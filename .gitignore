@@ -2,8 +2,8 @@
 node_modules/
 
 # Build directories
-build/
-dist/
+# build/
+# dist/
 
 # Logs
 npm-debug.log*
