@@ -1,0 +1,272 @@
+.schedule-your-visit-container {
+  width: 480px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  margin: 0 auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-your-visit-title {
+  color: var(--main-light-clr);
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.32px;
+  text-transform: capitalize;
+margin-bottom: 10px;
+ 
+ 
+}
+
+.heading-visit-form{
+  display: flex;
+
+}
+
+.schedule-your-visit-form {
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 0px 12px 0px #c8d6e0;
+}
+
+.schedule-your-visit-label {
+  display: flex;
+  color: #585858;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.28px;
+}
+
+.main-box-of-schedule {
+  display: flex;
+  gap: 10px;
+}
+
+.schedule-your-visit-time-container input {
+  border-radius: 4px;
+  border: 1px solid #4a7296;
+  padding: 10px;
+}
+
+.right-box-of-schedule {
+  border-radius: 7px;
+  padding: 5px 30px 20px 30px;
+  border: 1px solid rgba(107, 151, 190, 0.5);
+  background: #fff;
+}
+.right-box-of-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: start;
+}
+
+.schedule-your-visit-input {
+  width: 100%;
+  padding: 16px 20px;
+
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.schedule-your-visit-date-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.schedule-your-visit-group-data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+}
+
+.schedule-your-visit-group-data input {
+  /* display: flex;
+  justify-content: space-between; */
+  border-radius: 4px;
+  color: #999;
+  border: 1px solid #4a7296;
+  background: #fff;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+
+  align-self: stretch;
+}
+
+.schedule-your-visit-time-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schedule-your-visit-time-container span {
+  display: flex;
+  align-items: center;
+  color: #111;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.28px;
+}
+
+.cross-btn {
+  color: var(--main-light-clr);
+  cursor: pointer;
+  background-color: var(--main-lighter-clr);
+  padding: 5px;
+  border-radius: 100%;
+  font-size: 14px;
+  
+}
+
+.schedule-your-visit-time-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.schedule-your-visit-date-icon {
+  position: absolute;
+  left: 8px;
+  font-size: 18px;
+}
+
+.schedule-your-visit-select {
+  width: 100%;
+  padding: 8px 8px 8px 32px;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.schedule-your-visit-time-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.schedule-your-visit-time-button {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  border-radius: 4px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: #333333;
+}
+
+.schedule-your-visit-time-button:last-child {
+  margin-right: 0;
+}
+
+.schedule-your-visit-submit-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: var(--main-light-clr);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.schedule-your-visit-submit-button:hover {
+  opacity: 0.9;
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .right-box-of-schedule{
+    display: flex;
+    gap: 10px;
+
+  }
+  
+  .schedule-your-visit-group-data input {
+    display: flex;
+  }
+
+  .left-box-of-schedule img{
+    display: flex;
+
+    width: 80%;
+    margin: 5px auto;
+  }
+  .schedule-your-visit-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .schedule-your-visit-title {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .schedule-your-visit-form {
+    padding: 15px;
+    width: 90%;
+    margin: 1px auto;
+  }
+
+  .main-box-of-schedule {
+    display: block;
+    gap: 20px;
+  }
+
+  .right-box-of-schedule {
+    padding: 15px 20px;
+    border: none;
+  }
+
+  .schedule-your-visit-group-data {
+    gap: 8px;
+  }
+
+  .schedule-your-visit-time-container {
+    gap: 15px;
+  }
+
+  .schedule-your-visit-label {
+    font-size: 10px;
+  }
+
+  .schedule-your-visit-input,
+  .schedule-your-visit-time-container input {
+    padding: 12px;
+  }
+
+  .schedule-your-visit-time-container input {
+    width: 45%;
+  }
+
+  .schedule-your-visit-submit-button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .cross-btn {
+    font-size: 12px;
+    padding: 4px;
+  }
+}

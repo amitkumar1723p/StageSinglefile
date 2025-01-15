@@ -1,0 +1,384 @@
+.userDataSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 10px 0;
+}
+
+/* need help css start */
+.need-help-box {
+  width: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0px 0px 16px 0px #cfdae2;
+}
+
+.need-help-box h4 {
+  color: #353c48;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.need-help-box-paragraph {
+  color: #7b7f85;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+
+.need-help-box-contact {
+  color: #353c48;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.12px;
+}
+.need-help-box img {
+  width: 35px;
+}
+/* .dashboard-right-side img{
+  height: 60%
+  
+} */
+
+.need-help-box-or {
+  color: #353c48;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.12px;
+}
+
+.need-help-box-contact-main {
+  width: 80%;
+}
+
+/* need help css end */
+
+.button-section-dashborad {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-dashborad-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 10px;
+  border-radius: 2px;
+  border: 0.5px solid #ddd;
+  background: #f6f6f68f;
+  box-shadow: 0px 0px 12px 0px #f1f9ff;
+}
+
+.Last_Updated-dashborad {
+  color: #111;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.top-section-in-profile {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px 20px 20px;
+  background: linear-gradient(90deg, #a1d2f8 0%, #e8f5ff 100%);
+  margin: 0px 0 15px 0;
+  border-radius: 12px;
+}
+.top-section-in-profile-left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.top-section-in-profile-left-section h3 {
+  color: #03315f;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.top-section-in-profile-left-section p {
+  color: #111;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.profile-main-box {
+  box-shadow: 0px 0px 16px 0px #cfdae2;
+  padding: 20px;
+  border-radius: 10px;
+  /* width: 70%; */
+  height: fit-content;
+}
+.dashborad-section-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
+}
+
+.edit-btn-dashborad span {
+  border-radius: 3px;
+  background: var(--Pirmary, #0078d4);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.edit-btn-dashborad span:hover {
+  opacity: 0.9;
+}
+
+.edit-btn-dashborad {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.dashborad-section-left-right {
+  display: flex;
+  gap: 20px;
+}
+
+.profile-name-ans {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  background: #fff;
+  padding: 10px;
+  width: 40%;
+}
+
+.dash-que {
+  color: #111;
+
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+}
+
+.userDataSection p {
+  margin-top: 5px;
+  color: #111;
+}
+
+.ans {
+  display: inline-block;
+}
+
+.profile-text-dashborad {
+  border-radius: 2px;
+  border: 0.5px solid #ddd;
+  background: #f6f6f68f;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.profile-text-dashborad p {
+  color: #555;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 142.857% */
+}
+
+.profile-regis-ans {
+  width: fit-content;
+  display: inline-block;
+  border-radius: 4px;
+  background: var(--main-light-clr);
+  color: #fff;
+  font-family: Sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.5px;
+  padding: 5px 10px;
+}
+
+.whatapp-notify {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.whatapp-notify p {
+  color: #3f3f3f;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.mobile-no-section-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+.click-here-dashborad {
+  font-size: 12px;
+  text-decoration: underline;
+  color: #999;
+  padding: 5px;
+}
+
+.icons {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.icon-wp {
+  width: 28px;
+}
+
+.Shortlisted-prop {
+  font-size: 16px;
+  color: #111;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .dashborad-section-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .dashborad-section-left-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .button-section-dashborad {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .top-section-in-profile-left-section p {
+    color: #111;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .dashboard-right-side img {
+    width: 100%;
+  }
+
+  .profile-name-ans {
+    border-radius: 7px;
+    border: 1px solid #daeaf9;
+    background: #fff;
+    padding: 10px;
+    width: 95%;
+  }
+  .edit-btn-dashborad span {
+    border-radius: 3px;
+    background: var(--Pirmary, #0078d4);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .userDataSection p {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+
+  .profile-regis-ans {
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 20px;
+    background: var(--main-light-clr);
+    color: #fff;
+    font-family: Sans-serif;
+
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.5px;
+    padding: 5px 10px;
+  }
+
+  .whatapp-notify p {
+    font-size: 14px;
+  }
+  .whatapp-notify img {
+    width: 20px;
+  }
+}
+
+@media (max-width: 320px) {
+  .dashboard-right-side img {
+    width: 100%;
+  }
+
+  .userDataSection p {
+    margin-top: 12px;
+    font-size: 10px;
+  }
+}
+/* Amit css  */
+.profile-name {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  background: #fff;
+  padding: 10px;
+  width: 80%;
+}
+.profileNameEmail {
+  display: flex;
+  flex-direction: row; /* Align children in a row */
+  width: auto; /* Adjust width as needed */
+  justify-content: space-between; /* Space out the children */
+}
+
+.profileNameEmail > div {
+  flex: 1; /* Each child takes equal space */
+  margin: 0 10px; /* Optional: Add some margin between children */
+}
+.profile-email {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  background: #fff;
+  padding: 10px;
+  width: 80%;
+}
+.editProfileButton{
+ display: flex;
+ justify-content: end;
+
+
+}

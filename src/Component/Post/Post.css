@@ -1,0 +1,347 @@
+/* .PostContainer {
+  display: flex; 
+   justify-content: space-around; 
+   background-color: rgb(231, 192, 192);
+} */
+
+.user-filter-section{
+  margin: 10px;
+  background-color: #F1F5F9;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.user-section-heading{
+  text-align: start;
+  font-size: 18px;
+
+  color: var(--main-light-clr);
+  padding-left:10px ;
+}
+
+
+.showpost {
+  /* display: flex; */
+  /* margin-left: 40px; */
+  /* margin-right: 40px;
+  margin-top: 20px; */
+  flex-wrap: wrap;
+}
+
+/* Post Card Css  */
+
+.post-data p {
+  display: flex;
+  align-items: center;
+}
+.propertyName {
+  font-size: 16px;
+}
+.post-data p {
+  font-size: 12px;
+  margin: 5px 0;
+
+  padding: 0 10px;
+}
+
+.post-data h4 {
+  font-size: 18px;
+  padding: 2px;
+  margin: 5px 10px;
+}
+
+.post-data img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  padding: 1px;
+}
+.post-box {
+  cursor: pointer;
+
+  border-radius: 10px;
+
+  margin: 10px;
+  width: 20%;
+  min-width: 20%;
+}
+
+.propertyName {
+  font-size: 1.2em;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+
+.date .propertyAddresh .propertyName {
+  font-size: 12px;
+}
+.post-box .propertyDescription {
+  font-size: 1em;
+  font-weight: 500;
+  margin-top: 10px;
+  overflow-wrap: break-word;
+}
+
+.post-box .deletebtn-box {
+  cursor: pointer;
+}
+.post-box .deletebtn-box:active {
+  color: red;
+}
+
+.PostContainer .createpost {
+  width: 65%;
+}
+.PostContainer .form-box,
+.createpost h1 {
+  width: 50%;
+}
+.PostContainer h1 {
+  text-align: center;
+}
+.upload-para {
+  color: #555592;
+  text-decoration: underline;
+}
+.upload-para1 {
+  font-size: 12px;
+}
+
+/* .file-label {
+ background-color: rgb(223, 190, 131);
+ position: relative;
+} */
+.property-details-main-box .uploadfile-input {
+  height: 240px;
+  color: #555592;
+
+  position: relative;
+  border: 1px dashed #ccccff;
+  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.verified-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 120px; /* Adjust as per your design */
+  margin-bottom: 15px;
+}
+
+.verified-card img {
+  width: 20px; /* Adjust the size of the icon as per your needs */
+  height: 20px;
+}
+
+/* Style for the verified text */
+.verified-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #00508E;
+  font-weight: bold;
+}
+.verified-card{
+  display: flex;
+  gap: 5px;
+}
+.file-label {
+  flex-direction: column;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #365600;
+}
+
+.img-update {
+  align-items: center;
+}
+
+.icon-i {
+  display: flex;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.icon-i p {
+  margin-left: 5px;
+}
+input[type="file"] {
+  cursor: pointer;
+
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+input[type="file"]::file-selector-button {
+  display: none !important;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+/* Loding CSs  */
+.createpost-loadingdiv {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.createpost-loadingdiv > p {
+  font-size: 2em;
+  margin-bottom: 6px;
+}
+
+/* Image Slider Css  */
+
+.imageSlide {
+  width: 168px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.imageSlide img {
+  width: 168px; /* Set the fixed width to 300px */
+  height: 176px;
+
+  min-width: 100%;
+  max-width: 100%;
+
+  transition: all 1s ease-in-out;
+}
+
+.btn-rent-filter {
+ 
+  gap: 20px;
+  flex-direction: column;
+  color: #5F7284;
+  background-color: transparent;
+  font-family: Sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  margin: 10px;
+  border: none;
+}
+
+.share-btn {
+  pointer-events: auto; /* Ensure that pointer events are not disabled */
+}
+
+ .all-post-lisitng{
+  border-radius: 5px;
+    background-color: #fff ;
+    padding: 5px 15px;
+    color: var(--main-light-clr);
+}
+.btn-sell-filter {
+  cursor: pointer;
+
+  color: #595959;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  border-radius: 54px;
+  padding: 5px var(--Gutter, 20px);
+  border: 1px solid #cfcfcf;
+  background-color: #fff;
+}
+
+/* Post Card Share Box Css   */ 
+ .postcard-share-parent {
+  position: relative;
+ }
+ .postcard-share-child{
+  position: absolute;
+  background-color: red;
+
+ }
+ .postcard-share-child li{
+  list-style: none;
+ }
+@media  (max-width: 480px){
+
+  .user-section-heading{
+    font-size: 16px ;
+    color: #111;
+    text-align: center;
+    margin: 10px 0;
+  }
+  .user-filter-section{
+    display: flex;
+    justify-content: center;
+  }
+  .imageSlide {
+    width: 312px;
+    display: flex
+;
+    overflow: hidden;
+    position: relative;
+}
+}
+
+/* Amit css for share button */
+/* Modal Overlay */
+.sharehead{
+  font-weight: 500;
+  font-size: 12px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3);
+}
+.share1 {
+  z-index: 1;
+  position: absolute;
+margin-top: 9px;
+  width: 220px;
+  height: 150px;
+  padding: 10px;
+  left: 45%;
+  top: 0%;
+  border: 1px solid rgb(20, 169, 232); /* Add a border property */
+  border-radius: 8px; /* Apply border-radius properly */
+  background-color: #fff; /* Optional: Add background color to make it visible */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visibility */
+}
+
+.share2{
+  padding: 10px;
+
+}
+.share_options{
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px;
+  text-align: center;
+}
+ .shareButton{
+  border-radius: 4px;
+ margin-left: 150px;
+ }
+ .share-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.share-btn img {
+  pointer-events: auto;  /* Ensure the image is clickable */
+}

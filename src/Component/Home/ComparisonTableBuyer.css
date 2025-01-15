@@ -1,0 +1,203 @@
+.comparison-table-container {
+  margin: 20px auto;
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 80%;
+  margin: 40px auto;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.comparison-table th,
+.comparison-table td {
+  text-align: center;
+  border-right: 1px solid #c4e6ff;
+  border-bottom: 1px solid #c4e6ff;
+  border-right: 1px solid #c4e6ff;
+  border-left: 1px solid #c4e6ff;
+  padding: 1 0px;
+}
+
+.Main-box-Comparisontable {
+  background-color: var(--main-lighter-clr);
+}
+
+.heading-Comparisontable {
+  text-align: center;
+}
+
+.h-Comparisontable {
+  color: #454545;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 18px;
+}
+
+.services-header {
+  background-color: var(--main-light-clr);
+  color: white;
+  font-weight: bold;
+}
+
+.profuture-header {
+  background-color: var(--main-light-clr);
+  color: white;
+}
+
+.other-header {
+  background-color: var(--main-light-clr);
+  color: white;
+}
+
+.service-name {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.checkmark-cell {
+  color: var(--main-light-clr); /* Green for correct */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.crossmark-cell {
+  color: #da1c1c;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.Comparison-p {
+
+  color: #363636;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 20px;
+}
+
+.Comparison-h2 span {
+  font-weight: 550;
+  color: var(--main-light-clr);
+}
+
+
+.Comparison-h2 {
+  position: relative; /* Enables positioning of the underline */
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 40px;
+  color: #454545;
+}
+
+.Comparison-h2::after {
+  content: ""; /* Adds the underline */
+  position: absolute;
+  bottom: -10px; /* Position the underline below the text */
+  left: 50%; /* Center align the underline */
+  transform: translateX(-50%); /* Ensure the underline is centered */
+  width: 10%; /* Underline width */
+  height: 3px; /* Underline thickness */
+  background-color: var(--main-light-clr); /* Underline color */
+}
+
+@media (max-width: 480px) {
+
+  .comparison-table {
+    width: 80%;
+    margin: 10px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+  .comparison-table-container {
+    margin: 1px auto;
+    /* overflow-x: auto; */
+}
+  .comparison-table th, .comparison-table td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;}
+
+  .checkmark-cell {
+    color: var(--main-light-clr);
+    font-size: 12px;
+    font-weight: bold;}
+
+  .comparison-table {
+    width: 100%; /* Full width for mobile */
+    font-size: 14px; /* Reduce font size */
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 8px; /* Adjust padding for smaller screens */
+  }
+
+  .Comparison-h2 {
+    font-size: 24px; /* Reduce font size for heading */
+  }
+
+  .Comparison-p {
+    color: var(--main-light-blue-clr);
+    padding: 10px;
+    font-size: 14px; /* Smaller paragraph text */
+    margin-top: 15px;
+  }
+
+  .service-name {
+    font-size: 14px;
+    padding-left: 5px;
+  }
+
+  .checkmark-cell,
+  .crossmark-cell {
+    font-size: 14px; /* Adjust icon font size */
+  }
+}
+
+/* Tablet screens (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .comparison-table {
+    width: 85%; /* Slightly reduced width for tablets */
+    font-size: 16px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px;
+  }
+
+  .Comparison-h2 {
+    font-size: 28px;
+  }
+
+  .Comparison-p {
+    font-size: 15px;
+  }
+
+  .service-name {
+    font-size: 15px;
+    padding-left: 8px;
+  }
+
+  .checkmark-cell,
+  .crossmark-cell {
+    font-size: 15px;
+  }
+}

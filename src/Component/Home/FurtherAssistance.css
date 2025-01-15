@@ -1,0 +1,71 @@
+/* FurtherAssistance.css */
+.further-assistance-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .further-assistance-left {
+    flex: 1;
+  }
+  
+  .further-assistance-image {
+    width: 100%;
+    height: auto;
+    max-width: 300px; /* Adjust the max width for the image */
+  }
+  
+  .further-assistance-right {
+    flex: 1;
+    padding-left: 20px;
+  }
+  
+  .further-assistance-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .further-assistance-description {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .further-assistance-contact {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .whatsapp-link {
+    text-decoration: none;
+  }
+  
+  .whatsapp-button {
+    background-color: #25D366; /* WhatsApp color */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .whatsapp-button:hover {
+    background-color: #128C7E; /* Darker WhatsApp color on hover */
+  }
+  
+  .or-text {
+    margin: 0 15px;
+    font-size: 16px;
+  }
+  
+  .contact-number {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  

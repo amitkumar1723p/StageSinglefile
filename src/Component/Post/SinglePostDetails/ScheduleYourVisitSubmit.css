@@ -1,0 +1,87 @@
+.request-submit-container {
+    background-color: #f4f9fd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .request-submit-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 10px;
+  }
+  
+  .request-submit-body {
+    font-size: 16px;
+    color: #111;
+  }
+  
+  .status-message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .status-icon {
+    font-size: 20px;
+    color: #4CAF50;
+    margin-right: 8px;
+  }
+  
+  .status-text {
+    font-size: 16px;
+    color: #111;
+  }
+  
+  .note-text {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .view-more {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .dashboard {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .view-more:hover {
+    background-color: #0056b3;
+  }
+  
+  /* .dashboard:hover {
+    background-color: #218838;
+  } */
+  
+  @media (min-width: 500px) and (max-width: 730px) {
+    
+    .request-submit-container { width: 70vw;}
+  }
+  @media (min-width: 0px) and (max-width: 500px) {
+     
+    .request-submit-container { width: 90vw;}
+     .btn{
+      padding: 6px 12px;
+     }
+  }

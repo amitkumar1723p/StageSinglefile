@@ -1,0 +1,191 @@
+.main-box-sellertoseller {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.databox-sellertoseller {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.brokerrafe-endtoend{
+  color: #16315F;
+  font-family: Sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: end;  
+  width: 95%;;
+}
+
+.databox-sellertoseller{
+  background-color: var(--main-lighter-clr);
+  width: 80%;
+  margin:  40px auto;
+}
+
+.support-container {
+
+  width: 80%;
+
+  display: flex;
+  justify-content: center;
+  background-color: #f7f8fc;
+}
+
+.support-image {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+}
+
+.support-content {
+  padding: 0 60px;
+}
+
+.support-title {
+  color: #444;
+  font-weight: bold;
+}
+
+.buyers-text {
+  color: #4a4fb7;
+}
+
+.support-description {
+  color: #666;
+
+  margin: 20px;
+}
+
+.features-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+
+  color: #4a4fb7;
+}
+
+.checkmark-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.feature-text {
+  color: #444;
+}
+
+.support-content ul {
+  width: fit-content;
+  line-height: 40px;
+}
+
+.heading-line {
+  width: 30%; /* Set the line width to 30% */
+  height: 2px; /* Thin line height */
+  background: var(--main-light-clr); /* Use your defined color variable */
+  font-weight: bold; /* Adds a bold effect */
+  opacity: 0.8; /* Slightly reduce opacity for a subtle look */
+}
+
+@media  (max-width: 480px) {
+  .main-box-sellertoseller {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .databox-sellertoseller {
+    background-color: var(--main-lighter-clr);
+    width: 87%;
+    margin: 20px auto 80px auto;
+}
+
+  .databox-sellertoseller {
+    text-align: center;
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  .support-container {
+    flex-direction: column; /* Stack image and content vertically */
+    height: auto;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .support-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .support-content {
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  .support-title {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 10px;
+  }
+
+  .support-description {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+  }
+
+  .features-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align icons and text */
+    margin-bottom: 1px;
+    font-size: 14px;
+  }
+
+  .checkmark-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  .feature-text {
+    font-size: 14px;
+    color: #444;
+  }
+
+  .heading-line {
+    width: 50%; /* Adjust line width for smaller screens */
+    height: 2px;
+    margin: 10px auto; /* Center the line */
+    background: var(--main-light-clr);
+    opacity: 0.8;
+  }
+}

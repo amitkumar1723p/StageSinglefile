@@ -1,0 +1,232 @@
+.form-container {
+  display: flex;
+  gap: 30px;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Ensure the cross button is positioned relative to the form container */
+}
+
+.cross-btn {
+  position: absolute;
+  top: 10px;  /* Adjust this value to move it down */
+  right: 10px;  /* Adjust this value to move it left or right */
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+.form-left {
+  flex: 1;
+  width: 400px;
+}
+
+.form-title {
+  font-size: 20px;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.form-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.form-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  color: #111;
+  line-height: 1.8;
+}
+
+.form-right {
+  width: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  font-size: 18px;
+  color: #0078d4;
+  margin-bottom: 20px;
+}
+
+.property-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.img-requirement img{
+  width: 220px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  /* align-items: center;
+    justify-content: center; */
+ 
+   
+}
+
+.form-right input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #0078d4;
+}
+
+.form-submit-btn {
+  padding: 10px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #0078d4;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-submit-btn:hover {
+  background-color: #005bb5;
+}
+
+/* Hidden Field */
+.hidden-group {
+  display: none;
+}
+
+.form-input-hidden {
+  display: none;
+}
+
+
+.form-group input {
+
+  color: #808080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 121.065%;
+  /* width: 300px; */
+  font-size: 12px;
+ 
+
+  background: #fff;
+  border-radius: 7px;
+  padding: 10px;
+}
+@media (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
+    padding: 20px;
+    width: 90%;
+    gap: 0;
+  }
+
+  .form-left {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-right {
+    width: 100%;
+  }
+
+  .form-title {
+    font-size: 18px;
+  }
+
+  .form-description {
+    font-size: 12px;
+  }
+
+  .form-features {
+    font-size: 12px;
+  }
+
+  .form-header {
+    font-size: 16px;
+  }
+
+  .property-form {
+    gap: 12px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 14px;
+  }
+
+  .form-submit-btn {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .img-requirement img {
+    width: 150px;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .form-group select, .form-group input {
+    font-size: 14px;
+    width: 100%;
+    max-width: 264px;
+    border: 1px solid #c7c7c7;
+    border-radius: 7px;
+    padding: 10px;
+    color: #111;
+    font-size: 12px;
+    margin: 0;
+}
+  .form-title {
+    font-size: 16px;
+  }
+
+  .form-description {
+    font-size: 11px;
+  }
+
+  .form-features {
+    font-size: 11px;
+  }
+
+  .form-header {
+    font-size: 14px;
+  }
+
+  .property-form {
+    gap: 0;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 13px;
+  }
+
+  .form-submit-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .img-requirement img {
+    width: 120px;
+  }
+}

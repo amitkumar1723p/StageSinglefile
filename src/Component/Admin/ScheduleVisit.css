@@ -1,0 +1,119 @@
+/* Base styles for the schedule visit card */
+.schedule-visit-card {
+  border-radius: 4px;
+  border: 0.5px solid #0c7cd121;
+  background: #fff;
+  border-radius: 8px;
+
+  padding: 20px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  font-family: Arial, sans-serif;
+}
+
+.schedule-visit-header {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 40px;
+}
+
+.schedule-visit-user-info {
+  flex: 1;
+}
+
+.schedule-visit-schedule-info select {
+  border: none;
+  border-radius: 10px;
+  color: #111;
+
+  padding: 5px;
+}
+
+.schedule-visit-user-name {
+  color: #585959;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.schedule-visit-contact-details {
+  color: #5a5a5a;
+}
+
+.schedule-visit-phone-number {
+  color: #585959;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.schedule-visit-email {
+  display: block;
+  color: #585959;
+  font-family: Sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.schedule-visit-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.schedule-visit-property-details {
+  color: #585959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.schedule-visit-pid {
+  color: #585959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.schedule-visit-pid-number {
+  font-weight: bold;
+}
+.schedule-visit-status {
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0px 10px;
+}
+/* .schedule-visit-footer {
+    margin-top: 15px;
+    border-top: 1px solid #e1e1e1;
+    padding-top: 10px;
+  }
+   */
+.schedule-visit-schedule-info {
+  font-size: 14px;
+  color: #2c3e50;
+   display: flex;
+}
+.schedule-visit-time {
+  color: #585959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.visit-time-date {
+  color: #585959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

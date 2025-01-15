@@ -1,0 +1,113 @@
+body{
+  color: var(--main-black);
+}
+
+.bid-box {
+  display: flex;
+  justify-content: space-between;
+}
+:root {
+  --main-light-clr: #037edb;
+  --main-light-hover-clr: #0056b3;
+  --main-dark-clr: #0078d4be;
+  --main-white-light-clr: #f6f7fa;
+  --main-white-hover-light-clr: #ffffff;
+  --main-lighter-clr: #E9F5FF;
+  --main-lighters-clr: #accde7;
+  --main-light-blue-clr:#3D5A80
+}
+
+
+
+input:focus {
+  outline: none;
+}
+/* select:focus-visible{
+  display: none;
+} */
+.window-component-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.underline-on-text {
+  position: relative; /* Required for pseudo-elements positioning */
+  display: inline-block; /* To make the underline specific to the text */
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #111;
+}
+
+.underline-on-text::before,
+.underline-on-text::after {
+  content: ""; /* Pseudo-element content for the underline */
+  position: absolute;
+  bottom: -6px; /* Adjust the underline's position below the text */
+  height: 3px; /* Thickness of the underline */
+  background-color: #2F5CA9; /* Underline color */
+}
+
+.underline-on-text::before {
+  left: 15%;
+  width: 30%;
+}
+
+.underline-on-text::after {
+  right: 15%;
+  width: 40%;
+}
+.cross-btn{
+  text-align: end;
+}
+.cross-btn:hover{
+  color: red;
+font-weight: 800;
+}
+
+@media(max-width: 480px) {
+  .underline-on-text {
+    position: relative; /* Required for pseudo-elements positioning */
+    display: inline-block; /* To make the underline specific to the text */
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+@media(max-width: 320px){
+
+  .underline-on-text {
+    position: relative;
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+}
+@media(max-width: 375px){
+
+  .underline-on-text {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+}
+
+
+

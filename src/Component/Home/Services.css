@@ -1,0 +1,146 @@
+.heading-for-service {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.heading-for-service h3 {
+  font-size: 32px;
+  margin: 0;
+  color: #454545;
+  text-align: center;
+}
+
+.heading-for-service span {
+  color: var(--main-light-clr);
+}
+
+.heading-for-service p {
+  font-size: 16px;
+  margin: 10px 0 30px 0;
+  color: #454545;
+}
+
+.heading-line-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.heading-line {
+  width: 30%; /* Set the line width to 30% */
+  height: 2px; /* Thin line height */
+  background: var(--main-light-clr); /* Use your defined color variable */
+  font-weight: bold; /* Adds a bold effect */
+  opacity: 0.8; /* Slightly reduce opacity for a subtle look */
+}
+
+.services-container {
+  height: 180px;
+  display: flex;
+  justify-content: space-around;
+  /* background-color: var(--main-light-clr); */
+  padding: 20px 0;
+  /* margin: 20px 0 60px 0; */
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.service-icon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 24px;
+}
+
+.service-text {
+  color: #16315f;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.32px;
+}
+
+.services-main-box {
+  background-color: var(--main-lighter-clr);
+  padding: 20px 0;
+}
+
+@media (max-width: 480px) {
+  .heading-for-service {
+    text-align: center;
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  .heading-for-service h3 {
+    font-size: 24px; /* Adjusted font size for smaller screens */
+    margin: 0 0 10px 0;
+    font-size: 32px;
+  }
+
+  .heading-for-service p {
+    font-size: 14px; /* Reduced font size for readability */
+    margin: 5px 0 20px 0;
+  }
+
+  .heading-line-container {
+    flex-direction: column; /* Stack the heading and line vertically */
+    gap: 10px; /* Reduce spacing for smaller screens */
+  }
+
+  .heading-line {
+    width: 50%; /* Adjusted line width for mobile */
+    margin: 0 auto; /* Center the line */
+  }
+
+  .services-container {
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    justify-content: center; /* Center align items */
+    padding: 10px 0;
+    height: auto; /* Remove fixed height for flexibility */
+    gap: 15px; /* Add spacing between items */
+    margin: 10px 0 30px 0;
+  }
+
+  .service-item {
+    width: 45%; /* Adjust width for better fit in two columns */
+    margin-bottom: 10px; /* Add spacing between rows */
+  }
+
+  .service-icon {
+    width: 40px; /* Scale down icons for smaller screens */
+    height: 40px;
+    margin-bottom: 12px; /* Reduced spacing */
+  }
+
+  .service-text {
+    font-size: 12px; /* Adjusted text size for smaller screens */
+  }
+
+  .services-main-box {
+    background-color: #fff;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .heading-for-service h3 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+    font-size: 24px;
+  }
+  .heading-for-service p {
+    font-size: 12px;
+    margin: 5px 0 20px 0;
+  }
+}

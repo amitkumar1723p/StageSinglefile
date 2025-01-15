@@ -1,0 +1,40 @@
+.upgradeSection {
+    width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    margin-left: 20px;
+    border: 1px solid #ddd;
+  }
+  
+  .upgradeTitle {
+    color: #111;
+  }
+  
+  .upgradeList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .upgradeListItem {
+    color: #555;
+    padding: 8px 0;
+  }
+  
+  .upgradeBtn {
+    background-color: rgba(44, 132, 232, 0.7);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .upgradeBtn:hover {
+    background-color: rgba(44, 132, 232, 0.9);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  
