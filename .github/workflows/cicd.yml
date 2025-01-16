@@ -4,35 +4,36 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-      - name: Login to docker hub
+      - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
         run: docker build -t propertydekho247/property-frontend .
-
-
-      - name: Publish Image to docker hub
+      - name: Publish Image to Docker Hub
         run: docker push propertydekho247/property-frontend:latest 
- 
+
   deploy:
     needs: build
-    runs-on: self-hosted 
+    runs-on: self-hosted
     
     steps:
-        - name: Pull image from Docker Hub
+      - name: Pull image from Docker Hub
         run: |
           sudo docker pull propertydekho247/property-frontend:latest
+
       - name: Delete old container
         run: |
-            if [ "$(sudo docker ps -aq -f name=propertydekho247-property-frontend-container)" ]; then
-           sudo docker rm -f amit630-frontend-container
-            fi
+          if [ "$(sudo docker ps -aq -f name=propertydekho247-property-frontend-container)" ]; then
+            sudo docker rm -f propertydekho247-property-frontend-container
+          fi
+
       - name: Run Docker Container
-       run: |
-          sudo docker run -d -p 5000:5000 --name propertydekho247-property-frontend-container \
+        run: |
+          sudo docker run -d -p 3000:80 --name propertydekho247-property-frontend-container \
           -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' propertydekho247/property-frontend
