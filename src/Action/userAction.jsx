@@ -2,7 +2,7 @@ import axios from "axios";
 const api_Base_Url=process.env.REACT_APP_API_URL
 
 //  Create User Action    Change Genrate Otp  By User Create
-
+console.log(api_Base_Url,"api url")
 export const CreateUserOtpAction = (userData) => {
   return async (dispatch) => {
     try {
