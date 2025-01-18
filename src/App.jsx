@@ -418,7 +418,7 @@ function App() {
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
         />
-        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route exact path="/privacypolicy" element={<PrivacyPolicy />} />
         {/* protect route for user */}
         <>
           <Route
