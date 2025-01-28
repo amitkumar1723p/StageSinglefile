@@ -1,0 +1,226 @@
+.assistance-banner {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px 5%;
+  width: 80%;
+  color: white;
+  margin: 40px auto;
+  border-radius:10px;
+  box-shadow: 0px 0px 16px 0px #c5dff3;
+}
+
+.brand-name-propertydekho247 {
+  background-color: var(--main-lighter-clr);
+  width: fit-content;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.assistance-banner-image {
+  flex: 1;
+}
+.icon-btn {
+  width: 20px;
+}
+
+.assistance-banner-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.assistance-banner-content {
+  flex: 2;
+
+  padding-left: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px
+}
+
+.assistance-banner-title {
+  color: #333;
+;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px; /* 160% */
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.assistance-banner-text {
+  color: #333;
+
+font-size: 14px;
+/* font-style: italic; */
+font-weight: 400;
+line-height: 24px; /* 171.429% */
+text-transform: capitalize;
+}
+
+.assistance-banner-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.assistance-banner-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: var(--main-light-clr);
+  color: #fff;
+  background-color: var(--main-light-clr);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.assistance-banner-button:hover {
+  opacity: .8;
+}
+
+.assistance-banner-or {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--main-light-clr);
+}
+
+.assistance-banner-phone {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--main-light-clr);
+}
+.assistance-banner-phone:hover {
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-size: 600;
+}
+@media (max-width: 480px) {
+  .assistance-banner {
+    display: flex;
+    align-items: end;
+    background-color: #fff;
+    width: 100%;
+    color: white;
+    flex-direction: column;
+  }
+
+  .assistance-banner-image {
+    flex: 1;
+  }
+
+  /* .assistance-banner-img {
+    max-width: 100;
+  } */
+
+  .assistance-banner-content {
+    flex: 2;
+    padding-left: 20px;
+  }
+
+  .assistance-banner-title {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-family: "Inter", Sans-serif;
+    font-weight: bold;
+  }
+
+  .assistance-banner-text {
+    margin: 0 0 20px;
+    font-size: 14px;
+  }
+
+  .assistance-banner-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .assistance-banner-button {
+    background-color: white;
+    color: #fff;
+    background-color: var(--main-light-clr);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .assistance-banner-button:hover {
+    background-color: #ffffffe1;
+    color: #0078d7;
+  }
+
+  .assistance-banner-or {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .assistance-banner-phone {
+    border: 1px solid #fff;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .assistance-banner-phone:hover {
+    background-color: #fff;
+    color: var(--main-light-clr);
+    border: 1px solid #fff;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-size: 600;
+  }
+}
+
+@media (max-width: 320px) {
+  .banner-buttons {
+    margin-top: 10px;
+  }
+
+  .banner-image-right img {
+    max-width: 95%;
+    height: auto;
+  }
+  .banner-text-section p {
+    color: #333;
+    font-family: "Inter", Sans-serif;
+    font-size: 10px;
+    /* font-style: italic; */
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: 0.2px;
+    margin-top: 5px;
+  }
+
+  .banner-text-section h2 {
+    color: #333;
+    font-family: "Inter", Sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .explore-button,
+  .expert-assistance-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+}

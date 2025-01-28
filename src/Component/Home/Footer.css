@@ -1,0 +1,163 @@
+/* Footer Styles */
+.custom-footer {
+  background-color: var(--main-light-clr);
+ 
+  padding: 30px 0 0 0;
+  font-family: "Arial", sans-serif;
+}
+
+.last-p {
+  color: #fff;
+  text-align: center;
+  font-family: "Inter", Sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin:10px;
+  padding-bottom: 2px;
+  text-align: justify;
+
+}
+
+
+.footer-container {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 20px;
+  min-width: 200px;
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.footer-column h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+  /* text-transform: uppercase; */
+  font-weight: bold;
+}
+
+.footer-column p {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  font-weight: lighter;
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+/* Social Media Icons */
+/* .social-icons {
+    margin-top: 20px;
+} */
+
+.social-icons a {
+  color: #ffffff;
+  margin-right: 10px;
+  font-size: 20px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+  border-top: 1px solid #1c3d5a;
+  padding-top: 20px;
+  color: #a0aec0;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
+
+.footer-img {
+  width: 25px;
+}
+@media (max-width: 480px){
+  .footer-container {
+    padding: 0 30px 5px 30px;
+    flex-direction: column;
+    display: flex
+;}
+
+  
+.custom-footer{
+  background-color: #0F2A3F;
+}
+
+.footer-column p {
+  text-align: start;
+}
+
+  .footer-column {
+    flex: 1 1;
+    margin: 0 20px;
+  
+}
+.footer-heading{
+  text-align: start;
+}
+.social-icons{
+  text-align: start;
+}
+.footer-column{
+  margin: 5px 0;
+  border-bottom: 1px solid #fff;
+}
+.footer-column h3{
+  margin-bottom: 15px;
+ text-align: start;
+}
+.footer-column li{
+  text-align: start;
+ }
+
+
+  .last-p{
+    text-align: center;
+    /* margin: 5px auto;
+    width: 80%; */
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 375px){
+  .custom-footer {
+    background-color: #0F2A3F;
+    padding: 30px;
+}
+}
+
+@media (max-width: 320px){
+  .custom-footer {
+    background-color: #0F2A3F;
+    padding: 20px;
+}
+}

@@ -1,0 +1,80 @@
+.rent-sale-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #fff;
+    margin: 50px 0;
+    padding: 20px 10%;
+    filter: drop-shadow(0px 2px 4px rgba(193, 193, 193, 0.63));
+  }
+  
+  .property-image {
+    width: 350px; /* Container width */
+  
+    background-color: #0078d4;
+    border-radius: 5px;
+    overflow: hidden; /* Ensures anything outside is clipped */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .property-image img {
+    max-width: 100%; /* Ensures the image doesn't overflow horizontally */
+    max-height: 100%; /* Ensures the image doesn't overflow vertically */
+    object-fit: contain; /* Maintains aspect ratio while fitting inside the container */
+  }
+  
+  .rent-sale-sign {
+    position: absolute;
+    top: 60%;
+    left: -20px;
+    background-color: #fff;
+    border: 2px solid #0078d4;
+    border-radius: 3px;
+    padding: 5px 10px;
+    transform: translate(-50%, -50%);
+  }
+  
+  .rent-sale-text {
+    font-size: 14px;
+    color: #0078d4;
+    font-weight: bold;
+  }
+  
+  .property-info-section {
+    flex: 2;
+    margin-left: 30px;
+  }
+  
+  .property-info-title {
+    font-size: 20px;
+    color: var(--main-light-clr);
+    margin-bottom: 10px;
+  }
+  
+  .property-info-subtitle {
+    font-size: 16px;
+    color: var(--main-light-clr);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .property-info-details {
+    font-size: 14px;
+    color: var(--main-light-clr);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .property-info-footer {
+    font-size: 14px;
+    color: var(--main-light-clr);
+  }
+  
+  .property-highlight {
+    color: #0078d4;
+    font-weight: bolder;
+  }
+  

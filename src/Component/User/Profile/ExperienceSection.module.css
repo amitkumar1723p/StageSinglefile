@@ -1,0 +1,24 @@
+.experienceSection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    
+    
+  }
+
+  .allPost{
+    text-align: center;
+    font-size: 22px;
+  }
+
+  
+  .jobExperience {
+    margin-bottom: 20px;
+  }
+  
+  .jobImage {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+  }
+  

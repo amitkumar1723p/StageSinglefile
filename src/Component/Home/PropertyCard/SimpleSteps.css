@@ -1,0 +1,146 @@
+.simple-steps-container {
+  display: grid;
+  align-items: stretch; /* Ensures cards stretch to the same height */
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 20px 0 50px 0;
+  background-color: var(--main-lighter-clr);
+}
+
+.simple-step-card {
+  opacity: 0; /* Initially, all cards are hidden */
+  transform: translateY(30px); /* Start slightly below */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  display: flex;
+  justify-content: space-between; /* Distribute content evenly inside the card */
+  background: #fff;
+  color: #6a6a6a;
+  border-radius: 7px;
+  max-width: 280px;
+  height: 100%; /* Ensure all cards have the same height */
+  text-align: left;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform .5s ease, box-shadow .5s ease, background-color .5s ease;
+  border: 1px solid var(--main-light-clr);
+  padding: 15px; /* Add padding for consistent spacing */
+}
+
+.simple-step-card.animate-card {
+  opacity: 1; /* Make the card visible */
+  transform: translateY(0); /* Slide the card to its original position */
+}
+
+/* Optional: You can add a delay to each card's animation to stagger their appearance */
+#step1.animate-card {
+  animation-delay: 0.1s;
+}
+
+#step2.animate-card {
+  animation-delay: 0.2s;
+}
+
+#step3.animate-card {
+  animation-delay: 0.3s;
+}
+
+#step4.animate-card {
+  animation-delay: 0.4s;
+}
+
+.simple-step-card .howwework-data {
+  flex: 1; /* Allow the data section to stretch and occupy space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute title, text, and button evenly */
+}
+
+.simple-step-card h3 {
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: var(--main-light-clr);
+  min-height: 40px; /* Set a minimum height for consistency */
+}
+
+.simple-step-card p {
+  letter-spacing: 0.2px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  min-height: 60px; /* Set a minimum height for the paragraph */
+}
+
+.simple-step-btn {
+  margin-top: auto; /* Push the button to the bottom of the card */
+  letter-spacing: 0.5px;
+  display: inline-block;
+  font-weight: 600;
+  background-color: transparent;
+  border-radius: 8.5px;
+  font-size: 0.744rem;
+  text-decoration: none;
+  transition: 0.3s ease;
+  position: relative;
+  color: var(--main-light-clr);
+}
+
+.how-we-work-more-arrow {
+  font-weight: bolder;
+  font-size: 20px;
+  font-weight: 900;
+  margin-left: 10px;
+  display: inline-block; /* Ensures the arrow is treated as a block for animation */
+  animation: moveArrow 2s infinite ease-in-out;
+}
+
+@keyframes moveArrow {
+  0% {
+    transform: translateX(0); /* Start at the original position */
+  }
+  50% {
+    transform: translateX(20px); /* Move 20px to the right */
+  }
+  100% {
+    transform: translateX(0); /* Return to the original position */
+  }
+}
+
+.deal {
+  max-width: 30px;
+}
+
+.deal img {
+  width: 85%;
+  height: auto;
+  filter: grayscale(0); /* Ensure no grayscale by default */
+  transition: filter 0.5s ease;
+}
+
+.simple-step-card:hover .deal img {
+  filter: brightness(0) invert(1); /* Change icon color on hover */
+}
+
+.simple-step-card:hover {
+  background: var(--main-light-clr);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: 1s;
+}
+
+.simple-step-card:hover .howwework-data h3,
+.simple-step-card:hover .howwework-data p,
+.simple-step-card:hover .simple-step-btn,
+.simple-step-card:hover .how-we-work-more-arrow {
+  transition:1s;
+  color: #fff;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .simple-steps-container {
+    grid-template-columns: 1fr; /* Display one card per row on small screens */
+  }
+}
+

@@ -1,0 +1,72 @@
+/* Notice Section */
+.notice {
+  height: 10%;
+  width: 100%;
+  padding: 50px;
+  background-color: #1a7261;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  border-radius: 10px;
+}
+
+.notice span {
+  font-weight: bold;
+}
+
+/* Main Wrapper and Grid */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Box Styles */
+.box {
+  position: relative;
+  text-align: center;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.box span {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

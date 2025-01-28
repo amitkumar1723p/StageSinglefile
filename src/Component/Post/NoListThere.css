@@ -1,0 +1,45 @@
+.no-list-there-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+   
+    margin: 10px auto;
+  }
+  
+  .no-list-there-content {
+    text-align: center;
+  }
+  
+  .no-list-there-image {
+    max-width: 250px;
+    margin-bottom: 20px;
+  }
+  
+  .no-list-there-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .no-list-there-description {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .no-list-there-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .no-list-there-button:hover {
+    background-color: #357abf;
+  }
+  

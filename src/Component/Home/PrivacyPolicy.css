@@ -1,0 +1,144 @@
+/* General container for the Privacy Policy */
+.terms-container {
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Main heading for Privacy Policy */
+.main-heading-h3 {
+  text-align: center;
+  color: #2c3e50;
+  font-family: "Inter", Sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0.56px;
+}
+
+/* Date of last update */
+.tc-date-time {
+  text-align: center;
+  color: #8a8a8a;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.14px;
+}
+
+/* Section heading style */
+.section-tc {
+  margin-bottom: 20px;
+}
+
+.intro-tc-h2 {
+  color: var(--main-light-clr);
+  font-family: "Inter", Sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 14px 0;
+}
+
+.tc-date-time {
+  color: #8a8a8a;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.14px;
+}
+
+/* Paragraph text style */
+.heading-tc-p {
+  border-radius: 12px;
+  background: #f6f6f6;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.16);
+  padding: 20px;
+  color: #333;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.128px;
+}
+
+/* General section styles */
+.section {
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Lists in sections */
+.terms-container ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.terms-container ul li {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.terms-container a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.terms-container a:hover {
+  text-decoration: underline;
+}
+
+.acknowledgment p {
+  font-weight: bold;
+}
+
+.terms-container p {
+  font-size: 14px;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.terms-container h2 {
+  color: #333;
+  font-family: "Inter", Sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  margin-bottom: 10px;
+}
+
+.terms-container h3 {
+  margin-top: 20px;
+  color: var(--main-light-clr);
+  font-weight: 600;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .terms-container {
+    max-width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+  .main-heading-h3 {
+    
+    font-size: 1.5rem;
+  }
+
+  .intro-tc-h2 {
+    font-size: 1.25rem;
+  }
+
+  .terms-container ul li {
+    font-size: 0.9rem;
+  }
+}

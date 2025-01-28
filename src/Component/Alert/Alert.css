@@ -1,0 +1,101 @@
+/* Base styling for the alert box */
+.alertbox {
+  position: fixed;
+  top: 20px; /* Position the alert 20px from the top */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  width: auto;
+  background-color: var(--main-light-clr); /* Default green for success */
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  display: flex;
+  align-items: center;
+  animation: bounceIn 0.8s ease-out;
+  text-transform: capitalize;
+}
+
+/* Show alert animation (slide in) */
+.alertbox.show {
+  opacity: 1; /* Visible when show class is added */
+}
+/* Different alert types with unique colors */
+.alertbox.success {
+  background-color: var(--main-light-clr); /* Green */
+}
+
+.alertbox.error {
+  background-color: #be1425; /* Red */
+}
+
+.alertbox.info {
+  background-color: #17a2b8; /* Blue */
+}
+
+.alertbox.warning {
+  background-color: #ffc107; /* Yellow */
+}
+
+/* Alert icon style */
+.alert-icon {
+  font-size: 2em;
+  margin-right: 15px;
+}
+
+/* Alert message container */
+.alert-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Message text styling */
+.alert-type {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Bounce-in animation for the alert */
+@keyframes bounceIn {
+  0% {
+    transform: translateX(-50%) scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-50%) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* Fade-out animation when the alert disappears */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.alertbox.fadeOut {
+  animation: fadeOut 0.5s forwards;
+}
+
+/* Optional: Close button styling */
+.alertbox .close-btn {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: white;
+  font-weight: bold;
+}

@@ -1,0 +1,467 @@
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { BiddingFormAction } from "../../../Action/userAction";
+import { Link, useNavigate } from "react-router-dom";
+
+import Loader from "../../Loader/Loader";
+import { GetSinglePostAction } from "../../../Action/postAction";
+import "./OfferForm.css";
+import MakeOfferSuccessAlert from "./MakeOfferSuccessAlert";
+export default function BiddingFormForm({
+  SetShow,
+  SinglePostData,
+  PropertyAddress,
+}) {
+  const dispatch = useDispatch();
+  const { loading, data, LodingType } = useSelector((state) => {
+    return state.userData;
+  });
+  const [uploadimages, setuploadimages] = useState([]);
+  const [previewImage, setpreviewImage] = useState([]);
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [BiddingFormData, setBiddingFormData] = useState({
+    // Name: "",
+    // Email: "",
+    BidPrice: "",
+    AcceptPolicy: false,
+    WhatsAppUpdate: false,
+  });
+  const [standardPrices, setstandardPrices] = useState([]);
+  const [lowerPrices, setlowerPrices] = useState([]);
+
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
+  const [isLowerOffer, setIsLowerOffer] = useState(null); // State for toggling
+  const [showMakeOfferAlert, setshowMakeOfferAlert] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setBiddingFormData({ ...BiddingFormData, images: uploadimages });
+  }, [uploadimages]);
+
+  // const handleToggleLowerOffer = () => {
+  //   setBiddingFormData({ ...BiddingFormData, BidPrice: "" });
+  //   setIsLowerOffer((prev) => !prev); // Toggle between standard and lower offers
+  // };
+
+  const formatReservePrice = (price) => {
+    if (price >= 10000000) {
+      return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
+    } else if (price >= 100000) {
+      return `₹ ${(Math.floor(price / 1000) / 100).toFixed(2)} L`;
+    } else if (price >= 1000) {
+      return `₹ ${(Math.floor(price / 10) / 100).toFixed(2)} K`;
+    } else {
+      return `₹ ${price.toFixed(2)}`;
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      if (data.success == true && LodingType == "BiddingFormRequest") {
+        setBiddingFormData({
+          AcceptPolicy: false,
+
+          BidPrice: "",
+        });
+
+        setpreviewImage([]);
+        setuploadimages([]);
+      }
+      if (data.success == false) {
+        if (data.IsAuthenticated == false) {
+          navigate("/");
+        }
+
+        clearTimeout(timeoutId);
+        setshowMakeOfferAlert(false);
+        setTimeoutId(null);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    let standardPrices = [];
+    let lowerprice = [];
+
+    let initialstandardBidvalue = SinglePostData.BidData.BidHighPrice
+      ? SinglePostData.BidData.BidHighPrice
+      : SinglePostData.SinglePost.PricingDetails.ExpectedPrice;
+
+    let initiallowerdBidvalue =
+      SinglePostData.SinglePost.PricingDetails.ExpectedPrice;
+    for (let i = 0; i < 8; i++) {
+      initialstandardBidvalue = initialstandardBidvalue + 100000;
+      initiallowerdBidvalue = initiallowerdBidvalue - 100000;
+      standardPrices.push(initialstandardBidvalue);
+      lowerprice.push(initiallowerdBidvalue);
+    }
+
+    setstandardPrices(standardPrices);
+    setlowerPrices(lowerprice);
+  }, [SinglePostData]);
+  const BiddingFormSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!BiddingFormData.BidPrice) {
+      return alert("enter bid price");
+    }
+    if (previewImage.length <= 0) {
+      return alert("image field is required");
+    }
+    if (BiddingFormData.AcceptPolicy == false) {
+      return alert("Accept Terms & Conditions");
+    }
+
+    let BiddingObj = {
+      ...BiddingFormData,
+      PostData: {
+        PostId: SinglePostData.SinglePost._id,
+      },
+    };
+    let formData = new FormData(e.target);
+    formData.append("BiddingFormData", `${JSON.stringify(BiddingObj)}`);
+    formData.append("Email", BiddingObj.Email);
+
+    uploadimages.forEach((e) => {
+      formData.append("images", e, e.name);
+    });
+
+    dispatch(BiddingFormAction(formData));
+
+    setshowMakeOfferAlert("LodingTrue");
+    const id = setTimeout(() => {
+      setshowMakeOfferAlert(true);
+    }, 1000);
+    setTimeoutId(id);
+  };
+  return (
+    <>
+      {/* <div className="bidding-form-container"> */}
+
+      {showMakeOfferAlert == false && (
+        <form
+          // ref={BiddingFormRef}
+          className="mke-you-offer-form"
+          onSubmit={BiddingFormSubmitHandler}
+          encType="multipart/form-data"
+        >
+          <div className="cross-div">
+            <span
+              className="cross-btn"
+              onClick={() => {
+                SetShow(false);
+              }}
+            >
+              X
+            </span>
+          </div>
+          <h2 className="mke-you-offer-title">Make your Offer</h2>
+          <div className="main-box-content">
+            <div className="mke-you-offer-prperty-addresh-box">
+              <div className="apart-prop-id-box">
+                <p className="form-heading-name">{PropertyAddress}</p>
+              </div>
+            </div>
+
+            <div className="make-offer-reserved-price">
+              <div className="reserve-price-section-form">
+                <div>
+                  <p className="price-que-form">
+                    Reserved price :{" "}
+                    <span className="price-ans-form">
+                      {" "}
+                      {formatReservePrice(
+                        SinglePostData.SinglePost.PricingDetails.ExpectedPrice
+                      )}{" "}
+                    </span>{" "}
+                  </p>
+
+                  <p className="area-section-from"> 30,000/sq.ft</p>
+                </div>
+                <div className="make-offer-property-id">
+                  <p className="prop-id-from">Property Id </p>
+                  <p className="prop-id-number">
+                    {SinglePostData.SinglePost._id}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="mke-you-offer-bids-info">
+            <p className="mke-you-offer-bids-text">
+              Total no of Bids:
+              <span className="mke-you-offer-bids-count">
+                {SinglePostData.BidData.NumberOfBid}
+              </span>
+            </p>
+
+            <p className="mke-you-offer-bids-text">
+              Last Bid:
+              <span className="mke-you-offer-last-bid">
+                {SinglePostData.BidData.BidHighPrice &&
+                  SinglePostData.BidData.BidHighPrice}
+              </span>
+            </p>
+          </div> */}
+
+            {/* Bid Price */}
+
+            <div className="mke-you-offer-offer-group">
+              <p className="mke-offer-p">See Offer Table</p>
+              <select
+                className="offer-select-section"
+                name=""
+                id=""
+                onChange={(e) => {
+                  if (e.target.value == "HighValue") {
+                    setBiddingFormData({ ...BiddingFormData, BidPrice: "" });
+                    setIsLowerOffer(false);
+                  } else if (e.target.value == "LowerValue") {
+                    setBiddingFormData({ ...BiddingFormData, BidPrice: "" });
+                    setIsLowerOffer(true);
+                  } else {
+                    setIsLowerOffer(null);
+                  }
+                }}
+              >
+                <option value="">Select</option>
+                <option value="HighValue">High-Value</option>
+                <option value="LowerValue">Lower-Value</option>
+              </select>
+              {/* <div
+              type="button"
+              className="mke-you-offer-lower-toggle"
+              onClick={handleToggleLowerOffer}
+            >
+              {isLowerOffer
+                ? "Click here to view standard offers"
+                : "Click here to wish lower offer"}
+            </div> */}
+
+              <div className="mke-you-offer-offer-options">
+                {isLowerOffer !== null && (
+                  <>
+                    {(isLowerOffer == true ? lowerPrices : standardPrices).map(
+                      (price, index) => (
+                        <button
+                          type="button"
+                          className={`mke-you-offer-option ${
+                            price == BiddingFormData.BidPrice ? "select" : ""
+                          }`}
+                          key={
+                            isLowerOffer
+                              ? `lower-${index}`
+                              : `standard-${index}`
+                          } // Unique key for each button
+                          // onClick={() => setFormData({...formData, offer: price})}
+                          onClick={() => {
+                            setBiddingFormData({
+                              ...BiddingFormData,
+                              BidPrice: price,
+                            });
+                          }}
+                        >
+                          {/* {from} */}
+                          {/* ₹ {price.toFixed(2)} Cr₹ {price} Cr */}
+                          {formatReservePrice(price)}
+                        </button>
+                      )
+                    )}{" "}
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* <div className="eoi-form-group">
+                <label htmlFor="eoi-bidprice"> BidPrice </label>
+                <input
+                  type="number"
+                  id="eoi-bidprice"
+                  placeholder="BidPrice"
+                  required
+                  // value={BiddingFormData.BidPrice.value.trimStart()}
+                  value={BiddingFormData.BidPrice.trimStart()}
+                  onChange={(e) =>
+                    setBiddingFormData({
+                      ...BiddingFormData,
+                      BidPrice: e.target.value,
+                      // BidPrice: { ...BiddingFormData.BidPrice ,value:e.target.value},
+                    })
+                  }
+                />
+              </div> */}
+
+            {/* Images  */}
+            {/* <div></div> */}
+            {/* <div></div> */}
+
+            <div className="uploadfile-input">
+              <div className="file-label">
+                <img src="/img/upload.png" alt="upload" />
+                <p className="name-upload">Choose File</p>
+                <p className="upload-section">
+                  {" "}
+                  Supported Format: JPEG, PNG,SVG
+                </p>
+              </div>
+
+              <input
+                type="file"
+                name=""
+                id=""
+                multiple
+                accept="image/*"
+                required={previewImage.length === 0 ? true : false}
+                onChange={(e) => {
+                  const files = Array.from(e.target.files);
+
+                  files.forEach((file) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => {
+                      if (reader.readyState === 2) {
+                        setpreviewImage((old) => {
+                          let allpreviewImage = [
+                            ...old,
+                            { name: file.name, url: reader.result },
+                          ];
+                          const uniqueArray = allpreviewImage.filter(
+                            (value, index, self) =>
+                              index ===
+                              self.findIndex((t) => t.name === value.name)
+                          );
+
+                          return uniqueArray;
+                        });
+                      }
+
+                      setuploadimages((old) => {
+                        let alluploadimages = [...old, file];
+                        const uniqueArray = alluploadimages.filter(
+                          (value, index, self) =>
+                            index ===
+                            self.findIndex((t) => t.name === value.name)
+                        );
+                        return uniqueArray;
+                      });
+                    };
+                  });
+                }}
+              />
+            </div>
+
+            <div className="showpreviewImage-Container">
+              {previewImage.map((image, index) => {
+                return (
+                  <div className="showpreviewImage-box" key={index}>
+                    <img
+                      style={{ width: "100px" }}
+                      className="showpreviewImage"
+                      key={index}
+                      src={image.url}
+                      alt="PropertyPost"
+                    />
+                    {}
+                    <span
+                      className="cut-image"
+                      onClick={() => {
+                        setTimeout(() => {
+                          setpreviewImage(
+                            previewImage.filter((e) => {
+                              return e.name !== image.name;
+                            })
+                          );
+                          setuploadimages(
+                            uploadimages.filter((e) => {
+                              return e.name !== image.name;
+                            })
+                          );
+                        }, 0);
+                      }}
+                    >
+                      X
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="ke-you-offer-checkbox-group">
+              <label className="mke-you-offer-checkbox-label">
+                <input
+                  type="checkbox"
+                  className="mke-you-offer-checkbox-input"
+                  name="termsAgreed"
+                  checked={BiddingFormData.AcceptPolicy}
+                  onChange={(e) => {
+                    if (e.target.checked === true) {
+                      setBiddingFormData({
+                        ...BiddingFormData,
+                        AcceptPolicy: true,
+                      });
+                    }
+                    if (e.target.checked === false) {
+                      setBiddingFormData({
+                        ...BiddingFormData,
+                        AcceptPolicy: false,
+                      });
+                    }
+                  }}
+                />
+                I express interest to purchase the aforementioned property. I
+                agree with the{" "}
+                <span  className="offer-tc-p-p"
+                  onClick={() => {
+                    navigate("/privacy-policy");
+                  }}
+                >
+                  Privacy Policy
+                </span > and  <span  className="offer-tc-p-p"
+                onClick={() => {
+                    navigate("/terms-and-conditions");
+                  }}> Terms & Conditions. </span>
+              </label>
+
+              <label className="mke-you-offer-checkbox-label">
+                <input
+                  type="checkbox"
+                  name="whatsappUpdates"
+                  checked={BiddingFormData.WhatsAppUpdate}
+                  onChange={(e) => {
+                    if (e.target.checked === true) {
+                      setBiddingFormData({
+                        ...BiddingFormData,
+                        WhatsAppUpdate: true,
+                      });
+                    }
+                    if (e.target.checked === false) {
+                      setBiddingFormData({
+                        ...BiddingFormData,
+                        WhatsAppUpdate: false,
+                      });
+                    }
+                  }}
+                  className="mke-you-offer-checkbox-input"
+                />
+                Receive updates on WhatsApp
+              </label>
+            </div>
+
+            <button type="submit" className="mke-you-offer-submit-button">
+              Submit
+            </button>
+          </div>
+        </form>
+      )}
+
+      {showMakeOfferAlert === "LodingTrue" && (
+        <Loader className={"componentloader"} />
+      )}
+      {showMakeOfferAlert == true && (
+        <MakeOfferSuccessAlert SetShow={SetShow} />
+      )}
+    </>
+  );
+}

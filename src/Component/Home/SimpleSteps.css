@@ -1,0 +1,219 @@
+.simple-steps-container {
+  display: grid;
+  align-items: stretch; /* Ensures cards stretch to the same height */
+  justify-items: center;
+  grid-template-columns: repeat(4, 1fr); /* Default for larger screens */
+  width: 80%;
+  margin: 0 auto;
+  gap: 10px;
+  padding: 2rem 0 2rem 0; /* Adjusted using rem units */
+  /* background-color: var(--main-lighter-clr); */
+}
+
+.simple-steps-section {
+  background: #e9f5ff;
+}
+
+.simple-step-card {
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 8px 8px 20px 0px rgba(180, 185, 191, 0.50);
+
+  opacity: 0; /* Initially, all cards are hidden */
+  transform: translateY(30px); /* Start slightly below */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  display: flex;
+  justify-content: space-between; /* Distribute content evenly inside the card */
+  
+  color: #6a6a6a;
+  border-radius: 0.5rem; /* Adjusted for a smoother appearance */
+ 
+  height: 100%; /* Ensure all cards have the same height */
+  text-align: left;
+  position: relative;
+ 
+  transition: transform 0.5s ease, box-shadow 0.5s ease,
+    background-color 0.5s ease;
+  padding: 1rem; /* Adjusted using rem units */
+}
+
+.simple-step-card.animate-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional animation delays for staggered appearance */
+/* #step1.animate-card {
+  animation-delay: 0.1s;
+}
+
+#step2.animate-card {
+  animation-delay: 0.2s;
+}
+
+#step3.animate-card {
+  animation-delay: 0.3s;
+}
+
+#step4.animate-card {
+  animation-delay: 0.4s;
+} */
+
+.simple-step-card .howwework-data {
+  flex: 1; /* Allow the data section to stretch and occupy space */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Distribute title, text, and button evenly */
+}
+
+.simple-step-card h3 {
+  color: #333;
+
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.4px;
+}
+
+.simple-step-card p {
+  margin-top: 14px;
+  color: #333;
+  font-family: "Inter", Sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px; /* 157.143% */
+}
+
+.howwework-data img {
+  width: 50px;
+  /* margin-bottom: 32px; */
+}
+
+.simple-step-btn {
+  text-align: center;
+  text-align: center;
+  font-family: "Inter", Sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--main-light-clr);
+  margin-bottom: 5px;
+}
+
+.how-we-work-more-arrow {
+  font-weight: bolder;
+  font-size: 1.25rem; /* 20px equivalent */
+  margin-left: 0.625rem; /* 10px equivalent */
+  display: inline-block;
+  animation: moveArrow 2s infinite ease-in-out;
+}
+
+@keyframes moveArrow {
+  0% {
+    transform: translateX(0); /* Start at the original position */
+  }
+  50% {
+    transform: translateX(1.25rem); /* Move 20px to the right */
+  }
+  100% {
+    transform: translateX(0); /* Return to the original position */
+  }
+}
+
+.deal {
+  max-width: 1.875rem; /* 30px equivalent */
+}
+
+.deal img {
+  width: 85%;
+  height: auto;
+  filter: grayscale(0); /* Ensure no grayscale by default */
+  transition: filter 0.5s ease;
+}
+
+/* .simple-step-card:hover {
+  box-shadow: 0 0.3125rem 0.3125rem 0.3125rem #0078d48a;
+  transition: 1s;
+} */
+
+.simple-step-card:hover .howwework-data h3,
+.simple-step-card:hover .howwework-data p,
+.simple-step-card:hover .simple-step-btn,
+.simple-step-card:hover .how-we-work-more-arrow {
+  transition: 1s;
+}
+
+/* Media query for tablet responsiveness */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .simple-steps-container {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Adjusted to two columns for tablets */
+    gap: 2rem; /* More spacing for tablet screens */
+  }
+}
+@media (max-width: 480px) {
+
+  
+
+  .simple-steps-container {
+    display: grid;
+    align-items: stretch;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+
+    margin: 0 auto;
+    gap: 10px;
+    padding: 2rem 0 2rem 0;
+    /* background-color: var(--main-lighter-clr); */
+  }
+  .simple-steps-container {
+    grid-template-columns: repeat(
+      1,
+      1fr
+    ); /* Adjusted to two columns for tablets */
+    gap: 1rem; /* More spacing for tablet screens */
+  }
+}
+
+/* Media query for mobile responsiveness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .simple-steps-container {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Adjusted to two columns for tablets */
+    gap: 2rem; /* More spacing for tablet screens */
+  }
+
+  .howwework-data img {
+    width: 40px;
+    margin-bottom: 5px;
+  }
+
+  .simple-step-card {
+    max-width: 100%;
+    border: 1px solid var(--main-lighter-clr); /* Full width for mobile screens */
+  }
+
+  .simple-step-card h3 {
+    font-size: 0.875rem; /* 14px equivalent */
+  }
+
+  .simple-step-card p {
+    font-size: 0.75rem; /* 12px equivalent */
+  }
+
+  .simple-steps-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem 0 2rem 0; /* Adjusted using rem units */
+    /* background-color: var(--main-lighter-clr); */
+  }
+}

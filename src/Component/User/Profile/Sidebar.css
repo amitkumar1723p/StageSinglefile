@@ -1,0 +1,140 @@
+/* Base styles for the sidebar */
+.sidebar-profile {
+  padding: 20px;
+  color: #ffffff;
+  height: fit-content;
+  border: 1px solid #dedeff;
+  position: sticky;
+  top: 70px;
+}
+
+/* Optional logo styling */
+.logoTitle {
+  text-align: center;
+  color: #ffffff;
+}
+.navList {
+  list-style: none;
+  padding: 0;
+}
+.navItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 8px;
+  cursor: pointer;
+  color: #34414b;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  margin: 5px 5px;
+  font-size: 14px;
+  border-bottom: 1px solid #dedeff;
+  transition: filter 0.3s ease;
+}
+
+.active-btn-nav {
+  color: #fff;
+  background-color: var(--main-light-clr);
+  transition: filter 0.3s ease;
+}
+.navItem.active-btn-nav .icons {
+  filter: brightness(0) invert(1); /* Turn the icon white */
+}
+.icons {
+  width: 20px;
+}
+/* For mobile view */
+@media (max-width: 480px) {
+  .faq-item {
+    width: 90%;
+    margin: 10px 0;
+    border: 2px solid var(--main-light-clr);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .sidebar {
+    padding: 20px;
+    color: #ffffff;
+    height: fit-content;
+    border: 1px solid #dedeff;
+  }
+
+  .navList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .mob-hide {
+    display: none;
+  }
+
+  .sidebar-profile img {
+    display: none;
+  }
+
+  .navItem {
+    box-shadow: 0px 0px 4px 0px #b1cbdf;
+    background-color: white;
+
+    padding: 10px 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #8c8c8c;
+    /* margin-right: 20px; */
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .navItem {
+    box-shadow: 0px 0px 4px 0px #b1cbdf;
+    background-color: white;
+
+    padding: 10px 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #8c8c8c;
+    /* margin-right: 20px; */
+    font-size: 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  /* .profile-container{
+    display: block;
+  } */
+}
+@media (max-width: 320px) {
+  .navItem {
+    box-shadow: 0px 0px 4px 0px #b1cbdf;
+    background-color: white;
+    padding: 10px 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #8c8c8c;
+    /* margin-right: 20px; */
+    font-size: 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  .userDataSection p {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+}

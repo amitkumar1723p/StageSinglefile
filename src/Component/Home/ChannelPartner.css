@@ -1,0 +1,266 @@
+/* Main Container */
+/* .ChannelPartner-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);  
+    z-index: 1000;
+  } */
+
+  .ChannelPartner-box {
+    padding: 40px;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0px 1px 4px 1px rgba(0, 106, 194, 0.2);
+  }
+  
+  .img-right-channel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .main-channel-box {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .ChannelPartner-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 40px 30px;
+    max-width: 350px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Fade In Animation */
+  /* @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    } */
+  
+  /* Main Container */
+  /* .ChannelPartner-box {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.6);  
+      z-index: 1000;
+      animation: fadeInBackground 0.5s ease-in-out;  
+    } */
+  
+  /* Fade In Animation for Background */
+  
+  /* Form Container */
+  .ChannelPartner-container {
+    background-color: #ffffff;
+  
+    padding: 40px 30px;
+    max-width: 350px;
+  
+    position: relative;
+    border-radius: 12px;
+    border: 1px solid #dff1ff;
+    background: #fff;
+    box-shadow: 0px 0px 10px 0px #f1f1f1;
+  }
+  
+  /* Header Styling */
+  .ChannelPartner-container h2 {
+    color: var(--main-light-clr);
+    text-align: center;
+    font-family: "Inter", Sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  /* Close Button */
+  .ChannelPartner-container span {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+    animation: fadeInText 0.7s ease-in; /* Fade-in for close button */
+  }
+  
+  .ChannelPartner-container span:hover {
+    color: #ff0000; /* Red color on hover */
+  }
+  
+  /* Form Group Animations */
+  .ChannelPartner-group,
+  .ChannelPartner-checkbox {
+    animation: fadeInText 0.7s ease-in;
+    animation-delay: 0.1s;
+  }
+  
+  /* Submit Button Animation */
+  .ChannelPartner-submit-btn {
+    background-color: #0056e0;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: slideUpButton 0.7s ease-in; /* Slide-up effect for button */
+  }
+  
+  .ChannelPartner-submit-btn:hover {
+    background-color: #0041b3;
+  }
+  
+  
+  
+  /* Close Button */
+  .ChannelPartner-container span {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .ChannelPartner-container span:hover {
+    color: #ff0000; /* Red color on hover */
+  }
+  
+  /* Form Styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+  }
+  
+  /* Input Groups */
+  .ChannelPartner-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ChannelPartner-group label {
+    color: #333;
+  font-family: "Inter", Sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+    margin-bottom: 5px;
+    margin-top:16px;
+  }
+  
+  .ChannelPartner-group input {
+    border-radius: 7px;
+  border: 1px solid #DAEAF9;
+  background: #FFF;
+  color: #686868;
+  font-family: "Inter", Sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 8.5px 10px;
+  }
+  
+  .ChannelPartner-group input:focus {
+    border-color: #0056e0;
+  }
+  
+  /* Checkboxes */
+  .ChannelPartner-checkbox {
+    display: flex;
+    align-items: start;
+    /* margin: 20px 0; */
+    gap: 10px;
+  }
+  
+  .ChannelPartner-checkbox input {
+    /* width: 18px;
+    height: 18px; */
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  .tc-box{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 10px 0;
+  }
+  
+  .ChannelPartner-checkbox label {
+    color: #333;
+    font-family: "Inter", Sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  /* Links in Terms and Conditions */
+  .ChannelPartner-upload-link {
+    color: #0056e0;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .ChannelPartner-upload-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Submit Button */
+  .ChannelPartner-submit-btn {
+    background-color: #0056e0;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ChannelPartner-submit-btn:hover {
+    background-color: #0041b3;
+  }
+  
+  /* Loader */
+  .componentloader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    z-index: 9999;
+  }
+  

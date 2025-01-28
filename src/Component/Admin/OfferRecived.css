@@ -1,0 +1,113 @@
+/* Base styles for the offer received card */
+.offer-received-card {
+  border-radius: 8px;
+  border: 0.5px solid #0c7cd121;
+  background: #fff;
+  padding: 20px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  font-family: Arial, sans-serif;
+  gap: 20px; /* Add space between sections */
+}
+.view-img-offer-admin {
+  border: none;
+  background-color: var(--main-light-clr);
+  color: #fff;
+  padding: 5px 0;
+  border-radius: 5px;
+}
+
+/* Container for the sections */
+.offer-received-header {
+  display: flex;
+  flex-direction: row; /* Change to column for stacking */
+  justify-content: space-between;
+  gap: 20px; /* Space between each section */
+}
+
+/* Each section will be given equal space */
+.offer-received-user-info,
+.offer-received-user-date,
+.offer-received-property-info,
+.offer-received-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+/* Styling for user information */
+.offer-received-user-name {
+  color: #585959;
+  font-size: 14px; /* Slightly bigger text for clarity */
+  font-weight: 600;
+}
+
+.offer-received-phone-number {
+  color: #585959;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Styling for the user date */
+.offer-received-date {
+  color: #585959;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Styling for the property info section */
+.offer-received-property-details {
+  color: #585959;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.offer-received-pid {
+  color: #585959;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.offer-received-pid-number {
+  font-weight: bold;
+}
+
+/* Footer section styling */
+.offer-received-footer {
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.offer-received-status {
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.offer-received-schedule-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.offer-received-time {
+  color: #585959;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.visit-time-date {
+  color: #585959;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.view-img-offer-admin:hover{
+    opacity: .9;
+    
+}
