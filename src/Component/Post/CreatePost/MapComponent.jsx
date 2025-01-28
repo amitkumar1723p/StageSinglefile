@@ -7,12 +7,10 @@ export default function MapComponent() {
     lat: 0,
     lng: 0,
   });
- 
 
   // get real time address
   useEffect(() => {
     (async function () {
-      
       try {
         // Geo coding api link
         let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${centerCoordinates.lat},${centerCoordinates.lng}&key=AIzaSyBKlduTqtTfTxhDFOcyY_V5bgUrE8wUZO0`;
@@ -23,10 +21,7 @@ export default function MapComponent() {
         };
 
         const { data } = await axios.get(url, config);
-     
-      } catch (error) {
-       
-      }
+      } catch (error) {}
     })();
   }, [centerCoordinates]);
 
@@ -38,31 +33,29 @@ export default function MapComponent() {
       setCenterCoordinates(newCenter);
     }
   };
- //  Get initial longitude and latitude
- useEffect(() => {
-  
-  const getLocation =((position)=>{
-   setCenterCoordinates({
-     lat: position.coords.latitude,
-     lng: position.coords.longitude,
-   });
-  })
-  const FailgetLocaton=()=>{
-   alert("Allow Your Curent location")
-  }
-  navigator.geolocation.getCurrentPosition(getLocation ,FailgetLocaton  ) 
- // navigator.geolocation.getCurrentPosition((position ) => {
- //   setCenterCoordinates({
- //     lat: position.coords.latitude,
- //     lng: position.coords.longitude,
- //   });
-  
- // });
-}, []);
+  //  Get initial longitude and latitude
+  useEffect(() => {
+    const getLocation = (position) => {
+      setCenterCoordinates({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    };
+    const FailgetLocaton = () => {
+      alert("Allow Your Curent location");
+    };
+    navigator.geolocation.getCurrentPosition(getLocation, FailgetLocaton);
+    // navigator.geolocation.getCurrentPosition((position ) => {
+    //   setCenterCoordinates({
+    //     lat: position.coords.latitude,
+    //     lng: position.coords.longitude,
+    //   });
+
+    // });
+  }, []);
   return (
     <APIProvider
       apiKey={"AIzaSyBKlduTqtTfTxhDFOcyY_V5bgUrE8wUZO0"} // Make sure to replace with your valid API key
-       
     >
       <div style={{ height: "400px", width: "100%" }}>
         {" "}

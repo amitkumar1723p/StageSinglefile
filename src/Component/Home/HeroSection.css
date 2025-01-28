@@ -1,6 +1,6 @@
 .sub-heading {
-  color: #111;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
@@ -54,7 +54,8 @@
 }
 
 .hero-content h1 {
-  color: #111;
+  color: #333;
+  font-weight: 600;
   font-size: 38px;
   margin-bottom: 20px;
 }
@@ -64,7 +65,7 @@
 }
 
 .heading-span-h1 {
-  color: #3361e0;
+  color: var(--main-light-clr);
 }
 
 .hero-content p {
@@ -121,15 +122,14 @@
   color: var(--main-light-clr);
 }
 .search-tab-ing {
-  letter-spacing: .5px;
-  color: #111;
+  letter-spacing: 0.5px;
+  color: #333;
   text-align: center;
   padding: 5px 10px;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  
   border-radius: 5px;
   border: 0.5px solid #a7d6fa;
   background: #dff1ff;
@@ -145,7 +145,7 @@
 .search-tab-ing.active {
   color: #fff;
   border-radius: 5px;
-  background: var(--Pirmary, #0078d4);
+  background: var(--main-light-clr);
   box-shadow: 0px 0px 4px 0px #dadcdf;
 }
 .search-tab:hover {
@@ -198,7 +198,7 @@
   font-size: 12.8px;
 }
 .search-button {
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   display: flex;
   gap: 5px;
   padding: 0 12.8px;
@@ -221,7 +221,7 @@
 .property-section {
   display: flex;
   flex-direction: row;
-  gap: 180px;
+  gap: 120px;
   padding: 16px;
   padding: 40px 0 0 0;
   border-radius: 10px;
@@ -267,8 +267,8 @@
   text-align: left;
 }
 .details h3 {
-  color: #111;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 17px;
   font-style: normal;
   font-weight: 600;
@@ -282,7 +282,7 @@
 }
 .details p {
   font-size: 11.2px;
-  color: #111;
+  color: #333;
 }
 
 /* .form-group-home {
@@ -316,7 +316,7 @@
   align-items: flex-end;
   justify-content: center;
   color: #fff;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -329,10 +329,10 @@
   border-radius: 5px;
   border: none;
   padding: 5px;
-  background: var(--Pirmary, #0078d4);
+  background: var(--main-light-clr);
   box-shadow: 0px 0px 5.6px 2px #f6f6f6;
   color: #fff;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -345,7 +345,6 @@
 }
 
 @media (max-width: 768px) {
-
   /* .overlay {
     position: absolute;
     background-color: #fff;
@@ -363,7 +362,6 @@
   .property-section {
     display: flex;
     flex-direction: row;
-   
     gap: 50px;
     padding: 16px;
     padding: 40px 0 0 0;
@@ -372,7 +370,6 @@
 }
 
 @media (max-width: 480px) {
-
   .overlay {
     position: absolute;
     background-color: #fff;
@@ -387,14 +384,11 @@
     width: 100%;
   }
 
-
-
   .hero-content {
     position: relative;
     color: white;
-    padding: 0 16px; 
-    
-}
+    padding: 0 16px;
+  }
 
   .hero-section {
     position: relative;
@@ -408,13 +402,13 @@
   }
 
   .hero-content h1 {
-    color: #454545;
+    color: #333;
     font-size: 16px;
     margin-bottom: 20px;
   }
   .hero-content p {
     font-size: 14px;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     padding: 8px;
   }
   .search-box {
@@ -452,7 +446,6 @@
     width: 100%;
     height: 30%; /* Make sure the image takes up 50% of the section's height */
   }
-  
   .hero-img-section-main-section {
     position: absolute;
     bottom: 0;
@@ -556,7 +549,7 @@
   }
   .details p {
     font-size: 11.2px;
-    color: #111;
+    color: #333;
   }
   .arrow {
     display: flex;
@@ -604,7 +597,7 @@
     color: #8c8c8c;
     /* margin-right: 20px; */
     font-size: 14px;
-    border-radius: 4px;
+    /* border-radius: 4px; */
     border: none;
     cursor: pointer;
   }
@@ -642,7 +635,7 @@
     line-height: 1.6;
   }
 }
-@media  (max-width: 320px) {
+@media (max-width: 320px) {
   .heading-hero h1 {
     font-size: 13px;
     margin-top: 50px;
@@ -698,7 +691,7 @@
     background: var(--Pirmary, #0078d4);
     box-shadow: 0px 0px 5.6px 2px #f6f6f6;
     color: #fff;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -755,7 +748,7 @@
   }
 
   .search-tab-ing {
-    color: #111;
+    color: #333;
     text-align: center;
     padding: 5px 10px;
     font-size: 14px;
@@ -768,4 +761,47 @@
     background: #dff1ff;
     cursor: pointer;
   }
+}
+
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 3;
+}
+
+.floating-buttons a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  /* WhatsApp Green */
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.floating-buttons a:hover {
+  transform: scale(1.1);
+}
+
+.floating-buttons a.call-button {
+  background-color: var(--main-light-clr); /* Green for Call */
+}
+
+.floating-buttons img {
+  width: 25px;
+  height: 25px;
+}
+
+.whatsapp-button {
+  background-color: #25d366;
+}
+
+.call-button {
+  background-color: var(--main-light-clr);
 }

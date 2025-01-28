@@ -98,12 +98,12 @@
     font-weight: 500;
     line-height: normal;
     margin-top: 20px;
-    color: #454545;
+    color: #333;
   }
   .Comparison-p {
-    color: #363636;
+    color: #333;
     text-align: center;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -140,12 +140,12 @@
     font-weight: 500;
     line-height: normal;
     margin-top: 20px;
-    color: #454545;
+    color: #333;
   }
   .Comparison-p {
-    color: #363636;
+    color: #333;
     text-align: center;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

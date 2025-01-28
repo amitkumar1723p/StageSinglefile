@@ -11,7 +11,7 @@
 .main-heading-h3 {
   text-align: center;
   color: #2c3e50;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 28px;
   font-style: normal;
   font-weight: 600;
@@ -37,7 +37,7 @@
 
 .intro-tc-h2 {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 18px;
   font-weight: 500;
   margin: 14px 0;
@@ -57,7 +57,7 @@
   background: #f6f6f6;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.16);
   padding: 20px;
-  color: #3d5a80;
+  color: #333;
   font-size: 12px;
   font-style: italic;
   font-weight: 500;
@@ -78,7 +78,7 @@
 }
 
 .terms-container ul li {
-  color: #3d5a80;
+  color: #333;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -100,7 +100,7 @@
 
 .terms-container p {
   font-size: 14px;
-  color: #3d5a80;
+  color: #333;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -108,8 +108,8 @@
 }
 
 .terms-container h2 {
-  color: #16315f;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.2px;

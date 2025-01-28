@@ -1,20 +1,10 @@
-// import React from 'react'
-
-// export default function AdminAgentDashboard() {
-//   return (
-//      <>
-
-//      </>
-//   )
-// }
-
 // src/Dashboard.jsx
 import React, { useEffect, useState } from "react";
 import "./Dashboard.css"; // Import CSS for styling
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
 const AdminAgentDashboard = () => {
   const dispatch = useDispatch();
@@ -24,24 +14,20 @@ const AdminAgentDashboard = () => {
   const [UnVerifyAgent, setUnVerifyAgent] = useState([]);
   const [VerifyAgent, setVerifyAgent] = useState([]);
   const [FakeUnverifyAdmin, setFakeUnverifyAdmin] = useState([]);
-
+  const [querry, setquerry] = useSearchParams();
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
-
-  useEffect(() => {
-    if (medata && medata.IsAuthenticated) {
-      if (medata.user.Role === "Owner") {
-        dispatch(GetAllAdminAction());
-      }
-    }
-    // eslint-disable-next-line
-  }, []);
+  const [ShowFiled, setShowField] = useState({
+    showAgent: true,
+    showAdmin: true,
+  });
 
   const { data: AllAdminData, loading: AdminLoading } = useSelector((state) => {
     return state.AdminData;
   });
 
+  useEffect(() => {}, []);
   useEffect(() => {
     if (AllAdminData && AllAdminData.success) {
       let unverifyAdmin = AllAdminData.Admin.filter((admin) => {
@@ -63,18 +49,30 @@ const AdminAgentDashboard = () => {
       });
       setVerifyAgent(verifiedagent);
 
-
-
       let unverifiedagent = AllAdminData.Admin.filter((agent) => {
         return agent.AgentVerify === false;
       });
       setUnVerifyAgent(unverifiedagent);
-
-      
     }
   }, [AllAdminData]);
   // AdminData
-
+  useEffect(() => {
+    if (querry.get("Role") === "Agent") {
+      setShowField({ showAgent: true, showAdmin: false });
+    } else if (querry.get("Role") === "Admin") {
+      setShowField({ showAgent: false, showAdmin: true });
+    } else {
+      setShowField({ showAgent: true, showAdmin: true });
+    }
+  }, [querry]);
+  useEffect(() => {
+    if (medata && medata.IsAuthenticated) {
+      if (medata.user.Role === "Owner") {
+        dispatch(GetAllAdminAction());
+      }
+    }
+    // eslint-disable-next-line
+  }, []);
   return (
     <>
       {AdminLoading ? (
@@ -87,85 +85,98 @@ const AdminAgentDashboard = () => {
               medata.IsAuthenticated &&
               medata.user.Role === "Owner" && (
                 <>
-                  <Link to="/admin/data?Role=Admin">
-                    <div className="card">
-                      <div className="Admin-box">
-                        <p className="total-number">
-                          {UnVerifyAdmin.length + VerifiedAdmin.length}
-                        </p>
-                        <img src="/img/TotalAdmin.png" alt="post" />
-                      </div>
-                      <h3> Total Admin Verified And Un-Verified </h3>
-                      <p className="viewall">View All</p>
-                    </div>
-                  </Link>
-                  <Link to={`/admin/data?AdminVerify=false`}>
-                    <div className="card">
-                      <div className="Admin-box">
-                        <p className="total-number">{UnVerifyAdmin.length}</p>
-                        <img src="/img/ActivePosts.png" alt="post" />
-                      </div>
-                      <h3> Unverify Admin </h3>
-                      <p className="viewall">View All</p>
-                    </div>
-                  </Link>
+                  {ShowFiled.showAdmin && (
+                    <>
+                      {" "}
+                      <Link to="/admin/data?Role=Admin">
+                        <div className="card">
+                          <div className="Admin-box">
+                            <p className="total-number">
+                              {UnVerifyAdmin.length + VerifiedAdmin.length}
+                            </p>
+                            <img src="/img/TotalAdmin.png" alt="post" />
+                          </div>
+                          <h3> Total Admin Verified And Un-Verified </h3>
+                          <p className="viewall">View All</p>
+                        </div>
+                      </Link>
+                      <Link to={`/admin/data?AdminVerify=false`}>
+                        <div className="card">
+                          <div className="Admin-box">
+                            <p className="total-number">
+                              {UnVerifyAdmin.length}
+                            </p>
+                            <img src="/img/ActivePosts.png" alt="post" />
+                          </div>
+                          <h3> Unverify Admin </h3>
+                          <p className="viewall">View All</p>
+                        </div>
+                      </Link>
+                      <Link to="/admin/data/?AdminVerify=true">
+                        <div className="card">
+                          <div className="Admin-box">
+                            <p className="total-number">
+                              {VerifiedAdmin.length}
+                            </p>
+                            <img src="/img/ActivePosts.png" alt="post" />
+                          </div>
+                          <h3> Verify Admin </h3>
+                          <p className="viewall">View All</p>
+                        </div>
+                      </Link>
+                    </>
+                  )}
 
-                  <Link to="/admin/data/?AdminVerify=true">
-                    <div className="card">
-                      <div className="Admin-box">
-                        <p className="total-number">{VerifiedAdmin.length}</p>
-                        <img src="/img/ActivePosts.png" alt="post" />
-                      </div>
-                      <h3> Verify Admin </h3>
-                      <p className="viewall">View All</p>
-                    </div>
-                  </Link>
-
+                  {ShowFiled.showAgent && (
+                    <>
+                      {" "}
+                      <Link to="/admin/data/?Role=Agent">
+                        <div className="card">
+                          <div className="Admin-box">
+                            <p className="total-number">
+                              {UnVerifyAgent.length + VerifyAgent.length}
+                            </p>
+                            <img src="/img/TotalAdmin.png" alt="post" />
+                          </div>
+                          <h3> Total Agent Verified And Un-Verified </h3>
+                          <p className="viewall">View All</p>
+                        </div>
+                      </Link>
+                      <Link to="/admin/data?AgentVerify=false">
+                        <div className="card">
+                          <div className="Admin-box">
+                            <p className="total-number">
+                              {UnVerifyAgent.length}
+                            </p>
+                            <img src="/img/ActivePosts.png" alt="post" />
+                          </div>
+                          <h3> Unverify Agent </h3>
+                          <p className="viewall">View All</p>
+                        </div>
+                      </Link>
+                      <Link to="/admin/data?AgentVerify=true">
+                        <div className="card">
+                          <div className="Admin-box">
+                            <p className="total-number">{VerifyAgent.length}</p>
+                            <img src="/img/ActivePosts.png" alt="post" />
+                          </div>
+                          <h3> Verify Agent </h3>
+                          <p className="viewall">View All</p>
+                        </div>
+                      </Link>
+                    </>
+                  )}
                   {/* Agent Data  */}
 
-                  <Link to="/admin/data/?Role=Agent">
-                    <div className="card">
-                      <div className="Admin-box">
-                        <p className="total-number">
-                          {UnVerifyAgent.length + VerifyAgent.length}
-                        </p>
-                        <img src="/img/TotalAdmin.png" alt="post" />
-                      </div>
-                      <h3> Total Agent Verified And Un-Verified </h3>
-                      <p className="viewall">View All</p>
-                    </div>
-                  </Link>
-                  <Link to="/admin/data?AgentVerify=false">
-                    <div className="card">
-                      <div className="Admin-box">
-                        <p className="total-number">{UnVerifyAgent.length}</p>
-                        <img src="/img/ActivePosts.png" alt="post" />
-                      </div>
-                      <h3> Unverify Agent </h3>
-                      <p className="viewall">View All</p>
-                    </div>
-                  </Link>
-
-                  <Link to="/admin/data?AgentVerify=true">
-                    <div className="card">
-                      <div className="Admin-box">
-                        <p className="total-number">{VerifyAgent.length}</p>
-                        <img src="/img/ActivePosts.png" alt="post" />
-                      </div>
-                      <h3> Verify Agent </h3>
-                      <p className="viewall">View All</p>
-                    </div>
-                  </Link>
-
-                  <div className="card">
+                  {/* <div className="card">
                     <div className="Admin-box">
                       <p className="total-number">{FakeUnverifyAdmin.length}</p>
                       <img src="/img/ActivePosts.png" alt="post" />
                     </div>
-                    <h3> Fake Admin request </h3>
+                    <h3> Fake Admin request (Profile is not Create) </h3>
 
                     <p className="viewall">View All</p>
-                  </div>
+                  </div> */}
                 </>
               )}
           </div>

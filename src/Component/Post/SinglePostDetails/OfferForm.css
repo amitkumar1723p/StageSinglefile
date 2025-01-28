@@ -24,7 +24,7 @@
 }
 
 .prperty-addresh-heading {
-  color: #111;
+  color: #333;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -42,7 +42,7 @@
   border: none;
   font-size: 18px;
   font-weight: 600;
-  color: #111;
+  color: #333;
   cursor: pointer;
 }
 
@@ -65,7 +65,7 @@
 
 .mke-you-offer-title {
   color: var(--Pirmary, #0078d4);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -89,7 +89,7 @@
 
 .mke-offer-p {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -129,7 +129,7 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
-  color: #111;
+  color: #333;
 
   font-size: 14px;
   font-style: normal;
@@ -139,7 +139,7 @@
 
 .mke-you-offer-bids-count,
 .mke-you-offer-last-bid {
-  color: #111;
+  color: #333;
 }
 
 /* .mke-you-offer-offer-group {
@@ -152,7 +152,7 @@
   font-weight: bold;
   margin: 0.5em 0;
   color: #3c3c3c;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -168,7 +168,7 @@
 
 .mke-you-offer-option {
   padding: 2px 5px;
-  color: #515151;
+  color: #333;
   text-align: center;
   border-radius: 5px;
   border: 1px solid #abcbff;
@@ -210,15 +210,21 @@
 
 .mke-you-offer-file-support-text {
   font-size: 0.8em;
-  color: #888;
+  color: #333;
 }
 
 .mke-you-offer-checkbox-group {
   margin-bottom: 1em;
 }
 
+.offer-tc-p-p{
+  font-weight: 600;
+  color: #0078d4c9;
+  cursor: pointer;
+}
+
 .mke-you-offer-checkbox-label {
-  display: flex;
+  /* display: flex; */
   align-items: flex-start;
   font-size: 12px;
 }
@@ -254,7 +260,7 @@
 .mke-you-offer-lower-toggle {
   cursor: pointer;
   color: #fff;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -270,7 +276,7 @@
 }
 
 .form-heading-name {
-  color: #111;
+  color: #333;
 
   font-size: 12px;
   font-style: normal;
@@ -291,7 +297,7 @@
 .mke-you-offer-bids-info {
   display: flex;
   flex-direction: row;
-  color: #111;
+  color: #333;
   justify-content: space-between;
 }
 
@@ -299,7 +305,7 @@
   border-radius: 43px;
   color: #fff;
   padding: 5px 10px;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -309,14 +315,14 @@
 }
 
 .prop-id-number {
-  color: #111;
+  color: #333;
   text-align: center;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   letter-spacing: 1px;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   text-transform: uppercase;
 }
 
@@ -329,7 +335,7 @@
 }
 .price-ans-form {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -337,7 +343,7 @@
 }
 .area-section-from {
   color: #8b8b8b;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -367,7 +373,7 @@
 .name-upload {
   color: var(--Pirmary, #0078d4);
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

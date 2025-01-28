@@ -6,7 +6,7 @@ import {
   Admin_OwnerScheduleVisitDone,
 } from "../../Action/postAction";
 import HeaderCard from "./HeaderCard";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const ScheduleVisit = () => {
   const { data: VisitStatusData, LodingType } = useSelector((state) => {
@@ -14,9 +14,11 @@ const ScheduleVisit = () => {
   });
 
   // const [count, setcount] = useState(0);
-
+  //  const navigate
   const dispatch = useDispatch();
   const Params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   // const [VisitStatus, setVisitStatus] = useState({});
   const [VisitStatus, setVisitStatus] = useState({});
 
@@ -51,6 +53,12 @@ const ScheduleVisit = () => {
 
     return "N/A";
   }, []);
+
+  useEffect(() => {
+    if (ScheduleVisitsData?.success == false) {
+      navigate("/admin/allpost");
+    }
+  }, [ScheduleVisitsData]);
 
   return (
     <>
@@ -95,7 +103,7 @@ const ScheduleVisit = () => {
                   <p className="schedule-visit-pid">
                     PID:{" "}
                     <span className="schedule-visit-pid-number">
-                      {PostId?._id} 
+                      {PostId?._id}
                     </span>
                     {/* {} */}
                     {PostId?.PostVerify ? (
@@ -107,6 +115,9 @@ const ScheduleVisit = () => {
                 </div>
                 <div className="schedule-visit-footer">
                   <div className="schedule-visit-schedule-info">
+                    <div>
+
+                    
                     <p>
                       Schedule Visit:
                       <span className="schedule-visit-status">
@@ -126,39 +137,47 @@ const ScheduleVisit = () => {
                           <option value="Re-Plan">Re-Plan</option>
                           <option value="Done">Done</option>
                         </select>
-                        {visitData.VisitStatusData.Status}
-                        <button
-                          onClick={() => {
-                            const status =
-                              VisitStatus[visitData._id] || "Re-Plan";
+                        <span>{visitData.VisitStatusData.Status} </span>
+                      </span>
+                      <button
+                        className="submit-schedule"
+                        onClick={() => {
+                          const status =
+                            VisitStatus[visitData._id] || "Re-Plan";
 
-                            dispatch(
-                              Admin_OwnerScheduleVisitDone(
-                                { VisitStatus: status },
-                                visitData._id
-                              )
-                            );
-                          }}
-                        >
-                          Submit
-                        </button>
-                      </span>
-                    </p>
-                    <p className="visit-time-date">
-                      Date and Time:
-                      <span className="schedule-visit-time">
-                        {new Date(visitData.VisitDate).toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          }
-                        )}{" "}
-                        , {formatTime(visitData.VisitTime.From)} to{" "}
-                        {formatTime(visitData.VisitTime.To)}
-                      </span>
-                    </p>
+                          dispatch(
+                            Admin_OwnerScheduleVisitDone(
+                              { VisitStatus: status },
+                              visitData._id
+                            )
+                          );
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </p></div>
+                    <div className="visit-admin-box">
+                      <p className="visit-time-date">
+                        Date:
+                        <span className="schedule-visit-date">
+                          {new Date(visitData.VisitDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            }
+                          )}
+                        </span>
+                      </p>
+                      <p className="visit-time-date">
+                        Time:
+                        <span className="schedule-visit-time">
+                          {formatTime(visitData.VisitTime.From)} to{" "}
+                          {formatTime(visitData.VisitTime.To)}
+                        </span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

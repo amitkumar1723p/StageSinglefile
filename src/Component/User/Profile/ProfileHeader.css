@@ -16,6 +16,93 @@
   box-shadow: 0px 0px 16px 0px #cfdae2;
 }
 
+/* Amit css  */
+.profile-name {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  background: #fff;
+  padding: 10px;
+  width: 80%;
+}
+.profileNameEmail {
+  display: flex;
+  flex-direction: row; /* Align children in a row */
+  width: auto; /* Adjust width as needed */
+  justify-content: space-between; /* Space out the children */
+}
+
+.profileNameEmail > div {
+  flex: 1; /* Each child takes equal space */
+  margin: 0 0px; /* Optional: Add some margin between children */
+}
+
+.editProfileButton button {
+  color: #fff;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 3px;
+  background: var(--Pirmary, #0078d4);
+  border: none;
+  padding: 10px 20px;
+}
+
+.editProfileButton button:hover {
+  opacity: 0.9;
+}
+.profile-section-data {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.profile-email {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  background: #fff;
+  padding: 10px;
+  width: 80%;
+}
+.editProfileButton {
+  display: flex;
+  justify-content: space-between;
+}
+
+.medata-role {
+  border-radius: 2px;
+  /* border: 0.5px solid #ddd; */
+  background: #f3f3f3;
+  box-shadow: 0px 0px 12px 0px #f1f9ff;
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+}
+
+.medata-role span {
+  background-color: var(--main-light-clr);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.5px;
+}
+
+.profile-section-data label {
+  color: #3f3f3f;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
+}
+
 .need-help-box h4 {
   color: #353c48;
 
@@ -74,8 +161,8 @@
 
 .header-dashborad-section {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+
+  gap: 5px;
   padding: 15px 10px;
   border-radius: 2px;
   border: 0.5px solid #ddd;
@@ -84,7 +171,7 @@
 }
 
 .Last_Updated-dashborad {
-  color: #111;
+  color: #333;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -92,31 +179,32 @@
 }
 
 .top-section-in-profile {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   padding: 20px 20px 20px 20px;
-  background: linear-gradient(90deg, #a1d2f8 0%, #e8f5ff 100%);
+  /* background: linear-gradient(90deg, #a1d2f8 0%, #e8f5ff 100%); */
+  background-color: var(--main-light-clr);
   margin: 0px 0 15px 0;
   border-radius: 12px;
 }
 .top-section-in-profile-left-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .top-section-in-profile-left-section h3 {
-  color: #03315f;
-  font-size: 28px;
+  color: #fff;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 
 .top-section-in-profile-left-section p {
-  color: #111;
+  color: #fff;
 
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -124,17 +212,17 @@
 
 .profile-main-box {
   box-shadow: 0px 0px 16px 0px #cfdae2;
-  padding: 20px;
+  padding: 18px;
   border-radius: 10px;
-  /* width: 70%; */
+
   height: fit-content;
 }
-.dashborad-section-left {
+/* .dashborad-section-left {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 70%;
-}
+} */
 
 .edit-btn-dashborad span {
   border-radius: 3px;
@@ -159,7 +247,26 @@
 
 .dashborad-section-left-right {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+
+  width: 70%;
+}
+
+.main-profile-dashboard-section {
+  display: flex;
+  gap: 10px;
+  /* padding: 20px; */
+}
+
+.register-as-role {
+  display: flex;
+  align-items: center;
+  color: #3f3f3f;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 153.846% */
 }
 
 .profile-name-ans {
@@ -171,7 +278,7 @@
 }
 
 .dash-que {
-  color: #111;
+  color: #333;
 
   font-size: 13px;
   font-style: normal;
@@ -181,7 +288,7 @@
 
 .userDataSection p {
   margin-top: 5px;
-  color: #111;
+  color: #333;
 }
 
 .ans {
@@ -197,7 +304,7 @@
 }
 
 .profile-text-dashborad p {
-  color: #555;
+  color: #333;
 
   font-size: 14px;
   font-style: normal;
@@ -211,7 +318,7 @@
   border-radius: 4px;
   background: var(--main-light-clr);
   color: #fff;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
@@ -242,7 +349,7 @@
 .click-here-dashborad {
   font-size: 12px;
   text-decoration: underline;
-  color: #999;
+  color: #333;
   padding: 5px;
 }
 
@@ -257,7 +364,7 @@
 
 .Shortlisted-prop {
   font-size: 16px;
-  color: #111;
+  color: #333;
   text-align: center;
 }
 
@@ -273,9 +380,56 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
   }
 }
 @media (max-width: 480px) {
+  .sidebar-profile {
+    padding: 20px;
+    color: #ffffff;
+    height: fit-content;
+    border: 1px solid #dedeff;
+    position: static;
+    top: 0px;
+  }
+
+  .editProfileButton button {
+    color: #fff;
+    font-family: Inter;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 3px;
+    background: var(--Pirmary, #0078d4);
+    border: none;
+    padding: 5px 10px;
+  }
+
+  .profile-email {
+    width: 100%;
+  }
+  .profile-name {
+    width: 100%;
+  }
+
+  .main-profile-dashboard-section {
+    flex-direction: column;
+  }
+
+  .userDataSection {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 10px 0;
+  }
+
+  .click-here-dashborad {
+    font-size: 8px;
+    text-decoration: underline;
+    color: #333;
+    padding: 5px;
+  }
+
   .button-section-dashborad {
     display: flex;
     justify-content: space-between;
@@ -283,7 +437,7 @@
     gap: 10px;
   }
   .top-section-in-profile-left-section p {
-    color: #111;
+    color: #fff;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -299,7 +453,7 @@
     border: 1px solid #daeaf9;
     background: #fff;
     padding: 10px;
-    width: 95%;
+    width: 100%;
   }
   .edit-btn-dashborad span {
     border-radius: 3px;
@@ -313,17 +467,17 @@
   }
 
   .userDataSection p {
-    margin-top: 12px;
+    /* margin-top: 12px; */
     font-size: 12px;
   }
 
   .profile-regis-ans {
     display: inline-block;
-    font-size: 14px;
+    font-size: 10px;
     border-radius: 20px;
     background: var(--main-light-clr);
     color: #fff;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
 
     font-style: normal;
     font-weight: 700;
@@ -338,6 +492,13 @@
   .whatapp-notify img {
     width: 20px;
   }
+
+  .profileNameEmail {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 320px) {
@@ -349,36 +510,4 @@
     margin-top: 12px;
     font-size: 10px;
   }
-}
-/* Amit css  */
-.profile-name {
-  border-radius: 7px;
-  border: 1px solid #daeaf9;
-  background: #fff;
-  padding: 10px;
-  width: 80%;
-}
-.profileNameEmail {
-  display: flex;
-  flex-direction: row; /* Align children in a row */
-  width: auto; /* Adjust width as needed */
-  justify-content: space-between; /* Space out the children */
-}
-
-.profileNameEmail > div {
-  flex: 1; /* Each child takes equal space */
-  margin: 0 10px; /* Optional: Add some margin between children */
-}
-.profile-email {
-  border-radius: 7px;
-  border: 1px solid #daeaf9;
-  background: #fff;
-  padding: 10px;
-  width: 80%;
-}
-.editProfileButton{
- display: flex;
- justify-content: end;
-
-
 }

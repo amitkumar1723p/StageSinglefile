@@ -57,7 +57,7 @@ export default function ShowLoginUserPost() {
           {loading ? (
             <Loader className="componentloader" />
           ) : // AllPost.length > 0 ? <>
-          data && data.success && data.Post.length > 0 ? (
+            data?.Post?.length > 0 ? (
             <>
                <h3 className="user-section-heading">{PropertyAdType} Post</h3>
                <div className="user-filter-section">

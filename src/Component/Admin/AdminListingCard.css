@@ -2,12 +2,30 @@
   display: flex;
 }
 
+.prop-box-andpropname {
+  display: flex;
+  gap: 10px;
+}
+
+.CurrentPropertyStatus {
+  height: fit-content;
+  /* padding: 5px; */
+  font-weight: 500;
+  border-radius: 5px;
+}
+
 .deleteIcon {
   cursor: pointer;
 }
 
 .editIcon {
   cursor: pointer;
+}
+
+.user-name-contact span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-edit-box {
@@ -54,14 +72,14 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
-  color: #fff;
+  color: #333;
   padding: 8px;
   border-radius: 5px;
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  background-color: var(--main-light-clr);
+  background-color: var(--main-lighter-clr);
 }
 
 .user-name-contact p {
@@ -111,14 +129,22 @@
   margin: 0 0 20px 0;
 }
 
+.Assing-to {
+  position: relative;
+  top: 2px;
+
+  right: 5px;
+}
+
 .property-post-card {
   display: flex;
   justify-content: space-between;
   position: relative;
+  gap: 5px;
 }
 .edit-del-section {
   display: flex;
-  gap: 30px;
+  gap: 10px;
 }
 .Admin-property-post-card-main {
   width: 800px;
@@ -141,6 +167,9 @@
 }
 
 .asign-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
 }
 
@@ -153,7 +182,7 @@
 }
 
 .admin-property-card-info {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -171,7 +200,7 @@
   } */
 .property-title {
   font-size: 20px;
-  color: #111;
+  color: #333;
 }
 .active-sign {
   color: #0aa768;
@@ -182,7 +211,7 @@
 }
 
 .question-box {
-  color: #111;
+  color: #333;
 
   font-size: 10px;
   font-style: normal;
@@ -192,7 +221,7 @@
 }
 
 .answer-box {
-  color: #111;
+  color: #333;
 
   font-size: 12px;
   font-style: normal;
@@ -224,7 +253,7 @@
 }
 
 .property-details {
-  color: #555;
+  color: #333;
 }
 
 .pricevalue {
@@ -240,7 +269,7 @@
   font-weight: 600;
 
   font-size: 12px;
-  color: #000;
+  color: #333;
   display: flex;
 }
 .card-box-section {
@@ -254,7 +283,7 @@
   justify-content: start;
 }
 .price-rp-que {
-  color: #111;
+  color: #333;
 
   font-size: 14px;
   font-style: normal;
@@ -284,11 +313,13 @@
 }
 
 .heading-name {
+  align-items: center;
+  margin-bottom: 0px;
   display: flex;
-
+  /* margin: 10px 0; */
   justify-content: space-between;
-  color: #111;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -318,14 +349,14 @@
 .property-specs {
   width: 100%;
   font-size: 14px;
-  color: #777;
+  color: #333;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
 }
 .property-specs p {
-  color: #000;
+  color: #333;
   display: flex;
   align-items: center;
   font-weight: 600;
@@ -375,7 +406,7 @@
 .bhk-option {
   background-color: #fff;
   margin: 2px;
-  color: #515151;
+  color: #333;
   padding: 5px 10px;
   font-size: 12px;
   font-style: normal;
@@ -386,7 +417,7 @@
   border: 2px solid #5cadeb;
 }
 
-.bhk-option:hover{
+.bhk-option:hover {
   background-color: #5cadeb;
   color: #fff;
 }
@@ -400,7 +431,7 @@
   cursor: default;
   padding: 10px;
   font-size: 12px;
-  color: #111;
+  color: #333;
 }
 
 .filter-box-main input[type="checkbox"] {
@@ -445,7 +476,7 @@
     top: 15px;
     left: 15px; */
   background-color: #fff;
-  color: #000;
+  color: #333;
   padding: 2px;
   border-radius: 4px;
   font-size: 10px;
@@ -463,8 +494,8 @@
   justify-content: end;
 }
 .Date-of-post {
-  color: #111;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
@@ -478,7 +509,7 @@
 
 .price-section {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -487,7 +518,7 @@
 
 #postdate {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
@@ -552,7 +583,9 @@
 .response-section {
   display: flex;
   gap: 30px;
+
 }
+
 .admin-card-heading {
   color: #7f7f7f;
 
@@ -604,8 +637,8 @@
 
 .response-section p {
   cursor: pointer;
-  color: #3d5a80;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -621,7 +654,7 @@
 .three-section-data {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .date-post-section {
@@ -645,7 +678,6 @@
 }
 
 .Active-btn {
-
   background-color: #0aa768;
   color: #fff;
 }
@@ -660,35 +692,69 @@
 
   opacity: 0.9;
 }
+
+/* .AllListing-admin{
+  color: #333;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+} */
 .admin-card-area-section {
   margin-top: 10px;
   color: #8b8b8b;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
 
+.search-bar-admin{
+  position: relative;
+  right: 25px;
+}
+
 .filter-section-property {
   display: flex;
   gap: 20px;
+  padding: 10px 0px;
+  position: sticky;
+  top: 71px;
+  z-index: 3;
+  background-color: #fff;
+  border-bottom: 1px solid #ebe4e4;
 }
 
 .Admin-property-post-card-main-box {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: relative;
 }
 
 .select-section-admin {
+  width: 100%;
   display: flex;
-  padding: 2px 8px;
   gap: 20px;
-  border-radius: 4px;
-  border: 0.5px solid #a4d0ed;
+  /* border-radius: 4px; */
+  /* border: 0.5px solid #a4d0ed; */
   background: #f7fcff;
   width: fit-content;
+  margin: 10px 0;
+  position: sticky;
+  top: 124px;
+  z-index: 3;
+}
+.active-btn{
+ display: flex;
+ align-items: center;
+ background-color: var(--main-light-clr);
+ color: #fff  !important;
+ padding: 5px;
+ border-radius: 5px;
+ animation: .5s;
 }
 
 .select-section-admin span {
@@ -711,7 +777,7 @@
 .select-section-admin p {
   cursor: pointer;
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -734,7 +800,7 @@
   background: #fff;
   color: #4791cc;
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -744,6 +810,10 @@
 @media (min-width: 1px) and (max-width: 480px) {
   .property-filters {
     display: none;
+  }
+
+  .heading-name {
+    margin: 10px 0 0 0;
   }
   .property-card-info {
     margin-left: 0px;
@@ -767,56 +837,55 @@
     /* padding: 15px; */
     border-radius: 8px;
     background: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 12px 0px #cbe1f1;
   }
   .imageSlide img {
-    /* width: auto; */
-    /* height: auto; */
     min-width: 100%;
     max-width: 100%;
     transition: all 1s ease-in-out;
   }
   .property-post-card {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    /* display: grid; */
     /* justify-content: space-between;
       position: relative; */
   }
 }
-
-
 /* Amit css========================================== */
 .controlled-input {
-  padding: 7px;
-  border: 1px solid #939090;
+  padding: 5px;
+  border: 1px solid var(--main-light-clr);
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 12px;
   width: 200px;
+  color: #333;
 }
-.searchAdmin{
- margin-left: 20px;
+.searchAdmin {
+  margin-left: 20px;
 }
-.ActiveFill{
-  display: flex ;
-      flex-direction: row;
-      gap: 5px;
-      color: #0e86e4;
-      padding: 8px;
-      border-radius: 5px;
-      font-size: 11px;
-      font-style: normal;
-      font-weight: 550;
-      line-height: normal;
-      background-color: #fff;
-      border: 1px solid #daeaf9;
+.ActiveFill {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  color: #0e86e4;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
+  background-color: #fff;
+  border: 1px solid #daeaf9;
 }
 /* 2nd case */
-.ActiveEmpty{
+.ActiveEmpty {
   display: flex;
   flex-direction: row;
   gap: 5px;
   color: hsl(240, 10%, 94%);
-padding: 8px;
-border-radius: 5px;
+  padding: 8px;
+  border-radius: 5px;
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
@@ -824,49 +893,55 @@ border-radius: 5px;
   background-color: var(--main-light-clr);
 }
 
+.main-box-aline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.Assing-Property-btn {
+  background-color: var(--main-lighter-clr);
+  border: 1px solid #d0e5f6;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.Assing-Property-btn:hover {
+  background-color: var(--main-light-clr);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
 /* assign to section css */
 .selectAssign {
-  width: 8rem;
-  border: 3px solid transparent;
-  color: #3585da;
+  width: 10rem;
+  background-color: var(--main-light-clr);
+  border: 1px solid #d0e5f6;
+  /* color: whitesmoke; */
   border-radius: 6px;
   padding: 0px;
   margin-top: 0px;
   outline: none; /* Remove outline when focused */
   background-color: #dee2e600;
-  margin-left: 4px;
-  text-decoration: underline;
-}
 
-.selectAssign:focus {
-  /* border: 6px solid transparent; */
-   /* Keeps border transparent on focus */
-   padding: 0px;
-   margin-left: 4px;
-   text-decoration: underline;
+  padding: 5px 10px;
 }
 
 .selectAssign > option {
   background-color: hsl(120, 14%, 96%);
-  color: hwb(0 15% 84%);
-  margin-top: 10px;
-  text-decoration: underline;
+  color: #000;
 }
-
-.selectAssign:focus > option {
-  text-decoration: underline; /* Adds a line under the selected text */
-}
-
-.adminNameButton{
-      flex-direction: row;
-      gap: 5px;
-      color: #0e86e4;
-      padding: 8px;
-      border-radius: 5px;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      background-color: #fff;
-      border: 1px solid #6db3f4;
+.adminNameButton {
+  flex-direction: row;
+  gap: 5px;
+  color: #0e86e4;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background-color: #fff;
+  border: 1px solid #6db3f4;
 }

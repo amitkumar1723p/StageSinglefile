@@ -149,6 +149,9 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
   return (
     <>
       <ScrollToTop />
+      {/* <div className="create-banner-box">
+          <img src="/img/create-banner.svg" alt="create-banner" />
+        </div> */}
       <div className="property-details-main-box">
         <div className="property-details">
           <h2> {BasicDetailsData.ApartmentType} Section </h2>

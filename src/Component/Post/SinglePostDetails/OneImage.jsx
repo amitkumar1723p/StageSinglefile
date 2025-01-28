@@ -17,11 +17,7 @@ export default function OneImage({ ImageUrl }) {
     setScale((prevScale) => Math.min(prevScale + 0.5, 3)); // Limit max zoom to 3x
   const handleZoomOut = () =>
     setScale((prevScale) => Math.max(prevScale - 0.5, 1));
-  // return (
-  //   <>
-  //     <img src={ImageUrl} alt="" />
-  //   </>
-  // );
+ 
   const handleWheel = (event) => {
     event.preventDefault();
     

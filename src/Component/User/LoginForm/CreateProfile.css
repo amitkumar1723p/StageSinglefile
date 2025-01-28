@@ -1,10 +1,9 @@
-/* Enhanced SignUpForm Styles */
 .signup-form-wrapper-unique {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 900px;
-  height: 500px;
+  max-width: 800px;
+
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
@@ -51,7 +50,7 @@
 
 .signup-form-content-unique h2 {
   color: var(--Pirmary, #0078d4);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -68,6 +67,7 @@
 }
 
 .signup-form-content-unique input[type="text"],
+.signup-form-content-unique input[type="number"],
 .signup-form-content-unique input[type="email"],
 .signup-form-content-unique input[type="password"] {
   border-radius: 7px;
@@ -153,6 +153,8 @@
   .signup-form-wrapper-unique {
     flex-direction: column;
     height: auto;
+    width: 100%;
+    margin: 5% 0;
   }
 
   .signup-image-section-unique {
@@ -164,14 +166,15 @@
     width: 100%;
     border-left: none;
     border-top: 1px solid #f0f0f0;
-    border-radius: 10px;
+    border-radius: 0px;
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  .login-image-section-unique {
+  /* .login-image-section-unique {
     display: none;
-  }
+  } */
   .login-form-content-unique {
     background-color: white;
     display: flex;

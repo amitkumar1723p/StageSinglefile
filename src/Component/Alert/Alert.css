@@ -5,7 +5,7 @@
   left: 50%;
   transform: translateX(-50%); /* Center horizontally */
   width: auto;
-  background-color: #28a745; /* Default green for success */
+  background-color: var(--main-light-clr); /* Default green for success */
   color: white;
   padding: 15px 25px;
   border-radius: 8px;

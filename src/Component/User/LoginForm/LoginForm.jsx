@@ -148,22 +148,20 @@ const LoginForm = ({
             />
           </div>
           <div className="login-form-content-unique">
-            {/* <div className="login-small-img">
-              <img src="/img/login-small-form.png" alt="login img" />
-            </div> */}
+            
             <h2 className="heading-h2">Login or Register </h2>
             <p className="login-h2-p">
               Welcome to Propertydekho247.com Log in to your account
             </p>
             <form onSubmit={handleSubmit}>
               <label className="lable-login" htmlFor="login-form">
-                Mobile No
+              Phone Number
               </label>
               <input
                 id="login-form"
                 type="text"
                 autoComplete="off"
-                placeholder="Enter your Contact Number"
+                placeholder="Enter your Phone Number"
                 value={SignUpData.ContactNumber.trimStart()}
                 // onChange={(e) =>
                 //   setSignUpData({ ...SignUpData, ContactNumber: e.target.value })

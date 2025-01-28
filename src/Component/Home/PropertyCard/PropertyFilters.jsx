@@ -131,6 +131,7 @@ const PropertyFilters = () => {
   const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
   return (
     <>
+    
       <div className="property-post-filters-box">
         <aside className="property-filters">
           <h2 className="filter-title">Filters</h2>

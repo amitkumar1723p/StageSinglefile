@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 import ScrollToTop from "../../../ScrollToTop";
- 
 import { ToWords } from "to-words";
 export default function PricingDetails({
   PricingDetailsData,
@@ -15,12 +14,14 @@ export default function PricingDetails({
 }) {
   const PostSubmitHandler = (e) => {
     e.preventDefault();
-   
-    if (BasicDetailsData.PropertyAdType == "Sale" && !PricingDetailsData.PricePerSqFt) {
-      return alert("Price Per SqFt Is Required")
 
-     }
-  
+    if (
+      BasicDetailsData.PropertyAdType == "Sale" &&
+      !PricingDetailsData.PricePerSqFt
+    ) {
+      return alert("Price Per SqFt Is Required");
+    }
+
     const CopyObj = { ...PricingDetailsData };
     if (show_Maintenance_Charges == false) {
       delete CopyObj.AdditionalDetails;
@@ -82,9 +83,12 @@ export default function PricingDetails({
 
       let Area = null;
 
-      const { SuperBuiltUpArea, CarpetArea, BuiltUpArea } = AreaDetailsData;
+      const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
+        AreaDetailsData;
 
-      if (SuperBuiltUpArea.value) {
+      if (PlotArea) {
+        Area = PlotArea.value;
+      } else if (SuperBuiltUpArea.value) {
         Area = SuperBuiltUpArea.value;
       } else if (CarpetArea.value && !BuiltUpArea.value) {
         Area = CarpetArea.value;
@@ -198,7 +202,6 @@ export default function PricingDetails({
   //   }
   // }, []);
   const PriceToSentence = useCallback((price) => {
-  
     if (price) {
       // Convert price to string, remove commas, and parse as integer
       const numericPrice = parseInt(String(price).replace(/,/g, ""), 10);
@@ -223,9 +226,14 @@ export default function PricingDetails({
   return (
     <>
       <ScrollToTop />
-      
+      {/* <div className="create-banner-box">
+        <img src="/img/create-banner.svg" alt="create-banner" />
+      </div> */}
+      {/* <div className="create-banner-box">
+        <img src="/img/create-banner.svg" alt="create-banner" />
+      </div> */}
       <div className="property-details-main-box">
-        <div className="property-details price-sectipn-main">
+        <div className="property-details price-sectipn-main price-and-show">
           <h3 className="price-section-create-form"> Pricing Details</h3>
           <form id="property-form" onSubmit={PostSubmitHandler}>
             {/* Sale Pricing  */}
@@ -264,7 +272,7 @@ export default function PricingDetails({
                     className="p
                   price-section-pointer"
                   >
-                    Registration  & Govt. charges are excluded.
+                    Registration & Govt. charges are excluded.
                   </p>
                   <p
                     className="p
@@ -328,11 +336,9 @@ export default function PricingDetails({
                       });
                     }}
                   />
-                    <small className="number-to-word"> 
-                          {PriceToSentence(
-                            PricingDetailsData.ExpectedRent
-                          )}
-                        </small>
+                  <small className="number-to-word">
+                    {PriceToSentence(PricingDetailsData.ExpectedRent)}
+                  </small>
                   <p
                     className="p
                   price-section-pointer"
@@ -369,18 +375,16 @@ export default function PricingDetails({
                       // }
                     }}
                   />
-                    <small className="number-to-word">
-                        {PriceToSentence(
-                          PricingDetailsData.DepositePrice
-                        )}
-                      </small>
+                  <small className="number-to-word">
+                    {PriceToSentence(PricingDetailsData.DepositePrice)}
+                  </small>
                 </div>
               </div>
             )}
 
             {/* Additional Details  */}
             <div className="additional-detals-main">
-              <h3>
+              <h3 className="additional-detals-main-h3">
                 Additional Details{" "}
                 {BasicDetailsData.PropertyAdType == "Sale" && (
                   <span
@@ -438,7 +442,6 @@ export default function PricingDetails({
                       <p className="montly-chnagse-in-price-section">
                         Maintenance charges<span>/Monthly</span>
                       </p>
-                       
                       <input
                         className="expacted-rent"
                         type="text"
@@ -468,7 +471,6 @@ export default function PricingDetails({
                           // }
                         }}
                       />
-                      
                       <br />
                       <small className="number-to-word">
                         {PriceToSentence(
@@ -476,7 +478,6 @@ export default function PricingDetails({
                             ?.MaintenanceCharges
                         )}
                       </small>
-                       
                     </div>
 
                     <>

@@ -6,7 +6,7 @@
 .heading-for-service h3 {
   font-size: 32px;
   margin: 0;
-  color: #454545;
+  color: #333;
   text-align: center;
 }
 
@@ -17,7 +17,7 @@
 .heading-for-service p {
   font-size: 16px;
   margin: 10px 0 30px 0;
-  color: #454545;
+  color: #333;
 }
 
 .heading-line-container {
@@ -60,7 +60,7 @@
 }
 
 .service-text {
-  color: #16315f;
+  color: #333;
   text-transform: uppercase;
   text-align: center;
   font-size: 16px;

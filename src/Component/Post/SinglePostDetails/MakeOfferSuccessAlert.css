@@ -65,13 +65,13 @@
 /* Next Steps Section */
 .alert-next-steps {
   font-size: 14px;
-  color: #111;
+  color: #333;
   margin-bottom: 20px;
 }
 
 .alert-next-steps-p {
   margin: 10px 0 10px 0;
-  color: #16315f;
+  color: #333;
 
   font-size: 14px;
   font-style: normal;
@@ -95,7 +95,7 @@
 .action-link {
   color: #4b5563;
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: italic;
   font-weight: 500;
@@ -166,7 +166,7 @@
   background: none;
   border: none;
   font-size: 20px;
-  color: #111;
+  color: #333;
   cursor: pointer;
 }
 

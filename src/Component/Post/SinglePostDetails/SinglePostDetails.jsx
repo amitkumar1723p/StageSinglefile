@@ -10,14 +10,12 @@ import PropertyDataBox from "./PropertyDataBox";
 import ExpressionOfInterestForm from "./ExpressionOfInterest";
 import BiddingForm from "./BiddingForm";
 // import { GetPost_BiddingDocumentAction } from "../../../Action/userAction";
-import BiddingData from "./BiddingData";
+
 import ScheduleYourVisit from "./ScheduleYourVisit";
 
-import SinglePostImageSlider from "./SinglePostImageSlider";
-import ProjectNameSection from "../ProjectName";
 import WindowComponent from "../../WindowComponent";
 import CreateTenantPostResponse from "./CreateTenantPostResponse";
-import MakeOfferSuccessAlert from "./MakeOfferSuccessAlert";
+
 import { UserContext } from "../../CreateContext/CreateContext";
 
 import ShowSinglePostImages from "./ShowSinglePostImages";
@@ -74,11 +72,11 @@ export default function SinglePostDetails() {
       setPropertyAddress(
         `${`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`} ${
           getSinglePostData.SinglePost.BasicDetails.ApartmentType
-        } For ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType} In  ${
+        } For ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType} In ${
           getSinglePostData.SinglePost.LocationDetails.ProjectName
-        } ${getSinglePostData.SinglePost.LocationDetails.Landmark}  ${
-          getSinglePostData.SinglePost.LocationDetails.Locality
-        }`
+        }   ${getSinglePostData.SinglePost.LocationDetails.Landmark} ${
+          getSinglePostData.SinglePost.LocationDetails.City
+        } `
       );
 
       const areaDetailsData = getSinglePostData?.SinglePost?.AreaDetails;
@@ -176,10 +174,10 @@ export default function SinglePostDetails() {
 
   // useEffect(() => {
   //   const unlisten = navigate((state) => {
-  //     console.log(state)
-  //     // console.log("Navigated to:", location.pathname);
+  //
+  //
   //     // if (state.action === "POP") {
-  //     //   console.log("User used Back or Forward button.");
+  //
   //     //   // Perform actions based on Back or Forward button navigation
   //     // }
   //   });
@@ -202,6 +200,21 @@ export default function SinglePostDetails() {
 
   return (
     <>
+      <div className="floating-buttons">
+        {/* Call Button */}
+        <Link to="tel:+917837840785" className="call-button">
+          <img src="/img/call.png" alt="Call" />
+        </Link>
+        {/* WhatsApp Button */}
+        <Link
+          to="https://wa.me/7837840785"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-button"
+        >
+          <img src="/img/whatapp.png" alt="WhatsApp" />
+        </Link>
+      </div>
       {/* {openReportForm === true ? (
         <div className="report-form-container">
           <div className="report-form-header">
@@ -223,12 +236,11 @@ export default function SinglePostDetails() {
             {/* <!-- Left side: Property Image --> */}
 
             <div className="property-image">
-              <div></div>
               <ShowSinglePostImages
                 Images={getSinglePostData.SinglePost.PropertyImages}
               />
-
               {/* Single Post First Card  */}
+
               <div className="property-info">
                 <div className="property-location">
                   <p className="Property-detail-heading"> {PropertyAddress}</p>
@@ -365,6 +377,14 @@ export default function SinglePostDetails() {
                                 .ExpectedPrice
                             )}
                           </span>
+                          <p className="lisitng-area-section">
+                            ₹{" "}
+                            {
+                              getSinglePostData.SinglePost.PricingDetails
+                                .PricePerSqFt
+                            }{" "}
+                            Per sqft
+                          </p>
                         </span>
 
                         {!["Owner", "Admin"].includes(medata?.user?.Role) && (
@@ -452,7 +472,7 @@ export default function SinglePostDetails() {
                   )}
 
                   <Link
-                    to="https://wa.me/9560509397?text=Hello"
+                    to="https://wa.me/7837840785?text=Hello"
                     target="_blank"
                     className="contact-expert-btn"
                   >
@@ -482,9 +502,7 @@ export default function SinglePostDetails() {
                         {
                           new Date(
                             getSinglePostData.SinglePost.PostVerifyData.Time
-                          )
-                            .toISOString()
-                            .split("T")[0]
+                          ).toLocaleDateString("en-GB") // UK format: day/month/year
                         }
                       </span>
                     </p>
@@ -498,7 +516,9 @@ export default function SinglePostDetails() {
               <div className="prop-left">
                 <div className="overviwe-main">
                   <div className="details-heading-section">
-                    <h3>Property Details</h3>
+                    <h3>
+                      Property <br /> Information
+                    </h3>
                     <div className="property-id-leanding">
                       <span className="prop-id-name">
                         <img
@@ -758,7 +778,120 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
+                  <div className="similar-main-box">
+                    <h3 className="similar-heading-box">Similar Property</h3>
+                    <div className="similar-property-main-box">
+                      <div className="similar-property-box1">
+                        <div className="similar-property-main">
+                          <div className="similar-left-right">
+                            <div className="similar-img-box">
+                              <img src="/img/test.png" alt="" />
+                            </div>
+                            <div className="similar-right-section">
+                              <div className="similar-data-section">
+                                <div className="similar-prop-heading">
+                                  <p className="similar-prop-heading-p">
+                                    3 BHK Independent Floor House for Sale in
+                                    Krisumi Waterfall Residences
+                                  </p>
+                                </div>
+                                <div className="similar-prop-address">
+                                  <p className="similar-prop-address-p">
+                                    Sector 82A, Gurgaon
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="similar-area-price-box">
+                                <p className="similar-area-area">
+                                  1800 sqft
+                                  <span> Built-Up Area</span>
+                                </p>
 
+                                <p className="similar-area-price">
+                                  ₹ 3.2 Cr
+                                  <span> Reserved price </span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="similar-property-box2">
+                        <div className="similar-property-box1">
+                          <div className="similar-property-main">
+                            <div className="similar-left-right">
+                              <div className="similar-img-box">
+                                <img src="/img/test.png" alt="" />
+                              </div>
+                              <div className="similar-right-section">
+                                <div className="similar-data-section">
+                                  <div className="similar-prop-heading">
+                                    <p className="similar-prop-heading-p">
+                                      3 BHK Independent Floor House for Sale in
+                                      Krisumi Waterfall Residences
+                                    </p>
+                                  </div>
+                                  <div className="similar-prop-address">
+                                    <p className="similar-prop-address-p">
+                                      Sector 82A, Gurgaon
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="similar-area-price-box">
+                                  <p className="similar-area-area">
+                                    1800 sqft
+                                    <span> Built-Up Area</span>
+                                  </p>
+
+                                  <p className="similar-area-price">
+                                    ₹ 3.2 Cr
+                                    <span> Reserved price </span>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="similar-property-box3">
+                        <div className="similar-property-box1">
+                          <div className="similar-property-main">
+                            <div className="similar-left-right">
+                              <div className="similar-img-box">
+                                <img src="/img/dash-banner.png" alt="" />
+                              </div>
+                              <div className="similar-right-section">
+                                <div className="similar-data-section">
+                                  <div className="similar-prop-heading">
+                                    <p className="similar-prop-heading-p">
+                                      3 BHK Independent Floor House for Sale in
+                                      Krisumi Waterfall Residences
+                                    </p>
+                                  </div>
+                                  <div className="similar-prop-address">
+                                    <p className="similar-prop-address-p">
+                                      Sector 82A, Gurgaon
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="similar-area-price-box">
+                                  <p className="similar-area-area">
+                                    1800 sqft
+                                    <span> Built-Up Area</span>
+                                  </p>
+
+                                  <p className="similar-area-price">
+                                    ₹ 3.2 Cr
+                                    <span> Reserved price </span>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   {/* <ExpressionOfInterestForm /> */}
                   {showBiddingForm && (
                     <WindowComponent
@@ -878,18 +1011,7 @@ export default function SinglePostDetails() {
                   </div> */}
                 </div>
               )}
-
-              {/* {className CreateNewDiv} End */}
             </div>
-            {/* {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
-              "Sale" && (
-              <>
-                {getSinglePostData.BiddingDocument?.length > 0 &&
-                  ["Admin", "Owner"].includes(medata?.user?.Role) && (
-                    <BiddingData SinglePostData={getSinglePostData} />
-                  )}
-              </>
-            )} */}
           </div>
         )
       )}

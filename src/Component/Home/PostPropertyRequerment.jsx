@@ -53,7 +53,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           <li>✔ 100% Verified Seller</li>
           <li>✔ Dedicated Relationship Manager</li>
           <li>✔ Transparency, Trust and Fair Price</li>
-          <li>✔ Single point of Contact for Dealing</li>
+          <li>✔ Single point of Contact Dealing</li>
         </ul>
       </div>
       <div className="form-right">

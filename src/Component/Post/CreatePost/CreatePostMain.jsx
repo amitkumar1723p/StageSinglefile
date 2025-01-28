@@ -250,7 +250,6 @@ export default function CreatePostMain() {
         // delete BasicDetailsData_Rest.PossessionStatus;
       }
 
-      
       if (BasicDetailsData.PropertyStatus === "Ready to move") {
         delete BasicDetailsData_Rest.PossessionStatus;
       } else if (BasicDetailsData.PropertyStatus === "Under Construction") {
@@ -315,8 +314,6 @@ export default function CreatePostMain() {
     BasicDetailsData.PropertyStatus,
   ]);
 
- 
-
   useEffect(() => {
     if (data) {
       if (data.success === true) {
@@ -345,9 +342,8 @@ export default function CreatePostMain() {
     // eslint-disable-next-line
   }, [data]);
 
-
-   // Store Data  in session Data Storeage
-   useEffect(() => {
+  // Store Data  in session Data Storeage
+  useEffect(() => {
     if (!update) {
       if (sessionStorage.getItem("next")) {
         setnext(JSON.parse(sessionStorage.getItem("next")));
@@ -400,21 +396,21 @@ export default function CreatePostMain() {
     // eslint-disable-next-line
   }, []);
 
-  const[first,setFirst]=useState(false)
-  const[second,setSecond]=useState(false)
-  const[third,setThird]=useState(false)
-  const[fourth,setFourth]=useState()
-  useDispatch(()=>{
-    if(next==1){
-      setFirst(true)
-    }else if(next==2){
-      setSecond(true)
-    }else if(next==3){
-      setThird(true)
-    }else if(next==4){
-      setFourth(true)
+  const [first, setFirst] = useState(false);
+  const [second, setSecond] = useState(false);
+  const [third, setThird] = useState(false);
+  const [fourth, setFourth] = useState();
+  useDispatch(() => {
+    if (next == 1) {
+      setFirst(true);
+    } else if (next == 2) {
+      setSecond(true);
+    } else if (next == 3) {
+      setThird(true);
+    } else if (next == 4) {
+      setFourth(true);
     }
-  })
+  });
   return (
     <>
       {(LodingType &&
@@ -425,26 +421,314 @@ export default function CreatePostMain() {
         <Loader className="windowloader" />
       ) : (
         <>
-       
-          {" "}
-          <div className="ProgressBarMain"> 
-          {Array.from({ length:next }, (_, index) => (
-        <div className="ProgressBar" key={index} >
-          {index>=0?
-           <span className="okkSymbolProgress"><span style={{padding:"7px"}}>&#10003;</span></span>
-           :null}
-          <hr className="progressLine" /> {/* Make hr take available space */}
-         
-         
-        </div>
-      ))}
-    
-    <span className="progressLoader">loader</span>
-   
+          <div className="ProgressBarMain py-3 pb-0 ">
+            {/* step 1 */}
+            <div>
+              <div className="d-flex justify-content-center">
+                {next + 1 === 1 ? (
+                  <div class="spinner-border " role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                ) : next + 1 >= 1 ? (
+                  <span
+                    className=" text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                    onClick={() => setnext(0)}
+                  >
+                    &#10003;
+                  </span>
+                ) : (
+                  <span className="text-primary fw-normal  penddingCircleForm"></span>
+                )}
+              </div>
+
+              <div className="">
+                <p className="d-flex flex-column mb-3">
+                  <span className="text-secondary text-opacity-75 d-flex justify-content-center ">
+                    Step 1
+                  </span>
+                  <span className=" click-section-here  text-secondary fw-normal  d-flex justify-content-center">
+                    Sell or Rent
+                  </span>
+                  <span className="text-primary fw-normal  ">
+                    {next + 1 === 1 ? (
+                      <span className="text-primary fw-normal  d-flex justify-content-center">
+                        Progress
+                      </span>
+                    ) : next + 1 >= 1 ? (
+                      <span className="text-primary fw-normal  d-flex justify-content-center">
+                        Complete
+                      </span>
+                    ) : (
+                      <span className="text-primary fw-normal  d-flex justify-content-center">
+                        pending
+                      </span>
+                    )}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <hr className="progressLine  border border-primary border-3 opacity-75 d-flex justify-content-center" />
+            {/* step 2 */}
+            <div>
+              <div className="d-flex justify-content-center">
+                {next + 1 === 2 ? (
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                ) : next + 1 >= 2 ? (
+                  <span
+                    className="text-white fw-normal   completecircleForm  d-flex justify-content-center align-items-center"
+                    onClick={() => setnext(1)}
+                  >
+                    &#10003;
+                  </span>
+                ) : (
+                  <>
+                  {Object.keys(LocationDetailsData).length > 0 ? (
+                    <span
+                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                      onClick={() => setnext(1)}
+                    >
+                      &#10003; {/* This is the checkmark (tick) symbol */}
+                    </span>
+                  ) : (
+                    <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle when LocationDetailsData is empty
+                  )}
+                </>
+                
+                )}
+              </div>
+
+              <div className="">
+                <p className="d-flex flex-column mb-3">
+                  <span className="text-secondary text-opacity-75   d-flex justify-content-center">
+                    Step 2
+                  </span>
+                  <span className="  click-section-here text-secondary fw-normal   d-flex justify-content-center">
+                    Location Details
+                  </span>
+                  <span>
+                    {next + 1 === 2 ? (
+                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                        Progress
+                      </span>
+                    ) : next + 1 >= 2 ? (
+                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                        Complete
+                      </span>
+                    ) : (
+                      <span className="text-secondary fw-normal   d-flex justify-content-center">
+                        pending
+                      </span>
+                    )}
+                  </span>
+                </p>
+              </div>
+            </div>
+            {next + 1 === 3 ? (
+              <hr className="progressLine   border border-primary border-3 opacity-75" />
+            ) : next + 1 >= 3 ? (
+              <hr className="progressLine  border border-primary border-3 opacity-75" />
+            ) : (
+              <hr className="progressLine   border border-secondary border-3 opacity-75 " />
+            )}
+
+            {/* step 3 */}
+            <div>
+              <div>
+                <div className="d-flex justify-content-center">
+                  {next + 1 === 3 ? (
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  ) : next + 1 >= 3 ? (
+                    <span
+                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                      onClick={() => setnext(2)}
+                    >
+                      &#10003;
+                    </span>
+                  ) : (
+                    <>
+                    { Object.keys(FloorDetailsData).length > 0 ? (
+                      <span
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                        onClick={() => setnext(2)}
+                      >
+                        &#10003; {/* This is the checkmark (tick) symbol */}
+                      </span>
+                    ) : (
+                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                    )}
+                  </>
+                  )}
+                </div>
+
+                <div className="">
+                  <p className="d-flex flex-column mb-3">
+                    <span className="text-secondary text-opacity-75   d-flex justify-content-center">
+                      Step 3
+                    </span>
+                    <span className="click-section-here  text-secondary fw-normal   d-flex justify-content-center">
+                      Apartment Features
+                    </span>
+                    <span className="text-primary fw-normal  ">
+                      {next + 1 === 3 ? (
+                        <span className="text-primary fw-normal   d-flex justify-content-center">
+                          Progress
+                        </span>
+                      ) : next + 1 >= 3 ? (
+                        <span className="text-primary fw-normal   d-flex justify-content-center ">
+                          Complete
+                        </span>
+                      ) : (
+                        <span className="text-secondary fw-normal   d-flex justify-content-center">
+                          pending
+                        </span>
+                      )}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            {next + 1 === 4 ? (
+              <hr className="progressLine  border border-primary border-3 opacity-75" />
+            ) : next + 1 >= 4 ? (
+              <hr className="progressLine  border border-primary border-3 opacity-75" />
+            ) : (
+              <hr className="progressLine   border border-secondary border-3 opacity-75" />
+            )}
+            {/* step 4 */}
+            <div>
+              <div>
+                <div className="d-flex justify-content-center">
+                  {next + 1 === 4 ? (
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  ) : next + 1 >= 4 ? (
+                    <span
+                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                      onClick={() => setnext(3)}
+                    >
+                      &#10003;
+                    </span>
+                  ) : (
+                    <>
+                    {Object.keys(PricingDetailsData).length > 0 ? (
+                      <span
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                        onClick={() => setnext(3)}
+                      >
+                        &#10003; {/* This is the checkmark (tick) symbol */}
+                      </span>
+                    ) : (
+                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                    )}
+                  </>
+                  )}
+                </div>
+
+                <div className="">
+                  <p className="d-flex flex-column mb-3">
+                    <span className="text-secondary text-opacity-75   d-flex justify-content-center">
+                      Step 4
+                    </span>
+                    <span className="click-section-here  text-secondary fw-normal   d-flex justify-content-center">
+                      Price Detail
+                    </span>
+                    <span className="text-primary fw-normal  ">
+                      {next + 1 === 4 ? (
+                        <span className="text-primary fw-normal   d-flex justify-content-center">
+                          Progress
+                        </span>
+                      ) : next + 1 >= 4 ? (
+                        <span className="text-primary fw-normal   d-flex justify-content-center">
+                          Complete
+                        </span>
+                      ) : (
+                        <span className="text-secondary fw-normal   d-flex justify-content-center">
+                          pending
+                        </span>
+                      )}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            {next + 1 === 5 ? (
+              <hr className="progressLine   border border-primary border-3 opacity-75" />
+            ) : next + 1 >= 5 ? (
+              <hr className="progressLine   border border-primary border-3 opacity-75" />
+            ) : (
+              <hr className="progressLine   border border-secondary border-3 opacity-75" />
+            )}
+
+            {/* step 5 */}
+            <div>
+              <div className="d-flex justify-content-center">
+                {next + 1 === 5 ? (
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                ) : next + 1 >= 5 ? (
+                  <span
+                    className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                    onClick={() => setnext(4)}
+                  >
+                    &#10003;
+                  </span>
+                ) : (
+                  <>
+                  {uploadimages.length!==0 ? (
+                    <span
+                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                      onClick={() => setnext(4)}
+                    >
+                      &#10003; {/* This is the checkmark (tick) symbol */}
+                    </span>
+                  ) : (
+                    <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                  )}
+                </>
+                )}
+              </div>
+
+              <div className="">
+                <p className="d-flex flex-column mb-3">
+                  <span className="text-secondary text-opacity-75   d-flex justify-content-center">
+                    Step 5
+                  </span>
+                  <span className="text-secondary fw-normal  d-flex justify-content-center">
+                    Upload Image
+                  </span>
+                  <span className="text-primary fw-normal  ">
+                    {next + 1 === 5 ? (
+                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                        Progress
+                      </span>
+                    ) : next + 1 >= 5 ? (
+                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                        Complete
+                      </span>
+                    ) : (
+                      <span className="text-secondary fw-normal   d-flex justify-content-center">
+                        pending
+                      </span>
+                    )}
+                  </span>
+                </p>
+              </div>
+            </div>
+            {/* {Array.from({ length: next }, (_, index) => (
+              <div className="ProgressBar" key={index}>
+                {index >= 0 ? <></> : null}
+                <hr className="progressLine pb-5 mb-5" />{" "}
+              </div>
+            ))} */}
           </div>
-         
+
           {next === 0 && (
-            
             <BasicDetailsSection
               BasicDetailsData={BasicDetailsData}
               setBasicDetailsData={setBasicDetailsData}

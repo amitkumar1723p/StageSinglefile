@@ -7,10 +7,9 @@ import {
   CreateUserReducer,
   MeDetailsReducer,
   LogoutReducer,
-  GetAllAdminReducer ,
-  GetPost_BiddingDocumentReducer ,
-  GetTenentResponseReducer
-
+  GetAllAdminReducer,
+  GetPost_BiddingDocumentReducer,
+  GetTenentResponseReducer,
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -18,10 +17,12 @@ import {
   GetAllPostReducer,
   GetPostReducer,
   GetSinglePostReducer,
-  GetProjectNameReducer ,
-  Admin_OwnerGetAllPostReducer, 
+  GetProjectNameReducer,
+  Admin_OwnerGetAllPostReducer,
   GetSingleProjectNameDataReducer,
-  Admin_OwnerGetAllScheduleVisitsReducer 
+  Admin_OwnerGetAllScheduleVisitsReducer,
+  GetAllAssignPropertyReducer,
+  GetAdminAgentAssignPropertyReducer,
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -33,16 +34,17 @@ const reducer = combineReducers({
   GetPost: GetPostReducer,
   GetAllPost: GetAllPostReducer,
   GetSinglePost: GetSinglePostReducer,
-  ProjectName :GetProjectNameReducer ,
-  AdminData :GetAllAdminReducer ,
-  AdminGetAllPost :Admin_OwnerGetAllPostReducer ,
- OfferRecived:GetPost_BiddingDocumentReducer ,
- TenentResponse: GetTenentResponseReducer ,
- SingleProjectName: GetSingleProjectNameDataReducer ,
- ScheduleVisits: Admin_OwnerGetAllScheduleVisitsReducer
-  
+  ProjectName: GetProjectNameReducer,
+  AdminData: GetAllAdminReducer,
+  AdminGetAllPost: Admin_OwnerGetAllPostReducer,
+  OfferRecived: GetPost_BiddingDocumentReducer,
+  TenentResponse: GetTenentResponseReducer,
+  SingleProjectName: GetSingleProjectNameDataReducer,
+  ScheduleVisits: Admin_OwnerGetAllScheduleVisitsReducer,
+  AssignPropertys: GetAllAssignPropertyReducer,
+  AdminProperty: GetAdminAgentAssignPropertyReducer,
 });
- 
+
 let initialState = {};
 
 const middleware = [thunk];

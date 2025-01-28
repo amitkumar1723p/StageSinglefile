@@ -8,7 +8,7 @@ import React, {
 import "./OfferRecived.css"; // Import the custom CSS for styling
 import { useDispatch, useSelector } from "react-redux";
 import { GetPost_BiddingDocumentAction } from "../../Action/userAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HeaderCard from "./HeaderCard";
 import { Admin_OwnerGetAllScheduleVisits } from "../../Action/postAction";
 import SinglePostImageSlider from "../Post/SinglePostDetails/SinglePostImageSlider";
@@ -18,8 +18,9 @@ const OfferReceived = () => {
   const [showImageSlideBox, setshowImageSlideBox] = useState(false);
   const viewImageRefs = useRef([]);
   const Params = useParams();
+  const navigate = useNavigate();
   const [CheckScheduleVisit, setCheckScheduleVisit] = useState([]);
-  const [UserId, setUserId] = useState({});
+
   const { data: BidData } = useSelector((state) => {
     return state.OfferRecived;
   });
@@ -59,7 +60,11 @@ const OfferReceived = () => {
     }
     return `₹ ${price.toFixed(2)}`;
   }, []);
-
+  useEffect(() => {
+    if (BidData?.success == false) {
+      navigate("/admin/allpost");
+    }
+  }, [BidData]);
   return (
     <>
       {/* <button
@@ -74,9 +79,8 @@ const OfferReceived = () => {
       {BidData &&
         BidData.success &&
         BidData.BidDocument.map((reciveOffer, index) => {
-        
           const { Biddinguser } = reciveOffer;
-         
+         console.log(reciveOffer)
 
           viewImageRefs.current[index] = React.createRef();
           return (
@@ -97,7 +101,7 @@ const OfferReceived = () => {
                   </span>
                   <p className="offer-received-date ">
                     <span className="offer-received-date">
-                      {" "}
+                      
                       {new Date(reciveOffer.createAt).toLocaleDateString(
                         "en-US",
                         { month: "short", day: "numeric", year: "numeric" }
@@ -105,6 +109,7 @@ const OfferReceived = () => {
                     </span>
                   </p>
                 </div>
+                {console.log(Biddinguser)}
                 <div className="offer-received-property-info">
                   <p className="offer-received-property-details">
                     Schedule Visit: {}
@@ -114,6 +119,8 @@ const OfferReceived = () => {
                         })`
                       : "No"}
                   </p>
+                  {/* {console.log(Biddinguser)} */}
+
                   <p className="offer-received-pid">
                     Date and Time: :{" "}
                     <span className="offer-received-pid-number">
@@ -128,7 +135,7 @@ const OfferReceived = () => {
                           })}
                         </>
                       ) : null}
-                      20-06-2001
+                      
                     </span>
                   </p>
                   {}
@@ -143,18 +150,18 @@ const OfferReceived = () => {
                       </span>
                     </p>
                   </div>
+                    <button
+                    className="view-img-offer-admin"
+                      ref={viewImageRefs.current[index]}
+                      onClick={() => {
+                        setImageData(reciveOffer.images);
+                        setshowImageSlideBox(true);
+                      }}
+                    >
+                      View Img
+                    </button>
                 </div>
               </div>
-              <button
-                ref={viewImageRefs.current[index]}
-                onClick={() => {
-                  setImageData(reciveOffer.images);
-                  setshowImageSlideBox(true);
-                }}
-              >
-                {" "}
-                View Img
-              </button>
             </div>
           );
         })}

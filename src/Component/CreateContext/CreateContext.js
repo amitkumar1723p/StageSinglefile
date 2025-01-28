@@ -5,6 +5,8 @@ import React, { createContext, useContext, useRef, useState } from 'react';
 export function UserProvider({ children }) {
     const [RedirectPath, setRedirectPath] = useState("");
     const [RedirectPathIsHomeCard ,setRedirectPathIsHomeCard] =useState(null)
+
+    
 // varb is used for update forfile
     const [varb,setVarb]=useState(null)
 
@@ -14,7 +16,7 @@ export function UserProvider({ children }) {
      
     return (
         <UserContext.Provider value={{propertyId,setPropertyId,  varb,setVarb ,profile, setProfile,setRedirectPath , RedirectPath ,RedirectPathIsHomeCard ,setRedirectPathIsHomeCard }}>
-          {console.log(propertyId,"'ushjdf")}
+          
             {children}
         </UserContext.Provider>
     );

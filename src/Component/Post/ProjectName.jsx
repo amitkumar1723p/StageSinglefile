@@ -46,7 +46,9 @@ export default function ProjectNameSection({
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (ProjectNameFormGroupref?.current) {
-        const hideElement = ProjectNameFormGroupref.current.querySelector(".apartmentname-container");
+        const hideElement = ProjectNameFormGroupref.current.querySelector(
+          ".apartmentname-container"
+        );
 
         if (hideElement) {
           let element = ProjectNameFormGroupref.current.contains(e.target);
@@ -79,7 +81,6 @@ export default function ProjectNameSection({
 
       if (ProjectInputType == "Search") {
         if (exactMatch) {
-         
           setrunSearchButton(true);
         } else {
           setrunSearchButton(false);
@@ -108,7 +109,6 @@ export default function ProjectNameSection({
     if (ProjectInputType == "PostForm") {
       if (inputValue) {
         setProjectNameObjectData((prevData) => {
-        
           if (
             prevData.Locality !== inputValue.Locality ||
             prevData.City !== inputValue.City ||
@@ -126,7 +126,6 @@ export default function ProjectNameSection({
       }
     }
   }, [inputValue, ProjectInputType]);
-  
   const handleKeyDown = (event) => {
     setkeydown(true);
     if (FilterProjectName.length > 0) {
@@ -178,19 +177,18 @@ export default function ProjectNameSection({
       }
     }
   }, [FilterProjectName, listRef]);
-   
+
   return (
     <>
       <div
-        className={`form-group-home ${
-          ProjectInputType == "Search"
+        className={`form-group-home ${ProjectInputType == "Search"
             ? "search-dropdown-home"
             : ProjectInputType == "PostForm"
-            ? "create-post-search-project"
-            : ProjectInputType == "PostRequirement"
-            ? "post-requermient-search"
-            : ""
-        }`}
+              ? "create-post-search-project"
+              : ProjectInputType == "PostRequirement"
+                ? "post-requermient-search"
+                : ""
+          }`}
       >
         {ProjectInputType == "PostForm" && (
           <label
@@ -203,9 +201,8 @@ export default function ProjectNameSection({
         {/* searchInput */}
         <div
           ref={ProjectNameFormGroupref}
-          className={`dropdown ${
-            ProjectInputType == "Search" ? "search-dropdown" : ""
-          }`}
+          className={`dropdown ${ProjectInputType == "Search" ? "search-dropdown" : ""
+            }`}
         >
           <input
             onKeyDown={handleKeyDown}
@@ -267,7 +264,7 @@ export default function ProjectNameSection({
               ref={listRef}
               className="apartmentname-container"
               style={{ maxHeight: hight * 10 }}
-              //  tabIndex={0}
+            //  tabIndex={0}
             >
               {FilterProjectName.map((ApartmentFilter, index) => {
                 return (
@@ -294,8 +291,7 @@ export default function ProjectNameSection({
                       }, 0);
                     }}
                   >
-                    {ApartmentFilter["Project Name"]} ,{" "}
-                    {ApartmentFilter["Sector"]} , {ApartmentFilter["City"]}
+                    {ApartmentFilter["Project Name"]}, {ApartmentFilter["Sector"]}, {ApartmentFilter["City"]}
                   </p>
                 );
               })}

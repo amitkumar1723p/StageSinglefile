@@ -38,8 +38,8 @@
 }
 
 .banner-text-section h2 {
-  color: #252525;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -51,8 +51,8 @@
 }
 
 .banner-text-section p {
-  color: #504f4f;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   /* font-style: italic; */
   font-weight: 500;
@@ -151,8 +151,8 @@
   }
 
   .banner-text-section h2 {
-    color: #252525;
-    font-family: Sans-serif;
+    color: #333;
+    font-family: "Inter", Sans-serif;
     font-size: 16px;
 
     font-weight: 600;
@@ -161,8 +161,8 @@
   }
 
   .banner-text-section p {
-    color: #504f4f;
-    font-family: Sans-serif;
+    color: #333;
+    font-family: "Inter", Sans-serif;
     font-size: 14px;
     /* font-style: italic; */
     font-weight: 500;

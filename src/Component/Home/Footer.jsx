@@ -13,7 +13,7 @@ const Footer = () => {
           </h3>
 
           <div className="social-icons">
-            <Link to="#">
+            <Link to="https://www.linkedin.com/in/property-dekho-231b66346">
               <img
                 className="footer-img"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`
@@ -24,7 +24,7 @@ const Footer = () => {
                 alt="linkedin"
               />
             </Link>
-            <Link to="#">
+            <Link to="https://www.instagram.com/propertydekho24x7/">
               <img
                 className="footer-img"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`
@@ -35,7 +35,7 @@ const Footer = () => {
                 alt="insta"
               />
             </Link>
-            <Link to="#">
+            <Link to="https://www.facebook.com/profile.php?id=61572085979323 ">
               <img
                 className="footer-img"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`
@@ -46,29 +46,28 @@ const Footer = () => {
                 alt="fb"
               />
             </Link>
-            <Link to="#">
+            {/* <Link to="#">
               <img
                 className="footer-img"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-  <mask id="mask0_1358_6622" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="3" y="6" width="26" height="21">
-    <path d="M16 7.26465C28 7.26465 28 7.26465 28 16.598C28 25.9313 28 25.9313 16 25.9313C4 25.9313 4 25.9313 4 16.598C4 7.26465 4 7.26465 16 7.26465Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M13.332 11.9316L21.332 16.5983L13.332 21.265V11.9316Z" fill="black"/>
-  </mask>
-  <g mask="url(#mask0_1358_6622)">
-    <path d="M32 0.597656H0V32.5977H32V0.597656Z" fill="white"/>
-  </g>
-</svg>
-  `)}`}
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
+                <mask id="mask0_1358_6622" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="3" y="6" width="26" height="21">
+                  <path d="M16 7.26465C28 7.26465 28 7.26465 28 16.598C28 25.9313 28 25.9313 16 25.9313C4 25.9313 4 25.9313 4 16.598C4 7.26465 4 7.26465 16 7.26465Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13.332 11.9316L21.332 16.5983L13.332 21.265V11.9316Z" fill="black"/>
+                </mask>
+                <g mask="url(#mask0_1358_6622)">
+                  <path d="M32 0.597656H0V32.5977H32V0.597656Z" fill="white"/>
+                </g>
+              </svg>
+                `)}`}
                 alt="yt"
               />
-            </Link>
-            <Link to="#">
+            </Link> */}
+            <Link to="https://x.com/PropetyDekho247">
               <img className="footer-img" src="/img/Tw.png" alt="tw" />
             </Link>
           </div>
         </div>
-
         {/* Product Links */}
         <div className="footer-column">
           <h3>Quick Links</h3>
@@ -80,11 +79,10 @@ const Footer = () => {
               <Link to="#">About Us</Link>
             </li>
             {/* <li>
-              <Link to="#">Buy with Us</Link>
-            </li> */}
+                        <Link to="#">Buy with Us</Link>
+                      </li> */}
           </ul>
         </div>
-
         {/* Useful Links */}
         <div className="footer-column">
           <h3>Company</h3>
@@ -99,6 +97,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
+             
               <Link
                 to="/terms-and-conditions"
                 target="_blank"
@@ -120,7 +119,8 @@ const Footer = () => {
         <div className="footer-column">
           <h3>Contact</h3>
           <p>+91 783-784-0785</p>
-          <p>support@propertydekho247.com</p>
+          <p>Support@propertydekho247.com</p>
+          <p>Sales@propertydekho247.com</p>
         </div>
         <div>
           <p className="last-p">

@@ -1,8 +1,7 @@
 import axios from "axios";
-const api_Base_Url=process.env.REACT_APP_API_URL
-
+const api_Base_Url = process.env.REACT_APP_API_URL;
 //  Create User Action    Change Genrate Otp  By User Create
-console.log(api_Base_Url,"api url")
+
 export const CreateUserOtpAction = (userData) => {
   return async (dispatch) => {
     try {
@@ -11,7 +10,7 @@ export const CreateUserOtpAction = (userData) => {
         payload: "CreateUserOtpRequest",
       });
       // const url = "/user/create";
-      const url = "/user/genrate-otp";
+      const url = `${api_Base_Url}/user/genrate-otp`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -44,7 +43,6 @@ export const VerifyUserOtpAction = (userData) => {
         type: "VerifyUserOtpRequest",
         payload: "VerifyUserOtpRequest",
       });
-               
       const url = `${api_Base_Url}/user/verify-otp`;
 
       const config = {
@@ -173,6 +171,7 @@ export const CreateExpressionOfInterestAction = (queryData) => {
         payload: "CreateExpressionOfInterestRequest",
       });
 
+      // const url = "/expression-of-interest/create";
       const url = `${api_Base_Url}/expression-of-interest/create`;
 
       const config = {
@@ -208,8 +207,8 @@ export const BiddingFormAction = (queryData) => {
         type: "BiddingFormRequest",
         payload: "BiddingFormRequest",
       });
+      // const url = "/Biddingform/create";
       const url = `${api_Base_Url}/Biddingform/create`;
-
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -240,7 +239,6 @@ export const CreateOtp_Admin_Owner_Action = ({ userData }) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "CreateOtp_Admin_OwnerRequest" });
-      
       let url;
 
       if (userData.Otp) {
@@ -317,26 +315,16 @@ export const Login_Admin_Owner_Action = ({ userData }) => {
 // Get All Admin
 
 export const GetAllAdminAction = (Keyword) => {
-   
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllAdminRequest" });
-      // let url;
-      // if (AdminVerify == true || AdminVerify == false) {
-      //   url = `/admin-owner/admin-data?AdminVerify=${AdminVerify}`;
-      // } else if (AdminVerify == "Admin") {
-      //   url = `/admin-owner/admin-data?Role=${AdminVerify}`;
-      // } else {
-      //   url = `/admin-owner/admin-data`;
-      // }
-      //
+       
       let url;
       if (Keyword) {
-        url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]}=${
-          Keyword[Object.keys(Keyword)[0]]
+        url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]}=${Keyword[Object.keys(Keyword)[0]]
         }`;
       } else {
-        url = `${api_Base_Url}/admin-owner/admin-data`;
+        url = `/admin-owner/admin-data`;
       }
       // if(ke)
 
@@ -367,9 +355,7 @@ export const GetAllAdminAction = (Keyword) => {
 
 // Update role Action
 export const VerifyAdminAction = ({ userdata }, UserId) => {
-  console.log(userdata)
   return async (dispatch) => {
-   
     try {
       dispatch({
         type: "VerifyAdminRequest",
@@ -445,6 +431,7 @@ export const VerifyBidAction = ({ biddata }, BidId) => {
         payload: "VerifyBidRequest",
       });
 
+      
       let url = `${api_Base_Url}/Biddingform/bid/verify/${BidId}`;
 
       const config = {
@@ -512,6 +499,7 @@ export const PostPropertyRequirementAction = (PostRequirementData) => {
         payload: "PostPropertyRequirementRequest",
       });
 
+   
       const url = `${api_Base_Url}/property-requirement/create`;
 
       const config = {
@@ -617,15 +605,9 @@ export const GetAllTenentResponseAction = (AdminVerify) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllTenentResponseRequest" });
-      // let url;
-      // if (AdminVerify == true || AdminVerify == false) {
-      //   url = `/admin-owner/admin-data?AdminVerify=${AdminVerify}`;
-      // } else if(AdminVerify=="Admin"){
-      //   url = `/admin-owner/admin-data?Role=${AdminVerify}`;
-      // }
-      //  else {
+       
       let url = `${api_Base_Url}/tenant-post-response/get`;
-      // }
+ 
 
       const config = {
         headers: { "Content-Type": "application/json" },

@@ -2,8 +2,10 @@
 .sidebar-profile {
   padding: 20px;
   color: #ffffff;
-  /* height: fit-content; */
+  height: fit-content;
   border: 1px solid #dedeff;
+  position: sticky;
+  top: 70px;
 }
 
 /* Optional logo styling */
@@ -11,27 +13,39 @@
   text-align: center;
   color: #ffffff;
 }
-
 .navList {
   list-style: none;
   padding: 0;
 }
-
 .navItem {
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 8px 8px;
   cursor: pointer;
-  color: #000;
-  margin: 5px;
-  font-size: 16px;
+  color: #34414b;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  margin: 5px 5px;
+  font-size: 14px;
   border-bottom: 1px solid #dedeff;
+  transition: filter 0.3s ease;
 }
 
+.active-btn-nav {
+  color: #fff;
+  background-color: var(--main-light-clr);
+  transition: filter 0.3s ease;
+}
+.navItem.active-btn-nav .icons {
+  filter: brightness(0) invert(1); /* Turn the icon white */
+}
 .icons {
-  width: 28px;
+  width: 20px;
 }
-
 /* For mobile view */
 @media (max-width: 480px) {
   .faq-item {
@@ -103,7 +117,7 @@
     display: block;
   } */
 }
-@media(max-width: 320px) {
+@media (max-width: 320px) {
   .navItem {
     box-shadow: 0px 0px 4px 0px #b1cbdf;
     background-color: white;

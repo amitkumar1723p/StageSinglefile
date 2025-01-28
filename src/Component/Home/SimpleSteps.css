@@ -67,7 +67,7 @@
 }
 
 .simple-step-card h3 {
-  color: #16315f;
+  color: #333;
 
   font-size: 20px;
   font-style: normal;
@@ -78,8 +78,8 @@
 
 .simple-step-card p {
   margin-top: 14px;
-  color: #3d5a80;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -94,7 +94,7 @@
 .simple-step-btn {
   text-align: center;
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BiddingFormAction } from "../../../Action/userAction";
 import { Link, useNavigate } from "react-router-dom";
- 
 import Loader from "../../Loader/Loader";
 import { GetSinglePostAction } from "../../../Action/postAction";
 import "./OfferForm.css";
@@ -60,7 +59,7 @@ export default function BiddingFormForm({
 
   useEffect(() => {
     if (data) {
-      if (data.success == true && LodingType=="BiddingFormRequest") {
+      if (data.success == true && LodingType == "BiddingFormRequest") {
         setBiddingFormData({
           AcceptPolicy: false,
 
@@ -411,7 +410,17 @@ export default function BiddingFormForm({
                   }}
                 />
                 I express interest to purchase the aforementioned property. I
-                agree with the Privacy Policy and Terms & Conditions. .
+                agree with the{" "}
+                <span  className="offer-tc-p-p"
+                  onClick={() => {
+                    navigate("/privacy-policy");
+                  }}
+                >
+                  Privacy Policy
+                </span > and  <span  className="offer-tc-p-p"
+                onClick={() => {
+                    navigate("/terms-and-conditions");
+                  }}> Terms & Conditions. </span>
               </label>
 
               <label className="mke-you-offer-checkbox-label">
@@ -452,7 +461,6 @@ export default function BiddingFormForm({
       {showMakeOfferAlert == true && (
         <MakeOfferSuccessAlert SetShow={SetShow} />
       )}
-
     </>
   );
 }

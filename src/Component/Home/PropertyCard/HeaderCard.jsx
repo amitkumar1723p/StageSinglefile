@@ -57,22 +57,22 @@ const HeaderCard = () => {
             <div className="header-main-data">
               <div className="header-card-title-section">
                 <h2 className="header-card-title">
-                  {HeaderCardData["Project Name"]}
+                  {HeaderCardData["Project Name"]} 
                 </h2>
                 <p className="header-card-location">
-                  {HeaderCardData["Locality"]}
+                  {HeaderCardData["Sector"]}, {HeaderCardData["City"]}
                 </p>
               </div>
 
               <div className="header-card-info-grid">
                 <div className="header-card-info-item">
-                  <p className="header-card-info-label">Project Status</p>
+                  <p className="header-card-info-label">Project Status </p>
                   <p className="header-card-info-value">
                     {HeaderCardData["Project Status"]}
                   </p>
                 </div>
                 <div className="header-card-info-item">
-                  <p className="header-card-info-label">Project Type</p>
+                  <p className="header-card-info-label">Project Type </p>
                   <p className="header-card-info-value">
                     {HeaderCardData["Segment"]}
                   </p>

@@ -11,8 +11,8 @@
 }
 
 .brokerrafe-endtoend{
-  color: #16315F;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
@@ -52,7 +52,7 @@
 }
 
 .support-title {
-  color: #444;
+  color: #333;
   font-weight: bold;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .support-description {
-  color: #666;
+  color: #333;
 
   margin: 20px;
 }
@@ -85,7 +85,7 @@
 }
 
 .feature-text {
-  color: #444;
+  color: #333;
 }
 
 .support-content ul {
@@ -147,13 +147,13 @@
 
   .support-title {
     font-size: 24px;
-    color: #444;
+    color: #333;
     margin-bottom: 10px;
   }
 
   .support-description {
     font-size: 14px;
-    color: #666;
+    color: #333;
     margin: 10px 0;
   }
 
@@ -178,7 +178,7 @@
 
   .feature-text {
     font-size: 14px;
-    color: #444;
+    color: #333;
   }
 
   .heading-line {

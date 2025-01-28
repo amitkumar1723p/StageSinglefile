@@ -28,12 +28,15 @@ export default function LocationDetails({
   return (
     <>
       <ScrollToTop />
+        {/* <div className="create-banner-box">
+          <img src="/img/create-banner.svg" alt="create-banner" />
+        </div> */}
       <div className="container">
         <h2 className="location-heading">Location Details</h2>
         <form id="locationForm" onSubmit={submitHandler}>
           <div className="location-box">
             <ProjectNameSection
-              ProjectInputType ={"PostForm"}
+              ProjectInputType={"PostForm"}
               ProjectNameObjectData={LocationDetailsData}
               setProjectNameObjectData={setLocationDetailsData}
               placeholder={"Project Name"}

@@ -18,7 +18,7 @@
 }
 
 .report-form-title {
-    color: #16315F;
+    color: #333;
 
 font-size: 16px;
 font-style: normal;
@@ -33,13 +33,13 @@ letter-spacing: 0.16px;
     background: transparent;
     border: none;
     font-size: 16px;
-    color: #888;
+    color: #333;
     cursor: pointer;
     background-color: var(--main-lighter-clr);
 }
 
 .report-form-description {
-    color: #3D5A80;
+    color: #333;
     
     font-size: 12px;
     font-style: normal;

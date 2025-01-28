@@ -57,9 +57,8 @@ export default function UserForm() {
           navigate(-1);
         } else if (RedirectPath == "/post-requirement") {
           navigate(-1);
-        } else if(RedirectPath == "/show-Supspicious-Listing-Form"){
-          navigate(-1)
-
+        } else if (RedirectPath == "/show-Supspicious-Listing-Form") {
+          navigate(-1);
         } else {
           navigate("/user");
         }

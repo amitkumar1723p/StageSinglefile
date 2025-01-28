@@ -10,11 +10,11 @@ export const CreatePostReducer = (state = {}, action) => {
     case "ReOpenPostActionRequest":
     case "VerifyAdminRequest":
     case "VerifyBidRequest":
-    case "Admin_OwnerScheduleVisitDoneRequest" :
-      // case "AddPriceRequest":
+    case "Admin_OwnerScheduleVisitDoneRequest":
+    // case "AddPriceRequest":
     case "Admin_AssignedRequest":
-      case"Admin_RemovedRequest":
-
+    case "Admin_RemovedRequest":
+    case "RemoveAssignPropertyRequest":
       return {
         ...state,
         loading: true,
@@ -29,10 +29,10 @@ export const CreatePostReducer = (state = {}, action) => {
     case "VerifyAdminSuccess":
     case "VerifyBidSuccess":
     case "Admin_OwnerScheduleVisitDoneSuccess":
-      // case "AddPriceSuccess":
-      case "Admin_AssignedSuccess":
-        case"Admin_RemovedSuccess":
-
+    // case "AddPriceSuccess":
+    case "Admin_AssignedSuccess":
+    case "Admin_RemovedSuccess":
+    case "RemoveAssignPropertySuccess":
       return {
         ...state,
         loading: false,
@@ -47,10 +47,11 @@ export const CreatePostReducer = (state = {}, action) => {
     case "VerifyAdminFail":
     case "VerifyBidFail":
     case "Admin_OwnerScheduleVisitDoneFail":
-      // case "AddPriceFail":
-      case"Admin_AssignedFail":
-      case"Admin_RemovedFail":
-
+    // case "AddPriceFail":
+    case "Admin_AssignedFail":
+    case "Admin_RemovedFail":
+    case "RemoveAssignPropertyFail":
+     
       return {
         ...state,
         loading: false,
@@ -290,4 +291,65 @@ export const Admin_OwnerGetAllScheduleVisitsReducer = (state = {}, action) => {
   }
 };
 
+export const GetAllAssignPropertyReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GetAllAssignPropertyRequest":
+      return {
+        ...state,
+        loading: true,
+      };
 
+    case "GetAllAssignPropertySuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetAllAssignPropertyFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetAllAssignPropertyClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+
+export const GetAdminAgentAssignPropertyReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "Admin_AgentGetAllPostActionRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "Admin_AgentGetAllPostActionSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "Admin_AgentGetAllPostActionFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "Admin_AgentGetAllPostActionClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};

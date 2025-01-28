@@ -8,11 +8,11 @@ export default function WindowComponent({
   SinglePostData,
   PropertyAddress,
   ImageData,
+  ZoomImageNumber
 }) {
   const MainBox = useRef(null);
 
   useEffect(() => {
-
     const handleClickOutside = (e) => {
       if (MainBox?.current && BtnRef?.current) {
         let hideElement = MainBox.current.contains(e.target);
@@ -20,20 +20,17 @@ export default function WindowComponent({
 
         const BtnElement = Array.isArray(BtnRef.current)
           ? BtnRef.current.some(
-            (btnRef) => btnRef.current && btnRef.current.contains(e.target)
-          )
+              (btnRef) => btnRef.current && btnRef.current.contains(e.target)
+            )
           : BtnRef.current.contains(e.target);
 
         if (hideElement == false && BtnElement == false) {
-           SetShow(false);
-           
-           
+          SetShow(false);
         }
       }
     };
 
     if (Component && MainBox) {
-
       document.addEventListener("click", handleClickOutside);
 
       // Disable scrolling when the form is open
@@ -62,6 +59,7 @@ export default function WindowComponent({
             SinglePostData={SinglePostData}
             Images={ImageData}
             PropertyAddress={PropertyAddress}
+            ZoomImageNumber ={ ZoomImageNumber}
           />
         </div>
       </div>

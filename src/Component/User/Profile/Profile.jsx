@@ -9,8 +9,7 @@ import Sidebar from "./Sidebar";
 //  import ProfileHeader from '.'
 
 export default function Profile() {
- 
-  const location =useLocation()
+  const location = useLocation();
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -21,11 +20,7 @@ export default function Profile() {
       <>
         {" "}
         <div className="profile-container">
-
-{
-  !location.pathname.includes('/user/post') && <Sidebar />
-}
-       
+          {!location.pathname.includes("/user/post") && <Sidebar />}
           <main className="main-content create-post-section">
             <Outlet />
             {/* <ProfileHeader MeData={medata} /> */}

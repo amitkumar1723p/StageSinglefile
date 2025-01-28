@@ -34,7 +34,6 @@ export default function BasicDetailsSection({
     "By 2027",
     "By 2028",
     "By 2029",
-    
   ];
 
   // Add Plot And Land  After Some Time
@@ -73,11 +72,12 @@ export default function BasicDetailsSection({
     <>
       <ScrollToTop />
       <main className="main-container">
-        <h3 className="heading-section-form-start">
-          {" "}
+        {/* <h3 className="heading-section-form-start">
           Sale or Rent your Property For Free
-        </h3>
-
+        </h3> */}
+        {/* <div className="create-banner-box">
+          <img src="/img/create-banner.svg" alt="create-banner" />
+        </div> */}
         <div className="form-container-step-1">
           <div className="form-content">
             <h3 className="basic-details-heading">Property Type*</h3>
@@ -109,7 +109,6 @@ export default function BasicDetailsSection({
                 />
               </button>
             </div>
-
             <h3 className="basic-details-heading">I am Looking To *</h3>
             <div className="ad-type rent-sale">
               {PropertyAdTypeArray.map((text, i) => {
@@ -142,11 +141,9 @@ export default function BasicDetailsSection({
                 );
               })}
             </div>
-
             <h3 className="basic-details-heading">
               Choose Property Classification *{" "}
             </h3>
-
             <div className="tab-box">
               {ApartMentTypeTab.map((e, i) => {
                 return (
@@ -178,7 +175,6 @@ export default function BasicDetailsSection({
                 );
               })}
             </div>
-
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (
@@ -215,7 +211,6 @@ export default function BasicDetailsSection({
                     />
                   </div>
                 )}
-
                 {BasicDetailsData.PropertyAdType === "Sale" && (
                   <>
                     <div className="fom-group">
@@ -334,12 +329,12 @@ export default function BasicDetailsSection({
                         >
                           <option value="">Select</option>
                           {PossessionStatusOption.map((e, i) => {
-                      return (
-                        <option key={i} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
+                            return (
+                              <option key={i} value={e}>
+                                {e}
+                              </option>
+                            );
+                          })}
                           {/* <option value="0-5">0-5 years</option>
                           <option value="5-10">5-10 years</option>
                           <option value="10-20">10-20 years</option> */}
@@ -351,8 +346,7 @@ export default function BasicDetailsSection({
               </>
             )}
             {/* {BasicDetailsData.ApartmentType === "Plot/Land" && (
-              <>
-               
+              <>            
                 <div className="">
                   <label htmlFor="possession-status"> Possession Status </label>
                   <select
@@ -376,9 +370,6 @@ export default function BasicDetailsSection({
                     })}
                   </select>
                 </div>
-
-             
-
                 <div>
                   <h3> Current Property Status* </h3>
                   <div className="tab-box">
@@ -397,8 +388,7 @@ export default function BasicDetailsSection({
                               CurrentPropertyStatus: e,
                             });
                           }}
-                        >
-                        
+                        >          
                           {e}{" "}
                           <img
                             alt=""
@@ -414,10 +404,7 @@ export default function BasicDetailsSection({
                       );
                     })}
                   </div>
-                </div>
-
-           
-
+                </div>          
                 <div className="field-group">
                   <label htmlFor="plot-open-side">
                     No.Of Open Side Optional
@@ -433,8 +420,7 @@ export default function BasicDetailsSection({
                           });
                         }
                       }}
-                    >
-                      -
+                    >                      -
                     </div>
                     <input
                       type="number"

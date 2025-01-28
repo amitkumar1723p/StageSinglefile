@@ -4,22 +4,21 @@
    background-color: rgb(231, 192, 192);
 } */
 
-.user-filter-section{
+.user-filter-section {
   margin: 10px;
-  background-color: #F1F5F9;
+  background-color: #f1f5f9;
   width: fit-content;
   padding: 5px;
   border-radius: 5px;
 }
 
-.user-section-heading{
+.user-section-heading {
   text-align: start;
   font-size: 18px;
 
   color: var(--main-light-clr);
-  padding-left:10px ;
+  padding-left: 10px;
 }
-
 
 .showpost {
   /* display: flex; */
@@ -146,10 +145,10 @@
 .verified-card p {
   margin: 0;
   font-size: 14px;
-  color: #00508E;
+  color: #00508e;
   font-weight: bold;
 }
-.verified-card{
+.verified-card {
   display: flex;
   gap: 5px;
 }
@@ -225,12 +224,11 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .btn-rent-filter {
- 
   gap: 20px;
   flex-direction: column;
-  color: #5F7284;
+  color: #5f7284;
   background-color: transparent;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -244,18 +242,18 @@ input[type="file"]::-webkit-file-upload-button {
   pointer-events: auto; /* Ensure that pointer events are not disabled */
 }
 
- .all-post-lisitng{
+.all-post-lisitng {
   border-radius: 5px;
-    background-color: #fff ;
-    padding: 5px 15px;
-    color: var(--main-light-clr);
+  background-color: #fff;
+  padding: 5px 15px;
+  color: var(--main-light-clr);
 }
 .btn-sell-filter {
   cursor: pointer;
 
   color: #595959;
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -265,43 +263,60 @@ input[type="file"]::-webkit-file-upload-button {
   border: 1px solid #cfcfcf;
   background-color: #fff;
 }
+/* .Reserveprice-sec{
+  display: flex;
+} */
 
-/* Post Card Share Box Css   */ 
- .postcard-share-parent {
+/* Post Card Share Box Css   */
+.postcard-share-parent {
   position: relative;
- }
- .postcard-share-child{
+}
+.postcard-share-child {
   position: absolute;
   background-color: red;
-
- }
- .postcard-share-child li{
+}
+.postcard-share-child li {
   list-style: none;
- }
-@media  (max-width: 480px){
-
-  .user-section-heading{
-    font-size: 16px ;
-    color: #111;
+}
+@media (max-width: 480px) {
+  .user-section-heading {
+    font-size: 16px;
+    color: #333;
     text-align: center;
     margin: 10px 0;
   }
-  .user-filter-section{
+  .user-filter-section {
     display: flex;
     justify-content: center;
   }
   .imageSlide {
-    width: 312px;
-    display: flex
-;
+    width: 100%;
+    display: flex;
     overflow: hidden;
     position: relative;
-}
+  }
 }
 
+@media (max-width: 375px) {
+  .imageSlide {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+@media (max-width: 320px) {
+  .imageSlide {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+}
 /* Amit css for share button */
 /* Modal Overlay */
-.sharehead{
+.sharehead {
   font-weight: 500;
   font-size: 12px;
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3);
@@ -309,7 +324,7 @@ input[type="file"]::-webkit-file-upload-button {
 .share1 {
   z-index: 1;
   position: absolute;
-margin-top: 9px;
+  margin-top: 9px;
   width: 220px;
   height: 150px;
   padding: 10px;
@@ -321,27 +336,26 @@ margin-top: 9px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow for better visibility */
 }
 
-.share2{
+.share2 {
   padding: 10px;
-
 }
-.share_options{
+.share_options {
   text-decoration: none;
   font-size: 12px;
   font-weight: 500;
   padding: 3px;
   text-align: center;
 }
- .shareButton{
+.shareButton {
   border-radius: 4px;
- margin-left: 150px;
- }
- .share-btn {
+  margin-left: 150px;
+}
+.share-btn {
   background: transparent;
   border: none;
   cursor: pointer;
 }
 
 .share-btn img {
-  pointer-events: auto;  /* Ensure the image is clickable */
+  pointer-events: auto; /* Ensure the image is clickable */
 }

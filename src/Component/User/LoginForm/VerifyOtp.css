@@ -1,18 +1,30 @@
-/* OTP Component Styles */
 .otp-wrapper-unique {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 900px;
-  height: 500px;
+  max-width: 800px;
+  margin: 100px auto;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
   background-color: var(--main-lighter-clr, #f9f9f9);
   transition: all 0.3s ease-in-out;
   padding: 20px;
+
 }
-.resend-otp-btn {
+
+.otpsection-login-unique {
+  display: flex;
+  max-width: 750px;
+  box-shadow: 0 8px 16px var(--main-lighter-clr);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--main-lighter-clr);
+  transition: all 0.3s ease-in-out;
+  /* padding: 20px; */
+}
+
+.otp-resend-otp-btn {
   font-size: 10px;
   color: var(--main-light-clr);
   font-weight: 600;
@@ -22,11 +34,13 @@
   margin-right: 5px;
   cursor: pointer;
 }
-.resend-otp-btn:hover {
+
+.otp-resend-otp-btn:hover {
   border: none;
   background-color: #fff;
 }
-.mail-spam {
+
+.otp-mail-spam {
   color: #d80d0d;
   font-size: 12px;
   font-style: normal;
@@ -37,7 +51,6 @@
 .otp-section {
   padding: 10px;
   border: 3px solid var(--main-lighter-clr);
-  /* border: none; */
 }
 
 .otp-form-main {
@@ -58,10 +71,11 @@
   height: 100%;
   object-fit: cover;
   border-radius: 10px 0 0 10px;
+  
 }
 
 .otp-form-content-unique {
-  padding: 40px;
+  padding: 20px;
   width: 50%;
   background-color: white;
   display: flex;
@@ -70,6 +84,19 @@
   align-items: flex-start;
   border-left: 1px solid #f0f0f0;
   border-radius: 0 10px 10px 0;
+
+}
+
+.otp-login-h2-p{
+  color: #333;
+  margin-bottom: 10px;
+
+  font-size: 12px;
+  font-style: normal;
+
+  line-height: 18px; /* 150% */
+  letter-spacing: 0.32px;
+  
 }
 
 .otp-form-content-unique h2 {
@@ -84,7 +111,7 @@
 .otp-timer {
   font-size: 16px;
   font-weight: bold;
-  color: #ff4d4f; /* Highlighted red timer for urgency */
+  color: #ff4d4f;
   margin-bottom: 20px;
 }
 
@@ -112,7 +139,7 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.Continue-otp {
+.otp-continue-otp {
   width: 100%;
   padding: 12px;
   background-color: #007bff;
@@ -130,7 +157,7 @@
   transform: scale(1.02);
 }
 
-.resend-otp-button {
+.otp-resend-otp-button {
   margin-top: 10px;
   padding: 10px;
   background-color: #ff4d4f;
@@ -143,21 +170,25 @@
   transition: background-color 0.3s ease-in-out;
 }
 
-.resend-otp-button:hover {
+.otp-resend-otp-button:hover {
   background-color: #cc0000;
   transform: scale(1.02);
 }
 
-/* Additional media queries for responsiveness */
 @media (max-width: 768px) {
+  
   .otp-wrapper-unique {
     flex-direction: column;
     height: auto;
   }
 
+  .otpsection-login-unique{
+    flex-direction: column;
+  }
+
   .otp-image-section-unique {
-    width: 100%;
-    height: 200px;
+    width: 60%;
+    margin: 0 auto;
   }
 
   .otp-form-content-unique {

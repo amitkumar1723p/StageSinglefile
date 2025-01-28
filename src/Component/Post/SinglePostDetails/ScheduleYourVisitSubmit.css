@@ -17,7 +17,7 @@
   
   .request-submit-body {
     font-size: 16px;
-    color: #111;
+    color: #333;
   }
   
   .status-message {
@@ -34,12 +34,12 @@
   
   .status-text {
     font-size: 16px;
-    color: #111;
+    color: #333;
   }
   
   .note-text {
     font-size: 14px;
-    color: #888;
+    color: #333;
   }
   
   .action-buttons {

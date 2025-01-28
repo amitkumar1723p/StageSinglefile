@@ -6,6 +6,21 @@ body{
   display: flex;
   justify-content: space-between;
 }
+p{
+
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: inherit;
+}
 :root {
   --main-light-clr: #037edb;
   --main-light-hover-clr: #0056b3;
@@ -45,7 +60,7 @@ input:focus {
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
-  color: #111;
+  color: #333;
 }
 
 .underline-on-text::before,
@@ -54,7 +69,7 @@ input:focus {
   position: absolute;
   bottom: -6px; /* Adjust the underline's position below the text */
   height: 3px; /* Thickness of the underline */
-  background-color: #2F5CA9; /* Underline color */
+  background-color: var(--main-light-clr); /* Underline color */
 }
 
 .underline-on-text::before {
@@ -74,7 +89,36 @@ input:focus {
 font-weight: 800;
 }
 
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 0rem;
+}
+ol, ul {
+  padding-left: 0rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--bs-heading-color);
+}
+
+.row>* {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-top: var(--bs-gutter-y);
+}
+
 @media(max-width: 480px) {
+
+  .ProgressBarMain {
+    display: none;
+  }
+
   .underline-on-text {
     position: relative; /* Required for pseudo-elements positioning */
     display: inline-block; /* To make the underline specific to the text */
@@ -111,3 +155,10 @@ font-weight: 800;
 
 
 
+
+.active-btn-admin{
+  background-color: #fff !important;
+  color: var(--main-light-clr)  !important ;
+  border-radius: 10px !important;
+
+}

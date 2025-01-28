@@ -19,7 +19,7 @@
 
 .viewall {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -33,11 +33,13 @@
 }
 
 .sidebar {
+  top: 82px;
+  position: sticky;  
   width: 200px;
   background-color: var(--main-light-clr);
   color: white;
   padding: 20px;
-  height: fit-content;
+  height: 100%;
   border-bottom-right-radius: 5px;
 }
 
@@ -60,7 +62,7 @@
   flex-direction: column;
 }
 
-.sidebar .menu .menu-button {
+/* .sidebar .menu .menu-button {
   background: none;
   color: white;
   border: none;
@@ -68,21 +70,18 @@
   cursor: pointer;
   text-align: left;
   width: 100%;
-}
-
-.sidebar .menu .menu-button:hover {
-  border-radius: 10px;
-  background-color: rgba(44, 132, 232, 0.9);
-}
+} */
+ 
 .main-content {
-  margin: 5px;
+  margin: 0px;
   flex: 1;
-  /* padding: 20px; */
+  padding: 10px 0 15px 0;
   border-radius: 7px;
   /* width: 80%; */
   background: #feffff;
   /* margin: 20px; */
-  color: #000;
+  padding: 20px;
+  color: #333;
   box-shadow: 0px 0px 5px 0px #CFDAE2;
 }
 
@@ -120,9 +119,13 @@
   transform: translateY(-5px);
 }
 
+/* .admin-dash-borad{
+  margin: 20px;
+} */
+
 .main-dash {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -146,10 +149,14 @@
   display: flex;
 }
 
+.admin-agent-dash {
+  padding: 20px;
+}
+
 
 .main-content .cards .card h3 {
   color: #575859;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;

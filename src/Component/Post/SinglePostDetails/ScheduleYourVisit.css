@@ -10,7 +10,7 @@
 .schedule-your-visit-title {
   color: var(--main-light-clr);
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -98,7 +98,7 @@ margin-bottom: 10px;
   /* display: flex;
   justify-content: space-between; */
   border-radius: 4px;
-  color: #999;
+  color: #333;
   border: 1px solid #4a7296;
   background: #fff;
   display: flex;
@@ -118,7 +118,7 @@ margin-bottom: 10px;
 .schedule-your-visit-time-container span {
   display: flex;
   align-items: center;
-  color: #111;
+  color: #333;
 
   font-size: 14px;
   font-style: normal;
@@ -131,7 +131,7 @@ margin-bottom: 10px;
   color: var(--main-light-clr);
   cursor: pointer;
   background-color: var(--main-lighter-clr);
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 100%;
   font-size: 14px;
   

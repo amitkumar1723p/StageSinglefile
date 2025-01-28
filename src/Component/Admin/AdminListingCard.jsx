@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, Link, useNavigate, Navigate } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
 import { adminAssigned } from "../../Action/postAction";
-import { adminRemovePropertyId } from "../../Action/postAction";
+import { RemoveAssignPropertyAction } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
   // AddPriceAction,
@@ -12,12 +12,19 @@ import {
 import "./AdminListingCard.css";
 import { UserContext } from "../CreateContext/CreateContext";
 
-export default function AdminListingCard({ PostData, index }) {
+export default function AdminListingCard({
+  PostData,
+  index,
+  setAssignProperty,
+  AssignProperty,
+}) {
   const [formatDate, setFormatDate] = useState({
     ActiveDate: "",
     ExpiredDate: "",
   });
+
   const navigate = useNavigate();
+ 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
       return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
@@ -60,7 +67,7 @@ export default function AdminListingCard({ PostData, index }) {
 
   const location = useLocation();
   const dispatch = useDispatch();
-
+  const [isAssignedToAnyUser, setisAssignedToAnyUser] = useState([]);
   const [PropertyAddress, setPropertyAddress] = useState("");
 
   useEffect(() => {
@@ -74,89 +81,124 @@ export default function AdminListingCard({ PostData, index }) {
     return state.AdminData;
   });
 
-console.log(data,"kjgkjesf")
-  const { propertyId, setPropertyId } = useContext(UserContext);
+  const { data: AssignPostData } = useSelector((state) => {
+    return state.AssignPropertys;
+  });
 
-  const PropertyIdCheck = (id) => {
-    // console.log(id,"hellodjdhfgjhsd")
-    setPropertyId((prevIds) => {
-      if (prevIds.includes(id)) {
-        return prevIds.filter((item) => item !== id);
-      } else {
-        return [...prevIds, id];
-      }
-    });
-  };
   // ====================================== Store the id on click property id
   // Check if no user is assigned
-  const isAssignedToAnyUser = data?.Admin?.some((user) =>
-    user.AssignedPropertyId.includes(PostData?._id)
-  );
+  // const isAssignedToAnyUser = data?.Admin?.some((user) =>
+  //   user.AssignedPropertyId.includes(PostData?._id)
+  // );
   // remove from Assign work start here
   const [selectedUserData, setSelectedUserData] = useState(null); // Initialize state to store selected user and post IDs
 
-  const handleButtonClick = (userId, postId) => {
-    alert("Are You Sure !");
-    setSelectedUserData({ userId, postId }); // Update the state with user._id and PostData._id
-  };
-
   useEffect(() => {
-    if (selectedUserData) {
-      dispatch(adminRemovePropertyId(selectedUserData));
-      setSelectedUserData(null);
-    }
-  }, [selectedUserData]);
+    if (AssignPostData?.success == true) {
+      let AssingPosts = AssignPostData.AssignProperty.filter((item) => {
+        return (
+          item.AssignedPropertys.some((item) => item.PostId === PostData._id) &&
+          item.AdminId._id !== medata?.user?._id
+        );
+      });
 
+      setisAssignedToAnyUser(AssingPosts);
+    }
+  }, [AssignPostData]);
   // end here remove assign work
   return (
     <div className="Admin-property-post-card-main-box">
       <div className="Admin-property-post-card-main">
         <div className="property-post-card" id="property-card-1">
+          {medata?.user?.Role != "Agent" &&
+            AssignProperty &&
+            isAssignedToAnyUser.length <= 0 && (
+              <div className="Assing-to">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={AssignProperty.some(
+                      (item) => item.PostId === PostData._id
+                    )}
+                    onChange={(e) => {
+                      if (e.target.checked == true) {
+                        setAssignProperty([
+                          ...AssignProperty,
+
+                          // PostData._id,
+                          {
+                            PostId: PostData._id,
+                            CreatedBy: medata?.user?._id,
+                          },
+                        ]);
+                      }
+                      if (e.target.checked == false) {
+                        let removeAssignProperty = AssignProperty.filter(
+                          (e) => {
+                            return e.PostId != PostData._id;
+                          }
+                        );
+                        setAssignProperty(removeAssignProperty);
+                      }
+                    }}
+                  />
+                </label>
+              </div>
+            )}
           <div className="admin-property-card-info">
             <div className="heading-name">
               {PostData.LocationDetails.ProjectName}
-
-              <div className="edit-del-section">
-                <div className="asign-user">
-                  <p>
-                    Assign to:{" "}
-                    {isAssignedToAnyUser ? (
-                      data?.Admin?.map((user) => {
-                        if (user.AssignedPropertyId.includes(PostData._id)) {
-                          return (
-                            <button
-                              className="adminNameButton"
-                              key={user._id} // Use unique id for key
-                              onClick={() =>
-                                handleButtonClick(user._id, PostData._id)
-                              }
-                            >
-                              {user.Name} <span>🗑️</span>
-                            </button>
-                          );
-                        }
-                        return null;
-                      })
-                    ) : (
-                      <label>
-                        <input
-                          type="checkbox"
-                          checked={propertyId.includes(PostData._id)}
-                          onChange={() => PropertyIdCheck(PostData._id)}
-                        />
-                      </label>
+              {medata?.user?.Role != "Agent" && (
+                <>
+                  <div className="edit-del-section">
+                    {AssignProperty && (
+                      <div className="asign-user">
+                        {isAssignedToAnyUser.length > 0 && (
+                          <div className="show-admin-data">
+                            {isAssignedToAnyUser.map((AssignPropertys, i) => {
+                              return (
+                                <div
+                                  key={i}
+                                  className="adminNameButton"
+                                  onClick={() => {
+                                    const RemoveAssignProperty = {
+                                      AdminId: AssignPropertys.AdminId._id,
+                                      PostId: PostData._id,
+                                    };
+                                    
+                                    let confrim = window.confirm(
+                                      "Are You Sure About This"
+                                    );
+                                    if (confrim) {
+                                      dispatch(
+                                        RemoveAssignPropertyAction({
+                                          RemoveAssignProperty,
+                                        })
+                                      );
+                                    }
+                                  }}
+                                >
+                                  {AssignPropertys.AdminId?.Name} - (
+                                  {AssignPropertys.AdminId?.Role}){" "}
+                                  <span>🗑️</span>{" "}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
                     )}
-                  </p>
-                </div>
 
-                {location.pathname.includes("admin") && (
-                  <div className="delete-edit-box">
-                    <Link to={`/admin/post/update/${PostData._id}`}>
-                      <img src="/img/edit.png" className="editIcon" />
-                    </Link>
+                    {location.pathname.includes("admin") && (
+                      <div className="delete-edit-box">
+                        <Link to={`/admin/post/update/${PostData._id}`}>
+                          <img src="/img/edit.png" className="editIcon" />
+                        </Link>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </>
+              )}
             </div>
 
             <div className="three-section-data">
@@ -198,7 +240,9 @@ console.log(data,"kjgkjesf")
                       </>
                     </>
                   )}
-                  <p className="admin-card-area-section">15000 per Sqft</p>
+                  <p className="admin-card-area-section">
+                    {PostData.PricingDetails.PricePerSqFt} Per sqft
+                  </p>
                 </div>
 
                 <div className="property-id">
@@ -247,14 +291,19 @@ console.log(data,"kjgkjesf")
               </div>
 
               <div className="response-section">
+              
                 <p
+                // className={location.pathname.includes("schedule-visit"?"select":"")}
+                className= {`${location.pathname.includes("/admin/schedule-visit") ?"active-btn":""}`}  
+
                   onClick={() => {
                     navigate(`/admin/schedule-visit/${PostData._id}`);
                   }}
                 >
-                  View All Response
+                 Schedule Visit
                 </p>
-                <p
+                <p 
+                className= {`${location.pathname.includes("/admin/recive-offer") ?"active-btn":""}`}
                   onClick={() => {
                     navigate(`/admin/recive-offer/${PostData._id}`);
                   }}
@@ -262,21 +311,20 @@ console.log(data,"kjgkjesf")
                   View Offer Received
                 </p>
                 <p>Extend Duration</p>
-                <div className="user-name-contact">
-                  <span>Posted by : </span>
 
-                  <span>{PostData.CreatePostUser?.Name}</span>
-                </div>
-                <div className="user-name-contact">
-                  <span>Mobile No. : </span>
-                  {/* <span>
-                    {PostData.CreatPostUser &&
-                    PostData.CreatPostUser.ContactNumber
-                      ? PostData.CreatPostUser.ContactNumber
-                      : "9999999999"}
-                  </span> */}
-                  <span>{PostData.CreatePostUser?.ContactNumber}</span>
-                </div>
+                {medata.user.Role != "Agent" && (
+                  <>
+                    <div className="user-name-contact">
+                      <span>Posted by : </span>
+
+                      <span>{PostData.CreatePostUser?.Name}</span>
+                    </div>
+                    <div className="user-name-contact">
+                      <span>Mobile No. : </span>
+                      <span>{PostData.CreatePostUser?.ContactNumber}</span>
+                    </div>{" "}
+                  </>
+                )}
               </div>
 
               <div className="admin-btn-active-btn">
@@ -288,56 +336,63 @@ console.log(data,"kjgkjesf")
                 >
                   <button className="contact-button">View Listing</button>
                 </Link>
-                <div className="verify-box-section">
-                  {/* {location.pathname.includes("admin") && ( */}
-                  {PostData.PostExpired ? (
-                    <button
-                      onClick={() => {
-                        dispatch(ReOpenPostAction(PostData._id));
-                      }}
-                    >
-                      Re-Open
-                    </button>
-                  ) : (
-                    <>
-                      {PostData.PostVerify ? (
-                        <button
-                          className="post-verify-btn In-Active-btn"
-                          onClick={() => {
-                            let Confrimbox = window.confirm(
-                              "Are you Sure Verify This Post"
-                            );
-                            if (Confrimbox) {
-                              let postdata = { PostVerify: false };
-                              let postid = PostData._id;
-                              dispatch(VerifyPostAction({ postdata }, postid));
-                            }
-                          }}
-                        >
-                          {/* Unverify  */} In-Active
-                        </button>
-                      ) : (
-                        <button
-                          className="post-verify-btn Active-btn "
-                          onClick={() => {
-                            let Confrimbox = window.confirm(
-                              "Are you Sure Verify This Post"
-                            );
 
-                            if (Confrimbox) {
-                              let postdata = { PostVerify: true };
-                              let postid = PostData._id;
-                              dispatch(VerifyPostAction({ postdata }, postid));
-                            }
-                          }}
-                        >
-                          {/* Verify */}
-                          Active
-                        </button>
-                      )}
-                    </>
-                  )}
-                </div>
+                {medata?.user?.Role != "Agent" && (
+                  <div className="verify-box-section">
+                    {/* {location.pathname.includes("admin") && ( */}
+                    {PostData.PostExpired ? (
+                      <button
+                        onClick={() => {
+                          dispatch(ReOpenPostAction(PostData._id));
+                        }}
+                      >
+                        Re-Open
+                      </button>
+                    ) : (
+                      <>
+                        {PostData.PostVerify ? (
+                          <button
+                            className="post-verify-btn In-Active-btn"
+                            onClick={() => {
+                              let Confrimbox = window.confirm(
+                                "Are you Sure Verify This Post"
+                              );
+                              if (Confrimbox) {
+                                let postdata = { PostVerify: false };
+                                let postid = PostData._id;
+                                dispatch(
+                                  VerifyPostAction({ postdata }, postid)
+                                );
+                              }
+                            }}
+                          >
+                            {/* Unverify  */} In-Active
+                          </button>
+                        ) : (
+                          <button
+                            className="post-verify-btn Active-btn "
+                            onClick={() => {
+                              let Confrimbox = window.confirm(
+                                "Are you Sure Verify This Post"
+                              );
+
+                              if (Confrimbox) {
+                                let postdata = { PostVerify: true };
+                                let postid = PostData._id;
+                                dispatch(
+                                  VerifyPostAction({ postdata }, postid)
+                                );
+                              }
+                            }}
+                          >
+                            {/* Verify */}
+                            Active
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

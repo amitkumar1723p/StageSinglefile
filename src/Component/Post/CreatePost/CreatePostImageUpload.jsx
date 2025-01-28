@@ -116,8 +116,12 @@ export default function CreatePostImageUpload({
   return (
     <>
       <ScrollToTop />
+      {/* <div className="create-banner-box">
+        <img src="/img/create-banner.svg" alt="create-banner" />
+      </div> */}
+
       <div className="property-details-main-box">
-        <div className="postImage container">
+        <div className="postImage post-img-upload">
           <form
             onSubmit={CratePostHandler}
             encType="multipart/form-data"
@@ -221,7 +225,7 @@ export default function CreatePostImageUpload({
               />
             </div>
 
-            <div className="showpreviewImage-Container">
+            <div className="showpreviewImage-Container upload-img-section">
               {previewImage.map((image, index) => {
                 return (
                   <div className="showpreviewImage-box" key={index}>

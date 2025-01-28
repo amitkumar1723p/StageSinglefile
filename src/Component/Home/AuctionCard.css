@@ -71,7 +71,7 @@
 .property-title {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #111;
+  color: #333;
   margin-bottom: 10px;
   overflow: hidden;
   white-space: nowrap;
@@ -80,7 +80,7 @@
 
 .location {
   font-size: 0.9rem;
-  color: #777;
+  color: #333;
   display: flex;
   align-items: center;
   margin-bottom: 10px;

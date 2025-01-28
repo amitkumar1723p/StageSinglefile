@@ -1,6 +1,5 @@
 import axios from "axios";
-const api_Base_Url=process.env.REACT_APP_API_URL
-
+const api_Base_Url = process.env.REACT_APP_API_URL
 // This Function Show Only Alert (Simple User)
 export const CreatePostAction = (PostData) => {
   return async (dispatch) => {
@@ -10,6 +9,7 @@ export const CreatePostAction = (PostData) => {
         payload: "CreatePostRequest",
       });
 
+      // const url = "/post/create";
       const url = `${api_Base_Url}/post/create`;
 
       const config = {
@@ -44,6 +44,7 @@ export const LoginUserPostAction = () => {
     try {
       dispatch({ type: "LoginUserGetPostRequest" });
 
+       
       const url = `${api_Base_Url}/post/login/allpost`;
 
       const config = {
@@ -83,29 +84,6 @@ export const GetAllPostAction = ({
 }) => {
   return async (dispatch) => {
     try {
-      // if (!PropertyAdType  ) {
-      //   PropertyAdType = "";
-      // }
-
-      // if (!BHK  ) {
-      //   BHK = "";
-      // }
-      // if (!ApartmentType ) {
-      //   ApartmentType = "";
-      // }
-      // if (!PropertyStatus  ) {
-      //   PropertyStatus = "";
-      // }
-      // if (Furnishing  ) {
-      //   Furnishing = "";
-      // }
-      // if (!ProjectName  ) {
-      //   ProjectName = "";
-      // }
-
-      // if (Price == null) {
-      //   Price = 0;
-      // }
 
       dispatch({ type: "GetAllPostRequest" });
 
@@ -239,9 +217,7 @@ export const GetProjectNameAction = () => {
     try {
       dispatch({ type: "GetProjectNameRequest" });
 
-      const url =
-        // "https://script.googleusercontent.com/macros/echo?user_content_key=q_pseOM4Q_qrSNsdICnPUEEPW75h2NtStfboEmuXc1idW5tP2B5z_FCUKzbICxYjTqNAhjM4YpDcmJ3McOdzrWMkUQFih72Mm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnAgCCxoGcIZvkVHYYg_qHWKIQb6qUqpDc1nJjd0u43r23gPFI1E8uNqWmiEnXXJfeIfGQznKZUufiVoszZFZupqDFFZBgKTe7A&lib=MQEUGJ1PJA-GHX1yqLuPCq3ZeAoTePLQN";
-        `${api_Base_Url}/post/project-name`;
+      const url = `${api_Base_Url}/post/project-name`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -277,9 +253,7 @@ export const GetSingleProjectNameDataAction = (projectname) => {
     try {
       dispatch({ type: "GetSingleProjectNameDataRequest" });
 
-      const url =
-        // "https://script.googleusercontent.com/macros/echo?user_content_key=q_pseOM4Q_qrSNsdICnPUEEPW75h2NtStfboEmuXc1idW5tP2B5z_FCUKzbICxYjTqNAhjM4YpDcmJ3McOdzrWMkUQFih72Mm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnAgCCxoGcIZvkVHYYg_qHWKIQb6qUqpDc1nJjd0u43r23gPFI1E8uNqWmiEnXXJfeIfGQznKZUufiVoszZFZupqDFFZBgKTe7A&lib=MQEUGJ1PJA-GHX1yqLuPCq3ZeAoTePLQN";
-        `${api_Base_Url}/post/project-name/single`;
+      const url = `${api_Base_Url}/post/project-name/single`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -309,13 +283,14 @@ export const GetSingleProjectNameDataAction = (projectname) => {
 
 // Get All Post   -Admin_Owner
 
-export const Admin_OwnerGetAllPostAction = (PostVerify) => {
+export const Admin_OwnerGetAllPostAction = (Keyword) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "Admin_OwnerGetAllPostRequest" });
+
       let url;
-      if (PostVerify == true || PostVerify == false) {
-        url = `${api_Base_Url}/admin-owner/all-post?PostVerify=${PostVerify}`;
+      if (Keyword) {
+        url = `${api_Base_Url}/admin-owner/all-post?PostVerify=${Keyword.PostVerify}`;
       } else {
         url = `${api_Base_Url}/admin-owner/all-post`;
       }
@@ -327,7 +302,6 @@ export const Admin_OwnerGetAllPostAction = (PostVerify) => {
       };
 
       const { data } = await axios.get(url, config);
-      
 
       dispatch({ type: "Admin_OwnerGetAllPostSuccess", payload: data });
     } catch (error) {
@@ -417,7 +391,6 @@ export const ReOpenPostAction = (postId) => {
 };
 
 export const Admin_OwnerGetAllScheduleVisits = (PostId) => {
- 
   return async (dispatch) => {
     try {
       dispatch({ type: "Admin_OwnerGetAllScheduleVisitsRequest" });
@@ -452,12 +425,15 @@ export const Admin_OwnerGetAllScheduleVisits = (PostId) => {
   };
 };
 
-export const Admin_OwnerScheduleVisitDone = ({VisitStatus} ,visitId) => {
- 
+export const Admin_OwnerScheduleVisitDone = ({ VisitStatus }, visitId) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "Admin_OwnerScheduleVisitDoneRequest"  ,  payload: "Admin_OwnerScheduleVisitDoneRequest",});
+      dispatch({
+        type: "Admin_OwnerScheduleVisitDoneRequest",
+        payload: "Admin_OwnerScheduleVisitDoneRequest",
+      });
 
+      // let url = `/admin-owner/schedulevisit/status/${visitId}`;
       let url = `${api_Base_Url}/admin-owner/schedulevisit/status/${visitId}`;
 
       const config = {
@@ -466,7 +442,7 @@ export const Admin_OwnerScheduleVisitDone = ({VisitStatus} ,visitId) => {
         withCredentials: true,
       };
 
-      const { data } = await axios.post(url, {VisitStatus} , config);
+      const { data } = await axios.post(url, { VisitStatus }, config);
 
       dispatch({
         type: "Admin_OwnerScheduleVisitDoneSuccess",
@@ -488,17 +464,14 @@ export const Admin_OwnerScheduleVisitDone = ({VisitStatus} ,visitId) => {
   };
 };
 
-
-export const adminAssigned=(property,adminId)=>{
-  // console.log(property,adminId,"dfbfjer")
- 
-  return async(dispatch)=>{
+export const adminAssigned = ({ AssignedData }) => {
+  return async (dispatch) => {
     try {
-     
-      dispatch({ type: "Admin_AssignedRequest" });
-
-      let url = `${api_Base_Url}/admin-owner/updated-propertyId/${adminId}`;
-      // let url = `/user/updateProfile/${adminId}`;
+      dispatch({
+        type: "Admin_AssignedRequest",
+        payload: "Admin_AssignedRequest",
+      });
+      let url = `${api_Base_Url}/admin-owner/assign-property`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -506,7 +479,7 @@ export const adminAssigned=(property,adminId)=>{
         withCredentials: true,
       };
 
-      const { data } = await axios.put(url,property,config);
+      const { data } = await axios.post(url, AssignedData, config);
 
       dispatch({
         type: "Admin_AssignedSuccess",
@@ -525,39 +498,112 @@ export const adminAssigned=(property,adminId)=>{
         });
       }
     }
-  }
-}
-export const adminRemovePropertyId=(admindata)=>{
-  // console.log(admindata,"jfjbkjvnksdjcnkd")
-    return async(dispatch)=>{
-      try {
-        dispatch({ type: "Admin_RemovedRequest" });
-  
-        let url = `${api_Base_Url}/admin-owner/remove-propertyId`;
-  
-        const config = {
-          headers: { "Content-Type": "application/json" },
-  
-          withCredentials: true,
-        };
-  
-        const { data } = await axios.put(url,admindata,config);
-  
+  };
+};
+
+export const GetAllAssignProperty = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "GetAllAssignPropertyRequest" });
+
+      let url = `${api_Base_Url}/admin-owner/get/assign-property`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+      dispatch({
+        type: "GetAllAssignPropertySuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
         dispatch({
-          type: "Admin_RemovedSuccess",
-          payload: data,
+          type: "GetAllAssignPropertyFail",
+          payload: error.response.data,
         });
-      } catch (error) {
-        if (error.response) {
-          dispatch({
-            type: "Admin_RemoveFail",
-            payload: error.response.data,
-          });
-        } else {
-          dispatch({
-            type: "Admin_RemoveFail",
-            payload: { message: error.message, success: false },
-          });
-        }
+      } else {
+        dispatch({
+          type: "GetAllAssignPropertyFail",
+          payload: { message: error.message, success: false },
+        });
       }
-    }}
+    }
+  };
+};
+
+export const RemoveAssignPropertyAction = ({ RemoveAssignProperty }) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "RemoveAssignPropertyRequest",
+        payload: "RemoveAssignPropertyRequest",
+      });
+
+      const url = `${api_Base_Url}/admin-owner/remove/assign-property`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, RemoveAssignProperty, config);
+      dispatch({ type: "RemoveAssignPropertySuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "RemoveAssignPropertyFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "RemoveAssignPropertyFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+export const Admin_AgentGetAllPostAction = (Keyword) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "Admin_AgentGetAllPostActionRequest" });
+
+      // let url = `/admin-owner/get-admin/assign-property`;
+
+      let url;
+      if (Keyword) {
+        url = `${api_Base_Url}/admin-owner/get-admin/assign-property?PostVerify=${Keyword.PostVerify}`;
+      } else {
+        url = `${api_Base_Url}/admin-owner/get-admin/assign-property`;
+      }
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({ type: "Admin_AgentGetAllPostActionSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "Admin_AgentGetAllPostActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "Admin_AgentGetAllPostActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};

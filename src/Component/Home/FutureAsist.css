@@ -16,7 +16,7 @@
   padding: 5px;
   border-radius: 10px;
   font-size: 14px;
-  color: #111;
+  color: #333;
 }
 
 .assistance-banner-image {
@@ -42,7 +42,7 @@
 }
 
 .assistance-banner-title {
-  color: #16315F;
+  color: #333;
 ;
   font-size: 20px;
   font-style: normal;
@@ -53,7 +53,7 @@
 }
 
 .assistance-banner-text {
-  color: #3D5A80;
+  color: #333;
 
 font-size: 14px;
 /* font-style: italic; */
@@ -132,7 +132,7 @@ text-transform: capitalize;
   .assistance-banner-title {
     margin: 0 0 10px;
     font-size: 16px;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-weight: bold;
   }
 
@@ -196,8 +196,8 @@ text-transform: capitalize;
     height: auto;
   }
   .banner-text-section p {
-    color: #504f4f;
-    font-family: Sans-serif;
+    color: #333;
+    font-family: "Inter", Sans-serif;
     font-size: 10px;
     /* font-style: italic; */
     font-weight: 500;
@@ -207,8 +207,8 @@ text-transform: capitalize;
   }
 
   .banner-text-section h2 {
-    color: #252525;
-    font-family: Sans-serif;
+    color: #333;
+    font-family: "Inter", Sans-serif;
     font-size: 10px;
     font-weight: 600;
     line-height: 18px;

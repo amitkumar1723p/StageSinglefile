@@ -7,6 +7,13 @@
   gap: 50px;
 }
 
+.upload-img-section {
+  margin: 0;
+}
+
+.post-img-upload {
+  width: 80%;
+}
 .property-details-main-box {
   display: flex;
   justify-content: center;
@@ -15,7 +22,7 @@
 .next-prev-box {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 20px 0 20px 0;
 }
 
 .property-details h2 {
@@ -24,12 +31,16 @@
   color: var(--main-light-clr);
 }
 
+.property-details {
+  padding: 20px;
+}
+
 .next-prev-box button {
   margin-left: 10px;
   width: 120px;
   background-color: #fff;
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -57,7 +68,7 @@
   width: 120px;
   background-color: #fff;
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -78,7 +89,7 @@
 .property-details {
   width: 80%;
 
-  padding: 20px;
+  padding: 0;
 
   /* background-color: #f6f6ff54;
   background: rgba(249, 251, 255, 0.05);
@@ -86,10 +97,19 @@
   border-radius: 10px;
 }
 
+.create-banner-box {
+  margin: 10px auto;
+  width: 80%;
+}
+.create-banner-box img {
+  margin: 0 auto;
+  width: 100%;
+}
+
 .p-img-upload {
   color: #0078d4;
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -112,7 +132,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -123,26 +143,22 @@
 .p-img-upload-i img {
   margin-right: 5px;
 }
-
 .map {
   width: 100%;
   height: 80vh;
 }
-
-.main-container {
+/* .main-container {
   margin: 20px auto;
-}
-
+} */
 h1 {
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
 }
-
 .form-container-step-1 {
   display: flex;
   background-color: #fff;
-  padding: 20px;
+  padding: 10px 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 80%;
   margin: 10px auto;
@@ -214,7 +230,7 @@ input[type="checkbox"]:checked + .slider::after {
 }
 
 .tab {
-  color: #000;
+  color: #333;
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #ddd;
@@ -243,10 +259,10 @@ input[type="checkbox"]:checked + .slider::after {
 .ad-btn {
   /* margin-left: 10px; */
   padding: 10px;
-  color: #525252;
+  color: #333;
   text-align: center;
-  font-family: Sans-serif;
-  font-size: 15px;
+  font-family: "Inter", Sans-serif;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -273,6 +289,95 @@ input[type="checkbox"]:checked + .slider::after {
   transform: translateY(-50%);
   /* Adjust for perfect vertical centering */
 }
+
+/* progess bar end */
+
+.ProgressBarMain {
+  margin-left: 11%;
+  margin-right: 11%;
+  /* box-shadow: 0px 0px 5px 0px #CFDAE2; */
+
+  display: flex;
+  /* : center  */
+  align-items: center;
+}
+
+.ProgressBar {
+  padding: 0px;
+  width: 25%;
+  height: 2px;
+
+  display: flex;
+  align-items: center;
+}
+.okkSymbolProgress {
+  margin-left: "0px";
+  margin-top: "7px";
+  background-color: var(--main-light-clr);
+
+  margin: 7px;
+  border-radius: 20px;
+  color: white;
+}
+.progressLine {
+  flex: 1;
+  margin: "0px";
+  padding: "5px";
+  /* background-color: rgb(222, 130, 0); */
+  height: 3px;
+  margin-bottom: 81px;
+}
+.progressLoader {
+  margin-left: "0px";
+  margin-top: "7px";
+  background-color: "white";
+  padding: 10px;
+}
+
+.spinner-border {
+  color: var(--main-light-clr);
+}
+.completecircleForm {
+  width: 30px; /* Width of the circle */
+  height: 30px;
+  background-color: var(--main-light-clr); /* Height of the circle */
+  /* Border around the circle */
+  border-radius: 50%; /* This makes the shape a circle */
+  display: block; /* Ensures it’s a block-level element */
+  /* Centers the circle horizontally */
+}
+.penddingCircleForm {
+  width: 30px; /* Width of the circle */
+  height: 30px; /* Height of the circle */
+  border: 5px solid rgb(106 115 123 / 75%); /* Border around the circle */
+  border-radius: 50%; /* This makes the shape a circle */
+  display: block;
+}
+
+.ProgressBarMain span {
+  font-size: 12px;
+}
+
+/* 
+.signup-form-content-unique input[type="number"],
+.signup-form-content-unique input[type="email"],
+.signup-form-content-unique input[type="password"] {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  display: flex;
+  height: 40px;
+  padding: 0px 10px;
+  align-items: center;
+  gap: 6px;
+  align-self: stretch;
+} */
+
+
+
+
+
+
+
 
 .submit-btn {
   width: 100%;
@@ -312,7 +417,7 @@ input[type="checkbox"]:checked + .slider::after {
   position: absolute;
   right: 10px;
   top: 35px;
-  color: #999;
+  color: #333;
 } */
 
 body {
@@ -320,16 +425,22 @@ body {
   background-color: #f9f9f9;
 }
 
+.location-heading {
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+}
+
 .container {
   border-radius: 12px;
   background: rgba(249, 251, 255, 0.05);
   box-shadow: 0px 0px 4px 0px rgba(0, 78, 204, 0.3);
-  width: 800px;
-  padding: 40px 52px 0 52px;
+  width: 80%;
+  padding: 20px 20px 0 20px;
   align-items: flex-start;
   align-content: flex-start;
   /* gap: 18px 125px; */
-  margin: 50px auto;
+  margin: 0px auto 20px auto;
   flex-wrap: wrap;
 }
 
@@ -387,14 +498,30 @@ button:hover,
   width: 48%;
 } */
 
-.price-section-create-form {
-  color: #3a3a3a;
-  font-family: Sans-serif;
+.Click-here{
+  font-size: 14px;
+}
+
+.additional-detals-main-h3{
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin: 10px 0;
+  margin: 0 0 0 0;
+  
+
+}
+  .price-section-create-form {
+  color: #333;
+  font-family: "Inter", Sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0 0 0 0;
+  
 }
 
 .price-section-pointer {
@@ -410,7 +537,7 @@ button:hover,
   display: flex;
   font-weight: bold;
   margin-bottom: 8px;
-  color: #3a3a3a;
+  color: #333;
   font-size: 12px;
   font-weight: 500;
 }
@@ -444,13 +571,12 @@ button:hover,
   /* right: -35px; */
   width: 100%;
 }
-.apartmentname-container p{
+.apartmentname-container p {
   padding: 10px;
   letter-spacing: 1px;
 }
 
 .post-requermient-search .apartmentname-container {
-  
   background-color: white;
   color: black;
   position: absolute;
@@ -481,7 +607,6 @@ button:hover,
   width: 100%;
 }
 .apartmentname-container {
-  
   background-color: white;
   color: black;
   position: absolute;
@@ -501,7 +626,7 @@ button:hover,
   background-color: red;
 } */
 .Property-Details-heading {
-  color: #3a3a3a;
+  color: #333;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -512,7 +637,7 @@ button:hover,
 .create-post-search-project label {
   display: flex;
 
-  color: #3a3a3a;
+  color: #333;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -537,8 +662,8 @@ button:hover,
 }
 
 .montly-chnagse-in-price-section {
-  color: #3a3a3a;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -548,7 +673,7 @@ button:hover,
 
 .montly-chnagse-in-price-section span {
   color: #838383;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 500;
@@ -663,10 +788,15 @@ input[type="checkbox"]#whatsapp-updates {
   text-underline-offset: auto;
 }
 
+.property-form {
+  padding: 0;
+  gap: 0;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .row {
@@ -697,7 +827,7 @@ form {
 } */
 
 .expacted-rent {
-  color: #111;
+  color: #333;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -717,8 +847,8 @@ form {
 }
 
 .Area-section-p {
-  color: #3a3a3a;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -728,7 +858,7 @@ form {
 
 .Area-section-p1 {
   color: #696868;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -805,7 +935,7 @@ textarea {
 }
 
 .toggle {
-  color: #000;
+  color: #333;
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -866,8 +996,8 @@ input[type="number"] {
 /* General Styles */
 
 .prop-name-h3 {
-  color: #3a3a3a;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -923,7 +1053,7 @@ input[type="number"] {
 }
 
 .date-time-lable {
-  color: #111;
+  color: #333;
   width: 264px;
   padding: 10px;
   align-items: center;
@@ -943,19 +1073,19 @@ input[type="number"] {
 .PropertyStatus-box {
   display: flex;
   gap: 40px;
-  color: #111;
+  color: #333;
 }
 
 .basic-details-heading {
   color: var(--main-light-clr);
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 0.7px;
   margin-bottom: 8px;
-  margin-top: 24px;
+  margin-top: 10px;
 }
 
 .form-row {
@@ -964,13 +1094,17 @@ input[type="number"] {
   justify-content: space-between;
 }
 
+.price-and-show {
+  padding: 20px;
+}
+
 .form-group {
   /* flex: 0 0 48%; */
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0px;
+  margin-top: 0;
 }
 .label {
   margin-top: 10px;
@@ -987,7 +1121,7 @@ input[type="number"] {
 }
 
 .step-section-heading-p {
-  color: #3a3a3a;
+  color: #333;
 
   font-size: 14px;
   font-style: normal;
@@ -997,14 +1131,14 @@ input[type="number"] {
 }
 
 .form-group label {
-  color: #3a3a3a;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 0.7px;
-  margin: 0px 0px;
+  margin: 10px 0px;
 }
 
 .parking-section-box {
@@ -1018,7 +1152,7 @@ input[type="number"] {
   border-radius: 7px;
   border: 1px solid #daeaf9;
   background: #fff;
-  color: #111;
+  color: #333;
   padding: 10px;
   font-size: 12px;
   font-style: normal;
@@ -1044,7 +1178,7 @@ input[type="number"] {
 } */
 
 .form-group input {
-  color: #111;
+  color: #333;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -1073,6 +1207,7 @@ input[type="number"] {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 18px 125px;
+  /* padding: 0 2rem; */
 }
 
 #city,
@@ -1088,7 +1223,7 @@ input[type="number"] {
   position: absolute;
   right: 10px;
   top: 45px;
-  color: #999;
+  color: #333;
 }
 
 /* Alert Style */
@@ -1118,7 +1253,7 @@ input[type="number"] {
   display: flex;
   align-items: center;
   font-size: 1.1em;
-  color: #111;
+  color: #333;
 }
 
 .form-map-icon {
@@ -1127,7 +1262,7 @@ input[type="number"] {
 }
 
 .form-map-help-text {
-  color: #666;
+  color: #333;
   font-size: 0.9em;
   margin-top: 5px;
 }
@@ -1184,6 +1319,14 @@ input[type="number"] {
   margin-top: 14px;
 }
 
+.dashboard-right-side{
+  box-shadow: 0px 0px 16px 0px #cfdae2;
+  border-radius: 10px;
+}
+.dashboard-right-side img{
+  border-radius: 10px;
+}
+
 /* Upload Section */
 .showpreviewImage-Container {
   display: flex;
@@ -1192,8 +1335,16 @@ input[type="number"] {
   /* height: 250px; */
 }
 
+.upload-img-section{
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  width: 900px;
+    height: 150px;
+}
+
 .showpreviewImage {
-  width: 200px;
+  width: 100px;
 }
 
 .showpreviewImage-box {
@@ -1273,7 +1424,7 @@ input[type="number"] {
 .form-divider span {
   background-color: white;
   padding: 0 10px;
-  color: #999;
+  color: #333;
   font-weight: bold;
 }
 
@@ -1320,8 +1471,8 @@ input[type="number"] {
 
 .parking-label {
   margin-top: 24px;
-  color: #3a3a3a;
-  font-family: Sans-serif;
+  color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -1331,7 +1482,7 @@ input[type="number"] {
 
 .parking-label span {
   color: #7d7d7d;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -1346,7 +1497,7 @@ input[type="number"] {
 .area-form-heading {
   letter-spacing: 0.8px;
   color: #696868;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -1427,7 +1578,7 @@ input[type="number"] {
     border-radius: 7px;
     border: 1px solid #daeaf9;
     background: #fff;
-    color: #111;
+    color: #333;
     padding: 10px;
     font-size: 12px;
     font-style: normal;
@@ -1458,6 +1609,37 @@ input[type="number"] {
 }
 
 @media (max-width: 480px) {
+  /* .post-img-upload{
+    width: 90%;
+  } */
+  .ProgressBarMain {
+    display: none;
+  }
+
+  .create-post-search-project input {
+    width: 100%;
+  }
+
+  .create-banner-box {
+    margin: 10px auto;
+    width: 95%;
+  }
+  .form-group select,
+  .form-group input {
+    font-size: 14px;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .form-container-step-1 {
+    display: flex;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    margin: 10px auto;
+  }
+
   .postImage {
     width: 60%;
   }
@@ -1474,7 +1656,7 @@ input[type="number"] {
 
   .basic-details-heading {
     color: var(--main-light-clr);
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -1495,7 +1677,7 @@ input[type="number"] {
   }
 
   .unit-input {
-    width: 81%;
+    width: 100%;
   }
 
   .create-post-search-project .apartmentname-container {
@@ -1587,12 +1769,12 @@ input[type="number"] {
   }
 
   .tab-box {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    flex-wrap: nowrap;
+    display: flex;
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* flex-wrap: nowrap;
     align-content: space-around;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: flex-start; */
+    /* flex-direction: column; */
   }
 
   /* .profile-container {
@@ -1609,24 +1791,24 @@ input[type="number"] {
   }
 
   .location-heading {
-    text-align: center;
-    color: #111;
-    font-size: 18px;
+    text-align: start;
+    color: #333;
+    font-size: 20px;
   }
 
   .container {
-    width: 90%;
+    width: 100%;
     margin: 50px auto;
     background-color: white;
-    padding: 30px 20px;
+    padding: 15px 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius: 0;
   }
 
   .property-details {
-    width: 90%;
+    width: 100%;
     margin: 5px 0 0 0;
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     padding: 10px;
 
@@ -1652,10 +1834,10 @@ input[type="number"] {
 
   .Submit-prev {
     text-align: center;
-    width: 80px;
+    width: 110px;
     background-color: #fff;
     color: var(--main-light-clr);
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -1671,12 +1853,12 @@ input[type="number"] {
   .next-prev-box {
     display: flex;
     justify-content: center;
-    margin: 20px 0 0 0;
+    margin: 0px 0 0 0;
   }
 
   .next-prev-box button {
     margin-left: 10px;
-    width: 80px;
+    width: 110px;
     background-color: #fff;
     color: var(--main-light-clr);
 
@@ -1711,15 +1893,23 @@ input[type="number"] {
   .property-details-main-box {
     display: flex;
     justify-content: center;
+    width: 100%;
+  }
+  .post-img-upload {
+    width: 90%;
+  }
+
+  .price-section-create-form {
+    font-size: 18px;
   }
 
   .tab,
   .ad-btn {
     /* margin-left: 10px; */
     padding: 10px;
-    color: #525252;
+    color: #333;
     text-align: center;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -1785,7 +1975,7 @@ input[type="number"] {
     font-weight: bold;
     margin-bottom: 8px;
     /* Reduce margin for compact view */
-    color: #3a3a3a;
+    color: #333;
     font-size: 12px;
     font-weight: 500;
   }
@@ -1796,53 +1986,13 @@ input[type="number"] {
 
     width: 100%;
     /* Make inputs full-width */
-    max-width: 264px;
+    /* max-width: 264px; */
     /* Optional: limit max-width */
     border: 1px solid #c7c7c7;
     border-radius: 7px;
     padding: 10px;
-    color: #111;
+    color: #333;
     font-size: 12px;
   }
 }
 
-.ProgressBarMain{
-  margin-left: 11%;
-  margin-right: 11%;
-  /* box-shadow: 0px 0px 5px 0px #CFDAE2; */
-
-display: flex;
-/* : center  */
-align-items: center;
-}
-.ProgressBar{
-  padding: 0px;
-  width: 25%;
-  height: 2px;
-  
-  display: flex;
-  align-items: center;
-}
-.okkSymbolProgress{
-  margin-left: '0px';
-   margin-top:"7px";
- background-color: hwb(206 25% 9%);
- 
-     margin: 7px;
-     border-radius: 20px;
-     color: white;
-   
-}
-.progressLine{
-  flex: 1;
-   margin: "0px" ;
-  padding:"5px";
-  background-color:  hwb(206 25% 9%);
-  height: 3px;
-}
-.progressLoader{
-   margin-left: '0px'; 
-   margin-top:"7px";
-    background-color:"white" ;
-  padding: 10px;
-}

@@ -27,7 +27,7 @@ const FutureAsist = () => {
             className="assistance-banner-button"
             onClick={() => {
               window.open(
-                "https://wa.me/9560509397?text=Hello%20Propfuture%20AI%20Technologies,%20I%20would%20like%20to%20know%20more%20about%20the%20opportunity.",
+                "https://wa.me/7837840785?text=Hello%20Propfuture%20AI%20Technologies,%20I%20would%20like%20to%20know%20more%20about%20the%20opportunity.",
                 "_blank"
               );
             }}

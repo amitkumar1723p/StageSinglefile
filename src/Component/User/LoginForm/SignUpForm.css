@@ -1,4 +1,4 @@
-/* Enhanced SignUpForm Styles */
+/* 
 .signup-form-wrapper-unique {
   display: flex;
   align-items: center;
@@ -50,7 +50,11 @@
 
 .signup-form-content-unique h2 {
   color: var(--Pirmary, #0078d4);
+<<<<<<< HEAD
   font-family: Sans-serif;
+=======
+  font-family: "Inter", Sans-serif;
+>>>>>>> dfb428542fcbfc267bd0ae38ce673193327ab997
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -144,7 +148,6 @@
   }
 }
 
-/* Additional media queries for responsiveness */
 @media (max-width: 768px) {
   .signup-form-wrapper-unique {
     flex-direction: column;
@@ -162,4 +165,4 @@
     border-top: 1px solid #f0f0f0;
     border-radius: 10px;
   }
-}
+} */

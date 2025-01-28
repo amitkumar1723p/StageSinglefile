@@ -88,7 +88,7 @@
   .ChannelPartner-container h2 {
     color: var(--main-light-clr);
     text-align: center;
-    font-family: Sans-serif;
+    font-family: "Inter", Sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -103,7 +103,7 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    color: #555;
+    color: #333;
     transition: color 0.3s ease;
     animation: fadeInText 0.7s ease-in; /* Fade-in for close button */
   }
@@ -147,7 +147,7 @@
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    color: #555;
+    color: #333;
     transition: color 0.3s ease;
   }
   
@@ -169,8 +169,8 @@
   }
   
   .ChannelPartner-group label {
-    color: #515151;
-  font-family: Sans-serif;
+    color: #333;
+  font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -184,7 +184,7 @@
   border: 1px solid #DAEAF9;
   background: #FFF;
   color: #686868;
-  font-family: Sans-serif;
+  font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -218,8 +218,8 @@
   }
   
   .ChannelPartner-checkbox label {
-    color: #111;
-    font-family: Sans-serif;
+    color: #333;
+    font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

@@ -47,6 +47,9 @@ import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
 import ProfileUpdate from "./Component/User/Profile/ProfileUpdate";
 import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
+
+import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
+import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 function App() {
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
@@ -97,9 +100,14 @@ function App() {
   const { data: GetSingleProjectName } = useSelector((state) => {
     return state.SingleProjectName;
   });
+  const { data: AssignPostData } = useSelector((state) => {
+    return state.AssignPropertys;
+  });
+  const { data: AdminAssignPropertyData } = useSelector((state) => {
+    return state.AdminProperty;
+  });
   const location = useLocation();
 
- 
   useEffect(() => {
     if (RedirectPath) {
       sessionStorage.setItem("RedirectPath", RedirectPath);
@@ -122,7 +130,6 @@ function App() {
     // eslint-disable-next-line
   }, [location]);
 
-  
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
@@ -159,15 +166,13 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
-     
     if (CreatePost) {
       if (CreatePost.success === true) {
-        if (medata && medata.IsAuthenticated === true) {
-          if (["Admin", "Owner"].includes(medata.user.Role)) {
-            // dispatch(Admin_OwnerGetAllPostAction());
-          }
-        }
-        
+        // if (medata && medata.IsAuthenticated === true) {
+        //   if (["Admin", "Owner"].includes(medata.user.Role)) {
+        //     // dispatch(Admin_OwnerGetAllPostAction());
+        //   }
+        // }
 
         setalertMessage(<p>{CreatePost.message}</p>);
         setalertType("success");
@@ -211,9 +216,7 @@ function App() {
   //  Admin Owner Get Post
 
   useEffect(() => {
-    
     if (AdminGetAllPostData) {
-
       if (AdminGetAllPostData.success === false) {
         // dispatch(AlertAction("error", <p>{data.message}</p>, true));
         if (AdminGetAllPostData.AdminVerify === false) {
@@ -374,9 +377,66 @@ function App() {
     // eslint-disable-next-line
   }, [alertType, alertMessage, alertshow]);
 
+  // useEffect(() => {
+  //   if (AssignPostData) {
+  //     if (AssignPostData.success == false) {
+  //       if (AssignPostData.message) {
+  //         setalertMessage(<p>{GetSingleProjectName.message}</p>);
+  //         setalertType("error");
+  //         setalertShow(true);
+
+  //       }
+
+  //       dispatch({ type: "GetSingleProjectNameDataClear" });
+  //     }
+  //   }
+  // }, [GetSingleProjectName]);
+  useEffect(() => {
+    if (AssignPostData) {
+      if (AssignPostData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (AssignPostData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (AssignPostData.IsAuthenticated === false) {
+          navigate("/");
+        }
+
+        setalertMessage(<p>{AssignPostData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "GetAllAssignPropertyClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AssignPostData]);
+
+  useEffect(() => {
+    if (AdminAssignPropertyData) {
+      if (AdminAssignPropertyData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (AdminAssignPropertyData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (AdminAssignPropertyData.IsAuthenticated === false) {
+          navigate("/");
+        }
+
+        setalertMessage(<p>{AdminAssignPropertyData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "Admin_AgentGetAllPostActionClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AdminAssignPropertyData]);
+
   useEffect(() => {
     dispatch(GetMeDetailsAction());
   }, []);
+
   return (
     <>
       {/* <PinnacleSms /> */}
@@ -418,7 +478,7 @@ function App() {
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
         />
-        <Route exact path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         {/* protect route for user */}
         <>
           <Route
@@ -497,7 +557,7 @@ function App() {
               <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
             }
           /> */}
-{/* 
+          {/* 
           <Route
             exact
             path="agent/data/unverify"
@@ -510,13 +570,25 @@ function App() {
             exact
             path="agent/dashboard"
             element={
-              <AdminOwnerRoutes Component={AdminAgentDashboard} isOwner={true} />
+              <AdminOwnerRoutes
+                Component={AdminAgentDashboard}
+                isOwner={true}
+              />
             }
           />
 
-          <Route exact path="allpost" element={<AdminAllPost />} />
-          <Route exact path="allpost/verify" element={<AdminAllPost />} />
-          <Route exact path="allpost/unverify" element={<AdminAllPost />} />
+          <Route exact path="allpost" element={<AdminAgentOwnerPost />} />
+
+          {/* <Route
+            exact
+            path="allpost/verify"
+            element={<AdminAgentOwnerPost />}
+          /> */}
+          {/* <Route
+            exact
+            path="allpost/unverify"
+            element={<AdminAgentOwnerPost />}
+          /> */}
           <Route
             exact
             path="schedule-visit/:PostId"
