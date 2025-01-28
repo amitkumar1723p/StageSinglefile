@@ -101,15 +101,11 @@
   width: 25px;
 }
 @media (max-width: 480px){
-<<<<<<< HEAD
-
-=======
   .footer-container {
     padding: 0 30px 5px 30px;
     flex-direction: column;
     display: flex
 ;}
->>>>>>> dfb428542fcbfc267bd0ae38ce673193327ab997
 
   
 .custom-footer{
@@ -123,11 +119,7 @@
   .footer-column {
     flex: 1 1;
     margin: 0 20px;
-<<<<<<< HEAD
-    min-width: 360px;
-=======
   
->>>>>>> dfb428542fcbfc267bd0ae38ce673193327ab997
 }
 .footer-heading{
   text-align: start;
@@ -154,8 +146,6 @@
     width: 80%; */
     font-size: 10px;
   }
-<<<<<<< HEAD
-=======
 }
 
 @media (max-width: 375px){
@@ -170,5 +160,4 @@
     background-color: #0F2A3F;
     padding: 20px;
 }
->>>>>>> dfb428542fcbfc267bd0ae38ce673193327ab997
 }
