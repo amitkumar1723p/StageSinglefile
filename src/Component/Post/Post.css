@@ -12,6 +12,47 @@
   border-radius: 5px;
 }
 
+.icon-box {
+  position: relative;
+}
+.property-post-card {
+  position: relative; /* This makes it a reference point for absolutely positioned children */
+}
+
+.icon-box {
+  position: absolute; /* Position it relative to .property-post-card */
+  top: 3px;
+  left: 3px; 
+  background-color: #fff; 
+
+  border-radius: 5px; 
+  z-index: 1; 
+}
+
+.inactive-post-para{
+  background-color: red;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+
+}
+.active-post{
+  padding: 2px; 
+  /* background-color: #fff; */
+}
+.active-post {
+  display: flex;
+  gap: 5px;
+}
+
+.active-post-para {
+  font-size: 10px;
+  color: var(--main-light-clr);
+  border-radius: 5px;
+}
+
 .user-section-heading {
   text-align: start;
   font-size: 18px;

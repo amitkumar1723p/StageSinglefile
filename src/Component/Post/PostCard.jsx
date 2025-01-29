@@ -212,7 +212,21 @@ export default function PostCard({ PostData, index }) {
             setRunImageSlider(false);
           }}
         >
-          <div className="IconBox">
+          
+            <div className="icon-box">
+              {PostData.PostVerify ? (
+                <div className="active-post">
+                  <img src="/img/verified-tag.svg" alt="verified-tag" />
+                  <p className="active-post-para">Verified</p>
+                </div>
+              ) : (
+                <div className="inactive-post">
+                  <p className="inactive-post-para">Inactive</p>
+                </div>
+              )}
+            </div>
+          
+          {/* <div className="IconBox">
             <div className="edit-delete-Icon-box">
               {location.pathname.includes("user/my-listing") &&
                 PostData.BasicDetails.PropertyAdType == "Rent" && (
@@ -223,7 +237,7 @@ export default function PostCard({ PostData, index }) {
                   </>
                 )}
             </div>
-          </div>
+          </div> */}
 
           <div className="imageSlide">
             {PostData.PropertyImages.map((Post, i) => {
@@ -287,6 +301,14 @@ export default function PostCard({ PostData, index }) {
                       />
                     )}
                   </button>
+                  {location.pathname.includes("user/my-listing") &&
+                    PostData.BasicDetails.PropertyAdType == "Rent" && (
+                      <>
+                        <Link to={`/user/post/update/${PostData._id}`}>
+                          <img src="/img/edit.png" className="editIcon" />
+                        </Link>
+                      </>
+                    )}
                 </div>
               )}
             </div>
@@ -357,9 +379,10 @@ export default function PostCard({ PostData, index }) {
                       </span>
                     </>
                   )}
-                </p> 
-                <p className="post-card-section">₹ {PostData.PricingDetails.PricePerSqFt}  Per sqft</p>
-
+                </p>
+                <p className="post-card-section">
+                  ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                </p>
               </div>
               {PostData.BasicDetails.PropertyAdType == "Rent" && (
                 <>

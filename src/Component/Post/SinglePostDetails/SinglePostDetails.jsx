@@ -200,21 +200,22 @@ export default function SinglePostDetails() {
 
   return (
     <>
-      <div className="floating-buttons">
-        {/* Call Button */}
-        <Link to="tel:+917837840785" className="call-button">
-          <img src="/img/call.png" alt="Call" />
-        </Link>
-        {/* WhatsApp Button */}
-        <Link
-          to="https://wa.me/7837840785"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="whatsapp-button"
-        >
-          <img src="/img/whatapp.png" alt="WhatsApp" />
-        </Link>
-      </div>
+     <div className="floating-buttons">
+    
+            {/* Call Button */}
+            <Link to="tel:+917837840785" className="call-button">
+              <img src="/img/call.png" alt="Call" />
+            </Link>
+            {/* WhatsApp Button */}
+            <Link
+              to="https://wa.me/7837840785"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-button"
+            >
+              <img src="/img/whatapp.png" alt="WhatsApp" />
+            </Link>
+          </div>
       {/* {openReportForm === true ? (
         <div className="report-form-container">
           <div className="report-form-header">
@@ -240,7 +241,7 @@ export default function SinglePostDetails() {
                 Images={getSinglePostData.SinglePost.PropertyImages}
               />
               {/* Single Post First Card  */}
-
+                
               <div className="property-info">
                 <div className="property-location">
                   <p className="Property-detail-heading"> {PropertyAddress}</p>
@@ -274,6 +275,7 @@ export default function SinglePostDetails() {
                       <p> Type </p>
                     </div>
                   </div>
+
                   <div className="property-info-tags">
                     <img
                       className="icon-detials"
@@ -509,6 +511,7 @@ export default function SinglePostDetails() {
                   </div>
                 )}
               </div>
+             
             </div>
 
             {/* Single Post Second Card  */}
@@ -613,11 +616,12 @@ export default function SinglePostDetails() {
                       Data={"Property Direction"}
                     />
 
-                    {/* <PropertyDataBox
-                      Answer={"Overlooking View"}
+                    <PropertyDataBox
+                      Answer={getSinglePostData.SinglePost.FloorDetails
+                        .OverLookingView}
                       Icon="/img/area.png"
-                      Data={"Park, Pool"}
-                    /> */}
+                      Data={"Overlooking View"}
+                    />
 
                     {/* Property on Floor  */}
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
@@ -667,7 +671,7 @@ export default function SinglePostDetails() {
                             .CoveredParking
                         }
                         Icon="/img/parking.png"
-                        Data={"Cover Parking"}
+                        Data={"Covered Parking"}
                       />
                     )}
                     {/* Parking  */}
@@ -778,7 +782,7 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
-                  <div className="similar-main-box">
+                  {/* <div className="similar-main-box">
                     <h3 className="similar-heading-box">Similar Property</h3>
                     <div className="similar-property-main-box">
                       <div className="similar-property-box1">
@@ -891,7 +895,7 @@ export default function SinglePostDetails() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* <ExpressionOfInterestForm /> */}
                   {showBiddingForm && (
                     <WindowComponent

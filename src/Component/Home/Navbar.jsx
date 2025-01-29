@@ -380,14 +380,14 @@ const Navbar = () => {
               </>
             )}
 
-            <li
+            {/* <li
               ref={ChannelPartnerBtnRef}
               onClick={() => {
                 setShowChannelPartner(true);
               }}
             >
               Channel patner{" "}
-            </li>
+            </li> */}
           </ul>
         </div>
       </nav>
