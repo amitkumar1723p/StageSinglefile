@@ -8,7 +8,7 @@ export const CreatePostAction = (PostData) => {
         type: "CreatePostRequest",
         payload: "CreatePostRequest",
       });
-
+      
       // const url = "/post/create";
       const url = `${api_Base_Url}/post/create`;
 

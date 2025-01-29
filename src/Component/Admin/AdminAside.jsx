@@ -57,11 +57,11 @@ export default function AdminAside() {
             All Post
           </button>
 
-          <button className="menu-button">Library</button>
+          {/* <button className="menu-button">Library</button> */}
           <button className="menu-button">Report</button>
           <button className="menu-button">Authentication</button>
           <button className="menu-button">Schedules</button>
-          <button className="menu-button">Payouts</button>
+          {/* <button className="menu-button">Payouts</button> */}
           <button className="menu-button">Settings</button>
         </div>
       </div>

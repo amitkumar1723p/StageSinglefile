@@ -118,9 +118,9 @@ const Footer = () => {
         {/* Address Section */}
         <div className="footer-column">
           <h3>Contact</h3>
-          <p>+91 783-784-0785</p>
-          <p>Support@propertydekho247.com</p>
-          <p>Sales@propertydekho247.com</p>
+          <p>Contact No : +91 783-784-0785</p>
+          <p>Support : support@propertydekho247.com</p>
+          <p>Sales : sales@propertydekho247.com</p>
         </div>
         <div>
           <p className="last-p">
