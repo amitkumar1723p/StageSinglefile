@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./VerifyOtp.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { VerifyUserOtpAction } from "../../../Action/userAction";
+import {
+  CreateUserOtpAction,
+  VerifyUserOtpAction,
+} from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
+
 
 const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
   const dispatch = useDispatch();
+  const [showEdit, setshowEdit] = useState(false);
 
   // Form submission
   const handleSubmit = (e) => {
@@ -157,8 +162,23 @@ const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
           <div className="otp-form-content-unique">
             <h2 className="otp-heading-h2">Confirm OTP to Continue</h2>
             <p className="otp-login-h2-p">
-              We have sent you a message with a 6-digit verification code OTP on
-              your registered Phone Number:
+              {/* We have sent you a message with a 6-digit verification code OTP on
+              your registered Phone Number: */}
+              A 6-digit OTP has been sent to your registered phone number{" "}
+              <span className="ediit-phone-post-verify">
+                <b>{SignUpData.ContactNumber} .</b>
+                <img
+                  src="/img/edit.png"
+                  alt="edit"
+                  onClick={() => {
+                    setViewState({
+                      ...setViewState,
+                      showLoginAndSignup: true,
+                    });
+                  }}
+                />{" "}
+              </span>
+              Please enter it to verify your account
             </p>
 
             <form onSubmit={handleSubmit}>
@@ -177,25 +197,28 @@ const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
                 Continue
               </button>
               <div>
+                {console.log(timeLeft)}
+                <p className="otp-login-h2-p">Did not receive the code ?</p>
+                <p className="otp-login-h2-p">
+                  {timeLeft <= 0 && (
+                    <button
+                      className="otp-resend-otp-btn"
+                      onClick={() => {
+                        // setViewState({
+                        //   ...setViewState,
+                        //   showLoginAndSignup: true,
+                        // });
 
-              <p className="otp-login-h2-p">Did not receive the code ?</p>
-              <p className="otp-login-h2-p">
-                {timeLeft <= 0 && (
-                  <button
-                  className="otp-resend-otp-btn"
-                  onClick={() => {
-                    setViewState({
-                      ...setViewState,
-                      showLoginAndSignup: true,
-                    });
-                  }}
-                  >
-                    Resend OTP
-                  </button>
-                )}
-                Resend in {formatTime(timeLeft)}
-              </p>
-                </div>
+                        dispatch(CreateUserOtpAction(SignUpData));
+                        setTimeLeft(3 * 60 * 1000);
+                      }}
+                    >
+                      Resend OTP
+                    </button>
+                  )}
+                  {timeLeft > 0 && <>Resend in {formatTime(timeLeft)}</>}
+                </p>
+              </div>
             </form>
           </div>
         </div>
