@@ -411,6 +411,7 @@ export default function CreatePostMain() {
       setFourth(true);
     }
   });
+  // console.log("yfguyegfu",uploadimages)
   return (
     <>
       {(LodingType &&
@@ -685,6 +686,7 @@ export default function CreatePostMain() {
                       className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
                       onClick={() => setnext(4)}
                     >
+                      {console.log("yfguyegfu")}
                       &#10003; {/* This is the checkmark (tick) symbol */}
                     </span>
                   ) : (

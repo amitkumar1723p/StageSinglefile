@@ -246,12 +246,17 @@ export default function PostCard({ PostData, index }) {
           <div className="property-card-info">
             <div className="heading-name">
               {PostData.LocationDetails.ProjectName}
-              {/* <IoMdShareAlt />  */}
-              {/* <img onClick={toggleShare}  src="/img/share.png" alt="" /> */}
-              {/* share button */}
+
+              {/* share button start */}
               <div className="postcard-share-parent">
-                {/* <button onClick={toggleShare} className="share-btn"> share
-           </button> */}
+                <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <img
+                    src="/img/share-btn.svg"
+                    class="img-fluid img-thumbnail"
+                    alt="..."
+                  ></img>
+                </div>
+                {/* share button end */}
               </div>
               {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                 <div className={`add-favourite-box `}>
@@ -357,9 +362,10 @@ export default function PostCard({ PostData, index }) {
                       </span>
                     </>
                   )}
-                </p> 
-                <p className="post-card-section">₹ {PostData.PricingDetails.PricePerSqFt}  Per sqft</p>
-
+                </p>
+                <p className="post-card-section">
+                  ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                </p>
               </div>
               {PostData.BasicDetails.PropertyAdType == "Rent" && (
                 <>
@@ -413,44 +419,80 @@ export default function PostCard({ PostData, index }) {
           </div>
         </div>
       </div>
-      {/* share card  */}
+      {/* share card begin  */}
 
-      {isShare && (
-        <div className="share1">
-          <div className="share2">
-            <p className="sharehead">Share Property with Your Friends !</p>
-            <ul className="containerBox">
-              <li className="share_options">
-                <Link
-                  to={`https://t.me/share/url?url=${window.location.href}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="share_options"
-                >
-                  Telegram
-                </Link>
-              </li>
-              <li className="share_options">
-                <Link
-                  to={`https://wa.me/?text=${window.location.href}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="share_options"
-                >
-                  WhatsApp
-                </Link>
-              </li>
-              <li className="share_options">
-                <p onClick={shareUrl}>Copy URL</p>
-              </li>
-            </ul>
-
-            <button className="shareButton">
-              <span style={{ padding: "2px" }}>Close</span>
-            </button>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content rounded-4 shadow-lg">
+            <div className="modal-header border-0">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                Share Property with Your Friends!
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              />
+            </div>
+            <div className="modal-body p-4">
+              <p className="text-muted">
+                Choose a platform to share this property:
+              </p>
+              <ul className="list-unstyled">
+                <li className=" mb-3">
+                  <Link
+                    to={`https://t.me/share/url?url=${window.location.href}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="d-flex align-items-center text-decoration-none text-primary p-2 rounded-3 border border-1 border-primary hover-shadow"
+                  >
+                    <i className="bi bi-telegram me-3 fs-6"></i>
+                    Telegram
+                  </Link>
+                </li>
+                <li className=" mb-3">
+                  <Link
+                    to={`https://wa.me/?text=${window.location.href}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow"
+                  >
+                    <i className="bi bi-whatsapp me-3 fs-6"></i>
+                    WhatsApp
+                  </Link>
+                </li>
+                <li className=" mb-3">
+                  <p
+                    onClick={shareUrl}
+                    className="d-flex align-items-center text-decoration-none text-dark p-2 rounded-3 border border-1 border-secondary hover-shadow"
+                  >
+                    <i className="bi bi-link-45deg me-3 fs-6"></i>
+                    Copy URL
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className="modal-footer border-0">
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-sm"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* share card end  */}
     </>
   );
 }
