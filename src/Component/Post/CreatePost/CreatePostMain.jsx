@@ -39,7 +39,7 @@ export default function CreatePostMain() {
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
   //  Update Post Logic
-
+console.log(uploadimages,"fdfhfiueruc")
   //  GetSinglePostAction
   useEffect(() => {
     if (update) {
@@ -681,7 +681,7 @@ export default function CreatePostMain() {
                   </span>
                 ) : (
                   <>
-                  {uploadimages.length!==0 ? (
+                  {uploadimages.length!==0 || previewImage.length!==0? (
                     <span
                       className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
                       onClick={() => setnext(4)}
