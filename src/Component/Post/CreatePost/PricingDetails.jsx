@@ -83,12 +83,10 @@ export default function PricingDetails({
 
       let Area = null;
 
-      const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
-        AreaDetailsData;
+      const { SuperBuiltUpArea, CarpetArea, BuiltUpArea } = AreaDetailsData;
 
-      if (PlotArea) {
-        Area = PlotArea.value;
-      } else if (SuperBuiltUpArea.value) {
+      // Area = PlotArea.value;
+      if (SuperBuiltUpArea.value) {
         Area = SuperBuiltUpArea.value;
       } else if (CarpetArea.value && !BuiltUpArea.value) {
         Area = CarpetArea.value;

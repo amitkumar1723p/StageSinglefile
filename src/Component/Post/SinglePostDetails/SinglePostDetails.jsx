@@ -51,7 +51,8 @@ export default function SinglePostDetails() {
   const [PropertyAddress, setPropertyAddress] = useState("");
   const [showTenant_PostResponseForm, setshowTenant_PostResponseForm] =
     useState(false);
-  const [areaDetails, setAreaDetails] = useState(null);
+  const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
+  const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -80,11 +81,12 @@ export default function SinglePostDetails() {
       );
 
       const areaDetailsData = getSinglePostData?.SinglePost?.AreaDetails;
+
       if (areaDetailsData) {
         const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
           areaDetailsData;
 
-        if (PlotArea) {
+        if (PlotArea?.value) {
           setAreaDetails({
             value: PlotArea.value,
             unit: PlotArea.unit,
@@ -115,12 +117,53 @@ export default function SinglePostDetails() {
               unit: CarpetArea.unit,
               label: "CarpetArea Area",
             });
+            setOtherArea({
+              value: CarpetArea.value,
+              unit: CarpetArea.unit,
+              label: "CarpetArea Area",
+            });
           } else {
             setAreaDetails({
               value: BuiltUpArea.value,
               unit: BuiltUpArea.unit,
               label: "Built-up Area",
             });
+          }
+        }
+
+        if (PlotArea?.value) {
+          if (SuperBuiltUpArea.value) {
+            setOtherArea({
+              value: SuperBuiltUpArea.value,
+              unit: SuperBuiltUpArea.unit,
+              label: "Super-Built-up Area",
+            });
+          } else if (CarpetArea.value && !BuiltUpArea.value) {
+            setOtherArea({
+              value: CarpetArea.value,
+              unit: CarpetArea.unit,
+              label: "Carpet Area",
+            });
+          } else if (BuiltUpArea.value && !CarpetArea.value) {
+            setOtherArea({
+              value: BuiltUpArea.value,
+              unit: BuiltUpArea.unit,
+              label: "Built-up Area",
+            });
+          } else if (BuiltUpArea.value || CarpetArea.value) {
+            if (CarpetArea.value > BuiltUpArea.value) {
+              setAreaDetails({
+                value: CarpetArea.value,
+                unit: CarpetArea.unit,
+                label: "CarpetArea Area",
+              });
+            } else {
+              setAreaDetails({
+                value: BuiltUpArea.value,
+                unit: BuiltUpArea.unit,
+                label: "Built-up Area",
+              });
+            }
           }
         }
       }
@@ -197,7 +240,9 @@ export default function SinglePostDetails() {
   const closehandleReportForm = (e) => {
     setOpenReportForm(false);
   };
-
+  {
+    console.log(areaDetails);
+  }
   return (
     <>
       <div className="floating-buttons">
@@ -280,6 +325,7 @@ export default function SinglePostDetails() {
                       src="/img/area.png"
                       alt="icon"
                     />
+
                     <div className="img-box-imp-data">
                       {areaDetails ? (
                         <div className="img-box-details-span">
@@ -340,10 +386,11 @@ export default function SinglePostDetails() {
                       <p> Floor</p>
                     </div>
                   </div>
-                  {(getSinglePostData.SinglePost.PropertyDetails.Parking
+
+                  {getSinglePostData.SinglePost.PropertyDetails.Parking
                     .CoveredParking > 0 ||
-                    getSinglePostData.SinglePost.PropertyDetails.Parking
-                      .OpenParking > 0) && (
+                  getSinglePostData.SinglePost.PropertyDetails.Parking
+                    .OpenParking > 0 ? (
                     <div className="property-info-tags">
                       <img
                         className="icon-detials"
@@ -360,7 +407,39 @@ export default function SinglePostDetails() {
                         <p> Parking </p>
                       </div>
                     </div>
+                  ) : (
+                    getSinglePostData.SinglePost.BasicDetails
+                      .PropertyStatus && (
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="/img/status.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {
+                              getSinglePostData.SinglePost.BasicDetails
+                                .PropertyStatus
+                            }
+                          </span>
+                          <p> Status</p>
+                        </div>
+                      </div>
+                    )
                   )}
+
+                  {/* {getSinglePostData.SinglePost.BasicDetails
+                      .PropertyStatus && (
+                      <PropertyDataBox
+                        Answer={
+                          getSinglePostData.SinglePost.BasicDetails
+                            .PropertyStatus
+                        }
+                        Icon="/img/status.png"
+                        Data={"Status"}
+                      />
+                    )} */}
                 </div>
                 {/* BiddingFormRef */}
 
@@ -568,6 +647,14 @@ export default function SinglePostDetails() {
                         Answer={`${areaDetails.value} ${areaDetails.unit}`}
                         Icon="/img/area.png"
                         Data={areaDetails.label}
+                      />
+                    )}
+
+                    {OtherArea && (
+                      <PropertyDataBox
+                        Answer={`${OtherArea.value} ${OtherArea.unit}`}
+                        Icon="/img/area.png"
+                        Data={OtherArea.label}
                       />
                     )}
                     {/* Bathroom */}

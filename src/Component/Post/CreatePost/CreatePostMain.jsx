@@ -276,16 +276,16 @@ export default function CreatePostMain() {
     }
 
     if (["Independent House/Villa"].includes(BasicDetailsData.ApartmentType)) {
-      const {
-        BuiltUpArea,
-        CarpetArea,
-        SuperBuiltUpArea,
-        ...AreaDetailsData_Rest
-      } = AreaDetailsData;
-      setAreaDetailsData(AreaDetailsData_Rest);
-      if (sessionStorage.getItem("AreaDetailsData")) {
-        StoreDataInSession("AreaDetailsData", AreaDetailsData_Rest);
-      }
+      // const {
+      //   BuiltUpArea,
+      //   CarpetArea,
+      //   SuperBuiltUpArea,
+      //   ...AreaDetailsData_Rest
+      // } = AreaDetailsData;
+      // setAreaDetailsData(AreaDetailsData_Rest);
+      // if (sessionStorage.getItem("AreaDetailsData")) {
+      //   StoreDataInSession("AreaDetailsData", AreaDetailsData_Rest);
+      // }
       const { PropertyOnFloor, ...FloorDetailsData_Rest } = FloorDetailsData;
       setFloorDetailsData(FloorDetailsData_Rest);
 
@@ -313,6 +313,9 @@ export default function CreatePostMain() {
     BasicDetailsData.ApartmentType,
     BasicDetailsData.PropertyStatus,
   ]);
+  {
+    console.log(AreaDetailsData);
+  }
 
   useEffect(() => {
     if (data) {
@@ -426,8 +429,8 @@ export default function CreatePostMain() {
             <div>
               <div className="d-flex justify-content-center">
                 {next + 1 === 1 ? (
-                  <div class="spinner-border " role="status">
-                    <span class="visually-hidden">Loading...</span>
+                  <div className="spinner-border " role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div>
                 ) : next + 1 >= 1 ? (
                   <span
@@ -472,8 +475,8 @@ export default function CreatePostMain() {
             <div>
               <div className="d-flex justify-content-center">
                 {next + 1 === 2 ? (
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div>
                 ) : next + 1 >= 2 ? (
                   <span
@@ -484,18 +487,17 @@ export default function CreatePostMain() {
                   </span>
                 ) : (
                   <>
-                  {Object.keys(LocationDetailsData).length > 0 ? (
-                    <span
-                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                      onClick={() => setnext(1)}
-                    >
-                      &#10003; {/* This is the checkmark (tick) symbol */}
-                    </span>
-                  ) : (
-                    <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle when LocationDetailsData is empty
-                  )}
-                </>
-                
+                    {Object.keys(LocationDetailsData).length > 0 ? (
+                      <span
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                        onClick={() => setnext(1)}
+                      >
+                        &#10003; {/* This is the checkmark (tick) symbol */}
+                      </span>
+                    ) : (
+                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle when LocationDetailsData is empty
+                    )}
+                  </>
                 )}
               </div>
 
@@ -538,8 +540,8 @@ export default function CreatePostMain() {
               <div>
                 <div className="d-flex justify-content-center">
                   {next + 1 === 3 ? (
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
                   ) : next + 1 >= 3 ? (
                     <span
@@ -550,17 +552,17 @@ export default function CreatePostMain() {
                     </span>
                   ) : (
                     <>
-                    { Object.keys(FloorDetailsData).length > 0 ? (
-                      <span
-                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                        onClick={() => setnext(2)}
-                      >
-                        &#10003; {/* This is the checkmark (tick) symbol */}
-                      </span>
-                    ) : (
-                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
-                    )}
-                  </>
+                      {Object.keys(FloorDetailsData).length > 0 ? (
+                        <span
+                          className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                          onClick={() => setnext(2)}
+                        >
+                          &#10003; {/* This is the checkmark (tick) symbol */}
+                        </span>
+                      ) : (
+                        <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -603,8 +605,8 @@ export default function CreatePostMain() {
               <div>
                 <div className="d-flex justify-content-center">
                   {next + 1 === 4 ? (
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
                   ) : next + 1 >= 4 ? (
                     <span
@@ -615,17 +617,17 @@ export default function CreatePostMain() {
                     </span>
                   ) : (
                     <>
-                    {Object.keys(PricingDetailsData).length > 0 ? (
-                      <span
-                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                        onClick={() => setnext(3)}
-                      >
-                        &#10003; {/* This is the checkmark (tick) symbol */}
-                      </span>
-                    ) : (
-                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
-                    )}
-                  </>
+                      {Object.keys(PricingDetailsData).length > 0 ? (
+                        <span
+                          className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                          onClick={() => setnext(3)}
+                        >
+                          &#10003; {/* This is the checkmark (tick) symbol */}
+                        </span>
+                      ) : (
+                        <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -668,8 +670,8 @@ export default function CreatePostMain() {
             <div>
               <div className="d-flex justify-content-center">
                 {next + 1 === 5 ? (
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
                   </div>
                 ) : next + 1 >= 5 ? (
                   <span
@@ -680,17 +682,17 @@ export default function CreatePostMain() {
                   </span>
                 ) : (
                   <>
-                  {uploadimages.length!==0 ? (
-                    <span
-                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                      onClick={() => setnext(4)}
-                    >
-                      &#10003; {/* This is the checkmark (tick) symbol */}
-                    </span>
-                  ) : (
-                    <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
-                  )}
-                </>
+                    {uploadimages.length !== 0 ? (
+                      <span
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                        onClick={() => setnext(4)}
+                      >
+                        &#10003; {/* This is the checkmark (tick) symbol */}
+                      </span>
+                    ) : (
+                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                    )}
+                  </>
                 )}
               </div>
 

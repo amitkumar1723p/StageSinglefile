@@ -126,6 +126,7 @@ export default function PostCard({ PostData, index }) {
 
   useEffect(() => {
     const areaDetailsData = PostData.AreaDetails;
+
     if (areaDetailsData) {
       const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
         areaDetailsData;
@@ -357,9 +358,10 @@ export default function PostCard({ PostData, index }) {
                       </span>
                     </>
                   )}
-                </p> 
-                <p className="post-card-section">₹ {PostData.PricingDetails.PricePerSqFt}  Per sqft</p>
-
+                </p>
+                <p className="post-card-section">
+                  ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                </p>
               </div>
               {PostData.BasicDetails.PropertyAdType == "Rent" && (
                 <>
