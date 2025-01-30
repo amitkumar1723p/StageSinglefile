@@ -43,8 +43,13 @@ export default function AdminAgentOwnerPost() {
   useEffect(() => {
     if (
       adminAlertData &&
-      (LodingType === "VerifyPostActionRequest" ||
-        LodingType === "ReOpenPostActionRequest")
+      [
+        "VerifyPostActionRequest",
+        "ReOpenPostActionRequest",
+        "showVeirifyPostIconRequest",
+      ].includes(LodingType)
+      // (LodingType === "VerifyPostActionRequest" ||
+      //   LodingType === "ReOpenPostActionRequest")
     ) {
       // alert("Admin_OwnerGetAllPostAction PostVerify")
       if (adminAlertData.success === true && medata?.user?.Role == "Owner") {
@@ -164,7 +169,7 @@ export default function AdminAgentOwnerPost() {
             }}
           />
           <img
-          className="search-bar-admin"
+            className="search-bar-admin"
             src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
   <g clip-path="url(#clip0_3153_291)">

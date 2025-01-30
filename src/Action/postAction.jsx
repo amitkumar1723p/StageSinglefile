@@ -1,5 +1,5 @@
 import axios from "axios";
-const api_Base_Url = process.env.REACT_APP_API_URL
+const api_Base_Url = process.env.REACT_APP_API_URL;
 // This Function Show Only Alert (Simple User)
 export const CreatePostAction = (PostData) => {
   return async (dispatch) => {
@@ -44,7 +44,6 @@ export const LoginUserPostAction = () => {
     try {
       dispatch({ type: "LoginUserGetPostRequest" });
 
-       
       const url = `${api_Base_Url}/post/login/allpost`;
 
       const config = {
@@ -84,7 +83,6 @@ export const GetAllPostAction = ({
 }) => {
   return async (dispatch) => {
     try {
-
       dispatch({ type: "GetAllPostRequest" });
 
       let url = `${api_Base_Url}/post/allpost?LocationDetails.ProjectName=${ProjectName.trim()}&BasicDetails.PropertyAdType=${PropertyAdType.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}`;
@@ -349,6 +347,41 @@ export const VerifyPostAction = ({ postdata }, postId) => {
       } else {
         dispatch({
           type: "VerifyPostActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+export const showVeirifyPostIconAction = ({ postdata }, postId) => {
+  console.log(postdata);
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "showVeirifyPostIconRequest",
+        payload: "showVeirifyPostIconRequest",
+      });
+
+      const url = `${api_Base_Url}/admin-owner/show-verify-post-icon/${postId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, postdata, config);
+      dispatch({ type: "showVeirifyPostIconSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "showVeirifyPostIconFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "showVeirifyPostIconFail",
           payload: { message: error.message, success: false },
         });
       }

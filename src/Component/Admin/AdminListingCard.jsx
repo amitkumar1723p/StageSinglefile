@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, Link, useNavigate, Navigate } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
-import { adminAssigned } from "../../Action/postAction";
+import {
+  adminAssigned,
+  showVeirifyPostIconAction,
+} from "../../Action/postAction";
 import { RemoveAssignPropertyAction } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,7 +27,7 @@ export default function AdminListingCard({
   });
 
   const navigate = useNavigate();
- 
+
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
       return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
@@ -69,6 +72,7 @@ export default function AdminListingCard({
   const dispatch = useDispatch();
   const [isAssignedToAnyUser, setisAssignedToAnyUser] = useState([]);
   const [PropertyAddress, setPropertyAddress] = useState("");
+  const [ToggleBtn, setToggleBtn] = useState(false);
 
   useEffect(() => {
     setPropertyAddress(
@@ -92,6 +96,14 @@ export default function AdminListingCard({
   // );
   // remove from Assign work start here
   const [selectedUserData, setSelectedUserData] = useState(null); // Initialize state to store selected user and post IDs
+
+  useEffect(() => {
+    if (PostData?.PostVerifyShow) {
+      setToggleBtn(true);
+    } else {
+      setToggleBtn(false);
+    }
+  }, [PostData?.PostVerifyShow]);
 
   useEffect(() => {
     if (AssignPostData?.success == true) {
@@ -165,7 +177,7 @@ export default function AdminListingCard({
                                       AdminId: AssignPropertys.AdminId._id,
                                       PostId: PostData._id,
                                     };
-                                    
+
                                     let confrim = window.confirm(
                                       "Are You Sure About This"
                                     );
@@ -225,19 +237,17 @@ export default function AdminListingCard({
                   </div>
                   {PostData.BasicDetails.PropertyAdType == "Rent" && (
                     <>
-                      <>
-                        <div className="admin-rent-deposite-section">
-                          <div>
-                            <p className="price-ans">
-                              {formatReservePrice(
-                                PostData.PricingDetails.ExpectedRent
-                              )}
-                              <span>/Month </span>
-                            </p>
-                            {/* <p className="question-box"> </p> */}
-                          </div>
+                      <div className="admin-rent-deposite-section">
+                        <div>
+                          <p className="price-ans">
+                            {formatReservePrice(
+                              PostData.PricingDetails.ExpectedRent
+                            )}
+                            <span>/Month </span>
+                          </p>
+                          {/* <p className="question-box"> </p> */}
                         </div>
-                      </>
+                      </div>
                     </>
                   )}
                   <p className="admin-card-area-section">
@@ -291,19 +301,25 @@ export default function AdminListingCard({
               </div>
 
               <div className="response-section">
-              
                 <p
-                // className={location.pathname.includes("schedule-visit"?"select":"")}
-                className= {`${location.pathname.includes("/admin/schedule-visit") ?"active-btn":""}`}  
-
+                  // className={location.pathname.includes("schedule-visit"?"select":"")}
+                  className={`${
+                    location.pathname.includes("/admin/schedule-visit")
+                      ? "active-btn"
+                      : ""
+                  }`}
                   onClick={() => {
                     navigate(`/admin/schedule-visit/${PostData._id}`);
                   }}
                 >
-                 Schedule Visit
+                  Schedule Visit
                 </p>
-                <p 
-                className= {`${location.pathname.includes("/admin/recive-offer") ?"active-btn":""}`}
+                <p
+                  className={`${
+                    location.pathname.includes("/admin/recive-offer")
+                      ? "active-btn"
+                      : ""
+                  }`}
                   onClick={() => {
                     navigate(`/admin/recive-offer/${PostData._id}`);
                   }}
@@ -355,7 +371,7 @@ export default function AdminListingCard({
                             className="post-verify-btn In-Active-btn"
                             onClick={() => {
                               let Confrimbox = window.confirm(
-                                "Are you Sure Verify This Post"
+                                "Are you Sure In-Active This Post"
                               );
                               if (Confrimbox) {
                                 let postdata = { PostVerify: false };
@@ -373,7 +389,7 @@ export default function AdminListingCard({
                             className="post-verify-btn Active-btn "
                             onClick={() => {
                               let Confrimbox = window.confirm(
-                                "Are you Sure Verify This Post"
+                                "Are you Sure Active This Post"
                               );
 
                               if (Confrimbox) {
@@ -394,6 +410,74 @@ export default function AdminListingCard({
                   </div>
                 )}
               </div>
+
+              {/* <div className="post-verify-trademark">
+                {PostData.PostVerifyShow ? (
+                  <button
+                    onClick={() => {
+                      let Confrimbox = window.confirm(
+                        "Are you Sure Un-Veirify This Post"
+                      );
+                      if (Confrimbox) {
+                        let postdata = { PostVerifyShow: false };
+                        let postid = PostData._id;
+
+                        dispatch(
+                          showVeirifyPostIconAction({ postdata }, postid)
+                        );
+                      }
+                    }}
+                  >
+                    Un-Veirify
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      let Confrimbox = window.confirm(
+                        "Are you Sure Verify This Post"
+                      );
+                      if (Confrimbox) {
+                        let postdata = { PostVerifyShow: true };
+                        let postid = PostData._id;
+                        dispatch(
+                          showVeirifyPostIconAction({ postdata }, postid)
+                        );
+                      }
+                    }}
+                  >
+                    Veirify
+                  </button>
+                )}
+              </div> */}
+
+              <label className="toggle-switch-container">
+                <input
+                  type="checkbox"
+                  checked={ToggleBtn}
+                  onChange={(e) => {
+                    setToggleBtn(!ToggleBtn);
+                    if (e.target.checked == true) {
+                      let postdata = { PostVerifyShow: true };
+                      let postid = PostData._id;
+                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
+                    }
+                    if (e.target.checked == false) {
+                      let postdata = { PostVerifyShow: false };
+                      let postid = PostData._id;
+                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
+                    }
+
+                    //  if(){
+
+                    //  }
+                  }}
+                  // onChange={}
+                  // onClick={}
+                  className="toggle-switch-input"
+                />
+
+                <span className="toggle-btn-slider"></span>
+              </label>
             </div>
           </div>
         </div>
