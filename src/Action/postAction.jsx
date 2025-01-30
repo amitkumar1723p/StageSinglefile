@@ -607,3 +607,40 @@ export const Admin_AgentGetAllPostAction = (Keyword) => {
     }
   };
 };
+
+
+// for active or de-active property
+
+export const Active_InactiveProperty=(AssignProperty,status)=>{
+  console.log(AssignProperty,status)
+  return async(dispatch)=>{
+   try {
+    dispatch({
+      type: "Active_InactivePropertyRequest",
+      payload: "Active_InactivePropertyRequest",
+    });
+    const url = `${api_Base_Url}/admin-owner/active`;
+    const dataToSend = {
+      AssignProperty: AssignProperty,
+      status: status,
+    };
+
+    const config = {
+      headers: { "Content-Type": "application/json" },  // Changed to JSON if no file upload
+      withCredentials: true,
+    };;
+
+    const{data}= await axios.post(url,dataToSend, config);
+    dispatch({ type: "Active_InactivePropertySuccess", payload: data });
+   } catch (error) {
+    if (error.response) {
+      dispatch({ type: "Active_InactivePropertyFail", payload: error.response.data });
+    } else {
+      dispatch({
+        type: "Active_InactivePropertyFail",
+        payload: { message: error.message, success: false },
+      });
+    }
+   }
+  }
+}

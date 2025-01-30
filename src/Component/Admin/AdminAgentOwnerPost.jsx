@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Active_InactiveProperty,
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
   GetAllAssignProperty,
@@ -112,6 +113,32 @@ export default function AdminAgentOwnerPost() {
       dispatch(GetAllAssignProperty());
     }
   }, []);
+
+  // Active In Active start
+
+  const [status, setStatus] = useState("");
+
+  // Handle button click to update state
+  const handleStatusChange = (value) => {
+    const isConfirmed = window.confirm("Are you sure about it?");
+    if (isConfirmed) {
+      setStatus(value);
+    } else {
+      // Handle the cancel action if needed
+      console.log("Status change canceled.");
+    }
+  };
+
+  useEffect(() => {
+    if (status !== "") {
+      dispatch(Active_InactiveProperty(AssignProperty, status));
+      setTimeout(() => {
+        window.location.reload();
+      }, [500]);
+    }
+  }, [AssignProperty, status]);
+
+  // Active In Active end
   return (
     <>
       <div className="filter-section-property">
@@ -164,7 +191,7 @@ export default function AdminAgentOwnerPost() {
             }}
           />
           <img
-          className="search-bar-admin"
+            className="search-bar-admin"
             src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
   <g clip-path="url(#clip0_3153_291)">
@@ -181,50 +208,6 @@ export default function AdminAgentOwnerPost() {
           />
         </div>
       </div>
-
-      {/* <div className="filter-section-property">
-              <div>
-                {" "}
-                <img src="/img/FilteImg.png" alt="FilteImg" />
-              </div>
-              {active !== null ? (
-                <div
-                 onClick={handleAllPost} 
-                 className="ActiveFill">
-                  <span>All Post</span>
-                </div>
-              ) : (
-                <div className="ActiveEmpty">
-                  <span>All Post</span>
-                </div>
-              )}
-              <button
-                onClick={handleActive}
-                className={active == true ? "select" : ""}
-              >
-                Active
-              </button>
-              <button
-                onClick={handleInactive}
-                className={active == false ? "select" : ""}
-              >
-                Inactive
-              </button>
-              <button>Exprired</button>
-              <button>Reported</button>
-              <button>Success</button>
-              <div>
-                <input
-                  className="controlled-input"
-                  type="text"
-                  value={inputValue}
-                  onChange={handleChange}
-                />
-                <button onClick={handleSearch} className="searchAdmin">
-                  Search
-                </button>
-              </div>
-            </div> */}
 
       {AssignProperty.length > 0 && (
         <div className="select-section-admin">
@@ -255,10 +238,14 @@ export default function AdminAgentOwnerPost() {
               <option value={`Agent`}>Agent</option>
             </select>
           </div>
-
+          {/* here start */}
+          <div>
+          
+          </div>
+          {/* here end */}
           {AdminData && AdminData.success && (
             <select
-              className="selectAssign"
+              className="selectAssign mx-1"
               onChange={(e) => {
                 let FindAdmin = AdminData.Admin[e.target.value];
                 if (FindAdmin) {
@@ -298,39 +285,16 @@ export default function AdminAgentOwnerPost() {
             </button>
           )}
 
-          {/* {} */}
-          {/* {selectedRole === "Admin" ? (
-                  <p>
-                    <select
-                      id="adminOptions"
-                      className="selectAssign"
-                      
-                    >
-                      <option value="">Select Admin</option>
-
-                      {dataAdmin &&
-                        dataAdmin.Admin.map(
-                          (item) =>
-                            item.AdminVerify === true ? (
-                              <option key={item._id} value={`${item._id}`}>
-                                {item.Name}
-                              </option>
-                            ) : null // Render nothing if AdminVerify is false
-                        )}
-                    </select>
-                  </p>
-                ) : selectedRole === "Agent" ? (
-                  <p>
-                    <select id="adminOptions" className="selectAssign">
-                      <option value="">Select Agent</option>
-                      <option value="agent1">Agent-1</option>
-                      <option value="agent2">Agent-2</option>
-                    </select>
-                  </p>
-                ) : null} */}
-          {/* end here conditionally render  */}
+            {/* Buttons to change the status */}
+            <button  className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" onClick={() => handleStatusChange("Active")}>Active</button>
+           
+            <button className="px-3 mx-3 py-1 bg-primary bg-opacity-10 border border-info-subtle rounded" onClick={() => handleStatusChange("InActive")}>
+              In-Active
+            </button>
+            {/* Display the current status */}
         </div>
       )}
+
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (
           <OwnerAllPost

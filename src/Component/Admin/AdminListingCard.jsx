@@ -105,7 +105,9 @@ export default function AdminListingCard({
       setisAssignedToAnyUser(AssingPosts);
     }
   }, [AssignPostData]);
+  // console.log(AssignProperty,"dfkfvgguervyv")
   // end here remove assign work
+
   return (
     <div className="Admin-property-post-card-main-box">
       <div className="Admin-property-post-card-main">

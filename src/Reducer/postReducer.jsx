@@ -15,6 +15,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedRequest":
     case "Admin_RemovedRequest":
     case "RemoveAssignPropertyRequest":
+      // Activ in active
+    case "Active_InactivePropertyRequest":
       return {
         ...state,
         loading: true,
@@ -33,6 +35,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedSuccess":
     case "Admin_RemovedSuccess":
     case "RemoveAssignPropertySuccess":
+         // Activ in active
+    case "Active_InactivePropertySuccess":  
       return {
         ...state,
         loading: false,
@@ -51,7 +55,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedFail":
     case "Admin_RemovedFail":
     case "RemoveAssignPropertyFail":
-     
+      // Activ in active
+    case "Active_InactivePropertyFail":
       return {
         ...state,
         loading: false,
