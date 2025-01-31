@@ -26,6 +26,7 @@ export default function BiddingFormForm({
     AcceptPolicy: false,
     WhatsAppUpdate: false,
   });
+  console.log(BiddingFormData,"dfjhukjddnvkjdn")
   const [standardPrices, setstandardPrices] = useState([]);
   const [lowerPrices, setlowerPrices] = useState([]);
 
@@ -179,6 +180,15 @@ export default function BiddingFormForm({
 
     // Format the input value with commas and set the converted price
     const formattedPrice = formatNumberWithCommas(inputValue);
+ 
+// Remove commas before converting to a number
+const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
+    
+
+    setBiddingFormData({
+      ...BiddingFormData,
+      BidPrice: cleanPrice,
+    });
     setConvertedPrice(PriceToSentence(inputValue));
 
     // Update the input value to display with commas
@@ -282,17 +292,19 @@ export default function BiddingFormForm({
               </select>
 
               {isLowerOffer === "CustomValue" && (
-   <div>
-   <input
-     className="mx-1 py-1 rounded-2 px-2"
-     type="text"  // use 'text' to allow comma formatting
-     value={formatNumberWithCommas(price)}
-     onChange={handleChange}
-     placeholder="Enter custom value"
-   />
-   {convertedPrice && <p className="mke-offer-p">{convertedPrice}</p>}
- </div>
+  <div>
+
+    <input
+      className="mx-1 py-1 rounded-2 px-2"
+      type="text"
+      value={formatNumberWithCommas(price)}
+      onChange={handleChange}
+      placeholder="Enter custom value"
+    />
+    {convertedPrice && <p className="mke-offer-p">{convertedPrice}</p>}
+  </div>
 )}
+
               {/* <div
               type="button"
               className="mke-you-offer-lower-toggle"
