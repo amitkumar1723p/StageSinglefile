@@ -109,6 +109,7 @@ export default function CreatePostImageUpload({
         }
       } else {
         dispatch(CreatePostAction(formData));
+
       }
     }
   };
@@ -310,6 +311,8 @@ export default function CreatePostImageUpload({
           </form>
         </div>
       </div>
+
+      
     </>
   );
 }

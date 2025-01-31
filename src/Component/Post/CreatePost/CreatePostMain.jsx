@@ -39,7 +39,7 @@ export default function CreatePostMain() {
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
   //  Update Post Logic
-console.log(uploadimages,"fdfhfiueruc")
+// console.log(uploadimages,"fdfhfiueruc")
   //  GetSinglePostAction
   useEffect(() => {
     if (update) {
@@ -328,14 +328,14 @@ console.log(uploadimages,"fdfhfiueruc")
         sessionStorage.removeItem("PricingDetailsData");
 
         if (["Admin", "Owner"].includes(medata.user.Role)) {
-          navigate("/admin/allpost");
+          // navigate("/admin/allpost");
         } else {
-          navigate("/user");
+          // navigate("/user");
         }
       }
       if (data.success === false) {
         if (data.IsAuthenticated === false) {
-          navigate("/");
+          // navigate("/");
         }
       }
     }
