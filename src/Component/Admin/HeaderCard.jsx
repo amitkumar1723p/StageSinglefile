@@ -17,7 +17,7 @@ export default function HeaderCard() {
     dispatch(GetSinglePostAction(Params.PostId));
   }, []);
   useEffect(() => {
-    if (PostVerifyData && (LodingType === "VerifyPostActionRequest" || LodingType==="ReOpenPostActionRequest")) {
+    if (PostVerifyData && ["VerifyPostActionRequest" , "ReOpenPostActionRequest" ,"showVeirifyPostIconRequest"].includes(LodingType)) {
       if (PostVerifyData.success === true) {
         dispatch(GetSinglePostAction(Params.PostId));
       }

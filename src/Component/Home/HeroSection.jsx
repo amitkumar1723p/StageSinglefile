@@ -97,7 +97,7 @@ const HeroSection = () => {
         }
       }
     }
-  }, [AllPostData ,GetProjectNameData]);
+  }, [AllPostData, GetProjectNameData]);
 
   useEffect(() => {
     if (medata && medata.IsAuthenticated == true) {
@@ -331,7 +331,6 @@ const HeroSection = () => {
         </div>
       </header>
       <div className="floating-buttons">
-
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
           <img src="/img/call.png" alt="Call" />

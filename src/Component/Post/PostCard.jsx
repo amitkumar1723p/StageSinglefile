@@ -126,6 +126,7 @@ export default function PostCard({ PostData, index }) {
 
   useEffect(() => {
     const areaDetailsData = PostData.AreaDetails;
+
     if (areaDetailsData) {
       const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
         areaDetailsData;

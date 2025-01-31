@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function AreaDetailsSection({
   AreaDetailsData,
@@ -26,10 +26,120 @@ export default function AreaDetailsSection({
     // "chataks",
     // "perch",
   ];
+  useEffect(() => {
+    if (
+      [
+        "Apartment",
+        "Independent/Builder Floor",
+        "1 RK/Studio Apartment",
+        "Serviced Apartment",
+      ].includes(BasicDetailsData.ApartmentType)
+    ) {
+      setAreaDetailsData((prevData) => ({
+        ...prevData,
+        SuperBuiltUpArea: { ...prevData.SuperBuiltUpArea, unit: "sq.ft" },
+        CarpetArea: { ...prevData.CarpetArea, unit: "sq.ft" },
+        BuiltUpArea: { ...prevData.BuiltUpArea, unit: "sq.ft" },
+      }));
+    }
+    if (["Independent House/Villa"].includes(BasicDetailsData.ApartmentType)) {
+      setAreaDetailsData((prevData) => ({
+        ...prevData,
+        SuperBuiltUpArea: { ...prevData.SuperBuiltUpArea, unit: "sq.ft" },
+        CarpetArea: { ...prevData.CarpetArea, unit: "sq.ft" },
+        BuiltUpArea: { ...prevData.BuiltUpArea, unit: "sq.ft" },
+        PlotArea: { ...prevData.PlotArea, unit: "sq.yard" },
+      }));
+    }
+  }, [BasicDetailsData.ApartmentType]);
   return (
     <>
-    <p className="step-section-heading-p">Area Details <small>(At least one area type is mandatory.) </small> </p>
+      <p className="step-section-heading-p">
+        Area Details <small>(At least one area type is mandatory.) </small>{" "}
+      </p>
+
+      {/* Plot Area  */}
+
+      {["Independent House/Villa", "Plot/Land"].includes(
+        BasicDetailsData.ApartmentType
+      ) && (
+        <>
+          <div className="form-group">
+            <label htmlFor="plotArea">Plot Area*</label>
+            <div className="unit-input">
+              <input
+                type="number"
+                id="plotArea"
+                name="plotArea"
+                required
+                value={AreaDetailsData.PlotArea?.value || ""}
+                onChange={(e) => {
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    PlotArea: {
+                      ...AreaDetailsData.PlotArea,
+                      value: e.target.value,
+                    },
+                  });
+                }}
+                placeholder="Plot Area"
+              />
+              <input
+                type="text"
+                readOnly
+                className="unit"
+                value={AreaDetailsData.PlotArea?.unit || ""}
+              />
+
+              {console.log(AreaDetailsData)}
+              {/* <select
+                className="unit"
+                required
+                value={AreaDetailsData.PlotArea?.unit?.trim()}
+                onChange={(e) => {
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    PlotArea: {
+                      ...AreaDetailsData.PlotArea,
+                      unit: e.target.value.trim(),
+                    },
+                  });
+                }}
+              >
+                <option value="">select unit</option>
+                {Unit.map((e, i) => {
+                  return (
+                    <option key={i} value={e}>
+                      {e}
+                    </option>
+                  );
+                })}
+              </select> */}
+            </div>
+          </div>
+          {BasicDetailsData.ApartmentType === "Plot/Land" && (
+            <div className="form-group">
+              <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
+
+              <input
+                id="flooring-type"
+                required
+                value={AreaDetailsData.PlotDimensions || ""}
+                readOnly
+                // onChange={(e) => {
+                //   setPropertyDetailsData({
+                //     ...PropertyDetailsData,
+                //     FlooringType: e.target.value,
+                //   });
+                // }}
+              />
+            </div>
+          )}
+        </>
+      )}
+
       {[
+        "Independent House/Villa",
         "Apartment",
         "Independent/Builder Floor",
         "1 RK/Studio Apartment",
@@ -39,7 +149,7 @@ export default function AreaDetailsSection({
           {" "}
           {/* Super Built Up Area* */}
           <div className="form-group">
-            <label htmlFor="super-built-up-area"> Super Built Up Area*</label>
+            <label htmlFor="super-built-up-area"> Super Built Up Area* </label>
             <div className="unit-input">
               <input
                 type="text"
@@ -63,7 +173,14 @@ export default function AreaDetailsSection({
                 }}
               />
 
-              <select
+              <input
+                type="text"
+                readOnly
+                className="unit"
+                value={AreaDetailsData.SuperBuiltUpArea?.unit || ""}
+              />
+
+              {/* <select
                 className="unit"
                 value={AreaDetailsData.SuperBuiltUpArea?.unit?.trim() || ""}
                 onChange={(e) => {
@@ -92,7 +209,7 @@ export default function AreaDetailsSection({
                     </option>
                   );
                 })}
-              </select>
+              </select> */}
             </div>
           </div>
           {/* Built Up Area */}
@@ -120,10 +237,14 @@ export default function AreaDetailsSection({
                   }
                 }}
               />
+              <input
+                type="text"
+                readOnly
+                className="unit"
+                value={AreaDetailsData.BuiltUpArea?.unit || ""}
+              />
 
-              <>
-                {" "}
-                <select
+              {/* <select
                   className="unit"
                   value={AreaDetailsData.BuiltUpArea?.unit?.trim() || ""}
                   onChange={(e) => {
@@ -154,12 +275,12 @@ export default function AreaDetailsSection({
                       </option>
                     );
                   })}
-                </select>
-              </>
-              {/* // )} */}
+                </select> */}
             </div>
             {AlertObj.BuiltUpAreaAlert && (
-              <div className="alert-in-area-section">{AlertObj.BuiltUpAreaAlert}</div>
+              <div className="alert-in-area-section">
+                {AlertObj.BuiltUpAreaAlert}
+              </div>
             )}
           </div>
           {/* Carpet Area  */}
@@ -190,82 +311,24 @@ export default function AreaDetailsSection({
                 placeholder="Carpet Area"
               />
 
-              <>
-                <select
-                  className="unit"
-                  value={AreaDetailsData.CarpetArea?.unit?.trim() || ""}
-                  onChange={(e) => {
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      CarpetArea: {
-                        ...AreaDetailsData.CarpetArea,
-                        unit: e.target.value.trim(),
-                      },
-
-                      SuperBuiltUpArea: {
-                        ...AreaDetailsData.SuperBuiltUpArea,
-                        unit: e.target.value.trim(),
-                      },
-
-                      BuiltUpArea: {
-                        ...AreaDetailsData.BuiltUpArea,
-                        unit: e.target.value.trim(),
-                      },
-                    });
-                  }}
-                >
-                  <option value="">select unit</option>
-                  {Unit.map((e, i) => {
-                    return (
-                      <option key={i} value={e}>
-                        {e}
-                      </option>
-                    );
-                  })}
-                </select>{" "}
-              </>
-            </div>
-
-            {AlertObj.CarpetAreaAlert && <div className="alert-in-area-section">{AlertObj.CarpetAreaAlert}</div>}
-          </div>
-        </>
-      )}
-
-      {/* Plot Area  */}
-
-      {["Independent House/Villa", "Plot/Land"].includes(
-        BasicDetailsData.ApartmentType
-      ) && (
-        <>
-          <div className="form-group">
-            <label htmlFor="plotArea">Plot Area</label>
-            <div className="unit-input">
-              <input
-                type="number"
-                id="plotArea"
-                name="plotArea"
-                required
-                value={AreaDetailsData.PlotArea?.value || ""}
-                onChange={(e) => {
-                  setAreaDetailsData({
-                    ...AreaDetailsData,
-                    PlotArea: {
-                      ...AreaDetailsData.PlotArea,
-                      value: e.target.value,
-                    },
-                  });
-                }}
-                placeholder="Plot Area"
-              />
-              <select
+              {/* <select
                 className="unit"
-                required
-                value={AreaDetailsData.PlotArea?.unit?.trim()}
+                value={AreaDetailsData.CarpetArea?.unit?.trim() || ""}
                 onChange={(e) => {
                   setAreaDetailsData({
                     ...AreaDetailsData,
-                    PlotArea: {
-                      ...AreaDetailsData.PlotArea,
+                    CarpetArea: {
+                      ...AreaDetailsData.CarpetArea,
+                      unit: e.target.value.trim(),
+                    },
+
+                    SuperBuiltUpArea: {
+                      ...AreaDetailsData.SuperBuiltUpArea,
+                      unit: e.target.value.trim(),
+                    },
+
+                    BuiltUpArea: {
+                      ...AreaDetailsData.BuiltUpArea,
                       unit: e.target.value.trim(),
                     },
                   });
@@ -279,28 +342,16 @@ export default function AreaDetailsSection({
                     </option>
                   );
                 })}
-              </select>
+              </select> */}
+              <input type="text" readOnly className="unit" value={AreaDetailsData.CarpetArea?.unit} />
             </div>
+
+            {AlertObj.CarpetAreaAlert && (
+              <div className="alert-in-area-section">
+                {AlertObj.CarpetAreaAlert}
+              </div>
+            )}
           </div>
-
-          {BasicDetailsData.ApartmentType === "Plot/Land" && (
-            <div className="form-group">
-              <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
-
-              <input
-                id="flooring-type"
-                required
-                value={AreaDetailsData.PlotDimensions || ""}
-                readOnly
-                // onChange={(e) => {
-                //   setPropertyDetailsData({
-                //     ...PropertyDetailsData,
-                //     FlooringType: e.target.value,
-                //   });
-                // }}
-              />
-            </div>
-          )}
         </>
       )}
 

@@ -44,8 +44,13 @@ export default function AdminAgentOwnerPost() {
   useEffect(() => {
     if (
       adminAlertData &&
-      (LodingType === "VerifyPostActionRequest" ||
-        LodingType === "ReOpenPostActionRequest")
+      [
+        "VerifyPostActionRequest",
+        "ReOpenPostActionRequest",
+        "showVeirifyPostIconRequest",
+      ].includes(LodingType)
+      // (LodingType === "VerifyPostActionRequest" ||
+      //   LodingType === "ReOpenPostActionRequest")
     ) {
       // alert("Admin_OwnerGetAllPostAction PostVerify")
       if (adminAlertData.success === true && medata?.user?.Role == "Owner") {

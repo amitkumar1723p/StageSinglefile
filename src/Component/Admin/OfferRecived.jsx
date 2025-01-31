@@ -80,7 +80,7 @@ const OfferReceived = () => {
         BidData.success &&
         BidData.BidDocument.map((reciveOffer, index) => {
           const { Biddinguser } = reciveOffer;
-         console.log(reciveOffer)
+         
 
           viewImageRefs.current[index] = React.createRef();
           return (
@@ -109,7 +109,7 @@ const OfferReceived = () => {
                     </span>
                   </p>
                 </div>
-                {console.log(Biddinguser)}
+                
                 <div className="offer-received-property-info">
                   <p className="offer-received-property-details">
                     Schedule Visit: {}
@@ -119,7 +119,7 @@ const OfferReceived = () => {
                         })`
                       : "No"}
                   </p>
-                  {/* {console.log(Biddinguser)} */}
+                  
 
                   <p className="offer-received-pid">
                     Date and Time: :{" "}

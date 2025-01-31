@@ -4,7 +4,7 @@ import { StoreDataInSession } from "../../../utils/SessionStorage.js";
 import PropertyDetailsSection from "./PropertyDetails.jsx";
 import AreaDetailsSection from "./AreaDetails.jsx";
 import ConstructionDetails from "./ConstructionDetails.jsx";
- 
+
 import Amenities from "./Amenities.jsx";
 import ScrollToTop from "../../../ScrollToTop.jsx";
 import FloorDetails from "./FloorDetails.jsx";
@@ -58,7 +58,7 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
       // Check for BuiltUpArea vs SuperBuiltUpArea
       if (BuiltUpArea > SuperBuiltUpArea) {
         newAlertObj.BuiltUpAreaAlert =
-          "Super Built-Up Area is greater than or equal to Built-Up Area."  
+          "Super Built-Up Area is greater than or equal to Built-Up Area.";
       } else {
         delete newAlertObj.BuiltUpAreaAlert;
       }
@@ -78,31 +78,24 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
   const PostSubmitHandler = (e) => {
     e.preventDefault();
 
+    // if ([ "Apartment", "1 RK/Studio Apartment", "Independent/Builder Floor", "Serviced Apartment",].includes(BasicDetailsData.ApartmentType)) {
     if (
-      [
-        "Apartment",
-        "1 RK/Studio Apartment",
-        "Independent/Builder Floor",
-        "Serviced Apartment",
-      ].includes(BasicDetailsData.ApartmentType)
+      !AreaDetailsData.SuperBuiltUpArea?.value &&
+      !AreaDetailsData.CarpetArea?.value &&
+      !AreaDetailsData.BuiltUpArea?.value
     ) {
-      if (
-        !AreaDetailsData.SuperBuiltUpArea?.value &&
-        !AreaDetailsData.CarpetArea?.value &&
-        !AreaDetailsData.BuiltUpArea?.value
-      ) {
-        alert("SuperBuiltUpArea CarpetArea  and BuiltUpArea insert value");
-        return;
-      }
+      return alert("SuperBuiltUpArea CarpetArea  and BuiltUpArea insert value");
 
-      if (
-        !AreaDetailsData.SuperBuiltUpArea?.unit &&
-        !AreaDetailsData.CarpetArea?.unit &&
-        !AreaDetailsData.BuiltUpArea?.unit
-      ) {
-        alert("SuperBuiltUpArea CarpetArea and BuiltUpArea  insert unit");
-        return;
-      }
+      // }
+
+      // if (
+      //   !AreaDetailsData.SuperBuiltUpArea?.unit &&
+      //   !AreaDetailsData.CarpetArea?.unit &&
+      //   !AreaDetailsData.BuiltUpArea?.unit
+      // ) {
+      //   alert("SuperBuiltUpArea CarpetArea and BuiltUpArea  insert unit");
+      //   return;
+      // }
     }
 
     if (Object.keys(AlertObj).length > 0) {
@@ -114,10 +107,10 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
       return alert("PropertyDirection Field Required");
     }
 
-    if (FloorDetailsData.OverLookingView.length<=0) {
+    if (FloorDetailsData.OverLookingView.length <= 0) {
       return alert("View From Balcony Field Required");
     }
-     
+
     if (!AmenitiesDetailsData.Furnishing) {
       return alert("Furnishing Field Required");
     }
@@ -130,11 +123,12 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
     if (AmenitiesDetailsData.WaterSource.length <= 0) {
       return alert("WaterSource is Required");
     }
-     
-     if(update && AmenitiesDetailsData.Furnishing=="Un-Furnished"){
-      const { FurnishingOption, ...AmenitiesDetailsRest } =AmenitiesDetailsData;
-     setAmenitiesDetailsData(AmenitiesDetailsRest)
-     }
+
+    if (update && AmenitiesDetailsData.Furnishing == "Un-Furnished") {
+      const { FurnishingOption, ...AmenitiesDetailsRest } =
+        AmenitiesDetailsData;
+      setAmenitiesDetailsData(AmenitiesDetailsRest);
+    }
 
     setnext(3);
     if (!update) {
