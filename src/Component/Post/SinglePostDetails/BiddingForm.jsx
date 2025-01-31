@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect,useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { ToWords } from "to-words";
 import { BiddingFormAction } from "../../../Action/userAction";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../Loader/Loader";
@@ -135,6 +135,56 @@ export default function BiddingFormForm({
     }, 1000);
     setTimeoutId(id);
   };
+
+
+  const [price, setPrice] = useState("");
+  const [convertedPrice, setConvertedPrice] = useState("");
+
+  const PriceToSentence = useCallback((price) => {
+    if (price) {
+      // Convert price to string, remove commas, and parse as integer
+      const numericPrice = parseInt(String(price).replace(/,/g, ""), 10);
+
+      // Check if the parsed number is valid
+      if (isNaN(numericPrice)) {
+        return "Invalid Price";
+      }
+
+      // Initialize the ToWords instance
+      const toWords = new ToWords();
+
+      // Convert the number to words
+      const words = toWords.convert(numericPrice, { currency: true });
+
+      // Capitalize the first letter and return the result
+      return words.charAt(0).toUpperCase() + words.slice(1);
+    }
+
+    return "";
+  }, []);
+
+  const formatNumberWithCommas = (value) => {
+    // Format the number with commas
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const handleChange = (event) => {
+    let inputValue = event.target.value;
+
+    // Allow only numeric values (remove non-numeric characters except comma)
+    inputValue = inputValue.replace(/[^0-9]/g, "");
+
+    // Set price without commas for calculation
+    setPrice(inputValue);
+
+    // Format the input value with commas and set the converted price
+    const formattedPrice = formatNumberWithCommas(inputValue);
+    setConvertedPrice(PriceToSentence(inputValue));
+
+    // Update the input value to display with commas
+    event.target.value = formattedPrice;
+  };
+
   return (
     <>
       {/* <div className="bidding-form-container"> */}
@@ -216,19 +266,33 @@ export default function BiddingFormForm({
                 onChange={(e) => {
                   if (e.target.value == "HighValue") {
                     setBiddingFormData({ ...BiddingFormData, BidPrice: "" });
-                    setIsLowerOffer(false);
+                    setIsLowerOffer("HighValue");
                   } else if (e.target.value == "LowerValue") {
                     setBiddingFormData({ ...BiddingFormData, BidPrice: "" });
-                    setIsLowerOffer(true);
-                  } else {
-                    setIsLowerOffer(null);
+                    setIsLowerOffer("LowerValue");
+                  } else if (e.target.value === "CustomValue") {
+                    setIsLowerOffer("CustomValue"); // or adjust according to your needs
                   }
                 }}
               >
                 <option value="">Select</option>
                 <option value="HighValue">High-Value</option>
                 <option value="LowerValue">Lower-Value</option>
+                <option value="CustomValue">Custom Value</option>
               </select>
+
+              {isLowerOffer === "CustomValue" && (
+   <div>
+   <input
+     className="mx-1 py-1 rounded-2 px-2"
+     type="text"  // use 'text' to allow comma formatting
+     value={formatNumberWithCommas(price)}
+     onChange={handleChange}
+     placeholder="Enter custom value"
+   />
+   {convertedPrice && <p className="mke-offer-p">{convertedPrice}</p>}
+ </div>
+)}
               {/* <div
               type="button"
               className="mke-you-offer-lower-toggle"
@@ -240,9 +304,9 @@ export default function BiddingFormForm({
             </div> */}
 
               <div className="mke-you-offer-offer-options">
-                {isLowerOffer !== null && (
+                {isLowerOffer === "LowerValue" || isLowerOffer === "HighValue" && (
                   <>
-                    {(isLowerOffer == true ? lowerPrices : standardPrices).map(
+                    {(isLowerOffer == "LowerValue" ? lowerPrices : standardPrices).map(
                       (price, index) => (
                         <button
                           type="button"
