@@ -15,6 +15,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedRequest":
     case "Admin_RemovedRequest":
     case "RemoveAssignPropertyRequest":
+    case "showVeirifyPostIconRequest":
       return {
         ...state,
         loading: true,
@@ -33,6 +34,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedSuccess":
     case "Admin_RemovedSuccess":
     case "RemoveAssignPropertySuccess":
+    case "showVeirifyPostIconSuccess":
       return {
         ...state,
         loading: false,
@@ -51,6 +53,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedFail":
     case "Admin_RemovedFail":
     case "RemoveAssignPropertyFail":
+    case "showVeirifyPostIconFail":
      
       return {
         ...state,
