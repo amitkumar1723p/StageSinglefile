@@ -10,11 +10,13 @@ export default function AdminAgentAssignPost({
   AssignPropertyAdmin,
   setAssignPropertyAdmin,
   SearchPostId,
+  sortOrder
 }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => {
     return state.AdminProperty;
   });
+
   const [OwnerPosts, setOwnerPosts] = useState([]);
   useEffect(() => {
     if (data?.AssignProperty) {
@@ -91,6 +93,27 @@ export default function AdminAgentAssignPost({
       dispatch(Admin_AgentGetAllPostAction());
     }
   }, [querry]);
+
+
+    // Trigger sorting when either sortOrder or data changes
+    useEffect(() => {
+      if (data?.Post && sortOrder !== undefined) {  
+        let sortedPosts = [...data.Post]; 
+    
+        // Ascending order
+        if (sortOrder === 1) {
+          sortedPosts.sort((a, b) => new Date(a.createAt) - new Date(b.createAt));
+        }
+        // Descending order
+        else if (sortOrder === -1) {
+          sortedPosts.sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
+        }
+    
+        // Update the state with the sorted posts
+        setOwnerPosts(sortedPosts);
+      }
+    }, [sortOrder, data]);  // Dependencies: sortOrder and data
+     // Trigger sorting when either sortOrder or data changes
   return (
     <div className="Admin-property-post-card-main-box">
       <p>All Listing</p>
