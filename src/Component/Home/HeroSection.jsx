@@ -420,7 +420,7 @@ const HeroSection = () => {
       {/* Rent Component./ */}
       {/* {PropertyAddType == "Rent" && (
         <>
-          <SimpleStepsTenant />
+          
           <Services />
           <Testimonials />
           <WhoWeAre />
