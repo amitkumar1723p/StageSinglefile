@@ -15,7 +15,7 @@ export default function Alert({
     if (ShowAlert === true) {
       setTimeout(() => {
         dispatch({ type: "ClearAlert" });
-      }, 3000); // Alert will disappear after 4 seconds
+      }, 3000); // Alert will disappear after 3 seconds
     }
   }, [ShowAlert, dispatch]);
 

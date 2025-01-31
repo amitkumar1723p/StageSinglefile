@@ -7,9 +7,9 @@
   width: auto;
   background-color: var(--main-light-clr); /* Default green for success */
   color: white;
-  padding: 15px 25px;
+  padding: 15px;
   border-radius: 8px;
-  font-size: 1em;
+  font-size: .8em;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -25,13 +25,14 @@
 .alertbox.show {
   opacity: 1; /* Visible when show class is added */
 }
-/* Different alert types with unique colors */
+
+
 .alertbox.success {
   background-color: var(--main-light-clr); /* Green */
 }
 
 .alertbox.error {
-  background-color: #be1425; /* Red */
+  background-color: #be1425e1; /* Red */
 }
 
 .alertbox.info {

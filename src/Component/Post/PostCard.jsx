@@ -212,20 +212,19 @@ export default function PostCard({ PostData, index }) {
             setRunImageSlider(false);
           }}
         >
-          
-            <div className="icon-box">
-              {PostData.PostVerify ? (
-                <div className="active-post">
-                  <img src="/img/verified-tag.svg" alt="verified-tag" />
-                  <p className="active-post-para">Verified</p>
-                </div>
-              ) : (
-                <div className="inactive-post">
-                  <p className="inactive-post-para">Inactive</p>
-                </div>
-              )}
-            </div>
-          
+          <div className="icon-box">
+            {PostData.PostVerify ? (
+              <div className="active-post">
+                <img src="/img/verified-tag.svg" alt="verified-tag" />
+                <p className="active-post-para">Verified</p>
+              </div>
+            ) : (
+              <div className="inactive-post">
+                <p className="inactive-post-para">Inactive</p>
+              </div>
+            )}
+          </div>
+
           {/* <div className="IconBox">
             <div className="edit-delete-Icon-box">
               {location.pathname.includes("user/my-listing") &&
@@ -260,57 +259,63 @@ export default function PostCard({ PostData, index }) {
           <div className="property-card-info">
             <div className="heading-name">
               {PostData.LocationDetails.ProjectName}
-              {/* <IoMdShareAlt />  */}
-              {/* <img onClick={toggleShare}  src="/img/share.png" alt="" /> */}
-              {/* share button */}
-              <div className="postcard-share-parent">
-                {/* <button onClick={toggleShare} className="share-btn"> share
-           </button> */}
-              </div>
-              {!["Owner", "Admin"].includes(medata?.user?.Role) && (
-                <div className={`add-favourite-box `}>
-                  <button
-                    className={`add-favourite-btn ${index}`}
-                    onClick={() => {
-                      if (medata && medata.IsAuthenticated == true) {
-                        dispatch(
-                          AddFavouriteAndUnFavouriteAction({
-                            PostData: { PostId: PostData._id },
-                          })
-                        );
-                      } else {
-                        navigate("/login");
-                      }
-                    }}
-                  >
-                    {medata?.user?.FavouritePost?.some(
-                      (fav) =>
-                        String(fav.PostData.PostId?._id) ===
-                        String(PostData._id)
-                    ) ? (
-                      <img
-                        className="fav-icon"
-                        src="/img/Un-Fav-Post.svg"
-                        alt="Fav-icon"
-                      />
-                    ) : (
-                      <img
-                        className="fav-icon"
-                        src="/img/Fav-Post.svg"
-                        alt="Fav-icon"
-                      />
-                    )}
-                  </button>
-                  {location.pathname.includes("user/my-listing") &&
-                    PostData.BasicDetails.PropertyAdType == "Rent" && (
-                      <>
-                        <Link to={`/user/post/update/${PostData._id}`}>
-                          <img src="/img/edit.png" className="editIcon" />
-                        </Link>
-                      </>
-                    )}
+
+              <div className="share-fav-main-box"> 
+                <div className="postcard-share-parent">
+                  <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <img
+                      src="/img/share-btn.svg"
+                      class="img-fluid img-thumbnail"
+                      alt="..."
+                    ></img>
+                  </div>
+                  {/* share button end */}
                 </div>
-              )}
+                {!["Owner", "Admin"].includes(medata?.user?.Role) && (
+                  <div className={`add-favourite-box `}>
+                    <button
+                      className={`add-favourite-btn ${index}`}
+                      onClick={() => {
+                        if (medata && medata.IsAuthenticated == true) {
+                          dispatch(
+                            AddFavouriteAndUnFavouriteAction({
+                              PostData: { PostId: PostData._id },
+                            })
+                          );
+                        } else {
+                          navigate("/login");
+                        }
+                      }}
+                    >
+                      {medata?.user?.FavouritePost?.some(
+                        (fav) =>
+                          String(fav.PostData.PostId?._id) ===
+                          String(PostData._id)
+                      ) ? (
+                        <img
+                          className="fav-icon"
+                          src="/img/Un-Fav-Post.svg"
+                          alt="Fav-icon"
+                        />
+                      ) : (
+                        <img
+                          className="fav-icon"
+                          src="/img/Fav-Post.svg"
+                          alt="Fav-icon"
+                        />
+                      )}
+                    </button>
+                    {location.pathname.includes("user/my-listing") &&
+                      PostData.BasicDetails.PropertyAdType == "Rent" && (
+                        <>
+                          <Link to={`/user/post/update/${PostData._id}`}>
+                            <img src="/img/edit.png" className="editIcon" />
+                          </Link>
+                        </>
+                      )}
+                  </div>
+                )}
+              </div>
             </div>
             <div>
               <p className="property-address">{PropertyAddress}</p>
@@ -436,44 +441,82 @@ export default function PostCard({ PostData, index }) {
           </div>
         </div>
       </div>
-      {/* share card  */}
+      {/* share card begin  */}
 
-      {isShare && (
-        <div className="share1">
-          <div className="share2">
-            <p className="sharehead">Share Property with Your Friends !</p>
-            <ul className="containerBox">
-              <li className="share_options">
-                <Link
-                  to={`https://t.me/share/url?url=${window.location.href}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="share_options"
-                >
-                  Telegram
-                </Link>
-              </li>
-              <li className="share_options">
-                <Link
-                  to={`https://wa.me/?text=${window.location.href}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="share_options"
-                >
-                  WhatsApp
-                </Link>
-              </li>
-              <li className="share_options">
-                <p onClick={shareUrl}>Copy URL</p>
-              </li>
-            </ul>
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content rounded-4 shadow-lg">
+            <div className="modal-header border-0">
+              <h3 className="modal-title fs-6 text-sm " id="exampleModalLabel">
+                Share Property with Your Friends!
+              </h3>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              />
+            </div>
+            <div className="modal-body p-2">
+  <p className="text-muted">
+    Choose a platform to share this property:
+  </p>
+  <ul className="list-unstyled d-flex gap-3 justify-center">
+    <li className="mb-2">
+      <Link
+        to={`https://wa.me/?text=${window.location.href}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow justify-center"
+      >
+       
+        WhatsApp
+      </Link>
+    </li>
+    <li className="mb-2">
+      <Link
+        to={`https://t.me/share/url?url=${window.location.href}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="d-flex align-items-center text-decoration-none text-primary p-2 rounded-3 border border-1 border-primary hover-shadow justify-center"
+      >
+      
+        Telegram
+      </Link>
+    </li>
 
-            <button className="shareButton">
-              <span style={{ padding: "2px" }}>Close</span>
-            </button>
+    <li className="mb-2">
+      <p
+        onClick={shareUrl}
+        className="d-flex align-items-center text-decoration-none text-dark p-2 rounded-3 border border-1 border-secondary hover-shadow justify-center"
+      >
+       
+        Copy URL
+      </p>
+    </li>
+  </ul>
+</div>
+
+            <div className="modal-footer border-0">
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-sm"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* share card end  */}
     </>
   );
 }

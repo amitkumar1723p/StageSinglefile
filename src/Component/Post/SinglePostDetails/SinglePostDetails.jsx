@@ -200,22 +200,21 @@ export default function SinglePostDetails() {
 
   return (
     <>
-     <div className="floating-buttons">
-    
-            {/* Call Button */}
-            <Link to="tel:+917837840785" className="call-button">
-              <img src="/img/call.png" alt="Call" />
-            </Link>
-            {/* WhatsApp Button */}
-            <Link
-              to="https://wa.me/7837840785"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whatsapp-button"
-            >
-              <img src="/img/whatapp.png" alt="WhatsApp" />
-            </Link>
-          </div>
+      <div className="floating-buttons">
+        {/* Call Button */}
+        <Link to="tel:+917837840785" className="call-button">
+          <img src="/img/call.png" alt="Call" />
+        </Link>
+        {/* WhatsApp Button */}
+        <Link
+          to="https://wa.me/7837840785"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatsapp-button"
+        >
+          <img src="/img/whatapp.png" alt="WhatsApp" />
+        </Link>
+      </div>
       {/* {openReportForm === true ? (
         <div className="report-form-container">
           <div className="report-form-header">
@@ -237,11 +236,24 @@ export default function SinglePostDetails() {
             {/* <!-- Left side: Property Image --> */}
 
             <div className="property-image">
+              {/* post verified-section-start */}
+              <div className="icon-box-main">
+                {getSinglePostData.SinglePost.PostVerify ? (
+                  <div className="active-post-main">
+                    <img src="/img/verified-tag.svg" alt="verified-tag" />
+                    <p className="active-post-para-main">Verified</p>
+                  </div>
+                ) : (
+                  <div className="inactive-post-main">
+                    <p className="inactive-post-para-main">Inactive</p>
+                  </div>
+                )}
+              </div>
               <ShowSinglePostImages
                 Images={getSinglePostData.SinglePost.PropertyImages}
               />
               {/* Single Post First Card  */}
-                
+
               <div className="property-info">
                 <div className="property-location">
                   <p className="Property-detail-heading"> {PropertyAddress}</p>
@@ -511,7 +523,6 @@ export default function SinglePostDetails() {
                   </div>
                 )}
               </div>
-             
             </div>
 
             {/* Single Post Second Card  */}
@@ -617,8 +628,10 @@ export default function SinglePostDetails() {
                     />
 
                     <PropertyDataBox
-                      Answer={getSinglePostData.SinglePost.FloorDetails
-                        .OverLookingView}
+                      Answer={
+                        getSinglePostData.SinglePost.FloorDetails
+                          .OverLookingView
+                      }
                       Icon="/img/area.png"
                       Data={"Overlooking View"}
                     />

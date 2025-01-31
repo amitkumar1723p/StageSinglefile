@@ -106,9 +106,9 @@ export default function BiddingFormForm({
     if (!BiddingFormData.BidPrice) {
       return alert("enter bid price");
     }
-    if (previewImage.length <= 0) {
-      return alert("image field is required");
-    }
+    // if (previewImage.length <= 0) {
+    //   return alert("image field is required");
+    // }
     if (BiddingFormData.AcceptPolicy == false) {
       return alert("Accept Terms & Conditions");
     }
@@ -296,12 +296,12 @@ export default function BiddingFormForm({
             {/* <div></div> */}
             {/* <div></div> */}
 
-            <div className="uploadfile-input">
+            {/* <div className="uploadfile-input">
               <div className="file-label">
                 <img src="/img/upload.png" alt="upload" />
                 <p className="name-upload">Choose File</p>
                 <p className="upload-section">
-                  {" "}
+                 
                   Supported Format: JPEG, PNG,SVG
                 </p>
               </div>
@@ -349,7 +349,7 @@ export default function BiddingFormForm({
                   });
                 }}
               />
-            </div>
+            </div> */}
 
             <div className="showpreviewImage-Container">
               {previewImage.map((image, index) => {
