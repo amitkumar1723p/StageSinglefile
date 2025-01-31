@@ -354,7 +354,34 @@ export default function AdminListingCard({
                 >
                   <button className="contact-button">View Listing</button>
                 </Link>
-
+                <div className="Verified-lable">
+                  <p>Verified lable :</p>
+                  <label className="toggle-switch-container">
+                    <input
+                      type="checkbox"
+                      checked={ToggleBtn}
+                      onChange={(e) => {
+                        setToggleBtn(!ToggleBtn);
+                        if (e.target.checked == true) {
+                          let postdata = { PostVerifyShow: true };
+                          let postid = PostData._id;
+                          dispatch(
+                            showVeirifyPostIconAction({ postdata }, postid)
+                          );
+                        }
+                        if (e.target.checked == false) {
+                          let postdata = { PostVerifyShow: false };
+                          let postid = PostData._id;
+                          dispatch(
+                            showVeirifyPostIconAction({ postdata }, postid)
+                          );
+                        }
+                      }}
+                      className="toggle-switch-input"
+                    />
+                    <span className="toggle-btn-slider"></span>
+                  </label>
+                </div>
                 {medata?.user?.Role != "Agent" && (
                   <div className="verify-box-section">
                     {/* {location.pathname.includes("admin") && ( */}
@@ -451,35 +478,6 @@ export default function AdminListingCard({
                   </button>
                 )}
               </div> */}
-
-              <label className="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  checked={ToggleBtn}
-                  onChange={(e) => {
-                    setToggleBtn(!ToggleBtn);
-                    if (e.target.checked == true) {
-                      let postdata = { PostVerifyShow: true };
-                      let postid = PostData._id;
-                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
-                    }
-                    if (e.target.checked == false) {
-                      let postdata = { PostVerifyShow: false };
-                      let postid = PostData._id;
-                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
-                    }
-
-                    //  if(){
-
-                    //  }
-                  }}
-                  // onChange={}
-                  // onClick={}
-                  className="toggle-switch-input"
-                />
-
-                <span className="toggle-btn-slider"></span>
-              </label>
             </div>
           </div>
         </div>

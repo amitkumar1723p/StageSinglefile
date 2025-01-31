@@ -282,18 +282,18 @@ export default function SinglePostDetails() {
 
             <div className="property-image">
               {/* post verified-section-start */}
-              <div className="icon-box-main">
-                {getSinglePostData.SinglePost.PostVerify ? (
-                  <div className="active-post-main">
-                    <img src="/img/verified-tag.svg" alt="verified-tag" />
-                    <p className="active-post-para-main">Verified</p>
-                  </div>
-                ) : (
-                  <div className="inactive-post-main">
-                    <p className="inactive-post-para-main">Inactive</p>
-                  </div>
-                )}
+              <div className="icon-box">
+                {getSinglePostData.SinglePost.PostVerifyShow ? (
+                  getSinglePostData.SinglePost.PostVerify ? (
+                    <div className="active-post">
+                      <img src="/img/verified-tag.svg" alt="verified-tag" />
+                      <p className="active-post-para">Verified</p>
+                    </div>
+                  ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
+                ) : null}{" "}
+                {/* If PostVerifyShow is false, show nothing */}
               </div>
+
               <ShowSinglePostImages
                 Images={getSinglePostData.SinglePost.PropertyImages}
               />
@@ -1014,9 +1014,6 @@ export default function SinglePostDetails() {
                       Component={ScheduleYourVisit}
                       SetShow={setshowScheduleVisitForm}
                       BtnRef={ScheduleYourVisitOpenBtnRef}
-
-
-                      
                       SinglePostData={getSinglePostData}
                       PropertyAddress={PropertyAddress}
                     />
