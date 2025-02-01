@@ -501,26 +501,30 @@ export default function SinglePostDetails() {
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Rent" && (
                       <>
-                        <span>
-                          <span>
-                            Rent Price
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .ExpectedRent
-                            )}
-                          </span>
-                          <br />
-                          <span>
-                            {" "}
-                            DepositePrice Price{" "}
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .DepositePrice
-                            )}
-                          </span>
-                        </span>
+                        <div className="rent-main-section">
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .ExpectedRent
+                              )} <span>/Month
+                                 </span> 
+                            </p> 
+                            <p className="rent-ques-section" >Rent Price</p>
+                          </div>
 
-                        {!["Owner", "Admin"].includes(medata?.user?.Role) &&
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .DepositePrice
+                              )}
+                            </p>
+                            <p className="rent-ques-section" >Deposite Price</p>
+                          </div>
+                        </div>
+
+                        {/* {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                           getSinglePostData.SinglePost.CreatePostUser !==
                             medata?.user?._id && (
                             <span
@@ -537,7 +541,7 @@ export default function SinglePostDetails() {
                             >
                               Create Response
                             </span>
-                          )}
+                          )} */}
                       </>
                     )}
                   </div>

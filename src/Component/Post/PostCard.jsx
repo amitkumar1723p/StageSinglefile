@@ -213,17 +213,17 @@ export default function PostCard({ PostData, index }) {
             setRunImageSlider(false);
           }}
         >
-        <div className="icon-box">
-  {PostData.PostVerifyShow ? (
-    PostData.PostVerify ? (
-      <div className="active-post">
-        <img src="/img/verified-tag.svg" alt="verified-tag" />
-        <p className="active-post-para">Verified</p>
-      </div>
-    ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
-  ) : null} {/* If PostVerifyShow is false, show nothing */}
-</div>
-
+          <div className="icon-box">
+            {PostData.PostVerifyShow ? (
+              PostData.PostVerify ? (
+                <div className="active-post">
+                  <img src="/img/verified-tag.svg" alt="verified-tag" />
+                  <p className="active-post-para">Verified</p>
+                </div>
+              ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
+            ) : null}{" "}
+            {/* If PostVerifyShow is false, show nothing */}
+          </div>
 
           {/* <div className="IconBox">
             <div className="edit-delete-Icon-box">
@@ -376,17 +376,22 @@ export default function PostCard({ PostData, index }) {
                   {/* Show Reserve Price  */}
                   {PostData.BasicDetails.PropertyAdType == "Sale" && (
                     <>
-                      <span className="price-rp-que"> Reserve Price </span>:
-                      <span className="price-section">
-                        {formatReservePrice(
-                          PostData.PricingDetails.ExpectedPrice
-                        )}
-                      </span>
+                      
+                      <div>
+                      <div className="price-section-sale">
+                        <span className="price-rp-que"> Reserve Price </span>:
+                        <span className="price-section">
+                          {formatReservePrice(
+                            PostData.PricingDetails.ExpectedPrice
+                          )}
+                        </span>
+                      </div>
+                      <p className="post-card-section">
+                        ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                      </p>
+                      </div>
                     </>
                   )}
-                </p>
-                <p className="post-card-section">
-                  ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
                 </p>
               </div>
               {PostData.BasicDetails.PropertyAdType == "Rent" && (
@@ -404,7 +409,7 @@ export default function PostCard({ PostData, index }) {
                       </div>
                       <div>
                         <div className="Reserveprice-sec">
-                          <div className="price-pr-anwser">
+                          <div className="Reserveprice-sec-grid">
                             <p className="price-ans">
                               {formatReservePrice(
                                 PostData.PricingDetails.DepositePrice

@@ -242,13 +242,16 @@
 }
 .admin-property-address {
   color: #303030;
-
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 1px;
+  white-space: nowrap; /* Prevent text from wrapping */
 }
+
 
 /* .property-Area {
     padding: 10px 0 0 0;
@@ -565,7 +568,7 @@
 }
 
 .price-ans {
-  color: #555592;
+  color: var(--main-light-clr);
 
   font-size: 14px;
   font-style: normal;

@@ -84,7 +84,7 @@
   width: fit-content;
   /* border: 1px solid var(--Color-Primary-Background, #cde0ff); */
   background: #fff;
-  box-shadow: 0px 0px 12px 0px #CBE1F1;
+  box-shadow: 0px 0px 12px 0px #cbe1f1;
 }
 
 .rent-amount-section {
@@ -103,7 +103,7 @@
   margin-left: 10px;
   flex: 1;
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
   flex-direction: column;
   justify-content: space-between;
 }
@@ -123,7 +123,7 @@
 }
 
 .question-box {
-  color: #686868;
+  color: var(--main-light-clr);
 
   font-size: 10px;
   font-style: normal;
@@ -473,12 +473,18 @@
 }*/
 
 .rent-deposite-section {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+ 
+}
+
+.Reserveprice-sec-grid{
+  margin-left: 20px;
 }
 
 .price-ans {
-  color: #555592;
+  color: var(--main-light-clr);
 
   font-size: 14px;
   font-style: normal;

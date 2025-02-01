@@ -8,7 +8,7 @@
   /* margin: 10px; */
   background-color: #f1f5f9;
   width: fit-content;
-  padding: 5px;
+  /* padding: 5px; */
   border-radius: 5px;
 }
 
@@ -92,6 +92,11 @@ transition: .5s;
 
   color: var(--main-light-clr);
   /* padding-left: 10px; */
+}
+
+.price-section-sale{
+  display: flex;
+  gap: 5px;
 }
 
 .showpost {

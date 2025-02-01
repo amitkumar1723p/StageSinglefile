@@ -210,12 +210,12 @@
   color: #fff;
   cursor: pointer;
   border-radius: 5px;
+
   transition: background-color 0.3s ease;
 }
 .search-button:hover {
-  transition: 0.5s;
-  color: #fff;
-  background-color: rgba(44, 132, 232, 1);
+  opacity: .9;
+  transition: 1s;
 }
 /* Property Section */
 .property-section {
