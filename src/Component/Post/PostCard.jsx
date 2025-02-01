@@ -265,7 +265,7 @@ export default function PostCard({ PostData, index }) {
                   <div data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img
                       src="/img/share-btn.svg"
-                      class="img-fluid img-thumbnail"
+                      className="img-fluid img-thumbnail"
                       alt="..."
                     ></img>
                   </div>

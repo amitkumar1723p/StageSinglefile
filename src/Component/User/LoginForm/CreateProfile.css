@@ -69,6 +69,7 @@
 .signup-form-content-unique input[type="text"],
 .signup-form-content-unique input[type="number"],
 .signup-form-content-unique input[type="email"],
+.signup-form-content-unique select,
 .signup-form-content-unique input[type="password"] {
   border-radius: 7px;
   border: 1px solid #daeaf9;
@@ -78,10 +79,12 @@
   align-items: center;
   gap: 6px;
   align-self: stretch;
+  outline: none;
 }
 
 .signup-form-content-unique input[type="text"]:focus,
 .signup-form-content-unique input[type="email"]:focus,
+.signup-form-content-unique select:focus,
 .signup-form-content-unique input[type="password"]:focus {
   border-color: #007bff;
   outline: none;

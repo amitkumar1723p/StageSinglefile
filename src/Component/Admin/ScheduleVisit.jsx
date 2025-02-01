@@ -74,7 +74,7 @@ const ScheduleVisit = () => {
         ScheduleVisitsData.success == true &&
         ScheduleVisitsData.ScheduleVisits.map((visitData, i) => {
           const { PostId } = visitData.PostData;
-          let FullPropertyAddresh = `${`${PostId?.PropertyDetails.BHKType} BHK`} ${
+          let FullPropertyAddress = `${`${PostId?.PropertyDetails.BHKType} BHK`} ${
             PostId?.BasicDetails.ApartmentType
           } For ${PostId?.BasicDetails.PropertyAdType} In ${
             PostId?.LocationDetails.Locality
@@ -98,7 +98,7 @@ const ScheduleVisit = () => {
                 </div>
                 <div className="schedule-visit-property-info">
                   <p className="schedule-visit-property-details">
-                    {FullPropertyAddresh}
+                    {FullPropertyAddress}
                   </p>
                   <p className="schedule-visit-pid">
                     PID:{" "}

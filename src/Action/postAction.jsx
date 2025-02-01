@@ -355,7 +355,7 @@ export const VerifyPostAction = ({ postdata }, postId) => {
 };
 
 export const showVeirifyPostIconAction = ({ postdata }, postId) => {
-  console.log(postdata);
+  
   return async (dispatch) => {
     try {
       dispatch({
@@ -645,7 +645,7 @@ export const Admin_AgentGetAllPostAction = (Keyword) => {
 // for active or de-active property
 
 export const Active_InactiveProperty=(AssignProperty,status)=>{
-  console.log(AssignProperty,status)
+  
   return async(dispatch)=>{
    try {
     dispatch({

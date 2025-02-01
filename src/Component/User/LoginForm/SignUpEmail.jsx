@@ -41,7 +41,7 @@ const SignUpForm = ({ setlogin, setsignup, SignUpData, setSignUpData  , viewStat
            <input
              type="text"
              placeholder="Enter your Contact Number"
-             value={SignUpData.ContactNumber.trimStart()}
+             value={SignUpData?.ContactNumber?.trimStart()  || ""}
              onChange={(e) =>
                setSignUpData({ ...SignUpData, ContactNumber: e.target.value })
              }

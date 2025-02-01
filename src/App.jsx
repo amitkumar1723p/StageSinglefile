@@ -450,9 +450,10 @@ function App() {
         />
       )}
       {/* <ScrollToTop /> */}
-
+  
       <Routes>
         <Route exact path="/login" element={<UserForm />} />
+        <Route exact path="/nri/login" element={<UserForm />} />
         {/* Admin ,Owner ,Agent */}
         <Route
           exact
@@ -469,7 +470,7 @@ function App() {
         <Route exact path="/home/card" element={<PropertyFiltersCard />} />
         <Route
           exact
-          path="/post-detail/:PostAddresh"
+          path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
         />
 
