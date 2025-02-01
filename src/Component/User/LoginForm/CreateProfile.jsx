@@ -20,10 +20,6 @@ const CreateProfile = ({
 }) => {
   const dispatch = useDispatch();
 
- 
- 
-  
-
   const [countryArray, setcountryArray] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +50,6 @@ const CreateProfile = ({
   }, [countries]);
   return (
     <>
-      {" "}
       <ScrollToTop />
       <div className="main-sign-box">
         <div className="signup-form-wrapper-unique">
