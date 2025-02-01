@@ -39,7 +39,7 @@ export default function CreatePostMain() {
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
   //  Update Post Logic
-  // console.log(uploadimages,"fdfhfiueruc")
+ 
   //  GetSinglePostAction
   useEffect(() => {
     if (update) {
@@ -313,9 +313,7 @@ export default function CreatePostMain() {
     BasicDetailsData.ApartmentType,
     BasicDetailsData.PropertyStatus,
   ]);
-  {
-    console.log(AreaDetailsData);
-  }
+ 
 
   useEffect(() => {
     if (data) {
@@ -414,7 +412,7 @@ export default function CreatePostMain() {
       setFourth(true);
     }
   });
-  // console.log("yfguyegfu",uploadimages)
+  
   return (
     <>
       {(LodingType &&

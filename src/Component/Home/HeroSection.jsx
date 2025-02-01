@@ -88,7 +88,7 @@ const HeroSection = () => {
   useEffect(() => {
     if (AllPostData && GetProjectNameData) {
       if (AllPostData.success == true && GetProjectNameData.success == true) {
-        console.log("All Post Fetch");
+        
 
         if (RedirectPathIsHomeCard == false) {
           navigate(

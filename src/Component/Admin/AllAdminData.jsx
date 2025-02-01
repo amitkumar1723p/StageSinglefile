@@ -32,7 +32,7 @@ export default function AllAdminData() {
     } else if (querry.get("AgentVerify")) {
       dispatch(GetAllAdminAction({ AgentVerify: querry.get("AgentVerify") }));
     }
-    // console.log(params)
+  
     // if (location.pathname == "/admin/data/verify") {
     //   dispatch(GetAllAdminAction({ Keyword: "VerifyAdmin" }));
     // } else if (location.pathname == "/admin/data/unverify") {

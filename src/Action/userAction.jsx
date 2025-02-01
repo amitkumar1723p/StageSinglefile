@@ -3,7 +3,7 @@ const api_Base_Url = process.env.REACT_APP_API_URL;
 //  Create User Action    Change Genrate Otp  By User Create
 
 export const CreateUserOtpAction = (userData) => {
-  console.log("userData", userData.email);
+ 
   return async (dispatch) => {
     try {
       dispatch({
@@ -46,7 +46,7 @@ export const VerifyUserOtpAction = (userData) => {
         type: "VerifyUserOtpRequest",
         payload: "VerifyUserOtpRequest",
       });
-      // console.log(userData);
+     
 
       // let url = "";
       // const url = `${api_Base_Url}/user/${
@@ -80,13 +80,13 @@ export const VerifyUserOtpAction = (userData) => {
 export const CreateUserAction = (userData ,ISNRI) => {
   return async (dispatch) => {
     // ISNRI
-    console.log(userData)
+    
     try {
       dispatch({
         type: "CreateUserRequest",
         payload: "CreateUserRequest",
       });
-      console.log("ISNRI" ,ISNRI)
+       
       // const url = "/user/create";
       // const url = `${api_Base_Url}/user/create`;
       const url = `${api_Base_Url}/user/${ISNRI?"nri-create":"create"}`;

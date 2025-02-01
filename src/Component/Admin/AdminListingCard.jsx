@@ -114,7 +114,7 @@ export default function AdminListingCard({
       setisAssignedToAnyUser(AssingPosts);
     }
   }, [AssignPostData]);
-  // console.log(AssignProperty,"dfkfvgguervyv")
+  
   // end here remove assign work
 
   return (
