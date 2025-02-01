@@ -51,12 +51,8 @@ const HeroSection = () => {
 
   // };
 
-  const {
-    setRedirectPath,
-    RedirectPath,
-    RedirectPathIsHomeCard,
-    setRedirectPathIsHomeCard,
-  } = useContext(UserContext);
+  const { setRedirectPath, RedirectPathIsHomeCard, setRedirectPathIsHomeCard } =
+    useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
   const { medata } = useSelector((state) => {
@@ -88,8 +84,6 @@ const HeroSection = () => {
   useEffect(() => {
     if (AllPostData && GetProjectNameData) {
       if (AllPostData.success == true && GetProjectNameData.success == true) {
-        
-
         if (RedirectPathIsHomeCard == false) {
           navigate(
             `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
@@ -115,6 +109,7 @@ const HeroSection = () => {
     PropertyRequirementBtnRef.current[0] = React.createRef();
     PropertyRequirementBtnRef.current[1] = React.createRef();
     sessionStorage.removeItem("RedirectPath");
+    // sessionStorage.removeItem("isFirstLoad");
     setRedirectPath("");
   }, []);
 

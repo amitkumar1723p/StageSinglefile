@@ -113,6 +113,7 @@ const PropertyFilters = () => {
       // Cleanup event listeners on component unmount
       return () => {
         window.removeEventListener("beforeunload", handleBeforeUnload);
+        sessionStorage.removeItem("isFirstLoad")
       };
     }
   }, []);
