@@ -313,7 +313,7 @@ export default function SinglePostDetails() {
                     <div className="img-box-imp-data">
                       <span className="img-box-details-span">
                         {`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`}
-                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom.map(
+                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom?.map(
                           (text) => {
                             return `+ ${
                               text == "Pooja Room"

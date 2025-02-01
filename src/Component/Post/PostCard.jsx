@@ -325,7 +325,7 @@ export default function PostCard({ PostData, index }) {
                 <div className="img-box-imp-data-card">
                   <p className=" answer-box">
                     {`${PostData.PropertyDetails.BHKType} BHK`}{" "}
-                    {PostData.PropertyDetails?.OtherRoom.map((text) => {
+                    {PostData.PropertyDetails?.OtherRoom?.map((text) => {
                       return `+ ${
                         text == "Pooja Room"
                           ? "Pooja"
