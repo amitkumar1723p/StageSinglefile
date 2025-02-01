@@ -62,8 +62,8 @@ export default function SinglePostDetails() {
   });
 
   useEffect(() => {
-    let postaddresh = Params.PostAddresh;
-    let postId = postaddresh.substring(postaddresh.lastIndexOf("-") + 1);
+    let postaddress = Params.PostAddress;
+    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
     dispatch(GetSinglePostAction(postId));
   }, []);
@@ -179,7 +179,7 @@ export default function SinglePostDetails() {
         setFloorDetails(`${propertyOnFloorText}${totalFloorsText}`);
       }
     }
-  }, [getSinglePostData, Params.PostAddresh]);
+  }, [getSinglePostData, Params.PostAddress]);
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
@@ -241,7 +241,6 @@ export default function SinglePostDetails() {
     setOpenReportForm(false);
   };
   {
-    console.log(areaDetails);
   }
   return (
     <>
@@ -1014,9 +1013,6 @@ export default function SinglePostDetails() {
                       Component={ScheduleYourVisit}
                       SetShow={setshowScheduleVisitForm}
                       BtnRef={ScheduleYourVisitOpenBtnRef}
-
-
-                      
                       SinglePostData={getSinglePostData}
                       PropertyAddress={PropertyAddress}
                     />

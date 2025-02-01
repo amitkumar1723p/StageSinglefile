@@ -3,6 +3,7 @@ const api_Base_Url = process.env.REACT_APP_API_URL;
 //  Create User Action    Change Genrate Otp  By User Create
 
 export const CreateUserOtpAction = (userData) => {
+  console.log("userData", userData.email);
   return async (dispatch) => {
     try {
       dispatch({
@@ -10,8 +11,10 @@ export const CreateUserOtpAction = (userData) => {
         payload: "CreateUserOtpRequest",
       });
       // const url = "/user/create";
-      const url = `${api_Base_Url}/user/genrate-otp`;
-
+      const url = `${api_Base_Url}/user/${
+        userData.email ? "nri-genrate-otp" : "genrate-otp"
+      }`;
+      //  const url =  ""
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -43,7 +46,14 @@ export const VerifyUserOtpAction = (userData) => {
         type: "VerifyUserOtpRequest",
         payload: "VerifyUserOtpRequest",
       });
-      const url = `${api_Base_Url}/user/verify-otp`;
+      // console.log(userData);
+
+      // let url = "";
+      // const url = `${api_Base_Url}/user/${
+      //   userData.email ? "nri-genrate-otp" : "genrate-otp"
+      // }`;
+      
+      const url = `${api_Base_Url}/user/${userData.email?"nri-verify-otp":"verify-otp"}`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -67,16 +77,19 @@ export const VerifyUserOtpAction = (userData) => {
   };
 };
 
-export const CreateUserAction = (userData) => {
+export const CreateUserAction = (userData ,ISNRI) => {
   return async (dispatch) => {
+    // ISNRI
+    console.log(userData)
     try {
       dispatch({
         type: "CreateUserRequest",
         payload: "CreateUserRequest",
       });
+      console.log("ISNRI" ,ISNRI)
       // const url = "/user/create";
-      const url = `${api_Base_Url}/user/create`;
-
+      // const url = `${api_Base_Url}/user/create`;
+      const url = `${api_Base_Url}/user/${ISNRI?"nri-create":"create"}`;
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -318,11 +331,12 @@ export const GetAllAdminAction = (Keyword) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllAdminRequest" });
-       
+
       let url;
       if (Keyword) {
-        url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]}=${Keyword[Object.keys(Keyword)[0]]
-        }`;
+        url = `${api_Base_Url}/admin-owner/admin-data?${
+          Object.keys(Keyword)[0]
+        }=${Keyword[Object.keys(Keyword)[0]]}`;
       } else {
         url = `/admin-owner/admin-data`;
       }
@@ -431,7 +445,6 @@ export const VerifyBidAction = ({ biddata }, BidId) => {
         payload: "VerifyBidRequest",
       });
 
-      
       let url = `${api_Base_Url}/Biddingform/bid/verify/${BidId}`;
 
       const config = {
@@ -499,7 +512,6 @@ export const PostPropertyRequirementAction = (PostRequirementData) => {
         payload: "PostPropertyRequirementRequest",
       });
 
-   
       const url = `${api_Base_Url}/property-requirement/create`;
 
       const config = {
@@ -605,9 +617,8 @@ export const GetAllTenentResponseAction = (AdminVerify) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllTenentResponseRequest" });
-       
+
       let url = `${api_Base_Url}/tenant-post-response/get`;
- 
 
       const config = {
         headers: { "Content-Type": "application/json" },

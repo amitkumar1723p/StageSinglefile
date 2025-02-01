@@ -5,29 +5,36 @@ import Loader from "./Loader/Loader";
 import { GetMeDetailsAction } from "../Action/userAction";
 export default function ProtectedRoutes({ Component }) {
   const navigate = useNavigate();
-  const location =useLocation()
+  const location = useLocation();
   const dispatch = useDispatch();
   const { loading, medata } = useSelector((state) => {
     return state.meDetails;
   });
- 
 
   // useEffect(()=>{
   //   dispatch(GetMeDetailsAction());
   //  },[location.pathname])
 
   const { data, LodingType } = useSelector((state) => {
-    
     return state.userData;
   });
   useEffect(() => {
     if (medata) {
       // if (medata.IsAuthenticated == false ||   medata.user?.Role !== "User") {
-      if (medata.IsAuthenticated == false ||  !["Buyer", "Tenant", "PropertyOwner","Channel Partner"].includes(medata.user?.Role)) {
+      if (
+        medata.IsAuthenticated == false ||
+        ![
+          "Buyer",
+          "Tenant",
+          "PropertyOwner",
+          "Channel Partner",
+          "NRI",
+        ].includes(medata.user?.Role)
+      ) {
         navigate("/");
       }
     }
-    
+
     // eslint-disable-next-line
   }, [medata, navigate]);
 
@@ -41,7 +48,14 @@ export default function ProtectedRoutes({ Component }) {
           {medata &&
             (medata.IsAuthenticated === false ||
             // (medata.user && medata.user.Role !== "User") ? (
-            (medata.user && !["Buyer", "Tenant", "PropertyOwner","Channel Partner"].includes(medata.user.Role)) ? (
+            (medata.user &&
+              ![
+                "Buyer",
+                "Tenant",
+                "PropertyOwner",
+                "Channel Partner",
+                "NRI",
+              ].includes(medata.user.Role)) ? (
               <Navigate to={"/"} />
             ) : (
               <Component />
@@ -51,4 +65,3 @@ export default function ProtectedRoutes({ Component }) {
     </>
   );
 }
-

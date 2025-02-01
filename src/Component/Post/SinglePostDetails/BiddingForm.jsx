@@ -208,7 +208,7 @@ export default function BiddingFormForm({
           </div>
           <h2 className="mke-you-offer-title">Make your Offer</h2>
           <div className="main-box-content">
-            <div className="mke-you-offer-prperty-addresh-box">
+            <div className="mke-you-offer-prperty-address-box">
               <div className="apart-prop-id-box">
                 <p className="form-heading-name">{PropertyAddress}</p>
               </div>

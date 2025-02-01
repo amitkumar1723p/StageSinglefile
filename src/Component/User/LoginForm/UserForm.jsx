@@ -16,17 +16,14 @@ export default function UserForm() {
   const [signup, setsignup] = useState(false);
 
   const [SignUpData, setSignUpData] = useState({
-    ContactNumber: "",
+    // ContactNumber: "",
   });
-  const [OtpData, setOtpData] = useState({ Otp: "", OtpExpire: "" });
-  const [CreateProfileData, setCreateProfileData] = useState({
-    Name: "",
-    Role: "",
-  });
+  const [OtpData, setOtpData] = useState({ Otp: "" });
+  const [CreateProfileData, setCreateProfileData] = useState({});
   const [viewState, setViewState] = useState({
-    showLoginAndSignup: true,
+    showLoginAndSignup: false,
     showOtpVerify: false,
-    showCreateProfileSection: false,
+    showCreateProfileSection: true,
   });
 
   const dispatch = useDispatch();
@@ -42,7 +39,7 @@ export default function UserForm() {
   });
 
   const [URlVisit, setUrlVisit] = useState(true);
-
+  const ISNRI = location.pathname == "/nri/login";
   useEffect(() => {
     if (medata) {
       if (medata.IsAuthenticated == true) {
@@ -87,7 +84,8 @@ export default function UserForm() {
           showLoginAndSignup: false,
           showOtpVerify: true,
         });
-        setOtpData({ ...OtpData, OtpExpire: data.OtpExpire });
+        // setOtpData({ ...OtpData, OtpExpire: data.OtpExpire });
+        setOtpData({ ...OtpData });
       }
 
       if (CreateUserProfileVerifyOtp == true) {
@@ -126,6 +124,7 @@ export default function UserForm() {
   useEffect(() => {
     setUrlVisit(true);
   }, []);
+
   return (
     <>
       {URlVisit === true && (
@@ -146,6 +145,7 @@ export default function UserForm() {
                       setSignUpData={setSignUpData}
                       setViewState={setViewState}
                       viewState={viewState}
+                      ISNRI={ISNRI}
                     />
                   )}
 
@@ -169,6 +169,7 @@ export default function UserForm() {
                   OtpData={OtpData}
                   setOtpData={setOtpData}
                   setViewState={setViewState}
+                  ISNRI={ISNRI}
                 />
               )}
               {viewState.showCreateProfileSection && (
@@ -176,6 +177,7 @@ export default function UserForm() {
                   SignUpData={SignUpData}
                   CreateProfileData={CreateProfileData}
                   setCreateProfileData={setCreateProfileData}
+                  ISNRI={ISNRI}
                 />
               )}
             </>

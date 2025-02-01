@@ -90,10 +90,7 @@ export default function AdminListingCard({
   });
 
   // ====================================== Store the id on click property id
-  // Check if no user is assigned
-  // const isAssignedToAnyUser = data?.Admin?.some((user) =>
-  //   user.AssignedPropertyId.includes(PostData?._id)
-  // );
+  
   // remove from Assign work start here
   const [selectedUserData, setSelectedUserData] = useState(null); // Initialize state to store selected user and post IDs
 
@@ -413,44 +410,7 @@ export default function AdminListingCard({
                 )}
               </div>
 
-              {/* <div className="post-verify-trademark">
-                {PostData.PostVerifyShow ? (
-                  <button
-                    onClick={() => {
-                      let Confrimbox = window.confirm(
-                        "Are you Sure Un-Veirify This Post"
-                      );
-                      if (Confrimbox) {
-                        let postdata = { PostVerifyShow: false };
-                        let postid = PostData._id;
-
-                        dispatch(
-                          showVeirifyPostIconAction({ postdata }, postid)
-                        );
-                      }
-                    }}
-                  >
-                    Un-Veirify
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      let Confrimbox = window.confirm(
-                        "Are you Sure Verify This Post"
-                      );
-                      if (Confrimbox) {
-                        let postdata = { PostVerifyShow: true };
-                        let postid = PostData._id;
-                        dispatch(
-                          showVeirifyPostIconAction({ postdata }, postid)
-                        );
-                      }
-                    }}
-                  >
-                    Veirify
-                  </button>
-                )}
-              </div> */}
+ 
 
               <label className="toggle-switch-container">
                 <input

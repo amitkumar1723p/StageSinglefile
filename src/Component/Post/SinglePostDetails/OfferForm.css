@@ -23,7 +23,7 @@
   gap: 8px;
 }
 
-.prperty-addresh-heading {
+.prperty-address-heading {
   color: #333;
   font-size: 14px;
   font-style: normal;
@@ -362,7 +362,7 @@
   border-bottom: 0.5px solid #a4d0ed;
 } */
 
-.mke-you-offer-prperty-addresh-box {
+.mke-you-offer-prperty-address-box {
   display: flex;
   flex-direction: column;
 
