@@ -10,21 +10,22 @@ export default function AllPost({
   AssignProperty,
   SearchPostId,
   sortOrder,
-  activeFilter
+  activeFilter,
+ 
 }) {
   const dispatch = useDispatch();
   const [OwnerPosts, setOwnerPosts] = useState([]);
-  const { loading, data } = useSelector((state) => {
-    return state.AdminGetAllPost;
-  });
+  const { loading, data } = useSelector((state) => state.AdminGetAllPost);
 
-  // Pagination logic
+
+  // Pagination logic state 
   const [page, setPage] = useState(1); // Current page for pagination
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const itemsPerPage = 10; // Number of items per page
 
-  // Update posts when data or sortOrder changes
+  // Update posts when data or sortOrder changes searching or pagination set inside this useEffect
   useEffect(() => {
+
     if (data?.Post) {
       let filteredPosts = [...data.Post];
   
@@ -55,13 +56,13 @@ export default function AllPost({
         filteredPosts=[...filteredPosts]
       }
   
-      console.log(filteredPosts.length, "filtered posts length");
+   
   
       // Sorting logic
       if (sortOrder !== undefined) {
-        if (sortOrder === 1) {
+        if (sortOrder === "ascending") {
           filteredPosts.sort((a, b) => new Date(a.createAt) - new Date(b.createAt)); // Ascending order
-        } else if (sortOrder === -1) {
+        } else if (sortOrder === "descending") {
           filteredPosts.sort((a, b) => new Date(b.createAt) - new Date(a.createAt)); // Descending order
         }
       }
@@ -82,7 +83,7 @@ export default function AllPost({
       setOwnerPosts(postsToDisplay); // Set the current page posts
     }
   }, [data, SearchPostId, sortOrder, activeFilter, page]);
-  
+
   // Re-run when data, SearchPostId, sortOrder, or page changes
 
   const [querry, setquerry] = useSearchParams();
@@ -94,7 +95,7 @@ export default function AllPost({
     }
   }, [querry, dispatch]);
 
-  // Pagination control functions
+  // Pagination control functions start 
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);
@@ -110,11 +111,11 @@ export default function AllPost({
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
   };
-
+ // Pagination control functions end
   return (
     <div className="Admin-property-post-card-main-box">
       <p className="AllListing-admin">All Listing</p>
-
+{/* here we itrate all available property for owner only start */}
       {OwnerPosts.length > 0 ? (
         OwnerPosts.map((post, index) => (
           <AdminListingCard
@@ -128,8 +129,10 @@ export default function AllPost({
       ) : (
         <div>No posts available</div>
       )}
+{/* here we itrate all available property for owner only end */}
 
-      {/* Pagination controls */}
+
+      {/* Pagination controls start */}
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-center">
           <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
@@ -160,6 +163,9 @@ export default function AllPost({
           </li>
         </ul>
       </nav>
+
+      {/* Pagination controls end  */}
+
 
       {/* Loading Spinner */}
       {loading && <div>Loading...</div>}

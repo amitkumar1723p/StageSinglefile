@@ -95,7 +95,7 @@ export default function AdminListingCard({
   //   user.AssignedPropertyId.includes(PostData?._id)
   // );
   // remove from Assign work start here
-  const [selectedUserData, setSelectedUserData] = useState(null); // Initialize state to store selected user and post IDs
+
 
   useEffect(() => {
     if (PostData?.PostVerifyShow) {

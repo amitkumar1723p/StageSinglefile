@@ -48,6 +48,7 @@ export default function AdminAgentOwnerPost() {
         "VerifyPostActionRequest",
         "ReOpenPostActionRequest",
         "showVeirifyPostIconRequest",
+        "Active_InactivePropertyRequest",
       ].includes(LodingType)
       // (LodingType === "VerifyPostActionRequest" ||
       //   LodingType === "ReOpenPostActionRequest")
@@ -137,36 +138,35 @@ export default function AdminAgentOwnerPost() {
   useEffect(() => {
     if (status !== "") {
       dispatch(Active_InactiveProperty(AssignProperty, status));
-      setTimeout(() => {
-        window.location.reload();
-      }, [500]);
+      setStatus("");
+      setAssignProperty([]);
     }
   }, [AssignProperty, status]);
 
   // Active In Active end
+
   // sorting property start  at created
-  const[propertyOrder,setPropertyOrder]=useState(1)
-  const handlePropertyOrder=()=>{
-    if(propertyOrder===1){
-      setPropertyOrder(-1)
-    }else{
-      setPropertyOrder(1)
+  const [propertyOrder, setPropertyOrder] = useState("ascending");
+  const handlePropertyOrder = () => {
+    if (propertyOrder === "ascending") {
+      setPropertyOrder("descending");
+    } else {
+      setPropertyOrder("ascending");
     }
-   
-  }
-// handle active and inactive
-const [active, setActive] = useState(null);
-const handleActive = (status) => {
-  setActive(status);
-  if (status===true) {
-    setPropertyOrder(true);
-  } else if(status===false) {
-    setPropertyOrder(false);
-  }else{
-    setPropertyOrder(null)
-  }
-};
-console.log(active,"kjfg")
+  };
+  // handle active and inactive
+  const [active, setActive] = useState(null);
+  const handleActive = (status) => {
+    setActive(status);
+    if (status === true) {
+      setPropertyOrder(true);
+    } else if (status === false) {
+      setPropertyOrder(false);
+    } else {
+      setPropertyOrder(null);
+    }
+  };
+
   // sorting property end
   return (
     <>
@@ -177,7 +177,7 @@ console.log(active,"kjfg")
 
         <button
           className={` ${!querry.get("PostVerify") ? "select" : ""}`}
-          onClick={() => handleActive(null)} 
+          onClick={() => handleActive(null)}
         >
           <span>All Post</span>
         </button>
@@ -198,16 +198,15 @@ console.log(active,"kjfg")
           // }}
           className={querry.get("PostVerify") == "false" ? "select" : ""}
           // o
-          onClick={() => handleActive(false)} 
+          onClick={() => handleActive(false)}
           // className={active == false ? "select" : ""}
         >
           Inactive
         </button>
-        <button 
-        onClick={handlePropertyOrder}  style={{pointerEvents: "auto"}}>
-       {propertyOrder===1?<>bottom to top</>:<>Top to bottom</>}
+        <button onClick={handlePropertyOrder} style={{ pointerEvents: "auto" }}>
+          {propertyOrder === 1 ? <>bottom to top</> : <>Top to bottom</>}
         </button>
-        
+
         {/* <button>Exprired</button>
         <button>Reported</button>
         <button>Success</button> */}
@@ -271,9 +270,7 @@ console.log(active,"kjfg")
             </select>
           </div>
           {/* here start */}
-          <div>
-          
-          </div>
+          <div></div>
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -317,13 +314,21 @@ console.log(active,"kjfg")
             </button>
           )}
 
-            {/* Buttons to change the status */}
-            <button  className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" onClick={() => handleStatusChange("Active")}>Active</button>
-           
-            <button className="px-3 mx-3 py-1 bg-primary bg-opacity-10 border border-info-subtle rounded" onClick={() => handleStatusChange("InActive")}>
-              In-Active
-            </button>
-            {/* Display the current status */}
+          {/* Buttons to change the status */}
+          <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => handleStatusChange("Active")}
+          >
+            Active
+          </button>
+
+          <button
+            className="px-3 mx-3 py-1 bg-primary bg-opacity-10 border border-info-subtle rounded"
+            onClick={() => handleStatusChange("InActive")}
+          >
+            In-Active
+          </button>
+          {/* Display the current status */}
         </div>
       )}
 
@@ -346,10 +351,10 @@ console.log(active,"kjfg")
             setAssignPropertyAdmin={setAssignPropertyAdmin}
             SearchPostId={SearchPostId}
             sortOrder={propertyOrder}
+            activeFilter={active}
           />
         )}
       </div>
     </>
-
   );
 }
