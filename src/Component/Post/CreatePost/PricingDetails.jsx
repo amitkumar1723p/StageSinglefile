@@ -71,7 +71,7 @@ export default function PricingDetails({
     }
   };
   const YesNoArray = [true, false];
-  const PreferredTenantArray = ["Single", "Family", "Married", "Others"];
+  const PreferredTenantArray = ["Single", "Family", "Company", "Others"];
   const [showPrice, setshowPrice] = useState("");
 
   useEffect(() => {
@@ -573,74 +573,75 @@ export default function PricingDetails({
                       <h3 className="basic-details-heading">
                         Preferred Tenant
                       </h3>
+                      <div className="flex gap-5 items-center ">
+                        {PreferredTenantArray.map((text, i) => {
+                          return (
+                            <div className="PropertyStatus-box-content items-center  " key={i}>
+                              <label htmlFor="">{text}</label>
 
-                      {PreferredTenantArray.map((text, i) => {
-                        return (
-                          <div className="PropertyStatus-box-content" key={i}>
-                            <label htmlFor="">{text}</label>
-
-                            <input
-                              type="checkbox"
-                              name=""
-                              id=""
-                              checked={
-                                PricingDetailsData.AdditionalDetails?.PreferredTenant?.includes(
-                                  text
-                                )
-                                  ? true
-                                  : false
-                              }
-                              onChange={(event) => {
-                                if (event.target.checked === true) {
-                                  // setPricingDetailsData({
-                                  //   ...PricingDetailsData,
-
-                                  //   PreferredTenant: [
-                                  //     ...PricingDetailsData.PreferredTenant,
-                                  //     text,
-                                  //   ],
-                                  // });
-
-                                  setPricingDetailsData({
-                                    ...PricingDetailsData,
-                                    AdditionalDetails: {
-                                      ...PricingDetailsData.AdditionalDetails,
-                                      PreferredTenant: [
-                                        ...PricingDetailsData.AdditionalDetails
-                                          ?.PreferredTenant,
-                                        text,
-                                      ],
-                                    },
-                                  });
+                              <input
+                                type="checkbox"
+                                name=""
+                                id=""
+                                checked={
+                                  PricingDetailsData.AdditionalDetails?.PreferredTenant?.includes(
+                                    text
+                                  )
+                                    ? true
+                                    : false
                                 }
-                                if (event.target.checked === false) {
-                                  setPricingDetailsData({
-                                    ...PricingDetailsData,
-                                    AdditionalDetails: {
-                                      ...PricingDetailsData.AdditionalDetails,
-                                      PreferredTenant:
-                                        PricingDetailsData.AdditionalDetails?.PreferredTenant?.filter(
-                                          (item) => {
-                                            return item !== text;
-                                          }
-                                        ),
-                                    },
-                                  });
-                                  // setPricingDetailsData({
-                                  //   ...PricingDetailsData,
-                                  //   PreferredTenant:
-                                  //     PricingDetailsData.PreferredTenant?.filter(
-                                  //       (item) => {
-                                  //         return item !== text;
-                                  //       }
-                                  //     ),
-                                  // });
-                                }
-                              }}
-                            />
-                          </div>
-                        );
-                      })}
+                                onChange={(event) => {
+                                  if (event.target.checked === true) {
+                                    // setPricingDetailsData({
+                                    //   ...PricingDetailsData,
+
+                                    //   PreferredTenant: [
+                                    //     ...PricingDetailsData.PreferredTenant,
+                                    //     text,
+                                    //   ],
+                                    // });
+
+                                    setPricingDetailsData({
+                                      ...PricingDetailsData,
+                                      AdditionalDetails: {
+                                        ...PricingDetailsData.AdditionalDetails,
+                                        PreferredTenant: [
+                                          ...PricingDetailsData
+                                            .AdditionalDetails?.PreferredTenant,
+                                          text,
+                                        ],
+                                      },
+                                    });
+                                  }
+                                  if (event.target.checked === false) {
+                                    setPricingDetailsData({
+                                      ...PricingDetailsData,
+                                      AdditionalDetails: {
+                                        ...PricingDetailsData.AdditionalDetails,
+                                        PreferredTenant:
+                                          PricingDetailsData.AdditionalDetails?.PreferredTenant?.filter(
+                                            (item) => {
+                                              return item !== text;
+                                            }
+                                          ),
+                                      },
+                                    });
+                                    // setPricingDetailsData({
+                                    //   ...PricingDetailsData,
+                                    //   PreferredTenant:
+                                    //     PricingDetailsData.PreferredTenant?.filter(
+                                    //       (item) => {
+                                    //         return item !== text;
+                                    //       }
+                                    //     ),
+                                    // });
+                                  }
+                                }}
+                              />
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
                 </>

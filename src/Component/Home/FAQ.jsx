@@ -31,7 +31,7 @@ const FAQ = () => {
           aria-labelledby="headingOne"
           data-bs-parent="#accordionPanelsStayOpenExample"
         >
-          <div className="accordion-body">
+          <div className="accordion-body ">
             Reserve Price is the expected minimum price on which you propose to
             sell your property. We recommend fair market price of your property
             competitively based on various factors including but not limited to
@@ -63,7 +63,7 @@ const FAQ = () => {
           aria-labelledby="headingTwo"
           data-bs-parent="#accordionPanelsStayOpenExample"
         >
-          <div className="accordion-body">
+          <div className="accordion-body ">
             Our endeavor will be and we will put our best efforts to assist you
             in selling your property at the earliest. However the time it takes
             to sell a property online can vary depending upon various factors

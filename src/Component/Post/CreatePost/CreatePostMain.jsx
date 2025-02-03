@@ -649,7 +649,7 @@ export default function CreatePostMain() {
                         </span>
                       ) : (
                         <span className="text-secondary fw-normal   d-flex justify-content-center">
-                          Edit
+                          pending
                         </span>
                       )}
                     </span>
@@ -714,7 +714,7 @@ export default function CreatePostMain() {
                       </span>
                     ) : (
                       <span className="text-secondary fw-normal   d-flex justify-content-center">
-                        Edit
+                        pending
                       </span>
                     )}
                   </span>

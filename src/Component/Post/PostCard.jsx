@@ -272,7 +272,7 @@ export default function PostCard({ PostData, index }) {
                   {/* share button end */}
                 </div>
                 {!["Owner", "Admin"].includes(medata?.user?.Role) && (
-                  <div className={`add-favourite-box `}>
+                  <div className={`add-favourite-box  flex`}>
                     <button
                       className={`add-favourite-btn ${index}`}
                       onClick={() => {

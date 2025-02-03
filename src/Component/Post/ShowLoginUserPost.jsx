@@ -59,7 +59,7 @@ export default function ShowLoginUserPost() {
             <>
               <h3 className="user-section-heading">{PropertyAdType} Post</h3>
               <div className="filter-btn-section">
-                <div className="user-filter-section">
+                <div className="user-filter-section flex">
                   <img src="/img/mage_filter.svg" alt="mage_filter" />
                   {ButtonText.map((btntext, index) => {
                     return (

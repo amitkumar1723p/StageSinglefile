@@ -536,7 +536,7 @@ button:hover,
 .property-details label {
   display: flex;
   font-weight: bold;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
   color: #333;
   font-size: 12px;
   font-weight: 500;

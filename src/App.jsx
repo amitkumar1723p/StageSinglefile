@@ -50,6 +50,7 @@ import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
 
 import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
+import PageNotFound from "./PageNotFound";
 function App() {
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
@@ -607,6 +608,7 @@ function App() {
             element={<CreatePostMain />}
           />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </>

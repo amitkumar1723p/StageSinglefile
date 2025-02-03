@@ -12,24 +12,25 @@
   }
   
   .no-list-there-image {
-    max-width: 250px;
-    margin-bottom: 20px;
+    max-width: 200px;
+    margin-bottom:20px;
+    margin: 0 auto;
   }
   
   .no-list-there-title {
-    font-size: 24px;
+    font-size: 20px;
     color: #333;
     margin-bottom: 10px;
   }
   
   .no-list-there-description {
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
     margin-bottom: 20px;
   }
   
   .no-list-there-button {
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px 20px;
     background-color: #4a90e2;
     color: #fff;

@@ -150,11 +150,9 @@ const HeroSection = () => {
                       }
                     `}
                       onClick={() => {
-                        // if (e == PropertyAddType) {
-                        // setPropertyAddType("");
-                        // } else {
+                        
                         setSearchPropertyAddType(e);
-                        // }
+                   
                       }}
                     >
                       {e == "Sale" ? "Buy" : e}
@@ -182,8 +180,7 @@ const HeroSection = () => {
                 />
                 <select>
                   <option value="Gurgaon">Gurgaon</option>
-                  {/* <option value="Noida">Noida</option>
-                <option value="Delhi">Delhi</option> */}
+                  
                 </select>
 
                 <div className="search-section-box">
@@ -196,15 +193,7 @@ const HeroSection = () => {
                     setProjectNameObjectData={setProjectNameObjectData}
                     placeholder={"Search by Project name or society name"}
                   />
-                  <img
-                    className="img-searchbar"
-                    src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                  <path d="M10.5007 7.16634C11.3847 7.16634 12.2326 7.51753 12.8577 8.14265C13.4828 8.76777 13.834 9.61562 13.834 10.4997C13.834 11.3837 13.4828 12.2316 12.8577 12.8567C12.2326 13.4818 11.3847 13.833 10.5007 13.833C9.6166 13.833 8.76875 13.4818 8.14363 12.8567C7.51851 12.2316 7.16732 11.3837 7.16732 10.4997C7.16732 9.61562 7.51851 8.76777 8.14363 8.14265C8.76875 7.51753 9.6166 7.16634 10.5007 7.16634ZM3.04232 11.333H1.33398V9.66634H3.04232C3.41732 6.19134 6.19232 3.41634 9.66732 3.04134V1.33301H11.334V3.04134C14.809 3.41634 17.584 6.19134 17.959 9.66634H19.6673V11.333H17.959C17.584 14.808 14.809 17.583 11.334 17.958V19.6663H9.66732V17.958C6.19232 17.583 3.41732 14.808 3.04232 11.333ZM10.5007 4.66634C8.95356 4.66634 7.46982 5.28092 6.37586 6.37489C5.2819 7.46885 4.66732 8.95258 4.66732 10.4997C4.66732 12.0468 5.2819 13.5305 6.37586 14.6245C7.46982 15.7184 8.95356 16.333 10.5007 16.333C12.0477 16.333 13.5315 15.7184 14.6254 14.6245C15.7194 13.5305 16.334 12.0468 16.334 10.4997C16.334 8.95258 15.7194 7.46885 14.6254 6.37489C13.5315 5.28092 12.0477 4.66634 10.5007 4.66634Z" fill="#0078D4"/>
-                </svg>
-                  `)}`}
-                    alt="tst"
-                  />
+                  
 
                   <button
                     disabled={
@@ -234,9 +223,7 @@ const HeroSection = () => {
                           })
                         );
 
-                        // navigate(
-                        //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
-                        // );
+                      
                       }
                     }}
                   >
@@ -264,7 +251,6 @@ const HeroSection = () => {
             </div>
 
             <div className="property-section">
-              {/* Property Listing Section */}
               <div
                 className="property-link"
                 onClick={() => {
@@ -284,7 +270,7 @@ const HeroSection = () => {
                     <button className="btn-hero">I am an Owner</button>
                   </div>
                   <div className="arrow">
-                    {/* <span>&#x2192;</span> */}
+                 
                     <div className="icon">
                       <img
                         src="/img/needbuyer.svg"
@@ -294,8 +280,6 @@ const HeroSection = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Property Requirement Section */}
 
               <div
                 ref={PropertyRequirementBtnRef.current[0]}
@@ -315,22 +299,21 @@ const HeroSection = () => {
                   </h3>
                   <button className="btn-hero"> I am a Buyer</button>
                 </div>
-                <div className="arrow">{/* <span>&#x2192;</span> */}</div>
+                <div className="arrow"></div>
                 <div className="icon">
                   <img src="/img/Postreqire.svg" alt="Property Listing Icon" />
                 </div>
               </div>
-              {/* </a> */}
             </div>
           </div>
         </div>
       </header>
       <div className="floating-buttons">
-        {/* Call Button */}
+      
         <Link to="tel:+917837840785" className="call-button">
           <img src="/img/call.png" alt="Call" />
         </Link>
-        {/* WhatsApp Button */}
+       
         <Link
           to="https://wa.me/7837840785"
           target="_blank"
