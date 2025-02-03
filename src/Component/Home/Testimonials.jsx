@@ -31,34 +31,34 @@ const testimonials = [
     location: "Delhi",
     type: "Owner",
     feedback:
-      "PropertyDekho247 was straightforward and transparent, providing clear advice and helping me navigate the real estate market with confidence and ease",
+      "PropertyDekho247 was straightforward and transparent, providing clear advice and helping me navigate the real estate market with confidence and ease.",
     // image: "https://randomuser.me/api/portraits/women/2.jpg",
   },
 ];
 
 const Testimonials = () => {
   return (
-    <div className="feedback-section">
+    <div className="feedback-section bg-white py-10 px-5 text-center max-w-screen-xl mx-auto">
       <h2 className="feedback-header">
         Client <span>Feedback</span>
       </h2>
 
-      <div className="feedback-list">
+      <div className="feedback-list grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[20px] justify-items-center mt-[15px]">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="feedback-item">
+          <div key={index} className="feedback-item bg-white shadow-[0px_0px_16px_0px_#c5dff3] flex flex-col justify-between rounded-lg px-[20px] py-[15px] text-center   transition-all duration-300 ease-in-out feedback-item hover:-translate-y-[10px] hover:shadow-[0px_10px_20px_rgba(0,0,0,0.1)]">
             <div className="collan">
               <img src="/img/Double-colon.svg" alt="double" />
               <img src="/img/Double-colon.svg" alt="double" />
             </div>
-            <p className="feedback-quote"> {testimonial.feedback} </p>
-            <div className="feedback-user-info">
+            <p className="feedback-quote text-[#4b5563] text-sm font-medium leading-[18px] text-left my-2"> {testimonial.feedback} </p>
+            <div className="feedback-user-info flex flex-row items-center mt-[10px]">
               {/* <img
-                className="feedback-image"
+                className="feedback-image w-[40px] h-[40px] rounded-full object-cover mr-2"
                 src={testimonial.image}
                 alt={testimonial.name}
               /> */}
 
-              <p className="feedback-name">
+              <p className="feedback-name text-sm font-medium leading-[17px] text-left my-2 text-[var(--main-light-clr)]">
                 {testimonial.name}, {testimonial.location} <br />{" "}
                 {testimonial.type}
               </p>

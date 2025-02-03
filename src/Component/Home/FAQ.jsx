@@ -5,7 +5,7 @@ const FAQ = () => {
   return (
     <div className="accordion" id="accordionPanelsStayOpenExample">
       <div className="heading-faq">
-          <h2 className="heading-section-faq">
+          <h2 className="heading-section-faq text-[32px]">
             Frequently Asked <span>Questions</span>
           </h2>
           <p className="faq-heading">

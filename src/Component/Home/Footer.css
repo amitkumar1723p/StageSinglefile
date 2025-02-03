@@ -1,13 +1,13 @@
 /* Footer Styles */
 .custom-footer {
-  background-color: var(--main-light-clr);
- 
-  padding: 30px 0 0 0;
+  /* background-color: var(--main-light-clr);
   font-family: "Arial", sans-serif;
+  padding: 30px 0 0 0; */
+  
 }
 
 .last-p {
-  color: #fff;
+  /* color: #fff;
   text-align: center;
   font-family: "Inter", Sans-serif;
   font-size: 12px;
@@ -16,17 +16,17 @@
   line-height: normal;
   margin:10px;
   padding-bottom: 2px;
-  text-align: justify;
+  text-align: justify; */
 
 }
 
 
 .footer-container {
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
   max-width: 1200px;
   margin: 0 auto;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 
 .footer-column {
@@ -35,39 +35,33 @@
   min-width: 200px;
 }
 
-.footer-logo {
-  width: 150px;
-  margin-bottom: 20px;
-}
+
 
 .footer-column h3 {
-  font-size: 20px;
+  /* font-size: 20px;
   margin-bottom: 20px;
   color: #fff;
+  font-weight: bold; */
   /* text-transform: uppercase; */
-  font-weight: bold;
+  
 }
 
 .footer-column p {
-  font-size: 14px;
+  /* font-size: 14px;
   color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 15px; */
 }
 
 .footer-column ul {
-  list-style-type: none;
+  /* list-style-type: none; */
 }
 
 .footer-column ul li {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .footer-column ul li a {
-  font-weight: lighter;
-  text-decoration: none;
-  font-size: 14px;
-  color: #fff;
-  transition: color 0.3s ease;
+ 
 }
 
 /* Social Media Icons */
@@ -76,11 +70,11 @@
 } */
 
 .social-icons a {
-  color: #ffffff;
+  /* color: #ffffff;
   margin-right: 10px;
   font-size: 20px;
   transition: color 0.3s ease;
-  text-decoration: none;
+  text-decoration: none; */
 }
 
 /* Footer Bottom */
@@ -92,13 +86,17 @@
   padding-top: 20px;
   color: #a0aec0;
 }
+.footer-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
 
 .footer-bottom p {
   margin: 5px 0;
 }
 
 .footer-img {
-  width: 25px;
+  /* width: 25px; */
 }
 @media (max-width: 480px){
   .footer-container {
@@ -109,7 +107,7 @@
 
   
 .custom-footer{
-  background-color: #0F2A3F;
+  background-color: ;
 }
 
 .footer-column p {

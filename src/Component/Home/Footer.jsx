@@ -4,91 +4,79 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="custom-footer">
-      <div className="footer-container">
+    <footer className=" custom-footer bg-[var(--main-light-clr)] font-sans pt-[30px]">
+      <div className="footer-container flex justify-evenly max-w-[1200px] mx-auto flex-wrap">
         {/* Logo and Description */}
-        <div className="footer-column">
-          <h3 className="footer-heading">
+        <div className="footer-column     ">
+          <h3 className="footer-heading text-[20px] mb-[20px] text-white font-bold">
             Property<span>Dekho247.com </span>
           </h3>
 
-          <div className="social-icons">
+          <div className="social-icons flex">
             <Link to="https://www.linkedin.com/in/property-dekho-231b66346">
               <img
-                className="footer-img"
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-  <path d="M25.3333 4.59766C26.0406 4.59766 26.7189 4.87861 27.219 5.3787C27.719 5.8788 28 6.55708 28 7.26432V25.931C28 26.6382 27.719 27.3165 27.219 27.8166C26.7189 28.3167 26.0406 28.5977 25.3333 28.5977H6.66667C5.95942 28.5977 5.28115 28.3167 4.78105 27.8166C4.28095 27.3165 4 26.6382 4 25.931V7.26432C4 6.55708 4.28095 5.8788 4.78105 5.3787C5.28115 4.87861 5.95942 4.59766 6.66667 4.59766H25.3333ZM24.6667 25.2643V18.1977C24.6667 17.0448 24.2087 15.9393 23.3936 15.1241C22.5784 14.3089 21.4728 13.851 20.32 13.851C19.1867 13.851 17.8667 14.5443 17.2267 15.5843V14.1043H13.5067V25.2643H17.2267V18.691C17.2267 17.6643 18.0533 16.8243 19.08 16.8243C19.5751 16.8243 20.0499 17.021 20.3999 17.3711C20.75 17.7211 20.9467 18.1959 20.9467 18.691V25.2643H24.6667ZM9.17333 12.011C9.76742 12.011 10.3372 11.775 10.7573 11.3549C11.1773 10.9348 11.4133 10.3651 11.4133 9.77099C11.4133 8.53099 10.4133 7.51766 9.17333 7.51766C8.57571 7.51766 8.00257 7.75506 7.57999 8.17764C7.1574 8.60022 6.92 9.17337 6.92 9.77099C6.92 11.011 7.93333 12.011 9.17333 12.011ZM11.0267 25.2643V14.1043H7.33333V25.2643H11.0267Z" fill="white"/>
-</svg>
-                 `)}`}
+                className="footer-img text-white w-[25px] mr-2 text-xl transition-colors duration-300 ease-in-out no-underline"
+                src="/img/linkin.png"
                 alt="linkedin"
               />
             </Link>
             <Link to="https://www.instagram.com/propertydekho24x7/">
               <img
-                className="footer-img"
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-  <path d="M17.3708 3.26465C18.8708 3.26865 19.6321 3.27665 20.2894 3.29532L20.5481 3.30465C20.8468 3.31532 21.1414 3.32865 21.4974 3.34465C22.9161 3.41132 23.8841 3.63532 24.7334 3.96465C25.6134 4.30332 26.3548 4.76198 27.0961 5.50198C27.7744 6.16829 28.299 6.97461 28.6334 7.86465C28.9628 8.71398 29.1868 9.68198 29.2534 11.102C29.2694 11.4566 29.2828 11.7513 29.2934 12.0513L29.3014 12.31C29.3214 12.966 29.3294 13.7273 29.3321 15.2273L29.3334 16.222V17.9686C29.3367 18.9412 29.3265 19.9137 29.3028 20.886L29.2948 21.1446C29.2841 21.4446 29.2708 21.7393 29.2548 22.094C29.1881 23.514 28.9614 24.4806 28.6334 25.3313C28.299 26.2214 27.7744 27.0277 27.0961 27.694C26.4298 28.3722 25.6235 28.8969 24.7334 29.2313C23.8841 29.5606 22.9161 29.7847 21.4974 29.8513L20.5481 29.8913L20.2894 29.8993C19.6321 29.918 18.8708 29.9273 17.3708 29.93L16.3761 29.9313H14.6308C13.6578 29.9347 12.6848 29.9245 11.7121 29.9006L11.4534 29.8927C11.1369 29.8807 10.8205 29.8669 10.5041 29.8513C9.08544 29.7847 8.11744 29.5606 7.26677 29.2313C6.37721 28.8967 5.57136 28.3721 4.90544 27.694C4.2267 27.0278 3.70159 26.2215 3.36677 25.3313C3.03744 24.482 2.81344 23.514 2.74677 22.094L2.70677 21.1446L2.70011 20.886C2.67553 19.9137 2.66442 18.9412 2.66677 17.9686V15.2273C2.66308 14.2548 2.67286 13.2822 2.69611 12.31L2.70544 12.0513C2.71611 11.7513 2.72944 11.4566 2.74544 11.102C2.81211 9.68198 3.03611 8.71531 3.36544 7.86465C3.70103 6.97425 4.22707 6.1679 4.90677 5.50198C5.57231 4.82405 6.37769 4.29941 7.26677 3.96465C8.11744 3.63532 9.08411 3.41132 10.5041 3.34465C10.8588 3.32865 11.1548 3.31532 11.4534 3.30465L11.7121 3.29665C12.6844 3.27296 13.6569 3.26274 14.6294 3.26598L17.3708 3.26465ZM16.0001 9.93132C14.232 9.93132 12.5363 10.6337 11.2861 11.8839C10.0358 13.1342 9.33344 14.8299 9.33344 16.598C9.33344 18.3661 10.0358 20.0618 11.2861 21.312C12.5363 22.5623 14.232 23.2646 16.0001 23.2646C17.7682 23.2646 19.4639 22.5623 20.7142 21.312C21.9644 20.0618 22.6668 18.3661 22.6668 16.598C22.6668 14.8299 21.9644 13.1342 20.7142 11.8839C19.4639 10.6337 17.7682 9.93132 16.0001 9.93132ZM16.0001 12.598C16.5254 12.5979 17.0456 12.7013 17.5309 12.9022C18.0162 13.1031 18.4572 13.3977 18.8287 13.7691C19.2002 14.1405 19.4949 14.5814 19.696 15.0666C19.8971 15.5519 20.0007 16.072 20.0008 16.5973C20.0009 17.1226 19.8975 17.6428 19.6965 18.1281C19.4956 18.6134 19.201 19.0544 18.8297 19.4259C18.4583 19.7974 18.0174 20.0921 17.5321 20.2932C17.0469 20.4943 16.5267 20.5979 16.0014 20.598C14.9406 20.598 13.9232 20.1766 13.173 19.4264C12.4229 18.6763 12.0014 17.6588 12.0014 16.598C12.0014 15.5371 12.4229 14.5197 13.173 13.7696C13.9232 13.0194 14.9406 12.598 16.0014 12.598M23.0014 7.93132C22.5594 7.93132 22.1355 8.10691 21.8229 8.41947C21.5104 8.73203 21.3348 9.15595 21.3348 9.59798C21.3348 10.04 21.5104 10.4639 21.8229 10.7765C22.1355 11.0891 22.5594 11.2646 23.0014 11.2646C23.4435 11.2646 23.8674 11.0891 24.18 10.7765C24.4925 10.4639 24.6681 10.04 24.6681 9.59798C24.6681 9.15595 24.4925 8.73203 24.18 8.41947C23.8674 8.10691 23.4435 7.93132 23.0014 7.93132Z" fill="white"/>
-</svg>
-  `)}`}
-                alt="insta"
+                className="footer-img text-white w-[25px] mr-2 text-xl transition-colors duration-300 ease-in-out no-underline"
+                src="/img/insta.png"
+                alt="instagram"
               />
             </Link>
             <Link to="https://www.facebook.com/profile.php?id=61572085979323 ">
               <img
-                className="footer-img"
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-  <path d="M29.3346 16.598C29.3346 9.23798 23.3613 3.26465 16.0013 3.26465C8.6413 3.26465 2.66797 9.23798 2.66797 16.598C2.66797 23.0513 7.25464 28.4246 13.3346 29.6646V20.598H10.668V16.598H13.3346V13.2646C13.3346 10.6913 15.428 8.59798 18.0013 8.59798H21.3346V12.598H18.668C17.9346 12.598 17.3346 13.198 17.3346 13.9313V16.598H21.3346V20.598H17.3346V29.8646C24.068 29.198 29.3346 23.518 29.3346 16.598Z" fill="white"/>
-</svg>
-  `)}`}
+                className="footer-img text-white w-[25px] mr-2 text-xl transition-colors duration-300 ease-in-out no-underline"
+                src="/img/fb.png"
                 alt="fb"
               />
+            </Link>
+            <Link to="https://x.com/PropetyDekho247">
+              <img 
+              className="footer-img text-white w-[25px] mr-2 text-xl transition-colors duration-300 ease-in-out no-underline" 
+              src="/img/Tw.png" alt="tw" />
             </Link>
             {/* <Link to="#">
               <img
                 className="footer-img"
-                src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                <mask id="mask0_1358_6622" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="3" y="6" width="26" height="21">
-                  <path d="M16 7.26465C28 7.26465 28 7.26465 28 16.598C28 25.9313 28 25.9313 16 25.9313C4 25.9313 4 25.9313 4 16.598C4 7.26465 4 7.26465 16 7.26465Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M13.332 11.9316L21.332 16.5983L13.332 21.265V11.9316Z" fill="black"/>
-                </mask>
-                <g mask="url(#mask0_1358_6622)">
-                  <path d="M32 0.597656H0V32.5977H32V0.597656Z" fill="white"/>
-                </g>
-              </svg>
-                `)}`}
+                src="/img/yt.png"
                 alt="yt"
               />
             </Link> */}
-            <Link to="https://x.com/PropetyDekho247">
-              <img className="footer-img" src="/img/Tw.png" alt="tw" />
-            </Link>
+           
           </div>
         </div>
         {/* Product Links */}
-        <div className="footer-column">
-          <h3>Quick Links</h3>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="#">About Us</Link>
-            </li>
-            {/* <li>
-                        <Link to="#">Buy with Us</Link>
-                      </li> */}
-          </ul>
-        </div>
-        {/* Useful Links */}
-        <div className="footer-column">
-          <h3>Company</h3>
+        <div className="footer-column text-[20px]  text-white fond-bold">
+          <h3 className="font-bold text-white">Quick Links</h3>
           <ul>
             <li>
               <Link
+              className="font-light text-sm text-white no-underline "
+               to="/">Home</Link>
+            </li>
+            <li  className="mb-[10px]">
+              <Link
+              className="font-light text-sm text-white no-underline " 
+              to="#">About Us</Link>
+            </li >
+            {/* <li  className="mb-[10px]">
+                <Link
+                className="font-light text-sm text-white no-underline" 
+                to="#">Buy with Us</Link>
+            </li> */}
+          </ul>
+        </div>
+        {/* Useful Links */}
+        <div className="footer-column text-[20px] ">
+          <h3 className="font-bold text-white">Company</h3>
+          <ul className="list-none">
+            <li className="mb-[10px]">
+              <Link
+              className="font-light text-sm text-white no-underline "
                 to="/privacy-policy"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -96,9 +84,10 @@ const Footer = () => {
                 Privacy Policy
               </Link>
             </li>
-            <li>
+            <li className="mb-[10px]">
              
               <Link
+              className="font-light text-sm text-white no-underline"
                 to="/terms-and-conditions"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -106,24 +95,29 @@ const Footer = () => {
                 Terms and Conditions
               </Link>
             </li>
-            <li>
-              <Link to="#">FAQs</Link>
+            <li className="mb-[10px]">
+              <Link
+              className="font-light text-sm text-white no-underline" 
+              to="#"
+              >FAQs</Link>
             </li>
-            {/* <li>
-              <Link to="#">Blogs</Link>
+            {/* <li className="mb-[10px]">
+              <Link
+              className="font-light text-sm text-white no-underline " 
+              to="#">Blogs</Link>
             </li> */}
           </ul>
         </div>
 
         {/* Address Section */}
-        <div className="footer-column">
-          <h3>Contact</h3>
-          <p>+91 783-784-0785</p>
-          <p>Support@propertydekho247.com</p>
-          <p>Sales@propertydekho247.com</p>
+        <div className="footer-column text-[20px] ">
+          <h3 className="font-bold text-white">Contact</h3>
+          <p className="text-[14px] text-white mb-[15px] font-medium">+91 783-784-0785</p>
+          <p className="text-[14px] text-white mb-[15px] font-medium">Support@propertydekho247.com</p>
+          <p className="text-[14px] text-white mb-[15px] font-medium">Sales@propertydekho247.com</p>
         </div>
         <div>
-          <p className="last-p">
+          <p className="text-white text-sm font-medium leading-normal mx-2 pb-0.5 text-center ">
             Copyright © 2024 Propfuture AI Technologies Pvt. Ltd. All Rights
             Reserved.
           </p>

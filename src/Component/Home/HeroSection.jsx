@@ -42,6 +42,9 @@ import ReportListingForm from "./ReportListingForm";
 import TermsAndConditions from "./TermsAndConditions";
 import PrivacyPolicy from "./PrivacyPolicy";
 import FurtherAssistance from "./FurtherAssistance";
+
+import ChannelPartnerForm from "./ChannelPartnerForm.jsx";  
+
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -419,14 +422,15 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
-          <SimpleStepsTenant />
+          
           <Services />
           <Testimonials />
           <WhoWeAre />
+          <ChannelPartnerForm/>
         </>
-      )} */}
+      )}
 
       {/* Buy Component  */}
 
