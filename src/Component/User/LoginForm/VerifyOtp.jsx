@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { VerifyUserOtpAction } from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
+import { toast } from "react-toastify";
 
 const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
       Otp: OtpData.Otp,
       ContactNumber: SignUpData.ContactNumber,
     };
+    console.log(OtpDataObj)
+      toast.success("yuhhuu")
     dispatch(VerifyUserOtpAction(OtpDataObj));
   };
   const { loading, userdata } = useSelector((state) => {

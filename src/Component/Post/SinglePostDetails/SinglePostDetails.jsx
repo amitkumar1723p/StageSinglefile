@@ -210,7 +210,7 @@ export default function SinglePostDetails() {
           to="https://wa.me/7837840785"
           target="_blank"
           rel="noopener noreferrer"
-          className="whatsapp-button"
+          className="bg-[#25d366] h-[35px] w-[35px]"
         >
           <img src="/img/whatapp.png" alt="WhatsApp" />
         </Link>

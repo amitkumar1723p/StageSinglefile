@@ -93,7 +93,7 @@ export default function AdminAgentAssignPost({
   }, [querry]);
   return (
     <div className="Admin-property-post-card-main-box">
-      <p>All Listing</p>
+      <p className="p-2">All Listing</p>
 
       {OwnerPosts.map((e, i) => {
         if (e.PostId) {

@@ -36,7 +36,7 @@
   top: 82px;
   position: sticky;  
   width: 200px;
-  background-color: var(--main-light-clr);
+  /* background-color: var(--main-light-clr); */
   color: white;
   padding: 20px;
   height: 100%;

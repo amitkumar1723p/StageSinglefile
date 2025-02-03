@@ -14,6 +14,7 @@ export default function HomeCard() {
   const { loading, data } = useSelector((state) => {
     return state.GetAllPost;
   });
+  console.log("data is ",data)
 
   return (
     <>

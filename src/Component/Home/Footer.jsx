@@ -12,7 +12,7 @@ const Footer = () => {
             Property<span>Dekho247.com </span>
           </h3>
 
-          <div className="social-icons">
+          <div className="social-icons flex">
             <Link to="https://www.linkedin.com/in/property-dekho-231b66346">
               <img
                 className="footer-img"
