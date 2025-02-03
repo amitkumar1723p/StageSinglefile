@@ -58,7 +58,7 @@ export default function UserForm() {
         } else if (RedirectPath == "/show-Supspicious-Listing-Form") {
           navigate(-1);
         } else {
-          navigate("/user");
+          navigate("/user/my-listing");
         }
 
         if (RedirectPath == "/user/post") {
@@ -132,7 +132,7 @@ export default function UserForm() {
           {loading == true ? (
             <Loader className="windowloader" />
           ) : medata && medata.IsAuthenticated == true ? (
-            <Navigate to="/user" />
+            <Navigate to="/user/my-listing" />
           ) : (
             <>
               {viewState.showLoginAndSignup && (

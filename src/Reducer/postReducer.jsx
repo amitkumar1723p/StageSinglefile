@@ -15,7 +15,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedRequest":
     case "Admin_RemovedRequest":
     case "RemoveAssignPropertyRequest":
-      // Activ in active
+    // Activ in active
     case "Active_InactivePropertyRequest":
     case "showVeirifyPostIconRequest":
       return {
@@ -36,8 +36,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedSuccess":
     case "Admin_RemovedSuccess":
     case "RemoveAssignPropertySuccess":
-         // Activ in active
-    case "Active_InactivePropertySuccess":  
+    // Activ in active
+    case "Active_InactivePropertySuccess":
     case "showVeirifyPostIconSuccess":
       return {
         ...state,
@@ -57,10 +57,9 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Admin_AssignedFail":
     case "Admin_RemovedFail":
     case "RemoveAssignPropertyFail":
-      // Activ in active
+    // Activ in active
     case "Active_InactivePropertyFail":
     case "showVeirifyPostIconFail":
-     
       return {
         ...state,
         loading: false,
@@ -299,6 +298,39 @@ export const Admin_OwnerGetAllScheduleVisitsReducer = (state = {}, action) => {
       };
   }
 };
+export const GetAllScheduleVisitsAndMakeOffer_LengthReducer = (
+  state = {},
+  action
+) => {
+  switch (action.type) {
+    case "GetAllScheduleVisitsAndMakeOffer_LengthRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "GetAllScheduleVisitsAndMakeOffer_LengthSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetAllScheduleVisitsAndMakeOffer_LengthFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetAllScheduleVisitsAndMakeOffer_LengthClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
 export const GetAllAssignPropertyReducer = (state = {}, action) => {
   switch (action.type) {
@@ -330,7 +362,6 @@ export const GetAllAssignPropertyReducer = (state = {}, action) => {
       };
   }
 };
-
 
 export const GetAdminAgentAssignPropertyReducer = (state = {}, action) => {
   switch (action.type) {

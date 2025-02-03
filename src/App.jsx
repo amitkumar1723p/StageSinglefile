@@ -83,6 +83,9 @@ function App() {
     return state.ScheduleVisits;
   });
 
+  const { data:VistAndOfferData } = useSelector((state) => {
+    return state.VistAndOffer;
+  });
   const { data: AdminData } = useSelector((state) => {
     return state.AdminData;
   });
@@ -370,6 +373,27 @@ function App() {
     }
     // eslint-disable-next-line
   }, [ScheduleVisitsData]);
+
+  
+  useEffect(() => {
+    if (VistAndOfferData) {
+      if (VistAndOfferData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (VistAndOfferData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (VistAndOfferData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{VistAndOfferData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "GetAllScheduleVisitsAndMakeOffer_LengthClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [VistAndOfferData]);
 
   useEffect(() => {
     if (alertshow === true) {

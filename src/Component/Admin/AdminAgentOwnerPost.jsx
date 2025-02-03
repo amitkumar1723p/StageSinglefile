@@ -5,6 +5,7 @@ import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
   GetAllAssignProperty,
+  GetAllScheduleVisitsAndMakeOffer_Length,
 } from "../../Action/postAction";
 import Loader from "../Loader/Loader";
 import AdminListingCard from "./AdminListingCard";
@@ -39,6 +40,9 @@ export default function AdminAgentOwnerPost() {
     loading: PostVerifyLoding,
   } = useSelector((state) => {
     return state.Post;
+  });
+  const { data: VistAndOfferData } = useSelector((state) => {
+    return state.VistAndOffer;
   });
 
   useEffect(() => {
@@ -118,6 +122,7 @@ export default function AdminAgentOwnerPost() {
     if (["Admin", "Owner"].includes(medata?.user?.Role)) {
       dispatch(GetAllAssignProperty());
     }
+    dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
   }, []);
 
   // Active In Active start

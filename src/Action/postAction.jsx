@@ -423,6 +423,9 @@ export const ReOpenPostAction = (postId) => {
   };
 };
 
+
+// Get All GetAllScheduleVisits Post Vise 
+
 export const Admin_OwnerGetAllScheduleVisits = (PostId) => {
   return async (dispatch) => {
     try {
@@ -457,6 +460,44 @@ export const Admin_OwnerGetAllScheduleVisits = (PostId) => {
     }
   };
 };
+
+
+
+export const GetAllScheduleVisitsAndMakeOffer_Length = (PostId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "GetAllScheduleVisitsAndMakeOffer_LengthRequest" });
+
+      let url = `${api_Base_Url}/admin-owner/all-schedulevisits-offerreceive-length`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({
+        type: "GetAllScheduleVisitsAndMakeOffer_LengthSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "GetAllScheduleVisitsAndMakeOffer_LengthFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetAllScheduleVisitsAndMakeOffer_LengthFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
 
 export const Admin_OwnerScheduleVisitDone = ({ VisitStatus }, visitId) => {
   return async (dispatch) => {
