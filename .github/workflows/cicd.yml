@@ -14,9 +14,9 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} -t propertydekho247/property-frontend .
+        run: docker build --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} -t gauravwadhwa234/property-frontend .
       - name: Publish Image to Docker Hub
-        run: docker push propertydekho247/property-frontend:latest 
+        run: docker push gauravwadhwa234/property-frontend:latest 
 
   deploy:
     needs: build
@@ -25,16 +25,16 @@ jobs:
     steps:
       - name: Pull image from Docker Hub
         run: |
-          sudo docker pull propertydekho247/property-frontend:latest
+          sudo docker pull gauravwadhwa234/property-frontend:latest
 
       - name: Delete old container
         run: |
-          if [ "$(sudo docker ps -aq -f name=propertydekho247-property-frontend-container)" ]; then
-            sudo docker rm -f propertydekho247-property-frontend-container
+          if [ "$(sudo docker ps -aq -f name=gauravwadhwa234-property-frontend-container)" ]; then
+            sudo docker rm -f gauravwadhwa234-property-frontend-container
           fi
 
       
 
       - name: Run Docker Container
         run: |
-          sudo docker run -d -p 3000:80  --name propertydekho247-property-frontend-container propertydekho247/property-frontend
+          sudo docker run -d -p 3000:80  --name gauravwadhwa234-property-frontend-container gauravwadhwa234/property-frontend
