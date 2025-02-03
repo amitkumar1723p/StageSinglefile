@@ -231,12 +231,12 @@ export default function ProjectNameSection({
                   const matchProjectNameAndSector = SearchWord?.every((word) => {
                     return (
                       item["Project Name"]
-                        .toUpperCase()
-                        .includes(word.toUpperCase()) ||
+                        ?.toUpperCase()
+                        ?.includes(word?.toUpperCase()) ||
                       item["Sector"]
-                        .toUpperCase()
-                        .includes(word?.toUpperCase()) ||
-                      item["City"]?.toUpperCase().includes(word.toUpperCase())
+                        ?.toUpperCase()
+                        ?.includes(word?.toUpperCase()) ||
+                      item["City"]?.toUpperCase()?.includes(word?.toUpperCase())
                     );
                   });
 

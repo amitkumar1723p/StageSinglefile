@@ -129,8 +129,10 @@
 }
 
 .btn:hover {
-  opacity: 0.9;
-  color: #fff;
+  
+  background-color: #0078d4dc;
+  color: white;
+  
 }
 
 /* Footer */
