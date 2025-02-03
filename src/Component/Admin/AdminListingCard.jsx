@@ -76,7 +76,7 @@ export default function AdminListingCard({
 
   useEffect(() => {
     setPropertyAddress(
-      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Locality}`
+      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Landmark}  ${PostData.LocationDetails.City}`
     );
   }, [PostData]);
 
@@ -439,34 +439,7 @@ export default function AdminListingCard({
 
  
 
-              <label className="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  checked={ToggleBtn}
-                  onChange={(e) => {
-                    setToggleBtn(!ToggleBtn);
-                    if (e.target.checked == true) {
-                      let postdata = { PostVerifyShow: true };
-                      let postid = PostData._id;
-                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
-                    }
-                    if (e.target.checked == false) {
-                      let postdata = { PostVerifyShow: false };
-                      let postid = PostData._id;
-                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
-                    }
-
-                    //  if(){
-
-                    //  }
-                  }}
-                  // onChange={}
-                  // onClick={}
-                  className="toggle-switch-input"
-                />
-
-                <span className="toggle-btn-slider"></span>
-              </label>
+              
             </div>
           </div>
         </div>
