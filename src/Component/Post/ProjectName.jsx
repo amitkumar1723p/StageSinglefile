@@ -227,15 +227,16 @@ export default function ProjectNameSection({
                 let SearchWord = e.target.value.split(" ");
 
                 const result = ProjectName.filter((item) => {
-                  const matchProjectNameAndSector = SearchWord.every((word) => {
+                  {console.log(item)}
+                  const matchProjectNameAndSector = SearchWord?.every((word) => {
                     return (
                       item["Project Name"]
                         .toUpperCase()
                         .includes(word.toUpperCase()) ||
                       item["Sector"]
                         .toUpperCase()
-                        .includes(word.toUpperCase()) ||
-                      item["City"].toUpperCase().includes(word.toUpperCase())
+                        .includes(word?.toUpperCase()) ||
+                      item["City"]?.toUpperCase().includes(word.toUpperCase())
                     );
                   });
 
