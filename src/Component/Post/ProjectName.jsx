@@ -8,6 +8,7 @@ export default function ProjectNameSection({
   setProjectNameObjectData,
   inputClass,
   searchInput,
+
   placeholder,
   ProjectInputType,
   setrunSearchButton,
@@ -210,6 +211,7 @@ export default function ProjectNameSection({
             autoComplete="off"
             type="text"
             id="property-name"
+
             placeholder={placeholder}
             required
             value={ProjectNameObjectData.ProjectName?.trimStart() || ""}

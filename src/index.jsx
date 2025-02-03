@@ -7,6 +7,7 @@ import  store from'./store.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './Component/CreateContext/CreateContext.js';
 import ScrollToTop from './ScrollToTop.jsx';
+import { ToastContainer } from 'react-toastify';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -15,6 +16,12 @@ root.render(
       <BrowserRouter>
        <ScrollToTop />
         <App />
+        <ToastContainer 
+         position="top-center"
+        //  limit={3}
+        theme="colored"
+       
+         autoClose={5000}/> 
       </BrowserRouter>
     </UserProvider>
   </Provider>

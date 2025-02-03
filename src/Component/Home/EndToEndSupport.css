@@ -5,10 +5,7 @@
   margin: 20px 0;
 }
 
-.databox-sellertoseller {
-  text-align: center;
-  margin-top: 50px;
-}
+
 
 .brokerrafe-endtoend{
   color: #333;
@@ -21,11 +18,12 @@
   width: 95%;;
 }
 
-.databox-sellertoseller{
+/* .databox-sellertoseller{
   background-color: var(--main-lighter-clr);
   width: 80%;
   margin:  40px auto;
-}
+  text-align: center;
+} */
 
 .support-container {
 
@@ -51,10 +49,7 @@
   padding: 0 60px;
 }
 
-.support-title {
-  color: #333;
-  font-weight: bold;
-}
+
 
 .buyers-text {
   color: #4a4fb7;
@@ -116,7 +111,7 @@
 
   .databox-sellertoseller {
     text-align: center;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     padding: 0 10px;
   }
 
@@ -145,7 +140,9 @@
     text-align: center;
   }
 
+
   .support-title {
+    font-weight: bold;
     font-size: 24px;
     color: #333;
     margin-bottom: 10px;

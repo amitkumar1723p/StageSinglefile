@@ -7,6 +7,7 @@ import {
   VerifyUserOtpAction,
 } from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
+import { toast } from "react-toastify";
 
 const VerifyOtp = ({
   SignUpData,

@@ -725,8 +725,8 @@
   line-height: normal;
 }
 
-.search-bar-admin {
-  position: relative;
+.search-bar-admin{
+  position: absolute;
   right: 25px;
 }
 
@@ -737,7 +737,10 @@
   position: sticky;
   top: 71px;
   z-index: 3;
+  width: max-content;
   background-color: #fff;
+  /* background-color: #fe0707; */
+
   border-bottom: 1px solid #ebe4e4;
 }
 
@@ -873,6 +876,7 @@
   border-radius: 6px;
   font-size: 12px;
   width: 200px;
+  position: relative;
   color: #333;
 }
 .searchAdmin {

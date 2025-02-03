@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateUserOtpAction } from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
+import { toast } from "react-toastify";
 // import { LoginUserAction } from "../../../Action/userAction";
 
 const LoginForm = ({
@@ -207,7 +208,7 @@ const LoginForm = ({
                     }
                   }
                 }}
-                required
+                
               />
               <small className="t-candp-v">
                 By clicking you agree{" "}

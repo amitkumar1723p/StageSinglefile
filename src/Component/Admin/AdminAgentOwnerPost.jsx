@@ -215,7 +215,7 @@ export default function AdminAgentOwnerPost() {
         {/* <button>Exprired</button>
         <button>Reported</button>
         <button>Success</button> */}
-        <div>
+        <div className="relative bg--200">
           <input
             className="controlled-input"
             type="text"
@@ -227,7 +227,7 @@ export default function AdminAgentOwnerPost() {
             }}
           />
           <img
-            className="search-bar-admin"
+          className="absolute top-[5px] right-1 cursor-pointer"
             src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
   <g clip-path="url(#clip0_3153_291)">
