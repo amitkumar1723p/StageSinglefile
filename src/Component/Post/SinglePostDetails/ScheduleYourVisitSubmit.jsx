@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./ScheduleYourVisitSubmit.css"; // Import the CSS file
 import { useNavigate } from "react-router-dom";
 
-const ScheduleYourVisitSubmit = ({ SetShow }) => {
+const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
+  // console.log(ScheduleVistData)
+
   const navigate = useNavigate();
+  const formatTime = useCallback((time24) => {
+    if (time24) {
+      const [hours, minutes] = time24.split(":").map(Number);
+      const period = hours >= 12 ? "PM" : "AM"; // Determine AM/PM
+      const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+      return `${formattedHours}:${minutes
+        .toString()
+        .padStart(2, "0")} ${period}`;
+    }
+
+    return "N/A";
+  }, []);
   return (
     <div className="request-submit-container">
-       <div className="cross-div">
-            <span
-              className="cross-btn"
-              onClick={() => {
-                SetShow(false);
-              }}
-            >
-              X
-            </span>
-          </div>
+      <div className="cross-div">
+        <span
+          className="cross-btn"
+          onClick={() => {
+            SetShow(false);
+          }}
+        >
+          X
+        </span>
+      </div>
       <div className="request-submit-header">
         <h2>Request Submitted</h2>
       </div>
@@ -23,8 +37,15 @@ const ScheduleYourVisitSubmit = ({ SetShow }) => {
         <div className="status-message">
           <div className="status-icon">&#10003;</div>
           <span className="status-text">
-            Your visit is scheduled from 10:00 AM to 6:00 PM on January 16,
-            2025.
+            Your visit is scheduled from{" "}
+            {formatTime(ScheduleVistData.VisitTime.From)} to{" "}
+            {formatTime(ScheduleVistData.VisitTime.To)} on{" "}
+            {new Date(ScheduleVistData.VisitDate).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+            .
           </span>
         </div>
         <p className="note-text">

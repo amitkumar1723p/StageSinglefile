@@ -149,7 +149,6 @@ const CreateProfile = ({
                       }}
                     />
                     <input
-                      required
                       className="nri-contact-another-number"
                       type="text"
                       placeholder="Enter your Another Number"

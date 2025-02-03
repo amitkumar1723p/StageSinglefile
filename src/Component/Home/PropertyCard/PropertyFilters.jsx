@@ -44,9 +44,8 @@ const PropertyFilters = () => {
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
 
-
-
   useEffect(() => {
+    console.log(removeFilterField);
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       dispatch(
         GetAllPostAction({
@@ -61,7 +60,7 @@ const PropertyFilters = () => {
     }
 
     // eslint-disable-next-line
-  }, [Filter]);
+  }, [Filter, querry]);
   useEffect(() => {
     if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
       return navigate("/");
@@ -109,11 +108,11 @@ const PropertyFilters = () => {
       window.addEventListener("beforeunload", handleBeforeUnload);
       // setRedirectPath(location.pathname);
       // setRedirectPath(location.pathname);
-      setRedirectPathIsHomeCard(true)
+      setRedirectPathIsHomeCard(true);
       // Cleanup event listeners on component unmount
       return () => {
         window.removeEventListener("beforeunload", handleBeforeUnload);
-        sessionStorage.removeItem("isFirstLoad")
+        sessionStorage.removeItem("isFirstLoad");
       };
     }
   }, []);
@@ -130,12 +129,53 @@ const PropertyFilters = () => {
   const postedByOptions = ["Owner", "Builder", "Our Team"];
   const purchaseTypeOptions = ["Sale", "New Booking"];
   const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
+  const PropertyAdTypeArray = ["Sale", "Rent"];
+
+  // handle window.history button
+  useEffect(() => {
+    const handlePopState = (event) => {
+      // Prevent the back/forward action by pushing the current state again
+      // window.history.pushState(null, null, window.location.href);
+      navigate("/");
+    };
+
+    // Add the event listener for popstate
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []); // Empty dependency array ensures this effect runs once on mount and unmount
   return (
     <>
-    
       <div className="property-post-filters-box">
         <aside className="property-filters">
           <h2 className="filter-title">Filters</h2>
+          <div className="flex">
+            <div>
+              {PropertyAdTypeArray.map((text) => {
+                return (
+                  <button
+                    onClick={() => {
+                      setquerry({
+                        ProjectName: querry.get("ProjectName"),
+                        PropertyAddType: `${text}`,
+                      });
+                      setremoveFilterField(true);
+                    }}
+                    className={`bhk-option ${
+                      querry.get("PropertyAddType") == text ? "selected" : ""
+                    }`}
+                  >
+                    {text}
+                  </button>
+                );
+              })}
+
+             
+            </div>
+          </div>
           {/* Budget Filter */}
           {/* <div className="filter-group">
             <h3>Budget</h3>

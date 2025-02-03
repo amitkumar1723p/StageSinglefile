@@ -5,6 +5,7 @@ import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
   GetAllAssignProperty,
+  GetAllScheduleVisitsAndMakeOffer_Length,
 } from "../../Action/postAction";
 import Loader from "../Loader/Loader";
 import AdminListingCard from "./AdminListingCard";
@@ -39,6 +40,9 @@ export default function AdminAgentOwnerPost() {
     loading: PostVerifyLoding,
   } = useSelector((state) => {
     return state.Post;
+  });
+  const { data: VistAndOfferData } = useSelector((state) => {
+    return state.VistAndOffer;
   });
 
   useEffect(() => {
@@ -117,6 +121,7 @@ export default function AdminAgentOwnerPost() {
     if (["Admin", "Owner"].includes(medata?.user?.Role)) {
       dispatch(GetAllAssignProperty());
     }
+    dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
   }, []);
 
   // Active In Active start
@@ -244,9 +249,7 @@ export default function AdminAgentOwnerPost() {
             </select>
           </div>
           {/* here start */}
-          <div>
-          
-          </div>
+          <div></div>
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -290,13 +293,21 @@ export default function AdminAgentOwnerPost() {
             </button>
           )}
 
-            {/* Buttons to change the status */}
-            <button  className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" onClick={() => handleStatusChange("Active")}>Active</button>
-           
-            <button className="px-3 mx-3 py-1 bg-primary bg-opacity-10 border border-info-subtle rounded" onClick={() => handleStatusChange("InActive")}>
-              In-Active
-            </button>
-            {/* Display the current status */}
+          {/* Buttons to change the status */}
+          <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => handleStatusChange("Active")}
+          >
+            Active
+          </button>
+
+          <button
+            className="px-3 mx-3 py-1 bg-primary bg-opacity-10 border border-info-subtle rounded"
+            onClick={() => handleStatusChange("InActive")}
+          >
+            In-Active
+          </button>
+          {/* Display the current status */}
         </div>
       )}
 

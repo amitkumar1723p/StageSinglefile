@@ -40,14 +40,14 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
   };
 
   useEffect(() => {
-    if (data) {
-      if (data.success == true && LodingType == "CreateScheduleVisitRequest") {
-        setScheduleVistData({
-          VisitDate: "",
-          VisitTime: {},
-        });
-        // SetShow(false);
-      }
+    if (data && LodingType == "CreateScheduleVisitRequest") {
+      // if (data.success == true && LodingType == "CreateScheduleVisitRequest") {
+      //   setScheduleVistData({
+      //     VisitDate: "",
+      //     VisitTime: {},
+      //   });
+      //   // SetShow(false);
+      // }
       if (data.success == false) {
         if (data.IsAuthenticated == false) {
           navigate("/");
@@ -162,7 +162,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
         <Loader className={"componentloader"} />
       )}
       {showScheduleVistAlert == true && (
-        <ScheduleYourVisitSubmit SetShow={SetShow} />
+        <ScheduleYourVisitSubmit SetShow={SetShow}   ScheduleVistData={ScheduleVistData}/>
       )}
     </>
   );

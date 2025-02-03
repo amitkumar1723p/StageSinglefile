@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, Link, useNavigate, Navigate } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
 import {
+  Admin_OwnerGetAllScheduleVisits,
   adminAssigned,
   showVeirifyPostIconAction,
 } from "../../Action/postAction";
@@ -73,7 +74,7 @@ export default function AdminListingCard({
   const [isAssignedToAnyUser, setisAssignedToAnyUser] = useState([]);
   const [PropertyAddress, setPropertyAddress] = useState("");
   const [ToggleBtn, setToggleBtn] = useState(false);
-
+  const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
       `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Locality}`
@@ -89,10 +90,9 @@ export default function AdminListingCard({
     return state.AssignPropertys;
   });
 
-  // ====================================== Store the id on click property id
-  
-  // remove from Assign work start here
-  const [selectedUserData, setSelectedUserData] = useState(null); // Initialize state to store selected user and post IDs
+  const { data: VistAndOfferData } = useSelector((state) => {
+    return state.VistAndOffer;
+  });
 
   useEffect(() => {
     if (PostData?.PostVerifyShow) {
@@ -114,8 +114,21 @@ export default function AdminListingCard({
       setisAssignedToAnyUser(AssingPosts);
     }
   }, [AssignPostData]);
-  
-  // end here remove assign work
+
+  useEffect(() => {
+    if (VistAndOfferData?.success == true) {
+      let VisitsAndOffers_Data = VistAndOfferData?.VisitAndOffer?.find(
+        (item) => {
+          return PostData._id == item.PostId;
+        }
+      );
+      if (VisitsAndOffers_Data) {
+        setVisitAndOfferLength(VisitsAndOffers_Data);
+      }
+
+      // VistAndOfferData.VisitAndOffer?.find()
+    }
+  }, [VistAndOfferData]);
 
   return (
     <div className="Admin-property-post-card-main-box">
@@ -311,7 +324,11 @@ export default function AdminListingCard({
                     navigate(`/admin/schedule-visit/${PostData._id}`);
                   }}
                 >
-                  Schedule Visit
+                  Schedule Visit (
+                  {VisitAndOfferLength
+                    ? VisitAndOfferLength.schedulevisit
+                    : "0"}
+                  )
                 </p>
                 <p
                   className={`${
@@ -323,7 +340,8 @@ export default function AdminListingCard({
                     navigate(`/admin/recive-offer/${PostData._id}`);
                   }}
                 >
-                  View Offer Received
+                  View Offer Received (
+                  {VisitAndOfferLength ? VisitAndOfferLength.makeoffer : "0"})
                 </p>
                 <p>Extend Duration</p>
 
@@ -409,8 +427,6 @@ export default function AdminListingCard({
                   </div>
                 )}
               </div>
-
- 
 
               <label className="toggle-switch-container">
                 <input
