@@ -57,7 +57,7 @@
   }
   
   .view-more {
-    background-color: #007bff;
+    background-color: var(--main-light-clr);
     color: white;
   }
   
@@ -67,7 +67,7 @@
   }
   
   .view-more:hover {
-    background-color: #0056b3;
+    opacity: .9;
   }
   
   /* .dashboard:hover {

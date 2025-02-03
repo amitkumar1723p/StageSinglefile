@@ -8,18 +8,28 @@ import {
 } from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
 
-
-const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
+const VerifyOtp = ({
+  SignUpData,
+  OtpData,
+  setOtpData,
+  setViewState,
+  ISNRI,
+}) => {
   const dispatch = useDispatch();
   const [showEdit, setshowEdit] = useState(false);
 
   // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const OtpDataObj = {
       Otp: OtpData.Otp,
-      ContactNumber: SignUpData.ContactNumber,
     };
+    if (ISNRI) {
+      OtpDataObj.email = SignUpData.email;
+    } else {
+      OtpDataObj.ContactNumber = SignUpData.ContactNumber;
+    }
     dispatch(VerifyUserOtpAction(OtpDataObj));
   };
   const { loading, userdata } = useSelector((state) => {
@@ -166,7 +176,10 @@ const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
               your registered Phone Number: */}
               A 6-digit OTP has been sent to your registered phone number{" "}
               <span className="ediit-phone-post-verify">
-                <b>{SignUpData.ContactNumber} .</b>
+                <b>
+                  {" "}
+                  {ISNRI ? SignUpData?.email : SignUpData?.ContactNumber} .
+                </b>
                 <img
                   src="/img/edit.png"
                   alt="edit"
@@ -197,13 +210,13 @@ const VerifyOtp = ({ SignUpData, OtpData, setOtpData, setViewState }) => {
                 Continue
               </button>
               <div>
-                {console.log(timeLeft)}
                 <p className="otp-login-h2-p">Did not receive the code ?</p>
                 <p className="otp-login-h2-p">
                   {timeLeft <= 0 && (
                     <button
                       className="otp-resend-otp-btn"
                       onClick={() => {
+                         setOtpData({Otp:""})
                         // setViewState({
                         //   ...setViewState,
                         //   showLoginAndSignup: true,

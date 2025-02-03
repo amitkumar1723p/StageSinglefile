@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LoginUserPostAction } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
-
+import { Link } from "react-router-dom";
 import PostCard from "./PostCard";
 import { AlertAction } from "../../Action/alertAction";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,14 +16,12 @@ export default function ShowLoginUserPost() {
   const [PropertyAdType, setPropertyAddType] = useState("All");
   const navigate = useNavigate();
 
-
   const ButtonText = ["All", "Sale", "Rent"];
   // Get All Post by Login User
   const { loading, data } = useSelector((state) => {
     return state.GetPost;
   });
 
-  // show Alert any find error
   useEffect(() => {
     if (data) {
       if (data.success == true) {
@@ -57,25 +55,31 @@ export default function ShowLoginUserPost() {
           {loading ? (
             <Loader className="componentloader" />
           ) : // AllPost.length > 0 ? <>
-            data?.Post?.length > 0 ? (
+          data?.Post?.length > 0 ? (
             <>
-               <h3 className="user-section-heading">{PropertyAdType} Post</h3>
-               <div className="user-filter-section">
-                {ButtonText.map((btntext, index) => {
-                  return (
-                    <button
-                      key={index}
-                      className={`btn-rent-filter ${
-                        PropertyAdType == btntext ? "all-post-lisitng" : ""
-                      }`}
-                      onClick={() => {
-                        setPropertyAddType(btntext);
-                      }}
-                    >
-                      {btntext}
-                    </button>
-                  );
-                })}
+              <h3 className="user-section-heading">{PropertyAdType} Post</h3>
+              <div className="filter-btn-section">
+                <div className="user-filter-section">
+                  <img src="/img/mage_filter.svg" alt="mage_filter" />
+                  {ButtonText.map((btntext, index) => {
+                    return (
+                      <button
+                        key={index}
+                        className={`btn-rent-filter ${
+                          PropertyAdType == btntext ? "all-post-lisitng" : ""
+                        }`}
+                        onClick={() => {
+                          setPropertyAddType(btntext);
+                        }}
+                      >
+                        {btntext}
+                      </button>
+                    );
+                  })}
+                </div>
+                <Link to="/user/post">
+                  <div className="add-new-lisitng">+ Add More Listings </div>
+                </Link>
               </div>
 
               {AllPost.length > 0 ? (

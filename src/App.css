@@ -1,13 +1,25 @@
-body{
+body {
   color: var(--main-black);
 }
 
+.select:focus-visible {
+  border: none;
+  outline: none;
+}
+
+.select::focus {
+  border: none;
+  outline: none;
+}
+.input:focus {
+  border: none;
+  outline: none;
+}
 .bid-box {
   display: flex;
   justify-content: space-between;
 }
-p{
-
+p {
   margin-bottom: 0;
 }
 
@@ -15,7 +27,11 @@ a {
   text-decoration: none;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
   margin: 0;
   font-family: inherit;
   font-size: 12px;
@@ -27,12 +43,10 @@ button, input, optgroup, select, textarea {
   --main-dark-clr: #0078d4be;
   --main-white-light-clr: #f6f7fa;
   --main-white-hover-light-clr: #ffffff;
-  --main-lighter-clr: #E9F5FF;
+  --main-lighter-clr: #e9f5ff;
   --main-lighters-clr: #accde7;
-  --main-light-blue-clr:#3D5A80
+  --main-light-blue-clr: #3d5a80;
 }
-
-
 
 input:focus {
   outline: none;
@@ -81,40 +95,53 @@ input:focus {
   right: 15%;
   width: 40%;
 }
-.cross-btn{
+.cross-btn {
   text-align: end;
 }
-.cross-btn:hover{
+.cross-btn:hover {
   color: red;
-font-weight: 800;
+  font-weight: 800;
 }
 
-dl, ol, ul {
+dl,
+ol,
+ul {
   margin-top: 0;
   margin-bottom: 0rem;
 }
-ol, ul {
+ol,
+ul {
   padding-left: 0rem;
 }
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
   color: var(--bs-heading-color);
 }
 
-.row>* {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-right: 0;
-    padding-left: 0;
-    margin-top: var(--bs-gutter-y);
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: var(--bs-gutter-y);
 }
 
-@media(max-width: 480px) {
-
+@media (max-width: 480px) {
   .ProgressBarMain {
     display: none;
   }
@@ -129,8 +156,7 @@ ol, ul {
   }
 }
 
-@media(max-width: 320px){
-
+@media (max-width: 320px) {
   .underline-on-text {
     position: relative;
     display: inline-block;
@@ -138,10 +164,9 @@ ol, ul {
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+  }
 }
-}
-@media(max-width: 375px){
-
+@media (max-width: 375px) {
   .underline-on-text {
     position: relative;
     display: inline-block;
@@ -150,22 +175,13 @@ ol, ul {
     margin-bottom: 10px;
     text-align: center;
   }
-  
 }
 
-
-
-
-.active-btn-admin{
+.active-btn-admin {
   background-color: #fff !important;
-  color: var(--main-light-clr)  !important ;
+  color: var(--main-light-clr) !important ;
   border-radius: 10px !important;
-
 }
-
-
-
-
 
 /* Toogle Btn Css  */
 
@@ -175,7 +191,6 @@ ol, ul {
   display: inline-block;
   width: 50px;
   height: 24px;
- 
 }
 
 /* Hide default checkbox */

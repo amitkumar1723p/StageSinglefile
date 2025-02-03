@@ -91,7 +91,7 @@ export default function AreaDetailsSection({
                 value={AreaDetailsData.PlotArea?.unit || ""}
               />
 
-              {console.log(AreaDetailsData)}
+              
               {/* <select
                 className="unit"
                 required

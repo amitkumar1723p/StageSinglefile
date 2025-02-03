@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./LoginForm.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateUserOtpAction } from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
@@ -13,20 +13,31 @@ const LoginForm = ({
   setSignUpData,
   viewState,
   setViewState,
+  ISNRI
 }) => {
   //  const [SignUpData, setSignUpData] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
+  const location = useLocation();
   const { data, loading, LodingType } = useSelector((state) => {
     return state.userData;
   });
 
+  
   // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (SignUpData.ContactNumber.length !== 10) {
-      return alert("Enter Valid Contact Number");
+    if (ISNRI) {
+      setSignUpData({ ...SignUpData, Role: "NRI" });
+      if (!SignUpData.email) {
+        return alert("Email is Required");
+      }
+    } else {
+      if (SignUpData?.ContactNumber?.length !== 10) {
+        return alert("Enter Valid Contact Number");
+      }
     }
+
     dispatch(CreateUserOtpAction(SignUpData));
     setViewState({
       ...viewState,
@@ -148,34 +159,52 @@ const LoginForm = ({
             />
           </div>
           <div className="login-form-content-unique">
-            
             <h2 className="heading-h2">Login or Register </h2>
             <p className="login-h2-p">
               Welcome to Propertydekho247.com Log in to your account
             </p>
             <form onSubmit={handleSubmit}>
               <label className="lable-login" htmlFor="login-form">
-              Phone Number
+                {/* {ISNRI? } */}
+
+                {ISNRI ? "Email Address" : "Phone Number"}
               </label>
               <input
                 id="login-form"
-                type="text"
+                type={ISNRI ? "email" : "text"}
                 autoComplete="off"
-                placeholder="Enter your Phone Number"
-                value={SignUpData.ContactNumber.trimStart()}
+                // placeholder="Enter your Phone Number"
+                placeholder={
+                  ISNRI
+                    ? " Enter your Email Address"
+                    : "Enter your Phone Number"
+                }
+                value={
+                  ISNRI
+                    ? SignUpData?.email?.trimStart() || ""
+                    : SignUpData?.ContactNumber?.trimStart() || ""
+                }
+                // value={SignUpData?.ContactNumber?.trimStart() || ""}
                 // onChange={(e) =>
                 //   setSignUpData({ ...SignUpData, ContactNumber: e.target.value })
                 // }
                 onChange={(e) => {
-                  const numericValue = String(e.target.value).replace(
-                    /[^0-9]/g,
-                    ""
-                  );
-                  if (numericValue.length <= 10) {
+                  if (ISNRI) {
                     setSignUpData({
                       ...SignUpData,
-                      ContactNumber: numericValue,
+                      email: e.target.value,
                     });
+                  } else {
+                    const numericValue = String(e.target.value).replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                    if (numericValue.length <= 10) {
+                      setSignUpData({
+                        ...SignUpData,
+                        ContactNumber: numericValue,
+                      });
+                    }
                   }
                 }}
                 required

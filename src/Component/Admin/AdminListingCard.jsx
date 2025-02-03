@@ -76,7 +76,7 @@ export default function AdminListingCard({
 
   useEffect(() => {
     setPropertyAddress(
-      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Locality}`
+      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Landmark}  ${PostData.LocationDetails.City}`
     );
   }, [PostData]);
 
@@ -90,10 +90,7 @@ export default function AdminListingCard({
   });
 
   // ====================================== Store the id on click property id
-  // Check if no user is assigned
-  // const isAssignedToAnyUser = data?.Admin?.some((user) =>
-  //   user.AssignedPropertyId.includes(PostData?._id)
-  // );
+  
   // remove from Assign work start here
 
 
@@ -117,7 +114,7 @@ export default function AdminListingCard({
       setisAssignedToAnyUser(AssingPosts);
     }
   }, [AssignPostData]);
-  // console.log(AssignProperty,"dfkfvgguervyv")
+  
   // end here remove assign work
 
   return (
@@ -354,7 +351,34 @@ export default function AdminListingCard({
                 >
                   <button className="contact-button">View Listing</button>
                 </Link>
-
+                <div className="Verified-lable">
+                  <p>Verified lable :</p>
+                  <label className="toggle-switch-container">
+                    <input
+                      type="checkbox"
+                      checked={ToggleBtn}
+                      onChange={(e) => {
+                        setToggleBtn(!ToggleBtn);
+                        if (e.target.checked == true) {
+                          let postdata = { PostVerifyShow: true };
+                          let postid = PostData._id;
+                          dispatch(
+                            showVeirifyPostIconAction({ postdata }, postid)
+                          );
+                        }
+                        if (e.target.checked == false) {
+                          let postdata = { PostVerifyShow: false };
+                          let postid = PostData._id;
+                          dispatch(
+                            showVeirifyPostIconAction({ postdata }, postid)
+                          );
+                        }
+                      }}
+                      className="toggle-switch-input"
+                    />
+                    <span className="toggle-btn-slider"></span>
+                  </label>
+                </div>
                 {medata?.user?.Role != "Agent" && (
                   <div className="verify-box-section">
                     {/* {location.pathname.includes("admin") && ( */}
@@ -413,73 +437,9 @@ export default function AdminListingCard({
                 )}
               </div>
 
-              {/* <div className="post-verify-trademark">
-                {PostData.PostVerifyShow ? (
-                  <button
-                    onClick={() => {
-                      let Confrimbox = window.confirm(
-                        "Are you Sure Un-Veirify This Post"
-                      );
-                      if (Confrimbox) {
-                        let postdata = { PostVerifyShow: false };
-                        let postid = PostData._id;
+ 
 
-                        dispatch(
-                          showVeirifyPostIconAction({ postdata }, postid)
-                        );
-                      }
-                    }}
-                  >
-                    Un-Veirify
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      let Confrimbox = window.confirm(
-                        "Are you Sure Verify This Post"
-                      );
-                      if (Confrimbox) {
-                        let postdata = { PostVerifyShow: true };
-                        let postid = PostData._id;
-                        dispatch(
-                          showVeirifyPostIconAction({ postdata }, postid)
-                        );
-                      }
-                    }}
-                  >
-                    Veirify
-                  </button>
-                )}
-              </div> */}
-
-              <label className="toggle-switch-container">
-                <input
-                  type="checkbox"
-                  checked={ToggleBtn}
-                  onChange={(e) => {
-                    setToggleBtn(!ToggleBtn);
-                    if (e.target.checked == true) {
-                      let postdata = { PostVerifyShow: true };
-                      let postid = PostData._id;
-                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
-                    }
-                    if (e.target.checked == false) {
-                      let postdata = { PostVerifyShow: false };
-                      let postid = PostData._id;
-                      dispatch(showVeirifyPostIconAction({ postdata }, postid));
-                    }
-
-                    //  if(){
-
-                    //  }
-                  }}
-                  // onChange={}
-                  // onClick={}
-                  className="toggle-switch-input"
-                />
-
-                <span className="toggle-btn-slider"></span>
-              </label>
+              
             </div>
           </div>
         </div>

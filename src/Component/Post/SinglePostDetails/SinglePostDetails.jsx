@@ -51,8 +51,8 @@ export default function SinglePostDetails() {
   });
 
   useEffect(() => {
-    let postaddresh = Params.PostAddresh;
-    let postId = postaddresh.substring(postaddresh.lastIndexOf("-") + 1);
+    let postaddress = Params.PostAddress;
+    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
     dispatch(GetSinglePostAction(postId));
   }, []);
@@ -168,7 +168,7 @@ export default function SinglePostDetails() {
         setFloorDetails(`${propertyOnFloorText}${totalFloorsText}`);
       }
     }
-  }, [getSinglePostData, Params.PostAddresh]);
+  }, [getSinglePostData, Params.PostAddress]);
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
@@ -230,7 +230,6 @@ export default function SinglePostDetails() {
     setOpenReportForm(false);
   };
   {
-    console.log(areaDetails);
   }
   return (
     <>
@@ -271,18 +270,18 @@ export default function SinglePostDetails() {
 
             <div className="property-image">
               {/* post verified-section-start */}
-              <div className="icon-box-main">
-                {getSinglePostData.SinglePost.PostVerify ? (
-                  <div className="active-post-main">
-                    <img src="/img/verified-tag.svg" alt="verified-tag" />
-                    <p className="active-post-para-main">Verified</p>
-                  </div>
-                ) : (
-                  <div className="inactive-post-main">
-                    <p className="inactive-post-para-main">Inactive</p>
-                  </div>
-                )}
+              <div className="icon-box">
+                {getSinglePostData.SinglePost.PostVerifyShow ? (
+                  getSinglePostData.SinglePost.PostVerify ? (
+                    <div className="active-post">
+                      <img src="/img/verified-tag.svg" alt="verified-tag" />
+                      <p className="active-post-para">Verified</p>
+                    </div>
+                  ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
+                ) : null}{" "}
+                {/* If PostVerifyShow is false, show nothing */}
               </div>
+
               <ShowSinglePostImages
                 Images={getSinglePostData.SinglePost.PropertyImages}
               />
@@ -302,7 +301,7 @@ export default function SinglePostDetails() {
                     <div className="img-box-imp-data">
                       <span className="img-box-details-span">
                         {`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`}
-                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom.map(
+                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom?.map(
                           (text) => {
                             return `+ ${
                               text == "Pooja Room"
@@ -490,26 +489,30 @@ export default function SinglePostDetails() {
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Rent" && (
                       <>
-                        <span>
-                          <span>
-                            Rent Price
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .ExpectedRent
-                            )}
-                          </span>
-                          <br />
-                          <span>
-                            {" "}
-                            DepositePrice Price{" "}
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .DepositePrice
-                            )}
-                          </span>
-                        </span>
+                        <div className="rent-main-section">
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .ExpectedRent
+                              )} <span>/Month
+                                 </span> 
+                            </p> 
+                            <p className="rent-ques-section" >Rent Price</p>
+                          </div>
 
-                        {!["Owner", "Admin"].includes(medata?.user?.Role) &&
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .DepositePrice
+                              )}
+                            </p>
+                            <p className="rent-ques-section" >Deposite Price</p>
+                          </div>
+                        </div>
+
+                        {/* {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                           getSinglePostData.SinglePost.CreatePostUser !==
                             medata?.user?._id && (
                             <span
@@ -526,7 +529,7 @@ export default function SinglePostDetails() {
                             >
                               Create Response
                             </span>
-                          )}
+                          )} */}
                       </>
                     )}
                   </div>
@@ -1005,9 +1008,6 @@ export default function SinglePostDetails() {
                       Component={ScheduleYourVisit}
                       SetShow={setshowScheduleVisitForm}
                       BtnRef={ScheduleYourVisitOpenBtnRef}
-
-
-                      
                       SinglePostData={getSinglePostData}
                       PropertyAddress={PropertyAddress}
                     />

@@ -39,7 +39,7 @@ export default function CreatePostMain() {
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
   //  Update Post Logic
-// console.log(uploadimages,"fdfhfiueruc")
+ 
   //  GetSinglePostAction
   useEffect(() => {
     if (update) {
@@ -313,9 +313,7 @@ export default function CreatePostMain() {
     BasicDetailsData.ApartmentType,
     BasicDetailsData.PropertyStatus,
   ]);
-  {
-    console.log(AreaDetailsData);
-  }
+ 
 
   useEffect(() => {
     if (data) {
@@ -331,14 +329,14 @@ export default function CreatePostMain() {
         sessionStorage.removeItem("PricingDetailsData");
 
         if (["Admin", "Owner"].includes(medata.user.Role)) {
-          // navigate("/admin/allpost");
+          navigate("/admin/allpost");
         } else {
-          // navigate("/user");
+          navigate("/user/my-listing");
         }
       }
       if (data.success === false) {
         if (data.IsAuthenticated === false) {
-          // navigate("/");
+          navigate("/");
         }
       }
     }
@@ -414,7 +412,7 @@ export default function CreatePostMain() {
       setFourth(true);
     }
   });
-  // console.log("yfguyegfu",uploadimages)
+  
   return (
     <>
       {(LodingType &&
@@ -517,7 +515,8 @@ export default function CreatePostMain() {
                       </span>
                     ) : next + 1 >= 2 ? (
                       <span className="text-primary fw-normal   d-flex justify-content-center">
-Edit                      </span>
+                        Edit{" "}
+                      </span>
                     ) : (
                       <span className="text-secondary fw-normal   d-flex justify-content-center">
                         pending
@@ -650,7 +649,7 @@ Edit                      </span>
                         </span>
                       ) : (
                         <span className="text-secondary fw-normal   d-flex justify-content-center">
-                          pending
+                          Edit
                         </span>
                       )}
                     </span>
@@ -682,18 +681,17 @@ Edit                      </span>
                   </span>
                 ) : (
                   <>
-                  {uploadimages.length!==0 || previewImage.length!==0? (
-                    <span
-                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                      onClick={() => setnext(4)}
-                    >
-                      
-                      &#10003; {/* This is the checkmark (tick) symbol */}
-                    </span>
-                  ) : (
-                    <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
-                  )}
-                </>
+                    {uploadimages.length !== 0 || previewImage.length !== 0 ? (
+                      <span
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                        onClick={() => setnext(4)}
+                      >
+                        &#10003; {/* This is the checkmark (tick) symbol */}
+                      </span>
+                    ) : (
+                      <span className="text-primary fw-normal   penddingCircleForm"></span> // This is an empty circle or different style when locationDetails is null
+                    )}
+                  </>
                 )}
               </div>
 
@@ -716,7 +714,7 @@ Edit                      </span>
                       </span>
                     ) : (
                       <span className="text-secondary fw-normal   d-flex justify-content-center">
-                        pending
+                        Edit
                       </span>
                     )}
                   </span>
