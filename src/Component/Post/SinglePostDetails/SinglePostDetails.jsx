@@ -34,17 +34,6 @@ export default function SinglePostDetails() {
   const [showMakeOfferSuccessAlert, setshowMakeOfferSuccessAlert] =
     useState(false);
 
-  // const copyToClipboard = () => {
-  //   const url = window.location.href; // Get the current page URL
-  //   navigator.clipboard.writeText(url).then(
-  //     () => {
-  //       alert("URL copied to clipboard!");
-  //     },
-  //     () => {
-  //       alert("Failed to copy URL.");
-  //     }
-  //   );
-  // };
   const location = useLocation();
   const [showBiddingForm, setshowBiddingForm] = useState(false);
   const [showScheduleVisitForm, setshowScheduleVisitForm] = useState(false);
@@ -882,7 +871,7 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
-                  {/* <div className="similar-main-box">
+              <div className="similar-main-box">
                     <h3 className="similar-heading-box">Similar Property</h3>
                     <div className="similar-property-main-box">
                       <div className="similar-property-box1">
@@ -995,7 +984,9 @@ export default function SinglePostDetails() {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
+{/* similar property */}
+
                   {/* <ExpressionOfInterestForm /> */}
                   {showBiddingForm && (
                     <WindowComponent
