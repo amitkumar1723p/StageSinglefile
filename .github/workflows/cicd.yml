@@ -25,16 +25,16 @@ jobs:
     steps:
       - name: Pull image from Docker Hub
         run: |
-          sudo docker pull gauravwadhwa234/property-frontend:latest
+              docker pull gauravwadhwa234/property-frontend:latest
 
       - name: Delete old container
         run: |
-          if [ "$(sudo docker ps -aq -f name=gauravwadhwa234-property-frontend-container)" ]; then
-            sudo docker rm -f gauravwadhwa234-property-frontend-container
+          if [ "$( docker ps -aq -f name=gauravwadhwa234-property-frontend-container)" ]; then
+             docker rm -f gauravwadhwa234-property-frontend-container
           fi
 
       
 
       - name: Run Docker Container
         run: |
-          sudo docker run -d -p 3000:80  --name gauravwadhwa234-property-frontend-container gauravwadhwa234/property-frontend
+           docker run -d -p 3000:80  --name gauravwadhwa234-property-frontend-container gauravwadhwa234/property-frontend
