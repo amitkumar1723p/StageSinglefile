@@ -23,7 +23,7 @@ const SimpleStepsBuyer = () => {
   }, []);
 
   return (
-    <section className="bg-[#e9f5ff] py-8">
+    <section className="bg-[#e9f5ff]">
       <style jsx>{`
         .simple-step-card {
           opacity: 0;

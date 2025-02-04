@@ -14,7 +14,7 @@ const WhoWeAre = () => {
         </div>
         <div className=" w-[90%] mx-auto relative">
           <div className="top-[-15px] left-[-20px] text-[var(--main-white-light-clr)] font-extrabold text-[4rem] text-white absolute">“</div>
-          <p className="description text-[18px] text-[var(--main-white-light-clr)] leading-[1.8] mx-auto max-w-[1000px] text-center ">
+          <p className=" who-we-are-section description max-480:text-[12px]  text-[16px] text-[var(--main-white-light-clr)] leading-[1.8] mx-auto max-w-[1000px] text-center ">
             PropertyDekho247.com is an innovative Proptech platform that
             transforms the traditional property buying and selling process into
             a fully digital experience. As the first online platform to provide

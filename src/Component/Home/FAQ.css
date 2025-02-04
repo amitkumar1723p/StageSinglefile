@@ -15,6 +15,9 @@
   width: 100%;
 }
 
+.accordion-body{
+  color: #333;
+}
 .heading-faq{
   display: flex;
   align-items: center;

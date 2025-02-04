@@ -8,9 +8,6 @@
   box-sizing: border-box;
   /* outline: 1px solid red; */
 }
-.collapse{
-  visibility: visible;  /* This is applied so that the Answers in FAQ section in FAQ.jsx is visible */
-}
 
 body {
   margin: 0;

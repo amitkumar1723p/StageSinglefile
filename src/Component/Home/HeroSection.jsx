@@ -435,7 +435,7 @@ const HeroSection = () => {
             SearchContainerRef={SearchContainerRef}
           />
           <Services />
-          <FutureAsist />
+          {/* <FutureAsist /> */}
           <Testimonials />
           <WhoWeAre />
           <FaqBuyer />

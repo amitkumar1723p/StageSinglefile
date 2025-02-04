@@ -21,9 +21,9 @@ export default function UserForm() {
   const [OtpData, setOtpData] = useState({ Otp: "" });
   const [CreateProfileData, setCreateProfileData] = useState({});
   const [viewState, setViewState] = useState({
-    showLoginAndSignup: false,
-    showOtpVerify: true,
-    showCreateProfileSection: true,
+    showLoginAndSignup: true,
+    showOtpVerify: false,
+    showCreateProfileSection: false,
   });
 
   const dispatch = useDispatch();

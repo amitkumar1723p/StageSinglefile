@@ -1,4 +1,3 @@
-
 @tailwind base;
 /* @tailwind components; */
 @tailwind utilities;
@@ -57,9 +56,8 @@ textarea {
   --main-light-blue-clr: #3d5a80;
 }
 
-select:focus{
+select:focus {
   outline: none;
-  
 }
 
 input:focus {
@@ -155,13 +153,34 @@ h6 {
   margin-top: var(--bs-gutter-y);
 }
 
-@media (max-width: 480px) {
-
-.EndtoEnd-Res{
-  display: flex;
-  flex-direction: column;
+tr{
+  font-size: 16px !important; 
+}
+td{
+  font-size: 16px !important;
 }
 
+@media (max-width: 480px) {
+
+  .who-we-are-section{
+    font-size: 12px !important;
+  }
+
+  button{
+    font-size: 14px;
+  }
+
+  tr{
+    font-size: 14px !important; 
+  }
+  td{
+    font-size: 14px !important;
+  }
+
+  .EndtoEnd-Res {
+    display: flex;
+    flex-direction: column;
+  }
 
   .ProgressBarMain {
     display: none;

@@ -6,7 +6,7 @@ const ComparisonTableSeller = () => {
     <div>
         <div className="text-center">
         <h2 className="text-[32px] font- text-[#333] mt-3 relative text-center max-480:text-2xl">
-          Why We're{" "}
+          Why We're
           <span className="font-semibold text-[var(--main-light-clr)]">Unique</span>
           <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[10%] h-[3px] bg-[var(--main-light-clr)]"></span>
         </h2>
