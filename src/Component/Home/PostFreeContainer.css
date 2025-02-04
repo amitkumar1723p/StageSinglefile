@@ -1,5 +1,5 @@
 .post-free-container {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--main-light-clr);
@@ -9,64 +9,65 @@
   margin: auto;
   margin-top: 20px;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 16px 0px #c5dff3;}
+  box-shadow: 0px 0px 16px 0px #c5dff3; */
+}
 
 .Post-free-heading-box{
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px; */
 }
 .post-free-content {
-  padding: 18px;
+  /* padding: 18px;
   display: flex;
   gap: 18px;
-  align-items: center;
+  align-items: center; */
   /* width: 1020px; */
   /* height: 500px; */
 }
 
 .post-free-image {
-  flex-shrink: 0;
-  overflow: hidden;
+  /* flex-shrink:0;
+  overflow: hidden; */
 }
 
 .point-in-post-free{
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* gap: 20px; */
 }
 
 .post-free-img {
-  transform: scaleX(-1);
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  max-width: 430px;
-   margin-left: 30px; 
+  /* transform: scaleX(-1); */
+  /* width: 100%; */
+  /* height: auto; */
+  /* object-fit: cover; */
+  /* max-width: 430px; */
+   /* margin-left: 30px;  */
 }
 
 .post-free-text {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-around; */
   /* gap: 35px; */
   /* justify-content: space-between; */
-  height: 420px;
+  /* height: 420px; */
 }
 
 .post-free-title {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 0;
-  color: var(--main-white-light-clr);
+  /* font-size: 32px; */
+  /* font-weight: bold; */
+  /* margin: 0; */
+  /* color: var(--main-white-light-clr); */
 }
 
 .post-free-p {
-  font-family: "Inter", Sans-serif;
-  display: flex;
+  /* font-family: "Inter", Sans-serif; */
+  /* display: flex;
   align-items: center;
   font-size: 20px;
-  color: #fff;
+  color: #fff; */
 }
 /* .post-free-p img {
   margin-right: 10px;
@@ -81,26 +82,26 @@
 
 .post-free-description,
 .post-free-call {
-  font-size: 18px;
-  color: var(--main-white-light-clr);
-  margin: 0px 0 10px 0;
-  text-align: justify;
+  /* font-size: 18px; */
+  /* color: var(--main-white-light-clr); */
+  /* margin: 0px 0 10px 0;
+  text-align: justify; */
 }
 .post-free-p span {
-  margin-right: 10px;
+  /* margin-right: 10px; */
   font-weight: 900;
-  font-size: 16px;
+  /* font-size: 16px; */
 }
 .post-free-button {
-  padding: 20px 30px;
-  font-size: 1em;
-  color: var(--main-light-clr);
-  background-color: var(--main-white-light-clr);
-  border: none;
+  /* padding: 20px 30px; */
+  /* font-size: 1em; */
+  /* color: var(--main-light-clr); */
+  /* background-color: var(--main-white-light-clr); */
+  /* border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-weight: 600;
+  font-weight: 600; */
 }
 
 .post-free-button:hover {

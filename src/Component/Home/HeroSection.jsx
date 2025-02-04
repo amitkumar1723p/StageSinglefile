@@ -43,6 +43,9 @@ import TermsAndConditions from "./TermsAndConditions";
 import PrivacyPolicy from "./PrivacyPolicy";
 import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
+
+import ChannelPartnerForm from "./ChannelPartnerForm.jsx";  
+
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -463,6 +466,7 @@ const HeroSection = () => {
           <Services />
           <Testimonials />
           <WhoWeAre />
+          <ChannelPartnerForm/>
         </>
       )} */}
 

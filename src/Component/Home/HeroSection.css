@@ -155,6 +155,7 @@
   color: var(--main-light-clr);
 }
 .search-section-box {
+  color: #333;
   display: flex;
   justify-content: space-between;
   width: 100%;

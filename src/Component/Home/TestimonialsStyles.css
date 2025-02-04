@@ -1,10 +1,10 @@
 /* General Feedback Section Styles */
 .feedback-section {
-  background-color: #fff;
+  /* background-color: #fff;
   padding: 40px 20px;
   text-align: center;
   max-width: 1200px;
-  margin: auto;
+  margin: auto; */
 }
 
 .feedback-subheader {
@@ -15,15 +15,15 @@
 }
 
 .feedback-list {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   justify-items: center;
-  margin-top: 15px;
+  margin-top: 15px; */
 }
 
 .feedback-item {
-  box-shadow: 0px 0px 16px 0px #c5dff3;
+  /* box-shadow: 0px 0px 16px 0px #c5dff3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -32,48 +32,48 @@
   border-radius: 8px;
   padding: 10px 20px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .feedback-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  /* transform: translateY(-10px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); */
 }
 
 .feedback-quote {
-  color: #4b5563; /* Soft gray for readability */
-  font-size: 14px; /* Slightly larger for better readability */
+  /* color: #4b5563; 
+  font-size: 14px; 
 
-  font-weight: 500; /* Normal weight to make the text feel balanced */
-  line-height: 18px; /* Increased line height for better spacing */
-  text-align: left; /* Left-aligned text for a more standard quote format */
-  margin: 10px 0; /* Add some space around the quote */
+  font-weight: 500; 
+  line-height: 18px; 
+  text-align: left; 
+  margin: 10px 0;  */
 }
 
 .feedback-user-info {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 10px; */
 }
 
 .feedback-image {
-  width: 40px;
+  /* width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: cover; */
   border: 1px solid var(--main-light-clr);
-  margin-bottom: 10px;
+  
 }
 
 .feedback-name {
-  margin-left: 5px;
-  color: var(--main-light-clr);
-  font-family: "Inter", Sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: normal;
-  text-align: start;
+  /* margin-left: 5px; */
+  /* color: var(--main-light-clr); */
+  /* font-family: "Inter", Sans-serif; */
+  /* font-size: 14px; */
+  /* font-weight: 500; */
+  /* line-height: normal; */
+  /* text-align: start; */
 }
 
 .feedback-name span {
@@ -171,7 +171,7 @@
   }
 
   .feedback-item {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: #fff;
@@ -179,14 +179,14 @@
     border-radius: 8px;
     padding: 8px 10px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; */
   }
 
   .feedback-list {
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 15px;
     justify-items: center;
-    margin-top: 15px;
+    margin-top: 15px; */
   }
 }
