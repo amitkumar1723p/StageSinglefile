@@ -3,13 +3,13 @@ import React from "react";
 const EndToEndSupport = () => {
   return (
     <>
-      <div className="bg-[var(--main-lighter-clr)] w-[80%] max-480:w-[100%] max-480:px-[10px] my-[40px] py-4  mx-auto text-center rounded-2xl shadow-md">
+      <div className="bg-[var(--main-lighter-clr)] w-[100%] max-480:w-[80%] max-480:px-[10px] my-[40px] py-4  mx-auto text-center rounded-2xl shadow-md">
         <h2 className="font-bold text-[24px]  text-[#333] mt-[10px]  underline-on-text">
           End-to-End <span style={{ color: "#0078d4" }}> Support </span>
         </h2>
       
       <div className="flex items-center justify-evenly my-[20px] bg--200 ">
-        <div className="flex w-[60%] bg--400 bg-red-30 justify-around max-480:flex-col max-480:w-full  max-480:px-[0px] bg--400 ">
+        <div className="EndtoEnd-Res flex xs:flex gap-[20px] ">
           {/* Left Side Image */}
           <div className="max-480:flex max-480:mb-5 max-480:justify-center ">
             <img
@@ -21,7 +21,7 @@ const EndToEndSupport = () => {
 
           {/* Right Side Content */}
           <div className="px-[px] max-480:px-[15px] ">
-            <ul className="pl-0  h-full">
+            <ul className="pl-0  h-full leading-9">
               {[ 
                 "Dedicated Relationship Manager",
                 "Site Visit Assistance",

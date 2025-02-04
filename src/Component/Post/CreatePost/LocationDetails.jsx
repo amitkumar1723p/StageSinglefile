@@ -31,7 +31,7 @@ export default function LocationDetails({
         {/* <div className="create-banner-box">
           <img src="/img/create-banner.svg" alt="create-banner" />
         </div> */}
-      <div className="container">
+      <div className="container w-80%">
         <h2 className="location-heading">Location Details</h2>
         <form id="locationForm" onSubmit={submitHandler}>
           <div className="location-box">

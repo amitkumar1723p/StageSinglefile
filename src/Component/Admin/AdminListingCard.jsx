@@ -131,7 +131,7 @@ export default function AdminListingCard({
 
       // VistAndOfferData.VisitAndOffer?.find()
     }
-  }, [VistAndOfferData]);
+  }, [VistAndOfferData,PostData]);
 
   return (
     <div className="Admin-property-post-card-main-box">
@@ -370,7 +370,7 @@ export default function AdminListingCard({
                     .replace(",", "")
                     .replaceAll("/", "-")}-${PostData._id}`}
                 >
-                  <button className="contact-button">View Listing</button>
+                  <button className="contact-button btn-sm">View Listing</button>
                 </Link>
                 <div className="Verified-lable">
                   <p>Verified lable :</p>

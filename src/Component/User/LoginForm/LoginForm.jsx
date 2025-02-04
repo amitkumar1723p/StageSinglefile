@@ -171,6 +171,7 @@ const LoginForm = ({
                 {ISNRI ? "Email Address" : "Phone Number"}
               </label>
               <input
+              className="border"
                 id="login-form"
                 type={ISNRI ? "email" : "text"}
                 autoComplete="off"

@@ -388,6 +388,7 @@
   cursor: pointer;
   z-index: 1;
   position: relative;
+  font-size: 12px;
 }
 
 .contact-button:hover {

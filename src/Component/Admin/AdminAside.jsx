@@ -73,7 +73,7 @@ export default function AdminAside() {
             }
           >
             <img
-              src="/img/Allpost.svg"
+              src="/img/allpost.svg"
               alt="All Post Icon"
               className={`transition-all group-hover:invert group-hover:brightness-0 ${location.pathname === "/admin/allpost" ? "invert brightness-0" : ""}`}
             />

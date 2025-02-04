@@ -431,7 +431,7 @@ export default function BiddingFormForm({
               />
             </div> */}
 
-            <div className="showpreviewImage-Container">
+            {/* <div className="showpreviewImage-Container">
               {previewImage.map((image, index) => {
                 return (
                   <div className="showpreviewImage-box" key={index}>
@@ -465,7 +465,7 @@ export default function BiddingFormForm({
                   </div>
                 );
               })}
-            </div>
+            </div> */}
 
             <div className="ke-you-offer-checkbox-group">
               <label className="mke-you-offer-checkbox-label">

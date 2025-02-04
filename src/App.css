@@ -1,6 +1,6 @@
 
 @tailwind base;
-@tailwind components;
+/* @tailwind components; */
 @tailwind utilities;
 
 body {
@@ -156,6 +156,13 @@ h6 {
 }
 
 @media (max-width: 480px) {
+
+.EndtoEnd-Res{
+  display: flex;
+  flex-direction: column;
+}
+
+
   .ProgressBarMain {
     display: none;
   }
@@ -249,4 +256,8 @@ h6 {
 
 .tab {
   display: flex;
+}
+
+.collapse {
+  visibility: visible;
 }

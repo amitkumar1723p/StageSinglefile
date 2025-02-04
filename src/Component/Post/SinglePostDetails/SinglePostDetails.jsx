@@ -463,7 +463,8 @@ export default function SinglePostDetails() {
                             {
                               getSinglePostData.SinglePost.PricingDetails
                                 .PricePerSqFt
-                            } Per sqft
+                            }{" "}
+                            Per sqft
                           </p>
                         </span>
 
@@ -494,10 +495,10 @@ export default function SinglePostDetails() {
                               {formatReservePrice(
                                 getSinglePostData.SinglePost.PricingDetails
                                   .ExpectedRent
-                              )} <span>/Month
-                                 </span> 
-                            </p> 
-                            <p className="rent-ques-section" >Rent Price</p>
+                              )}{" "}
+                              <span>/Month</span>
+                            </p>
+                            <p className="rent-ques-section">Rent Price</p>
                           </div>
 
                           <div>
@@ -507,7 +508,7 @@ export default function SinglePostDetails() {
                                   .DepositePrice
                               )}
                             </p>
-                            <p className="rent-ques-section" >Deposite Price</p>
+                            <p className="rent-ques-section">Deposite Price</p>
                           </div>
                         </div>
 
@@ -873,7 +874,7 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
-              <div className="similar-main-box">
+                  {/* <div className="similar-main-box">
                     <h3 className="similar-heading-box">Similar Property</h3>
                     <div className="similar-property-main-box">
                       <div className="similar-property-box1">
@@ -986,8 +987,8 @@ export default function SinglePostDetails() {
                         </div>
                       </div>
                     </div>
-                  </div>
-{/* similar property */}
+                  </div> */}
+                  {/* similar property */}
 
                   {/* <ExpressionOfInterestForm /> */}
                   {showBiddingForm && (

@@ -28,9 +28,15 @@ code {
 }
 
 
+
 .admin-data-card{
   background: #bfcccfa3;
    width: 300px;
     padding: 7px;
     margin-bottom: 17px;
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: inline !important;   
+  vertical-align: middle;
 }
