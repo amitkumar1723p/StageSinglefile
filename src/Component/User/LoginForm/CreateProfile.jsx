@@ -37,7 +37,7 @@ const CreateProfile = ({
     dispatch(CreateUserAction(CreateProfileDataObj, ISNRI));
   };
 
-  const Role = ["Buyer", "Tenant", "PropertyOwner", "Channel Partner"];
+  const Role = ["Buyer", "Tenant", "Property Owner", "Channel Partner"];
 
   useEffect(() => {
     if (ISNRI) {
@@ -194,7 +194,7 @@ const CreateProfile = ({
                     {Role.map((e, i) => {
                       return (
                         <option key={i} value={e}>
-                          {e == "PropertyOwner" ? "Owner" : e}
+                          {e == "Property Owner" ? "Owner" : e}
                         </option>
                       );
                     })}

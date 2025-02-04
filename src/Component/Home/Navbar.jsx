@@ -171,7 +171,7 @@ const Navbar = () => {
                       [
                         "Buyer",
                         "Tenant",
-                        "PropertyOwner",
+                        "Property Owner",
                         "Channel Partner",
                       ].includes(medata.user.Role)
                     ) {

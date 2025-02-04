@@ -26,7 +26,7 @@ export default function ProtectedRoutes({ Component }) {
         ![
           "Buyer",
           "Tenant",
-          "PropertyOwner",
+          "Property Owner",
           "Channel Partner",
           "NRI",
         ].includes(medata.user?.Role)
@@ -52,7 +52,7 @@ export default function ProtectedRoutes({ Component }) {
               ![
                 "Buyer",
                 "Tenant",
-                "PropertyOwner",
+                "Property Owner",
                 "Channel Partner",
                 "NRI",
               ].includes(medata.user.Role)) ? (
