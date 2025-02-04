@@ -86,14 +86,14 @@ export default function PricingDetails({
       const { SuperBuiltUpArea, CarpetArea, BuiltUpArea } = AreaDetailsData;
 
       // Area = PlotArea.value;
-      if (SuperBuiltUpArea.value) {
-        Area = SuperBuiltUpArea.value;
-      } else if (CarpetArea.value && !BuiltUpArea.value) {
-        Area = CarpetArea.value;
-      } else if (BuiltUpArea.value && !CarpetArea.value) {
-        Area = BuiltUpArea.value;
-      } else if (BuiltUpArea.value || CarpetArea.value) {
-        Area = Math.max(CarpetArea.value, BuiltUpArea.value);
+      if (SuperBuiltUpArea?.value) {
+        Area = SuperBuiltUpArea?.value;
+      } else if (CarpetArea?.value && !BuiltUpArea?.value) {
+        Area = CarpetArea?.value;
+      } else if (BuiltUpArea?.value && !CarpetArea?.value) {
+        Area = BuiltUpArea?.value;
+      } else if (BuiltUpArea?.value || CarpetArea?.value) {
+        Area = Math.max(CarpetArea?.value, BuiltUpArea?.value);
       }
 
       if (Area && numbricvalue) {

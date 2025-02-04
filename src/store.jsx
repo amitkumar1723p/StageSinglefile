@@ -23,7 +23,8 @@ import {
   Admin_OwnerGetAllScheduleVisitsReducer,
   GetAllAssignPropertyReducer,
   GetAdminAgentAssignPropertyReducer,
-  GetAllScheduleVisitsAndMakeOffer_LengthReducer
+  GetAllScheduleVisitsAndMakeOffer_LengthReducer,
+  GetMeVisitsReducer,
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -44,7 +45,8 @@ const reducer = combineReducers({
   ScheduleVisits: Admin_OwnerGetAllScheduleVisitsReducer,
   AssignPropertys: GetAllAssignPropertyReducer,
   AdminProperty: GetAdminAgentAssignPropertyReducer,
-  VistAndOffer:    GetAllScheduleVisitsAndMakeOffer_LengthReducer
+  VistAndOffer: GetAllScheduleVisitsAndMakeOffer_LengthReducer,
+  meVisits: GetMeVisitsReducer,
 });
 
 let initialState = {};
