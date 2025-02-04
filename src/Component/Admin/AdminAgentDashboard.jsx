@@ -79,8 +79,8 @@ const AdminAgentDashboard = () => {
         <Loader className="componentloader" />
       ) : (
         <>
-          <h4 className="main-dash admin-agent-dash"> Admin Agent Dashboard</h4>
-          <div className="cards">
+          <h4 className="text-[var(--main-light-clr)] font-inter text-[16px] font-medium leading-normal pb-2"> Admin Agent Dashboard</h4>
+          <div className="cards grid grid-cols-4 gap-3 ">
             {medata &&
               medata.IsAuthenticated &&
               medata.user.Role === "Owner" && (
@@ -89,7 +89,7 @@ const AdminAgentDashboard = () => {
                     <>
                       {" "}
                       <Link to="/admin/data?Role=Admin">
-                        <div className="card">
+                        <div className="card p-3">
                           <div className="Admin-box">
                             <p className="total-number">
                               {UnVerifyAdmin.length + VerifiedAdmin.length}
@@ -101,7 +101,7 @@ const AdminAgentDashboard = () => {
                         </div>
                       </Link>
                       <Link to={`/admin/data?AdminVerify=false`}>
-                        <div className="card">
+                        <div className="card min-h-[8.5rem]  p-3">
                           <div className="Admin-box">
                             <p className="total-number">
                               {UnVerifyAdmin.length}
@@ -113,7 +113,7 @@ const AdminAgentDashboard = () => {
                         </div>
                       </Link>
                       <Link to="/admin/data/?AdminVerify=true">
-                        <div className="card">
+                        <div className="card min-h-[8.5rem]  p-3">
                           <div className="Admin-box">
                             <p className="total-number">
                               {VerifiedAdmin.length}
@@ -131,7 +131,7 @@ const AdminAgentDashboard = () => {
                     <>
                       {" "}
                       <Link to="/admin/data/?Role=Agent">
-                        <div className="card">
+                        <div className="card min-h-[8.5rem]  p-3">
                           <div className="Admin-box">
                             <p className="total-number">
                               {UnVerifyAgent.length + VerifyAgent.length}
@@ -143,7 +143,7 @@ const AdminAgentDashboard = () => {
                         </div>
                       </Link>
                       <Link to="/admin/data?AgentVerify=false">
-                        <div className="card">
+                        <div className="card min-h-[8.5rem]  p-3">
                           <div className="Admin-box">
                             <p className="total-number">
                               {UnVerifyAgent.length}
@@ -155,7 +155,7 @@ const AdminAgentDashboard = () => {
                         </div>
                       </Link>
                       <Link to="/admin/data?AgentVerify=true">
-                        <div className="card">
+                        <div className="card min-h-[8.5rem]  p-3">
                           <div className="Admin-box">
                             <p className="total-number">{VerifyAgent.length}</p>
                             <img src="/img/ActivePosts.png" alt="post" />

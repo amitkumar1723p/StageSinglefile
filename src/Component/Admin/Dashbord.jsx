@@ -84,9 +84,9 @@ const Dashboard = () => {
       ) : (
         <>
           <h4 className={`main-dash ${location.pathname.includes("/admin/dashboard") ?"active-btn-admin":""}`} > Dashboard</h4>
-          <div className="cards">
-            <Link to="/admin/allpost">
-              <div className="card">
+          <div className="cards  grid grid-cols-4 gap-3  ">
+            <Link to="/admin/allpost" >
+              <div className="card p-3">
                 <div className="Admin-box">
                   <p className="total-number">{TotalListing}</p>
                   <img src="/img/TotalPosts.png" alt="totalPost" />
@@ -97,7 +97,7 @@ const Dashboard = () => {
             </Link>
             <Link to="/admin/allpost?PostVerify=true">
 
-              <div className="card">
+              <div className="card p-3">
                 <div className="Admin-box">
                   <p className="total-number">{VerifyPost.length}</p>
                   <img src="/img/ActivePosts.png" alt="post" />
@@ -108,7 +108,7 @@ const Dashboard = () => {
             </Link>
 
             <Link to="/admin/allpost?PostVerify=false">
-              <div className="card">
+              <div className="card p-3 cursor-pointer">
                 <div className="Admin-box">
                   <p className="total-number">{UnVerifyPost.length}</p>
                   <img src="/img/In-ActivePosts.png" alt="post" />
@@ -121,7 +121,7 @@ const Dashboard = () => {
             {medata?.user?.Role!= "Agent" && (
               <>
                 {" "}
-                <div className="card">
+                <div className="card p-3 cursor-pointer">
                   <div className="Admin-box">
                     <p className="total-number">0</p>
                     <img src="/img/In-ActivePosts.png" alt="post" />
@@ -130,7 +130,7 @@ const Dashboard = () => {
 
                   <p className="viewall">View All</p>
                 </div>
-                <div className="card">
+                <div className="card p-3 cursor-pointer">
                   <div className="Admin-box">
                     <p className="total-number">0</p>
                     <img src="/img/In-ActivePosts.png" alt="post" />
@@ -139,7 +139,7 @@ const Dashboard = () => {
 
                   <p className="viewall">View All</p>
                 </div>
-                <div className="card">
+                <div className="card p-3 cursor-pointer">
                   <div className="Admin-box">
                     <p className="total-number">0</p>
                     <img src="/img/ActivePosts.png" alt="post" />
