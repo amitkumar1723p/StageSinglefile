@@ -34,17 +34,6 @@ export default function SinglePostDetails() {
   const [showMakeOfferSuccessAlert, setshowMakeOfferSuccessAlert] =
     useState(false);
 
-  // const copyToClipboard = () => {
-  //   const url = window.location.href; // Get the current page URL
-  //   navigator.clipboard.writeText(url).then(
-  //     () => {
-  //       alert("URL copied to clipboard!");
-  //     },
-  //     () => {
-  //       alert("Failed to copy URL.");
-  //     }
-  //   );
-  // };
   const location = useLocation();
   const [showBiddingForm, setshowBiddingForm] = useState(false);
   const [showScheduleVisitForm, setshowScheduleVisitForm] = useState(false);
@@ -88,79 +77,79 @@ export default function SinglePostDetails() {
 
         if (PlotArea?.value) {
           setAreaDetails({
-            value: PlotArea.value,
-            unit: PlotArea.unit,
+            value: PlotArea?.value,
+            unit: PlotArea?.unit,
             label: "Plot Area",
           });
-        } else if (SuperBuiltUpArea.value) {
+        } else if (SuperBuiltUpArea?.value) {
           setAreaDetails({
-            value: SuperBuiltUpArea.value,
-            unit: SuperBuiltUpArea.unit,
+            value: SuperBuiltUpArea?.value,
+            unit: SuperBuiltUpArea?.unit,
             label: "Super-Built-up Area",
           });
-        } else if (CarpetArea.value && !BuiltUpArea.value) {
+        } else if (CarpetArea?.value && !BuiltUpArea?.value) {
           setAreaDetails({
-            value: CarpetArea.value,
-            unit: CarpetArea.unit,
+            value: CarpetArea?.value,
+            unit: CarpetArea?.unit,
             label: "Carpet Area",
           });
-        } else if (BuiltUpArea.value && !CarpetArea.value) {
+        } else if (BuiltUpArea?.value && !CarpetArea?.value) {
           setAreaDetails({
-            value: BuiltUpArea.value,
-            unit: BuiltUpArea.unit,
+            value: BuiltUpArea?.value,
+            unit: BuiltUpArea?.unit,
             label: "Built-up Area",
           });
-        } else if (BuiltUpArea.value || CarpetArea.value) {
-          if (CarpetArea.value > BuiltUpArea.value) {
+        } else if (BuiltUpArea?.value || CarpetArea?.value) {
+          if (CarpetArea?.value > BuiltUpArea?.value) {
             setAreaDetails({
-              value: CarpetArea.value,
-              unit: CarpetArea.unit,
+              value: CarpetArea?.value,
+              unit: CarpetArea?.unit,
               label: "CarpetArea Area",
             });
             setOtherArea({
-              value: CarpetArea.value,
-              unit: CarpetArea.unit,
+              value: CarpetArea?.value,
+              unit: CarpetArea?.unit,
               label: "CarpetArea Area",
             });
           } else {
             setAreaDetails({
-              value: BuiltUpArea.value,
-              unit: BuiltUpArea.unit,
+              value: BuiltUpArea?.value,
+              unit: BuiltUpArea?.unit,
               label: "Built-up Area",
             });
           }
         }
 
         if (PlotArea?.value) {
-          if (SuperBuiltUpArea.value) {
+          if (SuperBuiltUpArea?.value) {
             setOtherArea({
-              value: SuperBuiltUpArea.value,
-              unit: SuperBuiltUpArea.unit,
+              value: SuperBuiltUpArea?.value,
+              unit: SuperBuiltUpArea?.unit,
               label: "Super-Built-up Area",
             });
-          } else if (CarpetArea.value && !BuiltUpArea.value) {
+          } else if (CarpetArea?.value && !BuiltUpArea?.value) {
             setOtherArea({
-              value: CarpetArea.value,
-              unit: CarpetArea.unit,
+              value: CarpetArea?.value,
+              unit: CarpetArea?.unit,
               label: "Carpet Area",
             });
-          } else if (BuiltUpArea.value && !CarpetArea.value) {
+          } else if (BuiltUpArea?.value && !CarpetArea?.value) {
             setOtherArea({
               value: BuiltUpArea.value,
               unit: BuiltUpArea.unit,
               label: "Built-up Area",
             });
-          } else if (BuiltUpArea.value || CarpetArea.value) {
-            if (CarpetArea.value > BuiltUpArea.value) {
+          } else if (BuiltUpArea?.value || CarpetArea?.value) {
+            if (CarpetArea?.value > BuiltUpArea?.value) {
               setAreaDetails({
-                value: CarpetArea.value,
-                unit: CarpetArea.unit,
+                value: CarpetArea?.value,
+                unit: CarpetArea?.unit,
                 label: "CarpetArea Area",
               });
             } else {
               setAreaDetails({
-                value: BuiltUpArea.value,
-                unit: BuiltUpArea.unit,
+                value: BuiltUpArea?.value,
+                unit: BuiltUpArea?.unit,
                 label: "Built-up Area",
               });
             }
@@ -474,8 +463,7 @@ export default function SinglePostDetails() {
                             {
                               getSinglePostData.SinglePost.PricingDetails
                                 .PricePerSqFt
-                            }{" "}
-                            Per sqft
+                            } Per sqft
                           </p>
                         </span>
 
@@ -885,7 +873,7 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
-                  {/* <div className="similar-main-box">
+              <div className="similar-main-box">
                     <h3 className="similar-heading-box">Similar Property</h3>
                     <div className="similar-property-main-box">
                       <div className="similar-property-box1">
@@ -998,7 +986,9 @@ export default function SinglePostDetails() {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
+{/* similar property */}
+
                   {/* <ExpressionOfInterestForm /> */}
                   {showBiddingForm && (
                     <WindowComponent

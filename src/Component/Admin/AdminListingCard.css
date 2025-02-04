@@ -948,7 +948,7 @@
 
 .selectAssign > option {
   background-color: hsl(120, 14%, 96%);
-  color: #000;
+  color: #333333;
 }
 .adminNameButton {
   flex-direction: row;

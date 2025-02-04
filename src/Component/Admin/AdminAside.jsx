@@ -15,7 +15,7 @@ export default function AdminAside() {
             to="/admin/dashboard"
             className={({ isActive }) =>
               `flex gap-2 py-2 text-left text-sm px-1 group rounded-md transition-all ${
-                isActive ? "bg-[var(--main-light-clr)]   text-white" : "hover:bg-[var(--main-light-hover-clr)] hover:text-white"
+                isActive ? "bg-[var(--main-light-clr)]   text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
               }`
             }
           >
@@ -35,7 +35,7 @@ export default function AdminAside() {
                   to="/admin/agent/dashboard?Role=Admin"
                   className={({ isActive }) =>
                     `flex gap-2 py-2 text-left group text-sm px-1 rounded-md transition-all ${
-                      location.search.includes("Role=Admin") ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-hover-clr)] hover:text-white"
+                      location.search.includes("Role=Admin") ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
                     }`
                   }
                 >
@@ -50,7 +50,7 @@ export default function AdminAside() {
                   to="/admin/agent/dashboard?Role=Agent"
                   className={({ isActive }) =>
                     `flex gap-2 py-2 text-left group text-sm px-1 rounded-md transition-all ${
-                      location.search.includes("Role=Agent") ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-hover-clr)] hover:text-white"
+                      location.search.includes("Role=Agent") ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
                     }`
                   }
                 >
@@ -68,7 +68,7 @@ export default function AdminAside() {
             to="/admin/allpost"
             className={({ isActive }) =>
               `flex gap-2 py-2 text-left group text-sm px-1 rounded-md transition-all ${
-                isActive ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-hover-clr)] hover:text-white"
+                isActive ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
               }`
             }
           >
@@ -132,22 +132,22 @@ export default function AdminAside() {
                     {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
             Library
           </button> */}
-          <button className="flex gap-2 text-sm py-2 group px-1 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white rounded-md">
+          <button className="flex gap-2 text-sm py-2 group px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
             <img src="/img/Report.svg" className="group-hover:invert group-hover:brightness-0" alt="" />
             Report
           </button>
-          <button  className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white rounded-md">
+          <button  className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
             <img src="/img/Authentication.svg"  className="group-hover:invert group-hover:brightness-0" alt="" />
             Authentication
           </button>
-          <button  className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white rounded-md">
+          <button  className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
             <img src="/img/Schedule.svg" className="group-hover:invert group-hover:brightness-0" alt="" />
             Schedules
           </button>
           {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
             Payouts
           </button> */}
-          <button  className="flex gap-2 group py-2 text-sm px-1 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white rounded-md">
+          <button  className="flex gap-2 group py-2 text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
             <img src="/img/Setting.svg" className="group-hover:invert group-hover:brightness-0" alt="" />   Settings
           </button>
 
@@ -156,7 +156,7 @@ export default function AdminAside() {
           <button className="menu-button">Authentication</button>
           <button className="menu-button">Schedules</button> */}
           {/* <button className="menu-button">Payouts</button> */}
-          <button className="menu-button">Settings</button>
+          {/* <button className="menu-button">Settings</button> */}
         </div>
       </aside>
 
@@ -188,7 +188,7 @@ export default function AdminAside() {
 //         <div className="mb-4 text-2xl font-semibold text-[var(--main-light-clr)]">Dashboard</div>
 //         <div className="flex flex-col space-y-4">
 //           <button
-//             className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-blue-500 focus:text-white focus:outline-none font-base rounded-md"
+//             className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-blue-500 focus:text-white focus:outline-none font-base rounded-md"
 //             onClick={() => navigate("/admin/dashboard")}
 //           >
 //             <img
@@ -206,14 +206,14 @@ export default function AdminAside() {
 //             medata.user.OwnerVerify && (
 //               <>
 //                 <button
-//                  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md"
+//                  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md"
 //                   onClick={() => navigate("/admin/agent/dashboard?Role=Admin")}
 //                 >
 //                   <img src="/img/Admin.svg" alt="" />
 //                   Admin
 //                 </button>
 //                 <button
-//                   className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md"
+//                   className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md"
 //                   onClick={() => navigate("/admin/agent/dashboard?Role=Agent")}
 //                 >
 //                   <img src="/img/Admin.svg" alt="" />
@@ -222,7 +222,7 @@ export default function AdminAside() {
 //               </>
 //             )}
 //           <button
-//              className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md"
+//              className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md"
 //             onClick={() => navigate("/admin/allpost")}
 //           >
 //             <img src="/img/Allpost.svg" alt="" />
@@ -231,22 +231,22 @@ export default function AdminAside() {
 //           {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
 //             Library
 //           </button> */}
-//           <button className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
+//           <button className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
 //             <img src="/img/Report.svg" alt="" />
 //             Report
 //           </button>
-//           <button  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
+//           <button  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
 //             <img src="/img/Authentication.svg" alt="" />
 //             Authentication
 //           </button>
-//           <button  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
+//           <button  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
 //             <img src="/img/Schedule.svg" alt="" />
 //             Schedules
 //           </button>
 //           {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
 //             Payouts
 //           </button> */}
-//           <button  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-hover-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
+//           <button  className="flex gap-2 p-2 text-left hover:bg-[var(--main-light-clr)] hover:text-white focus:bg-[var(--main-dark-clr)] focus:text-white focus:outline-none font-base rounded-md">
 //             <img src="/img/Setting.svg" alt="" />   Settings
 //           </button>
 //         </div>

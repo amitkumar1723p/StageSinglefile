@@ -1,4 +1,4 @@
-import React, { useEffect,useCallback, useRef, useState } from "react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToWords } from "to-words";
 import { BiddingFormAction } from "../../../Action/userAction";
@@ -137,7 +137,6 @@ export default function BiddingFormForm({
     setTimeoutId(id);
   };
 
-
   const [price, setPrice] = useState("");
   const [convertedPrice, setConvertedPrice] = useState("");
 
@@ -180,10 +179,9 @@ export default function BiddingFormForm({
 
     // Format the input value with commas and set the converted price
     const formattedPrice = formatNumberWithCommas(inputValue);
- 
-// Remove commas before converting to a number
-const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
-    
+
+    // Remove commas before converting to a number
+    const cleanPrice = Number(formattedPrice.replace(/,/g, ""));
 
     setBiddingFormData({
       ...BiddingFormData,
@@ -237,11 +235,14 @@ const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
                     </span>{" "}
                   </p>
 
-                  <p className="area-section-from"> 30,000/sq.ft</p>
+                  <p className="area-section-from pt-1">
+                    
+                    {SinglePostData.SinglePost.PricingDetails.PricePerSqFt} per sqft
+                  </p>
                 </div>
-                <div className="make-offer-property-id">
+                <div className="make-offer-property-id space-y-1">
                   <p className="prop-id-from">Property Id </p>
-                  <p className="prop-id-number">
+                  <p className="prop-id-number ">
                     {SinglePostData.SinglePost._id}
                   </p>
                 </div>
@@ -292,18 +293,19 @@ const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
               </select>
 
               {isLowerOffer === "CustomValue" && (
-  <div>
-
-    <input
-      className="mx-1 py-1 rounded-2 px-2"
-      type="text"
-      value={formatNumberWithCommas(price)}
-      onChange={handleChange}
-      placeholder="Enter custom value"
-    />
-    {convertedPrice && <p className="mke-offer-p">{convertedPrice}</p>}
-  </div>
-)}
+                <div>
+                  <input
+                    className="py-1 rounded-2 px-2 border text-[#333]"
+                    type="text"
+                    value={formatNumberWithCommas(price)}
+                    onChange={handleChange}
+                    placeholder="Enter Offer Price"
+                  />
+                  {convertedPrice && (
+                    <p className="mke-offer-p">{convertedPrice}</p>
+                  )}
+                </div>
+              )}
 
               {/* <div
               type="button"
@@ -316,10 +318,13 @@ const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
             </div> */}
 
               <div className="mke-you-offer-offer-options">
-                {isLowerOffer === "LowerValue" || isLowerOffer === "HighValue" && (
-                  <>
-                    {(isLowerOffer == "LowerValue" ? lowerPrices : standardPrices).map(
-                      (price, index) => (
+                {isLowerOffer === "LowerValue" ||
+                  (isLowerOffer === "HighValue" && (
+                    <>
+                      {(isLowerOffer == "LowerValue"
+                        ? lowerPrices
+                        : standardPrices
+                      ).map((price, index) => (
                         <button
                           type="button"
                           className={`mke-you-offer-option ${
@@ -342,10 +347,9 @@ const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
                           {/* ₹ {price.toFixed(2)} Cr₹ {price} Cr */}
                           {formatReservePrice(price)}
                         </button>
-                      )
-                    )}{" "}
-                  </>
-                )}
+                      ))}{" "}
+                    </>
+                  ))}
               </div>
             </div>
 
@@ -487,16 +491,24 @@ const cleanPrice = Number(formattedPrice.replace(/,/g, ''));
                 />
                 I express interest to purchase the aforementioned property. I
                 agree with the{" "}
-                <span  className="offer-tc-p-p"
+                <span
+                  className="offer-tc-p-p"
                   onClick={() => {
                     navigate("/privacy-policy");
                   }}
                 >
                   Privacy Policy
-                </span > and  <span  className="offer-tc-p-p"
-                onClick={() => {
+                </span>{" "}
+                and{" "}
+                <span
+                  className="offer-tc-p-p"
+                  onClick={() => {
                     navigate("/terms-and-conditions");
-                  }}> Terms & Conditions. </span>
+                  }}
+                >
+                  {" "}
+                  Terms & Conditions.{" "}
+                </span>
               </label>
 
               <label className="mke-you-offer-checkbox-label">

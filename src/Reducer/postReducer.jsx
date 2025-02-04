@@ -393,3 +393,34 @@ export const GetAdminAgentAssignPropertyReducer = (state = {}, action) => {
       };
   }
 };
+
+export const GetMeVisitsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GetMeVisitsRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "GetMeVisitsSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetMeVisitsFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetMeVisitsClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};

@@ -3,7 +3,6 @@ const api_Base_Url = process.env.REACT_APP_API_URL;
 //  Create User Action    Change Genrate Otp  By User Create
 
 export const CreateUserOtpAction = (userData) => {
- 
   return async (dispatch) => {
     try {
       dispatch({
@@ -46,14 +45,15 @@ export const VerifyUserOtpAction = (userData) => {
         type: "VerifyUserOtpRequest",
         payload: "VerifyUserOtpRequest",
       });
-     
 
       // let url = "";
       // const url = `${api_Base_Url}/user/${
       //   userData.email ? "nri-genrate-otp" : "genrate-otp"
       // }`;
-      
-      const url = `${api_Base_Url}/user/${userData.email?"nri-verify-otp":"verify-otp"}`;
+
+      const url = `${api_Base_Url}/user/${
+        userData.email ? "nri-verify-otp" : "verify-otp"
+      }`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -77,19 +77,19 @@ export const VerifyUserOtpAction = (userData) => {
   };
 };
 
-export const CreateUserAction = (userData ,ISNRI) => {
+export const CreateUserAction = (userData, ISNRI) => {
   return async (dispatch) => {
     // ISNRI
-    
+
     try {
       dispatch({
         type: "CreateUserRequest",
         payload: "CreateUserRequest",
       });
-       
+
       // const url = "/user/create";
       // const url = `${api_Base_Url}/user/create`;
-      const url = `${api_Base_Url}/user/${ISNRI?"nri-create":"create"}`;
+      const url = `${api_Base_Url}/user/${ISNRI ? "nri-create" : "create"}`;
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -613,7 +613,7 @@ export const CreateTenant_PostResponseAction = (Tenant_PostResponseobj) => {
   };
 };
 
-export const GetAllTenentResponseAction = (AdminVerify) => {
+export const GetAllTenentResponseAction = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllTenentResponseRequest" });
@@ -800,6 +800,38 @@ export const ReportSuspiciousProperty = (updateData) => {
       } else {
         dispatch({
           type: "ReportSuspiciousPropertyFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+export const GetMeVisitsAction = (AdminVerify) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "GetMeVisitsRequest" });
+
+      let url = `${api_Base_Url}/schedule-visit/me-visits`;;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({ type: "GetMeVisitsSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "GetMeVisitsFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetMeVisitsFail",
           payload: { message: error.message, success: false },
         });
       }

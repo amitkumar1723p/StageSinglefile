@@ -57,6 +57,11 @@ textarea {
   --main-light-blue-clr: #3d5a80;
 }
 
+select:focus{
+  outline: none;
+  
+}
+
 input:focus {
   outline: none;
 }

@@ -80,16 +80,16 @@ function Sidebar() {
                 Transactions
               </li>
             </NavLink> */}
-            <NavLink to="#">
+            {/* <NavLink to="/user/my-visits">
               <li className="navItem mob-hide">
                 <img
                   className="icons"
                   src="/img/NewLeads.svg"
                   alt="new leads"
                 />
-                New Leads
+                my Visits
               </li>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="#">
               <li className="navItem mob-hide">
                 <img
@@ -138,12 +138,12 @@ function Sidebar() {
                 FAQs
               </li>
             </NavLink>
-            {/* <NavLink to="/user/post/response">
+            <NavLink to="/user/post/response">
               <li className="navItem mob-hide">
                 <img className="icons" src="/img/MyListing.svg" alt="post response" />
                 Your Post Response
               </li>
-            </NavLink> */}
+            </NavLink>
           </ul>
         </nav>
       </aside>

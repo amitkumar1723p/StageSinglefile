@@ -214,7 +214,7 @@
 }
 
 .nav-link.buy-btn:hover {
-  background-color: var(--main-light-hover-clr);
+  background-color: var(--main-light-clr);
 }
 
 .userimg-logo-box {

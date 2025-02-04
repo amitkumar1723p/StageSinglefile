@@ -413,7 +413,7 @@ body {
   flex-grow: 1;
   width: 43%;
   height: 335px;
-  /* background-color: #0000001c; */
+  /* background-color: #3333330001c; */
   display: flex;
   overflow: hidden;
   position: relative;
@@ -463,7 +463,7 @@ body {
 }
 
 .posted-by-section span {
-  color: #4a4a4a;
+  color: #333333;
   font-family: "Inter", Sans-serif;
   font-size: 12px;
   font-style: normal;
@@ -633,7 +633,7 @@ line-height: normal;
   display: flex;
   align-items: center;
   gap: 30px;
-  color: #4a4a4a;
+  color: #333333;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -1148,7 +1148,7 @@ line-height: normal;
 
 /* Bedding Form Css  */
 .bidding-form-container {
-  background-color: #000000a8;
+  background-color: #333333000a8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1436,7 +1436,7 @@ line-height: normal;
   align-items: center;
   gap: 10px;
   font-size: 16px;
-  color: #4a4a4a;
+  color: #333333;
 }
 
 .report-icon {

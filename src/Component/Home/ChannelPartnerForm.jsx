@@ -54,7 +54,7 @@ const ChannelPartnerForm = () => {
                         <div className="justify-center items-center gap-2.5 inline-flex">
                             <div className="text-black text-base font-normal font-['Inter']">Company Name*</div>
                         </div>
-                        <input type="text" placeholder="Company Name" className="self-stretch px-2.5 py-[7.50px] bg-white rounded-[5px] border border-[#000000] justify-start items-center gap-2.5 inline-flex text-sm">
+                        <input type="text" placeholder="Company Name" className="self-stretch px-2.5 py-[7.50px] bg-white rounded-[5px] border border-[#333333000] justify-start items-center gap-2.5 inline-flex text-sm">
                             
                         </input>
                     </div>

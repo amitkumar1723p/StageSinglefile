@@ -124,6 +124,9 @@ export default function AdminListingCard({
       );
       if (VisitsAndOffers_Data) {
         setVisitAndOfferLength(VisitsAndOffers_Data);
+      } 
+      else{
+        setVisitAndOfferLength(undefined);
       }
 
       // VistAndOfferData.VisitAndOffer?.find()
@@ -455,9 +458,7 @@ export default function AdminListingCard({
                 )}
               </div>
 
- 
-
-              
+             
             </div>
           </div>
         </div>

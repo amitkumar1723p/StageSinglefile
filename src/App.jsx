@@ -51,6 +51,9 @@ import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
 import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
+import MeVisits from "./Component/Post/CreatePost/MeVisits";
+// import meVisits from "./Component/Post/CreatePost/m";
+ 
 function App() {
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
@@ -83,7 +86,7 @@ function App() {
     return state.ScheduleVisits;
   });
 
-  const { data:VistAndOfferData } = useSelector((state) => {
+  const { data: VistAndOfferData } = useSelector((state) => {
     return state.VistAndOffer;
   });
   const { data: AdminData } = useSelector((state) => {
@@ -110,6 +113,10 @@ function App() {
   const { data: AdminAssignPropertyData } = useSelector((state) => {
     return state.AdminProperty;
   });
+  const { data: GetMeVisitsReducer } = useSelector((state) => {
+    return state.meVisits;
+  });
+
   const location = useLocation();
 
   useEffect(() => {
@@ -396,6 +403,26 @@ function App() {
   }, [VistAndOfferData]);
 
   useEffect(() => {
+    if (VistAndOfferData) {
+      if (VistAndOfferData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (VistAndOfferData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (VistAndOfferData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{VistAndOfferData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "GetAllScheduleVisitsAndMakeOffer_LengthClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [VistAndOfferData]);
+
+  useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
     }
@@ -458,6 +485,28 @@ function App() {
     // eslint-disable-next-line
   }, [AdminAssignPropertyData]);
 
+
+//  myvisits
+  useEffect(() => {
+    if (LoginUserPostData) {
+      if (LoginUserPostData.success === false) {
+        if (LoginUserPostData.IsAuthenticated === false) {
+          navigate("/");
+          // setTimeout(() => {
+
+          //   navigate("/login")
+          // }, 0);
+        }
+        setalertMessage(<p>{LoginUserPostData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "LoginUserGetPostClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [LoginUserPostData]);
+
   useEffect(() => {
     dispatch(GetMeDetailsAction());
   }, []);
@@ -475,7 +524,7 @@ function App() {
         />
       )}
       {/* <ScrollToTop /> */}
-  
+
       <Routes>
         <Route exact path="/login" element={<UserForm />} />
         <Route exact path="/nri/login" element={<UserForm />} />
@@ -525,6 +574,8 @@ function App() {
               path="post/response"
               element={<ViewTenantPostResponse />}
             />
+
+            <Route exact path="my-visits" element={<MeVisits/>} />
             <Route
               exact
               path="favourite-post"
