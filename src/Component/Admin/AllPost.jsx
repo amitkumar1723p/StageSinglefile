@@ -1,217 +1,174 @@
-import React, { useEffect, useState, useMemo, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Admin_OwnerGetAllPostAction,
-  GetAllAssignProperty,
-} from "../../Action/postAction";
-import Loader from "../Loader/Loader";
+import { Admin_OwnerGetAllPostAction } from "../../Action/postAction";
 import AdminListingCard from "./AdminListingCard";
-// import PostCard from "../Post/PostCard";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "./AdminListingCard.css";
-import { GetAllAdminAction } from "../../Action/userAction";
-import { adminAssigned } from "../../Action/postAction";
-import { UserContext } from "../CreateContext/CreateContext";
 
 export default function AllPost({
   setAssignProperty,
   AssignProperty,
   SearchPostId,
+  sortOrder,
+  activeFilter,
+ 
 }) {
   const dispatch = useDispatch();
   const [OwnerPosts, setOwnerPosts] = useState([]);
-  const location = useLocation();
-  // const { medata } = useSelector((state) => {
-  //   return state.meDetails;
-  // });
+  const { loading, data } = useSelector((state) => state.AdminGetAllPost);
 
-  const { loading, data } = useSelector((state) => {
-    return state.AdminGetAllPost;
-  });
 
-  //  Assign Property Code
+  // Pagination logic state 
+  const [page, setPage] = useState(1); // Current page for pagination
+  const [totalPages, setTotalPages] = useState(0); // Total number of pages
+  const itemsPerPage = 10; // Number of items per page
 
-  // const [active, setActive] = useState(null);
-  // const [inputValue, setInputValue] = useState("");
-
-   
-  // const [inactive, setInActive] = useState(null); // Use null to indicate no filter
-
-  // filter data based on the active or in-active
-  // const newData = data?.Post || [];
-
-  // // const [filteredData, setFilteredData] = useState(newData);
-  // const handleChange = (event) => {
-  //   setInputValue(event.target.value);
-  // };
-  // const handleSearch = () => {};
-
-  // const handleActive = () => {
-  //   setActive(true); // Set active to true when the "Active" button is clicked
-  // };
-  // const handleInactive = () => {
-  //   setActive(false); // Set inactive to false when the "Inactive" button is clicked
-  // };
-  // const handleAllPost = () => {
-  //   setActive(null);
-  // };
-
-  // const filteredPosts = useMemo(() => {
-  //   let posts = [...newData];
-
-  //   // Filter based on 'active' (PostVerify)
-  //   if (active === true) {
-  //     posts = posts.filter((item) => item.PostVerify === true);
-  //   }
-
-  //   if (active === false) {
-  //     posts = posts.filter((item) => item.PostVerify === false);
-  //   }
-
-  //   // Filter based on 'inputValue'
-  //   if (inputValue !== "") {
-  //     posts = posts.filter((item) => {
-  //       const contactNumber = item.CreatePostUser?.ContactNumber;
-  //       return (
-  //         item._id.toLowerCase().includes(inputValue.toLowerCase()) ||
-  //         (item.CreatePostUser?.Name &&
-  //           item.CreatePostUser.Name.toLowerCase().includes(
-  //             inputValue.toLowerCase()
-  //           )) ||
-  //         (item.LocationDetails?.ProjectName &&
-  //           item.LocationDetails.ProjectName.toLowerCase().includes(
-  //             inputValue.toLowerCase()
-  //           )) ||
-  //         (contactNumber && String(contactNumber).includes(inputValue)) // Convert to string before calling includes
-  //       );
-  //     });
-  //   }
-
-  //   return posts; // Return the filtered posts
-  // }, [newData, active, inputValue]);
-  // +============================================================filter work end here
-
+  // Update posts when data or sortOrder changes searching or pagination set inside this useEffect
   useEffect(() => {
-    //  data?.Post?.length
-    if (data?.Post) {
-      setOwnerPosts(data.Post);
-    }
-  }, [data]);
 
-  useEffect(() => {
     if (data?.Post) {
+      let filteredPosts = [...data.Post];
+  
+      // Apply search filter
       if (SearchPostId.length > 0) {
-        //   let a = data.Post.find((post) => {
-        //   return post._id == SearchPostId;
-        // });
-
-        let posts = data.Post.filter((item) => {
+        filteredPosts = filteredPosts.filter((item) => {
           const contactNumber = item.CreatePostUser?.ContactNumber;
-
+  
           return (
             item._id.toLowerCase().includes(SearchPostId.toLowerCase()) ||
-            ( item?.CreatePostUser?.Name.toLowerCase().includes(
-                SearchPostId.toLowerCase()
-              )) ||
-            ( item.LocationDetails.ProjectName.toLowerCase().includes(
-                SearchPostId.toLowerCase()
-              )) ||
+            (item?.CreatePostUser?.Name.toLowerCase().includes(
+              SearchPostId.toLowerCase()
+            )) ||
+            (item.LocationDetails.ProjectName.toLowerCase().includes(
+              SearchPostId.toLowerCase()
+            )) ||
             (contactNumber && String(contactNumber).includes(SearchPostId)) // Convert to string before calling includes
           );
         });
-
-        setOwnerPosts(posts);
-        // if (posts) {
-        //   setOwnerPosts(posts);
-
-        //   // Filter based on 'inputValue'
-        //   // if (inputValue !== "") {
-        //   //   posts = posts.filter((item) => {
-        //   //     const contactNumber = item.CreatePostUser?.ContactNumber;
-        //   //     return (
-        //   //       item._id.toLowerCase().includes(inputValue.toLowerCase()) ||
-        //   //       (item.CreatePostUser?.Name &&
-        //   //         item.CreatePostUser.Name.toLowerCase().includes(
-        //   //           inputValue.toLowerCase()
-        //   //         )) ||
-        //   //       (item.LocationDetails?.ProjectName &&
-        //   //         item.LocationDetails.ProjectName.toLowerCase().includes(
-        //   //           inputValue.toLowerCase()
-        //   //         )) ||
-        //   //       (contactNumber && String(contactNumber).includes(inputValue)) // Convert to string before calling includes
-        //   //     );
-        //   //   });
-        //   // }
-        // }
-
-        // else {
-        //   setOwnerPosts(data.Post);
-        // }
-      } else {
-        setOwnerPosts(data.Post);
       }
+  
+      // Apply the active filter (postVerify) to all posts
+      if (activeFilter !== null) {
+        filteredPosts = filteredPosts.filter((item) => {
+          return item.PostVerify === activeFilter;
+        });
+      }else{
+        filteredPosts=[...filteredPosts]
+      }
+  
+   
+  
+      // Sorting logic
+      if (sortOrder !== undefined) {
+        if (sortOrder === "ascending") {
+          filteredPosts.sort((a, b) => new Date(a.createAt) - new Date(b.createAt)); // Ascending order
+        } else if (sortOrder === "descending") {
+          filteredPosts.sort((a, b) => new Date(b.createAt) - new Date(a.createAt)); // Descending order
+        }
+      }
+  
+      // Update pagination when filtered posts change
+      const newTotalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+      setTotalPages(newTotalPages); // Update total pages
+  
+      // Reset the page if it exceeds the new total pages
+      if (page > newTotalPages) {
+        setPage(1); // Reset to the first page
+      }
+  
+      const startIndex = (page - 1) * itemsPerPage;
+      const endIndex = page * itemsPerPage;
+      const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+  
+      setOwnerPosts(postsToDisplay); // Set the current page posts
     }
-  }, [SearchPostId, data]);
+  }, [data, SearchPostId, sortOrder, activeFilter, page]);
+
+  // Re-run when data, SearchPostId, sortOrder, or page changes
+
   const [querry, setquerry] = useSearchParams();
   useEffect(() => {
     if (querry.get("PostVerify")) {
-      dispatch(
-        Admin_OwnerGetAllPostAction({ PostVerify: querry.get("PostVerify") })
-      );
+      dispatch(Admin_OwnerGetAllPostAction({ PostVerify: querry.get("PostVerify") }));
     } else {
       dispatch(Admin_OwnerGetAllPostAction());
     }
-  }, [querry]);
+  }, [querry, dispatch]);
 
-  // Get All AssignProperty
+  // Pagination control functions start 
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage); // Go to the selected page
+  };
+ // Pagination control functions end
   return (
-    <>
-      <>
-        <div className="Admin-property-post-card-main-box">
-          <p className="AllListing-admin">All Listing</p>
+    <div className="Admin-property-post-card-main-box">
+      <p className="AllListing-admin">All Listing</p>
+{/* here we itrate all available property for owner only start */}
+      {OwnerPosts.length > 0 ? (
+        OwnerPosts.map((post, index) => (
+          <AdminListingCard
+            key={index}
+            index={index}
+            PostData={post}
+            setAssignProperty={setAssignProperty}
+            AssignProperty={AssignProperty}
+          />
+        ))
+      ) : (
+        <div>No posts available</div>
+      )}
+{/* here we itrate all available property for owner only end */}
 
-          {OwnerPosts.map((e, i) => {
-            return (
-              <AdminListingCard
-                key={i}
-                index={i}
-                PostData={e}
-                setAssignProperty={setAssignProperty}
-                AssignProperty={AssignProperty}
-              />
-            );
-          })}
-          {/* {filteredPosts.length > 0 ? (
-              filteredPosts.length &&
-              filteredPosts.map((e, i) => {
-                return (
-                  <AdminListingCard
-                    key={i}
-                    index={i}
-                    PostData={e}
-                    setAssignProperty={setAssignProperty}
-                    AssignProperty={AssignProperty}
-                  />
-                );
-              })
-            ) : (
-              <>
-                {data?.Post.map((e, i) => {
-                  return (
-                    <AdminListingCard
-                      key={i}
-                      index={i}
-                      PostData={e}
-                      setAssignProperty={setAssignProperty}
-                      AssignProperty={AssignProperty}
-                    />
-                  );
-                })}
-              </>
-            )} */}
-        </div>
-      </>
-    </>
+
+      {/* Pagination controls start */}
+      <nav aria-label="Page navigation example">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+            <button className="page-link" onClick={handlePrevPage}>
+              Pre
+            </button>
+          </li>
+
+          {/* Dynamic page numbers */}
+          {[...Array(totalPages).keys()].map((i) => (
+            <li
+              key={i + 1}
+              className={`page-item ${page === i + 1 ? "active" : ""}`}
+            >
+              <button
+                className="page-link"
+                onClick={() => handlePageChange(i + 1)}
+              >
+                {i + 1}
+              </button>
+            </li>
+          ))}
+
+          <li className={`page-item ${page === totalPages ? "disabled" : ""}`}>
+            <button className="page-link" onClick={handleNextPage}>
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Pagination controls end  */}
+
+
+      {/* Loading Spinner */}
+      {loading && <div>Loading...</div>}
+    </div>
   );
 }

@@ -62,9 +62,21 @@
   padding: 20px;
 }
 
+.Verified-lable{
+  display: flex;
+  gap: 5px;
+  color: #303030;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  align-items: center;
+}
+
 .admin-btn-active-btn {
   display: flex;
-
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -230,13 +242,16 @@
 }
 .admin-property-address {
   color: #303030;
-
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 1px;
+  white-space: nowrap; /* Prevent text from wrapping */
 }
+
 
 /* .property-Area {
     padding: 10px 0 0 0;
@@ -553,7 +568,7 @@
 }
 
 .price-ans {
-  color: #555592;
+  color: var(--main-light-clr);
 
   font-size: 14px;
   font-style: normal;
@@ -583,7 +598,6 @@
 .response-section {
   display: flex;
   gap: 30px;
-
 }
 
 .admin-card-heading {
@@ -711,7 +725,7 @@
   line-height: normal;
 }
 
-.search-bar-admin{
+.search-bar-admin {
   position: relative;
   right: 25px;
 }
@@ -747,14 +761,14 @@
   top: 124px;
   z-index: 3;
 }
-.active-btn{
- display: flex;
- align-items: center;
- background-color: var(--main-light-clr);
- color: #fff  !important;
- padding: 5px;
- border-radius: 5px;
- animation: .5s;
+.active-btn {
+  display: flex;
+  align-items: center;
+  background-color: var(--main-light-clr);
+  color: #fff !important;
+  padding: 5px;
+  border-radius: 5px;
+  animation: 0.5s;
 }
 
 .select-section-admin span {

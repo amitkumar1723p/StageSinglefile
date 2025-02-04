@@ -214,16 +214,15 @@ export default function PostCard({ PostData, index }) {
           }}
         >
           <div className="icon-box">
-            {PostData.PostVerify ? (
-              <div className="active-post">
-                <img src="/img/verified-tag.svg" alt="verified-tag" />
-                <p className="active-post-para">Verified</p>
-              </div>
-            ) : (
-              <div className="inactive-post">
-                <p className="inactive-post-para">Inactive</p>
-              </div>
-            )}
+            {PostData.PostVerifyShow ? (
+              PostData.PostVerify ? (
+                <div className="active-post">
+                  <img src="/img/verified-tag.svg" alt="verified-tag" />
+                  <p className="active-post-para">Verified</p>
+                </div>
+              ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
+            ) : null}{" "}
+            {/* If PostVerifyShow is false, show nothing */}
           </div>
 
           {/* <div className="IconBox">
@@ -261,7 +260,7 @@ export default function PostCard({ PostData, index }) {
             <div className="heading-name">
               {PostData.LocationDetails.ProjectName}
 
-              <div className="share-fav-main-box"> 
+              <div className="share-fav-main-box">
                 <div className="postcard-share-parent">
                   <div data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img
@@ -326,7 +325,7 @@ export default function PostCard({ PostData, index }) {
                 <div className="img-box-imp-data-card">
                   <p className=" answer-box">
                     {`${PostData.PropertyDetails.BHKType} BHK`}{" "}
-                    {PostData.PropertyDetails?.OtherRoom.map((text) => {
+                    {PostData.PropertyDetails?.OtherRoom?.map((text) => {
                       return `+ ${
                         text == "Pooja Room"
                           ? "Pooja"
@@ -377,17 +376,22 @@ export default function PostCard({ PostData, index }) {
                   {/* Show Reserve Price  */}
                   {PostData.BasicDetails.PropertyAdType == "Sale" && (
                     <>
-                      <span className="price-rp-que"> Reserve Price </span>:
-                      <span className="price-section">
-                        {formatReservePrice(
-                          PostData.PricingDetails.ExpectedPrice
-                        )}
-                      </span>
+                      
+                      <div>
+                      <div className="price-section-sale">
+                        <span className="price-rp-que"> Reserve Price </span>:
+                        <span className="price-section">
+                          {formatReservePrice(
+                            PostData.PricingDetails.ExpectedPrice
+                          )}
+                        </span>
+                      </div>
+                      <p className="post-card-section">
+                        ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                      </p>
+                      </div>
                     </>
                   )}
-                </p>
-                <p className="post-card-section">
-                  ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
                 </p>
               </div>
               {PostData.BasicDetails.PropertyAdType == "Rent" && (
@@ -405,7 +409,7 @@ export default function PostCard({ PostData, index }) {
                       </div>
                       <div>
                         <div className="Reserveprice-sec">
-                          <div className="price-pr-anwser">
+                          <div className="Reserveprice-sec-grid">
                             <p className="price-ans">
                               {formatReservePrice(
                                 PostData.PricingDetails.DepositePrice
@@ -465,44 +469,41 @@ export default function PostCard({ PostData, index }) {
               />
             </div>
             <div className="modal-body p-2">
-  <p className="text-muted">
-    Choose a platform to share this property:
-  </p>
-  <ul className="list-unstyled d-flex gap-3 justify-center">
-    <li className="mb-2">
-      <Link
-        to={`https://wa.me/?text=${window.location.href}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow justify-center"
-      >
-       
-        WhatsApp
-      </Link>
-    </li>
-    <li className="mb-2">
-      <Link
-        to={`https://t.me/share/url?url=${window.location.href}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="d-flex align-items-center text-decoration-none text-primary p-2 rounded-3 border border-1 border-primary hover-shadow justify-center"
-      >
-      
-        Telegram
-      </Link>
-    </li>
+              <p className="text-muted">
+                Choose a platform to share this property:
+              </p>
+              <ul className="list-unstyled d-flex gap-3 justify-center">
+                <li className="mb-2">
+                  <Link
+                    to={`https://wa.me/?text=${window.location.href}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow justify-center"
+                  >
+                    WhatsApp
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link
+                    to={`https://t.me/share/url?url=${window.location.href}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="d-flex align-items-center text-decoration-none text-primary p-2 rounded-3 border border-1 border-primary hover-shadow justify-center"
+                  >
+                    Telegram
+                  </Link>
+                </li>
 
-    <li className="mb-2">
-      <p
-        onClick={shareUrl}
-        className="d-flex align-items-center text-decoration-none text-dark p-2 rounded-3 border border-1 border-secondary hover-shadow justify-center"
-      >
-       
-        Copy URL
-      </p>
-    </li>
-  </ul>
-</div>
+                <li className="mb-2">
+                  <p
+                    onClick={shareUrl}
+                    className="d-flex align-items-center text-decoration-none text-dark p-2 rounded-3 border border-1 border-secondary hover-shadow justify-center"
+                  >
+                    Copy URL
+                  </p>
+                </li>
+              </ul>
+            </div>
 
             <div className="modal-footer border-0">
               <button

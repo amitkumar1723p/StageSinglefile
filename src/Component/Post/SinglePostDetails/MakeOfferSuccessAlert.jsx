@@ -3,7 +3,7 @@ import "./MakeOfferSuccessAlert.css";
 import { useNavigate } from "react-router-dom";
 
 const AlertBox = ({ SetShow }) => {
-     const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className="alert-box-container">
       <div className="alert-box">
@@ -32,17 +32,36 @@ const AlertBox = ({ SetShow }) => {
             Need help? Contact our support team here.
           </a>
           <div className="action-buttons">
-            <button className="btn" onClick={()=>{navigate("/user/my-listing")}}>View More Properties</button>
-            <button className="btn" onClick={()=>{navigate("/user/my-listing")}}>Dashboard</button>
+            <button
+              className="btn"
+              onClick={() => {
+                navigate("/user/my-listing");
+              }}
+            >
+              View More Properties
+            </button>
+            <button
+              className="btn"
+              onClick={() => {
+                navigate("/user/my-listing");
+              }}
+            >
+              Dashboard
+            </button>
           </div>
         </div>
         <div className="alert-footer">
           <span className="alert-warning">
-             <strong> ⚠ </strong> Found suspicious listing?
-             <a href="#">Report here!</a>
+            <strong> ⚠ </strong> Found suspicious listing?
+            <a href="#">Report here!</a>
           </span>
         </div>
-        <button className="close-btn" onClick={()=>{SetShow(false)}}>
+        <button
+          className="close-btn"
+          onClick={() => {
+            SetShow(false);
+          }}
+        >
           X
         </button>
       </div>

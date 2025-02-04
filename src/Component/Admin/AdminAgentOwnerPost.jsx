@@ -52,6 +52,7 @@ export default function AdminAgentOwnerPost() {
         "VerifyPostActionRequest",
         "ReOpenPostActionRequest",
         "showVeirifyPostIconRequest",
+        "Active_InactivePropertyRequest",
       ].includes(LodingType)
       // (LodingType === "VerifyPostActionRequest" ||
       //   LodingType === "ReOpenPostActionRequest")
@@ -142,13 +143,36 @@ export default function AdminAgentOwnerPost() {
   useEffect(() => {
     if (status !== "") {
       dispatch(Active_InactiveProperty(AssignProperty, status));
-      setTimeout(() => {
-        window.location.reload();
-      }, [500]);
+      setStatus("");
+      setAssignProperty([]);
     }
   }, [AssignProperty, status]);
 
   // Active In Active end
+
+  // sorting property start  at created
+  const [propertyOrder, setPropertyOrder] = useState("ascending");
+  const handlePropertyOrder = () => {
+    if (propertyOrder === "ascending") {
+      setPropertyOrder("descending");
+    } else {
+      setPropertyOrder("ascending");
+    }
+  };
+  // handle active and inactive
+  const [active, setActive] = useState(null);
+  const handleActive = (status) => {
+    setActive(status);
+    if (status === true) {
+      setPropertyOrder(true);
+    } else if (status === false) {
+      setPropertyOrder(false);
+    } else {
+      setPropertyOrder(null);
+    }
+  };
+
+  // sorting property end
   return (
     <>
       <div className="filter-section-property">
@@ -158,34 +182,36 @@ export default function AdminAgentOwnerPost() {
 
         <button
           className={` ${!querry.get("PostVerify") ? "select" : ""}`}
-          onClick={(e) => {
-            navigate("/admin/allpost");
-          }}
+          onClick={() => handleActive(null)}
         >
           <span>All Post</span>
         </button>
 
         <button
-          onClick={(e) => {
-            navigate("/admin/allpost?PostVerify=true");
-          }}
+          // onClick={(e) => {
+          //   navigate("/admin/allpost?PostVerify=true");
+          // }}
           className={querry.get("PostVerify") == "true" ? "select" : ""}
-          // onClick={handleActive}
+          onClick={() => handleActive(true)}
           // className={active == true ? "select" : ""}
         >
           Active
         </button>
         <button
-          onClick={(e) => {
-            navigate("/admin/allpost?PostVerify=false");
-          }}
+          // onClick={(e) => {
+          //   navigate("/admin/allpost?PostVerify=false");
+          // }}
           className={querry.get("PostVerify") == "false" ? "select" : ""}
           // o
-          // onClick={handleInactive}
+          onClick={() => handleActive(false)}
           // className={active == false ? "select" : ""}
         >
           Inactive
         </button>
+        <button onClick={handlePropertyOrder} style={{ pointerEvents: "auto" }}>
+          {propertyOrder === 1 ? <>bottom to top</> : <>Top to bottom</>}
+        </button>
+
         {/* <button>Exprired</button>
         <button>Reported</button>
         <button>Success</button> */}
@@ -319,6 +345,8 @@ export default function AdminAgentOwnerPost() {
             AssignPropertyAdmin={AssignPropertyAdmin}
             setAssignPropertyAdmin={setAssignPropertyAdmin}
             SearchPostId={SearchPostId}
+            sortOrder={propertyOrder}
+            activeFilter={active}
           />
         ) : (
           <AdminAgentAssignPost
@@ -327,190 +355,11 @@ export default function AdminAgentOwnerPost() {
             AssignPropertyAdmin={AssignPropertyAdmin}
             setAssignPropertyAdmin={setAssignPropertyAdmin}
             SearchPostId={SearchPostId}
+            sortOrder={propertyOrder}
+            activeFilter={active}
           />
         )}
       </div>
     </>
-
-    // <div className="showpost">
-    //   {data && data.success && data.Post.length > 0 && (
-    //     <>
-    //       <div className="Admin-property-post-card-main-box">
-    //         <p>All Listing</p>
-    //         <div className="filter-section-property">
-    //           <div>
-    //             {" "}
-    //             <img src="/img/FilteImg.png" alt="FilteImg" />
-    //           </div>
-    //           {active !== null ? (
-    //             <div onClick={handleAllPost} className="ActiveFill">
-    //               <span>All Post</span>
-    //             </div>
-    //           ) : (
-    //             <div className="ActiveEmpty">
-    //               <span>All Post</span>
-    //             </div>
-    //           )}
-    //           <button
-    //             onClick={handleActive}
-    //             className={active == true ? "select" : ""}
-    //           >
-    //             Active
-    //           </button>
-    //           <button
-    //             onClick={handleInactive}
-    //             className={active == false ? "select" : ""}
-    //           >
-    //             Inactive
-    //           </button>
-    //           <button>Exprired</button>
-    //           <button>Reported</button>
-    //           <button>Success</button>
-    //           <div>
-    //             <input
-    //               className="controlled-input"
-    //               type="text"
-    //               value={inputValue}
-    //               onChange={handleChange}
-    //             />
-    //             <button onClick={handleSearch} className="searchAdmin">
-    //               Search
-    //             </button>
-    //           </div>
-    //         </div>
-    //         {AssignProperty.length > 0 && (
-    //           <div className="select-section-admin">
-    //             {medata?.user?.Role === "Owner" && (
-    //               <div>
-    //                 {" "}
-    //                 <select
-    //                   id="cars"
-    //                   onChange={(e) => {
-    //                     if (e.target.value == "Admin") {
-    //                       dispatch(GetAllAdminAction({ AdminVerify: true }));
-    //                     } else if (e.target.value == "Agent") {
-    //                       dispatch(GetAllAdminAction({ AgentVerify: true }));
-    //                     } else {
-    //                       dispatch({ type: "GetAllAdminClear" });
-    //                       // setAssignPropertyAdmin(null);
-    //                     }
-    //                   }}
-    //                   // value={}
-    //                   className="selectAssign"
-    //                 >
-    //                   <option value="">Assign to </option>
-    //                   <option value={`Admin`}>Admin</option>
-
-    //                   <option value={`Agent`}>Agent</option>
-    //                 </select>
-    //               </div>
-    //             )}
-    //             {AdminData && AdminData.success && (
-    //               <select
-    //                 onChange={(e) => {
-    //                   let FindAdmin = AdminData.Admin[e.target.value];
-    //                   if (FindAdmin) {
-    //                     setAssignPropertyAdmin(FindAdmin);
-    //                   } else {
-    //                     setAssignPropertyAdmin(null);
-    //                   }
-    //                 }}
-    //               >
-    //                 <option value="">Select One</option>
-    //                 {AdminData.Admin.map((e, i) => {
-    //                   return (
-    //                     <option key={i} value={i}>
-    //                       {e.Name}
-    //                     </option>
-    //                   );
-    //                 })}
-    //               </select>
-    //             )}
-    //             {AssignPropertyAdmin && (
-    //               <button
-    //                 onClick={() => {
-    //                   let confirm = window.confirm(
-    //                     `This Property Assign to ${AssignPropertyAdmin.Name}  Role is ${AssignPropertyAdmin.Role}`
-    //                   );
-    //                   if (confirm) {
-    //                     const AssignedData = {
-    //                       AdminId: AssignPropertyAdmin._id,
-    //                       AssignedPropertyId: AssignProperty,
-    //                     };
-    //                     dispatch(adminAssigned({ AssignedData }));
-    //                   }
-    //                 }}
-    //               >
-
-    //                 Assing Property
-    //               </button>
-    //             )}
-
-    //             {/* {} */}
-    //             {/* {selectedRole === "Admin" ? (
-    //               <p>
-    //                 <select
-    //                   id="adminOptions"
-    //                   className="selectAssign"
-    //
-    //                 >
-    //                   <option value="">Select Admin</option>
-
-    //                   {dataAdmin &&
-    //                     dataAdmin.Admin.map(
-    //                       (item) =>
-    //                         item.AdminVerify === true ? (
-    //                           <option key={item._id} value={`${item._id}`}>
-    //                             {item.Name}
-    //                           </option>
-    //                         ) : null // Render nothing if AdminVerify is false
-    //                     )}
-    //                 </select>
-    //               </p>
-    //             ) : selectedRole === "Agent" ? (
-    //               <p>
-    //                 <select id="adminOptions" className="selectAssign">
-    //                   <option value="">Select Agent</option>
-    //                   <option value="agent1">Agent-1</option>
-    //                   <option value="agent2">Agent-2</option>
-    //                 </select>
-    //               </p>
-    //             ) : null} */}
-    //             {/* end here conditionally render  */}
-    //           </div>
-    //         )}
-
-    //         {filteredPosts.length > 0 ? (
-    //           filteredPosts.length &&
-    //           filteredPosts.map((e, i) => {
-    //             return (
-    //               <AdminListingCard
-    //                 key={i}
-    //                 index={i}
-    //                 PostData={e}
-    //                 setAssignProperty={setAssignProperty}
-    //                 AssignProperty={AssignProperty}
-    //               />
-    //             );
-    //           })
-    //         ) : (
-    //           <>
-    //             {data.Post.map((e, i) => {
-    //               return (
-    //                 <AdminListingCard
-    //                   key={i}
-    //                   index={i}
-    //                   PostData={e}
-    //                   setAssignProperty={setAssignProperty}
-    //                   AssignProperty={AssignProperty}
-    //                 />
-    //               );
-    //             })}
-    //           </>
-    //         )}
-    //       </div>
-    //     </>
-    //   )}
-    // </div>
   );
 }

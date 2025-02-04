@@ -34,17 +34,6 @@ export default function SinglePostDetails() {
   const [showMakeOfferSuccessAlert, setshowMakeOfferSuccessAlert] =
     useState(false);
 
-  // const copyToClipboard = () => {
-  //   const url = window.location.href; // Get the current page URL
-  //   navigator.clipboard.writeText(url).then(
-  //     () => {
-  //       alert("URL copied to clipboard!");
-  //     },
-  //     () => {
-  //       alert("Failed to copy URL.");
-  //     }
-  //   );
-  // };
   const location = useLocation();
   const [showBiddingForm, setshowBiddingForm] = useState(false);
   const [showScheduleVisitForm, setshowScheduleVisitForm] = useState(false);
@@ -281,18 +270,18 @@ export default function SinglePostDetails() {
 
             <div className="property-image">
               {/* post verified-section-start */}
-              <div className="icon-box-main">
-                {getSinglePostData.SinglePost.PostVerify ? (
-                  <div className="active-post-main">
-                    <img src="/img/verified-tag.svg" alt="verified-tag" />
-                    <p className="active-post-para-main">Verified</p>
-                  </div>
-                ) : (
-                  <div className="inactive-post-main">
-                    <p className="inactive-post-para-main">Inactive</p>
-                  </div>
-                )}
+              <div className="icon-box">
+                {getSinglePostData.SinglePost.PostVerifyShow ? (
+                  getSinglePostData.SinglePost.PostVerify ? (
+                    <div className="active-post">
+                      <img src="/img/verified-tag.svg" alt="verified-tag" />
+                      <p className="active-post-para">Verified</p>
+                    </div>
+                  ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
+                ) : null}{" "}
+                {/* If PostVerifyShow is false, show nothing */}
               </div>
+
               <ShowSinglePostImages
                 Images={getSinglePostData.SinglePost.PropertyImages}
               />
@@ -312,7 +301,7 @@ export default function SinglePostDetails() {
                     <div className="img-box-imp-data">
                       <span className="img-box-details-span">
                         {`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`}
-                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom.map(
+                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom?.map(
                           (text) => {
                             return `+ ${
                               text == "Pooja Room"
@@ -500,26 +489,30 @@ export default function SinglePostDetails() {
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Rent" && (
                       <>
-                        <span>
-                          <span>
-                            Rent Price
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .ExpectedRent
-                            )}
-                          </span>
-                          <br />
-                          <span>
-                            {" "}
-                            DepositePrice Price{" "}
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .DepositePrice
-                            )}
-                          </span>
-                        </span>
+                        <div className="rent-main-section">
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .ExpectedRent
+                              )} <span>/Month
+                                 </span> 
+                            </p> 
+                            <p className="rent-ques-section" >Rent Price</p>
+                          </div>
 
-                        {!["Owner", "Admin"].includes(medata?.user?.Role) &&
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .DepositePrice
+                              )}
+                            </p>
+                            <p className="rent-ques-section" >Deposite Price</p>
+                          </div>
+                        </div>
+
+                        {/* {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                           getSinglePostData.SinglePost.CreatePostUser !==
                             medata?.user?._id && (
                             <span
@@ -536,7 +529,7 @@ export default function SinglePostDetails() {
                             >
                               Create Response
                             </span>
-                          )}
+                          )} */}
                       </>
                     )}
                   </div>
@@ -881,7 +874,7 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
-                  {/* <div className="similar-main-box">
+              <div className="similar-main-box">
                     <h3 className="similar-heading-box">Similar Property</h3>
                     <div className="similar-property-main-box">
                       <div className="similar-property-box1">
@@ -994,7 +987,9 @@ export default function SinglePostDetails() {
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  </div>
+{/* similar property */}
+
                   {/* <ExpressionOfInterestForm /> */}
                   {showBiddingForm && (
                     <WindowComponent

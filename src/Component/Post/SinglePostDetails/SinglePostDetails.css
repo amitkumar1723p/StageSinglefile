@@ -7,6 +7,21 @@ body {
   width: 27px;
 }
 
+.rent-main-section{
+  display: flex;
+  gap: 75px;
+}
+
+
+.rent-ques-section{
+  color: #6E7B90;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .icon-box-main {
   position: absolute; /* Position it relative to .property-post-card */
   top: 10px;
@@ -485,9 +500,12 @@ body {
 }
 
 .prop-grid p {
-  font-size: 12px;
   color: #333;
-  font-weight: 500;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal
 }
 
 .prop-grid span {
@@ -586,6 +604,21 @@ body {
   margin-bottom: 5px;
 }
 
+.rent-price-main span{
+  font-size: 12px;
+  color: #333333a1;
+  font-weight: 500;
+}
+
+.rent-price-main{
+  color: var(--Pirmary, #0078D4);
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
 .price-value-in-span {
   color: var(--main-light-clr);
   font-family: "Inter", Sans-serif;
@@ -605,7 +638,7 @@ body {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-}
+/* } 
 .bidrecv {
   margin-left: 5px;
   width: 12px;
