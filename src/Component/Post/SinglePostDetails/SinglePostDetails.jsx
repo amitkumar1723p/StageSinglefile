@@ -229,8 +229,7 @@ export default function SinglePostDetails() {
   const closehandleReportForm = (e) => {
     setOpenReportForm(false);
   };
-  {
-  }
+  //  const SinglePost = getSinglePostData.SinglePost
   return (
     <>
       <div className="floating-buttons">
@@ -536,25 +535,27 @@ export default function SinglePostDetails() {
                 </div>
 
                 <div className="property-actions">
-                  {!["Owner", "Admin"].includes(medata?.user?.Role) && (
-                    <>
-                      {" "}
-                      <button
-                        ref={ScheduleYourVisitOpenBtnRef}
-                        className="contact-expert-btn"
-                        onClick={() => {
-                          if (medata && medata.IsAuthenticated == true) {
-                            setshowScheduleVisitForm(true);
-                          } else {
-                            setRedirectPath("/show-scheduleVisit");
-                            navigate("/login");
-                          }
-                        }}
-                      >
-                        Schedule Your Visit
-                      </button>
-                    </>
-                  )}
+                  {!["Owner", "Admin"].includes(medata?.user?.Role) &&
+                    getSinglePostData.SinglePost.BasicDetails.PropertyAdType !=
+                      "Rent" && (
+                      <>
+                        {" "}
+                        <button
+                          ref={ScheduleYourVisitOpenBtnRef}
+                          className="contact-expert-btn"
+                          onClick={() => {
+                            if (medata && medata.IsAuthenticated == true) {
+                              setshowScheduleVisitForm(true);
+                            } else {
+                              setRedirectPath("/show-scheduleVisit");
+                              navigate("/login");
+                            }
+                          }}
+                        >
+                          Schedule Your Visit
+                        </button>
+                      </>
+                    )}
 
                   <Link
                     to="https://wa.me/7837840785?text=Hello"

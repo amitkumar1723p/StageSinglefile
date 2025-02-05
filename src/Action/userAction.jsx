@@ -807,12 +807,12 @@ export const ReportSuspiciousProperty = (updateData) => {
   };
 };
 
-export const GetMeVisitsAction = (AdminVerify) => {
+export const GetMyVisitsAction = (AdminVerify) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "GetMeVisitsRequest" });
+      dispatch({ type: "GetMyVisitsRequest" });
 
-      let url = `${api_Base_Url}/schedule-visit/me-visits`;;
+      let url = `${api_Base_Url}/schedule-visit/my-visits`;;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -821,17 +821,17 @@ export const GetMeVisitsAction = (AdminVerify) => {
       };
 
       const { data } = await axios.get(url, config);
-
-      dispatch({ type: "GetMeVisitsSuccess", payload: data });
+console.log(data)
+      dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "GetMeVisitsFail",
+          type: "GetMyVisitsFail",
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "GetMeVisitsFail",
+          type: "GetMyVisitsFail",
           payload: { message: error.message, success: false },
         });
       }
