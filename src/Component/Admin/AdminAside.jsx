@@ -9,20 +9,28 @@ export default function AdminAside() {
   return (
     <div className="flex bg-red-20 p-4 gap-3">
       <aside className="sticky top-[82px] bg-white text-black p-4 w-[200px] h-full border-b-[5px] rounded-lg outline outline-[#f8f8f8]">
-        <div className="mb-4 text-2xl font-semibold text-[var(--main-light-clr)]">Dashboard</div>
+        <div className="mb-4 text-2xl font-semibold text-[var(--main-light-clr)]">
+          Dashboard
+        </div>
         <div className="flex flex-col space-y-4">
           <NavLink
             to="/admin/dashboard"
             className={({ isActive }) =>
               `flex gap-2 py-2 text-left text-sm px-1 group rounded-md transition-all ${
-                isActive ? "bg-[var(--main-light-clr)]   text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
+                isActive
+                  ? "bg-[var(--main-light-clr)]   text-white"
+                  : "hover:bg-[var(--main-light-clr)] hover:text-white"
               }`
             }
           >
             <img
               src="/img/Dashboard.svg"
               alt="Dashboard Icon"
-              className={`transition-all group-hover:invert group-hover:brightness-0 ${location.pathname === "/admin/dashboard" ? "invert brightness-0" : ""}`}
+              className={`transition-all group-hover:invert group-hover:brightness-0 ${
+                location.pathname === "/admin/dashboard"
+                  ? "invert brightness-0"
+                  : ""
+              }`}
             />
             Dashboard
           </NavLink>
@@ -35,14 +43,20 @@ export default function AdminAside() {
                   to="/admin/agent/dashboard?Role=Admin"
                   className={({ isActive }) =>
                     `flex gap-2 py-2 text-left group text-sm px-1 rounded-md transition-all ${
-                      location.search.includes("Role=Admin") ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
+                      location.search.includes("Role=Admin")
+                        ? "bg-[var(--main-light-clr)] text-white"
+                        : "hover:bg-[var(--main-light-clr)] hover:text-white"
                     }`
                   }
                 >
                   <img
                     src="/img/agent.svg"
                     alt="Admin Icon"
-                    className={`transition-all group-hover:invert group-hover:brightness-0 ${location.search.includes("Role=Admin") ? "invert brightness-0" : ""}`}
+                    className={`transition-all group-hover:invert group-hover:brightness-0 ${
+                      location.search.includes("Role=Admin")
+                        ? "invert brightness-0"
+                        : ""
+                    }`}
                   />
                   Admin
                 </NavLink>
@@ -50,14 +64,20 @@ export default function AdminAside() {
                   to="/admin/agent/dashboard?Role=Agent"
                   className={({ isActive }) =>
                     `flex gap-2 py-2 text-left group text-sm px-1 rounded-md transition-all ${
-                      location.search.includes("Role=Agent") ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
+                      location.search.includes("Role=Agent")
+                        ? "bg-[var(--main-light-clr)] text-white"
+                        : "hover:bg-[var(--main-light-clr)] hover:text-white"
                     }`
                   }
                 >
                   <img
                     src="/img/Admin.svg"
                     alt="Agent Icon"
-                    className={`transition-all group-hover:invert group-hover:brightness-0 ${location.search.includes("Role=Agent") ? "invert brightness-0" : ""}`}
+                    className={`transition-all group-hover:invert group-hover:brightness-0 ${
+                      location.search.includes("Role=Agent")
+                        ? "invert brightness-0"
+                        : ""
+                    }`}
                   />
                   Agent
                 </NavLink>
@@ -68,19 +88,25 @@ export default function AdminAside() {
             to="/admin/allpost"
             className={({ isActive }) =>
               `flex gap-2 py-2 text-left group text-sm px-1 rounded-md transition-all ${
-                isActive ? "bg-[var(--main-light-clr)] text-white" : "hover:bg-[var(--main-light-clr)] hover:text-white"
+                isActive
+                  ? "bg-[var(--main-light-clr)] text-white"
+                  : "hover:bg-[var(--main-light-clr)] hover:text-white"
               }`
             }
           >
             <img
               src="/img/AllPost.svg"
               alt="All Post Icon"
-              className={`transition-all group-hover:invert group-hover:brightness-0 ${location.pathname === "/admin/allpost" ? "invert brightness-0" : ""}`}
+              className={`transition-all group-hover:invert group-hover:brightness-0 ${
+                location.pathname === "/admin/allpost"
+                  ? "invert brightness-0"
+                  : ""
+              }`}
             />
             All Post
           </NavLink>
 
-           {/* <NavLink
+          {/* <NavLink
             to="/admin/report"
             className={({ isActive }) =>
               location.pathname === "/admin/report"
@@ -128,27 +154,43 @@ export default function AdminAside() {
             Settings
           </NavLink> */}
 
-
-                    {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
+          {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
             Library
           </button> */}
           <button className="flex gap-2 text-sm py-2 group px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
-            <img src="/img/Report.svg" className="group-hover:invert group-hover:brightness-0" alt="" />
+            <img
+              src="/img/Report.svg"
+              className="group-hover:invert group-hover:brightness-0"
+              alt=""
+            />
             Report
           </button>
-          <button  className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
-            <img src="/img/Authentication.svg"  className="group-hover:invert group-hover:brightness-0" alt="" />
+          <button className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
+            <img
+              src="/img/Authentication.svg"
+              className="group-hover:invert group-hover:brightness-0"
+              alt=""
+            />
             Authentication
           </button>
-          <button  className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
-            <img src="/img/Schedule.svg" className="group-hover:invert group-hover:brightness-0" alt="" />
+          <button className="flex gap-2 py-2 group text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
+            <img
+              src="/img/Schedule.svg"
+              className="group-hover:invert group-hover:brightness-0"
+              alt=""
+            />
             Schedules
           </button>
           {/* <button className="text- py-2 text-left hover:bg-gray-200 rounded-md">
             Payouts
           </button> */}
-          <button  className="flex gap-2 group py-2 text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
-            <img src="/img/Setting.svg" className="group-hover:invert group-hover:brightness-0" alt="" />   Settings
+          <button className="flex gap-2 group py-2 text-sm px-1 text-left hover:bg-[var(--main-light-clr)] hover:text-white rounded-md">
+            <img
+              src="/img/Setting.svg"
+              className="group-hover:invert group-hover:brightness-0"
+              alt=""
+            />{" "}
+            Settings
           </button>
 
           {/* <button className="menu-button">Library</button> */}
@@ -167,9 +209,6 @@ export default function AdminAside() {
   );
 }
 
-
-
-
 // import React from "react";
 // import { useSelector } from "react-redux";
 // import { Outlet, useNavigate, useLocation } from "react-router-dom";
@@ -183,7 +222,7 @@ export default function AdminAside() {
 
 //   return (
 //     <div className="flex bg-red-20 p-4 gap-3">
-//       <aside className="sticky top-[82px]  bg-white text-[var(--main-light-clr)] text-black 
+//       <aside className="sticky top-[82px]  bg-white text-[var(--main-light-clr)] text-black
 //        p-4 w-[200px] h-full border-b-[5px] rounded-lg outline outline-[#fbfbfb]">
 //         <div className="mb-4 text-2xl font-semibold text-[var(--main-light-clr)]">Dashboard</div>
 //         <div className="flex flex-col space-y-4">
@@ -198,7 +237,6 @@ export default function AdminAside() {
 //             />
 //             Dashboard
 //           </button>
-
 
 //           {medata &&
 //             medata.IsAuthenticated &&

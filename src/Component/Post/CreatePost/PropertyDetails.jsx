@@ -28,20 +28,18 @@ export default function PropertyDetailsSection({
 
   const FlooringArray = [
     "Marble",
+    "Vitrified",
+    "Wood",
     "Concrete",
+    "Stone",
     "Polished",
-    "concrete",
     "Granite",
     "Ceramic",
-    "Mosaic",
     "Cement",
-    "Stone",
-    "Vinyl",
-    "Wood",
-    "Vitrified",
-
-    "Spartex",
+    "Mosaic",
     "IPSFinish",
+    "Spartex",
+    "Vinyl",
     "Others",
   ];
   const OtherRoomArray = [

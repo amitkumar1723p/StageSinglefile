@@ -1364,8 +1364,9 @@ input[type="number"] {
   cursor: pointer;
   right: 0;
   color: red;
-  background-color: #fff;
+  /* background-color: #fff; */
   padding: 4px;
+  top: 1px;
 }
 
 .single-previewImage {

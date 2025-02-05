@@ -61,7 +61,7 @@ const CreateProfile = ({
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="Enter your Name"
+                placeholder="Enter your Name*"
                 value={CreateProfileData?.Name?.trimStart() || ""}
                 onChange={(e) =>
                   setCreateProfileData({
@@ -74,7 +74,7 @@ const CreateProfile = ({
 
               <input
                 type="email"
-                placeholder="Enter your Email"
+                placeholder="Enter your Email*"
                 value={
                   ISNRI
                     ? SignUpData?.email || ""
@@ -92,7 +92,7 @@ const CreateProfile = ({
 
               {ISNRI && (
                 <>
-                  <select
+                  {/* <select
                     required
                     onChange={(e) => {
                       const selectedCode = e.target.value;
@@ -126,14 +126,14 @@ const CreateProfile = ({
                         </option>
                       );
                     })}
-                  </select>
+                  </select> */}
 
                   <>
                     <input
                       required
                       className="nri-contact-number"
                       type="text"
-                      placeholder="Enter your Contact Number"
+                      placeholder="Enter your International Number*"
                       value={
                         CreateProfileData?.ContactNumber?.trimStart() || ""
                       }
