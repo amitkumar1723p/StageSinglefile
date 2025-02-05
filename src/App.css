@@ -8,6 +8,10 @@ body {
   outline: none;
 }
 
+.tab {
+  display: flex;
+}
+
 .collapse {
   visibility: visible !important;
 }
