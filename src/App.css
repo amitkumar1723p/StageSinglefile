@@ -1,6 +1,3 @@
-@tailwind base;
-/* @tailwind components; */
-@tailwind utilities;
 
 body {
   color: var(--main-black);
@@ -115,7 +112,7 @@ input:focus {
   font-weight: 800;
 }
 
-dl,
+/* dl,
 ol,
 ul {
   margin-top: 0;
@@ -142,7 +139,7 @@ h6 {
   font-weight: 500;
   line-height: 1.2;
   color: var(--bs-heading-color);
-}
+} */
 
 .row > * {
   flex-shrink: 0;
@@ -153,20 +150,20 @@ h6 {
   margin-top: var(--bs-gutter-y);
 }
 
-tr{
+/* tr{
   font-size: 16px !important; 
 }
 td{
   font-size: 16px !important;
-}
+} */
 
 @media (max-width: 480px) {
 
-  .who-we-are-section{
+  /* .who-we-are-section{
     font-size: 12px !important;
-  }
+  } */
 
-  button{
+  /* button{
     font-size: 14px;
   }
 
@@ -175,7 +172,7 @@ td{
   }
   td{
     font-size: 14px !important;
-  }
+  } */
 
   .EndtoEnd-Res {
     display: flex;
@@ -183,6 +180,9 @@ td{
   }
 
   .ProgressBarMain {
+    display: none;
+  }
+  .icons{
     display: none;
   }
 
@@ -205,6 +205,10 @@ td{
     margin-bottom: 10px;
     text-align: center;
   }
+
+  .icons{
+    display: none;
+  }
 }
 @media (max-width: 375px) {
   .underline-on-text {
@@ -215,13 +219,17 @@ td{
     margin-bottom: 10px;
     text-align: center;
   }
-}
 
+  .icons{
+    display: none;
+  }
+}
+/* 
 .active-btn-admin {
   background-color: #fff !important;
   color: var(--main-light-clr) !important ;
   border-radius: 10px !important;
-}
+} */
 
 /* Toogle Btn Css  */
 
@@ -273,9 +281,9 @@ td{
   transform: translateX(26px);
 }
 
-.tab {
+/* .tab {
   display: flex;
-}
+} */
 
 .collapse {
   visibility: visible;

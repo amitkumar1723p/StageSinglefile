@@ -1,80 +1,96 @@
 /* Who We Are Section */
 .who-we-are {
-  /* background-color: var(--main-light-clr);
+  background-color: var(--main-light-clr);
+  padding: 60px 20px;
   position: relative;
-  text-align: center; */
-  /* padding: 60px 20px; */
+  text-align: center;
 }
 
 .who-we-are-box {
-  /* width: 90%;
+  width: 90%;
   margin: 0 auto;
-  position: relative; */
+  position: relative;
 }
 
-
-
 .who-we-are h2 {
-  /* font-size: 2rem; */
-
-  /* color: var(--main-white-light-clr); */
-  /* margin-bottom: 20px; */
-  /* font-weight: bold; */
-  /* text-align: center; */
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--main-white-light-clr);
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .highlight {
-  /* color: var(--main-light-clr); */
+  color: var(--main-light-clr);
 }
 
 .whoweare-heading {
-  /* text-align: center; */
+  text-align: center;
 }
 
 .whoweare-h2 {
-  /* color: #333;
+  color: #333;
   text-align: center;
   margin-bottom: 18px;
-  font-style: normal; */
-  /* font-weight: 700; */
-  /* line-height: normal; */
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 .whoweare-p {
-  /* color: #ffffff;
+  color: #ffffff;
   text-align: center;
-  letter-spacing: 1px;
+  margin-bottom: 42px;
+
   font-size: 18px;
-  font-style: normal; 
-  font-weight: 500;*/
-  /* line-height: normal; */
-  /* margin-bottom: 42px; */
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
 }
 
 .description {
-  /* font-size: 18px;
+  font-size: 18px;
   color: var(--main-white-light-clr);
   line-height: 1.8;
-  
+  margin: 20px auto;
   max-width: 1000px;
-  text-align: center; */
-  /* margin: 20px auto; */
+  text-align: center;
 }
 
 /* Styling for the quote marks */
+.quote-left,
+.quote-right {
+  font-weight: 700;
+  font-size: 4rem;
+  color: #ffffff;
+  position: absolute;
+}
 
+.quote-left {
+  top: -15px;
+  left: -40px;
+  color: var(--main-white-light-clr);
+}
 
-/* .description span {
+.quote-right {
+  bottom: -30px;
+  right: -40px;
+  color: var(--main-white-light-clr);
+}
+
+.description span {
   color: var(--main-white-light-clr);
   text-decoration: underline;
-} */
+}
 
 .whoweare-h2 {
-  /* position: relative;    
-  display: inline-block;  */
-  /* font-size: 2rem; */
-  /* font-weight: bold;
+  position: relative; /* Required for pseudo-elements positioning */
+  display: inline-block; /* To make the underline specific to the text */
+  font-size: 2rem;
+  font-weight: bold;
   margin-bottom: 10px;
-  text-align: center; */
+  text-align: center;
 }
 
 .whoweare-h2::before,
