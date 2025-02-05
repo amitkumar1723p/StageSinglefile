@@ -424,3 +424,34 @@ export const GetMeVisitsReducer = (state = {}, action) => {
       };
   }
 };
+
+export const GetSimilarProperty = (state = {}, action) => {
+  switch (action.type) {
+    case"SimilarPropertyRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+      case"SimilarPropertySuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+      case"SimilarPropertyFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "SimilarPropertyClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};

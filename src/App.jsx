@@ -107,6 +107,12 @@ function App() {
   const { data: GetSingleProjectName } = useSelector((state) => {
     return state.SingleProjectName;
   });
+  // similar
+  const { data: SimilarPropertyData } = useSelector((state) => {
+    return state.SimilarProperty;
+  });
+
+
   const { data: AssignPostData } = useSelector((state) => {
     return state.AssignPropertys;
   });
@@ -506,6 +512,27 @@ function App() {
     }
     // eslint-disable-next-line
   }, [LoginUserPostData]);
+
+  // similar
+  useEffect(() => {
+    if (SimilarPropertyData) {
+      if (SimilarPropertyData.success === false) {
+        if (SimilarPropertyData.IsAuthenticated === false) {
+          navigate("/");
+          // setTimeout(() => {
+
+          //   navigate("/login")
+          // }, 0);
+        }
+        setalertMessage(<p>{SimilarPropertyData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "SimilarPropertyClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [SimilarPropertyData]);
 
   useEffect(() => {
     dispatch(GetMeDetailsAction());
