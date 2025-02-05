@@ -9,7 +9,7 @@ body {
 }
 
 .collapse {
-  visibility: visible;
+  visibility: visible !important;
 }
 
 .select::focus {
@@ -285,6 +285,4 @@ td{
   display: flex;
 } */
 
-.collapse {
-  visibility: visible;
-}
+
