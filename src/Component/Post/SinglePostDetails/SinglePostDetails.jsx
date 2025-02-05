@@ -2,7 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "./SinglePostDetails.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { GetSinglePostAction } from "../../../Action/postAction";
+import {
+  GetSinglePostAction,
+  SimilarProperty,
+} from "../../../Action/postAction";
 import Loader from "../../Loader/Loader";
 import "./ReportListingForm.css";
 import PropertyDataBox from "./PropertyDataBox";
@@ -43,19 +46,30 @@ export default function SinglePostDetails() {
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
+  const [reload, setReload] = useState(true); //use for reload similar property 
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
   const { loading, data: getSinglePostData } = useSelector((state) => {
     return state.GetSinglePost;
   });
-
+  const { data: SimilarPropertyData } = useSelector((state) => {
+    return state.SimilarProperty;
+  });
   useEffect(() => {
     let postaddress = Params.PostAddress;
     let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
+    if(reload===true){
+
+  
     dispatch(GetSinglePostAction(postId));
-  }, []);
+    // similar property dispatch
+    dispatch(SimilarProperty(postId));
+    setReload(false)
+    }
+  }, [reload]);
+
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -874,120 +888,72 @@ export default function SinglePostDetails() {
                       suspicious listing? Report here!
                     </p>
                   </div>
-                  {/* <div className="similar-main-box">
+
+                  {/* similar property */}
+
+                  <div className="similar-main-box">
+                    {" "}
+                    {/* Ensure each item has a unique key */}
                     <h3 className="similar-heading-box">Similar Property</h3>
-                    <div className="similar-property-main-box">
-                      <div className="similar-property-box1">
-                        <div className="similar-property-main">
-                          <div className="similar-left-right">
-                            <div className="similar-img-box">
-                              <img src="/img/test.png" alt="" />
-                            </div>
-                            <div className="similar-right-section">
-                              <div className="similar-data-section">
-                                <div className="similar-prop-heading">
-                                  <p className="similar-prop-heading-p">
-                                    3 BHK Independent Floor House for Sale in
-                                    Krisumi Waterfall Residences
-                                  </p>
-                                </div>
-                                <div className="similar-prop-address">
-                                  <p className="similar-prop-address-p">
-                                    Sector 82A, Gurgaon
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="similar-area-price-box">
-                                <p className="similar-area-area">
-                                  1800 sqft
-                                  <span> Built-Up Area</span>
-                                </p>
+                    {SimilarPropertyData?.similarProperties.map((item) => {
+                      return (
+                        <Link
+                        to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`.toLowerCase()
+                          .replaceAll(" ", "-")
+                          .replace(",", "")
+                          .replaceAll("/", "-")}-${item._id}`}
 
-                                <p className="similar-area-price">
-                                  ₹ 3.2 Cr
-                                  <span> Reserved price </span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="similar-property-box2">
-                        <div className="similar-property-box1">
-                          <div className="similar-property-main">
-                            <div className="similar-left-right">
-                              <div className="similar-img-box">
-                                <img src="/img/test.png" alt="" />
-                              </div>
-                              <div className="similar-right-section">
-                                <div className="similar-data-section">
-                                  <div className="similar-prop-heading">
-                                    <p className="similar-prop-heading-p">
-                                      3 BHK Independent Floor House for Sale in
-                                      Krisumi Waterfall Residences
-                                    </p>
+                          onClick={() => setReload(true)} // Trigger reload on click
+                        >
+                          <div className="similar-property-main-box">
+                            <div className="similar-property-box1">
+                              <div className="similar-property-main">
+                                <div className="similar-left-right">
+                                  <div className="similar-img-box">
+                                    {/* {item?.PropertyImages.map((img)=>{ */}
+                                    <img
+                                      src={item.PropertyImages[0]?.url}
+                                      alt="property"
+                                    />
+                                    {/* })} */}
                                   </div>
-                                  <div className="similar-prop-address">
-                                    <p className="similar-prop-address-p">
-                                      Sector 82A, Gurgaon
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="similar-area-price-box">
-                                  <p className="similar-area-area">
-                                    1800 sqft
-                                    <span> Built-Up Area</span>
-                                  </p>
+                                  <div className="similar-right-section">
+                                    <div className="similar-data-section">
+                                      <div className="similar-prop-heading">
+                                        <p className="similar-prop-heading-p">
+                                          {`${item?.PropertyDetails?.BHKType} BHK ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.ProjectName} ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`}
+                                        </p>
+                                      </div>
+                                      <div className="similar-prop-address">
+                                        <p className="similar-prop-address-p">
+                                          {item?.LocationDetails?.Locality},{" "}
+                                          {item?.LocationDetails?.City}
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div className="similar-area-price-box">
+                                      <p className="similar-area-area">
+                                        {item?.AreaDetails?.BuiltUpArea?.value}{" "}
+                                        {item?.AreaDetails?.BuiltUpArea?.unit}{" "}
+                                        1800 sqft
+                                        <span> Built-Up Area</span>
+                                      </p>
 
-                                  <p className="similar-area-price">
-                                    ₹ 3.2 Cr
-                                    <span> Reserved price </span>
-                                  </p>
+                                      <p className="similar-area-price">
+                                        {item?.PricingDetails?.ExpectedPrice}
+                                        <span> Reserved price </span>
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="similar-property-box3">
-                        <div className="similar-property-box1">
-                          <div className="similar-property-main">
-                            <div className="similar-left-right">
-                              <div className="similar-img-box">
-                                <img src="/img/dash-banner.png" alt="" />
-                              </div>
-                              <div className="similar-right-section">
-                                <div className="similar-data-section">
-                                  <div className="similar-prop-heading">
-                                    <p className="similar-prop-heading-p">
-                                      3 BHK Independent Floor House for Sale in
-                                      Krisumi Waterfall Residences
-                                    </p>
-                                  </div>
-                                  <div className="similar-prop-address">
-                                    <p className="similar-prop-address-p">
-                                      Sector 82A, Gurgaon
-                                    </p>
-                                  </div>
-                                </div>
-                                <div className="similar-area-price-box">
-                                  <p className="similar-area-area">
-                                    1800 sqft
-                                    <span> Built-Up Area</span>
-                                  </p>
+                        </Link>
+                      );
+                    })}
+                  </div>
 
-                                  <p className="similar-area-price">
-                                    ₹ 3.2 Cr
-                                    <span> Reserved price </span>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                   {/* similar property */}
 
                   {/* <ExpressionOfInterestForm /> */}

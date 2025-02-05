@@ -718,3 +718,50 @@ export const Active_InactiveProperty=(AssignProperty,status)=>{
    }
   }
 }
+
+// get similar property data
+
+export const SimilarProperty = (postId) => {
+
+ 
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "SimilarPropertyRequest",
+        payload: "SimilarPropertyRequest",
+      });
+
+   
+      let url = `${api_Base_Url}/post/project_name/similarProperty/${postId}`;  // Ensure project_name is correct/
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,  // Ensure that credentials are sent if needed
+      };
+ 
+      const { data } = await axios.get(url, config);  // Pass postId as an object
+//  console.log(similar)
+ console.log( "similer",data)
+      dispatch({
+        type: "SimilarPropertySuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.log("API Error:", error);  // Log the full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "SimilarPropertyFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response was received
+        dispatch({ type: "SimilarPropertyFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Something else happened
+        dispatch({
+          type: "SimilarPropertyFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
