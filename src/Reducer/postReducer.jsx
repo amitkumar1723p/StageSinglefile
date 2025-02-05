@@ -11,11 +11,9 @@ export const CreatePostReducer = (state = {}, action) => {
     case "VerifyAdminRequest":
     case "VerifyBidRequest":
     case "Admin_OwnerScheduleVisitDoneRequest":
-    // case "AddPriceRequest":
     case "Admin_AssignedRequest":
     case "Admin_RemovedRequest":
     case "RemoveAssignPropertyRequest":
-    // Activ in active
     case "Active_InactivePropertyRequest":
     case "showVeirifyPostIconRequest":
       return {
@@ -394,29 +392,29 @@ export const GetAdminAgentAssignPropertyReducer = (state = {}, action) => {
   }
 };
 
-export const GetMeVisitsReducer = (state = {}, action) => {
+export const GetMyVisitsReducer = (state = {}, action) => {
   switch (action.type) {
-    case "GetMeVisitsRequest":
+    case "GetMyVisitsRequest":
       return {
         ...state,
         loading: true,
       };
 
-    case "GetMeVisitsSuccess":
+    case "GetMyVisitsSuccess":
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
 
-    case "GetMeVisitsFail":
+    case "GetMyVisitsFail":
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
 
-    case "GetMeVisitsClear":
+    case "GetMyVisitsClear":
       return {};
     default:
       return {

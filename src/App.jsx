@@ -51,9 +51,9 @@ import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
 import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
-import MeVisits from "./Component/Post/CreatePost/MeVisits";
-// import meVisits from "./Component/Post/CreatePost/m";
- 
+import MyVisits from "./Component/Post/CreatePost/MyVisits";
+// import MyVisits from "./Component/Post/CreatePost/m";
+
 function App() {
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
@@ -119,8 +119,8 @@ function App() {
   const { data: AdminAssignPropertyData } = useSelector((state) => {
     return state.AdminProperty;
   });
-  const { data: GetMeVisitsReducer } = useSelector((state) => {
-    return state.meVisits;
+  const { data: MyVisitsData } = useSelector((state) => {
+    return state.MyVisits;
   });
 
   const location = useLocation();
@@ -387,7 +387,6 @@ function App() {
     // eslint-disable-next-line
   }, [ScheduleVisitsData]);
 
-  
   useEffect(() => {
     if (VistAndOfferData) {
       if (VistAndOfferData.success === false) {
@@ -408,47 +407,7 @@ function App() {
     // eslint-disable-next-line
   }, [VistAndOfferData]);
 
-  useEffect(() => {
-    if (VistAndOfferData) {
-      if (VistAndOfferData.success === false) {
-        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
-        if (VistAndOfferData.AdminVerify === false) {
-          navigate("/");
-          dispatch(LogoutAction());
-        }
-        if (VistAndOfferData.IsAuthenticated === false) {
-          navigate("/");
-        }
-        setalertMessage(<p>{VistAndOfferData.message}</p>);
-        setalertType("error");
-        setalertShow(true);
-        dispatch({ type: "GetAllScheduleVisitsAndMakeOffer_LengthClear" });
-      }
-    }
-    // eslint-disable-next-line
-  }, [VistAndOfferData]);
-
-  useEffect(() => {
-    if (alertshow === true) {
-      dispatch(AlertAction(alertType, alertMessage, alertshow));
-    }
-    // eslint-disable-next-line
-  }, [alertType, alertMessage, alertshow]);
-
-  // useEffect(() => {
-  //   if (AssignPostData) {
-  //     if (AssignPostData.success == false) {
-  //       if (AssignPostData.message) {
-  //         setalertMessage(<p>{GetSingleProjectName.message}</p>);
-  //         setalertType("error");
-  //         setalertShow(true);
-
-  //       }
-
-  //       dispatch({ type: "GetSingleProjectNameDataClear" });
-  //     }
-  //   }
-  // }, [GetSingleProjectName]);
+ 
   useEffect(() => {
     if (AssignPostData) {
       if (AssignPostData.success === false) {
@@ -491,27 +450,26 @@ function App() {
     // eslint-disable-next-line
   }, [AdminAssignPropertyData]);
 
-
-//  myvisits
+  //  myvisits
   useEffect(() => {
-    if (LoginUserPostData) {
-      if (LoginUserPostData.success === false) {
-        if (LoginUserPostData.IsAuthenticated === false) {
+    if (MyVisitsData) {
+      if (MyVisitsData.success === false) {
+        if (MyVisitsData.IsAuthenticated === false) {
           navigate("/");
           // setTimeout(() => {
 
           //   navigate("/login")
           // }, 0);
         }
-        setalertMessage(<p>{LoginUserPostData.message}</p>);
+        setalertMessage(<p>{MyVisitsData.message}</p>);
         setalertType("error");
         setalertShow(true);
 
-        dispatch({ type: "LoginUserGetPostClear" });
+        dispatch({ type: "GetMyVisitsClear" });
       }
     }
     // eslint-disable-next-line
-  }, [LoginUserPostData]);
+  }, [MyVisitsData]);
 
   // similar
   useEffect(() => {
@@ -534,6 +492,12 @@ function App() {
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
 
+  useEffect(() => {
+    if (alertshow === true) {
+      dispatch(AlertAction(alertType, alertMessage, alertshow));
+    }
+    // eslint-disable-next-line
+  }, [alertType, alertMessage, alertshow]);
   useEffect(() => {
     dispatch(GetMeDetailsAction());
   }, []);
@@ -602,7 +566,7 @@ function App() {
               element={<ViewTenantPostResponse />}
             />
 
-            <Route exact path="my-visits" element={<MeVisits/>} />
+            <Route exact path="my-visits" element={<MyVisits />} />
             <Route
               exact
               path="favourite-post"
