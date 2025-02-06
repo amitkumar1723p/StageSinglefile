@@ -807,12 +807,12 @@ export const ReportSuspiciousProperty = (updateData) => {
   };
 };
 
-export const GetMyVisitsAction = (AdminVerify) => {
+export const GetMyVisitsAction = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetMyVisitsRequest" });
 
-      let url = `${api_Base_Url}/schedule-visit/my-visits`;;
+      let url = `${api_Base_Url}/schedule-visit/my-visits`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -821,7 +821,7 @@ export const GetMyVisitsAction = (AdminVerify) => {
       };
 
       const { data } = await axios.get(url, config);
-console.log(data)
+      console.log(data);
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -832,6 +832,40 @@ console.log(data)
       } else {
         dispatch({
           type: "GetMyVisitsFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+// Onner All Post Visits
+
+export const OwnerAllPostsVisitAction = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "OwnerAllPostsVisitRequest" });
+
+      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-vists`;
+      
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+      console.log(data);
+      dispatch({ type: "OwnerAllPostsVisitSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "OwnerAllPostsVisitFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "OwnerAllPostsVisitFail",
           payload: { message: error.message, success: false },
         });
       }

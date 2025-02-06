@@ -35,13 +35,21 @@ function Sidebar() {
         <nav>
           <ul className="navList">
             <NavLink to="/user">
-              <li className={`navItem ${location.pathname=="/user" ?"active-btn-nav":""}`} >
+              <li
+                className={`navItem ${location.pathname == "/user" ? "active-btn-nav" : ""
+                  }`}
+              >
                 <img className="icons" src="/img/Profile.svg" alt="profile" />
                 Profile
               </li>
             </NavLink>
             <NavLink to="/user/my-listing">
-              <li className={`navItem ${location.pathname=="/user/my-listing" ?"active-btn-nav":""}`}>
+              <li
+                className={`navItem ${location.pathname == "/user/my-listing"
+                    ? "active-btn-nav"
+                    : ""
+                  }`}
+              >
                 <img
                   className="icons"
                   src="/img/MyListing.svg"
@@ -61,7 +69,12 @@ function Sidebar() {
               </li>
             </NavLink>
             <NavLink to="/user/favourite-post">
-              <li  className={`navItem ${location.pathname=="/user/favourite-post" ?"active-btn-nav":""}`}>
+              <li
+                className={`navItem ${location.pathname == "/user/favourite-post"
+                    ? "active-btn-nav"
+                    : ""
+                  }`}
+              >
                 <img
                   className="icons"
                   src="/img/Fav-Post.svg"
@@ -88,6 +101,17 @@ function Sidebar() {
                   alt="my-visits"
                 />
                 my Visits
+              </li>
+            </NavLink>
+
+            <NavLink to="/user/my-post/all-visits">
+              <li className="navItem mob-hide">
+                <img
+                  className="icons"
+                  src="/img/NewLeads.svg"
+                  alt="my-visits"
+                />
+                My Post All Visit
               </li>
             </NavLink>
             <NavLink to="#">
@@ -140,7 +164,11 @@ function Sidebar() {
             </NavLink>
             <NavLink to="/user/post/response">
               <li className="navItem mob-hide">
-                <img className="icons" src="/img/MyListing.svg" alt="post response" />
+                <img
+                  className="icons"
+                  src="/img/MyListing.svg"
+                  alt="post response"
+                />
                 Your Post Response
               </li>
             </NavLink>

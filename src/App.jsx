@@ -51,7 +51,8 @@ import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
 import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
-import MyVisits from "./Component/Post/CreatePost/MyVisits";
+import MyVisits from "./Component/User/Profile/MyVisits";
+import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -112,7 +113,6 @@ function App() {
     return state.SimilarProperty;
   });
 
-
   const { data: AssignPostData } = useSelector((state) => {
     return state.AssignPropertys;
   });
@@ -121,6 +121,9 @@ function App() {
   });
   const { data: MyVisitsData } = useSelector((state) => {
     return state.MyVisits;
+  });
+  const { data: OwnerPostsVisitsData } = useSelector((state) => {
+    return state.OwnerPostsVisits;
   });
 
   const location = useLocation();
@@ -407,7 +410,6 @@ function App() {
     // eslint-disable-next-line
   }, [VistAndOfferData]);
 
- 
   useEffect(() => {
     if (AssignPostData) {
       if (AssignPostData.success === false) {
@@ -470,6 +472,22 @@ function App() {
     }
     // eslint-disable-next-line
   }, [MyVisitsData]);
+
+  useEffect(() => {
+    if (OwnerPostsVisitsData) {
+      if (OwnerPostsVisitsData.success === false) {
+        if (OwnerPostsVisitsData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{OwnerPostsVisitsData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type:"OwnerAllPostsVisitClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [OwnerPostsVisitsData]);
 
   // similar
   useEffect(() => {
@@ -567,6 +585,8 @@ function App() {
             />
 
             <Route exact path="my-visits" element={<MyVisits />} />
+            
+            <Route exact path="my-post/all-visits" element={<OwnerPostAllVisits /> } />
             <Route
               exact
               path="favourite-post"

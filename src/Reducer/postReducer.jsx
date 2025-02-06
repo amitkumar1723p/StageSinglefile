@@ -425,20 +425,20 @@ export const GetMyVisitsReducer = (state = {}, action) => {
 
 export const GetSimilarProperty = (state = {}, action) => {
   switch (action.type) {
-    case"SimilarPropertyRequest":
+    case "SimilarPropertyRequest":
       return {
         ...state,
         loading: true,
       };
 
-      case"SimilarPropertySuccess":
+    case "SimilarPropertySuccess":
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
 
-      case"SimilarPropertyFail":
+    case "SimilarPropertyFail":
       return {
         ...state,
         loading: false,
@@ -446,6 +446,37 @@ export const GetSimilarProperty = (state = {}, action) => {
       };
 
     case "SimilarPropertyClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export const OwnerAllPostsVisitsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "OwnerAllPostsVisitRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "OwnerAllPostsVisitSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "OwnerAllPostsVisitFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "OwnerAllPostsVisitClear":
       return {};
     default:
       return {

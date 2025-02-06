@@ -46,7 +46,7 @@ export default function SinglePostDetails() {
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
-  const [reload, setReload] = useState(true); //use for reload similar property 
+  const [reload, setReload] = useState(true); //use for reload similar property
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -60,16 +60,13 @@ export default function SinglePostDetails() {
     let postaddress = Params.PostAddress;
     let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
-    if(reload===true){
-
-  
-    dispatch(GetSinglePostAction(postId));
-    // similar property dispatch
-    dispatch(SimilarProperty(postId));
-    setReload(false)
+    if (reload === true) {
+      dispatch(GetSinglePostAction(postId));
+      // similar property dispatch
+      dispatch(SimilarProperty(postId));
+      setReload(false);
     }
   }, [reload]);
-
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -896,14 +893,14 @@ export default function SinglePostDetails() {
                     {" "}
                     {/* Ensure each item has a unique key */}
                     <h3 className="similar-heading-box">Similar Property</h3>
-                    {SimilarPropertyData?.similarProperties.map((item) => {
+                    {SimilarPropertyData?.similarProperties?.map((item) => {
                       return (
                         <Link
-                        to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`.toLowerCase()
-                          .replaceAll(" ", "-")
-                          .replace(",", "")
-                          .replaceAll("/", "-")}-${item._id}`}
-
+                          to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`
+                            .toLowerCase()
+                            .replaceAll(" ", "-")
+                            .replace(",", "")
+                            .replaceAll("/", "-")}-${item._id}`}
                           onClick={() => setReload(true)} // Trigger reload on click
                         >
                           <div className="similar-property-main-box">
@@ -936,12 +933,12 @@ export default function SinglePostDetails() {
                                       <p className="similar-area-area">
                                         {item?.AreaDetails?.BuiltUpArea?.value}
                                         {item?.AreaDetails?.BuiltUpArea?.unit}
-                                       
+
                                         <span> Built-Up Area</span>
                                       </p>
 
                                       <p className="similar-area-price">
-                                        {item?.PricingDetails?.ExpectedPrice} 
+                                        {item?.PricingDetails?.ExpectedPrice}
                                         <span> Reserved price </span>
                                       </p>
                                     </div>

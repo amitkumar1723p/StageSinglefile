@@ -41,12 +41,12 @@ export default function MyVisits() {
     MyVisitsData.success == true && (
       <>
         <div>
-          {MyVisitsData.ScheduleVisits?.map((visit) => {
+          {MyVisitsData.ScheduleVisits?.map((visit ,i) => {
             const PostData = visit.PostData.PostId;
             const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
 
             return (
-              <div>
+              <div key={i}>
                 <p>
                   Date
                   {new Date(visit.VisitDate).toLocaleDateString("en-US", {
