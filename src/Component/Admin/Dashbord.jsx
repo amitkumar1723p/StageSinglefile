@@ -1,5 +1,5 @@
 // src/Dashboard.jsx
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Dashboard.css"; // Import CSS for styling
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,14 +10,16 @@ import {
 } from "../../Action/postAction";
 import { Link , useLocation ,useNavigate } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
+import { UserContext } from "../CreateContext/CreateContext";
+
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const { setAllPropertyData } = useContext(UserContext);
+  const{setPostVerify}=useContext(UserContext)
   const [UnVerifyPost, setUnVerifyPost] = useState([]);
   const [VerifyPost, setVerifyPost] = useState([]);
   const [TotalListing, setTotalListing] = useState(0);
-  const [VerifiedAdmin, setVerifiedAdmin] = useState([]);
-  const [UnVerifyAdmin, setUnVerifyAdmin] = useState([]);
-  const [FakeUnverifyAdmin, setFakeUnverifyAdmin] = useState([]);
+ 
   const navigate = useNavigate();
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -32,39 +34,10 @@ const Dashboard = () => {
     return state.AdminProperty;
   });
 
+  // On dashboard we get all property 
   useEffect(() => {
-    if (AllPost && AllPost.success) {
-      let PostVerify = AllPost.Post.filter((post) => {
-        return post.PostVerify == true;
-      });
-      setVerifyPost(PostVerify);
-      let unverify = AllPost.Post.filter((post) => {
-        return post.PostVerify == false;
-      });
-       
-      setUnVerifyPost(unverify);
-      setTotalListing(PostVerify.length + unverify.length);
-    }
-  }, [AllPost]);
 
-  useEffect(() => {
-    if (AgentAdminAllPost && AgentAdminAllPost.success) {
-      let PostVerify = AgentAdminAllPost.AssignProperty.filter((post) => {
-        return post.PostId?.PostVerify == true;
-      });
-
-      setVerifyPost(PostVerify);
-      let unverify = AgentAdminAllPost.AssignProperty.filter((post) => {
-        return post.PostId?.PostVerify == false;
-      });
-
-      setUnVerifyPost(unverify);
-      setTotalListing(PostVerify.length + unverify.length);
-    }
-  }, [AgentAdminAllPost]);
-
-  // AdminData
-  useEffect(() => {
+    
     if (medata && medata.IsAuthenticated) {
       if (medata.user.Role === "Owner") {
         dispatch(Admin_OwnerGetAllPostAction());
@@ -77,6 +50,38 @@ const Dashboard = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  //  by using this we show number of filtered or un-filtred property number on dashboard for owner 
+  useEffect(() => {
+    if (AllPost && AllPost.success) {
+      let PostVerify = AllPost.Post.filter((post) => {
+        return post.PostVerify == true;
+      });
+      setVerifyPost(PostVerify);
+      let unverify = AllPost.Post.filter((post) => {
+        return post.PostVerify == false;
+      });
+      setAllPropertyData(AllPost)
+      setUnVerifyPost(unverify);
+      setTotalListing(PostVerify.length + unverify.length);
+    }
+  }, [AllPost]);
+//  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent
+  useEffect(() => {
+    if (AgentAdminAllPost && AgentAdminAllPost.success) {
+      let PostVerify = AgentAdminAllPost.AssignProperty.filter((post) => {
+        return post.PostId?.PostVerify == true;
+      });
+
+      setVerifyPost(PostVerify);
+      let unverify = AgentAdminAllPost.AssignProperty.filter((post) => {
+        return post.PostId?.PostVerify == false;
+      });
+      setAllPropertyData(AgentAdminAllPost)
+      setUnVerifyPost(unverify);
+      setTotalListing(PostVerify.length + unverify.length);
+    }
+  }, [AgentAdminAllPost]);
   return (
     <>
       {loading ? (
@@ -95,25 +100,25 @@ const Dashboard = () => {
                 <p className="viewall">View All</p>
               </div>
             </Link>
-            <Link to="/admin/allpost?PostVerify=true">
+            <Link to="/admin/allpost">
 
               <div className="card p-3">
                 <div className="Admin-box">
                   <p className="total-number">{VerifyPost.length}</p>
                   <img src="/img/ActivePosts.png" alt="post" />
                 </div>
-                <h3>Active Listing</h3>
+                <h3 onClick={() => setPostVerify(true)}>Active Listing</h3>
                 <p className="viewall">View All</p>
               </div>
             </Link>
 
-            <Link to="/admin/allpost?PostVerify=false">
+            <Link to="/admin/allpost">
               <div className="card p-3 cursor-pointer">
                 <div className="Admin-box">
                   <p className="total-number">{UnVerifyPost.length}</p>
                   <img src="/img/In-ActivePosts.png" alt="post" />
                 </div>
-                <h3> In-Active Listing</h3>
+                <h3 onClick={() => setPostVerify(false)}>In-Active Listing</h3>
                 <p className="viewall">View All</p>
               </div>
             </Link>

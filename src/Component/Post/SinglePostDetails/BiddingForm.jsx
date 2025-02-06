@@ -34,6 +34,7 @@ export default function BiddingFormForm({
     return state.meDetails;
   });
   const [isLowerOffer, setIsLowerOffer] = useState(null); // State for toggling
+  
   const [showMakeOfferAlert, setshowMakeOfferAlert] = useState(false);
   const navigate = useNavigate();
 
@@ -318,8 +319,41 @@ export default function BiddingFormForm({
             </div> */}
 
               <div className="mke-you-offer-offer-options">
-                {isLowerOffer === "LowerValue" ||
+                {
                   (isLowerOffer === "HighValue" && (
+                    <>
+                      {(isLowerOffer == "LowerValue"
+                        ? lowerPrices
+                        : standardPrices
+                      ).map((price, index) => (
+                        <button
+                          type="button"
+                          className={`mke-you-offer-option ${
+                            price == BiddingFormData.BidPrice ? "select" : ""
+                          }`}
+                          key={
+                            isLowerOffer
+                              ? `lower-${index}`
+                              : `standard-${index}`
+                          } // Unique key for each button
+                          // onClick={() => setFormData({...formData, offer: price})}
+                          onClick={() => {
+                            setBiddingFormData({
+                              ...BiddingFormData,
+                              BidPrice: price,
+                            });
+                          }}
+                        >
+                          {/* {from} */}
+                          {/* ₹ {price.toFixed(2)} Cr₹ {price} Cr */}
+                          {formatReservePrice(price)}
+                        </button>
+                      ))}{" "}
+                    </>
+                  ))}
+
+{
+                  (isLowerOffer === "LowerValue" && (
                     <>
                       {(isLowerOffer == "LowerValue"
                         ? lowerPrices

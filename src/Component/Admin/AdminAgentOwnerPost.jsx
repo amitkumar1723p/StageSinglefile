@@ -22,6 +22,9 @@ export default function AdminAgentOwnerPost() {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+// for btn color
+const{postVerify}=useContext(UserContext)
+
 
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -44,7 +47,7 @@ export default function AdminAgentOwnerPost() {
   const { data: VistAndOfferData } = useSelector((state) => {
     return state.VistAndOffer;
   });
-
+// this useEffect Acesss the all data
   useEffect(() => {
     if (
       adminAlertData &&
@@ -54,20 +57,13 @@ export default function AdminAgentOwnerPost() {
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
       ].includes(LodingType)
-      // (LodingType === "VerifyPostActionRequest" ||
-      //   LodingType === "ReOpenPostActionRequest")
+    
     ) {
       // alert("Admin_OwnerGetAllPostAction PostVerify")
       if (adminAlertData.success === true && medata?.user?.Role == "Owner") {
-        if (querry.get("PostVerify")) {
-          dispatch(
-            Admin_OwnerGetAllPostAction({
-              PostVerify: querry.get("PostVerify"),
-            })
-          );
-        } else {
+        
           dispatch(Admin_OwnerGetAllPostAction());
-        }
+     
       }
       if (adminAlertData.success === true && medata?.user?.Role == "Admin") {
         if (querry.get("PostVerify")) {
@@ -164,11 +160,11 @@ export default function AdminAgentOwnerPost() {
   const handleActive = (status) => {
     setActive(status);
     if (status === true) {
-      setPropertyOrder(true);
+      setActive(true);
     } else if (status === false) {
-      setPropertyOrder(false);
+      setActive(false);
     } else {
-      setPropertyOrder(null);
+      setActive(null);
     }
   };
 
@@ -181,7 +177,7 @@ export default function AdminAgentOwnerPost() {
         </div>
 
         <button
-          className={` ${!querry.get("PostVerify") ? "select" : ""}`}
+          className={ postVerify||active===null ? "select" : ""}
           onClick={() => handleActive(null)}
         >
           <span>All Post</span>
@@ -191,7 +187,8 @@ export default function AdminAgentOwnerPost() {
           // onClick={(e) => {
           //   navigate("/admin/allpost?PostVerify=true");
           // }}
-          className={querry.get("PostVerify") == "true" ? "select" : ""}
+          className={postVerify || active === true ? "select" : ""}
+
           onClick={() => handleActive(true)}
           // className={active == true ? "select" : ""}
         >
@@ -201,7 +198,7 @@ export default function AdminAgentOwnerPost() {
           // onClick={(e) => {
           //   navigate("/admin/allpost?PostVerify=false");
           // }}
-          className={querry.get("PostVerify") == "false" ? "select" : ""}
+          className={ postVerify||active===false ? "select" : ""}
           // o
           onClick={() => handleActive(false)}
           // className={active == false ? "select" : ""}
@@ -209,7 +206,7 @@ export default function AdminAgentOwnerPost() {
           Inactive
         </button>
         <button onClick={handlePropertyOrder} style={{ pointerEvents: "auto" }}>
-          {propertyOrder === 1 ? <>bottom to top</> : <>Top to bottom</>}
+          {propertyOrder === "ascending" ? <>bottom to top</> : <>Top to bottom</>}
         </button>
 
         {/* <button>Exprired</button>

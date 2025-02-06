@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Admin_OwnerGetAllPostAction } from "../../Action/postAction";
 import AdminListingCard from "./AdminListingCard";
 import { useSearchParams } from "react-router-dom";
 import "./AdminListingCard.css";
+import { UserContext } from "../CreateContext/CreateContext";
 
 export default function AllPost({
   setAssignProperty,
@@ -14,6 +15,7 @@ export default function AllPost({
  
 }) {
   const dispatch = useDispatch();
+  const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)
   const [OwnerPosts, setOwnerPosts] = useState([]);
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
 
@@ -23,11 +25,17 @@ export default function AllPost({
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const itemsPerPage = 10; // Number of items per page
 
+  useEffect(()=>{
+    if(activeFilter!==null){
+      setPostVerify(null)
+     
+    }
+  },[activeFilter])
+
   // Update posts when data or sortOrder changes searching or pagination set inside this useEffect
   useEffect(() => {
-
-    if (data?.Post) {
-      let filteredPosts = [...data.Post];
+    if (allPropertyData?.Post) {
+      let filteredPosts = [...allPropertyData.Post];
   
       // Apply search filter
       if (SearchPostId.length > 0) {
@@ -48,15 +56,23 @@ export default function AllPost({
       }
   
       // Apply the active filter (postVerify) to all posts
-      if (activeFilter !== null) {
+      if (activeFilter !== null ) {
         filteredPosts = filteredPosts.filter((item) => {
           return item.PostVerify === activeFilter;
         });
+
       }else{
         filteredPosts=[...filteredPosts]
+        
       }
   
-   
+   if(postVerify!==null){
+    filteredPosts = filteredPosts.filter((item) => {
+      return item.PostVerify === postVerify;
+    });
+   }else{
+    filteredPosts=[...filteredPosts]
+  }
   
       // Sorting logic
       if (sortOrder !== undefined) {
@@ -82,20 +98,11 @@ export default function AllPost({
   
       setOwnerPosts(postsToDisplay); // Set the current page posts
     }
-  }, [data, SearchPostId, sortOrder, activeFilter, page]);
+  }, [data, SearchPostId, sortOrder, activeFilter, page,postVerify]);
 
-  // Re-run when data, SearchPostId, sortOrder, or page changes
 
-  const [querry, setquerry] = useSearchParams();
-  useEffect(() => {
-    if (querry.get("PostVerify")) {
-      dispatch(Admin_OwnerGetAllPostAction({ PostVerify: querry.get("PostVerify") }));
-    } else {
-      dispatch(Admin_OwnerGetAllPostAction());
-    }
-  }, [querry, dispatch]);
 
-  // Pagination control functions start 
+  
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);

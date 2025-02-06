@@ -61,6 +61,13 @@ const Navbar = () => {
   }, []);
   //  Logout Data show Code (Start)
 
+  // for removing the localstorage of login user/agen/owner/admin
+const  clearAllPropertyData=(()=>{
+  localStorage.removeItem('Admin_OwnerGetAllPostState');
+})
+
+
+
   useEffect(() => {
     if (logoutdata) {
       if (logoutdata.success === true) {
@@ -75,6 +82,9 @@ const Navbar = () => {
         setTimeout(() => {
           dispatch({ type: "MeDetailsClear" });
         }, 0);
+
+
+        clearAllPropertyData()
       }
       if (logoutdata.success === false) {
         setalertMessage(<p>{logoutdata.message}</p>);
