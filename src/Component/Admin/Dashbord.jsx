@@ -83,75 +83,75 @@ const Dashboard = () => {
         <Loader className="componentloader" />
       ) : (
         <>
-          <h4 className={`main-dash ${location.pathname.includes("/admin/dashboard") ?"active-btn-admin":""}`} > Dashboard</h4>
-          <div className="cards  grid grid-cols-4 gap-3  ">
-            <Link to="/admin/allpost" >
-              <div className="card p-3">
-                <div className="Admin-box">
-                  <p className="total-number">{TotalListing}</p>
-                  <img src="/img/TotalPosts.png" alt="totalPost" />
-                </div>
-                <h3>Total Listing</h3>
-                <p className="viewall">View All</p>
+        <h4 className={`main-dash ${location.pathname.includes("/admin/dashboard") ?"active-btn-admin":""}`} > Dashboard</h4>
+        <div className="cards">
+          <Link to="/admin/allpost">
+            <div className="card">
+              <div className="Admin-box">
+                <p className="total-number">{TotalListing}</p>
+                <img src="/img/TotalPosts.png" alt="totalPost" />
               </div>
-            </Link>
-            <Link to="/admin/allpost?PostVerify=true">
+              <h3>Total Listing</h3>
+              <p className="viewall">View All</p>
+            </div>
+          </Link>
+          <Link to="/admin/allpost?PostVerify=true">
 
-              <div className="card p-3">
-                <div className="Admin-box">
-                  <p className="total-number">{VerifyPost.length}</p>
-                  <img src="/img/ActivePosts.png" alt="post" />
-                </div>
-                <h3>Active Listing</h3>
-                <p className="viewall">View All</p>
+            <div className="card">
+              <div className="Admin-box">
+                <p className="total-number">{VerifyPost.length}</p>
+                <img src="/img/ActivePosts.png" alt="post" />
               </div>
-            </Link>
+              <h3>Active Listing</h3>
+              <p className="viewall">View All</p>
+            </div>
+          </Link>
 
-            <Link to="/admin/allpost?PostVerify=false">
-              <div className="card p-3 cursor-pointer">
+          <Link to="/admin/allpost?PostVerify=false">
+            <div className="card">
+              <div className="Admin-box">
+                <p className="total-number">{UnVerifyPost.length}</p>
+                <img src="/img/In-ActivePosts.png" alt="post" />
+              </div>
+              <h3> In-Active Listing</h3>
+              <p className="viewall">View All</p>
+            </div>
+          </Link>
+
+          {medata?.user?.Role!= "Agent" && (
+            <>
+              {" "}
+              <div className="card">
                 <div className="Admin-box">
-                  <p className="total-number">{UnVerifyPost.length}</p>
+                  <p className="total-number">0</p>
                   <img src="/img/In-ActivePosts.png" alt="post" />
                 </div>
-                <h3> In-Active Listing</h3>
+                <h3> Expire Lisitng </h3>
+
                 <p className="viewall">View All</p>
               </div>
-            </Link>
-
-            {medata?.user?.Role!= "Agent" && (
-              <>
-                {" "}
-                <div className="card p-3 cursor-pointer">
-                  <div className="Admin-box">
-                    <p className="total-number">0</p>
-                    <img src="/img/In-ActivePosts.png" alt="post" />
-                  </div>
-                  <h3> Expire Lisitng </h3>
-
-                  <p className="viewall">View All</p>
+              <div className="card">
+                <div className="Admin-box">
+                  <p className="total-number">0</p>
+                  <img src="/img/In-ActivePosts.png" alt="post" />
                 </div>
-                <div className="card p-3 cursor-pointer">
-                  <div className="Admin-box">
-                    <p className="total-number">0</p>
-                    <img src="/img/In-ActivePosts.png" alt="post" />
-                  </div>
-                  <h3> Deleted Lisitng </h3>
+                <h3> Deleted Lisitng </h3>
 
-                  <p className="viewall">View All</p>
+                <p className="viewall">View All</p>
+              </div>
+              <div className="card">
+                <div className="Admin-box">
+                  <p className="total-number">0</p>
+                  <img src="/img/ActivePosts.png" alt="post" />
                 </div>
-                <div className="card p-3 cursor-pointer">
-                  <div className="Admin-box">
-                    <p className="total-number">0</p>
-                    <img src="/img/ActivePosts.png" alt="post" />
-                  </div>
-                  <h3> Success</h3>
+                <h3> Success</h3>
 
-                  <p className="viewall">View All</p>
-                </div>{" "}
-              </>
-            )}
-          </div>
-        </>
+                <p className="viewall">View All</p>
+              </div>{" "}
+            </>
+          )}
+        </div>
+      </>
       )}
 
       {/* <div className="main-content"> */}

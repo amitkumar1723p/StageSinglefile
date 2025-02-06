@@ -46,7 +46,7 @@ export default function SinglePostDetails() {
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
-  const [reload, setReload] = useState(true); //use for reload similar property 
+  const [reload, setReload] = useState(true); //use for reload similar property
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -60,16 +60,13 @@ export default function SinglePostDetails() {
     let postaddress = Params.PostAddress;
     let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
-    if(reload===true){
-
-  
-    dispatch(GetSinglePostAction(postId));
-    // similar property dispatch
-    // dispatch(SimilarProperty(postId));
-    setReload(false)
+    if (reload === true) {
+      dispatch(GetSinglePostAction(postId));
+      // similar property dispatch
+      // dispatch(SimilarProperty(postId));
+      setReload(false);
     }
   }, [reload]);
-
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -735,7 +732,7 @@ export default function SinglePostDetails() {
                       "Rent" && (
                       <PropertyDataBox
                         Answer={floorDetails}
-                        Icon="/img/floorss.png"
+                        Icon="/img/total-floor.png"
                         Data={"Property on Floor"}
                       />
                     )}
@@ -816,7 +813,15 @@ export default function SinglePostDetails() {
                       "Rent" && (
                       <>
                         <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.BasicDetails.AvailableFrom}`}
+                          Answer={`${new Date(
+                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                          ).getDate()}-${
+                            new Date(
+                              getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                            ).getMonth() + 1
+                          }-${new Date(
+                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                          ).getFullYear()}`}
                           Icon="/img/bathroom.png"
                           Data={"Available From"}
                         />
