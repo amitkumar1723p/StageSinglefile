@@ -26,6 +26,10 @@ ul {
   margin-bottom: 0;
 }
 
+ol, ul {
+  padding-left: 0;
+}
+
 .admin-data-card{
   background: #bfcccfa3;
    width: 300px;
