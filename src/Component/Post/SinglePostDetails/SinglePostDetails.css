@@ -390,6 +390,10 @@ body {
   height: 33.3%;
 } */
 
+.original-price{
+  cursor: pointer;
+  
+}
 /* Window Slider  */
 .Window-Image-Slider-Container {
   display: flex;
@@ -1148,7 +1152,7 @@ line-height: normal;
 
 /* Bedding Form Css  */
 .bidding-form-container {
-  background-color: #333333000a8;
+  background-color: #333;
   display: flex;
   justify-content: center;
   align-items: center;

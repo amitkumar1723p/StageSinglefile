@@ -1,0 +1,91 @@
+.AdminAside-container {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: #f8f8f8;
+  }
+  
+  .AdminAside-sidebar {
+    position: sticky;
+    top: 82px;
+    background-color: white;
+    color: black;
+    padding: 1rem;
+    width: 200px;
+    height: 100%;
+    border-bottom: 5px solid #e5e5e5;
+    border-radius: 0.5rem;
+    outline: 1px solid #f8f8f8;
+  }
+  
+  .AdminAside-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--main-light-clr);
+    margin-bottom: 1rem;
+  }
+  
+  .AdminAside-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .AdminAside-navLink {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .AdminAside-navLink.active {
+    background-color: var(--main-light-clr);
+    color: white;
+    
+  }
+  
+  .AdminAside-navLink.hover:hover {
+    background-color: var(--main-light-clr);
+    color: white;
+  }
+  
+  .AdminAside-icon {
+    transition: all 0.3s;
+  }
+  
+  .AdminAside-icon.active,
+  .AdminAside-navLink:hover .AdminAside-icon {
+    filter: invert(1) brightness(100);
+  }
+  
+  .AdminAside-button {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .AdminAside-button:hover {
+    background-color: var(--main-light-clr);
+    color: white;
+  }
+  
+  .AdminAside-content {
+    flex: 1;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  

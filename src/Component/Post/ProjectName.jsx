@@ -182,14 +182,15 @@ export default function ProjectNameSection({
   return (
     <>
       <div
-        className={`form-group-home ${ProjectInputType == "Search"
+        className={`form-group-home ${
+          ProjectInputType == "Search"
             ? "search-dropdown-home"
             : ProjectInputType == "PostForm"
-              ? "create-post-search-project"
-              : ProjectInputType == "PostRequirement"
-                ? "post-requermient-search"
-                : ""
-          }`}
+            ? "create-post-search-project"
+            : ProjectInputType == "PostRequirement"
+            ? "post-requermient-search"
+            : ""
+        }`}
       >
         {ProjectInputType == "PostForm" && (
           <label
@@ -202,8 +203,9 @@ export default function ProjectNameSection({
         {/* searchInput */}
         <div
           ref={ProjectNameFormGroupref}
-          className={`dropdown ${ProjectInputType == "Search" ? "search-dropdown" : ""
-            }`}
+          className={`dropdown ${
+            ProjectInputType == "Search" ? "search-dropdown" : ""
+          }`}
         >
           <input
             onKeyDown={handleKeyDown}
@@ -211,7 +213,6 @@ export default function ProjectNameSection({
             autoComplete="off"
             type="text"
             id="property-name"
-
             placeholder={placeholder}
             required
             value={ProjectNameObjectData.ProjectName?.trimStart() || ""}
@@ -229,18 +230,21 @@ export default function ProjectNameSection({
                 let SearchWord = e.target.value.split(" ");
 
                 const result = ProjectName.filter((item) => {
-                  {console.log(item)}
-                  const matchProjectNameAndSector = SearchWord?.every((word) => {
-                    return (
-                      item["Project Name"]
-                        ?.toUpperCase()
-                        ?.includes(word?.toUpperCase()) ||
-                      item["Sector"]
-                        ?.toUpperCase()
-                        ?.includes(word?.toUpperCase()) ||
-                      item["City"]?.toUpperCase()?.includes(word?.toUpperCase())
-                    );
-                  });
+                  const matchProjectNameAndSector = SearchWord?.every(
+                    (word) => {
+                      return (
+                        item["Project Name"]
+                          ?.toUpperCase()
+                          ?.includes(word?.toUpperCase()) ||
+                        item["Sector"]
+                          ?.toUpperCase()
+                          ?.includes(word?.toUpperCase()) ||
+                        item["City"]
+                          ?.toUpperCase()
+                          ?.includes(word?.toUpperCase())
+                      );
+                    }
+                  );
 
                   return matchProjectNameAndSector;
                 });
@@ -267,7 +271,7 @@ export default function ProjectNameSection({
               ref={listRef}
               className="apartmentname-container"
               style={{ maxHeight: hight * 10 }}
-            //  tabIndex={0}
+              //  tabIndex={0}
             >
               {FilterProjectName.map((ApartmentFilter, index) => {
                 return (
@@ -294,7 +298,8 @@ export default function ProjectNameSection({
                       }, 0);
                     }}
                   >
-                    {ApartmentFilter["Project Name"]}, {ApartmentFilter["Sector"]}, {ApartmentFilter["City"]}
+                    {ApartmentFilter["Project Name"]},{" "}
+                    {ApartmentFilter["Sector"]}, {ApartmentFilter["City"]}
                   </p>
                 );
               })}

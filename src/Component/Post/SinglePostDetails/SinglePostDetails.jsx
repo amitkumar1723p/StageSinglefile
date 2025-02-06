@@ -63,7 +63,7 @@ export default function SinglePostDetails() {
     if (reload === true) {
       dispatch(GetSinglePostAction(postId));
       // similar property dispatch
-      dispatch(SimilarProperty(postId));
+      // dispatch(SimilarProperty(postId));
       setReload(false);
     }
   }, [reload]);
@@ -732,7 +732,7 @@ export default function SinglePostDetails() {
                       "Rent" && (
                       <PropertyDataBox
                         Answer={floorDetails}
-                        Icon="/img/floorss.png"
+                        Icon="/img/total-floor.png"
                         Data={"Property on Floor"}
                       />
                     )}
@@ -813,7 +813,15 @@ export default function SinglePostDetails() {
                       "Rent" && (
                       <>
                         <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.BasicDetails.AvailableFrom}`}
+                          Answer={`${new Date(
+                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                          ).getDate()}-${
+                            new Date(
+                              getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                            ).getMonth() + 1
+                          }-${new Date(
+                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                          ).getFullYear()}`}
                           Icon="/img/bathroom.png"
                           Data={"Available From"}
                         />
@@ -889,9 +897,9 @@ export default function SinglePostDetails() {
 
                   {/* similar property */}
 
-                  <div className="similar-main-box">
-                    {" "}
-                    {/* Ensure each item has a unique key */}
+                  {/* <div className="similar-main-box">
+              
+                    
                     <h3 className="similar-heading-box">Similar Property</h3>
                     {SimilarPropertyData?.similarProperties?.map((item) => {
                       return (
@@ -908,12 +916,12 @@ export default function SinglePostDetails() {
                               <div className="similar-property-main">
                                 <div className="similar-left-right">
                                   <div className="similar-img-box">
-                                    {/* {item?.PropertyImages.map((img)=>{ */}
+                                    
                                     <img
                                       src={item.PropertyImages[0]?.url}
                                       alt="property"
                                     />
-                                    {/* })} */}
+                                  
                                   </div>
                                   <div className="similar-right-section">
                                     <div className="similar-data-section">
@@ -950,7 +958,7 @@ export default function SinglePostDetails() {
                         </Link>
                       );
                     })}
-                  </div>
+                  </div> */}
 
                   {/* similar property */}
 
