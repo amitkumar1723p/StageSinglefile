@@ -1,71 +1,78 @@
 .heading-for-service {
-  /* text-align: center;
-  margin-top: 50px; */
+  text-align: center;
+  margin-top: 50px;
 }
 
 .heading-for-service h3 {
-  /* font-size: 32px;
+  font-size: 32px;
   margin: 0;
   color: #333;
-  text-align: center; */
+  text-align: center;
 }
 
 .heading-for-service span {
-  /* color: var(--main-light-clr); */
+  color: var(--main-light-clr);
 }
 
 .heading-for-service p {
-  /* font-size: 16px;
+  font-size: 16px;
   margin: 10px 0 30px 0;
-  color: #333; */
+  color: #333;
 }
 
 .heading-line-container {
-  /* display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px; */
+  gap: 20px;
 }
 
-
+.heading-line {
+  width: 30%; /* Set the line width to 30% */
+  height: 2px; /* Thin line height */
+  background: var(--main-light-clr); /* Use your defined color variable */
+  font-weight: bold; /* Adds a bold effect */
+  opacity: 0.8; /* Slightly reduce opacity for a subtle look */
+}
 
 .services-container {
-  
-  /* display: flex;
+  height: 180px;
+  display: flex;
   justify-content: space-around;
-  background-color: var(--main-light-clr);
+  /* background-color: var(--main-light-clr); */
   padding: 20px 0;
-  margin: 20px 0 60px 0; */
+  /* margin: 20px 0 60px 0; */
 }
 
 .service-item {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* text-align: center; */
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
 }
 
 .service-icon {
-  /* width: 58px;
+  width: 58px;
   height: 58px;
-  margin-bottom: 24px; */
+  margin-bottom: 24px;
 }
 
 .service-text {
-  /* color: #333;
+  color: #333;
   text-transform: uppercase;
   text-align: center;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  letter-spacing: 0.32px; */
+  letter-spacing: 0.32px;
 }
 
 .services-main-box {
-  /* background-color: var(--main-lighter-clr); */
+  background-color: var(--main-lighter-clr);
+  padding: 20px 0;
 }
 
 @media (max-width: 480px) {

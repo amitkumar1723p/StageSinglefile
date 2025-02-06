@@ -237,8 +237,8 @@ export default function BiddingFormForm({
                   </p>
 
                   <p className="area-section-from pt-1">
-                    
-                    {SinglePostData.SinglePost.PricingDetails.PricePerSqFt} per sqft
+                    {SinglePostData.SinglePost.PricingDetails.PricePerSqFt} per
+                    sqft
                   </p>
                 </div>
                 <div className="make-offer-property-id space-y-1">

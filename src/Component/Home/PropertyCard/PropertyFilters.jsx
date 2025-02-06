@@ -154,6 +154,7 @@ const PropertyFilters = () => {
           <h2 className="filter-title">Filters</h2>
           <div className="flex">
             <div>
+              <p className="looking-for-data">I am looking for</p>
               {PropertyAdTypeArray.map((text) => {
                 return (
                   <button

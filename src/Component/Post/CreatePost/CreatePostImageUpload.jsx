@@ -302,7 +302,7 @@ export default function CreatePostImageUpload({
                   setnext(3);
                 }}
               >
-                Preview
+                Previous
               </div>
               <button className="Submit-Next">
                 {update ? "Update Post" : "Create Post"}

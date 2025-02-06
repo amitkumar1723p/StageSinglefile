@@ -482,6 +482,17 @@
 .Reserveprice-sec-grid{
   margin-left: 20px;
 }
+.looking-for-data{
+
+  color: #333;
+    
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 1px;
+    margin: 5px 0;
+}
 
 .price-ans {
   color: var(--main-light-clr);

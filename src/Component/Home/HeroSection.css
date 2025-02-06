@@ -94,12 +94,12 @@
   margin-left: 10px;
 }
 
-/* .select-options {
+.select-options {
   display: flex;
   justify-content: center;
   background: #e9f5ff;
   padding: 20px 0;
-} */
+}
 .search-tab {
   /* box-shadow: 0px 0px 4px 0px #b1cbdf; */
   background-color: white;
@@ -121,7 +121,7 @@
   border-bottom: 2px solid var(--main-light-clr);
   color: var(--main-light-clr);
 }
-/* .search-tab-ing {
+.search-tab-ing {
   letter-spacing: 0.5px;
   color: #333;
   text-align: center;
@@ -147,15 +147,12 @@
   border-radius: 5px;
   background: var(--main-light-clr);
   box-shadow: 0px 0px 4px 0px #dadcdf;
-} */
-
-
+}
 .search-tab:hover {
   border-bottom: 2px solid var(--main-light-clr);
   color: var(--main-light-clr);
 }
 .search-section-box {
-  color: #333;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -195,11 +192,11 @@
 }
 .search-box input {
   background-color: #fff;
-  color: #333;
   height: 31.2px;
   width: 470px;
   border: none;
   font-size: 12.8px;
+  color: #333;
 }
 .search-button {
   letter-spacing: 0.5px;
@@ -281,9 +278,9 @@
   /* margin-bottom: 15px; */
   padding-bottom: 8px;
 }
-/* .heading-section-all {
+.heading-section-all {
   text-align: center;
-} */
+}
 .details p {
   font-size: 11.2px;
   color: #333;
@@ -464,7 +461,6 @@
     padding: 10px 0;
     border: none;
     font-size: 10px;
-    color: #333;
   }
 
   .search-button {
@@ -584,11 +580,11 @@
     line-height: 1.6; /* Increased line height for easier reading */
   }
 
-  /* .sell-rent-buy {
+  .sell-rent-buy {
     display: flex;
     flex-direction: column;
     gap: 15px;
-  } */
+  }
 
   .search-tab {
     /* box-shadow: 0px 0px 4px 0px #b1cbdf; */

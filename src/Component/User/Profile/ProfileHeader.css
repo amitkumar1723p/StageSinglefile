@@ -385,7 +385,7 @@
 }
 @media (max-width: 480px) {
   .sidebar-profile {
-    padding: 20px;
+    padding: 10px;
     color: #ffffff;
     height: fit-content;
     border: 1px solid #dedeff;

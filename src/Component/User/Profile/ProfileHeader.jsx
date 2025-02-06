@@ -213,9 +213,12 @@ function ProfileHeader() {
             </div>
           </div>
         </div>
+        <Link to="/user/post">
+       
         <div className="dashboard-right-side">
           <img src="img/dash-banner.svg" alt="dash-banner" />
         </div>
+         </Link>
       </div>
     </>
   );

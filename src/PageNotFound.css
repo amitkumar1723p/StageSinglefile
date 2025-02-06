@@ -1,0 +1,69 @@
+.PageNotFound-container {
+  display: grid;
+  place-items: center;
+  min-height: 91vh;
+  background-color: white;
+}
+
+.PageNotFound-content {
+  text-align: center;
+}
+
+.PageNotFound-heading {
+  font-weight: 600;
+  font-size: 7rem;
+  color: var(--main-dark-clr);
+}
+
+.PageNotFound-subheading {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01562em;
+  color: #333;
+}
+
+.PageNotFound-description {
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--main-dark-clr);
+  text-transform: none;
+}
+
+.PageNotFound-actions {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.PageNotFound-homeButton {
+  padding: 0.625rem 1.5rem;
+  background-color: var(--main-dark-clr);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: background-color 0.3s;
+}
+
+.PageNotFound-homeButton:hover {
+  background-color: var(--main-light-clr);
+}
+
+.PageNotFound-supportButton {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.PageNotFound-supportButton:hover {
+  color: #4b5563;
+}

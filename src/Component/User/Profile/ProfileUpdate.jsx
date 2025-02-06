@@ -109,7 +109,7 @@ const {varb}=useContext(UserContext);
           onChange={(e) => setOtp(e.target.value)}
           style={styles.input}
         />
-        <button type="submit" style={styles.button}>Submit</button>
+        <button className="updatepropfile-section" type="submit" style={styles.button}>Submit</button>
       </form>
       </div>
     </div>

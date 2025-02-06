@@ -115,7 +115,7 @@
 
 .filter-title {
   font-size: 18px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .filter-group {
@@ -940,6 +940,7 @@
   /* color: whitesmoke; */
   border-radius: 6px;
   padding: 0px;
+  font-size: 12px;
   margin-top: 0px;
   outline: none; /* Remove outline when focused */
   background-color: #dee2e600;

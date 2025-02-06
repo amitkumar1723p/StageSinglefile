@@ -46,7 +46,7 @@ export default function SinglePostDetails() {
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
-  const [reload, setReload] = useState(true); //use for reload similar property 
+  const [reload, setReload] = useState(true); //use for reload similar property
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -60,16 +60,13 @@ export default function SinglePostDetails() {
     let postaddress = Params.PostAddress;
     let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
-    if(reload===true){
-
-  
-    dispatch(GetSinglePostAction(postId));
-    // similar property dispatch
-    dispatch(SimilarProperty(postId));
-    setReload(false)
+    if (reload === true) {
+      dispatch(GetSinglePostAction(postId));
+      // similar property dispatch
+      // dispatch(SimilarProperty(postId));
+      setReload(false);
     }
   }, [reload]);
-
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -243,8 +240,7 @@ export default function SinglePostDetails() {
   const closehandleReportForm = (e) => {
     setOpenReportForm(false);
   };
-  {
-  }
+  //  const SinglePost = getSinglePostData.SinglePost
   return (
     <>
       <div className="floating-buttons">
@@ -550,25 +546,27 @@ export default function SinglePostDetails() {
                 </div>
 
                 <div className="property-actions">
-                  {!["Owner", "Admin"].includes(medata?.user?.Role) && (
-                    <>
-                      {" "}
-                      <button
-                        ref={ScheduleYourVisitOpenBtnRef}
-                        className="contact-expert-btn"
-                        onClick={() => {
-                          if (medata && medata.IsAuthenticated == true) {
-                            setshowScheduleVisitForm(true);
-                          } else {
-                            setRedirectPath("/show-scheduleVisit");
-                            navigate("/login");
-                          }
-                        }}
-                      >
-                        Schedule Your Visit
-                      </button>
-                    </>
-                  )}
+                  {!["Owner", "Admin"].includes(medata?.user?.Role) &&
+                    getSinglePostData.SinglePost.BasicDetails.PropertyAdType !=
+                      "Rent" && (
+                      <>
+                        {" "}
+                        <button
+                          ref={ScheduleYourVisitOpenBtnRef}
+                          className="contact-expert-btn"
+                          onClick={() => {
+                            if (medata && medata.IsAuthenticated == true) {
+                              setshowScheduleVisitForm(true);
+                            } else {
+                              setRedirectPath("/show-scheduleVisit");
+                              navigate("/login");
+                            }
+                          }}
+                        >
+                          Schedule Your Visit
+                        </button>
+                      </>
+                    )}
 
                   <Link
                     to="https://wa.me/7837840785?text=Hello"
@@ -734,7 +732,7 @@ export default function SinglePostDetails() {
                       "Rent" && (
                       <PropertyDataBox
                         Answer={floorDetails}
-                        Icon="/img/floorss.png"
+                        Icon="/img/total-floor.png"
                         Data={"Property on Floor"}
                       />
                     )}
@@ -815,7 +813,15 @@ export default function SinglePostDetails() {
                       "Rent" && (
                       <>
                         <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.BasicDetails.AvailableFrom}`}
+                          Answer={`${new Date(
+                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                          ).getDate()}-${
+                            new Date(
+                              getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                            ).getMonth() + 1
+                          }-${new Date(
+                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                          ).getFullYear()}`}
                           Icon="/img/bathroom.png"
                           Data={"Available From"}
                         />
@@ -891,11 +897,11 @@ export default function SinglePostDetails() {
 
                   {/* similar property */}
 
-                  <div className="similar-main-box">
-                    {" "}
-                    {/* Ensure each item has a unique key */}
+                  {/* <div className="similar-main-box">
+              
+                    
                     <h3 className="similar-heading-box">Similar Property</h3>
-                    {SimilarPropertyData?.similarProperties.map((item) => {
+                    {SimilarPropertyData?.similarProperties?.map((item) => {
                       return (
                         <Link
                         to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`.toLowerCase()
@@ -910,12 +916,12 @@ export default function SinglePostDetails() {
                               <div className="similar-property-main">
                                 <div className="similar-left-right">
                                   <div className="similar-img-box">
-                                    {/* {item?.PropertyImages.map((img)=>{ */}
+                                    
                                     <img
                                       src={item.PropertyImages[0]?.url}
                                       alt="property"
                                     />
-                                    {/* })} */}
+                                  
                                   </div>
                                   <div className="similar-right-section">
                                     <div className="similar-data-section">
@@ -933,14 +939,14 @@ export default function SinglePostDetails() {
                                     </div>
                                     <div className="similar-area-price-box">
                                       <p className="similar-area-area">
-                                        {item?.AreaDetails?.BuiltUpArea?.value}{" "}
-                                        {item?.AreaDetails?.BuiltUpArea?.unit}{" "}
-                                        1800 sqft
+                                        {item?.AreaDetails?.BuiltUpArea?.value}
+                                        {item?.AreaDetails?.BuiltUpArea?.unit}
+                                       
                                         <span> Built-Up Area</span>
                                       </p>
 
                                       <p className="similar-area-price">
-                                        {item?.PricingDetails?.ExpectedPrice}
+                                        {item?.PricingDetails?.ExpectedPrice} 
                                         <span> Reserved price </span>
                                       </p>
                                     </div>
@@ -952,7 +958,7 @@ export default function SinglePostDetails() {
                         </Link>
                       );
                     })}
-                  </div>
+                  </div> */}
 
                   {/* similar property */}
 
