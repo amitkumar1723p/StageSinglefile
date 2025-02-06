@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMyVisitsAction } from "../../../Action/userAction";
-import "./MyVisits.css"
+import "./MyVisits.css"; // Import the vanilla CSS file
+
 export default function MyVisits() {
   const { data: MyVisitsData } = useSelector((state) => {
     return state.MyVisits;
@@ -26,15 +27,15 @@ export default function MyVisits() {
   return (
     MyVisitsData &&
     MyVisitsData.success === true && (
-      <div className="overflow-x-auto">
-        <p className="My-Schedule-Visit" >My Schedule Visit </p>
-        <table className="min-w-full table-auto border-collapse border border-gray-300">
+      <div className="myvisit-overflow-x-auto">
+        <p className="myvisit-schedule-visit">My Schedule Visit</p>
+        <table className="myvisit-table">
           <thead>
-            <tr className="bg-gray-300">
-              <th className="py-2 px-4 border-b">Date</th>
-              <th className="py-2 px-4 border-b">Visit Time</th>
-              <th className="py-2 px-4 border-b">Property Name</th>
-              <th className="py-2 px-4 border-b">Property ID</th>
+            <tr className="myvisit-table-header">
+              <th className="myvisit-table-cell">Date</th>
+              <th className="myvisit-table-cell">Visit Time</th>
+              <th className="myvisit-table-cell">Property Name</th>
+              <th className="myvisit-table-cell">Property ID</th>
             </tr>
           </thead>
           <tbody>
@@ -44,18 +45,16 @@ export default function MyVisits() {
 
               return (
                 <tr key={visit._id}>
-                  <td className="py-2 px-4 border-b text-start">
-                    {new Date(visit.VisitDate).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </td>
-                  <td className="py-2 px-4 border-b text-start">
+                  <td className="myvisit-table-cell">{new Date(visit.VisitDate).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}</td>
+                  <td className="myvisit-table-cell">
                     {formatTime(visit.VisitTime.From)} to {formatTime(visit.VisitTime.To)}
                   </td>
-                  <td className="py-2 px-4 border-b">{PostName}</td>
-                  <td className="py-2 px-4 border-b text-start">{PostData?._id}</td>
+                  <td className="myvisit-table-cell">{PostName}</td>
+                  <td className="myvisit-table-cell">{PostData?._id}</td>
                 </tr>
               );
             })}

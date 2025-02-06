@@ -21,8 +21,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .admin-data-card{
   background: #bfcccfa3;

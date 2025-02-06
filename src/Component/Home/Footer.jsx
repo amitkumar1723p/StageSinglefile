@@ -13,7 +13,7 @@ const Footer = () => {
           </h3>
 
           <div className="social-icons">
-            <Link to="https://www.linkedin.com/in/property-dekho-231b66346">
+            <Link to="https://www.linkedin.com/company/propertydekho247">
               <img
                 className="footer-img"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`

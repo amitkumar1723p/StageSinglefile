@@ -8,6 +8,18 @@
   top: 70px;
 }
 
+.navItem:hover{
+  background-color: var(--main-light-clr);
+  color: #fff;
+}
+/* Base style for the icon */
+
+
+/* When hovering over the li element, the icon will turn white */
+.navItem:hover .icons {
+  filter: brightness(0) saturate(100%) invert(1); /* Makes the image color white */
+}
+
 /* Optional logo styling */
 .logoTitle {
   text-align: center;
@@ -81,10 +93,10 @@
   }
 
   .navItem {
+    min-height: 100%;
     box-shadow: 0px 0px 4px 0px #b1cbdf;
     background-color: white;
-
-    padding: 10px 20px;
+    padding: 10px;
     flex-direction: row;
     justify-content: center;
     align-items: center;

@@ -15,6 +15,14 @@
   padding: 20px;
 }
 
+.updatepropfile-section{
+  background-color: var(--main-light-clr);
+}
+.updatepropfile-section:hover{
+opacity: .9;
+}
+
+
 .card {
   display: flex;
   flex-direction: column;
