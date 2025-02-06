@@ -1,5 +1,6 @@
 # Stage 1: Build the frontend app
-FROM node:alpine3.18 as build
+# FROM node:alpine3.18 as build
+FROM node:18-alpine as build
 
 # Set the working directory for building the app
 WORKDIR /app
