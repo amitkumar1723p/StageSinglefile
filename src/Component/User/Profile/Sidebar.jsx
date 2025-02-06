@@ -81,13 +81,13 @@ function Sidebar() {
               </li>
             </NavLink> */}
             <NavLink to="/user/my-visits">
-              <li className="navItem mob-hide">
+            <li className={`navItem ${location.pathname=="/user/my-visits" ?"active-btn-nav":""}`}>
                 <img
                   className="icons"
                   src="/img/NewLeads.svg"
                   alt="my-visits"
                 />
-                my Visits
+                My Visits
               </li>
             </NavLink>
             <NavLink to="#">

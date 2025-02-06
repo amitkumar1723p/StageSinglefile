@@ -65,7 +65,7 @@ export default function SinglePostDetails() {
   
     dispatch(GetSinglePostAction(postId));
     // similar property dispatch
-    dispatch(SimilarProperty(postId));
+    // dispatch(SimilarProperty(postId));
     setReload(false)
     }
   }, [reload]);
@@ -892,11 +892,11 @@ export default function SinglePostDetails() {
 
                   {/* similar property */}
 
-                  <div className="similar-main-box">
-                    {" "}
-                    {/* Ensure each item has a unique key */}
+                  {/* <div className="similar-main-box">
+              
+                    
                     <h3 className="similar-heading-box">Similar Property</h3>
-                    {SimilarPropertyData?.similarProperties.map((item) => {
+                    {SimilarPropertyData?.similarProperties?.map((item) => {
                       return (
                         <Link
                         to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`.toLowerCase()
@@ -911,12 +911,12 @@ export default function SinglePostDetails() {
                               <div className="similar-property-main">
                                 <div className="similar-left-right">
                                   <div className="similar-img-box">
-                                    {/* {item?.PropertyImages.map((img)=>{ */}
+                                    
                                     <img
                                       src={item.PropertyImages[0]?.url}
                                       alt="property"
                                     />
-                                    {/* })} */}
+                                  
                                   </div>
                                   <div className="similar-right-section">
                                     <div className="similar-data-section">
@@ -953,7 +953,7 @@ export default function SinglePostDetails() {
                         </Link>
                       );
                     })}
-                  </div>
+                  </div> */}
 
                   {/* similar property */}
 

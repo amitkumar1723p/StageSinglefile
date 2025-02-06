@@ -1,32 +1,34 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './PageNotFound.css'; // Import the plain CSS file
 
 const PageNotFound = () => {
-    const scrollHorizontal = () => {
-        
-        console.log("hiii")
-        window.scrollBy({
-          top: document.documentElement.scrollHeight,
-          left: 0,
-          behavior: 'smooth',
-        });
-      };
+  const scrollHorizontal = () => {
+    console.log("hiii");
+    window.scrollBy({
+      top: document.documentElement.scrollHeight,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <main className="grid min-h-[91vh] place-items-center  bg-white">
-    <div className="text-center">
-      <p className=" font-semibold text-[var(--main-dark-clr)] text-7xl">404</p>
-      <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-[#333] sm:text-4xl">Page not found</h1>
-      <p className="mt-6 text-lg font-medium text-pretty text-[var(--main-dark-clr)] sm:text-xl/8">Sorry, we couldn’t find the page you’re looking for.</p>
-      <div className="mt-10 flex items-center justify-center gap-x-6">
-            <NavLink to={"/"} className={"rounded-md bg-[var(--main-dark-clr)] px-3.5 py-2.5 hover:bg-[var(--main-light-clr)] text-sm font-semibold text-white shadow-xs"}>
-                Go back to home
-            </NavLink>
-        {/* <a href="#" >Contact support <span aria-hidden="true">&rarr;</span></a> */}
-        <button onClick={scrollHorizontal} className="text-sm font-semibold text-[#333] hover:text-gray-600">Contact Support !</button>
+    <main className="PageNotFound-container">
+      <div className="PageNotFound-content">
+        <p className="PageNotFound-heading">404</p>
+        <h1 className="PageNotFound-subheading">Page not found</h1>
+        <p className="PageNotFound-description">Sorry, we couldn’t find the page you’re looking for.</p>
+        <div className="PageNotFound-actions">
+          <NavLink to="/" className="PageNotFound-homeButton">
+            Go back to home
+          </NavLink>
+          <button onClick={scrollHorizontal} className="PageNotFound-supportButton">
+            Contact Support !
+          </button>
+        </div>
       </div>
-    </div>
-  </main>
-  )
+    </main>
+  );
 }
 
-export default PageNotFound
+export default PageNotFound;

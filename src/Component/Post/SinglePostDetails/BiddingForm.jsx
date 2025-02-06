@@ -236,8 +236,8 @@ export default function BiddingFormForm({
                   </p>
 
                   <p className="area-section-from pt-1">
-                    
-                    {SinglePostData.SinglePost.PricingDetails.PricePerSqFt} per sqft
+                    {SinglePostData.SinglePost.PricingDetails.PricePerSqFt} per
+                    sqft
                   </p>
                 </div>
                 <div className="make-offer-property-id space-y-1">
@@ -317,9 +317,42 @@ export default function BiddingFormForm({
                 : "Click here to wish lower offer"}
             </div> */}
 
-              <div className="mke-you-offer-offer-options">
-                {isLowerOffer === "LowerValue" ||
+<div className="mke-you-offer-offer-options">
+                {
                   (isLowerOffer === "HighValue" && (
+                    <>
+                      {(isLowerOffer == "LowerValue"
+                        ? lowerPrices
+                        : standardPrices
+                      ).map((price, index) => (
+                        <button
+                          type="button"
+                          className={`mke-you-offer-option ${
+                            price == BiddingFormData.BidPrice ? "select" : ""
+                          }`}
+                          key={
+                            isLowerOffer
+                              ? `lower-${index}`
+                              : `standard-${index}`
+                          } // Unique key for each button
+                          // onClick={() => setFormData({...formData, offer: price})}
+                          onClick={() => {
+                            setBiddingFormData({
+                              ...BiddingFormData,
+                              BidPrice: price,
+                            });
+                          }}
+                        >
+                          {/* {from} */}
+                          {/* ₹ {price.toFixed(2)} Cr₹ {price} Cr */}
+                          {formatReservePrice(price)}
+                        </button>
+                      ))}{" "}
+                    </>
+                  ))}
+
+{
+                  (isLowerOffer === "LowerValue" && (
                     <>
                       {(isLowerOffer == "LowerValue"
                         ? lowerPrices
