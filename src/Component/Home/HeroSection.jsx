@@ -429,8 +429,14 @@ const HeroSection = () => {
 
           <Testimonials />
           </div>
+          <div id="WHO-WE-ARE">
+
           <WhoWeAre />
+          </div>
+          <div id="FAQ-SECTION">
+
           <FaqBuyer />
+          </div>
         </>
       )}
       {/* Sale Component  */}
@@ -448,8 +454,14 @@ const HeroSection = () => {
           <div id="testimonials">
           <Testimonials />
           </div>
+          <div id="WHO-WE-ARE">
+
           <WhoWeAre />
+          </div>
+          <div id="FAQ-SECTION">
+
           <FAQ />
+          </div>
         </>
       )}
 
