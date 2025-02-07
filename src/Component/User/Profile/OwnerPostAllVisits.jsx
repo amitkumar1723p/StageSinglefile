@@ -5,7 +5,7 @@ import {
   OwnerAllPostsVisitAction,
 } from "../../../Action/userAction";
 import { useNavigate } from "react-router-dom";
-
+import './OwnerPostAllVisit.css'
 export default function OwnerPostAllVisits() {
   const navigate = useNavigate();
   const { data: OwnerPostsVisitsData } = useSelector((state) => {
@@ -30,14 +30,15 @@ export default function OwnerPostAllVisits() {
   return (
     <>
       {OwnerPostsVisitsData?.success === true && OwnerPostsVisitsData?.myAllPostVisits?.length >0 &&(
-
-        <table className="table-auto w-full border-collapse">
+ <div className="owner-post-vists-overflow-x-auto">  
+    <p className="owner-post-vists-schedule-visit">My Schedule Visit</p> 
+        <table className="owner-post-vists-table">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="px-4 py-2 text-left">Name</th>
-              <th className="px-4 py-2 text-left">Mobile</th>
-              <th className="px-4 py-2 text-left">Date/Time</th>
-              <th className="px-4 py-2 text-left">Property Id</th>
+            <tr className="owner-post-vists-table">
+              <th className="owner-post-vists-table-cell">Name</th>
+              <th className="owner-post-vists-table-cell">Mobile</th>
+              <th className="owner-post-vists-table-cell">Date/Time</th>
+              <th className="owner-post-vists-table-cell">Property Id</th>
             </tr>
           </thead>
           <tbody>
@@ -45,12 +46,12 @@ export default function OwnerPostAllVisits() {
               const PostData = visit.PostData.PostId;
               const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
               return (
-                <tr key={i} className="border-t">
-                  <td className="px-4 py-2">{visit.VisitUser?.Name}</td>
-                  <td className="px-4 py-2">
+                <tr key={i} >
+                  <td className="owner-post-vists-table-cell">{visit.VisitUser?.Name}</td>
+                  <td className="owner-post-vists-table-cell">
                     {visit.VisitUser?.ContactNumber}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="owner-post-vists-table-cell">
                     <span>
                       {" "}
                       {new Date(visit.VisitDate).toLocaleDateString("en-US", {
@@ -65,8 +66,8 @@ export default function OwnerPostAllVisits() {
                       {formatTime(visit.VisitTime.To)}
                     </span>
                   </td>
-                  <td className="px-4 py-2">
-                    <span
+                  <td className="owner-post-vists-table-cell">
+                    <span className="owner-post-vists-post-id-btn"
                       onClick={(e) => {
                         let url = `/post-detail/${PostName.toLowerCase()
                           .replaceAll(" ", "-")
@@ -84,6 +85,7 @@ export default function OwnerPostAllVisits() {
             })}
           </tbody>
         </table>
+        </div>
       )}
     </>
   );

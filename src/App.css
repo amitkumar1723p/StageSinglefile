@@ -3,6 +3,10 @@ body {
   color: var(--main-black);
 }
 
+/* .navItem.active-btn-nav .icons {
+  filter: brightness(0) invert(1);
+} */
+
 .select:focus-visible {
   border: none;
   outline: none;
