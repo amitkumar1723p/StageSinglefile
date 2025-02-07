@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CreatePostAction, UpdatePostAction } from "../../../Action/postAction";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 // import BackupIcon from "@mui/icons-material/Backup";
-
+import { UserContext } from "../../CreateContext/CreateContext";
 import ScrollToTop from "../../../ScrollToTop";
+import { useNavigate } from "react-router-dom";
+import WindowComponent from "../../WindowComponent";
+import CreatePostSubmitAlert from "./CreatePostSubmitAlert";
 
 export default function CreatePostImageUpload({
   setnext,
@@ -29,9 +32,18 @@ export default function CreatePostImageUpload({
   FloorDetailsData,
   AmenitiesDetailsData,
   PricingDetailsData,
+  setPricingDetailsData,
+
+  // show subit alert
+  setshowCreatePostSubmitAlert,
+  CreatePostRef,
 }) {
   const dispatch = useDispatch();
+
   const [singlepreviewImage, setsinglepreviewImage] = useState("");
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
 
   useEffect(() => {
     if (update) {
@@ -44,6 +56,50 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
+  useEffect(() => {
+    // remove Coma
+
+    const CopyObj = { ...PricingDetailsData };
+    console.log(CopyObj);
+    console.log(CopyObj);
+    if (BasicDetailsData.PropertyAdType == "Rent") {
+      const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
+        /,/g,
+        ""
+      );
+      CopyObj.ExpectedRent = ExpectedRentRemoveComa;
+
+      const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
+        /,/g,
+        ""
+      );
+      CopyObj.DepositePrice = DepositePriceRemoveComa;
+    }
+
+    if (BasicDetailsData.PropertyAdType == "Sale") {
+      const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
+        /,/g,
+        ""
+      );
+      CopyObj.ExpectedPrice = ExpectedPriceRemoveComa;
+
+      if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+        const MonthlyExpectedRentRemoveComa = String(
+          CopyObj?.AdditionalDetails?.MonthlyExpectedRent
+        )?.replace(/,/g, "");
+        CopyObj.AdditionalDetails.MonthlyExpectedRent =
+          MonthlyExpectedRentRemoveComa;
+      }
+    }
+    if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
+      const MaintenanceChargesRemoveComa = String(
+        CopyObj.AdditionalDetails.MaintenanceCharges
+      )?.replace(/,/g, "");
+      CopyObj.AdditionalDetails.MaintenanceCharges =
+        MaintenanceChargesRemoveComa;
+    }
+    setPricingDetailsData(CopyObj);
+  }, []);
   const CratePostHandler = (e) => {
     e.preventDefault();
     if (previewImage.length <= 0) {
@@ -105,11 +161,19 @@ export default function CreatePostImageUpload({
         let confrim = window.confirm("Are you update this Post");
         if (confrim) {
           dispatch(UpdatePostAction(formData, PostId));
-          // dispatch(CreatePostAction(formData));
+
+          if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
+            setshowCreatePostSubmitAlert("showLoading");
+          }
         }
       } else {
+        console.log(PricingDetailsData);
         dispatch(CreatePostAction(formData));
-
+ 
+         
+        if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
+          setshowCreatePostSubmitAlert("showLoading");
+        }
       }
     }
   };
@@ -304,15 +368,13 @@ export default function CreatePostImageUpload({
               >
                 Previous
               </div>
-              <button className="Submit-Next">
+              <button className="Submit-Next" ref={CreatePostRef}>
                 {update ? "Update Post" : "Create Post"}
               </button>
             </div>
           </form>
         </div>
       </div>
-
-      
     </>
   );
 }

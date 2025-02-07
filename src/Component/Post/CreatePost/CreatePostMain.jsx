@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LocationDetailsSection from "./LocationDetails.jsx";
 import BasicDetailsSection from "./BasicDetails.jsx";
 import CreatePostImageUploadSection from "./CreatePostImageUpload.jsx";
@@ -11,6 +11,8 @@ import Loader from "../../Loader/Loader.jsx";
 import PropertyDetailsAreaDetailsConstructionDetailsFloorDetailsAmenitiesDetailsSection from "./PropertyDetails_AreaDetails_ConstructionDetails_FloorDetails_AmenitiesDetails.jsx";
 import PricingDetailsSection from "./PricingDetails.jsx";
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
+import WindowComponent from "../../WindowComponent.jsx";
+import CreatePostSubmitAlert from "./CreatePostSubmitAlert.jsx";
 
 export default function CreatePostMain() {
   const dispatch = useDispatch();
@@ -39,7 +41,14 @@ export default function CreatePostMain() {
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
   //  Update Post Logic
- 
+
+  // const []
+  // show submit alert
+  const [showCreatePostSubmitAlert, setshowCreatePostSubmitAlert] =
+    useState(false);
+
+  const CreatePostRef = useRef(null);
+
   //  GetSinglePostAction
   useEffect(() => {
     if (update) {
@@ -313,28 +322,16 @@ export default function CreatePostMain() {
     BasicDetailsData.ApartmentType,
     BasicDetailsData.PropertyStatus,
   ]);
- 
 
   useEffect(() => {
     if (data) {
       if (data.success === true) {
-        sessionStorage.removeItem("next");
-        sessionStorage.removeItem("BasicDetailsData");
-        sessionStorage.removeItem("LocationDetailsData");
-        sessionStorage.removeItem("PropertyDetailsData");
-        sessionStorage.removeItem("AreaDetailsData");
-        sessionStorage.removeItem("FloorDetailsData");
-        sessionStorage.removeItem("AmenitiesDetailsData");
-        sessionStorage.removeItem("PropertyDetailsData");
-        sessionStorage.removeItem("PricingDetailsData");
-
-        if (["Admin", "Owner"].includes(medata.user.Role)) {
+        if (["Admin", "Owner"].includes(medata?.user?.Role)) {
           navigate("/admin/allpost");
-        } else {
-          navigate("/user/my-listing");
         }
       }
       if (data.success === false) {
+        setshowCreatePostSubmitAlert(false);
         if (data.IsAuthenticated === false) {
           navigate("/");
         }
@@ -394,6 +391,7 @@ export default function CreatePostMain() {
         );
       }
     }
+
     // eslint-disable-next-line
   }, []);
 
@@ -412,14 +410,19 @@ export default function CreatePostMain() {
       setFourth(true);
     }
   });
-  
+
+  useEffect(() => {
+    if (showCreatePostSubmitAlert === "showLoading") {
+      const timer = setTimeout(() => {
+        setshowCreatePostSubmitAlert(true);
+      }, 2000);
+
+      return () => clearTimeout(timer); // Cleanup function to prevent memory leaks
+    }
+  }, [showCreatePostSubmitAlert]);
   return (
     <>
-      {(LodingType &&
-        ["CreatePostRequest", "UpdatePostRequest"].includes(LodingType) &&
-        loading) ||
-      SinglePostLoading ? (
-        // {  loadings? (
+      {SinglePostLoading || showCreatePostSubmitAlert == "showLoading" ? (
         <Loader className="windowloader" />
       ) : (
         <>
@@ -799,6 +802,20 @@ export default function CreatePostMain() {
               FloorDetailsData={FloorDetailsData}
               AmenitiesDetailsData={AmenitiesDetailsData}
               PricingDetailsData={PricingDetailsData}
+              //  submit Alert
+              setPricingDetailsData={setPricingDetailsData}
+              setshowCreatePostSubmitAlert={setshowCreatePostSubmitAlert}
+              CreatePostRef={CreatePostRef}
+            />
+          )}
+
+          {    (
+            <WindowComponent
+              SetShow={setshowCreatePostSubmitAlert}
+              Component={CreatePostSubmitAlert}
+              BtnRef={CreatePostRef}
+              className={"create-post-submit-alert-window-main"}
+              Type={"CreatePostSubmitAlert"}
             />
           )}
         </>

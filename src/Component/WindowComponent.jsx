@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function WindowComponent({
   Component,
@@ -8,9 +9,13 @@ export default function WindowComponent({
   SinglePostData,
   PropertyAddress,
   ImageData,
-  ZoomImageNumber
+  ZoomImageNumber ,
+  className,
+  Type // Type of Alert
 }) {
   const MainBox = useRef(null);
+  const navigate =useNavigate()
+
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -25,7 +30,12 @@ export default function WindowComponent({
           : BtnRef.current.contains(e.target);
 
         if (hideElement == false && BtnElement == false) {
+          
           SetShow(false);
+          if(Type=="CreatePostSubmitAlert"){
+            navigate("/user/my-listing")
+            
+          }
         }
       }
     };
@@ -51,7 +61,7 @@ export default function WindowComponent({
 
   return (
     <>
-      <div className="window-component-main">
+      <div className={`window-component-main ${className}`}>
         <div ref={MainBox}>
           <Component
             SetShow={SetShow}
