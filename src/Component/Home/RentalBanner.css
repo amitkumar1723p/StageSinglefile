@@ -1,0 +1,117 @@
+/* Overall container */
+
+.rental-banner-container {
+    max-width: 70rem; /* Equivalent to max-w-6xl in Tailwind */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+  }
+  
+  /* Banner content wrapper */
+  .banner-content {
+    border: 1px dotted #93c5fd; /* Border with dotted style and blue color */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  /* Left content section */
+  .left-content {
+    max-width: 36rem; /* Equivalent to max-w-xl in Tailwind */
+  }
+  
+  .banner-heading {
+
+     font-size: 20px;
+    font-weight:bolder;
+    color: #3e3e3e;
+    margin-bottom: 1rem;
+  }
+  
+  .info-box {
+    background-color: #eff6ff; /* Light blue background */
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .info-text {
+    color: #374151; /* Gray text */
+  }
+  
+  .feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 1rem;
+  }
+  
+  .features {
+    /* display: flex; */
+    /* flex-direction: column; */
+    gap: 1rem;
+  }
+  
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .feature-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #3b82f6; /* Blue color */
+    border-radius: 50%;
+  }
+  
+  .feature-text {
+    color: #374151; /* Gray text */
+    font-weight: 500; /* Medium weight */
+  }
+  
+  /* Right content section (image container) */
+  .right-content {
+    display: none; /* Hide by default */
+  }
+  
+  @media (min-width: 768px) {
+    .right-content {
+      display: block;
+
+    }
+    .banner-heading{
+      font-size: 34px;
+    }
+  }
+  
+  .agent-image-container {
+    position: relative;
+    width: 16rem; /* Equivalent to w-64 */
+    height: 20rem; /* Equivalent to h-80 */
+    border: 1px solid #d1d5db; /* Light gray border */
+    border-radius: 0.375rem;
+  }
+  
+  .agent-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af; /* Gray text */
+  }
+  
+  /* Optional decorative box - currently hidden */
+  .decorative-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8rem; /* Equivalent to w-32 */
+    height: 8rem; /* Equivalent to h-32 */
+    opacity: 0.2;
+    border: 1px solid black;
+  }
+  

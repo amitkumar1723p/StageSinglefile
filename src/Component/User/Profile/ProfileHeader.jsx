@@ -90,9 +90,9 @@ function ProfileHeader() {
   };
   // Check if any changes were made to the fields
   const hasChanges =
-    name !== medata.user.Name ||
-    email !== medata.user.email ||
-    number !== medata.user.ContactNumber;
+    name !== medata?.user?.Name ||
+    email !== medata?.user?.email ||
+    number !== medata?.user?.ContactNumber;
   // Effect to handle navigation on successful profile update
   const handleEnableEdit = () => {
     alert("please make changes !");
@@ -164,12 +164,12 @@ function ProfileHeader() {
                       >
                         <div className="button-section-dashborad">
                           <div className="whatapp-notify ">
-                            <img
+                            {/* <img
                               className="icon-wp"
                               src="/img/whatapp.png"
                               alt="whatapp logo"
-                            />
-                            <p>Receive updates on whatsapp</p>
+                            /> */}
+                            <p>Receive updates</p>
                             <div>
                               <label style={styles.toggleSwitchContainer}>
                                 <input

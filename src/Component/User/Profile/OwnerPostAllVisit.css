@@ -7,9 +7,13 @@
   .owner-post-vists-overflow-x-auto {
     overflow-x: auto;
   }
+
+ .heading-name-sehedule-visit{
+  background-color: var(--main-lighter-clr);
+ }
   
   .owner-post-vists-schedule-visit {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 1rem;
   }
@@ -19,6 +23,7 @@
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #d1d5db;
+    
   }
   
   .owner-post-vists-table-header {
@@ -29,6 +34,7 @@
     padding: 0.5rem 1rem;
     border-bottom: 1px solid #d1d5db;
     text-align: left;
+    font-size: 14px;
   }
   
   .owner-post-vists-table-cell.text-start {
@@ -44,6 +50,7 @@
   }
   .owner-post-vists-post-id-btn{
     cursor: pointer;
+    text-decoration: underline;
   }
   
   /* Mobile Responsiveness - 480px */

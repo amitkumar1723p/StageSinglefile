@@ -1,0 +1,228 @@
+.MainContainer {
+    width: 100%;
+  }
+  
+  .TenantContainer {
+    display: flex;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .LeftContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 350px;
+    
+    
+  }
+  
+  .TenantBackground {
+    width: 100%;
+    height: 240px;
+    object-fit:contain;
+    
+  }
+
+  
+  .TenantMobile {
+    position: absolute;
+    height: 380px;
+    left: 170px;
+    bottom: -5px;
+    z-index: 1;
+  }
+  
+  .TenantArrow {
+    position: absolute;
+    height: 80px;
+    left: 88px;
+    bottom: 86px;
+    z-index: 2;
+  }
+  
+  .PhNoContainer {
+    position: absolute;
+    height: 50px;
+    width: 160px;
+    left: 5px;
+    top: 125px;
+    background-color: white;
+    box-shadow: -4px 6px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-radius: 4px;
+  }
+  
+  .phoneText {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3e3e3e;
+  }
+  
+  .phoneNumber {
+    font-size: 12px;
+    color: var(--main-light-clr);
+  }
+  
+  .RightContainer {
+    width: 100%;
+    margin-left: 10px;
+  }
+  
+  .ForTenantLabel {
+    border: var( --main-lighters-clr);
+    color: var(--main-light-clr);
+    width: 132px;
+    padding: 5px 20px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    background-color: var(--main-lighter-clr);
+    font-weight: bold;
+  }
+  
+  .Heading h2 {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    color: #3e3e3e;
+  }
+  
+  .highlightText {
+    color: var(--main-light-clr);
+    font-weight: bold;
+  }
+  
+  .flexContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+  }
+  
+  .Introduction {
+    display: flex;
+    gap: 29px;
+  }
+  
+  .ImgContainer {
+    background-color: var(--main-lighter-clr);
+    height: 48px;
+    min-width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .Icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .Content h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3e3e3e;
+  }
+  
+  .Content p {
+    color: #3e3e3e;
+  }
+
+  
+  @media screen and (max-width: 768px) {
+    .TenantContainer {
+      flex-direction: column;
+      width: 100%;
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  
+    .LeftContainer {
+      height: 350px;
+      margin-bottom: 0;
+    }
+  
+    .TenantBackground {
+      height: 350px;
+    }
+  
+    .TenantMobile {
+      height: 360px;
+      left: 150px;
+    }
+   
+  
+    .TenantArrow {
+      bottom: 80px;
+
+    }
+  
+    .PhNoContainer {
+      top: 130px;
+      left: 15px;
+    }
+  
+    .RightContainer {
+      margin-left: 0;
+      
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .PhNoContainer {
+      top: 170px;
+      left: 24px;
+    }
+  
+    .TenantMobile {
+      left: 190px;
+    }
+  
+    .TenantArrow {
+      left: 110px;
+    }
+    .PhNoContainer{
+        top:125px
+    }
+    .flexContainer{
+        font-size: 14px;
+    }
+  }
+  
+  @media(min-width: 1024px){
+    .TenantMobile {
+        left: 190px;
+        top:8px
+      }
+    .TenantBackground{
+        height: 350px
+    }
+  }
+
+  @media screen and (max-width:475px){
+    .TenantMobile{
+        height: 320px;
+        left:140px
+
+    }
+    .TenantArrow{
+        left:60px;
+        bottom:70px;
+    }
+    .PhNoContainer{
+        left:-12px
+    }
+    .TenantBackground{
+        height:290px;
+        position:absolute
+    }
+  }
+

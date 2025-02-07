@@ -5,7 +5,7 @@ import {
   OwnerAllPostsVisitAction,
 } from "../../../Action/userAction";
 import { useNavigate } from "react-router-dom";
-import './OwnerPostAllVisit.css'
+import "./OwnerPostAllVisit.css";
 export default function OwnerPostAllVisits() {
   const navigate = useNavigate();
   const { data: OwnerPostsVisitsData } = useSelector((state) => {
@@ -29,64 +29,79 @@ export default function OwnerPostAllVisits() {
   }, []);
   return (
     <>
-      {OwnerPostsVisitsData?.success === true && OwnerPostsVisitsData?.myAllPostVisits?.length >0 &&(
- <div className="owner-post-vists-overflow-x-auto">  
-    <p className="owner-post-vists-schedule-visit">My Schedule Visit</p> 
-        <table className="owner-post-vists-table">
-          <thead>
-            <tr className="owner-post-vists-table">
-              <th className="owner-post-vists-table-cell">Name</th>
-              <th className="owner-post-vists-table-cell">Mobile</th>
-              <th className="owner-post-vists-table-cell">Date/Time</th>
-              <th className="owner-post-vists-table-cell">Property Id</th>
-            </tr>
-          </thead>
-          <tbody>
-            {OwnerPostsVisitsData.myAllPostVisits?.map((visit, i) => {
-              const PostData = visit.PostData.PostId;
-              const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
-              return (
-                <tr key={i} >
-                  <td className="owner-post-vists-table-cell">{visit.VisitUser?.Name}</td>
-                  <td className="owner-post-vists-table-cell">
-                    {visit.VisitUser?.ContactNumber}
-                  </td>
-                  <td className="owner-post-vists-table-cell">
-                    <span>
-                      {" "}
-                      {new Date(visit.VisitDate).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </span>
-
-                    <span>
-                      {formatTime(visit.VisitTime.From)} to
-                      {formatTime(visit.VisitTime.To)}
-                    </span>
-                  </td>
-                  <td className="owner-post-vists-table-cell">
-                    <span className="owner-post-vists-post-id-btn"
-                      onClick={(e) => {
-                        let url = `/post-detail/${PostName.toLowerCase()
-                          .replaceAll(" ", "-")
-                          .replace(",", "")
-                          .replaceAll("/", "-")}-${PostData._id}`;
-
-                        navigate(`${url}`);
-                      }}
-                    >
-                      {PostData?._id}
-                    </span>
-                  </td>
+      {OwnerPostsVisitsData?.success === true &&
+        OwnerPostsVisitsData?.myAllPostVisits?.length > 0 && (
+          <div className="owner-post-vists-overflow-x-auto">
+            <p className="owner-post-vists-schedule-visit">My Schedule Visit</p>
+            <table className="owner-post-vists-table">
+              <thead>
+                <tr className="owner-post-vists-table">
+                  <th className="owner-post-vists-table-cell heading-name-sehedule-visit">
+                    Name
+                  </th>
+                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit ">
+                    Mobile
+                  </th>
+                  <th className="owner-post-vists-table-cell heading-name-sehedule-visit  ">
+                    Date/Time
+                  </th>
+                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit">
+                    Property Id
+                  </th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        </div>
-      )}
+              </thead>
+              <tbody>
+                {OwnerPostsVisitsData.myAllPostVisits?.map((visit, i) => {
+                  const PostData = visit.PostData.PostId;
+                  const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
+                  return (
+                    <tr key={i}>
+                      <td className="owner-post-vists-table-cell">
+                        {visit.VisitUser?.Name}
+                      </td>
+                      <td className="owner-post-vists-table-cell">
+                        {visit.VisitUser?.ContactNumber}
+                      </td>
+                      <td className="owner-post-vists-table-cell">
+                        <span>
+                          {" "}
+                          {new Date(visit.VisitDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            }
+                          )}
+                        </span>
+
+                        <span>
+                          {formatTime(visit.VisitTime.From)} to
+                          {formatTime(visit.VisitTime.To)}
+                        </span>
+                      </td>
+                      <td className="owner-post-vists-table-cell">
+                        <span
+                          className="owner-post-vists-post-id-btn"
+                          onClick={(e) => {
+                            let url = `/post-detail/${PostName.toLowerCase()
+                              .replaceAll(" ", "-")
+                              .replace(",", "")
+                              .replaceAll("/", "-")}-${PostData._id}`;
+
+                            navigate(`${url}`);
+                          }}
+                        >
+                          {PostData?._id}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
     </>
   );
 }

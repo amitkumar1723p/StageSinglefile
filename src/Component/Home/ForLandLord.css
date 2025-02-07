@@ -1,0 +1,95 @@
+.LandLordDetails {
+    padding: 20px;
+  }
+  
+  .LandLordDetails-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .LandLordDetails-container {
+      flex-direction: row;
+      padding: 0 5%;
+      font-size: 14px;
+    }
+  }
+  
+  .LandLordDetails-left {
+    
+    display: flex;
+    justify-content: center;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 350px;
+    background: var(--main-lighter-clr);
+  }
+  
+  .LandLordDetails-left img {
+    height: 397px;
+  }
+  
+  .LandLordDetails-right {
+    width: 100%;
+    margin-left: 10px;
+  }
+  
+  .LandLordDetails-tag {
+    border: 1px solid rgb(220, 220, 220);
+    width: 150px;
+    padding: 5px 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background: var(--main-lighter-clr);
+    color: var(--main-light-clr);
+  }
+  
+  .LandLordDetails-heading h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3e3e3e;
+  }
+  
+  .LandLordDetails-heading span {
+    color: var(--main-light-clr);
+  }
+  
+  .LandLordDetails-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .LandLordDetails-step {
+    display: flex;
+    gap: 29px;
+  }
+  
+  .LandLordDetails-icon {
+    background: var(--main-lighter-clr);
+    height: 48px;
+    min-width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .LandLordDetails-icon img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .LandLordDetails-content h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3e3e3e;
+  }
+  
+  .LandLordDetails-content p {
+    color: #3e3e3e;
+  }
+  

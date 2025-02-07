@@ -790,6 +790,10 @@
   transform: scale(1.1);
 }
 
+.whatapps-section-floating{
+  background-color: #25d366;
+}
+
 .floating-buttons a.call-button {
   background-color: var(--main-light-clr); /* Green for Call */
 }

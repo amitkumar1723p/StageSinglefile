@@ -247,16 +247,16 @@ export default function SinglePostDetails() {
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
-          <img src="/img/call.png" alt="Call" />
+          <img   src="/img/call.png" alt="Call" />
         </Link>
         {/* WhatsApp Button */}
         <Link
           to="https://wa.me/7837840785"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#25d366] h-[35px] w-[35px]"
+          className="whatapps-section-floating"
         >
-          <img src="/img/whatapp.png" alt="WhatsApp" />
+          <img className="whatapp-ing-section" src="/img/whatapp.png" alt="WhatsApp" />
         </Link>
       </div>
       {/* {openReportForm === true ? (
@@ -576,7 +576,7 @@ export default function SinglePostDetails() {
                   >
                     {/* <button className="contact-expert-btn"> */}
                     <img
-                      className="icon-detial"
+                    className="whatapp-ing-section"
                       src="/img/whatapp.png"
                       alt="icon"
                     />

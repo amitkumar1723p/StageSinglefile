@@ -477,7 +477,7 @@ export default function PostCard({ PostData, index }) {
                     to={`https://wa.me/?text=${window.location.href}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow justify-center"
+                    className=" d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow justify-center"
                   >
                     WhatsApp
                   </Link>

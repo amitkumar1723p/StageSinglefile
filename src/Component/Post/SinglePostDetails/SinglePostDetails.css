@@ -309,7 +309,7 @@ body {
 
 .property-details-container {
   border-radius: 10px;
-  padding: 20px;
+  /* padding: 20px; */
   width: 80%;
   margin: 20px auto;
 }

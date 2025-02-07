@@ -9,7 +9,15 @@ import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 
 import FAQ from "./FAQ";
+
+import TenantDetailsForm from "./TenantDetailsForm";
+import RentalHome from "./RentalHome";
+import RentalBanner from "./RentalBanner";
+import ForTenant from "./ForTenant";
+import ForLandLord from "./ForLandLord";
+
 import PropertyListingBanner from "./PropertyListingBanner";
+
 import FutureAsist from "./FutureAsist";
 
 import WhoWeAre from "./WhoWeAre";
@@ -367,9 +375,9 @@ const HeroSection = () => {
             to="https://wa.me/7837840785"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#25d366] h-[35px] w-[35px]"
+            className="whatapps-section-floating"
           >
-            <img src="/img/whatapp.png" alt="WhatsApp" />
+            <img  src="/img/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
       )}
@@ -446,15 +454,15 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
-          
-          <Services />
-          <Testimonials />
-          <WhoWeAre />
-          <ChannelPartnerForm/>
+          <ForLandLord/>
+          <ForTenant />
+          <RentalBanner />
+          <RentalHome />
+          <TenantDetailsForm />
         </>
-      )} */}
+      )}
 
       {/* Buy Component  */}
 
