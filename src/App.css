@@ -115,13 +115,20 @@ input:focus {
   color: red;
   font-weight: 800;
 }
-
-/* dl,
 ol,
-ul {
+ul ,li{
   margin-top: 0;
   margin-bottom: 0rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
 }
+
+ol, ul {
+  padding-left: 0;
+}
+
+/* dl,
+
 ol,
 ul {
   padding-left: 0rem;

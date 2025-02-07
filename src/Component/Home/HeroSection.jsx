@@ -374,7 +374,7 @@ const HeroSection = () => {
         </div>
       )}
 
-      <div className="select-options">
+      <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">
           <div className="heading-section-all">
             <h2 className="underline-on-text hero-h2 logo-heading-navbar">
@@ -405,6 +405,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      <div>
+        
+      </div>
 
       {PropertyAddType == "Buy" && (
         <>
@@ -422,7 +425,10 @@ const HeroSection = () => {
           />
           <Services />
           {/* <FutureAsist /> */}
+          <div id="testimonials">
+
           <Testimonials />
+          </div>
           <WhoWeAre />
           <FaqBuyer />
         </>
@@ -439,7 +445,9 @@ const HeroSection = () => {
           <Services />
           <PostFreeContainer />
           <FutureAsist />
+          <div id="testimonials">
           <Testimonials />
+          </div>
           <WhoWeAre />
           <FAQ />
         </>
