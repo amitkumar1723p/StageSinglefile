@@ -376,19 +376,18 @@ export default function PostCard({ PostData, index }) {
                   {/* Show Reserve Price  */}
                   {PostData.BasicDetails.PropertyAdType == "Sale" && (
                     <>
-                      
                       <div>
-                      <div className="price-section-sale">
-                        <span className="price-rp-que"> Reserve Price </span>:
-                        <span className="price-section">
-                          {formatReservePrice(
-                            PostData.PricingDetails.ExpectedPrice
-                          )}
-                        </span>
-                      </div>
-                      <p className="post-card-section">
-                        ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
-                      </p>
+                        <div className="price-section-sale">
+                          <span className="price-rp-que"> Reserve Price </span>:
+                          <span className="price-section">
+                            {formatReservePrice(
+                              PostData.PricingDetails.ExpectedPrice
+                            )}
+                          </span>
+                        </div>
+                        <p className="post-card-section">
+                          ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                        </p>
                       </div>
                     </>
                   )}

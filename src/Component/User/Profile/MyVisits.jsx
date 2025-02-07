@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetMyVisitsAction } from "../../../Action/userAction";
 import "./MyVisits.css"; // Import the vanilla CSS file
+import { useNavigate } from "react-router-dom";
 
 export default function MyVisits() {
   const { data: MyVisitsData } = useSelector((state) => {
@@ -11,7 +12,7 @@ export default function MyVisits() {
   useEffect(() => {
     dispatch(GetMyVisitsAction());
   }, []);
-
+ const navigate =useNavigate()
   const formatTime = useCallback((time24) => {
     if (time24) {
       const [hours, minutes] = time24.split(":").map(Number);
@@ -45,16 +46,26 @@ export default function MyVisits() {
 
               return (
                 <tr key={visit._id}>
-                  <td className="myvisit-table-cell">{new Date(visit.VisitDate).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}</td>
                   <td className="myvisit-table-cell">
-                    {formatTime(visit.VisitTime.From)} to {formatTime(visit.VisitTime.To)}
+                    {new Date(visit.VisitDate).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </td>
+                  <td className="myvisit-table-cell">
+                    {formatTime(visit.VisitTime.From)} to{" "}
+                    {formatTime(visit.VisitTime.To)}
                   </td>
                   <td className="myvisit-table-cell">{PostName}</td>
-                  <td className="myvisit-table-cell">{PostData?._id}</td>
+                  <td className="myvisit-table-cell"  > <span className="myvisit-post-id-btn" onClick={(e) => {
+                        let url = `/post-detail/${PostName.toLowerCase()
+                          .replaceAll(" ", "-")
+                          .replace(",", "")
+                          .replaceAll("/", "-")}-${PostData._id}`;
+
+                        navigate(`${url}`);
+                      }}>{PostData?._id} </span></td>
                 </tr>
               );
             })}

@@ -144,6 +144,17 @@ function Sidebar() {
                 Support
               </li>
             </NavLink>
+
+            <NavLink to="/user/my-post/all-visits">
+              <li className="navItem mob-hide">
+                <img
+                  className="icons"
+                  src="/img/NewLeads.svg"
+                  alt="my-visits"
+                />
+                My Post All Visit
+              </li>
+            </NavLink>
             <NavLink to="#">
               <li className="navItem mob-hide">
                 <img
