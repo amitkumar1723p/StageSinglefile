@@ -39,9 +39,9 @@ margin-bottom: 10px;
 }
 
 .schedule-your-visit-label {
-  display: flex;
+ 
   color: #585858;
-
+  text-align: center;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -71,6 +71,7 @@ margin-bottom: 10px;
   flex-direction: column;
   gap: 15px;
   justify-content: start;
+  align-items: center;
 }
 
 .schedule-your-visit-input {
@@ -115,7 +116,7 @@ margin-bottom: 10px;
   gap: 10px;
 }
 
-.schedule-your-visit-time-container span {
+.schedule-your-visit-time-container  {
   display: flex;
   align-items: center;
   color: #333;
@@ -249,6 +250,7 @@ margin-bottom: 10px;
 
   .schedule-your-visit-label {
     font-size: 10px;
+    text-align: center;
   }
 
   .schedule-your-visit-input,

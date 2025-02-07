@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CreateScheduleVisitAction } from "../../../Action/userAction";
 import { useNavigate } from "react-router-dom";
 import ScheduleYourVisitSubmit from "./ScheduleYourVisitSubmit";
+import TimePicker from "./TimePicker";
 
 function ScheduleYourVisit({ SinglePostData, SetShow }) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
   const [ScheduleVistData, setScheduleVistData] = useState({
     VisitDate: "",
-    VisitTime: {},
+    VisitTime: ""
   });
   const [showScheduleVistAlert, setshowScheduleVistAlert] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -31,7 +32,8 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
     };
 
     //  alert(`${ScheduleVistData.VisitTime.From} to ${ScheduleVistData.VisitTime.To}`)
-    dispatch(CreateScheduleVisitAction(vistobj));
+    // dispatch(CreateScheduleVisitAction(vistobj));
+    console.log(vistobj)
     setshowScheduleVistAlert("LodingTrue");
     const id = setTimeout(() => {
       setshowScheduleVistAlert(true);
@@ -108,41 +110,16 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
               <div className="schedule-your-visit-time-group">
                 <label className="schedule-your-visit-label">Select Time</label>
                 <div className="schedule-your-visit-time-container">
-                  <input
-                    type="time"
-                    className="schedule-your-visit-time-input"
-                    required
-                    value={ScheduleVistData.VisitTime.From || ""}
-                    min={"10:00"}
-                    max={"18:00"}
-                    onChange={(e) => {
+                  <TimePicker onChange={(e) => {
+                    console.log(e)
                       setScheduleVistData({
                         ...ScheduleVistData,
                         VisitTime: {
                           ...ScheduleVistData.VisitTime,
-                          From: e.target.value,
+                          VisitTime: e,
                         },
                       });
-                    }}
-                  />
-                  <span>To</span>
-                  <input
-                    type="time"
-                    className="schedule-your-visit-time-input"
-                    value={ScheduleVistData.VisitTime.To || ""}
-                    required
-                    min={ScheduleVistData.VisitTime.From}
-                    max={"18:00"}
-                    onChange={(e) => {
-                      setScheduleVistData({
-                        ...ScheduleVistData,
-                        VisitTime: {
-                          ...ScheduleVistData.VisitTime,
-                          To: e.target.value,
-                        },
-                      });
-                    }}
-                  />
+                    }} />
                 </div>
                 {/* <small>available time 10:00 Am to 7:00 PM</small> */}
               </div>

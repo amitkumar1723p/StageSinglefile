@@ -23,6 +23,7 @@ import { UserContext } from "../../CreateContext/CreateContext";
 
 import ShowSinglePostImages from "./ShowSinglePostImages";
 import ReportListingForm from "./ReportListingForm";
+import FurnishDetails from "./FurnishDetails";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -876,6 +877,7 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
                 )}
+                                <FurnishDetails furnishD={getSinglePostData.SinglePost.AmenitiesDetails}/>
               </div>
               {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                 <div className="prop-right">

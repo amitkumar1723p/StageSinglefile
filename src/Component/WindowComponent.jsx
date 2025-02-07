@@ -25,7 +25,7 @@ export default function WindowComponent({
           : BtnRef.current.contains(e.target);
 
         if (hideElement == false && BtnElement == false) {
-          SetShow(false);
+          // SetShow(false);
         }
       }
     };
