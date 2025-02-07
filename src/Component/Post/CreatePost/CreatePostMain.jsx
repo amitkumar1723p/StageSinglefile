@@ -809,7 +809,7 @@ export default function CreatePostMain() {
             />
           )}
 
-          {    (
+          { showCreatePostSubmitAlert ==true &&    (
             <WindowComponent
               SetShow={setshowCreatePostSubmitAlert}
               Component={CreatePostSubmitAlert}
