@@ -17,6 +17,13 @@
     border-radius: 0.5rem;
     outline: 1px solid #f8f8f8;
   }
+
+  .search-admin-section{
+    position: absolute;
+left: 96%;
+bottom: 32%;
+   
+  }
   
   .AdminAside-header {
     font-size: 1.5rem;

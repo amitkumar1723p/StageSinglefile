@@ -224,7 +224,7 @@ const{postVerify}=useContext(UserContext)
             }}
           />
           <img
-          className="absolute top-[5px] right-1 cursor-pointer"
+          className="search-admin-section"
             src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
   <g clip-path="url(#clip0_3153_291)">

@@ -170,7 +170,8 @@ body {
 }
 .similar-area-price-box {
   display: flex;
-  gap: 30px;
+  gap: 60px;
+  
   margin-top: 10px;
 }
 .similar-data-section {
@@ -394,6 +395,20 @@ body {
   cursor: pointer;
   
 }
+
+.view-more-btn-3rd{
+  border: none;
+  padding: 5px;
+  font-size: 12px;
+  background-color: var(--main-light-clr);
+  color: #fff;
+  border-radius: 5px;
+}
+
+.view-more-btn-3rd:hover{
+  opacity: .9;
+}
+
 /* Window Slider  */
 .Window-Image-Slider-Container {
   display: flex;

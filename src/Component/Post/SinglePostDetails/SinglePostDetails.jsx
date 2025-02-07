@@ -63,7 +63,7 @@ export default function SinglePostDetails() {
     if (reload === true) {
       dispatch(GetSinglePostAction(postId));
       // similar property dispatch
-      // dispatch(SimilarProperty(postId));
+      dispatch(SimilarProperty(postId));
       setReload(false);
     }
   }, [reload]);
@@ -897,18 +897,16 @@ export default function SinglePostDetails() {
 
                   {/* similar property */}
 
-                  {/* <div className="similar-main-box">
-              
-                    
+                  <div className="similar-main-box">
                     <h3 className="similar-heading-box">Similar Property</h3>
                     {SimilarPropertyData?.similarProperties?.map((item) => {
                       return (
                         <Link
-                        to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`.toLowerCase()
-                          .replaceAll(" ", "-")
-                          .replace(",", "")
-                          .replaceAll("/", "-")}-${item._id}`}
-
+                          to={`/post-detail/${`${item?.PropertyDetails?.BHKType} BHk ${item?.BasicDetails?.ApartmentType} For ${item?.BasicDetails?.PropertyAdType} In ${item?.LocationDetails?.Landmark} ${item?.LocationDetails?.City}`
+                            .toLowerCase()
+                            .replaceAll(" ", "-")
+                            .replace(",", "")
+                            .replaceAll("/", "-")}-${item._id}`}
                           onClick={() => setReload(true)} // Trigger reload on click
                         >
                           <div className="similar-property-main-box">
@@ -916,12 +914,10 @@ export default function SinglePostDetails() {
                               <div className="similar-property-main">
                                 <div className="similar-left-right">
                                   <div className="similar-img-box">
-                                    
                                     <img
                                       src={item.PropertyImages[0]?.url}
                                       alt="property"
                                     />
-                                  
                                   </div>
                                   <div className="similar-right-section">
                                     <div className="similar-data-section">
@@ -932,23 +928,25 @@ export default function SinglePostDetails() {
                                       </div>
                                       <div className="similar-prop-address">
                                         <p className="similar-prop-address-p">
-                                          {item?.LocationDetails?.Locality},{" "}
+                                          {item?.LocationDetails?.Locality},
                                           {item?.LocationDetails?.City}
                                         </p>
                                       </div>
                                     </div>
                                     <div className="similar-area-price-box">
-                                      <p className="similar-area-area">
+                                      {/* <p className="similar-area-area">
                                         {item?.AreaDetails?.BuiltUpArea?.value}
                                         {item?.AreaDetails?.BuiltUpArea?.unit}
-                                       
+
                                         <span> Built-Up Area</span>
-                                      </p>
+                                      </p> */}
 
                                       <p className="similar-area-price">
-                                        {item?.PricingDetails?.ExpectedPrice} 
+                                      ₹ {item?.PricingDetails?.ExpectedPrice}
                                         <span> Reserved price </span>
                                       </p>
+
+                                      <button className="view-more-btn-3rd">View More</button>
                                     </div>
                                   </div>
                                 </div>
@@ -958,7 +956,7 @@ export default function SinglePostDetails() {
                         </Link>
                       );
                     })}
-                  </div> */}
+                  </div>
 
                   {/* similar property */}
 
