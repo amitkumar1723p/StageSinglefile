@@ -154,10 +154,27 @@ function App() {
   useEffect(() => {
     if (data) {
       if (
+        data.success === true &&["CreatePostRequest", "UpdatePostRequest"].includes(LodingType)
+      ) {
+         
+        sessionStorage.removeItem("next");
+        sessionStorage.removeItem("BasicDetailsData");
+        sessionStorage.removeItem("LocationDetailsData");
+        sessionStorage.removeItem("PropertyDetailsData");
+        sessionStorage.removeItem("AreaDetailsData");
+        sessionStorage.removeItem("FloorDetailsData");
+        sessionStorage.removeItem("AmenitiesDetailsData");
+        sessionStorage.removeItem("PropertyDetailsData");
+        sessionStorage.removeItem("PricingDetailsData");
+      }
+      if (
         data.success === true &&
-        ["CreateScheduleVisitRequest", "BiddingFormRequest"].includes(
-          LodingType
-        ) == false
+        [
+          "CreateScheduleVisitRequest",
+          "BiddingFormRequest",
+          "CreatePostRequest",
+          "UpdatePostRequest",
+        ].includes(LodingType) == false
       ) {
         setalertMessage(<p>{data.message}</p>);
         setalertType("Success");
@@ -483,7 +500,7 @@ function App() {
         setalertType("error");
         setalertShow(true);
 
-        dispatch({ type:"OwnerAllPostsVisitClear" });
+        dispatch({ type: "OwnerAllPostsVisitClear" });
       }
     }
     // eslint-disable-next-line
@@ -585,8 +602,12 @@ function App() {
             />
 
             <Route exact path="my-visits" element={<MyVisits />} />
-            
-            <Route exact path="my-post/all-visits" element={<OwnerPostAllVisits /> } />
+
+            <Route
+              exact
+              path="my-post/all-visits"
+              element={<OwnerPostAllVisits />}
+            />
             <Route
               exact
               path="favourite-post"

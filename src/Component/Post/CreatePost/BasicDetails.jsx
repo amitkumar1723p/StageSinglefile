@@ -200,7 +200,7 @@ export default function BasicDetailsSection({
                           .toISOString()
                           .split("T")[0];
                         const selectedDate = e.target.value;
-
+  
                         if (selectedDate >= currentDate) {
                           setBasicDetailsData({
                             ...BasicDetailsData,

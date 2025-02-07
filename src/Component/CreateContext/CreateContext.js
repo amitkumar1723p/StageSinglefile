@@ -21,6 +21,7 @@ export function UserProvider({ children }) {
     return storedState ? JSON.parse(storedState) : {}; // Initialize state from localStorage or empty object
   });
 
+
     // Whenever `allPropertyData` changes, update localStorage
     useEffect(() => {
       if (allPropertyData) {
@@ -29,6 +30,10 @@ export function UserProvider({ children }) {
     }, [allPropertyData]);
     
 // this state is store the dashboard keyword for active ,inactive or active 
+
+//  createPost Submit Alert Sate 
+ const [showCreatePostSubmitAlert ,setshowCreatePostSubmitAlert] =useState(false)
+  const CreatePostRef = useRef(null)
 const[postVerify,setPostVerify]=useState(null)
 console.log(postVerify,"check")
   return (
@@ -51,8 +56,11 @@ console.log(postVerify,"check")
 
 
         allPropertyData, setAllPropertyData,
-        postVerify,setPostVerify
+        postVerify,setPostVerify ,
 
+        //  cretate post submit alert 
+        showCreatePostSubmitAlert ,setshowCreatePostSubmitAlert ,
+        CreatePostRef
       }}
     >
       {children}

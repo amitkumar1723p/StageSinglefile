@@ -26,40 +26,8 @@ export default function PricingDetails({
     if (show_Maintenance_Charges == false) {
       delete CopyObj.AdditionalDetails;
     }
-    // Remove Coma  (Rent Field)
-    if (BasicDetailsData.PropertyAdType == "Rent") {
-      const ExpectedRentRemoveComa = CopyObj.ExpectedRent.replace(/,/g, "");
-      CopyObj.ExpectedRent = ExpectedRentRemoveComa;
 
-      const DepositePriceRemoveComa = CopyObj.DepositePrice.replace(/,/g, "");
-      CopyObj.DepositePrice = DepositePriceRemoveComa;
-    }
-
-    if (BasicDetailsData.PropertyAdType == "Sale") {
-      const ExpectedPriceRemoveComa = CopyObj.ExpectedPrice.replace(/,/g, "");
-      CopyObj.ExpectedPrice = ExpectedPriceRemoveComa;
-
-      if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-        const MonthlyExpectedRentRemoveComa =
-          CopyObj.AdditionalDetails.MonthlyExpectedRent.replace(/,/g, "");
-        CopyObj.AdditionalDetails.MonthlyExpectedRent =
-          MonthlyExpectedRentRemoveComa;
-      }
-    }
-
-    if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-      const MaintenanceChargesRemoveComa =
-        CopyObj.AdditionalDetails.MaintenanceCharges.replace(/,/g, "");
-      CopyObj.AdditionalDetails.MaintenanceCharges =
-        MaintenanceChargesRemoveComa;
-    }
-
-    // const ExpectedPriceRemoveComa = CopyObj.ExpectedPrice.replace(/,/g, "");
-    // const MaintenanceChargesRemoveComa =
-    //   CopyObj.AdditionalDetails.MaintenanceCharges.replace(/,/g, "");
-
-    // CopyObj.ExpectedPrice = ExpectedPriceRemoveComa;
-    // CopyObj.AdditionalDetails.MaintenanceCharges = MaintenanceChargesRemoveComa;
+ 
 
     setPricingDetailsData(CopyObj);
 
@@ -626,15 +594,7 @@ export default function PricingDetails({
                                           ),
                                       },
                                     });
-                                    // setPricingDetailsData({
-                                    //   ...PricingDetailsData,
-                                    //   PreferredTenant:
-                                    //     PricingDetailsData.PreferredTenant?.filter(
-                                    //       (item) => {
-                                    //         return item !== text;
-                                    //       }
-                                    //     ),
-                                    // });
+                                   
                                   }
                                 }}
                               />
