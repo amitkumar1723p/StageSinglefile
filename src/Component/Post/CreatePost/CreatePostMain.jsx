@@ -326,9 +326,16 @@ export default function CreatePostMain() {
   useEffect(() => {
     if (data) {
       if (data.success === true) {
+        
         if (["Admin", "Owner"].includes(medata?.user?.Role)) {
           navigate("/admin/allpost");
+        } else{
+           if(LodingType=="UpdatePostRequest") {
+            navigate("/user/my-listing")
+           }
+         
         }
+         
       }
       if (data.success === false) {
         setshowCreatePostSubmitAlert(false);
@@ -422,7 +429,9 @@ export default function CreatePostMain() {
   }, [showCreatePostSubmitAlert]);
   return (
     <>
-      {SinglePostLoading || showCreatePostSubmitAlert == "showLoading" ? (
+      {SinglePostLoading ||
+      showCreatePostSubmitAlert == "showLoading" ||
+      (loading && LodingType == "UpdatePostRequest") ? (
         <Loader className="windowloader" />
       ) : (
         <>
@@ -809,7 +818,8 @@ export default function CreatePostMain() {
             />
           )}
 
-          {    (
+          {
+            showCreatePostSubmitAlert==true &&
             <WindowComponent
               SetShow={setshowCreatePostSubmitAlert}
               Component={CreatePostSubmitAlert}
@@ -817,7 +827,7 @@ export default function CreatePostMain() {
               className={"create-post-submit-alert-window-main"}
               Type={"CreatePostSubmitAlert"}
             />
-          )}
+          }
         </>
       )}
     </>

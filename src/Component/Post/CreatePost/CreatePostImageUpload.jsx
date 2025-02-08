@@ -161,10 +161,6 @@ export default function CreatePostImageUpload({
         let confrim = window.confirm("Are you update this Post");
         if (confrim) {
           dispatch(UpdatePostAction(formData, PostId));
-
-          if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
-            setshowCreatePostSubmitAlert("showLoading");
-          }
         }
       } else {
         console.log(PricingDetailsData);
