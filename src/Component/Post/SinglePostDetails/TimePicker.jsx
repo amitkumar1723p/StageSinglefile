@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import "./TimePicker.css"
-const TimePicker = ({ onChange, initialTime = '09:00 AM' }) => {
+import React, { useState, useEffect } from "react";
+import "./TimePicker.css";
+const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState(9);
   const [selectedMinute, setSelectedMinute] = useState(0);
@@ -62,7 +62,9 @@ const TimePicker = ({ onChange, initialTime = '09:00 AM' }) => {
   const handleTimeSelection = () => {
     // Convert to 24-hour format for the onChange event
     const hour24 = to24HourFormat(selectedHour, period);
-    const timeString24 = `${hour24.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')}`;
+    const timeString24 = `${hour24.toString().padStart(2, "0")}:${selectedMinute
+      .toString()
+      .padStart(2, "0")}`;
     onChange?.(timeString24);
     setTimeout(() => {
       setIsOpen(false);
@@ -142,8 +144,14 @@ const TimePicker = ({ onChange, initialTime = '09:00 AM' }) => {
         onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
       >
         {/* Display both 24-hour and 12-hour formats */}
-        <span>{`${selectedHour}:${selectedMinute.toString().padStart(2, '0')} ${period}`}</span>
-        <span className='timepicker-format-dispaly'>{`(${hour24.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')})`}</span>
+        <span>{`${selectedHour}:${selectedMinute
+          .toString()
+          .padStart(2, "0")} ${period}`}</span>
+        <span className="timepicker-format-dispaly">{`(${hour24
+          .toString()
+          .padStart(2, "0")}:${selectedMinute
+          .toString()
+          .padStart(2, "0")})`}</span>
       </div>
       {isOpen && (
         <div className="time-picker-overlay">
