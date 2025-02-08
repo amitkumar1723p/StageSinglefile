@@ -19,7 +19,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
   const [ScheduleVistData, setScheduleVistData] = useState({
     VisitDate: "",
-    VisitTime: ""
+    VisitTime: "",
   });
   const [showScheduleVistAlert, setshowScheduleVistAlert] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -30,10 +30,10 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       ...ScheduleVistData,
       PostData: { PostId: SinglePostData.SinglePost._id },
     };
-
+    console.log(vistobj);
     //  alert(`${ScheduleVistData.VisitTime.From} to ${ScheduleVistData.VisitTime.To}`)
     // dispatch(CreateScheduleVisitAction(vistobj));
-    console.log(vistobj)
+    console.log(vistobj);
     setshowScheduleVistAlert("LodingTrue");
     const id = setTimeout(() => {
       setshowScheduleVistAlert(true);
@@ -110,16 +110,18 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
               <div className="schedule-your-visit-time-group">
                 <label className="schedule-your-visit-label">Select Time</label>
                 <div className="schedule-your-visit-time-container">
-                  <TimePicker onChange={(e) => {
-                    console.log(e)
+                  <TimePicker
+                    onChange={(e) => {
+                      console.log(e);
                       setScheduleVistData({
                         ...ScheduleVistData,
                         VisitTime: {
                           ...ScheduleVistData.VisitTime,
-                          VisitTime: e,
+                          From: e,
                         },
                       });
-                    }} />
+                    }}
+                  />
                 </div>
                 {/* <small>available time 10:00 Am to 7:00 PM</small> */}
               </div>
@@ -139,7 +141,10 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
         <Loader className={"componentloader"} />
       )}
       {showScheduleVistAlert == true && (
-        <ScheduleYourVisitSubmit SetShow={SetShow}   ScheduleVistData={ScheduleVistData}/>
+        <ScheduleYourVisitSubmit
+          SetShow={SetShow}
+          ScheduleVistData={ScheduleVistData}
+        />
       )}
     </>
   );
