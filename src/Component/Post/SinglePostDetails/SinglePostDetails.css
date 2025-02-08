@@ -169,7 +169,7 @@ body {
 }
 .similar-area-price-box {
   display: flex;
-  gap: 60px;
+  justify-content: space-between;
 
   margin-top: 10px;
 }
@@ -405,6 +405,7 @@ body {
   background-color: var(--main-light-clr);
   color: #fff;
   border-radius: 5px;
+  margin-right: 5px;
 }
 
 .view-more-btn-3rd:hover {
@@ -647,6 +648,11 @@ body {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+.rent-price-section-similar-property{
+  color: rgb(153, 153, 153);
+    font-weight: 400;
 }
 
 .property-price {
