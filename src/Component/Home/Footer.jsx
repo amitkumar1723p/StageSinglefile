@@ -192,12 +192,13 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Home', hash: "" },
-    { name: 'About Us', hash: "" },
+    { name: 'About Us', hash: "WHO-WE-ARE" },
     { name: 'Services', hash: "select-option-section" } // Make sure the section has this ID in your home page
   ];
 
   const companyLinks = [
-    { name: 'FAQs', hash: '' },
+
+    { name: 'FAQs', hash: 'FAQ-SECTION' },
     { name: 'Careers', hash: '' },
     { name: 'Testimonials', hash: "testimonials" } // Ensure section ID exists in home page
   ];
@@ -293,7 +294,7 @@ const Footer = () => {
                           scrollToSection(item.hash);
                         }
                       }}
-                      href="#"
+                      
                       className="links__link"
                     >
                       <span className="links__dot"></span>

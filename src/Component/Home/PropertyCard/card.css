@@ -318,16 +318,16 @@
   margin-top: 5px;
 }
 
-.price-details span {
+/* .price-details span {
   font-size: 12px;
   font-weight: 500;
   color: rgba(128, 128, 128, 0.8);
-}
-.price-details span:hover {
+} */
+/* .price-details span:hover {
   font-size: 12px;
   font-weight: 600;
   color: rgb(104, 104, 104);
-}
+} */
 
 .button-section {
   display: grid;

@@ -220,8 +220,12 @@ export default function PostCard({ PostData, index }) {
                   <img src="/img/verified-tag.svg" alt="verified-tag" />
                   <p className="active-post-para">Verified</p>
                 </div>
-              ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
-            ) : null}{" "}
+              ) : (
+                <div className="inactive-post">
+                  <p className="inactive-post-para">Inactive</p>
+                </div>
+              )
+            ) : null}
             {/* If PostVerifyShow is false, show nothing */}
           </div>
 
@@ -427,12 +431,18 @@ export default function PostCard({ PostData, index }) {
         </div>
         <div>
           <div className="price-details">
-            <p className="Date-of-post">
-              Posted On :{" "}
-              <span id="postdate">
-                {formatDate(PostData.PostVerifyData?.Time)}
-              </span>
-            </p>
+            <div className="Date-of-post">
+              {PostData.PostVerify ? (
+                <p>
+                  Posted On:{" "}
+                  <span id="postdate">
+                    {formatDate(PostData.PostVerifyData?.Time)}
+                  </span>
+                </p>
+              ) : (
+                <p className="inative-post-status">This post is currently  <span className="span-inactive-post"> Inactive</span></p>
+              )}
+            </div>
 
             <Link
               to={`/post-detail/${PropertyAddress.toLowerCase()

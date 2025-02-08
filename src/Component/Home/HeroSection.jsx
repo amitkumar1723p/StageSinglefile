@@ -235,7 +235,7 @@ const HeroSection = () => {
                     setProjectNameObjectData={setProjectNameObjectData}
                     placeholder={"Search by Project name or society name"}
                   />
-                  <img
+                  {/* <img
                     className="img-searchbar"
                     src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -243,7 +243,7 @@ const HeroSection = () => {
                 </svg>
                   `)}`}
                     alt="tst"
-                  />
+                  /> */}
 
                   <button
                     disabled={
@@ -437,8 +437,14 @@ const HeroSection = () => {
 
           <Testimonials />
           </div>
+          <div id="WHO-WE-ARE">
+
           <WhoWeAre />
+          </div>
+          <div id="FAQ-SECTION">
+
           <FaqBuyer />
+          </div>
         </>
       )}
       {/* Sale Component  */}
@@ -456,8 +462,14 @@ const HeroSection = () => {
           <div id="testimonials">
           <Testimonials />
           </div>
+          <div id="WHO-WE-ARE">
+
           <WhoWeAre />
+          </div>
+          <div id="FAQ-SECTION">
+
           <FAQ />
+          </div>
         </>
       )}
 

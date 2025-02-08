@@ -53,6 +53,7 @@
 }
 .contact__title{
   font-size: 20px;
+  margin-bottom: 1.5rem;
 }
 /* Newsletter Section */
 .footer__newsletter {
@@ -79,7 +80,7 @@
   /* background: red; */
 }
 .contact__item {
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -179,7 +180,7 @@
 
 /* Company Section */
 .company__title {
-  font-size: 1.575rem;
+  font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -213,7 +214,7 @@
 }
 
 .social__link:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 .social__icon {
@@ -231,6 +232,7 @@
 }
 
 .links__link {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -296,6 +298,10 @@
 
 
 /* Copyright Section */
+.footer__copyright p{
+  font-size: .8rem;
+}
+
 .footer__copyright {
   border-top: 1px solid rgba(96, 165, 250, 0.3);
   padding-top: 1rem;

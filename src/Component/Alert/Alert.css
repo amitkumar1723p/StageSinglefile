@@ -6,7 +6,7 @@
   transform: translateX(-50%); /* Center horizontally */
   width: auto;
   background-color: var(--main-light-clr); /* Default green for success */
-  color: white;
+  color: #fff;
   padding: 15px;
   border-radius: 8px;
   font-size: .8em;
@@ -29,6 +29,7 @@
 
 .alertbox.success {
   background-color: var(--main-light-clr); /* Green */
+  color: #fff;
 }
 
 .alertbox.error {

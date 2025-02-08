@@ -12,6 +12,18 @@
   border-radius: 5px;
 }
 
+.inative-post-status{
+  font-size: 11px;
+  color: #333333a2;
+  letter-spacing: .3px;
+}
+
+.span-inactive-post{
+  color: red;
+  font-size: 14px;
+  /* text-decoration: underline; */
+}
+
 .icon-box {
   position: relative;
 }

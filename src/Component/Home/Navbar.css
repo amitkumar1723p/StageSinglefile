@@ -129,7 +129,7 @@
   width: 25px;
 }
 .btn-drop {
-  width: 110px;
+  width: 90px;
   cursor: pointer;
   padding: 5px 15px;
 }
@@ -474,7 +474,7 @@
   /* need west box css */
 
   .btn-drop {
-    width: 90px;
+    width: 80px;
     cursor: pointer;
     padding: 0px 10px;
   }
