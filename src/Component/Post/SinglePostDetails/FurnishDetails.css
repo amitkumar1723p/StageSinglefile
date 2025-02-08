@@ -39,8 +39,8 @@
 }
 
 .furnish-icon {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  /* height: 30px; */
 }
 .furnish-dummy-line{
     width: 100%;
@@ -49,7 +49,7 @@
 }
 
 .furnish-name {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   color: #333;
 }

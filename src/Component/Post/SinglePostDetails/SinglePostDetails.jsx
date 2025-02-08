@@ -461,7 +461,7 @@ export default function SinglePostDetails() {
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Sale" && (
                       <>
-                        <span>
+                        <span className="ReservePrice-section">
                           Reserve Price :{" "}
                           <span className="price-value-in-span">
                             {formatReservePrice(
@@ -576,7 +576,7 @@ export default function SinglePostDetails() {
                   >
                     {/* <button className="contact-expert-btn"> */}
                     <img
-                    className="whatapp-ing-section"
+                    className="whatapp-ing-section-details"
                       src="/img/whatapp.png"
                       alt="icon"
                     />

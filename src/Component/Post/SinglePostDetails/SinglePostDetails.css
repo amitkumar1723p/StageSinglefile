@@ -7,6 +7,11 @@ body {
   width: 27px;
 }
 
+.whatapp-ing-section-details{
+  width: 20px; 
+  margin-right: 5px;
+}
+
 .rent-main-section{
   display: flex;
   gap: 75px;
@@ -131,7 +136,7 @@ body {
 }
 
 .icon-detials {
-  width: 32px;
+  width: 26px;
   margin-right: 10px;
 }
 
@@ -297,9 +302,9 @@ body {
 }
 
 .icon-overview {
-  width: 30px;
+  width: 24px;
 
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .img-icon {
@@ -393,7 +398,7 @@ body {
 
 .original-price{
   cursor: pointer;
-  
+  font-size: 12px;
 }
 
 .view-more-btn-3rd{
@@ -431,7 +436,7 @@ body {
   flex-shrink: 1;
   flex-grow: 1;
   width: 43%;
-  height: 335px;
+  height: 315px;
   /* background-color: #3333330001c; */
   display: flex;
   overflow: hidden;
@@ -466,7 +471,7 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .posted-by-section p {
@@ -515,7 +520,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* gap: 5px; */
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .prop-grid p {
@@ -530,7 +535,7 @@ body {
 .prop-grid span {
   color: #333;
   font-family: "Inter", Sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -549,7 +554,7 @@ body {
   border-radius: 12px;
 
   background: #fff;
-
+height: fit-content;
   box-shadow: 0px 0px 4px 2px rgba(156, 197, 231, 0.5);
   width: 400px;
   margin-left: 10px;
@@ -589,7 +594,7 @@ body {
 .property-info-tags {
   display: flex;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
   margin-bottom: 10px;
 }
 
@@ -612,7 +617,7 @@ body {
 
 .property-pricing {
   /* display: flex; */
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   justify-content: start;
   gap: 20px;
 }
@@ -632,7 +637,7 @@ body {
 .rent-price-main{
   color: var(--Pirmary, #0078D4);
 font-family: Inter;
-font-size: 14px;
+font-size: 12px;
 font-style: normal;
 font-weight: 600;
 line-height: normal;
@@ -641,14 +646,14 @@ line-height: normal;
 .price-value-in-span {
   color: var(--main-light-clr);
   font-family: "Inter", Sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 
 .property-price {
-  margin: 10px 0;
+  margin: 5px 0;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -730,6 +735,10 @@ line-height: normal;
   font-weight: 500;
   line-height: normal;
 }
+
+.ReservePrice-section{
+  font-size: 12px;
+}
 .contact-expert-btn {
   border-radius: 5px;
   display: flex;
@@ -740,7 +749,7 @@ line-height: normal;
   border: none;
   text-decoration: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
 }
 .contact-expert-btn:hover {
   transition: 1s;
@@ -817,7 +826,7 @@ line-height: normal;
 }
 .overbox-icon {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border-radius: 10px;
   margin-top: 10px;
   border: 1px solid #a4d0ed;
@@ -835,7 +844,7 @@ line-height: normal;
   padding: 0 0 0 10px;
   color: #333;
 
-  font-size: 13px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -846,7 +855,7 @@ line-height: normal;
 .p-deta {
   color: #474747;
   font-family: Inter;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
@@ -855,7 +864,7 @@ line-height: normal;
 
 .p-ans {
   color: #333;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   margin-top: 5px;
   letter-spacing: 0.8px;
@@ -1520,7 +1529,8 @@ line-height: normal;
 }
 .main_hide {
   position: absolute;
-  bottom: 80px;
+  bottom: 60px;
+  left: 110px;
   /* left: 50%; Center horizontally */
   transform: translateX(-50%);
   /* Centering the popup */

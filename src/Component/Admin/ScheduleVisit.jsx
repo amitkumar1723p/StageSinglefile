@@ -173,8 +173,9 @@ const ScheduleVisit = () => {
                       <p className="visit-time-date">
                         Time:
                         <span className="schedule-visit-time">
-                          {formatTime(visitData.VisitTime.From)} to{" "}
-                          {formatTime(visitData.VisitTime.To)}
+                          {formatTime(visitData.VisitTime.From)}
+                           {/* to{" "} */}
+                          {/* {formatTime(visitData.VisitTime.To)} */}
                         </span>
                       </p>
                     </div>

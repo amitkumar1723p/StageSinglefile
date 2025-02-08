@@ -37,9 +37,9 @@ const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
         <div className="status-message">
           <div className="status-icon">&#10003;</div>
           <span className="status-text">
-            Your visit is scheduled from{" "}
-            {formatTime(ScheduleVistData.VisitTime.From)} to{" "}
-            {formatTime(ScheduleVistData.VisitTime.To)} on{" "}
+            Your visit is scheduled{" "}
+            {formatTime(ScheduleVistData.VisitTime.From)} on{" "}
+            {/* {formatTime(ScheduleVistData.VisitTime.To)} on{" "} */}
             {new Date(ScheduleVistData.VisitDate).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",

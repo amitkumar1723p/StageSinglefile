@@ -197,7 +197,6 @@ const Footer = () => {
   ];
 
   const companyLinks = [
-
     { name: 'FAQs', hash: 'FAQ-SECTION' },
     { name: 'Careers', hash: '' },
     { name: 'Testimonials', hash: "testimonials" } // Ensure section ID exists in home page
