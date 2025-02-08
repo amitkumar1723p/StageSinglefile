@@ -247,7 +247,7 @@ export default function SinglePostDetails() {
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
-          <img   src="/img/call.png" alt="Call" />
+          <img src="/img/call.png" alt="Call" />
         </Link>
         {/* WhatsApp Button */}
         <Link
@@ -256,7 +256,11 @@ export default function SinglePostDetails() {
           rel="noopener noreferrer"
           className="whatapps-section-floating"
         >
-          <img className="whatapp-ing-section" src="/img/whatapp.png" alt="WhatsApp" />
+          <img
+            className="whatapp-ing-section"
+            src="/img/whatapp.png"
+            alt="WhatsApp"
+          />
         </Link>
       </div>
       {/* {openReportForm === true ? (
@@ -484,7 +488,7 @@ export default function SinglePostDetails() {
                             className="original-price"
                             ref={BiddingFormOpenBtnRef}
                             onClick={() => {
-                              if (medata && medata.IsAuthenticated == true) {
+                              if (medata && medata.IsAuthenticated === true) {
                                 setshowBiddingForm(true);
                               } else {
                                 setRedirectPath("/show-offerForm");
@@ -576,7 +580,7 @@ export default function SinglePostDetails() {
                   >
                     {/* <button className="contact-expert-btn"> */}
                     <img
-                    className="whatapp-ing-section-details"
+                      className="whatapp-ing-section-details"
                       src="/img/whatapp.png"
                       alt="icon"
                     />
@@ -877,7 +881,9 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
                 )}
-                                <FurnishDetails furnishD={getSinglePostData.SinglePost.AmenitiesDetails}/>
+                <FurnishDetails
+                  furnishD={getSinglePostData.SinglePost.AmenitiesDetails}
+                />
               </div>
               {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                 <div className="prop-right">
@@ -944,11 +950,13 @@ export default function SinglePostDetails() {
                                       </p> */}
 
                                       <p className="similar-area-price">
-                                      ₹ {item?.PricingDetails?.ExpectedPrice}
+                                        ₹ {item?.PricingDetails?.ExpectedPrice}
                                         <span> Reserved price </span>
                                       </p>
 
-                                      <button className="view-more-btn-3rd">View More</button>
+                                      <button className="view-more-btn-3rd">
+                                        View More
+                                      </button>
                                     </div>
                                   </div>
                                 </div>

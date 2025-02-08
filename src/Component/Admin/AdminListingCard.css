@@ -99,6 +99,7 @@
   margin: 0 10px 0 0;
 }
 .property-filters {
+  height: fit-content;
   /* width: 245px; */
   /* background-color: #007bff; */
   /* height: auto; */
@@ -109,7 +110,7 @@
   top: 76px;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 89vh;
+  /* height: 89vh; */
   margin-top: 10px;
   margin-bottom: 10px;
 

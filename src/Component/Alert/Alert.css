@@ -1,12 +1,12 @@
 /* Base styling for the alert box */
-.alertbox {
+.alertbox{
   position: fixed;
   top: 20px; /* Position the alert 20px from the top */
   left: 50%;
   transform: translateX(-50%); /* Center horizontally */
   width: auto;
   background-color: var(--main-light-clr); /* Default green for success */
-  color: #fff;
+  color: #fff !important; 
   padding: 15px;
   border-radius: 8px;
   font-size: .8em;
@@ -62,6 +62,7 @@
   margin: 0;
   font-size: 1.2em;
   font-weight: bold;
+  color: #fff;
 }
 
 /* Bounce-in animation for the alert */
