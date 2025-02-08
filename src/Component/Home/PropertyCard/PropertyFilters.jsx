@@ -149,11 +149,17 @@ const PropertyFilters = () => {
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
   return (
     <>
+      <div className="property-post-filters-main-box">
       <div className="property-post-filters-box">
         <aside className="property-filters">
-          <h2 className="filter-title">Filters</h2>
+          <div className="filter-title">
+          <h2 className="filter-title-1">Filter Your Search</h2>
+          {/* <p className="filter-title-1">clear Filter</p> */}
+          </div>
+
+          <div className="filter-dummyLine"></div>
           <div className="flex">
-            <div>
+            <div className="filter-Lookin-for">
               <p className="looking-for-data">I am looking for</p>
               {PropertyAdTypeArray.map((text) => {
                 return (
@@ -177,6 +183,8 @@ const PropertyFilters = () => {
              
             </div>
           </div>
+          <div className="filter-dummyLine"></div>
+
           {/* Budget Filter */}
           {/* <div className="filter-group">
             <h3>Budget</h3>
@@ -223,6 +231,7 @@ const PropertyFilters = () => {
               ))}
             </div>
           </div>
+          <div className="filter-dummyLine"></div>
 
           {/* Property Status Filter */}
           <div className="filter-group">
@@ -261,6 +270,8 @@ const PropertyFilters = () => {
               })}
             </div>
           </div>
+          <div className="filter-dummyLine"></div>
+
           {/* Construction Status Filter */}
           {/* {querry.get("PropertyType") === "Sale" && (
             <div className="filter-group">
@@ -334,11 +345,11 @@ const PropertyFilters = () => {
           <div className="filter-group">
             <h3>Furnishing Status</h3>
             <div className="button-section">
-              <div className="Furnishing Status">
+              <div className="Furnishing Status button-section">
                 {FurnishingOptions.map((option) => (
                   <button
                     key={option}
-                    className={`bhk-option ${
+                    className={`bhk-option-1 ${
                       Filter.Furnishing === option ? "selected" : ""
                     }`}
                     onClick={() => {
@@ -381,11 +392,14 @@ const PropertyFilters = () => {
               ))} */}
             </div>
           </div>
+          <div className="filter-dummyLine"></div>
+
         </aside>
-        <div>
+        <div className="filter-home-card">
           <HeaderCard />
           <HomeCard />
         </div>
+      </div>
       </div>
     </>
   );
