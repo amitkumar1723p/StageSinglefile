@@ -122,10 +122,12 @@ const OfferReceived = () => {
                   
 
                   <p className="offer-received-pid">
-                    Date and Time: :{" "}
+                    {/* Date and Time: :{" "}
                     <span className="offer-received-pid-number">
                       {getScheduleVisitInfo(Biddinguser?._id)?.length > 0 ? (
+                         
                         <>
+                         {console.log(getScheduleVisitInfo(Biddinguser?._id))}
                           {new Date(
                             getScheduleVisitInfo(Biddinguser?._id)[0].VisitDate
                           ).toLocaleDateString("en-US", {
@@ -136,9 +138,9 @@ const OfferReceived = () => {
                         </>
                       ) : null}
                       
-                    </span>
+                    </span> */}
                   </p>
-                  {}
+                  {/* {} */}
                 </div>
                 <div className="offer-received-footer">
                   <div className="offer-received-schedule-info">

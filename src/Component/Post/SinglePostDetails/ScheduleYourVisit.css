@@ -9,7 +9,7 @@
 
 .schedule-your-visit-title {
   color: var(--main-light-clr);
-  text-align: center;
+  /* text-align: center; */
   font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -42,7 +42,7 @@ margin-bottom: 10px;
 .schedule-your-visit-label {
  
   color: #585858;
-  text-align: center;
+  /* text-align: center; */
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -58,7 +58,7 @@ margin-bottom: 10px;
 .schedule-your-visit-time-container input {
   border-radius: 4px;
   border: 1px solid #4a7296;
-  padding: 10px;
+  padding: 20px;
 }
 
 .right-box-of-schedule {
@@ -251,7 +251,7 @@ margin-bottom: 10px;
 
   .schedule-your-visit-label {
     font-size: 10px;
-    text-align: center;
+    /* text-align: center; */
   }
 
   .schedule-your-visit-input,

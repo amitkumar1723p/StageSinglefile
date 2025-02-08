@@ -54,8 +54,9 @@ export default function MyVisits() {
                     })}
                   </td>
                   <td className="myvisit-table-cell">
-                    {formatTime(visit.VisitTime.From)} to{" "}
-                    {formatTime(visit.VisitTime.To)}
+                    {formatTime(visit.VisitTime.From)}
+                     {/* to{" "} */}
+                    {/* {formatTime(visit.VisitTime.To)} */}
                   </td>
                   <td className="myvisit-table-cell">{PostName}</td>
                   <td className="myvisit-table-cell"  > <span className="myvisit-post-id-btn" onClick={(e) => {

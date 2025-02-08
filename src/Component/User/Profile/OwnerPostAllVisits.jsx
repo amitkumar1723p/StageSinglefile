@@ -74,10 +74,11 @@ export default function OwnerPostAllVisits() {
                             }
                           )}
                         </span>
-
+                        {" "}
                         <span>
-                          {formatTime(visit.VisitTime.From)} to
-                          {formatTime(visit.VisitTime.To)}
+                          {formatTime(visit.VisitTime.From)} 
+                          {/* to */}
+                          {/* {formatTime(visit.VisitTime.To)} */}
                         </span>
                       </td>
                       <td className="owner-post-vists-table-cell">

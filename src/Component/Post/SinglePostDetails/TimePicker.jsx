@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import "./TimePicker.css";
-
-const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
+import React, { useState, useEffect } from 'react';
+import "./TimePicker.css"
+const TimePicker = ({ onChange, initialTime = '09:00 AM' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState(9);
   const [selectedMinute, setSelectedMinute] = useState(0);
@@ -9,7 +8,6 @@ const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
   const radius = 80;
   const center = { x: 100, y: 100 };
 
-  // Previous helper functions remain the same
   const to12HourFormat = (hour24) => {
     if (hour24 === 0) return { hour: 12, period: "AM" };
     if (hour24 === 12) return { hour: 12, period: "PM" };
@@ -43,7 +41,6 @@ const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
     }
   }, [initialTime]);
 
-  // Previous handler functions remain the same
   const handleHourClick = (hour) => {
     const validInAM = isTimeAllowed(hour, "AM");
     const validInPM = isTimeAllowed(hour, "PM");
@@ -63,10 +60,10 @@ const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
   };
 
   const handleTimeSelection = () => {
-    const timeString = `${selectedHour}:${selectedMinute
-      .toString()
-      .padStart(2, "0")} ${period}`;
-    onChange?.(timeString);
+    // Convert to 24-hour format for the onChange event
+    const hour24 = to24HourFormat(selectedHour, period);
+    const timeString24 = `${hour24.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')}`;
+    onChange?.(timeString24);
     setTimeout(() => {
       setIsOpen(false);
     }, 0);
@@ -132,6 +129,9 @@ const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
   const isAMValid = isTimeAllowed(selectedHour, "AM");
   const isPMValid = isTimeAllowed(selectedHour, "PM");
 
+  // Get 24-hour format for display
+  const hour24 = to24HourFormat(selectedHour, period);
+
   return (
     <div className="time-picker-container">
       <div
@@ -141,9 +141,9 @@ const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
         tabIndex={0}
         onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
       >
-        {`${selectedHour}:${selectedMinute
-          .toString()
-          .padStart(2, "0")} ${period}`}
+        {/* Display both 24-hour and 12-hour formats */}
+        <span>{`${selectedHour}:${selectedMinute.toString().padStart(2, '0')} ${period}`}</span>
+        <span className='timepicker-format-dispaly'>{`(${hour24.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')})`}</span>
       </div>
       {isOpen && (
         <div className="time-picker-overlay">
@@ -201,10 +201,7 @@ const TimePicker = ({ onChange, initialTime = "9:00 AM" }) => {
             </svg>
             <div className="time-picker-actions">
               <div
-                // onClick={() => setit setIsOpen(false)}
-                // onClick={() => setTimeout(setIsOpen(false) ,0)}
                 onClick={() => setTimeout(() => setIsOpen(false), 0)}
-                // onClick={()=>{}}
                 className="time-picker-cancel-btn"
                 role="button"
                 tabIndex={0}

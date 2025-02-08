@@ -19,7 +19,8 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
   const [ScheduleVistData, setScheduleVistData] = useState({
     VisitDate: "",
-    VisitTime: "",
+    // VisitTime: ,
+    VisitTime: {From :"09:00"},
   });
   const [showScheduleVistAlert, setshowScheduleVistAlert] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -32,7 +33,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
     };
     console.log(vistobj);
     //  alert(`${ScheduleVistData.VisitTime.From} to ${ScheduleVistData.VisitTime.To}`)
-    // dispatch(CreateScheduleVisitAction(vistobj));
+    dispatch(CreateScheduleVisitAction(vistobj));
     console.log(vistobj);
     setshowScheduleVistAlert("LodingTrue");
     const id = setTimeout(() => {
