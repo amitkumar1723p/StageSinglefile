@@ -1,5 +1,20 @@
 .property-post-filters-box {
+  /* background-color: #007bff */
+  /* ; */
   display: flex;
+  /* position: relative; */
+  /* align-items: center; */
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.property-post-filters-main-box {
+  /* background: #000; */
+  display: flex
+;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-leanding {
@@ -22,6 +37,8 @@
 }
 .filter-group label {
   font-size: 12px;
+
+  
 }
 
 .property-container {
@@ -39,16 +56,18 @@
   height: fit-content;
   border-right: 1px solid rgb(216, 208, 208);
 
-  padding: 20px 10px;
+  /* padding: 20px 10px; */
 }
 
 .filter-title {
-  font-size: 18px;
-  margin-bottom: 15px;
+  /* font-size: 18px; */
+
 }
 
 .filter-group {
-  margin-bottom: 20px;
+  padding: 10px;
+  margin-bottom: 12px;
+  /* margin-bottom: 20px; */
 }
 
 .budget-slider {
@@ -77,7 +96,7 @@
 }
 
 .property-post-card-main {
-  margin: 10px 10px 0 0;
+  /* margin: 10px 10px 0 0; */
   /* width: 438; */
   height: 238px;
   padding: 10px;
@@ -333,6 +352,27 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+.bhk-option-1 {
+  background-color: #fff;
+  margin: 2px;
+  color: #333;
+  padding: 3px 7px;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #5cadeb;
+}
+.filter-home-card{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background: #000; */
+}
 
 .Property-Status {
   display: grid;
@@ -529,15 +569,12 @@
     justify-content: space-between;
     gap: 10px;
   }
-
+/* 
   .property-post-filters-box {
     width: 80%;
     display: block;
-    /* margin: 5px auto; */
-  }
-  .property-post-filters-box {
-    display: block;
-  }
+    /* margin: 5px auto;
+  } */
 
   .property-post-card-main {
     margin: 10px;

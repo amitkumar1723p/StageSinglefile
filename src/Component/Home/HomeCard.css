@@ -1,9 +1,9 @@
 .home {
-  /* margin-top: 10px; */
-  margin-left: 20px;
-  margin-right: 40px;
+  margin-top: 10px;
+  /* margin-left: 20px; */
+  /* margin-right: 40px; */
   position: relative;
-  width: 980px;
+  /* width: 980px; */
   min-height: 120px;
   /* background-color: red; */
 }
