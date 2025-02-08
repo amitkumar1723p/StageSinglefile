@@ -190,7 +190,7 @@ export default function SinglePostDetails() {
     } else if (price >= 1000) {
       return `₹ ${(Math.floor(price / 10) / 100).toFixed(2)} K`;
     } else {
-      return `₹ ${price.toFixed(2)}`;
+      return `₹ ${price?.toFixed(2)}`;
     }
   };
 
@@ -948,11 +948,32 @@ export default function SinglePostDetails() {
 
                                         <span> Built-Up Area</span>
                                       </p> */}
+                                      {item?.BasicDetails?.PropertyAdType =="Rent" && (
+                                        <>
+                                          <div className="similar-area-price">
+                                            <div className="similar-area-price-rent-price">
+                                                {formatReservePrice(
+                                                item?.PricingDetails
+                                                  ?.ExpectedRent
+                                              )}   <span>/Month</span>
+                                            </div>
 
-                                      <p className="similar-area-price">
-                                        ₹ {item?.PricingDetails?.ExpectedPrice}
-                                        <span> Reserved price </span>
-                                      </p>
+                                            <span> RentPrice price </span>
+                                          </div>
+                                        </>
+                                      )}
+                                      {item?.BasicDetails?.PropertyAdType ==
+                                        "Sale" && (
+                                        <>
+                                          <div className="similar-area-price">
+                                            {formatReservePrice(
+                                              item?.PricingDetails
+                                                ?.ExpectedPrice
+                                            )}
+                                            <span> Reserved price </span>
+                                          </div>
+                                        </>
+                                      )}
 
                                       <button className="view-more-btn-3rd">
                                         View More
