@@ -21,12 +21,19 @@ const PropertyFilters = () => {
   const [FurnishingStatus, setFurnishingStatus] = useState("");
   const [Filter, setFilter] = useState({});
   const [removeFilterField, setremoveFilterField] = useState(false);
+  const [isClicked,setIsClicked] = useState(null);
   const handleCheckboxChange = (event, setter) => {
     const { name, checked } = event.target;
     setter((prev) =>
       checked ? [...prev, name] : prev.filter((item) => item !== name)
     );
   };
+
+  const handleClicked = (v)=>{
+      setIsClicked(v)
+  }
+
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -349,10 +356,12 @@ const PropertyFilters = () => {
                 {FurnishingOptions.map((option) => (
                   <button
                     key={option}
-                    className={`bhk-option-1 ${
-                      Filter.Furnishing === option ? "selected" : ""
+                    
+                    className={`  ${
+                      Filter.Furnishing === option ? " selected" : "bhk-option-1"
                     }`}
                     onClick={() => {
+                      handleClicked()
                       if (Filter.Furnishing === option) {
                         setFurnishingStatus(null);
                         const { Furnishing, ...Filterrest } = Filter;
