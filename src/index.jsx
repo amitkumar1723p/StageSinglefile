@@ -21,7 +21,7 @@ root.render(
         //  limit={3}
         theme="colored"
        
-         autoClose={5000}/> 
+         autoClose={3000}/> 
       </BrowserRouter>
     </UserProvider>
   </Provider>

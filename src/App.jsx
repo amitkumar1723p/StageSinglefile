@@ -154,7 +154,7 @@ function App() {
   useEffect(() => {
     if (data) {
       if (
-        data.success === true &&["CreatePostRequest", "UpdatePostRequest"].includes(LodingType)
+        data.success === true &&["CreatePostRequest"].includes(LodingType)
       ) {
          
         sessionStorage.removeItem("next");
@@ -173,7 +173,9 @@ function App() {
           "CreateScheduleVisitRequest",
           "BiddingFormRequest",
           "CreatePostRequest",
-          "UpdatePostRequest",
+          "CreateUserOtpRequest" ,
+          "VerifyUserOtpRequest" ,
+          "CreateUserRequest"
         ].includes(LodingType) == false
       ) {
         setalertMessage(<p>{data.message}</p>);
