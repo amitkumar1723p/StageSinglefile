@@ -1,0 +1,313 @@
+/* General styles for the form container */
+.form-container {
+ display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Left section content */
+.leftContainer {
+  flex: 1 1 45%;
+  width: 100%;
+
+  border-radius: 8px;
+  padding: 16px;
+  height: auto;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.heading h1{
+  color: #333;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+}
+.heading h1 span{
+  color:#007bff;
+  font-family: 'Inter', sans-serif;
+}
+.paragraph{
+  margin-bottom: 10px;
+  
+  color: #333;
+  font-size: 14px;
+}
+.paragraph p{
+  font-family: 'Inter', sans-serif;
+}
+.lowerSection h4{
+  color: #333;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+} 
+.img-container{
+  position: relative;
+}
+
+/* select option :disabled{
+  color: grey;
+} */
+
+/* Form section */
+.form-section {
+  flex: 1 1 45%;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #333;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Form grid layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+
+
+
+select::placeholder {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Counter styles */
+.counter {
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 7px;
+}
+
+.counter:focus-within {
+  border-color: #007bff;
+}
+
+.counter label {
+  font-size: 14px;
+  color: #333;
+  font-family: 'Inter', sans-serif;
+}
+
+.counter button {
+  width: 32px;
+  height: 32px;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color:var( --main-dark-clr);
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.counter span {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 34px;
+  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
+.counter label:first-child{
+  color:rgb(164, 164, 164)
+}
+
+
+/* Submit button */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+.property-Container {
+  position: relative;
+
+  width: 100%;
+  height: 250px; 
+  /* background: url('C:\Users\Admin\Desktop\New folder\property-Frontend\public\img\PropertyDetailsForm.svg') no-repeat center center ; */
+  background-size: contain;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.property-item {
+  position: absolute;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* .independent-floors {
+  top: 10%;
+  left: 2%;
+}
+
+.penthouse {
+  top: 10%;
+  right: 2%;
+}
+
+.apartment {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.plots-villa {
+  bottom: 10%;
+  left: 2%;
+}
+
+.studio-apartment {
+  bottom: 10%;
+  right: 2%;
+} */
+
+@media (max-width: 480px){
+  .leftContainer{
+    width: 100%;
+  }
+  .property-container{
+    width: 100%;
+    height: 150px;
+  }
+
+  .independent-floors{
+    left: 5%;
+    top: 15%;
+    height: 20px;
+    width: 90px;
+    font-size: 9px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .penthouse{
+    right: 5%;
+    top: 15%;
+    height: 20px;
+    width: 90px;
+    font-size: 9px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .apartment{
+
+    height: 20px;
+    width: 90px;
+    font-size: 9px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .plots-villa{
+    left: 5%;
+    bottom: 15%;
+    height: 20px;
+    width: 90px;
+    font-size: 9px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .studio-apartment{
+    right: 5%;
+    bottom: 15%;
+    height: 20px;
+    width: 100px;
+    font-size: 9px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
+  }
+
+  .placeholder,
+  .form-section {
+    flex: 1 1 100%;
+  }
+  .property-container{
+    /* width: 200px; */
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

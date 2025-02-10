@@ -10,7 +10,7 @@ const TenantsDetailsForm = () => {
   };
 
   const handleDecrement = (setter) => {
-    setter(prev => prev > 0 ? prev - 1 : 0);
+    setter(prev => prev > 0  ? prev - 1 : 0);
   };
 
   return (

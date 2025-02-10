@@ -11,10 +11,15 @@ import "./Navbar.css";
 import FAQ from "./FAQ";
 
 import TenantDetailsForm from "./TenantDetailsForm";
-import RentalHome from "./RentalHome";
+import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
-import ForTenant from "./ForTenant";
-import ForLandLord from "./ForLandLord";
+import BrowseProperties from "./BrowseProperties";
+// import LandLord from "./LandLord";
+
+
+import PropertyDetailsForm from "./PropertyDetailsForm";
+
+// import PropertyDetailsForm from "./PropertyDetailsForm";
 
 import PropertyListingBanner from "./PropertyListingBanner";
 
@@ -474,15 +479,16 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
-          <ForLandLord/>
-          <ForTenant />
+          <BrowseProperties/>
+          {/* <LandLord/> */}
+          <PropertyDetailsForm />
           <RentalBanner />
-          <RentalHome />
+          <Tenant />
           <TenantDetailsForm />
         </>
-      )} */}
+      )}
 
       {/* Buy Component  */}
 

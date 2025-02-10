@@ -1,0 +1,198 @@
+.for-tenant-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    /* border: 2px solid black; */
+  }
+  
+  .for-tenant-left {
+    /* margin-right: 20px; */
+    display: flex;
+    width: 580px;
+    /* justify-content: center; */
+    align-items: center;
+    /* width: 40%; */
+    height: auto;
+    /* border: 1px solid black; */
+    /* background-color: var(--main-lighter-clr); */
+  }
+  
+  .for-tenant-left :nth-child(1) {
+    position: relative;
+    left: 15%;
+    
+    height: 350px;
+  }
+  .for-tenant-left :nth-child(2){
+    position: relative;
+    left: -190px;
+
+    height: 410px;
+  }
+  .for-tenant-left :nth-child(3){
+    position: relative;
+    height: 120px;
+    top: 45px;
+    left:-510px;
+  }
+  /* .OwnerPhnNumber{
+    position: relative;
+    width: 200px;
+    left: -120%;
+    bottom: 15%;
+    height: 80px;
+    border: 1px solid black;
+  } */
+  .for-tenant-left :nth-child(4){
+    position: relative;
+    right:730px;
+    bottom: 15%;
+    height: 100px;
+    /* border: 1px solid black; */
+  }
+  
+  .for-tenant-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin-bottom: 26px;
+    width: 140px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--main-dark-clr);
+    background-color: var(--main-lighter-clr);
+  }
+  
+  .for-tenant-main-heading {
+    text-align: start;
+    font-weight: bold;
+    /* border: 1px solid black; */
+  }
+  
+  .for-tenant-main-heading span {
+    color: var(--main-light-clr);
+  }
+  
+  .for-tenant-right {
+    width: 40%;
+    min-width: 501px;
+  }
+  
+  .for-tenant-introduction-img-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    margin-right: 15px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .for-tenant-introduction {
+    display: flex;
+    /* border: 1px solid black; */
+  }
+  
+  .for-tenant-introduction-img-container {
+    background-color: var(--main-lighter-clr);
+  }
+  
+  .for-tenant-content-container {
+    width: 80%;
+  }
+  
+  .for-tenant-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .for-tenant-content-container h3 {
+    color: #222633;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+  }
+  
+  .for-tenant-content-container p {
+    font-size: 14px;
+    color: #54575f;
+  }
+  
+  @media (max-width: 768px) {
+    .for-tenant-details {
+      display: flex;
+      flex-direction: column;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  
+    .for-tenant-left {
+      width: 100%;
+      margin-right: 0px;
+      margin-bottom: 10px;
+    }
+  
+    .for-tenant-right {
+      width: auto;
+      min-width: 250px;
+    }
+    .for-tenant-left :nth-child(3){
+      position: relative;
+      height: 100px;
+      top: 55px;
+      left:-70%;
+    }
+    .for-tenant-left :nth-child(4){
+      position: relative;
+      right:720px;
+      bottom: 35px;
+      height: 100px;
+      
+    }
+  }
+
+  @media(max-width:480px){
+    .for-tenant-left :nth-child(1) {
+      position: relative;
+      left: 10%;
+      
+      height: 250px;
+    }
+    .for-tenant-left :nth-child(2){
+      position: relative;
+      left: -160px;
+  
+      height: 310px;
+    }
+    .for-tenant-left :nth-child(3){
+      position: relative;
+      height: 100px;
+      top: 32px;
+      left:-410px;
+    }
+    .for-tenant-left :nth-child(4){
+      position: relative;
+      right:570px;
+      bottom: 60px;
+      height: 80px;
+      
+    }
+
+  }
+
+  
+  @media(max-width:400px){
+    .for-tenant-left :nth-child(1) {
+      position: relative;
+      left: 0%;
+      height: 250px;
+    }
+    .for-tenant-left :nth-child(2){
+      position: relative;
+      left: -180px;
+  
+      height: 310px;
+    }
+  }
+  

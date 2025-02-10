@@ -23,21 +23,31 @@ const RentalBanner = () => {
                 <div className="feature-icon"></div>
                 <span className="feature-text">Direct owner listings</span>
               </div>
-              <div className="feature">
-                <div className="feature-icon"></div>
-                <span className="feature-text">No Hidden Charges</span>
-              </div>
+             
             </div>
-            
             <div className="features">
               <div className="feature">
                 <div className="feature-icon"></div>
                 <span className="feature-text">Zero Brokerage</span>
               </div>
+             
+            </div>
+            
+            <div className="features">
+              <div className="feature">
+                <div className="feature-icon"></div>
+                <span className="feature-text">No Hidden Charges</span>
+              </div>
+             
+            </div>
+
+             
+            <div className="features">
               <div className="feature">
                 <div className="feature-icon"></div>
                 <span className="feature-text">Legal Documentation</span>
               </div>
+             
             </div>
           </div>
         </div>
@@ -46,7 +56,10 @@ const RentalBanner = () => {
         <div className="right-content">
           <div className="agent-image-container">
             <div className="agent-image">
-              Agent Image
+              <img
+              src='/img/rentalbanner.svg'
+              alt='rentalBanner'
+              />
             </div>
           </div>
         </div>
