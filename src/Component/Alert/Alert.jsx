@@ -34,7 +34,7 @@ export default function Alert({
     }
   }; 
    
- ;
+;
 
   return (
     <>
@@ -42,7 +42,7 @@ export default function Alert({
         <div className={`alertbox ${ShowAlert ? "show" : ""} ${AlertType}`}>
           <div className="alert-content">
             <div className="alert-icon">{getIcon(AlertType)}</div>
-            <div className="alert-message-box">
+            <div className="alert-message-box">              
               <p className="alert-type">{AlertType}</p>
               {AlertMessage}
             </div>
