@@ -12,13 +12,16 @@ export default function AllPost({
   SearchPostId,
   sortOrder,
   activeFilter,
+  selectAll
  
 }) {
   const dispatch = useDispatch();
   const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)
   const [OwnerPosts, setOwnerPosts] = useState([]);
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
-
+ const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
 
   // Pagination logic state 
   const [page, setPage] = useState(1); // Current page for pagination
@@ -26,11 +29,10 @@ export default function AllPost({
   const itemsPerPage = 10; // Number of items per page
 
   useEffect(()=>{
-    if(activeFilter!==null){
+    if(activeFilter!==null&&postVerify!==null){
       setPostVerify(null)
-     
     }
-  },[activeFilter])
+  },[activeFilter,postVerify])
 
   // Update posts when data or sortOrder changes searching or pagination set inside this useEffect
   useEffect(() => {
@@ -98,7 +100,7 @@ export default function AllPost({
   
       setOwnerPosts(postsToDisplay); // Set the current page posts
     }
-  }, [data, SearchPostId, sortOrder, activeFilter, page,postVerify]);
+  }, [data, SearchPostId, sortOrder, activeFilter, page,postVerify , allPropertyData]);
 
 
 
@@ -118,7 +120,27 @@ export default function AllPost({
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
   };
- // Pagination control functions end
+ // this useEffect is used to handle the selectAll functinaolity 
+ const endIndex=itemsPerPage*page;
+ const startIndex=endIndex-itemsPerPage;
+ useEffect(() => {
+ 
+  if (allPropertyData?.Post && Array.isArray(allPropertyData.Post)&&selectAll===true) {
+
+ 
+    if (selectAll===true) {
+      const allAssignData = allPropertyData.Post.slice(startIndex, endIndex).map((post) => {
+   // This will log "hello" for each post
+        return {
+          PostId: post?._id,
+          CreatedBy: medata?.user?._id,
+        };
+      });
+      setAssignProperty(allAssignData);
+    }
+  }
+}, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
+
   return (
     <div className="Admin-property-post-card-main-box">
       <p className="AllListing-admin">All Listing</p>
@@ -131,6 +153,9 @@ export default function AllPost({
             PostData={post}
             setAssignProperty={setAssignProperty}
             AssignProperty={AssignProperty}
+            selectAllProperty={selectAll}
+            page={page}
+            itemsPerPage={itemsPerPage}
           />
         ))
       ) : (

@@ -48,7 +48,7 @@ const Dashboard = () => {
         dispatch(Admin_AgentGetAllPostAction());
       }
     }
-    // eslint-disable-next-line
+
   }, []);
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for owner 
