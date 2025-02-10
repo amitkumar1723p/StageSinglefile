@@ -13,7 +13,7 @@ const LandLord = () => {
      <div className="landlord-right">
         <div className="landlord-heading">
             <div className="forLandLord"> FOR LANDLORD</div>
-            <h1 className="Head">List Your Property and Find Tenants- <span>All Free</span></h1>
+            <h2 className="Head">List Your Property and Find Tenants- <span>All Free</span></h2>
         </div>
         <div className=" landlord-content">
             <div className="Introduction">

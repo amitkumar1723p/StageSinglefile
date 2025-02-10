@@ -9,10 +9,10 @@ const BrowseProperties = () => {
             <div className='BrowsePropertiesContainer'>
             <div className='BrowseProperties-Left'>
                 <div className='BrowseProperties-Headings'>
-                    <h1>Say Goodbye to </h1>
-                    <h1>Brokerage <span>-</span></h1>
-                    <h1>Rent Smart with</h1>
-                    <h1>Property Dekho 24/7!</h1>
+                    <h2>Say Goodbye to </h2>
+                    <h2>Brokerage <span>-</span></h2>
+                    <h2>Rent Smart with</h2>
+                    <h2>Property Dekho 24/7!</h2>
                 </div>
                 <div className='BrowseProperties-Content'>
                     Find your perfect home without paying extra. 100% Verified listings, direct owner deals, and a seamless rental experience!
@@ -58,7 +58,7 @@ const BrowseProperties = () => {
                 <div className='DocsAssistance'>
                 <div className='DocsAssistance-Img'>
                     <img
-                    src='/img/directOwnerListings.png'
+                    src='/img/DocsAssistance.png'
                     />
 
                 </div>

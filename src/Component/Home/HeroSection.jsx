@@ -479,16 +479,16 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {PropertyAddType == "Rent" && (
+      {/* {PropertyAddType == "Rent" && (
         <>
           <BrowseProperties/>
-          {/* <LandLord/> */}
+    
           <PropertyDetailsForm />
           <RentalBanner />
           <Tenant />
           <TenantDetailsForm />
         </>
-      )}
+      )} */}
 
       {/* Buy Component  */}
 

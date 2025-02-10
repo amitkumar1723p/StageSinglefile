@@ -21,6 +21,10 @@
 .landlord-left img{
     /* height: 350px; */
 }
+.landlord-heading{
+    font-size: 32px;
+    color: #333;
+}
 
 .forLandLord{
     display: flex;
@@ -103,5 +107,11 @@
         width: auto;
         min-width: 250px;
 
+    }
+}
+
+@media(max-width:480px){
+    .landlord-heading h2{
+        font-size: 20px;
     }
 }

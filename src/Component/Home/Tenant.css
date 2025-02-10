@@ -101,6 +101,10 @@
   .for-tenant-content-container {
     width: 80%;
   }
+  .for-tenant-heading h2{
+    color: #333;
+    font-size: 32px;
+  }
   
   .for-tenant-content {
     display: flex;
@@ -177,6 +181,9 @@
       bottom: 60px;
       height: 80px;
       
+    }
+    .for-tenant-heading h2{
+      font-size: 20px;
     }
 
   }

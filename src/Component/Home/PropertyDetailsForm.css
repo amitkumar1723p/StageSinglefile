@@ -1,15 +1,15 @@
-/* General styles for the form container */
+
 .form-container {
  display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 16px;
-  padding: 16px;
+  padding:16px px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Left section content */
+
 .leftContainer {
   flex: 1 1 45%;
   width: 100%;
@@ -22,12 +22,13 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.heading h1{
+.heading h2{
+  font-size: 32px;
   color: #333;
   font-weight: bold;
   font-family: 'Inter', sans-serif;
 }
-.heading h1 span{
+.heading h2 span{
   color:#007bff;
   font-family: 'Inter', sans-serif;
 }
@@ -55,7 +56,8 @@
 
 /* Form section */
 .form-section {
-  flex: 1 1 45%;
+  flex-grow: 1;
+  flex-shrink: 1;
   background-color: #ffffff;
   padding: 16px;
   border-radius: 8px;
@@ -72,6 +74,7 @@
 
 /* Form grid layout */
 .form-grid {
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -95,15 +98,14 @@ select::placeholder {
   font-size: 14px;
 }
 
-.input:focus,
-select:focus {
+.input:focus,  select:focus {
   border-color: #007bff;
   outline: none;
 }
 
-/* Counter styles */
+
 .counter {
-  width: 250px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -122,6 +124,7 @@ select:focus {
   color: #333;
   font-family: 'Inter', sans-serif;
 }
+
 
 .counter button {
   width: 32px;
@@ -147,11 +150,10 @@ select:focus {
   font-family: 'Inter', sans-serif;
 }
 .counter label:first-child{
-  color:rgb(164, 164, 164)
+  color:#333
 }
 
 
-/* Submit button */
 .submit-button {
   width: 100%;
   padding: 12px;
@@ -176,7 +178,7 @@ select:focus {
   position: relative;
 
   width: 100%;
-  height: 250px; 
+  /* height: 250px;  */
   /* background: url('C:\Users\Admin\Desktop\New folder\property-Frontend\public\img\PropertyDetailsForm.svg') no-repeat center center ; */
   background-size: contain;
   background-position: center;
@@ -230,12 +232,16 @@ select:focus {
   .leftContainer{
     width: 100%;
   }
-  .property-container{
+  .property-Container{
     width: 100%;
     height: 150px;
   }
+  .heading h2{
+    font-size: 20px;
+  }
 
-  .independent-floors{
+
+  /* .independent-floors{
     left: 5%;
     top: 15%;
     height: 20px;
@@ -288,7 +294,7 @@ select:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
 }
 
 
@@ -307,6 +313,9 @@ select:focus {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+  .counter{
+    width: 50%;
   }
 }
 

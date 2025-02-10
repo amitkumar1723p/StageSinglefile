@@ -15,9 +15,9 @@ const Tenant = () => {
       <div className="for-tenant-right">
         <div className="for-tenant-heading">
           <div className="for-tenant-title"> FOR TENANT</div>
-          <h1 className="for-tenant-main-heading">
+          <h2 className="for-tenant-main-heading">
             Search, Connect, and Move In- <span>All Free!</span>
-          </h1>
+          </h2>
         </div>
         <div className="for-tenant-content">
           <div className="for-tenant-introduction">

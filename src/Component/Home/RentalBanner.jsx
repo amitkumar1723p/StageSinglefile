@@ -7,9 +7,9 @@ const RentalBanner = () => {
       <div className="banner-content">
         {/* Left content section */}
         <div className="left-content">
-          <h1 className="banner-heading">
+          <h2 className="banner-heading">
             YOUR NEXT RENTAL HOME IS JUST A CLICK AWAY
-          </h1>
+          </h2>
           
           <div className="info-box">
             <p className="info-text">

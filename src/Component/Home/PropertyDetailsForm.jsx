@@ -15,7 +15,7 @@ export default function PropertyDetailsForm() {
       {/* Left Section Placeholder */}
       <div className="leftContainer">
         <div className="upperSection">
-          <div className="heading"><h1>Get a <span>Free</span> Property Estimate - Known Your Property's Real Value</h1></div>
+          <div className="heading"><h2>Get a <span>Free</span> Property Estimate - Known Your Property's Real Value</h2></div>
           <div className="paragraph"> <p>Thinking of Selling? Get an expert-estimated value of your property in minutes. Just fill in the Details, and our team will get back to you with a fair and transparent price extimate.</p></div>
         </div>
         <div className="lowerSection">
