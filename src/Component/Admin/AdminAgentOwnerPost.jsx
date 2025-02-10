@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   Active_InactiveProperty,
   Admin_AgentGetAllPostAction,
@@ -32,11 +33,22 @@ const{postVerify}=useContext(UserContext)
   const { loading: loadingGet, data: AdminData } = useSelector((state) => {
     return state.AdminData;
   });
-
+  const { loading, data: AllPost } = useSelector((state) => {
+    return state.AdminGetAllPost;
+  });
+    const { data: AgentAdminAllPost } = useSelector((state) => {
+      return state.AdminProperty;
+    });
   const [AssignProperty, setAssignProperty] = useState([]);
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
+  const[selectAll,setSelectAll]=useState(false)//used for selectAll key 
+  const [status, setStatus] = useState("");
+  const {setAllPropertyData } = useContext(UserContext);
+  const [active, setActive] = useState(null);
+  const [propertyOrder, setPropertyOrder] = useState("ascending");
+
   const {
     data: adminAlertData,
     LodingType,
@@ -47,7 +59,42 @@ const{postVerify}=useContext(UserContext)
   const { data: VistAndOfferData } = useSelector((state) => {
     return state.VistAndOffer;
   });
-// this useEffect Acesss the all data
+
+ 
+  // updated the localstorage after dashboard action
+
+  useEffect(() => {
+    if (AssignProperty.length <= 0) {
+      dispatch({ type: "GetAllAdminClear" });
+    }
+
+    if (!AdminData) {
+      setAssignPropertyAdmin(null);
+    }
+  }, [AssignProperty, AdminData]);
+
+
+  useEffect(() => {
+    if (["Admin", "Owner"].includes(medata?.user?.Role)) {
+      dispatch(GetAllAssignProperty());
+      // setSelectAll(false)
+    }
+    dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
+  }, []);
+
+  // Active In Active start
+
+
+  useEffect(() => {
+    if (status !== "") {
+      dispatch(Active_InactiveProperty(AssignProperty, status));
+      // setStatus("");
+      // setAssignProperty([]);
+    }
+  }, [AssignProperty, status]);
+ 
+
+  // Active In Active end
   useEffect(() => {
     if (
       adminAlertData &&
@@ -61,18 +108,28 @@ const{postVerify}=useContext(UserContext)
     ) {
       // alert("Admin_OwnerGetAllPostAction PostVerify")
       if (adminAlertData.success === true && medata?.user?.Role == "Owner") {
-        
+        setStatus("")
+        setAssignProperty([]);
+        setSelectAll(false)
           dispatch(Admin_OwnerGetAllPostAction());
-     
+ 
+      
       }
       if (adminAlertData.success === true && medata?.user?.Role == "Admin") {
         if (querry.get("PostVerify")) {
+          
+          setAssignProperty([]);
+          setStatus("")
+          setSelectAll(false)
           dispatch(
+            
             Admin_AgentGetAllPostAction({
               PostVerify: querry.get("PostVerify"),
             })
           );
         } else {
+          setAssignProperty([]);
+          setSelectAll(false)
           dispatch(Admin_AgentGetAllPostAction());
         }
       }
@@ -84,70 +141,42 @@ const{postVerify}=useContext(UserContext)
         LodingType === "Admin_AssignedRequest")
     ) {
       if (adminAlertData.success === true) {
-        setAssignProperty([]);
+         setAssignProperty([]);
+        setSelectAll(false)
+        
         dispatch(GetAllAssignProperty());
-        // if (medata?.user?.Role == "Admin") {
-        //   // dispatch(Admin_AgentGetAllPostAction());
-        //   if (querry.get("PostVerify")) {
-        //     dispatch(
-        //       Admin_AgentGetAllPostAction({
-        //         PostVerify: querry.get("PostVerify"),
-        //       })
-        //     );
-        //   } else {
-        //     dispatch(Admin_AgentGetAllPostAction());
-        //   }
-        // }
       }
     }
 
     // eslint-disable-next-line
   }, [adminAlertData]);
 
+  useEffect(()=>{
+    dispatch(Admin_OwnerGetAllPostAction());
+  
+   },[])
+  
+  //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent  setData
+   useEffect(() => {
+
+    if (AllPost && AllPost.success) {
+    
+      setAllPropertyData(AllPost)
+    
+    }
+  }, [AllPost]);
+  
   useEffect(() => {
-    if (AssignProperty.length <= 0) {
-      dispatch({ type: "GetAllAdminClear" });
+    if (AgentAdminAllPost && AgentAdminAllPost.success) {
+  
+      setAllPropertyData(AgentAdminAllPost)
     }
+  }, [AgentAdminAllPost]);
 
-    if (!AdminData) {
-      setAssignPropertyAdmin(null);
-    }
-  }, [AssignProperty, AdminData]);
 
-  useEffect(() => {
-    if (["Admin", "Owner"].includes(medata?.user?.Role)) {
-      dispatch(GetAllAssignProperty());
-    }
-    dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
-  }, []);
 
-  // Active In Active start
+  // sorting property start  at created filter
 
-  const [status, setStatus] = useState("");
-
-  // Handle button click to update state
-  const handleStatusChange = (value) => {
-    const isConfirmed = window.confirm("Are you sure about it?");
-    if (isConfirmed) {
-      setStatus(value);
-    } else {
-      // Handle the cancel action if needed
-      console.log("Status change canceled.");
-    }
-  };
-
-  useEffect(() => {
-    if (status !== "") {
-      dispatch(Active_InactiveProperty(AssignProperty, status));
-      setStatus("");
-      setAssignProperty([]);
-    }
-  }, [AssignProperty, status]);
-
-  // Active In Active end
-
-  // sorting property start  at created
-  const [propertyOrder, setPropertyOrder] = useState("ascending");
   const handlePropertyOrder = () => {
     if (propertyOrder === "ascending") {
       setPropertyOrder("descending");
@@ -155,12 +184,13 @@ const{postVerify}=useContext(UserContext)
       setPropertyOrder("ascending");
     }
   };
-  // handle active and inactive
-  const [active, setActive] = useState(null);
+  // handle active and inactive filter sectionfilter
+
   const handleActive = (status) => {
     setActive(status);
     if (status === true) {
       setActive(true);
+
     } else if (status === false) {
       setActive(false);
     } else {
@@ -168,7 +198,33 @@ const{postVerify}=useContext(UserContext)
     }
   };
 
-  // sorting property end
+
+
+    // Handle button click to update state active amd inactoive
+    const handleStatusChange = (value) => {
+      if(AssignProperty.length > 0){
+        const isConfirmed = window.confirm("Are you sure about it?");
+        if (isConfirmed) {
+          setStatus(value);
+          
+        } else {
+          // Handle the cancel action if needed
+          console.log("Status change canceled.");
+        }
+      }else{
+        alert("Please Select for Change Property Status!")
+      }
+     
+    };
+
+    // this is used for empty checked box 
+    useEffect(() => {
+      if (!selectAll) {
+        setAssignProperty([]);
+      }
+  
+    }, [selectAll]);
+
   return (
     <>
       <div className="filter-section-property">
@@ -194,19 +250,18 @@ const{postVerify}=useContext(UserContext)
         >
           Active
         </button>
-        <button
-          // onClick={(e) => {
-          //   navigate("/admin/allpost?PostVerify=false");
-          // }}
-          className={ postVerify||active===false ? "select" : ""}
-          // o
-          onClick={() => handleActive(false)}
-          // className={active == false ? "select" : ""}
-        >
+        <button className={ postVerify||active===false ? "select" : ""}
+          onClick={() => handleActive(false)}>
           Inactive
         </button>
+        <button  >
+         Success
+        </button>
+        <button  >
+        Expired
+        </button>
         <button onClick={handlePropertyOrder} style={{ pointerEvents: "auto" }}>
-          {propertyOrder === "ascending" ? <>bottom to top</> : <>Top to bottom</>}
+          {propertyOrder === "ascending" ? <>Sort (↑)</> : <>Sort(↓)</>}
         </button>
 
         {/* <button>Exprired</button>
@@ -241,9 +296,16 @@ const{postVerify}=useContext(UserContext)
           />
         </div>
       </div>
-
-      {AssignProperty.length > 0 && (
+     
         <div className="select-section-admin">
+        <div className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded">
+         <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1"       onChange={() => setSelectAll(prev => !prev)} />
+          <label >Select All</label></>
+          
+       
+        
+          </div>
+
           <div>
             {" "}
             <select
@@ -252,27 +314,35 @@ const{postVerify}=useContext(UserContext)
                 if (e.target.value == "Admin") {
                   dispatch({ type: "GetAllAdminClear" });
                   dispatch(GetAllAdminAction({ AdminVerify: true }));
+               
                 } else if (e.target.value == "Agent") {
                   dispatch({ type: "GetAllAdminClear" });
                   dispatch(GetAllAdminAction({ AgentVerify: true }));
+                  
                 } else {
                   dispatch({ type: "GetAllAdminClear" });
+                 
                   // setAssignPropertyAdmin(null);
                 }
               }}
               // value={}
               className="selectAssign"
             >
-              <option value="">Assign to </option>
+              <option value="">Assign</option>
+              {AssignProperty.length > 0 &&<>
               {medata?.user?.Role == "Owner" && (
                 <option value={`Admin`}>Admin</option>
               )}
 
-              <option value={`Agent`}>Agent</option>
+              <option value={`Agent`}>Agent</option></>
+
+            }
             </select>
-          </div>
+          </div> 
           {/* here start */}
-          <div></div>
+          <div>
+
+          </div>
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -317,6 +387,9 @@ const{postVerify}=useContext(UserContext)
           )}
 
           {/* Buttons to change the status */}
+        
+         
+         
           <button
             className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handleStatusChange("Active")}
@@ -330,9 +403,15 @@ const{postVerify}=useContext(UserContext)
           >
             In-Active
           </button>
+          {/* <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+           
+          >
+         sort
+          </button> */}
           {/* Display the current status */}
         </div>
-      )}
+  
 
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (
@@ -344,6 +423,7 @@ const{postVerify}=useContext(UserContext)
             SearchPostId={SearchPostId}
             sortOrder={propertyOrder}
             activeFilter={active}
+            selectAll={selectAll}
           />
         ) : (
           <AdminAgentAssignPost

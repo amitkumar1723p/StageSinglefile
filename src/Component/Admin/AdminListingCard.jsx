@@ -21,6 +21,9 @@ export default function AdminListingCard({
   index,
   setAssignProperty,
   AssignProperty,
+  selectAllProperty,
+  itemsPerPage,
+  page,
 }) {
   const [formatDate, setFormatDate] = useState({
     ActiveDate: "",
@@ -110,10 +113,10 @@ export default function AdminListingCard({
           item.AdminId._id !== medata?.user?._id
         );
       });
-
+ 
       setisAssignedToAnyUser(AssingPosts);
     }
-  }, [AssignPostData]);
+  }, [AssignPostData ,PostData?._id]);
 
   useEffect(() => {
     if (VistAndOfferData?.success == true) {
@@ -124,14 +127,25 @@ export default function AdminListingCard({
       );
       if (VisitsAndOffers_Data) {
         setVisitAndOfferLength(VisitsAndOffers_Data);
-      } 
-      else{
+      } else {
         setVisitAndOfferLength(undefined);
       }
 
-      // VistAndOfferData.VisitAndOffer?.find()
     }
-  }, [VistAndOfferData,PostData]);
+  }, [VistAndOfferData, PostData]);
+
+  // these are use for manage checked box
+  const endIndex=itemsPerPage*page;
+  const startIndex=endIndex-itemsPerPage;
+
+  const isChecked = (index) => {
+    if(selectAllProperty===true){
+      return index >= startIndex && index <= endIndex;
+    }
+    return index === 0 ;
+    
+  };
+
 
   return (
     <div className="Admin-property-post-card-main-box">
@@ -139,38 +153,62 @@ export default function AdminListingCard({
         <div className="property-post-card" id="property-card-1">
           {medata?.user?.Role != "Agent" &&
             AssignProperty &&
-            isAssignedToAnyUser.length <= 0 && (
-              <div className="Assing-to">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={AssignProperty.some(
-                      (item) => item.PostId === PostData._id
-                    )}
-                    onChange={(e) => {
-                      if (e.target.checked == true) {
-                        setAssignProperty([
-                          ...AssignProperty,
+            (
+              <>
+                {selectAllProperty === true ? (
+                  <div className="Assing-to">
+                    <label>
+                    
+                      <input
+                        type="checkbox"
+                        checked={isChecked(index)}
+                        // checked={
+                        //   selectAllProperty ||
+                        //   AssignProperty.some(
+                        //     (item) => item.PostId === PostData._id
+                        //   )
+                        // }
+                       
+                      
+                      />
+                    </label>
+                  </div>
+                ) : (
+                  <>
+                    <div className="Assing-to">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={AssignProperty.some(
+                            (item) => item.PostId === PostData._id
+                          )}
+                          onChange={(e) => {
+                            if (e.target.checked == true) {
+                              setAssignProperty([
+                                ...AssignProperty,
 
-                          // PostData._id,
-                          {
-                            PostId: PostData._id,
-                            CreatedBy: medata?.user?._id,
-                          },
-                        ]);
-                      }
-                      if (e.target.checked == false) {
-                        let removeAssignProperty = AssignProperty.filter(
-                          (e) => {
-                            return e.PostId != PostData._id;
-                          }
-                        );
-                        setAssignProperty(removeAssignProperty);
-                      }
-                    }}
-                  />
-                </label>
-              </div>
+                                // PostData._id,
+                                {
+                                  PostId: PostData._id,
+                                  CreatedBy: medata?.user?._id,
+                                },
+                              ]);
+                            }
+                            if (e.target.checked == false) {
+                              let removeAssignProperty = AssignProperty.filter(
+                                (e) => {
+                                  return e.PostId != PostData._id;
+                                }
+                              );
+                              setAssignProperty(removeAssignProperty);
+                            }
+                          }}
+                        />
+                      </label>
+                    </div>
+                  </>
+                )}
+              </>
             )}
           <div className="admin-property-card-info">
             <div className="heading-name">
@@ -370,7 +408,9 @@ export default function AdminListingCard({
                     .replace(",", "")
                     .replaceAll("/", "-")}-${PostData._id}`}
                 >
-                  <button className="contact-button btn-sm">View Listing</button>
+                  <button className="contact-button btn-sm">
+                    View Listing
+                  </button>
                 </Link>
                 <div className="Verified-lable">
                   <p>Verified lable :</p>
@@ -457,8 +497,6 @@ export default function AdminListingCard({
                   </div>
                 )}
               </div>
-
-             
             </div>
           </div>
         </div>

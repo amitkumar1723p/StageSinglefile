@@ -16,21 +16,23 @@ export function UserProvider({ children }) {
   //this store All Property fetched from backend
   // const [allPropertyData, setAllPropertyData] = useState([]);
 
-  const [allPropertyData, setAllPropertyData] = useState(() => {
-    const storedState = localStorage.getItem('Admin_OwnerGetAllPostState');
-    return storedState ? JSON.parse(storedState) : {}; // Initialize state from localStorage or empty object
-  });
+  // const [allPropertyData, setAllPropertyData] = useState(() => {
+  //   const storedState = localStorage.getItem('Admin_OwnerGetAllPostState');
+  //   return storedState ? JSON.parse(storedState) : {}; // Initialize state from localStorage or empty object
+  // });
 
     // Whenever `allPropertyData` changes, update localStorage
-    useEffect(() => {
-      if (allPropertyData) {
-        localStorage.setItem('Admin_OwnerGetAllPostState', JSON.stringify(allPropertyData));
-      }
-    }, [allPropertyData]);
+    // useEffect(() => {
+    //   if (allPropertyData) {
+    //     localStorage.setItem('Admin_OwnerGetAllPostState', JSON.stringify(allPropertyData));
+    //   }
+    // }, [allPropertyData]);
+    const [allPropertyData, setAllPropertyData] = useState([])
+   
     
 // this state is store the dashboard keyword for active ,inactive or active 
 const[postVerify,setPostVerify]=useState(null)
-console.log(postVerify,"check")
+// console.log(postVerify,"check")
   return (
     <UserContext.Provider
       value={{
