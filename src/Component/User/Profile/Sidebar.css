@@ -1,10 +1,12 @@
 /* Base styles for the sidebar */
 .sidebar-profile {
-  padding: 20px;
+  /* padding: 20px; */
   color: #ffffff;
   height: fit-content;
   border: 1px solid #dedeff;
   position: sticky;
+  display: flex;
+  align-items: center;
   top: 70px;
 }
 
@@ -23,6 +25,7 @@
   padding: 8px 8px;
   cursor: pointer;
   color: #34414b;
+  gap: 10px;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -72,23 +75,25 @@
     overflow-x: auto;
   }
 
-  .mob-hide {
+  /* .mob-hide {
     display: none;
-  }
+  } */
 
-  .sidebar-profile img {
-    display: none;
-  }
+   .navList::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
 
+  
   .navItem {
     box-shadow: 0px 0px 4px 0px #b1cbdf;
-    background-color: white;
-
+    
+    min-height: 46px;
     padding: 10px 20px;
     flex-direction: row;
+    overflow-x: auto;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
     color: #8c8c8c;
     /* margin-right: 20px; */
     font-size: 12px;
@@ -99,9 +104,9 @@
 
   .navItem {
     box-shadow: 0px 0px 4px 0px #b1cbdf;
-    background-color: white;
+   
 
-    padding: 10px 20px;
+    padding: 5px 20px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -112,6 +117,14 @@
     border-radius: 4px;
     border: none;
     cursor: pointer;
+  }
+  .active-btn-nav {
+    color: #fff;
+    background-color: var(--main-light-clr);
+    transition: filter 0.3s ease;
+  }
+  .navItem.active-btn-nav img {
+    filter: brightness(0) invert(1); /* Turn the icon white */
   }
   /* .profile-container{
     display: block;

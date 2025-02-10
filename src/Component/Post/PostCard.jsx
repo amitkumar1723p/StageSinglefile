@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, useNavigate, Navigate } from "react-router-dom";
-import { IoMdShareAlt } from "react-icons/io";
+import { IoIosCopy, IoLogoFacebook, IoLogoInstagram, IoMdAddCircle, IoMdSend, IoMdShareAlt } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./Post.css";
@@ -8,6 +8,7 @@ import {
   AddFavouriteAndUnFavouriteAction,
   GetMeDetailsAction,
 } from "../../Action/userAction";
+import ShareModal from "./SinglePostDetails/ShareModal";
 
 export default function PostCard({ PostData, index }) {
   const navigate = useNavigate();
@@ -19,8 +20,57 @@ export default function PostCard({ PostData, index }) {
     return state.userData;
   });
   const [floorDetails, setFloorDetails] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const shareUrl = () => {
+    navigator.clipboard.writeText(window.location.href);
+    // You could add a toast notification here
+  };
+
+  // const platforms = [
+  //   {
+  //     name: 'WhatsApp',
+  //     icon: <IoMdAddCircle className="w-5 h-5" />,
+  //     color: 'bg-green-500 hover:bg-green-600',
+  //     textColor: 'text-white',
+  //     url: `https://wa.me/?text=${window.location.href}`
+  //   },
+  //   {
+  //     name: 'Telegram',
+  //     icon: <IoMdSend className="w-5 h-5" />,
+  //     color: 'bg-blue-500 hover:bg-blue-600',
+  //     textColor: 'text-white',
+  //     url: `https://t.me/share/url?url=${window.location.href}`
+  //   },
+  //   {
+  //     name: 'Facebook',
+  //     icon: <IoLogoFacebook className="w-5 h-5" />,
+  //     color: 'bg-blue-600 hover:bg-blue-700',
+  //     textColor: 'text-white',
+  //     url: `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`
+  //   },
+  //   {
+  //     name: 'Instagram',
+  //     icon: <IoLogoInstagram className="w-5 h-5" />,
+  //     color: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600',
+  //     textColor: 'text-white',
+  //     url: `https://www.instagram.com/` // Note: Instagram doesn't support direct sharing via URL
+  //   },
+  //   {
+  //     name: 'Copy Link',
+  //     icon: <IoIosCopy className="w-5 h-5" />,
+  //     color: 'bg-gray-100 hover:bg-gray-200',
+  //     textColor: 'text-gray-800',
+  //     onClick: shareUrl
+  //   }
+  // ];
+
+
 
   // Stop Re-Rendring This Function
+  
+  
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
       return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
@@ -65,9 +115,9 @@ export default function PostCard({ PostData, index }) {
     setIIshare(!isShare);
   };
 
-  const shareUrl = () => {
-    navigator.clipboard.writeText(window.location.href);
-  };
+  // const shareUrl = () => {
+  //   navigator.clipboard.writeText(window.location.href);
+  // };
 
   useEffect(() => {
     let slider;
@@ -262,7 +312,7 @@ export default function PostCard({ PostData, index }) {
 
               <div className="share-fav-main-box">
                 <div className="postcard-share-parent">
-                  <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <div  onClick={() => setIsModalOpen(true)}>
                     <img
                       src="/img/share-btn.svg"
                       className="img-fluid img-thumbnail"
@@ -448,75 +498,12 @@ export default function PostCard({ PostData, index }) {
       </div>
       {/* share card begin  */}
 
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content rounded-4 shadow-lg">
-            <div className="modal-header border-0">
-              <h3 className="modal-title fs-6 text-sm " id="exampleModalLabel">
-                Share Property with Your Friends!
-              </h3>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              />
-            </div>
-            <div className="modal-body p-2">
-              <p className="text-muted">
-                Choose a platform to share this property:
-              </p>
-              <ul className="list-unstyled d-flex gap-3 justify-center">
-                <li className="mb-2">
-                  <Link
-                    to={`https://wa.me/?text=${window.location.href}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="d-flex align-items-center text-decoration-none text-success p-2 rounded-3 border border-1 border-success hover-shadow justify-center"
-                  >
-                    WhatsApp
-                  </Link>
-                </li>
-                <li className="mb-2">
-                  <Link
-                    to={`https://t.me/share/url?url=${window.location.href}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="d-flex align-items-center text-decoration-none text-primary p-2 rounded-3 border border-1 border-primary hover-shadow justify-center"
-                  >
-                    Telegram
-                  </Link>
-                </li>
 
-                <li className="mb-2">
-                  <p
-                    onClick={shareUrl}
-                    className="d-flex align-items-center text-decoration-none text-dark p-2 rounded-3 border border-1 border-secondary hover-shadow justify-center"
-                  >
-                    Copy URL
-                  </p>
-                </li>
-              </ul>
-            </div>
-
-            <div className="modal-footer border-0">
-              <button
-                type="button"
-                className="btn btn-outline-secondary btn-sm"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ShareModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} propid={`${     window.location.origin
+}/post-detail/${PropertyAddress.toLowerCase()
+                .replaceAll(" ", "-")
+                .replace(",", "")
+                .replaceAll("/", "-")}-${PostData._id}`}/>
 
       {/* share card end  */}
     </>

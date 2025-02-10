@@ -1,6 +1,7 @@
 
 body {
   color: var(--main-black);
+  background-color:#e6e0d4;
 }
 
 .select:focus-visible {
@@ -16,7 +17,7 @@ body {
   visibility: visible !important;
 }
 
-.select::focus {
+.select:focus {
   border: none;
   outline: none;
 }
@@ -321,3 +322,6 @@ td{
 }
 
 
+.ttc{
+ color: #0056b3;
+}
