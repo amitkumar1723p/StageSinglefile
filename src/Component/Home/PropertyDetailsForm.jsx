@@ -11,7 +11,7 @@ export default function PropertyDetailsForm() {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container-rent">
       {/* Left Section Placeholder */}
       <div className="leftContainer">
         <div className="upperSection">
@@ -118,7 +118,7 @@ export default function PropertyDetailsForm() {
           </select>
         </div>
 
-        <button className="submit-button">Get Free Estimate</button>
+        <button className="rent-submit-button">Get Free Estimate</button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 .BrowseProperties-Main{
     width: 100%;
-    
+    margin: 30px 0;
     /* border: 1px solid black; */
 }
 
@@ -10,8 +10,10 @@
     display: flex;
     margin: 0 auto;
     width: 80%;
-    
-
+    height: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -41,11 +43,12 @@
     /* border: 1px solid black;  */
     font-size: 14px;
     color: #333;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 
 .BrowseProperties-Button{
+    border: none;
     background-color: var(--main-light-clr);
     font-family: "Inter", sans-serif;
     color: white;
@@ -124,6 +127,7 @@
     font-weight: bold;
     color: #333;
     font-family: "Inter", sans-serif;
+    font-size: 14px;
 }
 .OwnerListings-Content p{
     font-family: "Inter", sans-serif;
@@ -145,12 +149,17 @@
     height: 80px;
    
 }
+
+.span-name-rent{
+color:var(--main-light-clr);
+}
 .VerifiedPropertiesContainer{
     box-shadow: -2px 4px 10px rgb(92, 92, 92);
     background-color: white;
     border-radius: 2px;
     padding: 8px;
     display: flex;
+    justify-content: space-between;
     min-width: 320px;
     width: 320px;
     /* border: 1px solid black; */
@@ -164,19 +173,24 @@
     justify-content: center;
     /* border: 1px solid black; */
 }
+
+.BrowseProperties-Right h3{
+    margin-bottom: 5px;
+}
 .VerifiedProperties-Img img{
     /* border: 1px solid black; */
 }
 .VerifiedProperties-Content{
     display: flex;
     flex-direction: column;
-    justify-content:space-evenly;
+    /* justify-content:space-evenly; */
 }
 
 .VerifiedProperties-Content h3{
     font-weight: bold;
     color: #333;
     font-family: "Inter", sans-serif;
+    font-size: 14px;
 }
 .VerifiedProperties-Content p{
     font-size: 13px;
@@ -216,6 +230,7 @@
     font-weight: bold;
     color: #333;
     font-family: "Inter", sans-serif;
+    font-size: 14px;
 }
 .DocsAssistance-Content p{
     font-size: 13px;

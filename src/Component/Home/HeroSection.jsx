@@ -9,12 +9,13 @@ import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 
 import FAQ from "./FAQ";
+import LandLord from "./LandLord";
 
 import TenantDetailsForm from "./TenantDetailsForm";
 import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
 import BrowseProperties from "./BrowseProperties";
-// import LandLord from "./LandLord";
+
 
 
 import PropertyDetailsForm from "./PropertyDetailsForm";
@@ -507,16 +508,16 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
           <BrowseProperties/>
-    
+        <LandLord/>
           <PropertyDetailsForm />
           <RentalBanner />
           <Tenant />
           <TenantDetailsForm />
         </>
-      )} */}
+      )}
 
       {/* Buy Component  */}
 

@@ -1,25 +1,53 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "PropertyDekho247",
+  "name": "PropertyDekho247 - Find Your Dream Property",
+  "version": "1.0",
+  "manifest_version": 2,
+  "theme_color": "#0044cc",
+  "background_color": "#ffffff",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "https://www.propertydekho247.com/icons/128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "https://www.propertydekho247.com/icons/144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "https://www.propertydekho247.com/icons/152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "https://www.propertydekho247.com/icons/192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://www.propertydekho247.com/icons/256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.propertydekho247.app"
+    },
+    {
+      "platform": "itunes",
+      "id": "com.propertydekho247.ios"
+    }
+  ],
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#333333000",
-  "background_color": "#ffffff"
+  "orientation": "portrait",
+  "description": "Discover and explore the best property listings, including homes for sale, apartments for rent, and property investments, with PropertyDekho247.",
+  "keywords": "real estate, property listings, homes for sale, apartments for rent, property investment, PropertyDekho247, buy property, rent property, property deals",
+  "author": "PropertyDekho247.com Team",
+  "lang": "en"
 }
