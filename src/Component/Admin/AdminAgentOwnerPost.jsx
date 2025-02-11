@@ -47,7 +47,9 @@ const{postVerify}=useContext(UserContext)
   const [status, setStatus] = useState("");
   const {setAllPropertyData } = useContext(UserContext);
   const [active, setActive] = useState(null);
+  const [onPageActive,setPageActive]=useState("");
   const [propertyOrder, setPropertyOrder] = useState("ascending");
+  const[currenSelected,setCurrentSelected] = useState("");
 
   const {
     data: adminAlertData,
@@ -60,7 +62,37 @@ const{postVerify}=useContext(UserContext)
     return state.VistAndOffer;
   });
 
- 
+  const queryParams = new URLSearchParams(location.search);
+  const [myQuery,setMyQuery] = useState(queryParams.get("type"))
+  // const myQuery = queryParams.get("type");
+  
+  console.log(myQuery,"my query hiiiii")
+
+  useEffect(()=>{
+      function settingFilter(){
+        // setActive(status);
+        if (myQuery === "true") {
+          setCurrentSelected("All Active posts")
+          setActive(true);
+    
+        } else if (myQuery === "false") {
+          setCurrentSelected("All In-Active posts")
+
+          setActive(false);
+        } else {
+          setCurrentSelected("All posts")
+
+          setActive(null);
+    
+        }
+      }
+      settingFilter()
+  },[])
+
+
+ function handleCurrentSlected(a){
+  setCurrentSelected(a);
+ }
   // updated the localstorage after dashboard action
 
   useEffect(() => {
@@ -186,15 +218,22 @@ const{postVerify}=useContext(UserContext)
   };
   // handle active and inactive filter sectionfilter
 
-  const handleActive = (status) => {
+  const handleActive = (status,buttonType) => {
+    setMyQuery("")
+    setPageActive(buttonType)
     setActive(status);
     if (status === true) {
+      setCurrentSelected("All Active posts")
+
       setActive(true);
 
     } else if (status === false) {
+      setCurrentSelected("All In-Active posts")
       setActive(false);
     } else {
+      setCurrentSelected("All posts")
       setActive(null);
+
     }
   };
 
@@ -227,14 +266,18 @@ const{postVerify}=useContext(UserContext)
 
   return (
     <>
-      <div className="filter-section-property">
-        <div>
+    <div className="admin-filter-main-parent-box">
+      
+    <p className="AllListing-admin">{currenSelected}</p>
+    <div className="filter-section-property">
+<div className="admin-filter-all-button-parent">
+         <div>
           <img src="/img/FilteImg.png" alt="FilteImg" />
         </div>
 
         <button
-          className={ postVerify||active===null ? "select" : ""}
-          onClick={() => handleActive(null)}
+          className={ myQuery === "all"  || onPageActive === "all" ? "select" : ""}
+          onClick={() => handleActive(null,"all")}
         >
           <span>All Post</span>
         </button>
@@ -243,15 +286,15 @@ const{postVerify}=useContext(UserContext)
           // onClick={(e) => {
           //   navigate("/admin/allpost?PostVerify=true");
           // }}
-          className={postVerify || active === true ? "select" : ""}
+          className={myQuery==="true" || onPageActive === "true" ? "select" : ""}
 
-          onClick={() => handleActive(true)}
+          onClick={() => handleActive(true,"true")}
           // className={active == true ? "select" : ""}
         >
           Active
         </button>
-        <button className={ postVerify||active===false ? "select" : ""}
-          onClick={() => handleActive(false)}>
+        <button className={ myQuery==="false"||onPageActive==="false" ? "select" : ""}
+          onClick={() => handleActive(false,"false")}>
           Inactive
         </button>
         <button  >
@@ -263,11 +306,12 @@ const{postVerify}=useContext(UserContext)
         <button onClick={handlePropertyOrder} style={{ pointerEvents: "auto" }}>
           {propertyOrder === "ascending" ? <>Sort (↑)</> : <>Sort(↓)</>}
         </button>
+</div>
 
         {/* <button>Exprired</button>
         <button>Reported</button>
         <button>Success</button> */}
-        <div className="relative bg--200">
+        <div className="">
           <input
             className="controlled-input"
             type="text"
@@ -298,9 +342,9 @@ const{postVerify}=useContext(UserContext)
       </div>
      
         <div className="select-section-admin">
-        <div className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded">
-         <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1"       onChange={() => setSelectAll(prev => !prev)} />
-          <label >Select All</label></>
+        <div className="admin-filter-select" onClick={() => setSelectAll(prev => !prev)} >
+         <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1" />
+          <label className="admin-filter-select-lable">Select All</label></>
           
        
         
@@ -391,14 +435,14 @@ const{postVerify}=useContext(UserContext)
          
          
           <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className="px-1 mx-0 bg-primary bg-opacity-10 border border-info-subtle  rounded"
             onClick={() => handleStatusChange("Active")}
           >
             Active
           </button>
 
           <button
-            className="px-3 mx-3 py-1 bg-primary bg-opacity-10 border border-info-subtle rounded"
+            className="px-1 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
             onClick={() => handleStatusChange("InActive")}
           >
             In-Active
@@ -411,6 +455,7 @@ const{postVerify}=useContext(UserContext)
           </button> */}
           {/* Display the current status */}
         </div>
+    </div>
   
 
       <div className="showpost">
