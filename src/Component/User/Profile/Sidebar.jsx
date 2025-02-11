@@ -104,7 +104,7 @@ function Sidebar() {
                   location.pathname == "/user/my-visits" ? "active-btn-nav" : ""
                 }`}
               >
-                <img className="" src="/img/admin.svg" alt="my-visits" />
+                <img className="" src="/img/Admin.svg" alt="my-visits" />
                 Schedule Visit
               </li>
             </NavLink>
