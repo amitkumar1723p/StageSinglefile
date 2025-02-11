@@ -60,7 +60,7 @@ function Sidebar() {
                 My Listing
               </li>
             </NavLink>
-            <NavLink to="/user/my-post/all-visits">
+            <NavLink to="/user/my-post/all-response">
               <li className="navItem mob-hide">
                 <img
                   className="icons"

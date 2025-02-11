@@ -117,6 +117,7 @@ transition: .5s;
   /* margin-right: 40px;
   margin-top: 20px; */
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* Post Card Css  */

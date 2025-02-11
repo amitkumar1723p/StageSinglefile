@@ -131,6 +131,9 @@ ol, ul {
   padding-left: 0;
 }
 
+.white-space-nowrap{
+  white-space: nowrap;
+}
 /* dl,
 
 ol,
@@ -300,12 +303,28 @@ td{
   display: flex;
 } */
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom:0;
+
+/* Apply to all scrollbars */
+::-webkit-scrollbar {
+  width: 6px;  /* Adjust scrollbar width */
+  height: 6px; /* For horizontal scrollbars */
 }
-/* @media (min-width: 1200px) {
-  .h3, h3 {
-      font-size: 0;
-  }
-} */
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray track */
+  border-radius: 10px;
+}
+
+/* Scrollbar Thumb */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Darker gray scrollbar */
+  border-radius: 10px;
+}
+
+/* Scrollbar on Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Even darker gray on hover */
+}
+
+

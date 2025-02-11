@@ -52,7 +52,7 @@ import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
-import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -607,8 +607,8 @@ function App() {
 
             <Route
               exact
-              path="my-post/all-visits"
-              element={<OwnerPostAllVisits />}
+              path="my-post/all-response"
+              element={<OwnerPostAllResponse />}
             />
             <Route
               exact

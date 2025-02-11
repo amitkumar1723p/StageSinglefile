@@ -958,7 +958,7 @@ export default function SinglePostDetails() {
                                               )}   <span>/Month</span>
                                             </div>
 
-                                            <span> RentPrice price </span>
+                                            <span className="rent-price-section-similar-property"> Rent Price </span>
                                           </div>
                                         </>
                                       )}
