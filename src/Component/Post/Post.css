@@ -113,9 +113,8 @@ transition: .5s;
 
 .showpost {
   display: flex; 
-  /* margin-left: 40px;
-  /* margin-right: 40px;
-  margin-top: 20px; */
+  
+  margin-top: 135px; 
   flex-wrap: wrap;
   gap: 10px;
 }

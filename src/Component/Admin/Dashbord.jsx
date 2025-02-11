@@ -90,7 +90,7 @@ const Dashboard = () => {
         <>
           <h4 className={`main-dash ${location.pathname.includes("/admin/dashboard") ?"active-btn-admin":""}`} > Dashboard</h4>
           <div className="cards  grid grid-cols-4 gap-3  ">
-            <Link to="/admin/allpost" >
+            <Link to="/admin/allpost?type=all" >
               <div className="card p-3">
                 <div className="Admin-box">
                   <p className="total-number">{TotalListing}</p>
@@ -100,7 +100,7 @@ const Dashboard = () => {
                 <p className="viewall">View All</p>
               </div>
             </Link>
-            <Link to="/admin/allpost">
+            <Link to="/admin/allpost?type=true">
 
               <div className="card p-3">
                 <div className="Admin-box">
@@ -112,7 +112,7 @@ const Dashboard = () => {
               </div>
             </Link>
 
-            <Link to="/admin/allpost">
+            <Link to="/admin/allpost?type=false">
               <div className="card p-3 cursor-pointer">
                 <div className="Admin-box">
                   <p className="total-number">{UnVerifyPost.length}</p>

@@ -8,7 +8,8 @@ export default function AdminAside() {
   const location = useLocation();
 
   return (
-    <div className="AdminAside-container">
+   <div className="">
+     <div className="AdminAside-container">
       <aside className="AdminAside-sidebar">
         <div className="AdminAside-header">Dashboard</div>
         <div className="AdminAside-links">
@@ -110,5 +111,6 @@ export default function AdminAside() {
         <Outlet />
       </div>
     </div>
+   </div>
   );
 }
