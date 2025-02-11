@@ -31,10 +31,10 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       ...ScheduleVistData,
       PostData: { PostId: SinglePostData.SinglePost._id },
     };
-    console.log(vistobj);
+  
     //  alert(`${ScheduleVistData.VisitTime.From} to ${ScheduleVistData.VisitTime.To}`)
     dispatch(CreateScheduleVisitAction(vistobj));
-    console.log(vistobj);
+   
     setshowScheduleVistAlert("LodingTrue");
     const id = setTimeout(() => {
       setshowScheduleVistAlert(true);
@@ -113,7 +113,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
                 <div className="schedule-your-visit-time-container">
                   <TimePicker
                     onChange={(e) => {
-                      console.log(e);
+                     
                       setScheduleVistData({
                         ...ScheduleVistData,
                         VisitTime: {

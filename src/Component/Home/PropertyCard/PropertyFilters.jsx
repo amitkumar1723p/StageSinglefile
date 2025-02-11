@@ -52,7 +52,7 @@ const PropertyFilters = () => {
   const [querry, setquerry] = useSearchParams();
 
   useEffect(() => {
-    console.log(removeFilterField);
+    
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       dispatch(
         GetAllPostAction({

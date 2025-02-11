@@ -740,8 +740,7 @@ export const SimilarProperty = (postId) => {
       };
  
       const { data } = await axios.get(url, config);  // Pass postId as an object
-//  console.log(similar)
- console.log( "similer",data)
+ 
       dispatch({
         type: "SimilarPropertySuccess",
         payload: data,

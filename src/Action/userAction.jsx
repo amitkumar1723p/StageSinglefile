@@ -821,7 +821,7 @@ export const GetMyVisitsAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
+       
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -855,7 +855,7 @@ export const OwnerAllPostsVisitAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
+      
       dispatch({ type: "OwnerAllPostsVisitSuccess", payload: data });
     } catch (error) {
       if (error.response) {
