@@ -1,11 +1,12 @@
 
 body {
   color: var(--main-black);
+  background-color:#e6e0d4;
 }
 
-/* .navItem.active-btn-nav .icons {
+.group-sidebar img:hover {
   filter: brightness(0) invert(1);
-} */
+}
 
 .select:focus-visible {
   border: none;
@@ -20,7 +21,7 @@ body {
   visibility: visible !important;
 }
 
-.select::focus {
+.select:focus {
   border: none;
   outline: none;
 }
@@ -325,3 +326,6 @@ td{
 }
 
 
+.ttc{
+ color: #0056b3;
+}

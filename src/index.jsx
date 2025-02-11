@@ -20,8 +20,8 @@ root.render(
          position="top-center"
         //  limit={3}
         theme="colored"
-       
-         autoClose={3000}/> 
+       className={"ttc"}
+         autoClose={1500}/> 
       </BrowserRouter>
     </UserProvider>
   </Provider>

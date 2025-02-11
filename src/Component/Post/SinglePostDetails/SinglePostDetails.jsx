@@ -275,7 +275,7 @@ export default function SinglePostDetails() {
         </div>
       ) : null} */}
 
-      {loading ? (
+      {loading  ? (
         <Loader className="windowloader" />
       ) : (
         getSinglePostData &&
