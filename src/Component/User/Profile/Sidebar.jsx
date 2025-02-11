@@ -157,7 +157,7 @@ function Sidebar() {
                 FAQs
               </li>
             </NavLink>
-            <NavLink to="/user/post/response">
+            {/* <NavLink to="/user/post/response">
               <li className="navItem mob-hide">
                 <img
                   className=""
@@ -166,7 +166,7 @@ function Sidebar() {
                 />
                 Your Post Response
               </li>
-            </NavLink>
+            </NavLink> */}
           </ul>
         </nav>
       </aside>
