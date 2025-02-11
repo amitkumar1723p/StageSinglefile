@@ -185,9 +185,9 @@ export default function OwnerPostAllResponse() {
                       </td>
 
                       {/* ScheduleVisits  */}
-                      <td>{data?.ScheduleVisit?.length}</td>
+                      <td className="owner-post-vists-table-cell">{data?.ScheduleVisit?.length}</td>
                       {/* Offer PRice  */}
-                      <td>
+                      <td className="owner-post-vists-table-cell">
                         <span className="white-space-nowrap">
                           {" "}
                           {data?.receiveoffer?.length > 0
