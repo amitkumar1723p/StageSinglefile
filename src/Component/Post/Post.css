@@ -361,6 +361,7 @@ input[type="file"]::-webkit-file-upload-button {
 
 /* Post Card Share Box Css   */
 .postcard-share-parent {
+  cursor: pointer;
   position: relative;
 }
 .postcard-share-child {
@@ -451,3 +452,4 @@ input[type="file"]::-webkit-file-upload-button {
 .share-btn img {
   pointer-events: auto; /* Ensure the image is clickable */
 }
+

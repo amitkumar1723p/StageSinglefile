@@ -126,6 +126,7 @@ export default function AdminAgentAssignPost({
                 PostData={e.PostId}
                 setAssignProperty={setAssignProperty}
                 AssignProperty={AssignProperty}
+              
               />
             );
           }

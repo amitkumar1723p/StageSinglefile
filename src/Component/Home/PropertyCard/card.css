@@ -381,12 +381,17 @@
   border-radius: 5px;
   border: 2px solid #5cadeb;
 }
+.bhk-option-1:hover{
+  background-color: #5cadeb;
+  color: #fff;
+}
+
 .filter-home-card{
   
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  align-items: center;
+  align-items: start;
   /* background: #000; */
 }
 

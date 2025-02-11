@@ -190,6 +190,10 @@
   /* .login-image-section-unique {
     display: none;
   } */
+
+  .create-post-section{
+    width: 100%;
+  }
   .login-form-content-unique {
     background-color: white;
     display: flex;

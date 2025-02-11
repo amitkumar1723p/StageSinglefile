@@ -374,6 +374,7 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    
   }
 
   .dashborad-section-left-right {
@@ -385,13 +386,17 @@
 }
 @media (max-width: 480px) {
   .sidebar-profile {
-    padding: 10px;
+    /* padding: 20px; */
+    overflow-x: auto;
     color: #ffffff;
-    height: fit-content;
+    height: 70px;
     border: 1px solid #dedeff;
     position: static;
     top: 0px;
   }
+  .sidebar-profile::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
 
   .editProfileButton button {
     color: #fff;
