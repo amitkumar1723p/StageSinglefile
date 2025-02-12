@@ -51,7 +51,7 @@ export default function UserForm() {
           navigate(-1);
         } else if (RedirectPath == "/show-scheduleVisit") {
           navigate(-1);
-        } else if (RedirectPath == "/show-TenantResponseForm") {
+        } else if (RedirectPath == "/view-owner-details") {
           navigate(-1);
         } else if (RedirectPath == "/post-requirement") {
           navigate(-1);

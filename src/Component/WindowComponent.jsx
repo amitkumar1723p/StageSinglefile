@@ -9,32 +9,30 @@ export default function WindowComponent({
   SinglePostData,
   PropertyAddress,
   ImageData,
-  ZoomImageNumber ,
+  ZoomImageNumber,
   className,
-  Type // Type of Alert
+  Type, // Type of Alert
 }) {
   const MainBox = useRef(null);
-  const navigate =useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (MainBox?.current && BtnRef?.current) {
+      if (MainBox?.current) {
         let hideElement = MainBox.current.contains(e.target);
-        // let BtnElement = ;
+        let BtnElement;
+        if (BtnRef?.current) {
+          BtnElement = Array.isArray(BtnRef.current)
+            ? BtnRef.current.some(
+                (btnRef) => btnRef.current && btnRef.current.contains(e.target)
+              )
+            : BtnRef.current.contains(e.target);
+        }
 
-        const BtnElement = Array.isArray(BtnRef.current)
-          ? BtnRef.current.some(
-              (btnRef) => btnRef.current && btnRef.current.contains(e.target)
-            )
-          : BtnRef.current.contains(e.target);
-
-        if (hideElement == false && BtnElement == false) {
-          
+        if (hideElement == false && !BtnElement) {
           SetShow(false);
-          if(Type=="CreatePostSubmitAlert"){
-            navigate("/user/my-listing")
-            
+          if (Type == "CreatePostSubmitAlert") {
+            navigate("/user/my-listing");
           }
         }
       }
@@ -69,7 +67,7 @@ export default function WindowComponent({
             SinglePostData={SinglePostData}
             Images={ImageData}
             PropertyAddress={PropertyAddress}
-            ZoomImageNumber ={ ZoomImageNumber}
+            ZoomImageNumber={ZoomImageNumber}
           />
         </div>
       </div>

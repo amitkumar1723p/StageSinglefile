@@ -579,15 +579,15 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 
 // Create Tenant Post Response
 
-export const CreateTenant_PostResponseAction = (Tenant_PostResponseobj) => {
+export const ViewOwnerDetailsAction = (postId) => {
   return async (dispatch) => {
     try {
       dispatch({
-        type: "CreateTenant_PostResponseRequest",
-        payload: "CreateTenant_PostResponseRequest",
+        type: "ViewOwnerDetailsRequest",
+        payload: "ViewOwnerDetailsRequest",
       });
 
-      const url = `${api_Base_Url}/tenant-post-response/create`;
+      const url = `${api_Base_Url}/tenant-post-response/create/${postId}`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -595,17 +595,17 @@ export const CreateTenant_PostResponseAction = (Tenant_PostResponseobj) => {
         withCredentials: true,
       };
 
-      const { data } = await axios.post(url, Tenant_PostResponseobj, config);
-      dispatch({ type: "CreateTenant_PostResponseSuccess", payload: data });
+      const { data } = await axios.get(url, config);
+      dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "CreateTenant_PostResponseFail",
+          type: "ViewOwnerDetailsFail",
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "CreateTenant_PostResponseFail",
+          type: "ViewOwnerDetailsFail",
           payload: { message: error.message, success: false },
         });
       }

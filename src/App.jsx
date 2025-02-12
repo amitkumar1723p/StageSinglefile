@@ -153,10 +153,7 @@ function App() {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-      if (
-        data.success === true &&["CreatePostRequest"].includes(LodingType)
-      ) {
-         
+      if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
         sessionStorage.removeItem("LocationDetailsData");
@@ -173,17 +170,21 @@ function App() {
           "CreateScheduleVisitRequest",
           "BiddingFormRequest",
           "CreatePostRequest",
-          "CreateUserOtpRequest" ,
-          "VerifyUserOtpRequest" ,
-          "CreateUserRequest"
-        ].includes(LodingType) == false
+          "CreateUserOtpRequest",
+          "VerifyUserOtpRequest",
+          "CreateUserRequest",
+          "ViewOwnerDetailsRequest",
+        ].includes(LodingType)
       ) {
+        dispatch({ type: "UserClear" });
+      } else {
         setalertMessage(<p>{data.message}</p>);
         setalertType("Success");
         setalertShow(true);
 
         dispatch({ type: "UserClear" });
       }
+
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(
@@ -597,11 +598,11 @@ function App() {
               path="post/update/:PostId"
               element={<CreatePostMain />}
             />
-            <Route
+            {/* <Route
               exact
               path="post/response"
               element={<ViewTenantPostResponse />}
-            />
+            /> */}
 
             <Route exact path="my-visits" element={<MyVisits />} />
 

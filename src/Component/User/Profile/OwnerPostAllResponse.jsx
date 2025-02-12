@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetMyVisitsAction,
@@ -25,6 +25,21 @@ export default function OwnerPostAllResponse() {
         .padStart(2, "0")} ${period}`;
     }
 
+    return "N/A";
+  }, []);
+
+  // let MaskContactnumber = (ContactNumber) => {
+  //   const phoneStr = ContactNumber.toString();
+  //   return phoneStr.slice(0, 2) + "XXXX" + phoneStr.slice(6);
+  // };
+  
+ 
+  let MaskContactnumber = useCallback((ContactNumber) => {
+    console.log("Rune")
+    if (ContactNumber) {
+      const phoneStr = ContactNumber.toString();
+      return phoneStr.slice(0, 2) + "XXXX" + phoneStr.slice(6);
+    }
     return "N/A";
   }, []);
 
@@ -58,8 +73,11 @@ export default function OwnerPostAllResponse() {
       return `₹ ${price?.toFixed(2)}`;
     }
   };
+  
   return (
+
     <>
+ 
       {OwnerPostsVisitsData?.success === true &&
         OwnerPostsVisitsData?.userOfferAndVisit?.length > 0 && (
           <div className="owner-post-vists-overflow-x-auto">
@@ -104,7 +122,8 @@ export default function OwnerPostAllResponse() {
 
                       {/* Mobile  */}
                       <td className="owner-post-vists-table-cell">
-                        {data?.UserData?.ContactNumber}
+                        {MaskContactnumber(data?.UserData?.ContactNumber)}
+                        {}
                       </td>
 
                       {/* Date/Time  */}
@@ -185,7 +204,9 @@ export default function OwnerPostAllResponse() {
                       </td>
 
                       {/* ScheduleVisits  */}
-                      <td className="owner-post-vists-table-cell">{data?.ScheduleVisit?.length}</td>
+                      <td className="owner-post-vists-table-cell">
+                        {data?.ScheduleVisit?.length}
+                      </td>
                       {/* Offer PRice  */}
                       <td className="owner-post-vists-table-cell">
                         <span className="white-space-nowrap">

@@ -517,7 +517,7 @@ const HeroSection = () => {
           <TenantDetailsForm />
         </>
       )} */}
-
+{/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
       {showPropertyRequirement && (
