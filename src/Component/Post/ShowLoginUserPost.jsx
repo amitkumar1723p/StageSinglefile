@@ -83,7 +83,7 @@ export default function ShowLoginUserPost() {
               </div>
 
               {AllPost.length > 0 ? (
-                <div className="showpost">
+                <div className= {`showpost my-listing-post`}>
                   {AllPost.map((e, i) => {
                     return <PostCard key={i} PostData={e} />;
                   })}

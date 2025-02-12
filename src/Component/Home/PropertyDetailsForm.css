@@ -1,12 +1,14 @@
 
-.form-container {
+.form-container-rent {
  display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   gap: 16px;
-  padding:16px px;
+  padding:16px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 0 auto;
 }
 
 
@@ -22,8 +24,14 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.upperSection{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 .heading h2{
-  font-size: 32px;
+  font-size: 20px;
   color: #333;
   font-weight: bold;
   font-family: 'Inter', sans-serif;
@@ -42,6 +50,7 @@
   font-family: 'Inter', sans-serif;
 }
 .lowerSection h4{
+  font-size: 20px;
   color: #333;
   font-family: 'Inter', sans-serif;
   font-weight: bold;
@@ -59,13 +68,13 @@
   flex-grow: 1;
   flex-shrink: 1;
   background-color: #ffffff;
-  padding: 16px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .form-section h2 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 16px;
   color: #333;
@@ -77,13 +86,13 @@
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .input {
   width: 100%;
-  padding: 8px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
@@ -98,9 +107,9 @@ select::placeholder {
   font-size: 14px;
 }
 
-.input:focus,  select:focus {
-  border-color: #007bff;
-  outline: none;
+.input:focus {
+  /* border-color: #007bff; */
+  outline:1px solid var(--main-light-clr)
 }
 
 
@@ -129,14 +138,17 @@ select::placeholder {
 .counter button {
   width: 32px;
   height: 32px;
-  color: white;
-  border: 1px solid #ccc;
+  color: var(--main-light-clr);
+  border: none;
   border-radius: 4px;
-  background-color:var( --main-dark-clr);
-  font-size: 16px;
+  background-color:#fff;
+  font-size: 20px;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
 }
+
+
+
 
 .counter span {
   display: flex;
@@ -154,10 +166,10 @@ select::placeholder {
 }
 
 
-.submit-button {
+.rent-submit-button {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: var(--main-light-clr);
   color: #ffffff;
   font-size: 16px;
   border: none;
@@ -167,8 +179,8 @@ select::placeholder {
   font-family: 'Inter', sans-serif;
 }
 
-.submit-button:hover {
-  background-color: #0056b3;
+.rent-submit-button:hover {
+  opacity: .9;
 }
 
 
@@ -177,7 +189,7 @@ select::placeholder {
 .property-Container {
   position: relative;
 
-  width: 100%;
+  width: 95%;
   /* height: 250px;  */
   /* background: url('C:\Users\Admin\Desktop\New folder\property-Frontend\public\img\PropertyDetailsForm.svg') no-repeat center center ; */
   background-size: contain;
@@ -185,7 +197,7 @@ select::placeholder {
   border-radius: 10px;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
@@ -299,7 +311,7 @@ select::placeholder {
 
 
 @media (max-width: 768px) {
-  .form-container {
+  .form-container-rent {
     flex-direction: column;
   }
 

@@ -9,17 +9,16 @@ import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 
 import FAQ from "./FAQ";
+import LandLord from "./LandLord";
 
 import TenantDetailsForm from "./TenantDetailsForm";
 import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
 import BrowseProperties from "./BrowseProperties";
-// import LandLord from "./LandLord";
-
 
 import PropertyDetailsForm from "./PropertyDetailsForm";
 
-// import PropertyDetailsForm from "./PropertyDetailsForm";
+// import RentAgreement from "./RentAgreement";
 
 import PropertyListingBanner from "./PropertyListingBanner";
 
@@ -61,6 +60,7 @@ import { toast } from "react-toastify";
 
 import ChannelPartnerForm from "./ChannelPartnerForm.jsx";
 import BuyingSellingTenant from "./BuyingSellingTenant.jsx";
+import DreamHomeBanner from "./DreamHomeBanner.jsx";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -189,7 +189,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <header className="hero-section">
+      <header className="hero-section" id="Hero-section">
         <div className="overlay"></div>
         <div className="hero-content">
           <div className="hero-img-section">
@@ -282,7 +282,6 @@ const HeroSection = () => {
 
                   {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
-
                   <button
                     disabled={
                       GetAllPostLoading || GetProjectNameLoding ? true : false
@@ -317,10 +316,12 @@ const HeroSection = () => {
                       }
                     }}
                   >
-                    <img src="/img/Search-icon.svg" alt="" className="img-searchbar" />
-                    
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
                   </button>
-
 
                   <button
                     disabled={
@@ -356,7 +357,11 @@ const HeroSection = () => {
                       }
                     }}
                   >
-                    <img src="/img/Search-icon.svg" alt="" className="img-searchbar" />
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
                     {GetAllPostLoading || GetProjectNameLoding
                       ? "Searching"
                       : "Search"}
@@ -440,7 +445,7 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             className="whatapps-section-floating"
           >
-            <img  src="/img/whatapp.png" alt="WhatsApp" />
+            <img src="/img/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
       )}
@@ -521,9 +526,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div>
-        
-      </div>
+      <div></div>
 
       {PropertyAddType == "Buy" && (
         <>
@@ -542,16 +545,13 @@ const HeroSection = () => {
           <Services />
           {/* <FutureAsist /> */}
           <div id="testimonials">
-
-          <Testimonials />
+            <Testimonials />
           </div>
           <div id="WHO-WE-ARE">
-
-          <WhoWeAre />
+            <WhoWeAre />
           </div>
           <div id="FAQ-SECTION">
-
-          <FaqBuyer />
+            <FaqBuyer />
           </div>
         </>
       )}
@@ -564,19 +564,19 @@ const HeroSection = () => {
           {/* <TermsAndConditions/> */}
           <ComparisonTableSeller />
           <EndToEndSupportSeller />
+          <DreamHomeBanner/>
+          
           <Services />
           <PostFreeContainer />
           <FutureAsist />
           <div id="testimonials">
-          <Testimonials />
+            <Testimonials />
           </div>
           <div id="WHO-WE-ARE">
-
-          <WhoWeAre />
+            <WhoWeAre />
           </div>
           <div id="FAQ-SECTION">
-
-          <FAQ />
+            <FAQ />
           </div>
         </>
       )}
@@ -584,8 +584,9 @@ const HeroSection = () => {
       {/* Rent Component./ */}
       {PropertyAddType == "Rent" && (
         <>
-          <BrowseProperties/>
-    
+          <BrowseProperties />
+          <LandLord />
+          {/* <RentAgreement/> */}
           <PropertyDetailsForm />
           <RentalBanner />
           <Tenant />

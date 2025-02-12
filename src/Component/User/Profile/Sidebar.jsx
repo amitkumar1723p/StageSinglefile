@@ -104,7 +104,7 @@ function Sidebar() {
                   location.pathname == "/user/my-visits" ? "active-btn-nav" : ""
                 }`}
               >
-                <img className="" src="/img/admin.svg" alt="my-visits" />
+                <img className="" src="/img/Admin.svg" alt="my-visits" />
                 Schedule Visit
               </li>
             </NavLink>
@@ -157,7 +157,7 @@ function Sidebar() {
                 FAQs
               </li>
             </NavLink>
-            <NavLink to="/user/post/response">
+            {/* <NavLink to="/user/post/response">
               <li className="navItem mob-hide">
                 <img
                   className=""
@@ -166,7 +166,7 @@ function Sidebar() {
                 />
                 Your Post Response
               </li>
-            </NavLink>
+            </NavLink> */}
           </ul>
         </nav>
       </aside>
