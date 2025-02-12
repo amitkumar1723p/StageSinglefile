@@ -58,7 +58,7 @@ export default function AdminAside() {
                 </NavLink>
               </>
             )}
-          <NavLink
+          {/* <NavLink
             to="/admin/allpost"
             className={({ isActive }) =>
               `AdminAside-navLink ${isActive ? "active" : "hover"}` 
@@ -70,7 +70,7 @@ export default function AdminAside() {
               className={`AdminAside-icon ${location.pathname === "/admin/allpost" ? "active" : ""}`}
             />
             All Post
-          </NavLink>
+          </NavLink> */}
 
           <button className="AdminAside-button">
             <img

@@ -16,11 +16,9 @@ import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
 import BrowseProperties from "./BrowseProperties";
 
-
-
 import PropertyDetailsForm from "./PropertyDetailsForm";
 
-// import PropertyDetailsForm from "./PropertyDetailsForm";
+import RentAgreement from "./RentAgreement";
 
 import PropertyListingBanner from "./PropertyListingBanner";
 
@@ -59,6 +57,7 @@ import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
 
 import ChannelPartnerForm from "./ChannelPartnerForm.jsx";
+import DreamHomeBanner from "./DreamHomeBanner.jsx";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -253,7 +252,6 @@ const HeroSection = () => {
 
                   {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
-
                   <button
                     disabled={
                       GetAllPostLoading || GetProjectNameLoding ? true : false
@@ -288,10 +286,12 @@ const HeroSection = () => {
                       }
                     }}
                   >
-                    <img src="/img/Search-icon.svg" alt="" className="img-searchbar" />
-                    
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
                   </button>
-
 
                   <button
                     disabled={
@@ -327,7 +327,11 @@ const HeroSection = () => {
                       }
                     }}
                   >
-                    <img src="/img/Search-icon.svg" alt="" className="img-searchbar" />
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
                     {GetAllPostLoading || GetProjectNameLoding
                       ? "Searching"
                       : "Search"}
@@ -411,7 +415,7 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             className="whatapps-section-floating"
           >
-            <img  src="/img/whatapp.png" alt="WhatsApp" />
+            <img src="/img/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
       )}
@@ -447,9 +451,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div>
-        
-      </div>
+      <div></div>
 
       {PropertyAddType == "Buy" && (
         <>
@@ -468,16 +470,13 @@ const HeroSection = () => {
           <Services />
           {/* <FutureAsist /> */}
           <div id="testimonials">
-
-          <Testimonials />
+            <Testimonials />
           </div>
           <div id="WHO-WE-ARE">
-
-          <WhoWeAre />
+            <WhoWeAre />
           </div>
           <div id="FAQ-SECTION">
-
-          <FaqBuyer />
+            <FaqBuyer />
           </div>
         </>
       )}
@@ -490,34 +489,35 @@ const HeroSection = () => {
           {/* <TermsAndConditions/> */}
           <ComparisonTableSeller />
           <EndToEndSupportSeller />
+          <DreamHomeBanner/>
+          
           <Services />
           <PostFreeContainer />
           <FutureAsist />
           <div id="testimonials">
-          <Testimonials />
+            <Testimonials />
           </div>
           <div id="WHO-WE-ARE">
-
-          <WhoWeAre />
+            <WhoWeAre />
           </div>
           <div id="FAQ-SECTION">
-
-          <FAQ />
+            <FAQ />
           </div>
         </>
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
-          <BrowseProperties/>
-        <LandLord/>
+          <BrowseProperties />
+          <LandLord />
+          <RentAgreement/>
           <PropertyDetailsForm />
           <RentalBanner />
           <Tenant />
           <TenantDetailsForm />
         </>
-      )} */}
+      )}
 
       {/* Buy Component  */}
 
