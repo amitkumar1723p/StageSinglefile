@@ -13,7 +13,6 @@ export default function AllPost({
   sortOrder,
   activeFilter,
   selectAll
- 
 }) {
   const dispatch = useDispatch();
   const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)

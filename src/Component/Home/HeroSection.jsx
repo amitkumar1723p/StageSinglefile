@@ -164,8 +164,9 @@ const HeroSection = () => {
 
 <Helmet>
              
-                <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title>
-                <meta name="description" content="PropertyDekho247.com is a leading real estate company in Gurugram, specializing in verified resale and rental properties. Explore residential, commercial properties, and real estate listings for hassle-free transactions in Gurugram. Buy, rent, and invest with confidence."></meta>
+                {/* <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title> */}
+                <title>Buy & Sell Resale Properties in Gurgaon</title>
+                <meta name="description" content="PropertyDekho247 India's 1st online Proptech Reselling platform that delivers real-time price alerts to property owners."></meta>
                 <link rel="canonical" href="https://wwww.propertydekho247.com/" />
             </Helmet>
 
