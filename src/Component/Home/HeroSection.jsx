@@ -59,6 +59,7 @@ import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
 
 import ChannelPartnerForm from "./ChannelPartnerForm.jsx";
+import { Helmet } from "react-helmet";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -160,6 +161,14 @@ const HeroSection = () => {
 
   return (
     <>
+
+<Helmet>
+             
+                <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title>
+                <meta name="description" content="PropertyDekho247.com is a leading real estate company in Gurugram, specializing in verified resale and rental properties. Explore residential, commercial properties, and real estate listings for hassle-free transactions in Gurugram. Buy, rent, and invest with confidence."></meta>
+                <link rel="canonical" href="https://wwww.propertydekho247.com/" />
+            </Helmet>
+
       <header className="hero-section">
         <div className="overlay"></div>
         <div className="hero-content">
