@@ -47,7 +47,9 @@ import EndToEndSupport from "./EndToEndSupport";
 import ComparisonTableBuyer from "./ComparisonTableBuyer";
 import EndToEndSupportSeller from "./EndToEndSupportSeller";
 import ComparisonTableSeller from "./ComparisonTableSeller";
-
+import { motion } from "framer-motion";
+// import { useState, useEffect, useRef } from "react";
+import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
 import { UserContext } from "../CreateContext/CreateContext";
@@ -58,6 +60,7 @@ import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
 
 import ChannelPartnerForm from "./ChannelPartnerForm.jsx";
+import BuyingSellingTenant from "./BuyingSellingTenant.jsx";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -67,6 +70,33 @@ const HeroSection = () => {
   //   setActiveTab(tab);
 
   // };
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [position, setPosition] = useState({ width: 0, left: 0, height: 0, top: 0 });
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const updatePosition = () => {
+      if (containerRef.current?.children[activeIndex]) {
+        const activeButton = containerRef.current.querySelector(`button:nth-child(${activeIndex + 2})`);
+        if (activeButton) {
+          const buttonRect = activeButton.getBoundingClientRect();
+          const containerRect = containerRef.current.getBoundingClientRect();
+          
+          setPosition({
+            width: buttonRect.width,
+            height: buttonRect.height,
+            left: activeButton.offsetLeft,
+            top: activeButton.offsetTop
+          });
+        }
+      }
+    };
+
+    updatePosition();
+    window.addEventListener("resize", updatePosition);
+    return () => window.removeEventListener("resize", updatePosition);
+  }, [activeIndex]);
+
 
   const { setRedirectPath, RedirectPathIsHomeCard, setRedirectPathIsHomeCard } =
     useContext(UserContext);
@@ -423,7 +453,7 @@ const HeroSection = () => {
             </h2>
           </div>
           <div className="rent-sell">
-            {Tab.map((e, i) => {
+            {/* {Tab.map((e, i) => {
               return (
                 <div
                   key={i}
@@ -443,6 +473,51 @@ const HeroSection = () => {
                 </div>
               );
             })}
+
+              <BuyingSellingTenant /> */}
+      <div 
+      ref={containerRef} 
+      className="AnimatedNav-container"
+    >
+      <motion.div
+        className="AnimatedNav-slider"
+        animate={{ 
+          width: position.width,
+          height: position.height,
+          left: position.left,
+          top: position.top
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      />
+      <button
+        key="seller"
+        onClick={() => {setActiveIndex(0);
+          setPropertyAddType("Buy")
+        }}
+        className={`AnimatedNav-button ${activeIndex === 0 ? 'AnimatedNav-button--active' : ''}`}
+      >
+        Buying
+      </button>
+      <button
+        key="buyer"
+        onClick={() => {setActiveIndex(1);
+          setPropertyAddType("Sale")
+        }}
+        className={`AnimatedNav-button ${activeIndex === 1 ? 'AnimatedNav-button--active' : ''}`}
+      >
+        Selling
+      </button>
+      <button
+        key="tenant"
+        onClick={() => {setActiveIndex(2);
+          setPropertyAddType("Rent")
+        }}
+        className={`AnimatedNav-button ${activeIndex === 2 ? 'AnimatedNav-button--active' : ''}`}
+      >
+        Renting
+      </button>
+    </div>
+
           </div>
         </div>
       </div>
@@ -507,7 +582,7 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
           <BrowseProperties/>
     
@@ -516,7 +591,7 @@ const HeroSection = () => {
           <Tenant />
           <TenantDetailsForm />
         </>
-      )} */}
+      )}
 
       {/* Buy Component  */}
 
