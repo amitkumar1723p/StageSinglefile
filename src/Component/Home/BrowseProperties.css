@@ -1,19 +1,17 @@
-.BrowseProperties-Main {
-  width: 100%;
-  margin: 30px 0;
-  /* border: 1px solid black; */
+.BrowseProperties-Main{
+    width: 100%;
+    
+    /* border: 1px solid black; */
 }
 
-.BrowsePropertiesContainer {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  display: flex;
-  margin: 0 auto;
-  width: 80%;
-  height: 300px;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.BrowsePropertiesContainer{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    margin: 0 auto;
+    width: 80%;
+    
+
 }
 
 .BrowseProperties-Left {
@@ -36,25 +34,25 @@
   color: var(--main-light-clr);
 }
 
-.BrowseProperties-Content {
-  font-family: "Inter", sans-serif;
-  max-width: 430px;
-  /* border: 1px solid black;  */
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 30px;
+.BrowseProperties-Content{
+    font-family: "Inter", sans-serif;
+    max-width: 430px;
+    /* border: 1px solid black;  */
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 35px;
 }
 
-.BrowseProperties-Button {
-  border: none;
-  background-color: var(--main-light-clr);
-  font-family: "Inter", sans-serif;
-  color: white;
-  height: 35px;
-  width: 170px;
-  border-radius: 3px;
-  border: 1px soild var(--main-light-clr);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+
+.BrowseProperties-Button{
+    background-color: var(--main-light-clr);
+    font-family: "Inter", sans-serif;
+    color: white;
+    height: 35px;
+    width: 170px;
+    border-radius: 3px;
+    border: 1px soild var(--main-light-clr);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .BrowseProperties-Button:hover {
@@ -257,22 +255,38 @@
     /* height: 300px; */
     /* background: red; */
     display: flex;
-    flex-direction: column;
-    gap: 17px;
-    /* background: red; */
-  }
-  .OwnerListings {
-    font-size: 14px;
-  }
-  .VerifiedProperties-Content {
-    font-size: 14px;
-  }
-  .VerifiedPropertiesContainer {
-    gap: 25px;
-  }
-  .DocsAssistance-Content {
-    font-size: 14px;
-  }
+    align-self: flex-end;
+    padding: 8px;
+    /* position: absolute; */
+    /* height: 80px; */
+    width: 330px;
+    /* border: 1px solid black; */
+}
+.OwnerListings-Img{
+    display: flex;
+    margin-right: 10px;
+    width: 150px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
+}
+.OwnerListings-Img img{
+    /* border: 1px solid black; */
+}
+
+.OwnerListings-Content{
+    /* border: 1px solid greenyellow; */
+}
+.OwnerListings-Content h3{
+    font-weight: bold;
+    color: #333;
+    font-family: "Inter", sans-serif;
+}
+.OwnerListings-Content p{
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    color: #333;
 }
 
 @media (max-width: 480px) {
@@ -315,23 +329,196 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 }
+.VerifiedPropertiesContainer{
+    box-shadow: -2px 4px 10px rgb(92, 92, 92);
+    background-color: white;
+    border-radius: 2px;
+    padding: 8px;
+    display: flex;
+    /* min-width: 320px; */
+    width: 330px;
+    /* border: 1px solid black; */
+}
+.VerifiedProperties-Img{
+    display: flex;
+    /* margin-right: 10px; */
+    width: 80px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
+}
+.VerifiedProperties-Img img{
+    /* border: 1px solid black; */
+}
+.VerifiedProperties-Content{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+}
 
-@media (max-width: 402px) {
-  .Img-Two {
-    right: -25%;
-  }
-  .BrowsePropertiesContainer {
-    width: 300px;
-  }
-  .OwnerListings {
-  }
-  .VerifiedProperties {
-    top: 37%;
-  }
-  .VerifiedPropertiesContainer {
-    gap: 5px;
-  }
-  .DocsAssistance {
+.VerifiedProperties-Content h3{
+    font-weight: bold;
+    color: #333;
+    font-family: "Inter", sans-serif;
+}
+.VerifiedProperties-Content p{
     font-size: 13px;
   }
+}
+
+
+
+.DocsAssistance{
+    background-color: white;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: -2px 4px 10px rgb(92, 92, 92);
+    display: flex;
+
+    padding: 8px;
+    bottom: 0%;
+    /* position: absolute; */
+    width:330px;
+    /* border: 1px solid black; */
+}
+.DocsAssistance-Img{
+    
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 80px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
+}
+.DocsAssistance-Img img{
+    /* border: 1px solid black; */
+}
+
+.DocsAssistance-Content h3{
+    font-weight: bold;
+    color: #333;
+    font-family: "Inter", sans-serif;
+}
+.DocsAssistance-Content p{
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px){
+
+    .Img-One{
+        /* left: 5%; */
+    }
+    .Img-Two{
+        /* right: -50%; */
+    }
+    .BrowsePropertiesContainer{
+        flex-direction: column;
+    }   
+    .BrowseProperties-Left{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .BrowseProperties-Right{
+        width: 100%;
+        /* height: 300px; */
+    }
+    .BrowseProperties-Right-parent{
+        width: 100%;
+        /* height: 300px; */
+         /* background: red; */
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+        /* background: red; */
+    }
+    .OwnerListings{
+        font-size: 14px;
+    }
+    .VerifiedProperties-Content{
+       
+        font-size: 14px;
+    }
+    .VerifiedPropertiesContainer{
+        gap:25px;
+    }
+    .DocsAssistance-Content{
+        font-size: 14px;
+        
+    }
+}
+
+@media (max-width:480px){
+    .Img-One ,.Img-Two{
+        display: none;
+    }
+    .BrowseProperties-Right-parent{
+        width: 100%;
+        /* height: 300px; */
+         /* background: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+ 
+    gap: 17px;
+        /* background: red; */
+    }
+    .BrowseProperties-Headings h2{
+        font-size: 20px;
+    }
+    .OwnerListings{
+        align-self: center;
+
+        box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .VerifiedProperties{
+        align-self: center;
+     
+        box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .VerifiedPropertiesContainer{
+        align-self: center;
+
+        box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .DocsAssistance{
+        align-self: center;
+    
+        box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@media (max-width: 402px){
+   
+    .Img-Two{
+        right: -25%;
+    }
+    .BrowsePropertiesContainer{
+        width: 300px;
+    }
+    .OwnerListings{
+        
+    }
+    .VerifiedProperties{
+        top: 37%;
+    
+    }
+    .VerifiedPropertiesContainer{
+     
+       
+        gap: 5px;
+    }
+    .DocsAssistance{
+        font-size: 13px;
+   
+    }
+
+
 }

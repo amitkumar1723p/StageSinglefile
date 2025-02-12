@@ -1,7 +1,7 @@
 
 .form-container-rent {
  display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   gap: 16px;
   padding:16px;
   background-color: #f9f9f9;
@@ -107,9 +107,9 @@ select::placeholder {
   font-size: 14px;
 }
 
-.input:focus,  select:focus {
-  border-color: #007bff;
-  outline: none;
+.input:focus {
+  /* border-color: #007bff; */
+  outline:1px solid var(--main-light-clr)
 }
 
 

@@ -18,7 +18,7 @@ import BrowseProperties from "./BrowseProperties";
 
 import PropertyDetailsForm from "./PropertyDetailsForm";
 
-import RentAgreement from "./RentAgreement";
+// import RentAgreement from "./RentAgreement";
 
 import PropertyListingBanner from "./PropertyListingBanner";
 
@@ -60,7 +60,9 @@ import { toast } from "react-toastify";
 
 import ChannelPartnerForm from "./ChannelPartnerForm.jsx";
 import DreamHomeBanner from "./DreamHomeBanner.jsx";
-import BuyingSellingTenant from "./BuyingSellingTenant.jsx";
+// import BuyingSellingTenant from "./BuyingSellingTenant.jsx";
+import BuyingSellingTenant from "./BuyingSellingTenant";
+// import DreamHomeBanner from "./DreamHomeBanner.jsx";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -189,7 +191,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <header className="hero-section">
+      <header className="hero-section" id="Hero-section">
         <div className="overlay"></div>
         <div className="hero-content">
           <div className="hero-img-section">
@@ -581,7 +583,7 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {PropertyAddType == "Rent" && (
+      {/* {PropertyAddType == "Rent" && (
         <>
           <BrowseProperties />
           <LandLord />
@@ -591,7 +593,7 @@ const HeroSection = () => {
           <Tenant />
           <TenantDetailsForm />
         </>
-      )}
+      )} */}
 
       {/* Buy Component  */}
 

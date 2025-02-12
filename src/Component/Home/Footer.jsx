@@ -191,7 +191,7 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'Home', hash: "" },
+    { name: 'Home', hash: "Hero-section" },
     { name: 'About Us', hash: "WHO-WE-ARE" },
     { name: 'Services', hash: "select-option-section" } // Make sure the section has this ID in your home page
   ];
@@ -249,7 +249,7 @@ const Footer = () => {
                           scrollToSection(item.hash);
                         }
                       }}
-                      href="#"
+                      href=""
                       className="links__link"
                     >
                       <span className="links__dot"></span>
