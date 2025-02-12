@@ -12,6 +12,11 @@
   border-radius: 5px;
 }
 
+.prop-card-main-box{
+  /* background-color: red; */
+  width: 488px;
+}
+
 .inative-post-status{
   font-size: 11px;
   color: #333333a2;
@@ -371,6 +376,11 @@ input[type="file"]::-webkit-file-upload-button {
   list-style: none;
 }
 @media (max-width: 480px) {
+
+  .prop-card-main-box{
+    /* background-color: red; */
+    width: auto;
+  }
   .user-section-heading {
     font-size: 16px;
     color: #333;

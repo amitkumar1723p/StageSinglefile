@@ -30,7 +30,8 @@ const BrowseProperties = () => {
                 className='Img-Two'
                 src='/img/EllipseBG.png'
                 />
-                <div className='OwnerListings'>
+             <div className='BrowseProperties-Right-parent'>
+             <div className='OwnerListings'>
                     <div className='OwnerListings-Img'>
                         <img
                         src='/img/directOwnerListings.png'
@@ -67,6 +68,7 @@ const BrowseProperties = () => {
                 <p>Rent Agreement and Police Verification.</p>
                 </div>
                 </div>
+             </div>
 
             </div>
             </div>

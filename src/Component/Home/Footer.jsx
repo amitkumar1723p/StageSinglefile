@@ -223,7 +223,8 @@ const Footer = () => {
               <div className="company__underline"></div>
             </div>
             <p className="company__description">
-              Your trusted partner in finding the perfect property. Discover your dream home with our AI-powered property search.
+            Stay ahead with instant price alerts, ensuring you always pay the right price for your property. Our platform helps property owners make informed decisions by delivering accurate, real-time market value insights.
+
             </p>
             <div className="company__social">
               {socialIcons.map(({ Icon, link }, index) => (
