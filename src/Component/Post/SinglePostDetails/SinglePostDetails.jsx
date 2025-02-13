@@ -87,10 +87,6 @@ export default function SinglePostDetails() {
     setSinglePostId(postId);
     if (reload === true) {
       dispatch(GetSinglePostAction(postId));
-<<<<<<< HEAD
-=======
-
->>>>>>> amitkumar
       dispatch(SimilarProperty(postId));
       console.log("medata",medata);
       TenentResponseIsExitAction(postId)
