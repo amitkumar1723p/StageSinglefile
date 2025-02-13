@@ -768,11 +768,11 @@
   background: white;
   position: fixed;
   transform: translateX(-16px);
-  top: 66px;
+  top: 67px;
   z-index: 3;
   width: 818px;
 
-  padding: 15px 17px;
+  padding: 15px 0px 0px 15px;
   padding-top: 15px;
 }
 

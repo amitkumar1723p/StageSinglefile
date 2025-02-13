@@ -573,7 +573,7 @@ const HeroSection = () => {
           {/* <TermsAndConditions/> */}
           <ComparisonTableSeller />
           <EndToEndSupportSeller />
-          <DreamHomeBanner/>
+          {/* <DreamHomeBanner/> */}
           
           <Services />
           <PostFreeContainer />
