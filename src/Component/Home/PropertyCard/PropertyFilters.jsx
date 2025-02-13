@@ -47,6 +47,7 @@ const PropertyFilters = () => {
   const { loading, data: GetAllPostData } = useSelector((state) => {
     return state.GetAllPost;
   });
+   
 
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();

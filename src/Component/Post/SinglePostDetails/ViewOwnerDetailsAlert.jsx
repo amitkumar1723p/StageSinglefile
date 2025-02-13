@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../../Loader/Loader";
-import { ViewOwnerDetailsAction } from "../../../Action/userAction";
-import { useNavigate } from "react-router-dom";
+ 
+ 
 
 export default function ViewOwnerDetails({ SetShow }) {
   const [OwnerDetails, setOwnerDetals] = useState({});

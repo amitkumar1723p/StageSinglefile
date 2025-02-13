@@ -5,7 +5,7 @@ import {
   OwnerAllPostsVisitAction,
 } from "../../../Action/userAction";
 import { useNavigate } from "react-router-dom";
-import "./OwnerPostAllVisit.css";
+import "./OwnerPostAllResponse.css";
 export default function OwnerPostAllResponse() {
   const navigate = useNavigate();
   const { data: OwnerPostsVisitsData } = useSelector((state) => {
@@ -80,31 +80,31 @@ export default function OwnerPostAllResponse() {
  
       {OwnerPostsVisitsData?.success === true &&
         OwnerPostsVisitsData?.userOfferAndVisit?.length > 0 && (
-          <div className="owner-post-vists-overflow-x-auto">
-            <p className="owner-post-vists-schedule-visit">My Schedule Visit</p>
-            <table className="owner-post-vists-table">
+          <div className="owner-post-response-overflow-x-auto">
+            <p className="owner-post-response-heading"> All Response</p>
+            <table className="owner-post-response-table">
               <thead>
-                <tr className="owner-post-vists-table">
-                  <th className="owner-post-vists-table-cell heading-name-sehedule-visit">
+                <tr className="owner-post-response-table">
+                  <th className="owner-post-response-table-cell heading-name-sehedule-visit">
                     Name
                   </th>
-                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit ">
+                  <th className="owner-post-response-table-cell  heading-name-sehedule-visit ">
                     Mobile
                   </th>
-                  <th className="owner-post-vists-table-cell heading-name-sehedule-visit  ">
+                  <th className="owner-post-response-table-cell heading-name-sehedule-visit  ">
                     Date/Time
                   </th>
 
-                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit">
+                  <th className="owner-post-response-table-cell  heading-name-sehedule-visit">
                     Submit Offers
                   </th>
-                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit">
+                  <th className="owner-post-response-table-cell  heading-name-sehedule-visit">
                     Schedule Visits
                   </th>
-                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit">
+                  <th className="owner-post-response-table-cell  heading-name-sehedule-visit">
                     Offer Price
                   </th>
-                  <th className="owner-post-vists-table-cell  heading-name-sehedule-visit">
+                  <th className="owner-post-response-table-cell  heading-name-sehedule-visit">
                     Property Id
                   </th>
                 </tr>
@@ -116,18 +116,18 @@ export default function OwnerPostAllResponse() {
                   return (
                     <tr key={i}>
                       {/* Name  */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         {data?.UserData?.Name}
                       </td>
 
                       {/* Mobile  */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         {MaskContactnumber(data?.UserData?.ContactNumber)}
                         {}
                       </td>
 
                       {/* Date/Time  */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         <span>
                           {data?.ScheduleVisit?.length > 0 ? (
                             <>
@@ -199,16 +199,16 @@ export default function OwnerPostAllResponse() {
                       </td>
 
                       {/* offer Submit  (Yes /NO) */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         {data?.receiveoffer?.length}
                       </td>
 
                       {/* ScheduleVisits  */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         {data?.ScheduleVisit?.length}
                       </td>
                       {/* Offer PRice  */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         <span className="white-space-nowrap">
                           {" "}
                           {data?.receiveoffer?.length > 0
@@ -223,9 +223,9 @@ export default function OwnerPostAllResponse() {
                         </span>
                       </td>
                       {/* Property Id  */}
-                      <td className="owner-post-vists-table-cell">
+                      <td className="owner-post-response-table-cell">
                         <span
-                          className="owner-post-vists-post-id-btn"
+                          className="owner-post-response-post-id-btn"
                           onClick={(e) => {
                             let url = `/post-detail/${PostName.toLowerCase()
                               .replaceAll(" ", "-")

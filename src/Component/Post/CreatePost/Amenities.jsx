@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect } from "react";
- 
 
 export default function Amenities({
   AmenitiesDetailsData,
@@ -45,7 +44,7 @@ export default function Amenities({
             Beds: prevData.FurnishingOption?.Beds || 0,
             Wardrobe: prevData.FurnishingOption?.Wardrobe || 0,
           }
-        : AmenitiesDetailsData.Furnishing === "Un-Furnished" &&  update
+        : AmenitiesDetailsData.Furnishing === "Un-Furnished" && update
         ? AmenitiesDetailsData.FurnishingOption
         : {},
       SocietyAndBuildingFeature: prevData.SocietyAndBuildingFeature || [],
@@ -94,7 +93,7 @@ export default function Amenities({
                   >
                     {text}{" "}
                     <img
-                    alt=""
+                      alt=""
                       src={
                         AmenitiesDetailsData.Furnishing === text
                           ? "/img/white-tick.svg"
@@ -560,7 +559,7 @@ export default function Amenities({
                     >
                       {text}{" "}
                       <img
-                      alt=""
+                        alt=""
                         src={
                           AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
                             text
@@ -599,8 +598,8 @@ export default function Amenities({
                 }}
               >
                 {text}{" "}
-                <img 
-                alt=""
+                <img
+                  alt=""
                   src={
                     AmenitiesDetailsData.PowerBackUp === text
                       ? "/img/white-tick.svg"
@@ -649,7 +648,7 @@ export default function Amenities({
               >
                 {text}{" "}
                 <img
-                alt=""
+                  alt=""
                   src={
                     AmenitiesDetailsData.WaterSource?.includes(text)
                       ? "/img/white-tick.svg"
@@ -711,7 +710,8 @@ export default function Amenities({
                       }}
                     >
                       {text}{" "}
-                      <img alt="tick"
+                      <img
+                        alt="tick"
                         src={
                           AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
                             text
@@ -729,8 +729,7 @@ export default function Amenities({
 
           <div>
             <h1>Other Feature</h1>
-           
-            
+
             <div className="row">
               {OtherFeatureArray.map((text, i) => {
                 return (
@@ -743,11 +742,8 @@ export default function Amenities({
                       //  checked={AmenitiesDetailsData.OtherFeature?.includes(
                       //   text
                       // )}
-                       checked={true}
-                      
+                      checked={true}
                       onChange={(event) => {
-                         
-                      
                         if (event.target.checked === false) {
                           alert("false");
                           // setAmenitiesDetailsData({

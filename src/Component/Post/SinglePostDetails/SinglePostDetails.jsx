@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetSinglePostAction,
+  LoginUserPostAction,
   SimilarProperty,
 } from "../../../Action/postAction";
 import Loader from "../../Loader/Loader";
@@ -29,6 +30,7 @@ import {
   ViewOwnerDetailsAction,
 } from "../../../Action/userAction";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
+import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -37,6 +39,7 @@ export default function SinglePostDetails() {
   const BiddingFormOpenBtnRef = useRef(null);
   const ScheduleYourVisitOpenBtnRef = useRef(null);
   const SupspiciousListingBtn = useRef(null);
+  const TenantDetailsFormBtnRef = useRef(null);
   const navigate = useNavigate();
   const [SinglePostId, setSinglePostId] = useState("");
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
@@ -49,6 +52,8 @@ export default function SinglePostDetails() {
   const [PropertyAddress, setPropertyAddress] = useState("");
   const [showTenant_PostResponseForm, setshowTenant_PostResponseForm] =
     useState(false);
+
+  const [showTenantDetailsForm, setshowTenantDetailsForm] = useState(false); // Open Tenant Details Form
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
@@ -66,16 +71,26 @@ export default function SinglePostDetails() {
   } = useSelector((state) => {
     return state.userData;
   });
-  console.log(AlertLoding, AlertType);
+
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
+
+  // Get All Post by Login User
+  const { data: myListing } = useSelector((state) => {
+    return state.GetPost;
+  });
+  // console.log(medata.IsAuthenticated)
   useEffect(() => {
     let postaddress = Params.PostAddress;
     let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
     setSinglePostId(postId);
     if (reload === true) {
       dispatch(GetSinglePostAction(postId));
+<<<<<<< HEAD
+=======
+
+>>>>>>> amitkumar
       dispatch(SimilarProperty(postId));
       console.log("medata",medata);
       TenentResponseIsExitAction(postId)
@@ -219,6 +234,10 @@ export default function SinglePostDetails() {
         "/show-Supspicious-Listing-Form"
       ) {
         setOpenReportForm(true);
+      } else if (
+        sessionStorage.getItem("RedirectPath") == "/view-owner-details"
+      ) {
+        setshowTenantDetailsForm(true);
       }
 
       sessionStorage.removeItem("RedirectPath");
@@ -239,16 +258,7 @@ export default function SinglePostDetails() {
   };
 
   //  Open Owner Details Alert  (T)
-  const [showOwnerDetails, setshowOwnerDetails] = useState(false);
-  useEffect(() => {
-    if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
-      // StoreDataInSession
-      console.log(AlertData);
-      StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
-      setshowOwnerDetails(true);
-    }
-  }, [AlertData, AlertType]);
-
+ 
   //  const SinglePost = getSinglePostData.SinglePost
   return (
     <>
@@ -534,6 +544,7 @@ export default function SinglePostDetails() {
                             <p className="rent-ques-section">Deposite Price</p>
                           </div>
                         </div>
+
                         {!medata || !medata.IsAuthenticated ? (
                           <span
                             className="original-price"
@@ -545,38 +556,15 @@ export default function SinglePostDetails() {
                             View Owner Details
                           </span>
                         ) : (
-                          ["Tenant"].includes(medata?.user?.Role) &&
-                          getSinglePostData.SinglePost.CreatePostUser !==
-                            medata?.user?._id && (
+                          ["Tenant"].includes(medata?.user?.Role) && (
                             <span
+                              ref={TenantDetailsFormBtnRef}
                               className="original-price"
                               onClick={() => {
-                                console.log("onclick", AlertType, AlertLoding);
-                                if (
-                                  AlertType != "ViewOwnerDetailsRequest" &&
-                                  !AlertLoding
-                                ) {
-                                  dispatch(
-                                    ViewOwnerDetailsAction(
-                                      getSinglePostData.SinglePost._id
-                                    )
-                                  );
-                                }
-                                // if (
-                                //   AlertType =="ViewOwnerDetailsRequest" &&
-                                //   !AlertLoding
-                                // ) {
-                                //   dispatch(
-                                //     ViewOwnerDetailsAction(
-                                //       getSinglePostData.SinglePost._id
-                                //     )
-                                //   );
-                                // } else {
-                                //   alert("run");
-                                // }
-                                // ViewOwnerDetailsRequest
+                                setshowTenantDetailsForm(true);
                               }}
                             >
+                               
                               View Owner Details
                             </span>
                           )
@@ -1056,14 +1044,14 @@ export default function SinglePostDetails() {
                   )}
 
                   {/* View Response Form  */}
-                  {console.log(showOwnerDetails)}
-                  {showOwnerDetails && (
-                    <WindowComponent
-                      Component={ViewOwnerDetailsAlert}
-                      SetShow={setshowOwnerDetails}
+                  {/* {console.log(showTenantDetailsForm)} */}
 
-                      // BtnRef={Tenant_PostResponseBtnRef}
-                      // SinglePostData={getSinglePostData}
+                  {showTenantDetailsForm && (
+                    <WindowComponent
+                      Component={TanantDetailsForm}
+                      SetShow={setshowTenantDetailsForm}
+                      BtnRef={TenantDetailsFormBtnRef}
+                      SinglePostData={getSinglePostData}
                       // PropertyAddress={PropertyAddress}
                     />
                   )}
