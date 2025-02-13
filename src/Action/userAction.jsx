@@ -579,7 +579,8 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 
 // Create Tenant Post Response
 
-export const ViewOwnerDetailsAction = (postId) => {
+export const ViewOwnerDetailsAction = ({ TenantsDetails, PostId }) => {
+  console.log(TenantsDetails);
   return async (dispatch) => {
     try {
       dispatch({
@@ -587,7 +588,7 @@ export const ViewOwnerDetailsAction = (postId) => {
         payload: "ViewOwnerDetailsRequest",
       });
 
-      const url = `${api_Base_Url}/tenant-post-response/create/${postId}`;
+      const url = `${api_Base_Url}/tenant-post-response/create/${PostId}`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -595,7 +596,7 @@ export const ViewOwnerDetailsAction = (postId) => {
         withCredentials: true,
       };
 
-      const { data } = await axios.get(url, config);
+      const { data } = await axios.post(url, TenantsDetails, config);
       dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -821,7 +822,7 @@ export const GetMyVisitsAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-       
+
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -846,8 +847,8 @@ export const OwnerAllPostsVisitAction = () => {
     try {
       dispatch({ type: "OwnerAllPostsVisitRequest" });
 
-      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-vists`;
-      
+      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-response`;
+
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -855,7 +856,7 @@ export const OwnerAllPostsVisitAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      
+
       dispatch({ type: "OwnerAllPostsVisitSuccess", payload: data });
     } catch (error) {
       if (error.response) {

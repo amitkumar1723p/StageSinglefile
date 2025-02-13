@@ -20,7 +20,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
   const [ScheduleVistData, setScheduleVistData] = useState({
     VisitDate: "",
     // VisitTime: ,
-    VisitTime: {From :"09:00"},
+    VisitTime: { From: "09:00" },
   });
   const [showScheduleVistAlert, setshowScheduleVistAlert] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -31,10 +31,10 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       ...ScheduleVistData,
       PostData: { PostId: SinglePostData.SinglePost._id },
     };
-  
+
     //  alert(`${ScheduleVistData.VisitTime.From} to ${ScheduleVistData.VisitTime.To}`)
     dispatch(CreateScheduleVisitAction(vistobj));
-   
+
     setshowScheduleVistAlert("LodingTrue");
     const id = setTimeout(() => {
       setshowScheduleVistAlert(true);
@@ -44,13 +44,6 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
   useEffect(() => {
     if (data && LodingType == "CreateScheduleVisitRequest") {
-      // if (data.success == true && LodingType == "CreateScheduleVisitRequest") {
-      //   setScheduleVistData({
-      //     VisitDate: "",
-      //     VisitTime: {},
-      //   });
-      //   // SetShow(false);
-      // }
       if (data.success == false) {
         if (data.IsAuthenticated == false) {
           navigate("/");
@@ -113,7 +106,6 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
                 <div className="schedule-your-visit-time-container">
                   <TimePicker
                     onChange={(e) => {
-                     
                       setScheduleVistData({
                         ...ScheduleVistData,
                         VisitTime: {

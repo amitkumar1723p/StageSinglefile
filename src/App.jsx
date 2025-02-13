@@ -37,7 +37,7 @@ import AllAdminData from "./Component/Admin/AllAdminData";
 import ProfileHeader from "./Component/User/Profile/ProfileHeader";
 import ShowLoginUserPost from "./Component/Post/ShowLoginUserPost";
 import AdminAllPost from "./Component/Admin/AllPost";
-import ViewTenantPostResponse from "./Component/User/Profile/ViewTenantPostResponse";
+ 
 import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePost";
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
@@ -598,11 +598,7 @@ function App() {
               path="post/update/:PostId"
               element={<CreatePostMain />}
             />
-            {/* <Route
-              exact
-              path="post/response"
-              element={<ViewTenantPostResponse />}
-            /> */}
+             
 
             <Route exact path="my-visits" element={<MyVisits />} />
 

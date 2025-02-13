@@ -10,12 +10,11 @@ import "./Navbar.css";
 
 import FAQ from "./FAQ";
 
-import TenantDetailsForm from "./TenantDetailsForm";
+// import TenantDetailsForm from "./TenantDetailsForm";
 import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
 import BrowseProperties from "./BrowseProperties";
 // import LandLord from "./LandLord";
-
 
 import PropertyDetailsForm from "./PropertyDetailsForm";
 
@@ -129,9 +128,20 @@ const HeroSection = () => {
     if (AllPostData && GetProjectNameData) {
       if (AllPostData.success == true && GetProjectNameData.success == true) {
         if (RedirectPathIsHomeCard == false) {
+          //  `/post-detail/${PropertyAddress.toLowerCase()
+          //   .replaceAll(" ", "-")
+          //   .replace(",", "")
+          //   .replaceAll("/", "-")}-${PostData._id}`
+
           navigate(
             `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
           );
+          // navigate(
+          //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
+          //       .replaceAll(" ", "-")
+          //       .replaceAll(",", "")
+          //      .replaceAll("/", "-")}&&PropertyAddType=${SearchPropertyAddType}`
+          // );
         }
       }
     }
@@ -252,7 +262,6 @@ const HeroSection = () => {
 
                   {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
-
                   <button
                     disabled={
                       GetAllPostLoading || GetProjectNameLoding ? true : false
@@ -287,10 +296,12 @@ const HeroSection = () => {
                       }
                     }}
                   >
-                    <img src="/img/Search-icon.svg" alt="" className="img-searchbar" />
-                    
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
                   </button>
-
 
                   <button
                     disabled={
@@ -326,7 +337,11 @@ const HeroSection = () => {
                       }
                     }}
                   >
-                    <img src="/img/Search-icon.svg" alt="" className="img-searchbar" />
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
                     {GetAllPostLoading || GetProjectNameLoding
                       ? "Searching"
                       : "Search"}
@@ -410,7 +425,7 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             className="whatapps-section-floating"
           >
-            <img  src="/img/whatapp.png" alt="WhatsApp" />
+            <img src="/img/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
       )}
@@ -446,9 +461,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div>
-        
-      </div>
+      <div></div>
 
       {PropertyAddType == "Buy" && (
         <>
@@ -467,16 +480,13 @@ const HeroSection = () => {
           <Services />
           {/* <FutureAsist /> */}
           <div id="testimonials">
-
-          <Testimonials />
+            <Testimonials />
           </div>
           <div id="WHO-WE-ARE">
-
-          <WhoWeAre />
+            <WhoWeAre />
           </div>
           <div id="FAQ-SECTION">
-
-          <FaqBuyer />
+            <FaqBuyer />
           </div>
         </>
       )}
@@ -493,15 +503,13 @@ const HeroSection = () => {
           <PostFreeContainer />
           <FutureAsist />
           <div id="testimonials">
-          <Testimonials />
+            <Testimonials />
           </div>
           <div id="WHO-WE-ARE">
-
-          <WhoWeAre />
+            <WhoWeAre />
           </div>
           <div id="FAQ-SECTION">
-
-          <FAQ />
+            <FAQ />
           </div>
         </>
       )}
@@ -517,7 +525,7 @@ const HeroSection = () => {
           <TenantDetailsForm />
         </>
       )} */}
-{/* <TenantDetailsForm /> */}
+      {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
       {showPropertyRequirement && (
