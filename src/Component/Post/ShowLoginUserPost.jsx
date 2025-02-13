@@ -7,7 +7,7 @@ import PostCard from "./PostCard";
 import { AlertAction } from "../../Action/alertAction";
 import { useLocation, useNavigate } from "react-router-dom";
 import NoListThere from "./NoListThere";
-
+import { Helmet } from "react-helmet";
 export default function ShowLoginUserPost() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -49,6 +49,13 @@ export default function ShowLoginUserPost() {
   }, []);
   return (
     <>
+      <Helmet>
+                
+                <title> My Listings - PropertyDekho247.com</title>
+                <meta name="description" content="Manage all your property listings in one place. View, edit, or remove your active posts and keep your listings up to date on PropertyDekho247.com."></meta>
+                <link rel="canonical" href="https://www.propertydekho247.com/user/my-listing/" />
+            </Helmet>
+
       {/* <div className="showpost"> */}
       {
         <>

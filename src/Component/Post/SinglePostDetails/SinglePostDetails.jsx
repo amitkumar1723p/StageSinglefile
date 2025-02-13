@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "./SinglePostDetails.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import {
   GetSinglePostAction,
   SimilarProperty,
@@ -241,9 +242,18 @@ export default function SinglePostDetails() {
   const closehandleReportForm = (e) => {
     setOpenReportForm(false);
   };
+  
   //  const SinglePost = getSinglePostData.SinglePost
+  console.log(Params.PostAddress)
   return (
     <>
+      <Helmet>
+                
+                <title>{PropertyAddress}</title>
+                <meta name="description" content={`Explore this spacious ${PropertyAddress}. Located in a prime area, this ${getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType} offers modern amenities, comfort, and easy access to key transport routes, shopping, and schools. Perfect for those seeking a high-quality living experience in ${getSinglePostData?.SinglePost?.LocationDetails?.City}!`}></meta>
+                <link rel="canonical" href={`https://propertydekho247.com/post-detail/${Params?.PostAddress}`}
+ />
+            </Helmet>
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">

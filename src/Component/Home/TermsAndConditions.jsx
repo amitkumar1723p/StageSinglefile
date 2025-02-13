@@ -1,8 +1,16 @@
 import React from "react";
 import "./TermsAndConditions.css";
+import { Helmet } from "react-helmet";
 const TermsAndConditions = () => {
   return (
     <div className="terms-container">
+     <Helmet>
+                <meta charSet="utf-8" />
+                <title>Terms and Conditions - PropertyDekho247.com</title>
+                <meta name="description" content=" Welcome to our website. By accessing or using our services, you agree to comply with the following Terms and Conditions. These terms govern your use of our platform, and by continuing to browse, register, or interact with our content, you acknowledge that you have read, understood, and accepted these terms. If you do not agree with any part of these terms, please refrain from using our website or services. For any questions or clarifications, feel free to contact us."></meta>
+                <link rel="canonical" href="https://www.propertydekho247.com/terms-and-conditions/"/>
+            </Helmet>
+
       <h3 className="main-heading-h3">Terms and Conditions</h3>
       <p className="tc-date-time">Last updated on 2nd Jan 2025</p>
 

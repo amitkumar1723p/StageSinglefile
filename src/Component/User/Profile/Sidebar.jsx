@@ -59,7 +59,7 @@ function Sidebar() {
             <NavLink to="/user/my-post/all-visits">
               <li className="navItem mob-hide ">
                 <img
-                  className="icons"
+               
                   src="/img/NewLeads.svg"
                   alt="my-visits"
                 />

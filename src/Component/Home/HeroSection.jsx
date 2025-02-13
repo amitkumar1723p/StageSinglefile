@@ -63,7 +63,7 @@ import DreamHomeBanner from "./DreamHomeBanner.jsx";
 // import BuyingSellingTenant from "./BuyingSellingTenant.jsx";
 import BuyingSellingTenant from "./BuyingSellingTenant";
 // import DreamHomeBanner from "./DreamHomeBanner.jsx";
-
+import { Helmet } from "react-helmet";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -190,7 +190,15 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <>
+    <><Helmet>
+             
+    {/* <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title> */}
+    <title>Buy & Sell Resale Properties in Gurgaon</title>
+    <meta name="description" content="PropertyDekho247 India's 1st online Proptech Reselling platform that delivers real-time price alerts to property owners."></meta>
+    <link rel="canonical" href="https://wwww.propertydekho247.com/" />
+</Helmet>
+
+
       <header className="hero-section" id="Hero-section">
         <div className="overlay"></div>
         <div className="hero-content">

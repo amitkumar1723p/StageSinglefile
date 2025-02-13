@@ -7,7 +7,7 @@ import { GetSinglePostAction } from "../../../Action/postAction.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Loader/Loader.jsx";
-
+import { Helmet } from "react-helmet";
 import PropertyDetailsAreaDetailsConstructionDetailsFloorDetailsAmenitiesDetailsSection from "./PropertyDetails_AreaDetails_ConstructionDetails_FloorDetails_AmenitiesDetails.jsx";
 import PricingDetailsSection from "./PricingDetails.jsx";
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
@@ -436,6 +436,13 @@ export default function CreatePostMain() {
       ) : (
         <>
           <div className="ProgressBarMain py-3 pb-0 ">
+
+          <Helmet>
+                
+                <title>Free Property Posting on PropertyDekho247.com</title>
+                <meta name="description" content="Welcome to PropertyDekho247.com, your go-to platform for posting resale properties absolutely free! Whether you're looking to sell or rent a property, our easy-to-use platform allows you to reach a wide audience and connect with potential buyers or tenants. Simply post your property listing without any charges and showcase it to people actively searching for resale properties. Get started today and make your property visible to thousands of potential buyers!"></meta>
+                <link rel="canonical" href="https://www.propertydekho247.com/user/post/" />
+            </Helmet>
             {/* step 1 */}
             <div>
               <div className="d-flex justify-content-center">

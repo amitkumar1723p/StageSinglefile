@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./card.css";
 import HomeCard from "../HomeCard";
+import { Helmet } from "react-helmet";
 import { UserContext } from "../../CreateContext/CreateContext";
 // import _ from "lodash";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
@@ -48,6 +49,9 @@ const PropertyFilters = () => {
     return state.GetAllPost;
   });
 
+   const { data:SingleProjectData,   } = useSelector((state) => {
+      return state.SingleProjectName;
+    });
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
 
@@ -154,9 +158,16 @@ const PropertyFilters = () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
+// console.log(SingleProjectData,"AMi")
   return (
     <>
       <div className="property-post-filters-main-box">
+      <Helmet>
+                
+                <title>{`${SingleProjectData?.SingleProjectName?.["Project Name"]} - ${SingleProjectData?.SingleProjectName?.["Apartment Type"]},${SingleProjectData?.SingleProjectName.City} | Premium Living in ${SingleProjectData?.SingleProjectName?.Locality} `}</title>
+                <meta name="description" content={`Discover your dream ${SingleProjectData?.SingleProjectName?.["Apartment Type"]} at ${SingleProjectData?.SingleProjectName?.["Project Name"]} in ${SingleProjectData?.SingleProjectName?.Locality}, ${SingleProjectData?.SingleProjectName.City}. Located in ${SingleProjectData?.SingleProjectName.Sector}, this modern apartment offers spacious living with top-tier amenities. Enjoy easy access to key transport routes, shopping, schools, and more. With its prime location in Gurgaon, Sunrise Heights provides the perfect balance of comfort, convenience, and luxury. Don’t miss out on this exceptional opportunity!`}></meta>
+                {/* <link rel="canonical" href="https://www.propertydekho247.com/home/card?ProjectName=DLF%20The%20Primus&&PropertyAddType=Sale" /> */}
+            </Helmet>
       <div className="property-post-filters-box">
         <aside className="property-filters">
           <div className="filter-title">
