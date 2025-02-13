@@ -644,6 +644,38 @@ export const GetAllTenentResponseAction = () => {
     }
   };
 };
+//  Check Tenent is Exit
+export const TenentResponseIsExitAction = (PostId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "TenentResponseIsExitRequest" });
+
+      let url = `${api_Base_Url}/tenant-post-response/get`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({ type: "TenentResponseIsExitSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "TenentResponseIsExitFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "TenentResponseIsExitFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
 
 export const AddFavouriteAndUnFavouriteAction = (postdata) => {
   return async (dispatch) => {
@@ -821,7 +853,7 @@ export const GetMyVisitsAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-       
+
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -847,7 +879,7 @@ export const OwnerAllPostsVisitAction = () => {
       dispatch({ type: "OwnerAllPostsVisitRequest" });
 
       let url = `${api_Base_Url}/schedule-visit/owner-posts-all-vists`;
-      
+
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -855,7 +887,7 @@ export const OwnerAllPostsVisitAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      
+
       dispatch({ type: "OwnerAllPostsVisitSuccess", payload: data });
     } catch (error) {
       if (error.response) {

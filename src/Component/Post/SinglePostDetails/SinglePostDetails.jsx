@@ -24,7 +24,10 @@ import { UserContext } from "../../CreateContext/CreateContext";
 import ShowSinglePostImages from "./ShowSinglePostImages";
 import ReportListingForm from "./ReportListingForm";
 import FurnishDetails from "./FurnishDetails";
-import { ViewOwnerDetailsAction } from "../../../Action/userAction";
+import {
+  TenentResponseIsExitAction,
+  ViewOwnerDetailsAction,
+} from "../../../Action/userAction";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
@@ -73,8 +76,9 @@ export default function SinglePostDetails() {
     setSinglePostId(postId);
     if (reload === true) {
       dispatch(GetSinglePostAction(postId));
-      // similar property dispatch
       dispatch(SimilarProperty(postId));
+      console.log("medata",medata);
+      TenentResponseIsExitAction(postId)
       setReload(false);
     }
   }, [reload]);

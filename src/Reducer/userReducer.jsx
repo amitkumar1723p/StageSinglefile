@@ -248,3 +248,36 @@ export const GetTenentResponseReducer = (state = {}, action) => {
       };
   }
 };
+
+
+
+export const TenentResponseIsExitReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "TenentResponseIsExitRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "TenentResponseIsExitSuccess":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "TenentResponseIsExitFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case "TenentResponseIsExitClear":
+      return {};
+
+    default:
+      return {
+        ...state,
+      };
+  }
+};

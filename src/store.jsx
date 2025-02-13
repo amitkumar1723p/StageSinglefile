@@ -10,6 +10,7 @@ import {
   GetAllAdminReducer,
   GetPost_BiddingDocumentReducer,
   GetTenentResponseReducer,
+  TenentResponseIsExitReducer ,
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -26,7 +27,7 @@ import {
   GetAllScheduleVisitsAndMakeOffer_LengthReducer,
   GetMyVisitsReducer,
   GetSimilarProperty ,
-  OwnerAllPostsVisitsReducer
+  OwnerAllPostsVisitsReducer ,
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -51,6 +52,7 @@ const reducer = combineReducers({
   MyVisits:  GetMyVisitsReducer,
   SimilarProperty:GetSimilarProperty ,
   OwnerPostsVisits:OwnerAllPostsVisitsReducer ,
+  TenentResponseIsExit: TenentResponseIsExitReducer
   
 });
 
