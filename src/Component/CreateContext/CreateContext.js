@@ -37,7 +37,7 @@ export function UserProvider({ children }) {
  const [showCreatePostSubmitAlert ,setshowCreatePostSubmitAlert] =useState(false)
   const CreatePostRef = useRef(null)
 const[postVerify,setPostVerify]=useState(null)
-console.log(postVerify,"check")
+ 
   return (
     <UserContext.Provider
       value={{

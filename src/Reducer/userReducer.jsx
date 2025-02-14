@@ -11,7 +11,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case "CreateScheduleVisitRequest":
     case "PostPropertyRequirementRequest":
     case "CreateChannelPartnerRequest":
-    case "CreateTenant_PostResponseRequest":
+    case "ViewOwnerDetailsRequest":
     case "AddFavouriteAndUnFavouriteRequest":
     case "NotifyActionRequest":
     case "CreatePostRequest":
@@ -38,7 +38,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case "CreateScheduleVisitSuccess":
     case "PostPropertyRequirementSuccess":
     case "CreateChannelPartnerSuccess":
-    case "CreateTenant_PostResponseSuccess":
+    case "ViewOwnerDetailsSuccess":
     case "AddFavouriteAndUnFavouriteSuccess":
     case "NotifyActionSuccess":
     case "CreatePostSuccess":
@@ -65,7 +65,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case "CreateScheduleVisitFail":
     case "PostPropertyRequirementFail":
     case "CreateChannelPartnerFail":
-    case "CreateTenant_PostResponseFail":
+    case "ViewOwnerDetailsFail":
     case "AddFavouriteAndUnFavouriteFail":
     case "NotifyActionFail":
     case "CreatePostFail":
@@ -240,6 +240,39 @@ export const GetTenentResponseReducer = (state = {}, action) => {
         loading: false,
       };
     case "GetAllTenentResponseFailClear":
+      return {};
+
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+
+
+export const TenentResponseIsExitReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "TenentResponseIsExitRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "TenentResponseIsExitSuccess":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "TenentResponseIsExitFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case "TenentResponseIsExitClear":
       return {};
 
     default:

@@ -2,6 +2,7 @@ import axios from "axios";
 const api_Base_Url = process.env.REACT_APP_API_URL;
 // This Function Show Only Alert (Simple User)
 export const CreatePostAction = (PostData) => {
+ console.log(PostData)
   return async (dispatch) => {
     try {
       dispatch({
@@ -22,9 +23,10 @@ export const CreatePostAction = (PostData) => {
       };
 
       const { data } = await axios.post(url, PostData, config);
-
+ 
       dispatch({ type: "CreatePostSuccess", payload: data });
     } catch (error) {
+      console.log(error)
       if (error.response) {
         dispatch({ type: "CreatePostFail", payload: error.response.data });
       } else {
@@ -177,6 +179,7 @@ export const GetSinglePostAction = (PostId) => {
 // Update Post Action
 
 export const UpdatePostAction = (PostData, PostId) => {
+  console.log(PostData)
   return async (dispatch) => {
     try {
       dispatch({
@@ -740,8 +743,7 @@ export const SimilarProperty = (postId) => {
       };
  
       const { data } = await axios.get(url, config);  // Pass postId as an object
-//  console.log(similar)
- console.log( "similer",data)
+ 
       dispatch({
         type: "SimilarPropertySuccess",
         payload: data,

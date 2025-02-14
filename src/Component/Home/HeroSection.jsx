@@ -11,10 +11,11 @@ import "./Navbar.css";
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
 
-import TenantDetailsForm from "./TenantDetailsForm";
+// import TenantDetailsForm from "./TenantDetailsForm";
 import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
 import BrowseProperties from "./BrowseProperties";
+// import LandLord from "./LandLord";
 
 import PropertyDetailsForm from "./PropertyDetailsForm";
 
@@ -161,9 +162,20 @@ const HeroSection = () => {
     if (AllPostData && GetProjectNameData) {
       if (AllPostData.success == true && GetProjectNameData.success == true) {
         if (RedirectPathIsHomeCard == false) {
+          //  `/post-detail/${PropertyAddress.toLowerCase()
+          //   .replaceAll(" ", "-")
+          //   .replace(",", "")
+          //   .replaceAll("/", "-")}-${PostData._id}`
+
           navigate(
             `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
           );
+          // navigate(
+          //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
+          //       .replaceAll(" ", "-")
+          //       .replaceAll(",", "")
+          //      .replaceAll("/", "-")}&&PropertyAddType=${SearchPropertyAddType}`
+          // );
         }
       }
     }
@@ -602,7 +614,7 @@ const HeroSection = () => {
           <TenantDetailsForm />
         </>
       )} */}
-
+      {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
       {showPropertyRequirement && (

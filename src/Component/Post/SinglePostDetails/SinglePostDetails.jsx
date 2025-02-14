@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import {
   GetSinglePostAction,
+  LoginUserPostAction,
   SimilarProperty,
 } from "../../../Action/postAction";
 import Loader from "../../Loader/Loader";
@@ -18,21 +19,29 @@ import BiddingForm from "./BiddingForm";
 import ScheduleYourVisit from "./ScheduleYourVisit";
 
 import WindowComponent from "../../WindowComponent";
-import CreateTenantPostResponse from "./CreateTenantPostResponse";
+import ViewOwnerDetailsAlert from "./ViewOwnerDetailsAlert";
 
 import { UserContext } from "../../CreateContext/CreateContext";
 
 import ShowSinglePostImages from "./ShowSinglePostImages";
 import ReportListingForm from "./ReportListingForm";
 import FurnishDetails from "./FurnishDetails";
+import {
+  TenentResponseIsExitAction,
+  ViewOwnerDetailsAction,
+} from "../../../Action/userAction";
+import { StoreDataInSession } from "../../../utils/SessionStorage";
+import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
+import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
   const Params = useParams();
-  const Tenant_PostResponseBtnRef = useRef(null);
+
   const BiddingFormOpenBtnRef = useRef(null);
   const ScheduleYourVisitOpenBtnRef = useRef(null);
   const SupspiciousListingBtn = useRef(null);
+  const TenantDetailsFormBtnRef = useRef(null);
   const navigate = useNavigate();
   const [SinglePostId, setSinglePostId] = useState("");
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
@@ -45,30 +54,41 @@ export default function SinglePostDetails() {
   const [PropertyAddress, setPropertyAddress] = useState("");
   const [showTenant_PostResponseForm, setshowTenant_PostResponseForm] =
     useState(false);
+
+  const [showTenantDetailsForm, setshowTenantDetailsForm] = useState(false); // Open Tenant Details Form
+  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false); // Open Tenant Details Form
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
-  const [reload, setReload] = useState(true); //use for reload similar property
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
   const { loading, data: getSinglePostData } = useSelector((state) => {
     return state.GetSinglePost;
   });
+  const {
+    loading: AlertLoding,
+    data: AlertData,
+    LodingType: AlertType,
+  } = useSelector((state) => {
+    return state.userData;
+  });
+
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
-  useEffect(() => {
-    let postaddress = Params.PostAddress;
-    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
-    setSinglePostId(postId);
-    if (reload === true) {
-      dispatch(GetSinglePostAction(postId));
-      // similar property dispatch
-      dispatch(SimilarProperty(postId));
-      setReload(false);
-    }
-  }, [reload]);
+
+  // Get All Post by Login User
+  const { data: myListing } = useSelector((state) => {
+    return state.GetPost;
+  });
+
+  //  Check Tenant Fill Response Form  (get Data)
+  const { data: TenentResponseIsExitData } = useSelector((state) => {
+    return state.TenentResponseIsExit;
+  });
+
+ 
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -207,30 +227,17 @@ export default function SinglePostDetails() {
       ) {
         setOpenReportForm(true);
       } else if (
-        sessionStorage.getItem("RedirectPath") == "/show-TenantResponseForm"
+        sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
+        !TenentResponseIsExitData?.TenantDetails
       ) {
-        setshowTenant_PostResponseForm(true);
+        setshowTenantDetailsForm(true);
       }
-
+      //  console.log()
       sessionStorage.removeItem("RedirectPath");
       setRedirectPath("");
     }
-  }, [medata]);
+  }, [medata, TenentResponseIsExitData]);
 
-  // useEffect(() => {
-  //   const unlisten = navigate((state) => {
-  //
-  //
-  //     // if (state.action === "POP") {
-  //
-  //     //   // Perform actions based on Back or Forward button navigation
-  //     // }
-  //   });
-
-  //   // return () => {
-  //   //   unlisten();
-  //   // };
-  // }, [navigate, location.pathname]);
   // let loadings =true
 
   // open report form
@@ -242,9 +249,41 @@ export default function SinglePostDetails() {
   const closehandleReportForm = (e) => {
     setOpenReportForm(false);
   };
-  
-  //  const SinglePost = getSinglePostData.SinglePost
-  console.log(Params.PostAddress)
+
+  //  Open Owner Details Alert  (T)
+
+  useEffect(() => {
+    if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
+      StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
+      setshowOwnerDetailsForm(true);
+      setshowTenantDetailsForm(false);
+      if (!TenentResponseIsExitData?.TenantDetails) {
+        dispatch(TenentResponseIsExitAction(SinglePostId));
+      }
+      // setTenantsDetails({
+      //   FamilyDetails: { Adults: 0, Children: 0, Pets: null },
+      //   ProfessionDetails: { WorkType: "" },
+      // });
+    }
+  }, [AlertData, AlertType]);
+
+  // Check Tenent Response IsExit  Dispatch
+  useEffect(() => {
+    if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
+    dispatch(TenentResponseIsExitAction(SinglePostId));
+  }, [SinglePostId, medata?.user?.Role]);
+
+  useEffect(() => {
+    if (!Params?.PostAddress) return; // Avoid running when undefined
+
+    let postaddress = Params.PostAddress;
+    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
+    setSinglePostId(postId);
+
+    dispatch(GetSinglePostAction(postId));
+    dispatch(SimilarProperty(postId));
+  }, [Params?.PostAddress]);
+
   return (
     <>
       <Helmet>
@@ -285,7 +324,7 @@ export default function SinglePostDetails() {
         </div>
       ) : null} */}
 
-      {loading  ? (
+      {loading ? (
         <Loader className="windowloader" />
       ) : (
         getSinglePostData &&
@@ -537,24 +576,40 @@ export default function SinglePostDetails() {
                           </div>
                         </div>
 
-                        {/* {!["Owner", "Admin"].includes(medata?.user?.Role) &&
-                          getSinglePostData.SinglePost.CreatePostUser !==
-                            medata?.user?._id && (
+                        {!medata || !medata.IsAuthenticated ? (
+                          <span
+                            className="original-price"
+                            onClick={() => {
+                              setRedirectPath("/view-owner-details");
+                              navigate("/login");
+                            }}
+                          >
+                            View Owner Details
+                          </span>
+                        ) : (
+                          ["Tenant"].includes(medata?.user?.Role) && (
                             <span
+                              ref={TenantDetailsFormBtnRef}
                               className="original-price"
-                              ref={Tenant_PostResponseBtnRef}
                               onClick={() => {
-                                if (medata && medata.IsAuthenticated == true) {
-                                  setshowTenant_PostResponseForm(true);
+                                if (!TenentResponseIsExitData?.TenantDetails) {
+                                  setshowTenantDetailsForm(true);
                                 } else {
-                                  setRedirectPath("show-TenantResponseForm");
-                                  navigate("/login");
+                                  
+                                  dispatch(
+                                    ViewOwnerDetailsAction({
+                                      PostId:
+                                        getSinglePostData?.SinglePost?._id,
+                                    })
+                                  );
+                                  //  dispatch(ViewOwnerDetailsAction({postId}))
                                 }
                               }}
                             >
-                              Create Response
+                              View Owner Details
                             </span>
-                          )} */}
+                          )
+                        )}
                       </>
                     )}
                   </div>
@@ -925,7 +980,7 @@ export default function SinglePostDetails() {
                             .replaceAll(" ", "-")
                             .replace(",", "")
                             .replaceAll("/", "-")}-${item._id}`}
-                          onClick={() => setReload(true)} // Trigger reload on click
+                           
                         >
                           <div className="similar-property-main-box">
                             <div className="similar-property-box1">
@@ -958,17 +1013,22 @@ export default function SinglePostDetails() {
 
                                         <span> Built-Up Area</span>
                                       </p> */}
-                                      {item?.BasicDetails?.PropertyAdType =="Rent" && (
+                                      {item?.BasicDetails?.PropertyAdType ==
+                                        "Rent" && (
                                         <>
                                           <div className="similar-area-price">
                                             <div className="similar-area-price-rent-price">
-                                                {formatReservePrice(
+                                              {formatReservePrice(
                                                 item?.PricingDetails
                                                   ?.ExpectedRent
-                                              )}   <span>/Month</span>
+                                              )}{" "}
+                                              <span>/Month</span>
                                             </div>
 
-                                            <span className="rent-price-section-similar-property"> Rent Price </span>
+                                            <span className="rent-price-section-similar-property">
+                                              {" "}
+                                              Rent Price{" "}
+                                            </span>
                                           </div>
                                         </>
                                       )}
@@ -1025,14 +1085,24 @@ export default function SinglePostDetails() {
                   )}
 
                   {/* View Response Form  */}
+                  {/* {console.log(showTenantDetailsForm)} */}
 
-                  {showTenant_PostResponseForm && (
+                  {showTenantDetailsForm && (
                     <WindowComponent
-                      Component={CreateTenantPostResponse}
-                      SetShow={setshowTenant_PostResponseForm}
-                      BtnRef={Tenant_PostResponseBtnRef}
+                      Component={TanantDetailsForm}
+                      SetShow={setshowTenantDetailsForm}
+                      BtnRef={TenantDetailsFormBtnRef}
                       SinglePostData={getSinglePostData}
-                      PropertyAddress={PropertyAddress}
+                      // PropertyAddress={PropertyAddress}
+                    />
+                  )}
+
+                  {showOwnerDetailsForm && (
+                    <WindowComponent
+                      Component={ViewOwnerDetailsAlert}
+                      SetShow={setshowOwnerDetailsForm}
+
+                      // PropertyAddress={PropertyAddress}
                     />
                   )}
 

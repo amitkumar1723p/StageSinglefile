@@ -132,6 +132,9 @@ ol, ul {
   padding-left: 0;
 }
 
+.white-space-nowrap{
+  white-space: nowrap;
+}
 /* dl,
 
 ol,

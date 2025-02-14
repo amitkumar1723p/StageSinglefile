@@ -579,33 +579,44 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 
 // Create Tenant Post Response
 
-export const CreateTenant_PostResponseAction = (Tenant_PostResponseobj) => {
+export const ViewOwnerDetailsAction = (Document) => {
+  console.log("4304949",Document)
   return async (dispatch) => {
     try {
       dispatch({
-        type: "CreateTenant_PostResponseRequest",
-        payload: "CreateTenant_PostResponseRequest",
+        type: "ViewOwnerDetailsRequest",
+        payload: "ViewOwnerDetailsRequest",
       });
 
-      const url = `${api_Base_Url}/tenant-post-response/create`;
-
+      const url = `${api_Base_Url}/tenant-post-response/create/${Document.PostId}`;
+         
       const config = {
         headers: { "Content-Type": "application/json" },
 
         withCredentials: true,
       };
-
-      const { data } = await axios.post(url, Tenant_PostResponseobj, config);
-      dispatch({ type: "CreateTenant_PostResponseSuccess", payload: data });
+       
+      let data ;
+      if (Document.TenantsDetails) {
+         console.log("kei3i")
+        const response = await axios.post(url, Document.TenantsDetails, config);
+        data = response.data;
+    } else {
+       console.log("run")
+        const response = await axios.get(url, config);
+        data = response.data;
+    }
+    
+      dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "CreateTenant_PostResponseFail",
+          type: "ViewOwnerDetailsFail",
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "CreateTenant_PostResponseFail",
+          type: "ViewOwnerDetailsFail",
           payload: { message: error.message, success: false },
         });
       }
@@ -638,6 +649,39 @@ export const GetAllTenentResponseAction = () => {
       } else {
         dispatch({
           type: "GetAllTenentResponseFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+//  Check Tenent is Exit
+export const TenentResponseIsExitAction = (PostId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "TenentResponseIsExitRequest" });
+
+      let url = `${api_Base_Url}/tenant-post-response/check-tenant-details/${PostId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({ type: "TenentResponseIsExitSuccess", payload: data });
+    } catch (error) {
+      console.log(error)
+      if (error.response) {
+        dispatch({
+          type: "TenentResponseIsExitFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "TenentResponseIsExitFail",
           payload: { message: error.message, success: false },
         });
       }
@@ -821,7 +865,7 @@ export const GetMyVisitsAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
+
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -846,8 +890,8 @@ export const OwnerAllPostsVisitAction = () => {
     try {
       dispatch({ type: "OwnerAllPostsVisitRequest" });
 
-      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-vists`;
-      
+      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-response`;
+
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -855,7 +899,7 @@ export const OwnerAllPostsVisitAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
+
       dispatch({ type: "OwnerAllPostsVisitSuccess", payload: data });
     } catch (error) {
       if (error.response) {

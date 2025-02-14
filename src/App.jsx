@@ -37,7 +37,7 @@ import AllAdminData from "./Component/Admin/AllAdminData";
 import ProfileHeader from "./Component/User/Profile/ProfileHeader";
 import ShowLoginUserPost from "./Component/Post/ShowLoginUserPost";
 import AdminAllPost from "./Component/Admin/AllPost";
-import ViewTenantPostResponse from "./Component/User/Profile/ViewTenantPostResponse";
+ 
 import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePost";
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
@@ -52,7 +52,7 @@ import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
-import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -153,10 +153,7 @@ function App() {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-      if (
-        data.success === true &&["CreatePostRequest"].includes(LodingType)
-      ) {
-         
+      if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
         sessionStorage.removeItem("LocationDetailsData");
@@ -173,17 +170,22 @@ function App() {
           "CreateScheduleVisitRequest",
           "BiddingFormRequest",
           "CreatePostRequest",
-          "CreateUserOtpRequest" ,
-          "VerifyUserOtpRequest" ,
-          "CreateUserRequest"
-        ].includes(LodingType) == false
+          "CreateUserOtpRequest",
+          "VerifyUserOtpRequest",
+          "CreateUserRequest",
+          "ViewOwnerDetailsRequest",
+        ].includes(LodingType)
       ) {
+        dispatch({ type: "UserClear" });
+        setalertShow(false);
+      } else {
         setalertMessage(<p>{data.message}</p>);
         setalertType("Success");
         setalertShow(true);
 
         dispatch({ type: "UserClear" });
-      }
+      } 
+       
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(
@@ -597,18 +599,14 @@ function App() {
               path="post/update/:PostId"
               element={<CreatePostMain />}
             />
-            <Route
-              exact
-              path="post/response"
-              element={<ViewTenantPostResponse />}
-            />
+             
 
             <Route exact path="my-visits" element={<MyVisits />} />
 
             <Route
               exact
-              path="my-post/all-visits"
-              element={<OwnerPostAllVisits />}
+              path="my-post/all-response"
+              element={<OwnerPostAllResponse />}
             />
             <Route
               exact

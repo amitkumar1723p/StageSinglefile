@@ -48,6 +48,7 @@ const PropertyFilters = () => {
   const { loading, data: GetAllPostData } = useSelector((state) => {
     return state.GetAllPost;
   });
+   
 
    const { data:SingleProjectData,   } = useSelector((state) => {
       return state.SingleProjectName;
@@ -56,7 +57,7 @@ const PropertyFilters = () => {
   const [querry, setquerry] = useSearchParams();
 
   useEffect(() => {
-    console.log(removeFilterField);
+    
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       dispatch(
         GetAllPostAction({

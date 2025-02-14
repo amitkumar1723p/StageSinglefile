@@ -60,8 +60,7 @@ export default function CreatePostImageUpload({
     // remove Coma
 
     const CopyObj = { ...PricingDetailsData };
-    console.log(CopyObj);
-    console.log(CopyObj);
+
     if (BasicDetailsData.PropertyAdType == "Rent") {
       const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
         /,/g,
@@ -163,10 +162,8 @@ export default function CreatePostImageUpload({
           dispatch(UpdatePostAction(formData, PostId));
         }
       } else {
-        console.log(PricingDetailsData);
         dispatch(CreatePostAction(formData));
- 
-         
+
         if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
           setshowCreatePostSubmitAlert("showLoading");
         }
@@ -239,6 +236,7 @@ export default function CreatePostImageUpload({
                   const files = Array.from(e.target.files);
 
                   files.forEach((file) => {
+                    //  console.log(file)
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {

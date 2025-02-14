@@ -4,7 +4,7 @@ import './PageNotFound.css'; // Import the plain CSS file
 
 const PageNotFound = () => {
   const scrollHorizontal = () => {
-    console.log("hiii");
+    
     window.scrollBy({
       top: document.documentElement.scrollHeight,
       left: 0,
