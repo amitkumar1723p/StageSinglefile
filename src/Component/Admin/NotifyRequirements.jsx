@@ -11,7 +11,7 @@ const NotifyRequirements = () => {
   const { loading, data } = useSelector((state) => state?.AllNotifiesAndReq || {});
   
 
-  const allData = useSelector(state => state.AllNotifiesAndReq);
+  const allData = useSelector(state => state?.AllNotifiesAndReq);
 
 const [unacknowledgedNotifies, setUnacknowledgedNotifies] = useState([]);
 const [acknowledgedNotifies, setAcknowledgedNotifies] = useState([]);
@@ -20,11 +20,13 @@ const [acknowledgedRequirements, setAcknowledgedRequirements] = useState([]);
 const [newNotifiesId,setNewNotifiesId]=useState([]);
 const [newReqId,setNewReqId]= useState([]);
 const [displayData, setDisplayData] = useState([]);
-
+const [madeReqAck,setMadeReqAck] = useState(false);
+const [madeNotifyAck,setMadeNotifyAck] = useState(false);
+const [apiType,setApiType]=useState("");
 // console.log(data)
 
 useEffect(()=>{
-  console.log(enterdDate)
+  // console.log(enterdDate)
   const currentData = activeTab === "notifies" ? allData?.data?.notifies : allData?.data?.requirements
     const filterdData=currentData?.filter((item=> {
       if(enterdDate){
@@ -60,27 +62,91 @@ useEffect(() => {
       .map(item => item._id); // Extract only _id
 
     // Update state
-    console.log(unacknowledgedNotifiesId);
+    // console.log(unacknowledgedNotifiesId);
     setUnacknowledgedNotifies(filteredUnacknowledgedNotifies);
     setUnacknowledgedRequirements(filteredUnacknowledgedRequirements);
     setNewReqId(unacknowledgedReqId);
+    // console.log("this is ",unacknowledgedReqId)
     setNewNotifiesId(unacknowledgedNotifiesId); // Assuming setNewNotifyId is the correct function for notifies
   }
 }, [allData]); // Runs whenever `allData` updates
 
- async function handleSubmit(){
-  console.log(newNotifiesId)
-    try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/notify/acknowledeg`,{ids:newNotifiesId}, {
-        headers: { "Content-Type": "application/json" },
+//  async function handleSubmit(){
+//   console.log("called",newNotifiesId)
 
+ 
+//     try {
+//      var res;
+//      console.log("before")
+//       if(apiType === "Notify" && newNotifiesId.length > 0 && !madeNotifyAck){
+//         console.log("innnn")
+//         res = await axios.post(`${process.env.REACT_APP_API_URL}/notify/acknowledeg`,{ids:newNotifiesId}, {
+//           headers: { "Content-Type": "application/json" },
+  
+//           withCredentials: true,
+//         })
+
+//         if(res.data.success){
+//           setMadeNotifyAck(true)
+//         }
+//       }
+//       if(apiType==="Requests" && newReqId.length > 0 && !madeReqAck){
+//         res = await axios.post(`${process.env.REACT_APP_API_URL}/property-requirement/acknowledge`,{ids:newReqId}, {
+//           headers: { "Content-Type": "application/json" },
+  
+//           withCredentials: true,
+//         })
+//         console.log(res)
+//         if(res.data.success){
+//           setMadeReqAck(true)
+//         }
+//       }
+     
+//       // console.log(res)
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+
+async function handleSubmit() {
+  // console.log("API Type:", apiType);
+  // console.log("New Notifies IDs:", newNotifiesId);
+  // console.log("New Request IDs:", newReqId);
+
+  try {
+    let res;
+
+    if (apiType === "Notify" && newNotifiesId.length > 0 && !madeNotifyAck) {
+      // console.log("Calling Notify API");
+      res = await axios.post(`${process.env.REACT_APP_API_URL}/notify/acknowledeg`, { ids: newNotifiesId }, {
+        headers: { "Content-Type": "application/json" },
         withCredentials: true,
-      })
-      console.log(res)
-    } catch (error) {
-      console.log(error)
+      });
+
+      if (res.data.success) {
+        setMadeNotifyAck(true);
+      }
     }
+
+    if (apiType === "Requests" && newReqId.length > 0 && !madeReqAck) {
+      // console.log("Calling Requests API");
+      res = await axios.post(`${process.env.REACT_APP_API_URL}/property-requirement/acknowledge`, { ids: newReqId }, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+
+      if (res.data.success) {
+        setMadeReqAck(true);
+      }
+    }
+  } catch (error) {
+    console.error("API Call Failed:", error);
   }
+}
+
+useEffect(()=>{
+  handleSubmit()
+},[apiType])
 
 
   return (
@@ -90,31 +156,36 @@ useEffect(() => {
         <button
           className={`notify-requirements-tab ${activeTab === "notifies" ? "active" : ""}`}
           onClick={() => { setActiveTab("notifies"); 
-            setDisplayData(acknowledgedNotifies)
+            setDisplayData(acknowledgedNotifies);
+            setShowUnacknowledged("all");
 
           }}
         >
-          Notifies
+          Notifies ({data?.notifies.length})
         </button>
         <button
           className={ `notify-requirements-tab ${activeTab === "requirements" ? "active" : ""}`}
-          onClick={() => { setActiveTab("requirements"); console.log(showUnacknowledged);  setDisplayData(acknowledgedRequirements) }}
+          onClick={() => { setActiveTab("requirements"); setShowUnacknowledged("all");  setDisplayData(acknowledgedRequirements) }}
         >
-          Requirements
+          Requirements ({data?.requirements.length})
         </button>
       </div>
 
       {/* Toggle Buttons for Unacknowledged */}
       <div className="toggle-buttons">
         {activeTab === "notifies" ? (
-        <>  <button   className={` notify-button-toggale-one ${showUnacknowledged==="all" ? "button-toggle" : " "}`} onClick={() =>{ setShowUnacknowledged("all");
-          console.log(showUnacknowledged)
+        <>  <button   className={` notify-button-toggale-one ${showUnacknowledged==="all" ? "button-toggle" : " "}`} onClick={() =>{ 
+          setShowUnacknowledged("all");
+          // console.log(showUnacknowledged)
           setDisplayData(acknowledgedNotifies)
         }}>All</button> 
        <></> {
-          !enterdDate &&    <button className={`notify-button-toggale-one ${showUnacknowledged ==="new" ? "button-toggle" : " "}`} onClick={() => {setShowUnacknowledged("new");
+          !enterdDate &&    <button className={`notify-button-toggale-one ${showUnacknowledged ==="new" ? "button-toggle" : " "}`} onClick={() => {
+            setShowUnacknowledged("new");
             setDisplayData(unacknowledgedNotifies);
-            handleSubmit()
+            setApiType("Notify");
+           
+            
            }}>({unacknowledgedNotifies.length}) New Response</button>   
          
         }</>
@@ -124,8 +195,12 @@ useEffect(() => {
           }}> All</button> 
           
           {
-          !enterdDate && <button className={`notify-button-toggale-one ${showUnacknowledged==="new" ? "button-toggle" : " "}`} onClick={() => {setShowUnacknowledged("new");
-            setDisplayData(unacknowledgedRequirements)
+          !enterdDate && <button className={`notify-button-toggale-one ${showUnacknowledged==="new" ? "button-toggle" : " "}`} onClick={() => {
+            setShowUnacknowledged("new");
+            setDisplayData(unacknowledgedRequirements);
+            setApiType("Requests");
+          
+           
           }}>({unacknowledgedRequirements.length}) New Response</button>    
          }
           
@@ -148,7 +223,7 @@ useEffect(() => {
               <tr>
                 {activeTab === "notifies" ? (
                   <>
-                    <th className="notify-requirements-th">serial no.</th>
+                    <th className="notify-requirements-th">Serial no.</th>
                     <th className="notify-requirements-th">Name</th>
                     <th className="notify-requirements-th">Phone</th>
                     <th className="notify-requirements-th">Date </th>
@@ -160,7 +235,7 @@ useEffect(() => {
                   </>
                 ) : (
                   <>
-                    <th className="notify-requirements-th">serial no.</th>
+                    <th className="notify-requirements-th">Serial no.</th>
                     <th className="notify-requirements-th">Name</th>
                     <th className="notify-requirements-th">Phone</th>
                     <th className="notify-requirements-th">Date</th>
@@ -181,7 +256,7 @@ useEffect(() => {
                     {activeTab === "notifies" ? (
                       <>
                         <td className="notify-requirements-td">{ind+1}</td>
-                        <td className="notify-requirements-td">{item.Name || item?.User?.Name}</td>
+                        <td className="notify-requirements-td">{item?.User?.Name}</td>
                         <td className="notify-requirements-td">{item?.User?.ContactNumber}</td>
                         <td className="notify-requirements-td">
                         {new Date(item.createAt).toISOString().split('T')[0]}
