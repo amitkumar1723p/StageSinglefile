@@ -741,7 +741,7 @@ export const SimilarProperty = (postId) => {
  
       const { data } = await axios.get(url, config);  // Pass postId as an object
 //  console.log(similar)
- console.log( "similer",data)
+ 
       dispatch({
         type: "SimilarPropertySuccess",
         payload: data,
@@ -759,6 +759,42 @@ export const SimilarProperty = (postId) => {
         // Something else happened
         dispatch({
           type: "SimilarPropertyFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+
+
+export const GetAllNotificationsAndRequirements = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "GetNotifiesAndPropRequests" });
+
+      let url = `${api_Base_Url}/notify/notifies-requests`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+      dispatch({
+        type: "GetNotifiesAndPropRequestsSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "GetNotifiesAndPropRequestsFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetNotifiesAndPropRequests",
           payload: { message: error.message, success: false },
         });
       }

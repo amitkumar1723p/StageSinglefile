@@ -53,6 +53,7 @@ import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
 import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -124,6 +125,12 @@ function App() {
   });
   const { data: OwnerPostsVisitsData } = useSelector((state) => {
     return state.OwnerPostsVisits;
+  });
+
+
+  // notify 
+  const { data: AllNotifiesAndReqData } = useSelector((state) => {
+    return state.AllNotifiesAndReq;
   });
 
   const location = useLocation();
@@ -529,6 +536,28 @@ function App() {
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
 
+
+  // notify 
+
+  useEffect(() => {
+    if (AllNotifiesAndReqData) {
+      if (AllNotifiesAndReqData.success === false) {
+        if (AllNotifiesAndReqData.IsAuthenticated === false) {
+          navigate("/");
+          // setTimeout(() => {
+
+          //   navigate("/login")
+          // }, 0);
+        }
+        setalertMessage(<p>{AllNotifiesAndReqData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "GetNotifiesAndPropRequestsClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AllNotifiesAndReqData]);
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
@@ -636,6 +665,13 @@ function App() {
             path="data"
             element={
               <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          />
+              <Route
+            exact
+            path="notify"
+            element={
+              <AdminOwnerRoutes Component={NotifyRequirements} isOwner={false} />
             }
           />
           {/* <Route

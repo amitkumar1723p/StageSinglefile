@@ -26,8 +26,10 @@ import {
   GetAllScheduleVisitsAndMakeOffer_LengthReducer,
   GetMyVisitsReducer,
   GetSimilarProperty ,
-  OwnerAllPostsVisitsReducer
+  OwnerAllPostsVisitsReducer,
+  GetAllNotificationsAndRequirementsReducer
 } from "./Reducer/postReducer.jsx";
+
 
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
@@ -51,7 +53,7 @@ const reducer = combineReducers({
   MyVisits:  GetMyVisitsReducer,
   SimilarProperty:GetSimilarProperty ,
   OwnerPostsVisits:OwnerAllPostsVisitsReducer ,
-  
+  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer
 });
 
 let initialState = {};

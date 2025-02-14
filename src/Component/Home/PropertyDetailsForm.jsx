@@ -150,6 +150,7 @@ export default function PropertyDetailsForm() {
       <div className="form-section">
         <h2>Property Details</h2>
 
+
         <div className="form-grid">
           <select className="input" name="propertyType" value={formData.propertyType} onChange={handleInputChange}>
             <option value="" disabled hidden>
