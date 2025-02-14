@@ -33,6 +33,7 @@ import {
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
+import { retry } from "@reduxjs/toolkit/query";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -226,15 +227,25 @@ export default function SinglePostDetails() {
         setOpenReportForm(true);
       } else if (
         sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
-        !TenentResponseIsExitData?.TenantDetails
+        medata?.user?.Role == "Tenant"
       ) {
         setshowTenantDetailsForm(true);
       }
-      //  console.log()
+
       sessionStorage.removeItem("RedirectPath");
       setRedirectPath("");
     }
-  }, [medata, TenentResponseIsExitData]);
+  }, [medata]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("TenentFillForm")) {
+      return sessionStorage.removeItem("TenentFillForm");
+    }
+    if (TenentResponseIsExitData?.TenantDetails?.Tenant) {
+      setshowTenantDetailsForm(false);
+    }
+  }, [TenentResponseIsExitData]);
+  // console.log("TenentResponseIsExitData",TenentResponseIsExitData?.TenantDetails);
 
   // let loadings =true
 
@@ -255,7 +266,9 @@ export default function SinglePostDetails() {
       StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
       setshowOwnerDetailsForm(true);
       setshowTenantDetailsForm(false);
+
       if (!TenentResponseIsExitData?.TenantDetails) {
+        sessionStorage.setItem("TenentFillForm", true);
         dispatch(TenentResponseIsExitAction(SinglePostId));
       }
       // setTenantsDetails({
@@ -578,8 +591,6 @@ export default function SinglePostDetails() {
                           </div>
                         </div>
 
-                        {/* view owner no comment */}
-
                         {/* {!medata || !medata.IsAuthenticated ? (
                           <span
                             className="original-price"
@@ -613,8 +624,6 @@ export default function SinglePostDetails() {
                             </span>
                           )
                         )} */}
-
-                        {/* view owner no comment */}
                       </>
                     )}
                   </div>
@@ -954,6 +963,7 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
                 )}
+               
               </div>
               {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                 <div className="prop-right">
