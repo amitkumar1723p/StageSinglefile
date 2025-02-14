@@ -1,11 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import './AdminAside.css'; // Import the vanilla CSS file
+import { getAllUserAction } from "../../Action/userAction";
 
 export default function AdminAside() {
+  const dispatch=useDispatch();
   const { medata } = useSelector((state) => state.meDetails);
   const location = useLocation();
+  // get all user excepation owner Admin agent
+  const{data:AllUserResponseData}=useSelector((state)=>{
+    return state.AllUserResponse
+  })
+// this useEffect get All user reponse 
+  useEffect(()=>{
+    dispatch(getAllUserAction())
+  },[dispatch])
+// filter All user data
+
+
+// console.log(AllUserResponseData,"hello")
 
   return (
    <div className="">
@@ -56,6 +70,21 @@ export default function AdminAside() {
                   />
                   Agent
                 </NavLink>
+{/* All repose user route  */}
+                <NavLink
+                  to="/admin/all-registration-response"
+                  className={({ isActive }) =>
+                    `AdminAside-navLink ${location.search.includes("Role=Agent") ? "active" : "hover"}` 
+                  }
+                >
+                  <img
+                    src="/img/Admin.svg"
+                    alt="Agent Icon"
+                    className={`AdminAside-icon ${location.search.includes("Role=Agent") ? "active" : ""}`}
+                  />
+                 All User
+                </NavLink>
+{/* All repose user route  */}
               </>
             )}
           <NavLink

@@ -22,6 +22,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ProfileUpdateRequest":
 
     case"ReportSuspiciousPropertyRequest":
+    case"acknowledgeProfileRequest":
       return {
         ...state,
         loading: true,
@@ -48,6 +49,8 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ProfileUpdateSuccess":
 
     case"ReportSuspiciousPropertySuccess":
+
+    case"acknowledgeProfileSuccess":
       return {
         ...state,
         loading: false,
@@ -74,6 +77,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ProfileEditFail":
     case"ProfileUpdateFail":
     case"ReportSuspiciousPropertyFail":
+    case"acknowledgeProfileFail":
       return {
         ...state,
         loading: false,
@@ -248,3 +252,37 @@ export const GetTenentResponseReducer = (state = {}, action) => {
       };
   }
 };
+
+// get All user excepation owner admin agent;
+
+export const getAllUserReducer=(state={},action)=>{
+  switch(action.type){
+    case "GetAllUserRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case"GetAllUserSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"GetAllUserFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"GetAllUserFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}

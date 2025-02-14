@@ -33,7 +33,10 @@ const Dashboard = () => {
   const { data: AgentAdminAllPost } = useSelector((state) => {
     return state.AdminProperty;
   });
-
+ // get all user excepation owner Admin agent
+  const{data:AllUserResponseData}=useSelector((state)=>{
+    return state.AllUserResponse
+  })
   // On dashboard we get all property 
   useEffect(() => {
 
@@ -82,6 +85,8 @@ const Dashboard = () => {
       setTotalListing(PostVerify.length + unverify.length);
     }
   }, [AgentAdminAllPost]);
+
+  // console.log(AllUserResponseData,"dash")
   return (
     <>
       {loading ? (
@@ -155,6 +160,22 @@ const Dashboard = () => {
                 </div>{" "}
               </>
             )}
+            {
+              medata?.user?.Role==="Owner"&&(
+                <>
+                <Link to="/admin/all-registration-response">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{AllUserResponseData?.data?.length}</p>
+                  <img src="/img/ActivePosts.png" alt="post" />
+                </div>
+                <h3 onClick={() => setPostVerify(false)}>All Registration</h3>
+                <p className="viewall">View All</p>
+              </div>
+            </Link>
+                </>
+              )
+            }
           </div>
         </>
       )}

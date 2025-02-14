@@ -745,6 +745,7 @@ export const ProfileEditAction = (editData) => {
 };
 
 export const ProfileUpdateAction = (updateData) => {
+  
   return async (dispatch) => {
     try {
       dispatch({
@@ -821,7 +822,7 @@ export const GetMyVisitsAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
+      // console.log(data);
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -866,6 +867,72 @@ export const OwnerAllPostsVisitAction = () => {
       } else {
         dispatch({
           type: "OwnerAllPostsVisitFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+// here we get All User except Owner/Admin/agent
+
+export const getAllUserAction=()=>{
+  return async (dispatch) => {
+      try {
+        dispatch({ type: "GetAllUserRequest" });
+      let url = `${api_Base_Url}/user/getallUser/`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+      const { data } = await axios.get(url, config);
+      dispatch({ type: "GetAllUserSuccess", payload: data });
+      } catch (error) {
+        if (error.response) {
+          dispatch({
+            type: "GetAllUserFail",
+            payload: error.response.data,
+          });
+        } else {
+          dispatch({
+            type: "GetAllUserFail",
+            payload: { message: error.message, success: false },
+          });
+        }
+      }
+    }
+}
+
+// acknowledge profile
+
+
+export const acknowledgeProfile = () => {
+  
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "acknowledgeProfileRequest",
+        payload: "acknowledgeProfileRequest",
+      });
+      const url = `${api_Base_Url}/user/acknowledgeProfile`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.post(url,  config);
+      dispatch({ type: "acknowledgeProfileSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "acknowledgeProfileFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "acknowledgeProfileFail",
           payload: { message: error.message, success: false },
         });
       }

@@ -53,6 +53,7 @@ import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
 import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -112,6 +113,10 @@ function App() {
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
+  // get all user excepation owner Admin agent
+  const{data:AllUserResponseData}=useSelector((state)=>{
+    return state.AllUserResponse
+  })
 
   const { data: AssignPostData } = useSelector((state) => {
     return state.AssignPropertys;
@@ -514,10 +519,6 @@ function App() {
       if (SimilarPropertyData.success === false) {
         if (SimilarPropertyData.IsAuthenticated === false) {
           navigate("/");
-          // setTimeout(() => {
-
-          //   navigate("/login")
-          // }, 0);
         }
         setalertMessage(<p>{SimilarPropertyData.message}</p>);
         setalertType("error");
@@ -528,6 +529,23 @@ function App() {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
+
+  // get All User 
+  useEffect(() => {
+    if (AllUserResponseData) {
+      if (AllUserResponseData.success === false) {
+        if (AllUserResponseData.IsAuthenticated === false) {
+          // navigate("/");
+        }
+        setalertMessage(<p>{AllUserResponseData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "SimilarPropertyClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AllUserResponseData]);
 
   useEffect(() => {
     if (alertshow === true) {
@@ -636,6 +654,14 @@ function App() {
             path="data"
             element={
               <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          />
+
+           <Route    
+            exact
+            path="all-registration-response"
+            element={
+              <AdminOwnerRoutes Component={AllRegistrationResponse} isOwner={true} />
             }
           />
           {/* <Route
