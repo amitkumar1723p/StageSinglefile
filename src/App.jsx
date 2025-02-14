@@ -177,6 +177,7 @@ function App() {
         ].includes(LodingType)
       ) {
         dispatch({ type: "UserClear" });
+        setalertShow(false);
       } else {
         setalertMessage(<p>{data.message}</p>);
         setalertType("Success");
@@ -184,7 +185,7 @@ function App() {
 
         dispatch({ type: "UserClear" });
       } 
-       console.log(data)
+       
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(

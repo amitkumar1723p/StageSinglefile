@@ -579,8 +579,8 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 
 // Create Tenant Post Response
 
-export const ViewOwnerDetailsAction = ({ TenantsDetails, PostId }) => {
-  console.log(TenantsDetails);
+export const ViewOwnerDetailsAction = (Document) => {
+  console.log("4304949",Document)
   return async (dispatch) => {
     try {
       dispatch({
@@ -588,15 +588,25 @@ export const ViewOwnerDetailsAction = ({ TenantsDetails, PostId }) => {
         payload: "ViewOwnerDetailsRequest",
       });
 
-      const url = `${api_Base_Url}/tenant-post-response/create/${PostId}`;
-
+      const url = `${api_Base_Url}/tenant-post-response/create/${Document.PostId}`;
+         
       const config = {
         headers: { "Content-Type": "application/json" },
 
         withCredentials: true,
       };
-
-      const { data } = await axios.post(url, TenantsDetails, config);
+       
+      let data ;
+      if (Document.TenantsDetails) {
+         console.log("kei3i")
+        const response = await axios.post(url, Document.TenantsDetails, config);
+        data = response.data;
+    } else {
+       console.log("run")
+        const response = await axios.get(url, config);
+        data = response.data;
+    }
+    
       dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -651,7 +661,7 @@ export const TenentResponseIsExitAction = (PostId) => {
     try {
       dispatch({ type: "TenentResponseIsExitRequest" });
 
-      let url = `${api_Base_Url}/tenant-post-response/get`;
+      let url = `${api_Base_Url}/tenant-post-response/check-tenant-details/${PostId}`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -663,6 +673,7 @@ export const TenentResponseIsExitAction = (PostId) => {
 
       dispatch({ type: "TenentResponseIsExitSuccess", payload: data });
     } catch (error) {
+      console.log(error)
       if (error.response) {
         dispatch({
           type: "TenentResponseIsExitFail",

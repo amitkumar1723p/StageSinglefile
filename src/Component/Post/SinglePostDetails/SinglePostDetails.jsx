@@ -31,6 +31,7 @@ import {
 } from "../../../Action/userAction";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
+import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -54,10 +55,10 @@ export default function SinglePostDetails() {
     useState(false);
 
   const [showTenantDetailsForm, setshowTenantDetailsForm] = useState(false); // Open Tenant Details Form
+  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false); // Open Tenant Details Form
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
-  const [reload, setReload] = useState(true); //use for reload similar property
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -80,19 +81,13 @@ export default function SinglePostDetails() {
   const { data: myListing } = useSelector((state) => {
     return state.GetPost;
   });
-  // console.log(medata.IsAuthenticated)
-  useEffect(() => {
-    let postaddress = Params.PostAddress;
-    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
-    setSinglePostId(postId);
-    if (reload === true) {
-      dispatch(GetSinglePostAction(postId));
-      dispatch(SimilarProperty(postId));
-      console.log("medata",medata);
-      TenentResponseIsExitAction(postId)
-      setReload(false);
-    }
-  }, [reload]);
+
+  //  Check Tenant Fill Response Form  (get Data)
+  const { data: TenentResponseIsExitData } = useSelector((state) => {
+    return state.TenentResponseIsExit;
+  });
+
+ 
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -231,15 +226,16 @@ export default function SinglePostDetails() {
       ) {
         setOpenReportForm(true);
       } else if (
-        sessionStorage.getItem("RedirectPath") == "/view-owner-details"
+        sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
+        !TenentResponseIsExitData?.TenantDetails
       ) {
         setshowTenantDetailsForm(true);
       }
-
+      //  console.log()
       sessionStorage.removeItem("RedirectPath");
       setRedirectPath("");
     }
-  }, [medata]);
+  }, [medata, TenentResponseIsExitData]);
 
   // let loadings =true
 
@@ -254,8 +250,39 @@ export default function SinglePostDetails() {
   };
 
   //  Open Owner Details Alert  (T)
- 
-  //  const SinglePost = getSinglePostData.SinglePost
+
+  useEffect(() => {
+    if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
+      StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
+      setshowOwnerDetailsForm(true);
+      setshowTenantDetailsForm(false);
+      if (!TenentResponseIsExitData?.TenantDetails) {
+        dispatch(TenentResponseIsExitAction(SinglePostId));
+      }
+      // setTenantsDetails({
+      //   FamilyDetails: { Adults: 0, Children: 0, Pets: null },
+      //   ProfessionDetails: { WorkType: "" },
+      // });
+    }
+  }, [AlertData, AlertType]);
+
+  // Check Tenent Response IsExit  Dispatch
+  useEffect(() => {
+    if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
+    dispatch(TenentResponseIsExitAction(SinglePostId));
+  }, [SinglePostId, medata?.user?.Role]);
+
+  useEffect(() => {
+    if (!Params?.PostAddress) return; // Avoid running when undefined
+
+    let postaddress = Params.PostAddress;
+    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
+    setSinglePostId(postId);
+
+    dispatch(GetSinglePostAction(postId));
+    dispatch(SimilarProperty(postId));
+  }, [Params?.PostAddress]);
+
   return (
     <>
       <div className="floating-buttons">
@@ -557,10 +584,20 @@ export default function SinglePostDetails() {
                               ref={TenantDetailsFormBtnRef}
                               className="original-price"
                               onClick={() => {
-                                setshowTenantDetailsForm(true);
+                                if (!TenentResponseIsExitData?.TenantDetails) {
+                                  setshowTenantDetailsForm(true);
+                                } else {
+                                  
+                                  dispatch(
+                                    ViewOwnerDetailsAction({
+                                      PostId:
+                                        getSinglePostData?.SinglePost?._id,
+                                    })
+                                  );
+                                  //  dispatch(ViewOwnerDetailsAction({postId}))
+                                }
                               }}
                             >
-                               
                               View Owner Details
                             </span>
                           )
@@ -935,7 +972,7 @@ export default function SinglePostDetails() {
                             .replaceAll(" ", "-")
                             .replace(",", "")
                             .replaceAll("/", "-")}-${item._id}`}
-                          onClick={() => setReload(true)} // Trigger reload on click
+                           
                         >
                           <div className="similar-property-main-box">
                             <div className="similar-property-box1">
@@ -1048,6 +1085,15 @@ export default function SinglePostDetails() {
                       SetShow={setshowTenantDetailsForm}
                       BtnRef={TenantDetailsFormBtnRef}
                       SinglePostData={getSinglePostData}
+                      // PropertyAddress={PropertyAddress}
+                    />
+                  )}
+
+                  {showOwnerDetailsForm && (
+                    <WindowComponent
+                      Component={ViewOwnerDetailsAlert}
+                      SetShow={setshowOwnerDetailsForm}
+
                       // PropertyAddress={PropertyAddress}
                     />
                   )}

@@ -3,7 +3,7 @@ import "./TenantDetailsForm.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ViewOwnerDetailsAction } from "../../../Action/userAction";
-import   Loader   from "../../Loader/Loader";
+import Loader from "../../Loader/Loader";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 
@@ -31,6 +31,7 @@ const TenantsDetailsForm = ({ SetShow, SinglePostData }) => {
     } else if (TenantsDetails.ProfessionDetails.WorkType == "Self Employed") {
       delete TenantsDetailsCopyObj.ProfessionDetails?.CompanyName;
       delete TenantsDetailsCopyObj.ProfessionDetails?.Designation;
+      delete TenantsDetailsCopyObj.ProfessionDetails?.Linkedin;
     }
     setTenantsDetails(TenantsDetailsCopyObj);
   }, [TenantsDetails.ProfessionDetails.WorkType]);
@@ -45,26 +46,25 @@ const TenantsDetailsForm = ({ SetShow, SinglePostData }) => {
       })
     );
   };
-   console.log()
+   
   //  show Owner details
-  useEffect(() => {
-    if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
-      StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
-      setshowOwnerDetails(true);
+  // useEffect(() => {
+  //   if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
+  //     // setshowOwnerDetails(true);
 
-      setTenantsDetails({
-        FamilyDetails: { Adults: 0, Children: 0, Pets: null },
-        ProfessionDetails: { WorkType: "" },
-      });
-    }
-  }, [AlertData, AlertType]);
+  //     setTenantsDetails({
+  //       FamilyDetails: { Adults: 0, Children: 0, Pets: null },
+  //       ProfessionDetails: { WorkType: "" },
+  //     });
+  //   }
+  // }, [AlertData, AlertType]);
   return (
     <>
       {AlertLoding && AlertType == "ViewOwnerDetailsRequest" ? (
         <Loader className={"componentloader"} />
       ) : //  {showOwnerDetails  ?"": }
       showOwnerDetails ? (
-        <ViewOwnerDetails SetShow= {SetShow}/>
+        <ViewOwnerDetails SetShow={SetShow} />
       ) : (
         <div className="tenant-details">
           <div className="tenant-details__container">
@@ -74,7 +74,6 @@ const TenantsDetailsForm = ({ SetShow, SinglePostData }) => {
                 className="tenant-details__close "
                 onClick={() => {
                   SetShow(false);
-
                 }}
               >
                 &times;
@@ -444,6 +443,30 @@ const TenantsDetailsForm = ({ SetShow, SinglePostData }) => {
                           }}
                         />
                       </div>
+                    </div>
+
+                    {/* Socal Media  */}
+                    <div className="tenant-details__field">
+                      <label className="tenant-details__label">Linkedin</label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Linkedin"
+                        className="tenant-details__input"
+                        value={
+                          TenantsDetails?.ProfessionDetails?.Linkedin?.trimStart() ||
+                          ""
+                        }
+                        onChange={(e) => {
+                          setTenantsDetails({
+                            ...TenantsDetails,
+                            ProfessionDetails: {
+                              ...TenantsDetails.ProfessionDetails,
+                              Linkedin: e.target.value,
+                            },
+                          });
+                        }}
+                      />
                     </div>
                   </>
                 )}
