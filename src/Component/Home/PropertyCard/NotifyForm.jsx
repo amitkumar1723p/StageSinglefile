@@ -17,7 +17,7 @@ const NotifyForm = ({ SetShow }) => {
     return state.meDetails;
   });
 
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
@@ -40,7 +40,6 @@ const NotifyForm = ({ SetShow }) => {
   useEffect(() => {
     if (data) {
       if (data.success === true) {
-        
         SetShow(false);
       }
       if (data.success === false) {
@@ -51,7 +50,6 @@ const NotifyForm = ({ SetShow }) => {
     }
     // eslint-disable-next-line
   }, [data]);
-  
 
   return (
     <>
@@ -77,92 +75,92 @@ const NotifyForm = ({ SetShow }) => {
               />
             </div>
           </div>
-          <p className="des-p">
-            Please provide your exact requirements so we can notify you when
-            it's available
-          </p>
+          <div>
+            <p className="des-p">
+              Please provide your exact requirements so we can notify you when
+              it's available
+            </p>
 
-          <form onSubmit={handleSubmit}>
-            <label className="notify-lable">BHK Type</label>
-            <select
-              required
-              value={NotifyData.BHKType}
-              className="form-select"
-              onChange={(e) => {
-                setNotifyData({ ...NotifyData, BHKType: e.target.value });
-              }}
-            >
-              <option value="">Select</option>
-              <option value="1">1 BHK</option>
-              <option value="2">2 BHK</option>
-              <option value="3">3 BHK</option>
-              <option value="4">4 BHK</option>
-              <option value="5">5 BHK</option>
+            <form onSubmit={handleSubmit}>
+              <label className="notify-lable">BHK Type</label>
+              <select
+                required
+                value={NotifyData.BHKType}
+                className="form-select"
+                onChange={(e) => {
+                  setNotifyData({ ...NotifyData, BHKType: e.target.value });
+                }}
+              >
+                <option value="">Select</option>
+                <option value="1">1 BHK</option>
+                <option value="2">2 BHK</option>
+                <option value="3">3 BHK</option>
+                <option value="4">4 BHK</option>
+                <option value="5">5 BHK</option>
+              </select>
 
-            </select>
+              <div className="room-section">
+                <p>Room</p>
+                <div className=" checkbox-notify">
+                  {Room.map((room, index) => {
+                    return (
+                      <div className="data-notify" key={index}>
+                        <label className="notify-lable" htmlFor={index}>
+                          {room}
+                        </label>
 
-            <div className="room-section">
-              <p>Room</p>
-              <div className=" checkbox-notify">
-                {Room.map((room, index) => {
-                  return (
-                    <div className="data-notify" key={index}>
-                      <label className="notify-lable" htmlFor={index}>
-                        {room}
-                      </label>
+                        <input
+                          type="checkbox"
+                          checked={NotifyData.Room.includes(room)}
+                          name=""
+                          id={index}
+                          onChange={(e) => {
+                            if (e.target.checked === true) {
+                              setNotifyData({
+                                ...NotifyData,
+                                Room: [...NotifyData.Room, room],
+                              });
+                            }
 
-                      <input
-                        type="checkbox"
-                        checked={NotifyData.Room.includes(room)}
-                        name=""
-                        id={index}
-                        onChange={(e) => {
-                          if (e.target.checked === true) {
-                            setNotifyData({
-                              ...NotifyData,
-                              Room: [...NotifyData.Room, room],
-                            });
-                          }
-
-                          if (e.target.checked === false) {
-                          
-                            setNotifyData({
-                              ...NotifyData,
-                              Room: NotifyData.Room.filter((item) => {
-                                return item !== room;
-                              }),
-                            });
-                          }
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+                            if (e.target.checked === false) {
+                              setNotifyData({
+                                ...NotifyData,
+                                Room: NotifyData.Room.filter((item) => {
+                                  return item !== room;
+                                }),
+                              });
+                            }
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
-            <label className="notify-lable">Floor Preference</label>
-            <select
-              value={NotifyData.FloorPreference}
-              className="form-select"
-              required
-              onChange={(e) => {
-                setNotifyData({
-                  ...NotifyData,
-                  FloorPreference: e.target.value,
-                });
-              }}
-            >
-              <option value="">Floor Preference</option>
-              <option value="low">Low Floor</option>
-              <option value="mid">Mid Floor</option>
-              <option value="high">High Floor</option>
-            </select>
+              <label className="notify-lable">Floor Preference</label>
+              <select
+                value={NotifyData.FloorPreference}
+                className="form-select"
+                required
+                onChange={(e) => {
+                  setNotifyData({
+                    ...NotifyData,
+                    FloorPreference: e.target.value,
+                  });
+                }}
+              >
+                <option value="">Floor Preference</option>
+                <option value="low">Low Floor</option>
+                <option value="mid">Mid Floor</option>
+                <option value="high">High Floor</option>
+              </select>
 
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
-          </form>
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </>

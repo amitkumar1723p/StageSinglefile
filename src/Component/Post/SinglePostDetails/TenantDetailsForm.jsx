@@ -449,7 +449,7 @@ const TenantsDetailsForm = ({ SetShow, SinglePostData }) => {
                     <div className="tenant-details__field">
                       <label className="tenant-details__label">Linkedin</label>
                       <input
-                        required
+                        
                         type="text"
                         placeholder="Linkedin"
                         className="tenant-details__input"

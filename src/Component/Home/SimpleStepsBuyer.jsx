@@ -25,7 +25,7 @@ const SimpleStepsBuyer = () => {
       <div className="simple-steps-container">
         <div className="simple-step-card" id="step1">
           <div className="howwework-data">
-            <img src="/img/StartExploring.png" alt="Start Exploring" />
+            <img src="/img/StartExploring.svg" alt="Start Exploring" />
             <h3>Start Exploring</h3>
             <p>
               Start exploring our verified listings & select a property that

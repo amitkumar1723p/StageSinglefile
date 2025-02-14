@@ -113,7 +113,7 @@ export default function AdminAgentAssignPost({
 
   return (
     <div className="Admin-property-post-card-main-box">
-      <p>All Listing</p>
+      
 
       {/* Displaying posts */}
       {OwnerPosts.length > 0 ? (

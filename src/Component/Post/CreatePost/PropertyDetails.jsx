@@ -235,7 +235,7 @@ export default function PropertyDetailsSection({
         <div className="parking-section-box">
           <div className="parking-section-box">
             <div className="Parking-counter">
-              <label htmlFor="coveredParking">Cover Parking</label>
+              <label htmlFor="coveredParking">Covered Parking</label>
               <div className="counter">
                 <div
                   className="decrement button"

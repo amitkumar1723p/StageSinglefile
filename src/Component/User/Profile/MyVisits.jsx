@@ -4,6 +4,7 @@ import { GetMyVisitsAction } from "../../../Action/userAction";
 import "./MyVisits.css"; // Import the vanilla CSS file
 import { useNavigate } from "react-router-dom";
 
+import { Helmet } from "react-helmet";
 export default function MyVisits() {
   const { data: MyVisitsData } = useSelector((state) => {
     return state.MyVisits;
@@ -29,6 +30,12 @@ export default function MyVisits() {
     MyVisitsData &&
     MyVisitsData.success === true && (
       <div className="myvisit-overflow-x-auto">
+           <Helmet>
+                
+                <title>My Visits - PropertyDekho247.com</title>
+                <meta name="description" content="View and manage the properties you've visited on PropertyDekho247.com. Keep track of your browsing history and revisit any listings you've shown interest in."></meta>
+                <link rel="canonical" href="https://www.propertydekho247.com/user/my-visits/" />
+            </Helmet>
         <p className="myvisit-schedule-visit">My Schedule Visit</p>
         <table className="myvisit-table">
           <thead>

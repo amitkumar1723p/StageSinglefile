@@ -38,7 +38,7 @@ const Services = () => {
           </div>
           <div className="service-item">
             <img
-              src="/img/Rental.png"
+              src="/img/RentServices.svg"
               alt="Rental Services"
               className="service-icon"
             />

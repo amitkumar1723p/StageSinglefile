@@ -19,21 +19,47 @@ const Dashboard = () => {
   const [UnVerifyPost, setUnVerifyPost] = useState([]);
   const [VerifyPost, setVerifyPost] = useState([]);
   const [TotalListing, setTotalListing] = useState(0);
- 
   const navigate = useNavigate();
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
-
+  
   const location= useLocation();
   const { loading, data: AllPost } = useSelector((state) => {
     return state.AdminGetAllPost;
   });
+  const allData = useSelector(state => state.AllNotifiesAndReq);
+const [newNotifyAndReq, setNewNotifyAndReq] = useState([]);
+// const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  if (allData?.data) {
+    const notifies = allData.data.notifies || [];
+    const requirements = allData.data.requirements || [];
+
+    // Filter where Acknowledged is false
+    const unacknowledgedNotifies = notifies.filter(item => !item.Acknowledged);
+    const unacknowledgedRequirements = requirements.filter(item => !item.Acknowledged);
+
+    // Combine both arrays
+    const combinedUnacknowledged = [...unacknowledgedNotifies, ...unacknowledgedRequirements];
+
+    // Update state
+    setNewNotifyAndReq(combinedUnacknowledged);
+    console.log(combinedUnacknowledged)
+    // setLoading(false); // Set loading to false when data is processed
+  }
+}, [allData]); // Runs whenever `allData` updates
+
+  
 
   const { data: AgentAdminAllPost } = useSelector((state) => {
     return state.AdminProperty;
   });
-
+ // get all user excepation owner Admin agent
+  const{data:AllUserResponseData}=useSelector((state)=>{
+    return state.AllUserResponse
+  })
   // On dashboard we get all property 
   useEffect(() => {
 
@@ -82,6 +108,8 @@ const Dashboard = () => {
       setTotalListing(PostVerify.length + unverify.length);
     }
   }, [AgentAdminAllPost]);
+
+  // console.log(AllUserResponseData,"dash")
   return (
     <>
       {loading ? (
@@ -90,7 +118,7 @@ const Dashboard = () => {
         <>
           <h4 className={`main-dash ${location.pathname.includes("/admin/dashboard") ?"active-btn-admin":""}`} > Dashboard</h4>
           <div className="cards  grid grid-cols-4 gap-3  ">
-            <Link to="/admin/allpost" >
+            <Link to="/admin/allpost?type=all" >
               <div className="card p-3">
                 <div className="Admin-box">
                   <p className="total-number">{TotalListing}</p>
@@ -100,7 +128,7 @@ const Dashboard = () => {
                 <p className="viewall">View All</p>
               </div>
             </Link>
-            <Link to="/admin/allpost">
+            <Link to="/admin/allpost?type=true">
 
               <div className="card p-3">
                 <div className="Admin-box">
@@ -112,7 +140,7 @@ const Dashboard = () => {
               </div>
             </Link>
 
-            <Link to="/admin/allpost">
+            <Link to="/admin/allpost?type=false">
               <div className="card p-3 cursor-pointer">
                 <div className="Admin-box">
                   <p className="total-number">{UnVerifyPost.length}</p>
@@ -122,6 +150,7 @@ const Dashboard = () => {
                 <p className="viewall">View All</p>
               </div>
             </Link>
+
 
             {medata?.user?.Role!= "Agent" && (
               <>
@@ -153,8 +182,44 @@ const Dashboard = () => {
 
                   <p className="viewall">View All</p>
                 </div>{" "}
+                
+     
               </>
             )}
+            {
+              medata?.user?.Role==="Owner"&&(
+                <>
+                <Link to="/admin/all-registration-response">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{AllUserResponseData?.data?.length}</p>
+                  <img src="/img/ActivePosts.png" alt="post" />
+                </div>
+                <h3 onClick={() => setPostVerify(false)}>All Registration</h3>
+                <p className="viewall">View All</p>
+              </div>
+            </Link>
+                </>
+              )
+            }
+
+              {
+                medata?.user?.Role === "Owner" && (
+                  <>
+               <Link to="/admin/notify">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{newNotifyAndReq.length}</p>
+                  <img src="/img/In-ActivePosts.png" alt="post" />
+                </div>
+                <h3 onClick={() => setPostVerify(false)}>Notify & requests</h3>
+                <p className="viewall">View All</p>
+              </div>
+               </Link>
+                  </>
+                )
+              }
+            
           </div>
         </>
       )}

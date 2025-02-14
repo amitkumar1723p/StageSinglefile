@@ -151,7 +151,7 @@ const CreateProfile = ({
                     <input
                       className="nri-contact-another-number"
                       type="text"
-                      placeholder="Enter your Another Number"
+                      placeholder="Enter your Indian Number"
                       value={
                         CreateProfileData?.AnotherContactNumber?.trimStart() ||
                         ""

@@ -13,10 +13,10 @@ export default function AllPost({
   sortOrder,
   activeFilter,
   selectAll
- 
 }) {
   const dispatch = useDispatch();
   const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)
+  console.log(postVerify,"page all post")
   const [OwnerPosts, setOwnerPosts] = useState([]);
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
  const { medata } = useSelector((state) => {
@@ -143,7 +143,7 @@ export default function AllPost({
 
   return (
     <div className="Admin-property-post-card-main-box">
-      <p className="AllListing-admin">All Listing</p>
+      
 {/* here we itrate all available property for owner only start */}
       {OwnerPosts.length > 0 ? (
         OwnerPosts.map((post, index) => (
