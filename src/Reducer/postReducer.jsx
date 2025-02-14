@@ -488,3 +488,39 @@ export const OwnerAllPostsVisitsReducer = (state = {}, action) => {
       };
   }
 };
+
+
+
+
+
+// notify
+export const GetAllNotificationsAndRequirementsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GetNotifiesAndPropRequests":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "GetNotifiesAndPropRequestsSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetNotifiesAndPropRequestsFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetNotifiesAndPropRequestsClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};

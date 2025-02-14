@@ -29,7 +29,10 @@ import {
   GetMyVisitsReducer,
   GetSimilarProperty ,
   OwnerAllPostsVisitsReducer ,
+  // OwnerAllPostsVisitsReducer,
+  GetAllNotificationsAndRequirementsReducer
 } from "./Reducer/postReducer.jsx";
+
 
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
@@ -57,8 +60,9 @@ const reducer = combineReducers({
   OwnerPostsVisits:OwnerAllPostsVisitsReducer ,
   TenentResponseIsExit: TenentResponseIsExitReducer,
 
-  AllUserResponse:getAllUserReducer
+  AllUserResponse:getAllUserReducer,
   
+  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer
 });
 
 let initialState = {};

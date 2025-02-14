@@ -37,7 +37,7 @@ import AllAdminData from "./Component/Admin/AllAdminData";
 import ProfileHeader from "./Component/User/Profile/ProfileHeader";
 import ShowLoginUserPost from "./Component/Post/ShowLoginUserPost";
 import AdminAllPost from "./Component/Admin/AllPost";
- 
+
 import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePost";
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
@@ -54,6 +54,8 @@ import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
 import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse";
 import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
+// import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -114,9 +116,9 @@ function App() {
     return state.SimilarProperty;
   });
   // get all user excepation owner Admin agent
-  const{data:AllUserResponseData}=useSelector((state)=>{
-    return state.AllUserResponse
-  })
+  const { data: AllUserResponseData } = useSelector((state) => {
+    return state.AllUserResponse;
+  });
 
   const { data: AssignPostData } = useSelector((state) => {
     return state.AssignPropertys;
@@ -129,6 +131,11 @@ function App() {
   });
   const { data: OwnerPostsVisitsData } = useSelector((state) => {
     return state.OwnerPostsVisits;
+  });
+
+  // notify
+  const { data: AllNotifiesAndReqData } = useSelector((state) => {
+    return state.AllNotifiesAndReq;
   });
 
   const location = useLocation();
@@ -189,8 +196,8 @@ function App() {
         setalertShow(true);
 
         dispatch({ type: "UserClear" });
-      } 
-       
+      }
+
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(
@@ -532,7 +539,7 @@ function App() {
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
 
-  // get All User 
+  // get All User
   useEffect(() => {
     if (AllUserResponseData) {
       if (AllUserResponseData.success === false) {
@@ -549,6 +556,27 @@ function App() {
     // eslint-disable-next-line
   }, [AllUserResponseData]);
 
+  // notify
+
+  useEffect(() => {
+    if (AllNotifiesAndReqData) {
+      if (AllNotifiesAndReqData.success === false) {
+        if (AllNotifiesAndReqData.IsAuthenticated === false) {
+          navigate("/");
+          // setTimeout(() => {
+
+          //   navigate("/login")
+          // }, 0);
+        }
+        setalertMessage(<p>{AllNotifiesAndReqData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "GetNotifiesAndPropRequestsClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AllNotifiesAndReqData]);
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
@@ -617,7 +645,6 @@ function App() {
               path="post/update/:PostId"
               element={<CreatePostMain />}
             />
-             
 
             <Route exact path="my-visits" element={<MyVisits />} />
 
@@ -654,14 +681,22 @@ function App() {
               <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
             }
           />
-
-           <Route    
+          <Route
+            exact
+            path="notify"
+            element={
+              <AdminOwnerRoutes
+                Component={NotifyRequirements}
+                isOwner={false}
+              />
+            }
+          />
+          <Route    
             exact
             path="all-registration-response"
             element={
-              <AdminOwnerRoutes Component={AllRegistrationResponse} isOwner={true} />
-            }
-          />
+              <AdminOwnerRoutes Component={AllRegistrationResponse} isOwner={true} /> }/>
+
           {/* <Route
             exact
             path="data/unverify"
