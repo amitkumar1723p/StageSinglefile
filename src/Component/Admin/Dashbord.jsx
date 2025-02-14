@@ -212,7 +212,7 @@ useEffect(() => {
                   <p className="total-number">{newNotifyAndReq.length}</p>
                   <img src="/img/In-ActivePosts.png" alt="post" />
                 </div>
-                <h3 onClick={() => setPostVerify(false)}>Notify & requests</h3>
+                <h3 onClick={() => setPostVerify(false)}>Notify & Requests</h3>
                 <p className="viewall">View All</p>
               </div>
                </Link>

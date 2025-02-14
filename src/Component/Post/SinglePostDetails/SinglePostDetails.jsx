@@ -88,8 +88,6 @@ export default function SinglePostDetails() {
     return state.TenentResponseIsExit;
   });
 
- 
-
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
       setPropertyAddress(
@@ -287,12 +285,16 @@ export default function SinglePostDetails() {
   return (
     <>
       <Helmet>
-                
-                <title>{PropertyAddress}</title>
-                <meta name="description" content={`Explore this spacious ${PropertyAddress}. Located in a prime area, this ${getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType} offers modern amenities, comfort, and easy access to key transport routes, shopping, and schools. Perfect for those seeking a high-quality living experience in ${getSinglePostData?.SinglePost?.LocationDetails?.City}!`}></meta>
-                <link rel="canonical" href={`https://propertydekho247.com/post-detail/${Params?.PostAddress}`}
- />
-            </Helmet>
+        <title>{PropertyAddress}</title>
+        <meta
+          name="description"
+          content={`Explore this spacious ${PropertyAddress}. Located in a prime area, this ${getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType} offers modern amenities, comfort, and easy access to key transport routes, shopping, and schools. Perfect for those seeking a high-quality living experience in ${getSinglePostData?.SinglePost?.LocationDetails?.City}!`}
+        ></meta>
+        <link
+          rel="canonical"
+          href={`https://propertydekho247.com/post-detail/${Params?.PostAddress}`}
+        />
+      </Helmet>
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
@@ -576,7 +578,9 @@ export default function SinglePostDetails() {
                           </div>
                         </div>
 
-                        {!medata || !medata.IsAuthenticated ? (
+                        {/* view owner no comment */}
+
+                        {/* {!medata || !medata.IsAuthenticated ? (
                           <span
                             className="original-price"
                             onClick={() => {
@@ -595,7 +599,6 @@ export default function SinglePostDetails() {
                                 if (!TenentResponseIsExitData?.TenantDetails) {
                                   setshowTenantDetailsForm(true);
                                 } else {
-                                  
                                   dispatch(
                                     ViewOwnerDetailsAction({
                                       PostId:
@@ -609,7 +612,9 @@ export default function SinglePostDetails() {
                               View Owner Details
                             </span>
                           )
-                        )}
+                        )} */}
+
+                        {/* view owner no comment */}
                       </>
                     )}
                   </div>
@@ -924,6 +929,9 @@ export default function SinglePostDetails() {
                     )}
                   </div>
                 </div>
+                <FurnishDetails
+                  furnishD={getSinglePostData.SinglePost.AmenitiesDetails}
+                />
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">
                     <div className="location-section">
@@ -946,9 +954,6 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
                 )}
-                <FurnishDetails
-                  furnishD={getSinglePostData.SinglePost.AmenitiesDetails}
-                />
               </div>
               {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                 <div className="prop-right">
@@ -980,7 +985,6 @@ export default function SinglePostDetails() {
                             .replaceAll(" ", "-")
                             .replace(",", "")
                             .replaceAll("/", "-")}-${item._id}`}
-                           
                         >
                           <div className="similar-property-main-box">
                             <div className="similar-property-box1">
