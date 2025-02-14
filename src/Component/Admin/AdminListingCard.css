@@ -328,7 +328,7 @@
 .price-rp-que {
   color: #333;
 
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -599,7 +599,7 @@
 .price-ans {
   color: var(--main-light-clr);
 
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -641,7 +641,7 @@
 
 .admin-card-heading-ans {
   color: #535151;
-  font-size: 12px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -650,7 +650,7 @@
 }
 
 .Status-section-admin {
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

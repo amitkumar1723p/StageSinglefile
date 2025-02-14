@@ -129,11 +129,13 @@ export default function UserForm() {
   return (
     <>
       <Helmet>
-                
-                <title>Login or Sign Up to Your Account</title>
-                <meta name="description" content="Access your account or create a new one to get started. Manage your property listings, save your favorites, and stay connected with the latest updates on PropertyDekho247.com"></meta>
-                <link rel="canonical" href="https://www.propertydekho247.com/login/" />
-            </Helmet>
+        <title>Login or Sign Up to Your Account</title>
+        <meta
+          name="description"
+          content="Access your account or create a new one to get started. Manage your property listings, save your favorites, and stay connected with the latest updates on PropertyDekho247.com"
+        ></meta>
+        <link rel="canonical" href="https://www.propertydekho247.com/login/" />
+      </Helmet>
       {URlVisit === true && (
         <>
           {loading == true ? (

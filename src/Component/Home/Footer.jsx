@@ -223,7 +223,7 @@ const Footer = () => {
               <div className="company__underline"></div>
             </div>
             <p className="company__description">
-            Stay ahead with instant price alerts, ensuring you always pay the right price for your property. Our platform helps property owners make informed decisions by delivering accurate, real-time market value insights.
+            India's first online Proptech platform that delivers real-time price alerts to property owners. We focused on building Transparency, Trust with fair price value
 
             </p>
             <div className="company__social">
