@@ -37,7 +37,7 @@ import AllAdminData from "./Component/Admin/AllAdminData";
 import ProfileHeader from "./Component/User/Profile/ProfileHeader";
 import ShowLoginUserPost from "./Component/Post/ShowLoginUserPost";
 import AdminAllPost from "./Component/Admin/AllPost";
- 
+
 import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePost";
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
@@ -184,8 +184,8 @@ function App() {
         setalertShow(true);
 
         dispatch({ type: "UserClear" });
-      } 
-       
+      }
+
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(
@@ -599,7 +599,6 @@ function App() {
               path="post/update/:PostId"
               element={<CreatePostMain />}
             />
-             
 
             <Route exact path="my-visits" element={<MyVisits />} />
 
