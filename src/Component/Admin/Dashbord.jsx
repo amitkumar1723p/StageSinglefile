@@ -42,11 +42,11 @@ useEffect(() => {
     const unacknowledgedRequirements = requirements.filter(item => !item.Acknowledged);
 
     // Combine both arrays
-    const combinedUnacknowledged = [...unacknowledgedNotifies, ...unacknowledgedRequirements];
+    const combinedUnacknowledged = [...notifies, ...requirements];
 
     // Update state
     setNewNotifyAndReq(combinedUnacknowledged);
-    console.log(combinedUnacknowledged)
+    // console.log(combinedUnacknowledged)
     // setLoading(false); // Set loading to false when data is processed
   }
 }, [allData]); // Runs whenever `allData` updates

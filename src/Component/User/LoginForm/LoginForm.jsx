@@ -55,7 +55,8 @@ const LoginForm = ({
         <div className="login-wrapper-unique">
           <div className="login-image-section-unique">
             <img
-              src="/img/Login.svg"
+              // src="/img/LoginNri.svg"
+              src={ISNRI ? "/img/LoginNri.svg" : "/img/Login.svg"}
               alt="City Buildings"
             />
           </div>
@@ -139,14 +140,14 @@ const LoginForm = ({
                 Continue<span> &#8594; </span>
               </button>
             </form>
-            <div className="d-flex gap-1 d-flex align-items-center  nri-main-section center"> 
-
-            <p className="nri-login-section">
-              if your are NRI login and register
-            </p>
-            <NavLink to="/nri/login">
-             <span className="nri-click-here"> Click Here </span>
-            </NavLink>
+            <div className="d-flex gap-1 d-flex align-items-center  nri-main-section center">
+              <p className="nri-login-section">
+                {ISNRI ? "Normal User" : "if your are NRI login and register"}
+              </p>
+              
+              <NavLink to={ISNRI ? "/login" : "/nri/login"}>
+                <span className="nri-click-here"> Click Here </span>
+              </NavLink>
             </div>
             {/* <button      onClick={() => {
                  setTimeout(() => {
