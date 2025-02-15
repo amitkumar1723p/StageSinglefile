@@ -142,7 +142,7 @@ const LoginForm = ({
             </form>
             <div className="d-flex gap-1 d-flex align-items-center  nri-main-section center">
               <p className="nri-login-section">
-                {ISNRI ? "Normal User" : "if your are NRI login and register"}
+                {ISNRI ? "If you are an Normal User" : "If you are an  NRI, please log in or register here."}
               </p>
               
               <NavLink to={ISNRI ? "/login" : "/nri/login"}>

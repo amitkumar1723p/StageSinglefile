@@ -100,7 +100,7 @@
   }
   
   .button-toggle {
-    background: green;
+    background:var(--main-light-clr);
     color: white;
     font-weight: bold;
   }
@@ -113,7 +113,7 @@
     /* padding: 5px 9px; */
     border-radius: 5px;
     color: white;
-    background: rgba(0, 128, 0, 0.752);
+    background: var(--main-light-clr);
     border: none;
   }
   /* Table */
