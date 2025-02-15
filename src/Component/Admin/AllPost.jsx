@@ -12,11 +12,13 @@ export default function AllPost({
   SearchPostId,
   sortOrder,
   activeFilter,
-  selectAll
+  selectAll,
+  postPerPage
 }) {
   const dispatch = useDispatch();
   const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)
-  console.log(postVerify,"page all post")
+  // console.log(postVerify,"page all post")
+  console.log(postPerPage)
   const [OwnerPosts, setOwnerPosts] = useState([]);
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
  const { medata } = useSelector((state) => {
@@ -26,7 +28,7 @@ export default function AllPost({
   // Pagination logic state 
   const [page, setPage] = useState(1); // Current page for pagination
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
-  const itemsPerPage = 10; // Number of items per page
+  const itemsPerPage = postPerPage; // Number of items per page
 
   useEffect(()=>{
     if(activeFilter!==null&&postVerify!==null){
@@ -100,7 +102,7 @@ export default function AllPost({
   
       setOwnerPosts(postsToDisplay); // Set the current page posts
     }
-  }, [data, SearchPostId, sortOrder, activeFilter, page,postVerify , allPropertyData]);
+  }, [data, SearchPostId, sortOrder, activeFilter, page,postVerify ,itemsPerPage, allPropertyData]);
 
 
 
@@ -120,7 +122,7 @@ export default function AllPost({
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
   };
- // this useEffect is used to handle the selectAll functinaolity 
+ // this useEffect is used to handle the selectAll functionality 
  const endIndex=itemsPerPage*page;
  const startIndex=endIndex-itemsPerPage;
  useEffect(() => {
