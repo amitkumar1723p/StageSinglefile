@@ -16,7 +16,7 @@ export default function AllPost({
 }) {
   const dispatch = useDispatch();
   const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)
-  console.log(postVerify,"page all post")
+  // console.log(postVerify,"page all post")
   const [OwnerPosts, setOwnerPosts] = useState([]);
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
  const { medata } = useSelector((state) => {

@@ -5,6 +5,7 @@ import {
   Active_InactiveProperty,
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
+  changePropertyStatus,
   GetAllAssignProperty,
   GetAllScheduleVisitsAndMakeOffer_Length,
 } from "../../Action/postAction";
@@ -66,7 +67,7 @@ const{postVerify}=useContext(UserContext)
   const [myQuery,setMyQuery] = useState(queryParams.get("type"))
   // const myQuery = queryParams.get("type");
   
-  console.log(myQuery,"my query hiiiii")
+  // console.log(myQuery,"my query hiiiii")
 
   useEffect(()=>{
       function settingFilter(){
@@ -135,6 +136,7 @@ const{postVerify}=useContext(UserContext)
         "ReOpenPostActionRequest",
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
+        "changePropertyStatusRequest"
       ].includes(LodingType)
     
     ) {
@@ -242,7 +244,9 @@ const{postVerify}=useContext(UserContext)
     // Handle button click to update state active amd inactoive
     const handleStatusChange = (value) => {
       if(AssignProperty.length > 0){
-        const isConfirmed = window.confirm("Are you sure about it?");
+        // console.log(AssignProperty.length,value)
+        const isConfirmed = window.confirm(`Are you sure to ${value} ${AssignProperty.length} property?`);
+
         if (isConfirmed) {
           setStatus(value);
           
@@ -263,6 +267,27 @@ const{postVerify}=useContext(UserContext)
       }
   
     }, [selectAll]);
+
+    // this fn is used for the updated available or sold out
+    const handlePropertyStatus=(value)=>{
+      // console.log(AssignProperty,"hj")
+     
+      const changePropertyStatusData = {
+        propertyStatus:value,
+        AssignedPropertys: AssignProperty,
+      };
+      if(changePropertyStatusData?.AssignedPropertys?.length>1 || changePropertyStatusData?.AssignedPropertys?.length<1){
+       return 0
+      }
+      let result = window.confirm("Are you sure you want to proceed?");
+      if (result&&changePropertyStatusData?.AssignedPropertys?.length===1) {
+        dispatch(changePropertyStatus(changePropertyStatusData))
+       
+      } else {
+          console.log("Cancel");
+      }
+    
+    }
 
   return (
     <>
@@ -345,9 +370,6 @@ const{postVerify}=useContext(UserContext)
         <div className="admin-filter-select" onClick={() => setSelectAll(prev => !prev)} >
          <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1" />
           <label className="admin-filter-select-lable">Select All</label></>
-          
-       
-        
           </div>
 
           <div>
@@ -382,11 +404,10 @@ const{postVerify}=useContext(UserContext)
 
             }
             </select>
+           
           </div> 
           {/* here start */}
-          <div>
-
-          </div>
+      
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -429,7 +450,7 @@ const{postVerify}=useContext(UserContext)
               Assing Property
             </button>
           )}
-
+ 
           {/* Buttons to change the status */}
         
          
@@ -447,12 +468,16 @@ const{postVerify}=useContext(UserContext)
           >
             In-Active
           </button>
-          {/* <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
-           
+          <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
+          onClick={()=>handlePropertyStatus("sold out")}
           >
-         sort
-          </button> */}
+           Sold Out
+          </button>
+          <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
+          onClick={()=>handlePropertyStatus("available")}
+          >
+          Available
+          </button>
           {/* Display the current status */}
         </div>
     </div>

@@ -804,3 +804,73 @@ export const GetAllNotificationsAndRequirements = () => {
     }
   };
 };
+
+// change property state available or sold out 
+
+export const changePropertyStatus=(updateData)=>{
+  console.log(updateData,"h")
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "changePropertyStatusRequest",
+        payload: "changePropertyStatusRequest",
+      });
+      const url = `${api_Base_Url}/post/updatePropertyStatus`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(url, updateData, config);
+      dispatch({ type: "changePropertyStatusSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "changePropertyStatusFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "changePropertyStatusFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+// acknowledge profile
+
+
+export const acknowledgeProfile = () => {
+  
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "acknowledgeProfileRequest",
+        payload: "acknowledgeProfileRequest",
+      });
+      const url = `${api_Base_Url}/user/acknowledgeProfile`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.post(url,  config);
+      dispatch({ type: "acknowledgeProfileSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "acknowledgeProfileFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "acknowledgeProfileFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+

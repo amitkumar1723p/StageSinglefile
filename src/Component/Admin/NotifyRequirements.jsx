@@ -21,10 +21,10 @@ const [newNotifiesId,setNewNotifiesId]=useState([]);
 const [newReqId,setNewReqId]= useState([]);
 const [displayData, setDisplayData] = useState([]);
 
-// console.log(data)
+// console.log(allData)
 
 useEffect(()=>{
-  console.log(enterdDate)
+  // console.log(enterdDate)
   const currentData = activeTab === "notifies" ? allData?.data?.notifies : allData?.data?.requirements
     const filterdData=currentData?.filter((item=> {
       if(enterdDate){
