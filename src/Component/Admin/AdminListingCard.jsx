@@ -30,6 +30,8 @@ export default function AdminListingCard({
     ExpiredDate: "",
   });
 
+
+  // console.log(selectAllProperty)
   const navigate = useNavigate();
 
   const formatReservePrice = (price) => {

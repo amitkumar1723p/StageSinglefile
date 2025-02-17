@@ -54,6 +54,13 @@
   .home {
     width: auto;
   }
+  .home-postContainer .home-showpost {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 300px;
+  }
+  
 }
 
 @media (min-width: 481px) and (max-width: 780px) {
@@ -63,7 +70,7 @@
 }
 @media (min-width: 0px) and (max-width: 480px) {
   .home {
-    width: auto;
+    width: 420px;
     margin: 5px auto;
     position: relative;
     min-height: 120px;

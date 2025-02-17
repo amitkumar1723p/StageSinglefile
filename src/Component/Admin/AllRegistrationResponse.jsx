@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ProfileUpdateAction } from "../../Action/userAction";
 import { acknowledgeProfile } from "../../Action/postAction";
+import { Pointer } from "lucide-react";
 // Define the functional component
 export default function AllRegistrationResponse({}) {
   const dispatch = useDispatch();
@@ -65,7 +66,7 @@ export default function AllRegistrationResponse({}) {
       let filteredData = [...AllUserResponseData.data];
 
       if (viewfilterUser === "verified") {
-        console.log(viewfilterUser);
+        // console.log(viewfilterUser);
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === true
         ); // Only verified
@@ -73,12 +74,12 @@ export default function AllRegistrationResponse({}) {
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === false
         ); // Only unverified
-        console.log(viewfilterUser);
+        // console.log(viewfilterUser);
       } else if (viewfilterUser === "newUser") {
         filteredData = filteredData.filter(
           (item) => item?.acknowledge === false
         ); // Only new users
-        console.log(viewfilterUser);
+        // console.log(viewfilterUser);
       }
 
       // Set the filtered or full data
@@ -90,7 +91,7 @@ export default function AllRegistrationResponse({}) {
   return (
     <>
       <div className="container-fluid">
-        <div className="d-flex flex-row mb-3">
+        <div className="d-flex flex-row mb-2 gap-2">
           <div
             className={
               Object.keys(viewfilterUser).length === 0
@@ -98,6 +99,7 @@ export default function AllRegistrationResponse({}) {
                 : "p-2 border"
             }
             style={{
+            cursor:"pointer",
               backgroundColor:
                 Object.keys(viewfilterUser).length === 0 ? "#037edb" : "",
               color: Object.keys(viewfilterUser).length === 0 ? "white" : "",
@@ -118,7 +120,7 @@ export default function AllRegistrationResponse({}) {
             className={
               viewfilterUser === "verified" ? " p-2 border" : "p-2 border"
             }
-            style={{
+            style={{cursor:"pointer",
               backgroundColor: viewfilterUser === "verified" ? "#037edb" : "",
               color: viewfilterUser === "verified" ? "white" : "",
             }}
@@ -129,7 +131,7 @@ export default function AllRegistrationResponse({}) {
                   setViewfilterUser("verified"); // Corrected to 'verified'
                 }}
               >
-                Verified User ({verified?.length})
+                Otp-Verified ({verified?.length})
               </small>
             </p>
           </div>
@@ -137,7 +139,7 @@ export default function AllRegistrationResponse({}) {
             className={
               viewfilterUser === "unverified" ? " p-2 border" : "p-2 border"
             }
-            style={{
+            style={{ cursor:"pointer",
               backgroundColor: viewfilterUser === "unverified" ? "#037edb" : "",
               color: viewfilterUser === "unverified" ? "white" : "",
             }}
@@ -148,7 +150,7 @@ export default function AllRegistrationResponse({}) {
                   setViewfilterUser("unverified");
                 }}
               >
-                Un-Verified User ({unverified?.length})
+               OTP Un-Verified User ({unverified?.length})
               </small>
             </p>
           </div>
@@ -157,7 +159,7 @@ export default function AllRegistrationResponse({}) {
             className={
               viewfilterUser === "newUser" ? " p-2 border " : "p-2 border"
             }
-            style={{
+            style={{ cursor:"pointer",
               backgroundColor: viewfilterUser === "newUser" ? "#037edb" : "",
               color: viewfilterUser === "newUser" ? "white" : "",
             }}

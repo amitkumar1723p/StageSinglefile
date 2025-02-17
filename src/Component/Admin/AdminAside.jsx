@@ -20,15 +20,29 @@ export default function AdminAside() {
   //   return state.AllUserResponse
   // })
   // this useEffect get All user reponse
-  useEffect(() => {
-    dispatch(GetAllNotificationsAndRequirements());
+  // useEffect(() => {
+  //   dispatch(GetAllNotificationsAndRequirements());
+  // const{data:AllUserResponseData}=useSelector((state)=>{
+  //   return state.AllUserResponse
+  // })
+// this useEffect get All user reponse 
+  useEffect(()=>{
+    // dispatch(getAllUserAction())
+    //have to protect for agent
 
-    // all post
+    // console.log(medata?.user?.Role)
+    if(["Owner", "Admin"].includes(medata?.user?.Role)){
+
+      dispatch(GetAllNotificationsAndRequirements())
+    }
     if (medata?.user?.Role === "Owner") {
       dispatch(getAllUserAction());
       dispatch(Admin_OwnerGetAllPostAction());
     }
-  }, [dispatch]);
+  },[])
+
+  
+ 
 
   // console.log(AllUserResponseData,"hello")
 

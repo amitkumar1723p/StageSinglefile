@@ -1731,11 +1731,12 @@ input[type="number"] {
     color: black;
     position: absolute;
     font-size: 12px;
-    z-index: 1;
+    z-index: 2;
     left: -86px;
     width: 197%;
     font-size: 12px;
-    height: 300px;
+    height: fit-content;
+    max-height: 300px;
     /* overflow: auto; */
     text-align: justify;
     border: none;

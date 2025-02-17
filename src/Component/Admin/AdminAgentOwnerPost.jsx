@@ -271,7 +271,7 @@ export default function AdminAgentOwnerPost() {
   //handle items per page 
   const handleItemsPerPageChange = (value) => {
     setItemsPerPage(parseInt(value, 10)); // Update the state with the selected value
-    console.log(itemsPerPage)
+    // console.log(itemsPerPage)
     // setCurrentPage(1); // Reset to first page when changing items per page
   };
 
@@ -296,6 +296,7 @@ export default function AdminAgentOwnerPost() {
   // this is used for empty checked box 
   useEffect(() => {
     if (!selectAll) {
+      
       setAssignProperty([]);
     }
 
