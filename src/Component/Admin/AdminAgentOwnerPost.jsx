@@ -5,6 +5,7 @@ import {
   Active_InactiveProperty,
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
+  changePropertyStatus,
   GetAllAssignProperty,
   GetAllScheduleVisitsAndMakeOffer_Length,
 } from "../../Action/postAction";
@@ -163,6 +164,7 @@ export default function AdminAgentOwnerPost() {
         "ReOpenPostActionRequest",
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
+        "changePropertyStatusRequest"
       ].includes(LodingType)
 
     ) {
@@ -299,6 +301,27 @@ export default function AdminAgentOwnerPost() {
 
   }, [selectAll]);
 
+    // this fn is used for the updated available or sold out
+    const handlePropertyStatus=(value)=>{
+      // console.log(AssignProperty,"hj")
+     
+      const changePropertyStatusData = {
+        propertyStatus:value,
+        AssignedPropertys: AssignProperty,
+      };
+      if(changePropertyStatusData?.AssignedPropertys?.length>1 || changePropertyStatusData?.AssignedPropertys?.length<1){
+       return 0
+      }
+      let result = window.confirm("Are you sure you want to proceed?");
+      if (result&&changePropertyStatusData?.AssignedPropertys?.length===1) {
+        dispatch(changePropertyStatus(changePropertyStatusData))
+       
+      } else {
+          console.log("Cancel");
+      }
+    
+    }
+
   return (
     <>
       <div className="admin-filter-main-parent-box">
@@ -383,12 +406,9 @@ export default function AdminAgentOwnerPost() {
         </div>
 
         <div className="select-section-admin">
-          <div className="admin-filter-select" onClick={() => setSelectAll(prev => !prev)} >
-            <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1" />
-              <label className="admin-filter-select-lable">Select All</label></>
-
-
-
+        <div className="admin-filter-select" onClick={() => setSelectAll(prev => !prev)} >
+         <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1" />
+          <label className="admin-filter-select-lable">Select All</label></>
           </div>
 
           <div>
@@ -425,9 +445,7 @@ export default function AdminAgentOwnerPost() {
             </select>
           </div>
           {/* here start */}
-          <div>
-
-          </div>
+      
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -470,34 +488,25 @@ export default function AdminAgentOwnerPost() {
               Assing Property
             </button>
           )}
-
+ 
           {/* Buttons to change the status */}
 
-
-
-          {
-            currenSelected !== "All Active posts" && <button
-              className="px-1 mx-0 bg-primary bg-opacity-10 border border-info-subtle  rounded"
-              onClick={() => handleStatusChange("Active")}
-            >
-
-              Active
-            </button>
-          }
-          {
-            currenSelected !== "All In-Active posts" && <button
-              className="px-1 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
-              onClick={() => handleStatusChange("InActive")}
-            >
-              In-Active
-            </button>
-          }
-          {/* <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
-           
+          <button
+            className="px-1 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+            onClick={() => handleStatusChange("InActive")}
           >
-         sort
-          </button> */}
+            In-Active
+          </button>
+          <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
+          onClick={()=>handlePropertyStatus("sold out")}
+          >
+           Sold Out
+          </button>
+          <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
+          onClick={()=>handlePropertyStatus("available")}
+          >
+          Available
+          </button>
           {/* Display the current status */}
         </div>
       </div>

@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  acknowledgeProfile,
-  ProfileUpdateAction,
-} from "../../Action/userAction";
-import "./AllRegistrationResponse.css";
-
+import { ProfileUpdateAction } from "../../Action/userAction";
+import { acknowledgeProfile } from "../../Action/postAction";
 // Define the functional component
 export default function AllRegistrationResponse({}) {
   const dispatch = useDispatch();
@@ -14,7 +10,8 @@ export default function AllRegistrationResponse({}) {
   const [newRegistration, setNewRegistration] = useState();
   const [viewfilterUser, setViewfilterUser] = useState({});
   const [tableData, setTableData] = useState([]);
-
+  const [checkNotify, setCheckNotfiy] = useState([]);
+  const [require, setRequire] = useState([]);
   // login user detail
   const { medata } = useSelector((state) => state.meDetails);
 
@@ -23,7 +20,19 @@ export default function AllRegistrationResponse({}) {
     return state.AllUserResponse;
   });
 
-  // CRTVerifyUser
+  const { loading, data: AllPost } = useSelector((state) => {
+    return state.AdminGetAllPost;
+  });
+  // All notify or requirement
+  const allData = useSelector((state) => state.AllNotifiesAndReq);
+
+  useEffect(() => {
+    const notification = allData?.data?.notifies;
+    const requirement = allData?.data?.requirements;
+    setCheckNotfiy(notification);
+    setRequire(requirement);
+  }, [allData]);
+
   useEffect(() => {
     if (Array.isArray(AllUserResponseData?.data)) {
       const verifiedUsers = AllUserResponseData.data.filter(
@@ -77,94 +86,116 @@ export default function AllRegistrationResponse({}) {
     }
   }, [AllUserResponseData, viewfilterUser]);
 
+  console.log(AllPost, "j");
   return (
     <>
-      {/* Component content goes here */}
       <div className="container-fluid">
-        <div className="filter-container">
-          <div onClick={(e) => {
-                  setViewfilterUser({}); // Reset to show all users
-                }}
+        <div className="d-flex flex-row mb-3">
+          <div
             className={
               Object.keys(viewfilterUser).length === 0
-                ? "filter-item active"
-                : "filter-item"
+                ? " p-2 border "
+                : "p-2 border"
             }
+            style={{
+              backgroundColor:
+                Object.keys(viewfilterUser).length === 0 ? "#037edb" : "",
+              color: Object.keys(viewfilterUser).length === 0 ? "white" : "",
+            }}
           >
-            <p className="filter-resposne">
+            <p>
               <small
-                
+                // Default to muted if not empty
+                onClick={(e) => {
+                  setViewfilterUser({}); // Reset to show all users
+                }}
               >
                 All User ({AllUserResponseData?.data?.length})
               </small>
             </p>
           </div>
-          <div 
-          onClick={(e) => {
-            setViewfilterUser("verified");
-          }}
+          <div
             className={
-              viewfilterUser === "verified"
-                ? "filter-item active"
-                : "filter-item"
-                
+              viewfilterUser === "verified" ? " p-2 border" : "p-2 border"
             }
+            style={{
+              backgroundColor: viewfilterUser === "verified" ? "#037edb" : "",
+              color: viewfilterUser === "verified" ? "white" : "",
+            }}
           >
-            <p className="filter-resposne">
+            <p>
               <small
-                
+                onClick={(e) => {
+                  setViewfilterUser("verified"); // Corrected to 'verified'
+                }}
               >
                 Verified User ({verified?.length})
               </small>
             </p>
           </div>
-          <div onClick={(e) => {
+          <div
+            className={
+              viewfilterUser === "unverified" ? " p-2 border" : "p-2 border"
+            }
+            style={{
+              backgroundColor: viewfilterUser === "unverified" ? "#037edb" : "",
+              color: viewfilterUser === "unverified" ? "white" : "",
+            }}
+          >
+            <p>
+              <small
+                onClick={(e) => {
                   setViewfilterUser("unverified");
                 }}
-            className={
-              viewfilterUser === "unverified"
-                ? "filter-item active"
-                : "filter-item"
-            }
-          >
-            <p className="filter-resposne">
-              <small
-                
               >
                 Un-Verified User ({unverified?.length})
               </small>
             </p>
           </div>
 
-          <div  onClick={() => {
+          <div
+            className={
+              viewfilterUser === "newUser" ? " p-2 border " : "p-2 border"
+            }
+            style={{
+              backgroundColor: viewfilterUser === "newUser" ? "#037edb" : "",
+              color: viewfilterUser === "newUser" ? "white" : "",
+            }}
+          >
+            <p
+              onClick={() => {
                 setViewfilterUser("newUser");
                 handleNumber();
               }}
-            className={
-              viewfilterUser === "newUser"
-                ? "filter-item active"
-                : "filter-item"
-            }
-          >
-            <p
-              className="filter-resposne"
-             
             >
               <small>New User ({newRegistration?.length})</small>
             </p>
           </div>
         </div>
 
-        <div className="table-container">
-          <table className="main-response-section">
-            <thead>
-              <tr>
-                <th>S.no</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Contact</th>
-                <th>Date</th>
+        <div className="border-top border-end border-start">
+          <table className="table table-hover">
+            <thead className="table-info ">
+              <tr className="">
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small>Name-(Role)</small>
+                </th>
+                <th scope="col" className="text-primary col-1 border-end">
+                  <small>Phone</small>
+                </th>
+                <th scope="col" className="text-primary col-3 border-end">
+                  <small>Email</small>
+                </th>
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small>Posting</small>
+                </th>
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small>Notification</small>
+                </th>
+
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small>Date</small>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -176,18 +207,47 @@ export default function AllRegistrationResponse({}) {
                   .slice(2);
                 return (
                   <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.Name}</td>
-                    <td>{item.email}</td>
-                    <td>{item.Role}</td>
-                    <td>{item.ContactNumber}</td>
-                    <td>
-                      {item.updatedAt && !isNaN(new Date(item.updatedAt))
-                        ? new Date(item.updatedAt)
-                            .toLocaleDateString("en-GB")
-                            .replace(/\//g, "-")
-                            .slice(0, 8)
-                        : "Invalid Date"}
+                    <td className="text-light-emphasis border-end">
+                      {item.Name ? (
+                        <small>
+                          {item.Name}- {item.Role}
+                        </small>
+                      ) : (
+                        <></>
+                      )}
+                    </td>
+                    <td className="text-light-emphasis border-end">
+                      <small>{item.ContactNumber}</small>
+                    </td>
+                    <td className="text-light-emphasis border-end">
+                      <small>{item.email}</small>
+                    </td>
+
+                    <td className="text-light-emphasis border-end">
+                      {AllPost?.Post?.some( (post) => post?.CreatePostUser?._id  === item._id )? (
+                        <>Yes</>
+                      ) : (
+                        <>No</>
+                      )}
+                    </td>
+
+                    <td className="text-light-emphasis border-end" key={index}>
+                      {checkNotify?.some(
+                        (user) => user?.User?._id === item._id
+                      ) ||
+                      require?.some((user) => user?.User?._id === item._id) ? (
+                        <small>Yes</small>
+                      ) : (
+                        <small>No</small>
+                      )}
+                    </td>
+
+                    <td className="text-light-emphasis border-end">
+                      <small>
+                        {item?.createAt
+                          ? new Date(item?.createAt).toLocaleString()
+                          : "..."}
+                      </small>
                     </td>
                   </tr>
                 );

@@ -16,6 +16,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "RemoveAssignPropertyRequest":
     case "Active_InactivePropertyRequest":
     case "showVeirifyPostIconRequest":
+    case"changePropertyStatusRequest":
+    case"acknowledgeProfileRequest":
       return {
         ...state,
         loading: true,
@@ -37,6 +39,8 @@ export const CreatePostReducer = (state = {}, action) => {
     // Activ in active
     case "Active_InactivePropertySuccess":
     case "showVeirifyPostIconSuccess":
+      case"changePropertyStatusSuccess":
+      case"acknowledgeProfileSuccess":
       return {
         ...state,
         loading: false,
@@ -58,6 +62,9 @@ export const CreatePostReducer = (state = {}, action) => {
     // Activ in active
     case "Active_InactivePropertyFail":
     case "showVeirifyPostIconFail":
+      case"changePropertyStatusFail":
+      case"acknowledgeProfileFail":
+
       return {
         ...state,
         loading: false,

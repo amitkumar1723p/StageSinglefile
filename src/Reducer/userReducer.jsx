@@ -22,7 +22,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ProfileUpdateRequest":
 
     case"ReportSuspiciousPropertyRequest":
-    case"acknowledgeProfileRequest":
+    
       return {
         ...state,
         loading: true,
@@ -49,8 +49,6 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ProfileUpdateSuccess":
 
     case"ReportSuspiciousPropertySuccess":
-
-    case"acknowledgeProfileSuccess":
       return {
         ...state,
         loading: false,
@@ -77,7 +75,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ProfileEditFail":
     case"ProfileUpdateFail":
     case"ReportSuspiciousPropertyFail":
-    case"acknowledgeProfileFail":
+  
       return {
         ...state,
         loading: false,
