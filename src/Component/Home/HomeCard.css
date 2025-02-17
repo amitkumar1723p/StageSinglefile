@@ -63,7 +63,7 @@
 }
 @media (min-width: 0px) and (max-width: 480px) {
   .home {
-    width: auto;
+    width: 420px;
     margin: 5px auto;
     position: relative;
     min-height: 120px;

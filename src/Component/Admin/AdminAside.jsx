@@ -19,8 +19,14 @@ export default function AdminAside() {
 // this useEffect get All user reponse 
   useEffect(()=>{
     dispatch(getAllUserAction())
-    dispatch(GetAllNotificationsAndRequirements())
-  },[dispatch])
+    //have to protect for agent
+
+    // console.log(medata?.user?.Role)
+    if(["Owner", "Admin"].includes(medata?.user?.Role)){
+
+      dispatch(GetAllNotificationsAndRequirements())
+    }
+  },[])
 // filter All user data
 // useEffect(() => {
 //   dispatch(GetAllNotificationsAndRequirements())

@@ -254,7 +254,10 @@ export default function PostCard({ PostData, index }) {
   }, []);
   return (
     <>
-      <div className="prop-card-main-box">
+      <div className="prop-card-main-box ">
+        {PostData?.propertyStatus?.currentPropertyStatus==="sold out" && <div className="sold-out-blur-img sold-img-blur glass-effect">
+          <img src="/img/sold-out.svg" alt="" className="sold-img-blu blur-img"/>
+          <p className="sold-out-lable">This property is sold out</p></div>}
         <div className="property-post-card-main">
           <div
             className="property-post-card"
@@ -296,7 +299,7 @@ export default function PostCard({ PostData, index }) {
             </div>
           </div> */}
 
-            <div className="imageSlide">
+            {PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? <div className="imageSlide">
               {PostData.PropertyImages.map((Post, i) => {
                 return (
                   <img
@@ -313,12 +316,28 @@ export default function PostCard({ PostData, index }) {
                   />
                 );
               })}
-            </div>
-            <div className="property-card-info">
-              <div className="heading-name">
+            </div>:
+          <div className="imageSlide">
+                <img
+                    // key={}
+                    src={PostData.PropertyImages[0].url}
+                    alt="PropertyPost"
+                    style={{
+                      transform: `translateX(${ImageTranlate}00%)`,
+                      transition:
+                        RunImageSlider === true &&
+                        RunInterval === true &&
+                        "all 1s ease-in-out",
+                    }}
+                  />
+
+          </div>
+                  }
+            <div className="property-card-info ">
+              <div className={`heading-name  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                 {PostData.LocationDetails.ProjectName}
 
-                <div className="share-fav-main-box">
+               {PostData?.propertyStatus?.currentPropertyStatus!=="sold out" && <div className="share-fav-main-box">
                   <div className="postcard-share-parent">
                     <div onClick={() => setIsModalOpen(true)}>
                       <img
@@ -373,81 +392,80 @@ export default function PostCard({ PostData, index }) {
                         )}
                     </div>
                   )}
-                </div>
+                </div>}
               </div>
               <div>
-                <p className="property-address">{PropertyAddress}</p>
+                <p className={`  property-address ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{PropertyAddress}</p>
               </div>
               <div className="details-about-property">
                 <div className="main-class--property">
                   <div className="img-box-imp-data-card">
-                    <p className=" answer-box">
+                    <p className={`  answer-box  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                       {`${PostData.PropertyDetails.BHKType} BHK`}{" "}
                       {PostData.PropertyDetails?.OtherRoom?.map((text) => {
-                        return `+ ${
-                          text == "Pooja Room"
+                        return `+ ${text == "Pooja Room"
                             ? "Pooja"
                             : text == "Servant Room"
-                            ? "SQ"
-                            : text == "Study Room"
-                            ? "Study"
-                            : text == "Store Room"
-                            ? "Store"
-                            : ""
-                        }`;
+                              ? "SQ"
+                              : text == "Study Room"
+                                ? "Study"
+                                : text == "Store Room"
+                                  ? "Store"
+                                  : ""
+                          }`;
                       })}
                     </p>
-                    <p className="question-box">Type </p>
+                    <p className={`question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>Type </p>
                   </div>
                 </div>
                 <div>
                   <div className="Area-answer">
                     {areaDetails ? (
-                      <div className="area-card-box">
-                        <p className="answer-box">
+                      <div className="area-card-box ">
+                        <p className={` answer-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                           {`${areaDetails.value} ${areaDetails.unit}`}
                         </p>
-                        <p className="question-box">{areaDetails.label}</p>
+                        <p className={` question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{areaDetails.label}</p>
                       </div>
                     ) : null}
                   </div>
                 </div>
                 <div>
                   <div className="property-status-floor">
-                    <p className="answer-box">{floorDetails}</p>
-                    <p className="question-box"> Floor </p>
+                    <p className={` answer-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{floorDetails}</p>
+                    <p className={`question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> Floor </p>
                   </div>
                 </div>
                 <div>
                   {" "}
                   <div className="property-status">
-                    <p className="answer-box">
+                    <p className={` answer-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                       {PostData.AmenitiesDetails.Furnishing}
                     </p>
-                    <p className="question-box"> Furnishing Details</p>
+                    <p className={`question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> Furnishing Details</p>
                   </div>
                 </div>
               </div>
               <div className="Price-section-card">
                 <div className="Reserveprice-sec">
-                  <p className="price-pr-anwser">
+                  <p className={`price-pr-anwser ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                     {/* Show Reserve Price  */}
                     {PostData.BasicDetails.PropertyAdType == "Sale" && (
                       <>
                         <div>
                           <div className="price-section-sale">
-                            <span className="price-rp-que">
+                            <span className={`price-rp-que ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                               {" "}
                               Reserve Price{" "}
                             </span>
                             :
-                            <span className="price-section">
+                            <span className={` price-section ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                               {formatReservePrice(
                                 PostData.PricingDetails.ExpectedPrice
                               )}
                             </span>
                           </div>
-                          <p className="post-card-section">
+                          <p className={`post-card-section ${false ? "" : "sold-out"} `}>
                             ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
                           </p>
                         </div>
@@ -489,21 +507,23 @@ export default function PostCard({ PostData, index }) {
           </div>
           <div>
             <div className="price-details">
-              <div className="Date-of-post">
-                {PostData.PostVerify ? (
-                  <p>
-                    Posted On:{" "}
-                    <span id="postdate">
-                      {formatDate(PostData.PostVerifyData?.Time)}
-                    </span>
-                  </p>
-                ) : (
-                  <p className="inative-post-status">
-                    This post is currently{" "}
-                    <span className="span-inactive-post"> Inactive</span>
-                  </p>
-                )}
-              </div>
+             {
+               PostData?.propertyStatus?.currentPropertyStatus==="sold out" ?  <p className=""></p>:<div className="Date-of-post">
+               {PostData.PostVerify ? (
+                 <p>
+                   Posted On:{" "}
+                   <span id="postdate">
+                     {formatDate(PostData.PostVerifyData?.Time)}
+                   </span>
+                 </p>
+               ) : (
+                 <p className="inative-post-status">
+                   This post is currently{" "}
+                   <span className="span-inactive-post"> Inactive</span>
+                 </p>
+               )}
+             </div>
+             }
 
               <Link
                 to={`/post-detail/${PropertyAddress.toLowerCase()
@@ -511,7 +531,7 @@ export default function PostCard({ PostData, index }) {
                   .replace(",", "")
                   .replaceAll("/", "-")}-${PostData._id}`}
               >
-                <button className="contact-button">View More</button>
+                <button className={`contact-button ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out-button"}`} disabled={PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? false: true}>View More</button>
               </Link>
             </div>
           </div>
@@ -522,12 +542,11 @@ export default function PostCard({ PostData, index }) {
       <ShareModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        propid={`${
-          window.location.origin
-        }/post-detail/${PropertyAddress.toLowerCase()
-          .replaceAll(" ", "-")
-          .replace(",", "")
-          .replaceAll("/", "-")}-${PostData._id}`}
+        propid={`${window.location.origin
+          }/post-detail/${PropertyAddress.toLowerCase()
+            .replaceAll(" ", "-")
+            .replace(",", "")
+            .replaceAll("/", "-")}-${PostData._id}`}
       />
 
       {/* share card end  */}

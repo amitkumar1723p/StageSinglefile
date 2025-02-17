@@ -56,7 +56,7 @@ export default function AllRegistrationResponse({}) {
       let filteredData = [...AllUserResponseData.data];
 
       if (viewfilterUser === "verified") {
-        console.log(viewfilterUser);
+        // console.log(viewfilterUser);
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === true
         ); // Only verified
@@ -64,12 +64,12 @@ export default function AllRegistrationResponse({}) {
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === false
         ); // Only unverified
-        console.log(viewfilterUser);
+        // console.log(viewfilterUser);
       } else if (viewfilterUser === "newUser") {
         filteredData = filteredData.filter(
           (item) => item?.acknowledge === false
         ); // Only new users
-        console.log(viewfilterUser);
+        // console.log(viewfilterUser);
       }
 
       // Set the filtered or full data
