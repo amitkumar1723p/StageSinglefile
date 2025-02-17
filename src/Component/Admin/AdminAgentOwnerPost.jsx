@@ -109,12 +109,12 @@ export default function AdminAgentOwnerPost() {
     // console.log(AllPost)
     setCurrentDataLength(AllPost?.Post?.length)
     if (currenSelected === "All In-Active posts") {
-      filterdData = AllPost.Post.filter(item => !item.PostVerify)
-      setCurrentDataLength(filterdData.length);
+      filterdData = AllPost?.Post?.filter(item => !item?.PostVerify)
+      setCurrentDataLength(filterdData?.length);
     }
     if (currenSelected === "All Active posts") {
-      filterdData = AllPost.Post.filter(item => item.PostVerify)
-      setCurrentDataLength(filterdData.length)
+      filterdData = AllPost?.Post?.filter(item => item?.PostVerify)
+      setCurrentDataLength(filterdData?.length)
     }
 
   }, [currenSelected, AllPost])
@@ -503,11 +503,11 @@ export default function AdminAgentOwnerPost() {
           >
            Sold Out
           </button>
-          <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
+          {/* <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
           onClick={()=>handlePropertyStatus("available")}
           >
           Available
-          </button>
+          </button> */}
           {/* Display the current status */}
         </div>
       </div>

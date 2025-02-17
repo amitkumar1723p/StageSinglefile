@@ -179,19 +179,19 @@ export default function AllRegistrationResponse({}) {
           <table className="table table-hover">
             <thead className="table-info ">
               <tr className="">
-                <th scope="col" className="text-primary col-2 border-end">
+                <th scope="col" className="text-primary col-3 border-end">
                   <small>Name-(Role)</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
                   <small>Phone</small>
                 </th>
-                <th scope="col" className="text-primary col-3 border-end">
+                <th scope="col" className="text-primary col-1 border-end ">
                   <small>Email</small>
                 </th>
-                <th scope="col" className="text-primary col-2 border-end">
+                <th scope="col" className="text-primary col-1 border-end">
                   <small>Posting</small>
                 </th>
-                <th scope="col" className="text-primary col-2 border-end">
+                <th scope="col" className="text-primary col-1 border-end">
                   <small>Notification</small>
                 </th>
 
