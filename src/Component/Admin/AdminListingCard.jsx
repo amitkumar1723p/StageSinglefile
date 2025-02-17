@@ -411,90 +411,92 @@ export default function AdminListingCard({
                     View Listing
                   </button>
                 </Link>
-                <div className="Verified-lable">
-                  <p>Verified lable :</p>
-                  <label className="toggle-switch-container">
-                    <input
-                      type="checkbox"
-                      checked={ToggleBtn}
-                      onChange={(e) => {
-                        setToggleBtn(!ToggleBtn);
-                        if (e.target.checked == true) {
-                          let postdata = { PostVerifyShow: true };
-                          let postid = PostData._id;
-                          dispatch(
-                            showVeirifyPostIconAction({ postdata }, postid)
-                          );
-                        }
-                        if (e.target.checked == false) {
-                          let postdata = { PostVerifyShow: false };
-                          let postid = PostData._id;
-                          dispatch(
-                            showVeirifyPostIconAction({ postdata }, postid)
-                          );
-                        }
-                      }}
-                      className="toggle-switch-input"
-                    />
-                    <span className="toggle-btn-slider"></span>
-                  </label>
-                </div>
-                {medata?.user?.Role != "Agent" && (
-                  <div className="verify-box-section">
-                    {/* {location.pathname.includes("admin") && ( */}
-                    {PostData.PostExpired ? (
-                      <button
-                        onClick={() => {
-                          dispatch(ReOpenPostAction(PostData._id));
+                <div className="d-flex gap-5">
+                  <div className="Verified-lable">
+                    <p className="varified-lable">Verified lable :</p>
+                    <label className="toggle-switch-container">
+                      <input
+                        type="checkbox"
+                        checked={ToggleBtn}
+                        onChange={(e) => {
+                          setToggleBtn(!ToggleBtn);
+                          if (e.target.checked == true) {
+                            let postdata = { PostVerifyShow: true };
+                            let postid = PostData._id;
+                            dispatch(
+                              showVeirifyPostIconAction({ postdata }, postid)
+                            );
+                          }
+                          if (e.target.checked == false) {
+                            let postdata = { PostVerifyShow: false };
+                            let postid = PostData._id;
+                            dispatch(
+                              showVeirifyPostIconAction({ postdata }, postid)
+                            );
+                          }
                         }}
-                      >
-                        Re-Open
-                      </button>
-                    ) : (
-                      <>
-                        {PostData.PostVerify ? (
-                          <button
-                            className="post-verify-btn In-Active-btn"
-                            onClick={() => {
-                              let Confrimbox = window.confirm(
-                                "Are you Sure In-Active This Post"
-                              );
-                              if (Confrimbox) {
-                                let postdata = { PostVerify: false };
-                                let postid = PostData._id;
-                                dispatch(
-                                  VerifyPostAction({ postdata }, postid)
-                                );
-                              }
-                            }}
-                          >
-                            {/* Unverify  */} In-Active
-                          </button>
-                        ) : (
-                          <button
-                            className="post-verify-btn Active-btn "
-                            onClick={() => {
-                              let Confrimbox = window.confirm(
-                                "Are you Sure Active This Post"
-                              );
-
-                              if (Confrimbox) {
-                                let postdata = { PostVerify: true };
-                                let postid = PostData._id;
-                                dispatch(
-                                  VerifyPostAction({ postdata }, postid)
-                                );
-                              }
-                            }}
-                          >
-                            {/* Verify */}
-                            Active
-                          </button>
-                        )}
-                      </>
-                    )}
+                        className="toggle-switch-input"
+                      />
+                      <span className="toggle-btn-slider"></span>
+                    </label>
                   </div>
-                )}
+                  {medata?.user?.Role != "Agent" && (
+                    <div className="verify-box-section">
+                      {/* {location.pathname.includes("admin") && ( */}
+                      {PostData.PostExpired ? (
+                        <button
+                          onClick={() => {
+                            dispatch(ReOpenPostAction(PostData._id));
+                          }}
+                        >
+                          Re-Open
+                        </button>
+                      ) : (
+                        <>
+                          {PostData.PostVerify ? (
+                            <button
+                              className="post-verify-btn In-Active-btn"
+                              onClick={() => {
+                                let Confrimbox = window.confirm(
+                                  "Are you Sure In-Active This Post"
+                                );
+                                if (Confrimbox) {
+                                  let postdata = { PostVerify: false };
+                                  let postid = PostData._id;
+                                  dispatch(
+                                    VerifyPostAction({ postdata }, postid)
+                                  );
+                                }
+                              }}
+                            >
+                              {/* Unverify  */} In-Active
+                            </button>
+                          ) : (
+                            <button
+                              className="post-verify-btn Active-btn "
+                              onClick={() => {
+                                let Confrimbox = window.confirm(
+                                  "Are you Sure Active This Post"
+                                );
+
+                                if (Confrimbox) {
+                                  let postdata = { PostVerify: true };
+                                  let postid = PostData._id;
+                                  dispatch(
+                                    VerifyPostAction({ postdata }, postid)
+                                  );
+                                }
+                              }}
+                            >
+                              {/* Verify */}
+                              Active
+                            </button>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

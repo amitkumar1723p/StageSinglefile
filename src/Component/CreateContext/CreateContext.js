@@ -1,3 +1,4 @@
+import { all } from "axios";
 import React, { createContext, useContext, useRef, useState ,useEffect} from "react";
 // Create a context
 export const UserContext = createContext();
@@ -30,7 +31,11 @@ export function UserProvider({ children }) {
     // }, [allPropertyData]);
     const [allPropertyData, setAllPropertyData] = useState([])
    
-    
+    // useEffect(()=>{
+    //   console.log("data ")
+    //   const reversedData=allPropertyData?.Post?.reverse();
+    //   setAllPropertyData(reversedData)
+    // },[allPropertyData])
 // this state is store the dashboard keyword for active ,inactive or active 
 
 //  createPost Submit Alert Sate 
@@ -57,7 +62,7 @@ const[postVerify,setPostVerify]=useState(null)
         setRedirectPathIsHomeCard,
 
 
-        allPropertyData, setAllPropertyData,
+        allPropertyData:{...allPropertyData ,Post:allPropertyData?.Post?.reverse()}, setAllPropertyData,
         postVerify,setPostVerify ,
 
         //  cretate post submit alert 

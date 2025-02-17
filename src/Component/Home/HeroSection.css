@@ -537,7 +537,7 @@ line-height: normal;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 60px 0 60px 0;
+    padding: 40px 0 40px 0;
     border-radius: 10px;
   }
 

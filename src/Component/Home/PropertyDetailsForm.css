@@ -326,9 +326,9 @@ select::placeholder {
   .form-grid {
     grid-template-columns: 1fr;
   }
-  .counter{
+  /* .counter{
     width: 50%;
-  }
+  } */
 }
 
 

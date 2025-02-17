@@ -213,7 +213,7 @@
   }
 
   .property-form {
-    gap: 0;
+    gap: 10px;
   }
 
   .form-group input,

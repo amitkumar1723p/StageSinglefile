@@ -69,16 +69,15 @@ const NotifyForm = ({ SetShow }) => {
           <div className="img-notify">
             <div>
               <img
-                src="/img/notifyform.png"
+                src="/img/notifyimg.svg"
                 alt="Notification Illustration"
                 className="notify-form-image"
               />
             </div>
           </div>
-          <div>
-            <p className="des-p">
-              Please provide your exact requirements so we can notify you when
-              it's available
+          <div className="main-content-in-notify">
+            <p className="des-p-nofity">
+              Looking for Your Ideal Home? Let Us Notify You First!
             </p>
 
             <form onSubmit={handleSubmit}>
