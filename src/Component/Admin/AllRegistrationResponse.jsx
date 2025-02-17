@@ -99,7 +99,7 @@ export default function AllRegistrationResponse({}) {
                 : "p-2 border"
             }
             style={{
-            cursor:"pointer",
+              cursor: "pointer",
               backgroundColor:
                 Object.keys(viewfilterUser).length === 0 ? "#037edb" : "",
               color: Object.keys(viewfilterUser).length === 0 ? "white" : "",
@@ -120,7 +120,8 @@ export default function AllRegistrationResponse({}) {
             className={
               viewfilterUser === "verified" ? " p-2 border" : "p-2 border"
             }
-            style={{cursor:"pointer",
+            style={{
+              cursor: "pointer",
               backgroundColor: viewfilterUser === "verified" ? "#037edb" : "",
               color: viewfilterUser === "verified" ? "white" : "",
             }}
@@ -139,7 +140,8 @@ export default function AllRegistrationResponse({}) {
             className={
               viewfilterUser === "unverified" ? " p-2 border" : "p-2 border"
             }
-            style={{ cursor:"pointer",
+            style={{
+              cursor: "pointer",
               backgroundColor: viewfilterUser === "unverified" ? "#037edb" : "",
               color: viewfilterUser === "unverified" ? "white" : "",
             }}
@@ -150,7 +152,7 @@ export default function AllRegistrationResponse({}) {
                   setViewfilterUser("unverified");
                 }}
               >
-               OTP Un-Verified User ({unverified?.length})
+                OTP Un-Verified User ({unverified?.length})
               </small>
             </p>
           </div>
@@ -159,7 +161,8 @@ export default function AllRegistrationResponse({}) {
             className={
               viewfilterUser === "newUser" ? " p-2 border " : "p-2 border"
             }
-            style={{ cursor:"pointer",
+            style={{
+              cursor: "pointer",
               backgroundColor: viewfilterUser === "newUser" ? "#037edb" : "",
               color: viewfilterUser === "newUser" ? "white" : "",
             }}
@@ -225,11 +228,13 @@ export default function AllRegistrationResponse({}) {
                       <small>{item.email}</small>
                     </td>
 
-                    <td className="text-light-emphasis border-end">
-                      {AllPost?.Post?.some( (post) => post?.CreatePostUser?._id  === item._id )? (
-                        <>Yes</>
+                    <td className="text-light-emphasis border-end ">
+                      {AllPost?.Post?.some(
+                        (post) => post?.CreatePostUser?._id === item._id
+                      ) ? (
+                        <small> Yes </small>
                       ) : (
-                        <>No</>
+                        <small> No </small>
                       )}
                     </td>
 
@@ -247,7 +252,14 @@ export default function AllRegistrationResponse({}) {
                     <td className="text-light-emphasis border-end">
                       <small>
                         {item?.createAt
-                          ? new Date(item?.createAt).toLocaleString()
+                          ? new Date(item?.createAt).toLocaleDateString(
+                              "en-GB"
+                            ) +
+                            " (" +
+                            new Date(item?.createAt)
+                              .toLocaleTimeString("en-GB", { hour12: false })
+                              .slice(0, 5) +
+                            ")"
                           : "..."}
                       </small>
                     </td>
