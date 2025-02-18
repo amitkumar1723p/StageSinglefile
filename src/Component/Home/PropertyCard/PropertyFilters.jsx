@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import HeaderCard from "./HeaderCard";
 const PropertyFilters = () => {
   // const [Budget, setBudget] = useState(0);
+  const path = useLocation();
+  
   const previousValue = useRef(null);
   const [SelectedApartmentType, setSelectedApartmentType] = useState("");
   const [ConstructionStatus, setConstructionStatus] = useState("");
@@ -417,6 +419,7 @@ const PropertyFilters = () => {
 
         </aside>
         <div className="filter-home-card">
+          
           <HeaderCard />
           <HomeCard />
         </div>

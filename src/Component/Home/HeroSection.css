@@ -840,3 +840,12 @@ line-height: normal;
 .call-button {
   background-color: var(--main-light-clr);
 }
+
+.hero-section-all-post-button{
+  background-color: var(--main-light-clr);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 10px;
+}

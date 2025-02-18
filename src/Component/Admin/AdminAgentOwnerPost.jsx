@@ -52,7 +52,7 @@ export default function AdminAgentOwnerPost() {
   const [propertyOrder, setPropertyOrder] = useState("decending");
   const [currenSelected, setCurrentSelected] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(15);
-  // const [currentPage, setCurrentPage] = useState(1);
+  const [PropertyType, setPropertyType] = useState("");
 
   const {
     data: adminAlertData,
@@ -92,7 +92,12 @@ export default function AdminAgentOwnerPost() {
         setCurrentSelected("All In-Active posts")
 
         setActive(false);
-      } else {
+      }else if(myQuery==="success"){
+        // console.log()
+        setActive("success")
+        setCurrentSelected("Success Post ") 
+       }
+       else {
         setCurrentSelected("All posts")
 
         setActive(null);
@@ -108,13 +113,34 @@ export default function AdminAgentOwnerPost() {
     // console.log(AllPost)
     setCurrentDataLength(AllPost?.Post?.length)
     if (currenSelected === "All In-Active posts") {
-      filterdData = AllPost.Post.filter(item => !item.PostVerify)
-      setCurrentDataLength(filterdData.length);
+      filterdData = AllPost?.Post?.filter(item => !item.PostVerify)
+      setCurrentDataLength(filterdData?.length);
     }
     if (currenSelected === "All Active posts") {
-      filterdData = AllPost.Post.filter(item => item.PostVerify)
-      setCurrentDataLength(filterdData.length)
+      filterdData = AllPost?.Post?.filter(item => item.PostVerify)
+      setCurrentDataLength(filterdData?.length)
     }
+    if(currenSelected==="rent"){
+        filterdData = AllPost?.Post?.filter((item) => {
+          return item?.BasicDetails?.PropertyAdType === PropertyType;
+        })
+
+        setCurrentDataLength(filterdData?.length)
+    }
+    if(currenSelected==="sale"){
+      filterdData = AllPost?.Post?.filter((item) => {
+        return item?.BasicDetails?.PropertyAdType === PropertyType;
+      })
+
+      setCurrentDataLength(filterdData?.length)
+  }
+  if(currenSelected==="Success Post"){
+    filterdData = AllPost?.Post?.filter((item) => {
+      return item?.propertyStatus?.currentPropertyStatus === "sold out";
+    })
+
+    setCurrentDataLength(filterdData?.length)
+}
 
   }, [currenSelected, AllPost])
 
@@ -213,7 +239,6 @@ export default function AdminAgentOwnerPost() {
 
   useEffect(() => {
     dispatch(Admin_OwnerGetAllPostAction());
-
   }, [])
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent  setData
@@ -259,7 +284,10 @@ export default function AdminAgentOwnerPost() {
     } else if (status === false) {
       setCurrentSelected("All In-Active posts")
       setActive(false);
-    } else {
+    }else if(status==="success"){
+     setActive("success") 
+    }
+     else {
       setCurrentSelected("All posts")
       setActive(null);
 
@@ -333,7 +361,10 @@ export default function AdminAgentOwnerPost() {
               onClick={() => handleActive(false, "false")}>
               Inactive
             </button>
-            <button  >
+            <button className={myQuery === "success" || onPageActive === "Success Post" ? "select" : ""}  onClick={() => {handleActive("success", "Success Post");
+                              setCurrentSelected("Success Post")
+
+            }}>
               Success
             </button>
             <button  >
@@ -347,7 +378,20 @@ export default function AdminAgentOwnerPost() {
               <option value="50">50</option>
               <option value="100">100</option>
             </select>
+            <button className={onPageActive === "sale" ? "select" : ""} onClick={()=>{
+              setPropertyType("Sale");
+                setPageActive("sale");
+                setCurrentSelected("sale")
+                setMyQuery(null)
+              }}>Sale</button>
+              <button className={onPageActive === "rent" ? "select" : ""} onClick={()=>{setPropertyType("Rent");
+                // console.log("called rent")
+                setPageActive("rent")
+                setCurrentSelected("rent")
+                setMyQuery(null)
 
+              }}>Rent</button>
+           
           </div>
 
           {/* <button>Exprired</button>
@@ -516,6 +560,7 @@ export default function AdminAgentOwnerPost() {
             activeFilter={active}
             selectAll={selectAll}
             postPerPage={itemsPerPage}
+            propertAdType={PropertyType}
           />
         ) : (
           <AdminAgentAssignPost

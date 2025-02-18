@@ -19,6 +19,7 @@ const Dashboard = () => {
   const [UnVerifyPost, setUnVerifyPost] = useState([]);
   const [VerifyPost, setVerifyPost] = useState([]);
   const [TotalListing, setTotalListing] = useState(0);
+  const [successPostlength ,setSuccessPostLength]=useState(0);
   const navigate = useNavigate();
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -46,6 +47,7 @@ useEffect(() => {
 
     // Update state
     setNewNotifyAndReq(combinedUnacknowledged);
+   
     // console.log(combinedUnacknowledged)
     // setLoading(false); // Set loading to false when data is processed
   }
@@ -91,6 +93,11 @@ useEffect(() => {
       setUnVerifyPost(unverify);
       setTotalListing(PostVerify.length + unverify.length);
     }
+    const successPost =  AllPost?.Post?.filter((item) => {
+      return item?.propertyStatus?.currentPropertyStatus === "sold out";
+    });
+
+    setSuccessPostLength(successPost?.length)
   }, [AllPost]);
 //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent
   useEffect(() => {
@@ -113,7 +120,15 @@ useEffect(() => {
   return (
     <>
       {loading ? (
-        <Loader className="componentloader" />
+        <>
+           <p className="dashboard-skeleton-heading skeleton"></p>
+
+        <div className="dashboard-skeleton-container">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <DashboardSkeletonCard key={index} />
+        ))}
+      </div>
+        </>
       ) : (
         <>
           <h4 className={`main-dash ${location.pathname.includes("/admin/dashboard") ?"active-btn-admin":""}`} > Dashboard</h4>
@@ -173,9 +188,9 @@ useEffect(() => {
 
                   <p className="viewall">View All</p>
                 </div>
-                <div className="card p-3 cursor-pointer">
+                <div className="card p-3 cursor-pointer" onClick={()=>navigate("/admin/allpost?type=success")} >
                   <div className="Admin-box">
-                    <p className="total-number">0</p>
+                    <p className="total-number">{successPostlength}</p>
                     <img src="/img/ActivePosts.png" alt="post" />
                   </div>
                   <h3> Success</h3>
@@ -232,3 +247,18 @@ useEffect(() => {
 };
 
 export default Dashboard;
+
+
+const DashboardSkeletonCard = () => {
+  return (
+    <>
+   
+    < div className="dashboard-skeleton-card">
+      <div className="dashboard-skeleton-number skeleton"></div>
+      <div className="dashboard-skeleton-title skeleton"></div>
+      <div className="dashboard-skeleton-link skeleton"></div>
+      <div className="dashboard-skeleton-icon skeleton"></div>
+    </div>
+    </>
+  );
+};

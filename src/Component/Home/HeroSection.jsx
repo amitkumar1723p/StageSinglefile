@@ -30,7 +30,7 @@ import WhoWeAre from "./WhoWeAre";
 import SimpleSteps from "./SimpleSteps";
 import FaqBuyer from "./FaqBuyer";
 import ProjectNameSection from "../Post/ProjectName";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   GetAllPostAction,
   GetSingleProjectNameDataAction,
@@ -390,7 +390,7 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-
+            <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink>
             <div className="property-section">
               {/* Property Listing Section */}
               <div
@@ -451,6 +451,7 @@ const HeroSection = () => {
               {/* </a> */}
             </div>
           </div>
+         
         </div>
       </header>
       {!isHidden && (
