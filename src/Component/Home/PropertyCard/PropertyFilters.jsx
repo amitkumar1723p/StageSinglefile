@@ -15,7 +15,7 @@ import HeaderCard from "./HeaderCard";
 const PropertyFilters = () => {
   // const [Budget, setBudget] = useState(0);
   const path = useLocation();
-  
+
   const previousValue = useRef(null);
   const [SelectedApartmentType, setSelectedApartmentType] = useState("");
   const [ConstructionStatus, setConstructionStatus] = useState("");
@@ -24,16 +24,21 @@ const PropertyFilters = () => {
   const [FurnishingStatus, setFurnishingStatus] = useState("");
   const [Filter, setFilter] = useState({});
   const [removeFilterField, setremoveFilterField] = useState(false);
-  const [isClicked,setIsClicked] = useState(null);
+  const [isClicked, setIsClicked] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const [showModal, setShowModal] = useState(false);  // Modal visibility state
   const handleCheckboxChange = (event, setter) => {
     const { name, checked } = event.target;
     setter((prev) =>
       checked ? [...prev, name] : prev.filter((item) => item !== name)
     );
   };
-
-  const handleClicked = (v)=>{
-      setIsClicked(v)
+    const {data } = useSelector((state) => {
+        return state.GetAllPost;
+      });
+      console.log(data)
+  const handleClicked = (v) => {
+    setIsClicked(v)
   }
 
 
@@ -50,16 +55,26 @@ const PropertyFilters = () => {
   const { loading, data: GetAllPostData } = useSelector((state) => {
     return state.GetAllPost;
   });
-   
 
-   const { data:SingleProjectData,   } = useSelector((state) => {
-      return state.SingleProjectName;
-    });
+
+  const { data: SingleProjectData, } = useSelector((state) => {
+    return state.SingleProjectName;
+  });
+
+
+  // Replace your current modal close handler with this
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setShowModal(false);
+      setIsClosing(false);
+    }, 300); // Match this timeout with your animation duration
+  };
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
 
   useEffect(() => {
-    
+
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       dispatch(
         GetAllPostAction({
@@ -161,53 +176,66 @@ const PropertyFilters = () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
-// console.log(SingleProjectData,"AMi")
+  // console.log(SingleProjectData,"AMi")
   return (
     <>
       <div className="property-post-filters-main-box">
-      <Helmet>
-                
-                <title>{`${SingleProjectData?.SingleProjectName?.["Project Name"]} - ${SingleProjectData?.SingleProjectName?.["Apartment Type"]},${SingleProjectData?.SingleProjectName?.City} | Premium Living in ${SingleProjectData?.SingleProjectName?.Locality} `}</title>
-                <meta name="description" content={`Discover your dream ${SingleProjectData?.SingleProjectName?.["Apartment Type"]} at ${SingleProjectData?.SingleProjectName?.["Project Name"]} in ${SingleProjectData?.SingleProjectName?.Locality}, ${SingleProjectData?.SingleProjectName?.City}. Located in ${SingleProjectData?.SingleProjectName.Sector}, this modern apartment offers spacious living with top-tier amenities. Enjoy easy access to key transport routes, shopping, schools, and more. With its prime location in Gurgaon, Sunrise Heights provides the perfect balance of comfort, convenience, and luxury. Don’t miss out on this exceptional opportunity!`}></meta>
-                {/* <link rel="canonical" href="https://www.propertydekho247.com/home/card?ProjectName=DLF%20The%20Primus&&PropertyAddType=Sale" /> */}
-            </Helmet>
-      <div className="property-post-filters-box">
-        <aside className="property-filters">
-          <div className="filter-title">
-          <h2 className="filter-title-1">Filter Your Search</h2>
-          {/* <p className="filter-title-1">clear Filter</p> */}
-          </div>
+        <Helmet>
 
-          <div className="filter-dummyLine"></div>
-          <div className="flex">
-            <div className="filter-Lookin-for">
-              <p className="looking-for-data">I am looking for</p>
-              {PropertyAdTypeArray.map((text) => {
-                return (
-                  <button
-                    onClick={() => {
-                      setquerry({
-                        ProjectName: querry.get("ProjectName"),
-                        PropertyAddType: `${text}`,
-                      });
-                      setremoveFilterField(true);
-                    }}
-                    className={`bhk-option ${
-                      querry.get("PropertyAddType") == text ? "selected" : ""
-                    }`}
-                  >
-                    {text}
-                  </button>
+          <title>{`${SingleProjectData?.SingleProjectName?.["Project Name"]} - ${SingleProjectData?.SingleProjectName?.["Apartment Type"]},${SingleProjectData?.SingleProjectName?.City} | Premium Living in ${SingleProjectData?.SingleProjectName?.Locality} `}</title>
+          <meta name="description" content={`Discover your dream ${SingleProjectData?.SingleProjectName?.["Apartment Type"]} at ${SingleProjectData?.SingleProjectName?.["Project Name"]} in ${SingleProjectData?.SingleProjectName?.Locality}, ${SingleProjectData?.SingleProjectName?.City}. Located in ${SingleProjectData?.SingleProjectName.Sector}, this modern apartment offers spacious living with top-tier amenities. Enjoy easy access to key transport routes, shopping, schools, and more. With its prime location in Gurgaon, Sunrise Heights provides the perfect balance of comfort, convenience, and luxury. Don’t miss out on this exceptional opportunity!`}></meta>
+          {/* <link rel="canonical" href="https://www.propertydekho247.com/home/card?ProjectName=DLF%20The%20Primus&&PropertyAddType=Sale" /> */}
+        </Helmet>
+        <div className="property-post-filters-box">
+          <aside className="property-filters">
+            <div className="allpost-clear-filter-title">
+              <h2 className="filter-title-1">Filter Your Search</h2>
+
+              <div className='allpost-clear-filter' onClick={() => {
+                dispatch(
+                  GetAllPostAction({
+                    ProjectName: querry.get("ProjectName"),
+                    PropertyAdType: querry.get("PropertyAddType"),
+                    BHK: "",
+                    ApartmentType: "",
+                    PropertyStatus: undefined,
+                    Furnishing: "",
+                  }
+                  )
                 );
-              })}
-
-             
+                setFilter({})
+              }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
             </div>
-          </div>
-          <div className="filter-dummyLine"></div>
 
-          {/* Budget Filter */}
-          {/* <div className="filter-group">
+            <div className="filter-dummyLine"></div>
+            <div className="flex">
+              <div className="filter-Lookin-for">
+                <p className="looking-for-data">I am looking for</p>
+                {PropertyAdTypeArray.map((text) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        setquerry({
+                          ProjectName: querry.get("ProjectName"),
+                          PropertyAddType: `${text}`,
+                        });
+                        setremoveFilterField(true);
+                      }}
+                      className={`bhk-option ${querry.get("PropertyAddType") == text ? "selected" : ""
+                        }`}
+                    >
+                      {text}
+                    </button>
+                  );
+                })}
+
+
+              </div>
+            </div>
+            <div className="filter-dummyLine"></div>
+
+            {/* Budget Filter */}
+            {/* <div className="filter-group">
             <h3>Budget</h3>
             <input
               style={{ cursor: "pointer", opacity: Budget == 0 ? "0.5" : "1" }}
@@ -227,74 +255,73 @@ const PropertyFilters = () => {
             <span>{Budget} </span>
           </div> */}
 
-          {/* BHK Filter */}
-          <div className="filter-group">
-            <h3>BHK</h3>
-            <div className="button-section">
-              {bhkOptions.map((bhk, i) => (
-                <button
-                  key={i}
-                  className={`bhk-option ${
-                    Filter.BHK === bhk ? "selected" : ""
-                  }`}
-                  onClick={() => {
-                    if (Filter.BHK === bhk) {
-                      const { BHK, ...Filterrest } = Filter;
-                      setFilter(Filterrest);
-                      setremoveFilterField(true);
-                    } else {
-                      setFilter({ ...Filter, BHK: bhk });
-                    }
-                  }}
-                >
-                  {bhk} BHK{" "}
-                </button>
-              ))}
+            {/* BHK Filter */}
+            <div className="filter-group">
+              <h3>BHK</h3>
+              <div className="button-section">
+                {bhkOptions.map((bhk, i) => (
+                  <button
+                    key={i}
+                    className={`bhk-option ${Filter.BHK === bhk ? "selected" : ""
+                      }`}
+                    onClick={() => {
+                      if (Filter.BHK === bhk) {
+                        const { BHK, ...Filterrest } = Filter;
+                        setFilter(Filterrest);
+                        setremoveFilterField(true);
+                      } else {
+                        setFilter({ ...Filter, BHK: bhk });
+                      }
+                    }}
+                  >
+                    {bhk} BHK{" "}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="filter-dummyLine"></div>
+            <div className="filter-dummyLine"></div>
 
-          {/* Property Status Filter */}
-          <div className="filter-group">
-            <h3>Property Status</h3>
-            <div className="Property-Status">
-              {ApartmentTypeOptions.map((apartmenttype, i) => {
-                return (
-                  <React.Fragment key={i}>
-                    <div className="filter-box-main">
-                      <input
-                        id={`${apartmenttype}${i}`}
-                        value={apartmenttype}
-                        type="Checkbox"
-                        name="Property-Status"
-                        onChange={() => {}} // Add this to suppress the warning
-                        checked={Filter.ApartmentType === apartmenttype}
-                        onClick={(e) => {
-                          if (Filter.ApartmentType === apartmenttype) {
-                            const { ApartmentType, ...Filterrest } = Filter;
-                            setFilter(Filterrest);
-                            setremoveFilterField(true);
-                          } else {
-                            setFilter({
-                              ...Filter,
-                              ApartmentType: apartmenttype,
-                            });
-                          }
-                        }}
-                      />
-                      <label htmlFor={`${apartmenttype}${i}`}>
-                        {apartmenttype}
-                      </label>
-                    </div>
-                  </React.Fragment>
-                );
-              })}
+            {/* Property Status Filter */}
+            <div className="filter-group">
+              <h3>Property Status</h3>
+              <div className="Property-Status">
+                {ApartmentTypeOptions.map((apartmenttype, i) => {
+                  return (
+                    <React.Fragment key={i}>
+                      <div className="filter-box-main">
+                        <input
+                          id={`${apartmenttype}${i}`}
+                          value={apartmenttype}
+                          type="Checkbox"
+                          name="Property-Status"
+                          onChange={() => { }} // Add this to suppress the warning
+                          checked={Filter.ApartmentType === apartmenttype}
+                          onClick={(e) => {
+                            if (Filter.ApartmentType === apartmenttype) {
+                              const { ApartmentType, ...Filterrest } = Filter;
+                              setFilter(Filterrest);
+                              setremoveFilterField(true);
+                            } else {
+                              setFilter({
+                                ...Filter,
+                                ApartmentType: apartmenttype,
+                              });
+                            }
+                          }}
+                        />
+                        <label htmlFor={`${apartmenttype}${i}`}>
+                          {apartmenttype}
+                        </label>
+                      </div>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          <div className="filter-dummyLine"></div>
+            <div className="filter-dummyLine"></div>
 
-          {/* Construction Status Filter */}
-          {/* {querry.get("PropertyType") === "Sale" && (
+            {/* Construction Status Filter */}
+            {/* {querry.get("PropertyType") === "Sale" && (
             <div className="filter-group">
               <h3>Construction Status</h3>
               <div className="Property-Status">
@@ -326,7 +353,7 @@ const PropertyFilters = () => {
             </div>
           )} */}
 
-          {/* Posted By Filter
+            {/* Posted By Filter
           <div className="filter-group">
             <h3>Posted by</h3>
             <div className="Postedby">
@@ -344,7 +371,7 @@ const PropertyFilters = () => {
             </div>
           </div> */}
 
-          {/* Purchase Type Filter
+            {/* Purchase Type Filter
           <div className="filter-group">
             <h3>Purchase Type</h3>
             <div className="Postedby">
@@ -362,38 +389,37 @@ const PropertyFilters = () => {
             </div>
           </div> */}
 
-          {/* Furnishing Status Filter */}
-          <div className="filter-group">
-            <h3>Furnishing Status</h3>
-            <div className="button-section">
-              <div className="Furnishing Status button-section">
-                {FurnishingOptions.map((option) => (
-                  <button
-                    key={option}
-                    
-                    className={`  ${
-                      Filter.Furnishing === option ? " selected" : "bhk-option-1"
-                    }`}
-                    onClick={() => {
-                      handleClicked()
-                      if (Filter.Furnishing === option) {
-                        setFurnishingStatus(null);
-                        const { Furnishing, ...Filterrest } = Filter;
-                        setFilter(Filterrest);
-                        setremoveFilterField(true);
-                      } else {
-                        // setFurnishingStatus(option);
-                        setFilter({ ...Filter, Furnishing: option });
-                      }
-                      // setquerry({ Search: "" });
-                    }}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
+            {/* Furnishing Status Filter */}
+            <div className="filter-group">
+              <h3>Furnishing Status</h3>
+              <div className="button-section">
+                <div className="Furnishing Status button-section">
+                  {FurnishingOptions.map((option) => (
+                    <button
+                      key={option}
 
-              {/* {bhkOptions.map((bhk, i) => (
+                      className={`  ${Filter.Furnishing === option ? " selected" : "bhk-option-1"
+                        }`}
+                      onClick={() => {
+                        handleClicked()
+                        if (Filter.Furnishing === option) {
+                          setFurnishingStatus(null);
+                          const { Furnishing, ...Filterrest } = Filter;
+                          setFilter(Filterrest);
+                          setremoveFilterField(true);
+                        } else {
+                          // setFurnishingStatus(option);
+                          setFilter({ ...Filter, Furnishing: option });
+                        }
+                        // setquerry({ Search: "" });
+                      }}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+
+                {/* {bhkOptions.map((bhk, i) => (
                 <button
                   key={i}
                   className={`bhk-option ${
@@ -413,17 +439,152 @@ const PropertyFilters = () => {
                   {bhk} BHK{" "}
                 </button>
               ))} */}
+              </div>
             </div>
-          </div>
-          <div className="filter-dummyLine"></div>
+            <div className="filter-dummyLine"></div>
 
-        </aside>
-        <div className="filter-home-card">
-          
-          <HeaderCard />
-          <HomeCard />
+          </aside>
+          <div className="filter-home-card">
+            <div className='total-post-length-container'>
+              <p className='total-post-lable-allpost' >
+                Total result {data?.allPost?.length}
+              </p>
+
+              <button className="all-post-filter-button" onClick={() => setShowModal(true)}> filter</button>
+
+            </div>
+            <HeaderCard />
+            <HomeCard />
+          </div>
+          {/* Modal */}
+          {showModal && (
+            <div className={`all-post-filter-overlay  ${isClosing ? 'closing' : ''}`} onClick={closeModal}>
+              <div className="all-post-filter-content" onClick={(e) => e.stopPropagation()}>
+                <div className="all-post-filter-modal">
+                  {/* Property Type Filter */}
+                  <div className="filter-group">
+                    <div className="allpost-clear-filter-title-2">
+                      <h2 className="">Filter Your Search</h2>
+
+                      <div className='allpost-clear-filter' onClick={() => {
+                        dispatch(
+                          GetAllPostAction({
+                            ProjectName: querry.get("ProjectName"),
+                            PropertyAdType: querry.get("PropertyAddType"),
+                            BHK: "",
+                            ApartmentType: "",
+                            PropertyStatus: undefined,
+                            Furnishing: "",
+                          }
+                          )
+                        );
+                        setFilter({})
+                      }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
+                    </div>
+
+                    <div className="button-section">
+                      {PropertyAdTypeArray.map((text) => (
+                        <button
+                          key={text}
+                          onClick={() => {
+                            setquerry({
+                              ProjectName: querry.get("ProjectName"),
+                              PropertyAddType: `${text}`,
+                            });
+                            setremoveFilterField(true);
+                          }}
+                          className={`bhk-option ${querry.get("PropertyAddType") === text ? "selected" : ""}`}
+                        >
+                          {text}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* BHK Filter */}
+                  <div className="filter-group">
+                    <h3>BHK</h3>
+                    <div className="button-section">
+                      {bhkOptions.map((bhk, i) => (
+                        <button
+                          key={i}
+                          className={`bhk-option ${Filter.BHK === bhk ? "selected" : ""}`}
+                          onClick={() => {
+                            if (Filter.BHK === bhk) {
+                              const { BHK, ...Filterrest } = Filter;
+                              setFilter(Filterrest);
+                              setremoveFilterField(true);
+                            } else {
+                              setFilter({ ...Filter, BHK: bhk });
+                            }
+                          }}
+                        >
+                          {bhk} BHK
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Property Status Filter */}
+                  <div className="filter-group">
+                    <h3>Property Status</h3>
+                    <div className="button-section">
+                      {ApartmentTypeOptions.map((apartmenttype, i) => (
+                        <div key={i} className={`bhk-option  ${Filter.ApartmentType === apartmenttype ? "selected" : ""} `} name="Property-Status"
+                          onChange={() => { }}
+
+
+                          onClick={() => {
+                            if (Filter.ApartmentType === apartmenttype) {
+                              const { ApartmentType, ...Filterrest } = Filter;
+                              setFilter(Filterrest);
+                              setremoveFilterField(true);
+                            } else {
+                              setFilter({
+                                ...Filter,
+                                ApartmentType: apartmenttype,
+                              });
+                            }
+                          }}>
+                          {apartmenttype}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Furnishing Status Filter */}
+                  <div className="filter-group">
+                    <h3>Furnishing Status</h3>
+                    <div className="button-section">
+                      {FurnishingOptions.map((option) => (
+                        <button
+                          key={option}
+                          className={`bhk-option ${Filter.Furnishing === option ? "selected" : "bhk-option-1"}`}
+                          onClick={() => {
+                            handleClicked();
+                            if (Filter.Furnishing === option) {
+                              setFurnishingStatus(null);
+                              const { Furnishing, ...Filterrest } = Filter;
+                              setFilter(Filterrest);
+                              setremoveFilterField(true);
+                            } else {
+                              setFilter({ ...Filter, Furnishing: option });
+                            }
+                          }}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="all-post-filter-close" onClick={closeModal}>Close</div>
+              </div>
+            </div>
+          )}
+
         </div>
-      </div>
       </div>
     </>
   );
