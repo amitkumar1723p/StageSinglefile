@@ -204,9 +204,10 @@
 }
 
 .nav-link.buy-btn {
-  padding: 9px 13.5px; /* Decreased padding */
+  padding: 5px 10px; /* Decreased padding */
   background-color: var(--main-light-clr);
   color: #fff;
+  font-size: 12px;
   border-radius: 4.5px; /* Decreased border radius */
   transition: background-color 0.3s ease;
 }

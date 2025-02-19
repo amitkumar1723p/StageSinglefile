@@ -474,6 +474,10 @@ line-height: normal;
 }
 
 @media (max-width: 480px) {
+  .search-main-box-section-nav{
+    display: none;
+  }
+
   .overlay {
     position: absolute;
     background-color: #fff;
