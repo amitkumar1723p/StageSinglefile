@@ -300,6 +300,11 @@ margin-bottom: 5px;
     animation: slideDown 0.4s ease-out forwards;
   }
   
+  .all-post-no-property-found{
+      justify-self: center;
+      align-self: center;
+  }
+
   @keyframes fadeOut {
     from {
       opacity: 1;
@@ -385,13 +390,20 @@ margin-bottom: 5px;
         /* background: red; */
         /* flex: 1; */
         width: 100%;
+        position: relative;
         
     }
     .total-post-length-container{
-        height: 40px;
-        display: flex;
-        gap: 10px;
-        align-items: center;
+      height: 40px;
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      align-items: center;
+      position: sticky;
+      z-index: 2;
+      top: 49px;
+      background: white;
+      border-bottom: 1px solid #f1f1f1bf;
     }
     .total-post-lable-allpost{
         /* min-width: 245px; */

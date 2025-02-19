@@ -4,6 +4,7 @@ import axios from 'axios';
 import PostCard from './PostCard';
 import './AllPostRender.css';
 import "../Home/PropertyCard/card.css"
+import NotifyMe from '../Home/PropertyCard/NotifyMe';
 
 const AllPostRender = () => {
     const [filters, setFilters] = useState({
@@ -179,6 +180,7 @@ const closeModal = () => {
                 <p className='total-post-lable-allpost-1' >
                         Total result {filteredData?.length}
                     </p>
+
                     <div className='total-post-length-container'>
                     
                     <p className='total-post-lable-allpost' >
@@ -194,7 +196,7 @@ const closeModal = () => {
                                 <AllPostSkeleton key={index} />
                             ))}
                         </div>
-                    ) : (
+                    ) :filteredData.length===0 ? <NotifyMe />: (
                         <div className="home-showpost">
                             {filteredData.map((e, i) => (
                                 <PostCard key={i} PostData={e} index={i} />
