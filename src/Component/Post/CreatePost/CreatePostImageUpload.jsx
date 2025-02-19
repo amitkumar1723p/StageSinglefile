@@ -229,8 +229,7 @@ export default function CreatePostImageUpload({
                 type="file"
                 name=""
                 id=""
-                multiple
-                accept="image/*"
+               multiple accept="image/*,video/*,.pdf"
                 required={previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
