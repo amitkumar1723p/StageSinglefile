@@ -86,6 +86,10 @@
   box-shadow: 0px 0px 16px 0px #cfe7f8;
 }
 
+
+
+
+
 .search-options {
   display: flex;
   justify-content: start;
@@ -158,6 +162,7 @@ line-height: normal;
   width: 100%;
   margin-left: 5px;
 }
+
 .search-box {
   padding: 0 15px;
   margin: 5px;
@@ -172,6 +177,7 @@ line-height: normal;
   /* border: 1px solid var(--Non-hovered-Primary, #448bff); */
   /* box-shadow: 4px 4px 0px 0px #5988d4; */
 }
+
 
 .search-box {
   display: flex;
@@ -198,6 +204,87 @@ line-height: normal;
   font-size: 12.8px;
   color: #333;
 }
+
+
+.search-main-box-section-nav {
+  border-radius: 15px;
+  /* background: #ff2a2a; */
+
+  top: 12px;
+  width: 300px;
+  /* left: 30.5%; */
+  z-index: 10000;
+  position: fixed; /* Fix it relative to viewport */
+    /* top: 50%; */
+    left: 45.3%;
+    transform: translate(-50%, 0%); 
+     transition: opacity 0.3s ease-in-out;
+  /* transform: translateY(-220px); */
+  /* box-shadow: 0px 0px 16px 0px #cfe7f8; */
+
+
+}
+.search-options-nav {
+  display: flex;
+  justify-content: start;
+  gap: 10px;
+  padding: 10px 10px 0 0;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+.search-section-box-nav {
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
+  /* background: red; */
+  margin-left: 5px;
+}
+.search-box-nav {
+  padding: 0 15px;
+  /* margin: 5px; */
+  border: 1px solid #d6d6fa;
+  background-color: #fff;
+  display: flex;
+  border-radius: 12px; 
+  /* justify-content: space-between; */
+  align-items: center;
+  /* height: 53.6px; */
+  /* width: 649.6px;
+  /* border: 1px solid var(--Non-hovered-Primary, #448bff); */
+  /* box-shadow: 4px 4px 0px 0px #5988d4; */
+}
+.search-box-nav input {
+  background-color: #fff;
+  height: 31.2px;
+  width: 138px;
+  border: none;
+  font-size: 8.8px;
+  color: #333;
+}
+.search-button-nav {
+  letter-spacing: 0.5px;
+  /* display: none; */
+  /* gap: 5px; */
+  padding: 0 8px;
+  border: 1px solid #3361e0;
+  font-size: 8px;
+  /* padding: 10px; */
+  color: #3361e0;
+  background-color: var(--main-light-clr);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  /* height: %; */
+
+  transition: background-color 0.3s ease;
+}
+.search-box-nav select {
+  font-size: 8.8px;
+  height: 40.8px;
+  border: none;
+  color: #4c4c4c;
+  background-color: #fff;
+}
 .search-button {
   letter-spacing: 0.5px;
   display: none;
@@ -214,6 +301,7 @@ line-height: normal;
 
   transition: background-color 0.3s ease;
 }
+
 .search-button:hover {
   opacity: 0.9;
   transition: 1s;
@@ -634,6 +722,9 @@ line-height: normal;
   }
 }
 @media (max-width: 375px) {
+  .search-main-box-section-nav{
+    display: none;
+  }
   .property-card {
     display: flex;
     align-items: center;
@@ -839,4 +930,84 @@ line-height: normal;
 
 .call-button {
   background-color: var(--main-light-clr);
+}
+
+.hero-section-all-post-button{
+  background-color: var(--main-light-clr);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 10px;
+}
+
+@media (min-width:1025px){
+  .search-main-box-section-nav {
+    border-radius: 15px;
+    /* background: #ff2a2a; */
+  
+    top: 12px;
+    width: 500px;
+    /* left: 30.5%; */
+    z-index: 12;
+    position: fixed; /* Fix it relative to viewport */
+      /* top: 50%; */
+      left: 47.3%;
+      transform: translate(-50%, 0%); 
+       transition: opacity 0.3s ease-in-out;
+    /* transform: translateY(-220px); */
+    /* box-shadow: 0px 0px 16px 0px #cfe7f8; */
+  
+  
+  }
+  .search-options-nav {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    padding: 10px 10px 0 0;
+    border-radius: 10px;
+    margin-left: 10px;
+    /* background: red; */
+    width: 100%;
+
+  }
+  .search-section-box-nav {
+    display: flex;
+    /* justify-content: space-between; */
+    /* background: red; */
+    margin-left: 5px;
+  }
+  .search-box-nav input {
+    background-color: #fff;
+    height: 31.2px;
+    width:315px;
+    /* background: yellow; */
+    border: none;
+    font-size: 12.8px;
+    color: #333;
+  }
+  .search-button-nav {
+    letter-spacing: 0.5px;
+    /* display: none; */
+    /* gap: 5px; */
+    padding: 0 14px;
+    border: 1px solid #3361e0;
+    font-size: 12px;
+    /* padding: 10px; */
+    color: #3361e0;
+    background-color: var(--main-light-clr);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    /* height: %; */
+  
+    transition: background-color 0.3s ease;
+  }
+  .search-box-nav select {
+    font-size: 10.8px;
+    height: 40.8px;
+    border: none;
+    color: #4c4c4c;
+    background-color: #fff;
+  }
 }

@@ -56,6 +56,7 @@ import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse"
 import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 // import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
+import AllPostRender from "./Component/Post/AllPostRender";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -776,6 +777,8 @@ function App() {
             element={<CreatePostMain />}
           />
         </Route>
+        {/*All post route*/ }
+        <Route path={"/all-post"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

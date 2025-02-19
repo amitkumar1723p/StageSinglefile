@@ -808,7 +808,7 @@ export const GetAllNotificationsAndRequirements = () => {
 // change property state available or sold out 
 
 export const changePropertyStatus=(updateData)=>{
-  console.log(updateData,"h")
+  // console.log(updateData,"h")
   return async(dispatch)=>{
     try {
       dispatch({
