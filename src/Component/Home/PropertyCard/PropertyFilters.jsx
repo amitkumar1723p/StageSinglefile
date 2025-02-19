@@ -444,6 +444,7 @@ const PropertyFilters = () => {
             <div className="filter-dummyLine"></div>
 
           </aside>
+          <div>
             <HeaderCard />
           <div className="filter-home-card">
             <div className='total-post-length-container'>
@@ -455,6 +456,7 @@ const PropertyFilters = () => {
 
             </div>
             <HomeCard />
+          </div>
           </div>
           {/* Modal */}
           {showModal && (

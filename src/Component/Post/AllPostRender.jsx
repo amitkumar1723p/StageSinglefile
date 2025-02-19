@@ -5,6 +5,7 @@ import PostCard from "./PostCard";
 import "./AllPostRender.css";
 import "../Home/PropertyCard/card.css";
 import NotifyMe from "../Home/PropertyCard/NotifyMe";
+import SingleCard from "./SingleCard";
 
 const AllPostRender = () => {
   const [filters, setFilters] = useState({
@@ -228,7 +229,7 @@ const AllPostRender = () => {
           ) : (
             <div className="home-showpost">
               {filteredData.map((e, i) => (
-                <PostCard key={i} PostData={e} index={i} />
+                <SingleCard key={i} PostData={e} index={i} />
               ))}
             </div>
           )}
