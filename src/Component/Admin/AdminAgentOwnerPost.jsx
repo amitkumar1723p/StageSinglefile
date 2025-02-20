@@ -52,7 +52,7 @@ export default function AdminAgentOwnerPost() {
   const [onPageActive, setPageActive] = useState("");
   const [propertyOrder, setPropertyOrder] = useState("decending");
   const [currenSelected, setCurrentSelected] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(15);
+  const [itemsPerPage, setItemsPerPage] = useState(25);
   const [PropertyType, setPropertyType] = useState("");
 
   const {
@@ -303,6 +303,7 @@ export default function AdminAgentOwnerPost() {
 
   //handle items per page 
   const handleItemsPerPageChange = (value) => {
+    // console.log(value)
     setItemsPerPage(parseInt(value, 10)); // Update the state with the selected value
     // console.log(itemsPerPage)
     // setCurrentPage(1); // Reset to first page when changing items per page
