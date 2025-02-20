@@ -377,7 +377,7 @@ export default function PostCard({ PostData, index }) {
                 </div>
                 <div>
                   <div className="property-status-floor">
-                    <p className={` answer-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{floorDetails}</p>
+                    <p className={` answer-box  `}>{floorDetails}</p>
                     <p className={`question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> Floor </p>
                   </div>
                 </div>

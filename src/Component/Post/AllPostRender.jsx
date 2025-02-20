@@ -29,7 +29,23 @@ const AllPostRender = () => {
   const [loading, setLoading] = useState(false);
   const [GetAllPostData, setGetAllData] = useState([]);
   const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const [filterdPost, setFilterdPost] = useState([]);
 
+
+
+    useEffect(() => {
+      if (!GetAllPostData ) return;
+  
+      const soldOut = GetAllPostData.filter(
+        (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
+      );
+      const available = GetAllPostData.filter(
+        (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
+      );
+  
+      setFilterdPost([...available, ...soldOut]);
+    }, [GetAllPostData]);
+  
   // const { data: SingleProjectData } = useSelector((state) => state.SingleProjectName);
 
   useEffect(() => {
@@ -54,7 +70,7 @@ const AllPostRender = () => {
   useEffect(() => {
     if (!GetAllPostData.length) return;
 
-    let filtered = [...GetAllPostData];
+    let filtered = [...filterdPost];
 
     if (filters.propertyType) {
       filtered = filtered.filter(
@@ -76,9 +92,10 @@ const AllPostRender = () => {
         (post) => post.AmenitiesDetails?.Furnishing === filters.furnishing
       );
     }
+// console.log("filter post ",filterdPost)
 
     setFilteredData(filtered);
-  }, [filters, GetAllPostData]);
+  }, [filters, GetAllPostData,filterdPost]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({
@@ -219,7 +236,7 @@ const AllPostRender = () => {
             </button>
           </div>
           {loading ? (
-            <div className="home-showpost">
+            <div className="allPostrender-showpost">
               {Array.from({ length: 8 }).map((_, index) => (
                 <AllPostSkeleton key={index} />
               ))}
@@ -227,8 +244,8 @@ const AllPostRender = () => {
           ) : filteredData.length === 0 ? (
             <NotifyMe />
           ) : (
-            <div className="home-showpost">
-              {filteredData.map((e, i) => (
+            <div className="allPostrender-showpost">
+              {filteredData?.map((e, i) => (
                 <SingleCard key={i} PostData={e} index={i} />
               ))}
             </div>
@@ -356,24 +373,24 @@ export default AllPostRender;
 
 const AllPostSkeleton = () => {
   return (
-    <div className="all-post-skeleton">
-      <div className="all-post-skeleton-image skeleton"></div>
-      <div className="all-post-skeleton-content">
-        <div className="all-post-skeleton-title skeleton"></div>
-        <div className="all-post-skeleton-text skeleton"></div>
-        <div className="all-post-skeleton-row">
-          <div className="all-post-skeleton-info skeleton"></div>
-          <div className="all-post-skeleton-info skeleton"></div>
-        </div>
-        <div className="all-post-skeleton-row">
-          <div className="all-post-skeleton-info skeleton"></div>
-          <div className="all-post-skeleton-info skeleton"></div>
-        </div>
-        <div className="all-post-skeleton-footer">
-          <div className="all-post-skeleton-inactive skeleton"></div>
-          <div className="all-post-skeleton-button skeleton"></div>
-        </div>
-      </div>
+    <div className="all-post-skeleton-card">
+    <div className="all-post-skeleton-image"></div>
+
+    <div className="all-post-skeleton-text all-post-skeleton-title"></div>
+    <div className="all-post-skeleton-text all-post-skeleton-subtitle-1"></div>
+    <div className="all-post-skeleton-text all-post-skeleton-subtitle"></div>
+
+    <div className="all-post-skeleton-info-container">
+      <div className="all-post-skeleton-info"></div>
+      <div className="all-post-skeleton-info"></div>
     </div>
+
+    <div className="all-post-skeleton-footer">
+      <div className="all-post-skeleton-button"></div>
+      <div className="all-post-skeleton-button"></div>
+    </div>
+  </div>
   );
 };
+
+
