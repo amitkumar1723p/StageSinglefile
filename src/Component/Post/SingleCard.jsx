@@ -509,7 +509,7 @@ const SingleCard = ({ PostData, index }) => {
                             {formatReservePrice(
                               PostData.PricingDetails.ExpectedRent
                             )}
-                            <span className={`rent-per-month  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>/Month </span>
+                            <span className={`rent-per-month  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> / Month </span>
                           </p>
                           <p className={`question-box  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>Rent </p>
                         </div>
@@ -536,10 +536,8 @@ const SingleCard = ({ PostData, index }) => {
                           <div className="single-card-price-section">
                             <span className={`single-card-sale-price-label ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                               {" "}
-                              Reserve Price{" "}
-                            </span>
-                            :
-                            <span className={` single-card-price-value ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
+                              Reserve Price
+                            </span> : <span className={` single-card-price-value ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                               {formatReservePrice(
                                 PostData.PricingDetails.ExpectedPrice
                               )}

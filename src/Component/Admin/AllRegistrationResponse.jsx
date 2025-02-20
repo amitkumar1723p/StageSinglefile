@@ -248,7 +248,7 @@ export default function AllRegistrationResponse({}) {
                       {checkNotify?.some(
                         (user) => user?.User?._id === item._id
                       ) ||
-                      require?.some((user) => user?.User?._id === item._id) ? (
+                      require?.some((user) => user?.RequirementUser?._id === item._id) ? (
                         <small>Yes</small>
                       ) : (
                         <small>No</small>

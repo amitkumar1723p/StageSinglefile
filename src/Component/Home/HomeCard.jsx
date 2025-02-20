@@ -16,18 +16,33 @@ export default function HomeCard() {
     return state.GetAllPost;
   });
   const [filterdPost,setFilterdPost] = useState(null);
+  const [allData,setAllData] = useState([]);
 
   useEffect(()=>{
 
     function filter(){
+       if (!data || !data.allPost){
+        return
+       }else{
+        
         const soldout = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus==="sold out")
         const available = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus!=="sold out")
-
+      console.log(available,soldout)
         setFilterdPost([...available,...soldout]);
         console.log(filterdPost)
+       }
     }
     filter()
   },[data])
+
+  useEffect(()=>{
+    console.log("this i ffatttt")
+
+    setAllData(()=>{
+      return filterdPost;
+    });
+  },[filterdPost])
+
 
   return (
     <>
@@ -37,7 +52,7 @@ export default function HomeCard() {
           (data.allPost.length > 0 ? (
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
-                {filterdPost?.map((e, i) => {
+                {allData?.map((e, i) => {
                   return <SingleCard key={i} PostData={e} index={i} />;
                 })}
               </div>

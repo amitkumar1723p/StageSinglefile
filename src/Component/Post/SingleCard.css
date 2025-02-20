@@ -56,7 +56,7 @@
   .single-card-title-actions-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
   
   .single-card-property-title {
@@ -131,7 +131,7 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     /* gap: 16px; */
-    padding: 10px;
+    padding: 5px;
     white-space: nowrap;
   }
   
@@ -150,8 +150,8 @@
     width: 133px;
     background-color: white;
     border-radius: 10px;
-    padding: 5px 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px 1px;
+    /* box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); */
     display: flex;
     align-items: center;
     /* gap: 10px; */
@@ -171,8 +171,8 @@
   
   /* Icon */
   .single-card-detail-icon-container img {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
   
   /* Text */
@@ -221,6 +221,7 @@
 
   .single-card-price-value{
     color: var(--main-light-clr);
+    font-weight: 600;
   }
 
   
@@ -260,8 +261,8 @@
   }
   
   .single-card-detail-title {
-    font-size:12px;
-    font-weight: 500;
+    font-size:10px;
+    font-weight: 600;
     color: #1F2937;
     /* margin: 0 0 2px 0; */
   }
@@ -313,13 +314,15 @@
   .single-card-rent-price-section{
     /* background: red; */
     display: flex;
+    gap: 50px;
     padding-top: 10px;
     padding-bottom: 5px;
     padding-left: 16px;
   }
   .rent-price-ans{
-    font-size: 12px;
+    font-size: 14px;
     color: var(--main-light-clr);
+    font-weight: 600;
   }
   .rent-per-month{
     color: #1F2937;

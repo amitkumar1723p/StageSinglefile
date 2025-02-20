@@ -463,7 +463,7 @@ const PropertyFilters = () => {
               </div>
               <HomeCard />
             </div>
-          </div>
+         
           </div>
           {/* Modal */}
           {showModal && (

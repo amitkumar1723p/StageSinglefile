@@ -70,7 +70,7 @@ color: #333;
   
 .all-post-skeleton-card {
 
-  width: 374px;
+  width: 320px;
   background: #fff;
   border-radius: 12px;
   padding: 16px;
@@ -159,7 +159,7 @@ color: #333;
   }
 .allPostrender-showpost{
       display: grid;
-      gap: 5px;
+      gap: 10px;
       grid-template-columns: repeat(3, 1fr);
       margin-bottom: 300px;
     }

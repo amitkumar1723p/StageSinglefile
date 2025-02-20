@@ -243,6 +243,7 @@ const AllPostRender = () => {
             </div>
           ) : filteredData.length === 0 ? (
             <NotifyMe />
+            
           ) : (
             <div className="allPostrender-showpost">
               {filteredData?.map((e, i) => (
