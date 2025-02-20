@@ -692,11 +692,16 @@ function App() {
               />
             }
           />
-          <Route    
+          <Route
             exact
             path="all-registration-response"
             element={
-              <AdminOwnerRoutes Component={AllRegistrationResponse} isOwner={true} /> }/>
+              <AdminOwnerRoutes
+                Component={AllRegistrationResponse}
+                isOwner={true}
+              />
+            }
+          />
 
           {/* <Route
             exact
@@ -777,7 +782,7 @@ function App() {
             element={<CreatePostMain />}
           />
         </Route>
-        {/*All post route*/ }
+        {/*All post route*/}
         <Route path={"/all-post"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
