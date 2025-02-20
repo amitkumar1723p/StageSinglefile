@@ -516,7 +516,7 @@ const HeroSection = () => {
             </div>
 
 
-            <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink>
+            {/* <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink> */}
             <div className="property-section">
               {/* Property Listing Section */}
               <div

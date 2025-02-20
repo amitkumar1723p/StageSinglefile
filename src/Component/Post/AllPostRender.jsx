@@ -214,7 +214,7 @@ const AllPostRender = () => {
               onClick={() => setShowModal(true)}
             >
               {" "}
-              filter
+              Filter
             </button>
           </div>
           {loading ? (

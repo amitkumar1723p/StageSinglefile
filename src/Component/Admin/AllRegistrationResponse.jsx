@@ -182,8 +182,11 @@ export default function AllRegistrationResponse({}) {
           <table className="table table-hover">
             <thead className="table-info ">
               <tr className="">
-                <th scope="col" className="text-primary col-3 border-end">
-                  <small>Name-(Role)</small>
+                <th scope="col" className="text-primary col-1 border-end">
+                  <small>Name </small>
+                </th>
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small> Role</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
                   <small>Phone</small>
@@ -192,10 +195,10 @@ export default function AllRegistrationResponse({}) {
                   <small>Email</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
-                  <small>Posting</small>
+                  <small>Lisitng</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
-                  <small>Notification</small>
+                  <small>Notify</small>
                 </th>
 
                 <th scope="col" className="text-primary col-2 border-end">
@@ -215,11 +218,14 @@ export default function AllRegistrationResponse({}) {
                     <td className="text-light-emphasis border-end">
                       {item.Name ? (
                         <small>
-                          {item.Name}- {item.Role}
+                          {item.Name} 
                         </small>
                       ) : (
                         <></>
                       )}
+                    </td>
+                    <td className="text-light-emphasis border-end">
+                      <small>{item.Role}</small>
                     </td>
                     <td className="text-light-emphasis border-end">
                       <small>{item.ContactNumber}</small>

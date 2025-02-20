@@ -26,22 +26,20 @@ const PropertyFilters = () => {
   const [removeFilterField, setremoveFilterField] = useState(false);
   const [isClicked, setIsClicked] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
-  const [showModal, setShowModal] = useState(false);  // Modal visibility state
+  const [showModal, setShowModal] = useState(false); // Modal visibility state
   const handleCheckboxChange = (event, setter) => {
     const { name, checked } = event.target;
     setter((prev) =>
       checked ? [...prev, name] : prev.filter((item) => item !== name)
     );
   };
-    const {data } = useSelector((state) => {
-        return state.GetAllPost;
-      });
-      console.log(data)
+  const { data } = useSelector((state) => {
+    return state.GetAllPost;
+  });
+  console.log(data);
   const handleClicked = (v) => {
-    setIsClicked(v)
-  }
-
-
+    setIsClicked(v);
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,11 +54,9 @@ const PropertyFilters = () => {
     return state.GetAllPost;
   });
 
-
-  const { data: SingleProjectData, } = useSelector((state) => {
+  const { data: SingleProjectData } = useSelector((state) => {
     return state.SingleProjectName;
   });
-
 
   // Replace your current modal close handler with this
   const closeModal = () => {
@@ -74,7 +70,6 @@ const PropertyFilters = () => {
   const [querry, setquerry] = useSearchParams();
 
   useEffect(() => {
-
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       dispatch(
         GetAllPostAction({
@@ -181,9 +176,11 @@ const PropertyFilters = () => {
     <>
       <div className="property-post-filters-main-box">
         <Helmet>
-
           <title>{`${SingleProjectData?.SingleProjectName?.["Project Name"]} - ${SingleProjectData?.SingleProjectName?.["Apartment Type"]},${SingleProjectData?.SingleProjectName?.City} | Premium Living in ${SingleProjectData?.SingleProjectName?.Locality} `}</title>
-          <meta name="description" content={`Discover your dream ${SingleProjectData?.SingleProjectName?.["Apartment Type"]} at ${SingleProjectData?.SingleProjectName?.["Project Name"]} in ${SingleProjectData?.SingleProjectName?.Locality}, ${SingleProjectData?.SingleProjectName?.City}. Located in ${SingleProjectData?.SingleProjectName.Sector}, this modern apartment offers spacious living with top-tier amenities. Enjoy easy access to key transport routes, shopping, schools, and more. With its prime location in Gurgaon, Sunrise Heights provides the perfect balance of comfort, convenience, and luxury. Don’t miss out on this exceptional opportunity!`}></meta>
+          <meta
+            name="description"
+            content={`Discover your dream ${SingleProjectData?.SingleProjectName?.["Apartment Type"]} at ${SingleProjectData?.SingleProjectName?.["Project Name"]} in ${SingleProjectData?.SingleProjectName?.Locality}, ${SingleProjectData?.SingleProjectName?.City}. Located in ${SingleProjectData?.SingleProjectName.Sector}, this modern apartment offers spacious living with top-tier amenities. Enjoy easy access to key transport routes, shopping, schools, and more. With its prime location in Gurgaon, Sunrise Heights provides the perfect balance of comfort, convenience, and luxury. Don’t miss out on this exceptional opportunity!`}
+          ></meta>
           {/* <link rel="canonical" href="https://www.propertydekho247.com/home/card?ProjectName=DLF%20The%20Primus&&PropertyAddType=Sale" /> */}
         </Helmet>
         <div className="property-post-filters-box">
@@ -191,20 +188,24 @@ const PropertyFilters = () => {
             <div className="allpost-clear-filter-title">
               <h2 className="filter-title-1">Filter Your Search</h2>
 
-              <div className='allpost-clear-filter' onClick={() => {
-                dispatch(
-                  GetAllPostAction({
-                    ProjectName: querry.get("ProjectName"),
-                    PropertyAdType: querry.get("PropertyAddType"),
-                    BHK: "",
-                    ApartmentType: "",
-                    PropertyStatus: undefined,
-                    Furnishing: "",
-                  }
-                  )
-                );
-                setFilter({})
-              }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
+              <div
+                className="allpost-clear-filter"
+                onClick={() => {
+                  dispatch(
+                    GetAllPostAction({
+                      ProjectName: querry.get("ProjectName"),
+                      PropertyAdType: querry.get("PropertyAddType"),
+                      BHK: "",
+                      ApartmentType: "",
+                      PropertyStatus: undefined,
+                      Furnishing: "",
+                    })
+                  );
+                  setFilter({});
+                }}
+              >
+                Clear Filter <img src="/img/clear-filter.svg" alt="" />
+              </div>
             </div>
 
             <div className="filter-dummyLine"></div>
@@ -221,15 +222,14 @@ const PropertyFilters = () => {
                         });
                         setremoveFilterField(true);
                       }}
-                      className={`bhk-option ${querry.get("PropertyAddType") == text ? "selected" : ""
-                        }`}
+                      className={`bhk-option ${
+                        querry.get("PropertyAddType") == text ? "selected" : ""
+                      }`}
                     >
                       {text}
                     </button>
                   );
                 })}
-
-
               </div>
             </div>
             <div className="filter-dummyLine"></div>
@@ -262,8 +262,9 @@ const PropertyFilters = () => {
                 {bhkOptions.map((bhk, i) => (
                   <button
                     key={i}
-                    className={`bhk-option ${Filter.BHK === bhk ? "selected" : ""
-                      }`}
+                    className={`bhk-option ${
+                      Filter.BHK === bhk ? "selected" : ""
+                    }`}
                     onClick={() => {
                       if (Filter.BHK === bhk) {
                         const { BHK, ...Filterrest } = Filter;
@@ -294,7 +295,7 @@ const PropertyFilters = () => {
                           value={apartmenttype}
                           type="Checkbox"
                           name="Property-Status"
-                          onChange={() => { }} // Add this to suppress the warning
+                          onChange={() => {}} // Add this to suppress the warning
                           checked={Filter.ApartmentType === apartmenttype}
                           onClick={(e) => {
                             if (Filter.ApartmentType === apartmenttype) {
@@ -397,11 +398,13 @@ const PropertyFilters = () => {
                   {FurnishingOptions.map((option) => (
                     <button
                       key={option}
-
-                      className={`  ${Filter.Furnishing === option ? " selected" : "bhk-option-1"
-                        }`}
+                      className={`  ${
+                        Filter.Furnishing === option
+                          ? " selected"
+                          : "bhk-option-1"
+                      }`}
                       onClick={() => {
-                        handleClicked()
+                        handleClicked();
                         if (Filter.Furnishing === option) {
                           setFurnishingStatus(null);
                           const { Furnishing, ...Filterrest } = Filter;
@@ -442,44 +445,61 @@ const PropertyFilters = () => {
               </div>
             </div>
             <div className="filter-dummyLine"></div>
-
           </aside>
+          <div>
             <HeaderCard />
-          <div className="filter-home-card">
-            <div className='total-post-length-container'>
-              <p className='total-post-lable-allpost' >
-                Total result {data?.allPost?.length}
-              </p>
+            <div className="filter-home-card">
+              <div className="total-post-length-container">
+                <p className="total-post-lable-allpost">
+                  Total result {data?.allPost?.length}
+                </p>
 
-              <button className="all-post-filter-button" onClick={() => setShowModal(true)}> filter</button>
-
+                <button
+                  className="all-post-filter-button"
+                  onClick={() => setShowModal(true)}
+                >
+                  Filter
+                </button>
+              </div>
+              <HomeCard />
             </div>
-            <HomeCard />
           </div>
           {/* Modal */}
           {showModal && (
-            <div className={`all-post-filter-overlay  ${isClosing ? 'closing' : ''}`} onClick={closeModal}>
-              <div className="all-post-filter-content" onClick={(e) => e.stopPropagation()}>
+            <div
+              className={`all-post-filter-overlay  ${
+                isClosing ? "closing" : ""
+              }`}
+              onClick={closeModal}
+            >
+              <div
+                className="all-post-filter-content"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="all-post-filter-modal">
                   {/* Property Type Filter */}
                   <div className="filter-group">
                     <div className="allpost-clear-filter-title-2">
                       <h2 className="">Filter Your Search</h2>
 
-                      <div className='allpost-clear-filter' onClick={() => {
-                        dispatch(
-                          GetAllPostAction({
-                            ProjectName: querry.get("ProjectName"),
-                            PropertyAdType: querry.get("PropertyAddType"),
-                            BHK: "",
-                            ApartmentType: "",
-                            PropertyStatus: undefined,
-                            Furnishing: "",
-                          }
-                          )
-                        );
-                        setFilter({})
-                      }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
+                      <div
+                        className="allpost-clear-filter"
+                        onClick={() => {
+                          dispatch(
+                            GetAllPostAction({
+                              ProjectName: querry.get("ProjectName"),
+                              PropertyAdType: querry.get("PropertyAddType"),
+                              BHK: "",
+                              ApartmentType: "",
+                              PropertyStatus: undefined,
+                              Furnishing: "",
+                            })
+                          );
+                          setFilter({});
+                        }}
+                      >
+                        Clear Filter <img src="/img/clear-filter.svg" alt="" />
+                      </div>
                     </div>
 
                     <div className="button-section">
@@ -493,7 +513,11 @@ const PropertyFilters = () => {
                             });
                             setremoveFilterField(true);
                           }}
-                          className={`bhk-option ${querry.get("PropertyAddType") === text ? "selected" : ""}`}
+                          className={`bhk-option ${
+                            querry.get("PropertyAddType") === text
+                              ? "selected"
+                              : ""
+                          }`}
                         >
                           {text}
                         </button>
@@ -508,7 +532,9 @@ const PropertyFilters = () => {
                       {bhkOptions.map((bhk, i) => (
                         <button
                           key={i}
-                          className={`bhk-option ${Filter.BHK === bhk ? "selected" : ""}`}
+                          className={`bhk-option ${
+                            Filter.BHK === bhk ? "selected" : ""
+                          }`}
                           onClick={() => {
                             if (Filter.BHK === bhk) {
                               const { BHK, ...Filterrest } = Filter;
@@ -530,10 +556,15 @@ const PropertyFilters = () => {
                     <h3>Property Status</h3>
                     <div className="button-section">
                       {ApartmentTypeOptions.map((apartmenttype, i) => (
-                        <div key={i} className={`bhk-option  ${Filter.ApartmentType === apartmenttype ? "selected" : ""} `} name="Property-Status"
-                          onChange={() => { }}
-
-
+                        <div
+                          key={i}
+                          className={`bhk-option  ${
+                            Filter.ApartmentType === apartmenttype
+                              ? "selected"
+                              : ""
+                          } `}
+                          name="Property-Status"
+                          onChange={() => {}}
                           onClick={() => {
                             if (Filter.ApartmentType === apartmenttype) {
                               const { ApartmentType, ...Filterrest } = Filter;
@@ -545,7 +576,8 @@ const PropertyFilters = () => {
                                 ApartmentType: apartmenttype,
                               });
                             }
-                          }}>
+                          }}
+                        >
                           {apartmenttype}
                         </div>
                       ))}
@@ -559,7 +591,11 @@ const PropertyFilters = () => {
                       {FurnishingOptions.map((option) => (
                         <button
                           key={option}
-                          className={`bhk-option ${Filter.Furnishing === option ? "selected" : "bhk-option-1"}`}
+                          className={`bhk-option ${
+                            Filter.Furnishing === option
+                              ? "selected"
+                              : "bhk-option-1"
+                          }`}
                           onClick={() => {
                             handleClicked();
                             if (Filter.Furnishing === option) {
@@ -579,11 +615,12 @@ const PropertyFilters = () => {
                   </div>
                 </div>
 
-                <div className="all-post-filter-close" onClick={closeModal}>Close</div>
+                <div className="all-post-filter-close" onClick={closeModal}>
+                  Close
+                </div>
               </div>
             </div>
           )}
-
         </div>
       </div>
     </>
