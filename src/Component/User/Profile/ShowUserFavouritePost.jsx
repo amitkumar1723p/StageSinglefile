@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import PostCard from "../../Post/PostCard";
 import { Helmet } from "react-helmet";
+import SingleCard from "../../Post/SingleCard";
 export default function ShowUserFavouritePost() {
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -21,10 +22,10 @@ export default function ShowUserFavouritePost() {
      
    
 
-      <div className="showpost">
+      <div className="allPostrender-showpost">
         {medata && medata.user&&medata.user.FavouritePost &&
           medata.user.FavouritePost.map((post, i) => {
-            return <PostCard key={i} PostData={post.PostData.PostId} />;
+            return <SingleCard key={i} PostData={post.PostData.PostId} />;
           })}
       </div>
     </>

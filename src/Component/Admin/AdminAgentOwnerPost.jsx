@@ -540,7 +540,12 @@ export default function AdminAgentOwnerPost() {
           )}
  
           {/* Buttons to change the status */}
-
+          <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => handleStatusChange("Active")}
+          >
+            Active
+          </button>
           <button
             className="px-1 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
             onClick={() => handleStatusChange("InActive")}
