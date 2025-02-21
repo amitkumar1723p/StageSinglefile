@@ -87,7 +87,7 @@ export default function AllRegistrationResponse({}) {
     }
   }, [AllUserResponseData, viewfilterUser]);
 
-  console.log(AllPost, "j");
+  
   return (
     <>
       <div className="container-fluid">
