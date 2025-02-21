@@ -111,14 +111,14 @@ const SingleCard = ({ PostData, index }) => {
 
         if (RunInterval === true) {
             slider = setInterval(() => {
-                if (PostData.PropertyImages.length <= 1) {
+                if (PostData?.PropertyImages.length <= 1) {
                     setImageTranlate(0);
                 }
 
-                if (PostData.PropertyImages.length > 1) {
+                if (PostData?.PropertyImages.length > 1) {
                     if (
                         Number(String(ImageTranlate).replace("-", "")) + 1 <
-                        PostData.PropertyImages.length
+                        PostData?.PropertyImages.length
                     ) {
                         setImageTranlate(ImageTranlate - 1);
                     } else {
@@ -157,7 +157,7 @@ const SingleCard = ({ PostData, index }) => {
     }, [data]);
 
     useEffect(() => {
-        const areaDetailsData = PostData.AreaDetails;
+        const areaDetailsData = PostData?.AreaDetails;
 
         if (areaDetailsData) {
             const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
@@ -203,7 +203,7 @@ const SingleCard = ({ PostData, index }) => {
                 }
             }
         }
-        const floorDetailsData = PostData.FloorDetails;
+        const floorDetailsData = PostData?.FloorDetails;
 
         if (floorDetailsData) {
             const { PropertyOnFloor, TotalFloors } = floorDetailsData;
@@ -215,7 +215,7 @@ const SingleCard = ({ PostData, index }) => {
         }
 
         setPropertyAddress(
-            `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Landmark} ${PostData.LocationDetails.City}`
+            `${PostData?.PropertyDetails.BHKType} BHk ${PostData?.BasicDetails.ApartmentType} For ${PostData?.BasicDetails.PropertyAdType} In ${PostData?.LocationDetails.Landmark} ${PostData?.LocationDetails.City}`
         );
     }, [PostData]);
 
@@ -231,7 +231,7 @@ const SingleCard = ({ PostData, index }) => {
             document.removeEventListener("click", closeShareBox);
         };
     }, []);
-    // console.log(PostData)
+    // console.log(PostData?)
     return (
         <>
             <div className="single-card"
@@ -266,8 +266,8 @@ const SingleCard = ({ PostData, index }) => {
 
 
 
-                    {PostData.PostVerifyShow ? (
-                        PostData.PostVerify ? (
+                    {PostData?.PostVerifyShow ? (
+                        PostData?.PostVerify ? (
                             <div className="single-card-verified-badge">
                                 <img src="/img/verified-tag.svg" className='single-card-verified-icon' alt="verified-tag" />
                                 <p className="active-post-para">Verified</p>
@@ -284,7 +284,7 @@ const SingleCard = ({ PostData, index }) => {
                 {/* Property Title Section */}
                 <div className="single-card-title-section">
                     <div className="single-card-title-actions-container">
-                        <h2 className={`single-card-property-title  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{PostData.LocationDetails.ProjectName}</h2>
+                        <h2 className={`single-card-property-title  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{PostData?.LocationDetails?.ProjectName}</h2>
                         {/* <div className="single-card-action-icons">
                             <button
                                 onClick={() => setIsFavorite(!isFavorite)}
@@ -315,7 +315,7 @@ const SingleCard = ({ PostData, index }) => {
                                             if (medata && medata.IsAuthenticated == true) {
                                                 dispatch(
                                                     AddFavouriteAndUnFavouriteAction({
-                                                        PostData: { PostId: PostData._id },
+                                                        PostData: { PostId: PostData?._id },
                                                     })
                                                 );
                                             } else {
@@ -325,8 +325,8 @@ const SingleCard = ({ PostData, index }) => {
                                     >
                                         {medata?.user?.FavouritePost?.some(
                                             (fav) =>
-                                                String(fav.PostData.PostId?._id) ===
-                                                String(PostData._id)
+                                                String(fav?.PostData?.PostId?._id) ===
+                                                String(PostData?._id)
                                         ) ? (
                                             <img
                                                 className="fav-icon"
@@ -342,9 +342,9 @@ const SingleCard = ({ PostData, index }) => {
                                         )}
                                     </button>
                                     {location.pathname.includes("user/my-listing") &&
-                                        PostData.BasicDetails.PropertyAdType == "Rent" && (
+                                        PostData?.BasicDetails.PropertyAdType == "Rent" && (
                                             <>
-                                                <Link to={`/user/post/update/${PostData._id}`}>
+                                                <Link to={`/user/post/update/${PostData?._id}`}>
                                                     <img src="/img/edit.png" className="editIcon" />
                                                 </Link>
                                             </>
@@ -365,7 +365,7 @@ const SingleCard = ({ PostData, index }) => {
                         <img src="/img/washing-machine.svg" className='single-card-detail-icon-container' alt="" />
                         </div>
                         <div className="single-card-detail-text">
-                            <p className="single-card-detail-title"> {PostData.AmenitiesDetails.Furnishing}</p>
+                            <p className="single-card-detail-title"> {PostData?.AmenitiesDetails.Furnishing}</p>
                             <p className="single-card-detail-subtitle">Furnishing Details</p>
                         </div>
                     </div>
@@ -395,8 +395,8 @@ const SingleCard = ({ PostData, index }) => {
                             <img src="/img/typology.png" className='single-card-detail-icon-container'  alt="" />
                         </div>
                         <div className="single-card-detail-text">
-                            <p className="single-card-detail-title">     {`${PostData.PropertyDetails.BHKType} BHK`}{" "}
-                      {PostData.PropertyDetails?.OtherRoom?.map((text) => {
+                            <p className="single-card-detail-title">     {`${PostData?.PropertyDetails.BHKType} BHK`}{" "}
+                      {PostData?.PropertyDetails?.OtherRoom?.map((text) => {
                         return `+ ${text == "Pooja Room"
                             ? "Pooja"
                             : text == "Servant Room"
@@ -432,7 +432,7 @@ const SingleCard = ({ PostData, index }) => {
 
                             <div className="single-card-detail-text ">
                                 <p className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
-                                    {PostData.AmenitiesDetails.Furnishing}
+                                    {PostData?.AmenitiesDetails.Furnishing}
                                 </p>
                                 <p className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>Furnishing Details</p>
                             </div>
@@ -466,8 +466,8 @@ const SingleCard = ({ PostData, index }) => {
                             </div>
                             <div className="single-card-detail-text">
                                 <p className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
-                                    {`${PostData.PropertyDetails.BHKType} BHK`}{" "}
-                                    {PostData.PropertyDetails?.OtherRoom?.map((text) => {
+                                    {`${PostData?.PropertyDetails.BHKType} BHK`}{" "}
+                                    {PostData?.PropertyDetails?.OtherRoom?.map((text) => {
                                         return `+ ${text === "Pooja Room"
                                                 ? "Pooja"
                                                 : text === "Servant Room"
@@ -500,14 +500,14 @@ const SingleCard = ({ PostData, index }) => {
                                 PostData?.PricingDetails?.ExpectedPrice
                             )}</span>
                     </p> */}
-                     {PostData.BasicDetails.PropertyAdType == "Rent" && (
+                     {PostData?.BasicDetails.PropertyAdType == "Rent" && (
                   <>
                     <>
                       <div className="single-card-rent-price-section">
                         <div>
                           <p className={`rent-price-ans  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                             {formatReservePrice(
-                              PostData.PricingDetails.ExpectedRent
+                              PostData?.PricingDetails.ExpectedRent
                             )}
                             <span className={`rent-per-month  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> / Month </span>
                           </p>
@@ -518,7 +518,7 @@ const SingleCard = ({ PostData, index }) => {
                             <div className="Reserveprice-sec-grid">
                               <p className={`rent-price-ans  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                                 {formatReservePrice(
-                                  PostData.PricingDetails.DepositePrice
+                                  PostData?.PricingDetails.DepositePrice
                                 )}
                               </p>
                               <p  className={`single-card-rent-price-value  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>Deposit Amount </p>
@@ -530,7 +530,7 @@ const SingleCard = ({ PostData, index }) => {
                   </>
                 )}
 
-{PostData.BasicDetails.PropertyAdType == "Sale" && (
+{PostData?.BasicDetails.PropertyAdType == "Sale" && (
                       <>
                         <div className='single-card-price-section-sale'>
                           <div className="single-card-price-section">
@@ -539,19 +539,19 @@ const SingleCard = ({ PostData, index }) => {
                               Reserve Price
                             </span> : <span className={` single-card-price-value ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                               {formatReservePrice(
-                                PostData.PricingDetails.ExpectedPrice
+                                PostData?.PricingDetails.ExpectedPrice
                               )}
                             </span>
                           </div>
                           <p className={`single-post-card-persqft ${false ? "" : "sold-out"} `}>
-                            ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                            ₹ {PostData?.PricingDetails.PricePerSqFt} Per sqft
                           </p>
                         </div>
                       </>
                     )}
                     <p className="single-card-publish-date">
                         <span className="single-card-date-label">Publish on: </span>
-                        <span className="single-card-date-value"> {formatDate(PostData.PostVerifyData?.Time)}</span>
+                        <span className="single-card-date-value"> {formatDate(PostData?.PostVerifyData?.Time)}</span>
                     </p>
                 </div>
 
@@ -562,7 +562,7 @@ const SingleCard = ({ PostData, index }) => {
                                     to={`/post-detail/${PropertyAddress.toLowerCase()
                                       .replaceAll(" ", "-")
                                       .replace(",", "")
-                                      .replaceAll("/", "-")}-${PostData._id}`}
+                                      .replaceAll("/", "-")}-${PostData?._id}`}
                                   >
                                     <button className={`single-card-action-button ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out-button"}`} disabled={PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? false: true}>View More</button>
                                   </Link>
@@ -578,7 +578,7 @@ const SingleCard = ({ PostData, index }) => {
                     }/post-detail/${PropertyAddress.toLowerCase()
                         .replaceAll(" ", "-")
                         .replace(",", "")
-                        .replaceAll("/", "-")}-${PostData._id}`}
+                        .replaceAll("/", "-")}-${PostData?._id}`}
             />
 
             {/* share card end  */}
