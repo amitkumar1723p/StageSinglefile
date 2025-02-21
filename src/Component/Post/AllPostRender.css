@@ -159,7 +159,7 @@ color: #333;
   }
 .allPostrender-showpost{
       display: grid;
-      gap: 10px;
+      gap: 15px;
       grid-template-columns: repeat(3, 1fr);
       margin-bottom: 300px;
     }
