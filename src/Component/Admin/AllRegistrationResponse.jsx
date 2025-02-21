@@ -87,7 +87,7 @@ export default function AllRegistrationResponse({}) {
     }
   }, [AllUserResponseData, viewfilterUser]);
 
-  console.log(AllPost, "j");
+  
   return (
     <>
       <div className="container-fluid">
@@ -239,14 +239,13 @@ export default function AllRegistrationResponse({}) {
                     </td>
 
                     <td className="text-light-emphasis border-end" key={index}>
-                      {checkNotify?.some(
-                        (user) => user?.User?._id === item._id
-                      ) ||
-                      require?.some((user) => user?.User?._id === item._id) ? (
-                        <small>Yes</small>
-                      ) : (
-                        <small>No</small>
-                      )}
+                    {
+  (checkNotify?.some(user => user?.User?._id === item._id) ||
+   require?.some(user => user?.User?._id === item._id))
+    ? <small>Yes</small>
+    : <small>No</small>
+}
+
                     </td>
 
                     <td className="text-light-emphasis border-end">
