@@ -1597,7 +1597,7 @@ input[type="number"] {
     font-weight: 500;
     line-height: normal;
     width: auto;
-    margin-right: 5px;
+    /* margin-right: 5px; */
   }
 
   .parking-section-box {

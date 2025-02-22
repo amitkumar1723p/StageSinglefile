@@ -1,13 +1,19 @@
 /* Who We Are Section */
-.who-we-are {
+
+.who-we-are-main-container{
   background-color: var(--main-light-clr);
+}
+
+.who-we-are {
+  max-width: 1450px;
+  margin: 0 auto;
   padding: 60px 20px;
   position: relative;
   text-align: center;
 }
 
 .who-we-are-box {
-  width: 90%;
+  width: 70%;
   margin: 0 auto;
   position: relative;
 }
@@ -111,6 +117,12 @@
   right: 15%;
   width: 40%;
 }
+@media(max-width:1024px){
+  .who-we-are-box{
+    width: 90%;
+  }
+}
+
 @media (max-width: 768px) {
   .quote-left {
     left: -20px;

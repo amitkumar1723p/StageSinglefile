@@ -4,6 +4,7 @@
 }
 
 .comparison-table {
+  max-width: 1300px;
   width: 80%;
   margin: 40px auto;
   border-collapse: collapse;
