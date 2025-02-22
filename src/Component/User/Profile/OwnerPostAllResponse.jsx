@@ -111,7 +111,7 @@ export default function OwnerPostAllResponse() {
               </thead>
               <tbody>
                 {OwnerPostsVisitsData.userOfferAndVisit?.map((data, i) => {
-                  const PostData = data.PostData.PostId;
+                  const PostData = data?.PostData?.PostId;
                   const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
                   return (
                     <tr key={i}>
@@ -230,7 +230,7 @@ export default function OwnerPostAllResponse() {
                             let url = `/post-detail/${PostName.toLowerCase()
                               .replaceAll(" ", "-")
                               .replace(",", "")
-                              .replaceAll("/", "-")}-${PostData._id}`;
+                              .replaceAll("/", "-")}-${PostData?._id}`;
 
                             navigate(`${url}`);
                           }}

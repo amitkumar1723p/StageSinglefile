@@ -9,6 +9,7 @@ import { getAllUserAction } from "../../Action/userAction";
 import {
   GetAllNotificationsAndRequirements,
   Admin_OwnerGetAllPostAction,
+  GetDeletedPostsAction,
 } from "../../Action/postAction";
 
 export default function AdminAside() {
@@ -25,26 +26,36 @@ export default function AdminAside() {
   // const{data:AllUserResponseData}=useSelector((state)=>{
   //   return state.AllUserResponse
   // })
-// this useEffect get All user reponse 
-  useEffect(()=>{
+  // this useEffect get All user reponse
+  useEffect(() => {
     // dispatch(getAllUserAction())
     //have to protect for agent
 
     // console.log(medata?.user?.Role)
-    if(["Owner", "Admin"].includes(medata?.user?.Role)){
-
-      dispatch(GetAllNotificationsAndRequirements())
+    if (["Owner", "Admin"].includes(medata?.user?.Role)) {
+      dispatch(GetAllNotificationsAndRequirements());
     }
     if (medata?.user?.Role === "Owner") {
       dispatch(getAllUserAction());
       dispatch(Admin_OwnerGetAllPostAction());
     }
-  },[])
-
-  
- 
+  }, []);
 
   // console.log(AllUserResponseData,"hello")
+  const { data: adminAlertData, LodingType: AlertType } = useSelector(
+    (state) => {
+      return state.Post;
+    }
+  );
+  // useEffect(() => {
+  //   if (adminAlertData && ["DeletePostRequest"].includes(AlertType)) {
+  //     if (adminAlertData.success === true) {
+  //       dispatch(GetDeletedPostsAction());
+  //     }
+  //   }
+
+  //   // eslint-disable-next-line
+  // }, [adminAlertData]);
 
   return (
     <div className="">

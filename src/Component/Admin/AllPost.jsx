@@ -13,100 +13,140 @@ export default function AllPost({
   sortOrder,
   activeFilter,
   selectAll,
-  postPerPage
+  postPerPage,
+  propertAdType,
 }) {
   const dispatch = useDispatch();
-  const{postVerify,allPropertyData,setPostVerify}=useContext(UserContext)
+  const { postVerify, allPropertyData, setPostVerify } =
+    useContext(UserContext);
   // console.log(postVerify,"page all post")
   // console.log(postPerPage)
   const [OwnerPosts, setOwnerPosts] = useState([]);
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
- const { medata } = useSelector((state) => {
+  const { medata } = useSelector((state) => {
     return state.meDetails;
   });
 
-  // Pagination logic state 
+  // Pagination logic state
   const [page, setPage] = useState(1); // Current page for pagination
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const itemsPerPage = postPerPage; // Number of items per page
 
-  useEffect(()=>{
-    if(activeFilter!==null&&postVerify!==null){
-      setPostVerify(null)
+  useEffect(() => {
+    if (activeFilter !== null && postVerify !== null) {
+      setPostVerify(null);
     }
-  },[activeFilter,postVerify])
+  }, [activeFilter, postVerify]);
 
   // Update posts when data or sortOrder changes searching or pagination set inside this useEffect
   useEffect(() => {
     if (allPropertyData?.Post) {
-      let filteredPosts = [...allPropertyData.Post];
-  
+      let filteredPosts = [...allPropertyData?.Post];
+
       // Apply search filter
       if (SearchPostId.length > 0) {
         filteredPosts = filteredPosts.filter((item) => {
           const contactNumber = item.CreatePostUser?.ContactNumber;
-  
+
           return (
             item._id.toLowerCase().includes(SearchPostId.toLowerCase()) ||
-            (item?.CreatePostUser?.Name.toLowerCase().includes(
+            item?.CreatePostUser?.Name.toLowerCase().includes(
               SearchPostId.toLowerCase()
-            )) ||
-            (item.LocationDetails.ProjectName.toLowerCase().includes(
+            ) ||
+            item.LocationDetails.ProjectName.toLowerCase().includes(
               SearchPostId.toLowerCase()
-            )) ||
+            ) ||
             (contactNumber && String(contactNumber).includes(SearchPostId)) // Convert to string before calling includes
           );
         });
       }
-  
-      // Apply the active filter (postVerify) to all posts
-      if (activeFilter !== null ) {
-        filteredPosts = filteredPosts.filter((item) => {
-          return item.PostVerify === activeFilter;
-        });
 
-      }else{
-        filteredPosts=[...filteredPosts]
-        
+      // Apply the active filter (postVerify) to all posts
+      if (activeFilter !== null) {
+        if (activeFilter === "success") {
+          // console.log("in sec")
+          filteredPosts = filteredPosts?.filter((item) => {
+            return item?.propertyStatus?.currentPropertyStatus === "sold out";
+          });
+          // console.log(filteredPosts)
+          // return ;
+        }
+        // console.log("out")
+        if (activeFilter == true || activeFilter == false) {
+          filteredPosts = filteredPosts.filter((item) => {
+            return item.PostVerify === activeFilter;
+          });
+        }
+      } else {
+        filteredPosts = [...filteredPosts];
       }
-  
-   if(postVerify!==null){
-    filteredPosts = filteredPosts.filter((item) => {
-      return item.PostVerify === postVerify;
-    });
-   }else{
-    filteredPosts=[...filteredPosts]
-  }
-  
+
+      if (postVerify !== null) {
+        filteredPosts = filteredPosts.filter((item) => {
+          return item.PostVerify === postVerify;
+        });
+      } else {
+        filteredPosts = [...filteredPosts];
+      }
+
+      //rent and sale filter logic based on property add type
+      if (propertAdType != "") {
+        // console.log("this is add type ",propertAdType)
+        if (propertAdType === "Rent") {
+          // console.log(propertAdType,"in if")
+
+          filteredPosts = filteredPosts.filter((item) => {
+            return item?.BasicDetails?.PropertyAdType === propertAdType;
+          });
+        } else {
+          // console.log(propertAdType,"in else")
+          filteredPosts = filteredPosts.filter((item) => {
+            return item?.BasicDetails?.PropertyAdType === propertAdType;
+          });
+        }
+      }
+
       // Sorting logic
       if (sortOrder !== undefined) {
         if (sortOrder === "ascending") {
-          filteredPosts.sort((a, b) => new Date(a.createAt) - new Date(b.createAt)); // Ascending order
+          filteredPosts.sort(
+            (a, b) => new Date(a.createAt) - new Date(b.createAt)
+          ); // Ascending order
         } else if (sortOrder === "descending") {
-          filteredPosts.sort((a, b) => new Date(b.createAt) - new Date(a.createAt)); // Descending order
+          filteredPosts.sort(
+            (a, b) => new Date(b.createAt) - new Date(a.createAt)
+          ); // Descending order
         }
       }
-  
+
       // Update pagination when filtered posts change
       const newTotalPages = Math.ceil(filteredPosts.length / itemsPerPage);
       setTotalPages(newTotalPages); // Update total pages
-  
+
       // Reset the page if it exceeds the new total pages
       if (page > newTotalPages) {
         setPage(1); // Reset to the first page
       }
-  
+
       const startIndex = (page - 1) * itemsPerPage;
       const endIndex = page * itemsPerPage;
+      // console.log("filter post ",filteredPosts)
       const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
-  
+
       setOwnerPosts(postsToDisplay); // Set the current page posts
     }
-  }, [data, SearchPostId, sortOrder, activeFilter, page,postVerify ,itemsPerPage, allPropertyData]);
+  }, [
+    data,
+    SearchPostId,
+    sortOrder,
+    activeFilter,
+    page,
+    postVerify,
+    itemsPerPage,
+    allPropertyData,
+    propertAdType,
+  ]);
 
-
-
-  
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);
@@ -122,49 +162,52 @@ export default function AllPost({
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
   };
- // this useEffect is used to handle the selectAll functionality 
- const endIndex=itemsPerPage*page;
- const startIndex=endIndex-itemsPerPage;
- useEffect(() => {
- 
-  if (allPropertyData?.Post && Array.isArray(allPropertyData.Post)&&selectAll===true) {
-
- 
-    if (selectAll===true) {
-      const allAssignData = allPropertyData.Post.slice(startIndex, endIndex).map((post) => {
-   // This will log "hello" for each post
-        return {
-          PostId: post?._id,
-          CreatedBy: medata?.user?._id,
-        };
-      });
-      setAssignProperty(allAssignData);
+  // this useEffect is used to handle the selectAll functionality
+  const endIndex = itemsPerPage * page;
+  const startIndex = endIndex - itemsPerPage;
+  useEffect(() => {
+    if (
+      allPropertyData?.Post &&
+      Array.isArray(allPropertyData.Post) &&
+      selectAll === true
+    ) {
+      if (selectAll === true) {
+        const allAssignData = allPropertyData?.Post?.slice(
+          startIndex,
+          endIndex
+        ).map((post) => {
+          // This will log "hello" for each post
+          return {
+            PostId: post?._id,
+            CreatedBy: medata?.user?._id,
+          };
+        });
+        setAssignProperty(allAssignData);
+      }
     }
-  }
-}, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
+  }, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
 
   return (
     <div className="Admin-property-post-card-main-box">
       
-{/* here we itrate all available property for owner only start */}
-      {OwnerPosts.length > 0 ? (
-        OwnerPosts.map((post, index) => (
-          <AdminListingCard
-            key={index}
-            index={index}
-            PostData={post}
-            setAssignProperty={setAssignProperty}
-            AssignProperty={AssignProperty}
-            selectAllProperty={selectAll}
-            page={page}
-            itemsPerPage={itemsPerPage}
-          />
-        ))
-      ) : (
-        <div>No posts available</div>
-      )}
-{/* here we itrate all available property for owner only end */}
-
+      {/* here we itrate all available property for owner only start */}
+      {OwnerPosts.length > 0
+        ? OwnerPosts.map((post, index) => (
+            <AdminListingCard
+              key={index}
+              index={index}
+              PostData={post}
+              setAssignProperty={setAssignProperty}
+              AssignProperty={AssignProperty}
+              selectAllProperty={selectAll}
+              page={page}
+              itemsPerPage={itemsPerPage}
+            />
+          ))
+        : Array.from({ length: 4 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+      {/* here we itrate all available property for owner only end */}
 
       {/* Pagination controls start */}
       <nav aria-label="Page navigation example">
@@ -200,9 +243,57 @@ export default function AllPost({
 
       {/* Pagination controls end  */}
 
-
       {/* Loading Spinner */}
       {loading && <div>Loading...</div>}
     </div>
   );
 }
+
+const SkeletonCard = () => {
+  return (
+    <div className="skeleton-card">
+      {/* Top Section */}
+      <div className="skeleton-top">
+        <div className="skeleton skeleton-checkbox"></div>
+        <div className="skeleton-text">
+          <div className="skeleton skeleton-title"></div>
+          <div className="skeleton skeleton-subtitle"></div>
+        </div>
+        <div className="skeleton skeleton-badge"></div>
+      </div>
+
+      {/* Property Details */}
+      <div className="skeleton-details">
+        <div className="skeleton skeleton-price"></div>
+        <div className="skeleton skeleton-info"></div>
+        <div className="skeleton skeleton-info"></div>
+        <div className="skeleton skeleton-info"></div>
+      </div>
+
+      {/* Visit, Offer, Duration */}
+      <div className="skeleton-actions">
+        <div className="skeleton skeleton-action"></div>
+        <div className="skeleton skeleton-action"></div>
+        <div className="skeleton skeleton-action"></div>
+      </div>
+
+      {/* Posted By */}
+      <div className="skeleton-posted">
+        <div className="skeleton skeleton-tag"></div>
+        <div className="skeleton skeleton-tag"></div>
+      </div>
+
+      {/* Toggle Switch */}
+      <div className="skeleton-toggle">
+        <div className="skeleton skeleton-switch-text"></div>
+        <div className="skeleton skeleton-switch"></div>
+      </div>
+
+      {/* Buttons */}
+      <div className="skeleton-buttons">
+        <div className="skeleton skeleton-button blue"></div>
+        <div className="skeleton skeleton-button red"></div>
+      </div>
+    </div>
+  );
+};

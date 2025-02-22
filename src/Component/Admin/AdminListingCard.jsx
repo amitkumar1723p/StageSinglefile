@@ -4,6 +4,8 @@ import { GetAllAdminAction } from "../../Action/userAction";
 import {
   Admin_OwnerGetAllScheduleVisits,
   adminAssigned,
+  DeleteAndRestorePostAction,
+  PermanentPostDeleteAction,
   showVeirifyPostIconAction,
 } from "../../Action/postAction";
 import { RemoveAssignPropertyAction } from "../../Action/postAction";
@@ -29,7 +31,6 @@ export default function AdminListingCard({
     ActiveDate: "",
     ExpiredDate: "",
   });
-
 
   // console.log(selectAllProperty)
   const navigate = useNavigate();
@@ -106,9 +107,11 @@ export default function AdminListingCard({
       setToggleBtn(false);
     }
   }, [PostData?.PostVerifyShow]);
-
+ 
   useEffect(() => {
+    console.log("kjsd" ,AssignPostData)
     if (AssignPostData?.success == true) {
+      
       let AssingPosts = AssignPostData.AssignProperty.filter((item) => {
         return (
           item.AssignedPropertys.some((item) => item.PostId === PostData._id) &&
@@ -208,10 +211,15 @@ export default function AdminListingCard({
             <div className="heading-name">
               {PostData.LocationDetails.ProjectName}
               {medata?.user?.Role != "Agent" && (
+                
                 <>
+
+                {console.log("AssignProperty",AssignProperty)}
+                 {console.log( "isAssignedToAnyUser",isAssignedToAnyUser)}
                   <div className="edit-del-section">
-                    {AssignProperty && (
+                    {/* {AssignProperty && ( */}
                       <div className="asign-user">
+                         
                         {isAssignedToAnyUser.length > 0 && (
                           <div className="show-admin-data">
                             {isAssignedToAnyUser.map((AssignPropertys, i) => {
@@ -246,14 +254,81 @@ export default function AdminListingCard({
                           </div>
                         )}
                       </div>
-                    )}
+                    {/* // )} */}
 
                     {location.pathname.includes("admin") && (
-                      <div className="delete-edit-box">
-                        <Link to={`/admin/post/update/${PostData._id}`}>
-                          <img src="/img/edit.png" className="editIcon" />
-                        </Link>
-                      </div>
+                      <>
+                        {medata?.user?.Role == "Owner" &&
+                          (PostData?.PostDelete?.Status == "delete" ? (
+                            <>
+                              <div>
+                                <button
+                                  onClick={(e) => {
+                                    let confirm = window.confirm(
+                                      "Are you sure Restore This Post"
+                                    );
+                                    if (confirm) {
+                                      dispatch(
+                                        DeleteAndRestorePostAction({
+                                          postId: PostData._id,
+                                          Status: "restore",
+                                        })
+                                      );
+                                    }
+                                  }}
+                                >
+                                  Re Store
+                                </button>
+                                {/* <button
+                                  onClick={() => {
+                                    let confrim = window.confirm(
+                                      "Are You Sure Parmanent Delete This Post"
+                                    );
+
+                                    if (confrim) {
+                                      dispatch(PermanentPostDeleteAction());
+                                    }
+                                  }}
+                                >
+                                  {" "}
+                                  Permanent delete
+                                </button> */}
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="delete-edit-box">
+                                <Link to={`/admin/post/update/${PostData._id}`}>
+                                  <img
+                                    src="/img/edit.png"
+                                    className="editIcon"
+                                  />
+                                </Link>
+                              </div>{" "}
+                              <div
+                                className="delete-edit-box"
+                                onClick={(e) => {
+                                  const confrim = window.confirm(
+                                    `Are you sure you want to delete the post with ID (${PostData._id})`
+                                  );
+                                  if (confrim) {
+                                    dispatch(
+                                      DeleteAndRestorePostAction({
+                                        postId: PostData._id,
+                                        Status: "delete",
+                                      })
+                                    );
+                                  }
+                                }}
+                              >
+                                <img
+                                  src="/img/delete.png"
+                                  className="editIcon"
+                                />
+                              </div>{" "}
+                            </>
+                          ))}
+                      </>
                     )}
                   </div>
                 </>
@@ -363,7 +438,17 @@ export default function AdminListingCard({
                       : ""
                   }`}
                   onClick={() => {
-                    navigate(`/admin/schedule-visit/${PostData._id}`);
+                    if (
+                      medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
+                    ) {
+                      // schedule-visit/deleted-post
+                      navigate(
+                        `/admin/schedule-visit/deleted-post/${PostData._id}`
+                      );
+                    } else {
+                      navigate(`/admin/schedule-visit/${PostData._id}`);
+                    }
                   }}
                 >
                   Schedule Visit (
@@ -379,7 +464,16 @@ export default function AdminListingCard({
                       : ""
                   }`}
                   onClick={() => {
-                    navigate(`/admin/recive-offer/${PostData._id}`);
+                    if (
+                      medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
+                    ) {
+                      navigate(
+                        `/admin/recive-offer/deleted-post/${PostData._id}`
+                      );
+                    } else {
+                      navigate(`/admin/recive-offer/${PostData._id}`);
+                    }
                   }}
                 >
                   View Offer Received (
@@ -404,7 +498,12 @@ export default function AdminListingCard({
 
               <div className="admin-btn-active-btn">
                 <Link
-                  to={`/post-detail/${PropertyAddress.toLowerCase()
+                  to={`${
+                    medata?.user?.Role == "Owner" &&
+                    PostData?.PostDelete?.Status == "delete"
+                      ? "/admin/deleted-post"
+                      : "/post-detail"
+                  }/${PropertyAddress.toLowerCase()
                     .replaceAll(" ", "-")
                     .replace(",", "")
                     .replaceAll("/", "-")}-${PostData._id}`}
@@ -413,92 +512,95 @@ export default function AdminListingCard({
                     View Listing
                   </button>
                 </Link>
-                <div className="d-flex gap-5">
-                  <div className="Verified-lable">
-                    <p className="varified-lable">Verified lable :</p>
-                    <label className="toggle-switch-container">
-                      <input
-                        type="checkbox"
-                        checked={ToggleBtn}
-                        onChange={(e) => {
-                          setToggleBtn(!ToggleBtn);
-                          if (e.target.checked == true) {
-                            let postdata = { PostVerifyShow: true };
-                            let postid = PostData._id;
-                            dispatch(
-                              showVeirifyPostIconAction({ postdata }, postid)
-                            );
-                          }
-                          if (e.target.checked == false) {
-                            let postdata = { PostVerifyShow: false };
-                            let postid = PostData._id;
-                            dispatch(
-                              showVeirifyPostIconAction({ postdata }, postid)
-                            );
-                          }
-                        }}
-                        className="toggle-switch-input"
-                      />
-                      <span className="toggle-btn-slider"></span>
-                    </label>
-                  </div>
-                  {medata?.user?.Role != "Agent" && (
-                    <div className="verify-box-section">
-                      {/* {location.pathname.includes("admin") && ( */}
-                      {PostData.PostExpired ? (
-                        <button
-                          onClick={() => {
-                            dispatch(ReOpenPostAction(PostData._id));
-                          }}
-                        >
-                          Re-Open
-                        </button>
-                      ) : (
-                        <>
-                          {PostData.PostVerify ? (
-                            <button
-                              className="post-verify-btn In-Active-btn"
-                              onClick={() => {
-                                let Confrimbox = window.confirm(
-                                  "Are you Sure In-Active This Post"
-                                );
-                                if (Confrimbox) {
-                                  let postdata = { PostVerify: false };
-                                  let postid = PostData._id;
-                                  dispatch(
-                                    VerifyPostAction({ postdata }, postid)
-                                  );
-                                }
-                              }}
-                            >
-                              {/* Unverify  */} In-Active
-                            </button>
-                          ) : (
-                            <button
-                              className="post-verify-btn Active-btn "
-                              onClick={() => {
-                                let Confrimbox = window.confirm(
-                                  "Are you Sure Active This Post"
-                                );
 
-                                if (Confrimbox) {
-                                  let postdata = { PostVerify: true };
-                                  let postid = PostData._id;
-                                  dispatch(
-                                    VerifyPostAction({ postdata }, postid)
-                                  );
-                                }
-                              }}
-                            >
-                              {/* Verify */}
-                              Active
-                            </button>
-                          )}
-                        </>
-                      )}
+                {PostData?.PostDelete?.Status != "delete" && (
+                  <div className="d-flex gap-5">
+                    <div className="Verified-lable">
+                      <p className="varified-lable">Verified lable :</p>
+                      <label className="toggle-switch-container">
+                        <input
+                          type="checkbox"
+                          checked={ToggleBtn}
+                          onChange={(e) => {
+                            setToggleBtn(!ToggleBtn);
+                            if (e.target.checked == true) {
+                              let postdata = { PostVerifyShow: true };
+                              let postid = PostData._id;
+                              dispatch(
+                                showVeirifyPostIconAction({ postdata }, postid)
+                              );
+                            }
+                            if (e.target.checked == false) {
+                              let postdata = { PostVerifyShow: false };
+                              let postid = PostData._id;
+                              dispatch(
+                                showVeirifyPostIconAction({ postdata }, postid)
+                              );
+                            }
+                          }}
+                          className="toggle-switch-input"
+                        />
+                        <span className="toggle-btn-slider"></span>
+                      </label>
                     </div>
-                  )}
-                </div>
+                    {medata?.user?.Role != "Agent" && (
+                      <div className="verify-box-section">
+                        {/* {location.pathname.includes("admin") && ( */}
+                        {PostData.PostExpired ? (
+                          <button
+                            onClick={() => {
+                              dispatch(ReOpenPostAction(PostData._id));
+                            }}
+                          >
+                            Re-Open
+                          </button>
+                        ) : (
+                          <>
+                            {PostData.PostVerify ? (
+                              <button
+                                className="post-verify-btn In-Active-btn"
+                                onClick={() => {
+                                  let Confrimbox = window.confirm(
+                                    "Are you Sure In-Active This Post"
+                                  );
+                                  if (Confrimbox) {
+                                    let postdata = { PostVerify: false };
+                                    let postid = PostData._id;
+                                    dispatch(
+                                      VerifyPostAction({ postdata }, postid)
+                                    );
+                                  }
+                                }}
+                              >
+                                {/* Unverify  */} In-Active
+                              </button>
+                            ) : (
+                              <button
+                                className="post-verify-btn Active-btn "
+                                onClick={() => {
+                                  let Confrimbox = window.confirm(
+                                    "Are you Sure Active This Post"
+                                  );
+
+                                  if (Confrimbox) {
+                                    let postdata = { PostVerify: true };
+                                    let postid = PostData._id;
+                                    dispatch(
+                                      VerifyPostAction({ postdata }, postid)
+                                    );
+                                  }
+                                }}
+                              >
+                                {/* Verify */}
+                                Active
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

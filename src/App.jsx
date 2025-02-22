@@ -56,6 +56,8 @@ import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse"
 import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 // import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
+import AllPostRender from "./Component/Post/AllPostRender";
+import DeletePosts from "./Component/Admin/DeletePosts";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -136,6 +138,10 @@ function App() {
   // notify
   const { data: AllNotifiesAndReqData } = useSelector((state) => {
     return state.AllNotifiesAndReq;
+  });
+
+  const { data: deletePostsData } = useSelector((state) => {
+    return state.deletePosts;
   });
 
   const location = useLocation();
@@ -221,12 +227,6 @@ function App() {
   useEffect(() => {
     if (CreatePost) {
       if (CreatePost.success === true) {
-        // if (medata && medata.IsAuthenticated === true) {
-        //   if (["Admin", "Owner"].includes(medata.user.Role)) {
-        //     // dispatch(Admin_OwnerGetAllPostAction());
-        //   }
-        // }
-
         setalertMessage(<p>{CreatePost.message}</p>);
         setalertType("success");
         setalertShow(true);
@@ -240,7 +240,18 @@ function App() {
         if (CreatePost.IsAuthenticated === false) {
           navigate("/");
         }
-        setalertMessage(<p>{CreatePost.message}</p>);
+
+        if (CreatePost?.fielderrors) {
+          setalertMessage(
+            CreatePost.fielderrors?.map((e, index) => {
+              return <p key={index}>{e.msg}</p>;
+            })
+          );
+        } else {
+          setalertMessage(<p> {CreatePost.message}</p>);
+        }
+
+        // setalertMessage(<p>{CreatePost.message}</p>);
         setalertType("error");
         setalertShow(true);
         dispatch({ type: "AdminAlertClear" });
@@ -577,6 +588,23 @@ function App() {
     }
     // eslint-disable-next-line
   }, [AllNotifiesAndReqData]);
+
+  useEffect(() => {
+    if (deletePostsData) {
+      if (deletePostsData.success === false) {
+        if (deletePostsData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{deletePostsData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "GetNotifiesAndPropRequestsClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [deletePostsData]);
+
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
@@ -599,6 +627,7 @@ function App() {
           ShowAlert={alertData.AlertShow}
         />
       )}
+      {/* <Scroll  */}
       {/* <ScrollToTop /> */}
 
       <Routes>
@@ -666,6 +695,7 @@ function App() {
             />
           </Route>
         </>
+        {/* This Routes available For Admin Owner Agent  */}
 
         <Route
           exact
@@ -673,7 +703,7 @@ function App() {
           element={<AdminOwnerRoutes Component={AdminAside} />}
         >
           <Route exact path="dashboard" element={<Dashbord />} />
-
+          {/* This routes Avaliable for Owner Only  */}
           <Route
             exact
             path="data"
@@ -691,50 +721,16 @@ function App() {
               />
             }
           />
-          <Route    
+          <Route
             exact
             path="all-registration-response"
             element={
-              <AdminOwnerRoutes Component={AllRegistrationResponse} isOwner={true} /> }/>
-
-          {/* <Route
-            exact
-            path="data/unverify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+              <AdminOwnerRoutes
+                Component={AllRegistrationResponse}
+                isOwner={true}
+              />
             }
-          /> */}
-          {/* <Route
-            exact
-            path="data/total"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          {/* Agent Data  */}
-          {/* <Route
-            exact
-            path="agent/data/total"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-
-          {/* <Route
-            exact
-            path="agent/data/verify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          {/* 
-          <Route
-            exact
-            path="agent/data/unverify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
+          />
 
           <Route
             exact
@@ -746,19 +742,23 @@ function App() {
               />
             }
           />
-
+          <Route
+            exact
+            path="deleted-post"
+            element={
+              <AdminOwnerRoutes Component={DeletePosts} isOwner={true} />
+            }
+          />
+          <Route
+            exact
+            path="deleted-post/:PostAddress"
+            element={
+              <AdminOwnerRoutes Component={SinglePostDetails} isOwner={true} />
+            }
+          />
+          {/* Route Avaliable Only Admin Owner Agent  */}
           <Route exact path="allpost" element={<AdminAgentOwnerPost />} />
 
-          {/* <Route
-            exact
-            path="allpost/verify"
-            element={<AdminAgentOwnerPost />}
-          /> */}
-          {/* <Route
-            exact
-            path="allpost/unverify"
-            element={<AdminAgentOwnerPost />}
-          /> */}
           <Route
             exact
             path="schedule-visit/:PostId"
@@ -769,13 +769,28 @@ function App() {
             path="recive-offer/:PostId"
             element={<OfferReceived />}
           />
+          {/* deletepost schedulevisit  and delete post offers */}
 
+          <Route
+            exact
+            path="schedule-visit/deleted-post/:PostId"
+            element={<ScheduleYourVisit />}
+          />
+
+          <Route
+            exact
+            path="recive-offer/deleted-post/:PostId"
+            element={<OfferReceived />}
+          />
           <Route
             exact
             path="post/update/:PostId"
             element={<CreatePostMain />}
           />
         </Route>
+
+        {/*All post route*/}
+        <Route path={"/all-post"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
