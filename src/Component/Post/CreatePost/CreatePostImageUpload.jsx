@@ -56,6 +56,7 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
+
   // useEffect(() => {
   //   // remove Coma
 
@@ -130,7 +131,7 @@ export default function CreatePostImageUpload({
     }
   
     // Log the modified object before setting it in state
-    console.log("CopyObj after modifications:", CopyObj);
+    // console.log("CopyObj after modifications:", CopyObj);
   
     // Set the new state
     setPricingDetailsData(CopyObj);
@@ -193,6 +194,7 @@ export default function CreatePostImageUpload({
           }
         }
       } else {
+        console.log("cj")
         uploadimages.forEach((e) => {
           formData.append("PropertyImages", e, e.name);
         });
@@ -263,7 +265,7 @@ export default function CreatePostImageUpload({
                     src="/img/i-icon.png"
                     alt="i-icon"
                   />{" "}
-                  Supported Format: JPEG, PNG,SVG{" "}
+                  Supported Format: JPEG, PNG{" "}
                 </p>
               </div>
 
@@ -277,7 +279,7 @@ export default function CreatePostImageUpload({
                   const files = Array.from(e.target.files);
 
                   files.forEach((file) => {
-                    //  console.log(file)
+                    
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {

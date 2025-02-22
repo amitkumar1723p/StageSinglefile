@@ -18,7 +18,7 @@ export const CreatePostAction = (PostData) => {
           "Content-Type": "multipart/form-data",
         
         
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
         },
 
         withCredentials: true,
