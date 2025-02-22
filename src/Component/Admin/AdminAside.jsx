@@ -31,7 +31,7 @@ export default function AdminAside() {
     // dispatch(getAllUserAction())
     //have to protect for agent
 
-    // console.log(medata?.user?.Role)
+    
     if (["Owner", "Admin"].includes(medata?.user?.Role)) {
       dispatch(GetAllNotificationsAndRequirements());
     }
@@ -41,7 +41,7 @@ export default function AdminAside() {
     }
   }, []);
 
-  // console.log(AllUserResponseData,"hello")
+  
   const { data: adminAlertData, LodingType: AlertType } = useSelector(
     (state) => {
       return state.Post;

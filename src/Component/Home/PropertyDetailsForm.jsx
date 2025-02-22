@@ -32,7 +32,7 @@ export default function PropertyDetailsForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Form Data:", formData);
+  
     const config = {
       headers: {
         
@@ -43,7 +43,7 @@ export default function PropertyDetailsForm() {
     };
       try {
         const response =await axios.post(`${process.env.REACT_APP_API_URL}/get-free-estimation/save`,formData,config)
-        console.log(response)
+         
         if(response.data.success){
           toast.success("query is submittted !!")
           resetForm();

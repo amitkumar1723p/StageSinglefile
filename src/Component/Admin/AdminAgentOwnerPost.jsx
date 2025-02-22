@@ -69,7 +69,7 @@ export default function AdminAgentOwnerPost() {
   const [myQuery, setMyQuery] = useState(queryParams.get("type"));
   // const myQuery = queryParams.get("type");
 
-  // console.log(myQuery,"my query hiiiii")
+ 
 
   // useEffect(()=>{
   //   if (sortOrder !== undefined) {
@@ -92,7 +92,7 @@ export default function AdminAgentOwnerPost() {
 
         setActive(false);
       } else if (myQuery === "success") {
-        // console.log()
+      
         setActive("success");
         setCurrentSelected("Success Post ");
       } else {
@@ -106,7 +106,7 @@ export default function AdminAgentOwnerPost() {
 
   useEffect(() => {
     var filterdData = AllPost;
-    // console.log(AllPost)
+   
     setCurrentDataLength(AllPost?.Post?.length);
     if (currenSelected === "All In-Active posts") {
       filterdData = AllPost?.Post?.filter((item) => !item.PostVerify);
@@ -244,7 +244,7 @@ export default function AdminAgentOwnerPost() {
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent  setData
   useEffect(() => {
     if (AllPost && AllPost.success) {
-      // console.log("this is data ",AllPost.Post.reverse())
+     
 
       setAllPropertyData(AllPost);
     }
@@ -289,7 +289,7 @@ export default function AdminAgentOwnerPost() {
   //handle items per page
   const handleItemsPerPageChange = (value) => {
     setItemsPerPage(parseInt(value, 10)); // Update the state with the selected value
-    // console.log(itemsPerPage)
+    
     // setCurrentPage(1); // Reset to first page when changing items per page
   };
 
@@ -317,7 +317,7 @@ export default function AdminAgentOwnerPost() {
 
   // this fn is used for the updated available or sold out
   const handlePropertyStatus = (value) => {
-    // console.log(AssignProperty,"hj")
+ 
 
     const changePropertyStatusData = {
       propertyStatus: value,
@@ -426,7 +426,7 @@ export default function AdminAgentOwnerPost() {
               className={onPageActive === "rent" ? "select" : ""}
               onClick={() => {
                 setPropertyType("Rent");
-                // console.log("called rent")
+               
                 setPageActive("rent");
                 setCurrentSelected("rent");
                 setMyQuery(null);

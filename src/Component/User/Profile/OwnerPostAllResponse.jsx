@@ -35,7 +35,7 @@ export default function OwnerPostAllResponse() {
   
  
   let MaskContactnumber = useCallback((ContactNumber) => {
-    console.log("Rune")
+    
     if (ContactNumber) {
       const phoneStr = ContactNumber.toString();
       return phoneStr.slice(0, 2) + "XXXX" + phoneStr.slice(6);

@@ -228,7 +228,7 @@ export const GetSinglePostAction = (PostId, showDeletePost) => {
 // Update Post Action
 
 export const UpdatePostAction = (PostData, PostId) => {
-  console.log(PostData);
+ 
   return async (dispatch) => {
     try {
       dispatch({
@@ -790,7 +790,7 @@ export const SimilarProperty = (postId) => {
       };
 
       const { data } = await axios.get(url, config); // Pass postId as an object
-      //  console.log(similar)
+      
 
       dispatch({
         type: "SimilarPropertySuccess",
@@ -856,7 +856,7 @@ export const GetAllNotificationsAndRequirements = () => {
 // change property state available or sold out
 
 export const changePropertyStatus = (updateData) => {
-  console.log(updateData, "h");
+ 
   return async (dispatch) => {
     try {
       dispatch({

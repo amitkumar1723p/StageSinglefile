@@ -13,7 +13,7 @@ export default function ViewOwnerDetails({ SetShow }) {
     };
   }, []);
 
-  console.log(OwnerDetails);
+  
 
   return (
     <div className="view-owner-details-modal">

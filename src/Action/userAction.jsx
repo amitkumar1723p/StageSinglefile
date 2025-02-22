@@ -588,7 +588,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 // Create Tenant Post Response
 
 export const ViewOwnerDetailsAction = (Document) => {
-  console.log("4304949",Document)
+ 
   return async (dispatch) => {
     try {
       dispatch({
@@ -606,11 +606,11 @@ export const ViewOwnerDetailsAction = (Document) => {
        
       let data ;
       if (Document.TenantsDetails) {
-         console.log("kei3i")
+       
         const response = await axios.post(url, Document.TenantsDetails, config);
         data = response.data;
     } else {
-       console.log("run")
+     
         const response = await axios.get(url, config);
         data = response.data;
     }

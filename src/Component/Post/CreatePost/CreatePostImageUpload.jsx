@@ -236,7 +236,7 @@ export default function CreatePostImageUpload({
                   const files = Array.from(e.target.files);
 
                   files.forEach((file) => {
-                    //  console.log(file)
+                     
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {
