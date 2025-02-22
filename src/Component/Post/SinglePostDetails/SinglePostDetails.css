@@ -516,7 +516,7 @@ body {
 
 .prop-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   /* gap: 5px; */
   margin-top: 12px;
 }
@@ -651,16 +651,16 @@ body {
   line-height: normal;
 }
 
-.rent-price-section-similar-property{
+.rent-price-section-similar-property {
   color: rgb(153, 153, 153);
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .property-price {
   margin: 5x 0;
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 18px;
   color: #333333;
   font-size: 14px;
   font-style: normal;
@@ -1705,7 +1705,7 @@ body {
   .property-actions {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 53px;
   }
 
   .property-info {
@@ -1737,7 +1737,7 @@ body {
   }
 
   .property-price {
-    gap: 60px;
+    gap: 50px;
   }
 
   /* .main-img-box .other-image {
@@ -1904,7 +1904,7 @@ body {
 
   .property-actions {
     flex-direction: row;
-    gap: 70px;
+    gap: 60px;
   }
 
   .property-info-tags {
@@ -2029,7 +2029,9 @@ body {
   }
 }
 
-/* @media (min-width: 480px) and (max-width: 2160px) {
+/* @media (min
+
+and (max-width: 2160px) {
     .property-info-mobile {
       display: none;
     }
@@ -2123,8 +2125,6 @@ body {
 
 /* make your offer */
 
-
-
 .original-price {
   display: inline-block;
   cursor: pointer;
@@ -2200,4 +2200,33 @@ body {
     transform: scale(1);
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
   }
+}
+
+@media (max-width: 376px) {
+  .overviwe-main {
+    border-radius: 12px;
+    margin-top: 60px;
+  }
+
+  .original-price {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 0.6rem;
+    border-radius: 8px;
+
+    background: linear-gradient(135deg, #037edb, #037edb, #037edb);
+    color: white;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .property-price {
+    gap: 30px;
+  }
+  .property-actions {
+    flex-direction: row;
+    gap: 38px;
+}
 }

@@ -219,12 +219,12 @@ const AllPostRender = () => {
         {/* Posts or Skeleton Loader */}
         <div className="home-postContainer all-post-showpost">
           <p className="total-post-lable-allpost-1">
-            Total result {filteredData?.length}
+            Showing {filteredData?.length} Listing
           </p>
 
           <div className="total-post-length-container">
             <p className="total-post-lable-allpost">
-              Total result {filteredData?.length}
+             Showing {filteredData?.length} Listing
             </p>
 
             <button

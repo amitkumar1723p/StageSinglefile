@@ -451,7 +451,7 @@ const PropertyFilters = () => {
             <div className="filter-home-card">
               <div className="total-post-length-container">
                 <p className="total-post-lable-allpost">
-                  Total result {data?.allPost?.length}
+                  Showing {data?.allPost?.length} Lisitng
                 </p>
 
                 <button

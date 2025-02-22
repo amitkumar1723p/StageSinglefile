@@ -205,7 +205,8 @@ color: #333;
   /* Modal overlay base styles */
 .all-post-filter-overlay {
     position: fixed;
-    top: 0;
+    
+    bottom: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -363,12 +364,13 @@ color: #333;
       gap: 20px;
       grid-template-columns: repeat(1, 1fr);
       margin-bottom: 300px;
+      margin-top: 15px;
     }
   }
 
   @media (min-width: 0px) and (max-width: 480px) {
     .home {
-      width: 420px;
+      width: auto;
       margin: 5px auto;
       position: relative;
       min-height: 120px;
@@ -392,7 +394,7 @@ color: #333;
         /* background: red; */
         gap: 8px;
         padding: 0;
-       width: 420px;
+       width: auto;
         /* margin: 0 auto;     */
     }
     .all-post-showpost {
