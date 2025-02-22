@@ -225,7 +225,7 @@ export const BiddingFormAction = (queryData) => {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          // "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
 
         withCredentials: true,
