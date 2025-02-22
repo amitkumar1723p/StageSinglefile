@@ -786,7 +786,7 @@ const SingleCard = ({ PostData, index }) => {
               if (
                 PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
               ) {
-                const phoneNumber = "9053608395"; // Replace with actual phone number
+                const phoneNumber = "7837840785"; // Replace with actual phone number
                 const userName = medata?.user?.name || "Interested Buyer"; // Fallback if name is unavailable
                 const message = encodeURIComponent(
                   `Hello, I am interested in a   ${PostData?.PropertyDetails.BHKType} BHk ${PostData?.BasicDetails.ApartmentType} In ${PostData?.LocationDetails?.ProjectName} For ${PostData?.BasicDetails.PropertyAdType} In ${PostData?.LocationDetails.Landmark} ${PostData?.LocationDetails.City}.Could you please share more details?`

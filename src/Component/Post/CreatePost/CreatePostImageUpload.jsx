@@ -199,7 +199,7 @@ export default function CreatePostImageUpload({
           formData.append("PropertyImages", e, e.name);
         });
       }
-
+  
       if (update) {
         let confrim = window.confirm("Are you update this Post");
         if (confrim) {
