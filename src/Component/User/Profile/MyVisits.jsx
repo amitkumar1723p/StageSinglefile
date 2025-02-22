@@ -48,7 +48,7 @@ export default function MyVisits() {
           </thead>
           <tbody>
             {MyVisitsData.ScheduleVisits?.map((visit) => {
-              const PostData = visit.PostData.PostId;
+              const PostData = visit?.PostData?.PostId;
               const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
 
               return (
@@ -70,7 +70,7 @@ export default function MyVisits() {
                         let url = `/post-detail/${PostName.toLowerCase()
                           .replaceAll(" ", "-")
                           .replace(",", "")
-                          .replaceAll("/", "-")}-${PostData._id}`;
+                          .replaceAll("/", "-")}-${PostData?._id}`;
 
                         navigate(`${url}`);
                       }}>{PostData?._id} </span></td>

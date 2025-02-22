@@ -58,8 +58,7 @@ export default function AdminOwnerRoutes({ Component, isOwner }) {
         <>
           {medata &&
             (medata.IsAuthenticated == false || // User is not authenticated
-            (!isOwner &&
-              !["Admin", "Owner", "Agent"].includes(medata?.user?.Role)) ||
+            (!isOwner &&!["Admin", "Owner", "Agent"].includes(medata?.user?.Role)) ||
             (medata?.user?.Role === "Admin" &&
               medata?.user?.AdminVerify == false) || // admin is not verify
             (medata?.user?.Role === "Agent" &&

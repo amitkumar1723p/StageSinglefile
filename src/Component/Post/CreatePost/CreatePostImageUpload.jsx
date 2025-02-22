@@ -280,6 +280,7 @@ export default function CreatePostImageUpload({
 
                   files.forEach((file) => {
                     
+                     
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {

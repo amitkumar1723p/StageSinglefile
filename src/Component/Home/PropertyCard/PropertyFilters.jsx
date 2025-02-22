@@ -37,6 +37,7 @@ const PropertyFilters = () => {
     return state.GetAllPost;
   });
   console.log(data);
+
   const handleClicked = (v) => {
     setIsClicked(v);
   };
@@ -85,6 +86,7 @@ const PropertyFilters = () => {
 
     // eslint-disable-next-line
   }, [Filter, querry]);
+
   useEffect(() => {
     if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
       return navigate("/");
@@ -109,6 +111,7 @@ const PropertyFilters = () => {
       if (sessionStorage.getItem("isReloaded")) {
         sessionStorage.removeItem("isReloaded");
 
+        window.alert("first load");
         dispatch(
           GetSingleProjectNameDataAction({
             ProjectName: querry.get("ProjectName"),
@@ -140,6 +143,7 @@ const PropertyFilters = () => {
       };
     }
   }, []);
+
   const bhkOptions = [1, 2, 3, 4, 5];
   const ApartmentTypeOptions = [
     "Apartment",
@@ -206,6 +210,10 @@ const PropertyFilters = () => {
               >
                 Clear Filter <img src="/img/clear-filter.svg" alt="" />
               </div>
+            </div>
+            <div className="filter-title">
+              <h2 className="filter-title-1">Filter Your Search</h2>
+              {/* <p className="filter-title-1">clear Filter</p> */}
             </div>
 
             <div className="filter-dummyLine"></div>
@@ -463,7 +471,6 @@ const PropertyFilters = () => {
               </div>
               <HomeCard />
             </div>
-         
           </div>
           {/* Modal */}
           {showModal && (

@@ -17,7 +17,7 @@
 //     });
 //   };
 //   const vv =window.innerWidth <= 768 
-//   console.log(vv)
+ 
 
 //   const quickLinks = [
 //     { name: 'Home', hash: "" },

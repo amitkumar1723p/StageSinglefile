@@ -207,7 +207,7 @@ const NotifyRequirements = () => {
               }`}
               onClick={() => {
                 setShowUnacknowledged("all");
-                // console.log(showUnacknowledged)
+             
                 setDisplayData(acknowledgedNotifies);
               }}
             >

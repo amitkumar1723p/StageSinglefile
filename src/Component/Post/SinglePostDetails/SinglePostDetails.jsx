@@ -289,11 +289,16 @@ export default function SinglePostDetails() {
 
     let postaddress = Params.PostAddress;
     let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
-    setSinglePostId(postId);
+    if (location.pathname.includes("/admin/deleted-post")) {
+      dispatch(GetSinglePostAction(postId, true));
+    } else {
+      //  function not get single-post-details
+      dispatch(GetSinglePostAction(postId));
+      dispatch(SimilarProperty(postId));
+    }
 
-    dispatch(GetSinglePostAction(postId));
-    dispatch(SimilarProperty(postId));
-  }, [Params?.PostAddress]);
+    
+  }, [Params?.PostAddress ]);
 
   return (
     <>
@@ -350,8 +355,10 @@ export default function SinglePostDetails() {
             <div className="property-image">
               {/* post verified-section-start */}
               <div className="icon-box">
-                {getSinglePostData.SinglePost.PostVerifyShow ? (
-                  getSinglePostData.SinglePost.PostVerify ? (
+                {
+                
+                getSinglePostData?.SinglePost?.PostVerifyShow ? (
+                  getSinglePostData?.SinglePost?.PostVerify ? (
                     <div className="active-post">
                       <img src="/img/verified-tag.svg" alt="verified-tag" />
                       <p className="active-post-para">Verified</p>
@@ -963,7 +970,6 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
                 )}
-               
               </div>
               {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                 <div className="prop-right">
@@ -1099,7 +1105,6 @@ export default function SinglePostDetails() {
                   )}
 
                   {/* View Response Form  */}
-                  {/* {console.log(showTenantDetailsForm)} */}
 
                   {showTenantDetailsForm && (
                     <WindowComponent

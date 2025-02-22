@@ -400,7 +400,7 @@ export const VerifyAdminAction = ({ userdata }, UserId) => {
 };
 
 // Get All Bidding Data  sort by Post id
-export const GetPost_BiddingDocumentAction = (PostId) => {
+export const GetPost_BiddingDocumentAction = (PostId , DeletePost) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -408,7 +408,15 @@ export const GetPost_BiddingDocumentAction = (PostId) => {
         payload: "GetPost_BiddingDocumentRequest",
       });
 
-      let url = `${api_Base_Url}/Biddingform/get-bidding-data/${PostId}`;
+    
+
+       let url ;
+
+      if (DeletePost == true) {
+        url = `${api_Base_Url}/Biddingform/get-bidding-data/deleted-post/${PostId}`;
+      } else {
+        url = `${api_Base_Url}/Biddingform/get-bidding-data/${PostId}`;
+      }
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -580,7 +588,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 // Create Tenant Post Response
 
 export const ViewOwnerDetailsAction = (Document) => {
-  console.log("4304949",Document)
+ 
   return async (dispatch) => {
     try {
       dispatch({
@@ -598,11 +606,11 @@ export const ViewOwnerDetailsAction = (Document) => {
        
       let data ;
       if (Document.TenantsDetails) {
-         console.log("kei3i")
+       
         const response = await axios.post(url, Document.TenantsDetails, config);
         data = response.data;
     } else {
-       console.log("run")
+     
         const response = await axios.get(url, config);
         data = response.data;
     }
@@ -855,7 +863,7 @@ export const ReportSuspiciousProperty = (updateData) => {
 export const GetMyVisitsAction = () => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "GetMyVisitsRequest" });
+      dispatch({ type: "GetMyVisitsRequest" })
 
       let url = `${api_Base_Url}/schedule-visit/my-visits`;
 
