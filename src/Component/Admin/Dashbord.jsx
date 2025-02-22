@@ -81,7 +81,7 @@ const Dashboard = () => {
           dispatch(GetDeletedPostsAction());
         }
       }
-  //  console.log(medata.user.Role)
+      //  console.log(medata.user.Role)
       if (["Admin", "Agent"].includes(medata.user.Role)) {
         dispatch(Admin_AgentGetAllPostAction());
       }
@@ -211,19 +211,25 @@ const Dashboard = () => {
             )}
             {medata?.user?.Role === "Owner" && (
               <>
-                <Link to="/admin/deleted-post?Type=AllPost" target="_blank">
-                  <div className="card p-3 cursor-pointer">
-                    <div className="Admin-box">
-                      <p className="total-number">
-                        {DeletedPost?.deletedPosts?.length || 0}
-                      </p>
-                      <img src="/img/In-ActivePosts.png" alt="post" />
-                    </div>
-                    <h3> Deleted Lisitng </h3>
-
-                    <p className="viewall">View All</p>
+                <div
+                  className="card p-3 cursor-pointer"
+                  onClick={() => {
+                    window.open(
+                      "/admin/deleted-post?Type=AllPost",
+                      "DeletedPostTab"
+                    );
+                  }}
+                >
+                  <div className="Admin-box">
+                    <p className="total-number">
+                      {DeletedPost?.deletedPosts?.length || 0}
+                    </p>
+                    <img src="/img/In-ActivePosts.png" alt="post" />
                   </div>
-                </Link>
+                  <h3> Deleted Lisitng </h3>
+
+                  <p className="viewall">View All</p>
+                </div>
 
                 <Link to="/admin/all-registration-response">
                   <div className="card p-3 cursor-pointer">

@@ -391,8 +391,11 @@ export default function AdminAgentOwnerPost() {
             >
               Success
             </button>
-            <button>Expired</button>
-            {medata?.user?.Role =="Owner" &&  <Link to={`/admin/deleted-post?Type=AllPost` } target="_blank">  <button  >Deleted Post</button></Link>}
+            {/* <button>Expired</button> */}
+            {medata?.user?.Role =="Owner" && <button onClick={() => {
+    window.open('/admin/deleted-post?Type=AllPost', 'DeletedPostTab');
+  }} >Deleted Post</button> }  
+            {/* <Link to={`/admin/deleted-post?Type=AllPost` } target="_blank"> </Link> */}
            
             <button
               onClick={handlePropertyOrder}

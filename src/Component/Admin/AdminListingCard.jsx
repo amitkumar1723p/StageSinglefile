@@ -32,7 +32,7 @@ export default function AdminListingCard({
     ExpiredDate: "",
   });
 
-  // console.log(selectAllProperty)
+  
   const navigate = useNavigate();
 
   const formatReservePrice = (price) => {
@@ -107,11 +107,10 @@ export default function AdminListingCard({
       setToggleBtn(false);
     }
   }, [PostData?.PostVerifyShow]);
- 
+
   useEffect(() => {
-    console.log("kjsd" ,AssignPostData)
+     
     if (AssignPostData?.success == true) {
-      
       let AssingPosts = AssignPostData.AssignProperty.filter((item) => {
         return (
           item.AssignedPropertys.some((item) => item.PostId === PostData._id) &&
@@ -211,28 +210,29 @@ export default function AdminListingCard({
             <div className="heading-name">
               {PostData.LocationDetails.ProjectName}
               {medata?.user?.Role != "Agent" && (
-                
                 <>
-
-                {console.log("AssignProperty",AssignProperty)}
-                 {console.log( "isAssignedToAnyUser",isAssignedToAnyUser)}
+              
                   <div className="edit-del-section">
                     {/* {AssignProperty && ( */}
-                      <div className="asign-user">
-                         
-                        {isAssignedToAnyUser.length > 0 && (
-                          <div className="show-admin-data">
-                            {isAssignedToAnyUser.map((AssignPropertys, i) => {
-                              return (
-                                <div
-                                  key={i}
-                                  className="adminNameButton"
-                                  onClick={() => {
+                    <div className="asign-user">
+                      {isAssignedToAnyUser.length > 0 && (
+                        <div className="show-admin-data">
+                          {isAssignedToAnyUser.map((AssignPropertys, i) => {
+                            return (
+                              <div
+                                key={i}
+                                className="adminNameButton"
+                                onClick={() => {
+                                  if (
+                                    PostData?.PostDelete?.Status !== "delete"
+                                  ) {
+
+
                                     const RemoveAssignProperty = {
                                       AdminId: AssignPropertys.AdminId._id,
                                       PostId: PostData._id,
                                     };
-
+  
                                     let confrim = window.confirm(
                                       "Are You Sure About This"
                                     );
@@ -243,17 +243,22 @@ export default function AdminListingCard({
                                         })
                                       );
                                     }
-                                  }}
-                                >
-                                  {AssignPropertys.AdminId?.Name} - (
-                                  {AssignPropertys.AdminId?.Role}){" "}
-                                  <span>🗑️</span>{" "}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
+                                  }
+
+                                  
+                                }}
+                              >
+                                {AssignPropertys.AdminId?.Name} - (
+                                {AssignPropertys.AdminId?.Role}){" "}
+                                {PostData?.PostDelete?.Status != "delete" && (
+                                  <span>🗑️</span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                     {/* // )} */}
 
                     {location.pathname.includes("admin") && (
@@ -263,6 +268,8 @@ export default function AdminListingCard({
                             <>
                               <div>
                                 <button
+                                 className="px-1 py-2 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+                                //  className="post-verify-btn"
                                   onClick={(e) => {
                                     let confirm = window.confirm(
                                       "Are you sure Restore This Post"
@@ -306,7 +313,7 @@ export default function AdminListingCard({
                                 </Link>
                               </div>{" "}
                               <div
-                                className="delete-edit-box"
+                                className="PostData?.PostDelete?.Status-edit-box"
                                 onClick={(e) => {
                                   const confrim = window.confirm(
                                     `Are you sure you want to delete the post with ID (${PostData._id})`

@@ -15,16 +15,23 @@ export default function DeletePosts() {
   const { data: VistAndOfferData } = useSelector((state) => {
     return state.VistAndOffer;
   });
-  //  get All Assign Property 
-    const { data: AssignPostData } = useSelector((state) => {
-      return state.AssignPropertys;
-    });
-  
+  //  get All Assign Property
+  const { data: AssignPostData } = useSelector((state) => {
+    return state.AssignPropertys;
+  });
 
   const dispatch = useDispatch();
   const [showDeletePost, setshowDeletePost] = useState([]);
+  const [countFilterPost, secoutFilterPost] = useState([]);
   const [SearchValue, setSearhValue] = useState("");
   const [querry, setquerry] = useSearchParams();
+  const [propertyOrder, setPropertyOrder] = useState("decending");
+
+  //  pagination
+  const [page, setPage] = useState(1); // Current page for pagination
+  const [totalPages, setTotalPages] = useState(0); // Total number of pages
+  const itemsPerPage = 25; // Number of items per page
+
   //  if  data is  exit in redux store not call thsi api
   useEffect(() => {
     if (!DeletedPost) {
@@ -33,11 +40,9 @@ export default function DeletePosts() {
     if (!VistAndOfferData) {
       dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
     }
-     if(!AssignPostData){
-   dispatch(GetAllAssignProperty())
-     }
-     
-   
+    if (!AssignPostData) {
+      dispatch(GetAllAssignProperty());
+    }
   }, []);
 
   const {
@@ -50,7 +55,6 @@ export default function DeletePosts() {
 
   useEffect(() => {
     if (adminAlertData && ["RestorePostRequest"].includes(LodingType)) {
-      alert("Admin_OwnerGetAllPostAction PostVerify");
       if (adminAlertData.success === true) {
         dispatch(GetDeletedPostsAction());
       }
@@ -65,56 +69,93 @@ export default function DeletePosts() {
   useEffect(() => {
     //  delete post filter
     const FilterType = querry.get("Type");
+    if (DeletedPost?.deletedPosts) {
+      let filteredPosts = DeletedPost?.deletedPosts;
 
-    if (SearchValue?.length > 0) {
-      let search_filter_post = DeletedPost?.deletedPosts?.filter((item) => {
-        const contactNumber = item?.CreatePostUser?.ContactNumber;
-
-        return (
-          item?._id?.toLowerCase().includes(SearchValue.toLowerCase()) ||
-          item?.CreatePostUser?.Name.toLowerCase().includes(
-            SearchValue.toLowerCase()
-          ) ||
-          item?.LocationDetails?.ProjectName.toLowerCase().includes(
-            SearchValue.toLowerCase()
-          ) ||
-          (contactNumber && String(contactNumber).includes(SearchValue)) // Convert to string before calling includes
-        );
-      });
-
-      setshowDeletePost(search_filter_post);
-    } else {
-      if (FilterType == "AllPost") {
-        setshowDeletePost(DeletedPost?.deletedPosts);
-      } else if (FilterType == "Active") {
-        setshowDeletePost(
-          DeletedPost?.deletedPosts?.filter((post) => {
+      
+      
+  //  user change filter without search querry 
+     
+        if (FilterType == "AllPost") {
+          window.scrollTo(0, 0);
+          filteredPosts = DeletedPost?.deletedPosts;
+          secoutFilterPost(filteredPosts);
+        } else if (FilterType == "Active") {
+          window.scrollTo(0, 0);
+          filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post.PostVerify == true;
-          })
-        );
-      } else if (FilterType == "In-Active") {
-        setshowDeletePost(
-          DeletedPost?.deletedPosts?.filter((post) => {
+          });
+          secoutFilterPost(filteredPosts);
+        } else if (FilterType == "In-Active") {
+          window.scrollTo(0, 0);
+          filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post.PostVerify == false;
-          })
-        );
-      } else if (FilterType == "Sale") {
-        setshowDeletePost(
-          DeletedPost?.deletedPosts?.filter((post) => {
+          });
+          secoutFilterPost(filteredPosts);
+        } else if (FilterType == "Sale") {
+          window.scrollTo(0, 0);
+          filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post?.BasicDetails?.PropertyAdType == "Sale";
-          })
-        );
-      } else if (FilterType == "Rent") {
-        setshowDeletePost(
-          DeletedPost?.deletedPosts?.filter((post) => {
+          });
+          secoutFilterPost(filteredPosts);
+        } else if (FilterType == "Rent") {
+          window.scrollTo(0, 0);
+          filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post?.BasicDetails?.PropertyAdType == "Rent";
-          })
-        );
-      } else {
-        setshowDeletePost(DeletedPost?.deletedPosts);
+          });
+        
+         
       }
+      if (SearchValue?.length > 0) {
+        let search_filter_post = filteredPosts?.filter((item) => {
+          const contactNumber = item?.CreatePostUser?.ContactNumber;
+
+          return (
+            item?._id?.toLowerCase().includes(SearchValue.toLowerCase()) ||
+            item?.CreatePostUser?.Name.toLowerCase().includes(
+              SearchValue.toLowerCase()
+            ) ||
+            item?.LocationDetails?.ProjectName.toLowerCase().includes(
+              SearchValue.toLowerCase()
+            ) ||
+            (contactNumber && String(contactNumber).includes(SearchValue)) // Convert to string before calling includes
+          );
+        });
+        filteredPosts = search_filter_post;
+        // setshowDeletePost(search_filter_post);
+      }
+      //  user chage filter with search querry 
+
+       
+      secoutFilterPost(filteredPosts);
+
+
+      if (propertyOrder === "ascending") {
+        filteredPosts.sort(
+          (a, b) => new Date(a.createAt) - new Date(b.createAt)
+        ); // Ascending order
+      } else if (propertyOrder === "descending") {
+        filteredPosts.sort(
+          (a, b) => new Date(b.createAt) - new Date(a.createAt)
+        ); // Descending order
+      }
+
+      const newTotalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+      setTotalPages(newTotalPages); // Update total pages
+
+      // Reset the page if it exceeds the new total pages
+      if (page > newTotalPages) {
+        setPage(1); // Reset to the first page
+      }
+
+      const startIndex = (page - 1) * itemsPerPage;
+      const endIndex = page * itemsPerPage;
+
+      const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+
+      setshowDeletePost(postsToDisplay); // Set
     }
-  }, [DeletedPost, querry, SearchValue]);
+  }, [DeletedPost, querry, SearchValue, page, propertyOrder]);
 
   //  back button
   useEffect(() => {
@@ -132,12 +173,39 @@ export default function DeletePosts() {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []);
+
+  // Pagination logic state
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage); // Go to the selected page
+  };
   return (
     <>
+      {/* Filter nav  */}
       <div className="admin-filter-main-parent-box">
         <p className="AllListing-admin">
-          <span> Total Deleted Posts ({DeletedPost?.deletedPosts?.length})</span> {`>`} <span> {`${querry.get("Type")} (${showDeletePost?.length})`} </span>
-             
+          <span>
+            {" "}
+            Total Deleted Posts ({DeletedPost?.deletedPosts?.length})
+          </span>{" "}
+          {querry.get("Type") && (
+            <span>
+              {" "}
+              {`>`} {`${querry.get("Type")} (${countFilterPost?.length})`}{" "}
+            </span>
+          )}
         </p>
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
@@ -182,7 +250,7 @@ export default function DeletePosts() {
               Success
             </button> */}
 
-            <button>{/* { ? <>Sort (↑)</> : <>Sort(↓)</>} */}</button>
+            
             {/* <select id="itemsPerPage">
               <option value="25">25</option>
               <option value="50">50</option>
@@ -205,8 +273,21 @@ export default function DeletePosts() {
             >
               Sale
             </button>
-          </div>
 
+            <button
+            onClick={() => {
+              if (propertyOrder === "ascending") {
+                setPropertyOrder("descending");
+              } else {
+                setPropertyOrder("ascending");
+              }
+            }}
+            style={{ pointerEvents: "auto" }}
+          >
+            {propertyOrder === "ascending" ? <>Sort (↑)</> : <>Sort(↓)</>}
+          </button>
+          </div>
+      
           {/* <button>Exprired</button>
         <button>Reported</button>
         <button>Success</button> */}
@@ -217,7 +298,6 @@ export default function DeletePosts() {
               placeholder="Search Here"
               value={SearchValue?.trimStart()}
               onChange={(e) => {
-                 
                 window.scrollTo(0, 0);
                 setSearhValue(e.target.value);
               }}
@@ -243,8 +323,6 @@ export default function DeletePosts() {
       </div>
 
       <div className="Admin-delete-property-card-main-box">
-        {/* {console.log(DeletedPost)} */}
-        {}
         {/* Displaying posts */}
         {showDeletePost?.length > 0 ? (
           showDeletePost?.map((postdata, i) => {
@@ -254,59 +332,40 @@ export default function DeletePosts() {
           <p>No posts available</p>
         )}
 
-        {/* Pagination */}
-        {/* <nav>
-          <ul className="pagination">
-            <li>
+        {/* Pagination controls start */}
+        <nav aria-label="Page navigation example">
+          <ul className="pagination justify-content-center">
+            <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
               <button className="page-link" onClick={handlePrevPage}>
-                Prev
+                Pre
               </button>
             </li>
+
+            {/* Dynamic page numbers */}
             {[...Array(totalPages).keys()].map((i) => (
-              <li key={i}>
+              <li
+                key={i + 1}
+                className={`page-item ${page === i + 1 ? "active" : ""}`}
+              >
                 <button
-                  className={`page-link ${page === i + 1 ? "active" : ""}`}
-                  onClick={() => handlePageClick(i + 1)}
+                  className="page-link"
+                  onClick={() => handlePageChange(i + 1)}
                 >
                   {i + 1}
                 </button>
               </li>
             ))}
-            <li>
+
+            <li
+              className={`page-item ${page === totalPages ? "disabled" : ""}`}
+            >
               <button className="page-link" onClick={handleNextPage}>
                 Next
               </button>
             </li>
           </ul>
-        </nav> */}
+        </nav>
       </div>
-
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className={`page-item`}>
-            <button className="page-link">Pre</button>
-          </li>
-
-          {/* Dynamic page numbers */}
-          {/* {[...Array(totalPages).keys()].map((i) => (
-            <li
-              key={i + 1}
-              className={`page-item ${page === i + 1 ? "active" : ""}`}
-            >
-              <button
-                className="page-link"
-                onClick={() => handlePageChange(i + 1)}
-              >
-                {i + 1}
-              </button>
-            </li>
-          ))} */}
-
-          <li className={`page-item`}>
-            <button className="page-link">Next</button>
-          </li>
-        </ul>
-      </nav>
     </>
   );
 }
