@@ -516,7 +516,7 @@ body {
 
 .prop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   /* gap: 5px; */
   margin-top: 12px;
 }
@@ -1597,6 +1597,13 @@ body {
 }
 
 @media (max-width: 768px) {
+
+  .prop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 5px; */
+    margin-top: 12px;
+  }
   /* .property-details-container {
     flex-direction: column;
     align-items: center;
