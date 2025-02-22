@@ -15,34 +15,35 @@ export default function HomeCard() {
   const { loading, data } = useSelector((state) => {
     return state.GetAllPost;
   });
-  const [filterdPost,setFilterdPost] = useState(null);
-  const [allData,setAllData] = useState([]);
+  const [filterdPost, setFilterdPost] = useState(null);
+  const [allData, setAllData] = useState([]);
 
-  useEffect(()=>{
-
-    function filter(){
-       if (!data || !data.allPost){
-        return
-       }else{
-        
-        const soldout = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus==="sold out")
-        const available = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus!=="sold out")
-      console.log(available,soldout)
-        setFilterdPost([...available,...soldout]);
-        console.log(filterdPost)
-       }
+  useEffect(() => {
+    function filter() {
+      if (!data || !data.allPost) {
+        return;
+      } else {
+        const soldout = data?.allPost?.filter(
+          (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
+        );
+        const available = data?.allPost?.filter(
+          (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
+        );
+        console.log(available, soldout);
+        setFilterdPost([...available, ...soldout]);
+        console.log(filterdPost);
+      }
     }
-    filter()
-  },[data])
+    filter();
+  }, [data]);
 
-  useEffect(()=>{
-    console.log("this i ffatttt")
+  useEffect(() => {
+    // console.log("this i ffatttt")
 
-    setAllData(()=>{
+    setAllData(() => {
       return filterdPost;
     });
-  },[filterdPost])
-
+  }, [filterdPost]);
 
   return (
     <>

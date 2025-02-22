@@ -178,7 +178,7 @@ color: #333;
   
     .allPostrender-showpost {
       display: grid;
-      gap: 5px;
+      gap: 20px;
       grid-template-columns: repeat(2, 1fr);
       margin-bottom: 300px;
     }
@@ -360,7 +360,7 @@ color: #333;
     }
     .allPostrender-showpost {
       display: grid;
-      gap: 5px;
+      gap: 20px;
       grid-template-columns: repeat(1, 1fr);
       margin-bottom: 300px;
     }

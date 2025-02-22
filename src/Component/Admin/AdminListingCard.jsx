@@ -403,13 +403,13 @@ export default function AdminListingCard({
               </div>
 
               <div className="admin-btn-active-btn">
-                <Link
+                <Link 
                   to={`/post-detail/${PropertyAddress.toLowerCase()
                     .replaceAll(" ", "-")
                     .replace(",", "")
                     .replaceAll("/", "-")}-${PostData._id}`}
                 >
-                  <button className="contact-button btn-sm">
+                  <button className="contact-button btn-sm" >
                     View Listing
                   </button>
                 </Link>
