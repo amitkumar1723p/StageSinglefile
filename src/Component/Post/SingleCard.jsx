@@ -48,6 +48,68 @@ const SingleCard = ({ PostData, index }) => {
     //aminities section scroll button start
 
 
+    // const sliderRef = useRef(null);
+    // const intervalRef = useRef(null);
+    // const [direction, setDirection] = useState("right");
+
+    // const scrollLeft = () => {
+    //     if (sliderRef.current) {
+    //         sliderRef.current.scrollBy({ left: -310, behavior: "smooth" });
+    //         setDirection("left");
+    //         resetAutoScroll();
+    //     }
+    // };
+
+    // const scrollRight = () => {
+    //     if (sliderRef.current) {
+    //         sliderRef.current.scrollBy({ left: 310, behavior: "smooth" });
+    //         setDirection("right");
+    //         resetAutoScroll();
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     intervalRef.current = setInterval(() => {
+    //         if (sliderRef.current) {
+    //             const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+                
+    //             if (scrollLeft + clientWidth >= scrollWidth) {
+    //                 setDirection("left");
+    //             } else if (scrollLeft <= 0) {
+    //                 setDirection("right");
+    //             }
+
+    //             if (direction === "right") {
+    //                 scrollRight();
+    //             } else {
+    //                 scrollLeft();
+    //             }
+    //         }
+    //     }, 3000);
+
+    //     return () => clearInterval(intervalRef.current);
+    // }, [direction]);
+
+    // const resetAutoScroll = () => {
+    //     clearInterval(intervalRef.current);
+    //     intervalRef.current = setInterval(() => {
+    //         if (sliderRef.current) {
+    //             const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+                
+    //             if (scrollLeft + clientWidth >= scrollWidth) {
+    //                 setDirection("left");
+    //             } else if (scrollLeft <= 0) {
+    //                 setDirection("right");
+    //             }
+
+    //             if (direction === "right") {
+    //                 scrollRight();
+    //             } else {
+    //                 scrollLeft();
+    //             }
+    //         }
+    //     }, 3000);
+    // };
 
 
     const formatReservePrice = (price) => {
