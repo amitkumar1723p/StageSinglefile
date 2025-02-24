@@ -78,7 +78,7 @@ const PropertyFilters = () => {
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       dispatch(
         GetAllPostAction({
-          ProjectName: querry.get("ProjectName"),
+          Location: querry.get("Location"),
           PropertyAdType: querry.get("PropertyAddType"),
           BHK: Filter.BHK,
           ApartmentType: Filter.ApartmentType,
@@ -90,8 +90,10 @@ const PropertyFilters = () => {
 
     // eslint-disable-next-line
   }, [Filter, querry]);
+
+
   useEffect(() => {
-    if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
+    if (!querry.get("Location")) {
       return navigate("/");
     } else {
       // Check if it is the first page load
@@ -104,7 +106,7 @@ const PropertyFilters = () => {
         );
         dispatch(
           GetAllPostAction({
-            ProjectName: querry.get("ProjectName"),
+            ProjectName: querry.get("Location"),
             PropertyAdType: querry.get("PropertyAddType"),
           })
         );
@@ -116,12 +118,12 @@ const PropertyFilters = () => {
 
         dispatch(
           GetSingleProjectNameDataAction({
-            ProjectName: querry.get("ProjectName"),
+            ProjectName: querry.get("Location"),
           })
         );
         dispatch(
           GetAllPostAction({
-            ProjectName: querry.get("ProjectName"),
+            ProjectName: querry.get("Location"),
             PropertyAdType: querry.get("PropertyAddType"),
           })
         );

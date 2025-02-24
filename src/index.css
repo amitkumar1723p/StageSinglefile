@@ -17,6 +17,13 @@ body {
   font-size: 16px;
 }
 
+/* Disable scrolling when modal is open */
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -20,11 +20,17 @@ export default function HomeCard() {
   useEffect(()=>{
 
     function filter(){
+      console.log(data)
+      if(!data || !data?.allPost){
+        return 
+      }
         const soldout = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus==="sold out")
         const available = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus!=="sold out")
 
-        setFilterdPost([...available,...soldout]);
-        console.log(filterdPost)
+        setFilterdPost(()=>{
+          return [...available,...soldout]
+        });
+        // console.log(filterdPost)
     }
     filter()
   },[data])
@@ -32,9 +38,9 @@ export default function HomeCard() {
   return (
     <>
       <div className="home">
-        {data &&
-          data.success === true &&
-          (data.allPost.length > 0 ? (
+        {
+          data?.success === true ?
+          (
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
                 {filterdPost?.map((e, i) => {
@@ -44,7 +50,7 @@ export default function HomeCard() {
             </div>
           ) : (
             <Notifyme />
-          ))}
+          )}
       </div>
     </>
   );

@@ -23,10 +23,11 @@ export default function ProjectNameSection({
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [hight, sethight] = useState(0);
   const [keydown, setkeydown] = useState(false);
-
+  
   const { data } = useSelector((state) => {
     return state.ProjectName;
   });
+
   useEffect(() => {
     if (data) {
       if (data.success === true) {
@@ -70,41 +71,42 @@ export default function ProjectNameSection({
     };
   }, [FilterProjectName, ProjectNameFormGroupref]);
 
-  useEffect(() => {
-    if (ExactMatchObj.length > 0) {
-      const exactMatch = ExactMatchObj.find((item) => {
-        // Check if "Project Name" matches exactly with ProjectNameObjectData
-        return (
-          item["Project Name"].trim().toUpperCase() ===
-          ProjectNameObjectData.ProjectName.trim().toUpperCase()
-        );
-      });
+  // useEffect(() => {
+  //   if (ExactMatchObj.length > 0) {
+  //     console.log("exact obj ",ExactMatchObj)
+  //     const exactMatch = ExactMatchObj.find((item) => {
+  //       // Check if "Project Name" matches exactly with ProjectNameObjectData
+  //       return (
+  //         item["ProjectName"].trim().toUpperCase() ===
+  //         ProjectNameObjectData.ProjectName.trim().toUpperCase()
+  //       );
+  //     });
 
-      if (ProjectInputType == "Search") {
-        if (exactMatch) {
-          setrunSearchButton(true);
-        } else {
-          setrunSearchButton(false);
-        }
-      }
-      if (ProjectInputType == "PostForm") {
-        // if (exactMatch) {
+  //     if (ProjectInputType == "Search") {
+  //       if (exactMatch) {
+  //         setrunSearchButton(true);
+  //       } else {
+  //         setrunSearchButton(true);
+  //       }
+  //     }
+  //     if (ProjectInputType == "PostForm") {
+  //       // if (exactMatch) {
 
-        setinputValue({
-          City: exactMatch?.["City"] || "",
-          Locality: exactMatch?.["Locality"] || "",
-          Landmark: exactMatch?.["Sector"] || "",
-        });
-        // } else {
+  //       setinputValue({
+  //         City: exactMatch?.["City"] || "",
+  //         Locality: exactMatch?.["Locality"] || "",
+  //         Landmark: exactMatch?.["Sector"] || "",
+  //       });
+  //       // } else {
 
-        // setinputValue({
-        //   city: "",
-        //   Locality: "",
-        // });
-        // }
-      }
-    }
-  }, [ExactMatchObj, ProjectNameObjectData.ProjectName, ProjectInputType]);
+  //       // setinputValue({
+  //       //   city: "",
+  //       //   Locality: "",
+  //       // });
+  //       // }
+  //     }
+  //   }
+  // }, [ExactMatchObj, ProjectNameObjectData.ProjectName, ProjectInputType]);
 
   useEffect(() => {
     if (ProjectInputType == "PostForm") {
@@ -182,15 +184,14 @@ export default function ProjectNameSection({
   return (
     <>
       <div
-        className={`form-group-home ${
-          ProjectInputType == "Search"
+        className={`form-group-home ${ProjectInputType == "Search"
             ? "search-dropdown-home"
             : ProjectInputType == "PostForm"
-            ? "create-post-search-project"
-            : ProjectInputType == "PostRequirement"
-            ? "post-requermient-search"
-            : ""
-        }`}
+              ? "create-post-search-project"
+              : ProjectInputType == "PostRequirement"
+                ? "post-requermient-search"
+                : ""
+          }`}
       >
         {ProjectInputType == "PostForm" && (
           <label
@@ -203,9 +204,8 @@ export default function ProjectNameSection({
         {/* searchInput */}
         <div
           ref={ProjectNameFormGroupref}
-          className={`dropdown ${
-            ProjectInputType == "Search" ? "search-dropdown" : ""
-          }`}
+          className={`dropdown ${ProjectInputType == "Search" ? "search-dropdown" : ""
+            }`}
         >
           <input
             onKeyDown={handleKeyDown}
@@ -218,17 +218,17 @@ export default function ProjectNameSection({
             value={ProjectNameObjectData.ProjectName?.trimStart() || ""}
             onChange={(e) => {
               setHighlightedIndex(0);
-              setProjectNameObjectData({
+              setProjectNameObjectData(()=>{return {
                 ...ProjectNameObjectData,
                 ProjectName: e.target.value,
-              });
-
+              }});
+              
               if (e.target.value == "" || e.target.value == " ") {
                 setHighlightedIndex(0);
                 setFilterProjectName([]);
               } else {
                 let SearchWord = e.target.value.split(" ");
-
+                // console.log("project name ",ProjectName)
                 const result = ProjectName.filter((item) => {
                   const matchProjectNameAndSector = SearchWord?.every(
                     (word) => {
@@ -245,10 +245,15 @@ export default function ProjectNameSection({
                       );
                     }
                   );
-
+                  // console.log(matchProjectNameAndSector)
                   return matchProjectNameAndSector;
                 });
-
+                // console.log("result ios ",result)
+                result.unshift({
+                  "Project Name"
+                    :  e.target.value
+                })
+                // console.log(result)
                 setFilterProjectName(result);
                 setExactMatchObj(result);
 
@@ -264,6 +269,7 @@ export default function ProjectNameSection({
               }
             }}
           />
+          {/* <p>{ProjectNameObjectData?.ProjectName}</p> */}
 
           {FilterProjectName.length > 0 && (
             <div
@@ -271,15 +277,20 @@ export default function ProjectNameSection({
               ref={listRef}
               className="apartmentname-container"
               style={{ maxHeight: hight * 10 }}
-              //  tabIndex={0}
+            //  tabIndex={0}
             >
+      
               {FilterProjectName.map((ApartmentFilter, index) => {
+
+                
+
                 return (
                   <p
                     // onMouseEnter={() => setHighlightedIndex(index)}
                     onMouseEnter={() => {
                       setkeydown(false);
                       if (keydown == false) {
+                        // console.log(highlightedIndex)
                         setHighlightedIndex(index);
                       }
                     }}
@@ -298,8 +309,14 @@ export default function ProjectNameSection({
                       }, 0);
                     }}
                   >
-                    {ApartmentFilter["Project Name"]},{" "}
-                    {ApartmentFilter["Sector"]}, {ApartmentFilter["City"]}
+                    {index === 0 && !ApartmentFilter["Sector"] ? (
+                      ApartmentFilter["Project Name"]
+                    ) : (
+                      <>
+                        {ApartmentFilter["Project Name"]}, {ApartmentFilter["Sector"]},{" "}
+                        {ApartmentFilter["City"]}
+                      </>
+                    )}
                   </p>
                 );
               })}

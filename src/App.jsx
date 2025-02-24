@@ -57,6 +57,7 @@ import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 // import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
+import AllPostSearchFilter from "./Component/Home/PropertyCard/AllPostSearchFilter";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -618,7 +619,9 @@ function App() {
           element={<AdminOwnerLoginProfileSection />}
         />
         <Route exact path="/" element={<HeroSection />} />
-        <Route exact path="/home/card" element={<PropertyFiltersCard />} />
+        {/* <Route exact path="/home/card" element={<PropertyFiltersCard />} /> */}
+        <Route exact path="/home/card" element={<AllPostSearchFilter />} />
+        
         <Route
           exact
           path="/post-detail/:PostAddress"

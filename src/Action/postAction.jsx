@@ -83,11 +83,12 @@ export const GetAllPostAction = ({
   PropertyStatus = "",
   Furnishing = "",
 }) => {
+  console.log("called" ,PropertyAdType,ProjectName)
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllPostRequest" });
 
-      let url = `${api_Base_Url}/post/allpost?LocationDetails.ProjectName=${ProjectName.trim()}&BasicDetails.PropertyAdType=${PropertyAdType.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}`;
+      let url = `${api_Base_Url}/post/allpost?ProjectName=${ProjectName?.trim()}&BasicDetails.PropertyAdType=${PropertyAdType?.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}`;
       // &Pricing[$gte]=${Price}
       const config = {
         headers: { "Content-Type": "application/json" },
