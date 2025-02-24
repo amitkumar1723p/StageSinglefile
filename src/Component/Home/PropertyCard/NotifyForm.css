@@ -81,6 +81,7 @@
 .notify-form-main-content-bottom{
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 .notify-form-floor{
   display: flex;
