@@ -15,7 +15,7 @@ const EndToEndSupport = () => {
             <img
               src="/img/EndToEndNewBuyer.svg"
               alt="Support illustration"
-              className="main-image"
+              className="end-to-end-main-image"
             />
           </div>
 

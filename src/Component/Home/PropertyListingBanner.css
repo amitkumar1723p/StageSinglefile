@@ -95,6 +95,7 @@
   background-color: #fff;
   border: 1px solid var(--main-light-clr);
   color: var(--main-light-clr);
+  margin-top: 10px;
 }
 .expert-assistance-button:hover {
   background-color: var(--main-light-clr);
@@ -123,6 +124,16 @@
 .banner-bottom-image img {
   display: none;
 }
+
+@media(max-width:768px){
+  .banner-text-section h2 {
+    font-size:20px;
+  }
+  .banner-text-section p{
+    font-size: 14px;
+  }
+}
+
 
 @media (max-width: 480px) {
   /* Main container */
@@ -158,8 +169,11 @@
     font-weight: 600;
     line-height: 18px;
     letter-spacing: 0.5px;
+    margin-bottom: 20px;
   }
-
+  .expert-assistance-button{
+    margin-top: 0px;
+  }
   .banner-text-section p {
     color: #333;
     font-family: "Inter", Sans-serif;
@@ -217,7 +231,7 @@
   }
 
   .banner-image-right img {
-    max-width: 70%;
+    max-width: 60%;
     height: auto;
   }
 

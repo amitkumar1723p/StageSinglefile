@@ -193,7 +193,7 @@ text-transform: capitalize;
   }
 
   .banner-image-right img {
-    max-width: 95%;
+    /* max-width: 95%; */
     height: auto;
   }
   .banner-text-section p {

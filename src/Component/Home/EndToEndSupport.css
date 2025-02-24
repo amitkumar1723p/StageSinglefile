@@ -26,7 +26,7 @@
 } */
 
 .Support-Container {
-
+  max-width: 1300px;
   width: 80%;
   
   display: flex;
@@ -40,8 +40,8 @@
   justify-content: center;
 }
 
-.main-image {
-  width: 100%;
+.end-to-end-main-image {
+  width: 90%;
   height: auto;
 }
 
@@ -133,14 +133,14 @@
     margin-bottom: 20px;
   }
 
-  .main-image {
-    width: 100%;
+  .end-to-end-main-image {
+    width: 90%;
     height: auto;
     object-fit: cover;
   }
 
   .buying-support-content {
-    padding: 0 15px;
+    /* padding: 0 15px; */
     text-align: center;
   }
 
@@ -170,7 +170,9 @@
     margin-bottom: 1px;
     font-size: 14px;
   }
-
+  .buying-support-content ul {
+    line-height: 25px;
+  }
   .checkmark-icon {
     width: 16px;
     height: 16px;
@@ -178,7 +180,6 @@
   }
 
   .feature-text {
-    font-size: 14px;
     color: #333;
   }
 
