@@ -111,7 +111,7 @@ const PropertyFilters = () => {
       if (sessionStorage.getItem("isReloaded")) {
         sessionStorage.removeItem("isReloaded");
 
-        window.alert("first load");
+
         dispatch(
           GetSingleProjectNameDataAction({
             ProjectName: querry.get("ProjectName"),

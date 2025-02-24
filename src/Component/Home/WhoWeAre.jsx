@@ -3,7 +3,7 @@ import "./WhoWeAre.css"; // Importing the updated CSS file
 
 const WhoWeAre = () => {
   return (
-    <div>
+    <div className="who-we-are-main-container">
       <div className="who-we-are">
         <div className="whoweare-heading">
           <h2 className="whoweare-h2 ">Who We Are</h2>

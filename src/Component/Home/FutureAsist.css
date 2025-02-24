@@ -4,6 +4,7 @@
   background-color: #fff;
   padding: 20px 5%;
   width: 80%;
+  max-width: 1300px;
   color: white;
   margin: 40px auto;
   border-radius:10px;
@@ -192,7 +193,7 @@ text-transform: capitalize;
   }
 
   .banner-image-right img {
-    max-width: 95%;
+    /* max-width: 95%; */
     height: auto;
   }
   .banner-text-section p {

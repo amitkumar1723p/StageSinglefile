@@ -59,7 +59,7 @@ const NotifyForm = ({ SetShow }) => {
       ) : (
         <div className="notify-form-container">
           <div
-            className="cross-btn"
+            className="notify-cross-btn"
             onClick={() => {
               SetShow(false);
             }}
@@ -81,7 +81,10 @@ const NotifyForm = ({ SetShow }) => {
             </p>
 
             <form onSubmit={handleSubmit}>
-              <label className="notify-lable">BHK Type</label>
+
+              <div className="notify-form-main-content">
+                <div className="notify-form-bhk-section">
+                <label className="notify-lable">BHK Type</label>
               <select
                 required
                 value={NotifyData.BHKType}
@@ -98,15 +101,15 @@ const NotifyForm = ({ SetShow }) => {
                 <option value="5">5 BHK</option>
               </select>
 
+                </div>
+             
               <div className="room-section">
-                <p>Room</p>
+                <p>Rooms</p>
                 <div className=" checkbox-notify">
                   {Room.map((room, index) => {
                     return (
                       <div className="data-notify" key={index}>
-                        <label className="notify-lable" htmlFor={index}>
-                          {room}
-                        </label>
+                       
 
                         <input
                           type="checkbox"
@@ -131,12 +134,18 @@ const NotifyForm = ({ SetShow }) => {
                             }
                           }}
                         />
+                         <label className="notify-lable" htmlFor={index}>
+                          {room}
+                        </label>
                       </div>
                     );
                   })}
                 </div>
               </div>
+              </div>
 
+              <div className="notify-form-main-content-bottom">
+              <div className="notify-form-floor">
               <label className="notify-lable">Floor Preference</label>
               <select
                 value={NotifyData.FloorPreference}
@@ -155,9 +164,16 @@ const NotifyForm = ({ SetShow }) => {
                 <option value="high">High Floor</option>
               </select>
 
-              <button type="submit" className="submit-button">
+              </div>
+              
+              <div className="notify-button-container">
+              <button type="submit" className="notify-submit-button">
                 Submit
               </button>
+              </div>
+              
+              </div>
+              
             </form>
           </div>
         </div>

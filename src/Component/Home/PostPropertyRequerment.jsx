@@ -14,6 +14,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
       Budget: "",
       FloorPreference: "",
     });
+    const [unit, setUnit] = useState('Cr');
   const { loading, data, LodingType } = useSelector((state) => {
     return state.userData;
   });
@@ -40,50 +41,44 @@ const PostPropertyRequerment = ({ SetShow }) => {
   };
   return (
     <div className="form-container">
-      <div className="form-left">
-        <h2 className="form-title">Why Buy From Us?</h2>
-        <p className="form-description">
-          “Experience a seamless journey from property search to ownership with
-          our expert guidance.”
-        </p>
-        <div className="img-requirement">
-          <img src="./img/share-require.svg" alt="img" />
-        </div>
-        <ul className="form-features">
-          <li>✔ 100% Verified Seller</li>
-          <li>✔ Dedicated Relationship Manager</li>
-          <li>✔ Transparency, Trust and Fair Price</li>
-          <li>✔ Single point of Contact Dealing</li>
-        </ul>
-      </div>
+     
       <div className="form-right">
+        <div className="form-right-heading-container">
         <h3 className="form-header">Share Your Requirement</h3>
-        <form className="property-form" onSubmit={CreateQuerryFormHandler}>
-          <div className="form-group">
+        <p>Tell us what you're looking for, and we'll help you find your perfect property.</p>
+        </div>
        
-            <ProjectNameSection 
-            ProjectInputType ={"PostRequirement"}
-                  ProjectNameObjectData={PostPropertyRequirementData}
-                  setProjectNameObjectData={setPostPropertyRequirementData}
-                  placeholder={"Search by locality, project name"}
-            
-            />
-            
-            {/* <input
-              required
-              value={PostPropertyRequirementData.ProjectName.trimStart()}
-              onChange={(e) => {
-                setPostPropertyRequirementData({
-                  ...PostPropertyRequirementData,
-                  ProjectName: e.target.value,
-                });
-              }}
-              type="text"
-              placeholder="Search by locality, project name"
-              className="form-input"
-            /> */}
-          </div>
-          <div className="form-group">
+        <form className="property-form  post-property-form" onSubmit={CreateQuerryFormHandler}>
+          <div className="property-form-details-top">
+             <div className="form-group">
+             <p>Locality</p>
+       
+       <ProjectNameSection 
+       ProjectInputType ={"PostRequirement"}
+             ProjectNameObjectData={PostPropertyRequirementData}
+             setProjectNameObjectData={setPostPropertyRequirementData}
+             placeholder={"Search by locality, project name"}
+       
+       />
+       
+       {/* <input
+         required
+         value={PostPropertyRequirementData.ProjectName.trimStart()}
+         onChange={(e) => {
+           setPostPropertyRequirementData({
+             ...PostPropertyRequirementData,
+             ProjectName: e.target.value,
+           });
+         }}
+         type="text"
+         placeholder="Search by locality, project name"
+         className="form-input"
+       /> */}
+             </div>
+             
+
+             <div className="form-group form-bhk">
+             <p>BHK Type</p>
             <select
               className="form-input"
               required
@@ -103,9 +98,34 @@ const PostPropertyRequerment = ({ SetShow }) => {
               <option value="5">5 BHK</option>
             </select>
           </div>
+          <div className="form-group form-floor">
+          <p>Floor Preference</p>
+          <select
+              required
+              className="form-input"
+              onChange={(e) => {
+                setPostPropertyRequirementData({
+                  ...PostPropertyRequirementData,
+                  FloorPreference: e.target.value,
+                });
+              }}
+            >
+              <option value="">Floor Preference</option>
+              <option value="ground">Ground Floor</option>
+              <option value="mid">Mid Floor</option>
+              <option value="high">High Floor</option>
+            </select>
+           
+          </div>
+          </div>
+          
+          
 
-          <div className="form-group">
-            <input
+          <div className="property-form-details-bottom">
+          <div className="form-group form-budget">
+            <div className="budget-container">
+            <p>Budget</p>
+          <input
               required
               value={PostPropertyRequirementData.Budget.trimStart()}
               onChange={(e) => {
@@ -122,34 +142,44 @@ const PostPropertyRequerment = ({ SetShow }) => {
               type="text"
               placeholder="Enter your Budget"
               className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <select
-              required
-              className="form-input"
-              onChange={(e) => {
-                setPostPropertyRequirementData({
-                  ...PostPropertyRequirementData,
-                  FloorPreference: e.target.value,
-                });
-              }}
-            >
-              <option value="">Floor Preference</option>
-              <option value="ground">Ground Floor</option>
-              <option value="mid">Mid Floor</option>
-              <option value="high">High Floor</option>
+            /> 
+             
+            </div>
+            <div className="form-budget-option">
+            <select value={unit} onChange={(e)=>setUnit(e.target.value)}>
+              <option value="Cr">Cr</option>
+              <option value="Lakhs">lakhs</option>
             </select>
+            </div>
+           
+           
           </div>
-          {/* Hidden Field */}
-          {/* <div className="form-group hidden-group">
-            <input
-              type="hidden"
-              placeholder="Property Details"
-              value="hidden property data"
-              className="form-input-hidden"
-            />
-          </div> */}
+          <div className="possession-status">
+            <p className="possession-status-title" >Possession Status</p>
+            <div className="radio-group">
+                <label>
+                    <input
+                        type="radio"
+                        name="possession"
+                        value="Ready to Move"
+                      
+                       
+                    />
+                    Ready to Move
+                </label>
+                <label>
+                    <input
+                        type="radio"
+                        name="possession"
+                        value="Under Construction"
+                      
+                       
+                    />
+                    Under Construction
+                </label>
+            </div>
+        </div>
+          
           <div className="form-group">
             <button
               disabled={loading ? true : false}
@@ -159,10 +189,22 @@ const PostPropertyRequerment = ({ SetShow }) => {
               Submit
             </button>
           </div>
+          </div>
+          
+          {/* Hidden Field */}
+          {/* <div className="form-group hidden-group">
+            <input
+              type="hidden"
+              placeholder="Property Details"
+              value="hidden property data"
+              className="form-input-hidden"
+            />
+          </div> */}
+          
         </form>
       </div>
       <div
-        className="cross-btn"
+        className="cross-Btn"
         onClick={() => {
           SetShow(false);
         }}

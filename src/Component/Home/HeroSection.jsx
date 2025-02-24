@@ -725,7 +725,7 @@ const HeroSection = () => {
           </div>
           <div id="FAQ-SECTION">
             <FAQ />
-          </div>
+          </div>        
         </>
       )}
 
