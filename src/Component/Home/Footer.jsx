@@ -203,7 +203,6 @@ const Footer = () => {
   const companyLinks = [
     { name: 'FAQs', hash: 'FAQ-SECTION' },
     { name: 'Careers', url: "/Career" },
-    { name: 'Testimonials', hash: "testimonials" } // Ensure section ID exists in home page
   ];
 
   return (
@@ -297,6 +296,17 @@ const Footer = () => {
                     >
                       <span className="links__dot"></span>
                       <span className='list__Name'>Privacy Policy</span>
+                    </a>
+                  </li>
+                  <li  className="links__item">
+                    <a
+                     
+                      href="/Report"
+                      target='blank'
+                      className="links__link"
+                    >
+                      <span className="links__dot"></span>
+                      <span className='list__Name'>Report</span>
                     </a>
                   </li>
                   <li  className="links__item">

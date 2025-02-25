@@ -43,6 +43,7 @@ import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
 import { UserContext } from "./Component/CreateContext/CreateContext";
 import OurService from "./Component/Home/OurService";
+import ReportPage from "./Component/Home/ReportPage";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
@@ -664,6 +665,13 @@ function App() {
           path="/Career"
           element={<Career />}
         />
+        
+        <Route
+          exact
+          path="/Report"
+          element={<ReportPage />}
+        />
+
         <Route
           exact
           path="/terms-and-conditions"
