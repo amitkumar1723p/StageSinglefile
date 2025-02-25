@@ -55,7 +55,7 @@ function OurService() {
       </div>
 
       <div className="offer-card-container">
-      <div className="first-card-row">
+    
         <div className="offer-card">
           <div className="offer-card-img">
             <img src="/img/house-green.svg" alt="house" />
@@ -91,8 +91,8 @@ function OurService() {
             </h3>
           </div>
         </div>
-      </div>
-      <div className="second-card-row">
+   
+     
         <div className="offer-card">
           <div className="offer-card-img">
             <img src="/img/house-purple.svg" alt="house" />
@@ -128,7 +128,8 @@ function OurService() {
             </h3>
           </div>
         </div>
-      </div>
+        
+   
     </div>
         <div className="main-layout-container"></div>
     <div className="service-what-we-offer-container">
