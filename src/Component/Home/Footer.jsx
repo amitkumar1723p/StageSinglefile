@@ -168,6 +168,8 @@ import React from 'react';
 import { Mail, Phone, Linkedin, Instagram, Facebook, Twitter } from 'lucide-react';
 import "./Footer.css";
 
+
+
 const Footer = () => {
   const socialIcons = [
     { Icon: Linkedin, link: 'https://www.linkedin.com/company/propertydekho247' },
@@ -175,6 +177,7 @@ const Footer = () => {
     { Icon: Facebook, link: 'https://www.facebook.com/people/PropertyDekho247/61572085979323/' },
     { Icon: Twitter, link: 'https://x.com/PropetyDekho247' }
   ];
+
 
   // Function to scroll to a section while accounting for the sticky navbar height
   const scrollToSection = (id) => {
@@ -193,12 +196,13 @@ const Footer = () => {
   const quickLinks = [
     { name: 'Home', hash: "Hero-section" },
     { name: 'About Us', hash: "WHO-WE-ARE" },
-    { name: 'Services', hash: "select-option-section" } // Make sure the section has this ID in your home page
+    // { name: 'Services', hash: "OurService" } // Make sure the section has this ID in your home page
+    { name: "Services", url: "/Our-Service" }
   ];
 
   const companyLinks = [
     { name: 'FAQs', hash: 'FAQ-SECTION' },
-    { name: 'Careers', hash: '' },
+    { name: 'Careers', url: "/Career" },
     { name: 'Testimonials', hash: "testimonials" } // Ensure section ID exists in home page
   ];
 
@@ -249,12 +253,15 @@ const Footer = () => {
                           scrollToSection(item.hash);
                         }
                       }}
-                      href=""
+                      href={item.url} target="_blank"
                       className="links__link"
                     >
                       <span className="links__dot"></span>
                       <span className='list__Name'>{item.name}</span>
+                      
                     </a>
+
+                    
                   </li>
                 ))}
               </ul>
@@ -265,6 +272,24 @@ const Footer = () => {
               <h4 className="links__title">Company</h4>
               <ul className="links__list">
               <li  className="links__item">
+
+              {/* <a
+                    target='blank'
+                      href="/Career"
+                      className="links__link"
+                    >
+                      <span className="links__dot"></span>
+                      <span className='list__Name'>Career</span>
+                    </a> */}
+
+              {/* <a
+                    target='blank'
+                      href="/Our-Service"
+                      className="links__link"
+                    >
+                      <span className="links__dot"></span>
+                      <span className='list__Name'>Services</span>
+                    </a> */}
                     <a
                     target='blank'
                       href="/privacy-policy"
@@ -294,7 +319,7 @@ const Footer = () => {
                           scrollToSection(item.hash);
                         }
                       }}
-                      
+                      href={item.url} target="_blank"
                       className="links__link"
                     >
                       <span className="links__dot"></span>

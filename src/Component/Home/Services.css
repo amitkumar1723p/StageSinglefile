@@ -38,7 +38,7 @@
 .services-container {
   height: 180px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   /* background-color: var(--main-light-clr); */
   padding: 20px 0;
   /* margin: 20px 0 60px 0; */

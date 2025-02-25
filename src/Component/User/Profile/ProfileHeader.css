@@ -377,6 +377,18 @@
     
   }
 
+  .dashboard-right-side {
+    margin: 20px 0px;
+  }
+
+  .dashboard-right-side img {
+    width: 100%;
+  }
+
+  .main-profile-dashboard-section {
+    display: unset;
+  }
+
   .dashborad-section-left-right {
     display: flex;
     flex-direction: column;

@@ -42,6 +42,7 @@ import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePos
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
 import { UserContext } from "./Component/CreateContext/CreateContext";
+import OurService from "./Component/Home/OurService";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
@@ -57,6 +58,7 @@ import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 // import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
+import Career from "./Component/Home/Careers";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -624,7 +626,16 @@ function App() {
           path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
         />
-
+         <Route
+          exact
+          path="/Our-Service"
+          element={<OurService />}
+        />
+         <Route
+          exact
+          path="/Career"
+          element={<Career />}
+        />
         <Route
           exact
           path="/terms-and-conditions"
