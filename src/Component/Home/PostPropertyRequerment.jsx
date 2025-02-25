@@ -61,7 +61,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
         >
           <div className="property-form-details-top">
             <div className="form-group">
-              <p>Locality</p>
+              <p className="postreq-form ">Locality</p>
               <ProjectNameSection
                 ProjectInputType={"PostRequirement"}
                 ProjectNameObjectData={PostPropertyRequirementData}
@@ -71,7 +71,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
             </div>
 
             <div className="form-group form-bhk">
-              <p>BHK Type</p>
+              <p className="postreq-form " >BHK Type</p>
               <select
                 className="form-input"
                 required
@@ -93,7 +93,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
             </div>
 
             <div className="form-group form-floor">
-              <p>Floor Preference</p>
+              <p className="postreq-form "> Floor Preference</p>
               <select
                 required
                 className="form-input"
@@ -115,7 +115,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           <div className="property-form-details-bottom">
             <div className="form-group form-budget">
               <div className="budget-container">
-                <p>Budget</p>
+                <p className="postreq-form ">Budget</p>
                 <input
                   required
                   value={PostPropertyRequirementData.Budget}
