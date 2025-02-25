@@ -7,6 +7,8 @@ import Loader from "../Loader/Loader";
 import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
+  fetchAllOwnerFiles,
+  OwnerAllExcelFile,
 } from "../../Action/postAction";
 import { Link , useLocation ,useNavigate } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
@@ -33,6 +35,9 @@ const Dashboard = () => {
   const { data: AgentAdminAllPost } = useSelector((state) => {
     return state.AdminProperty;
   });
+  const { data } = useSelector((state) => {
+    return state.OwnerAllExcelFiles;
+  });
 
   // On dashboard we get all property 
   useEffect(() => {
@@ -42,6 +47,7 @@ const Dashboard = () => {
       if (medata.user.Role === "Owner") {
         dispatch(Admin_OwnerGetAllPostAction());
         dispatch(GetAllAdminAction());
+        dispatch(fetchAllOwnerFiles())
       }
 
       if (["Admin", "Agent"].includes(medata.user.Role)) {
@@ -153,6 +159,20 @@ const Dashboard = () => {
 
                   <p className="viewall">View All</p>
                 </div>{" "}
+
+
+                
+            <Link to="/admin/all-excel">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{data?.length}</p>
+                  <img src="/img/In-ActivePosts.png" alt="post" />
+                </div>
+                <h3 >All Excel Data</h3>
+                <p className="viewall">View All</p>
+              </div>
+            </Link>
+
               </>
             )}
           </div>

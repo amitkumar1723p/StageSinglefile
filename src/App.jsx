@@ -53,6 +53,8 @@ import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
 import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import OwnerAgentExcelData from "./Component/Admin/OwnerAgentExcelData";
+import OwnerAgentExcel from "./Component/Admin/OwnerAgentExcel";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -154,9 +156,9 @@ function App() {
   useEffect(() => {
     if (data) {
       if (
-        data.success === true &&["CreatePostRequest"].includes(LodingType)
+        data.success === true && ["CreatePostRequest"].includes(LodingType)
       ) {
-         
+
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
         sessionStorage.removeItem("LocationDetailsData");
@@ -173,8 +175,8 @@ function App() {
           "CreateScheduleVisitRequest",
           "BiddingFormRequest",
           "CreatePostRequest",
-          "CreateUserOtpRequest" ,
-          "VerifyUserOtpRequest" ,
+          "CreateUserOtpRequest",
+          "VerifyUserOtpRequest",
           "CreateUserRequest"
         ].includes(LodingType) == false
       ) {
@@ -623,19 +625,35 @@ function App() {
             />
           </Route>
         </>
-
+        {/*admin routes*/}
         <Route
           exact
           path="/admin"
           element={<AdminOwnerRoutes Component={AdminAside} />}
         >
-          <Route exact path="dashboard" element={<Dashbord />} />
 
+          <Route exact path="dashboard" element={<Dashbord />} />
+          {/* <Route exact path="all-excel" element={ <AdminOwnerRoutes Component={OwnerAgentExcelData} isOwner={true} />} /> */}
           <Route
             exact
             path="data"
             element={
               <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          />
+
+          <Route
+            exact
+            path="all-excel"
+            element={
+              <AdminOwnerRoutes Component={OwnerAgentExcelData} isOwner={true} />
+            }
+          />
+             <Route
+            exact
+            path="excel/:id"
+            element={
+              <AdminOwnerRoutes Component={OwnerAgentExcel} isOwner={true} />
             }
           />
           {/* <Route

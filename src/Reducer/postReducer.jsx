@@ -488,3 +488,63 @@ export const OwnerAllPostsVisitsReducer = (state = {}, action) => {
       };
   }
 };
+
+export const OwnerAllExcelFileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "OwnerAllExcelFile":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "OwnerAllExcelFileSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "OwnerAllExcelFileFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+      case "OwnerAllExcelFileClear":
+        return {};
+      default:
+        return {
+          ...state,
+        };
+  }
+}
+
+export const fetchAllOwnerFilesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FetchAllOwnerFilesRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "FetchAllOwnerFilesSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "FetchAllOwnerFilesFail":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // Changed "data" to "error" for better clarity
+      };
+
+    case "FetchAllOwnerFilesClear":
+      return {};
+
+    default:
+      return state;
+  }
+};

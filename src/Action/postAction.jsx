@@ -741,7 +741,7 @@ export const SimilarProperty = (postId) => {
  
       const { data } = await axios.get(url, config);  // Pass postId as an object
 //  console.log(similar)
- console.log( "similer",data)
+//  console.log( "similer",data)
       dispatch({
         type: "SimilarPropertySuccess",
         payload: data,
@@ -765,3 +765,97 @@ export const SimilarProperty = (postId) => {
     }
   };
 };
+
+
+export const OwnerAllExcelFile = (file)=>{
+
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "OwnerAllExcelFileRequest",
+        payload: "OwnerAllExcelFileRequest",
+      });
+      if (!file) return alert("Please select a file!");
+  
+      const formData = new FormData();
+      formData.append("file", file);
+    
+  
+   
+      let url = `${api_Base_Url}/excel/upload`;  // Ensure url is correct/
+
+      const config = {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,  // Ensure that credentials are sent if needed
+      };
+ 
+      const { data } = await axios.post(url, formData, config);  // Pass postId as an object
+//  console.log(similar)
+     
+      dispatch({
+        type: "OwnerAllExcelFileSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.log("API Error:", error);  // Log the full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "OwnerAllExcelFileFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response was received
+        dispatch({ type: "OwnerAllExcelFileFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Something else happened
+        dispatch({
+          type: "OwnerAllExcelFileFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+
+
+export const fetchAllOwnerFiles = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "FetchAllOwnerFilesRequest",
+      });
+
+      const url = `${api_Base_Url}/excel/all-files`; // Ensure the endpoint is correct
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Ensures credentials are sent if required
+      };
+
+      const { data } = await axios.get(url, config); // Fetch all files
+
+      dispatch({
+        type: "FetchAllOwnerFilesSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("API Error:", error); // Log full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "FetchAllOwnerFilesFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response received
+        dispatch({ type: "FetchAllOwnerFilesFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Unexpected error
+        dispatch({
+          type: "FetchAllOwnerFilesFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+
