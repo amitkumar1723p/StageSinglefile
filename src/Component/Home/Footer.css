@@ -236,12 +236,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #bfdbfe;
+  /* color: #bfdbfe; */
   transition: color 0.2s;
 }
 
 .links__link:hover {
-  color: white;
+  /* color: white; */
 }
 
 .links__dot {
