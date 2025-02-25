@@ -42,6 +42,7 @@ import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePos
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
 import { UserContext } from "./Component/CreateContext/CreateContext";
+import ReportPage from "./Component/Home/ReportPage";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
@@ -623,6 +624,12 @@ function App() {
           exact
           path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
+        />
+        
+        <Route
+          exact
+          path="/Report"
+          element={<ReportPage />}
         />
 
         <Route

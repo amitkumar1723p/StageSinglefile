@@ -277,6 +277,17 @@ const Footer = () => {
                   <li  className="links__item">
                     <a
                      
+                      href="/Report"
+                      target='blank'
+                      className="links__link"
+                    >
+                      <span className="links__dot"></span>
+                      <span className='list__Name'>Report</span>
+                    </a>
+                  </li>
+                  <li  className="links__item">
+                    <a
+                     
                       href="/terms-and-conditions"
                       target='blank'
                       className="links__link"
