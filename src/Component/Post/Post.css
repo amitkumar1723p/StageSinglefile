@@ -326,6 +326,8 @@ transition: .5s;
 .icon-i p {
   margin-left: 5px;
 }
+
+/* this has to be change for admin upload excel file */
 input[type="file"] {
   cursor: pointer;
 

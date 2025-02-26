@@ -13,6 +13,7 @@ export default function AllRegistrationResponse({}) {
   const [tableData, setTableData] = useState([]);
   const [checkNotify, setCheckNotfiy] = useState([]);
   const [require, setRequire] = useState([]);
+  const [roleIndex,setRoleIndex]=useState(null);
   // login user detail
   const { medata } = useSelector((state) => state.meDetails);
 
@@ -90,7 +91,7 @@ export default function AllRegistrationResponse({}) {
   
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" >
         <div className="d-flex flex-row mb-2 gap-2">
           <div
             className={
@@ -224,8 +225,16 @@ export default function AllRegistrationResponse({}) {
                         <></>
                       )}
                     </td>
-                    <td className="text-light-emphasis border-end">
-                      <small>{item.Role}</small>
+                    <td className="text-light-emphasis border-end" onClick={()=>setRoleIndex(index)}>
+                    {
+                        roleIndex===index ?   <select name="" id="">
+                        <option value=""><small>{item.Role}</small></option>
+                        <option value=""><small>Tanent</small></option>
+                        <option value=""><small>Buyer</small></option>
+                        <option value=""><small>Seller</small></option>
+                        <option value=""><small>ChannelPartner</small></option>
+                      </select>:<>{item.Role}</>
+                    }
                     </td>
                     <td className="text-light-emphasis border-end">
                       <small>{item.ContactNumber}</small>

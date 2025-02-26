@@ -19,6 +19,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "changePropertyStatusRequest":
     case "acknowledgeProfileRequest":
     case "PermanentPostDeleteRequest":
+      case "AssignExecleRequest":
+    case "Remove_ExcelFromAdminRequest":
       return {
         ...state,
         loading: true,
@@ -43,6 +45,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "changePropertyStatusSuccess":
     case "acknowledgeProfileSuccess":
     case "PermanentPostDeleteSuccess":
+      case "AssignExecleSucess":
+    case "Remove_ExcelFromAdminSuccess":
       return {
         ...state,
         loading: false,
@@ -67,6 +71,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "changePropertyStatusFail":
     case "acknowledgeProfileFail":
     case "PermanentPostDeleteFail":
+      case "AssignExeclFail":
+    case "Remove_ExcelFromAdminFail":
       return {
         ...state,
         loading: false,
@@ -493,6 +499,132 @@ export const OwnerAllPostsVisitsReducer = (state = {}, action) => {
       };
   }
 };
+
+export const OwnerAllExcelFileReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "OwnerAllExcelFile":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "OwnerAllExcelFileSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "OwnerAllExcelFileFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+      case "OwnerAllExcelFileClear":
+        return {};
+      default:
+        return {
+          ...state,
+        };
+  }
+}
+
+//owner all file excel reducer 
+export const fetchAllOwnerFilesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FetchAllOwnerFilesRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "FetchAllOwnerFilesSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "FetchAllOwnerFilesFail":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // Changed "data" to "error" for better clarity
+      };
+
+    case "FetchAllOwnerFilesClear":
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+//admin all excel file
+export const fetchAllAdminFilesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FetchAllAdminFilesRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "FetchAllAdminFilesSuccess":
+      console.log("this is in reducer ",action)
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "FetchAllAdminFilesFail":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // Stores error details
+      };
+
+    case "FetchAllAdminFilesClear":
+      return {}; // Clears state when necessary
+
+    default:
+      return state;
+  }
+};
+//agent all excel file
+export const fetchAllAgentFilesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FetchAllAgentFilesRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "FetchAllAgentFilesSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "FetchAllAgentFilesFail":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // Stores error details
+      };
+
+    case "FetchAllAgentFilesClear":
+      return {}; // Clears state when necessary
+
+    default:
+      return state;
+  }
+};
+//remove excel reducer
+
+
 
 // notify
 export const GetAllNotificationsAndRequirementsReducer = (

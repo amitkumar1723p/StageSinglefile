@@ -129,8 +129,8 @@ console.log(data)
 
   return (
     <>
-      <button onClick={handlePayment}>
-        Pay Button
+      <button className="original-price border-0" onClick={handlePayment}>
+        View Number
       </button>
     </>
   );
