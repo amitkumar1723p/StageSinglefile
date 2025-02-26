@@ -12,8 +12,7 @@ import {
   GetTenentResponseReducer,
   TenentResponseIsExitReducer,
   getAllUserReducer,
-  TenentResponseIsExitReducer ,
-  getAllUserReducer,
+  
   paymentReducer,
   getPaidPropertyReducer
 } from "./Reducer/userReducer.jsx";

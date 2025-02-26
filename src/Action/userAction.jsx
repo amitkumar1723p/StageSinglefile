@@ -585,11 +585,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 // Create Tenant Post Response
 
 export const ViewOwnerDetailsAction = (Document) => {
-<<<<<<< HEAD
  
-=======
-  console.log("4304949", Document)
->>>>>>> 45a9ff0f5cf9509ed6e2474b5e3bcef0f1b0b96d
   return async (dispatch) => {
     try {
       dispatch({
