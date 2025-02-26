@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ViewOwnerDetailsAlert.css";
-export default function ViewOwnerDetails({ SetShow }) {
+export default function ViewOwnerDetails({ SetShow ,Contact}) {
   const [OwnerDetails, setOwnerDetals] = useState({});
 
   useEffect(() => {
@@ -13,7 +13,6 @@ export default function ViewOwnerDetails({ SetShow }) {
     };
   }, []);
 
-  console.log(OwnerDetails);
 
   return (
     <div className="view-owner-details-modal">
@@ -33,7 +32,7 @@ export default function ViewOwnerDetails({ SetShow }) {
           <strong>Name:</strong> {OwnerDetails.OwnerName}
         </p>
         <p>
-          <strong>Phone No:</strong> {OwnerDetails.OwnerContactNumber}
+          <strong>Phone No:</strong> {Contact}
         </p>
         <p>
           Dear Tenant, here is the contact information for the property owner.

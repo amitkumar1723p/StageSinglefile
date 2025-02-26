@@ -11,7 +11,9 @@ import {
   GetPost_BiddingDocumentReducer,
   GetTenentResponseReducer,
   TenentResponseIsExitReducer ,
-  getAllUserReducer
+  getAllUserReducer,
+  paymentReducer,
+  getPaidPropertyReducer
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -62,7 +64,10 @@ const reducer = combineReducers({
 
   AllUserResponse:getAllUserReducer,
   
-  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer
+  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer,
+  paymentResponse:paymentReducer,
+  
+  paidPropertyData:getPaidPropertyReducer
 });
 
 let initialState = {};
