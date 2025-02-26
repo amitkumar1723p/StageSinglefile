@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./OurService.css";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { UserContext } from "../CreateContext/CreateContext";
+import { useContext } from "react";
 function OurService() {
- 
-
   const [activeTab, setActiveTab] = useState("PropertyOwner");
 
   const openTab = (tabName) => {
@@ -14,11 +15,16 @@ function OurService() {
     //   color: "white",
     // };
   };
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
+  const navigate =useNavigate()
 
+    const { setRedirectPath } =useContext(UserContext);
   return (
     <>
       <header>
-      <div className="hero-container">
+        <div className="hero-container">
           <div className="hero-img">
             <img src="/img/service-hero-img3.png" alt="Hero background" />
           </div>
@@ -55,15 +61,12 @@ function OurService() {
       </div>
 
       <div className="offer-card-container">
-    
         <div className="offer-card">
           <div className="offer-card-img">
             <img src="/img/house-green.svg" alt="house" />
           </div>
           <div className="offer-card-text">
-            <h2 className="offer-card-text-h2">
-              PROPERTY MANAGEMENT
-            </h2>
+            <h2 className="offer-card-text-h2">PROPERTY MANAGEMENT</h2>
             <h3 className="offer-card-h3">
               Effortless Property Management – We Handle Everything for You.
             </h3>
@@ -91,16 +94,13 @@ function OurService() {
             </h3>
           </div>
         </div>
-   
-     
+
         <div className="offer-card">
           <div className="offer-card-img">
             <img src="/img/house-purple.svg" alt="house" />
           </div>
           <div className="offer-card-text">
-            <h2 className="offer-card-text-h2">
-              NRI PROPERTY MANAGEMENT
-            </h2>
+            <h2 className="offer-card-text-h2">NRI PROPERTY MANAGEMENT</h2>
             <h3 className="offer-card-h3">
               Seamless Property Management for NRIs Across the Globe.
             </h3>
@@ -128,29 +128,24 @@ function OurService() {
             </h3>
           </div>
         </div>
-        
-   
-    </div>
-        <div className="main-layout-container"></div>
-    <div className="service-what-we-offer-container">
-              <div className="what-we-offer-heading">
-                <h2 className="what-we-offer-h2">
-                  What We <span className="what-we-offer-span">Offer</span>
-                </h2>
-              </div>
-              <div className="what-we-offer-description">
-                <h3 className="what-we-offer-h3">
-                  Tailored Real Estate Solutions – Dedicated Services Designed
-                  to Benefit Tenants, Empower Channel Partners, and Support
-                  Property Owners Seamlessly"
-                </h3>
-              </div>
-            </div>
+      </div>
+      <div className="main-layout-container"></div>
+      <div className="service-what-we-offer-container">
+        <div className="what-we-offer-heading">
+          <h2 className="what-we-offer-h2">
+            What We <span className="what-we-offer-span">Offer</span>
+          </h2>
+        </div>
+        <div className="what-we-offer-description">
+          <h3 className="what-we-offer-h3">
+            Tailored Real Estate Solutions – Dedicated Services Designed to
+            Benefit Tenants, Empower Channel Partners, and Support Property
+            Owners Seamlessly"
+          </h3>
+        </div>
+      </div>
 
       <div className="tab-container">
-       
-          
-        
         {activeTab === "PropertyOwner" && (
           <div className="tab-content active">
             {/* <div className="service-card-container">
@@ -205,97 +200,109 @@ function OurService() {
               </div>
             </div> */}
 
-                
             <div className="selling-card-main">
-              
-      <div className="selling-card-container">
-            <div className="tab-buttons">
-          <div
-            className={`tab-button ${
-              activeTab === "PropertyOwner" ? "active" : ""
-            }`}
-            onClick={() => openTab("PropertyOwner")}
-          >
-            <div className="tab-button-text">For Property Owner</div>
-          </div>
-          <div
-            className={`tab-button ${activeTab === "buying" ? "active" : ""}`}
-            onClick={() => openTab("buying")}
-          >
-            <div className="tab-button-text">For Buyers</div>
-          </div>
-          <div
-            className={`tab-button ${activeTab === "tenant" ? "active" : ""}`}
-            onClick={() => openTab("tenant")}
-          >
-            <div className="tab-button-text">For Tenants</div>
-          </div>
-        </div>
-        <div className="selling-offer-card">
-          <div className="selling-offer-card-img">
-            <img
-              src="/img/Group 297.svg"
-              alt="verified buyer"
-            />
-          </div>
-          <div className="selling-offer-card-text">
-            <h2 className="selling-offer-card-text-h2">
-              100% VERIFIED BUYERS
-            </h2>
-            <h3 className="selling-offer-card-text-h3">
-              Connect with 100% Verified Buyers for a Transparent
-              Selling Experience.
-            </h3>
-          </div>
-        </div>
-        <div className="selling-offer-card">
-          <div className="selling-offer-card-img">
-            <img src="/img/Group 298.svg" alt="schedule" />
-          </div>
-          <div className="selling-offer-card-text">
-            <h2 className="selling-offer-card-text-h2">
-              SCHEDULE VISIT ALERTS
-            </h2>
-            <h3 className="selling-offer-card-text-h3">
-              Get real-time updates on your scheduled property visits,
-              including confirmations and reminders for a hassle-free
-              experience.
-            </h3>
-          </div>
-        </div>
-        <div className="selling-offer-card">
-          <div className="selling-offer-card-img">
-            <img src="/img/Group 299.svg" alt="house" />
-          </div>
-          <div className="selling-offer-card-text">
-            <h2 className="selling-offer-card-text-h2">
-              REAL-TIME PRICE OFFER ALERTS
-            </h2>
-            <h3 className="selling-offer-card-text-h3">
-              Receive instant alerts whenever a new offer is made,
-              keeping you updated on the best price opportunities.
-            </h3>
-          </div>
-        </div>
-        <div className="selling-offer-card">
-          <div className="selling-offer-card-img">
-            <img src="/img/Group 300.svg" alt="house" />
-          </div>
-          <div className="selling-offer-card-text">
-            <h2 className="selling-offer-card-text-h2">
-              HASSLE FREE DOCUMENTATION
-            </h2>
-            <h3 className="selling-offer-card-text-h3">
-              Effortless Documentation – Complete Support for All
-              Required Documents in Property Transactions.
-            </h3>
-          </div>
-        </div>
-      </div>
-      <div className="selling-card-banner">
-        <img src="/img/Real Estate Retractable Banner2.png" alt="banner" />
-      </div>
-    </div>
+              <div className="selling-card-container">
+                <div className="tab-buttons">
+                  <div
+                    className={`tab-button ${
+                      activeTab === "PropertyOwner" ? "active" : ""
+                    }`}
+                    onClick={() => openTab("PropertyOwner")}
+                  >
+                    <div className="tab-button-text">For Property Owner</div>
+                  </div>
+                  <div
+                    className={`tab-button ${
+                      activeTab === "buying" ? "active" : ""
+                    }`}
+                    onClick={() => openTab("buying")}
+                  >
+                    <div className="tab-button-text">For Buyers</div>
+                  </div>
+                  <div
+                    className={`tab-button ${
+                      activeTab === "tenant" ? "active" : ""
+                    }`}
+                    onClick={() => openTab("tenant")}
+                  >
+                    <div className="tab-button-text">For Tenants</div>
+                  </div>
+                </div>
+                <div className="selling-offer-card">
+                  <div className="selling-offer-card-img">
+                    <img src="/img/Group 297.svg" alt="verified buyer" />
+                  </div>
+                  <div className="selling-offer-card-text">
+                    <h2 className="selling-offer-card-text-h2">
+                      100% VERIFIED BUYERS
+                    </h2>
+                    <h3 className="selling-offer-card-text-h3">
+                      Connect with 100% Verified Buyers for a Transparent
+                      Selling Experience.
+                    </h3>
+                  </div>
+                </div>
+                <div className="selling-offer-card">
+                  <div className="selling-offer-card-img">
+                    <img src="/img/Group 298.svg" alt="schedule" />
+                  </div>
+                  <div className="selling-offer-card-text">
+                    <h2 className="selling-offer-card-text-h2">
+                      SCHEDULE VISIT ALERTS
+                    </h2>
+                    <h3 className="selling-offer-card-text-h3">
+                      Get real-time updates on your scheduled property visits,
+                      including confirmations and reminders for a hassle-free
+                      experience.
+                    </h3>
+                  </div>
+                </div>
+                <div className="selling-offer-card">
+                  <div className="selling-offer-card-img">
+                    <img src="/img/Group 299.svg" alt="house" />
+                  </div>
+                  <div className="selling-offer-card-text">
+                    <h2 className="selling-offer-card-text-h2">
+                      REAL-TIME PRICE OFFER ALERTS
+                    </h2>
+                    <h3 className="selling-offer-card-text-h3">
+                      Receive instant alerts whenever a new offer is made,
+                      keeping you updated on the best price opportunities.
+                    </h3>
+                  </div>
+                </div>
+                <div className="selling-offer-card">
+                  <div className="selling-offer-card-img">
+                    <img src="/img/Group 300.svg" alt="house" />
+                  </div>
+                  <div className="selling-offer-card-text">
+                    <h2 className="selling-offer-card-text-h2">
+                      HASSLE FREE DOCUMENTATION
+                    </h2>
+                    <h3 className="selling-offer-card-text-h3">
+                      Effortless Documentation – Complete Support for All
+                      Required Documents in Property Transactions.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div className="selling-card-banner" 
+               onClick=
+               {() => {
+                 if (medata && medata.IsAuthenticated == true) {
+                   navigate("/user/post");
+                 } else {
+                   setRedirectPath("/user/post");
+                   navigate("/login");
+                 }
+               }}>
+               
+                <img
+                  src="/img/Real Estate Retractable Banner2.png"
+                  alt="banner"
+                />
+              </div>
+            </div>
           </div>
         )}
         {activeTab === "buying" && (
@@ -367,28 +374,32 @@ function OurService() {
             </div> */}
             <div className="buying-main-card">
               <div className="buying-card-container">
-              <div className="tab-buttons">
-          <div
-            className={`tab-button ${
-              activeTab === "PropertyOwner" ? "active" : ""
-            }`}
-            onClick={() => openTab("PropertyOwner")}
-          >
-            <div className="tab-button-text">For Property Owner</div>
-          </div>
-          <div
-            className={`tab-button ${activeTab === "buying" ? "active" : ""}`}
-            onClick={() => openTab("buying")}
-          >
-            <div className="tab-button-text">For Buyers</div>
-          </div>
-          <div
-            className={`tab-button ${activeTab === "tenant" ? "active" : ""}`}
-            onClick={() => openTab("tenant")}
-          >
-            <div className="tab-button-text">For Tenants</div>
-          </div>
-        </div>
+                <div className="tab-buttons">
+                  <div
+                    className={`tab-button ${
+                      activeTab === "PropertyOwner" ? "active" : ""
+                    }`}
+                    onClick={() => openTab("PropertyOwner")}
+                  >
+                    <div className="tab-button-text">For Property Owner</div>
+                  </div>
+                  <div
+                    className={`tab-button ${
+                      activeTab === "buying" ? "active" : ""
+                    }`}
+                    onClick={() => openTab("buying")}
+                  >
+                    <div className="tab-button-text">For Buyers</div>
+                  </div>
+                  <div
+                    className={`tab-button ${
+                      activeTab === "tenant" ? "active" : ""
+                    }`}
+                    onClick={() => openTab("tenant")}
+                  >
+                    <div className="tab-button-text">For Tenants</div>
+                  </div>
+                </div>
                 <div className="buying-offer-card">
                   <div className="buying-offer-card-img">
                     <img
@@ -530,29 +541,32 @@ function OurService() {
                 </h3>
               </div>
             </div> */}
-                <div className="tab-buttons">
-          <div
-            className={`tab-button ${
-              activeTab === "PropertyOwner" ? "active" : ""
-            }`}
-            onClick={() => openTab("PropertyOwner")}
-          >
-            <div className="tab-button-text">For Property Owner</div>
-          </div>
-          <div
-            className={`tab-button ${activeTab === "buying" ? "active" : ""}`}
-            onClick={() => openTab("buying")}
-          >
-            <div className="tab-button-text">For Buyers</div>
-          </div>
-          <div
-            className={`tab-button ${activeTab === "tenant" ? "active" : ""}`}
-            onClick={() => openTab("tenant")}
-          >
-            <div className="tab-button-text">For Tenants</div>
-          </div>
-        </div>
-            
+            <div className="tab-buttons">
+              <div
+                className={`tab-button ${
+                  activeTab === "PropertyOwner" ? "active" : ""
+                }`}
+                onClick={() => openTab("PropertyOwner")}
+              >
+                <div className="tab-button-text">For Property Owner</div>
+              </div>
+              <div
+                className={`tab-button ${
+                  activeTab === "buying" ? "active" : ""
+                }`}
+                onClick={() => openTab("buying")}
+              >
+                <div className="tab-button-text">For Buyers</div>
+              </div>
+              <div
+                className={`tab-button ${
+                  activeTab === "tenant" ? "active" : ""
+                }`}
+                onClick={() => openTab("tenant")}
+              >
+                <div className="tab-button-text">For Tenants</div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -561,5 +575,3 @@ function OurService() {
 }
 
 export default OurService;
-
-

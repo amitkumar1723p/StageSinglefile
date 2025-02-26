@@ -676,9 +676,7 @@ const SingleCard = ({ PostData, index }) => {
                             ? ""
                             : "sold-out"
                         }`}
-                      >
-                        {" "}
-                        / Month{" "}
+                      > / Month
                       </span>
                     </p>
                     <p

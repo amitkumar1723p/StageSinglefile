@@ -53,8 +53,8 @@ import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
 import { UserContext } from "../CreateContext/CreateContext";
-import ReportListingForm from "./ReportListingForm";
-import TermsAndConditions from "./TermsAndConditions";
+import RentAgreement from "./RentAgreement";
+// import TenantDetailsForm from "./TenantDetailsForm";
 import PrivacyPolicy from "./PrivacyPolicy";
 import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
@@ -730,7 +730,7 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+       {PropertyAddType == "Rent" && (
         <>
           <BrowseProperties />
           <LandLord />
@@ -738,9 +738,9 @@ const HeroSection = () => {
           <PropertyDetailsForm />
           <RentalBanner />
           <Tenant />
-          <TenantDetailsForm />
+          {/* <TenantDetailsForm /> */}
         </>
-      )} */}
+      )}
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 

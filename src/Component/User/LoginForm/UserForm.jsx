@@ -58,7 +58,8 @@ export default function UserForm() {
           navigate(-1);
         } else if (RedirectPath == "/show-Supspicious-Listing-Form") {
           navigate(-1);
-        } else {
+        }  
+          else {
           navigate("/user/my-listing");
         }
 

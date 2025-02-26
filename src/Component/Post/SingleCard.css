@@ -333,6 +333,8 @@ margin-right: 5px;
   }
   .rent-per-month{
     color: #1F2937;
+    font-size: 12px;
+    font-weight: 600;
   }
   .truncate-text {
     white-space: nowrap;

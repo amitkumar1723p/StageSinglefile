@@ -910,7 +910,7 @@ function Career() {
                     src="img/iconoir_cancel.svg"
                     alt="cancel"
                     srcSet=""
-                  />{" "}
+                  />
                 </div>
               </div>
               <div className="Career-Card-Form-content">
