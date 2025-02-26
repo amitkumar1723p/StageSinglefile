@@ -27,7 +27,6 @@ export default function PostCard({ PostData, index }) {
     // You could add a toast notification here
   };
 
-  
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
       return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;

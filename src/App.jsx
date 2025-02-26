@@ -42,6 +42,8 @@ import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePos
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
 import { UserContext } from "./Component/CreateContext/CreateContext";
+import OurService from "./Component/Home/OurService";
+import ReportPage from "./Component/Home/ReportPage";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
@@ -61,6 +63,7 @@ import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
+import Career from "./Component/Home/Careers";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
@@ -120,6 +123,10 @@ function App() {
   // similar
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
+  });
+  // paid property
+  const { data: paidPropertyData } = useSelector((state) => {
+    return state.paidPropertyData;
   });
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
@@ -570,6 +577,22 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
+   //  paid property 
+   useEffect(() => {
+    if (paidPropertyData) {
+      if (paidPropertyData.success === false) {
+        if (paidPropertyData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{paidPropertyData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "getPaidPropertyFailClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [paidPropertyData]);
 
   // get All User
   useEffect(() => {
@@ -743,6 +766,22 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
           exact
           path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
+        />
+         <Route
+          exact
+          path="/Our-Service"
+          element={<OurService />}
+        />
+         <Route
+          exact
+          path="/Career"
+          element={<Career />}
+        />
+        
+        <Route
+          exact
+          path="/Report"
+          element={<ReportPage />}
         />
 
         <Route

@@ -36,7 +36,7 @@ const PropertyFilters = () => {
   const { data } = useSelector((state) => {
     return state.GetAllPost;
   });
-  console.log(data);
+  // console.log(data);
 
   const handleClicked = (v) => {
     setIsClicked(v);

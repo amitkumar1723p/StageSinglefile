@@ -63,7 +63,7 @@ const LoginForm = ({
           <div className="login-form-content-unique">
             <h2 className="heading-h2">Login or Register </h2>
             <p className="login-h2-p">
-              Welcome to Propertydekho247.com Log in to your account
+              Welcome to PropertyDekho247 Log in to your account
             </p>
             <form onSubmit={handleSubmit}>
               <label className="lable-login" htmlFor="login-form">
@@ -129,7 +129,7 @@ const LoginForm = ({
                   rel="noopener noreferrer"
                   className="link-t-c-p-v"
                 >
-                  Privicy Policy
+                  Privacy Policy
                 </Link>
               </small>
               <button

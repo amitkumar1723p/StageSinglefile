@@ -27,6 +27,7 @@ import ShowSinglePostImages from "./ShowSinglePostImages";
 import ReportListingForm from "./ReportListingForm";
 import FurnishDetails from "./FurnishDetails";
 import {
+  getPaidPropertyAction,
   TenentResponseIsExitAction,
   ViewOwnerDetailsAction,
 } from "../../../Action/userAction";
@@ -34,6 +35,7 @@ import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
+import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -42,7 +44,7 @@ export default function SinglePostDetails() {
   const BiddingFormOpenBtnRef = useRef(null);
   const ScheduleYourVisitOpenBtnRef = useRef(null);
   const SupspiciousListingBtn = useRef(null);
-  const TenantDetailsFormBtnRef = useRef(null);
+  const showOwnerDetailsFormRef = useRef(null);
   const navigate = useNavigate();
   const [SinglePostId, setSinglePostId] = useState("");
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
@@ -57,10 +59,18 @@ export default function SinglePostDetails() {
     useState(false);
 
   const [showTenantDetailsForm, setshowTenantDetailsForm] = useState(false); // Open Tenant Details Form
-  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false); // Open Tenant Details Form
+
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
+  // payment
+  const [status, setStatus] = useState(false);
+  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
+  // payment
+  const { data: paidPropertyData } = useSelector((state) => {
+    return state.paidPropertyData;
+  });
+
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -74,7 +84,7 @@ export default function SinglePostDetails() {
   } = useSelector((state) => {
     return state.userData;
   });
-
+  // const {data}=useSelector((state)=>state.paymentResponse) //paymentAction
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
@@ -250,7 +260,7 @@ export default function SinglePostDetails() {
   // let loadings =true
 
   // open report form
-  const [openReportForm, setOpenReportForm] = useState(false);
+  const [openReportForm, setOpenReportForm] = useState("");
   const [reportdata, setReportData] = useState("");
   const handleReportFormOpen = (e) => {
     setOpenReportForm(true);
@@ -267,10 +277,10 @@ export default function SinglePostDetails() {
       setshowOwnerDetailsForm(true);
       setshowTenantDetailsForm(false);
 
-      if (!TenentResponseIsExitData?.TenantDetails) {
-        sessionStorage.setItem("TenentFillForm", true);
-        dispatch(TenentResponseIsExitAction(SinglePostId));
-      }
+      // if (!TenentResponseIsExitData?.TenantDetails) {
+      //   sessionStorage.setItem("TenentFillForm", true);
+      //   dispatch(TenentResponseIsExitAction(SinglePostId));
+      // }
       // setTenantsDetails({
       //   FamilyDetails: { Adults: 0, Children: 0, Pets: null },
       //   ProfessionDetails: { WorkType: "" },
@@ -297,6 +307,22 @@ export default function SinglePostDetails() {
       dispatch(SimilarProperty(postId));
     }
   }, [Params?.PostAddress]);
+
+  // payment
+
+  const updateStatus = (newStatus) => {
+    setStatus(newStatus);
+  };
+  useEffect(() => {
+    if (getSinglePostData || status) {
+      dispatch(getPaidPropertyAction(getSinglePostData?.SinglePost?._id));
+      //  alert(getSinglePostData?.SinglePost?._id)
+    }
+
+    if (status !== false) {
+      setshowOwnerDetailsForm(true);
+    }
+  }, [status, getSinglePostData]);
 
   return (
     <>
@@ -552,7 +578,7 @@ export default function SinglePostDetails() {
 
                         {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                           <span
-                            className="original-price"
+                            className="original-price make-offer-btn"
                             ref={BiddingFormOpenBtnRef}
                             onClick={() => {
                               if (medata && medata.IsAuthenticated === true) {
@@ -593,46 +619,14 @@ export default function SinglePostDetails() {
                             <p className="rent-ques-section">Deposite Price</p>
                           </div>
                         </div>
-
-                        {/* {!medata || !medata.IsAuthenticated ? (
-                          <span
-                            className="original-price"
-                            onClick={() => {
-                              setRedirectPath("/view-owner-details");
-                              navigate("/login");
-                            }}
-                          >
-                            View Owner Details
-                          </span>
-                        ) : (
-                          ["Tenant"].includes(medata?.user?.Role) && (
-                            <span
-                              ref={TenantDetailsFormBtnRef}
-                              className="original-price"
-                              onClick={() => {
-                                if (!TenentResponseIsExitData?.TenantDetails) {
-                                  setshowTenantDetailsForm(true);
-                                } else {
-                                  dispatch(
-                                    ViewOwnerDetailsAction({
-                                      PostId:
-                                        getSinglePostData?.SinglePost?._id,
-                                    })
-                                  );
-                                  //  dispatch(ViewOwnerDetailsAction({postId}))
-                                }
-                              }}
-                            >
-                              View Owner Details
-                            </span>
-                          )
-                        )} */}
+                        {/* pay button */}
                       </>
                     )}
+                    {/* pay button */}
                   </div>
                 </div>
 
-                <div className="property-actions">
+                <div className={`property-actions ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType =="Rent" ?"property-actions-rent":"property-actions-sale"}`}>
                   {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                     getSinglePostData.SinglePost.BasicDetails.PropertyAdType !=
                       "Rent" && (
@@ -655,6 +649,8 @@ export default function SinglePostDetails() {
                       </>
                     )}
 
+                    
+
                   <Link
                     to="https://wa.me/7837840785?text=Hello"
                     target="_blank"
@@ -669,6 +665,47 @@ export default function SinglePostDetails() {
                     WhatsApp
                     {/* </button> */}
                   </Link>
+                  {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType ===
+                  "Rent" ? (
+                    <div>
+                      {!medata || !medata.IsAuthenticated ? (
+                        <span
+                          className="original-price"
+                          onClick={() => {
+                            setRedirectPath("/view-owner-details");
+                            navigate("/login");
+                          }}
+                        >
+                          View Owner Details
+                        </span>
+                      ) : (
+                        <>
+                          {
+                            // Check if paidPropertyData?.data contains data and satisfies the condition
+                            Array.isArray(paidPropertyData?.data) &&
+                            paidPropertyData?.data.length > 0 &&
+                            paidPropertyData?.data[0]?.userId ===
+                              medata?.user?._id ? (
+                              <button
+                              className="original-price border-0"
+                                ref={showOwnerDetailsFormRef}
+                                onClick={() => {
+                                  setshowOwnerDetailsForm(true);
+                                }}
+                              >
+                                View Number
+                              </button>
+                            ) : (
+                              <PayButton
+                                PostId={getSinglePostData?.SinglePost?._id}
+                                onSuccess={updateStatus}
+                              />
+                            ) // Show PayButton if the condition is not satisfied
+                          }
+                        </>
+                      )}
+                    </div>
+                  ) : null}
                 </div>
                 {getSinglePostData.SinglePost.PostVerifyData?.Time && (
                   <div className="posted-by-section">
@@ -1106,17 +1143,22 @@ export default function SinglePostDetails() {
                     <WindowComponent
                       Component={TanantDetailsForm}
                       SetShow={setshowTenantDetailsForm}
-                      BtnRef={TenantDetailsFormBtnRef}
+                      BtnRef={""}
                       SinglePostData={getSinglePostData}
                       // PropertyAddress={PropertyAddress}
                     />
                   )}
 
+                  {/* After make payment done this open  */}
                   {showOwnerDetailsForm && (
                     <WindowComponent
                       Component={ViewOwnerDetailsAlert}
                       SetShow={setshowOwnerDetailsForm}
-
+                      BtnRef={showOwnerDetailsFormRef}
+                      Contact={
+                        paidPropertyData?.getOwnerDetail?.CreatePostUser
+                          ?.ContactNumber
+                      }
                       // PropertyAddress={PropertyAddress}
                     />
                   )}

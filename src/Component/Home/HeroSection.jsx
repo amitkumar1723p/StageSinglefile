@@ -53,8 +53,8 @@ import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
 import { UserContext } from "../CreateContext/CreateContext";
-import ReportListingForm from "./ReportListingForm";
-import TermsAndConditions from "./TermsAndConditions";
+import RentAgreement from "./RentAgreement";
+// import TenantDetailsForm from "./TenantDetailsForm";
 import PrivacyPolicy from "./PrivacyPolicy";
 import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
@@ -65,6 +65,7 @@ import DreamHomeBanner from "./DreamHomeBanner.jsx";
 import BuyingSellingTenant from "./BuyingSellingTenant";
 // import DreamHomeBanner from "./DreamHomeBanner.jsx";
 import { Helmet } from "react-helmet";
+import VerifiedComponent from "./VerifiedComponent.jsx";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -227,7 +228,7 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
-  console.log(PropertyAddType)
+  // console.log(PropertyAddType)
 
   return (
     <><Helmet>
@@ -730,17 +731,18 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+       {PropertyAddType == "Rent" && (
         <>
+        <VerifiedComponent/>
+          <Tenant />
           <BrowseProperties />
           <LandLord />
-          <RentAgreement/>
           <PropertyDetailsForm />
+          <RentAgreement/>
           <RentalBanner />
-          <Tenant />
-          <TenantDetailsForm />
+          {/* <TenantDetailsForm /> */}
         </>
-      )} */}
+      )}
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
