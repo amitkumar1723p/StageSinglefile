@@ -27,6 +27,7 @@ import ShowSinglePostImages from "./ShowSinglePostImages";
 import ReportListingForm from "./ReportListingForm";
 import FurnishDetails from "./FurnishDetails";
 import {
+  getPaidPropertyAction,
   TenentResponseIsExitAction,
   ViewOwnerDetailsAction,
 } from "../../../Action/userAction";
@@ -34,6 +35,7 @@ import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
+import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -42,7 +44,7 @@ export default function SinglePostDetails() {
   const BiddingFormOpenBtnRef = useRef(null);
   const ScheduleYourVisitOpenBtnRef = useRef(null);
   const SupspiciousListingBtn = useRef(null);
-  const TenantDetailsFormBtnRef = useRef(null);
+  const showOwnerDetailsFormRef= useRef(null);
   const navigate = useNavigate();
   const [SinglePostId, setSinglePostId] = useState("");
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
@@ -57,10 +59,18 @@ export default function SinglePostDetails() {
     useState(false);
 
   const [showTenantDetailsForm, setshowTenantDetailsForm] = useState(false); // Open Tenant Details Form
-  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false); // Open Tenant Details Form
+
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
+  // payment
+  const [status, setStatus] = useState(false)
+  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
+  // payment
+  const { data: paidPropertyData } = useSelector((state) => {
+    return state.paidPropertyData;
+  });
+
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -74,7 +84,7 @@ export default function SinglePostDetails() {
   } = useSelector((state) => {
     return state.userData;
   });
-
+  // const {data}=useSelector((state)=>state.paymentResponse) //paymentAction
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
@@ -92,12 +102,9 @@ export default function SinglePostDetails() {
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
       setPropertyAddress(
-        `${`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`} ${
-          getSinglePostData.SinglePost.BasicDetails.ApartmentType
-        } For ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType} In ${
-          getSinglePostData.SinglePost.LocationDetails.ProjectName
-        }   ${getSinglePostData.SinglePost.LocationDetails.Landmark} ${
-          getSinglePostData.SinglePost.LocationDetails.City
+        `${`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`} ${getSinglePostData.SinglePost.BasicDetails.ApartmentType
+        } For ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType} In ${getSinglePostData.SinglePost.LocationDetails.ProjectName
+        }   ${getSinglePostData.SinglePost.LocationDetails.Landmark} ${getSinglePostData.SinglePost.LocationDetails.City
         } `
       );
 
@@ -250,7 +257,7 @@ export default function SinglePostDetails() {
   // let loadings =true
 
   // open report form
-  const [openReportForm, setOpenReportForm] = useState(false);
+  const [openReportForm, setOpenReportForm] = useState('');
   const [reportdata, setReportData] = useState("");
   const handleReportFormOpen = (e) => {
     setOpenReportForm(true);
@@ -267,10 +274,10 @@ export default function SinglePostDetails() {
       setshowOwnerDetailsForm(true);
       setshowTenantDetailsForm(false);
 
-      if (!TenentResponseIsExitData?.TenantDetails) {
-        sessionStorage.setItem("TenentFillForm", true);
-        dispatch(TenentResponseIsExitAction(SinglePostId));
-      }
+      // if (!TenentResponseIsExitData?.TenantDetails) {
+      //   sessionStorage.setItem("TenentFillForm", true);
+      //   dispatch(TenentResponseIsExitAction(SinglePostId));
+      // }
       // setTenantsDetails({
       //   FamilyDetails: { Adults: 0, Children: 0, Pets: null },
       //   ProfessionDetails: { WorkType: "" },
@@ -297,6 +304,25 @@ export default function SinglePostDetails() {
       dispatch(SimilarProperty(postId));
     }
   }, [Params?.PostAddress]);
+
+  // payment
+
+  const updateStatus = (newStatus) => {
+    setStatus(newStatus);
+  };
+  useEffect(() => {
+
+    if (getSinglePostData || status) {
+
+      dispatch(getPaidPropertyAction(getSinglePostData?.SinglePost?._id))
+      //  alert(getSinglePostData?.SinglePost?._id)
+     
+    }
+   
+    if(status!==false){
+      setshowOwnerDetailsForm(true)
+    }
+  }, [status, getSinglePostData]);
 
   return (
     <>
@@ -385,17 +411,16 @@ export default function SinglePostDetails() {
                         {`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`}
                         {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom?.map(
                           (text) => {
-                            return `+ ${
-                              text == "Pooja Room"
+                            return `+ ${text == "Pooja Room"
                                 ? "Pooja"
                                 : text == "Servant Room"
-                                ? "SQ"
-                                : text == "Study Room"
-                                ? "Study"
-                                : text == "Store Room"
-                                ? "Store"
-                                : ""
-                            }`;
+                                  ? "SQ"
+                                  : text == "Study Room"
+                                    ? "Study"
+                                    : text == "Store Room"
+                                      ? "Store"
+                                      : ""
+                              }`;
                           }
                         )}
                       </span>
@@ -473,8 +498,8 @@ export default function SinglePostDetails() {
 
                   {getSinglePostData.SinglePost.PropertyDetails.Parking
                     .CoveredParking > 0 ||
-                  getSinglePostData.SinglePost.PropertyDetails.Parking
-                    .OpenParking > 0 ? (
+                    getSinglePostData.SinglePost.PropertyDetails.Parking
+                      .OpenParking > 0 ? (
                     <div className="property-info-tags">
                       <img
                         className="icon-detials"
@@ -531,111 +556,108 @@ export default function SinglePostDetails() {
                   <div className="property-price">
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Sale" && (
-                      <>
-                        <span className="ReservePrice-section">
-                          Reserve Price :{" "}
-                          <span className="price-value-in-span">
-                            {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .ExpectedPrice
-                            )}
+                        <>
+                          <span className="ReservePrice-section">
+                            Reserve Price :{" "}
+                            <span className="price-value-in-span">
+                              {formatReservePrice(
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .ExpectedPrice
+                              )}
+                            </span>
+                            <p className="lisitng-area-section">
+                              ₹{" "}
+                              {
+                                getSinglePostData.SinglePost.PricingDetails
+                                  .PricePerSqFt
+                              }{" "}
+                              Per sqft
+                            </p>
                           </span>
-                          <p className="lisitng-area-section">
-                            ₹{" "}
-                            {
-                              getSinglePostData.SinglePost.PricingDetails
-                                .PricePerSqFt
-                            }{" "}
-                            Per sqft
-                          </p>
-                        </span>
 
-                        {!["Owner", "Admin"].includes(medata?.user?.Role) && (
-                          <span
-                            className="original-price"
-                            ref={BiddingFormOpenBtnRef}
-                            onClick={() => {
-                              if (medata && medata.IsAuthenticated === true) {
-                                setshowBiddingForm(true);
-                              } else {
-                                setRedirectPath("/show-offerForm");
-                                navigate("/login");
-                              }
-                            }}
-                          >
-                            Make Your Offer
-                          </span>
-                        )}
-                      </>
-                    )}
+                          {!["Owner", "Admin"].includes(medata?.user?.Role) && (
+                            <span
+                              className="original-price"
+                              ref={BiddingFormOpenBtnRef}
+                              onClick={() => {
+                                if (medata && medata.IsAuthenticated === true) {
+                                  setshowBiddingForm(true);
+                                } else {
+                                  setRedirectPath("/show-offerForm");
+                                  navigate("/login");
+                                }
+                              }}
+                            >
+                              Make Your Offer
+                            </span>
+                          )}
+                        </>
+                      )}
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Rent" && (
-                      <>
-                        <div className="rent-main-section">
-                          <div>
-                            <p className="rent-price-main">
-                              {formatReservePrice(
-                                getSinglePostData.SinglePost.PricingDetails
-                                  .ExpectedRent
-                              )}{" "}
-                              <span>/Month</span>
-                            </p>
-                            <p className="rent-ques-section">Rent Price</p>
-                          </div>
+                        <>
+                          <div className="rent-main-section">
+                            <div>
+                              <p className="rent-price-main">
+                                {formatReservePrice(
+                                  getSinglePostData.SinglePost.PricingDetails
+                                    .ExpectedRent
+                                )}{" "}
+                                <span>/Month</span>
+                              </p>
+                              <p className="rent-ques-section">Rent Price</p>
+                            </div>
 
-                          <div>
-                            <p className="rent-price-main">
-                              {formatReservePrice(
-                                getSinglePostData.SinglePost.PricingDetails
-                                  .DepositePrice
-                              )}
-                            </p>
-                            <p className="rent-ques-section">Deposite Price</p>
+                            <div>
+                              <p className="rent-price-main">
+                                {formatReservePrice(
+                                  getSinglePostData.SinglePost.PricingDetails
+                                    .DepositePrice
+                                )}
+                              </p>
+                              <p className="rent-ques-section">Deposite Price</p>
+                            </div>
                           </div>
-                        </div>
+                          {/* pay button */}
 
-                        {/* {!medata || !medata.IsAuthenticated ? (
-                          <span
-                            className="original-price"
-                            onClick={() => {
-                              setRedirectPath("/view-owner-details");
-                              navigate("/login");
-                            }}
-                          >
-                            View Owner Details
-                          </span>
-                        ) : (
-                          ["Tenant"].includes(medata?.user?.Role) && (
+                          {!medata || !medata.IsAuthenticated ? (
                             <span
-                              ref={TenantDetailsFormBtnRef}
                               className="original-price"
                               onClick={() => {
-                                if (!TenentResponseIsExitData?.TenantDetails) {
-                                  setshowTenantDetailsForm(true);
-                                } else {
-                                  dispatch(
-                                    ViewOwnerDetailsAction({
-                                      PostId:
-                                        getSinglePostData?.SinglePost?._id,
-                                    })
-                                  );
-                                  //  dispatch(ViewOwnerDetailsAction({postId}))
-                                }
+                                setRedirectPath("/view-owner-details");
+                                navigate("/login");
                               }}
                             >
                               View Owner Details
                             </span>
-                          )
-                        )} */}
-                      </>
-                    )}
+                          ) : (
+                            <>
+                            {
+                              // Check if paidPropertyData?.data contains data and satisfies the condition
+                              Array.isArray(paidPropertyData?.data) && paidPropertyData?.data.length > 0 && paidPropertyData?.data[0]?.userId === medata?.user?._id
+                            ?  
+                                <button  
+                                ref={showOwnerDetailsFormRef}
+                                onClick={()=>{
+                                   setshowOwnerDetailsForm(true)
+                                }}>view Number</button>
+                             
+                                : <PayButton PostId={getSinglePostData?.SinglePost?._id} onSuccess={updateStatus} /> // Show PayButton if the condition is not satisfied
+                            }
+                          </>
+                          
+                          )}
+
+                        </>
+                      )}
+                    {/* pay button */}
                   </div>
                 </div>
 
                 <div className="property-actions">
                   {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                     getSinglePostData.SinglePost.BasicDetails.PropertyAdType !=
-                      "Rent" && (
+                    "Rent" && (
                       <>
                         {" "}
                         <button
@@ -730,15 +752,15 @@ export default function SinglePostDetails() {
                     {/* PropertyStatus */}
                     {getSinglePostData.SinglePost.BasicDetails
                       .PropertyStatus && (
-                      <PropertyDataBox
-                        Answer={
-                          getSinglePostData.SinglePost.BasicDetails
-                            .PropertyStatus
-                        }
-                        Icon="/img/status.png"
-                        Data={"Status"}
-                      />
-                    )}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData.SinglePost.BasicDetails
+                              .PropertyStatus
+                          }
+                          Icon="/img/status.png"
+                          Data={"Status"}
+                        />
+                      )}
 
                     {/* BHKType */}
                     <PropertyDataBox
@@ -765,25 +787,25 @@ export default function SinglePostDetails() {
                     {/* Bathroom */}
                     {getSinglePostData.SinglePost.PropertyDetails?.Bathroom >
                       0 && (
-                      <PropertyDataBox
-                        Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Bathroom
-                        }
-                        Icon="/img/bathroom.png"
-                        Data={"Bathrooms"}
-                      />
-                    )}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData.SinglePost.PropertyDetails.Bathroom
+                          }
+                          Icon="/img/bathroom.png"
+                          Data={"Bathrooms"}
+                        />
+                      )}
                     {/* Balcony */}
                     {getSinglePostData.SinglePost.PropertyDetails?.Balcony >
                       0 && (
-                      <PropertyDataBox
-                        Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Balcony
-                        }
-                        Icon="/img/balcony.png"
-                        Data={"Balconies"}
-                      />
-                    )}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData.SinglePost.PropertyDetails.Balcony
+                          }
+                          Icon="/img/balcony.png"
+                          Data={"Balconies"}
+                        />
+                      )}
 
                     {/* Furnishing */}
                     <PropertyDataBox
@@ -817,54 +839,54 @@ export default function SinglePostDetails() {
                     {/* Property on Floor  */}
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Rent" && (
-                      <PropertyDataBox
-                        Answer={floorDetails}
-                        Icon="/img/total-floor.png"
-                        Data={"Property on Floor"}
-                      />
-                    )}
+                        <PropertyDataBox
+                          Answer={floorDetails}
+                          Icon="/img/total-floor.png"
+                          Data={"Property on Floor"}
+                        />
+                      )}
                     {/* Property on Floor  , Total Floors" */}
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Sale" && (
-                      <>
-                        {getSinglePostData.SinglePost.FloorDetails
-                          .PropertyOnFloor && (
+                        <>
+                          {getSinglePostData.SinglePost.FloorDetails
+                            .PropertyOnFloor && (
+                              <PropertyDataBox
+                                Answer={`${getSinglePostData.SinglePost.FloorDetails.PropertyOnFloor}`}
+                                Icon="/img/total-floor.png"
+                                Data={"Property on Floor"}
+                              />
+                            )}
                           <PropertyDataBox
-                            Answer={`${getSinglePostData.SinglePost.FloorDetails.PropertyOnFloor}`}
+                            Answer={`${getSinglePostData.SinglePost.FloorDetails.TotalFloors}`}
                             Icon="/img/total-floor.png"
-                            Data={"Property on Floor"}
+                            Data={"Total Floors"}
                           />
-                        )}
-                        <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.FloorDetails.TotalFloors}`}
-                          Icon="/img/total-floor.png"
-                          Data={"Total Floors"}
-                        />
-                      </>
-                    )}
+                        </>
+                      )}
                     {getSinglePostData.SinglePost.PropertyDetails.Parking
                       ?.OpenParking > 0 && (
-                      <PropertyDataBox
-                        Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Parking
-                            .OpenParking
-                        }
-                        Icon="/img/parking.png"
-                        Data={"Open Parking"}
-                      />
-                    )}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData.SinglePost.PropertyDetails.Parking
+                              .OpenParking
+                          }
+                          Icon="/img/parking.png"
+                          Data={"Open Parking"}
+                        />
+                      )}
 
                     {getSinglePostData.SinglePost.PropertyDetails.Parking
                       ?.CoveredParking > 0 && (
-                      <PropertyDataBox
-                        Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Parking
-                            .CoveredParking
-                        }
-                        Icon="/img/parking.png"
-                        Data={"Covered Parking"}
-                      />
-                    )}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData.SinglePost.PropertyDetails.Parking
+                              .CoveredParking
+                          }
+                          Icon="/img/parking.png"
+                          Data={"Covered Parking"}
+                        />
+                      )}
                     {/* Parking  */}
 
                     {/* Flooring Type */}
@@ -898,47 +920,46 @@ export default function SinglePostDetails() {
 
                     {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
                       "Rent" && (
-                      <>
-                        <PropertyDataBox
-                          Answer={`${new Date(
-                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
-                          ).getDate()}-${
-                            new Date(
+                        <>
+                          <PropertyDataBox
+                            Answer={`${new Date(
+                              getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                            ).getDate()}-${new Date(
                               getSinglePostData.SinglePost.BasicDetails.AvailableFrom
                             ).getMonth() + 1
-                          }-${new Date(
-                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
-                          ).getFullYear()}`}
-                          Icon="/img/bathroom.png"
-                          Data={"Available From"}
-                        />
-
-                        {getSinglePostData.SinglePost.PricingDetails
-                          .AdditionalDetails?.PreferredTenant && (
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData.SinglePost.PricingDetails.AdditionalDetails?.PreferredTenant.map(
-                              (text) => {
-                                return text;
-                              }
-                            )}`}
+                              }-${new Date(
+                                getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                              ).getFullYear()}`}
                             Icon="/img/bathroom.png"
-                            Data={"Preferred Tenant"}
+                            Data={"Available From"}
                           />
-                        )}
 
-                        <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.PricingDetails.ExpectedRent}`}
-                          Icon="/img/bathroom.png"
-                          Data={"Expected Rent"}
-                        />
+                          {getSinglePostData.SinglePost.PricingDetails
+                            .AdditionalDetails?.PreferredTenant && (
+                              <PropertyDataBox
+                                Answer={`${getSinglePostData.SinglePost.PricingDetails.AdditionalDetails?.PreferredTenant.map(
+                                  (text) => {
+                                    return text;
+                                  }
+                                )}`}
+                                Icon="/img/bathroom.png"
+                                Data={"Preferred Tenant"}
+                              />
+                            )}
 
-                        <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.PricingDetails.DepositePrice}`}
-                          Icon="/img/Property-age.png"
-                          Data={"Security Deposit"}
-                        />
-                      </>
-                    )}
+                          <PropertyDataBox
+                            Answer={`${getSinglePostData.SinglePost.PricingDetails.ExpectedRent}`}
+                            Icon="/img/bathroom.png"
+                            Data={"Expected Rent"}
+                          />
+
+                          <PropertyDataBox
+                            Answer={`${getSinglePostData.SinglePost.PricingDetails.DepositePrice}`}
+                            Icon="/img/Property-age.png"
+                            Data={"Security Deposit"}
+                          />
+                        </>
+                      )}
                   </div>
                 </div>
                 <FurnishDetails
@@ -1031,35 +1052,35 @@ export default function SinglePostDetails() {
                                       </p> */}
                                       {item?.BasicDetails?.PropertyAdType ==
                                         "Rent" && (
-                                        <>
-                                          <div className="similar-area-price">
-                                            <div className="similar-area-price-rent-price">
-                                              {formatReservePrice(
-                                                item?.PricingDetails
-                                                  ?.ExpectedRent
-                                              )}{" "}
-                                              <span>/Month</span>
-                                            </div>
+                                          <>
+                                            <div className="similar-area-price">
+                                              <div className="similar-area-price-rent-price">
+                                                {formatReservePrice(
+                                                  item?.PricingDetails
+                                                    ?.ExpectedRent
+                                                )}{" "}
+                                                <span>/Month</span>
+                                              </div>
 
-                                            <span className="rent-price-section-similar-property">
-                                              {" "}
-                                              Rent Price{" "}
-                                            </span>
-                                          </div>
-                                        </>
-                                      )}
+                                              <span className="rent-price-section-similar-property">
+                                                {" "}
+                                                Rent Price{" "}
+                                              </span>
+                                            </div>
+                                          </>
+                                        )}
                                       {item?.BasicDetails?.PropertyAdType ==
                                         "Sale" && (
-                                        <>
-                                          <div className="similar-area-price">
-                                            {formatReservePrice(
-                                              item?.PricingDetails
-                                                ?.ExpectedPrice
-                                            )}
-                                            <span> Reserved price </span>
-                                          </div>
-                                        </>
-                                      )}
+                                          <>
+                                            <div className="similar-area-price">
+                                              {formatReservePrice(
+                                                item?.PricingDetails
+                                                  ?.ExpectedPrice
+                                              )}
+                                              <span> Reserved price </span>
+                                            </div>
+                                          </>
+                                        )}
 
                                       <button className="view-more-btn-3rd">
                                         View More
@@ -1085,7 +1106,7 @@ export default function SinglePostDetails() {
                       BtnRef={BiddingFormOpenBtnRef}
                       SinglePostData={getSinglePostData}
                       PropertyAddress={PropertyAddress}
-                      // setshowMakeOfferSuccessAlert ={setshowMakeOfferSuccessAlert}
+                    // setshowMakeOfferSuccessAlert ={setshowMakeOfferSuccessAlert}
                     />
                   )}
 
@@ -1106,18 +1127,20 @@ export default function SinglePostDetails() {
                     <WindowComponent
                       Component={TanantDetailsForm}
                       SetShow={setshowTenantDetailsForm}
-                      BtnRef={TenantDetailsFormBtnRef}
+                      BtnRef={''}
                       SinglePostData={getSinglePostData}
-                      // PropertyAddress={PropertyAddress}
+                    // PropertyAddress={PropertyAddress}
                     />
                   )}
 
+{/* After make payment done this open  */}
                   {showOwnerDetailsForm && (
                     <WindowComponent
                       Component={ViewOwnerDetailsAlert}
                       SetShow={setshowOwnerDetailsForm}
-
-                      // PropertyAddress={PropertyAddress}
+                      BtnRef={showOwnerDetailsFormRef}
+                      Contact={paidPropertyData?.getOwnerDetail?.CreatePostUser?.ContactNumber}
+                    // PropertyAddress={PropertyAddress}
                     />
                   )}
 
@@ -1128,7 +1151,7 @@ export default function SinglePostDetails() {
                       SetShow={setOpenReportForm}
                       BtnRef={SupspiciousListingBtn}
                       SinglePostData={getSinglePostData}
-                      // PropertyAddress={PropertyAddress}
+                    // PropertyAddress={PropertyAddress}
                     />
                   )}
 
@@ -1217,6 +1240,10 @@ export default function SinglePostDetails() {
           BtnRef={null}
         />
       )} */}
+
+
+
+
     </>
   );
 }

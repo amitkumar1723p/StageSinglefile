@@ -10,9 +10,8 @@ export const CreateUserOtpAction = (userData) => {
         payload: "CreateUserOtpRequest",
       });
       // const url = "/user/create";
-      const url = `${api_Base_Url}/user/${
-        userData.email ? "nri-genrate-otp" : "genrate-otp"
-      }`;
+      const url = `${api_Base_Url}/user/${userData.email ? "nri-genrate-otp" : "genrate-otp"
+        }`;
       //  const url =  ""
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -51,9 +50,8 @@ export const VerifyUserOtpAction = (userData) => {
       //   userData.email ? "nri-genrate-otp" : "genrate-otp"
       // }`;
 
-      const url = `${api_Base_Url}/user/${
-        userData.email ? "nri-verify-otp" : "verify-otp"
-      }`;
+      const url = `${api_Base_Url}/user/${userData.email ? "nri-verify-otp" : "verify-otp"
+        }`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -334,9 +332,8 @@ export const GetAllAdminAction = (Keyword) => {
 
       let url;
       if (Keyword) {
-        url = `${api_Base_Url}/admin-owner/admin-data?${
-          Object.keys(Keyword)[0]
-        }=${Keyword[Object.keys(Keyword)[0]]}`;
+        url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]
+          }=${Keyword[Object.keys(Keyword)[0]]}`;
       } else {
         url = `/admin-owner/admin-data`;
       }
@@ -588,7 +585,11 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 // Create Tenant Post Response
 
 export const ViewOwnerDetailsAction = (Document) => {
+<<<<<<< HEAD
  
+=======
+  console.log("4304949", Document)
+>>>>>>> 45a9ff0f5cf9509ed6e2474b5e3bcef0f1b0b96d
   return async (dispatch) => {
     try {
       dispatch({
@@ -597,14 +598,14 @@ export const ViewOwnerDetailsAction = (Document) => {
       });
 
       const url = `${api_Base_Url}/tenant-post-response/create/${Document.PostId}`;
-         
+
       const config = {
         headers: { "Content-Type": "application/json" },
 
         withCredentials: true,
       };
-       
-      let data ;
+
+      let data;
       if (Document.TenantsDetails) {
        
         const response = await axios.post(url, Document.TenantsDetails, config);
@@ -613,8 +614,8 @@ export const ViewOwnerDetailsAction = (Document) => {
      
         const response = await axios.get(url, config);
         data = response.data;
-    }
-    
+      }
+
       dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -797,7 +798,7 @@ export const ProfileEditAction = (editData) => {
 };
 
 export const ProfileUpdateAction = (updateData) => {
-  
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -927,10 +928,10 @@ export const OwnerAllPostsVisitAction = () => {
 
 // here we get All User except Owner/Admin/agent
 
-export const getAllUserAction=()=>{
+export const getAllUserAction = () => {
   return async (dispatch) => {
-      try {
-        dispatch({ type: "GetAllUserRequest" });
+    try {
+      dispatch({ type: "GetAllUserRequest" });
       let url = `${api_Base_Url}/user/getallUser/`;
 
       const config = {
@@ -940,20 +941,124 @@ export const getAllUserAction=()=>{
       };
       const { data } = await axios.get(url, config);
       dispatch({ type: "GetAllUserSuccess", payload: data });
-      } catch (error) {
-        if (error.response) {
-          dispatch({
-            type: "GetAllUserFail",
-            payload: error.response.data,
-          });
-        } else {
-          dispatch({
-            type: "GetAllUserFail",
-            payload: { message: error.message, success: false },
-          });
-        }
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "GetAllUserFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetAllUserFail",
+          payload: { message: error.message, success: false },
+        });
       }
     }
+  }
+}
+
+
+// Pyement Action
+
+export const paymentAction =  () => {
+  // console.log("hgq")
+  return async (dispatch) => {
+    try {
+      // console.log("dis")
+      dispatch({ type: "PaymentActionRequest",payload: "PaymentActionRequest" });
+
+      let url = `${api_Base_Url}/payment/userOrder`;
+      // console.log(url)
+      // const config = {
+      
+
+      //   withCredentials: true,
+      // };
+
+      const { data } = await axios.post(url, {}, { withCredentials: true });
+      console.log("data", data)
+      dispatch({ type: "PaymentActionSuccess", payload: data });
+    } catch (error) {
+      console.log(error)
+      if (error.response) {
+        dispatch({
+          type: "PaymentActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "PaymentActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+// store payment info
+export const verifiedPayment =  (userData) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "verifiedPaymentRequest" });
+
+      let url = `${api_Base_Url}/payment/userSuccess`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+// console.log(userData,"j")
+      const { data } = await axios.post(url, userData, config);
+      dispatch({ type: "verifiedPaymentSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "verifiedPaymentFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "verifiedPaymentFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+// get paid property 
+
+export const getPaidPropertyAction=(PostId)=>{
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "getPaidPropertyRequest" });
+
+      let url = `${api_Base_Url}/payment/getPaidProperty/${PostId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({ type: "getPaidPropertySuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "getPaidPropertyFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "getPaidPropertyFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
 }
 
 

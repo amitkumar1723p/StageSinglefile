@@ -120,6 +120,10 @@ function App() {
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
+  // paid property
+  const { data: paidPropertyData } = useSelector((state) => {
+    return state.paidPropertyData;
+  });
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
@@ -552,6 +556,22 @@ function App() {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
+   //  paid property 
+   useEffect(() => {
+    if (paidPropertyData) {
+      if (paidPropertyData.success === false) {
+        if (paidPropertyData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{paidPropertyData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "getPaidPropertyFailClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [paidPropertyData]);
 
   // get All User
   useEffect(() => {
