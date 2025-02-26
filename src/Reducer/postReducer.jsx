@@ -21,6 +21,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "PermanentPostDeleteRequest":
       case "AssignExecleRequest":
     case "Remove_ExcelFromAdminRequest":
+      case "UserRoleUpdationRequest":
       return {
         ...state,
         loading: true,
@@ -47,6 +48,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "PermanentPostDeleteSuccess":
       case "AssignExecleSucess":
     case "Remove_ExcelFromAdminSuccess":
+      case "UserRoleUpdationSuccess":
       return {
         ...state,
         loading: false,
@@ -73,6 +75,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "PermanentPostDeleteFail":
       case "AssignExeclFail":
     case "Remove_ExcelFromAdminFail":
+    case "UserRoleUpdationFail":
       return {
         ...state,
         loading: false,

@@ -957,3 +957,36 @@ export const getAllUserAction=()=>{
 }
 
 
+//user role updation
+ 
+export const UserRoleUpdation = (updateData) => {
+  console.log(updateData)
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "UserRoleUpdationRequest",
+        payload: "UserRoleUpdationRequest",
+      });
+      const url = `${api_Base_Url}/user/update-role`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(url, updateData, config);
+      dispatch({ type: "UserRoleUpdationSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "UserRoleUpdationFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "UserRoleUpdationFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
