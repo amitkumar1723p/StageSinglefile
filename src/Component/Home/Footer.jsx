@@ -17,7 +17,7 @@
 //     });
 //   };
 //   const vv =window.innerWidth <= 768 
-//   console.log(vv)
+ 
 
 //   const quickLinks = [
 //     { name: 'Home', hash: "" },
@@ -191,7 +191,7 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'Home', hash: "" },
+    { name: 'Home', hash: "Hero-section" },
     { name: 'About Us', hash: "WHO-WE-ARE" },
     { name: 'Services', hash: "select-option-section" } // Make sure the section has this ID in your home page
   ];
@@ -223,7 +223,8 @@ const Footer = () => {
               <div className="company__underline"></div>
             </div>
             <p className="company__description">
-              Your trusted partner in finding the perfect property. Discover your dream home with our AI-powered property search.
+            India's first online Proptech platform that delivers real-time price alerts to property owners. We focused on building Transparency, Trust with fair price value
+
             </p>
             <div className="company__social">
               {socialIcons.map(({ Icon, link }, index) => (
@@ -248,7 +249,7 @@ const Footer = () => {
                           scrollToSection(item.hash);
                         }
                       }}
-                      href="#"
+                      href=""
                       className="links__link"
                     >
                       <span className="links__dot"></span>

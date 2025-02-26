@@ -3,7 +3,7 @@ export const CreatePostReducer = (state = {}, action) => {
   switch (action.type) {
     // user Routes
     // case "CreatePostRequest":
-    // case "DeletePostRequest":
+    case "DeleteAndRestorePostRequest":
     // Admin routes
     // case "UpdatePostRequest":
     case "VerifyPostActionRequest":
@@ -16,6 +16,11 @@ export const CreatePostReducer = (state = {}, action) => {
     case "RemoveAssignPropertyRequest":
     case "Active_InactivePropertyRequest":
     case "showVeirifyPostIconRequest":
+    case "changePropertyStatusRequest":
+    case "acknowledgeProfileRequest":
+    case "PermanentPostDeleteRequest":
+      case "AssignExecleRequest":
+    case "Remove_ExcelFromAdminRequest":
       return {
         ...state,
         loading: true,
@@ -23,7 +28,7 @@ export const CreatePostReducer = (state = {}, action) => {
       };
 
     // case "CreatePostSuccess":
-    // case "DeletePostSuccess":
+    case "DeleteAndRestorePostSuccess":
     // case "UpdatePostSuccess":
     case "VerifyPostActionSuccess":
     case "ReOpenPostActionSuccess":
@@ -37,6 +42,11 @@ export const CreatePostReducer = (state = {}, action) => {
     // Activ in active
     case "Active_InactivePropertySuccess":
     case "showVeirifyPostIconSuccess":
+    case "changePropertyStatusSuccess":
+    case "acknowledgeProfileSuccess":
+    case "PermanentPostDeleteSuccess":
+      case "AssignExecleSucess":
+    case "Remove_ExcelFromAdminSuccess":
       return {
         ...state,
         loading: false,
@@ -44,7 +54,7 @@ export const CreatePostReducer = (state = {}, action) => {
       };
 
     // case "CreatePostFail":
-    // case "DeletePostFail":
+    case "DeleteAndRestorePostFail":
     // case "UpdatePostFail":
     case "VerifyPostActionFail":
     case "ReOpenPostActionFail":
@@ -58,6 +68,11 @@ export const CreatePostReducer = (state = {}, action) => {
     // Activ in active
     case "Active_InactivePropertyFail":
     case "showVeirifyPostIconFail":
+    case "changePropertyStatusFail":
+    case "acknowledgeProfileFail":
+    case "PermanentPostDeleteFail":
+      case "AssignExeclFail":
+    case "Remove_ExcelFromAdminFail":
       return {
         ...state,
         loading: false,
@@ -265,10 +280,6 @@ export const Admin_OwnerGetAllPostReducer = (state = {}, action) => {
       };
   }
 };
-
-
-
-
 
 export const Admin_OwnerGetAllScheduleVisitsReducer = (state = {}, action) => {
   switch (action.type) {
@@ -519,6 +530,7 @@ export const OwnerAllExcelFileReducer = (state = {}, action) => {
   }
 }
 
+//owner all file excel reducer 
 export const fetchAllOwnerFilesReducer = (state = {}, action) => {
   switch (action.type) {
     case "FetchAllOwnerFilesRequest":
@@ -546,5 +558,138 @@ export const fetchAllOwnerFilesReducer = (state = {}, action) => {
 
     default:
       return state;
+  }
+};
+
+//admin all excel file
+export const fetchAllAdminFilesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FetchAllAdminFilesRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "FetchAllAdminFilesSuccess":
+      console.log("this is in reducer ",action)
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "FetchAllAdminFilesFail":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // Stores error details
+      };
+
+    case "FetchAllAdminFilesClear":
+      return {}; // Clears state when necessary
+
+    default:
+      return state;
+  }
+};
+//agent all excel file
+export const fetchAllAgentFilesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FetchAllAgentFilesRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "FetchAllAgentFilesSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "FetchAllAgentFilesFail":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload, // Stores error details
+      };
+
+    case "FetchAllAgentFilesClear":
+      return {}; // Clears state when necessary
+
+    default:
+      return state;
+  }
+};
+//remove excel reducer
+
+
+
+// notify
+export const GetAllNotificationsAndRequirementsReducer = (
+  state = {},
+  action
+) => {
+  switch (action.type) {
+    case "GetNotifiesAndPropRequests":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "GetNotifiesAndPropRequestsSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetNotifiesAndPropRequestsFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetNotifiesAndPropRequestsClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+// Get All Deleted Posts
+
+export const GetDeletedPostsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "GetDeletedPostsRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "GetDeletedPostsSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetDeletedPostsFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "GetDeletedPostsClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
   }
 };

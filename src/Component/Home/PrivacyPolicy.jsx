@@ -1,9 +1,18 @@
 import React from "react";
 import "./PrivacyPolicy.css";
+import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
   return (
+    
     <div className="terms-container">
+  <Helmet>
+                <meta charSet="utf-8" />
+                <title>Privacy Policy - PropertyDekho247.com</title>
+                <meta name="description" content=" At PropertyDekho247.com, your privacy is of utmost importance to us. This Privacy Policy explains how we collect, use, safeguard, and disclose your personal information when you interact with our website and services. By accessing or using PropertyDekho247.com, you agree to the practices outlined in this policy. We are dedicated to protecting your privacy and ensuring the security of your personal data. If you have any questions or concerns regarding our privacy practices, please feel free to reach out to us."></meta>
+                <link rel="canonical" href="https://www.propertydekho247.com/privacy-policy/"/>
+            </Helmet>
+
       <h3 className="main-heading-h3">Privacy Policy</h3>
       <p className="tc-date-time">Last updated on 2nd Jan 2025</p>
 

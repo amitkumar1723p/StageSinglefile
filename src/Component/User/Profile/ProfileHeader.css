@@ -364,8 +364,10 @@
 
 .Shortlisted-prop {
   font-size: 16px;
+  padding: 10px 0px;
   color: #333;
   text-align: center;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -374,24 +376,29 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    
   }
 
   .dashborad-section-left-right {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; */
     width: 100%;
   }
 }
 @media (max-width: 480px) {
   .sidebar-profile {
-    padding: 10px;
+    /* padding: 20px; */
+    overflow-x: auto;
     color: #ffffff;
-    height: fit-content;
+    height: 70px;
     border: 1px solid #dedeff;
     position: static;
     top: 0px;
   }
+  .sidebar-profile::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
 
   .editProfileButton button {
     color: #fff;

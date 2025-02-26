@@ -1,13 +1,13 @@
 .AdminAside-container {
     display: flex;
-    padding: 1rem;
+    /* padding:1rem; */
     gap: 1rem;
     background-color: #f8f8f8;
   }
   
   .AdminAside-sidebar {
     position: sticky;
-    top: 82px;
+    top: 65px;
     background-color: white;
     color: black;
     padding: 1rem;
@@ -16,8 +16,11 @@
     border-bottom: 5px solid #e5e5e5;
     border-radius: 0.5rem;
     outline: 1px solid #f8f8f8;
+    background-color: white;
   }
-
+.admin-aside-bar-contaoner{
+  position: relative;
+}
   .search-admin-section{
     position: absolute;
 left: 96%;
@@ -89,10 +92,152 @@ bottom: 32%;
   }
   
   .AdminAside-content {
+    width: 800px;
     flex: 1;
     padding: 1rem;
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .skeleton-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    width: 800px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Skeleton Animation */
+  .skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    border-radius: 8px;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  /* Top Section */
+  .skeleton-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .skeleton-checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+  
+  .skeleton-text {
+    flex-grow: 1;
+  }
+  
+  .skeleton-title {
+    width: 200px;
+    height: 20px;
+  }
+  
+  .skeleton-subtitle {
+    width: 300px;
+    height: 14px;
+    margin-top: 6px;
+  }
+  
+  .skeleton-badge {
+    width: 120px;
+    height: 20px;
+  }
+  
+  /* Property Details */
+  .skeleton-details {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .skeleton-price {
+    width: 100px;
+    height: 18px;
+  }
+  
+  .skeleton-info {
+    width: 150px;
+    height: 16px;
+  }
+  
+  /* Visit, Offer, Duration */
+  .skeleton-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .skeleton-action {
+    width: 200px;
+    height: 16px;
+  }
+  
+  /* Posted By */
+  .skeleton-posted {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .skeleton-tag {
+    width: 200px;
+    height: 20px;
+  }
+  
+  /* Toggle Switch */
+  .skeleton-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .skeleton-switch-text {
+    width: 120px;
+    height: 16px;
+  }
+  
+  .skeleton-switch {
+    width: 40px;
+    height: 20px;
+    border-radius: 20px;
+  }
+  
+  /* Buttons */
+  .skeleton-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    /* background: #000; */
+  }
+  
+  .skeleton-button {
+    width: 120px;
+    height: 40px;
+  }
+  
+  .skeleton-button.blue {
+    background: linear-gradient(90deg, #bbdefb 25%, #90caf9 50%, #bbdefb 75%);
+  }
+  
+  .skeleton-button.red {
+    background: linear-gradient(90deg, #f8d7da 25%, #f5c6cb 50%, #f8d7da 75%);
   }
   

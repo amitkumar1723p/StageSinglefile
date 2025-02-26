@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "./SinglePostDetails.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import {
   GetSinglePostAction,
+  LoginUserPostAction,
   SimilarProperty,
 } from "../../../Action/postAction";
 import Loader from "../../Loader/Loader";
@@ -17,21 +19,30 @@ import BiddingForm from "./BiddingForm";
 import ScheduleYourVisit from "./ScheduleYourVisit";
 
 import WindowComponent from "../../WindowComponent";
-import CreateTenantPostResponse from "./CreateTenantPostResponse";
+import ViewOwnerDetailsAlert from "./ViewOwnerDetailsAlert";
 
 import { UserContext } from "../../CreateContext/CreateContext";
 
 import ShowSinglePostImages from "./ShowSinglePostImages";
 import ReportListingForm from "./ReportListingForm";
 import FurnishDetails from "./FurnishDetails";
+import {
+  TenentResponseIsExitAction,
+  ViewOwnerDetailsAction,
+} from "../../../Action/userAction";
+import { StoreDataInSession } from "../../../utils/SessionStorage";
+import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
+import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
+import { retry } from "@reduxjs/toolkit/query";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
   const Params = useParams();
-  const Tenant_PostResponseBtnRef = useRef(null);
+
   const BiddingFormOpenBtnRef = useRef(null);
   const ScheduleYourVisitOpenBtnRef = useRef(null);
   const SupspiciousListingBtn = useRef(null);
+  const TenantDetailsFormBtnRef = useRef(null);
   const navigate = useNavigate();
   const [SinglePostId, setSinglePostId] = useState("");
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
@@ -44,30 +55,39 @@ export default function SinglePostDetails() {
   const [PropertyAddress, setPropertyAddress] = useState("");
   const [showTenant_PostResponseForm, setshowTenant_PostResponseForm] =
     useState(false);
+
+  const [showTenantDetailsForm, setshowTenantDetailsForm] = useState(false); // Open Tenant Details Form
+  const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false); // Open Tenant Details Form
   const [areaDetails, setAreaDetails] = useState(null); // Plot-Area // builup-area //  super-builtup-area //carpet-area
   const [OtherArea, setOtherArea] = useState(null); // builup-area //  super-builtup-area //carpet-area
   const [floorDetails, setFloorDetails] = useState("");
-  const [reload, setReload] = useState(true); //use for reload similar property
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
   const { loading, data: getSinglePostData } = useSelector((state) => {
     return state.GetSinglePost;
   });
+  const {
+    loading: AlertLoding,
+    data: AlertData,
+    LodingType: AlertType,
+  } = useSelector((state) => {
+    return state.userData;
+  });
+
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
-  useEffect(() => {
-    let postaddress = Params.PostAddress;
-    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
-    setSinglePostId(postId);
-    if (reload === true) {
-      dispatch(GetSinglePostAction(postId));
-      // similar property dispatch
-      dispatch(SimilarProperty(postId));
-      setReload(false);
-    }
-  }, [reload]);
+
+  // Get All Post by Login User
+  const { data: myListing } = useSelector((state) => {
+    return state.GetPost;
+  });
+
+  //  Check Tenant Fill Response Form  (get Data)
+  const { data: TenentResponseIsExitData } = useSelector((state) => {
+    return state.TenentResponseIsExit;
+  });
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
@@ -206,9 +226,10 @@ export default function SinglePostDetails() {
       ) {
         setOpenReportForm(true);
       } else if (
-        sessionStorage.getItem("RedirectPath") == "/show-TenantResponseForm"
+        sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
+        medata?.user?.Role == "Tenant"
       ) {
-        setshowTenant_PostResponseForm(true);
+        setshowTenantDetailsForm(true);
       }
 
       sessionStorage.removeItem("RedirectPath");
@@ -216,20 +237,16 @@ export default function SinglePostDetails() {
     }
   }, [medata]);
 
-  // useEffect(() => {
-  //   const unlisten = navigate((state) => {
-  //
-  //
-  //     // if (state.action === "POP") {
-  //
-  //     //   // Perform actions based on Back or Forward button navigation
-  //     // }
-  //   });
+  useEffect(() => {
+    if (sessionStorage.getItem("TenentFillForm")) {
+      return sessionStorage.removeItem("TenentFillForm");
+    }
+    if (TenentResponseIsExitData?.TenantDetails?.Tenant) {
+      setshowTenantDetailsForm(false);
+    }
+  }, [TenentResponseIsExitData]);
+  // console.log("TenentResponseIsExitData",TenentResponseIsExitData?.TenantDetails);
 
-  //   // return () => {
-  //   //   unlisten();
-  //   // };
-  // }, [navigate, location.pathname]);
   // let loadings =true
 
   // open report form
@@ -241,9 +258,59 @@ export default function SinglePostDetails() {
   const closehandleReportForm = (e) => {
     setOpenReportForm(false);
   };
-  //  const SinglePost = getSinglePostData.SinglePost
+
+  //  Open Owner Details Alert  (T)
+
+  useEffect(() => {
+    if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
+      StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
+      setshowOwnerDetailsForm(true);
+      setshowTenantDetailsForm(false);
+
+      if (!TenentResponseIsExitData?.TenantDetails) {
+        sessionStorage.setItem("TenentFillForm", true);
+        dispatch(TenentResponseIsExitAction(SinglePostId));
+      }
+      // setTenantsDetails({
+      //   FamilyDetails: { Adults: 0, Children: 0, Pets: null },
+      //   ProfessionDetails: { WorkType: "" },
+      // });
+    }
+  }, [AlertData, AlertType]);
+
+  // Check Tenent Response IsExit  Dispatch
+  useEffect(() => {
+    if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
+    dispatch(TenentResponseIsExitAction(SinglePostId));
+  }, [SinglePostId, medata?.user?.Role]);
+
+  useEffect(() => {
+    if (!Params?.PostAddress) return; // Avoid running when undefined
+
+    let postaddress = Params.PostAddress;
+    let postId = postaddress.substring(postaddress.lastIndexOf("-") + 1);
+    if (location.pathname.includes("/admin/deleted-post")) {
+      dispatch(GetSinglePostAction(postId, true));
+    } else {
+      //  function not get single-post-details
+      dispatch(GetSinglePostAction(postId));
+      dispatch(SimilarProperty(postId));
+    }
+  }, [Params?.PostAddress]);
+
   return (
     <>
+      <Helmet>
+        <title>{PropertyAddress}</title>
+        <meta
+          name="description"
+          content={`Explore this spacious ${PropertyAddress}. Located in a prime area, this ${getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType} offers modern amenities, comfort, and easy access to key transport routes, shopping, and schools. Perfect for those seeking a high-quality living experience in ${getSinglePostData?.SinglePost?.LocationDetails?.City}!`}
+        ></meta>
+        <link
+          rel="canonical"
+          href={`https://propertydekho247.com/post-detail/${Params?.PostAddress}`}
+        />
+      </Helmet>
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
@@ -286,8 +353,8 @@ export default function SinglePostDetails() {
             <div className="property-image">
               {/* post verified-section-start */}
               <div className="icon-box">
-                {getSinglePostData.SinglePost.PostVerifyShow ? (
-                  getSinglePostData.SinglePost.PostVerify ? (
+                {getSinglePostData?.SinglePost?.PostVerifyShow ? (
+                  getSinglePostData?.SinglePost?.PostVerify ? (
                     <div className="active-post">
                       <img src="/img/verified-tag.svg" alt="verified-tag" />
                       <p className="active-post-para">Verified</p>
@@ -527,24 +594,39 @@ export default function SinglePostDetails() {
                           </div>
                         </div>
 
-                        {/* {!["Owner", "Admin"].includes(medata?.user?.Role) &&
-                          getSinglePostData.SinglePost.CreatePostUser !==
-                            medata?.user?._id && (
+                        {/* {!medata || !medata.IsAuthenticated ? (
+                          <span
+                            className="original-price"
+                            onClick={() => {
+                              setRedirectPath("/view-owner-details");
+                              navigate("/login");
+                            }}
+                          >
+                            View Owner Details
+                          </span>
+                        ) : (
+                          ["Tenant"].includes(medata?.user?.Role) && (
                             <span
+                              ref={TenantDetailsFormBtnRef}
                               className="original-price"
-                              ref={Tenant_PostResponseBtnRef}
                               onClick={() => {
-                                if (medata && medata.IsAuthenticated == true) {
-                                  setshowTenant_PostResponseForm(true);
+                                if (!TenentResponseIsExitData?.TenantDetails) {
+                                  setshowTenantDetailsForm(true);
                                 } else {
-                                  setRedirectPath("show-TenantResponseForm");
-                                  navigate("/login");
+                                  dispatch(
+                                    ViewOwnerDetailsAction({
+                                      PostId:
+                                        getSinglePostData?.SinglePost?._id,
+                                    })
+                                  );
+                                  //  dispatch(ViewOwnerDetailsAction({postId}))
                                 }
                               }}
                             >
-                              Create Response
+                              View Owner Details
                             </span>
-                          )} */}
+                          )
+                        )} */}
                       </>
                     )}
                   </div>
@@ -592,10 +674,10 @@ export default function SinglePostDetails() {
                   <div className="posted-by-section">
                     <img
                       src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <path d="M15.7741 4.63696L12.4718 4.63697V3.81501C12.4718 3.58715 12.2872 3.40259 12.0594 3.40259C11.8315 3.40259 11.647 3.58715 11.647 3.81501V4.63677H8.34757V3.81501C8.34757 3.58715 8.16301 3.40259 7.93514 3.40259C7.70728 3.40259 7.52272 3.58715 7.52272 3.81501V4.63677H4.22621C3.77069 4.63677 3.40137 5.00609 3.40137 5.46161V15.7722C3.40137 16.2277 3.77069 16.5971 4.22621 16.5971H15.7741C16.2296 16.5971 16.5989 16.2277 16.5989 15.7722V5.46161C16.5989 5.00629 16.2296 4.63696 15.7741 4.63696ZM15.7741 15.7722H4.22621V5.46161H7.52272V5.87713C7.52272 6.10498 7.70728 6.28955 7.93514 6.28955C8.16301 6.28955 8.34757 6.10498 8.34757 5.87713V5.46182H11.647V5.87734C11.647 6.1052 11.8315 6.28976 12.0594 6.28976C12.2872 6.28976 12.4718 6.1052 12.4718 5.87734V5.46182H15.7741V15.7722ZM12.8871 9.99847H13.712C13.9396 9.99847 14.1244 9.8137 14.1244 9.58605V8.7612C14.1244 8.53354 13.9396 8.34877 13.712 8.34877H12.8871C12.6595 8.34877 12.4747 8.53354 12.4747 8.7612V9.58605C12.4747 9.8137 12.6595 9.99847 12.8871 9.99847ZM12.8871 13.2977H13.712C13.9396 13.2977 14.1244 13.1131 14.1244 12.8852V12.0604C14.1244 11.8327 13.9396 11.648 13.712 11.648H12.8871C12.6595 11.648 12.4747 11.8327 12.4747 12.0604V12.8852C12.4747 13.1133 12.6595 13.2977 12.8871 13.2977ZM10.4126 11.648H9.58773C9.36007 11.648 9.1753 11.8327 9.1753 12.0604V12.8852C9.1753 13.1131 9.36007 13.2977 9.58773 13.2977H10.4126C10.6402 13.2977 10.825 13.1131 10.825 12.8852V12.0604C10.825 11.8329 10.6402 11.648 10.4126 11.648ZM10.4126 8.34877H9.58773C9.36007 8.34877 9.1753 8.53354 9.1753 8.7612V9.58605C9.1753 9.8137 9.36007 9.99847 9.58773 9.99847H10.4126C10.6402 9.99847 10.825 9.8137 10.825 9.58605V8.7612C10.825 8.53333 10.6402 8.34877 10.4126 8.34877ZM7.11318 8.34877H6.28833C6.06068 8.34877 5.87591 8.53354 5.87591 8.7612V9.58605C5.87591 9.8137 6.06068 9.99847 6.28833 9.99847H7.11318C7.34084 9.99847 7.52561 9.8137 7.52561 9.58605V8.7612C7.52561 8.53333 7.34084 8.34877 7.11318 8.34877ZM7.11318 11.648H6.28833C6.06068 11.648 5.87591 11.8327 5.87591 12.0604V12.8852C5.87591 13.1131 6.06068 13.2977 6.28833 13.2977H7.11318C7.34084 13.2977 7.52561 13.1131 7.52561 12.8852V12.0604C7.52561 11.8329 7.34084 11.648 7.11318 11.648Z" fill="#0078D4"/>
-</svg>
-  `)}`}
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                       <path d="M15.7741 4.63696L12.4718 4.63697V3.81501C12.4718 3.58715 12.2872 3.40259 12.0594 3.40259C11.8315 3.40259 11.647 3.58715 11.647 3.81501V4.63677H8.34757V3.81501C8.34757 3.58715 8.16301 3.40259 7.93514 3.40259C7.70728 3.40259 7.52272 3.58715 7.52272 3.81501V4.63677H4.22621C3.77069 4.63677 3.40137 5.00609 3.40137 5.46161V15.7722C3.40137 16.2277 3.77069 16.5971 4.22621 16.5971H15.7741C16.2296 16.5971 16.5989 16.2277 16.5989 15.7722V5.46161C16.5989 5.00629 16.2296 4.63696 15.7741 4.63696ZM15.7741 15.7722H4.22621V5.46161H7.52272V5.87713C7.52272 6.10498 7.70728 6.28955 7.93514 6.28955C8.16301 6.28955 8.34757 6.10498 8.34757 5.87713V5.46182H11.647V5.87734C11.647 6.1052 11.8315 6.28976 12.0594 6.28976C12.2872 6.28976 12.4718 6.1052 12.4718 5.87734V5.46182H15.7741V15.7722ZM12.8871 9.99847H13.712C13.9396 9.99847 14.1244 9.8137 14.1244 9.58605V8.7612C14.1244 8.53354 13.9396 8.34877 13.712 8.34877H12.8871C12.6595 8.34877 12.4747 8.53354 12.4747 8.7612V9.58605C12.4747 9.8137 12.6595 9.99847 12.8871 9.99847ZM12.8871 13.2977H13.712C13.9396 13.2977 14.1244 13.1131 14.1244 12.8852V12.0604C14.1244 11.8327 13.9396 11.648 13.712 11.648H12.8871C12.6595 11.648 12.4747 11.8327 12.4747 12.0604V12.8852C12.4747 13.1133 12.6595 13.2977 12.8871 13.2977ZM10.4126 11.648H9.58773C9.36007 11.648 9.1753 11.8327 9.1753 12.0604V12.8852C9.1753 13.1131 9.36007 13.2977 9.58773 13.2977H10.4126C10.6402 13.2977 10.825 13.1131 10.825 12.8852V12.0604C10.825 11.8329 10.6402 11.648 10.4126 11.648ZM10.4126 8.34877H9.58773C9.36007 8.34877 9.1753 8.53354 9.1753 8.7612V9.58605C9.1753 9.8137 9.36007 9.99847 9.58773 9.99847H10.4126C10.6402 9.99847 10.825 9.8137 10.825 9.58605V8.7612C10.825 8.53333 10.6402 8.34877 10.4126 8.34877ZM7.11318 8.34877H6.28833C6.06068 8.34877 5.87591 8.53354 5.87591 8.7612V9.58605C5.87591 9.8137 6.06068 9.99847 6.28833 9.99847H7.11318C7.34084 9.99847 7.52561 9.8137 7.52561 9.58605V8.7612C7.52561 8.53333 7.34084 8.34877 7.11318 8.34877ZM7.11318 11.648H6.28833C6.06068 11.648 5.87591 11.8327 5.87591 12.0604V12.8852C5.87591 13.1131 6.06068 13.2977 6.28833 13.2977H7.11318C7.34084 13.2977 7.52561 13.1131 7.52561 12.8852V12.0604C7.52561 11.8329 7.34084 11.648 7.11318 11.648Z" fill="#0078D4"/>
+                         </svg>
+                       `)}`}
                       alt="post-img"
                     />
                     <p>
@@ -859,6 +941,9 @@ export default function SinglePostDetails() {
                     )}
                   </div>
                 </div>
+                <FurnishDetails
+                  furnishD={getSinglePostData.SinglePost.AmenitiesDetails}
+                />
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">
                     <div className="location-section">
@@ -881,9 +966,6 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
                 )}
-                <FurnishDetails
-                  furnishD={getSinglePostData.SinglePost.AmenitiesDetails}
-                />
               </div>
               {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                 <div className="prop-right">
@@ -915,7 +997,6 @@ export default function SinglePostDetails() {
                             .replaceAll(" ", "-")
                             .replace(",", "")
                             .replaceAll("/", "-")}-${item._id}`}
-                          onClick={() => setReload(true)} // Trigger reload on click
                         >
                           <div className="similar-property-main-box">
                             <div className="similar-property-box1">
@@ -948,17 +1029,22 @@ export default function SinglePostDetails() {
 
                                         <span> Built-Up Area</span>
                                       </p> */}
-                                      {item?.BasicDetails?.PropertyAdType =="Rent" && (
+                                      {item?.BasicDetails?.PropertyAdType ==
+                                        "Rent" && (
                                         <>
                                           <div className="similar-area-price">
                                             <div className="similar-area-price-rent-price">
-                                                {formatReservePrice(
+                                              {formatReservePrice(
                                                 item?.PricingDetails
                                                   ?.ExpectedRent
-                                              )}   <span>/Month</span>
+                                              )}{" "}
+                                              <span>/Month</span>
                                             </div>
 
-                                            <span className="rent-price-section-similar-property"> Rent Price </span>
+                                            <span className="rent-price-section-similar-property">
+                                              {" "}
+                                              Rent Price{" "}
+                                            </span>
                                           </div>
                                         </>
                                       )}
@@ -1016,13 +1102,22 @@ export default function SinglePostDetails() {
 
                   {/* View Response Form  */}
 
-                  {showTenant_PostResponseForm && (
+                  {showTenantDetailsForm && (
                     <WindowComponent
-                      Component={CreateTenantPostResponse}
-                      SetShow={setshowTenant_PostResponseForm}
-                      BtnRef={Tenant_PostResponseBtnRef}
+                      Component={TanantDetailsForm}
+                      SetShow={setshowTenantDetailsForm}
+                      BtnRef={TenantDetailsFormBtnRef}
                       SinglePostData={getSinglePostData}
-                      PropertyAddress={PropertyAddress}
+                      // PropertyAddress={PropertyAddress}
+                    />
+                  )}
+
+                  {showOwnerDetailsForm && (
+                    <WindowComponent
+                      Component={ViewOwnerDetailsAlert}
+                      SetShow={setshowOwnerDetailsForm}
+
+                      // PropertyAddress={PropertyAddress}
                     />
                   )}
 

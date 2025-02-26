@@ -225,7 +225,7 @@ export const BiddingFormAction = (queryData) => {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          // "Content-Type": "application/json"
+          "Content-Type": "application/json"
         },
 
         withCredentials: true,
@@ -400,7 +400,7 @@ export const VerifyAdminAction = ({ userdata }, UserId) => {
 };
 
 // Get All Bidding Data  sort by Post id
-export const GetPost_BiddingDocumentAction = (PostId) => {
+export const GetPost_BiddingDocumentAction = (PostId , DeletePost) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -408,7 +408,15 @@ export const GetPost_BiddingDocumentAction = (PostId) => {
         payload: "GetPost_BiddingDocumentRequest",
       });
 
-      let url = `${api_Base_Url}/Biddingform/get-bidding-data/${PostId}`;
+    
+
+       let url ;
+
+      if (DeletePost == true) {
+        url = `${api_Base_Url}/Biddingform/get-bidding-data/deleted-post/${PostId}`;
+      } else {
+        url = `${api_Base_Url}/Biddingform/get-bidding-data/${PostId}`;
+      }
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -579,33 +587,44 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 
 // Create Tenant Post Response
 
-export const CreateTenant_PostResponseAction = (Tenant_PostResponseobj) => {
+export const ViewOwnerDetailsAction = (Document) => {
+ 
   return async (dispatch) => {
     try {
       dispatch({
-        type: "CreateTenant_PostResponseRequest",
-        payload: "CreateTenant_PostResponseRequest",
+        type: "ViewOwnerDetailsRequest",
+        payload: "ViewOwnerDetailsRequest",
       });
 
-      const url = `${api_Base_Url}/tenant-post-response/create`;
-
+      const url = `${api_Base_Url}/tenant-post-response/create/${Document.PostId}`;
+         
       const config = {
         headers: { "Content-Type": "application/json" },
 
         withCredentials: true,
       };
-
-      const { data } = await axios.post(url, Tenant_PostResponseobj, config);
-      dispatch({ type: "CreateTenant_PostResponseSuccess", payload: data });
+       
+      let data ;
+      if (Document.TenantsDetails) {
+       
+        const response = await axios.post(url, Document.TenantsDetails, config);
+        data = response.data;
+    } else {
+     
+        const response = await axios.get(url, config);
+        data = response.data;
+    }
+    
+      dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "CreateTenant_PostResponseFail",
+          type: "ViewOwnerDetailsFail",
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "CreateTenant_PostResponseFail",
+          type: "ViewOwnerDetailsFail",
           payload: { message: error.message, success: false },
         });
       }
@@ -638,6 +657,39 @@ export const GetAllTenentResponseAction = () => {
       } else {
         dispatch({
           type: "GetAllTenentResponseFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+//  Check Tenent is Exit
+export const TenentResponseIsExitAction = (PostId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "TenentResponseIsExitRequest" });
+
+      let url = `${api_Base_Url}/tenant-post-response/check-tenant-details/${PostId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+
+      dispatch({ type: "TenentResponseIsExitSuccess", payload: data });
+    } catch (error) {
+      console.log(error)
+      if (error.response) {
+        dispatch({
+          type: "TenentResponseIsExitFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "TenentResponseIsExitFail",
           payload: { message: error.message, success: false },
         });
       }
@@ -745,6 +797,7 @@ export const ProfileEditAction = (editData) => {
 };
 
 export const ProfileUpdateAction = (updateData) => {
+  
   return async (dispatch) => {
     try {
       dispatch({
@@ -810,7 +863,7 @@ export const ReportSuspiciousProperty = (updateData) => {
 export const GetMyVisitsAction = () => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "GetMyVisitsRequest" });
+      dispatch({ type: "GetMyVisitsRequest" })
 
       let url = `${api_Base_Url}/schedule-visit/my-visits`;
 
@@ -821,7 +874,6 @@ export const GetMyVisitsAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
       dispatch({ type: "GetMyVisitsSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -846,8 +898,8 @@ export const OwnerAllPostsVisitAction = () => {
     try {
       dispatch({ type: "OwnerAllPostsVisitRequest" });
 
-      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-vists`;
-      
+      let url = `${api_Base_Url}/schedule-visit/owner-posts-all-response`;
+
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -855,7 +907,7 @@ export const OwnerAllPostsVisitAction = () => {
       };
 
       const { data } = await axios.get(url, config);
-      console.log(data);
+
       dispatch({ type: "OwnerAllPostsVisitSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -872,3 +924,36 @@ export const OwnerAllPostsVisitAction = () => {
     }
   };
 };
+
+// here we get All User except Owner/Admin/agent
+
+export const getAllUserAction=()=>{
+  return async (dispatch) => {
+      try {
+        dispatch({ type: "GetAllUserRequest" });
+      let url = `${api_Base_Url}/user/getallUser/`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+      const { data } = await axios.get(url, config);
+      dispatch({ type: "GetAllUserSuccess", payload: data });
+      } catch (error) {
+        if (error.response) {
+          dispatch({
+            type: "GetAllUserFail",
+            payload: error.response.data,
+          });
+        } else {
+          dispatch({
+            type: "GetAllUserFail",
+            payload: { message: error.message, success: false },
+          });
+        }
+      }
+    }
+}
+
+

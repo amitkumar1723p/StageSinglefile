@@ -22,6 +22,9 @@
 opacity: .9;
 }
 
+.create-post-section{
+  width: 80%;
+}
 
 .card {
   display: flex;

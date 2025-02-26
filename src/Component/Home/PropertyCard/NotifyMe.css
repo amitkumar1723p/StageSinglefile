@@ -44,11 +44,14 @@ margin: 5px 0px;
 }
 
 @media (max-width: 480px) {
+
+ 
   .notify-me-container {
-    max-width: 50%;
+    max-width: 80%;
     height: auto;
     padding: 10px;
     margin: 10px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .notify-me-container h1 {

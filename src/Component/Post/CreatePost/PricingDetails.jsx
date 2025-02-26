@@ -541,10 +541,10 @@ export default function PricingDetails({
                       <h3 className="basic-details-heading">
                         Preferred Tenant
                       </h3>
-                      <div className="flex gap-5 items-center ">
+                      <div className="flex gap-5 items-center tenant-checkbox ">
                         {PreferredTenantArray.map((text, i) => {
                           return (
-                            <div className="PropertyStatus-box-content items-center  " key={i}>
+                            <div className="PropertyStatus-box-content items-center   " key={i}>
                               <label htmlFor="">{text}</label>
 
                               <input

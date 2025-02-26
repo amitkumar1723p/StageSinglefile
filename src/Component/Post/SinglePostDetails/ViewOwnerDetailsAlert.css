@@ -1,0 +1,66 @@
+.view-owner-details-modal {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    z-index: 10;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .view-owner-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .view-owner-details-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .close-btn {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: #ff4d4d;
+    transition: color 0.3s;
+  }
+  
+  .close-btn:hover {
+    color: #e60000;
+  }
+  
+  .view-owner-details-content {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .view-owner-details-content p {
+    margin: 12px 0;
+  }
+  
+  .view-owner-details-content strong {
+    color: #333;
+    font-weight: 600;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -21,12 +21,16 @@
   margin-bottom: 300px;
 }
 
+.my-listing-post{
+  margin-top: 10px;
+}
+
 .home-showpost .post-box {
   margin: 10px;
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-@media (min-width: 841px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .home {
     width: auto;
   }
@@ -38,18 +42,20 @@
     margin-bottom: 300px;
   }
 
-  .home-postContainer .home-showpost {
-    display: grid;
-    gap: 5px;
-    grid-template-columns: repeat(1, 1fr);
-    margin-bottom: 300px;
-  }
+
 }
 
 @media (min-width: 481px) and (max-width: 840px) {
   .home {
     width: auto;
   }
+  .home-postContainer .home-showpost {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 300px;
+  }
+  
 }
 
 @media (min-width: 481px) and (max-width: 780px) {
@@ -59,7 +65,7 @@
 }
 @media (min-width: 0px) and (max-width: 480px) {
   .home {
-    width: auto;
+    width: 420px;
     margin: 5px auto;
     position: relative;
     min-height: 120px;

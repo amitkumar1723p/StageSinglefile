@@ -10,14 +10,14 @@ const TenantsDetailsForm = () => {
   };
 
   const handleDecrement = (setter) => {
-    setter(prev => prev > 0 ? prev - 1 : 0);
+    setter(prev => prev > 0  ? prev - 1 : 0);
   };
 
   return (
     <div className="tenant-details">
       <div className="tenant-details__container">
         <div className="tenant-details__header">
-          <h2 className="tenant-details__title">Tenants Details Form</h2>
+          <h2 className="tenant-details__title">Owner Seeking Some More Informationgit </h2>
           <button className="tenant-details__close "  onClick={()=>{console.log("clicked")}}>&times;</button>
         </div>
 

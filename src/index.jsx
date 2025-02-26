@@ -10,8 +10,7 @@ import ScrollToTop from './ScrollToTop.jsx';
 import { ToastContainer } from 'react-toastify';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-  <Provider store={store}>
+   <Provider store={store}>
     <UserProvider>
       <BrowserRouter>
        <ScrollToTop />
@@ -20,13 +19,12 @@ root.render(
          position="top-center"
         //  limit={3}
         theme="colored"
-       
-         autoClose={3000}/> 
+       className={"ttc"}
+         autoClose={1500}/> 
       </BrowserRouter>
     </UserProvider>
   </Provider>
-</React.StrictMode>
-);
+ );
 
  
  

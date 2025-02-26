@@ -10,6 +10,8 @@ import {
   GetAllAdminReducer,
   GetPost_BiddingDocumentReducer,
   GetTenentResponseReducer,
+  TenentResponseIsExitReducer,
+  getAllUserReducer,
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -25,11 +27,17 @@ import {
   GetAdminAgentAssignPropertyReducer,
   GetAllScheduleVisitsAndMakeOffer_LengthReducer,
   GetMyVisitsReducer,
-  GetSimilarProperty ,
+  GetSimilarProperty,
   OwnerAllPostsVisitsReducer,
+  // OwnerAllPostsVisitsReducer,
+  GetAllNotificationsAndRequirementsReducer,
   OwnerAllExcelFileReducer,
   fetchAllOwnerFilesReducer,
 
+  GetDeletedPostsReducer,
+  fetchAllAdminFilesReducer,
+  fetchAllAgentFilesReducer,
+  removeExcelFromAdminReducer,
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -51,11 +59,18 @@ const reducer = combineReducers({
   AssignPropertys: GetAllAssignPropertyReducer,
   AdminProperty: GetAdminAgentAssignPropertyReducer,
   VistAndOffer: GetAllScheduleVisitsAndMakeOffer_LengthReducer,
-  MyVisits:  GetMyVisitsReducer,
-  SimilarProperty:GetSimilarProperty ,
-  OwnerPostsVisits:OwnerAllPostsVisitsReducer ,
+  MyVisits: GetMyVisitsReducer,
+  SimilarProperty: GetSimilarProperty,
+  OwnerPostsVisits: OwnerAllPostsVisitsReducer,
+  TenentResponseIsExit: TenentResponseIsExitReducer,
+  AllUserResponse: getAllUserReducer,
+  AllNotifiesAndReq: GetAllNotificationsAndRequirementsReducer,
+  deletePosts: GetDeletedPostsReducer,
   OwnerUploadingExcelFile:OwnerAllExcelFileReducer,
-  OwnerAllExcelFiles:fetchAllOwnerFilesReducer
+  OwnerAllExcelFiles:fetchAllOwnerFilesReducer,
+  AdminAllExcelFiles:fetchAllAdminFilesReducer,
+  AgentAllExcelFiles:fetchAllAgentFilesReducer,
+  // RemoveAdminAgentExcel:removeExcelFromAdminReducer
 });
 
 let initialState = {};

@@ -1,0 +1,93 @@
+/* Global Styles */
+
+
+/* Container for all content */
+.container-fluid {
+  padding: 20px;
+}
+
+/* Filter section */
+.filter-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+
+.filter-item {
+  /* padding: 0.5rem 1rem; */
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.filter-item:hover {
+  background-color: #e0e0e0;
+}
+
+.filter-item.active {
+  background-color:  var(--main-light-clr);;
+  color: white;
+}
+
+.filter-item small {
+  font-size: 12px;
+}
+
+/* Table container */
+.table-container {
+  margin-top: 1rem;
+  border-top: 2px solid #ccc;
+}
+
+.main-response-section {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: .5rem;
+}
+
+.main-response-section th,
+.main-response-section td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.main-response-section th {
+  /* background-color: #f1f1f1; */
+  color: var(--main-light-clr);
+  font-size: 1rem;
+}
+
+.main-response-section thead {
+  background-color: var(--main-lighter-clr);
+}
+.main-response-section tr {
+  border-bottom: 1px solid #f1f1f1;
+  color: #555;
+}
+/*   
+  .main-response-section tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  } */
+
+/* .main-response-section tbody tr:hover {
+  background-color: #f1f1f1;
+} */
+
+.filter-resposne {
+  padding: 10px;
+
+}
+
+.main-response-section th,
+.main-response-section td {
+  font-size: 12px;
+}
+
+.main-response-section td {
+  word-wrap: break-word;
+  border: 1px solid #f1f1f1;
+}

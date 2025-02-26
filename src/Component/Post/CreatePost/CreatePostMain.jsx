@@ -7,7 +7,7 @@ import { GetSinglePostAction } from "../../../Action/postAction.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Loader/Loader.jsx";
-
+import { Helmet } from "react-helmet";
 import PropertyDetailsAreaDetailsConstructionDetailsFloorDetailsAmenitiesDetailsSection from "./PropertyDetails_AreaDetails_ConstructionDetails_FloorDetails_AmenitiesDetails.jsx";
 import PricingDetailsSection from "./PricingDetails.jsx";
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
@@ -326,16 +326,13 @@ export default function CreatePostMain() {
   useEffect(() => {
     if (data) {
       if (data.success === true) {
-        
         if (["Admin", "Owner"].includes(medata?.user?.Role)) {
           navigate("/admin/allpost");
-        } else{
-           if(LodingType=="UpdatePostRequest") {
-            navigate("/user/my-listing")
-           }
-         
+        } else {
+          if (LodingType == "UpdatePostRequest") {
+            navigate("/user/my-listing");
+          }
         }
-         
       }
       if (data.success === false) {
         setshowCreatePostSubmitAlert(false);
@@ -427,6 +424,24 @@ export default function CreatePostMain() {
       return () => clearTimeout(timer); // Cleanup function to prevent memory leaks
     }
   }, [showCreatePostSubmitAlert]);
+
+  //  create post alert
+  //  this use effect run show cretepost alert and user refresh this page
+  useEffect(() => {
+    if (sessionStorage.getItem("CreatePostAlertIsRefreshed")) {
+      sessionStorage.removeItem("CreatePostAlertIsRefreshed");
+      sessionStorage.removeItem("next");
+      sessionStorage.removeItem("BasicDetailsData");
+      sessionStorage.removeItem("LocationDetailsData");
+      sessionStorage.removeItem("PropertyDetailsData");
+      sessionStorage.removeItem("AreaDetailsData");
+      sessionStorage.removeItem("FloorDetailsData");
+      sessionStorage.removeItem("AmenitiesDetailsData");
+      sessionStorage.removeItem("PropertyDetailsData");
+      sessionStorage.removeItem("PricingDetailsData");
+      navigate("/user/my-listing");
+    }
+  }, [sessionStorage.getItem("CreatePostAlertIsRefreshed")]);
   return (
     <>
       {SinglePostLoading ||
@@ -436,6 +451,17 @@ export default function CreatePostMain() {
       ) : (
         <>
           <div className="ProgressBarMain py-3 pb-0 ">
+            <Helmet>
+              <title>Free Property Posting on PropertyDekho247.com</title>
+              <meta
+                name="description"
+                content="Welcome to PropertyDekho247.com, your go-to platform for posting resale properties absolutely free! Whether you're looking to sell or rent a property, our easy-to-use platform allows you to reach a wide audience and connect with potential buyers or tenants. Simply post your property listing without any charges and showcase it to people actively searching for resale properties. Get started today and make your property visible to thousands of potential buyers!"
+              ></meta>
+              <link
+                rel="canonical"
+                href="https://www.propertydekho247.com/user/post/"
+              />
+            </Helmet>
             {/* step 1 */}
             <div>
               <div className="d-flex justify-content-center">
@@ -792,6 +818,7 @@ export default function CreatePostMain() {
           {next === 4 && (
             <CreatePostImageUploadSection
               setnext={setnext}
+              next={next}
               uploadimages={uploadimages}
               setuploadimages={setuploadimages}
               previewImage={previewImage}
@@ -818,8 +845,7 @@ export default function CreatePostMain() {
             />
           )}
 
-          {
-            showCreatePostSubmitAlert==true &&
+          {showCreatePostSubmitAlert == true && (
             <WindowComponent
               SetShow={setshowCreatePostSubmitAlert}
               Component={CreatePostSubmitAlert}
@@ -827,7 +853,7 @@ export default function CreatePostMain() {
               className={"create-post-submit-alert-window-main"}
               Type={"CreatePostSubmitAlert"}
             />
-          }
+          )}
         </>
       )}
     </>

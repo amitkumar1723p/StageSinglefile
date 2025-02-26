@@ -1,40 +1,126 @@
 .notify-form-container {
   text-align: center;
   margin: 50px auto;
-  padding: 20px;
-  max-width: 400px;
+  padding: 30px 30px;
+  max-width: 950px;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   background: #fff;
   box-shadow: 0px 0px 2px 0px #eaf1f6;
   position: relative;
+  display: flex;
+  gap: 30px;
 }
+.notify-cross-btn{
+  position: absolute;
+  top: 0px;  /* Adjust this value to move it down */
+  right: 0px;  /* Adjust this value to move it left or right */
+  font-size: 16px;
+  cursor: pointer;
+  /* background-color:#c7e4fc;   */
+  color: var(--main-light-clr);
+  cursor: pointer;
 
+  padding: 5px 12px;
+  border-radius: 50%;
+  
+  &:hover{
+    color: red;
+  }
+}
 .img-notify {
   display: flex;
   justify-content: center; /* Centers the image horizontally */
   align-items: center; /* Centers the image vertically */
-  margin-bottom: 20px; /* Adds space between the image and the text */
+  /* margin-bottom: 20px;  */
 }
 
+.des-p-nofity {
+  background-color: var(--main-light-clr);
+  display: flex;
+  padding: 15px 20px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  color: #fff;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  /* font-weight: 600; */
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+.main-content-in-notify {
+  border-radius: 7px 7px 7px 7px;
+  border-right: 1px solid #d2dae0;
+  border-bottom: 1px solid #d2dae0;
+  border-left: 1px solid #d2dae0;
+  box-shadow: 4px 4px 12px #80808069;
+  background: #fff;
+  width: 650px;
+  overflow: hidden;
+}
+
+.notify-form-main-content{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  background: linear-gradient(to right, #999 10px, transparent 6px);
+    background-size: 16px 1px;  
+    background-repeat: repeat-x;
+    background-position: bottom;
+
+}
+.notify-form-bhk-section{
+  width: 40%;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.notify-form-main-content-bottom{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.notify-form-floor{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 40%;
+}
+.notify-form-floor select{
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.notify-form-bhk-section select{
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+
+
 .notify-form-image {
-  max-width: 40%;
+  max-width: 100%;
   height: auto;
 }
-.des-p{
+.des-p {
   margin-bottom: 5px;
 }
 
-.data-notify label{
+.data-notify label {
   color: #333;
-font-family: "Inter", Sans-serif;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+  font-family: "Inter", Sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
-.data-notify{
+.data-notify {
   display: flex;
   gap: 5px;
   justify-content: center;
@@ -43,19 +129,19 @@ line-height: normal;
 
 .room-section p {
   color: #333;
-text-align: start;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-margin-bottom: 5px;
+  text-align: start;
+  font-size: 14px;
+  font-style: normal;
+  /* font-weight: 600; */
+  line-height: normal;
+
 }
 
-.des-p{
-  color: #6E6D6D;
+.des-p {
+  color: #333;
   text-align: center;
 
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -64,40 +150,48 @@ margin-bottom: 5px;
 form {
   display: flex;
   flex-direction: column;
+  padding: 10px;
+  gap: 0;
 }
 
 .notify-lable {
-  
   text-align: start;
   color: #333;
 
   font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  /* font-weight: 600; */
   line-height: normal;
 }
 
 .form-select,
 .form-input {
   color: #727b85;
-font-family: "Inter", Sans-serif;
-font-size: 12px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+  font-family: "Inter", Sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   padding: 10px;
-  margin-bottom: 15px;
+  /* margin-bottom: 10px; */
   border-radius: 7px;
-  border: 1px solid #DAEAF9;
-  background: #FFF;
+  border: 1px solid #daeaf9;
+  background: #fff;
   border-radius: 5px;
   font-size: 12px;
   width: 100%;
   box-sizing: border-box;
 }
+.notify-button-container{
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.notify-submit-button {
 
-.submit-button {
-  padding: 10px;
+  padding: 6px;
+  width: 100%;
   font-size: 16px;
   color: #fff;
   background-color: #007bff;
@@ -107,20 +201,26 @@ line-height: normal;
   transition: background-color 0.3s;
 }
 
-.submit-button:hover {
+.notify-submit-button:hover {
   background-color: #0056b3;
 }
 
 .checkbox-notify {
   display: flex;
-align-items: flex-start;
-align-content: flex-start;
-gap: 8px;
-align-self: stretch;
-flex-wrap: wrap;}
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
 
-.room-section{
-  margin: 0 0 10px 0;
+.room-section {
+  margin-left: 10px;
+  width:auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 5px;
 }
 
 .data-notify {
@@ -128,4 +228,40 @@ flex-wrap: wrap;}
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media(max-width:768px){
+  .notify-form-main-content{
+    flex-direction: column;
+    gap: 10px;
+  }
+  .main-content-in-notify{
+    width: auto;
+  }
+  .notify-form-bhk-section{
+    width: 100%;
+  }
+  .notify-form-main-content-bottom{
+    flex-direction: column;
+    gap: 10px;
+  }
+  .notify-form-floor{
+    width: 100%;
+  }
+  .notify-button-container{
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .notify-form-container {
+    padding: 15px ;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .notify-form-image {
+    max-width: 80%;
+    height: auto;
+  }
 }

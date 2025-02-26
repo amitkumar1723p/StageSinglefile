@@ -1,0 +1,10 @@
+
+
+
+.Admin-delete-property-card-main-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    margin-top: 86px;
+  }

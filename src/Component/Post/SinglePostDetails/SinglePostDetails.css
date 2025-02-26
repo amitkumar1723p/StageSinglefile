@@ -14,7 +14,7 @@ body {
 
 .rent-main-section {
   display: flex;
-  gap: 75px;
+  gap: 95px;
 }
 
 .rent-ques-section {
@@ -434,7 +434,7 @@ body {
   flex-shrink: 1;
   flex-grow: 1;
   width: 43%;
-  height: 315px;
+  height: 330px;
   /* background-color: #3333330001c; */
   display: flex;
   overflow: hidden;
@@ -518,7 +518,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* gap: 5px; */
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .prop-grid p {
@@ -555,8 +555,9 @@ body {
   height: fit-content;
   box-shadow: 0px 0px 4px 2px rgba(156, 197, 231, 0.5);
   width: 400px;
+  height: 325px;
   margin-left: 10px;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   flex-shrink: 0;
   flex-grow: 0;
   /* display: flex;
@@ -593,7 +594,7 @@ body {
   display: flex;
   align-items: center;
   /* gap: 10px; */
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
 .property-location {
@@ -615,7 +616,7 @@ body {
 
 .property-pricing {
   /* display: flex; */
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   justify-content: start;
   gap: 20px;
 }
@@ -650,16 +651,16 @@ body {
   line-height: normal;
 }
 
-.rent-price-section-similar-property{
+.rent-price-section-similar-property {
   color: rgb(153, 153, 153);
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .property-price {
-  margin: 5px 0;
+  margin: 5x 0;
   display: flex;
   align-items: center;
-  gap: 43px;
+  gap: 18px;
   color: #333333;
   font-size: 14px;
   font-style: normal;
@@ -823,9 +824,7 @@ body {
 }
 .overviwe-main {
   border-radius: 12px;
-  /* border: 1px solid #A4D0ED;
-    background: #FFF;
-    box-shadow: 0px 0px 4px 2px rgba(226, 242, 255, 0.50); */
+  /* margin-top: 30px; */
 }
 .overbox-icon {
   display: grid;
@@ -1598,11 +1597,18 @@ body {
 }
 
 @media (max-width: 768px) {
-  .property-details-container {
+
+  .prop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 5px; */
+    margin-top: 12px;
+  }
+  /* .property-details-container {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-  }
+  } */
   .prop-content-main {
     flex-direction: column;
     align-items: center;
@@ -1706,7 +1712,7 @@ body {
   .property-actions {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 53px;
   }
 
   .property-info {
@@ -1732,8 +1738,13 @@ body {
   /* margin: auto; */
   /* } */
 
+  .overviwe-main {
+    border-radius: 12px;
+    margin-top: 30px;
+  }
+
   .property-price {
-    gap: 25px;
+    gap: 50px;
   }
 
   /* .main-img-box .other-image {
@@ -1758,7 +1769,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /* gap: 5px; */
-    margin-top: 20px;
+    /* margin-top: 20px; */
   }
 
   .property-image .singlePost-image-slider {
@@ -1823,21 +1834,21 @@ body {
     border-radius: 7px;
     border: none;
     background: #fff;
-    box-shadow: 0px 4px 12px 0px rgba(166, 166, 166, 0.5);
+    /* box-shadow: 0px 4px 12px 0px rgba(166, 166, 166, 0.5); */
     padding: 8px 15px;
   }
 
   .icon-overview {
-    width: 30px;
+    width: 24px;
     /* height: 30px; */
-    margin-right: 20px;
+    margin-right: 18px;
   }
 
   .Property-detail-heading {
     color: #333;
-    border-bottom: 1.5px dashed #d7d9e1;
-    padding-bottom: 16px;
-    font-size: 16px;
+    /* border-bottom: 1.5px dashed #d7d9e1; */
+    padding-bottom: 5px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -1900,7 +1911,7 @@ body {
 
   .property-actions {
     flex-direction: row;
-    gap: 25px;
+    gap: 60px;
   }
 
   .property-info-tags {
@@ -1929,7 +1940,7 @@ body {
 
   .overbox-icon {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0px;
     box-shadow: none;
     border: none;
@@ -1943,14 +1954,13 @@ body {
     position: relative;
   }
 
-  .p-ans {
+  /* .p-ans {
     color: #333;
-
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-  }
+  } */
 
   .property-info {
     /* display: none; */
@@ -1972,7 +1982,7 @@ body {
     text-align: center;
     color: #fff;
 
-    font-size: 16px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
   }
@@ -2026,7 +2036,9 @@ body {
   }
 }
 
-/* @media (min-width: 480px) and (max-width: 2160px) {
+/* @media (min
+
+and (max-width: 2160px) {
     .property-info-mobile {
       display: none;
     }
@@ -2119,3 +2131,109 @@ body {
 }
 
 /* make your offer */
+
+.original-price {
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 20px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(135deg, #037edb, #037edb, #037edb);
+  color: white;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden; /* Ensure shine stays inside the button */
+}
+
+/* Shine effect - add the gradient shine */
+.original-price::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.452),
+    rgba(255, 255, 255, 0)
+  );
+  transform: rotate(45deg);
+  animation: shine 2s infinite;
+  pointer-events: none; /* Prevent it from interfering with clicks */
+}
+
+/* Animation for the shine effect */
+@keyframes shine {
+  0% {
+    top: -100%;
+    left: -100%;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+  }
+}
+
+/* Animation for the hover effect */
+.original-price:hover {
+  transform: scale(1.1); /* Slightly increase the button size */
+  background: linear-gradient(
+    135deg,
+    #037edb,
+    #037ddb8a
+  ); /* Reverse gradient */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+/* Add a glowing effect when clicked or interacted with */
+.original-price:active {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Pulse keyframe animation for the click effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-width: 376px) {
+  .overviwe-main {
+    border-radius: 12px;
+    margin-top: 60px;
+  }
+
+  .original-price {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 0.6rem;
+    border-radius: 8px;
+
+    background: linear-gradient(135deg, #037edb, #037edb, #037edb);
+    color: white;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .property-price {
+    gap: 30px;
+  }
+  .property-actions {
+    flex-direction: row;
+    gap: 38px;
+}
+}

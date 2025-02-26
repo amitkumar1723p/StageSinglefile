@@ -8,7 +8,7 @@ import React, {
 import "./OfferRecived.css"; // Import the custom CSS for styling
 import { useDispatch, useSelector } from "react-redux";
 import { GetPost_BiddingDocumentAction } from "../../Action/userAction";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import HeaderCard from "./HeaderCard";
 import { Admin_OwnerGetAllScheduleVisits } from "../../Action/postAction";
 import SinglePostImageSlider from "../Post/SinglePostDetails/SinglePostImageSlider";
@@ -27,11 +27,20 @@ const OfferReceived = () => {
   const { data: ScheduleVisitsData } = useSelector((state) => {
     return state.ScheduleVisits;
   });
-  // const [count, setcount] = useState(0);
+
+  const location = useLocation();
+
   useEffect(() => {
-    dispatch(GetPost_BiddingDocumentAction(Params.PostId));
-    dispatch(Admin_OwnerGetAllScheduleVisits(Params.PostId));
+    if (location.pathname.includes("recive-offer/deleted-post")) {
+      //  show delete post details
+      dispatch(GetPost_BiddingDocumentAction(Params.PostId, true));
+      dispatch(Admin_OwnerGetAllScheduleVisits(Params.PostId, true));
+    } else {
+      dispatch(GetPost_BiddingDocumentAction(Params.PostId));
+      dispatch(Admin_OwnerGetAllScheduleVisits(Params.PostId));
+    }
   }, []);
+
   const [ImageData, setImageData] = useState([]);
   // Memoizing getScheduleVisitInfo to prevent unnecessary rerenders
   const getScheduleVisitInfo = useCallback(
@@ -62,7 +71,13 @@ const OfferReceived = () => {
   }, []);
   useEffect(() => {
     if (BidData?.success == false) {
-      navigate("/admin/allpost");
+      // navigate(-1);
+      if (location.pathname.includes("recive-offer/deleted-post")) {
+
+        navigate("/admin/deleted-post");
+      } else {
+        navigate("/admin/allpost");
+      }
     }
   }, [BidData]);
   return (
@@ -80,7 +95,6 @@ const OfferReceived = () => {
         BidData.success &&
         BidData.BidDocument.map((reciveOffer, index) => {
           const { Biddinguser } = reciveOffer;
-         
 
           viewImageRefs.current[index] = React.createRef();
           return (
@@ -101,7 +115,6 @@ const OfferReceived = () => {
                   </span>
                   <p className="offer-received-date ">
                     <span className="offer-received-date">
-                      
                       {new Date(reciveOffer.createAt).toLocaleDateString(
                         "en-US",
                         { month: "short", day: "numeric", year: "numeric" }
@@ -109,7 +122,7 @@ const OfferReceived = () => {
                     </span>
                   </p>
                 </div>
-                
+
                 <div className="offer-received-property-info">
                   <p className="offer-received-property-details">
                     Schedule Visit: {}
@@ -119,7 +132,6 @@ const OfferReceived = () => {
                         })`
                       : "No"}
                   </p>
-                  
 
                   <p className="offer-received-pid">
                     {/* Date and Time: :{" "}
@@ -152,16 +164,16 @@ const OfferReceived = () => {
                       </span>
                     </p>
                   </div>
-                    <button
+                  <button
                     className="view-img-offer-admin"
-                      ref={viewImageRefs.current[index]}
-                      onClick={() => {
-                        setImageData(reciveOffer.images);
-                        setshowImageSlideBox(true);
-                      }}
-                    >
-                      View Img
-                    </button>
+                    ref={viewImageRefs.current[index]}
+                    onClick={() => {
+                      setImageData(reciveOffer.images);
+                      setshowImageSlideBox(true);
+                    }}
+                  >
+                    View Img
+                  </button>
                 </div>
               </div>
             </div>

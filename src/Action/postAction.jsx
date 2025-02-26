@@ -8,14 +8,16 @@ export const CreatePostAction = (PostData) => {
         type: "CreatePostRequest",
         payload: "CreatePostRequest",
       });
-      
+
       // const url = "/post/create";
       const url = `${api_Base_Url}/post/create`;
 
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          // { "Content-Type": "application/json" },
+        
+        
+          // "Content-Type": "application/json",
         },
 
         withCredentials: true,
@@ -25,6 +27,7 @@ export const CreatePostAction = (PostData) => {
 
       dispatch({ type: "CreatePostSuccess", payload: data });
     } catch (error) {
+      console.log(error);
       if (error.response) {
         dispatch({ type: "CreatePostFail", payload: error.response.data });
       } else {
@@ -109,17 +112,59 @@ export const GetAllPostAction = ({
   };
 };
 
-// Delete Post Action
+// Delete Post Action and restore post
 
-export const DeletePostAction = (PostId) => {
+export const DeleteAndRestorePostAction = (PostData) => {
   return async (dispatch) => {
     try {
       dispatch({
-        type: "DeletePostRequest",
-        payload: "DeletePostRequest",
+        type: `DeleteAndRestorePostRequest`,
+        payload: `${
+          PostData?.Status == "delete"
+            ? "Delete"
+            : PostData?.Status == "restore"
+            ? "Restore"
+            : ""
+        }PostRequest`,
       });
 
-      const url = `${api_Base_Url}/post/delete/${PostId}`;
+      const url = `${api_Base_Url}/post/delete`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, PostData, config);
+
+      dispatch({ type: "DeleteAndRestorePostSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "DeleteAndRestorePostFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "DeleteAndRestorePostFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+// PermanentPostDelete delete
+export const PermanentPostDeleteAction = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: `PermanentPostDeleteRequest`,
+        payload: `PermanentPostDeleteRequest`,
+      });
+
+      const url = `${api_Base_Url}/post/delete`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -129,13 +174,16 @@ export const DeletePostAction = (PostId) => {
 
       const { data } = await axios.delete(url, config);
 
-      dispatch({ type: "DeletePostSuccess", payload: data });
+      dispatch({ type: "PermanentPostDeleteSuccess", payload: data });
     } catch (error) {
       if (error.response) {
-        dispatch({ type: "DeletePostFail", payload: error.response.data });
+        dispatch({
+          type: "PermanentPostDeleteFail",
+          payload: error.response.data,
+        });
       } else {
         dispatch({
-          type: "DeletePostFail",
+          type: "PermanentPostDeleteFail",
           payload: { message: error.message, success: false },
         });
       }
@@ -145,12 +193,17 @@ export const DeletePostAction = (PostId) => {
 
 // Get Single Post
 
-export const GetSinglePostAction = (PostId) => {
+export const GetSinglePostAction = (PostId, showDeletePost) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetSinglePostRequest" });
+      let url;
 
-      const url = `${api_Base_Url}/post/single/${PostId}`;
+      if (showDeletePost == true) {
+        url = `${api_Base_Url}/post/single/delete/${PostId}`;
+      } else {
+        url = `${api_Base_Url}/post/single/${PostId}`;
+      }
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -177,6 +230,7 @@ export const GetSinglePostAction = (PostId) => {
 // Update Post Action
 
 export const UpdatePostAction = (PostData, PostId) => {
+ 
   return async (dispatch) => {
     try {
       dispatch({
@@ -355,7 +409,6 @@ export const VerifyPostAction = ({ postdata }, postId) => {
 };
 
 export const showVeirifyPostIconAction = ({ postdata }, postId) => {
-  
   return async (dispatch) => {
     try {
       dispatch({
@@ -423,16 +476,20 @@ export const ReOpenPostAction = (postId) => {
   };
 };
 
+// Get All GetAllScheduleVisits Post Vise
 
-// Get All GetAllScheduleVisits Post Vise 
-
-export const Admin_OwnerGetAllScheduleVisits = (PostId) => {
+export const Admin_OwnerGetAllScheduleVisits = (PostId, DeletePost) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "Admin_OwnerGetAllScheduleVisitsRequest" });
 
-      let url = `${api_Base_Url}/admin-owner/all-schedulevisits/${PostId}`;
+      let url;
 
+      if (DeletePost == true) {
+        url = `${api_Base_Url}/admin-owner/all-schedulevisits/deleted-post/${PostId}`;
+      } else {
+        url = `${api_Base_Url}/admin-owner/all-schedulevisits/${PostId}`;
+      }
       const config = {
         headers: { "Content-Type": "application/json" },
 
@@ -460,8 +517,6 @@ export const Admin_OwnerGetAllScheduleVisits = (PostId) => {
     }
   };
 };
-
-
 
 export const GetAllScheduleVisitsAndMakeOffer_Length = (PostId) => {
   return async (dispatch) => {
@@ -497,7 +552,6 @@ export const GetAllScheduleVisitsAndMakeOffer_Length = (PostId) => {
     }
   };
 };
-
 
 export const Admin_OwnerScheduleVisitDone = ({ VisitStatus }, visitId) => {
   return async (dispatch) => {
@@ -682,48 +736,47 @@ export const Admin_AgentGetAllPostAction = (Keyword) => {
   };
 };
 
-
 // for active or de-active property
 
-export const Active_InactiveProperty=(AssignProperty,status)=>{
-  
-  return async(dispatch)=>{
-   try {
-    dispatch({
-      type: "Active_InactivePropertyRequest",
-      payload: "Active_InactivePropertyRequest",
-    });
-    const url = `${api_Base_Url}/admin-owner/active`;
-    const dataToSend = {
-      AssignProperty: AssignProperty,
-      status: status,
-    };
-
-    const config = {
-      headers: { "Content-Type": "application/json" },  // Changed to JSON if no file upload
-      withCredentials: true,
-    };;
-
-    const{data}= await axios.post(url,dataToSend, config);
-    dispatch({ type: "Active_InactivePropertySuccess", payload: data });
-   } catch (error) {
-    if (error.response) {
-      dispatch({ type: "Active_InactivePropertyFail", payload: error.response.data });
-    } else {
+export const Active_InactiveProperty = (AssignProperty, status) => {
+  return async (dispatch) => {
+    try {
       dispatch({
-        type: "Active_InactivePropertyFail",
-        payload: { message: error.message, success: false },
+        type: "Active_InactivePropertyRequest",
+        payload: "Active_InactivePropertyRequest",
       });
+      const url = `${api_Base_Url}/admin-owner/active`;
+      const dataToSend = {
+        AssignProperty: AssignProperty,
+        status: status,
+      };
+
+      const config = {
+        headers: { "Content-Type": "application/json" }, // Changed to JSON if no file upload
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, dataToSend, config);
+      dispatch({ type: "Active_InactivePropertySuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "Active_InactivePropertyFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "Active_InactivePropertyFail",
+          payload: { message: error.message, success: false },
+        });
+      }
     }
-   }
-  }
-}
+  };
+};
 
 // get similar property data
 
 export const SimilarProperty = (postId) => {
-
- 
   return async (dispatch) => {
     try {
       dispatch({
@@ -731,30 +784,32 @@ export const SimilarProperty = (postId) => {
         payload: "SimilarPropertyRequest",
       });
 
-   
-      let url = `${api_Base_Url}/post/project_name/similarProperty/${postId}`;  // Ensure project_name is correct/
+      let url = `${api_Base_Url}/post/project_name/similarProperty/${postId}`; // Ensure project_name is correct/
 
       const config = {
         headers: { "Content-Type": "application/json" },
-        withCredentials: true,  // Ensure that credentials are sent if needed
+        withCredentials: true, // Ensure that credentials are sent if needed
       };
- 
-      const { data } = await axios.get(url, config);  // Pass postId as an object
-//  console.log(similar)
-//  console.log( "similer",data)
+
+      const { data } = await axios.get(url, config); // Pass postId as an object
+      
+
       dispatch({
         type: "SimilarPropertySuccess",
         payload: data,
       });
     } catch (error) {
-      console.log("API Error:", error);  // Log the full error
+      console.log("API Error:", error); // Log the full error
 
       if (error.response) {
         // Server responded with an error
         dispatch({ type: "SimilarPropertyFail", payload: error.response.data });
       } else if (error.request) {
         // No response was received
-        dispatch({ type: "SimilarPropertyFail", payload: { message: "No response from server", success: false } });
+        dispatch({
+          type: "SimilarPropertyFail",
+          payload: { message: "No response from server", success: false },
+        });
       } else {
         // Something else happened
         dispatch({
@@ -816,8 +871,30 @@ export const OwnerAllExcelFile = (file)=>{
   };
 };
 
+//remove excel rom admin and agent
+export const removeExcelFromAdminAction = (adminId, excelId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "Remove_ExcelFromAdminRequest", payload: "Removing Excel from Admin" });
+      
+      const url = `${api_Base_Url}/excel/remove-excel-access`;
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
-
+      const { data } = await axios.put(url,{
+        adminId,
+        excelId
+      }, config);
+      dispatch({ type: "Remove_ExcelFromAdminSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({ type: "Remove_ExcelFromAdminFail", payload: error.response.data });
+      } else {
+        dispatch({ type: "Remove_ExcelFromAdminFail", payload: { message: error.message, success: false } });
+      }
+    }
+  };
+}
+//all excel files of Owner
 export const fetchAllOwnerFiles = () => {
   return async (dispatch) => {
     try {
@@ -857,5 +934,221 @@ export const fetchAllOwnerFiles = () => {
     }
   };
 };
+//all excel file of  agent
+export const fetchAllAdminFiles = () => {
+  console.log("im called")
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "FetchAllAdminFilesRequest",
+      });
+
+      const url = `${api_Base_Url}/admin-owner/get-admin/assign-excel`; // Ensure the correct endpoint for Admin
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Ensures credentials are sent if required
+      };
+
+      const { data } = await axios.get(url, config); // Fetch admin files
+console.log("this sis data ",data)
+      dispatch({
+        type: "FetchAllAdminFilesSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("API Error:", error); // Log full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "FetchAllAdminFilesFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response received
+        dispatch({ type: "FetchAllAdminFilesFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Unexpected error
+        dispatch({
+          type: "FetchAllAdminFilesFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+//all excel file of  agent
+export const fetchAllAgentFiles = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "FetchAllAgentFilesRequest",
+      });
+
+      const url = `${api_Base_Url}/admin-owner/get-agent/assign-excel`; // Ensure the endpoint is correct
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Ensures credentials are sent if required
+      };
+
+      const { data } = await axios.get(url, config); // Fetch all agent files
+
+      dispatch({
+        type: "FetchAllAgentFilesSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("API Error:", error); // Log full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "FetchAllAgentFilesFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response received
+        dispatch({ type: "FetchAllAgentFilesFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Unexpected error
+        dispatch({
+          type: "FetchAllAgentFilesFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
 
 
+export const GetAllNotificationsAndRequirements = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "GetNotifiesAndPropRequests" });
+
+      let url = `${api_Base_Url}/notify/notifies-requests`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+      dispatch({
+        type: "GetNotifiesAndPropRequestsSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "GetNotifiesAndPropRequestsFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetNotifiesAndPropRequests",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+// change property state available or sold out
+
+export const changePropertyStatus = (updateData) => {
+ 
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "changePropertyStatusRequest",
+        payload: "changePropertyStatusRequest",
+      });
+      const url = `${api_Base_Url}/post/updatePropertyStatus`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.put(url, updateData, config);
+      dispatch({ type: "changePropertyStatusSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "changePropertyStatusFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "changePropertyStatusFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+// acknowledge profile
+
+export const acknowledgeProfile = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "acknowledgeProfileRequest",
+        payload: "acknowledgeProfileRequest",
+      });
+      const url = `${api_Base_Url}/user/acknowledgeProfile`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.post(url, config);
+      dispatch({ type: "acknowledgeProfileSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "acknowledgeProfileFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "acknowledgeProfileFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+// Get All DeletePostAction
+
+export const GetDeletedPostsAction = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "GetDeletedPostsRequest",
+        payload: "GetDeletedPostsRequest",
+      });
+
+      const url = `${api_Base_Url}/post/all-deleted`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.get(url, config);
+      
+      dispatch({ type: "GetDeletedPostsSuccess", payload: data });
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        dispatch({
+          type: "GetDeletedPostsFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetDeletedPostsFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};

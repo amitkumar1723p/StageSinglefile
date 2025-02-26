@@ -178,3 +178,65 @@
     word-break: break-word;
   }
   
+  .excel-checkbox-container{
+        display: flex;
+        /* outline: 1px solid red; */
+        align-items: flex-start;
+        gap: 1px;
+  }
+
+  .assigned-admins-container{
+    /* background: red; */
+    outline: 1px solid var(--main-lighter-clr);
+    display: flex;
+    gap: 12px;
+    padding: 12px 0px;
+  }
+
+  .assigned-admin-name{
+    color: #007bff;
+    
+    display: flex;
+    gap: 3px;
+
+  }
+
+  .assigned-admin-name p{
+    color: #007bff;
+    text-decoration: underline;
+    display: flex;
+    gap: 3px;
+
+  }
+  .assigned-admin-name button{
+    color: red;
+   border: none;
+    background: none;
+  }
+
+  .file-handler-buttons-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .file-handler-save-headers-button {
+    background-color: #ff9800;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .file-handler-save-headers-button:hover {
+    background-color: #f57c00;
+  }
+  /* .editable-header{
+    display: flex;
+    gap: 12px;
+  } */
+  .modified-header {
+    background-color: #fffde7;
+    font-style: italic;
+  }

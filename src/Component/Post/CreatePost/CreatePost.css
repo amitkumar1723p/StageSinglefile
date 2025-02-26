@@ -562,16 +562,17 @@ button:hover,
   right: 2%;
   z-index: 1;
   overflow: auto;
-  text-align: justify;
+  /* text-align: justify; */
   border: none;
-  padding: 10px;
+  font-size: 12px;
+  padding: 8px;
   /* border-radius: 10px; */
   /* right: -35px; */
   width: 100%;
 }
 .apartmentname-container p {
-  padding: 10px;
-  letter-spacing: 1px;
+  padding: 5px;
+  /* letter-spacing: .4px; */
 }
 
 .post-requermient-search .apartmentname-container {
@@ -582,9 +583,10 @@ button:hover,
   right: 2%;
   z-index: 1;
   overflow: auto;
-  text-align: justify;
+  /* text-align: justify; */
   border: none;
-  padding: 10px;
+  padding: 8px;
+  font-size: 12px;
   /* border-radius: 10px; */
   /* right: -35px; */
   width: 100%;
@@ -594,15 +596,17 @@ button:hover,
   color: black;
   position: absolute;
   top: 100%;
-  right: 2%;
+  right: 17%;
+  white-space: nowrap;
   z-index: 1;
   overflow: auto;
-  text-align: justify;
+  font-size: 12px;
+  /* text-align: justify; */
   border: none;
   padding: 10px;
   /* border-radius: 10px; */
   /* right: -35px; */
-  width: 100%;
+  width: 85%;
 }
 .apartmentname-container {
   background-color: white;
@@ -685,11 +689,11 @@ button:hover,
   justify-content: center;
 }
 
-.apartmentname-container P {
+/* .apartmentname-container P {
   margin-bottom: 5px;
   letter-spacing: -0.5px;
   white-space: nowrap;
-}
+} */
 
 .apartmentname-container p:last-child {
   margin-bottom: 0px;
@@ -708,6 +712,7 @@ button:hover,
 .highlighted {
   background: var(--main-light-clr);
   color: white;
+  border-radius: 5px;
   /* Highlight color */
 }
 
@@ -893,14 +898,14 @@ textarea {
 }
 
 .counter .button {
-  font-size: 25px;
+  font-size: 20px;
   background-color: var(--main-lighter-clr);
   margin: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   text-align: center;
   color: var(--main-light-clr);
   border-radius: 50%;
@@ -1066,6 +1071,10 @@ input[type="number"] {
   display: flex;
   gap: 10px;
   cursor: pointer;
+}
+
+.tenant-checkbox{
+  display: flex;
 }
 
 .PropertyStatus-box {
@@ -1588,7 +1597,7 @@ input[type="number"] {
     font-weight: 500;
     line-height: normal;
     width: auto;
-    margin-right: 5px;
+    /* margin-right: 5px; */
   }
 
   .parking-section-box {
@@ -1727,11 +1736,12 @@ input[type="number"] {
     color: black;
     position: absolute;
     font-size: 12px;
-    z-index: 1;
+    z-index: 2;
     left: -86px;
     width: 197%;
     font-size: 12px;
-    height: 300px;
+    height: fit-content;
+    max-height: 300px;
     /* overflow: auto; */
     text-align: justify;
     border: none;

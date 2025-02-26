@@ -11,7 +11,7 @@ import CreatePostSubmitAlert from "./CreatePostSubmitAlert";
 
 export default function CreatePostImageUpload({
   setnext,
-
+ next ,
   previewImage,
   setpreviewImage,
   uploadimages,
@@ -56,50 +56,92 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
+
+  // useEffect(() => {
+  //   // remove Coma
+
+  //   const CopyObj = { ...PricingDetailsData };
+
+  //   if (BasicDetailsData.PropertyAdType == "Rent") {
+  //     const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(/,/g,"");
+  //     CopyObj.ExpectedRent =parseInt( ExpectedRentRemoveComa);
+
+  //     const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
+  //       /,/g,
+  //       ""
+  //     );
+  //     CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
+  //   }
+
+  //   if (BasicDetailsData.PropertyAdType == "Sale") {
+  //     const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
+  //       /,/g,
+  //       ""
+  //     );
+  //     CopyObj.ExpectedPrice =parseInt( ExpectedPriceRemoveComa);
+
+  //     if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+  //       const MonthlyExpectedRentRemoveComa = String(
+  //         CopyObj?.AdditionalDetails?.MonthlyExpectedRent
+  //       )?.replace(/,/g, "");
+  //       CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt (MonthlyExpectedRentRemoveComa);
+  //     }
+  //   }
+  //   if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
+  //     const MaintenanceChargesRemoveComa = String(
+  //       CopyObj.AdditionalDetails.MaintenanceCharges
+  //     )?.replace(/,/g, "");
+  //     CopyObj.AdditionalDetails.MaintenanceCharges =parseInt(MaintenanceChargesRemoveComa) ;
+  //   }
+    
+  //    console.log("copyobjec",CopyObj)
+  //    setPricingDetailsData(CopyObj);
+  //     console.log( "PricingDetailsData",PricingDetailsData)
+  // }, []);
+
   useEffect(() => {
-    // remove Coma
-
+    // Create a copy of the data to avoid mutating the original object
     const CopyObj = { ...PricingDetailsData };
-    console.log(CopyObj);
-    console.log(CopyObj);
-    if (BasicDetailsData.PropertyAdType == "Rent") {
-      const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.ExpectedRent = ExpectedRentRemoveComa;
-
-      const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.DepositePrice = DepositePriceRemoveComa;
+  
+    if (BasicDetailsData.PropertyAdType === "Rent") {
+      // Remove commas from ExpectedRent and DepositePrice for Rent
+      const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(/,/g, "");
+      CopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
+  
+      const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(/,/g, "");
+      CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
     }
-
-    if (BasicDetailsData.PropertyAdType == "Sale") {
-      const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.ExpectedPrice = ExpectedPriceRemoveComa;
-
+  
+    if (BasicDetailsData.PropertyAdType === "Sale") {
+      // Remove commas from ExpectedPrice for Sale
+      const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(/,/g, "");
+      CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
+  
+      // Check and remove commas from MonthlyExpectedRent if it exists
       if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-        const MonthlyExpectedRentRemoveComa = String(
-          CopyObj?.AdditionalDetails?.MonthlyExpectedRent
-        )?.replace(/,/g, "");
-        CopyObj.AdditionalDetails.MonthlyExpectedRent =
-          MonthlyExpectedRentRemoveComa;
+        const MonthlyExpectedRentRemoveComa = String(CopyObj?.AdditionalDetails?.MonthlyExpectedRent)?.replace(/,/g, "");
+        CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(MonthlyExpectedRentRemoveComa);
       }
     }
+  
+    // Remove commas from MaintenanceCharges if it exists
     if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-      const MaintenanceChargesRemoveComa = String(
-        CopyObj.AdditionalDetails.MaintenanceCharges
-      )?.replace(/,/g, "");
-      CopyObj.AdditionalDetails.MaintenanceCharges =
-        MaintenanceChargesRemoveComa;
+      const MaintenanceChargesRemoveComa = String(CopyObj.AdditionalDetails.MaintenanceCharges)?.replace(/,/g, "");
+      CopyObj.AdditionalDetails.MaintenanceCharges = parseInt(MaintenanceChargesRemoveComa);
     }
+  
+    // Log the modified object before setting it in state
+    // console.log("CopyObj after modifications:", CopyObj);
+  
+    // Set the new state
     setPricingDetailsData(CopyObj);
-  }, []);
+  
+  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
+  
+  // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
+  
+  
+
   const CratePostHandler = (e) => {
     e.preventDefault();
     if (previewImage.length <= 0) {
@@ -152,21 +194,20 @@ export default function CreatePostImageUpload({
           }
         }
       } else {
+        console.log("cj")
         uploadimages.forEach((e) => {
           formData.append("PropertyImages", e, e.name);
         });
       }
-
+  
       if (update) {
         let confrim = window.confirm("Are you update this Post");
         if (confrim) {
           dispatch(UpdatePostAction(formData, PostId));
         }
       } else {
-        console.log(PricingDetailsData);
         dispatch(CreatePostAction(formData));
- 
-         
+
         if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
           setshowCreatePostSubmitAlert("showLoading");
         }
@@ -224,7 +265,7 @@ export default function CreatePostImageUpload({
                     src="/img/i-icon.png"
                     alt="i-icon"
                   />{" "}
-                  Supported Format: JPEG, PNG,SVG{" "}
+                  Supported Format: JPEG, PNG{" "}
                 </p>
               </div>
 
@@ -232,13 +273,14 @@ export default function CreatePostImageUpload({
                 type="file"
                 name=""
                 id=""
-                multiple
-                accept="image/*"
+               multiple accept="image/*,video/*,.pdf"
                 required={previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 
                   files.forEach((file) => {
+                    
+                     
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {

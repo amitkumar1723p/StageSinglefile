@@ -6,7 +6,7 @@ import "./DreamHomeBanner.css"; // If you have custom styles for the banner
 
 const DreamHomeBanner = () => {
   return (
-    <div className="dream-home-banner">
+    <div className="">
       <img
         src="/img/Contactus.png"
         alt="Dream Home Banner"
