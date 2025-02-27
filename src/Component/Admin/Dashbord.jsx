@@ -8,7 +8,7 @@ import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
   fetchAllOwnerFiles,
-  OwnerAllExcelFile,
+  OwnerUploadExcelFile,
   GetDeletedPostsAction,
   fetchAllAdminFiles,
   fetchAllAgentFiles,
@@ -74,6 +74,10 @@ const Dashboard = () => {
  );
  const {data:AdminAllExcelFilesData} = useSelector((state) => {
   return state.AdminAllExcelFiles}
+);
+
+const {data:AgentAllExcelFilesData} = useSelector((state) => {
+  return state.AgentAllExcelFiles}
 );
 
   // get all user excepation owner Admin agent
@@ -233,15 +237,11 @@ const Dashboard = () => {
                 </div>{" "}
 
 
-                
-      
-      
-         
               </>
             )}
 
 
-{medata?.user?.Role === "Owner" && (
+      {medata?.user?.Role === "Owner" && (
               <>
                    <Link to="/admin/all-excel">
               <div className="card p-3 cursor-pointer">
@@ -274,7 +274,9 @@ const Dashboard = () => {
                  <Link to="/admin/all-excel-both">
               <div className="card p-3 cursor-pointer">
                 <div className="Admin-box">
-                  <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
+                  <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
+                  {!AgentAllExcelFilesData && <p className="total-number">0</p>}
+
                   <img src="/img/In-ActivePosts.png" alt="post" />
                 </div>
                 <h3 >All Excel Data</h3>

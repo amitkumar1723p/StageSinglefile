@@ -22,6 +22,8 @@ export const CreatePostReducer = (state = {}, action) => {
       case "AssignExecleRequest":
     case "Remove_ExcelFromAdminRequest":
       case "UserRoleUpdationRequest":
+    case "Delete_ExcelFileRequest":
+    case "OwnerAllExcelFileRequest":
       return {
         ...state,
         loading: true,
@@ -49,6 +51,8 @@ export const CreatePostReducer = (state = {}, action) => {
       case "AssignExecleSucess":
     case "Remove_ExcelFromAdminSuccess":
       case "UserRoleUpdationSuccess":
+    case "Delete_ExcelFileSuccess":
+    case "OwnerAllExcelFileSuccess":
       return {
         ...state,
         loading: false,
@@ -76,6 +80,8 @@ export const CreatePostReducer = (state = {}, action) => {
       case "AssignExeclFail":
     case "Remove_ExcelFromAdminFail":
     case "UserRoleUpdationFail":
+    case "Delete_ExcelFileFail":
+    case "OwnerAllExcelFileFail":
       return {
         ...state,
         loading: false,
@@ -503,28 +509,28 @@ export const OwnerAllPostsVisitsReducer = (state = {}, action) => {
   }
 };
 
-export const OwnerAllExcelFileReducer = (state = {}, action) => {
+export const OwnerUploadExcelFileReducer = (state = {}, action) => {
   switch (action.type) {
-    case "OwnerAllExcelFile":
+    case "OwnerUploadExcelFile":
       return {
         ...state,
         loading: true,
       };
 
-    case "OwnerAllExcelFileSuccess":
+    case "OwnerUploadExcelFileSuccess":
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
 
-    case "OwnerAllExcelFileFail":
+    case "OwnerUploadExcelFileFail":
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
-      case "OwnerAllExcelFileClear":
+      case "OwnerUploadExcelFileClear":
         return {};
       default:
         return {

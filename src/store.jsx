@@ -34,7 +34,7 @@ import {
   OwnerAllPostsVisitsReducer,
   // OwnerAllPostsVisitsReducer,
   GetAllNotificationsAndRequirementsReducer,
-  OwnerAllExcelFileReducer,
+  OwnerUploadExcelFileReducer,
   fetchAllOwnerFilesReducer,
 
   GetDeletedPostsReducer,
@@ -76,7 +76,7 @@ const reducer = combineReducers({
   paymentResponse:paymentReducer,
   
   paidPropertyData:getPaidPropertyReducer,
-  OwnerUploadingExcelFile:OwnerAllExcelFileReducer,
+  OwnerUploadingExcelFile:OwnerUploadExcelFileReducer,
   OwnerAllExcelFiles:fetchAllOwnerFilesReducer,
   AdminAllExcelFiles:fetchAllAdminFilesReducer,
   AgentAllExcelFiles:fetchAllAgentFilesReducer,

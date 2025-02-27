@@ -1029,7 +1029,13 @@
   padding: 5px;
   border-radius: 5px;
 }
-
+.delete-Property-btn {
+  background-color: red;
+  border: 1px solid #d0e5f6;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
 .Assing-Property-btn:hover {
   background-color: var(--main-light-clr);
   color: #fff;

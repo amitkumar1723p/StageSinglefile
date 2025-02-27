@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from 'react'
 // import { useDispatch, useSelector } from 'react-redux';
-// import { fetchAllOwnerFiles, OwnerAllExcelFile, removeExcelFromAdminAction } from '../../Action/postAction';
+// import { fetchAllOwnerFiles, OwnerUploadExcelFile, removeExcelFromAdminAction } from '../../Action/postAction';
 // import axios from 'axios';
 // import "./OwnerAgentExcelData.css"
 // import { useParams } from 'react-router-dom';
@@ -247,10 +247,12 @@
 
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllOwnerFiles, OwnerAllExcelFile, removeExcelFromAdminAction } from '../../Action/postAction';
+import { fetchAllOwnerFiles, OwnerUploadExcelFile, removeExcelFromAdminAction } from '../../Action/postAction';
 import axios from 'axios';
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver"
 import "./OwnerAgentExcelData.css"
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 const OwnerAgentExcel = () => {
 
     const [file, setFile] = useState(null);
@@ -264,14 +266,15 @@ const OwnerAgentExcel = () => {
     const [filterdAdmins,setFilterAdmin]= useState([]);
     const [editingHeader, setEditingHeader] = useState(null);
     const [hasHeaderChanges, setHasHeaderChanges] = useState(false); // Flag for header changes
-
+    const [fileName, setFileName] = useState("exported_data");
+  const navigate =useNavigate();
     const dispatch= useDispatch();
     const { medata } = useSelector((state) => {
         return state.meDetails;
       });
     const {id}=useParams("id")
-console.log(allAdmins)
-    const fetchedAllFiles =useSelector((store)=>store.OwnerAllExcelFiles.data)
+
+    // const fetchedAllFiles =useSelector((store)=>store.OwnerAllExcelFiles.data)
     useEffect(() => {
         const handleKeyUp = (event) => {
           if (event.key === "PrintScreen") {
@@ -323,8 +326,31 @@ console.log(allAdmins)
       }
 
 
+      const fetchSingleFileDataOwner = async (id) => {
+        try {
+          const res = await axios.get(`http://localhost:5000/excel/owner/file/${id}`,{withCredentials:true});
+          setAssignedAdmins(res.data.admins);
+          setColumns(res.data.fileData.columns);
+          setOriginalColumns([...res.data.fileData.columns]); // Store original column names
+          setData(res.data.fileData.rows);
+          setFileId(id);
+          setHasHeaderChanges(false);
+        } catch (err) {
+          // navigate("/admin/dashboard")
+          console.error("Error fetching file data:", err);
+        }
+      };
+    
+
+
       useEffect(()=>{
-        fetchSingleFileData(id);
+        if(medata.user.Role ==="Owner"){
+
+          fetchSingleFileDataOwner(id)
+        }else{
+          fetchSingleFileData(id);
+
+        }
         setAllAdmins([])
         getAllAdminsAgents({ AgentVerify: true })
         getAllAdminsAgents({ AdminVerify: true })
@@ -479,7 +505,7 @@ console.log(allAdmins)
       // Fetch single file data
     const fetchSingleFileData = async (id) => {
         try {
-          const res = await axios.get(`http://localhost:5000/excel/file/${id}`);
+          const res = await axios.get(`http://localhost:5000/excel/file/${id}`,{withCredentials:true});
           setAssignedAdmins(res.data.admins);
           setColumns(res.data.fileData.columns);
           setOriginalColumns([...res.data.fileData.columns]); // Store original column names
@@ -487,21 +513,51 @@ console.log(allAdmins)
           setFileId(id);
           setHasHeaderChanges(false);
         } catch (err) {
+          navigate("/admin/dashboard")
           console.error("Error fetching file data:", err);
         }
       };
-    
-        
-    
+
+      //downloadfile
+      function handleDownload() {
+        if (columns.length === 0 || data.length === 0) {
+          alert("No data available to download.");
+          return;
+        }
+      
+        // Extract column names
+        const columnNames = columns.map(col => col.name);
+      
+        // Convert object-based rows into array-based rows
+        const rowData = data.map(row => columnNames.map(col => row[col] || "")); 
+      
+        // Create a worksheet with column headers and row data
+        const worksheet = XLSX.utils.aoa_to_sheet([columnNames, ...rowData]);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      
+        // Generate an Excel file and trigger download
+        const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+        const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+        saveAs(blob, `${fileName}.xlsx`);
+      }
+      
   return (
     
     <div className='file-handler-table-container'>
 
            {/* Add Column Button */}
           {medata?.user?.Role === "Owner"&&
-             <button onClick={addEditableColumn} className="file-handler-add-button">
+            <div>
+                 <button onClick={addEditableColumn} className="file-handler-add-button">
              Add Column
            </button>
+           <button onClick={handleDownload} className="file-handler-add-button">
+             Download
+           </button>
+
+
+            </div>
           }
 
           {medata?.user?.Role === "Owner"&&
@@ -599,7 +655,7 @@ console.log(allAdmins)
               </tbody>
             </table>
           )}
-    
+   
           {/* Save Buttons Container */}
           {data?.length > 0 && (
             <div className="file-handler-buttons-container">

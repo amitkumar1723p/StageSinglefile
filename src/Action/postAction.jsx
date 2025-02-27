@@ -822,7 +822,7 @@ export const SimilarProperty = (postId) => {
 };
 
 
-export const OwnerAllExcelFile = (file)=>{
+export const OwnerUploadExcelFile = (file)=>{
 
   return async (dispatch) => {
     try {
