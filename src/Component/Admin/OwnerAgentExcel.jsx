@@ -555,6 +555,9 @@ const OwnerAgentExcel = () => {
            <button onClick={handleDownload} className="file-handler-add-button">
              Download
            </button>
+           <button onClick={saveChanges} className="file-handler-save-button">
+                Save Changes
+              </button>
 
 
             </div>
@@ -580,6 +583,8 @@ const OwnerAgentExcel = () => {
                 }
             </div>
           }
+
+          
                {/* Data Table */}
                {!isHidden && data?.length > 0 && (
             <table className="file-handler-table">
@@ -660,9 +665,9 @@ const OwnerAgentExcel = () => {
           {data?.length > 0 && (
             <div className="file-handler-buttons-container">
               {/* Save Row Data Button (Original) */}
-              <button onClick={saveChanges} className="file-handler-save-button">
+              {/* <button onClick={saveChanges} className="file-handler-save-button">
                 Save Cell Changes
-              </button>
+              </button> */}
               
               {/* Save Headers Button (New) */}
               {medata?.user?.Role === "Owner" && hasHeaderChanges && (

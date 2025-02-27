@@ -130,7 +130,7 @@ console.log(data)
   return (
     <>
       <button className="original-price border-0" onClick={handlePayment}>
-        View Number
+        Pay
       </button>
     </>
   );

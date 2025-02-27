@@ -102,7 +102,7 @@ const OwnerAgentExcelData = () => {
         }
     };
 
-    
+
 
 
 
@@ -131,7 +131,7 @@ const OwnerAgentExcelData = () => {
                                 dispatch(GetAllAdminAction({ AdminVerify: true }));
                             } else if (e.target.value == "Agent") {
                                 dispatch({ type: "GetAllAdminClear" });
-                                dispatch(GetAllAdminAction({ AgentVerify:true}));
+                                dispatch(GetAllAdminAction({ AgentVerify: true }));
                             } else {
                                 dispatch({ type: "GetAllAdminClear" });
 
@@ -197,25 +197,25 @@ const OwnerAgentExcelData = () => {
                 }
                 {
                     selectedExcel && <button
-                    className="delete-Property-btn"
-                    onClick={(e) => {
-                        let confirm = window.confirm(
-                            `wants to delete`
-                        );
-                        if (confirm) {
-                             if (medata.user.Role === "Owner") {
-                                  
+                        className="delete-Property-btn"
+                        onClick={(e) => {
+                            let confirm = window.confirm(
+                                `wants to delete`
+                            );
+                            if (confirm) {
+                                if (medata.user.Role === "Owner") {
+
                                     dispatch(fetchAllOwnerFiles())
-                                   
-                                  }
-                            dispatch(deleteExcelFile(selectedExcel))
-                            setSelectedeExcel(null)
-                            //  dispatch(adminAssigned({ AssignedData }));
-                        }
-                    }}
-                >
-                    delete Excel
-                </button>
+
+                                }
+                                dispatch(deleteExcelFile(selectedExcel))
+                                setSelectedeExcel(null)
+                                //  dispatch(adminAssigned({ AssignedData }));
+                            }
+                        }}
+                    >
+                        Delete File
+                    </button>
                 }
 
                 {/* Buttons to change the status */}
@@ -235,13 +235,13 @@ const OwnerAgentExcelData = () => {
 
                         <div className='excel-checkbox-container'>
 
-                            <input checked={selectedExcel === item._id} type="checkbox" className='' onChange={() =>{
-                                if(selectedExcel=== item._id){
+                            <input checked={selectedExcel === item._id} type="checkbox" className='' onChange={() => {
+                                if (selectedExcel === item._id) {
                                     setSelectedeExcel(null);
-                                }else{
+                                } else {
                                     setSelectedeExcel(item?._id)
                                 }
-                            } } />
+                            }} />
                             <div
                                 key={item._id}
                                 className="files-card"

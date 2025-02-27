@@ -31,7 +31,7 @@ const Tenant = () => {
           </div>
           <div className="for-tenant-introduction">
             <div className="for-tenant-introduction-img-container">
-              <img src="/img/StartExploring.svg" alt="" />
+              <img src="/img/StartExplore_Rent.svg" alt="" />
             </div>
             <div className="for-tenant-content-container">
               <h3>Start Exploring</h3>

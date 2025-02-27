@@ -315,14 +315,16 @@ export default function SinglePostDetails() {
   };
   useEffect(() => {
     if (getSinglePostData || status) {
+     if(medata?.IsAuthenticated===true){
       dispatch(getPaidPropertyAction(getSinglePostData?.SinglePost?._id));
+     }
       //  alert(getSinglePostData?.SinglePost?._id)
     }
 
     if (status !== false) {
       setshowOwnerDetailsForm(true);
     }
-  }, [status, getSinglePostData]);
+  }, [status, getSinglePostData,medata]);
 
   return (
     <>
