@@ -44,6 +44,8 @@ import OfferReceived from "./Component/Admin/OfferRecived";
 import { UserContext } from "./Component/CreateContext/CreateContext";
 import ReportPage from "./Component/Home/ReportPage";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
+import BlogPage from "./Component/Home/BlogContent/BlogPage";
+import SingleBlog from "./Component/Home/BlogContent/Components/SingleBlog";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
 import ProfileUpdate from "./Component/User/Profile/ProfileUpdate";
@@ -636,6 +638,16 @@ function App() {
           exact
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
+        />
+         <Route
+          exact
+          path="/blog-page"
+          element={<BlogPage />}
+        />
+        <Route
+          exact
+          path="/blog-page/:title"
+          element={<SingleBlog />}
         />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         {/* protect route for user */}
