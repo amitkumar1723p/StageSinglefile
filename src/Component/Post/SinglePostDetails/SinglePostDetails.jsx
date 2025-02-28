@@ -289,10 +289,10 @@ export default function SinglePostDetails() {
   }, [AlertData, AlertType]);
 
   // Check Tenent Response IsExit  Dispatch
-  useEffect(() => {
-    if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
-    dispatch(TenentResponseIsExitAction(SinglePostId));
-  }, [SinglePostId, medata?.user?.Role]);
+  // useEffect(() => {
+  //   if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
+  //   dispatch(TenentResponseIsExitAction(SinglePostId));
+  // }, [SinglePostId, medata?.user?.Role]);
 
   useEffect(() => {
     if (!Params?.PostAddress) return; // Avoid running when undefined
@@ -315,14 +315,17 @@ export default function SinglePostDetails() {
   };
   useEffect(() => {
     if (getSinglePostData || status) {
-      dispatch(getPaidPropertyAction(getSinglePostData?.SinglePost?._id));
+      if(medata?.IsAuthenticated===true){
+        dispatch(getPaidPropertyAction(getSinglePostData?.SinglePost?._id));
+      }
+     
       //  alert(getSinglePostData?.SinglePost?._id)
     }
 
     if (status !== false) {
       setshowOwnerDetailsForm(true);
     }
-  }, [status, getSinglePostData]);
+  }, [status, getSinglePostData,medata]);
 
   return (
     <>

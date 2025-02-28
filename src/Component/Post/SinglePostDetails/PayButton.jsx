@@ -18,7 +18,7 @@ export default function PayButton(
       dispatch(paymentAction());
     }
   }, [dispatch, medata?.user?._id]);
-console.log(data)
+// console.log(data)
   // Function to load the Razorpay SDK script dynamically
   function loadScript(src) {
     return new Promise((resolve, reject) => {
@@ -30,7 +30,8 @@ console.log(data)
     });
   }
 
-  const handlePayment = async () => {
+  const handlePayment = async (e) => {
+    // console.log(e._reactName==='onClick') true 
     try {
       // Load Razorpay SDK 
       let res;
@@ -65,7 +66,7 @@ console.log(data)
         contact: medata?.user?.ContactNumber || "Default Contact",
         userId: medata?.user?._id || "defaultUserId"
       };
-  
+  console.log(userData,"medtat")
       // Razorpay payment options
       const options = {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,  // Ensure the env variable is correctly set
@@ -130,7 +131,7 @@ console.log(data)
   return (
     <>
       <button className="original-price border-0" onClick={handlePayment}>
-        View Number
+       Pay
       </button>
     </>
   );

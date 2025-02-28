@@ -1061,7 +1061,7 @@ export const getPaidPropertyAction=(PostId)=>{
 //user role updation
  
 export const UserRoleUpdation = (updateData) => {
-  console.log(updateData)
+  // console.log(updateData)
   return async (dispatch) => {
     try {
       dispatch({
@@ -1091,3 +1091,37 @@ export const UserRoleUpdation = (updateData) => {
     }
   };
 };
+
+export const getTransactionDetailAction=()=>{
+  console.log("jg")
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "getTransactionDetailRequest" });
+
+      let url = `${api_Base_Url}/payment/allPaidUser`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.get(url, config);
+   
+
+      dispatch({ type: "getTransactionDetailSuccess", payload:data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "getTransactionDetailFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "getTransactionDetailFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+}
