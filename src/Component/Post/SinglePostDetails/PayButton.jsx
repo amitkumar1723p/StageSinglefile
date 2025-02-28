@@ -18,7 +18,7 @@ export default function PayButton(
       dispatch(paymentAction());
     }
   }, [dispatch, medata?.user?._id]);
-console.log(data)
+
   // Function to load the Razorpay SDK script dynamically
   function loadScript(src) {
     return new Promise((resolve, reject) => {

@@ -273,7 +273,7 @@ const OwnerAgentExcel = () => {
     return state.meDetails;
   });
   const { id } = useParams("id")
-
+console.log(id)
   // const fetchedAllFiles =useSelector((store)=>store.OwnerAllExcelFiles.data)
   useEffect(() => {
     const handleKeyUp = (event) => {
