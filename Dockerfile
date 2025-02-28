@@ -14,9 +14,12 @@ COPY . ./
 
 # Define build argument for the API URL (e.g., provided in GitHub Actions)
 ARG REACT_APP_API_URL
+ARG REACT_APP_RAZORPAY_KEY_ID
 
 # Write the environment variable to a .env file
 RUN echo "REACT_APP_API_URL=$REACT_APP_API_URL" > .env
+RUN echo "REACT_APP_RAZORPAY_KEY_ID=$REACT_APP_RAZORPAY_KEY_ID" > .env
+
 
 # Build the React app (or any other frontend framework)
 RUN npm run build
