@@ -497,3 +497,11 @@ opacity: .9;
         top: 16%;
     }
 }
+.reporting-remove-file{
+    border: none;
+    outline: none;;
+    color: red;
+    padding-left: 8px;
+    font-size: 18px;
+    background: none;
+}

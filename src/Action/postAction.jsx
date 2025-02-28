@@ -936,7 +936,7 @@ export const fetchAllOwnerFiles = () => {
 };
 //all excel file of  agent
 export const fetchAllAdminFiles = () => {
-  console.log("im called")
+  // console.log("im called")
   return async (dispatch) => {
     try {
       dispatch({
@@ -951,7 +951,7 @@ export const fetchAllAdminFiles = () => {
       };
 
       const { data } = await axios.get(url, config); // Fetch admin files
-console.log("this sis data ",data)
+// console.log("this sis data ",data)
       dispatch({
         type: "FetchAllAdminFilesSuccess",
         payload: data,
@@ -1153,3 +1153,53 @@ export const GetDeletedPostsAction = () => {
   };
 };
 
+//report page reportaction
+
+
+export const ReportPagePostAction = (formdata) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "ReportPagePostRequest",
+        payload: "ReportPagePostRequest",
+      });
+
+      const url = `${api_Base_Url}/feedback/report-feedback`;
+      console.log('mu ddd ',formdata)
+
+      const feedBack = new FormData();
+      feedBack.append("feedbackType", formdata.type);
+      feedBack.append("description", formdata.description);
+
+      // Append multiple files correctly
+      if (formdata.file) {
+        // console.log(formdata.file)
+        
+        formdata.file.forEach((files) => {
+          feedBack.append("PropertyImages", files);
+        });
+      }
+      // console.log('mu ddd ',feedBack)
+
+      const config = {
+     
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, feedBack, config);
+      dispatch({ type: "ReportPagePostSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "ReportPagePostFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "ReportPagePostFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};

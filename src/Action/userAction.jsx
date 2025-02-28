@@ -972,7 +972,7 @@ export const paymentAction =  () => {
       // };
 
       const { data } = await axios.post(url, {}, { withCredentials: true });
-      console.log("data", data)
+      // console.log("data", data)
       dispatch({ type: "PaymentActionSuccess", payload: data });
     } catch (error) {
       console.log(error)
@@ -1061,7 +1061,7 @@ export const getPaidPropertyAction=(PostId)=>{
 //user role updation
  
 export const UserRoleUpdation = (updateData) => {
-  console.log(updateData)
+  // console.log(updateData)
   return async (dispatch) => {
     try {
       dispatch({

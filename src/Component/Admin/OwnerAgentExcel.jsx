@@ -470,10 +470,10 @@ const OwnerAgentExcel = () => {
       useEffect(()=>{
         const agentIdsSet = new Set(AssinedAdmins.map(agent => agent.AdminId._id));
 
-        console.log("seeting agent  ",agentIdsSet)
+        // console.log("seeting agent  ",agentIdsSet)
         // Find common AdminIds
         const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
-        console.log("thi sis matchinggg ",matchingAdmins)
+        // console.log("thi sis matchinggg ",matchingAdmins)
         setFilterAdmin(matchingAdmins)
       },[allAdmins,AssinedAdmins])
     
@@ -559,7 +559,15 @@ const OwnerAgentExcel = () => {
 
             </div>
           }
-
+        
+          <marquee
+  direction="down"
+  width="250"
+  height="200"
+  behavior="alternate"
+  style="border:solid">
+  <marquee behavior="alternate">please save changes</marquee>
+</marquee>
           {medata?.user?.Role === "Owner"&&
             <div className='assigned-admins-container'>
                 Assigned to: {

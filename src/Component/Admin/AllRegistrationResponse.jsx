@@ -98,7 +98,7 @@ export default function AllRegistrationResponse({ }) {
   const { data: adminAlertData, LodingType: adminAlertType, } = useSelector((state) => {
     return state.Post;
   });
-  console.log(adminAlertData)
+  // console.log(adminAlertData)
 
   useEffect(() => {
       

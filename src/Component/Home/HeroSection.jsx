@@ -271,7 +271,7 @@ const HeroSection = () => {
                     // setPropertyAddType("");
                     // } else {
                     setSearchPropertyAddType(e.target.value);
-                    console.log(e.target.value)
+                    // console.log(e.target.value)
                     // }
                   }}>
               <option selected={PropertyAddType === "Sale"} value="Sale">Buy</option>
