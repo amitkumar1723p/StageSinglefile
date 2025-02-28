@@ -72,20 +72,22 @@ const RentAgreement = () => {
           </div>
         </div>
       </div>
-      <button className="RentAgreement__upload-button">
-       <img src="./img/upload.svg" alt="upload" />
-       <Link
-                   to="https://wa.me/7837840785"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="whatapps-section-floating"
-                 >
-                   <img src="/img/whatapp.png" alt="WhatsApp" />
-                 </Link>
+      <Link
+        to="https://wa.me/7837840785"
+        target="_blank"
+        rel="noopener noreferrer"
        
-        Upload your Draft
-      </button>
-    </div>
+      >
+        <button className="UploadYourDraftMain ">
+
+          <img src="/img/whatapp.png" alt="WhatsApp" />
+          Upload Your Draft
+
+        </button>
+      </Link>
+
+
+    </div >
   );
 };
 

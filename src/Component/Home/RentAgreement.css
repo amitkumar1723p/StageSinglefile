@@ -47,6 +47,21 @@ margin: 10px 10px 20px 10px;
   justify-content: center;
 }
 
+.UploadYourDraftMain{
+  padding: 5px;
+  border: none;
+  background: var(--main-light-clr);
+  color: #fff;
+  border-radius: 5px;
+}
+.UploadYourDraftMain:hover{
+ opacity: .8;
+}
+.UploadYourDraftMain img{
+  width: 24px;
+  margin-right: 5px;
+}
+
 .RentAgreement__icon img {
   width: 90px;
   height: auto;

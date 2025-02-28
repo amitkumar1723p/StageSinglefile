@@ -18,6 +18,9 @@
   }
   .upload-excel-file-input{
     background:rgb(234, 234, 234);
+    border: none;
+    background: var(--main-lighter-clr);
+    border: 5px;
     /* outline: 1px solid red !important; */
     padding: 5px;
     /* width: 30%; */
@@ -27,10 +30,12 @@
   .file-handler-upload-button{
     border: none;
     padding: 10px 20px;
-    background: rgb(35, 145, 35);
+    background: var(--main-light-clr);
+    /* background: rgb(35, 145, 35); */
     color: white;
-    font: 15px;
-    border-radius: 10px;
+    font: 14px;
+    border-radius: 5px;
+    margin-left: 10px;
   }
   /* Table Styling */
   .file-handler-table {
@@ -127,10 +132,10 @@ opacity: .9;
   }
 
 
-  .files-card{
+  /* .files-card{
     max-width: 150px;
         background: rgb(153, 248, 153);
-  }
+  } */
   
   /* Responsive Design */
   @media (max-width: 768px) {
@@ -166,12 +171,13 @@ opacity: .9;
   
   /* Individual file card styling */
   .files-card {
+    max-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #1d6f42; /* Excel Green */
-    color: white;
+    /* background-color: #1d6f42;  */
+    color: #333;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
@@ -181,7 +187,7 @@ opacity: .9;
   
   /* Hover effect */
   .files-card:hover {
-    background-color: #155d35; /* Darker Green */
+   
     transform: scale(1.05);
   }
   
@@ -193,10 +199,16 @@ opacity: .9;
   /* File name text */
   .file-name {
     margin-top: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-size: 14px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* Adjust as needed */
     word-break: break-word;
   }
+  
   
   .excel-checkbox-container{
         display: flex;

@@ -72,7 +72,7 @@ console.log(data)
         amount: amount, 
         currency: currency,
         name: "Propfuture AI Technologies Pvt. Ltd.",
-        description: "Test Transaction",
+        description: "Rent Payment",
         image: '/favicon.png',
         order_id: id,  
         handler: async function (response) {
@@ -106,8 +106,14 @@ console.log(data)
            }
           }
         },
-        prefill: userData,  // Prefill user information dynamically
+        prefill:{
+          contact: medata?.user?.ContactNumber || "Default Contact",
+          Email: medata?.user?.email || "Default Name", 
+        }, // Prefill user information dynamically
         notes: {
+          userId:medata?.user?._id,
+          PostId,
+          appName:"PropertyDekho247",
           address: "D-1007, Block-D, Vatika Town Square, Sector 82A, Gurugram-122004, Haryana",
         },
         theme: {
@@ -130,7 +136,7 @@ console.log(data)
   return (
     <>
       <button className="original-price border-0" onClick={handlePayment}>
-        Pay
+        Pay & View Number
       </button>
     </>
   );

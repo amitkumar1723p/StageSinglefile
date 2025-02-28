@@ -4,14 +4,14 @@ import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
   return (
-    
+
     <div className="terms-container">
-  <Helmet>
-                <meta charSet="utf-8" />
-                <title>Privacy Policy - PropertyDekho247.com</title>
-                <meta name="description" content=" At PropertyDekho247.com, your privacy is of utmost importance to us. This Privacy Policy explains how we collect, use, safeguard, and disclose your personal information when you interact with our website and services. By accessing or using PropertyDekho247.com, you agree to the practices outlined in this policy. We are dedicated to protecting your privacy and ensuring the security of your personal data. If you have any questions or concerns regarding our privacy practices, please feel free to reach out to us."></meta>
-                <link rel="canonical" href="https://www.propertydekho247.com/privacy-policy/"/>
-            </Helmet>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Privacy Policy - PropertyDekho247.com</title>
+        <meta name="description" content=" At PropertyDekho247.com, your privacy is of utmost importance to us. This Privacy Policy explains how we collect, use, safeguard, and disclose your personal information when you interact with our website and services. By accessing or using PropertyDekho247.com, you agree to the practices outlined in this policy. We are dedicated to protecting your privacy and ensuring the security of your personal data. If you have any questions or concerns regarding our privacy practices, please feel free to reach out to us."></meta>
+        <link rel="canonical" href="https://www.propertydekho247.com/privacy-policy/" />
+      </Helmet>
 
       <h3 className="main-heading-h3">Privacy Policy</h3>
       <p className="tc-date-time">Last updated on 2nd Jan 2025</p>
@@ -317,21 +317,21 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
         <p>
-         
+
           <b>
-          “Force Majeure Event” shall mean any event that is beyond the
-          reasonable control of Our Company and shall include, without
-          limitation, sabotage, pandemics, fire, flood, explosion, acts of God,
-          civil commotion, strikes or industrial action of any kind, riots,
-          insurrection, war, acts of government, order of lockdowns imposed by
-          government restraining function of critical information technology
-          services, computer hacking, unauthorised access to computer, computer
-          system or computer network, computer crashes, breach of security and
-          encryption (provided beyond reasonable control of Our Company), power
-          or electricity failure or unavailability of adequate power or
-          electricity or any other incident or event which is beyond the control
-          or Our Company and disturbs the functioning of Our Company.
-        </b> </p>
+            “Force Majeure Event” shall mean any event that is beyond the
+            reasonable control of Our Company and shall include, without
+            limitation, sabotage, pandemics, fire, flood, explosion, acts of God,
+            civil commotion, strikes or industrial action of any kind, riots,
+            insurrection, war, acts of government, order of lockdowns imposed by
+            government restraining function of critical information technology
+            services, computer hacking, unauthorised access to computer, computer
+            system or computer network, computer crashes, breach of security and
+            encryption (provided beyond reasonable control of Our Company), power
+            or electricity failure or unavailability of adequate power or
+            electricity or any other incident or event which is beyond the control
+            or Our Company and disturbs the functioning of Our Company.
+          </b> </p>
       </section>
 
       <section className="section">
@@ -704,6 +704,46 @@ const PrivacyPolicy = () => {
           </li>
         </ul>
       </section>
+
+
+      <section className="section">
+        <h2>Rent Refund</h2>
+        <ul>
+          <li>
+            PROPFUTURE AI TECHNOLOGIES PRIVATE LIMITED believes in helping its customers as far as possible, and has therefore a liberal cancellation policy. Under this policy: Cancellations will be considered only if the request is made within 1-2 days of placing the order. However, the cancellation request may not be entertained if the orders have been communicated to the vendors/merchants and they have initiated the process of shipping them. PROPFUTURE AI TECHNOLOGIES PRIVATE LIMITED does not accept cancellation requests for perishable items like flowers, eatables etc. However, refund/replacement can be made if the customer establishes that the quality of product delivered is not good. In case of receipt of damaged or defective items please report the same to our Customer Service team. The request will, however, be entertained once the merchant has checked and determined the same at his own end. This should be reported within 1-2 days of receipt of the products. In case you feel that the product received is not as shown on the site or as per your expectations, you must bring it to the notice of our customer service within 1-2 days of receiving the product. The Customer Service Team after looking into your complaint will take an appropriate decision. In case of complaints regarding products that come with a warranty from manufacturers, please refer the issue to them. In case of any Refunds approved by the PROPFUTURE AI TECHNOLOGIES PRIVATE LIMITED, it’ll take 3-5 days for the refund to be processed to the end customer.
+          </li>
+          <li>
+            For International buyers, orders are shipped and delivered through registered international courier companies and/or International speed post only. For domestic buyers, orders are shipped through registered domestic courier companies and /or speed post only. Orders are shipped within Not Applicable or as per the delivery date agreed at the time of order confirmation and delivering of the shipment subject to Courier Company / post office norms. PROPFUTURE AI TECHNOLOGIES PRIVATE LIMITED is not liable for any delay in delivery by the courier company / postal authorities and only guarantees to hand over the consignment to the courier company or postal authorities within Not Applicable rom the date of the order and payment or as per the delivery date agreed at the time of order confirmation. Delivery of all orders will be to the address provided by the buyer. Delivery of our services will be confirmed on your mail ID as specified during registration. For any issues in utilizing our services you may contact our helpdesk on 7837840785 or support@propertydekho247.com
+          </li>
+          <li>
+            You may contact us using the information below: Merchant Legal entity name: PROPFUTURE AI TECHNOLOGIES PRIVATE LIMITED Registered Address: D1007, 10th Floor, Vatika Town Square 1, Sector 82A Gurgaon HARYANA 122004 Operational Address: D1007, 10th Floor, Vatika Town Square 1, Sector 82A Gurgaon HARYANA 122004 Telephone No: 7837840785 E-Mail ID: support@propertydekho247.com
+          </li>
+          <li>
+            Our Company makes no representations, warranties, or guarantees that
+            use or results of the use of the site (including all of its content)
+            is or will be accurate, reliable, current, uninterrupted, or without
+            errors. Without prior notice, we may modify, suspend, or discontinue
+            any aspect or feature of this site or your use of this site. If Our
+            Company elects to modify, suspend, or discontinue the site, it will
+            not be liable to You or any other person for any consequential
+            impact whatsoever.
+          </li>
+          <li>
+            All property listing information contained within this site is
+            subject to the possibility of errors, omissions, change of price,
+            rental, or other conditions, prior sale, lease or financing, or
+            withdrawal without notice.
+          </li>
+          <li>
+            Some of the content, and services available through our site may
+            include materials that belong to 3rd parties and You acknowledge
+            that our Company assumes no responsibility for such content,
+            products, services, or estimates, etc.
+          </li>
+        </ul>
+      </section>
+
+
       <section className="section">
         <ul>
           <li>
