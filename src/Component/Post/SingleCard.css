@@ -96,6 +96,7 @@ margin-right: 5px;
   .single-page-share-button{
       outline: none;
       border: none;
+      border-radius: 8px;
   }
   
   .single-card-property-location {

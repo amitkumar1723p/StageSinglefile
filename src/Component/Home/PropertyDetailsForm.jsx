@@ -45,11 +45,12 @@ export default function PropertyDetailsForm() {
         const response =await axios.post(`${process.env.REACT_APP_API_URL}/get-free-estimation/save`,formData,config)
          
         if(response.data.success){
-          toast.success("query is submittted !!")
+          toast.success("Your form is submitted our team will contact you soon !!")
           resetForm();
         }
 
       } catch (error) {
+        toast.error("oops try again later")
         console.log(error)
       }
 
@@ -187,12 +188,14 @@ export default function PropertyDetailsForm() {
 
           <input type="text" name="cityLocality" placeholder="City & Locality" value={formData.cityLocality} className="input" onChange={handleInputChange} />
 
-          <div className="input  counter">
-            <label className="bedroom-counter">Bedrooms</label>
-            <button type="button" onClick={() => updateBedrooms(-1)}>-</button>
-            <span>{bedroom}</span>
-            <button type="button" onClick={() => updateBedrooms(1)}>+</button>
-          </div>
+        {formData.propertyType !=="Commerical" &&
+                 <div className="input  counter">
+                 <label className="bedroom-counter">Bedrooms</label>
+                 <button type="button" onClick={() => updateBedrooms(-1)}>-</button>
+                 <span>{bedroom}</span>
+                 <button type="button" onClick={() => updateBedrooms(1)}>+</button>
+               </div>
+        }
 
           <div className="input counter">
             <label>Parking</label>

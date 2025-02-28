@@ -12,7 +12,7 @@ const OwnerAgentExcelData = () => {
     const [selectedExcel, setSelectedeExcel] = useState(null);
     const [selectedAdmin, setSelectedAdmin] = useState(null)
 
-    console.log(selectedExcel, selectedAdmin)
+    // console.log(selectedExcel, selectedAdmin)
     const { medata } = useSelector((state) => {
         return state.meDetails;
     });

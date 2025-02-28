@@ -105,14 +105,14 @@ const SingleCard = ({ PostData, index }) => {
 
     if (RunInterval === true) {
       slider = setInterval(() => {
-        if (PostData?.PropertyImages.length <= 1) {
+        if (PostData?.PropertyImages?.length <= 1) {
           setImageTranlate(0);
         }
 
-        if (PostData?.PropertyImages.length > 1) {
+        if (PostData?.PropertyImages?.length > 1) {
           if (
             Number(String(ImageTranlate).replace("-", "")) + 1 <
-            PostData?.PropertyImages.length
+            PostData?.PropertyImages?.length
           ) {
             setImageTranlate(ImageTranlate - 1);
           } else {
@@ -163,35 +163,35 @@ const SingleCard = ({ PostData, index }) => {
           unit: PlotArea.unit,
           label: "Plot Area",
         });
-      } else if (SuperBuiltUpArea.value) {
+      } else if (SuperBuiltUpArea?.value) {
         setAreaDetails({
-          value: SuperBuiltUpArea.value,
-          unit: SuperBuiltUpArea.unit,
+          value: SuperBuiltUpArea?.value,
+          unit: SuperBuiltUpArea?.unit,
           label: "Super Area",
         });
-      } else if (CarpetArea.value && !BuiltUpArea.value) {
+      } else if (CarpetArea?.value && !BuiltUpArea?.value) {
         setAreaDetails({
-          value: CarpetArea.value,
-          unit: CarpetArea.unit,
+          value: CarpetArea?.value,
+          unit: CarpetArea?.unit,
           label: "Carpet Area",
         });
-      } else if (BuiltUpArea.value && !CarpetArea.value) {
+      } else if (BuiltUpArea?.value && !CarpetArea?.value) {
         setAreaDetails({
-          value: BuiltUpArea.value,
-          unit: BuiltUpArea.unit,
+          value: BuiltUpArea?.value,
+          unit: BuiltUpArea?.unit,
           label: "Built-up Area",
         });
-      } else if (BuiltUpArea.value || CarpetArea.value) {
-        if (CarpetArea.value > BuiltUpArea.value) {
+      } else if (BuiltUpArea?.value || CarpetArea?.value) {
+        if (CarpetArea?.value > BuiltUpArea?.value) {
           setAreaDetails({
-            value: CarpetArea.value,
-            unit: CarpetArea.unit,
+            value: CarpetArea?.value,
+            unit: CarpetArea?.unit,
             label: "CarpetArea Area",
           });
         } else {
           setAreaDetails({
-            value: BuiltUpArea.value,
-            unit: BuiltUpArea.unit,
+            value: BuiltUpArea?.value,
+            unit: BuiltUpArea?.unit,
             label: "Built-up Area",
           });
         }
@@ -209,7 +209,7 @@ const SingleCard = ({ PostData, index }) => {
     }
 
     setPropertyAddress(
-      `${PostData?.PropertyDetails.BHKType} BHk ${PostData?.BasicDetails.ApartmentType} For ${PostData?.BasicDetails.PropertyAdType} In ${PostData?.LocationDetails.Landmark} ${PostData?.LocationDetails.City}`
+      `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -358,7 +358,7 @@ const SingleCard = ({ PostData, index }) => {
                     )}
                   </button>
                   {location.pathname.includes("user/my-listing") &&
-                    PostData?.BasicDetails.PropertyAdType == "Rent" && (
+                    PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                       <>
                         <Link to={`/user/post/update/${PostData?._id}`}>
                           <img src="/img/edit.png" className="editIcon" />
@@ -484,7 +484,7 @@ const SingleCard = ({ PostData, index }) => {
                       : "sold-out"
                   }`}
                 >
-                  {`${PostData?.PropertyDetails.BHKType} BHK`}{" "}
+                  {`${PostData?.PropertyDetails?.BHKType} BHK`}{" "}
                   {PostData?.PropertyDetails?.OtherRoom?.map((text) => {
                     return `+ ${
                       text === "Pooja Room"
@@ -554,7 +554,7 @@ const SingleCard = ({ PostData, index }) => {
                       : "sold-out"
                   }`}
                 >
-                  {PostData?.AmenitiesDetails.Furnishing}
+                  {PostData?.AmenitiesDetails?.Furnishing}
                 </p>
                 <p
                   className={`single-card-detail-subtitle  ${
@@ -653,7 +653,7 @@ const SingleCard = ({ PostData, index }) => {
                                 PostData?.PricingDetails?.ExpectedPrice
                             )}</span>
                     </p> */}
-          {PostData?.BasicDetails.PropertyAdType == "Rent" && (
+          {PostData?.BasicDetails?.PropertyAdType == "Rent" && (
             <>
               <>
                 <div className="single-card-rent-price-section">
@@ -667,7 +667,7 @@ const SingleCard = ({ PostData, index }) => {
                       }`}
                     >
                       {formatReservePrice(
-                        PostData?.PricingDetails.ExpectedRent
+                        PostData?.PricingDetails?.ExpectedRent
                       )}
                       <span
                         className={`rent-per-month  ${
@@ -702,7 +702,7 @@ const SingleCard = ({ PostData, index }) => {
                           }`}
                         >
                           {formatReservePrice(
-                            PostData?.PricingDetails.DepositePrice
+                            PostData?.PricingDetails?.DepositePrice
                           )}
                         </p>
                         <p
@@ -723,7 +723,7 @@ const SingleCard = ({ PostData, index }) => {
             </>
           )}
 
-          {PostData?.BasicDetails.PropertyAdType == "Sale" && (
+          {PostData?.BasicDetails?.PropertyAdType == "Sale" && (
             <>
               <div className="single-card-price-section-sale">
                 <div className="single-card-price-section">
@@ -747,7 +747,7 @@ const SingleCard = ({ PostData, index }) => {
                         : "sold-out"
                     } `}
                   >
-                    {formatReservePrice(PostData?.PricingDetails.ExpectedPrice)}
+                    {formatReservePrice(PostData?.PricingDetails?.ExpectedPrice)}
                   </span>
                 </div>
                 <p
@@ -755,7 +755,7 @@ const SingleCard = ({ PostData, index }) => {
                     false ? "" : "sold-out"
                   } `}
                 >
-                  ₹ {PostData?.PricingDetails.PricePerSqFt} Per sqft
+                  ₹ {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                 </p>
               </div>
             </>
@@ -787,7 +787,7 @@ const SingleCard = ({ PostData, index }) => {
                 const phoneNumber = "7837840785"; // Replace with actual phone number
                 const userName = medata?.user?.name || "Interested Buyer"; // Fallback if name is unavailable
                 const message = encodeURIComponent(
-                  `Hello, I am interested in a   ${PostData?.PropertyDetails.BHKType} BHk ${PostData?.BasicDetails.ApartmentType} In ${PostData?.LocationDetails?.ProjectName} For ${PostData?.BasicDetails.PropertyAdType} In ${PostData?.LocationDetails.Landmark} ${PostData?.LocationDetails.City}.Could you please share more details?`
+                  `Hello, I am interested in a   ${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} In ${PostData?.LocationDetails?.ProjectName} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}.Could you please share more details?`
                 );
                 window.open(
                   `https://wa.me/${phoneNumber}?text=${message}`,

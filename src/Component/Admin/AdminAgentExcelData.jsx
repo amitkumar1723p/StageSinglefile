@@ -11,22 +11,20 @@ const AdminAgentExcelData = () => {
   });
   // if()
 
-  const { data } = useSelector((store) => store.OwnerAllExcelFiles)
-  const navigate = useNavigate();
-  const { data: AdminAllExcelFilesData } = useSelector((state) => {
-    return state.AdminAllExcelFiles
-  }
-  );
-  const { data: AgentAllExcelFilesData } = useSelector((state) => {
-    return state.AdminAllExcelFiles
-  }
-  );
-  const fetchedAllFiles = data || AdminAllExcelFilesData?.assignedExcels || AgentAllExcelFilesData?.assignedExcels
-  console.log("this is fetche ", fetchedAllFiles)
+    const {data} = useSelector((store)=>store.OwnerAllExcelFiles)
+    const navigate = useNavigate();
+ const {data:AdminAllExcelFilesData} = useSelector((state) => {
+  return state.AdminAllExcelFiles}
+);
+const {data:AgentAllExcelFilesData} = useSelector((state) => {
+  return state.AdminAllExcelFiles}
+);
+    const fetchedAllFiles=data || AdminAllExcelFilesData?.assignedExcels ||AgentAllExcelFilesData?.assignedExcels
+// console.log("this is fetche ",fetchedAllFiles)
   useEffect(() => {
     if (!fetchedAllFiles) {
 
-      console.log("called")
+      // console.log("called")
       dispatch(fetchAllAdminFiles())
       dispatch(fetchAllAgentFiles())
     }
