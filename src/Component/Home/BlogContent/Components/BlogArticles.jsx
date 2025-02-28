@@ -43,7 +43,7 @@ export default function BlogArticles() {
         },
         {
             id:4,
-            date:"19 Dec 2025",
+            date:"19 Dec 2024",
             title:"LIFESTYLE & LIVINGS",
             heading:"Urban vs. Suburban Living",
             content:"Comparing the benefits of living in cities versus suburbs in India. Comparing the benefits of living in cities versus suburbs in India.",

@@ -62,7 +62,7 @@ export default function BlogSubscribe() {
                   <div className='blog-subscribe-error'>{error && <p style={{color: 'red', fontSize: '12px' }}>{error}</p>}</div>
                   <div className='blog-subscribe-links'>
                     <p>By Subscribing, you agree to our <span><Link to="/terms-and-conditions" >Terms & Conditions</Link> </span>and <span><Link to="/privacy-policy" >Privacy Policy</Link>.</span></p>
-                    <p><span><Link to="#" >Unsubscribe</Link> </span> anytime.</p>
+                    <p><span><Link to="/" >Unsubscribe</Link> </span> anytime.</p>
                   </div>
                 </div>
             </div>
