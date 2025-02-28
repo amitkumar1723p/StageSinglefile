@@ -91,6 +91,34 @@
         opacity: 0.9;
     }
 }
+@keyframes justshake {
+    25% {
+      transform: translateX(5px);
+    }
+  
+    50% {
+      transform: translateX(-5px);
+    }
+  
+    75% {
+      transform: translateX(5px);
+    }
+  
+    100% {
+      transform: translateX-(5px);
+    }
+  }
+  .shake {
+    color: red !important;
+    animation: justshake 0.5s ease-in-out;
+  }
+  .inputShake{
+    border: 1px solid red !important;
+    animation: justshake 0.5s ease-in-out;
+  }
+.blog-subscribe-error{
+    height: 20px;
+}
 
 .blog-subscribe-links p{
     font-size: 14px;
