@@ -83,9 +83,15 @@ export default function ReportForm() {
             </div>
 
             <div className="reporting-form-group">
-              <label className="reporting-label">Upload Files</label>
+              <label className="reporting-label">Upload JPEG Images</label>
               <div className="reporting-file-container reporting-input">
-                <input placeholder="choose image " type="file" multiple className="reporting-input" onChange={handleFileChange} />
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp"
+                  multiple
+                  className="reporting-input"
+                  onChange={handleFileChange}
+                />
               </div>
 
               {/* Display selected files with a remove button */}
@@ -95,7 +101,7 @@ export default function ReportForm() {
                     <div key={index} className="reporting-file-item">
                       <span>{f.name}</span>
                       <button className="reporting-remove-file" onClick={() => removeFile(index)}>
-                      &#10005;
+                        &#10005;
                       </button>
                     </div>
                   ))}

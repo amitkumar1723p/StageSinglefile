@@ -560,14 +560,7 @@ const OwnerAgentExcel = () => {
             </div>
           }
         
-          <marquee
-  direction="down"
-  width="250"
-  height="200"
-  behavior="alternate"
-  style="border:solid">
-  <marquee behavior="alternate">please save changes</marquee>
-</marquee>
+ 
           {medata?.user?.Role === "Owner"&&
             <div className='assigned-admins-container'>
                 Assigned to: {
