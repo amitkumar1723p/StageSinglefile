@@ -32,7 +32,7 @@ export function UserProvider({ children }) {
     const [allPropertyData, setAllPropertyData] = useState([])
    
     // useEffect(()=>{
-    //   console.log("data ")
+ 
     //   const reversedData=allPropertyData?.Post?.reverse();
     //   setAllPropertyData(reversedData)
     // },[allPropertyData])

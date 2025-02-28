@@ -189,10 +189,10 @@ text-decoration: underline;
 
 .login-continue-login {
   width: 100%;
-  padding: 12px;
+  padding: 8px;
   background-color: #007bff;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   border: none;
   border-radius: 6px;

@@ -136,6 +136,32 @@ const HeroSection = () => {
     };
   }, []);
 
+
+  
+
+  const [navSearchInputVisible, setnavSearchInputVisible] = useState(false);
+  const sectionRef = useRef(null); // Reference to track the target section
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setnavSearchInputVisible(!entry.isIntersecting); // Show if section is in view
+      },
+      { threshold: 0.5 } // Trigger when 50% of section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+
   const SearchTab = ["Sale", "Rent"];
   const Tab = ["Buy", "Sale", "Rent"];
   const [PropertyAddType, setPropertyAddType] = useState("Buy");
@@ -201,6 +227,8 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
+  console.log(PropertyAddType)
+
   return (
     <><Helmet>
              
@@ -231,9 +259,104 @@ const HeroSection = () => {
               alerts to property owners.
             </p>
           </div>
+        {/* nav bar search button  */}
+        {
+          navSearchInputVisible &&   <div className={`search-main-box-section-nav`}>
+              
+          <div className="search-box-nav">
+   
+          <select className="" onChange={(e) => {
+                    // if (e == PropertyAddType) {
+                    // setPropertyAddType("");
+                    // } else {
+                    setSearchPropertyAddType(e.target.value);
+                    console.log(e.target.value)
+                    // }
+                  }}>
+              <option selected={PropertyAddType === "Sale"} value="Sale">Buy</option>
+              <option  selected={PropertyAddType === "Rent"} value="Rent">Rent</option>
 
+              {/* <option value="Noida">Noida</option>
+            <option value="Delhi">Delhi</option> */}
+            </select>
+       
+            <select>
+              <option value="Gurgaon">Gurgaon</option>
+              {/* <option value="Noida">Noida</option>
+            <option value="Delhi">Delhi</option> */}
+            </select>
+
+            <div className="search-section-box-nav">
+              <ProjectNameSection
+                ProjectInputType={"Search"}
+                searchInput={true}
+                setrunSearchButton={setrunSearchButton}
+                inputClass={"hero-search-button"}
+                ProjectNameObjectData={ProjectNameObjectData}
+                setProjectNameObjectData={setProjectNameObjectData}
+                placeholder={"Search by Project name or society name"}
+              />
+              {/* <img
+                className="img-searchbar"
+                src={`data:image/svg+xml;utf8,${encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+              <path d="M10.5007 7.16634C11.3847 7.16634 12.2326 7.51753 12.8577 8.14265C13.4828 8.76777 13.834 9.61562 13.834 10.4997C13.834 11.3837 13.4828 12.2316 12.8577 12.8567C12.2326 13.4818 11.3847 13.833 10.5007 13.833C9.6166 13.833 8.76875 13.4818 8.14363 12.8567C7.51851 12.2316 7.16732 11.3837 7.16732 10.4997C7.16732 9.61562 7.51851 8.76777 8.14363 8.14265C8.76875 7.51753 9.6166 7.16634 10.5007 7.16634ZM3.04232 11.333H1.33398V9.66634H3.04232C3.41732 6.19134 6.19232 3.41634 9.66732 3.04134V1.33301H11.334V3.04134C14.809 3.41634 17.584 6.19134 17.959 9.66634H19.6673V11.333H17.959C17.584 14.808 14.809 17.583 11.334 17.958V19.6663H9.66732V17.958C6.19232 17.583 3.41732 14.808 3.04232 11.333ZM10.5007 4.66634C8.95356 4.66634 7.46982 5.28092 6.37586 6.37489C5.2819 7.46885 4.66732 8.95258 4.66732 10.4997C4.66732 12.0468 5.2819 13.5305 6.37586 14.6245C7.46982 15.7184 8.95356 16.333 10.5007 16.333C12.0477 16.333 13.5315 15.7184 14.6254 14.6245C15.7194 13.5305 16.334 12.0468 16.334 10.4997C16.334 8.95258 15.7194 7.46885 14.6254 6.37489C13.5315 5.28092 12.0477 4.66634 10.5007 4.66634Z" fill="#0078D4"/>
+            </svg>
+              `)}`}
+                alt="tst"
+              /> */}
+
+              {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
+
+              <button
+                disabled={
+                  GetAllPostLoading || GetProjectNameLoding ? true : false
+                }
+                className="search-button-nav"
+                onClick={() => {
+                  if (runSearchButton == false) {
+                    return alert("Write correct ProjectName");
+                  }
+                  if (
+                    runSearchButton == true &&
+                    ProjectNameObjectData.ProjectName.length > 0
+                  ) {
+                    // setRedirectPath("/");
+                    dispatch(
+                      GetSingleProjectNameDataAction({
+                        ProjectName:
+                          ProjectNameObjectData.ProjectName.trim(),
+                      })
+                    );
+                    dispatch(
+                      GetAllPostAction({
+                        ProjectName:
+                          ProjectNameObjectData.ProjectName.trim(),
+                        PropertyAdType: SearchPropertyAddType,
+                      })
+                    );
+
+                    // navigate(
+                    //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
+                    // );
+                  }
+                }}
+              >
+                <img
+                  src="/img/Search-icon.svg"
+                  alt=""
+                  className="img-searchbar"
+                />
+              </button>
+
+            </div>
+          </div>
+        </div>
+        }
           {/* Search Container */}
-          <div className="search-container">
+          <div ref={sectionRef} className="search-container">
+          
+            
             <div className="search-main-box-section">
               <div className="search-options">
                 {SearchTab.map((e, i) => {
@@ -249,6 +372,7 @@ const HeroSection = () => {
                         // setPropertyAddType("");
                         // } else {
                         setSearchPropertyAddType(e);
+                        // console.log(e)
                         // }
                       }}
                     >
@@ -390,7 +514,9 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink>
+
+
+            {/* <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink> */}
             <div className="property-section">
               {/* Property Listing Section */}
               <div

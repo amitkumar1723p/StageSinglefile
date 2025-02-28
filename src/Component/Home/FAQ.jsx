@@ -5,13 +5,13 @@ const FAQ = () => {
   return (
     <div className="accordion" id="accordionPanelsStayOpenExample">
       <div className="heading-faq">
-          <h2 className="heading-section-faq text-[32px]">
-            Frequently Asked <span>Questions</span>
-          </h2>
-          <p className="faq-heading">
-            Get Quick Solutions and Expert Advice for All Your Real Estate Needs
-          </p>
-        </div>
+        <h2 className="heading-section-faq text-[32px]">
+          Frequently Asked <span>Questions</span>
+        </h2>
+        <p className="faq-heading">
+          Get Quick Solutions and Expert Advice for All Your Real Estate Needs
+        </p>
+      </div>
       <div className="accordion-item">
         <h2 className="accordion-header">
           <button
@@ -22,7 +22,7 @@ const FAQ = () => {
             aria-expanded="true"
             aria-controls="collapseOne"
           >
-            What is a reserve price, and how is it calculated? 
+            What is a reserve price, and how is it calculated?
           </button>
         </h2>
         <div
@@ -337,6 +337,33 @@ const FAQ = () => {
             However, you play an important role in keeping your personal
             information secure. You should not share your username, password, or
             other security information for your account with anyone.
+          </div>
+        </div>
+      </div>
+
+      <div className="accordion-item">
+        <h2 className="accordion-header">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTw"
+            aria-expanded="false"
+            aria-controls="collapseTw"
+          >
+            Which cities are you currently operating in?
+          </button>
+        </h2>
+        <div
+          id="collapseTw"
+          className="accordion-collapse collapse"
+          aria-labelledby="headingEleven"
+          data-bs-parent="#accordionPanelsStayOpenExample"
+        >
+          <div className="accordion-body">
+      
+          Currently, PropertyDekho247 specializes in resale transactions for Gurugram.
+          If you're interested in other areas, let us know your requirements, and we'll provide the best options available!"
           </div>
         </div>
       </div>

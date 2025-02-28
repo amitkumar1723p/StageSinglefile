@@ -184,6 +184,33 @@ const FAQ = () => {
             </div>
           </div>
         </div>
+
+        <div className="accordion-item">
+        <h2 className="accordion-header">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseTw"
+            aria-expanded="false"
+            aria-controls="collapseTw"
+          >
+            Which cities are you currently operating in?
+          </button>
+        </h2>
+        <div
+          id="collapseTw"
+          className="accordion-collapse collapse"
+          aria-labelledby="headingEleven"
+          data-bs-parent="#accordionPanelsStayOpenExample"
+        >
+          <div className="accordion-body">
+      
+          Currently, PropertyDekho247 specializes in resale transactions for Gurugram.
+          If you're interested in other areas, let us know your requirements, and we'll provide the best options available!"
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   );

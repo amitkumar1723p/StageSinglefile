@@ -364,8 +364,10 @@
 
 .Shortlisted-prop {
   font-size: 16px;
+  padding: 10px 0px;
   color: #333;
   text-align: center;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -380,7 +382,7 @@
   .dashborad-section-left-right {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; */
     width: 100%;
   }
 }

@@ -51,7 +51,7 @@ export default function AdminListingCard({
     return state.meDetails;
   });
   useEffect(() => {
-    let dateString = PostData.PostVerifyData?.Time;
+    let dateString = PostData?.PostVerifyData?.Time;
     if (!dateString) {
       setFormatDate({
         ExpiredDate: "Invalid Date",
@@ -73,7 +73,7 @@ export default function AdminListingCard({
 
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
-  }, [PostData.PostVerifyData?.Time]);
+  }, [PostData?.PostVerifyData?.Time]);
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ export default function AdminListingCard({
   const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
-      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Landmark}  ${PostData.LocationDetails.City}`
+      `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -111,9 +111,9 @@ export default function AdminListingCard({
   useEffect(() => {
      
     if (AssignPostData?.success == true) {
-      let AssingPosts = AssignPostData.AssignProperty.filter((item) => {
+      let AssingPosts = AssignPostData?.AssignProperty?.filter((item) => {
         return (
-          item.AssignedPropertys.some((item) => item.PostId === PostData._id) &&
+          item.AssignedPropertys.some((item) => item.PostId === PostData?._id) &&
           item.AdminId._id !== medata?.user?._id
         );
       });
@@ -126,7 +126,7 @@ export default function AdminListingCard({
     if (VistAndOfferData?.success == true) {
       let VisitsAndOffers_Data = VistAndOfferData?.VisitAndOffer?.find(
         (item) => {
-          return PostData._id == item.PostId;
+          return PostData?._id == item.PostId;
         }
       );
       if (VisitsAndOffers_Data) {
@@ -176,7 +176,7 @@ export default function AdminListingCard({
                       <input
                         type="checkbox"
                         checked={AssignProperty.some(
-                          (item) => item.PostId === PostData._id
+                          (item) => item.PostId === PostData?._id
                         )}
                         onChange={(e) => {
                           if (e.target.checked == true) {
@@ -185,7 +185,7 @@ export default function AdminListingCard({
 
                               // PostData._id,
                               {
-                                PostId: PostData._id,
+                                PostId: PostData?._id,
                                 CreatedBy: medata?.user?._id,
                               },
                             ]);
@@ -193,7 +193,7 @@ export default function AdminListingCard({
                           if (e.target.checked == false) {
                             let removeAssignProperty = AssignProperty.filter(
                               (e) => {
-                                return e.PostId != PostData._id;
+                                return e.PostId != PostData?._id;
                               }
                             );
                             setAssignProperty(removeAssignProperty);
@@ -208,7 +208,7 @@ export default function AdminListingCard({
           )}
           <div className="admin-property-card-info">
             <div className="heading-name">
-              {PostData.LocationDetails.ProjectName}
+              {PostData?.LocationDetails?.ProjectName}
               {medata?.user?.Role != "Agent" && (
                 <>
               
@@ -230,7 +230,7 @@ export default function AdminListingCard({
 
                                     const RemoveAssignProperty = {
                                       AdminId: AssignPropertys.AdminId._id,
-                                      PostId: PostData._id,
+                                      PostId: PostData?._id,
                                     };
   
                                     let confrim = window.confirm(
@@ -277,7 +277,7 @@ export default function AdminListingCard({
                                     if (confirm) {
                                       dispatch(
                                         DeleteAndRestorePostAction({
-                                          postId: PostData._id,
+                                          postId: PostData?._id,
                                           Status: "restore",
                                         })
                                       );
@@ -305,7 +305,7 @@ export default function AdminListingCard({
                           ) : (
                             <>
                               <div className="delete-edit-box">
-                                <Link to={`/admin/post/update/${PostData._id}`}>
+                                <Link to={`/admin/post/update/${PostData?._id}`}>
                                   <img
                                     src="/img/edit.png"
                                     className="editIcon"
@@ -316,12 +316,12 @@ export default function AdminListingCard({
                                 className="PostData?.PostDelete?.Status-edit-box"
                                 onClick={(e) => {
                                   const confrim = window.confirm(
-                                    `Are you sure you want to delete the post with ID (${PostData._id})`
+                                    `Are you sure you want to delete the post with ID (${PostData?._id})`
                                   );
                                   if (confrim) {
                                     dispatch(
                                       DeleteAndRestorePostAction({
-                                        postId: PostData._id,
+                                        postId: PostData?._id,
                                         Status: "delete",
                                       })
                                     );
@@ -352,25 +352,25 @@ export default function AdminListingCard({
                   <div className="Reserveprice-sec">
                     <p className="admin-price-pr-anwser">
                       {/* Show Reserve Price  */}
-                      {PostData.BasicDetails.PropertyAdType == "Sale" && (
+                      {PostData?.BasicDetails?.PropertyAdType == "Sale" && (
                         <>
                           <span className="price-rp-que"> Reserve Price </span>:
                           <span className="price-section">
                             {formatReservePrice(
-                              PostData.PricingDetails.ExpectedPrice
+                              PostData?.PricingDetails?.ExpectedPrice
                             )}
                           </span>
                         </>
                       )}
                     </p>
                   </div>
-                  {PostData.BasicDetails.PropertyAdType == "Rent" && (
+                  {PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                     <>
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
                             {formatReservePrice(
-                              PostData.PricingDetails.ExpectedRent
+                              PostData?.PricingDetails?.ExpectedRent
                             )}
                             <span>/Month </span>
                           </p>
@@ -380,25 +380,25 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
-                    {PostData.PricingDetails.PricePerSqFt} Per sqft
+                    {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>
 
                 <div className="property-id">
                   <p className="admin-card-heading">property id</p>
-                  <p className="admin-card-heading-ans">{PostData._id}</p>
+                  <p className="admin-card-heading-ans">{PostData?._id}</p>
                 </div>
 
                 <div className="Property-status-section">
                   <p className="admin-card-heading">Current status</p>
-                  {PostData.PostExpired ? (
+                  {PostData?.PostExpired ? (
                     <p className="Status-section-admin inactive-sign">
                       {" "}
                       Expired
                     </p>
                   ) : (
                     <>
-                      {PostData.PostVerify ? (
+                      {PostData?.PostVerify ? (
                         <p className="Status-section-admin active-sign">
                           Active
                         </p>
@@ -415,7 +415,7 @@ export default function AdminListingCard({
                   <div className="poston-date">
                     <p className="admin-card-heading">Create on</p>
                     <p className="admin-card-heading-ans">
-                      {new Date(PostData.createAt).toLocaleDateString("en-GB")}
+                      {new Date(PostData?.createAt).toLocaleDateString("en-GB")}
                     </p>
                   </div>
 
@@ -451,10 +451,10 @@ export default function AdminListingCard({
                     ) {
                       // schedule-visit/deleted-post
                       navigate(
-                        `/admin/schedule-visit/deleted-post/${PostData._id}`
+                        `/admin/schedule-visit/deleted-post/${PostData?._id}`
                       );
                     } else {
-                      navigate(`/admin/schedule-visit/${PostData._id}`);
+                      navigate(`/admin/schedule-visit/${PostData?._id}`);
                     }
                   }}
                 >
@@ -476,10 +476,10 @@ export default function AdminListingCard({
                       PostData?.PostDelete?.Status == "delete"
                     ) {
                       navigate(
-                        `/admin/recive-offer/deleted-post/${PostData._id}`
+                        `/admin/recive-offer/deleted-post/${PostData?._id}`
                       );
                     } else {
-                      navigate(`/admin/recive-offer/${PostData._id}`);
+                      navigate(`/admin/recive-offer/${PostData?._id}`);
                     }
                   }}
                 >
@@ -493,11 +493,11 @@ export default function AdminListingCard({
                     <div className="user-name-contact">
                       <span>Posted by : </span>
 
-                      <span>{PostData.CreatePostUser?.Name}</span>
+                      <span>{PostData?.CreatePostUser?.Name}</span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>
-                      <span>{PostData.CreatePostUser?.ContactNumber}</span>
+                      <span>{PostData?.CreatePostUser?.ContactNumber}</span>
                     </div>{" "}
                   </>
                 )}
@@ -513,9 +513,9 @@ export default function AdminListingCard({
                   }/${PropertyAddress.toLowerCase()
                     .replaceAll(" ", "-")
                     .replace(",", "")
-                    .replaceAll("/", "-")}-${PostData._id}`}
+                    .replaceAll("/", "-")}-${PostData?._id}`}
                 >
-                  <button className="contact-button btn-sm">
+                  <button className="contact-button btn-sm" >
                     View Listing
                   </button>
                 </Link>
@@ -532,14 +532,14 @@ export default function AdminListingCard({
                             setToggleBtn(!ToggleBtn);
                             if (e.target.checked == true) {
                               let postdata = { PostVerifyShow: true };
-                              let postid = PostData._id;
+                              let postid = PostData?._id;
                               dispatch(
                                 showVeirifyPostIconAction({ postdata }, postid)
                               );
                             }
                             if (e.target.checked == false) {
                               let postdata = { PostVerifyShow: false };
-                              let postid = PostData._id;
+                              let postid = PostData?._id;
                               dispatch(
                                 showVeirifyPostIconAction({ postdata }, postid)
                               );
@@ -553,17 +553,17 @@ export default function AdminListingCard({
                     {medata?.user?.Role != "Agent" && (
                       <div className="verify-box-section">
                         {/* {location.pathname.includes("admin") && ( */}
-                        {PostData.PostExpired ? (
+                        {PostData?.PostExpired ? (
                           <button
                             onClick={() => {
-                              dispatch(ReOpenPostAction(PostData._id));
+                              dispatch(ReOpenPostAction(PostData?._id));
                             }}
                           >
                             Re-Open
                           </button>
                         ) : (
                           <>
-                            {PostData.PostVerify ? (
+                            {PostData?.PostVerify ? (
                               <button
                                 className="post-verify-btn In-Active-btn"
                                 onClick={() => {
@@ -572,7 +572,7 @@ export default function AdminListingCard({
                                   );
                                   if (Confrimbox) {
                                     let postdata = { PostVerify: false };
-                                    let postid = PostData._id;
+                                    let postid = PostData?._id;
                                     dispatch(
                                       VerifyPostAction({ postdata }, postid)
                                     );
@@ -591,7 +591,7 @@ export default function AdminListingCard({
 
                                   if (Confrimbox) {
                                     let postdata = { PostVerify: true };
-                                    let postid = PostData._id;
+                                    let postid = PostData?._id;
                                     dispatch(
                                       VerifyPostAction({ postdata }, postid)
                                     );

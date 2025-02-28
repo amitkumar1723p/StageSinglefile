@@ -91,18 +91,16 @@ export default function SinglePostDetails() {
 
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
-      setPropertyAddress(
-        `${`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`} ${
-          getSinglePostData.SinglePost.BasicDetails.ApartmentType
-        } For ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType} In ${
-          getSinglePostData.SinglePost.LocationDetails.ProjectName
-        }   ${getSinglePostData.SinglePost.LocationDetails.Landmark} ${
-          getSinglePostData.SinglePost.LocationDetails.City
+      setPropertyAddress(`${`${getSinglePostData.SinglePost?.PropertyDetails?.BHKType ? `${getSinglePostData.SinglePost?.PropertyDetails?.BHKType} BHK` :""}`} ${getSinglePostData?.SinglePost?.BasicDetails.ApartmentType
+        } For ${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType} In ${
+          getSinglePostData?.SinglePost?.LocationDetails?.ProjectName
+        }   ${getSinglePostData?.SinglePost?.LocationDetails?.Landmark} ${
+          getSinglePostData?.SinglePost?.LocationDetails?.City
         } `
       );
 
       const areaDetailsData = getSinglePostData?.SinglePost?.AreaDetails;
-
+  console.log( "areaDetailsData",areaDetailsData)
       if (areaDetailsData) {
         const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
           areaDetailsData;
@@ -245,7 +243,7 @@ export default function SinglePostDetails() {
       setshowTenantDetailsForm(false);
     }
   }, [TenentResponseIsExitData]);
-  // console.log("TenentResponseIsExitData",TenentResponseIsExitData?.TenantDetails);
+   
 
   // let loadings =true
 
@@ -369,7 +367,7 @@ export default function SinglePostDetails() {
               </div>
 
               <ShowSinglePostImages
-                Images={getSinglePostData.SinglePost.PropertyImages}
+                Images={getSinglePostData?.SinglePost?.PropertyImages}
               />
               {/* Single Post First Card  */}
 
@@ -386,8 +384,8 @@ export default function SinglePostDetails() {
                     />
                     <div className="img-box-imp-data">
                       <span className="img-box-details-span">
-                        {`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`}
-                        {getSinglePostData.SinglePost.PropertyDetails?.OtherRoom?.map(
+                        {`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
+                        {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
                           (text) => {
                             return `+ ${
                               text == "Pooja Room"
@@ -436,8 +434,7 @@ export default function SinglePostDetails() {
                     <div className="img-box-imp-data">
                       <span className="img-box-details-span">
                         {
-                          getSinglePostData.SinglePost.AmenitiesDetails
-                            .Furnishing
+                          getSinglePostData?.SinglePost?.AmenitiesDetails?.Furnishing
                         }
                       </span>
                       <p>Furnishing Details</p>
@@ -453,8 +450,7 @@ export default function SinglePostDetails() {
                     <div className="img-box-imp-data">
                       <span className="img-box-details-span">
                         {
-                          getSinglePostData.SinglePost.FloorDetails
-                            .OverLookingView[0]
+                          getSinglePostData?.SinglePost?.FloorDetails?.OverLookingView[0]
                         }
                       </span>
                       <p> Overlooking View </p>
@@ -475,10 +471,8 @@ export default function SinglePostDetails() {
                     </div>
                   </div>
 
-                  {getSinglePostData.SinglePost.PropertyDetails.Parking
-                    .CoveredParking > 0 ||
-                  getSinglePostData.SinglePost.PropertyDetails.Parking
-                    .OpenParking > 0 ? (
+                  {getSinglePostData?.SinglePost?.PropertyDetails?.Parking?.CoveredParking > 0 ||
+                  getSinglePostData?.SinglePost?.PropertyDetails?.Parking?.OpenParking > 0 ? (
                     <div className="property-info-tags">
                       <img
                         className="icon-detials"
@@ -487,17 +481,14 @@ export default function SinglePostDetails() {
                       />
                       <div className="img-box-imp-data">
                         <span className="img-box-details-span">
-                          {getSinglePostData.SinglePost.PropertyDetails.Parking
-                            .CoveredParking +
-                            getSinglePostData.SinglePost.PropertyDetails.Parking
-                              .OpenParking}
+                          {getSinglePostData?.SinglePost?.PropertyDetails?.Parking?.CoveredParking +
+                            getSinglePostData?.SinglePost?.PropertyDetails?.Parking?.OpenParking}
                         </span>
                         <p> Parking </p>
                       </div>
                     </div>
                   ) : (
-                    getSinglePostData.SinglePost.BasicDetails
-                      .PropertyStatus && (
+                    getSinglePostData?.SinglePost?.BasicDetails?.PropertyStatus && (
                       <div className="property-info-tags">
                         <img
                           className="icon-detials"
@@ -507,8 +498,7 @@ export default function SinglePostDetails() {
                         <div className="img-box-imp-data">
                           <span className="img-box-details-span">
                             {
-                              getSinglePostData.SinglePost.BasicDetails
-                                .PropertyStatus
+                              getSinglePostData?.SinglePost?.BasicDetails?.PropertyStatus
                             }
                           </span>
                           <p> Status</p>
@@ -533,22 +523,20 @@ export default function SinglePostDetails() {
 
                 <div className="property-pricing">
                   <div className="property-price">
-                    {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType ==
                       "Sale" && (
                       <>
                         <span className="ReservePrice-section">
                           Reserve Price :{" "}
                           <span className="price-value-in-span">
                             {formatReservePrice(
-                              getSinglePostData.SinglePost.PricingDetails
-                                .ExpectedPrice
+                              getSinglePostData?.SinglePost?.PricingDetails?.ExpectedPrice
                             )}
                           </span>
                           <p className="lisitng-area-section">
                             ₹{" "}
                             {
-                              getSinglePostData.SinglePost.PricingDetails
-                                .PricePerSqFt
+                              getSinglePostData?.SinglePost?.PricingDetails?.PricePerSqFt
                             }{" "}
                             Per sqft
                           </p>
@@ -572,15 +560,14 @@ export default function SinglePostDetails() {
                         )}
                       </>
                     )}
-                    {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType ==
                       "Rent" && (
                       <>
                         <div className="rent-main-section">
                           <div>
                             <p className="rent-price-main">
                               {formatReservePrice(
-                                getSinglePostData.SinglePost.PricingDetails
-                                  .ExpectedRent
+                                getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent
                               )}{" "}
                               <span>/Month</span>
                             </p>
@@ -590,15 +577,14 @@ export default function SinglePostDetails() {
                           <div>
                             <p className="rent-price-main">
                               {formatReservePrice(
-                                getSinglePostData.SinglePost.PricingDetails
-                                  .DepositePrice
+                                getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice
                               )}
                             </p>
                             <p className="rent-ques-section">Deposite Price</p>
                           </div>
                         </div>
 
-                        {/* {!medata || !medata.IsAuthenticated ? (
+                        {!medata || !medata.IsAuthenticated ? (
                           <span
                             className="original-price"
                             onClick={() => {
@@ -630,7 +616,7 @@ export default function SinglePostDetails() {
                               View Owner Details
                             </span>
                           )
-                        )} */}
+                        )}
                       </>
                     )}
                   </div>
@@ -638,7 +624,7 @@ export default function SinglePostDetails() {
 
                 <div className="property-actions">
                   {!["Owner", "Admin"].includes(medata?.user?.Role) &&
-                    getSinglePostData.SinglePost.BasicDetails.PropertyAdType !=
+                    getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType !=
                       "Rent" && (
                       <>
                         {" "}
@@ -674,7 +660,7 @@ export default function SinglePostDetails() {
                     {/* </button> */}
                   </Link>
                 </div>
-                {getSinglePostData.SinglePost.PostVerifyData?.Time && (
+                {getSinglePostData?.SinglePost?.PostVerifyData?.Time && (
                   <div className="posted-by-section">
                     <img
                       src={`data:image/svg+xml;utf8,${encodeURIComponent(`
@@ -689,7 +675,7 @@ export default function SinglePostDetails() {
                       <span>
                         {
                           new Date(
-                            getSinglePostData.SinglePost.PostVerifyData.Time
+                            getSinglePostData?.SinglePost?.PostVerifyData?.Time
                           ).toLocaleDateString("en-GB") // UK format: day/month/year
                         }
                       </span>
@@ -718,7 +704,7 @@ export default function SinglePostDetails() {
                       </span>
 
                       <span className="prop-id-number">
-                        {getSinglePostData.SinglePost._id}
+                        {getSinglePostData?.SinglePost?._id}
                       </span>
                     </div>
                   </div>
@@ -726,18 +712,16 @@ export default function SinglePostDetails() {
                     {/* ApartmentType */}
                     <PropertyDataBox
                       Answer={
-                        getSinglePostData.SinglePost.BasicDetails.ApartmentType
+                        getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType
                       }
                       Icon="/img/floor.png"
                       Data={"Property Type"}
                     />
                     {/* PropertyStatus */}
-                    {getSinglePostData.SinglePost.BasicDetails
-                      .PropertyStatus && (
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyStatus && (
                       <PropertyDataBox
                         Answer={
-                          getSinglePostData.SinglePost.BasicDetails
-                            .PropertyStatus
+                          getSinglePostData?.SinglePost?.BasicDetails?.PropertyStatus
                         }
                         Icon="/img/status.png"
                         Data={"Status"}
@@ -746,43 +730,43 @@ export default function SinglePostDetails() {
 
                     {/* BHKType */}
                     <PropertyDataBox
-                      Answer={`${getSinglePostData.SinglePost.PropertyDetails.BHKType} BHK`}
+                      Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
                       Icon="/img/typology.png"
                       Data={"BHK Type"}
                     />
                     {/* areaDetails */}
                     {areaDetails && (
                       <PropertyDataBox
-                        Answer={`${areaDetails.value} ${areaDetails.unit}`}
+                        Answer={`${areaDetails?.value} ${areaDetails?.unit}`}
                         Icon="/img/area.png"
-                        Data={areaDetails.label}
+                        Data={areaDetails?.label}
                       />
                     )}
 
                     {OtherArea && (
                       <PropertyDataBox
-                        Answer={`${OtherArea.value} ${OtherArea.unit}`}
+                        Answer={`${OtherArea?.value} ${OtherArea?.unit}`}
                         Icon="/img/area.png"
-                        Data={OtherArea.label}
+                        Data={OtherArea?.label}
                       />
                     )}
                     {/* Bathroom */}
-                    {getSinglePostData.SinglePost.PropertyDetails?.Bathroom >
+                    {getSinglePostData?.SinglePost?.PropertyDetails?.Bathroom >
                       0 && (
                       <PropertyDataBox
                         Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Bathroom
+                          getSinglePostData?.SinglePost?.PropertyDetails?.Bathroom
                         }
                         Icon="/img/bathroom.png"
                         Data={"Bathrooms"}
                       />
                     )}
                     {/* Balcony */}
-                    {getSinglePostData.SinglePost.PropertyDetails?.Balcony >
+                    {getSinglePostData?.SinglePost?.PropertyDetails?.Balcony >
                       0 && (
                       <PropertyDataBox
                         Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Balcony
+                          getSinglePostData?.SinglePost?.PropertyDetails?.Balcony
                         }
                         Icon="/img/balcony.png"
                         Data={"Balconies"}
@@ -792,7 +776,7 @@ export default function SinglePostDetails() {
                     {/* Furnishing */}
                     <PropertyDataBox
                       Answer={
-                        getSinglePostData.SinglePost.AmenitiesDetails.Furnishing
+                        getSinglePostData?.SinglePost?.AmenitiesDetails?.Furnishing
                       }
                       Icon="/img/furnish.png"
                       Data={"Furnishing Details"}
@@ -802,8 +786,7 @@ export default function SinglePostDetails() {
                     <PropertyDataBox
                       Id={"property-dir"}
                       Answer={
-                        getSinglePostData.SinglePost.FloorDetails
-                          .PropertyDirection
+                        getSinglePostData?.SinglePost?.FloorDetails?.PropertyDirection
                       }
                       Icon="/img/facing.png"
                       Data={"Property Direction"}
@@ -811,15 +794,14 @@ export default function SinglePostDetails() {
 
                     <PropertyDataBox
                       Answer={
-                        getSinglePostData.SinglePost.FloorDetails
-                          .OverLookingView
+                        getSinglePostData?.SinglePost?.FloorDetails?.OverLookingView
                       }
                       Icon="/img/area.png"
                       Data={"Overlooking View"}
                     />
 
                     {/* Property on Floor  */}
-                    {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType ==
                       "Rent" && (
                       <PropertyDataBox
                         Answer={floorDetails}
@@ -828,42 +810,39 @@ export default function SinglePostDetails() {
                       />
                     )}
                     {/* Property on Floor  , Total Floors" */}
-                    {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType ==
                       "Sale" && (
                       <>
-                        {getSinglePostData.SinglePost.FloorDetails
-                          .PropertyOnFloor && (
+                        {getSinglePostData?.SinglePost?.FloorDetails?.PropertyOnFloor && (
                           <PropertyDataBox
-                            Answer={`${getSinglePostData.SinglePost.FloorDetails.PropertyOnFloor}`}
+                            Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.PropertyOnFloor}`}
                             Icon="/img/total-floor.png"
                             Data={"Property on Floor"}
                           />
                         )}
                         <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.FloorDetails.TotalFloors}`}
+                          Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.TotalFloors}`}
                           Icon="/img/total-floor.png"
                           Data={"Total Floors"}
                         />
                       </>
                     )}
-                    {getSinglePostData.SinglePost.PropertyDetails.Parking
+                    {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
                       ?.OpenParking > 0 && (
                       <PropertyDataBox
                         Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Parking
-                            .OpenParking
+                          getSinglePostData?.SinglePost?.PropertyDetails?.Parking?.OpenParking
                         }
                         Icon="/img/parking.png"
                         Data={"Open Parking"}
                       />
                     )}
 
-                    {getSinglePostData.SinglePost.PropertyDetails.Parking
+                    {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
                       ?.CoveredParking > 0 && (
                       <PropertyDataBox
                         Answer={
-                          getSinglePostData.SinglePost.PropertyDetails.Parking
-                            .CoveredParking
+                          getSinglePostData?.SinglePost?.PropertyDetails?.Parking?.CoveredParking
                         }
                         Icon="/img/parking.png"
                         Data={"Covered Parking"}
@@ -873,45 +852,45 @@ export default function SinglePostDetails() {
 
                     {/* Flooring Type */}
                     <PropertyDataBox
-                      Answer={`${getSinglePostData.SinglePost.PropertyDetails.FlooringType}`}
+                      Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.FlooringType}`}
                       Icon="/img/Flooring-Type.png"
                       Data={"Flooring Type"}
                     />
                     {/* Power BackUp */}
                     <PropertyDataBox
-                      Answer={`${getSinglePostData.SinglePost.AmenitiesDetails.PowerBackUp}`}
+                      Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.PowerBackUp}`}
                       Icon="/img/power-backup.png"
                       Data={"Power BackUp"}
                     />
 
                     {/* Water Source */}
                     <PropertyDataBox
-                      Answer={`${getSinglePostData.SinglePost.AmenitiesDetails.WaterSource}`}
+                      Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
                       Icon="/img/water.png"
                       Data={"Water Source"}
                     />
 
                     {/* Property Age */}
-                    {getSinglePostData.SinglePost.BasicDetails.PropertyAge && (
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge && (
                       <PropertyDataBox
-                        Answer={`${getSinglePostData.SinglePost.BasicDetails.PropertyAge} Year`}
+                        Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
                         Icon="/img/bathroom.png"
                         Data={"Property Age"}
                       />
                     )}
 
-                    {getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
+                    {getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType ==
                       "Rent" && (
                       <>
                         <PropertyDataBox
                           Answer={`${new Date(
-                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                            getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                           ).getDate()}-${
                             new Date(
-                              getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                             ).getMonth() + 1
                           }-${new Date(
-                            getSinglePostData.SinglePost.BasicDetails.AvailableFrom
+                            getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                           ).getFullYear()}`}
                           Icon="/img/bathroom.png"
                           Data={"Available From"}
@@ -920,7 +899,7 @@ export default function SinglePostDetails() {
                         {getSinglePostData.SinglePost.PricingDetails
                           .AdditionalDetails?.PreferredTenant && (
                           <PropertyDataBox
-                            Answer={`${getSinglePostData.SinglePost.PricingDetails.AdditionalDetails?.PreferredTenant.map(
+                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
                               (text) => {
                                 return text;
                               }
@@ -931,13 +910,13 @@ export default function SinglePostDetails() {
                         )}
 
                         <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.PricingDetails.ExpectedRent}`}
+                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
                           Icon="/img/bathroom.png"
                           Data={"Expected Rent"}
                         />
 
                         <PropertyDataBox
-                          Answer={`${getSinglePostData.SinglePost.PricingDetails.DepositePrice}`}
+                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
                           Icon="/img/Property-age.png"
                           Data={"Security Deposit"}
                         />
@@ -946,7 +925,7 @@ export default function SinglePostDetails() {
                   </div>
                 </div>
                 <FurnishDetails
-                  furnishD={getSinglePostData.SinglePost.AmenitiesDetails}
+                  furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                 />
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">

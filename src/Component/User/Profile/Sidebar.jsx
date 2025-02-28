@@ -57,7 +57,11 @@ function Sidebar() {
               </li>
             </NavLink>
             <NavLink to="/user/my-post/all-response">
-              <li className="navItem mob-hide">
+              <li  className={`navItem navItem mob-hide ${
+                  location.pathname == "/user/my-post/all-response"
+                    ? "active-btn-nav"
+                    : ""
+                } `} >
                 <img
                
                   src="/img/NewLeads.svg"

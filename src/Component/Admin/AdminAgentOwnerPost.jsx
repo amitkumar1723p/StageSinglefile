@@ -51,7 +51,7 @@ export default function AdminAgentOwnerPost() {
   const [onPageActive, setPageActive] = useState("");
   const [propertyOrder, setPropertyOrder] = useState("decending");
   const [currenSelected, setCurrentSelected] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(15);
+  const [itemsPerPage, setItemsPerPage] = useState(25);
   const [PropertyType, setPropertyType] = useState("");
 
   const {
@@ -109,14 +109,26 @@ export default function AdminAgentOwnerPost() {
    
     setCurrentDataLength(AllPost?.Post?.length);
     if (currenSelected === "All In-Active posts") {
-      filterdData = AllPost?.Post?.filter((item) => !item.PostVerify);
+      filterdData = AllPost?.Post?.filter(item => !item?.PostVerify)
       setCurrentDataLength(filterdData?.length);
     }
     if (currenSelected === "All Active posts") {
-      filterdData = AllPost?.Post?.filter((item) => item.PostVerify);
+      filterdData = AllPost?.Post?.filter(item => item?.PostVerify)
+      filterdData = AllPost?.Post?.filter(item => !item.PostVerify)
       setCurrentDataLength(filterdData?.length);
     }
-    if (currenSelected === "rent") {
+    if (currenSelected === "All Active posts") {
+      filterdData = AllPost?.Post?.filter(item => item.PostVerify)
+      setCurrentDataLength(filterdData?.length)
+    }
+    if(currenSelected==="rent"){
+        filterdData = AllPost?.Post?.filter((item) => {
+          return item?.BasicDetails?.PropertyAdType === PropertyType;
+        })
+
+        setCurrentDataLength(filterdData?.length)
+    }
+    if(currenSelected==="sale"){
       filterdData = AllPost?.Post?.filter((item) => {
         return item?.BasicDetails?.PropertyAdType === PropertyType;
       });
@@ -288,6 +300,7 @@ export default function AdminAgentOwnerPost() {
 
   //handle items per page
   const handleItemsPerPageChange = (value) => {
+    // console.log(value)
     setItemsPerPage(parseInt(value, 10)); // Update the state with the selected value
     
     // setCurrentPage(1); // Reset to first page when changing items per page
@@ -563,7 +576,12 @@ export default function AdminAgentOwnerPost() {
           )}
 
           {/* Buttons to change the status */}
-
+          <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => handleStatusChange("Active")}
+          >
+            Active
+          </button>
           <button
             className="px-1 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
             onClick={() => handleStatusChange("InActive")}

@@ -24,8 +24,15 @@ export default function BasicDetailsSection({
     "Serviced Apartment",
   ];
   const PropertyStatusArray = ["Ready to move", "Under Construction"];
+
   const PropertyAdTypeArray = ["Sale", "Rent"];
-  const CurrentPropertyStatusArray = ["Vacant", "Rented", "Self Occupied"];
+
+  // const CurrentPropertyStatusArray = ["Vacant", "Rented", "Self Occupied"];
+
+  const [CurrentPropertyStatusArray, setCurrentPropertyStatusArray] = useState(
+    []
+  );
+
   const PossessionStatusOption = [
     "Within 3 Month",
     "Within 6 Month",
@@ -36,43 +43,61 @@ export default function BasicDetailsSection({
     "By 2029",
   ];
 
-  // Add Plot And Land  After Some Time
-  // useEffect(() => {
-  //   if (BasicDetailsData.PropertyAdType === "Sale") {
-  //     if (!ApartMentTypeTab.includes("Plot/Land")) {
-  //       setApartMentTypeTab([...ApartMentTypeTab, "Plot/Land"]);
-  //     }
-  //   }
-
-  //   if (BasicDetailsData.PropertyAdType === "Rent") {
-  //     if (ApartMentTypeTab.includes("Plot/Land")) {
-  //       setApartMentTypeTab(
-  //         ApartMentTypeTab.filter((e) => {
-  //           return e !== "Plot/Land";
-  //         })
-  //       );
-  //     }
-  //   }
-
-  //   // eslint-disable-next-line
-  // }, [BasicDetailsData.PropertyAdType]);
-
+  // Property Ad type (useEffect)  add plot/land
   useEffect(() => {
-    setTimeout(() => {
-      setBasicDetailsData((prevData) => ({
-        ...prevData,
+    if (BasicDetailsData.PropertyAdType === "Sale") {
+      if (!ApartMentTypeTab.includes("Plot/Land")) {
+        setApartMentTypeTab([...ApartMentTypeTab, "Plot/Land"]);
+      }
+    }
 
-        NoOfOpenSide: prevData.NoOfOpenSide || 0,
-      }));
-    }, 0);
+    if (BasicDetailsData.PropertyAdType === "Rent") {
+      if (ApartMentTypeTab.includes("Plot/Land")) {
+        setApartMentTypeTab(
+          ApartMentTypeTab.filter((e) => {
+            return e !== "Plot/Land";
+          })
+        );
+      }
+    }
+
     // eslint-disable-next-line
-  }, []);
+  }, [BasicDetailsData.PropertyAdType]);
+
+  // Property Ad type (useEffect)  add plot/land
+  useEffect(() => {
+    if (BasicDetailsData.ApartmentType == "Plot/Land") {
+      setCurrentPropertyStatusArray([
+        "Vacant",
+        "Boundary Wall",
+        "Construction Done",
+      ]);
+    } else {
+      setCurrentPropertyStatusArray(["Vacant", "Rented", "Self Occupied"]);
+    }
+    // eslint-disable-next-line
+  }, [BasicDetailsData.ApartmentType]);
+
+  // useEffect(() => {NoOfOpenSide
+  //   setTimeout(() => {
+  //     setBasicDetailsData((prevData) => ({
+  //       ...prevData,
+
+  //       NoOfOpenSide: prevData.NoOfOpenSide || 0,
+  //     }));
+  //   }, 0);
+  //   // eslint-disable-next-line
+  // }, []);
+  // Possession Status
+
+
+    
 
   return (
     <>
       <ScrollToTop />
       <main className="main-container">
-        {/* <h3 className="heading-section-form-start">
+        {/* <h3 className="heading-section-form-start"
           Sale or Rent your Property For Free
         </h3> */}
         {/* <div className="create-banner-box">
@@ -175,7 +200,7 @@ export default function BasicDetailsSection({
                 );
               })}
             </div>
-            {ApartMentTypeArrayRemovePlotAndLand.includes(
+            {[...ApartMentTypeArrayRemovePlotAndLand, "Plot/Land"].includes(
               BasicDetailsData.ApartmentType
             ) && (
               <>
@@ -200,7 +225,7 @@ export default function BasicDetailsSection({
                           .toISOString()
                           .split("T")[0];
                         const selectedDate = e.target.value;
-  
+
                         if (selectedDate >= currentDate) {
                           setBasicDetailsData({
                             ...BasicDetailsData,
@@ -211,42 +236,53 @@ export default function BasicDetailsSection({
                     />
                   </div>
                 )}
+
                 {BasicDetailsData.PropertyAdType === "Sale" && (
                   <>
-                    <div className="fom-group">
-                      <h4 className="basic-details-heading">
-                        {" "}
-                        Property Status*{" "}
-                      </h4>
-                      <div className="PropertyStatus-box">
-                        {PropertyStatusArray.map((text, i) => {
-                          return (
-                            <div key={i} className="PropertyStatus-box-content">
-                              <label htmlFor={`property-status-${i}`}>
-                                {text}
-                              </label>
-                              <input
-                                type="radio"
-                                name="Property Stattus"
-                                required
-                                id={`property-status-${i}`}
-                                value={text}
-                                checked={
-                                  BasicDetailsData.PropertyStatus === text
-                                }
-                                onChange={() => {
-                                  setBasicDetailsData({
-                                    ...BasicDetailsData,
-                                    PropertyStatus: text,
-                                  });
-                                }}
-                              />
-                            </div>
-                          );
-                        })}
+                    {/* not enable plot and land  */}
+                    {ApartMentTypeArrayRemovePlotAndLand.includes(
+                      BasicDetailsData.ApartmentType
+                    ) && (
+                      <div className="fom-group">
+                        <h4 className="basic-details-heading">
+                          {" "}
+                          Property Status*{" "}
+                        </h4>
+                        <div className="PropertyStatus-box">
+                          {PropertyStatusArray.map((text, i) => {
+                            return (
+                              <div
+                                key={i}
+                                className="PropertyStatus-box-content"
+                              >
+                                <label htmlFor={`property-status-${i}`}>
+                                  {text}
+                                </label>
+                                <input
+                                  type="radio"
+                                  name="Property Stattus"
+                                  required
+                                  id={`property-status-${i}`}
+                                  value={text}
+                                  checked={
+                                    BasicDetailsData.PropertyStatus === text
+                                  }
+                                  onChange={() => {
+                                    setBasicDetailsData({
+                                      ...BasicDetailsData,
+                                      PropertyStatus: text,
+                                    });
+                                  }}
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                    {BasicDetailsData.PropertyStatus == "Ready to move" && (
+                    )}
+
+                    {(BasicDetailsData.PropertyStatus == "Ready to move" ||
+                      BasicDetailsData.ApartmentType == "Plot/Land") && (
                       <>
                         {" "}
                         <div className="fom-group">
@@ -289,30 +325,36 @@ export default function BasicDetailsSection({
                             })}
                           </div>
                         </div>
-                        <div className="form-group">
-                          <label htmlFor="property-age">Property Age*</label>
-                          <select
-                            className="date-time-lable"
-                            id="property-age"
-                            required
-                            value={BasicDetailsData.PropertyAge || ""}
-                            onChange={(e) => {
-                              setBasicDetailsData({
-                                ...BasicDetailsData,
-                                PropertyAge: e.target.value,
-                              });
-                            }}
-                          >
-                            <option value="">Select</option>
-                            <option value="0-5">0-5 years</option>
-                            <option value="5-10">5-10 years</option>
-                            <option value="10-20">10-20 years</option>
-                          </select>
-                        </div>
+                        {/* not enable plot and land  */}
+                        {ApartMentTypeArrayRemovePlotAndLand.includes(
+                          BasicDetailsData.ApartmentType
+                        ) && (
+                          <div className="form-group">
+                            <label htmlFor="property-age">Property Age*</label>
+                            <select
+                              className="date-time-lable"
+                              id="property-age"
+                              required
+                              value={BasicDetailsData.PropertyAge || ""}
+                              onChange={(e) => {
+                                setBasicDetailsData({
+                                  ...BasicDetailsData,
+                                  PropertyAge: e.target.value,
+                                });
+                              }}
+                            >
+                              <option value="">Select</option>
+                              <option value="0-5">0-5 years</option>
+                              <option value="5-10">5-10 years</option>
+                              <option value="10-20">10-20 years</option>
+                            </select>
+                          </div>
+                        )}
                       </>
                     )}
-                    {BasicDetailsData.PropertyStatus ==
-                      "Under Construction" && (
+
+                    {(BasicDetailsData.PropertyStatus == "Under Construction" ||
+                      BasicDetailsData.ApartmentType == "Plot/Land") && (
                       <div className="form-group">
                         <label htmlFor="property-age">Possession Status*</label>
                         <select
@@ -341,110 +383,57 @@ export default function BasicDetailsSection({
                         </select>
                       </div>
                     )}
+                    {BasicDetailsData.ApartmentType == "Plot/Land" && (
+                      <div className="open-side-box not-select-text">
+                        <div className="Counter">
+                          <p className="basic-details-heading">
+                            Open Sides
+                            <small> (optional) </small>
+                          </p>
+
+                          <div className="counter">
+                            <div
+                              className="decrement button"
+                              onClick={() => {
+                                if (BasicDetailsData.NoOfOpenSide > 0) {
+                                  setBasicDetailsData({
+                                    ...BasicDetailsData,
+                                    NoOfOpenSide:
+                                      BasicDetailsData.NoOfOpenSide - 1,
+                                  });
+                                }
+                              }}
+                            >
+                              -
+                            </div>
+                            <input
+                              type="number"
+                              id="bathroom"
+                              name="bathroom"
+                              min="0"
+                              value={BasicDetailsData.NoOfOpenSide || 0}
+                              readOnly
+                            />
+                            <div
+                              className="increment button"
+                              onClick={() => {
+                                setBasicDetailsData({
+                                  ...BasicDetailsData,
+                                  NoOfOpenSide:
+                                    BasicDetailsData.NoOfOpenSide + 1,
+                                });
+                              }}
+                            >
+                              +
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </>
                 )}
               </>
             )}
-            {/* {BasicDetailsData.ApartmentType === "Plot/Land" && (
-              <>            
-                <div className="">
-                  <label htmlFor="possession-status"> Possession Status </label>
-                  <select
-                    id="possession-status"
-                    required
-                    value={BasicDetailsData.PossessionStatus}
-                    onChange={(e) => {
-                      setBasicDetailsData({
-                        ...BasicDetailsData,
-                        PossessionStatus: e.target.value,
-                      });
-                    }}
-                  >
-                    <option value="">Select</option>
-                    {PossessionStatusOption.map((e, i) => {
-                      return (
-                        <option key={i} value={e}>
-                          {e}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-                <div>
-                  <h3> Current Property Status* </h3>
-                  <div className="tab-box">
-                    {CurrentPropertyStatusArray.map((e, i) => {
-                      return (
-                        <button
-                          className={`tab ${
-                            BasicDetailsData.CurrentPropertyStatus === e
-                              ? "select"
-                              : ""
-                          }`}
-                          key={i}
-                          onClick={() => {
-                            setBasicDetailsData({
-                              ...BasicDetailsData,
-                              CurrentPropertyStatus: e,
-                            });
-                          }}
-                        >          
-                          {e}{" "}
-                          <img
-                            alt=""
-                            className="select-img"
-                            src={
-                              BasicDetailsData.CurrentPropertyStatus === e
-                                ? "/img/white-tick.svg"
-                                : `/img/plus-create.svg`
-                            }
-                          />
-                         
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>          
-                <div className="field-group">
-                  <label htmlFor="plot-open-side">
-                    No.Of Open Side Optional
-                  </label>
-                  <div className="counter">
-                    <div
-                      className="decrement button"
-                      onClick={() => {
-                        if (BasicDetailsData.NoOfOpenSide > 0) {
-                          setBasicDetailsData({
-                            ...BasicDetailsData,
-                            NoOfOpenSide: BasicDetailsData.NoOfOpenSide - 1,
-                          });
-                        }
-                      }}
-                    >                      -
-                    </div>
-                    <input
-                      type="number"
-                      id="plot-open-side"
-                      name="plot-open-side"
-                      min="0"
-                      value={BasicDetailsData.NoOfOpenSide || 0}
-                      readOnly
-                    />
-                    <div
-                      className="increment button"
-                      onClick={() => {
-                        setBasicDetailsData({
-                          ...BasicDetailsData,
-                          NoOfOpenSide: BasicDetailsData.NoOfOpenSide + 1,
-                        });
-                      }}
-                    >
-                      +
-                    </div>
-                  </div>
-                </div>
-              </>
-            )} */}
           </div>
         </div>
       </main>
@@ -533,17 +522,17 @@ export default function BasicDetailsSection({
               return alert("Possession Status is Required");
             }
 
-            // if (
-            //   BasicDetailsData.ApartmentType === "Plot/Land" &&
-            //   !BasicDetailsData.PossessionStatus
-            // ) {
-            //   return alert("Possession Status is Required");
-            // }
             if (
               BasicDetailsData.ApartmentType === "Plot/Land" &&
               !BasicDetailsData.CurrentPropertyStatus
             ) {
               return alert("Current Possession Status is Required");
+            }
+            if (
+              BasicDetailsData.ApartmentType === "Plot/Land" &&
+              !BasicDetailsData.PossessionStatus
+            ) {
+              return alert("Possession Status is Required");
             }
 
             if (!update) {

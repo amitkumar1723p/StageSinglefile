@@ -11,7 +11,7 @@ import CreatePostSubmitAlert from "./CreatePostSubmitAlert";
 
 export default function CreatePostImageUpload({
   setnext,
-
+  next,
   previewImage,
   setpreviewImage,
   uploadimages,
@@ -33,7 +33,7 @@ export default function CreatePostImageUpload({
   AmenitiesDetailsData,
   PricingDetailsData,
   setPricingDetailsData,
-
+  OtherDetailsData,
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
@@ -56,49 +56,112 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  useEffect(() => {
-    // remove Coma
+  // console.log("BasicDetailsData" , BasicDetailsData  )
+  // console.log("LocationDetailsData" , LocationDetailsData  )
+  // console.log("PropertyDetailsData" , PropertyDetailsData  )
+  // console.log("OtherDetailsData" , OtherDetailsData  )
+  // console.log("AreaDetailsData" , AreaDetailsData  )
+  // console.log("FloorDetailsData" , FloorDetailsData  )
+  // console.log("AmenitiesDetailsData" , AmenitiesDetailsData  )
+  // console.log("PricingDetailsData" , PricingDetailsData  )
 
+  // useEffect(() => {
+  //   // remove Coma
+
+  //   const CopyObj = { ...PricingDetailsData };
+
+  //   if (BasicDetailsData.PropertyAdType == "Rent") {
+  //     const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(/,/g,"");
+  //     CopyObj.ExpectedRent =parseInt( ExpectedRentRemoveComa);
+
+  //     const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
+  //       /,/g,
+  //       ""
+  //     );
+  //     CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
+  //   }
+
+  //   if (BasicDetailsData.PropertyAdType == "Sale") {
+  //     const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
+  //       /,/g,
+  //       ""
+  //     );
+  //     CopyObj.ExpectedPrice =parseInt( ExpectedPriceRemoveComa);
+
+  //     if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+  //       const MonthlyExpectedRentRemoveComa = String(
+  //         CopyObj?.AdditionalDetails?.MonthlyExpectedRent
+  //       )?.replace(/,/g, "");
+  //       CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt (MonthlyExpectedRentRemoveComa);
+  //     }
+  //   }
+  //   if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
+  //     const MaintenanceChargesRemoveComa = String(
+  //       CopyObj.AdditionalDetails.MaintenanceCharges
+  //     )?.replace(/,/g, "");
+  //     CopyObj.AdditionalDetails.MaintenanceCharges =parseInt(MaintenanceChargesRemoveComa) ;
+  //   }
+
+  //    setPricingDetailsData(CopyObj);
+  //
+  // }, []);
+
+  useEffect(() => {
+    // Create a copy of the data to avoid mutating the original object
     const CopyObj = { ...PricingDetailsData };
 
-    if (BasicDetailsData.PropertyAdType == "Rent") {
+    if (BasicDetailsData.PropertyAdType === "Rent") {
+      // Remove commas from ExpectedRent and DepositePrice for Rent
       const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
         /,/g,
         ""
       );
-      CopyObj.ExpectedRent = ExpectedRentRemoveComa;
+      CopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
 
       const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
         /,/g,
         ""
       );
-      CopyObj.DepositePrice = DepositePriceRemoveComa;
+      CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
     }
 
-    if (BasicDetailsData.PropertyAdType == "Sale") {
+    if (BasicDetailsData.PropertyAdType === "Sale") {
+      // Remove commas from ExpectedPrice for Sale
       const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
         /,/g,
         ""
       );
-      CopyObj.ExpectedPrice = ExpectedPriceRemoveComa;
+      CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
 
+      // Check and remove commas from MonthlyExpectedRent if it exists
       if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
         const MonthlyExpectedRentRemoveComa = String(
           CopyObj?.AdditionalDetails?.MonthlyExpectedRent
         )?.replace(/,/g, "");
-        CopyObj.AdditionalDetails.MonthlyExpectedRent =
-          MonthlyExpectedRentRemoveComa;
+        CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(
+          MonthlyExpectedRentRemoveComa
+        );
       }
     }
+
+    // Remove commas from MaintenanceCharges if it exists
     if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
       const MaintenanceChargesRemoveComa = String(
         CopyObj.AdditionalDetails.MaintenanceCharges
       )?.replace(/,/g, "");
-      CopyObj.AdditionalDetails.MaintenanceCharges =
-        MaintenanceChargesRemoveComa;
+      CopyObj.AdditionalDetails.MaintenanceCharges = parseInt(
+        MaintenanceChargesRemoveComa
+      );
     }
+
+    // Log the modified object before setting it in state
+
+    // Set the new state
     setPricingDetailsData(CopyObj);
-  }, []);
+  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
+
+  // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
+
   const CratePostHandler = (e) => {
     e.preventDefault();
     if (previewImage.length <= 0) {
@@ -111,12 +174,21 @@ export default function CreatePostImageUpload({
         "LocationDetails",
         `${JSON.stringify(LocationDetailsData)}`
       );
-      formData.append(
-        "PropertyDetails",
-        `${JSON.stringify(PropertyDetailsData)}`
-      );
+
       formData.append("AreaDetails", `${JSON.stringify(AreaDetailsData)}`);
-      formData.append("FloorDetails", `${JSON.stringify(FloorDetailsData)}`);
+
+      if (BasicDetailsData.ApartmentType == "Plot/Land") {
+        //  alert("form details")
+        formData.append("OtherDetails", `${JSON.stringify(OtherDetailsData)}`);
+      } else {
+        formData.append(
+          "PropertyDetails",
+          `${JSON.stringify(PropertyDetailsData)}`
+        );
+
+        formData.append("FloorDetails", `${JSON.stringify(FloorDetailsData)}`);
+      }
+
       formData.append(
         "AmenitiesDetails",
         `${JSON.stringify(AmenitiesDetailsData)}`
@@ -221,7 +293,7 @@ export default function CreatePostImageUpload({
                     src="/img/i-icon.png"
                     alt="i-icon"
                   />{" "}
-                  Supported Format: JPEG, PNG,SVG{" "}
+                  Supported Format: JPEG, PNG{" "}
                 </p>
               </div>
 
@@ -230,13 +302,12 @@ export default function CreatePostImageUpload({
                 name=""
                 id=""
                 multiple
-                accept="image/*"
+                accept="image/*,video/*,.pdf"
                 required={previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 
                   files.forEach((file) => {
-                     
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {

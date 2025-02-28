@@ -788,7 +788,6 @@ function App() {
             element={<CreatePostMain />}
           />
         </Route>
-
         {/*All post route*/}
         <Route path={"/all-post"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />

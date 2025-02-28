@@ -173,7 +173,7 @@
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 18px; /* Decreased gap */
+  gap: 10px; /* Decreased gap */
 }
 
 .nav-link {
@@ -191,7 +191,7 @@
 
 .nav-link.sell-btn {
   font-weight: 600;
-  padding: 9px 13.5px; /* Decreased padding */
+  padding: 8px 13.5px; /* Decreased padding */
   border: 1px solid var(--main-light-clr);
   color: var(--main-light-clr);
   border-radius: 4.5px; /* Decreased border radius */
@@ -204,9 +204,10 @@
 }
 
 .nav-link.buy-btn {
-  padding: 9px 13.5px; /* Decreased padding */
+  padding: 8px 13.5px; /* Decreased padding */
   background-color: var(--main-light-clr);
   color: #fff;
+  /* font-size: 12px; */
   border-radius: 4.5px; /* Decreased border radius */
   transition: background-color 0.3s ease;
 }
@@ -400,6 +401,11 @@
 }
 
 @media (max-width: 480px) {
+  .nav-link.sell-btn{
+    padding: 8px 13.5px;
+    font-size: 12px;
+  }
+  
 
   .header-free {
     background-color: #94D1FF;

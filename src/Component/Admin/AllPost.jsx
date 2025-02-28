@@ -190,24 +190,25 @@ export default function AllPost({
   return (
     <div className="Admin-property-post-card-main-box">
       
-      {/* here we itrate all available property for owner only start */}
-      {OwnerPosts.length > 0
-        ? OwnerPosts.map((post, index) => (
-            <AdminListingCard
-              key={index}
-              index={index}
-              PostData={post}
-              setAssignProperty={setAssignProperty}
-              AssignProperty={AssignProperty}
-              selectAllProperty={selectAll}
-              page={page}
-              itemsPerPage={itemsPerPage}
-            />
-          ))
-        : Array.from({ length: 4 }).map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-      {/* here we itrate all available property for owner only end */}
+{/* here we itrate all available property for owner only start */}
+      {!loading ? OwnerPosts.length > 0 ? (
+        OwnerPosts.map((post, index) => (
+          <AdminListingCard
+            key={index}
+            index={index}
+            PostData={post}
+            setAssignProperty={setAssignProperty}
+            AssignProperty={AssignProperty}
+            selectAllProperty={selectAll}
+            page={page}
+            itemsPerPage={itemsPerPage}
+          />
+        ))
+      ):<p>No OwnerPosts Available</p> : (
+        Array.from({length:4}).map((_,index)=>(<SkeletonCard key={index}/>))
+      )}
+{/* here we itrate all available property for owner only end */}
+
 
       {/* Pagination controls start */}
       <nav aria-label="Page navigation example">
