@@ -254,6 +254,7 @@ export default function AllRegistrationResponse({ }) {
                             <option value="Tanent"><small>Tanent</small></option>
                             <option value="Buyer"><small>Buyer</small></option>
                             <option value="Seller"><small>Seller</small></option>
+                            <option value="Property Owner"><small>Property Owner</small></option>
                             <option value="NRI"><small>NRI</small></option>
                             <option value="ChannelPartner"><small>ChannelPartner</small></option>
                           </select> <button className="border" onClick={() => {

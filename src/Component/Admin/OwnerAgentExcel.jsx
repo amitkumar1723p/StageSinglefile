@@ -247,7 +247,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllOwnerFiles, OwnerUploadExcelFile, removeExcelFromAdminAction } from '../../Action/postAction';
+import { removeExcelFromAdminAction } from '../../Action/postAction';
 import axios from 'axios';
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver"
@@ -255,7 +255,7 @@ import "./OwnerAgentExcelData.css"
 import { useNavigate, useParams } from 'react-router-dom';
 const OwnerAgentExcel = () => {
 
-  const [file, setFile] = useState(null);
+
   const [fileId, setFileId] = useState(null);
   const [data, setData] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -327,7 +327,7 @@ console.log(id)
 
   const fetchSingleFileDataOwner = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:5000/excel/owner/file/${id}`, { withCredentials: true });
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/owner/file/${id}`, { withCredentials: true });
       setAssignedAdmins(res.data.admins);
       setColumns(res.data.fileData.columns);
       setOriginalColumns([...res.data.fileData.columns]); // Store original column names
@@ -428,7 +428,7 @@ console.log(id)
     try {
       // Save each header change one by one
       for (const change of changes) {
-        await axios.put(`http://localhost:5000/excel/file/${fileId}/rename-column`, change, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${fileId}/rename-column`, change, {
           withCredentials: true
         });
       }
@@ -452,7 +452,7 @@ console.log(id)
     if (!columnName) return alert("Column name cannot be empty!");
 
     try {
-      const res = await axios.post(`http://localhost:5000/excel/file/${fileId}/add-column`, {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/excel/file/${fileId}/add-column`, {
         columnName,
       },
         {
@@ -481,7 +481,7 @@ console.log(id)
     if (!fileId) return alert("Please select a file first!");
 
     try {
-      await axios.put(`http://localhost:5000/excel/file/${fileId}/update`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${fileId}/update`, {
         updates: data.map((row, index) =>
           columns
             .filter((col) => col.editable)
@@ -504,7 +504,7 @@ console.log(id)
   // Fetch single file data
   const fetchSingleFileData = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:5000/excel/file/${id}`, { withCredentials: true });
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/file/${id}`, { withCredentials: true });
       setAssignedAdmins(res.data.admins);
       setColumns(res.data.fileData.columns);
       setOriginalColumns([...res.data.fileData.columns]); // Store original column names
