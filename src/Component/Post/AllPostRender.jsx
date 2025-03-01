@@ -92,7 +92,7 @@ const AllPostRender = () => {
         (post) => post.AmenitiesDetails?.Furnishing === filters.furnishing
       );
     }
-// console.log("filter post ",filterdPost)
+ 
 
     setFilteredData(filtered);
   }, [filters, GetAllPostData,filterdPost]);

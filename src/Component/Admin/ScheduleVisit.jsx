@@ -71,7 +71,7 @@ const ScheduleVisit = () => {
   const { loading, data: getSinglePostData } = useSelector((state) => {
     return state.GetSinglePost;
   });
-  //  console.log()
+ 
 
   return (
     <>

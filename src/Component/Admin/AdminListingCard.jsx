@@ -111,7 +111,7 @@ export default function AdminListingCard({
   useEffect(() => {
      
     if (AssignPostData?.success == true) {
-      let AssingPosts = AssignPostData?.AssignProperty.filter((item) => {
+      let AssingPosts = AssignPostData?.AssignProperty?.filter((item) => {
         return (
           item.AssignedPropertys.some((item) => item.PostId === PostData?._id) &&
           item.AdminId._id !== medata?.user?._id
@@ -208,7 +208,7 @@ export default function AdminListingCard({
           )}
           <div className="admin-property-card-info">
             <div className="heading-name">
-              {PostData?.LocationDetails.ProjectName}
+              {PostData?.LocationDetails?.ProjectName}
               {medata?.user?.Role != "Agent" && (
                 <>
               
@@ -352,25 +352,25 @@ export default function AdminListingCard({
                   <div className="Reserveprice-sec">
                     <p className="admin-price-pr-anwser">
                       {/* Show Reserve Price  */}
-                      {PostData?.BasicDetails.PropertyAdType == "Sale" && (
+                      {PostData?.BasicDetails?.PropertyAdType == "Sale" && (
                         <>
                           <span className="price-rp-que"> Reserve Price </span>:
                           <span className="price-section">
                             {formatReservePrice(
-                              PostData?.PricingDetails.ExpectedPrice
+                              PostData?.PricingDetails?.ExpectedPrice
                             )}
                           </span>
                         </>
                       )}
                     </p>
                   </div>
-                  {PostData?.BasicDetails.PropertyAdType == "Rent" && (
+                  {PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                     <>
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
                             {formatReservePrice(
-                              PostData?.PricingDetails.ExpectedRent
+                              PostData?.PricingDetails?.ExpectedRent
                             )}
                             <span>/Month </span>
                           </p>
@@ -380,7 +380,7 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
-                    {PostData?.PricingDetails.PricePerSqFt} Per sqft
+                    {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>
 
