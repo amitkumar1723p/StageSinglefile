@@ -42,7 +42,6 @@ export default function CreatePostMain() {
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
   //  Form Submit  State
-  const [BasicDetailsSubmit, setBasicDetailsSubmit] = useState();
 
   //  Update Post Logic
 
@@ -63,6 +62,163 @@ export default function CreatePostMain() {
   }, [update]);
 
   // getSingle PostData
+
+  const BasicDetailsForm = useRef(null);
+
+  const handleNextClick = () => {
+    if (BasicDetailsForm.current) {
+      BasicDetailsForm.current.submit(); // This will trigger form submission
+    }
+  };
+  // const handleNextClick = () => {
+  //   if (formRef.current) {
+  //     // formRef.current.submit();   // This will trigger form submission
+  //   }
+  // };
+
+
+
+  // Form Submit  Start 
+  //  BasicDetils Component submit -- Start
+  const ApartMentTypeArrayRemovePlotAndLand = [
+    "Apartment",
+    "Independent House/Villa",
+    "1 RK/Studio Apartment",
+    "Independent/Builder Floor",
+    "Serviced Apartment",
+  ];
+
+  const BasicDetailsFormSubmit = () => {
+    if (!BasicDetailsData.PropertyType) {
+      return alert(" Poperty Type is Required");
+    }
+
+    if (!BasicDetailsData.PropertyAdType) {
+      return alert("Property Ad Type is Required");
+    }
+    if (!BasicDetailsData.ApartmentType) {
+      return alert("Apartment Type is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Rent" &&
+      !BasicDetailsData.AvailableFrom
+    ) {
+      return alert("Available From is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Rent" &&
+      BasicDetailsData.AvailableFrom
+    ) {
+      // const currentDate = new Date(Date.now());
+      const currentDate = new Date().toISOString().split("T")[0];
+      const selectedDate = BasicDetailsData.AvailableFrom;
+
+      if (selectedDate < currentDate) {
+        return alert("Enter valid Date");
+      }
+
+      // if (selectedDate >= currentDate) {
+      //   setBasicDetailsData({
+      //     ...BasicDetailsData,
+      //     AvailableFrom: e.target.value,
+      //   });
+      // }
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      !BasicDetailsData.PropertyStatus
+    ) {
+      return alert("Property Status is Required");
+    }
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Ready to move" &&
+      !BasicDetailsData.CurrentPropertyStatus
+    ) {
+      return alert("Current Property Status is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Ready to move" &&
+      !BasicDetailsData.PropertyAge
+    ) {
+      return alert("PropertyAge is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Under Construction" &&
+      !BasicDetailsData.PossessionStatus
+    ) {
+      return alert("Possession Status is Required");
+    }
+
+    if (
+      BasicDetailsData.ApartmentType === "Plot/Land" &&
+      !BasicDetailsData.CurrentPropertyStatus
+    ) {
+      return alert("Current Possession Status is Required");
+    }
+    if (
+      BasicDetailsData.ApartmentType === "Plot/Land" &&
+      !BasicDetailsData.PossessionStatus
+    ) {
+      return alert("Possession Status is Required");
+    }
+
+    if (!update) {
+      // StoreDataInSession("BasicDetailsDataUpdate", BasicDetailsData);
+      StoreDataInSession("BasicDetailsData", BasicDetailsData);
+      StoreDataInSession("next", 1);
+    }
+
+    setnext(1);
+  };
+
+
+   const LocationDetailsSubmit =(e) => {
+       e.preventDefault();
+       if (!update) {
+         StoreDataInSession("next", 2);
+         StoreDataInSession("LocationDetailsData", LocationDetailsData);
+       }
+       setnext(2);
+     }
+  // BasicDetails Component Submit  -- End
+
+
+  //  LocationDetails Component Submit  -- Start
+
+
+     
+
+
+
+
+
+
+      
+
+
+
+   
+  //  Form Submit End
 
   const { loading: SinglePostLoading, data: getSinglePostData } = useSelector(
     (state) => {
@@ -587,7 +743,7 @@ export default function CreatePostMain() {
                 ) : next + 1 >= 2 ? (
                   <span
                     className="text-white fw-normal   completecircleForm  d-flex justify-content-center align-items-center"
-                    onClick={() => setnext(1)}
+                    onClick={() => BasicDetailsFormSubmit()}
                   >
                     &#10003;
                   </span>
@@ -596,7 +752,7 @@ export default function CreatePostMain() {
                     {Object.keys(LocationDetailsData).length > 0 ? (
                       <span
                         className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                        onClick={() => setnext(1)}
+                        onClick={() => BasicDetailsFormSubmit()}
                       >
                         &#10003; {/* This is the checkmark (tick) symbol */}
                       </span>
@@ -653,7 +809,11 @@ export default function CreatePostMain() {
                   ) : next + 1 >= 3 ? (
                     <span
                       className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                      onClick={() => setnext(2)}
+                      onClick={(e) => {
+                        BasicDetailsFormSubmit()
+                        LocationDetailsSubmit(e)
+                      }
+                         }
                     >
                       &#10003;
                     </span>
@@ -675,7 +835,10 @@ export default function CreatePostMain() {
                       ).length > 0 ? (
                         <span
                           className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                          onClick={() => setnext(2)}
+                          onClick={(e) => {
+                            BasicDetailsFormSubmit(e)
+                            LocationDetailsSubmit(e)
+                          }}
                         >
                           &#10003; {/* This is the checkmark (tick) symbol */}
                         </span>
@@ -859,7 +1022,8 @@ export default function CreatePostMain() {
               PricingDetailsData={PricingDetailsData}
               setPricingDetailsData={setPricingDetailsData}
               // setBasicDetailsSubmit ={setBasicDetailsSubmit}
-              BasicDetailsSubmit={BasicDetailsSubmit}
+              BasicDetailsFormSubmit={BasicDetailsFormSubmit}
+              // BasicDetailsFormRef={BasicDetailsFormRef}
             />
           )}
           {next === 1 && (
@@ -868,6 +1032,7 @@ export default function CreatePostMain() {
               setLocationDetailsData={setLocationDetailsData}
               setnext={setnext}
               update={update}
+              LocationDetailsSubmit ={LocationDetailsSubmit}
             />
           )}
           {next === 2 && (
@@ -929,6 +1094,8 @@ export default function CreatePostMain() {
               setPricingDetailsData={setPricingDetailsData}
               setshowCreatePostSubmitAlert={setshowCreatePostSubmitAlert}
               CreatePostRef={CreatePostRef}
+
+              // BasicDetailsForm
             />
           )}
 
