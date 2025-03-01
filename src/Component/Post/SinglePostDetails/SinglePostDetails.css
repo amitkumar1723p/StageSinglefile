@@ -883,11 +883,11 @@ body {
   font-weight: 700;
 }
 
-.overview-box span {
+/* .overview-box span {
   color: #333;
   font-size: 12px;
   font-weight: 600;
-}
+} */
 
 /* Amenities section */
 .amenities-section {
@@ -1527,6 +1527,9 @@ body {
 /* Amit chaudhary css */
 
 #property-dir {
+  position: relative;
+}
+#plot-dir{
   position: relative;
 }
 .main_hide {

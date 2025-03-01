@@ -28,6 +28,7 @@ export default function CreatePostMain() {
   const [PropertyDetailsData, setPropertyDetailsData] = useState({});
   const [OtherDetailsData, setOtherDetailsData] = useState({});
   const [AreaDetailsData, setAreaDetailsData] = useState({});
+
   const [FloorDetailsData, setFloorDetailsData] = useState({});
   const [AmenitiesDetailsData, setAmenitiesDetailsData] = useState({});
   const [PricingDetailsData, setPricingDetailsData] = useState({});
@@ -40,6 +41,8 @@ export default function CreatePostMain() {
   const [update_RemoveImage, setupdate_RemoveImage] = useState([]);
   const [uploadimagesName, setuploadimagesName] = useState([]);
 
+  //  Form Submit  State
+  const [BasicDetailsSubmit, setBasicDetailsSubmit] = useState();
 
   //  Update Post Logic
 
@@ -631,7 +634,6 @@ export default function CreatePostMain() {
               </div>
             </div>
 
-            
             {next + 1 === 3 ? (
               <hr className="progressLine   border border-primary border-3 opacity-75" />
             ) : next + 1 >= 3 ? (
@@ -657,7 +659,20 @@ export default function CreatePostMain() {
                     </span>
                   ) : (
                     <>
-                      {Object.keys(FloorDetailsData).length > 0 ? (
+                      {Object.keys(
+                        BasicDetailsData.ApartmentType == "Plot/Land"
+                          ? {
+                              ...AreaDetailsData,
+                              ...AmenitiesDetailsData,
+                              ...OtherDetailsData,
+                            }
+                          : {
+                              ...AreaDetailsData,
+                              ...AmenitiesDetailsData,
+                              ...FloorDetailsData,
+                              ...PropertyDetailsData,
+                            }
+                      ).length > 0 ? (
                         <span
                           className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
                           onClick={() => setnext(2)}
@@ -843,6 +858,8 @@ export default function CreatePostMain() {
               update={update}
               PricingDetailsData={PricingDetailsData}
               setPricingDetailsData={setPricingDetailsData}
+              // setBasicDetailsSubmit ={setBasicDetailsSubmit}
+              BasicDetailsSubmit={BasicDetailsSubmit}
             />
           )}
           {next === 1 && (
@@ -907,9 +924,7 @@ export default function CreatePostMain() {
               FloorDetailsData={FloorDetailsData}
               AmenitiesDetailsData={AmenitiesDetailsData}
               PricingDetailsData={PricingDetailsData}
-
-
-              OtherDetailsData = {OtherDetailsData }
+              OtherDetailsData={OtherDetailsData}
               //  submit Alert
               setPricingDetailsData={setPricingDetailsData}
               setshowCreatePostSubmitAlert={setshowCreatePostSubmitAlert}

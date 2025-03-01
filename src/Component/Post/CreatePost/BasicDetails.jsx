@@ -78,17 +78,7 @@ export default function BasicDetailsSection({
     // eslint-disable-next-line
   }, [BasicDetailsData.ApartmentType]);
 
-  // useEffect(() => {NoOfOpenSide
-  //   setTimeout(() => {
-  //     setBasicDetailsData((prevData) => ({
-  //       ...prevData,
-
-  //       NoOfOpenSide: prevData.NoOfOpenSide || 0,
-  //     }));
-  //   }, 0);
-  //   // eslint-disable-next-line
-  // }, []);
-  // Possession Status
+ 
 
 
     
