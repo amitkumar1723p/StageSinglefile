@@ -36,10 +36,12 @@ export default function LocationDetails({
         <form id="locationForm" onSubmit={submitHandler}>
           <div className="location-box">
             <ProjectNameSection
+            
               ProjectInputType={"PostForm"}
               ProjectNameObjectData={LocationDetailsData}
               setProjectNameObjectData={setLocationDetailsData}
               placeholder={"Project Name"}
+              inputClass ={"locationdetails-input"}
             />
 
             <div className="form-group">

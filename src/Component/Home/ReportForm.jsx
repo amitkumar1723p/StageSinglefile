@@ -72,10 +72,10 @@ export default function ReportForm() {
             </div>
 
             <div className="reporting-form-group">
-              <label className="reporting-label">Describe</label>
+              <label className="reporting-label-section">Describe</label>
               <input
                 type="text"
-                className="reporting-input"
+                className="reporting-input-section"
                 placeholder="Describe your concern"
                 value={feedback.description}
                 onChange={(e) => setFeedback({ ...feedback, description: e.target.value })}
@@ -85,13 +85,7 @@ export default function ReportForm() {
             <div className="reporting-form-group">
               <label className="reporting-label">Upload JPEG Images</label>
               <div className="reporting-file-container reporting-input">
-                <input
-                  type="file"
-                  accept=".jpg,.jpeg,.png,.webp"
-                  multiple
-                  className="reporting-input"
-                  onChange={handleFileChange}
-                />
+                <input placeholder="choose image " type="file"  accept=".jpg,.jpeg,.png,.webp" multiple className="reporting-input" onChange={handleFileChange} />
               </div>
 
               {/* Display selected files with a remove button */}

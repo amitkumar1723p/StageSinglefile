@@ -270,10 +270,11 @@ export default function CreatePostImageUpload({
               </div>
 
               <input
+              className="RemoveCusImg"
                 type="file"
                 name=""
                 id=""
-               multiple accept="image/*,video/*,.pdf"
+               multiple accept=".jpg,.jpeg,.png,.webp,.avif"
                 required={previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);

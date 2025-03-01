@@ -1,8 +1,8 @@
 /* Container Styling */
 .file-handler-container {
     max-width: 100%;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 0px auto;
+    padding: 0 20px;
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -17,19 +17,25 @@
     margin-bottom: 15px;
   }
   .upload-excel-file-input{
-    background:rgb(234, 234, 234) !important;
-    outline: 1px solid red !important;
+    background:rgb(234, 234, 234);
+    border: none;
+    background: var(--main-lighter-clr);
+    border: 5px;
+    /* outline: 1px solid red !important; */
     padding: 5px;
     /* width: 30%; */
     padding: 40px;
+    cursor: pointer;
   }
   .file-handler-upload-button{
     border: none;
     padding: 10px 20px;
-    background: rgb(35, 145, 35);
+    background: var(--main-light-clr);
+    /* background: rgb(35, 145, 35); */
     color: white;
-    font: 15px;
-    border-radius: 10px;
+    font: 14px;
+    border-radius: 5px;
+    margin-left: 10px;
   }
   /* Table Styling */
   .file-handler-table {
@@ -60,10 +66,29 @@
     background-color: #007bff;
     color: white;
     font-weight: bold;
+    font-size: 14px;
   }
   
   .file-handler-table td {
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .file-handler-add-button{
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    background-color: var(--main-light-clr);
+    padding: 10px; 
+    margin: 5px;
+    font-weight: 600;
+    transition: .1s;
+
+  }
+  .file-handler-add-button:hover{
+  
+opacity: .9;
   }
   
   .file-handler-table tr:hover {
@@ -87,10 +112,10 @@
     color: white;
     border: none;
     padding: 10px 16px;
-    font-size: 16px;
+    font-size: 12px;
     cursor: pointer;
     border-radius: 5px;
-    margin: 15px 5px;
+    /* margin: 15px 5px; */
     transition: background 0.3s ease;
   }
   
@@ -107,10 +132,10 @@
   }
 
 
-  .files-card{
+  /* .files-card{
     max-width: 150px;
         background: rgb(153, 248, 153);
-  }
+  } */
   
   /* Responsive Design */
   @media (max-width: 768px) {
@@ -139,19 +164,20 @@
   /* Container grid for file cards */
 .files-card-container {
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(4,1fr);
     gap: 16px;
     padding: 16px;
   }
   
   /* Individual file card styling */
   .files-card {
+    max-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #1d6f42; /* Excel Green */
-    color: white;
+    /* background-color: #1d6f42;  */
+    color: #333;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
@@ -161,7 +187,7 @@
   
   /* Hover effect */
   .files-card:hover {
-    background-color: #155d35; /* Darker Green */
+   
     transform: scale(1.05);
   }
   
@@ -173,10 +199,16 @@
   /* File name text */
   .file-name {
     margin-top: 10px;
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-size: 14px;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* Adjust as needed */
     word-break: break-word;
   }
+  
   
   .excel-checkbox-container{
         display: flex;

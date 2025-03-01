@@ -40,11 +40,26 @@ margin: 10px 10px 20px 10px;
   display: flex;
   background-color: white;
   border-radius: 8px;
-  width: 350px;
+  width: 450px;
   padding: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   align-items: center;
   justify-content: center;
+}
+
+.UploadYourDraftMain{
+  padding: 5px;
+  border: none;
+  background: var(--main-light-clr);
+  color: #fff;
+  border-radius: 5px;
+}
+.UploadYourDraftMain:hover{
+ opacity: .8;
+}
+.UploadYourDraftMain img{
+  width: 24px;
+  margin-right: 5px;
 }
 
 .RentAgreement__icon img {

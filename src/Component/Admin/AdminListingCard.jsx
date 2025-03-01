@@ -111,7 +111,7 @@ export default function AdminListingCard({
   useEffect(() => {
      
     if (AssignPostData?.success == true) {
-      let AssingPosts = AssignPostData.AssignProperty.filter((item) => {
+      let AssingPosts = AssignPostData?.AssignProperty.filter((item) => {
         return (
           item.AssignedPropertys.some((item) => item.PostId === PostData?._id) &&
           item.AdminId._id !== medata?.user?._id
