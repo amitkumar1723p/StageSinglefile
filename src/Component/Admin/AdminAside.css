@@ -92,6 +92,7 @@ bottom: 32%;
   }
   
   .AdminAside-content {
+    width: 800px;
     flex: 1;
     padding: 1rem;
     background-color: white;

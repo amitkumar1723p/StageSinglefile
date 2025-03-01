@@ -79,7 +79,7 @@ text-decoration: underline;
   object-fit: contain;
 }
 .lable-login {
-  color: #79818b;
+  color: #333;
   font-family: "Inter", Sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -90,7 +90,7 @@ text-decoration: underline;
 .heading-h2 {
   color: var(--Pirmary, #0078d4);
   font-family: "Inter", Sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -110,7 +110,7 @@ text-decoration: underline;
 }
 
 .login-h2-p {
-  margin-bottom: 18px;
+  /* margin-bottom: 18px; */
   color: #7a8490;
   font-family: "Inter", Sans-serif;
   font-size: 12px;
@@ -166,6 +166,7 @@ text-decoration: underline;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding:  10px 0;
 }
 
 .login-form-content-unique input[type="email"],
@@ -189,10 +190,10 @@ text-decoration: underline;
 
 .login-continue-login {
   width: 100%;
-  padding: 12px;
+  padding: 8px;
   background-color: #007bff;
   color: white;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   border: none;
   border-radius: 6px;

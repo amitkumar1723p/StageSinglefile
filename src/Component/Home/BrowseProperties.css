@@ -1,6 +1,8 @@
 .BrowseProperties-Main{
     width: 100%;
-    
+    margin: 30px 0;
+    background: var(--main-lighter-clr);
+    padding: 30px 0 ;
     /* border: 1px solid black; */
 }
 
@@ -99,7 +101,7 @@
 }
 
 .OwnerListings {
-  box-shadow: -2px 4px 10px rgb(92, 92, 92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
   border-radius: 10px 10px 0px 0px;
   display: flex;
@@ -154,7 +156,7 @@
   color: var(--main-light-clr);
 }
 .VerifiedPropertiesContainer {
-  box-shadow: -2px 4px 10px rgb(92, 92, 92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   background-color: white;
   border-radius: 2px;
   padding: 8px;
@@ -199,7 +201,7 @@
 .DocsAssistance {
   background-color: white;
   border-radius: 0px 0px 10px 10px;
-  box-shadow: -2px 4px 10px rgb(92, 92, 92);
+  /* box-shadow: -2px 4px 10px rgb(92, 92, 92); */
   display: flex;
 
   padding: 8px;
@@ -372,7 +374,7 @@
 .DocsAssistance{
     background-color: white;
     border-radius: 0px 0px 10px 10px;
-    box-shadow: -2px 4px 10px rgb(92, 92, 92);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
 
     padding: 8px;

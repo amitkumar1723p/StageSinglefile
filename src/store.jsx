@@ -10,8 +10,11 @@ import {
   GetAllAdminReducer,
   GetPost_BiddingDocumentReducer,
   GetTenentResponseReducer,
-  TenentResponseIsExitReducer ,
-  getAllUserReducer
+  TenentResponseIsExitReducer,
+  getAllUserReducer,
+  
+  paymentReducer,
+  getPaidPropertyReducer
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -27,12 +30,18 @@ import {
   GetAdminAgentAssignPropertyReducer,
   GetAllScheduleVisitsAndMakeOffer_LengthReducer,
   GetMyVisitsReducer,
-  GetSimilarProperty ,
-  OwnerAllPostsVisitsReducer ,
+  GetSimilarProperty,
+  OwnerAllPostsVisitsReducer,
   // OwnerAllPostsVisitsReducer,
-  GetAllNotificationsAndRequirementsReducer
-} from "./Reducer/postReducer.jsx";
+  GetAllNotificationsAndRequirementsReducer,
+  OwnerUploadExcelFileReducer,
+  fetchAllOwnerFilesReducer,
 
+  GetDeletedPostsReducer,
+  fetchAllAdminFilesReducer,
+  fetchAllAgentFilesReducer,
+  removeExcelFromAdminReducer,
+} from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
@@ -53,16 +62,25 @@ const reducer = combineReducers({
   AssignPropertys: GetAllAssignPropertyReducer,
   AdminProperty: GetAdminAgentAssignPropertyReducer,
   VistAndOffer: GetAllScheduleVisitsAndMakeOffer_LengthReducer,
-  MyVisits:  GetMyVisitsReducer,
-
-  SimilarProperty:GetSimilarProperty ,
-
-  OwnerPostsVisits:OwnerAllPostsVisitsReducer ,
+  MyVisits: GetMyVisitsReducer,
+  SimilarProperty: GetSimilarProperty,
+  OwnerPostsVisits: OwnerAllPostsVisitsReducer,
   TenentResponseIsExit: TenentResponseIsExitReducer,
+  AllUserResponse: getAllUserReducer,
+  AllNotifiesAndReq: GetAllNotificationsAndRequirementsReducer,
+  deletePosts: GetDeletedPostsReducer,
 
   AllUserResponse:getAllUserReducer,
   
-  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer
+  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer,
+  paymentResponse:paymentReducer,
+  
+  paidPropertyData:getPaidPropertyReducer,
+  OwnerUploadingExcelFile:OwnerUploadExcelFileReducer,
+  OwnerAllExcelFiles:fetchAllOwnerFilesReducer,
+  AdminAllExcelFiles:fetchAllAdminFilesReducer,
+  AgentAllExcelFiles:fetchAllAgentFilesReducer,
+  // RemoveAdminAgentExcel:removeExcelFromAdminReducer
 });
 
 let initialState = {};

@@ -36,7 +36,8 @@ const PropertyFilters = () => {
   const { data } = useSelector((state) => {
     return state.GetAllPost;
   });
-  console.log(data);
+  // console.log(data);
+
   const handleClicked = (v) => {
     setIsClicked(v);
   };
@@ -85,6 +86,7 @@ const PropertyFilters = () => {
 
     // eslint-disable-next-line
   }, [Filter, querry]);
+
   useEffect(() => {
     if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
       return navigate("/");
@@ -108,6 +110,7 @@ const PropertyFilters = () => {
       // Detect page refresh
       if (sessionStorage.getItem("isReloaded")) {
         sessionStorage.removeItem("isReloaded");
+
 
         dispatch(
           GetSingleProjectNameDataAction({
@@ -140,6 +143,7 @@ const PropertyFilters = () => {
       };
     }
   }, []);
+
   const bhkOptions = [1, 2, 3, 4, 5];
   const ApartmentTypeOptions = [
     "Apartment",
@@ -206,6 +210,10 @@ const PropertyFilters = () => {
               >
                 Clear Filter <img src="/img/clear-filter.svg" alt="" />
               </div>
+            </div>
+            <div className="filter-title">
+              <h2 className="filter-title-1">Filter Your Search</h2>
+              {/* <p className="filter-title-1">clear Filter</p> */}
             </div>
 
             <div className="filter-dummyLine"></div>
@@ -451,7 +459,7 @@ const PropertyFilters = () => {
             <div className="filter-home-card">
               <div className="total-post-length-container">
                 <p className="total-post-lable-allpost">
-                  Total result {data?.allPost?.length}
+                  Showing {data?.allPost?.length} Lisitng
                 </p>
 
                 <button

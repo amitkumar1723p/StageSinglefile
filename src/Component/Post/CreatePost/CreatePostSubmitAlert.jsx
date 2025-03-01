@@ -12,13 +12,12 @@ export default function CreatePostSubmitAlert({ SetShow }) {
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
- 
   const navigate = useNavigate();
   return (
     <div className="create-post-submit-alert">
       <div className="alert-header">
         <div className="alert-title-create">
-          {" "}
+          
           <img src="/img/blue-tick.svg" alt="blue-tick" />
           <h3>Post Created Successfully! </h3>{" "}
         </div>

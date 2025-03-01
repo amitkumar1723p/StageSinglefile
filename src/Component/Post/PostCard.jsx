@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, useNavigate, Navigate } from "react-router-dom";
-import {
-  IoIosCopy,
-  IoLogoFacebook,
-  IoLogoInstagram,
-  IoMdAddCircle,
-  IoMdSend,
-  IoMdShareAlt,
-} from "react-icons/io";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import "./Post.css";
@@ -33,46 +26,6 @@ export default function PostCard({ PostData, index }) {
     navigator.clipboard.writeText(window.location.href);
     // You could add a toast notification here
   };
-
-  // const platforms = [
-  //   {
-  //     name: 'WhatsApp',
-  //     icon: <IoMdAddCircle className="w-5 h-5" />,
-  //     color: 'bg-green-500 hover:bg-green-600',
-  //     textColor: 'text-white',
-  //     url: `https://wa.me/?text=${window.location.href}`
-  //   },
-  //   {
-  //     name: 'Telegram',
-  //     icon: <IoMdSend className="w-5 h-5" />,
-  //     color: 'bg-blue-500 hover:bg-blue-600',
-  //     textColor: 'text-white',
-  //     url: `https://t.me/share/url?url=${window.location.href}`
-  //   },
-  //   {
-  //     name: 'Facebook',
-  //     icon: <IoLogoFacebook className="w-5 h-5" />,
-  //     color: 'bg-blue-600 hover:bg-blue-700',
-  //     textColor: 'text-white',
-  //     url: `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`
-  //   },
-  //   {
-  //     name: 'Instagram',
-  //     icon: <IoLogoInstagram className="w-5 h-5" />,
-  //     color: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600',
-  //     textColor: 'text-white',
-  //     url: `https://www.instagram.com/` // Note: Instagram doesn't support direct sharing via URL
-  //   },
-  //   {
-  //     name: 'Copy Link',
-  //     icon: <IoIosCopy className="w-5 h-5" />,
-  //     color: 'bg-gray-100 hover:bg-gray-200',
-  //     textColor: 'text-gray-800',
-  //     onClick: shareUrl
-  //   }
-  // ];
-
-  // Stop Re-Rendring This Function
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
@@ -132,14 +85,14 @@ export default function PostCard({ PostData, index }) {
 
     if (RunInterval === true) {
       slider = setInterval(() => {
-        if (PostData.PropertyImages.length <= 1) {
+        if (PostData?.PropertyImages?.length <= 1) {
           setImageTranlate(0);
         }
 
-        if (PostData.PropertyImages.length > 1) {
+        if (PostData?.PropertyImages?.length > 1) {
           if (
             Number(String(ImageTranlate).replace("-", "")) + 1 <
-            PostData.PropertyImages.length
+            PostData?.PropertyImages?.length
           ) {
             setImageTranlate(ImageTranlate - 1);
           } else {
@@ -178,7 +131,7 @@ export default function PostCard({ PostData, index }) {
   }, [data]);
 
   useEffect(() => {
-    const areaDetailsData = PostData.AreaDetails;
+    const areaDetailsData = PostData?.AreaDetails;
 
     if (areaDetailsData) {
       const { PlotArea, SuperBuiltUpArea, CarpetArea, BuiltUpArea } =
@@ -224,7 +177,7 @@ export default function PostCard({ PostData, index }) {
         }
       }
     }
-    const floorDetailsData = PostData.FloorDetails;
+    const floorDetailsData = PostData?.FloorDetails;
 
     if (floorDetailsData) {
       const { PropertyOnFloor, TotalFloors } = floorDetailsData;
@@ -236,7 +189,7 @@ export default function PostCard({ PostData, index }) {
     }
 
     setPropertyAddress(
-      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Landmark} ${PostData.LocationDetails.City}`
+      `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -273,8 +226,8 @@ export default function PostCard({ PostData, index }) {
             }}
           >
             <div className="icon-box">
-              {PostData.PostVerifyShow ? (
-                PostData.PostVerify ? (
+              {PostData?.PostVerifyShow ? (
+                PostData?.PostVerify ? (
                   <div className="active-post">
                     <img src="/img/verified-tag.svg" alt="verified-tag" />
                     <p className="active-post-para">Verified</p>
@@ -288,21 +241,9 @@ export default function PostCard({ PostData, index }) {
               {/* If PostVerifyShow is false, show nothing */}
             </div>
 
-            {/* <div className="IconBox">
-            <div className="edit-delete-Icon-box">
-              {location.pathname.includes("user/my-listing") &&
-                PostData.BasicDetails.PropertyAdType == "Rent" && (
-                  <>
-                    <Link to={`/user/post/update/${PostData._id}`}>
-                      <img src="/img/edit.png" className="editIcon" />
-                    </Link>
-                  </>
-                )}
-            </div>
-          </div> */}
 
             {PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? <div className="imageSlide">
-              {PostData.PropertyImages.map((Post, i) => {
+              {PostData?.PropertyImages?.map((Post, i) => {
                 return (
                   <img
                     key={i}
@@ -322,7 +263,7 @@ export default function PostCard({ PostData, index }) {
           <div className="imageSlide">
                 <img
                     // key={}
-                    src={PostData.PropertyImages[0].url}
+                    src={PostData?.PropertyImages[0]?.url}
                     alt="PropertyPost"
                     style={{
                       transform: `translateX(${ImageTranlate}00%)`,
@@ -337,9 +278,10 @@ export default function PostCard({ PostData, index }) {
                   }
             <div className="property-card-info ">
               <div className={`heading-name  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
-                {PostData.LocationDetails.ProjectName}
+                {PostData?.LocationDetails?.ProjectName}
 
-               {PostData?.propertyStatus?.currentPropertyStatus!=="sold out" && <div className="share-fav-main-box">
+               {PostData?.propertyStatus?.currentPropertyStatus!=="sold out" &&
+                <div className="share-fav-main-box">
                   <div className="postcard-share-parent">
                     <div onClick={() => setIsModalOpen(true)}>
                       <img
@@ -348,7 +290,7 @@ export default function PostCard({ PostData, index }) {
                         alt="..."
                       ></img>
                     </div>
-                    {/* share button end */}
+                  
                   </div>
                   {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                     <div className={`add-favourite-box  flex`}>
@@ -358,7 +300,7 @@ export default function PostCard({ PostData, index }) {
                           if (medata && medata.IsAuthenticated == true) {
                             dispatch(
                               AddFavouriteAndUnFavouriteAction({
-                                PostData: { PostId: PostData._id },
+                                PostData: { PostId: PostData?._id },
                               })
                             );
                           } else {
@@ -368,8 +310,8 @@ export default function PostCard({ PostData, index }) {
                       >
                         {medata?.user?.FavouritePost?.some(
                           (fav) =>
-                            String(fav.PostData.PostId?._id) ===
-                            String(PostData._id)
+                            String(fav?.PostData?.PostId?._id) ===
+                            String(PostData?._id)
                         ) ? (
                           <img
                             className="fav-icon"
@@ -385,9 +327,9 @@ export default function PostCard({ PostData, index }) {
                         )}
                       </button>
                       {location.pathname.includes("user/my-listing") &&
-                        PostData.BasicDetails.PropertyAdType == "Rent" && (
+                        PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                           <>
-                            <Link to={`/user/post/update/${PostData._id}`}>
+                            <Link to={`/user/post/update/${PostData?._id}`}>
                               <img src="/img/edit.png" className="editIcon" />
                             </Link>
                           </>
@@ -403,8 +345,8 @@ export default function PostCard({ PostData, index }) {
                 <div className="main-class--property">
                   <div className="img-box-imp-data-card">
                     <p className={`  answer-box  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
-                      {`${PostData.PropertyDetails.BHKType} BHK`}{" "}
-                      {PostData.PropertyDetails?.OtherRoom?.map((text) => {
+                      {`${PostData?.PropertyDetails.BHKType} BHK`}{" "}
+                      {PostData?.PropertyDetails?.OtherRoom?.map((text) => {
                         return `+ ${text == "Pooja Room"
                             ? "Pooja"
                             : text == "Servant Room"
@@ -434,7 +376,7 @@ export default function PostCard({ PostData, index }) {
                 </div>
                 <div>
                   <div className="property-status-floor">
-                    <p className={` answer-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>{floorDetails}</p>
+                    <p className={` answer-box  `}>{floorDetails}</p>
                     <p className={`question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> Floor </p>
                   </div>
                 </div>
@@ -442,7 +384,7 @@ export default function PostCard({ PostData, index }) {
                   {" "}
                   <div className="property-status">
                     <p className={` answer-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
-                      {PostData.AmenitiesDetails.Furnishing}
+                      {PostData?.AmenitiesDetails?.Furnishing}
                     </p>
                     <p className={`question-box ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}> Furnishing Details</p>
                   </div>
@@ -452,7 +394,7 @@ export default function PostCard({ PostData, index }) {
                 <div className="Reserveprice-sec">
                   <p className={`price-pr-anwser ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                     {/* Show Reserve Price  */}
-                    {PostData.BasicDetails.PropertyAdType == "Sale" && (
+                    {PostData?.BasicDetails?.PropertyAdType == "Sale" && (
                       <>
                         <div>
                           <div className="price-section-sale">
@@ -463,26 +405,26 @@ export default function PostCard({ PostData, index }) {
                             :
                             <span className={` price-section ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"} `}>
                               {formatReservePrice(
-                                PostData.PricingDetails.ExpectedPrice
+                                PostData?.PricingDetails.ExpectedPrice
                               )}
                             </span>
                           </div>
                           <p className={`post-card-section ${false ? "" : "sold-out"} `}>
-                            ₹ {PostData.PricingDetails.PricePerSqFt} Per sqft
+                            ₹ {PostData?.PricingDetails.PricePerSqFt} Per sqft
                           </p>
                         </div>
                       </>
                     )}
                   </p>
                 </div>
-                {PostData.BasicDetails.PropertyAdType == "Rent" && (
+                {PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                   <>
                     <>
                       <div className="rent-deposite-section">
                         <div>
                           <p className="price-ans">
                             {formatReservePrice(
-                              PostData.PricingDetails.ExpectedRent
+                              PostData?.PricingDetails?.ExpectedRent
                             )}
                             <span>/Month </span>
                           </p>
@@ -493,7 +435,7 @@ export default function PostCard({ PostData, index }) {
                             <div className="Reserveprice-sec-grid">
                               <p className="price-ans">
                                 {formatReservePrice(
-                                  PostData.PricingDetails.DepositePrice
+                                  PostData?.PricingDetails?.DepositePrice
                                 )}
                               </p>
                               <p className="question-box">Deposit Amount </p>
@@ -511,11 +453,11 @@ export default function PostCard({ PostData, index }) {
             <div className="price-details">
              {
                PostData?.propertyStatus?.currentPropertyStatus==="sold out" ?  <p className=""></p>:<div className="Date-of-post">
-               {PostData.PostVerify ? (
+               {PostData?.PostVerify ? (
                  <p>
                    Posted On:{" "}
                    <span id="postdate">
-                     {formatDate(PostData.PostVerifyData?.Time)}
+                     {formatDate(PostData?.PostVerifyData?.Time)}
                    </span>
                  </p>
                ) : (
@@ -531,7 +473,7 @@ export default function PostCard({ PostData, index }) {
                 to={`/post-detail/${PropertyAddress.toLowerCase()
                   .replaceAll(" ", "-")
                   .replace(",", "")
-                  .replaceAll("/", "-")}-${PostData._id}`}
+                  .replaceAll("/", "-")}-${PostData?._id}`}
               >
                 <button className={`contact-button ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out-button"}`} disabled={PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? false: true}>View More</button>
               </Link>
@@ -548,7 +490,7 @@ export default function PostCard({ PostData, index }) {
           }/post-detail/${PropertyAddress.toLowerCase()
             .replaceAll(" ", "-")
             .replace(",", "")
-            .replaceAll("/", "-")}-${PostData._id}`}
+            .replaceAll("/", "-")}-${PostData?._id}`}
       />
 
       {/* share card end  */}

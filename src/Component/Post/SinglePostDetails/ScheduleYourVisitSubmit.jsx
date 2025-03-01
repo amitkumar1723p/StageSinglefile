@@ -3,7 +3,7 @@ import "./ScheduleYourVisitSubmit.css"; // Import the CSS file
 import { useNavigate } from "react-router-dom";
 
 const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
-  // console.log(ScheduleVistData)
+ 
 
   const navigate = useNavigate();
   const formatTime = useCallback((time24) => {

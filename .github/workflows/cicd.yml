@@ -14,7 +14,7 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} -t gauravwadhwa234/property-frontend .
+        run: docker build  --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}  --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} -t gauravwadhwa234/property-frontend .
       - name: Publish Image to Docker Hub
         run: docker push gauravwadhwa234/property-frontend:latest 
 

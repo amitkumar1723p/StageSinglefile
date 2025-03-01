@@ -364,8 +364,10 @@
 
 .Shortlisted-prop {
   font-size: 16px;
+  padding: 10px 0px;
   color: #333;
   text-align: center;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -375,6 +377,18 @@
     gap: 20px;
     width: 100%;
     
+  }
+
+  .dashboard-right-side {
+    margin: 20px 0px;
+  }
+
+  .dashboard-right-side img {
+    width: 100%;
+  }
+
+  .main-profile-dashboard-section {
+    display: unset;
   }
 
   .dashborad-section-left-right {

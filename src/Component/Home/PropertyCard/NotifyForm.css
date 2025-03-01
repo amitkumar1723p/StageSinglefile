@@ -81,6 +81,7 @@
 .notify-form-main-content-bottom{
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 .notify-form-floor{
   display: flex;
@@ -150,7 +151,7 @@ form {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  gap: 20px;
+  gap: 0;
 }
 
 .notify-lable {
@@ -260,7 +261,7 @@ form {
     gap: 0;
   }
   .notify-form-image {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
   }
 }

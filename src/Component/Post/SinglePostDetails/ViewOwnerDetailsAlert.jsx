@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./ViewOwnerDetailsAlert.css";
-export default function ViewOwnerDetails({ SetShow }) {
+import { FaCheckCircle } from "react-icons/fa"; // Import an icon for success
+
+export default function ViewOwnerDetails({ SetShow, Contact }) {
   const [OwnerDetails, setOwnerDetals] = useState({});
 
   useEffect(() => {
@@ -13,8 +15,6 @@ export default function ViewOwnerDetails({ SetShow }) {
     };
   }, []);
 
-  console.log(OwnerDetails);
-
   return (
     <div className="view-owner-details-modal">
       <div className="view-owner-details-header">
@@ -26,23 +26,33 @@ export default function ViewOwnerDetails({ SetShow }) {
         >
           X
         </span>
-        <h1 className="view-owner-details-title">View Response Form</h1>
+        {/* <h2 className="view-owner-details-title">Payment Successful!</h2> */}
       </div>
       <div className="view-owner-details-content">
+        <div className="success-icon">
+          <FaCheckCircle color="#28a745" size={50} />
+        </div>
         <p>
-          <strong>Name:</strong> {OwnerDetails.OwnerName}
+          Congratulations! Your payment was successfully processed. Here are
+          the details:
         </p>
+        <strong>
+          Property Owner Contact No: <b>{Contact}</b>
+        </strong>
         <p>
-          <strong>Phone No:</strong> {OwnerDetails.OwnerContactNumber}
+          You can now directly reach out to the owner for further
+          communication and discussions.
         </p>
-        <p>
-          Dear Tenant, here is the contact information for the property owner.
-          You can directly reach out to the owner to inquire about the listing.
-          Additionally, we have sent your details to the owner. If they choose
-          to proceed with you, you will receive a call from their side. You also
-          have the option to contact the owner directly for further discussions
-          and to move forward with the property process.
-        </p>
+        {/* <div className="cta-btn-container">
+          <button
+            className="cta-btn"
+            onClick={() => {
+              alert("Opening contact options...");
+            }}
+          >
+            Contact Owner
+          </button>
+        </div> */}
       </div>
     </div>
   );

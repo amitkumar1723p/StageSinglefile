@@ -8,10 +8,14 @@
   position: relative; /* Ensure the cross button is positioned relative to the form container */
 }
 
+.postreq-form{
+  margin-bottom: 3px;
+}
+
 .cross-Btn {
   position: absolute;
-  top: 16px;  /* Adjust this value to move it down */
-  right: 16px;  /* Adjust this value to move it left or right */
+  top: 9px;  /* Adjust this value to move it down */
+  right: 8px;  /* Adjust this value to move it left or right */
   font-size: 16px;
   cursor: pointer;
   background-color:#c7e4fc;  
@@ -70,7 +74,7 @@
   border-bottom: 1px solid #e2e2e2;
   gap: 10px;
   /* border: 1px solid black; */
-  padding: 10px 10px 25px 10px;
+  padding: 10px 10px 10px 10px;
   border-radius: 8px 8px 0px 0px ;
   background-color: rgb(233 245 255);
 
@@ -109,7 +113,8 @@
   display: flex;
   justify-content: space-between;
   align-items: end;
-  padding: 10px;
+  /* padding: 10px; */
+  gap: 10px;
 }
 .img-requirement img{
   width: 220px;
@@ -150,7 +155,7 @@
   border-radius: 4px;
   cursor: pointer;
   height: 36px;
-  width: 226px;
+  width: 100px;
 }
 
 .form-submit-btn:hover {
@@ -181,6 +186,7 @@
 }
 .form-budget{
  flex-direction: row;
+ margin-left: 13px;
  
 }
 .form-budget-option{
@@ -188,8 +194,9 @@
   align-items: end;
 }
 .form-budget select{
+  padding: 5px;
   color: rgba(170, 181, 193, 1);
-  width: 100px;
+  width: 50px;
   height: 36px;
   padding: 0px;
   border-radius:0px 8px 8px 0px ;
@@ -210,7 +217,7 @@
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #333;
-  width: 320px;
+  /* width: 320px; */
 }
 .possession-status-title{
   font-size: 12px;
@@ -320,6 +327,10 @@ input[type="radio"] {
 
 
 @media (max-width: 480px) {
+
+  .possession-status{
+    padding: 10px;
+  }
 
   .form-group select, .form-group input {
     font-size: 14px;

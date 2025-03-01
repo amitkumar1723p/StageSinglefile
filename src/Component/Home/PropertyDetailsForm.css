@@ -8,7 +8,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 80%;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 
 
@@ -241,6 +241,14 @@ select::placeholder {
 } */
 
 @media (max-width: 480px){
+  .form-container-rent{
+    width: 90%;
+    padding: 0;
+  }
+
+  .property-Container{
+    display: none;
+  }
   .leftContainer{
     width: 100%;
   }

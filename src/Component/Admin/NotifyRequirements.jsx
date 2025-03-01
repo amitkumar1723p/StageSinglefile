@@ -207,7 +207,7 @@ const NotifyRequirements = () => {
               }`}
               onClick={() => {
                 setShowUnacknowledged("all");
-                // console.log(showUnacknowledged)
+
                 setDisplayData(acknowledgedNotifies);
               }}
             >
@@ -301,6 +301,7 @@ const NotifyRequirements = () => {
                       </th>
                       <th className="notify-requirements-th">Budget</th>
                       <th className="notify-requirements-th">Project Name</th>
+                      <th className="notify-requirements-th">Possession Status</th>
                     </>
                   )}
                 </tr>
@@ -355,7 +356,7 @@ const NotifyRequirements = () => {
                             {item?.RequirementUser?.ContactNumber}
                           </td>
                           <td className="notify-requirements-td">
-                          {
+                            {
                               new Date(item.createAt)
                                 .toLocaleDateString("en-GB") // This formats the date as DD/MM/YYYY
                                 .split("/") // Splitting the date into [DD, MM, YYYY]
@@ -374,10 +375,13 @@ const NotifyRequirements = () => {
                             {item.FloorPreference}
                           </td>
                           <td className="notify-requirements-td">
-                            {item.Budget}
+                            {item.Budget} {item.unit}
                           </td>
                           <td className="notify-requirements-td">
                             {item.ProjectName}
+                          </td>
+                          <td className="notify-requirements-td">
+                            {item.PossessionStatus}
                           </td>
                         </>
                       )}

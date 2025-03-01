@@ -818,6 +818,7 @@ export default function CreatePostMain() {
           {next === 4 && (
             <CreatePostImageUploadSection
               setnext={setnext}
+              next={next}
               uploadimages={uploadimages}
               setuploadimages={setuploadimages}
               previewImage={previewImage}
