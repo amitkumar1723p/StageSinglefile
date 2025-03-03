@@ -14,6 +14,8 @@ import LandLord from "./LandLord";
 // import TenantDetailsForm from "./TenantDetailsForm";
 import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
+import ListYourProperty from "./ListYourProperty.jsx";
+import RentAuthentication from "./RentAuthentication.jsx";
 import BrowseProperties from "./BrowseProperties";
 // import LandLord from "./LandLord";
 
@@ -737,11 +739,13 @@ const HeroSection = () => {
         <>
           <Tenant />
           <BrowseProperties />
+          <ListYourProperty/>
           <LandLord />
           <PropertyDetailsForm />
           <RentAgreement />
           <RentalBanner />
-          <VerifiedComponent />
+          {/* <VerifiedComponent /> */}
+          <RentAuthentication/>
           {/* <TenantDetailsForm /> */}
         </>
       )}
