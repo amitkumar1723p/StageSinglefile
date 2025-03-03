@@ -919,7 +919,7 @@ const SingleCard = ({ PostData, index }) => {
         </div>
       </div>
       {/* share card begin  */}
-
+      
       <ShareModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
