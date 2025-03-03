@@ -498,7 +498,7 @@ export default function SinglePostDetails() {
                       <div className="property-info-tags">
                         <img
                           className="icon-detials"
-                          src="/img/floor.png"
+                          src="/img/parking.png"
                           alt="icon"
                         />
                         <div className="img-box-imp-data">
@@ -516,7 +516,7 @@ export default function SinglePostDetails() {
                       <div className="property-info-tags">
                         <img
                           className="icon-detials"
-                          src="/img/floor.png"
+                          src="/img/Flooring-Type.png"
                           alt="icon"
                         />
                         <div className="img-box-imp-data">
@@ -534,7 +534,7 @@ export default function SinglePostDetails() {
                       <div className="property-info-tags">
                         <img
                           className="icon-detials"
-                          src="/img/floor.png"
+                          src="/img/bathroom.png"
                           alt="icon"
                         />
                         <div className="img-box-imp-data">
@@ -553,7 +553,7 @@ export default function SinglePostDetails() {
                       <div className="property-info-tags">
                         <img
                           className="icon-detials"
-                          src="/img/floor.png"
+                          src="/img/facing.png"
                           alt="icon"
                         />
                         <div className="img-box-imp-data">
@@ -1047,7 +1047,7 @@ export default function SinglePostDetails() {
                     {/* Water Source */}
                     <PropertyDataBox
                       Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                      Icon="/img/water.png"
+                     Icon="/img/parking.png"
                       Data={"Water Source"}
                     />
 
@@ -1115,18 +1115,18 @@ export default function SinglePostDetails() {
                         <PropertyDataBox
                           Id={"plot-dir"}
                           Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotDirection}`}
-                          Icon="/img/water.png"
+                          Icon="/img/facing.png"
                           Data={"Plot Direction"}
                         />
                         {/* Plot Facing  */}
                         <PropertyDataBox
                           Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotFacing}`}
-                          Icon="/img/water.png"
+                          Icon="/img/Property-age.png"
                           Data={"Plot Facing"}
                         />
                         <PropertyDataBox
                           Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
-                          Icon="/img/water.png"
+                          Icon="/img/total-floor.png"
                           Data={"Front Road Width"}
                         />
                         {/* Other Feature   */}
@@ -1136,7 +1136,7 @@ export default function SinglePostDetails() {
                             <div className="img-icon">
                               <img
                                 className="icon-overview"
-                                src={"/img/water.png"}
+                                src={"/img/bathroom.png"}
                                 alt="icon"
                               />
                             </div>

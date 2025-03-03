@@ -56,14 +56,14 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  // console.log("BasicDetailsData" , BasicDetailsData  )
-  // console.log("LocationDetailsData" , LocationDetailsData  )
-  // console.log("PropertyDetailsData" , PropertyDetailsData  )
-  // console.log("OtherDetailsData" , OtherDetailsData  )
-  // console.log("AreaDetailsData" , AreaDetailsData  )
-  // console.log("FloorDetailsData" , FloorDetailsData  )
-  // console.log("AmenitiesDetailsData" , AmenitiesDetailsData  )
-  // console.log("PricingDetailsData" , PricingDetailsData  )
+  // console.log("BasicDetailsData", BasicDetailsData);
+  // console.log("LocationDetailsData", LocationDetailsData);
+  // console.log("PropertyDetailsData", PropertyDetailsData);
+  // console.log("OtherDetailsData", OtherDetailsData);
+  // console.log("AreaDetailsData", AreaDetailsData);
+  // console.log("FloorDetailsData", FloorDetailsData);
+  // console.log("AmenitiesDetailsData", AmenitiesDetailsData);
+  // console.log("PricingDetailsData", PricingDetailsData);
 
   // useEffect(() => {
   //   // remove Coma
@@ -131,6 +131,20 @@ export default function CreatePostImageUpload({
         /,/g,
         ""
       );
+      if (BasicDetailsData.ApartmentType == "Plot/Land") {
+        const PricePerSqYdRemoveComa = String(CopyObj?.PricePerSqYd)?.replace(
+          /,/g,
+          ""
+        );
+        CopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
+      } else {
+        const PricePerSqFtRemoveComa = String(CopyObj?.PricePerSqFt)?.replace(
+          /,/g,
+          ""
+        );
+        CopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
+      }
+
       CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
 
       // Check and remove commas from MonthlyExpectedRent if it exists
@@ -179,7 +193,10 @@ export default function CreatePostImageUpload({
 
       if (BasicDetailsData.ApartmentType == "Plot/Land") {
         //  alert("form details")
-        formData.append("OtherDetails", `${JSON.stringify(OtherDetailsData)}`);
+        formData.append(
+          "OtherDetails",
+          `${JSON.stringify( OtherDetailsData )}`
+        );
       } else {
         formData.append(
           "PropertyDetails",

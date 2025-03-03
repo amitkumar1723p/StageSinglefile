@@ -13,18 +13,19 @@ export default function LocationDetails({
   setLocationDetailsData,
   update,
   setnext,
-  LocationDetailsSubmit
+  // LocationDetailsSubmit
+  LocationDetailsSubmiRef
 }) {
   const dispatch = useDispatch();
 
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   if (!update) {
-  //     StoreDataInSession("next", 2);
-  //     StoreDataInSession("LocationDetailsData", LocationDetailsData);
-  //   }
-  //   setnext(2);
-  // };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (!update) {
+      StoreDataInSession("next", 2);
+      StoreDataInSession("LocationDetailsData", LocationDetailsData);
+    }
+    setnext(2);
+  };
 
   return (
     <>
@@ -34,7 +35,7 @@ export default function LocationDetails({
         </div> */}
       <div className="container w-80%">
         <h2 className="location-heading">Location Details</h2>
-        <form id="locationForm" onSubmit={LocationDetailsSubmit}>
+        <form id="locationForm" onSubmit={submitHandler} ref={ LocationDetailsSubmiRef}>
           <div className="location-box">
             <ProjectNameSection
               ProjectInputType={"PostForm"}
