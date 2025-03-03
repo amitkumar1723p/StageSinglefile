@@ -32,7 +32,7 @@ export default function AdminAside() {
     //have to protect for agent
 
     
-    if (["Owner", "Admin"].includes(medata?.user?.Role)) {
+    if (["Owner"].includes(medata?.user?.Role)) {
       dispatch(GetAllNotificationsAndRequirements());
     }
     if (medata?.user?.Role === "Owner") {

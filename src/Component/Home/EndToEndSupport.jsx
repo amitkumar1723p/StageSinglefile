@@ -9,18 +9,18 @@ const EndToEndSupport = () => {
         </h2>
       
       <div className="main-box-sellertoseller">
-        <div className="support-container">
+        <div className="Support-Container">
           {/* Left Side Image */}
-          <div className="support-image">
+          <div className="Buying-support-image">
             <img
               src="/img/EndToEndNewBuyer.svg"
               alt="Support illustration"
-              className="main-image"
+              className="end-to-end-main-image"
             />
           </div>
 
           {/* Right Side Content */}
-          <div className="support-content">
+          <div className="buying-support-content">
             <ul className="features-list">
               {[ 
                 "Dedicated Relationship Manager",

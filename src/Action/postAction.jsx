@@ -821,6 +821,202 @@ export const SimilarProperty = (postId) => {
   };
 };
 
+
+export const OwnerUploadExcelFile = (file)=>{
+
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "OwnerAllExcelFileRequest",
+        payload: "OwnerAllExcelFileRequest",
+      });
+      if (!file) return alert("Please select a file!");
+  
+      const formData = new FormData();
+      formData.append("file", file);
+    
+  
+   
+      let url = `${api_Base_Url}/excel/upload`;  // Ensure url is correct/
+
+      const config = {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,  // Ensure that credentials are sent if needed
+      };
+ 
+      const { data } = await axios.post(url, formData, config);  // Pass postId as an object
+//  console.log(similar)
+     
+      dispatch({
+        type: "OwnerAllExcelFileSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.log("API Error:", error);  // Log the full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "OwnerAllExcelFileFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response was received
+        dispatch({ type: "OwnerAllExcelFileFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Something else happened
+        dispatch({
+          type: "OwnerAllExcelFileFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//remove excel rom admin and agent
+export const removeExcelFromAdminAction = (adminId, excelId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "Remove_ExcelFromAdminRequest", payload: "Removing Excel from Admin" });
+      
+      const url = `${api_Base_Url}/excel/remove-excel-access`;
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+
+      const { data } = await axios.put(url,{
+        adminId,
+        excelId
+      }, config);
+      dispatch({ type: "Remove_ExcelFromAdminSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({ type: "Remove_ExcelFromAdminFail", payload: error.response.data });
+      } else {
+        dispatch({ type: "Remove_ExcelFromAdminFail", payload: { message: error.message, success: false } });
+      }
+    }
+  };
+}
+//all excel files of Owner
+export const fetchAllOwnerFiles = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "FetchAllOwnerFilesRequest",
+      });
+
+      const url = `${api_Base_Url}/excel/all-files`; // Ensure the endpoint is correct
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Ensures credentials are sent if required
+      };
+
+      const { data } = await axios.get(url, config); // Fetch all files
+
+      dispatch({
+        type: "FetchAllOwnerFilesSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("API Error:", error); // Log full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "FetchAllOwnerFilesFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response received
+        dispatch({ type: "FetchAllOwnerFilesFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Unexpected error
+        dispatch({
+          type: "FetchAllOwnerFilesFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+//all excel file of  agent
+export const fetchAllAdminFiles = () => {
+  // console.log("im called")
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "FetchAllAdminFilesRequest",
+      });
+
+      const url = `${api_Base_Url}/admin-owner/get-admin/assign-excel`; // Ensure the correct endpoint for Admin
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Ensures credentials are sent if required
+      };
+
+      const { data } = await axios.get(url, config); // Fetch admin files
+// console.log("this sis data ",data)
+      dispatch({
+        type: "FetchAllAdminFilesSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("API Error:", error); // Log full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "FetchAllAdminFilesFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response received
+        dispatch({ type: "FetchAllAdminFilesFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Unexpected error
+        dispatch({
+          type: "FetchAllAdminFilesFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+//all excel file of  agent
+export const fetchAllAgentFiles = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "FetchAllAgentFilesRequest",
+      });
+
+      const url = `${api_Base_Url}/admin-owner/get-agent/assign-excel`; // Ensure the endpoint is correct
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // Ensures credentials are sent if required
+      };
+
+      const { data } = await axios.get(url, config); // Fetch all agent files
+
+      dispatch({
+        type: "FetchAllAgentFilesSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("API Error:", error); // Log full error
+
+      if (error.response) {
+        // Server responded with an error
+        dispatch({ type: "FetchAllAgentFilesFail", payload: error.response.data });
+      } else if (error.request) {
+        // No response received
+        dispatch({ type: "FetchAllAgentFilesFail", payload: { message: "No response from server", success: false } });
+      } else {
+        // Unexpected error
+        dispatch({
+          type: "FetchAllAgentFilesFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+
 export const GetAllNotificationsAndRequirements = () => {
   return async (dispatch) => {
     try {
@@ -854,7 +1050,6 @@ export const GetAllNotificationsAndRequirements = () => {
     }
   };
 };
-
 // change property state available or sold out
 
 export const changePropertyStatus = (updateData) => {
@@ -939,7 +1134,7 @@ export const GetDeletedPostsAction = () => {
         withCredentials: true,
       };
       const { data } = await axios.get(url, config);
-      console.log(data);
+      
       dispatch({ type: "GetDeletedPostsSuccess", payload: data });
     } catch (error) {
       console.log(error);
@@ -951,6 +1146,57 @@ export const GetDeletedPostsAction = () => {
       } else {
         dispatch({
           type: "GetDeletedPostsFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//report page reportaction
+
+
+export const ReportPagePostAction = (formdata) => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "ReportPagePostRequest",
+        payload: "ReportPagePostRequest",
+      });
+
+      const url = `${api_Base_Url}/feedback/report-feedback`;
+      console.log('mu ddd ',formdata)
+
+      const feedBack = new FormData();
+      feedBack.append("feedbackType", formdata.type);
+      feedBack.append("description", formdata.description);
+
+      // Append multiple files correctly
+      if (formdata.file) {
+        // console.log(formdata.file)
+        
+        formdata.file.forEach((files) => {
+          feedBack.append("PropertyImages", files);
+        });
+      }
+      // console.log('mu ddd ',feedBack)
+
+      const config = {
+     
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, feedBack, config);
+      dispatch({ type: "ReportPagePostSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "ReportPagePostFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "ReportPagePostFail",
           payload: { message: error.message, success: false },
         });
       }

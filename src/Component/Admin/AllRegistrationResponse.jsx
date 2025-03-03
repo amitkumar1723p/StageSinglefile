@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ProfileUpdateAction } from "../../Action/userAction";
+import { getAllUserAction, ProfileUpdateAction, UserRoleUpdation } from "../../Action/userAction";
 import { acknowledgeProfile } from "../../Action/postAction";
 import { Pointer } from "lucide-react";
+// import "./AllRegistrationResponse.css"
 // Define the functional component
-export default function AllRegistrationResponse({}) {
+export default function AllRegistrationResponse({ }) {
   const dispatch = useDispatch();
   const [verified, setVerified] = useState();
   const [unverified, setUnverified] = useState();
@@ -13,6 +14,8 @@ export default function AllRegistrationResponse({}) {
   const [tableData, setTableData] = useState([]);
   const [checkNotify, setCheckNotfiy] = useState([]);
   const [require, setRequire] = useState([]);
+  const [roleIndex, setRoleIndex] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   // login user detail
   const { medata } = useSelector((state) => state.meDetails);
 
@@ -33,6 +36,9 @@ export default function AllRegistrationResponse({}) {
     setCheckNotfiy(notification);
     setRequire(requirement);
   }, [allData]);
+
+
+
 
   useEffect(() => {
     if (Array.isArray(AllUserResponseData?.data)) {
@@ -66,7 +72,7 @@ export default function AllRegistrationResponse({}) {
       let filteredData = [...AllUserResponseData.data];
 
       if (viewfilterUser === "verified") {
-       
+
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === true
         ); // Only verified
@@ -74,7 +80,7 @@ export default function AllRegistrationResponse({}) {
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === false
         ); // Only unverified
-      
+
       } else if (viewfilterUser === "newUser") {
         filteredData = filteredData.filter(
           (item) => item?.acknowledge === false
@@ -87,10 +93,26 @@ export default function AllRegistrationResponse({}) {
     }
   }, [AllUserResponseData, viewfilterUser]);
 
-  
+
+  // show alert data 
+  const { data: adminAlertData, LodingType: adminAlertType, } = useSelector((state) => {
+    return state.Post;
+  });
+  // console.log(adminAlertData)
+
+  useEffect(() => {
+      
+    if (adminAlertData?.success === true && adminAlertType == "UserRoleUpdationRequest") {
+ 
+      dispatch(getAllUserAction());
+    }
+  }, [adminAlertData])
+
+
+
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" >
         <div className="d-flex flex-row mb-2 gap-2">
           <div
             className={
@@ -218,14 +240,37 @@ export default function AllRegistrationResponse({}) {
                     <td className="text-light-emphasis border-end">
                       {item.Name ? (
                         <small>
-                          {item.Name} 
+                          {item.Name}
                         </small>
                       ) : (
                         <></>
                       )}
                     </td>
-                    <td className="text-light-emphasis border-end">
-                      <small>{item.Role}</small>
+                    <td className="text-light-emphasis border-end" >
+                      {
+                        roleIndex === index ? <div className="owner-user-role-submit-button d-flex gap-1 ">
+                          <select name="" onChange={(e) => setUserRole(e.target.value)}>
+                            <option value={item.Role}><small>{item.Role}</small></option>
+                            <option value="Tanent"><small>Tanent</small></option>
+                            <option value="Buyer"><small>Buyer</small></option>
+                            <option value="Seller"><small>Seller</small></option>
+                            <option value="Property Owner"><small>Property Owner</small></option>
+                            <option value="NRI"><small>NRI</small></option>
+                            <option value="ChannelPartner"><small>ChannelPartner</small></option>
+                          </select> <button className="border" onClick={() => {
+                            setRoleIndex(null)
+                            dispatch(UserRoleUpdation({
+                              userId: item._id,
+                              role: userRole
+                            }))
+                            // window.location.reload();
+
+                          }}>✅</button></div> : <div onClick={() => {
+
+                            setRoleIndex(index)
+
+                          }}>{item.Role}</div>
+                      }
                     </td>
                     <td className="text-light-emphasis border-end">
                       <small>{item.ContactNumber}</small>
@@ -248,7 +293,7 @@ export default function AllRegistrationResponse({}) {
                       {checkNotify?.some(
                         (user) => user?.User?._id === item._id
                       ) ||
-                      require?.some((user) => user?.RequirementUser?._id === item._id) ? (
+                        require?.some((user) => user?.RequirementUser?._id === item._id) ? (
                         <small>Yes</small>
                       ) : (
                         <small>No</small>
@@ -259,13 +304,13 @@ export default function AllRegistrationResponse({}) {
                       <small>
                         {item?.createAt
                           ? new Date(item?.createAt).toLocaleDateString(
-                              "en-GB"
-                            ) +
-                            " (" +
-                            new Date(item?.createAt)
-                              .toLocaleTimeString("en-GB", { hour12: false })
-                              .slice(0, 5) +
-                            ")"
+                            "en-GB"
+                          ) +
+                          " (" +
+                          new Date(item?.createAt)
+                            .toLocaleTimeString("en-GB", { hour12: false })
+                            .slice(0, 5) +
+                          ")"
                           : "..."}
                       </small>
                     </td>

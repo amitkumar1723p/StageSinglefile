@@ -7,7 +7,11 @@ import Loader from "../Loader/Loader";
 import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
+  fetchAllOwnerFiles,
+  OwnerUploadExcelFile,
   GetDeletedPostsAction,
+  fetchAllAdminFiles,
+  fetchAllAgentFiles,
 } from "../../Action/postAction";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GetAllAdminAction } from "../../Action/userAction";
@@ -65,10 +69,23 @@ const Dashboard = () => {
   const { data: AgentAdminAllPost } = useSelector((state) => {
     return state.AdminProperty;
   });
+  const { data } = useSelector((state) => {
+    return state.OwnerAllExcelFiles;}
+ );
+ const {data:AdminAllExcelFilesData} = useSelector((state) => {
+  return state.AdminAllExcelFiles}
+);
+
+const {data:AgentAllExcelFilesData} = useSelector((state) => {
+  return state.AgentAllExcelFiles}
+);
+
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
-  });
+  })
+
+  // console.log("assongg ",assignedExcles)
 
   // On dashboard we get all property
   useEffect(() => {
@@ -76,13 +93,21 @@ const Dashboard = () => {
       if (medata.user.Role === "Owner") {
         dispatch(Admin_OwnerGetAllPostAction());
         dispatch(GetAllAdminAction());
+        dispatch(fetchAllOwnerFiles())
         // if  data is  exit in redux store not call thsi api
         if (!DeletedPost) {
           dispatch(GetDeletedPostsAction());
         }
       }
       //  console.log(medata.user.Role)
-      if (["Admin", "Agent"].includes(medata.user.Role)) {
+      if (["Admin"].includes(medata.user.Role)) {
+        dispatch(fetchAllAdminFiles())
+
+        dispatch(Admin_AgentGetAllPostAction());
+      }
+      if (["Agent"].includes(medata.user.Role)) {
+        dispatch(fetchAllAgentFiles())
+
         dispatch(Admin_AgentGetAllPostAction());
       }
     }
@@ -101,12 +126,15 @@ const Dashboard = () => {
       setAllPropertyData(AllPost);
       setUnVerifyPost(unverify);
       setTotalListing(PostVerify.length + unverify.length);
-    }
-    const successPost = AllPost?.Post?.filter((item) => {
+    
+    const successPost = AllPost.Post.filter((item) => {
+        // console.log("ittem  ",item)
       return item?.propertyStatus?.currentPropertyStatus === "sold out";
     });
 
-    setSuccessPostLength(successPost?.length);
+  
+        setSuccessPostLength(successPost?.length);
+  }
   }, [AllPost]);
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent
@@ -207,6 +235,54 @@ const Dashboard = () => {
 
                   <p className="viewall">View All</p>
                 </div>{" "}
+
+
+              </>
+            )}
+
+
+      {medata?.user?.Role === "Owner" && (
+              <>
+                   <Link to="/admin/all-excel">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{data?.length}</p>
+                  <img src="/img/In-ActivePosts.png" alt="post" />
+                </div>
+                <h3 >All Excel Data</h3>
+                <p className="viewall">View All</p>
+              </div>
+            </Link>
+              </>
+            )}
+            {medata?.user?.Role === "Admin" && (
+              <>
+                 <Link to="/admin/all-excel-both">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
+                  <img src="/img/In-ActivePosts.png" alt="post" />
+                </div>
+                <h3 >All Excel Data</h3>
+                <p className="viewall">View All</p>
+              </div>
+            </Link>
+              </>
+            )}
+               {medata?.user?.Role === "Agent" && (
+              <>
+                 <Link to="/admin/all-excel-both">
+              <div className="card p-3 cursor-pointer">
+                <div className="Admin-box">
+                  <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
+                  {!AgentAllExcelFilesData && <p className="total-number">0</p>}
+
+                  <img src="/img/In-ActivePosts.png" alt="post" />
+                </div>
+                <h3 >All Excel Data</h3>
+                <p className="viewall">View All</p>
+              </div>
+            </Link>
               </>
             )}
             {medata?.user?.Role === "Owner" && (
@@ -273,7 +349,7 @@ const Dashboard = () => {
       {/* </div> */}
     </>
   );
-};
+}
 
 export default Dashboard;
 

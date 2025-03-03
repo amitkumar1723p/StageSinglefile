@@ -13,7 +13,7 @@
   border-top-right-radius: 10px;
 
   /* border-right: 1px solid #bbddf6; */
-  box-shadow: 0px 0px 12px 0px #cbe1f1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   padding: 10px;
 }
 .header-card-title-section {

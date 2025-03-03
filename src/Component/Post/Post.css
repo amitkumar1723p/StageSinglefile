@@ -326,20 +326,21 @@ transition: .5s;
 .icon-i p {
   margin-left: 5px;
 }
-input[type="file"] {
-  cursor: pointer;
 
+/* this has to be change for admin upload excel file */
+.RemoveCusImg{
+  cursor: pointer;
   margin: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
 }
 
-input[type="file"]::file-selector-button {
+.RemoveCusImg::file-selector-button {
   display: none !important;
 }
 
-input[type="file"]::-webkit-file-upload-button {
+.RemoveCusImg::-webkit-file-upload-button {
   display: none;
 }
 

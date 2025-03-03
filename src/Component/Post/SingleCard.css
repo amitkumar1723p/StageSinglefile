@@ -6,7 +6,7 @@
     /* margin: 0 auto; */
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
     /* overflow: hidden; */
     position: relative;
     font-family: "Inter", Sans-serif;
@@ -96,6 +96,7 @@ margin-right: 5px;
   .single-page-share-button{
       outline: none;
       border: none;
+      border-radius: 8px;
   }
   
   .single-card-property-location {
@@ -333,6 +334,8 @@ margin-right: 5px;
   }
   .rent-per-month{
     color: #1F2937;
+    font-size: 12px;
+    font-weight: 600;
   }
   .truncate-text {
     white-space: nowrap;

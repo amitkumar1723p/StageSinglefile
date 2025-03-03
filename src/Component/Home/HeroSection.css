@@ -439,7 +439,10 @@
 .btn-hero:hover {
   color: #fff;
 }
+@media (max-width: 1024px){
 
+  .search-box-nav{display: none;}
+}
 @media (max-width: 768px) {
   /* .overlay {
     position: absolute;
@@ -505,7 +508,7 @@
   .hero-content {
     position: relative;
     color: white;
-    padding: 0 16px;
+    padding: 0px;
   }
 
   .hero-section {

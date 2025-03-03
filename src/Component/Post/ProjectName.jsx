@@ -208,6 +208,7 @@ export default function ProjectNameSection({
           }`}
         >
           <input
+          
             onKeyDown={handleKeyDown}
             className={inputClass}
             autoComplete="off"

@@ -12,6 +12,7 @@ export default function WindowComponent({
   ZoomImageNumber,
   className,
   Type, // Type of Alert
+  Contact
 }) {
   const MainBox = useRef(null);
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ export default function WindowComponent({
             Images={ImageData}
             PropertyAddress={PropertyAddress}
             ZoomImageNumber={ZoomImageNumber}
+            Contact={Contact}
           />
         </div>
       </div>

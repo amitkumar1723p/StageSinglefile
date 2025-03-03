@@ -163,7 +163,7 @@ export default function AdminListingCard({
                       // checked={
                       //   selectAllProperty ||
                       //   AssignProperty.some(
-                      //     (item) => item.PostId === PostData._id
+                      //     (item) => item.PostId === PostData?._id
                       //   )
                       // }
                     />
@@ -183,7 +183,7 @@ export default function AdminListingCard({
                             setAssignProperty([
                               ...AssignProperty,
 
-                              // PostData._id,
+                              // PostData?._id,
                               {
                                 PostId: PostData?._id,
                                 CreatedBy: medata?.user?._id,
@@ -423,7 +423,7 @@ export default function AdminListingCard({
                     <p className="admin-card-heading">Active on</p>
                     <p className="admin-card-heading-ans">
                       {formatDate.ActiveDate}
-                      {/* {formatDate(PostData.PostVerifyData?.Time)} */}
+                      {/* {formatDate(PostData?.PostVerifyData?.Time)} */}
                     </p>
                   </div>
 

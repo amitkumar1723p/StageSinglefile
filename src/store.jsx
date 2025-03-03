@@ -12,6 +12,9 @@ import {
   GetTenentResponseReducer,
   TenentResponseIsExitReducer,
   getAllUserReducer,
+  
+  paymentReducer,
+  getPaidPropertyReducer
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -31,7 +34,13 @@ import {
   OwnerAllPostsVisitsReducer,
   // OwnerAllPostsVisitsReducer,
   GetAllNotificationsAndRequirementsReducer,
+  OwnerUploadExcelFileReducer,
+  fetchAllOwnerFilesReducer,
+
   GetDeletedPostsReducer,
+  fetchAllAdminFilesReducer,
+  fetchAllAgentFilesReducer,
+  removeExcelFromAdminReducer,
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -60,6 +69,18 @@ const reducer = combineReducers({
   AllUserResponse: getAllUserReducer,
   AllNotifiesAndReq: GetAllNotificationsAndRequirementsReducer,
   deletePosts: GetDeletedPostsReducer,
+
+  AllUserResponse:getAllUserReducer,
+  
+  AllNotifiesAndReq:GetAllNotificationsAndRequirementsReducer,
+  paymentResponse:paymentReducer,
+  
+  paidPropertyData:getPaidPropertyReducer,
+  OwnerUploadingExcelFile:OwnerUploadExcelFileReducer,
+  OwnerAllExcelFiles:fetchAllOwnerFilesReducer,
+  AdminAllExcelFiles:fetchAllAdminFilesReducer,
+  AgentAllExcelFiles:fetchAllAgentFilesReducer,
+  // RemoveAdminAgentExcel:removeExcelFromAdminReducer
 });
 
 let initialState = {};

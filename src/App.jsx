@@ -42,6 +42,8 @@ import ShowUserFavouritePost from "./Component/User/Profile/ShowUserFavouritePos
 import ScheduleYourVisit from "./Component/Admin/ScheduleVisit";
 import OfferReceived from "./Component/Admin/OfferRecived";
 import { UserContext } from "./Component/CreateContext/CreateContext";
+import OurService from "./Component/Home/OurService";
+import ReportPage from "./Component/Home/ReportPage";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
@@ -52,12 +54,17 @@ import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
+// import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+import OwnerAgentExcelData from "./Component/Admin/OwnerAgentExcelData";
+import OwnerAgentExcel from "./Component/Admin/OwnerAgentExcel";
 import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse";
 import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
 // import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
+import Career from "./Component/Home/Careers";
+import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -117,6 +124,10 @@ function App() {
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
+  // paid property
+  const { data: paidPropertyData } = useSelector((state) => {
+    return state.paidPropertyData;
+  });
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
@@ -144,6 +155,19 @@ function App() {
     return state.deletePosts;
   });
 
+//  excel file  
+
+const { data: OwnerAllExcelFilesData } = useSelector((state) => {
+  return state.OwnerAllExcelFiles;
+});
+const { data: AgentAllExcelFilesData } = useSelector((state) => {
+  return state.AgentAllExcelFiles;
+});
+const { data: AdminAllExcelFilesData } = useSelector((state) => {
+  return state.AdminAllExcelFiles;
+});
+ 
+    
   const location = useLocation();
 
   useEffect(() => {
@@ -171,6 +195,10 @@ function App() {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
+      if (
+        data.success === true && ["CreatePostRequest"].includes(LodingType)
+      ) {
+
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
@@ -220,7 +248,7 @@ function App() {
       }
     }
     // eslint-disable-next-line
-  }, [data]);
+}}, [data]);
 
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
@@ -549,6 +577,22 @@ function App() {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
+   //  paid property 
+   useEffect(() => {
+    if (paidPropertyData) {
+      if (paidPropertyData.success === false) {
+        if (paidPropertyData.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{paidPropertyData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "getPaidPropertyFailClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [paidPropertyData]);
 
   // get All User
   useEffect(() => {
@@ -605,6 +649,77 @@ function App() {
     // eslint-disable-next-line
   }, [deletePostsData]);
 
+
+
+
+  //  exel file  (Owner)
+
+  useEffect(() => {
+    if (OwnerAllExcelFilesData) {
+      if (OwnerAllExcelFilesData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (OwnerAllExcelFilesData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (OwnerAllExcelFilesData.IsAuthenticated === false) {
+          navigate("/");
+        }
+
+        setalertMessage(<p>{OwnerAllExcelFilesData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "FetchAllOwnerFilesClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [OwnerAllExcelFilesData]);
+// excel file (admin)
+  useEffect(() => {
+    if (AdminAllExcelFilesData) {
+      if (AdminAllExcelFilesData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (AdminAllExcelFilesData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (AdminAllExcelFilesData.IsAuthenticated === false) {
+          navigate("/");
+        }
+
+        setalertMessage(<p>{AdminAllExcelFilesData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "FetchAllOwnerFilesClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AdminAllExcelFilesData]);
+
+// excel file (ajent)
+
+  useEffect(() => {
+    if (AgentAllExcelFilesData) {
+      if (AgentAllExcelFilesData.success === false) {
+        // dispatch(AlertAction("error", <p>{data.message}</p>, true));
+        if (AgentAllExcelFilesData.AdminVerify === false) {
+          navigate("/");
+          dispatch(LogoutAction());
+        }
+        if (AgentAllExcelFilesData.IsAuthenticated === false) {
+          navigate("/");
+        }
+
+        setalertMessage(<p>{AgentAllExcelFilesData.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+        dispatch({ type: "FetchAllOwnerFilesClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AgentAllExcelFilesData]);
+
+
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
@@ -652,6 +767,22 @@ function App() {
           path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
         />
+         <Route
+          exact
+          path="/Our-Service"
+          element={<OurService />}
+        />
+         <Route
+          exact
+          path="/Career"
+          element={<Career />}
+        />
+        
+        <Route
+          exact
+          path="/Report"
+          element={<ReportPage />}
+        />
 
         <Route
           exact
@@ -695,6 +826,7 @@ function App() {
             />
           </Route>
         </>
+        {/*admin routes*/}
         {/* This Routes available For Admin Owner Agent  */}
 
         <Route
@@ -711,6 +843,59 @@ function App() {
               <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
             }
           />
+
+          <Route
+            exact
+            path="all-excel"
+            element={
+              <AdminOwnerRoutes Component={OwnerAgentExcelData} isOwner={true} />
+            }
+          />
+             <Route
+            
+            path="all-excel-both"
+            element={
+              <AdminAgentExcelData  />
+            }
+          />
+             <Route
+            exact
+            path="excel/:id"
+            element={
+              <AdminOwnerRoutes Component={OwnerAgentExcel} />
+            }
+          />
+          {/* <Route
+            exact
+            path="data/unverify"
+            element={
+              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          /> */}
+          {/* <Route
+            exact
+            path="data/total"
+            element={
+              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          /> */}
+          {/* Agent Data  */}
+          {/* <Route
+            exact
+            path="agent/data/total"
+            element={
+              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          /> */}
+
+          {/* <Route
+            exact
+            path="agent/data/verify"
+            element={
+              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
+            }
+          /> */}
+          
           <Route
             exact
             path="notify"

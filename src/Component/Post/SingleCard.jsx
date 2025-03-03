@@ -104,14 +104,14 @@ const SingleCard = ({ PostData, index }) => {
 
     if (RunInterval === true) {
       slider = setInterval(() => {
-        if (PostData?.PropertyImages.length <= 1) {
+        if (PostData?.PropertyImages?.length <= 1) {
           setImageTranlate(0);
         }
 
-        if (PostData?.PropertyImages.length > 1) {
+        if (PostData?.PropertyImages?.length > 1) {
           if (
             Number(String(ImageTranlate).replace("-", "")) + 1 <
-            PostData?.PropertyImages.length
+            PostData?.PropertyImages?.length
           ) {
             setImageTranlate(ImageTranlate - 1);
           } else {
@@ -376,7 +376,7 @@ const SingleCard = ({ PostData, index }) => {
                     )}
                   </button>
                   {location.pathname.includes("user/my-listing") &&
-                    PostData?.BasicDetails.PropertyAdType == "Rent" && (
+                    PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                       <>
                         <Link to={`/user/post/update/${PostData?._id}`}>
                           <img src="/img/edit.png" className="editIcon" />
@@ -739,7 +739,7 @@ const SingleCard = ({ PostData, index }) => {
                                 PostData?.PricingDetails?.ExpectedPrice
                             )}</span>
                     </p> */}
-          {PostData?.BasicDetails.PropertyAdType == "Rent" && (
+          {PostData?.BasicDetails?.PropertyAdType == "Rent" && (
             <>
               <>
                 <div className="single-card-rent-price-section">
@@ -753,7 +753,7 @@ const SingleCard = ({ PostData, index }) => {
                       }`}
                     >
                       {formatReservePrice(
-                        PostData?.PricingDetails.ExpectedRent
+                        PostData?.PricingDetails?.ExpectedRent
                       )}
                       <span
                         className={`rent-per-month  ${
@@ -762,9 +762,7 @@ const SingleCard = ({ PostData, index }) => {
                             ? ""
                             : "sold-out"
                         }`}
-                      >
-                        {" "}
-                        / Month{" "}
+                      > / Month
                       </span>
                     </p>
                     <p
@@ -790,7 +788,7 @@ const SingleCard = ({ PostData, index }) => {
                           }`}
                         >
                           {formatReservePrice(
-                            PostData?.PricingDetails.DepositePrice
+                            PostData?.PricingDetails?.DepositePrice
                           )}
                         </p>
                         <p
@@ -811,7 +809,7 @@ const SingleCard = ({ PostData, index }) => {
             </>
           )}
 
-          {PostData?.BasicDetails.PropertyAdType == "Sale" && (
+          {PostData?.BasicDetails?.PropertyAdType == "Sale" && (
             <>
               <div className="single-card-price-section-sale">
                 <div className="single-card-price-section">
@@ -835,7 +833,7 @@ const SingleCard = ({ PostData, index }) => {
                         : "sold-out"
                     } `}
                   >
-                    {formatReservePrice(PostData?.PricingDetails.ExpectedPrice)}
+                    {formatReservePrice(PostData?.PricingDetails?.ExpectedPrice)}
                   </span>
                 </div>
                 <p

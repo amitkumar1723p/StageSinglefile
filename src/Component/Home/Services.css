@@ -36,9 +36,11 @@
 }
 
 .services-container {
+  max-width: 1300px;
+    margin: 0 auto;
   height: 180px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   /* background-color: var(--main-light-clr); */
   padding: 20px 0;
   /* margin: 20px 0 60px 0; */
