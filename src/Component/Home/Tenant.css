@@ -109,13 +109,13 @@
   .for-tenant-heading h2{
     color: #333;
     font-size: 28px;
-    margin: 5px 0;
+    margin: 5px 0 15px 0;
   }
   
   .for-tenant-content {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
   }
   
   .for-tenant-content-container h3 {

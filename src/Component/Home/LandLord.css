@@ -57,7 +57,7 @@
 .landlord-right{
     width: 40%;
     min-width: 501px;
-    gap: 10px;
+    gap: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -98,6 +98,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     font-size: 14px;
+    margin-bottom: 5px;
 }
 .contentContainer p{
     font-size: 14px;
