@@ -525,11 +525,74 @@ export default function SinglePostDetails() {
                           </span>
                           <p> Floor</p>
                         </div>
-                      </div>{" "}
+                      </div> 
+
+
+                      {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
+                    ?.CoveredParking > 0 ||
+                  getSinglePostData?.SinglePost?.PropertyDetails?.Parking
+                    ?.OpenParking > 0 ? (
+                    <div className="property-info-tags">
+                      <img
+                        className="icon-detials"
+                        src="/img/parking.png"
+                        alt="icon"
+                      />
+                      <div className="img-box-imp-data">
+                        <span className="img-box-details-span">
+                          {getSinglePostData?.SinglePost?.PropertyDetails
+                            ?.Parking?.CoveredParking +
+                            getSinglePostData?.SinglePost?.PropertyDetails
+                              ?.Parking?.OpenParking}
+                        </span>
+                        <p> Parking </p>
+                      </div>
+                    </div>
+                  ) : getSinglePostData?.SinglePost?.BasicDetails
+                      ?.PropertyStatus ? (
+                    <div className="property-info-tags">
+                      <img
+                        className="icon-detials"
+                        src="/img/status.png"
+                        alt="icon"
+                      />
+                      <div className="img-box-imp-data">
+                        <span className="img-box-details-span">
+                          {
+                            getSinglePostData?.SinglePost?.BasicDetails
+                              ?.PropertyStatus
+                          }
+                        </span>
+                        <p> Status</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="property-info-tags">
+                      <img
+                        className="icon-detials"
+                        src="/img/power-backup.png"
+                        alt="icon"
+                      />
+
+                      <div className="img-box-imp-data">
+                        <span className="img-box-details-span">
+                          {
+                            getSinglePostData?.SinglePost?.AmenitiesDetails
+                              ?.PowerBackUp
+                          }
+                        </span>
+                        <p> Power BackUp</p>
+                      </div>
+                    </div>
+                  )}
                     </>
                   )}
 
-                  {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType ==
+                  
+
+                 
+
+{getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType ==
                     "Plot/Land" && (
                     <>
                       {/* PlotDimensions */}
@@ -625,65 +688,6 @@ export default function SinglePostDetails() {
                       </div>
                     </>
                   )}
-
-                  {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
-                    ?.CoveredParking > 0 ||
-                  getSinglePostData?.SinglePost?.PropertyDetails?.Parking
-                    ?.OpenParking > 0 ? (
-                    <div className="property-info-tags">
-                      <img
-                        className="icon-detials"
-                        src="/img/parking.png"
-                        alt="icon"
-                      />
-                      <div className="img-box-imp-data">
-                        <span className="img-box-details-span">
-                          {getSinglePostData?.SinglePost?.PropertyDetails
-                            ?.Parking?.CoveredParking +
-                            getSinglePostData?.SinglePost?.PropertyDetails
-                              ?.Parking?.OpenParking}
-                        </span>
-                        <p> Parking </p>
-                      </div>
-                    </div>
-                  ) : getSinglePostData?.SinglePost?.BasicDetails
-                      ?.PropertyStatus ? (
-                    <div className="property-info-tags">
-                      <img
-                        className="icon-detials"
-                        src="/img/status.png"
-                        alt="icon"
-                      />
-                      <div className="img-box-imp-data">
-                        <span className="img-box-details-span">
-                          {
-                            getSinglePostData?.SinglePost?.BasicDetails
-                              ?.PropertyStatus
-                          }
-                        </span>
-                        <p> Status</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="property-info-tags">
-                      <img
-                        className="icon-detials"
-                        src="/img/power-backup.png"
-                        alt="icon"
-                      />
-
-                      <div className="img-box-imp-data">
-                        <span className="img-box-details-span">
-                          {
-                            getSinglePostData?.SinglePost?.AmenitiesDetails
-                              ?.PowerBackUp
-                          }
-                        </span>
-                        <p> Power BackUp</p>
-                      </div>
-                    </div>
-                  )}
-
                   {/* {getSinglePostData.SinglePost.BasicDetails
                       .PropertyStatus && (
                       <PropertyDataBox

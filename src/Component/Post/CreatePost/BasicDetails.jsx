@@ -169,7 +169,7 @@ export default function BasicDetailsSection({
                     }`}
                     key={i}
                     onClick={() => {
-                      if (!update) {
+                      if (!update ) {
                         setBasicDetailsData({
                           ...BasicDetailsData,
                           ApartmentType: e,
@@ -177,7 +177,7 @@ export default function BasicDetailsSection({
                       }
                     }}
                   >
-                    {e}{" "}
+                    {e}
                     <img
                       className="select-img"
                       alt=""
