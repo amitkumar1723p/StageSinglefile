@@ -217,7 +217,7 @@ const VerifyOtp = ({
                     <button
                       className="otp-resend-otp-btn"
                       onClick={() => {
-                         setOtpData({Otp:""})
+                        setOtpData({ Otp: "" });
                         // setViewState({
                         //   ...setViewState,
                         //   showLoginAndSignup: true,

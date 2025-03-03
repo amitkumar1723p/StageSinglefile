@@ -225,7 +225,7 @@ export default function CreatePostMain() {
       if (getSinglePostData) {
         if (getSinglePostData.success === true) {
           const { SinglePost } = getSinglePostData;
-          console.log(SinglePost);
+          
           const {
             BasicDetails,
             LocationDetails,
@@ -355,7 +355,7 @@ export default function CreatePostMain() {
       // delete BasicDetailsData_Rest.CurrentPropertyStatus;
       // delete BasicDetailsData_Rest.PossessionStatus;
       setBasicDetailsData(BasicDetailsData_Rest);
-      // console.log(BasicDetailsData)
+      
       //  if(A)
       if (sessionStorage.getItem("BasicDetailsData")) {
         StoreDataInSession("BasicDetailsData", BasicDetailsData_Rest);

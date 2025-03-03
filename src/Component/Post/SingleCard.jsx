@@ -171,7 +171,7 @@ const SingleCard = ({ PostData, index }) => {
           label: "Plot Area",
         });
       } else if (SuperBuiltUpArea?.value) {
-        console.log("PostId", PostData._id);
+         
         setAreaDetails({
           value: SuperBuiltUpArea?.value,
           unit: SuperBuiltUpArea.unit,

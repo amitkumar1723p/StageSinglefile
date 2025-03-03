@@ -29,9 +29,9 @@ export default function HomeCard() {
         const available = data?.allPost?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
         );
-        // console.log(available, soldout);
+        
         setFilterdPost([...available, ...soldout]);
-        // console.log(filterdPost);
+        
       }
     }
     filter();
