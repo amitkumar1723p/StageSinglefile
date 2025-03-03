@@ -9,13 +9,13 @@ const BrowseProperties = () => {
             <div className='BrowsePropertiesContainer'>
             <div className='BrowseProperties-Left'>
                 <div className='BrowseProperties-Headings'>
-                    <h2>Say Goodbye to  <span className='span-name-rent'> Brokerage </span> </h2>
+                    <h2>Say Goodbye to  <span className='span-name-rent'> Hefty-Brokerage </span> </h2>
                     <h2></h2>
                     <h2>Rent Smart with <span className='span-name-rent'>   PropertyDekho247! </span></h2>
                     <h2></h2>
                 </div>
                 <div className='BrowseProperties-Content'>
-                Find your perfect home with 100% verified listings, direct owner deals, and no extra costs! Property Dekho 24/7 offers a wide range of properties at competitive prices, free from brokers and hidden fees. Enjoy a simple, transparent process with fully verified listings for a stress-free rental experience.
+                Find your perfect rental home with 100% verified listings, Connect property owner's directly. PropertyDekho247 offers a wide range of properties at competitive prices and free from misleading and fake listings. Enjoy a simple, transparent process with fully verified listings for a stress-free rental experience.
                 </div>
                 <div className='BrowseProperties-Button-Container'>
                     <button className='BrowseProperties-Button'>Browse Properties</button>
