@@ -715,7 +715,8 @@ export default function SinglePostDetails() {
                                 ?.ExpectedPrice
                             )}
                           </span>
-                          {getSinglePostData?.BasicDetails?.ApartmentType =="Plot/Land" ? (
+                      
+                          {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType =="Plot/Land" ? (
                             <>
                               <p className="lisitng-area-section">
                                 ₹{" "}

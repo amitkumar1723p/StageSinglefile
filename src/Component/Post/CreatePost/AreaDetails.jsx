@@ -11,7 +11,9 @@ export default function AreaDetailsSection({
       [
         "Apartment",
         "Independent/Builder Floor",
-        "1 RK/Studio Apartment",
+        // "1 RK/Studio Apartment",
+        "Studio Apartment",
+        "1 RK/PG",
         "Serviced Apartment",
       ].includes(BasicDetailsData.ApartmentType)
     ) {
@@ -147,10 +149,12 @@ export default function AreaDetailsSection({
       )}
 
       {[
-      "Independent House/Villa",
+        "Independent House/Villa",
         "Apartment",
         "Independent/Builder Floor",
-        "1 RK/Studio Apartment",
+        // "1 RK/Studio Apartment",
+        "Studio Apartment",
+        "1 RK/PG",
         "Serviced Apartment",
       ].includes(BasicDetailsData.ApartmentType) && (
         <>
@@ -164,25 +168,20 @@ export default function AreaDetailsSection({
                 placeholder="Built Up Area"
                 value={AreaDetailsData?.SuperBuiltUpArea?.value || ""}
                 onChange={(e) => {
-                  
-
-
-
                   const numericValue = String(e.target.value).replace(
                     /[^0-9]/g,
                     ""
                   );
 
                   // eslint-disable-next-line
-                  
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      SuperBuiltUpArea: {
-                        ...AreaDetailsData.SuperBuiltUpArea,
-                        value: numericValue,
-                      },
-                    });
-                  
+
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    SuperBuiltUpArea: {
+                      ...AreaDetailsData.SuperBuiltUpArea,
+                      value: numericValue,
+                    },
+                  });
                 }}
               />
 
@@ -192,8 +191,6 @@ export default function AreaDetailsSection({
                 className="unit"
                 value={AreaDetailsData?.SuperBuiltUpArea?.unit || ""}
               />
-
- 
             </div>
           </div>
           {/* Built Up Area */}
@@ -206,23 +203,20 @@ export default function AreaDetailsSection({
                 placeholder="Built Up Area"
                 value={AreaDetailsData?.BuiltUpArea?.value || ""}
                 onChange={(e) => {
-               
-
                   const numericValue = String(e.target.value).replace(
                     /[^0-9]/g,
                     ""
                   );
-                  
+
                   // eslint-disable-next-line
-              
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      BuiltUpArea: {
-                        ...AreaDetailsData.BuiltUpArea,
-                        value:numericValue,
-                      },
-                    });
-                  
+
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    BuiltUpArea: {
+                      ...AreaDetailsData.BuiltUpArea,
+                      value: numericValue,
+                    },
+                  });
                 }}
               />
               <input
@@ -231,8 +225,6 @@ export default function AreaDetailsSection({
                 className="unit"
                 value={AreaDetailsData.BuiltUpArea?.unit || ""}
               />
-
-              
             </div>
             {AlertObj.BuiltUpAreaAlert && (
               <div className="alert-in-area-section">
@@ -253,23 +245,21 @@ export default function AreaDetailsSection({
                   const numericValue = String(e.target.value).replace(
                     /[^0-9]/g,
                     ""
-                  )
+                  );
 
                   // eslint-disable-next-line
-                  
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      CarpetArea: {
-                        ...AreaDetailsData.CarpetArea,
-                        value: numericValue,
-                      },
-                    });
-                  
+
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    CarpetArea: {
+                      ...AreaDetailsData.CarpetArea,
+                      value: numericValue,
+                    },
+                  });
                 }}
                 placeholder="Carpet Area"
               />
 
-               
               <input
                 type="text"
                 readOnly
@@ -286,8 +276,6 @@ export default function AreaDetailsSection({
           </div>
         </>
       )}
-
- 
     </>
   );
 }

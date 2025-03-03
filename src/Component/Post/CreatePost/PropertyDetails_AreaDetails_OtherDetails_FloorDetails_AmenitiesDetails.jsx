@@ -27,7 +27,9 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+"1 RK/PG",
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];

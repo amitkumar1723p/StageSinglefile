@@ -81,7 +81,9 @@ export default function CreatePostMain() {
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+    "1 RK/PG",
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
@@ -223,7 +225,7 @@ export default function CreatePostMain() {
       if (getSinglePostData) {
         if (getSinglePostData.success === true) {
           const { SinglePost } = getSinglePostData;
-           console.log(SinglePost)
+          console.log(SinglePost);
           const {
             BasicDetails,
             LocationDetails,
@@ -233,8 +235,7 @@ export default function CreatePostMain() {
             AmenitiesDetails,
             PropertyImages,
             PricingDetails,
-            OtherDetails
-
+            OtherDetails,
           } = SinglePost;
 
           if (BasicDetails.PropertyAdType === "Rent") {
@@ -261,14 +262,14 @@ export default function CreatePostMain() {
           } else {
             setBasicDetailsData({ ...BasicDetails });
           }
- 
+
           setLocationDetailsData({ ...LocationDetails });
           setPropertyDetailsData({ ...PropertyDetails });
           setFloorDetailsData({ ...FloorDetails });
           setAreaDetailsData({ ...AreaDetails });
           setAmenitiesDetailsData({ ...AmenitiesDetails });
           setPricingDetailsData({ ...PricingDetails });
-          setOtherDetailsData({...OtherDetails})
+          setOtherDetailsData({ ...OtherDetails });
           setpreviewImage(
             PropertyImages.map((e) => {
               return { name: e.name, url: e.url };
@@ -343,7 +344,11 @@ export default function CreatePostMain() {
         ...BasicDetailsData_Rest
       } = BasicDetailsData; // Destructure to remove PropertyStatus
 
-      if (BasicDetailsData.ApartmentType === "Plot/Land") {
+      if (
+        ["Plot/Land", "Studio Apartment"].includes(
+          BasicDetailsData.ApartmentType
+        )
+      ) {
         delete BasicDetailsData_Rest.ApartmentType;
       }
       delete BasicDetailsData_Rest.NoOfOpenSide;
@@ -370,6 +375,15 @@ export default function CreatePostMain() {
       }
     } else if (BasicDetailsData.PropertyAdType === "Sale") {
       const { AvailableFrom, ...BasicDetailsData_Rest } = BasicDetailsData; // Destructure to remove PropertyStatus
+
+      if (
+        ["Serviced Apartment", "1 RK/PG"].includes(
+          BasicDetailsData.ApartmentType
+        )
+      ) {
+        delete BasicDetailsData_Rest.ApartmentType;
+      }
+
       // remove price field
 
       const {
@@ -445,7 +459,9 @@ export default function CreatePostMain() {
           "Independent House/Villa",
           "Apartment",
           "Independent/Builder Floor",
-          "1 RK/Studio Apartment",
+          // "1 RK/Studio Apartment",
+          "Studio Apartment",
+          "1 RK/PG",
           "Serviced Apartment",
         ].includes(BasicDetailsData.ApartmentType)
       ) {
@@ -478,7 +494,9 @@ export default function CreatePostMain() {
           [
             "Apartment",
             "Independent/Builder Floor",
-            "1 RK/Studio Apartment",
+            // "1 RK/Studio Apartment",
+            "Studio Apartment",
+            "1 RK/PG",
             "Serviced Apartment",
           ].includes(BasicDetailsData.ApartmentType)
         ) {
@@ -894,7 +912,6 @@ export default function CreatePostMain() {
                         e.preventDefault();
                         BasicDetailsFormSubmit(e);
                         setTimeout(() => {
-                       
                           LocationDetailsSubmiRef?.current?.requestSubmit();
                           setTimeout(() => {
                             ApartmentFeaturesRef?.current?.requestSubmit();
