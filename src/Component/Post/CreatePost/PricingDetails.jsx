@@ -12,6 +12,7 @@ export default function PricingDetails({
   setnext,
   update,
   next,
+  PricingDetailsRef,
 }) {
   const PostSubmitHandler = (e) => {
     e.preventDefault();
@@ -87,20 +88,28 @@ export default function PricingDetails({
         //  get Area and Price
         if (Area && numbricvalue) {
           let CalPricePer_SqFt_SqYd = Number(numbricvalue) / Area;
-          let roundedPricePerSqFt;
+          let roundedPricePer_SqFt_Sqyd;
           const decimalPart =
             CalPricePer_SqFt_SqYd - Math.floor(CalPricePer_SqFt_SqYd);
 
           if (decimalPart <= 0.5) {
-            roundedPricePerSqFt = Math.floor(CalPricePer_SqFt_SqYd);
+            roundedPricePer_SqFt_Sqyd = Math.floor(CalPricePer_SqFt_SqYd);
           } else {
-            roundedPricePerSqFt = Math.ceil(CalPricePer_SqFt_SqYd);
+            roundedPricePer_SqFt_Sqyd = Math.ceil(CalPricePer_SqFt_SqYd);
           }
 
+          let Sqft_Sqyd_AdComa = String(
+            roundedPricePer_SqFt_Sqyd
+          ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        
           if (BasicDetailsData.ApartmentType == "Plot/Land") {
-            PricingDetailsCopyObj.PricePerSqYd = roundedPricePerSqFt;
+            
+           
+           
+            PricingDetailsCopyObj.PricePerSqYd = Sqft_Sqyd_AdComa;
           } else {
-            PricingDetailsCopyObj.PricePerSqFt = roundedPricePerSqFt;
+              
+            PricingDetailsCopyObj.PricePerSqFt = Sqft_Sqyd_AdComa;
           }
         }
       }
@@ -276,7 +285,11 @@ export default function PricingDetails({
       <div className="property-details-main-box">
         <div className="property-details price-sectipn-main price-and-show">
           <h3 className="price-section-create-form"> Pricing Details</h3>
-          <form id="property-form" onSubmit={PostSubmitHandler}>
+          <form
+            id="property-form"
+            onSubmit={PostSubmitHandler}
+            ref={PricingDetailsRef}
+          >
             {/* Sale Pricing  */}
 
             {BasicDetailsData.PropertyAdType === "Sale" && (
@@ -324,17 +337,27 @@ export default function PricingDetails({
                 </div>
 
                 {BasicDetailsData.ApartmentType == "Plot/Land" ? (
-                  <div className="form-group">
-                    <label htmlFor="price-per-sq.yd"> Price Per Sq. Yd.*</label>
-                    <input
-                      type="text"
-                      id="price-per-sq.yd"
-                      placeholder=" Price Per Sq. Yd ₹ "
-                      required
-                      readOnly
-                      value={PricingDetailsData.PricePerSqYd || 0}
-                    />
-                  </div>
+                  <>
+                  
+                    <div className="form-group">
+                      <label htmlFor="price-per-sq.yd">
+                       
+                        Price Per Sq. Yd.*
+                      </label>
+                      <input
+                        type="text"
+                        id="price-per-sq.yd"
+                        placeholder=" Price Per Sq. Yd ₹ "
+                        required
+                        readOnly
+                        value={PricingDetailsData.PricePerSqYd || 0}
+                      />
+                          <small className="number-to-word">
+                    {PriceToSentence(PricingDetailsData.PricePerSqYd)}
+                  </small>
+                    </div>
+                
+                  </>
                 ) : (
                   <div className="form-group">
                     <label htmlFor="price-per-sq.ft"> Price Per Sq.Ft*</label>
@@ -346,6 +369,10 @@ export default function PricingDetails({
                       readOnly
                       value={PricingDetailsData.PricePerSqFt || 0}
                     />
+                    <small className="number-to-word">
+                    {PriceToSentence(PricingDetailsData.PricePerSqFt)}
+                    </small>
+                 
                   </div>
                 )}
                 {/* Price Per Sq.ft  */}

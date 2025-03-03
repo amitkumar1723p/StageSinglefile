@@ -22,6 +22,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
   setAmenitiesDetailsData,
   FloorDetailsData,
   setFloorDetailsData,
+  ApartmentFeaturesRef,
 }) {
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
@@ -115,7 +116,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       }
 
       if (FloorDetailsData?.OverLookingView?.length <= 0) {
-        return alert("View From Balcony Field Required");
+        return alert("Over Looking View  Field Required");
       }
 
       if (!AmenitiesDetailsData.Furnishing) {
@@ -165,7 +166,11 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       <div className="property-details-main-box">
         <div className="property-details">
           <h2> {BasicDetailsData.ApartmentType} Section </h2>
-          <form id="property-form" onSubmit={PostSubmitHandler}>
+          <form
+            id="property-form"
+            onSubmit={PostSubmitHandler}
+            ref={ApartmentFeaturesRef}
+          >
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (

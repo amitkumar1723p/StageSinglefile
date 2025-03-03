@@ -7,6 +7,7 @@ export default function BasicDetailsSection({
   setBasicDetailsData,
   setnext,
   update,
+  BasicDetailsFormSubmit
 }) {
   // eslint-disable-next-line
   const [ApartMentTypeTab, setApartMentTypeTab] = useState([
@@ -80,7 +81,7 @@ export default function BasicDetailsSection({
 
  
 
-
+  // const BasicDetailsSubmitForm =()=>{}
     
 
   return (
@@ -93,7 +94,7 @@ export default function BasicDetailsSection({
         {/* <div className="create-banner-box">
           <img src="/img/create-banner.svg" alt="create-banner" />
         </div> */}
-        <div className="form-container-step-1">
+        <div className="form-container-step-1" >
           <div className="form-content">
             <h3 className="basic-details-heading">Property Type*</h3>
             <div className="tabs">
@@ -431,108 +432,7 @@ export default function BasicDetailsSection({
       <div className="next-prev-box">
         <button
           id="Submit-Next"
-          onClick={() => {
-            if (!BasicDetailsData.PropertyType) {
-              return alert(" Poperty Type is Required");
-            }
-
-            if (!BasicDetailsData.PropertyAdType) {
-              return alert("Property Ad Type is Required");
-            }
-            if (!BasicDetailsData.ApartmentType) {
-              return alert("Apartment Type is Required");
-            }
-
-            if (
-              BasicDetailsData.PropertyAdType === "Rent" &&
-              !BasicDetailsData.AvailableFrom
-            ) {
-              return alert("Available From is Required");
-            }
-
-            if (
-              BasicDetailsData.PropertyAdType === "Rent" &&
-              BasicDetailsData.AvailableFrom
-            ) {
-              // const currentDate = new Date(Date.now());
-              const currentDate = new Date().toISOString().split("T")[0];
-              const selectedDate = BasicDetailsData.AvailableFrom;
-
-              if (selectedDate < currentDate) {
-                return alert("Enter valid Date");
-              }
-
-              // if (selectedDate >= currentDate) {
-              //   setBasicDetailsData({
-              //     ...BasicDetailsData,
-              //     AvailableFrom: e.target.value,
-              //   });
-              // }
-            }
-
-            if (
-              BasicDetailsData.PropertyAdType === "Sale" &&
-              ApartMentTypeArrayRemovePlotAndLand.includes(
-                BasicDetailsData.ApartmentType
-              ) &&
-              !BasicDetailsData.PropertyStatus
-            ) {
-              return alert("Property Status is Required");
-            }
-            if (
-              BasicDetailsData.PropertyAdType === "Sale" &&
-              ApartMentTypeArrayRemovePlotAndLand.includes(
-                BasicDetailsData.ApartmentType
-              ) &&
-              BasicDetailsData.PropertyStatus == "Ready to move" &&
-              !BasicDetailsData.CurrentPropertyStatus
-            ) {
-              return alert("Current Property Status is Required");
-            }
-
-            if (
-              BasicDetailsData.PropertyAdType === "Sale" &&
-              ApartMentTypeArrayRemovePlotAndLand.includes(
-                BasicDetailsData.ApartmentType
-              ) &&
-              BasicDetailsData.PropertyStatus == "Ready to move" &&
-              !BasicDetailsData.PropertyAge
-            ) {
-              return alert("PropertyAge is Required");
-            }
-
-            if (
-              BasicDetailsData.PropertyAdType === "Sale" &&
-              ApartMentTypeArrayRemovePlotAndLand.includes(
-                BasicDetailsData.ApartmentType
-              ) &&
-              BasicDetailsData.PropertyStatus == "Under Construction" &&
-              !BasicDetailsData.PossessionStatus
-            ) {
-              return alert("Possession Status is Required");
-            }
-
-            if (
-              BasicDetailsData.ApartmentType === "Plot/Land" &&
-              !BasicDetailsData.CurrentPropertyStatus
-            ) {
-              return alert("Current Possession Status is Required");
-            }
-            if (
-              BasicDetailsData.ApartmentType === "Plot/Land" &&
-              !BasicDetailsData.PossessionStatus
-            ) {
-              return alert("Possession Status is Required");
-            }
-
-            if (!update) {
-              // StoreDataInSession("BasicDetailsDataUpdate", BasicDetailsData);
-              StoreDataInSession("BasicDetailsData", BasicDetailsData);
-              StoreDataInSession("next", 1);
-            }
-
-            setnext(1);
-          }}
+          onClick={BasicDetailsFormSubmit}
         >
           Next
         </button>

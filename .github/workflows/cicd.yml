@@ -37,4 +37,4 @@ jobs:
 
       - name: Run Docker Container
         run: |
-           docker run -d -p 3000:80  --name gauravwadhwa234-property-frontend-container gauravwadhwa234/property-frontend
+           docker run -d -p 3000:80 --restart always --name gauravwadhwa234-property-frontend-container gauravwadhwa234/property-frontend

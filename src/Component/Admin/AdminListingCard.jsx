@@ -83,7 +83,7 @@ export default function AdminListingCard({
   const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
-      `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails.ApartmentType} For  ${PostData?.BasicDetails.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails.City}`
+      `${PostData?.PropertyDetails?.BHKType? `${PostData?.PropertyDetails?.BHKType} BHk`:""}  ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
