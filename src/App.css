@@ -337,3 +337,33 @@ td{
 .ttc{
  color: #0056b3;
 }
+
+
+/* input shake when user put wrong values */
+
+@keyframes justshake {
+  25% {
+    transform: translateX(5px);
+  }
+
+  50% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX-(5px);
+  }
+}
+.shake {
+  color: red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+.inputShake{
+  border: 1px solid red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+

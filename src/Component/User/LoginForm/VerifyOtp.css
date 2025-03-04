@@ -87,6 +87,11 @@
 
 }
 
+.otp-error-msg-container{
+  height: 10px;
+
+}
+
 .otp-login-h2-p{
   color: #333;
   margin-bottom: 10px;

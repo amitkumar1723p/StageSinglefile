@@ -68,6 +68,30 @@ export default function BasicDetailsSection({
     // eslint-disable-next-line
   }, []);
 
+    const [error, setError] = useState(' ');
+
+    const [residentialShake, setResidentialShake] = useState(false);
+    const [residentialTextShake, setResidentialTextShake] = useState(false);
+
+    const [sellRentShake, setSellRentShake] = useState(false);
+    const [sellRentTextShake, setSellRentTextShake] = useState(false);
+
+    const [choosePropertyShake, setChoosePropertyShake] = useState(false);
+    const [choosePropertyTextShake, setChoosePropertyTextShake] = useState(false);
+
+    const [propertyStatusShake,setPropertyStatusShake] = useState(false);
+    const [propertyStatusTextShake,setPropertyStatusTextShake] = useState(false);
+
+    const [availableForShake,setAvailableForShake] = useState(false);
+    const [availableForTextShake,setAvailableForTextShake] = useState(false);
+
+    const [currentPropertyStateShake,setCurrentPropertyStateShake] = useState(false);
+
+    const [propertyAgeShake, setpropertyAgeShake] = useState(false);
+    
+    const [possessionStatusShake, setPossessionStatusShake] = useState(false);
+
+
   return (
     <>
       <ScrollToTop />
@@ -87,7 +111,7 @@ export default function BasicDetailsSection({
                   BasicDetailsData.PropertyType === "Residential"
                     ? "select"
                     : ""
-                }`}
+                }   ${residentialShake? 'inputShake' : ''} ${residentialShake? 'shake' : ''}  `}
                 value={"Residential"}
                 onClick={() => {
                   if (!update) {
@@ -108,6 +132,7 @@ export default function BasicDetailsSection({
                   }
                 />
               </button>
+              <div>{error && <p style={{color: 'red', fontSize: '12px' }}>{error}</p>}</div>
             </div>
             <h3 className="basic-details-heading">I am Looking To *</h3>
             <div className="ad-type rent-sale">
@@ -118,7 +143,7 @@ export default function BasicDetailsSection({
                     value={text}
                     className={`ad-btn tab img add-btn-${text} ${
                       BasicDetailsData.PropertyAdType === text ? "select" : ""
-                    }`}
+                    }  ${sellRentShake? 'inputShake' : ''}  ${sellRentTextShake? 'shake' : ''} `  }
                     onClick={() => {
                       if (!update) {
                         setBasicDetailsData({
@@ -150,7 +175,7 @@ export default function BasicDetailsSection({
                   <button
                     className={`tab ${
                       BasicDetailsData.ApartmentType === e ? "select" : ""
-                    }`}
+                    }  ${choosePropertyShake? 'inputShake' : ''}  ${choosePropertyTextShake? 'shake' : ''}`}
                     key={i}
                     onClick={() => {
                       if (!update) {
@@ -189,7 +214,7 @@ export default function BasicDetailsSection({
                     </label>
 
                     <input
-                      className="date-time-lable"
+                      className={`date-time-lable ${availableForShake?'inputShake' :''} ${availableForShake?'shake' :''} `}
                       type="date"
                       id="available-from"
                       required
@@ -222,10 +247,11 @@ export default function BasicDetailsSection({
                         {PropertyStatusArray.map((text, i) => {
                           return (
                             <div key={i} className="PropertyStatus-box-content">
-                              <label htmlFor={`property-status-${i}`}>
+                              <label htmlFor={`property-status-${i}`} className={` ${propertyStatusTextShake? 'shake' : ''}`}>
                                 {text}
                               </label>
                               <input
+                              className={` ${propertyStatusShake? 'inputShake' : ''}`}
                                 type="radio"
                                 name="Property Stattus"
                                 required
@@ -263,12 +289,14 @@ export default function BasicDetailsSection({
                                   className="PropertyStatus-box-content"
                                 >
                                   <label
+                                  className={`   ${currentPropertyStateShake? 'shake' : ''} `}
                                     htmlFor={`current-property-status-${i}`}
                                   >
                                     {text}
                                   </label>
                                   <input
                                     type="radio"
+                                    className={`${currentPropertyStateShake? 'shake' : ''}`}
                                     name="current-property-status"
                                     required
                                     id={`current-property-status-${i}`}
@@ -292,7 +320,7 @@ export default function BasicDetailsSection({
                         <div className="form-group">
                           <label htmlFor="property-age">Property Age*</label>
                           <select
-                            className="date-time-lable"
+                            className={`date-time-lable ${propertyAgeShake? 'shake inputShake' : ''}`}
                             id="property-age"
                             required
                             value={BasicDetailsData.PropertyAge || ""}
@@ -316,7 +344,7 @@ export default function BasicDetailsSection({
                       <div className="form-group">
                         <label htmlFor="property-age">Possession Status*</label>
                         <select
-                          className="date-time-lable"
+                          className={`date-time-lable ${possessionStatusShake? 'shake inputShake' : ''}` }
                           id="property-age"
                           required
                           value={BasicDetailsData.PossessionStatus || ""}
@@ -454,21 +482,40 @@ export default function BasicDetailsSection({
           id="Submit-Next"
           onClick={() => {
             if (!BasicDetailsData.PropertyType) {
-              return alert(" Poperty Type is Required");
+              // setError("Email cannot be empty. ");
+              // setInputShake(true);
+              setResidentialShake(true);
+              setResidentialTextShake(true)
+
+              // setTimeout(()=>setError(''),2000);
+              setTimeout(()=>setResidentialShake(false),1600)
+              setTimeout(()=>setResidentialTextShake(false),1600)
+              // setTimeout(()=>setInputShake(false),1600);
+              return;
             }
 
             if (!BasicDetailsData.PropertyAdType) {
-              return alert("Property Ad Type is Required");
+             setSellRentShake(true);
+             setSellRentTextShake(true)
+            setTimeout(()=>{setSellRentShake(false); setSellRentTextShake(false)},1600)
+            return;
             }
             if (!BasicDetailsData.ApartmentType) {
-              return alert("Apartment Type is Required");
+              setChoosePropertyShake(true)
+              setChoosePropertyTextShake(true)
+              setTimeout(()=>setChoosePropertyShake(false),1600)
+              setTimeout(()=>setChoosePropertyTextShake(false),1600);
+              return;
             }
 
             if (
               BasicDetailsData.PropertyAdType === "Rent" &&
               !BasicDetailsData.AvailableFrom
             ) {
-              return alert("Available From is Required");
+
+              setAvailableForShake(true);
+              setTimeout(()=>setAvailableForShake(false),1600)
+              return;
             }
 
             if (
@@ -498,7 +545,13 @@ export default function BasicDetailsSection({
               ) &&
               !BasicDetailsData.PropertyStatus
             ) {
-              return alert("Property Status is Required");
+              setPropertyStatusShake(true);
+              setPropertyStatusTextShake(true);
+
+              setTimeout(()=>setPropertyStatusShake(false),1600);
+              setTimeout(()=>setPropertyStatusTextShake(false),1600);
+              
+              return;
             }
             if (
               BasicDetailsData.PropertyAdType === "Sale" &&
@@ -508,7 +561,10 @@ export default function BasicDetailsSection({
               BasicDetailsData.PropertyStatus == "Ready to move" &&
               !BasicDetailsData.CurrentPropertyStatus
             ) {
-              return alert("Current Property Status is Required");
+
+              setCurrentPropertyStateShake(true);
+              setTimeout(()=>setCurrentPropertyStateShake(false),1600);
+              return ;
             }
 
             if (
@@ -519,7 +575,9 @@ export default function BasicDetailsSection({
               BasicDetailsData.PropertyStatus == "Ready to move" &&
               !BasicDetailsData.PropertyAge
             ) {
-              return alert("PropertyAge is Required");
+              setpropertyAgeShake(true);
+              setTimeout(()=>setpropertyAgeShake(false),1600);
+              return;
             }
 
             if (
@@ -530,7 +588,9 @@ export default function BasicDetailsSection({
               BasicDetailsData.PropertyStatus == "Under Construction" &&
               !BasicDetailsData.PossessionStatus
             ) {
-              return alert("Possession Status is Required");
+              setPossessionStatusShake(true);
+              setTimeout(()=>setPossessionStatusShake(false),1600);
+              return;
             }
 
             // if (

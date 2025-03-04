@@ -197,9 +197,9 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-      if (
-        data.success === true && ["CreatePostRequest"].includes(LodingType)
-      ) {
+      // if (
+      //   data.success === true && ["CreatePostRequest"].includes(LodingType)
+      // ) {
 
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
@@ -248,7 +248,7 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
         setalertShow(true);
         dispatch({ type: "UserClear" });
       }
-    }
+    
     // eslint-disable-next-line
 }}, [data]);
 

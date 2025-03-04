@@ -18,7 +18,12 @@ const VerifyOtp = ({
 }) => {
   const dispatch = useDispatch();
   const [showEdit, setshowEdit] = useState(false);
+  const [otpError, setOtpError] = useState(' ');
+  const [shake, setShake] = useState(false);
+  const [inputShake, setInputShake] = useState(false);
 
+
+  
   // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,6 +61,42 @@ const VerifyOtp = ({
       .toString()
       .padStart(2, "0")}`;
   };
+
+  // Otp validation
+  const handleOtpError = ()=>{
+    if(OtpData.Otp.length != 6){
+      if(OtpData.Otp.length == 0){
+        setOtpError("Enter Your OTP")
+        setInputShake(true);
+        // setShake(true);
+        setTimeout(()=>setInputShake(false),1000);
+        // setTimeout(()=>setShake(false),1000)
+        setTimeout(()=>setOtpError(' '),1000);
+      }else{
+        setOtpError("Otp should be 6 digit long")
+        setInputShake(true);
+        setShake(true);
+        setTimeout(()=>setInputShake(false),1500);
+        setTimeout(()=>setShake(false),1500)
+        setTimeout(()=>setOtpError(' '),1500);
+      }
+    }else{
+      
+    }
+    return;
+  }
+
+  // const { data: AlertData, LodingType: AlertType } = useSelector((state) => {
+  //   console.log(state.userData);
+  //   return state.userData;
+  // });
+
+  // useEffect(() => {
+  //   console.log(AlertData, AlertType);
+  //   if (AlertData?.success == false && AlertType == "VerifyUserOtpRequest") {
+      
+  //   }
+  // }, [AlertData]);
 
   return (
     <>
@@ -197,17 +238,17 @@ const VerifyOtp = ({
 
             <form onSubmit={handleSubmit}>
               <input
-                className="otp-section"
+                className={`otp-section ${shake ? 'shake' : ''} ${inputShake? 'inputShake' : ''}`}
                 type="text"
                 placeholder="Enter your OTP"
                 value={OtpData.Otp.trimStart()}
                 onChange={(e) =>
                   setOtpData({ ...OtpData, Otp: e.target.value })
                 }
-                required
               />
+              <div className="otp-error-msg-container">{otpError && <p style={{color: 'red', fontSize: '12px' }}>{otpError}</p>}</div>
 
-              <button className="otp-continue-otp" type="submit">
+              <button className="otp-continue-otp" type="submit" onClick={handleOtpError}>
                 Continue
               </button>
               <div>
