@@ -20,6 +20,7 @@ const SingleCard = ({ PostData, index }) => {
   const { data, LodingType } = useSelector((state) => {
     return state.userData;
   });
+    console.log("data",data)
   const [floorDetails, setFloorDetails] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -143,9 +144,11 @@ const SingleCard = ({ PostData, index }) => {
   }, [RunImageSlider, ImageTranlate, RunInterval]);
 
   useEffect(() => {
+   
     if (data && LodingType == "AddFavouriteAndUnFavouriteRequest") {
       if (data.success == true) {
-        dispatch(GetMeDetailsAction());
+        // alert("run")
+         dispatch(GetMeDetailsAction());
       }
     }
   }, [data]);
