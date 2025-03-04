@@ -66,7 +66,7 @@ export default function PayButton(
         contact: medata?.user?.ContactNumber || "Default Contact",
         userId: medata?.user?._id || "defaultUserId"
       };
-  console.log(userData,"medtat")
+  console.log(userData,"")
       // Razorpay payment options
       const options = {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,  // Ensure the env variable is correctly set
@@ -107,8 +107,15 @@ export default function PayButton(
            }
           }
         },
-        prefill: userData,  // Prefill user information dynamically
+        prefill: { 
+          email: medata?.user?.email || "default@example.com", 
+          contact: medata?.user?.ContactNumber || "0000000000",
+          userId: medata?.user?._id,
+          PostId
+        },  // Prefill user information dynamically // Prefill user information dynamically
         notes: {
+            userId: medata?.user?._id,  // Send userId and PostId in notes (not visible to user)
+            PostId,
           address: "D-1007, Block-D, Vatika Town Square, Sector 82A, Gurugram-122004, Haryana",
         },
         theme: {

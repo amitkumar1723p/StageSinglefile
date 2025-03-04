@@ -822,7 +822,7 @@ export const SimilarProperty = (postId) => {
 };
 
 
-export const OwnerAllExcelFile = (file)=>{
+export const OwnerUploadExcelFile = (file)=>{
 
   return async (dispatch) => {
     try {
@@ -1152,4 +1152,42 @@ export const GetDeletedPostsAction = () => {
     }
   };
 };
+
+
+// elastic search action
+export const getSerachProperty=(query,propertyAdType)=>{
+  console.log(query,propertyAdType,"post")
+  return async(dispatch)=>{
+  try {
+    dispatch({
+      type: "GetSerachPropertyRequest",
+      payload: "GetSerachPropertyRequest",
+    });
+
+    const url = `${api_Base_Url}/post/allpost?query=${query}`;
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    console.log(url)
+    const { data } = await axios.post(url,{propertyAdType}, config);
+    
+    dispatch({ type: "GetSerachPropertySuccess", payload: data });
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      dispatch({
+        type: "GetSerachPropertyFail",
+        payload: error.response.data,
+      });
+    } else {
+      dispatch({
+        type: "GetSerachPropertyFail",
+        payload: { message: error.message, success: false },
+      });
+    }
+  }
+  }
+}
 

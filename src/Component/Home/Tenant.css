@@ -8,7 +8,7 @@
     /* border: 2px solid black; */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   }
   
   .for-tenant-left {
@@ -164,6 +164,10 @@
   }
 
   @media(max-width:480px){
+    .for-tenant-details{
+      width: 90%;
+    }
+
     .for-tenant-left :nth-child(1) {
       position: relative;
       left: 10%;

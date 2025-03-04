@@ -1024,12 +1024,28 @@
 }
 
 .Assing-Property-btn {
-  background-color: var(--main-lighter-clr);
+  background-color: var(--main-light-clr);
   border: 1px solid #d0e5f6;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.Assing-Property-btn:hover{
+  opacity: .8;
+}
+
+.delete-Property-btn {
+  background-color: red;
+  border: 1px solid #d0e5f6;
+  color: white;
   padding: 5px;
   border-radius: 5px;
 }
 
+.delete-Property-btn:hover{
+  opacity: .8;
+}
 .Assing-Property-btn:hover {
   background-color: var(--main-light-clr);
   color: #fff;

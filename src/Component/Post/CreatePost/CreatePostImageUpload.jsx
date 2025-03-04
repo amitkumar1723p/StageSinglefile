@@ -270,6 +270,7 @@ export default function CreatePostImageUpload({
               </div>
 
               <input
+              className="RemoveCusImg"
                 type="file"
                 name=""
                 id=""

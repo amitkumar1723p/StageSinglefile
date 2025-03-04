@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllOwnerFiles, OwnerAllExcelFile } from '../../Action/postAction';
+import { fetchAllOwnerFiles, OwnerUploadExcelFile } from '../../Action/postAction';
 import axios from 'axios';
 import "./OwnerAgentExcelData.css"
 import { useNavigate } from 'react-router-dom';
-import { GetAllAdminAction } from '../../Action/userAction';
+import { deleteExcelFile, GetAllAdminAction } from '../../Action/userAction';
 const OwnerAgentExcelData = () => {
 
     const [file, setFile] = useState(null);
@@ -44,7 +44,7 @@ const OwnerAgentExcelData = () => {
 
     const uploadFile = async () => {
         if (!file) return alert("Please select a file!");
-        dispatch(OwnerAllExcelFile(file))
+        dispatch(OwnerUploadExcelFile(file))
     };
     //   Fetch all files on component mount
     useEffect(() => {
@@ -103,6 +103,9 @@ const OwnerAgentExcelData = () => {
     };
 
 
+
+
+
     return (
         <div className="file-handler-container">
             <h2>Upload file here</h2>
@@ -128,7 +131,7 @@ const OwnerAgentExcelData = () => {
                                 dispatch(GetAllAdminAction({ AdminVerify: true }));
                             } else if (e.target.value == "Agent") {
                                 dispatch({ type: "GetAllAdminClear" });
-                                dispatch(GetAllAdminAction({ AgentVerify:true}));
+                                dispatch(GetAllAdminAction({ AgentVerify: true }));
                             } else {
                                 dispatch({ type: "GetAllAdminClear" });
 
@@ -192,7 +195,28 @@ const OwnerAgentExcelData = () => {
                         Assing Excel
                     </button>
                 }
+                {
+                    selectedExcel && <button
+                        className="delete-Property-btn"
+                        onClick={(e) => {
+                            let confirm = window.confirm(
+                                `wants to delete`
+                            );
+                            if (confirm) {
+                                if (medata.user.Role === "Owner") {
 
+                                    dispatch(fetchAllOwnerFiles())
+
+                                }
+                                dispatch(deleteExcelFile(selectedExcel))
+                                setSelectedeExcel(null)
+                                //  dispatch(adminAssigned({ AssignedData }));
+                            }
+                        }}
+                    >
+                        Delete File
+                    </button>
+                }
 
                 {/* Buttons to change the status */}
 
@@ -211,7 +235,13 @@ const OwnerAgentExcelData = () => {
 
                         <div className='excel-checkbox-container'>
 
-                            <input checked={selectedExcel === item._id} type="checkbox" className='' onChange={() => setSelectedeExcel(item?._id)} />
+                            <input checked={selectedExcel === item._id} type="checkbox" className='' onChange={() => {
+                                if (selectedExcel === item._id) {
+                                    setSelectedeExcel(null);
+                                } else {
+                                    setSelectedeExcel(item?._id)
+                                }
+                            }} />
                             <div
                                 key={item._id}
                                 className="files-card"

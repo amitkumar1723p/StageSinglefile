@@ -1125,3 +1125,27 @@ export const getTransactionDetailAction=()=>{
     }
   };
 }
+//delete excel file
+
+export const deleteExcelFile = (excelId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "Delete_ExcelFileRequest",
+        payload:"Delete_ExcelFileRequest"
+       });
+
+      const url = `${process.env.REACT_APP_API_URL}/excel/delete/${excelId}`;
+      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+
+      const { data } = await axios.delete(url, config);
+
+      dispatch({ type: "Delete_ExcelFileSuccess", payload: data });
+
+    } catch (error) {
+      dispatch({
+        type: "Delete_ExcelFileFail",
+        payload:{ message: error.message, success: false }
+      });
+    }
+  };
+};

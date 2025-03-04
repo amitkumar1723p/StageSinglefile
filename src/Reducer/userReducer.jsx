@@ -385,7 +385,6 @@ return{}
   }
 }
 
-
 // export const getTransactionDetailReducer=(state={},action)=>{
 //   switch(action.type){
 //     case "getTransactionDetailRequest":

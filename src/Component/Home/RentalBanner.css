@@ -129,6 +129,9 @@
   }
 
   @media(max-width:480px){
+
+    .rental-banner-container {
+      max-width: 90%;}
     .feature-text{
       font-size: 12px;
     }

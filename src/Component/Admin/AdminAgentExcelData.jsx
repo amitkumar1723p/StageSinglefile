@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllAdminFiles, fetchAllOwnerFiles } from '../../Action/postAction';
+import { fetchAllAdminFiles, fetchAllAgentFiles, fetchAllOwnerFiles } from '../../Action/postAction';
 import { useNavigate } from 'react-router-dom';
 
 const AdminAgentExcelData = () => {
@@ -16,13 +16,17 @@ const AdminAgentExcelData = () => {
  const {data:AdminAllExcelFilesData} = useSelector((state) => {
   return state.AdminAllExcelFiles}
 );
-    const fetchedAllFiles=data || AdminAllExcelFilesData?.assignedExcels
+const {data:AgentAllExcelFilesData} = useSelector((state) => {
+  return state.AdminAllExcelFiles}
+);
+    const fetchedAllFiles=data || AdminAllExcelFilesData?.assignedExcels ||AgentAllExcelFilesData?.assignedExcels
 console.log("this is fetche ",fetchedAllFiles)
   useEffect(() => {
         if(!fetchedAllFiles){
 
             console.log("called")
             dispatch(fetchAllAdminFiles())
+            dispatch(fetchAllAgentFiles())
         }
             
         
@@ -60,6 +64,9 @@ console.log("this is fetche ",fetchedAllFiles)
               ))}
             </div>
           )}
+
+
+{!fetchedAllFiles && <div>no assined excel found</div>}
     </div>
   )
 }

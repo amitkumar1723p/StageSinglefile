@@ -1,5 +1,7 @@
 import React from "react";
 import "./RentAgreement.css";
+import { Link } from "react-router-dom";
+
 
 const RentAgreement = () => {
   return (
@@ -71,7 +73,17 @@ const RentAgreement = () => {
         </div>
       </div>
       <button className="RentAgreement__upload-button">
-       <img src="./img/upload.svg" alt="upload" /> Upload your Draft
+       <img src="./img/upload.svg" alt="upload" />
+       <Link
+                   to="https://wa.me/7837840785"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="whatapps-section-floating"
+                 >
+                   <img src="/img/whatapp.png" alt="WhatsApp" />
+                 </Link>
+       
+        Upload your Draft
       </button>
     </div>
   );

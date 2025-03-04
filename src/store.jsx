@@ -36,13 +36,14 @@ import {
   OwnerAllPostsVisitsReducer,
   // OwnerAllPostsVisitsReducer,
   GetAllNotificationsAndRequirementsReducer,
-  OwnerAllExcelFileReducer,
+  OwnerUploadExcelFileReducer,
   fetchAllOwnerFilesReducer,
 
   GetDeletedPostsReducer,
   fetchAllAdminFilesReducer,
   fetchAllAgentFilesReducer,
   removeExcelFromAdminReducer,
+  getSerachPropertyReducer
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -78,13 +79,15 @@ const reducer = combineReducers({
   paymentResponse:paymentReducer,
   
   paidPropertyData:getPaidPropertyReducer,
-  OwnerUploadingExcelFile:OwnerAllExcelFileReducer,
+  OwnerUploadingExcelFile:OwnerUploadExcelFileReducer,
   OwnerAllExcelFiles:fetchAllOwnerFilesReducer,
   AdminAllExcelFiles:fetchAllAdminFilesReducer,
   AgentAllExcelFiles:fetchAllAgentFilesReducer,
   // RemoveAdminAgentExcel:removeExcelFromAdminReducer
 
-  getTransactionDetail:getTransactionDetailReducer
+  getTransactionDetail:getTransactionDetailReducer,
+
+  serachResponse:getSerachPropertyReducer
 });
 
 let initialState = {};
