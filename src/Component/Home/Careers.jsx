@@ -1,53 +1,173 @@
 import { useState } from "react";
 import "./Careers.css";
+import { useDispatch, useSelector } from "react-redux";
+import { ApplyJobAction } from "../../Action/postAction";
 // import "./Responsive.css";
 
 function Career() {
   const [departmentOpen, setDepartmentOpen] = useState(false);
   const [typeOpen, setTypeOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [applying, setApplying] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [jobName,setJobName] = useState("");
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
   const [mobile, setMobile] = useState('');
   const [LinkedIn, setLinkedIn] = useState('');
   const [experienceOpen, setExperienceOpen] = useState(false);
   const [count, setCount] = useState(0);
+  const[expandedJobIndex,setExpandedJobIndex]= useState(null)
+  const [resume,setResume]= useState(null);
+  const dispatch = useDispatch()
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    // console.log(file)
+    if (file && file.type === "application/pdf") {
+      setResume(file)
+    } else {
+      alert("Only PDF files are allowed.");
+    }
+  };
 
-  // const fullText = document.getElementById("full-text");
+  const { data: adminAlertData, LodingType: AlertType } = useSelector(
+    (state) => {
+      return state.Post;
+    }
+  );
+  // useEffect(() => {
+  //   if (adminAlertData && ["Delete_ExcelFileRequest","OwnerAllExcelFileRequest"].includes(AlertType)) {
+  //     if (adminAlertData.success === true) {
+  //       // dispatch(GetDeletedPostsAction());
+  //       dispatch(fetchAllOwnerFiles())
+  //     }
+  //   }
 
-  // if(fullText.style.display === "none") {
-  //   fullText.style.display = "block";
-  //   this.textContent = "See Less";
+  //   // eslint-disable-next-line
+  // }, [adminAlertData]);
 
-  // } else {
-  //   fullText.style.display="none";
-  //   this.textContent = "See More";
-  // }
+
+  const jobs = [
+    {
+      title: "Technology & Development - Backend Systems - Developer",
+      experience: "2-5 Years",
+      salary: "Not disclosed",
+      location: "Gurugram, Haryana",
+      category: "Product Management",
+      posted: "4 days ago",
+      openings: 5,
+      applicants: 5,
+      description:
+        "We are looking for a skilled Backend Systems Developer with 2-5 years of experience to join our Technology & Development team. The ideal candidate will have strong knowledge of server-side programming, database design, and API development.",
+      requirements: [
+        "Bachelor's degree in Computer Science or related field",
+        "2-5 years of experience in backend development",
+        "Proficiency in at least one backend language (Java, Python, Node.js)",
+        "Experience with database systems (SQL, NoSQL)",
+        "Knowledge of REST API design principles",
+        "Experience with cloud services (AWS, Azure, GCP)",
+      ],
+      benefits: [
+        "Competitive salary",
+        "Health insurance",
+        "Flexible working hours",
+        "Professional development opportunities",
+        "Dynamic work environment",
+      ],
+    },
+    {
+      title: "Design & User Experience - Product Design - Senior Designer",
+      experience: "2-5 Years",
+      salary: "Not disclosed",
+      location: "Gurugram, Haryana",
+      category: "Product Management",
+      posted: "4 days ago",
+      openings: 5,
+      applicants: 5,
+      description:
+        "We are looking for a skilled Product Designer with 2-5 years of experience to join our Design & User Experience team. The ideal candidate will have strong UI/UX design skills, experience with prototyping tools, and an understanding of user-centered design principles.",
+      requirements: [
+        "Bachelor's degree in Design, HCI, or related field",
+        "2-5 years of experience in UI/UX design",
+        "Proficiency in design tools (Figma, Adobe XD, Sketch)",
+        "Strong knowledge of user-centered design principles",
+        "Ability to create wireframes, mockups, and prototypes",
+        "Experience in working with development teams for implementation",
+      ],
+      benefits: [
+        "Competitive salary",
+        "Health insurance",
+        "Flexible working hours",
+        "Professional development opportunities",
+        "Dynamic work environment",
+      ],
+    },
+    {
+      title: "Sales & Marketing - Digital Campaigns - Marketing Specialist",
+      experience: "2-5 Years",
+      salary: "Not disclosed",
+      location: "Gurugram, Haryana",
+      category: "Product Management",
+      posted: "4 days ago",
+      openings: 5,
+      applicants: 5,
+      description:
+        "We are looking for a skilled Marketing Specialist with 2-5 years of experience to manage digital campaigns and drive customer engagement. The ideal candidate will have expertise in SEO, social media marketing, and performance analytics.",
+      requirements: [
+        "Bachelor's degree in Marketing, Business, or related field",
+        "2-5 years of experience in digital marketing",
+        "Experience with SEO, Google Ads, and social media platforms",
+        "Strong analytical skills to measure campaign performance",
+        "Ability to develop and implement marketing strategies",
+        "Excellent communication and creativity skills",
+      ],
+      benefits: [
+        "Competitive salary",
+        "Health insurance",
+        "Flexible working hours",
+        "Professional development opportunities",
+        "Dynamic work environment",
+      ],
+    },
+    {
+      title: "Operations & Support - Customer Success - Support Executive",
+      experience: "2-5 Years",
+      salary: "Not disclosed",
+      location: "Gurugram, Haryana",
+      category: "Product Management",
+      posted: "4 days ago",
+      openings: 5,
+      applicants: 5,
+      description:
+        "We are looking for a dedicated Support Executive with 2-5 years of experience in customer service and operations. The ideal candidate will be responsible for handling customer queries, resolving issues, and ensuring customer satisfaction.",
+      requirements: [
+        "Bachelor's degree in Business, Communication, or related field",
+        "2-5 years of experience in customer support or operations",
+        "Strong problem-solving and communication skills",
+        "Ability to handle customer queries efficiently",
+        "Experience with CRM tools and customer engagement strategies",
+        "Ability to work in a fast-paced environment",
+      ],
+      benefits: [
+        "Competitive salary",
+        "Health insurance",
+        "Flexible working hours",
+        "Professional development opportunities",
+        "Dynamic work environment",
+      ],
+    },
+  ];
+  
+    
+
   return (
     <>
-      <>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Career Page</title>
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="responsive.css" />
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-          crossOrigin="anonymous"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-          rel="stylesheet"
-        />
+      
+     
+<div className="career-page-main-container">
+
+
+
+
         <header className="Career-Hero-Section">
           <div className="heading-container">
             <h1 className="Career-Hero-Heading">
@@ -117,7 +237,9 @@ function Career() {
 
               <div
                 className="career-search-filter career-search-experience"
-                onClick={() => setExperienceOpen(!experienceOpen)}
+                onClick={() => {setExperienceOpen(!experienceOpen);
+                  // console.log("helloo")
+                }}
               >
                 <img src="/img/iconoir_page-star.svg" alt="Experience icon" />
                 <span>Experience</span>
@@ -386,383 +508,105 @@ function Career() {
         </div>
         <div className="Career-Job-Container">
           <div className="job-main-container ">
-            <div className="job-card">
-              <div className="job-header">
-                <h2>
-                  Technology &amp; Development - Backend Systems - Developer
-                </h2>
-                <div className="tags">
-                  <span className="tag">On-Site</span>
-                  <span className="tag">Full Time</span>
-                </div>
+     
+
+
+    <>
+      {jobs.map((job, index) => {
+    
+
+        return (
+          <div key={index} className="job-card">
+            <div className="job-header">
+              <h2>{job.title}</h2>
+              <div className="tags">
+                <span className="tag">On-Site</span>
+                <span className="tag">Full Time</span>
               </div>
-              <div className="job-details">
-                <div className="detail">
-                  <div>
-                    <img
-                      src="/img/mynaui_briefcase.svg"
-                      alt="briefcase"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>2-5 Years</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/heroicons_currency-rupee.svg"
-                      alt="currency"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Not disclosed</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/fluent_location-28-regular.svg"
-                      alt="location"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Gurugram, Haryana</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/streamline_industry-innovation-and-infrastructure.svg"
-                      alt="infrastructure"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Product Management</span>
-                </div>
-              </div>
-              <hr className="dashed-2" />
-              <div className="job-information">
-                <div className="meta">
-                  <span>Posted: 4 days ago</span>
-                  <span>Total Openings: 5</span>
-                  <span>Applicants: 5</span>
-                </div>
-                <div className="actions">
-                  <button className="apply-now">Apply Now</button>
-                  <button  onClick={() => setIsExpanded(!isExpanded)} className="see-more">
-                  {isExpanded ? 'See Less' : 'See More'}
-                    <img src="img/Icon placeholder.svg" alt="" srcSet="" />
-                  </button>
-                </div>
-              </div>
-              <div className={`job-description ${isExpanded ? 'expanded' : ''}`}>
-        <h3>Job Description</h3>
-        <p>
-          We are looking for a skilled Backend Systems Developer with 2-5 years of experience to join our Technology & Development team. The ideal candidate will have strong knowledge of server-side programming, database design, and API development.
-        </p>
-        <h3>Requirements</h3>
-        <ul>
-          <li>Bachelor's degree in Computer Science or related field</li>
-          <li>2-5 years of experience in backend development</li>
-          <li>Proficiency in at least one backend language (Java, Python, Node.js)</li>
-          <li>Experience with database systems (SQL, NoSQL)</li>
-          <li>Knowledge of REST API design principles</li>
-          <li>Experience with cloud services (AWS, Azure, GCP)</li>
-        </ul>
-        <h3>Benefits</h3>
-        <p>
-          Competitive salary, health insurance, flexible working hours, professional development opportunities, and a dynamic work environment.
-        </p>
-      </div>
             </div>
-            <div className="job-card">
-              <div className="job-header">
-                <h2>
-                  Design &amp; User Experience - Product Design - Senior
-                  Designer
-                </h2>
-                <div className="tags">
-                  <span className="tag">On-Site</span>
-                  <span className="tag">Full Time</span>
+            <div className="job-details">
+              <div className="detail">
+                <div>
+                  <img src="/img/mynaui_briefcase.svg" alt="briefcase" />
                 </div>
+                <span>{job.experience}</span>
+                <div className="detail-stroke">|</div>
               </div>
-              <div className="job-details">
-                <div className="detail">
-                  <div>
-                    <img
-                      src="/img/mynaui_briefcase.svg"
-                      alt="briefcase"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>2-5 Years</span>
-                  <div className="detail-stroke">|</div>
+              <div className="detail">
+                <div>
+                  <img src="img/heroicons_currency-rupee.svg" alt="currency" />
                 </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/heroicons_currency-rupee.svg"
-                      alt="currency"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Not disclosed</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/fluent_location-28-regular.svg"
-                      alt="location"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Gurugram, Haryana</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/streamline_industry-innovation-and-infrastructure.svg"
-                      alt="infrastructure"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Product Management</span>
-                </div>
+                <span>{job.salary}</span>
+                <div className="detail-stroke">|</div>
               </div>
-              <hr className="dashed-2" />
-              <div className="job-information">
-                <div className="meta">
-                  <span>Posted: 4 days ago</span>
-                  <span>Total Openings: 5</span>
-                  <span>Applicants: 5</span>
+              <div className="detail">
+                <div>
+                  <img src="img/fluent_location-28-regular.svg" alt="location" />
                 </div>
-                <div className="actions">
-                  <button className="apply-now">Apply Now</button>
-                  <div className="content">
-                    <p id="full-text" style={{ display: "none" }}>
-                      this is information
-                    </p>
-                  </div>
-                  <button   onClick={() => setIsExpanded(!isExpanded)} className="see-more">
-                  {isExpanded ? 'See Less' : 'See More'}
-                    <img src="img/Icon placeholder.svg" alt="" srcSet="" />
-                  </button>
-                  
-                </div>
+                <span>{job.location}</span>
+                <div className="detail-stroke">|</div>
               </div>
-              <div className={`job-description ${isExpanded ? 'expanded' : ''}`}>
-        <h3>Job Description</h3>
-        <p>
-          We are looking for a skilled Backend Systems Developer with 2-5 years of experience to join our Technology & Development team. The ideal candidate will have strong knowledge of server-side programming, database design, and API development.
-        </p>
-        <h3>Requirements</h3>
-        <ul>
-          <li>Bachelor's degree in Computer Science or related field</li>
-          <li>2-5 years of experience in backend development</li>
-          <li>Proficiency in at least one backend language (Java, Python, Node.js)</li>
-          <li>Experience with database systems (SQL, NoSQL)</li>
-          <li>Knowledge of REST API design principles</li>
-          <li>Experience with cloud services (AWS, Azure, GCP)</li>
-        </ul>
-        <h3>Benefits</h3>
-        <p>
-          Competitive salary, health insurance, flexible working hours, professional development opportunities, and a dynamic work environment.
-        </p>
-      </div>
+              <div className="detail">
+                <div>
+                  <img
+                    src="img/streamline_industry-innovation-and-infrastructure.svg"
+                    alt="infrastructure"
+                  />
+                </div>
+                <span>{job.category}</span>
+              </div>
             </div>
-            <div className="job-card">
-              <div className="job-header">
-                <h2>
-                  Sales &amp; Marketing - Digital Campaigns - Marketing
-                  Specialist
-                </h2>
-                <div className="tags">
-                  <span className="tag">On-Site</span>
-                  <span className="tag">Full Time</span>
-                </div>
+            <hr className="dashed-2" />
+            <div className="job-information">
+              <div className="meta">
+                <span>Posted: {job.posted}</span>
+                <span>Total Openings: {job.openings}</span>
+                <span>Applicants: {job.applicants}</span>
               </div>
-              <div className="job-details">
-                <div className="detail">
-                  <div>
-                    <img
-                      src="/img/mynaui_briefcase.svg"
-                      alt="briefcase"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>2-5 Years</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/heroicons_currency-rupee.svg"
-                      alt="currency"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Not disclosed</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/fluent_location-28-regular.svg"
-                      alt="location"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Gurugram, Haryana</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/streamline_industry-innovation-and-infrastructure.svg"
-                      alt="infrastructure"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Product Management</span>
-                </div>
+              <div className="actions">
+                <button className="apply-now" onClick={() => {setApplying(true)
+              setJobName(job.title)}}>
+                  Apply Now
+                </button>
+                <button
+                   onClick={() => {
+                    if(expandedJobIndex===index){
+
+                      setExpandedJobIndex(null)
+                    }else{
+                      setExpandedJobIndex(index)
+
+                    }
+                   }}
+                  className="see-more"
+                >
+                  {expandedJobIndex === index ? "See Less" : "See More"}
+                  <img src="img/Icon placeholder.svg" alt="" />
+                </button>
               </div>
-              <hr className="dashed-2" />
-              <div className="job-information">
-                <div className="meta">
-                  <span>Posted: 4 days ago</span>
-                  <span>Total Openings: 5</span>
-                  <span>Applicants: 5</span>
-                </div>
-                <div className="actions">
-                  <button className="apply-now">Apply Now</button>
-                  <div className="career-see-more-action">
-                  <button onClick={() => setIsExpanded(!isExpanded)}  className="see-more">  {isExpanded ? 'See Less' : 'See More'}
-                  
-                    <img src="img/Icon placeholder.svg" alt="" srcSet="" />
-                  </button>
-                  </div>
-                </div>
-              </div>
-              <div className={`job-description ${isExpanded ? 'expanded' : ''}`}>
-        <h3>Job Description</h3>
-        <p>
-          We are looking for a skilled Backend Systems Developer with 2-5 years of experience to join our Technology & Development team. The ideal candidate will have strong knowledge of server-side programming, database design, and API development.
-        </p>
-        <h3>Requirements</h3>
-        <ul>
-          <li>Bachelor's degree in Computer Science or related field</li>
-          <li>2-5 years of experience in backend development</li>
-          <li>Proficiency in at least one backend language (Java, Python, Node.js)</li>
-          <li>Experience with database systems (SQL, NoSQL)</li>
-          <li>Knowledge of REST API design principles</li>
-          <li>Experience with cloud services (AWS, Azure, GCP)</li>
-        </ul>
-        <h3>Benefits</h3>
-        <p>
-          Competitive salary, health insurance, flexible working hours, professional development opportunities, and a dynamic work environment.
-        </p>
-      </div>
             </div>
-            <div className="job-card">
-              <div className="job-header">
-                <h2>
-                  Operations &amp; Support - Customer Success - Support
-                  Executive
-                </h2>
-                <div className="tags">
-                  <span className="tag">On-Site</span>
-                  <span className="tag">Full Time</span>
-                </div>
+            {expandedJobIndex ===index && (
+              <div className="job-description expanded">
+                <h3>Job Description</h3>
+                <p>{job.description}</p>
+
+                <h3>Requirements</h3>
+                <ul>
+                  {job.requirements.map((req, idx) => (
+                    <li key={idx}>{req}</li>
+                  ))}
+                </ul>
+
+                <h3>Benefits</h3>
+                <p>{job.benefits.join(", ")}</p>
               </div>
-              <div className="job-details">
-                <div className="detail">
-                  <div>
-                    <img
-                      src="/img/mynaui_briefcase.svg"
-                      alt="briefcase"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>2-5 Years</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/heroicons_currency-rupee.svg"
-                      alt="currency"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Not disclosed</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/fluent_location-28-regular.svg"
-                      alt="location"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Gurugram, Haryana</span>
-                  <div className="detail-stroke">|</div>
-                </div>
-                <div className="detail">
-                  <div>
-                    <img
-                      src="img/streamline_industry-innovation-and-infrastructure.svg"
-                      alt="infrastructure"
-                      srcSet=""
-                    />
-                  </div>
-                  <span>Product Management</span>
-                </div>
-              </div>
-              <hr className="dashed-2" />
-              <div className="job-information">
-                <div className="meta">
-                  <span>Posted: 4 days ago</span>
-                  <span>Total Openings: 5</span>
-                  <span>Applicants: 5</span>
-                </div>
-                <div className="actions">
-                  <button className="apply-now">Apply Now</button>
-                  <div className="career-see-more-action">
-                  <button onClick={() => setIsExpanded(!isExpanded)}  className="see-more">   {isExpanded ? 'See Less' : 'See More'}
-                    
-                    <img
-                      src="img/Icon placeholder.svg"
-                      alt="down arrow"
-                      srcSet=""
-                    />
-                  </button>
-                  </div>
-                </div>
-              </div>
-              <div className={`job-description ${isExpanded ? 'expanded' : ''}`}>
-        <h3>Job Description</h3>
-        <p>
-          We are looking for a skilled Backend Systems Developer with 2-5 years of experience to join our Technology & Development team. The ideal candidate will have strong knowledge of server-side programming, database design, and API development.
-        </p>
-        <h3>Requirements</h3>
-        <ul>
-          <li>Bachelor's degree in Computer Science or related field</li>
-          <li>2-5 years of experience in backend development</li>
-          <li>Proficiency in at least one backend language (Java, Python, Node.js)</li>
-          <li>Experience with database systems (SQL, NoSQL)</li>
-          <li>Knowledge of REST API design principles</li>
-          <li>Experience with cloud services (AWS, Azure, GCP)</li>
-        </ul>
-        <h3>Benefits</h3>
-        <p>
-          Competitive salary, health insurance, flexible working hours, professional development opportunities, and a dynamic work environment.
-        </p>
-      </div>
-            </div>
+            )}
+          </div>
+        );
+      })}
+    </>
+
+
             <div className="career-explore-page">
           <div className="first-explore-page">
             <div className="explore-text-section">
@@ -901,84 +745,7 @@ function Career() {
         </div>
           </div>
           <div className="job-card-right-side-item">
-            <div className="Career-Card-form">
-              <div className="Career-Card-header">
-                <h3>Join Our Team</h3>
-                <div className="Career-Card-header-img">
-                  {" "}
-                  <img
-                    src="img/iconoir_cancel.svg"
-                    alt="cancel"
-                    srcSet=""
-                  />
-                </div>
-              </div>
-              <div className="Career-Card-Form-content">
-                <form>
-                  <div className="Career-form-group">
-                    <label htmlFor="fullName">Full Name</label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      className="form-input"
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      placeholder="e.g. Sumit Sharma"
-                    />
-                  </div>
-                  <div className="Career-form-group">
-                    <label htmlFor="mobile">Mobile No</label>
-                    <input
-                      type="tel"
-                      id="mobile"
-                      className="form-input"
-                      value={mobile}
-                      onChange={(e) => setMobile(e.target.value)}
-                      placeholder="e.g. 987xxxxxxx"
-                    />
-                  </div>
-                  <div className="Career-form-group">
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="form-input"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g. sharma@gmail.com"
-                    />
-                  </div>
-                  <div className="Career-form-group">
-                    <label htmlFor="linkedin">
-                   
-                      LinkedIn Id <span className="optional">(Optional)</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="linkedin"
-                      className="form-input"
-                       value={LinkedIn}
-                    onChange={(e) => setLinkedIn(e.target.value)}
-                      placeholder="e.g. ankit.sharma.dev"
-                    />
-                  </div>
-                  <div className="Button-group">
-                    <button type="button" className="attach-button">
-                      <img
-                        src="img/mdi_attachment-plus.svg"
-                        alt="attachment-button"
-                        srcSet=""
-                      />
-                      <input type="file" id="file" />
-                      <label htmlFor="file">Attach File</label>
-                    </button>
-                    <button type="submit" className="submit-button">
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
+           
             <div className="career-banner">
             <div className="first-banner">
             <img
@@ -1017,8 +784,138 @@ function Career() {
           </div>
          
         </div>
+        </div>
+
+  {
+      applying &&  <div className="career-form-parent" >
+      <div className="Career-Card-form">
+                 <div className="Career-Card-header">
+                   <h3>Join Our Team</h3>
+                   <div className="Career-Card-header-img" onClick={() => {setApplying(false)
+                    setJobName("")
+                   }}>
+                     {" "}
+                     <img
+                       src="img/iconoir_cancel.svg"
+                       alt="cancel"
+                       srcSet=""
+                     />
+                   </div>
+                 </div>
+                 <div className="Career-Card-Form-content">
+                   <form>
+                     <div className="Career-form-group">
+                       <label htmlFor="fullName">Full Name</label>
+                       <input
+                         type="text"
+                         id="fullName"
+                         className="form-input" 
+                         required
+                         value={fullName}
+                         onChange={(e) => setFullName(e.target.value)}
+                         placeholder="e.g. Ankit Sharma"
+                       />
+                     </div>
+                     <div className="Career-form-group">
+                       <label htmlFor="mobile">Mobile No</label>
+                       <input
+                         type="tel"
+                         id="mobile"
+                         className="form-input" 
+                         required
+                         value={mobile}
+                         onChange={(e) => setMobile(e.target.value)}
+                         placeholder="e.g. 782xxxxxxx"
+                       />
+                     </div>
+                     <div className="Career-form-group">
+                       <label htmlFor="email">Email Address</label>
+                       <input
+                         type="email"
+                         id="email"
+                         className="form-input" 
+                         required
+                         value={email}
+                         onChange={(e) => setEmail(e.target.value)}
+                         placeholder="e.g. sharma@gmail.com"
+                       />
+                     </div>
+                     <div className="Career-form-group">
+                       <label htmlFor="linkedin">
+                      
+                         LinkedIn Id <span className="optional">(Optional)</span>
+                       </label>
+                       <input
+                         type="text"
+                         id="linkedin"
+                         className="form-input" 
+                        
+                          value={LinkedIn}
+                       onChange={(e) => setLinkedIn(e.target.value)}
+                         placeholder="e.g. ankit.sharma.dev"
+                       />
+                     </div>
+                     <div className="Button-group">
+                
+                       <div className="attach-button">
+                          <label htmlFor="file" className="file-label">
+                            <img
+                              src="img/mdi_attachment-plus.svg"
+                              alt="attachment-button"
+                            />
+                            Attach File
+                          </label>
+                          <input
+                            type="file"
+                            id="file"
+                            accept=".pdf"
+                            required
+                            onChange={handleFileChange}
+                          />
+                        </div>
+
+                       <button type="submit" className="submit-button" onClick={
+                        
+                       
+                        (e)=> 
+                    {e.preventDefault()
+
+                      if(!jobName || !fullName || !mobile || !email || !resume){
+                          alert("please fill all filed !!")
+                          return;
+                      }
+                      
+                      dispatch(ApplyJobAction(
+                        {
+                          jobName,
+                          fullName,
+                          mobile,
+                          email,
+                          LinkedIn,
+                          resume
+
+                        }
+                       ))
+
+                       setJobName("");
+                       setFullName("");
+                       setMobile("");
+                       setEmail("")
+                       setLinkedIn("");
+                       setResume(null);
+                       setApplying(false)
+                    }   
+                    }>
+                         Submit
+                       </button>
+                     </div>
+                   </form>
+                 </div>
+               </div>
+      </div>
+  }
       </>
-    </>
+ 
   );
 }
 
