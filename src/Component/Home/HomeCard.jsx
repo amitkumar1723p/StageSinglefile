@@ -38,7 +38,7 @@ export default function HomeCard() {
   }, [data]);
 
   useEffect(() => {
-    // console.log("this i ffatttt")
+    
 
     setAllData(() => {
       return filterdPost;

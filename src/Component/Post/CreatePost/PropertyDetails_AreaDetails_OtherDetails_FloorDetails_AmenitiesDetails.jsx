@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
 import PropertyDetailsSection from "./PropertyDetails.jsx";
 import AreaDetailsSection from "./AreaDetails.jsx";
-import ConstructionDetails from "./ConstructionDetails.jsx";
+import OtherDetails from "./OtherDetails.jsx";
 
 import Amenities from "./Amenities.jsx";
 import ScrollToTop from "../../../ScrollToTop.jsx";
 import FloorDetails from "./FloorDetails.jsx";
-export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDetails_AmenitiesDetails_Section({
+export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_AmenitiesDetails_Section({
   setnext,
   BasicDetailsData,
   update,
@@ -16,12 +16,13 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
   setPropertyDetailsData,
   AreaDetailsData,
   setAreaDetailsData,
-  setConstructionDetailsData,
-  ConstructionDetailsData,
+  setOtherDetailsData,
+  OtherDetailsData,
   AmenitiesDetailsData,
   setAmenitiesDetailsData,
   FloorDetailsData,
   setFloorDetailsData,
+  ApartmentFeaturesRef,
 }) {
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
@@ -77,65 +78,81 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
   useEffect(() => {}, [BasicDetailsData.PropertyAdType]);
   const PostSubmitHandler = (e) => {
     e.preventDefault();
+    if (BasicDetailsData.ApartmentType == "Plot/Land") {
+      if (!OtherDetailsData.PlotDirection) {
+        return alert("Plot Direction Field is Required");
+      }
 
-    // if ([ "Apartment", "1 RK/Studio Apartment", "Independent/Builder Floor", "Serviced Apartment",].includes(BasicDetailsData.ApartmentType)) {
-    if (
-      !AreaDetailsData.SuperBuiltUpArea?.value &&
-      !AreaDetailsData.CarpetArea?.value &&
-      !AreaDetailsData.BuiltUpArea?.value
-    ) {
-      return alert("SuperBuiltUpArea CarpetArea  and BuiltUpArea insert value");
+      //  if()
+      if (!OtherDetailsData.PlotFacing) {
+        return alert("Plot Facing  Field is Required");
+      }
 
-      // }
+      if (AmenitiesDetailsData?.ProjectAmmenities?.length <= 0) {
+        return alert("Project Ammenities  Field is Required");
+      }
 
-      // if (
-      //   !AreaDetailsData.SuperBuiltUpArea?.unit &&
-      //   !AreaDetailsData.CarpetArea?.unit &&
-      //   !AreaDetailsData.BuiltUpArea?.unit
-      // ) {
-      //   alert("SuperBuiltUpArea CarpetArea and BuiltUpArea  insert unit");
-      //   return;
-      // }
+      if (AmenitiesDetailsData?.OtherFeature?.length <= 0) {
+        return alert("Other Field is Required");
+      }
+
+      //
+    } else {
+      if (
+        !AreaDetailsData.SuperBuiltUpArea?.value &&
+        !AreaDetailsData.CarpetArea?.value &&
+        !AreaDetailsData.BuiltUpArea?.value
+      ) {
+        return alert(
+          "SuperBuiltUpArea CarpetArea  and BuiltUpArea insert value"
+        );
+      }
+      if (Object.keys(AlertObj).length > 0) {
+        alert("resove Area field error");
+        return;
+      }
+      if (!FloorDetailsData.PropertyDirection) {
+        return alert("PropertyDirection Field Required");
+      }
+
+      if (FloorDetailsData?.OverLookingView?.length <= 0) {
+        return alert("Over Looking View  Field Required");
+      }
+
+      if (!AmenitiesDetailsData.Furnishing) {
+        return alert("Furnishing Field Required");
+      }
+
+      if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
+        return alert(" Society And Building Feature is Required");
+      }
+      if (update && AmenitiesDetailsData.Furnishing == "Un-Furnished") {
+        const { FurnishingOption, ...AmenitiesDetailsRest } =
+          AmenitiesDetailsData;
+        setAmenitiesDetailsData(AmenitiesDetailsRest);
+      }
     }
 
-    if (Object.keys(AlertObj).length > 0) {
-      alert("resove Area field error");
-      return;
-    }
-
-    if (!FloorDetailsData.PropertyDirection) {
-      return alert("PropertyDirection Field Required");
-    }
-
-    if (FloorDetailsData.OverLookingView.length <= 0) {
-      return alert("View From Balcony Field Required");
-    }
-
-    if (!AmenitiesDetailsData.Furnishing) {
-      return alert("Furnishing Field Required");
-    }
     if (!AmenitiesDetailsData.PowerBackUp) {
       return alert(" PowerBackUp  Field is Required");
     }
-    if (AmenitiesDetailsData.SocietyAndBuildingFeature.length <= 0) {
-      return alert(" Society And Building Feature is Required");
-    }
-    if (AmenitiesDetailsData.WaterSource.length <= 0) {
-      return alert("WaterSource is Required");
-    }
 
-    if (update && AmenitiesDetailsData.Furnishing == "Un-Furnished") {
-      const { FurnishingOption, ...AmenitiesDetailsRest } =
-        AmenitiesDetailsData;
-      setAmenitiesDetailsData(AmenitiesDetailsRest);
+    if (AmenitiesDetailsData?.WaterSource?.length <= 0) {
+      return alert("WaterSource is Required");
     }
 
     setnext(3);
     if (!update) {
+      if (BasicDetailsData.ApartmentType == "Plot/Land") {
+        StoreDataInSession("OtherDetailsData", OtherDetailsData);
+      } else {
+        StoreDataInSession("PropertyDetailsData", PropertyDetailsData);
+        StoreDataInSession("FloorDetailsData", FloorDetailsData);
+      }
       StoreDataInSession("next", 3);
-      StoreDataInSession("PropertyDetailsData", PropertyDetailsData);
+
       StoreDataInSession("AreaDetailsData", AreaDetailsData);
-      StoreDataInSession("FloorDetailsData", FloorDetailsData);
+
       StoreDataInSession("AmenitiesDetailsData", AmenitiesDetailsData);
     }
   };
@@ -149,7 +166,11 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
       <div className="property-details-main-box">
         <div className="property-details">
           <h2> {BasicDetailsData.ApartmentType} Section </h2>
-          <form id="property-form" onSubmit={PostSubmitHandler}>
+          <form
+            id="property-form"
+            onSubmit={PostSubmitHandler}
+            ref={ApartmentFeaturesRef}
+          >
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (
@@ -170,13 +191,35 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
               />
             </div>
 
-            <div className="Prop-detials-box-floor">
-              <FloorDetails
-                FloorDetailsData={FloorDetailsData}
-                setFloorDetailsData={setFloorDetailsData}
-                BasicDetailsData={BasicDetailsData}
-              />
-            </div>
+            {ApartMentTypeArrayRemovePlotAndLand.includes(
+              BasicDetailsData.ApartmentType
+            ) && (
+              <div className="Prop-detials-box-floor">
+                <FloorDetails
+                  FloorDetailsData={FloorDetailsData}
+                  setFloorDetailsData={setFloorDetailsData}
+                  BasicDetailsData={BasicDetailsData}
+                />
+              </div>
+            )}
+
+            {BasicDetailsData.ApartmentType == "Plot/Land" && (
+              <>
+                <OtherDetails
+                  OtherDetailsData={OtherDetailsData}
+                  setOtherDetailsData={setOtherDetailsData}
+                  BasicDetailsData={BasicDetailsData}
+                />
+
+                {/* <Amenities
+                  update={update}
+                  AmenitiesDetailsData={AmenitiesDetailsData}
+                  setAmenitiesDetailsData={setAmenitiesDetailsData}
+                  BasicDetailsData={BasicDetailsData}
+                /> */}
+              </>
+            )}
+
             <div className="Prop-detials-box-form-Amenities">
               <Amenities
                 update={update}
@@ -185,22 +228,6 @@ export default function PropertyDetails_AreaDetails_ConstructionDetails_FloorDet
                 BasicDetailsData={BasicDetailsData}
               />
             </div>
-            {BasicDetailsData.ApartmentType == "Plot/Land" && (
-              <>
-                <ConstructionDetails
-                  ConstructionDetailsData={ConstructionDetailsData}
-                  setConstructionDetailsData={setConstructionDetailsData}
-                  BasicDetailsData={BasicDetailsData}
-                />
-
-                <Amenities
-                  update={update}
-                  AmenitiesDetailsData={AmenitiesDetailsData}
-                  setAmenitiesDetailsData={setAmenitiesDetailsData}
-                  BasicDetailsData={BasicDetailsData}
-                />
-              </>
-            )}
 
             <div className="next-prev-box">
               <>

@@ -13,6 +13,8 @@ export default function LocationDetails({
   setLocationDetailsData,
   update,
   setnext,
+  // LocationDetailsSubmit
+  LocationDetailsSubmiRef
 }) {
   const dispatch = useDispatch();
 
@@ -33,7 +35,7 @@ export default function LocationDetails({
         </div> */}
       <div className="container w-80%">
         <h2 className="location-heading">Location Details</h2>
-        <form id="locationForm" onSubmit={submitHandler}>
+        <form id="locationForm" onSubmit={submitHandler} ref={ LocationDetailsSubmiRef}>
           <div className="location-box">
             <ProjectNameSection
             

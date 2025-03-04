@@ -11,23 +11,35 @@ export default function PricingDetails({
   show_Maintenance_Charges,
   setnext,
   update,
+  next,
+  PricingDetailsRef,
 }) {
   const PostSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (
-      BasicDetailsData.PropertyAdType == "Sale" &&
-      !PricingDetailsData.PricePerSqFt
-    ) {
-      return alert("Price Per SqFt Is Required");
+    //  validate price sqft and sqyd
+
+    if (BasicDetailsData.ApartmentType == "Plot/Land") {
+      if (
+        !PricingDetailsData.PricePerSqYd ||
+        PricingDetailsData.PricePerSqYd <= 0
+      ) {
+        return alert("Price Price Per Sq. Yd Is Required");
+      }
+    } else {
+      if (
+        BasicDetailsData.PropertyAdType == "Sale" &&
+        (!PricingDetailsData.PricePerSqFt ||
+          PricingDetailsData.PricePerSqYd <= 0)
+      ) {
+        return alert("Price Per SqFt Is Required");
+      }
     }
 
     const CopyObj = { ...PricingDetailsData };
     if (show_Maintenance_Charges == false) {
       delete CopyObj.AdditionalDetails;
     }
-
- 
 
     setPricingDetailsData(CopyObj);
 
@@ -43,130 +55,202 @@ export default function PricingDetails({
   const [showPrice, setshowPrice] = useState("");
 
   useEffect(() => {
-    if (PricingDetailsData.ExpectedPrice) {
-      let numbricvalue = String(PricingDetailsData.ExpectedPrice).replace(
-        /,/g,
-        ""
-      );
+    setTimeout(() => {
+      const PricingDetailsCopyObj = { ...PricingDetailsData };
 
-      let Area = null;
+      if (PricingDetailsData.ExpectedPrice) {
+        // get Price
+        let numbricvalue = String(PricingDetailsData.ExpectedPrice).replace(
+          /,/g,
+          ""
+        );
 
-      const { SuperBuiltUpArea, CarpetArea, BuiltUpArea } = AreaDetailsData;
+        let Area = null;
 
-      // Area = PlotArea.value;
-      if (SuperBuiltUpArea?.value) {
-        Area = SuperBuiltUpArea?.value;
-      } else if (CarpetArea?.value && !BuiltUpArea?.value) {
-        Area = CarpetArea?.value;
-      } else if (BuiltUpArea?.value && !CarpetArea?.value) {
-        Area = BuiltUpArea?.value;
-      } else if (BuiltUpArea?.value || CarpetArea?.value) {
-        Area = Math.max(CarpetArea?.value, BuiltUpArea?.value);
-      }
+        const { SuperBuiltUpArea, CarpetArea, BuiltUpArea, PlotSize } =
+          AreaDetailsData;
 
-      if (Area && numbricvalue) {
-        let CalPricePerSqFt = Number(numbricvalue) / Area;
-
-        let roundedPricePerSqFt;
-        const decimalPart = CalPricePerSqFt - Math.floor(CalPricePerSqFt);
-        if (decimalPart <= 0.5) {
-          roundedPricePerSqFt = Math.floor(CalPricePerSqFt);
+        if (BasicDetailsData.ApartmentType == "Plot/Land") {
+          Area = PlotSize?.value;
         } else {
-          roundedPricePerSqFt = Math.ceil(CalPricePerSqFt);
+          // Area = PlotArea.value;
+          if (SuperBuiltUpArea?.value) {
+            Area = SuperBuiltUpArea?.value;
+          } else if (CarpetArea?.value && !BuiltUpArea?.value) {
+            Area = CarpetArea?.value;
+          } else if (BuiltUpArea?.value && !CarpetArea?.value) {
+            Area = BuiltUpArea?.value;
+          } else if (BuiltUpArea?.value || CarpetArea?.value) {
+            Area = Math.max(CarpetArea?.value, BuiltUpArea?.value);
+          }
         }
 
-        setPricingDetailsData({
-          ...PricingDetailsData,
+        //  get Area and Price
+        if (Area && numbricvalue) {
+          let CalPricePer_SqFt_SqYd = Number(numbricvalue) / Area;
+          let roundedPricePer_SqFt_Sqyd;
+          const decimalPart =
+            CalPricePer_SqFt_SqYd - Math.floor(CalPricePer_SqFt_SqYd);
 
-          PricePerSqFt: roundedPricePerSqFt,
-        });
+          if (decimalPart <= 0.5) {
+            roundedPricePer_SqFt_Sqyd = Math.floor(CalPricePer_SqFt_SqYd);
+          } else {
+            roundedPricePer_SqFt_Sqyd = Math.ceil(CalPricePer_SqFt_SqYd);
+          }
+
+          let Sqft_Sqyd_AdComa = String(
+            roundedPricePer_SqFt_Sqyd
+          ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        
+          if (BasicDetailsData.ApartmentType == "Plot/Land") {
+            
+           
+           
+            PricingDetailsCopyObj.PricePerSqYd = Sqft_Sqyd_AdComa;
+          } else {
+              
+            PricingDetailsCopyObj.PricePerSqFt = Sqft_Sqyd_AdComa;
+          }
+        }
       }
-    }
 
-    if (!PricingDetailsData.ExpectedPrice) {
-      const { PricePerSqFt, ...PricingDetails_Rest } = PricingDetailsData; // Destructure to remove PropertyStatus
-      setPricingDetailsData(PricingDetails_Rest);
-    }
-  }, [PricingDetailsData.ExpectedPrice]);
+      if (!PricingDetailsData.ExpectedPrice) {
+        delete PricingDetailsCopyObj.PricePerSqFt;
+        delete PricingDetailsCopyObj.PricePerSqYd;
+
+        // const { PricePerSqFt, PricePerSqYd, ...PricingDetails_Rest } =
+        //   PricingDetailsData; // Destructure to remove PropertyStatus
+        // setPricingDetailsData(PricingDetails_Rest);
+      }
+
+      if (sessionStorage.getItem("PriceDetailsFirstLoad")) {
+        if (BasicDetailsData.PropertyAdType == "Rent") {
+          PricingDetailsCopyObj.AdditionalDetails = {
+            ...PricingDetailsCopyObj.AdditionalDetails,
+            PreferredTenant:
+              PricingDetailsCopyObj.AdditionalDetails?.PreferredTenant || [],
+          };
+
+          //  Rent Price
+          if (PricingDetailsCopyObj.ExpectedRent) {
+            let AddComaPrice = String(
+              PricingDetailsCopyObj.ExpectedRent
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            PricingDetailsCopyObj.ExpectedRent = AddComaPrice;
+          }
+          if (PricingDetailsCopyObj.DepositePrice) {
+            let AddComaPrice = String(
+              PricingDetailsCopyObj.DepositePrice
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            PricingDetailsCopyObj.DepositePrice = AddComaPrice;
+          }
+        }
+        if (BasicDetailsData.PropertyAdType == "Sale") {
+          if (PricingDetailsCopyObj.ExpectedPrice) {
+            let AddComaPrice = String(
+              PricingDetailsCopyObj.ExpectedPrice
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            PricingDetailsCopyObj.ExpectedPrice = AddComaPrice;
+          }
+
+          if (PricingDetailsCopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+            let AddComaPrice = String(
+              PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent =
+              AddComaPrice;
+          }
+        }
+        //  Sale Price
+
+        // Additional Details
+        if (PricingDetailsCopyObj.AdditionalDetails?.MaintenanceCharges) {
+          let AddComaPrice = String(
+            PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges
+          ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges =
+            AddComaPrice;
+        }
+
+        if (PricingDetailsData.AdditionalDetails?.MaintenanceCharges) {
+          setshow_Maintenance_Charges(true);
+        }
+      }
+      setPricingDetailsData(PricingDetailsCopyObj);
+    }, 0);
+  }, [
+    PricingDetailsData.ExpectedPrice,
+    BasicDetailsData.ApartmentType,
+    BasicDetailsData.PropertyAdType,
+    AreaDetailsData,
+  ]);
+
   useEffect(() => {
-    const PricingDetailsCopyObj = { ...PricingDetailsData };
-
-    if (BasicDetailsData.PropertyAdType == "Rent") {
-      PricingDetailsCopyObj.AdditionalDetails = {
-        ...PricingDetailsCopyObj.AdditionalDetails,
-        PreferredTenant:
-          PricingDetailsCopyObj.AdditionalDetails?.PreferredTenant || [],
-      };
-
-      //  Rent Price
-      if (PricingDetailsCopyObj.ExpectedRent) {
-        let AddComaPrice = String(PricingDetailsCopyObj.ExpectedRent).replace(
-          /\B(?=(\d{3})+(?!\d))/g,
-          ","
-        );
-        PricingDetailsCopyObj.ExpectedRent = AddComaPrice;
-      }
-      if (PricingDetailsCopyObj.DepositePrice) {
-        let AddComaPrice = String(PricingDetailsCopyObj.DepositePrice).replace(
-          /\B(?=(\d{3})+(?!\d))/g,
-          ","
-        );
-        PricingDetailsCopyObj.DepositePrice = AddComaPrice;
-      }
-    }
-    if (BasicDetailsData.PropertyAdType == "Sale") {
-      if (PricingDetailsCopyObj.ExpectedPrice) {
-        let AddComaPrice = String(PricingDetailsCopyObj.ExpectedPrice).replace(
-          /\B(?=(\d{3})+(?!\d))/g,
-          ","
-        );
-        PricingDetailsCopyObj.ExpectedPrice = AddComaPrice;
-      }
-
-      if (PricingDetailsCopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-        let AddComaPrice = String(
-          PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent
-        ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent =
-          AddComaPrice;
-      }
-    }
-    //  Sale Price
-
-    // Additional Details
-    if (PricingDetailsCopyObj.AdditionalDetails?.MaintenanceCharges) {
-      let AddComaPrice = String(
-        PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges
-      ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges = AddComaPrice;
-    }
-
-    setPricingDetailsData(PricingDetailsCopyObj);
-    if (PricingDetailsData.AdditionalDetails?.MaintenanceCharges) {
-      setshow_Maintenance_Charges(true);
-    }
+    sessionStorage.setItem("PriceDetailsFirstLoad", "true");
+    return () => {
+      sessionStorage.removeItem("PriceDetailsFirstLoad");
+    };
   }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     const PricingDetailsCopyObj = { ...PricingDetailsData };
 
-  // const PriceToSentence = useCallback((price) => {
-  //   try {
-  //     // Convert price to string, remove commas, and parse as integer
-  //     const numericPrice = parseInt(String(price).replace(/,/g, ""), 10);
+  //     if (BasicDetailsData.PropertyAdType == "Rent") {
+  //       PricingDetailsCopyObj.AdditionalDetails = {
+  //         ...PricingDetailsCopyObj.AdditionalDetails,
+  //         PreferredTenant:
+  //           PricingDetailsCopyObj.AdditionalDetails?.PreferredTenant || [],
+  //       };
 
-  //     // Check if the parsed number is valid
-  //     if (isNaN(numericPrice)) {
-  //       return "Invalid price";
+  //       //  Rent Price
+  //       if (PricingDetailsCopyObj.ExpectedRent) {
+  //         let AddComaPrice = String(PricingDetailsCopyObj.ExpectedRent).replace(
+  //           /\B(?=(\d{3})+(?!\d))/g,
+  //           ","
+  //         );
+  //         PricingDetailsCopyObj.ExpectedRent = AddComaPrice;
+  //       }
+  //       if (PricingDetailsCopyObj.DepositePrice) {
+  //         let AddComaPrice = String(
+  //           PricingDetailsCopyObj.DepositePrice
+  //         ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //         PricingDetailsCopyObj.DepositePrice = AddComaPrice;
+  //       }
+  //     }
+  //     if (BasicDetailsData.PropertyAdType == "Sale") {
+  //       if (PricingDetailsCopyObj.ExpectedPrice) {
+  //         let AddComaPrice = String(
+  //           PricingDetailsCopyObj.ExpectedPrice
+  //         ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //         PricingDetailsCopyObj.ExpectedPrice = AddComaPrice;
+  //       }
+
+  //       if (PricingDetailsCopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+  //         let AddComaPrice = String(
+  //           PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent
+  //         ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //         PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent =
+  //           AddComaPrice;
+  //       }
+  //     }
+  //     //  Sale Price
+
+  //     // Additional Details
+  //     if (PricingDetailsCopyObj.AdditionalDetails?.MaintenanceCharges) {
+  //       let AddComaPrice = String(
+  //         PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges
+  //       ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //       PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges =
+  //         AddComaPrice;
   //     }
 
-  //     // Convert the number to words
-  //     const words = numWords(numericPrice);
-
-  //     // Capitalize the first letter and return the result
-  //     return words.charAt(0).toUpperCase() + words.slice(1);
-  //   } catch (error) {
-  //     console.error("Error converting price to sentence:", error);
-  //     return "Error processing the price";
-  //   }
+  //     setPricingDetailsData(PricingDetailsCopyObj);
+  //     if (PricingDetailsData.AdditionalDetails?.MaintenanceCharges) {
+  //       setshow_Maintenance_Charges(true);
+  //     }
+  //   }, 0);
   // }, []);
+
   const PriceToSentence = useCallback((price) => {
     if (price) {
       // Convert price to string, remove commas, and parse as integer
@@ -201,7 +285,11 @@ export default function PricingDetails({
       <div className="property-details-main-box">
         <div className="property-details price-sectipn-main price-and-show">
           <h3 className="price-section-create-form"> Pricing Details</h3>
-          <form id="property-form" onSubmit={PostSubmitHandler}>
+          <form
+            id="property-form"
+            onSubmit={PostSubmitHandler}
+            ref={PricingDetailsRef}
+          >
             {/* Sale Pricing  */}
 
             {BasicDetailsData.PropertyAdType === "Sale" && (
@@ -248,28 +336,48 @@ export default function PricingDetails({
                   </p>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="price-per-sq.ft"> Price Per Sq.Ft*</label>
-                  <input
-                    type="text"
-                    id="price-per-sq.ft"
-                    placeholder="Price Per Sq.Ft ₹ "
-                    required
-                    readOnly
-                    value={PricingDetailsData.PricePerSqFt || ""}
-                    // onChange={(e) => {
-                    //   // const regex = /^[1-9][0-9]*$/;
-                    //   // let test = regex.test(e.target.value);
-                    //   // if (e.target.value == "" || test) {
-                    //   // if (e.target.value == "" || test) {
-                    //   //   setPricingDetailsData({
-                    //   //     ...PricingDetailsData,
-                    //   //     PricePerSqFt: e.target.value,
-                    //   //   });
-                    //   // }
-                    // }}
-                  />
-                </div>
+                {BasicDetailsData.ApartmentType == "Plot/Land" ? (
+                  <>
+                  
+                    <div className="form-group">
+                      <label htmlFor="price-per-sq.yd">
+                       
+                        Price Per Sq. Yd.*
+                      </label>
+                      <input
+                        type="text"
+                        id="price-per-sq.yd"
+                        placeholder=" Price Per Sq. Yd ₹ "
+                        required
+                        readOnly
+                        value={PricingDetailsData.PricePerSqYd || 0}
+                      />
+                          <small className="number-to-word">
+                    {PriceToSentence(PricingDetailsData.PricePerSqYd)}
+                  </small>
+                    </div>
+                
+                  </>
+                ) : (
+                  <div className="form-group">
+                    <label htmlFor="price-per-sq.ft"> Price Per Sq.Ft*</label>
+                    <input
+                      type="text"
+                      id="price-per-sq.ft"
+                      placeholder="Price Per Sq.Ft ₹ "
+                      required
+                      readOnly
+                      value={PricingDetailsData.PricePerSqFt || 0}
+                    />
+                    <small className="number-to-word">
+                    {PriceToSentence(PricingDetailsData.PricePerSqFt)}
+                    </small>
+                 
+                  </div>
+                )}
+                {/* Price Per Sq.ft  */}
+
+                {/* Price Per Sq. yd */}
               </div>
             )}
 
@@ -486,53 +594,54 @@ export default function PricingDetails({
                         </div>
                       )} */}
                       {/* Monthly Expected Rent  */}
-                      {BasicDetailsData.PropertyAdType === "Sale" && (
-                        <div className="form-group">
-                          <label
-                            className="montly-chnagse-in-price-section"
-                            htmlFor="monthly-expected-rent"
-                          >
-                            <p>
-                              {" "}
-                              Expected Rent<span>/Monthly</span>{" "}
-                            </p>
-                          </label>
-                          <input
-                            type="text"
-                            id="monthly-expected-rent"
-                            placeholder="Monthly Expected Price"
-                            value={
-                              PricingDetailsData.AdditionalDetails
-                                ?.MonthlyExpectedRent || ""
-                            }
-                            onChange={(e) => {
-                              const numericValue = String(
-                                e.target.value
-                              ).replace(/[^0-9]/g, "");
+                      {BasicDetailsData.PropertyAdType === "Sale" &&
+                        BasicDetailsData.ApartmentType != "Plot/Land" && (
+                          <div className="form-group">
+                            <label
+                              className="montly-chnagse-in-price-section"
+                              htmlFor="monthly-expected-rent"
+                            >
+                              <p>
+                                {" "}
+                                Expected Rent<span>/Monthly</span>{" "}
+                              </p>
+                            </label>
+                            <input
+                              type="text"
+                              id="monthly-expected-rent"
+                              placeholder="Monthly Expected Price"
+                              value={
+                                PricingDetailsData.AdditionalDetails
+                                  ?.MonthlyExpectedRent || ""
+                              }
+                              onChange={(e) => {
+                                const numericValue = String(
+                                  e.target.value
+                                ).replace(/[^0-9]/g, "");
 
-                              // Remove non-numeric characters
-                              let AddComaPrice = numericValue.replace(
-                                /\B(?=(\d{3})+(?!\d))/g,
-                                ","
-                              );
-                              setPricingDetailsData({
-                                ...PricingDetailsData,
-                                AdditionalDetails: {
-                                  ...PricingDetailsData.AdditionalDetails,
-                                  MonthlyExpectedRent: AddComaPrice,
-                                },
-                              });
-                              // }
-                            }}
-                          />
-                          <small className="number-to-word">
-                            {PriceToSentence(
-                              PricingDetailsData.AdditionalDetails
-                                ?.MonthlyExpectedRent
-                            )}
-                          </small>
-                        </div>
-                      )}
+                                // Remove non-numeric characters
+                                let AddComaPrice = numericValue.replace(
+                                  /\B(?=(\d{3})+(?!\d))/g,
+                                  ","
+                                );
+                                setPricingDetailsData({
+                                  ...PricingDetailsData,
+                                  AdditionalDetails: {
+                                    ...PricingDetailsData.AdditionalDetails,
+                                    MonthlyExpectedRent: AddComaPrice,
+                                  },
+                                });
+                                // }
+                              }}
+                            />
+                            <small className="number-to-word">
+                              {PriceToSentence(
+                                PricingDetailsData.AdditionalDetails
+                                  ?.MonthlyExpectedRent
+                              )}
+                            </small>
+                          </div>
+                        )}
                     </>
                   </div>
                   {/* Preferred Tenant  */}
@@ -544,7 +653,10 @@ export default function PricingDetails({
                       <div className="flex gap-5 items-center tenant-checkbox ">
                         {PreferredTenantArray.map((text, i) => {
                           return (
-                            <div className="PropertyStatus-box-content items-center   " key={i}>
+                            <div
+                              className="PropertyStatus-box-content items-center   "
+                              key={i}
+                            >
                               <label htmlFor="">{text}</label>
 
                               <input
@@ -594,7 +706,6 @@ export default function PricingDetails({
                                           ),
                                       },
                                     });
-                                   
                                   }
                                 }}
                               />

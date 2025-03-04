@@ -83,7 +83,7 @@ export default function ReportForm() {
             </div>
 
             <div className="reporting-form-group">
-              <label className="reporting-label">Upload Files</label>
+              <label className="reporting-label">Upload JPEG Images</label>
               <div className="reporting-file-container reporting-input">
                 <input placeholder="choose image " type="file"  accept=".jpg,.jpeg,.png,.webp" multiple className="reporting-input" onChange={handleFileChange} />
               </div>
@@ -95,7 +95,7 @@ export default function ReportForm() {
                     <div key={index} className="reporting-file-item">
                       <span>{f.name}</span>
                       <button className="reporting-remove-file" onClick={() => removeFile(index)}>
-                      &#10005;
+                        &#10005;
                       </button>
                     </div>
                   ))}

@@ -18,12 +18,7 @@ export default function PropertyDataBox({ Answer, Icon, Data, Id }) {
 
       <div className="para-span" id={Id}>
         <p className="p-ans">{Answer}</p>
-        <p className="p-deta">
-          {Data}
-
-          
-        </p>
-       
+        <p className="p-deta">{Data}</p>
 
         {/* Conditional rendering of content based on visibility */}
         {isVisible && Id && (
@@ -34,21 +29,23 @@ export default function PropertyDataBox({ Answer, Icon, Data, Id }) {
           </div>
         )}
       </div>
-      {Data === "Property Direction" ? (
-            <button
-              className="i-icon-section"
-              onMouseEnter={() => setIsVisible(true)}
-              onMouseOut={() => setIsVisible(false)}
-            >
-              <img
-                onMouseEnter={() => setIsVisible(true)}
-                onMouseOut={() => setIsVisible(false)}
-                src="/img/i-icon.png"
-                alt="Icon"
-                className="hover-icon"
-              />
-            </button>
-          ) : null}
+      {["Property Direction", "Plot Direction"].includes(Data) ? (
+        <button
+          className="i-icon-section"
+          onMouseEnter={() => setIsVisible(true)}
+          onMouseOut={() => setIsVisible(false)}
+        >
+          <img
+            onMouseEnter={() => setIsVisible(true)}
+            onMouseOut={() => setIsVisible(false)}
+            src="/img/i-icon.png"
+            alt="Icon"
+            className="hover-icon"
+          />
+        </button>
+      ) : null}
     </div>
   );
+
+
 }

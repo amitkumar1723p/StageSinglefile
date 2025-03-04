@@ -3,7 +3,7 @@
     height: 300px;
     margin-bottom: 30px;
     background-color: rgba(0, 145, 255, 0.623);
-    background-image: url('C:\Users\Admin\Desktop\test\propertyDekho247-frontend\public\img\blog-insights-background-image.svg');
+    background-image: url('/public/img/blog-insights-background-image.svg');
     /* background-repeat:repeat-x; */
 }
 
@@ -45,19 +45,15 @@
     font-weight: 400;
     color: white;
 }
-
 @media(max-width:768px){
     .blog-insights-headings{
         width: 90%;
     }
     .blog-insights-headings p{
-        font-size: 20px;
+        font-size: 15px;
 
     }
     .blog-insights-headings h1{
-        font-size: 34px;
-    
+        font-size: 24px;
     }
-    
-
 }
