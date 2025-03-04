@@ -1165,7 +1165,7 @@ export const ReportPagePostAction = (formdata) => {
       });
 
       const url = `${api_Base_Url}/feedback/report-feedback`;
-      console.log('mu ddd ',formdata)
+      // console.log('mu ddd ',formdata)
 
       const feedBack = new FormData();
       feedBack.append("feedbackType", formdata.type);
@@ -1197,6 +1197,60 @@ export const ReportPagePostAction = (formdata) => {
       } else {
         dispatch({
           type: "ReportPagePostFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//handle submit applyjob 
+
+export const ApplyJobAction = (formdata) => {
+  return async (dispatch) => {
+    console.log(formdata)
+    try {
+      dispatch({
+        type: "ApplyJobActionRequest",
+        payload: "ApplyJobActionRequest",
+      });
+
+      const url = `${api_Base_Url}/application/apply-job`;
+      // console.log('mu ddd ',formdata)
+
+      const userApplication = new FormData();
+      userApplication.append("jobName", formdata.jobName);
+      userApplication.append("fullName", formdata.fullName);
+      userApplication.append("mobileNo", formdata.mobile);
+      userApplication.append("email", formdata.email);
+      userApplication.append("linkedIn", formdata.LinkedIn);
+
+      // Append multiple files correctly
+      if (formdata.resume) {
+        // console.log(formdata.file)
+        
+     
+        userApplication.append("resume", formdata.resume);
+      
+      }
+      // console.log('mu ddd ',feedBack)
+
+      const config = {
+     
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, userApplication, config);
+      dispatch({ type: "ApplyJobActionSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "ApplyJobActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "ApplyJobActionFail",
           payload: { message: error.message, success: false },
         });
       }

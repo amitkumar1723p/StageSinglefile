@@ -25,6 +25,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileRequest":
     case "OwnerAllExcelFileRequest":
     case "ReportPagePostRequest":
+    case "ApplyJobActionRequest":
       return {
         ...state,
         loading: true,
@@ -55,6 +56,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileSuccess":
     case "OwnerAllExcelFileSuccess":
       case "ReportPagePostSuccess":
+   case "ApplyJobActionSuccess":
      
     return {
         ...state,
@@ -86,6 +88,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileFail":
     case "OwnerAllExcelFileFail":
     case "ReportPagePostFail":
+    case "ApplyJobActionFail":
+
       return {
         ...state,
         loading: false,

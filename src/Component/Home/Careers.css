@@ -14,6 +14,9 @@
   --main-black-clr: #222;
 }
 
+.career-page-main-container{
+  position: realtive;
+}
 .Career-Hero-Section {
   color: var(--main-white-clr);
   padding: 0 16px;
@@ -22,7 +25,7 @@
 
 .heading-container {
   position: relative;
-  top: 128px;
+  top: 210px;
 }
 .Career-Hero-Heading {
   color: var(--main-black-clr);
@@ -65,6 +68,10 @@
   --shadow-color: rgba(146, 146, 146, 0.25);
   --white: #fff;
   --font-family: "Inter", sans-serif;
+}
+.custon-accordian-header{
+  background: var(--main-light-clr) !important;
+  color: white  !important;
 }
 
 .career-search-container {
@@ -871,11 +878,27 @@ h2 span {
 }
 
 .Career-Card-form {
-  max-width: 367px;
-  /* background: var(--main-dark-clr); */
+  max-width: 375px;
+  background-color: rgb(209, 220, 251);
+  /* -webkit-backdrop-filter: blur(4px); */
+  /* backdrop-filter: blur(4px); */
+ 
+  color: white;
   border-radius: 8px;
-  margin: 0px 28px;
-  box-shadow: 0px 0px 10px 0px #d4dde4;
+  margin: 0 28px;
+  /* box-shadow: 0 0 10px #d4dde4; */
+  padding: 16px; /* Optional: Adds spacing inside */
+}
+.career-form-parent{
+  background: #0000005c;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 20;
 }
 
 .hidden-content {
@@ -1026,8 +1049,8 @@ label {
 .career-explore-page {
   display: flex;
   gap: 20px;
-  flex-direction: column;
-  margin: 20px 222px;
+  /* flex-direction: column;
+  margin: 20px 222px; */
 }
 
 .first-explore-page {

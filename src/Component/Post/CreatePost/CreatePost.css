@@ -2025,3 +2025,9 @@ input[type="number"] {
   }
 }
 
+.other-details-plot{
+  box-shadow: 0px 0px 8px 2px rgba(178, 178, 178, 0.25);
+  padding: 10px 20px;
+  border-radius: 0;
+  margin: 10px 0;
+}

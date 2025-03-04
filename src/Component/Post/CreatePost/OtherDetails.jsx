@@ -1,10 +1,12 @@
+
+import "./CreatePost.css"
 export default function OtherDetails({
   OtherDetailsData,
   setOtherDetailsData,
   // eslint-disable-next-line
   BasicDetailsData,
 }) {
- 
+
   //   useEffect(() => {
   //     if (ConstructionDetailsData.TotalFloors) {
   //       let count = [];
@@ -52,115 +54,117 @@ export default function OtherDetails({
 
   return (
     <>
-      <p className="Property-Details-heading"> Other Details </p>
-      <div className="form-group">
-        <label htmlFor="constructor-allowed"> Construction Allowed*</label>
-        <input
-          type="text"
-          id="constructor-allowed"
-          placeholder="eg., 3 Floors"
-          required
-          value={OtherDetailsData.ConstructionAllowed || ""}
-          onChange={(e) => {
-            setOtherDetailsData({
-              ...OtherDetailsData,
-              ConstructionAllowed: e.target.value,
-            });
-          }}
-        />
-      </div>
+      <div className="other-details-plot">
 
-      {/* Plot Direction   */}
 
-      <div className="fom-group">
-        <p className="label">Plot Direction *</p>
-
-        <div className="tab-box">
-          {PropertyfacingArray.map((text, i) => {
-            return (
-              <div
-                key={i}
-                className={`tab ${
-                  OtherDetailsData.PlotDirection === text ? "select" : ""
-                }`}
-                onClick={() => {
-                  setOtherDetailsData({
-                    ...OtherDetailsData,
-                    PlotDirection: text,
-                  });
-                }}
-              >
-                {text}
-                <img
-                  alt=""
-                  src={
-                    OtherDetailsData.PlotDirection === text
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
-                  }
-                />
-              </div>
-            );
-          })}
+        <p className="Property-Details-heading"> Other Details </p>
+        <div className="form-group">
+          <label htmlFor="constructor-allowed"> Construction Allowed*</label>
+          <input
+            type="text"
+            id="constructor-allowed"
+            placeholder="eg., 3 Floors"
+            required
+            value={OtherDetailsData.ConstructionAllowed || ""}
+            onChange={(e) => {
+              setOtherDetailsData({
+                ...OtherDetailsData,
+                ConstructionAllowed: e.target.value,
+              });
+            }}
+          />
         </div>
-      </div>
 
-      {/* PlotOver  Facing */}
+        {/* Plot Direction   */}
 
-      <div className="fom-group">
-        <p className="label"> Plot Facing to*</p>
+        <div className="fom-group">
+          <p className="label">Plot Direction *</p>
 
-        <div className="tab-box">
-          {OverLookingViewArray.map((text, i) => {
-            return (
-              <div
-                key={i}
-                className={`tab ${
-                  OtherDetailsData.PlotFacing === text ? "select" : ""
-                }`}
-                onClick={() => {
-                  setOtherDetailsData({
-                    ...OtherDetailsData,
-                    PlotFacing: text,
-                  });
-                }}
-              >
-                {text}
-                <img
-                  alt=""
-                  src={
-                    OtherDetailsData.PlotFacing === text
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
-                  }
-                />
-              </div>
-            );
-          })}
+          <div className="tab-box">
+            {PropertyfacingArray.map((text, i) => {
+              return (
+                <div
+                  key={i}
+                  className={`tab ${OtherDetailsData.PlotDirection === text ? "select" : ""
+                    }`}
+                  onClick={() => {
+                    setOtherDetailsData({
+                      ...OtherDetailsData,
+                      PlotDirection: text,
+                    });
+                  }}
+                >
+                  {text}
+                  <img
+                    alt=""
+                    src={
+                      OtherDetailsData.PlotDirection === text
+                        ? "/img/white-tick.svg"
+                        : "/img/plus-create.svg"
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Width of Front Road* only in mt */}
+        {/* PlotOver  Facing */}
 
-      {/* Front Rod Width  */}
-      <div className="form-group">
-        <label htmlFor="front-road-width">
-          {" "}
-          Width of Front Road* only in mt
-        </label>
-        <input
-          type="text"
-          id="front-road-width"
-          placeholder="eg., 3 Floors"
-          required
-          value={OtherDetailsData.FrontRoadWidth || ""}
-          onChange={(e) => {
-            setOtherDetailsData({
-              ...OtherDetailsData,
-              FrontRoadWidth: e.target.value,
-            });
-          }}
-        />
+        <div className="fom-group">
+          <p className="label"> Plot Facing to*</p>
+
+          <div className="tab-box">
+            {OverLookingViewArray.map((text, i) => {
+              return (
+                <div
+                  key={i}
+                  className={`tab ${OtherDetailsData.PlotFacing === text ? "select" : ""
+                    }`}
+                  onClick={() => {
+                    setOtherDetailsData({
+                      ...OtherDetailsData,
+                      PlotFacing: text,
+                    });
+                  }}
+                >
+                  {text}
+                  <img
+                    alt=""
+                    src={
+                      OtherDetailsData.PlotFacing === text
+                        ? "/img/white-tick.svg"
+                        : "/img/plus-create.svg"
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Width of Front Road* only in mt */}
+
+        {/* Front Rod Width  */}
+        <div className="form-group">
+          <label htmlFor="front-road-width">
+            {" "}
+            Width of Front Road* only in mt
+          </label>
+          <input
+            type="text"
+            id="front-road-width"
+            placeholder="eg., 3 Floors"
+            required
+            value={OtherDetailsData.FrontRoadWidth || ""}
+            onChange={(e) => {
+              setOtherDetailsData({
+                ...OtherDetailsData,
+                FrontRoadWidth: e.target.value,
+              });
+            }}
+          />
+        </div>
       </div>
     </>
   );
