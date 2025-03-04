@@ -17,7 +17,7 @@ const RentAgreement = () => {
           <div className="RentAgreement__icon">
             <img src="./img/Submityourdraft.svg" alt="Submit your draft" />
           </div>
-          <div  className="RentAgreement-text">
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Submit your Draft</h2>
             <p>
               Begin your process by sending us your preliminary rent agreement
@@ -32,7 +32,7 @@ const RentAgreement = () => {
               alt="Review & Custmization"
             />
           </div>
-          <div  className="RentAgreement-text">
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">
               Review & Customization
             </h2>
@@ -61,7 +61,7 @@ const RentAgreement = () => {
               alt="Delivery At Your Door step.svg"
             />
           </div>
-          <div  className="RentAgreement-text">
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">
               Delivery at your Doorstep
             </h2>
@@ -76,12 +76,12 @@ const RentAgreement = () => {
         to="https://wa.me/7837840785"
         target="_blank"
         rel="noopener noreferrer"
-       
+
       >
         <button className="UploadYourDraftMain ">
 
           <img src="/img/whatapp.png" alt="WhatsApp" />
-          Upload Your Draft
+          Share Your Draft
 
         </button>
       </Link>

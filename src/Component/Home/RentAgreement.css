@@ -61,6 +61,7 @@ margin: 10px 10px 20px 10px;
   background: var(--main-light-clr);
   color: #fff;
   border-radius: 5px;
+  font-weight: 600;
 }
 .UploadYourDraftMain:hover{
  opacity: .8;
