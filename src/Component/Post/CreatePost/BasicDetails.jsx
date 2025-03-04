@@ -111,6 +111,10 @@ export default function BasicDetailsSection({
     
     const [possessionStatusShake, setPossessionStatusShake] = useState(false);
 
+    const [currentPossessionStatusShake, setCurrentPossessionStatusShake] =  useState(false);
+
+    const [currentPossessionStatusShakePlotLand, setCurrentPossessionStatusShakePlotLand ] = useState(false);
+
 
   return (
     <>
@@ -274,10 +278,13 @@ export default function BasicDetailsSection({
                                     key={i}
                                     className="PropertyStatus-box-content"
                                   >
-                                    <label htmlFor={`property-status-${i}`}>
+                                    <label
+                                     className={` ${propertyStatusShake?' shake' :''}`}
+                                     htmlFor={`property-status-${i}`}>
                                       {text}
                                     </label>
                                     <input
+                                     className={` ${propertyStatusShake?' shake' :''}`}
                                       type="radio"
                                       name="Property Stattus"
                                       required
@@ -353,7 +360,7 @@ export default function BasicDetailsSection({
                                 <div className="form-group">
                                   <label htmlFor="property-age">Property Age*</label>
                                   <select
-                                         className={`date-time-lable ${possessionStatusShake? 'shake inputShake' : ''}` }
+                                         className={`date-time-lable ${propertyAgeShake? 'shake inputShake' : ''}` }
                                     id="property-age"
                                     required
                                     value={BasicDetailsData.PropertyAge || ""}
@@ -379,7 +386,7 @@ export default function BasicDetailsSection({
                           <div className="form-group">
                             <label htmlFor="property-age">Possession Status*</label>
                             <select
-                          className={`date-time-lable ${propertyAgeShake? 'shake inputShake' : ''}`}
+                          className={`date-time-lable  ${possessionStatusShake? 'shake inputShake' : ''} `}
                               id="property-age"
                               required
                               value={BasicDetailsData.PossessionStatus || ""}
@@ -473,6 +480,7 @@ export default function BasicDetailsSection({
               setTimeout(()=>setResidentialShake(false),1600)
               setTimeout(()=>setResidentialTextShake(false),1600)
               // setTimeout(()=>setInputShake(false),1600);
+              console.log("residential shake")
               return;
             }
 
@@ -480,6 +488,7 @@ export default function BasicDetailsSection({
              setSellRentShake(true);
              setSellRentTextShake(true)
             setTimeout(()=>{setSellRentShake(false); setSellRentTextShake(false)},1600)
+            console.log(" sellRent shake")
             return;
             }
             if (!BasicDetailsData.ApartmentType) {
@@ -487,6 +496,7 @@ export default function BasicDetailsSection({
               setChoosePropertyTextShake(true)
               setTimeout(()=>setChoosePropertyShake(false),1600)
               setTimeout(()=>setChoosePropertyTextShake(false),1600);
+              console.log("chooseProperty shake")
               return;
             }
 
@@ -497,6 +507,7 @@ export default function BasicDetailsSection({
 
               setAvailableForShake(true);
               setTimeout(()=>setAvailableForShake(false),1600)
+              console.log("availablevFor shake")
               return;
             }
 
@@ -546,6 +557,7 @@ export default function BasicDetailsSection({
 
               setCurrentPropertyStateShake(true);
               setTimeout(()=>setCurrentPropertyStateShake(false),1600);
+              console.log("currentpropertystatus shake")
               return ;
             }
 
@@ -559,6 +571,7 @@ export default function BasicDetailsSection({
             ) {
               setpropertyAgeShake(true);
               setTimeout(()=>setpropertyAgeShake(false),1600);
+              console.log("setPropertyAge shake")
               return;
             }
 
