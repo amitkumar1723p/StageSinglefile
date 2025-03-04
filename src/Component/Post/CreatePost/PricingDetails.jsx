@@ -101,14 +101,14 @@ export default function PricingDetails({
           let Sqft_Sqyd_AdComa = String(
             roundedPricePer_SqFt_Sqyd
           ).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        
+
           if (BasicDetailsData.ApartmentType == "Plot/Land") {
-            
-           
-           
+
+
+
             PricingDetailsCopyObj.PricePerSqYd = Sqft_Sqyd_AdComa;
           } else {
-              
+
             PricingDetailsCopyObj.PricePerSqFt = Sqft_Sqyd_AdComa;
           }
         }
@@ -338,10 +338,10 @@ export default function PricingDetails({
 
                 {BasicDetailsData.ApartmentType == "Plot/Land" ? (
                   <>
-                  
+
                     <div className="form-group">
                       <label htmlFor="price-per-sq.yd">
-                       
+
                         Price Per Sq. Yd.*
                       </label>
                       <input
@@ -352,11 +352,11 @@ export default function PricingDetails({
                         readOnly
                         value={PricingDetailsData.PricePerSqYd || 0}
                       />
-                          <small className="number-to-word">
-                    {PriceToSentence(PricingDetailsData.PricePerSqYd)}
-                  </small>
+                      <small className="number-to-word">
+                        {PriceToSentence(PricingDetailsData.PricePerSqYd)}
+                      </small>
                     </div>
-                
+
                   </>
                 ) : (
                   <div className="form-group">
@@ -370,9 +370,9 @@ export default function PricingDetails({
                       value={PricingDetailsData.PricePerSqFt || 0}
                     />
                     <small className="number-to-word">
-                    {PriceToSentence(PricingDetailsData.PricePerSqFt)}
+                      {PriceToSentence(PricingDetailsData.PricePerSqFt)}
                     </small>
-                 
+
                   </div>
                 )}
                 {/* Price Per Sq.ft  */}

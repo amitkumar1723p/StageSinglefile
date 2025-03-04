@@ -223,13 +223,16 @@ export default function SinglePostDetails() {
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
-      return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
+      const value = Math.floor(price / 100000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} Cr`;
     } else if (price >= 100000) {
-      return `₹ ${(Math.floor(price / 1000) / 100).toFixed(2)} L`;
+      const value = Math.floor(price / 1000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} L`;
     } else if (price >= 1000) {
-      return `₹ ${(Math.floor(price / 10) / 100).toFixed(2)} K`;
+      const value = Math.floor(price / 10) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} K`;
     } else {
-      return `₹ ${price?.toFixed(2)}`;
+      return `₹ ${price.toFixed(2)}`;
     }
   };
 
@@ -437,14 +440,14 @@ export default function SinglePostDetails() {
                               {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
                                 (text) => {
                                   return `+ ${text == "Pooja Room"
-                                      ? "Pooja"
-                                      : text == "Servant Room"
-                                        ? "SQ"
-                                        : text == "Study Room"
-                                          ? "Study"
-                                          : text == "Store Room"
-                                            ? "Store"
-                                            : ""
+                                    ? "Pooja"
+                                    : text == "Servant Room"
+                                      ? "SQ"
+                                      : text == "Study Room"
+                                        ? "Study"
+                                        : text == "Store Room"
+                                          ? "Store"
+                                          : ""
                                     }`;
                                 }
                               )}
@@ -910,9 +913,16 @@ export default function SinglePostDetails() {
                       Posted On :{" "}
                       <span>
                         {
-                          new Date(
-                            getSinglePostData?.SinglePost?.PostVerifyData?.Time
-                          ).toLocaleDateString("en-GB") // UK format: day/month/year
+                          (() => {
+                            const date = new Date(getSinglePostData?.SinglePost?.PostVerifyData?.Time);
+                            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                            const day = ("0" + date.getDate()).slice(-2);  // Ensures two-digit day
+                            const month = monthNames[date.getMonth()];     // Get abbreviated month name
+                            const year = date.getFullYear().toString().slice(-2);  // Get last two digits of the year
+
+                            return `${day}-${month}-${year}`;
+                          })()
                         }
                       </span>
                     </p>
