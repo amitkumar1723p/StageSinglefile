@@ -1,6 +1,5 @@
 .BrowseProperties-Main{
     width: 100%;
-    margin: 30px 0;
     background: var(--main-lighter-clr);
     padding: 30px 0 ;
     /* border: 1px solid black; */
@@ -9,26 +8,31 @@
 .BrowsePropertiesContainer{
     padding-top: 20px;
     padding-bottom: 20px;
-    display: flex;
     margin: 0 auto;
+    display: flex;
+justify-content: center;
     width: 80%;
+    max-width: 1300px;
     
 
 }
 
 .BrowseProperties-Left {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
   /* border: 1px solid black; */
 }
 
 .BrowseProperties-Headings {
   font-family: "Inter", sans-serif;
   /* border: 1px solid pink; */
-  margin-bottom: 20px;
 }
 
 .BrowseProperties-Headings h2 {
-  font-size: 25px;
+  font-size: 28px;
   font-weight: bold;
   color: #333;
 }
@@ -38,11 +42,10 @@
 
 .BrowseProperties-Content{
     font-family: "Inter", sans-serif;
-    max-width: 430px;
+    max-width: 90%;
     /* border: 1px solid black;  */
     font-size: 14px;
     color: #333;
-    margin-bottom: 35px;
 }
 
 
@@ -69,13 +72,14 @@
   /* background: red; */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 /* right container */
 
 .BrowseProperties-Right {
   position: relative;
   width: 50%;
+  max-width: 472px;
   /* height: 400px; */
   /* border: 1px solid black; */
   /* background: red; */
@@ -241,12 +245,14 @@
   .Img-Two {
     /* right: -50%; */
   }
+  .BrowseProperties-Headings h2 {
+    font-size: 24px;
+  }
   .BrowsePropertiesContainer {
     flex-direction: column;
   }
   .BrowseProperties-Left {
     width: 100%;
-    margin-bottom: 30px;
   }
   .BrowseProperties-Right {
     width: 100%;
@@ -287,7 +293,7 @@
 }
 .OwnerListings-Content p{
     font-family: "Inter", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     color: #333;
 }
 
@@ -332,7 +338,7 @@
   }
 }
 .VerifiedPropertiesContainer{
-    box-shadow: -2px 4px 10px rgb(92, 92, 92);
+    /* box-shadow: -2px 4px 10px rgb(92, 92, 92); */
     background-color: white;
     border-radius: 2px;
     padding: 8px;
@@ -365,7 +371,7 @@
     font-family: "Inter", sans-serif;
 }
 .VerifiedProperties-Content p{
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
@@ -404,7 +410,7 @@
     font-family: "Inter", sans-serif;
 }
 .DocsAssistance-Content p{
-    font-size: 13px;
+    font-size: 12px;
 }
 
 
@@ -422,14 +428,15 @@
         /* right: -50%; */
     }
     .BrowsePropertiesContainer{
-        flex-direction: column;
+      flex-direction: column-reverse;
+      gap: 20px;
     }   
     .BrowseProperties-Left{
         width: 100%;
-        margin-bottom: 30px;
     }
     .BrowseProperties-Right{
         width: 100%;
+        margin: 0 auto;
         /* height: 300px; */
     }
     .BrowseProperties-Right-parent{
@@ -458,6 +465,9 @@
 }
 
 @media (max-width:480px){
+  .BrowseProperties-Main{
+    padding: 0px;
+  }
     .Img-One ,.Img-Two{
         display: none;
     }
@@ -473,26 +483,30 @@
         /* background: red; */
     }
     .BrowseProperties-Headings h2{
-        font-size: 20px;
+        font-size: 16px;
     }
+    .BrowseProperties-Content {
+      font-size: 12px;
+
+  }
     .OwnerListings{
         align-self: center;
-
+        width: 100%;
         box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
     }
     .VerifiedProperties{
         align-self: center;
-     
+     width: 100%;
         box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
     }
     .VerifiedPropertiesContainer{
         align-self: center;
-
+width: 100%;
         box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
     }
     .DocsAssistance{
         align-self: center;
-    
+    width: 100%;
         box-shadow:  0 2px 8px rgba(0, 0, 0, 0.1);
     }
 }

@@ -36,7 +36,7 @@ const PropertyFilters = () => {
   const { data } = useSelector((state) => {
     return state.GetAllPost;
   });
-  // console.log(data);
+   
 
   const handleClicked = (v) => {
     setIsClicked(v);
@@ -175,7 +175,7 @@ const PropertyFilters = () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
-  // console.log(SingleProjectData,"AMi")
+   
   return (
     <>
       <div className="property-post-filters-main-box">

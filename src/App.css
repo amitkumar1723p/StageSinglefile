@@ -1,7 +1,6 @@
-
 body {
   color: var(--main-black);
-  background-color:#e6e0d4;
+  background-color: #e6e0d4;
 }
 
 .group-sidebar img:hover {
@@ -121,18 +120,20 @@ input:focus {
   font-weight: 800;
 }
 ol,
-ul ,li{
+ul,
+li {
   margin-top: 0;
   margin-bottom: 0rem;
   margin-left: 0rem;
   margin-right: 0rem;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 0;
 }
 
-.white-space-nowrap{
+.white-space-nowrap {
   white-space: nowrap;
 }
 /* dl,
@@ -179,10 +180,9 @@ td{
 .form-select:focus {
   border-color: #fff;
   outline: 0;
-  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 @media (max-width: 480px) {
-
   /* .who-we-are-section{
     font-size: 12px !important;
   } */
@@ -206,7 +206,7 @@ td{
   .ProgressBarMain {
     display: none;
   }
-  .icons{
+  .icons {
     display: none;
   }
 
@@ -230,7 +230,7 @@ td{
     text-align: center;
   }
 
-  .icons{
+  .icons {
     display: none;
   }
 }
@@ -244,7 +244,7 @@ td{
     text-align: center;
   }
 
-  .icons{
+  .icons {
     display: none;
   }
 }
@@ -309,10 +309,9 @@ td{
   display: flex;
 } */
 
-
 /* Apply to all scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;  /* Adjust scrollbar width */
+  width: 6px; /* Adjust scrollbar width */
   height: 6px; /* For horizontal scrollbars */
 }
 
@@ -333,7 +332,15 @@ td{
   background: #555; /* Even darker gray on hover */
 }
 
+.ttc {
+  color: #0056b3;
+}
 
-.ttc{
- color: #0056b3;
+/* not select text  */
+.not-select-text {
+  user-select: none; /* Prevent text selection */
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }

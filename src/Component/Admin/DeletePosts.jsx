@@ -77,29 +77,29 @@ export default function DeletePosts() {
   //  user change filter without search querry 
      
         if (FilterType == "AllPost") {
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
           filteredPosts = DeletedPost?.deletedPosts;
           secoutFilterPost(filteredPosts);
         } else if (FilterType == "Active") {
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
           filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post.PostVerify == true;
           });
           secoutFilterPost(filteredPosts);
         } else if (FilterType == "In-Active") {
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
           filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post.PostVerify == false;
           });
           secoutFilterPost(filteredPosts);
         } else if (FilterType == "Sale") {
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
           filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post?.BasicDetails?.PropertyAdType == "Sale";
           });
           secoutFilterPost(filteredPosts);
         } else if (FilterType == "Rent") {
-          window.scrollTo(0, 0);
+          // window.scrollTo(0, 0);
           filteredPosts = DeletedPost?.deletedPosts?.filter((post) => {
             return post?.BasicDetails?.PropertyAdType == "Rent";
           });
@@ -298,7 +298,7 @@ export default function DeletePosts() {
               placeholder="Search Here"
               value={SearchValue?.trimStart()}
               onChange={(e) => {
-                window.scrollTo(0, 0);
+                // window.scrollTo(0, 0);
                 setSearhValue(e.target.value);
               }}
             />
