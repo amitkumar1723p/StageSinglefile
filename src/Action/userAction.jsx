@@ -972,7 +972,7 @@ export const paymentAction =  () => {
       // };
 
       const { data } = await axios.post(url, {}, { withCredentials: true });
-      console.log("data", data)
+      // console.log("data", data)
       dispatch({ type: "PaymentActionSuccess", payload: data });
     } catch (error) {
       console.log(error)
@@ -1149,3 +1149,7 @@ export const deleteExcelFile = (excelId) => {
     }
   };
 };
+
+// if (medata.user.Role === "Owner") {
+//   dispatch(fetchAllOwnerFiles());
+// }

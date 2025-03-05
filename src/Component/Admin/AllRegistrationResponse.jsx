@@ -98,12 +98,12 @@ export default function AllRegistrationResponse({ }) {
   const { data: adminAlertData, LodingType: adminAlertType, } = useSelector((state) => {
     return state.Post;
   });
-  console.log(adminAlertData)
+  // console.log(adminAlertData)
 
   useEffect(() => {
-      
+
     if (adminAlertData?.success === true && adminAlertType == "UserRoleUpdationRequest") {
- 
+
       dispatch(getAllUserAction());
     }
   }, [adminAlertData])
@@ -204,6 +204,10 @@ export default function AllRegistrationResponse({ }) {
           <table className="table table-hover">
             <thead className="table-info ">
               <tr className="">
+
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small>Date</small>
+                </th>
                 <th scope="col" className="text-primary col-1 border-end">
                   <small>Name </small>
                 </th>
@@ -223,9 +227,7 @@ export default function AllRegistrationResponse({ }) {
                   <small>Notify</small>
                 </th>
 
-                <th scope="col" className="text-primary col-2 border-end">
-                  <small>Date</small>
-                </th>
+
               </tr>
             </thead>
             <tbody>
@@ -237,6 +239,25 @@ export default function AllRegistrationResponse({ }) {
                   .slice(2);
                 return (
                   <tr key={index}>
+
+                    <td className="text-light-emphasis border-end">
+                      <small>
+                        {
+                          item?.createAt
+                            ? new Date(item?.createAt).toLocaleString("en-IN", {
+                              day: "2-digit",
+                              month: "short",  // This will use the abbreviated month (e.g., "Mar" for March)
+                              year: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: false,
+                            }).replace(",", "").replace(" ", "-").replace(":", "").replace(/(\d{2})(\d{2})/, `($1:$2)`)
+                            : "..."
+                        }
+
+
+                      </small>
+                    </td>
                     <td className="text-light-emphasis border-end">
                       {item.Name ? (
                         <small>
@@ -246,6 +267,7 @@ export default function AllRegistrationResponse({ }) {
                         <></>
                       )}
                     </td>
+
                     <td className="text-light-emphasis border-end" >
                       {
                         roleIndex === index ? <div className="owner-user-role-submit-button d-flex gap-1 ">
@@ -254,6 +276,7 @@ export default function AllRegistrationResponse({ }) {
                             <option value="Tanent"><small>Tanent</small></option>
                             <option value="Buyer"><small>Buyer</small></option>
                             <option value="Seller"><small>Seller</small></option>
+                            <option value="Property Owner"><small>Property Owner</small></option>
                             <option value="NRI"><small>NRI</small></option>
                             <option value="ChannelPartner"><small>ChannelPartner</small></option>
                           </select> <button className="border" onClick={() => {
@@ -299,20 +322,7 @@ export default function AllRegistrationResponse({ }) {
                       )}
                     </td>
 
-                    <td className="text-light-emphasis border-end">
-                      <small>
-                        {item?.createAt
-                          ? new Date(item?.createAt).toLocaleDateString(
-                            "en-GB"
-                          ) +
-                          " (" +
-                          new Date(item?.createAt)
-                            .toLocaleTimeString("en-GB", { hour12: false })
-                            .slice(0, 5) +
-                          ")"
-                          : "..."}
-                      </small>
-                    </td>
+
                   </tr>
                 );
               })}

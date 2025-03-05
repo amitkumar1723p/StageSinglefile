@@ -202,7 +202,7 @@ const Footer = () => {
 
   const companyLinks = [
     { name: 'FAQs', hash: 'FAQ-SECTION' },
-    { name: 'Careers', url: "/Career" },
+    // { name: 'Careers', url: "/Career" },
   ];
 
   return (
@@ -320,6 +320,18 @@ const Footer = () => {
                       <span className='list__Name'>Terms & Conditions</span>
                     </a>
                   </li>
+                  <li  className="links__item">
+                    <a
+                     
+                      href="/blog-page"
+                      target='blank'
+                      className="links__link"
+                    >  
+                      <span className="links__dot"></span>
+                      <span className='list__Name'>Blogs</span>
+                    </a>
+                  </li>
+                 
                 {companyLinks.map((item, index) => (
                   <li key={index} className="links__item">
                     <a

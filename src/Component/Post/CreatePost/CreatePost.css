@@ -648,19 +648,33 @@ button:hover,
   margin: 10px 0;
 }
 
-.create-post-search-project input {
+/* .create-post-search-project input {
   width: 80%;
   color: #808080;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: 121.065%;
-  /* width: 300px; */
+ 
   font-size: 12px;
   background: #fff;
   border-radius: 7px;
   padding: 10px;
   border: 1px solid #c7c7c7;
+} */
+
+.locationdetails-input{
+  color: #808080;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 121.065%;
+  width: 250px;
+  font-size: 12px;
+  background: #fff;
+  border-radius: 7px;
+  border: 1px solid #c7c7c7;
+  padding: 10px;
+
 }
 
 .montly-chnagse-in-price-section {
@@ -1868,7 +1882,7 @@ input[type="number"] {
   .next-prev-box {
     display: flex;
     justify-content: center;
-    margin: 0px 0 0 0;
+    margin: 20px 0;
   }
 
   .next-prev-box button {

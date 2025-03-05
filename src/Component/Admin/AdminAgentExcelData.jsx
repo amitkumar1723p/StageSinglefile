@@ -5,11 +5,11 @@ import { fetchAllAdminFiles, fetchAllAgentFiles, fetchAllOwnerFiles } from '../.
 import { useNavigate } from 'react-router-dom';
 
 const AdminAgentExcelData = () => {
-    const dispatch = useDispatch();
-      const { medata } = useSelector((state) => {
-        return state.meDetails;
-      });
-    // if()
+  const dispatch = useDispatch();
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
+  // if()
 
     const {data} = useSelector((store)=>store.OwnerAllExcelFiles)
     const navigate = useNavigate();
@@ -20,53 +20,53 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
   return state.AdminAllExcelFiles}
 );
     const fetchedAllFiles=data || AdminAllExcelFilesData?.assignedExcels ||AgentAllExcelFilesData?.assignedExcels
-console.log("this is fetche ",fetchedAllFiles)
+// console.log("this is fetche ",fetchedAllFiles)
   useEffect(() => {
-        if(!fetchedAllFiles){
+    if (!fetchedAllFiles) {
 
-            console.log("called")
-            dispatch(fetchAllAdminFiles())
-            dispatch(fetchAllAgentFiles())
-        }
-            
-        
-   
-      }, []);
+      // console.log("called")
+      dispatch(fetchAllAdminFiles())
+      dispatch(fetchAllAgentFiles())
+    }
 
 
 
+  }, []);
 
 
-      
+
+
+
+
   return (
     <div>
-   
-        {fetchedAllFiles?.length > 0 && (
-            <div className="files-card-container">
-              {fetchedAllFiles?.map((item) => (
 
-                <div className='excel-checkbox-container'> 
+      {fetchedAllFiles?.length > 0 && (
+        <div className="files-card-container">
+          {fetchedAllFiles?.map((item) => (
 
-               {
+            <div className='excel-checkbox-container'>
+
+              {
                 // false && <input checked={selectedExcel===item._id} type="checkbox" className='' onChange={()=>setSelectedeExcel(item?._id)}/>
-               }
-                <div
-                  key={item._id}
-                  className="files-card"
-                  onClick={() => navigate(`/admin/excel/${item?.ExcelId?._id}`)}
-                >
-                
-                  <div className="file-icon">📊</div>
-                  <div className="file-name">{item?.ExcelId?.fileName}</div>
-                </div>
-                </div>
+              }
+              <div
+                key={item._id}
+                className="files-card"
+                onClick={() => navigate(`/admin/excel/${item?.ExcelId?._id}`)}
+              >
 
-              ))}
+                <div className="file-icon"><img src="/img/excel_icon.svg" alt="excel_icon" /></div>
+                <div className="file-name"><small>{item?.ExcelId?.fileName}  </small> </div>
+              </div>
             </div>
-          )}
+
+          ))}
+        </div>
+      )}
 
 
-{!fetchedAllFiles && <div>no assined excel found</div>}
+      {!fetchedAllFiles && <div>no assined excel found</div>}
     </div>
   )
 }

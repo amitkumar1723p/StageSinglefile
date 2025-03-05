@@ -24,6 +24,7 @@ export const CreatePostReducer = (state = {}, action) => {
       case "UserRoleUpdationRequest":
     case "Delete_ExcelFileRequest":
     case "OwnerAllExcelFileRequest":
+    case "ReportPagePostRequest":
       return {
         ...state,
         loading: true,
@@ -53,7 +54,9 @@ export const CreatePostReducer = (state = {}, action) => {
       case "UserRoleUpdationSuccess":
     case "Delete_ExcelFileSuccess":
     case "OwnerAllExcelFileSuccess":
-      return {
+      case "ReportPagePostSuccess":
+     
+    return {
         ...state,
         loading: false,
         data: action.payload,
@@ -82,6 +85,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "UserRoleUpdationFail":
     case "Delete_ExcelFileFail":
     case "OwnerAllExcelFileFail":
+    case "ReportPagePostFail":
       return {
         ...state,
         loading: false,
@@ -580,7 +584,7 @@ export const fetchAllAdminFilesReducer = (state = {}, action) => {
       };
 
     case "FetchAllAdminFilesSuccess":
-      console.log("this is in reducer ",action)
+      // console.log("this is in reducer ",action)
       return {
         ...state,
         loading: false,

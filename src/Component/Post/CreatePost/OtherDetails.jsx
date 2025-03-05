@@ -1,13 +1,10 @@
- 
-
-export default function ConstructionDetails({
-  ConstructionDetailsData,
-  setConstructionDetailsData,
+export default function OtherDetails({
+  OtherDetailsData,
+  setOtherDetailsData,
   // eslint-disable-next-line
   BasicDetailsData,
 }) {
  
-
   //   useEffect(() => {
   //     if (ConstructionDetailsData.TotalFloors) {
   //       let count = [];
@@ -55,21 +52,20 @@ export default function ConstructionDetails({
 
   return (
     <>
+      <p className="Property-Details-heading"> Other Details </p>
       <div className="form-group">
-        <label htmlFor="floors">Floor Allowed for Construction </label>
+        <label htmlFor="constructor-allowed"> Construction Allowed*</label>
         <input
-          type="number"
-          id="floors"
-          placeholder="No. of Floors"
+          type="text"
+          id="constructor-allowed"
+          placeholder="eg., 3 Floors"
           required
-          value={ConstructionDetailsData.ConstructionAllowed || ""}
+          value={OtherDetailsData.ConstructionAllowed || ""}
           onChange={(e) => {
-            if (e.target.value.length <= 2) {
-              setConstructionDetailsData({
-                ...ConstructionDetailsData,
-                ConstructionAllowed: e.target.value,
-              });
-            }
+            setOtherDetailsData({
+              ...OtherDetailsData,
+              ConstructionAllowed: e.target.value,
+            });
           }}
         />
       </div>
@@ -85,21 +81,20 @@ export default function ConstructionDetails({
               <div
                 key={i}
                 className={`tab ${
-                  ConstructionDetailsData.PlotDirection === text ? "select" : ""
+                  OtherDetailsData.PlotDirection === text ? "select" : ""
                 }`}
                 onClick={() => {
-                  setConstructionDetailsData({
-                    ...ConstructionDetailsData,
+                  setOtherDetailsData({
+                    ...OtherDetailsData,
                     PlotDirection: text,
                   });
                 }}
               >
                 {text}
                 <img
-                 alt=""
+                  alt=""
                   src={
-                    
-                    ConstructionDetailsData.PlotDirection === text
+                    OtherDetailsData.PlotDirection === text
                       ? "/img/white-tick.svg"
                       : "/img/plus-create.svg"
                   }
@@ -110,10 +105,10 @@ export default function ConstructionDetails({
         </div>
       </div>
 
-      {/* PlotOverlooking */}
+      {/* PlotOver  Facing */}
 
       <div className="fom-group">
-        <p className="label"> Plot Overlooking to*</p>
+        <p className="label"> Plot Facing to*</p>
 
         <div className="tab-box">
           {OverLookingViewArray.map((text, i) => {
@@ -121,22 +116,20 @@ export default function ConstructionDetails({
               <div
                 key={i}
                 className={`tab ${
-                  ConstructionDetailsData.PlotOverlooking === text
-                    ? "select"
-                    : ""
+                  OtherDetailsData.PlotFacing === text ? "select" : ""
                 }`}
                 onClick={() => {
-                  setConstructionDetailsData({
-                    ...ConstructionDetailsData,
-                    PlotOverlooking: text,
+                  setOtherDetailsData({
+                    ...OtherDetailsData,
+                    PlotFacing: text,
                   });
                 }}
               >
                 {text}
                 <img
-                alt=""
+                  alt=""
                   src={
-                    ConstructionDetailsData.PlotOverlooking === text
+                    OtherDetailsData.PlotFacing === text
                       ? "/img/white-tick.svg"
                       : "/img/plus-create.svg"
                   }
@@ -145,6 +138,29 @@ export default function ConstructionDetails({
             );
           })}
         </div>
+      </div>
+
+      {/* Width of Front Road* only in mt */}
+
+      {/* Front Rod Width  */}
+      <div className="form-group">
+        <label htmlFor="front-road-width">
+          {" "}
+          Width of Front Road* only in mt
+        </label>
+        <input
+          type="text"
+          id="front-road-width"
+          placeholder="eg., 3 Floors"
+          required
+          value={OtherDetailsData.FrontRoadWidth || ""}
+          onChange={(e) => {
+            setOtherDetailsData({
+              ...OtherDetailsData,
+              FrontRoadWidth: e.target.value,
+            });
+          }}
+        />
       </div>
     </>
   );

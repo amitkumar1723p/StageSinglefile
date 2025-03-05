@@ -1,37 +1,40 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash.debounce';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSerachProperty } from '../../Action/postAction';
+import './Search.css'
+import { useNavigate } from 'react-router-dom';
 export default function Search({
   query, typeOfProperty, onQueryChange
 }) {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const [localQuery, setLocalQuery] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+   const navigate  =useNavigate()
   // serach property 
-  const { data:serachResponse } = useSelector((state) => {
+  const { data: serachResponse } = useSelector((state) => {
     return state.serachResponse;
   });
- 
+
   const fetchSuggestions = async (query) => {
     if (!query.trim()) {
       setSuggestions([]);
       return;
     }
-  
+
     setIsLoading(true);
     try {
       // Clean the 'typeOfProperty' to ensure it's a valid string
       let propertyAdType = typeOfProperty;
-  console.log(propertyAdType,)
+      console.log(propertyAdType,)
       // If 'typeOfProperty' contains extra quotes (like ""Sale""), fix it
       // if (typeOfProperty.startsWith('"') && typeOfProperty.endsWith('"')) {
       //   propertyAdType = typeOfProperty.slice(1, -1); // Remove the extra double quotes
       // }
-  
+
       console.log('Property Ad Type:', propertyAdType);  // Log the cleaned value
-      
+
       // Dispatch your action
       dispatch(getSerachProperty(query, propertyAdType));
     } catch (error) {
@@ -40,7 +43,7 @@ export default function Search({
       setIsLoading(false);
     }
   };
-  
+
 
   // Debounced fetch suggestions
   const debouncedFetchSuggestions = useCallback(
@@ -70,7 +73,14 @@ export default function Search({
     if (localQuery.trim()) {
       // If there's a query, fetch results based on the query
       fetchSuggestions(localQuery);
+
     }
+    navigate(
+      `/home/card?ProjectName=${query}&&PropertyAddType=${typeOfProperty}`
+       );
+
+
+       
   };
 
   // Clear suggestions if query is empty
@@ -80,35 +90,77 @@ export default function Search({
     }
   }, [localQuery]);
 
-  useEffect(()=>{
-          if (serachResponse?.results) {
-        setSuggestions(serachResponse.results.map(post => {
-          const { LocationDetails } = post;
-          return `${LocationDetails.ProjectName}, ${LocationDetails.Locality}, ${LocationDetails.City}`;
-        }));
-      }
-  },[serachResponse])
+  useEffect(() => {
+    if (serachResponse?.results) {
+      setSuggestions(serachResponse.results.map(post => {
+        const { LocationDetails } = post;
+        return `${LocationDetails.ProjectName}, ${LocationDetails.Locality}, ${LocationDetails.City}`;
+      }));
+    }
+  }, [serachResponse])
 
+
+  //  naigate second page 
+
+  // navigate(
+  //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
+  // );
   return (
-    <div className="search-container p-5">
-      <h1>Property Search</h1>
+    <div className="">
 
-      {/* Search Box */}
-      <input
-        type="text"
-        value={localQuery}
-        onChange={handleInputChange}
-        placeholder="Search for properties..."
-      />
+<div className='d-flex'>
+      <div className="input-group mb-3">
+        <button
+          className="btn  dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          style={{ padding: '4px 8px', fontSize: '12px' }}
+        >
+          Dropdown
+        </button>
+        <ul className="dropdown-menu">
+          <li>
+            <a className="" >
+              Action
+            </a>
+          </li>
+          <li>
+            <a className="">
+              Another action
+            </a>
+          </li>
+        
+        
+        
+        </ul>
+        <input
+        style={{width:"500px"}}
+        className='py-2 border-0 rounded-end'
+          type="text"
+          value={localQuery}
+          onChange={handleInputChange}
+          placeholder="Search for properties..."
+        />
+      </div>
+<div className='px-3 '>
+<button 
+  className='btn btn-primary btn-sm py-2' 
+  onClick={handleSearchClick} 
+  style={{ padding: '4px 8px', fontSize: '12px' }}
+>
+  Search
+</button>
+</div>
 
-      {/* Search Button */}
-      <button onClick={handleSearchClick}>Search</button>
 
+      </div >
       {isLoading && <p>Loading...</p>}
 
       {/* Display suggestions */}
+      
       {suggestions.length > 0 && (
-        <ul>
+        <ul className='bg-body-tertiary'>
           {suggestions.map((suggestion, index) => (
             <li key={index} onClick={() => handleSuggestionClick(suggestion)}>
               {suggestion}

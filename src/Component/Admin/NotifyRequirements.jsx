@@ -28,6 +28,11 @@ const NotifyRequirements = () => {
   const [apiType, setApiType] = useState("");
   // console.log(data)
 
+  const monthNames = [
+     "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
+  "Sep", "Oct", "Nov", "Dec"
+  ];
+
   useEffect(() => {
     // console.log(enterdDate)
     const currentData =
@@ -322,12 +327,11 @@ const NotifyRequirements = () => {
                           <td className="notify-requirements-td">
                             {
                               new Date(item.createAt)
-                                .toLocaleDateString("en-GB") // This formats the date as DD/MM/YYYY
-                                .split("/") // Splitting the date into [DD, MM, YYYY]
-                                .map((part, index) =>
-                                  index === 2 ? part.slice(-2) : part
-                                ) // Keep only the last 2 digits of the year
-                                .join("/") // Recombine the parts back into DD/MM/YY
+                              .toLocaleDateString("en-GB", { year: '2-digit', month: 'short', day: '2-digit' }) // Format with month name
+                              .split(" ") // Splitting the result into [DD, MonthName, YYYY]
+                              .map((part, index) => index === 2 ? part.slice(-2) : part) // Keep only the last 2 digits of the year
+                              .join(" ") // Recombine the parts back into DD MonthName YY
+                            
                             }
                           </td>
 
@@ -357,13 +361,16 @@ const NotifyRequirements = () => {
                           </td>
                           <td className="notify-requirements-td">
                             {
+                            
+          
                               new Date(item.createAt)
                                 .toLocaleDateString("en-GB") // This formats the date as DD/MM/YYYY
                                 .split("/") // Splitting the date into [DD, MM, YYYY]
                                 .map((part, index) =>
-                                  index === 2 ? part.slice(-2) : part
-                                ) // Keep only the last 2 digits of the year
-                                .join("/") // Recombine the parts back into DD/MM/YY
+                                  index === 1 ? monthNames[parseInt(part, 10) - 1] : // Convert month number to month name
+                                  index === 2 ? part.slice(-2) : part // Keep only the last 2 digits of the year
+                                )
+                                .join("-") // Recombine the parts b
                             }
                           </td>
                           {/* <td className="notify-requirements-td">{item?.Room?.map((room)=><span>{room}</span>)}</td> */}

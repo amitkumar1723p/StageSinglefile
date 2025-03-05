@@ -6,7 +6,7 @@ export default function FloorDetails({
   BasicDetailsData,
 }) {
   const [floorCount, setFloorCount] = useState([]);
-
+ 
   useEffect(() => {
     if (FloorDetailsData.TotalFloors) {
       let count = [];

@@ -369,10 +369,8 @@ transition: .5s;
 .imageSlide img {
   width: 168px; /* Set the fixed width to 300px */
   height: 176px;
-
   min-width: 100%;
   max-width: 100%;
-
   transition: all 1s ease-in-out;
 }
 

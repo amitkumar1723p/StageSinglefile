@@ -1,9 +1,7 @@
 import React,{useEffect,useState} from 'react';
-
 import {useDispatch, useSelector } from 'react-redux';
 import { paymentAction, verifiedPayment } from '../../../Action/userAction';
 const REACT_APP_RAZORPAY_KEY_ID=process.env.REACT_APP_RAZORPAY_KEY_ID;
-
 export default function PayButton(
   { PostId, onSuccess }
 ) {
@@ -11,14 +9,12 @@ export default function PayButton(
   const dispatch=useDispatch()
   const { medata } = useSelector((state) => state.meDetails);
   const {data}=useSelector((state)=>state.paymentResponse) //paymentAction
-
   useEffect(() => {
     // Fetch payment data on component mount
     if (medata?.user?._id) {
       dispatch(paymentAction());
     }
   }, [dispatch, medata?.user?._id]);
-// console.log(data)
   // Function to load the Razorpay SDK script dynamically
   function loadScript(src) {
     return new Promise((resolve, reject) => {
@@ -29,9 +25,7 @@ export default function PayButton(
       document.body.appendChild(script);
     });
   }
-
-  const handlePayment = async (e) => {
-    // console.log(e._reactName==='onClick') true 
+  const handlePayment = async () => {
     try {
       // Load Razorpay SDK 
       let res;
@@ -55,8 +49,6 @@ export default function PayButton(
       alert('Loading payment details, please try again.');
       return;
     }
-
-  
       // Extract necessary data from the result
       const { amount, id, currency } = data?.order;
   
@@ -66,14 +58,13 @@ export default function PayButton(
         contact: medata?.user?.ContactNumber || "Default Contact",
         userId: medata?.user?._id || "defaultUserId"
       };
-  console.log(userData,"")
       // Razorpay payment options
       const options = {
         key: process.env.REACT_APP_RAZORPAY_KEY_ID,  // Ensure the env variable is correctly set
         amount: amount, 
         currency: currency,
         name: "Propfuture AI Technologies Pvt. Ltd.",
-        description: "Test Transaction",
+        description: "Rent Payment",
         image: '/favicon.png',
         order_id: id,  
         handler: async function (response) {
@@ -83,14 +74,12 @@ export default function PayButton(
             alert("Missing required payment information.");
             return;
           }
-  
           // Prepare the data to send to the backend
           const paymentData = { 
             razorpayPaymentId: razorpay_payment_id,
             user: medata?.user._id, 
             PostId // Ensure medata contains user data
-          };
-  
+          }; 
           try {
             // Send payment success details to the backend
              dispatch(verifiedPayment(paymentData));
@@ -122,23 +111,19 @@ export default function PayButton(
           color: "#037edb",  // Set the theme color
         },
       };
-  
       // Open the Razorpay payment modal
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
-  
     } catch (error) {
       // Handle errors such as script loading or any unexpected issues
       console.error("Error loading script:", error);
       alert("Error loading Razorpay SDK: " + error.message);
     }
   };
-  
-
   return (
     <>
       <button className="original-price border-0" onClick={handlePayment}>
-       Pay
+        Pay & View Number
       </button>
     </>
   );

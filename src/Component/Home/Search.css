@@ -1,0 +1,7 @@
+.mainImage {
+    background-image: url('../../../public/img/hero-img9.png');
+    background-size: cover;
+    background-position: center;
+    /* Optional: Set a height for the background to show properly */
+  }
+  /* ./img/hero-img9.png */
