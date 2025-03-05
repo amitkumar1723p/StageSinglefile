@@ -15,18 +15,21 @@ export default function HomeCard() {
   const { loading, data } = useSelector((state) => {
     return state.GetAllPost;
   });
+   const { data: serachResponse } = useSelector((state) => {
+      return state.serachResponse;
+    });
   const [filterdPost, setFilterdPost] = useState(null);
   const [allData, setAllData] = useState([]);
 
   useEffect(() => {
     function filter() {
-      if (!data || !data.allPost) {
+      if (!serachResponse || !serachResponse?.results) {
         return;
       } else {
-        const soldout = data?.allPost?.filter(
+        const soldout = serachResponse?.results?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
         );
-        const available = data?.allPost?.filter(
+        const available = serachResponse?.results?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
         );
         // console.log(available, soldout);
@@ -35,7 +38,7 @@ export default function HomeCard() {
       }
     }
     filter();
-  }, [data]);
+  }, [serachResponse]);
 
   useEffect(() => {
     
@@ -45,22 +48,33 @@ export default function HomeCard() {
     });
   }, [filterdPost]);
 
+   console.log(serachResponse?.results[0])
   return (
     <>
       <div className="home">
-        {data &&
-          data.success === true &&
-          (data.allPost.length > 0 ? (
+        {/* {serachResponse &&
+          serachResponse.success === true &&
+          (serachResponse?.results?.length > 0 ? (
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
-                {allData?.map((e, i) => {
+                {serachResponse?.results?.map((e, i) => {
+                  console.log(e)
                   return <SingleCard key={i} PostData={e} index={i} />;
                 })}
               </div>
             </div>
           ) : (
             <Notifyme />
-          ))}
+          ))} */}
+
+<div className="home-postContainer">
+              <div className="allPostrender-showpost">
+                {serachResponse?.results?.map((e, i) => {
+                
+                  return <SingleCard key={i} PostData={e} index={i} />;
+                })}
+              </div>
+            </div>
       </div>
     </>
   );

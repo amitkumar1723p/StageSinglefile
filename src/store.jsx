@@ -14,7 +14,9 @@ import {
   getAllUserReducer,
   
   paymentReducer,
-  getPaidPropertyReducer
+  getPaidPropertyReducer,
+
+  getTransactionDetailReducer
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -41,6 +43,7 @@ import {
   fetchAllAdminFilesReducer,
   fetchAllAgentFilesReducer,
   removeExcelFromAdminReducer,
+  getSerachPropertyReducer
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -81,6 +84,10 @@ const reducer = combineReducers({
   AdminAllExcelFiles:fetchAllAdminFilesReducer,
   AgentAllExcelFiles:fetchAllAgentFilesReducer,
   // RemoveAdminAgentExcel:removeExcelFromAdminReducer
+
+  getTransactionDetail:getTransactionDetailReducer,
+
+  serachResponse:getSerachPropertyReducer
 });
 
 let initialState = {};

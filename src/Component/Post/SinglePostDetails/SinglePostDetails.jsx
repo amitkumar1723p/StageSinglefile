@@ -300,10 +300,10 @@ export default function SinglePostDetails() {
   }, [AlertData, AlertType]);
 
   // Check Tenent Response IsExit  Dispatch
-  useEffect(() => {
-    if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
-    dispatch(TenentResponseIsExitAction(SinglePostId));
-  }, [SinglePostId, medata?.user?.Role]);
+  // useEffect(() => {
+  //   if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
+  //   dispatch(TenentResponseIsExitAction(SinglePostId));
+  // }, [SinglePostId, medata?.user?.Role]);
 
   useEffect(() => {
     if (!Params?.PostAddress) return; // Avoid running when undefined

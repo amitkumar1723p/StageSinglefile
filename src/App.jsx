@@ -67,6 +67,9 @@ import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
 import Career from "./Component/Home/Careers";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
+import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
+import Transaction from "./Component/User/Profile/Transaction";
+import Search from "./Component/Home/Search";
 // import MyVisits from "./Component/Post/CreatePost/m";
 
 function App() {
@@ -126,10 +129,19 @@ function App() {
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
+  // serach property 
+  const { data:serachResponse } = useSelector((state) => {
+    return state.serachResponse;
+  });
   // paid property
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
   });
+  // paid user transaction detail 
+  const { data:getTransactionDetail} = useSelector((state) => {
+    return state.getTransactionDetail;
+  });
+
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
@@ -579,6 +591,22 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
+    // search property
+    useEffect(() => {
+      if (serachResponse) {
+        if (serachResponse.success === false) {
+          if (serachResponse.IsAuthenticated === false) {
+            navigate("/");
+          }
+          setalertMessage(<p>{serachResponse.message}</p>);
+          setalertType("error");
+          setalertShow(true);
+  
+          dispatch({ type: "SimilarPropertyClear" });
+        }
+      }
+      // eslint-disable-next-line
+    }, [serachResponse]);
    //  paid property 
    useEffect(() => {
     if (paidPropertyData) {
@@ -595,6 +623,22 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
     }
     // eslint-disable-next-line
   }, [paidPropertyData]);
+// get transaction paid detail 
+  useEffect(() => {
+    if (getTransactionDetail) {
+      if (getTransactionDetail.success === false) {
+        if (getTransactionDetail.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{getTransactionDetail.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "getPaidPropertyFailClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [getTransactionDetail]);
 
   // get All User
   useEffect(() => {
@@ -762,6 +806,10 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
           path="sqpt/:Role/login"
           element={<AdminOwnerLoginProfileSection />}
         />
+
+        {/* test */}
+        <Route exact path="/test" element={<Search/>}/>
+        {/* test */}
         <Route exact path="/" element={<HeroSection />} />
         <Route exact path="/home/card" element={<PropertyFiltersCard />} />
         <Route
@@ -825,7 +873,15 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
               path="my-post/all-response"
               element={<OwnerPostAllResponse />}
             />
+   <Route
+              exact
+              path="transactions"
+              element={<Transaction/>}
+            />
+
+            
             <Route
+            
               exact
               path="favourite-post"
               element={<ShowUserFavouritePost />}
@@ -924,6 +980,16 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
             element={
               <AdminOwnerRoutes
                 Component={AllRegistrationResponse}
+                isOwner={true}
+              />
+            }
+          />
+            <Route
+            exact
+            path="Transaction"
+            element={
+              <AdminOwnerRoutes
+                Component={AllTransactionResponse}
                 isOwner={true}
               />
             }

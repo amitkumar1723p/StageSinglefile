@@ -711,35 +711,37 @@ export const GetDeletedPostsReducer = (state = {}, action) => {
   }
 };
 
-// Get All Deleted Posts
 
-export const ReportPagePostReducer = (state = {}, action) => {
-  switch (action.type) {
-    case "ReportPagePostRequest":
+
+
+export const getSerachPropertyReducer=(state={},action)=>{
+  switch(action.type){
+    case "GetSerachPropertyRequest":
       return {
         ...state,
         loading: true,
       };
 
-    case "ReportPagePostSuccess":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+    case"GetSerachPropertySuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
 
-    case "ReportPagePostFail":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
 
-    case "ReportPagePostReducerClear":
-      return {};
+    case"GetSerachPropertyFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"GetSerachPropertyClear":
+return{}
     default:
-      return {
+      return{
         ...state,
-      };
-  }
-};
+      };
+  }
+}

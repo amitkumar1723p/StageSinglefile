@@ -384,3 +384,66 @@ return{}
       };
   }
 }
+
+// export const getTransactionDetailReducer=(state={},action)=>{
+//   switch(action.type){
+//     case "getTransactionDetailRequest":
+//       return {
+//         ...state,
+//         data:action.payload,
+//         loading:true,
+//       };
+
+//       case"getTransactionDetailSuccess":
+//       return {
+//         ...state,
+//         data:action.payload,
+//         loading:false
+//       };
+
+//       case"getTransactionDetailFail":
+//       return {
+//         ...state,
+//         data:action.payload,
+//         loading:false
+//       }
+
+//       case"getPaidPropertyFailClear":
+//       return{}
+//           default:
+//             return{
+//               ...state,
+//             };
+//   }
+// }
+export const getTransactionDetailReducer=(state={},action)=>{
+  switch(action.type){
+    case "getTransactionDetailRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case"getTransactionDetailSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"getTransactionDetailFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"getTransactionDetailFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}

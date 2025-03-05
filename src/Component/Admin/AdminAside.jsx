@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import "./AdminAside.css"; // Import the vanilla CSS file
-import { getAllUserAction } from "../../Action/userAction";
+import { getAllUserAction, getPaidPropertyAction, getTransactionDetailAction } from "../../Action/userAction";
 // import { useDispatch, useSelector } from "react-redux";
 // import { NavLink, Outlet, useLocation } from "react-router-dom";
 // import './AdminAside.css'; // Import the vanilla CSS file
@@ -36,8 +36,10 @@ export default function AdminAside() {
       dispatch(GetAllNotificationsAndRequirements());
     }
     if (medata?.user?.Role === "Owner") {
+      console.log("owner")
       dispatch(getAllUserAction());
       dispatch(Admin_OwnerGetAllPostAction());
+      dispatch(getTransactionDetailAction())
     }
   }, []);
 
@@ -120,6 +122,8 @@ export default function AdminAside() {
                     />
                     Agent
                   </NavLink>
+
+                  
                   {/* All repose user route  */}
                   {/* <NavLink
                     to="/admin/all-registration-response"

@@ -8,6 +8,7 @@ import { UserContext } from "../../CreateContext/CreateContext";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   GetAllPostAction,
+  getSerachProperty,
   GetSingleProjectNameDataAction,
 } from "../../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +37,10 @@ const PropertyFilters = () => {
   const { data } = useSelector((state) => {
     return state.GetAllPost;
   });
-   
+     // serach property 
+     const { data: serachResponse } = useSelector((state) => {
+       return state.serachResponse;
+     });
 
   const handleClicked = (v) => {
     setIsClicked(v);
@@ -87,63 +91,74 @@ const PropertyFilters = () => {
     // eslint-disable-next-line
   }, [Filter, querry]);
 
-  useEffect(() => {
-    if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
-      return navigate("/");
-    } else {
-      // Check if it is the first page load
-      if (!sessionStorage.getItem("isFirstLoad")) {
-        sessionStorage.setItem("isFirstLoad", "true");
-        dispatch(
-          GetSingleProjectNameDataAction({
-            ProjectName: querry.get("ProjectName"),
-          })
-        );
-        dispatch(
-          GetAllPostAction({
-            ProjectName: querry.get("ProjectName"),
-            PropertyAdType: querry.get("PropertyAddType"),
-          })
-        );
-      }
+  // useEffect(() => {
+  //   if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
+  //     return navigate("/");
+  //   } else {
+  //     // Check if it is the first page load
+  //     if (!sessionStorage.getItem("isFirstLoad")) {
+  //       sessionStorage.setItem("isFirstLoad", "true");
+  //       dispatch(
+  //         GetSingleProjectNameDataAction({
+  //           ProjectName: querry.get("ProjectName"),
+  //         })
+  //       );
+  //       dispatch(
+  //         GetAllPostAction({
+  //           ProjectName: querry.get("ProjectName"),
+  //           PropertyAdType: querry.get("PropertyAddType"),
+  //         })
+  //       );
+  //     }
 
-      // Detect page refresh
-      if (sessionStorage.getItem("isReloaded")) {
-        sessionStorage.removeItem("isReloaded");
+  //     // Detect page refresh
+  //     if (sessionStorage.getItem("isReloaded")) {
+  //       sessionStorage.removeItem("isReloaded");
 
 
-        dispatch(
-          GetSingleProjectNameDataAction({
-            ProjectName: querry.get("ProjectName"),
-          })
-        );
-        dispatch(
-          GetAllPostAction({
-            ProjectName: querry.get("ProjectName"),
-            PropertyAdType: querry.get("PropertyAddType"),
-          })
-        );
-      }
+  //       dispatch(
+  //         GetSingleProjectNameDataAction({
+  //           ProjectName: querry.get("ProjectName"),
+  //         })
+  //       );
+  //       dispatch(
+  //         GetAllPostAction({
+  //           ProjectName: querry.get("ProjectName"),
+  //           PropertyAdType: querry.get("PropertyAddType"),
+  //         })
+  //       );
+  //     }
 
-      // Handle page unload event for refresh detection
-      const handleBeforeUnload = () => {
-        if (sessionStorage.getItem("isFirstLoad")) {
-          sessionStorage.setItem("isReloaded", "true");
-        }
-      };
+  //     // Handle page unload event for refresh detection
+  //     const handleBeforeUnload = () => {
+  //       if (sessionStorage.getItem("isFirstLoad")) {
+  //         sessionStorage.setItem("isReloaded", "true");
+  //       }
+  //     };
 
-      window.addEventListener("beforeunload", handleBeforeUnload);
-      // setRedirectPath(location.pathname);
-      // setRedirectPath(location.pathname);
-      setRedirectPathIsHomeCard(true);
-      // Cleanup event listeners on component unmount
-      return () => {
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-        sessionStorage.removeItem("isFirstLoad");
-      };
-    }
-  }, []);
+  //     window.addEventListener("beforeunload", handleBeforeUnload);
+  //     // setRedirectPath(location.pathname);
+  //     // setRedirectPath(location.pathname);
+  //     setRedirectPathIsHomeCard(true);
+  //     // Cleanup event listeners on component unmount
+  //     return () => {
+  //       window.removeEventListener("beforeunload", handleBeforeUnload);
+  //       sessionStorage.removeItem("isFirstLoad");
+  //     };
+  //   }
+  // }, []);
 
+  useEffect(()=>{
+ if(!serachResponse ){
+  // GetAllPostAction({
+  //               ProjectName: querry.get("ProjectName"),
+  //              PropertyAdType: querry.get("PropertyAddType"),
+  //           })
+ 
+            dispatch(getSerachProperty(  querry.get("ProjectName"), querry.get("PropertyAddType")));
+ }
+  } ,[])
+  
   const bhkOptions = [1, 2, 3, 4, 5];
   const ApartmentTypeOptions = [
     "Apartment",
@@ -631,6 +646,14 @@ const PropertyFilters = () => {
           )}
         </div>
       </div>
+
+
+
+      {/* serachResponse.results.map(post => {
+        const { LocationDetails } = post;
+        return `${LocationDetails.ProjectName}, ${LocationDetails.Locality}, ${LocationDetails.City}`;
+      } */}
+
     </>
   );
 };

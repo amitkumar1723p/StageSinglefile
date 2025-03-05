@@ -92,7 +92,7 @@ function Sidebar() {
                 Shortlisted Property
               </li>
             </NavLink>
-            {/* <NavLink to="#">
+            <NavLink to="/user/transactions">
               <li className="navItem mob-hide">
                 <img
                   className="icons"
@@ -101,7 +101,7 @@ function Sidebar() {
                 />
                 Transactions
               </li>
-            </NavLink> */}
+            </NavLink>
             <NavLink to="/user/my-visits">
               <li
                 className={`navItem ${

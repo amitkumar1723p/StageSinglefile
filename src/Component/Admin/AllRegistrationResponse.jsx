@@ -89,7 +89,7 @@ export default function AllRegistrationResponse({ }) {
       }
 
       // Set the filtered or full data
-      setTableData(filteredData); // No need to spread here
+      setTableData(filteredData); 
     }
   }, [AllUserResponseData, viewfilterUser]);
 
