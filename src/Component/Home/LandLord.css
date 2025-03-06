@@ -64,8 +64,8 @@
 
 .IntroductionImgContainer {
     margin-right: 15px;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,15 +74,15 @@
 
 .Introduction{
     display: flex;
+    align-items: center;
     /* border: 1px solid black; */
 }
 .IntroductionImgContainer{
-    width: 50px;
     background-color: var(--main-lighter-clr);
     
 }
 .IntroductionImgContainer img{
-    width: 40px;
+    width: 30px;
 }
 .contentContainer{
     width: 80%;
