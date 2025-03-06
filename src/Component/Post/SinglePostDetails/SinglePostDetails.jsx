@@ -66,6 +66,9 @@ export default function SinglePostDetails() {
   // payment
   const [status, setStatus] = useState(false);
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
+
+
+  console.log(showOwnerDetailsForm, "j")
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
@@ -251,7 +254,8 @@ export default function SinglePostDetails() {
         sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
         medata?.user?.Role == "Tenant"
       ) {
-        setshowTenantDetailsForm(true);
+        setshowOwnerDetailsForm(true)
+        // setshowTenantDetailsForm(true);
       }
 
       sessionStorage.removeItem("RedirectPath");
@@ -857,6 +861,17 @@ export default function SinglePostDetails() {
                     WhatsApp
                     {/* </button> */}
                   </Link>
+
+
+                  {/* <button
+                    className="original-price border-0"
+                    ref={showOwnerDetailsFormRef}
+                    onClick={() => {
+                      setshowOwnerDetailsForm(true);
+                    }}
+                  >
+                    View Number
+                  </button> */}
                   {getSinglePostData?.SinglePost?.BasicDetails
                     ?.PropertyAdType === "Rent" ? (
                     <div>
@@ -868,10 +883,23 @@ export default function SinglePostDetails() {
                             navigate("/login");
                           }}
                         >
-                          View Owner Details
+                        View Number
                         </span>
                       ) : (
                         <>
+                          <button
+                            className="original-price border-0"
+                            ref={showOwnerDetailsFormRef}
+                            onClick={() => {
+                              setshowOwnerDetailsForm(true);
+                            }}
+                          >
+                            View Number
+                          </button>
+
+                          {/* <>  
+
+                         Rozer pay Logic
                           {
                             // Check if paidPropertyData?.data contains data and satisfies the condition
                             Array.isArray(paidPropertyData?.data) &&
@@ -894,10 +922,12 @@ export default function SinglePostDetails() {
                               />
                             ) // Show PayButton if the condition is not satisfied
                           }
+                           </> */}
                         </>
                       )}
                     </div>
                   ) : null}
+
                 </div>
                 {getSinglePostData?.SinglePost?.PostVerifyData?.Time && (
                   <div className="posted-by-section">
@@ -1429,10 +1459,7 @@ export default function SinglePostDetails() {
                       Component={ViewOwnerDetailsAlert}
                       SetShow={setshowOwnerDetailsForm}
                       BtnRef={showOwnerDetailsFormRef}
-                      Contact={
-                        paidPropertyData?.getOwnerDetail?.CreatePostUser
-                          ?.ContactNumber
-                      }
+                      Contact={"7837840785"}
                     // PropertyAddress={PropertyAddress}
                     />
                   )}
