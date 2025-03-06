@@ -107,6 +107,9 @@ export default function CreatePostImageUpload({
   // }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      
+    
     // Create a copy of the data to avoid mutating the original object
     const CopyObj = { ...PricingDetailsData };
 
@@ -172,6 +175,7 @@ export default function CreatePostImageUpload({
 
     // Set the new state
     setPricingDetailsData(CopyObj);
+  }, 0);
   }, [BasicDetailsData]); // Add dependency on BasicDetailsData
 
   // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes

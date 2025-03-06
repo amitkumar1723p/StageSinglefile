@@ -233,7 +233,7 @@ const SingleCard = ({ PostData, index }) => {
     setPropertyAddress(
 
 
-      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHk` : ""} ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
+      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHK` : ""} ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -293,6 +293,7 @@ const SingleCard = ({ PostData, index }) => {
               className="single-card-image"
             />
           </Link>
+          
           {PostData?.PostVerifyShow ? (
             PostData?.PostVerify ? (
               <div className="single-card-verified-badge">

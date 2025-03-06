@@ -375,6 +375,7 @@ export default function AdminListingCard({
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
+                         <span className="rent-admin-section">Rent : </span> 
                             {formatReservePrice(
                               PostData?.PricingDetails?.ExpectedRent
                             )}
@@ -386,6 +387,7 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
+                    
                     {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>

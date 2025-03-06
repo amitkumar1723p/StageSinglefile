@@ -219,7 +219,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="light"
                             name="light"
                             min="0"
@@ -271,7 +271,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="fans"
                             name="fans"
                             min="0"
@@ -322,7 +322,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="geyser"
                             name="geyser"
                             min="0"
@@ -373,7 +373,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="ac"
                             name="ac"
                             min="0"
@@ -420,7 +420,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="tv"
                             name="tv"
                             min="0"
@@ -468,7 +468,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="beds"
                             name="beds"
                             min="0"
@@ -519,7 +519,7 @@ export default function Amenities({
                             -
                           </div>
                           <input
-                            type="number"
+                            type="text"
                             id="wardrobe"
                             name="wardrobe"
                             min="0"

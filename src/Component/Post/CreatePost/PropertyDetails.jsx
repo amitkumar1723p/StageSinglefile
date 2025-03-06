@@ -172,7 +172,7 @@ export default function PropertyDetailsSection({
                 -
               </div>
               <input
-                type="number"
+                type="text"
                 id="bathroom"
                 name="bathroom"
                 min="0"
@@ -209,7 +209,7 @@ export default function PropertyDetailsSection({
                 -
               </div>
               <input
-                type="number"
+                type="text"
                 id="balcony"
                 name="balcony"
                 min="0"
@@ -256,7 +256,7 @@ export default function PropertyDetailsSection({
                 </div>
 
                 <input
-                  type="number"
+                  type="text"
                   id="coveredParking"
                   name="coveredParking"
                   min="0"
@@ -302,7 +302,7 @@ export default function PropertyDetailsSection({
                   -
                 </div>
                 <input
-                  type="number"
+                  type="text"
                   id="openParking"
                   name="openParking"
                   min="0"

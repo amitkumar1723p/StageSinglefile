@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Careers.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ApplyJobAction } from "../../Action/postAction";
@@ -8,7 +8,7 @@ function Career() {
   const [departmentOpen, setDepartmentOpen] = useState(false);
   const [typeOpen, setTypeOpen] = useState(false);
   const [applying, setApplying] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
   const [jobName, setJobName] = useState("");
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
@@ -18,6 +18,7 @@ function Career() {
   const [count, setCount] = useState(0);
   const [expandedJobIndex, setExpandedJobIndex] = useState(null)
   const [resume, setResume] = useState(null);
+
   const dispatch = useDispatch()
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -29,21 +30,21 @@ function Career() {
     }
   };
 
-  const { data: adminAlertData, LodingType: AlertType } = useSelector(
-    (state) => {
-      return state.Post;
+  const { data:AlertData, LodingType:AlertType } = useSelector((state) => {
+    return state.userData;
+  });
+ 
+  useEffect(() => {
+    if (AlertData&& ["ApplyJobActionRequest"].includes(AlertType)) {
+      if (AlertData.success === true) {
+        setSuccessOpen(true)
+        // dispatch(GetDeletedPostsAction());
+         
+      }
     }
-  );
-  // useEffect(() => {
-  //   if (adminAlertData && ["Delete_ExcelFileRequest","OwnerAllExcelFileRequest"].includes(AlertType)) {
-  //     if (adminAlertData.success === true) {
-  //       // dispatch(GetDeletedPostsAction());
-  //       dispatch(fetchAllOwnerFiles())
-  //     }
-  //   }
 
-  //   // eslint-disable-next-line
-  // }, [adminAlertData]);
+    // eslint-disable-next-line
+  }, [AlertData]);
 
 
   const jobs = [
@@ -190,7 +191,7 @@ function Career() {
       question: "How will I be informed if I’m selected for the role?",
       answer: "If you're shortlisted, you will be contacted by our HR team for interviews. If you are offered the role, you will receive an official offer letter with details regarding the role and joining process."
     },
-  
+
     {
       question: "How can I grow in my career at PropertyDekho247?",
       answer: "We believe in empowering our employees through continuous learning, mentoring, and career development opportunities. You'll have access to training and growth within the company, allowing you to advance in your career."
@@ -321,11 +322,11 @@ function Career() {
           </div>
         </div>
         {
-          careerFAQs.map((e,ind) => {
+          careerFAQs.map((e, ind) => {
             return <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header " id={
-                    `heading${ind}`
+                  `heading${ind}`
                 }>
                   <button
                     className="accordion-button custon-accordian-header"
@@ -754,28 +755,37 @@ function Career() {
           </div>
         </div>
 
-        <div className="Career-thankyoufor-applying-container">
-          <div className="Career-thankyoufor-applying">
-            <div className="heading-thankyoufor-applying">
-              <h3>Thank you for applying.</h3>
-              <div className="cancel-action">
-                <img src="img/iconoir_cancel.svg" alt="cancel-action" srcSet="" />
+
+
+       { successOpen &&  <div className="career-form-parent">
+
+
+          <div className="Career-thankyoufor-applying-container  ">
+            <div className="Career-thankyoufor-applying">
+              <div className="heading-thankyoufor-applying">
+                <h3>Thank you for applying.</h3>
+                <div className="cancel-action" onClick={()=>{
+                  setSuccessOpen(false)
+
+                }} >
+                  <img src="img/iconoir_cancel.svg" alt="cancel-action" srcSet="" />
+                </div>
+              </div>
+              <div className="thankyoufor-applying-paragraph">
+                Thank you for applying to Property Dekho 24/7! We receive many
+                applications and carefully review each one. If shortlisted, we’ll
+                reach out for the next steps. Otherwise, we’ll keep your profile
+                for future opportunities. In the meantime, explore our website or
+                follow us on LinkedIn (<span>@PropertyDekho247</span>) to stay
+                updated!
+              </div>
+              <div className="view-more-button">
+                <button>View More Jobs </button>
               </div>
             </div>
-            <div className="thankyoufor-applying-paragraph">
-              Thank you for applying to Property Dekho 24/7! We receive many
-              applications and carefully review each one. If shortlisted, we’ll
-              reach out for the next steps. Otherwise, we’ll keep your profile
-              for future opportunities. In the meantime, explore our website or
-              follow us on LinkedIn (<span>@PropertyDekho247</span>) to stay
-              updated!
-            </div>
-            <div className="view-more-button">
-              <button>View More Jobs </button>
-            </div>
-          </div>
 
-        </div>
+          </div>
+        </div>}
       </div>
 
       {

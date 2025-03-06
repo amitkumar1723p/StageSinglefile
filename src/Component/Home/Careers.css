@@ -1169,7 +1169,7 @@ label {
 }
 
 .Career-thankyoufor-applying-container {
-  display: none;
+  /* display: none; */
   width: 712px;
   padding: 28px;
   align-items: flex-start;

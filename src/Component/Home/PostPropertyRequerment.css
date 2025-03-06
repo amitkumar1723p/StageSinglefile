@@ -195,7 +195,7 @@
 }
 .form-budget select{
   padding: 5px;
-  color: rgba(170, 181, 193, 1);
+  color: #444;
   width: 50px;
   height: 36px;
   padding: 0px;
@@ -207,10 +207,10 @@
   border-radius: 8px 0px 0px 8px;
 }
 .form-bhk select{
-  color: rgba(170, 181, 193, 1);
+  color: #444;
 }
 .form-floor select{
-  color: rgba(170, 181, 193, 1);
+  color: #444;
 }
 
 .possession-status {

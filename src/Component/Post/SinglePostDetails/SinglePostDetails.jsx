@@ -599,7 +599,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/parking.png"
+                            src="/img/plot_dimension.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -617,7 +617,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/Flooring-Type.png"
+                            src="/img/possession_.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -635,7 +635,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/bathroom.png"
+                            src="/img/current_prop_status.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -672,7 +672,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/floor.png"
+                            src="/img/plot_facing.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -1213,7 +1213,7 @@ export default function SinglePostDetails() {
                           />
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
-                            Icon="/img/total-floor.png"
+                            Icon="/img/front_road.svg"
                             Data={"Front Road Width"}
                           />
                           {/* Other Feature   */}
@@ -1223,7 +1223,7 @@ export default function SinglePostDetails() {
                                 <div className="img-icon">
                                   <img
                                     className="icon-overview"
-                                    src={"/img/bathroom.png"}
+                                    src={"/img/corner_prop.svg"}
                                     alt="icon"
                                   />
                                 </div>

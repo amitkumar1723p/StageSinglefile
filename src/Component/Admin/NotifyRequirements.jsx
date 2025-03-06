@@ -29,8 +29,8 @@ const NotifyRequirements = () => {
   // console.log(data)
 
   const monthNames = [
-     "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", 
-  "Sep", "Oct", "Nov", "Dec"
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+    "Sep", "Oct", "Nov", "Dec"
   ];
 
   useEffect(() => {
@@ -176,9 +176,8 @@ const NotifyRequirements = () => {
       {/* Tab Buttons */}
       <div className="notify-tab-buttons">
         <button
-          className={`notify-requirements-tab ${
-            activeTab === "notifies" ? "active" : ""
-          }`}
+          className={`notify-requirements-tab ${activeTab === "notifies" ? "active" : ""
+            }`}
           onClick={() => {
             setActiveTab("notifies");
             setDisplayData(acknowledgedNotifies);
@@ -188,9 +187,8 @@ const NotifyRequirements = () => {
           Notifies ({data?.notifies.length})
         </button>
         <button
-          className={`notify-requirements-tab ${
-            activeTab === "requirements" ? "active" : ""
-          }`}
+          className={`notify-requirements-tab ${activeTab === "requirements" ? "active" : ""
+            }`}
           onClick={() => {
             setActiveTab("requirements");
             setShowUnacknowledged("all");
@@ -207,9 +205,8 @@ const NotifyRequirements = () => {
           <>
             {" "}
             <button
-              className={` notify-button-toggale-one ${
-                showUnacknowledged === "all" ? "button-toggle" : " "
-              }`}
+              className={` notify-button-toggale-one ${showUnacknowledged === "all" ? "button-toggle" : " "
+                }`}
               onClick={() => {
                 setShowUnacknowledged("all");
 
@@ -221,9 +218,8 @@ const NotifyRequirements = () => {
             <></>{" "}
             {!enterdDate && (
               <button
-                className={`notify-button-toggale-one ${
-                  showUnacknowledged === "new" ? "button-toggle" : " "
-                }`}
+                className={`notify-button-toggale-one ${showUnacknowledged === "new" ? "button-toggle" : " "
+                  }`}
                 onClick={() => {
                   setShowUnacknowledged("new");
                   setDisplayData(unacknowledgedNotifies);
@@ -238,9 +234,8 @@ const NotifyRequirements = () => {
           <>
             {" "}
             <button
-              className={`notify-button-toggale-one ${
-                showUnacknowledged === "all" ? "button-toggle" : " "
-              }`}
+              className={`notify-button-toggale-one ${showUnacknowledged === "all" ? "button-toggle" : " "
+                }`}
               onClick={() => {
                 setShowUnacknowledged("all");
                 setDisplayData(acknowledgedRequirements);
@@ -251,9 +246,8 @@ const NotifyRequirements = () => {
             </button>
             {!enterdDate && (
               <button
-                className={`notify-button-toggale-one ${
-                  showUnacknowledged === "new" ? "button-toggle" : " "
-                }`}
+                className={`notify-button-toggale-one ${showUnacknowledged === "new" ? "button-toggle" : " "
+                  }`}
                 onClick={() => {
                   setShowUnacknowledged("new");
                   setDisplayData(unacknowledgedRequirements);
@@ -280,12 +274,12 @@ const NotifyRequirements = () => {
                 <tr>
                   {activeTab === "notifies" ? (
                     <>
-                      <th className="notify-requirements-th">Serial no.</th>
+
                       <th className="notify-requirements-th">Name</th>
                       <th className="notify-requirements-th">Phone</th>
                       <th className="notify-requirements-th">Date </th>
                       <th className="notify-requirements-th">Room</th>
-                      <th className="notify-requirements-th">BHK Type</th>
+                      <th className="notify-requirements-th">BHK</th>
                       <th className="notify-requirements-th">
                         Floor Preference
                       </th>
@@ -294,13 +288,13 @@ const NotifyRequirements = () => {
                     </>
                   ) : (
                     <>
-                      <th className="notify-requirements-th">Serial no.</th>
+
                       <th className="notify-requirements-th">Name</th>
                       <th className="notify-requirements-th">Phone</th>
                       <th className="notify-requirements-th">Date</th>
-                      {/* <th className="notify-requirements-th">Name</th> */}
+                      <th className="notify-requirements-th">Property type</th>
 
-                      <th className="notify-requirements-th">BHK Type</th>
+                      <th className="notify-requirements-th">BHK / Area</th>
                       <th className="notify-requirements-th">
                         Floor Preference
                       </th>
@@ -317,7 +311,7 @@ const NotifyRequirements = () => {
                     <tr key={item._id}>
                       {activeTab === "notifies" ? (
                         <>
-                          <td className="notify-requirements-td">{ind + 1}</td>
+
                           <td className="notify-requirements-td">
                             {item?.User?.Name}
                           </td>
@@ -327,20 +321,21 @@ const NotifyRequirements = () => {
                           <td className="notify-requirements-td">
                             {
                               new Date(item.createAt)
-                              .toLocaleDateString("en-GB", { year: '2-digit', month: 'short', day: '2-digit' }) // Format with month name
-                              .split(" ") // Splitting the result into [DD, MonthName, YYYY]
-                              .map((part, index) => index === 2 ? part.slice(-2) : part) // Keep only the last 2 digits of the year
-                              .join(" ") // Recombine the parts back into DD MonthName YY
-                            
+                                .toLocaleDateString("en-GB", { year: '2-digit', month: 'short', day: '2-digit' }) // Format with month name
+                                .split(" ") // Splitting the result into [DD, MonthName, YYYY]
+                                .map((part, index) => index === 2 ? part.slice(-2) : part) // Keep only the last 2 digits of the year
+                                .join(" ") // Recombine the parts back into DD MonthName YY
+
                             }
                           </td>
+                        
 
                           <td className="notify-requirements-td ">
                             {item?.Room?.join(" , ")}
                           </td>
 
                           <td className="notify-requirements-td">
-                            {item.BHKType}
+                            {item?.BHKType} 
                           </td>
                           <td className="notify-requirements-td">
                             {item.FloorPreference}
@@ -352,7 +347,7 @@ const NotifyRequirements = () => {
                         </>
                       ) : (
                         <>
-                          <td className="notify-requirements-td">{ind + 1}</td>
+
                           <td className="notify-requirements-td">
                             {item?.RequirementUser?.Name}
                           </td>
@@ -361,21 +356,24 @@ const NotifyRequirements = () => {
                           </td>
                           <td className="notify-requirements-td">
                             {
-                            
-          
+
+
                               new Date(item.createAt)
                                 .toLocaleDateString("en-GB") // This formats the date as DD/MM/YYYY
                                 .split("/") // Splitting the date into [DD, MM, YYYY]
                                 .map((part, index) =>
                                   index === 1 ? monthNames[parseInt(part, 10) - 1] : // Convert month number to month name
-                                  index === 2 ? part.slice(-2) : part // Keep only the last 2 digits of the year
+                                    index === 2 ? part.slice(-2) : part // Keep only the last 2 digits of the year
                                 )
                                 .join("-") // Recombine the parts b
                             }
                           </td>
                           {/* <td className="notify-requirements-td">{item?.Room?.map((room)=><span>{room}</span>)}</td> */}
                           <td className="notify-requirements-td">
-                            {item.BHKType}
+                            {item.PropertyType}
+                          </td>
+                          <td className="notify-requirements-td">
+                            {item.BHKType} {item?.plotSize} {item?.plotUnit} 
                           </td>
 
                           <td className="notify-requirements-td">
