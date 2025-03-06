@@ -8,7 +8,7 @@
 }
 
 :root {
-  /* --main-dark-clr: #0078d4;
+  /* --main-dark-clr: #1877f2;
   --main-light-hover-clr: #96c8ef; */
   --main-white-clr: #fff;
   --main-black-clr: #222;
@@ -62,7 +62,7 @@
 /* CareerSearch.css */
 :root {
   --main-black-clr: #333;
-  --main-dark-clr: #0078d4;
+  --main-dark-clr: #1877f2;
   --light-blue-bg: #f1f9ff;
   --border-color: #bdd9ef;
   --shadow-color: rgba(146, 146, 146, 0.25);
@@ -277,7 +277,7 @@
 }
 
 .Career-Heading span {
-  color: #0078d4;
+  color: #1877f2;
   font-family: Inter;
   font-size: 28px;
   font-style: normal;
@@ -638,7 +638,7 @@ h2 span {
   gap: 16px;
 }
 .Simple-Step-Title {
-  color: #0078d4;
+  color: #1877f2;
   font-family: Inter;
   font-size: 18px;
   font-style: normal;

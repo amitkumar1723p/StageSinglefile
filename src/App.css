@@ -51,7 +51,7 @@ textarea {
   line-height: inherit;
 }
 :root {
-  --main-light-clr: #037edb;
+  --main-light-clr: #1877f2;
   --main-light-hover-clr: #0056b3;
   --main-dark-clr: #0078d4be;
   --main-white-light-clr: #f6f7fa;
@@ -115,6 +115,12 @@ input:focus {
 .cross-btn {
   text-align: end;
 }
+
+large  image slider 
+ .img-zoom-slide .cross-btn{
+ position: fixed;
+  right: 35px;
+ }
 .cross-btn:hover {
   color: red;
   font-weight: 800;

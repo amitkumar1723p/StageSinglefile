@@ -603,7 +603,8 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/plot_dimension.svg"
+                            src="/img/Plot-Dimension.svg"
+
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -1243,7 +1244,7 @@ export default function SinglePostDetails() {
                           />
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
-                            Icon="/img/front_road.svg"
+                            Icon="/img/Width-of-front-road.svg"
                             Data={"Front Road Width"}
                           />
                           {/* Other Feature   */}
@@ -1253,7 +1254,7 @@ export default function SinglePostDetails() {
                                 <div className="img-icon">
                                   <img
                                     className="icon-overview"
-                                    src={"/img/corner_prop.svg"}
+                                    src={"/img/Cornerproperty.svg"}
                                     alt="icon"
                                   />
                                 </div>
