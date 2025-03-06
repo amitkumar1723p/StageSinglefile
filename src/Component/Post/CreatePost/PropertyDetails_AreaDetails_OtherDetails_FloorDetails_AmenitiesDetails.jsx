@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,} from "react";
 
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
 import PropertyDetailsSection from "./PropertyDetails.jsx";
@@ -27,7 +27,9 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+"1 RK/PG",
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
@@ -74,26 +76,29 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
     AreaDetailsData.CarpetArea?.value,
     AreaDetailsData.SuperBuiltUpArea?.value,
   ]);
-
+  const [filederror ,setfielderror]= useState("")
   useEffect(() => {}, [BasicDetailsData.PropertyAdType]);
   const PostSubmitHandler = (e) => {
     e.preventDefault();
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
       if (!OtherDetailsData.PlotDirection) {
-        return alert("Plot Direction Field is Required");
+
+        setfielderror(true)
+        return ;
+
       }
 
-      //  if()
+       
       if (!OtherDetailsData.PlotFacing) {
-        return alert("Plot Facing  Field is Required");
+        return;
       }
 
       if (AmenitiesDetailsData?.ProjectAmmenities?.length <= 0) {
-        return alert("Project Ammenities  Field is Required");
+        return ;
       }
 
       if (AmenitiesDetailsData?.OtherFeature?.length <= 0) {
-        return alert("Other Field is Required");
+        return;
       }
 
       //
@@ -103,9 +108,9 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         !AreaDetailsData.CarpetArea?.value &&
         !AreaDetailsData.BuiltUpArea?.value
       ) {
-        return alert(
-          "SuperBuiltUpArea CarpetArea  and BuiltUpArea insert value"
-        );
+
+        
+        return;
       }
       if (Object.keys(AlertObj).length > 0) {
         alert("resove Area field error");
@@ -116,11 +121,11 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       }
 
       if (FloorDetailsData?.OverLookingView?.length <= 0) {
-        return alert("Over Looking View  Field Required");
+        return ;
       }
 
       if (!AmenitiesDetailsData.Furnishing) {
-        return alert("Furnishing Field Required");
+        return ;
       }
 
       if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
@@ -134,11 +139,11 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
     }
 
     if (!AmenitiesDetailsData.PowerBackUp) {
-      return alert(" PowerBackUp  Field is Required");
+      return ;
     }
 
     if (AmenitiesDetailsData?.WaterSource?.length <= 0) {
-      return alert("WaterSource is Required");
+      return;
     }
 
     setnext(3);
@@ -157,6 +162,152 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
     }
   };
 
+
+  // wrong field Alert shakes
+
+ const [Error ,showError] =useState({})
+
+  const HandleAreaDetailsAlert=()=>{
+    if (BasicDetailsData.ApartmentType == "Plot/Land"){
+    
+    if(!AreaDetailsData.PlotSize?.value){
+      setTimeout(()=>showError({PlotSize:true}),500);
+      setTimeout(()=>showError({PlotSize:false}),1500);
+      return;
+    }
+     if(!AreaDetailsData.PlotDimensions){
+      setTimeout(()=>showError({PlotDimensions:true}),500);
+      setTimeout(()=>showError({PlotDimensions:false}),1500);
+      return;
+     }
+     if(!OtherDetailsData.ConstructionAllowed){
+      setTimeout(()=>showError({ConstructionAllowed:true}),500);
+      setTimeout(()=>showError({ConstructionAllowed:false}),1500);
+      return;
+     }
+     if(!OtherDetailsData.PlotDirection){
+      setTimeout(()=>showError({PlotDirection:true}),200);
+      setTimeout(()=>showError({PlotDirection:false}),1500);
+      return;
+     }
+     if(!OtherDetailsData.PlotFacing){
+      setTimeout(()=>showError({PlotFacing:true}),200);
+      setTimeout(()=>showError({PlotFacing:false}),1500);
+      return;
+     }
+     if(!OtherDetailsData.FrontRoadWidth){
+      setTimeout(()=>showError({FrontRoadWidth:true}),100);
+      setTimeout(()=>showError({FrontRoadWidth:false}),1500);
+      return;
+     }
+     if(!AmenitiesDetailsData.PowerBackUp){
+      setTimeout(()=>showError({PowerBackUp:true}),100);
+      setTimeout(()=>showError({PowerBackUp:false}),1500);
+      return;
+     }
+     if(AmenitiesDetailsData.WaterSource?.length<=0){
+      setTimeout(()=>showError({WaterSource:true}),100);
+      setTimeout(()=>showError({WaterSource:false}),1500);
+      return;
+     }
+     if(AmenitiesDetailsData.ProjectAmmenities?.length<=0){
+      console.log(AmenitiesDetailsData.ProjectAmmenities?.length)
+      showError({ProjectAmmenities:true});
+      setTimeout(()=>showError({ProjectAmmenities:false}),1500);
+      return;
+     }
+     if(AmenitiesDetailsData?.OtherFeature?.length <= 0){
+      showError({OtherFeature:true});
+      setTimeout(()=>showError({OtherFeature:false}),1500);
+      return;
+     }
+
+    }else{
+      if(!PropertyDetailsData.BHKType){
+        setTimeout(()=>showError({BHKType:true}),800);
+      setTimeout(()=>showError({BHKType:false}),1800);
+      return;
+      }
+      if(!PropertyDetailsData.FlooringType){
+        setTimeout(()=>showError({FlooringType:true}),800);
+        setTimeout(()=>showError({FlooringType:false}),1800);
+        return;
+      }
+      if(PropertyDetailsData.OtherRoom <=0){
+        setTimeout(()=>showError({OtherRoom:true}),800);
+        setTimeout(()=>showError({OtherRoom:false}),1800);
+        return;
+      }
+      if(FloorDetailsData.TotalFloors <=0 || FloorDetailsData.TotalFloors === undefined){
+        console.log("hii i Am console 😍")
+        setTimeout(()=>showError({TotalFloors:true}),800);
+        setTimeout(()=>showError({TotalFloors:false}),1800);
+        return;
+      }
+      if(FloorDetailsData.PropertyOnFloor <=0 || FloorDetailsData.PropertyOnFloor === undefined){
+        if(BasicDetailsData.ApartmentType == "Indepedent House/Villa"){
+          console.log("done");
+         
+        }else{
+          setTimeout(()=>showError({PropertyOnFloor:true}),800);
+          setTimeout(()=>showError({PropertyOnFloor:false}),1800);
+          return;
+        }
+        
+       
+        
+      }
+      if(FloorDetailsData.PropertyDirection <=0 || FloorDetailsData.PropertyDirection === undefined){
+        setTimeout(()=>showError({PropertyDirection:true}),800);
+        setTimeout(()=>showError({PropertyDirection:false}),1800);
+        return;
+      }
+      if (
+        !AreaDetailsData.SuperBuiltUpArea?.value &&
+        !AreaDetailsData.CarpetArea?.value &&
+        !AreaDetailsData.BuiltUpArea?.value
+      ){
+        setTimeout(()=>showError({AreaDetailData:true}),500);
+        setTimeout(()=>showError({AreaDetailData:false}),1500);
+        return;
+      }
+      
+      if(FloorDetailsData?.OverLookingView?.length <= 0){
+        setTimeout(()=>showError({OverLookingView:true}),500);
+        setTimeout(()=>showError({OverLookingView:false}),1500);
+        return;
+      }
+      if (!AmenitiesDetailsData.Furnishing) {
+        setTimeout(()=>showError({Furnishing:true}),500);
+        setTimeout(()=>showError({Furnishing:false}),1500);
+        return;
+      }
+
+     
+
+      
+
+    }
+
+
+
+    
+
+
+
+  
+
+     
+     
+     
+  
+
+
+
+
+  }
+
+
   return (
     <>
       <ScrollToTop />
@@ -174,10 +325,11 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (
-              <div className="Prop-detials-box-form">
+              <div className="Prop-detials-box-form " >
                 <PropertyDetailsSection
                   PropertyDetailsData={PropertyDetailsData}
                   setPropertyDetailsData={setPropertyDetailsData}
+                  Error={Error}
                 />
               </div>
             )}
@@ -188,6 +340,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                 setAreaDetailsData={setAreaDetailsData}
                 BasicDetailsData={BasicDetailsData}
                 AlertObj={AlertObj}
+                Error={Error}
               />
             </div>
 
@@ -199,6 +352,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                   FloorDetailsData={FloorDetailsData}
                   setFloorDetailsData={setFloorDetailsData}
                   BasicDetailsData={BasicDetailsData}
+                  Error={Error}
                 />
               </div>
             )}
@@ -209,6 +363,8 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                   OtherDetailsData={OtherDetailsData}
                   setOtherDetailsData={setOtherDetailsData}
                   BasicDetailsData={BasicDetailsData}
+                  filederror={filederror}
+                  Error={Error}
                 />
 
                 {/* <Amenities
@@ -226,6 +382,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                 AmenitiesDetailsData={AmenitiesDetailsData}
                 setAmenitiesDetailsData={setAmenitiesDetailsData}
                 BasicDetailsData={BasicDetailsData}
+                Error={Error}
               />
             </div>
 
@@ -245,7 +402,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                 </div>{" "}
               </>
 
-              <button type="Submit-next"> Next</button>
+              <button  onClick={HandleAreaDetailsAlert} type="Submit-next"> Next</button>
             </div>
           </form>
         </div>

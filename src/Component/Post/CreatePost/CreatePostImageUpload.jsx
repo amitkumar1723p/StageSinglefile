@@ -56,55 +56,7 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  // console.log("BasicDetailsData", BasicDetailsData);
-  // console.log("LocationDetailsData", LocationDetailsData);
-  // console.log("PropertyDetailsData", PropertyDetailsData);
-  // console.log("OtherDetailsData", OtherDetailsData);
-  // console.log("AreaDetailsData", AreaDetailsData);
-  // console.log("FloorDetailsData", FloorDetailsData);
-  // console.log("AmenitiesDetailsData", AmenitiesDetailsData);
-  // console.log("PricingDetailsData", PricingDetailsData);
-
-  // useEffect(() => {
-  //   // remove Coma
-
-  //   const CopyObj = { ...PricingDetailsData };
-
-  //   if (BasicDetailsData.PropertyAdType == "Rent") {
-  //     const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(/,/g,"");
-  //     CopyObj.ExpectedRent =parseInt( ExpectedRentRemoveComa);
-
-  //     const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
-  //       /,/g,
-  //       ""
-  //     );
-  //     CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
-  //   }
-
-  //   if (BasicDetailsData.PropertyAdType == "Sale") {
-  //     const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
-  //       /,/g,
-  //       ""
-  //     );
-  //     CopyObj.ExpectedPrice =parseInt( ExpectedPriceRemoveComa);
-
-  //     if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-  //       const MonthlyExpectedRentRemoveComa = String(
-  //         CopyObj?.AdditionalDetails?.MonthlyExpectedRent
-  //       )?.replace(/,/g, "");
-  //       CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt (MonthlyExpectedRentRemoveComa);
-  //     }
-  //   }
-  //   if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-  //     const MaintenanceChargesRemoveComa = String(
-  //       CopyObj.AdditionalDetails.MaintenanceCharges
-  //     )?.replace(/,/g, "");
-  //     CopyObj.AdditionalDetails.MaintenanceCharges =parseInt(MaintenanceChargesRemoveComa) ;
-  //   }
-
-  //    setPricingDetailsData(CopyObj);
-  //
-  // }, []);
+  
 
   useEffect(() => {
     // Create a copy of the data to avoid mutating the original object

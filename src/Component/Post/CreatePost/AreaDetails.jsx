@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useImperativeHandle, forwardRef, useState  } from "react";
 
 export default function AreaDetailsSection({
   AreaDetailsData,
   setAreaDetailsData,
   BasicDetailsData,
   AlertObj,
+  Error,
 }) {
   useEffect(() => {
     if (
       [
         "Apartment",
         "Independent/Builder Floor",
-        "1 RK/Studio Apartment",
+        // "1 RK/Studio Apartment",
+        "Studio Apartment",
+        "1 RK/PG",
         "Serviced Apartment",
       ].includes(BasicDetailsData.ApartmentType)
     ) {
@@ -45,6 +48,18 @@ export default function AreaDetailsSection({
       }, 0);
     }
   }, [BasicDetailsData.ApartmentType]);
+
+
+//  const [amit ,setamit ] =useState(false)
+
+//   const HandleAreaDerailsAlert=()=>{
+//     if(!AreaDetailsData.PlotSize){
+//       console.log("i am AM");
+//       setamit(true)
+//     }
+//   }
+
+
   return (
     <>
       <p className="step-section-heading-p">
@@ -56,9 +71,12 @@ export default function AreaDetailsSection({
       {BasicDetailsData.ApartmentType === "Plot/Land" && (
         <>
           <div className="form-group">
+          {/* <p> {Error.PlotSize && "Plot Area Error"}</p> */}
             <label htmlFor="plotSize">Plot Size*</label>
-            <div className="unit-input">
+             
+            <div className={`unit-input  ${Error.PlotSize? 'inputShake shake' : ''}`}>
               <input
+              
                 type="text"
                 id="plotSize"
                 name="plotSize"
@@ -88,10 +106,12 @@ export default function AreaDetailsSection({
               />
             </div>
           </div>
-          <div className="form-group">
+          <div className="form-group ">
+            {console.log(Error)}
+          {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
             <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
-
             <input
+            className={`${Error.PlotDimensions? 'inputShake shake' : ''}`}
               id="plot-dimensions"
               required
               value={AreaDetailsData.PlotDimensions?.trimStart() || ""}
@@ -147,42 +167,41 @@ export default function AreaDetailsSection({
       )}
 
       {[
-      "Independent House/Villa",
+        "Independent House/Villa",
         "Apartment",
         "Independent/Builder Floor",
-        "1 RK/Studio Apartment",
+        // "1 RK/Studio Apartment",
+        "Studio Apartment",
+        "1 RK/PG",
         "Serviced Apartment",
       ].includes(BasicDetailsData.ApartmentType) && (
         <>
           {/* Super Built Up Area* */}
           <div className="form-group">
             <label htmlFor="super-built-up-area"> Super Built Up Area* </label>
-            <div className="unit-input">
+            <div className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
+               
+
                 type="text"
                 id="super-built-up-area"
                 placeholder="Built Up Area"
                 value={AreaDetailsData?.SuperBuiltUpArea?.value || ""}
                 onChange={(e) => {
-                  
-
-
-
                   const numericValue = String(e.target.value).replace(
                     /[^0-9]/g,
                     ""
                   );
 
                   // eslint-disable-next-line
-                  
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      SuperBuiltUpArea: {
-                        ...AreaDetailsData.SuperBuiltUpArea,
-                        value: numericValue,
-                      },
-                    });
-                  
+
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    SuperBuiltUpArea: {
+                      ...AreaDetailsData.SuperBuiltUpArea,
+                      value: numericValue,
+                    },
+                  });
                 }}
               />
 
@@ -192,37 +211,32 @@ export default function AreaDetailsSection({
                 className="unit"
                 value={AreaDetailsData?.SuperBuiltUpArea?.unit || ""}
               />
-
- 
             </div>
           </div>
           {/* Built Up Area */}
           <div className="form-group">
             <label htmlFor="built-up-area">Built Up Area</label>
-            <div className="unit-input">
+            <div  className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                 type="text"
                 id="built-up-area"
                 placeholder="Built Up Area"
                 value={AreaDetailsData?.BuiltUpArea?.value || ""}
                 onChange={(e) => {
-               
-
                   const numericValue = String(e.target.value).replace(
                     /[^0-9]/g,
                     ""
                   );
-                  
+
                   // eslint-disable-next-line
-              
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      BuiltUpArea: {
-                        ...AreaDetailsData.BuiltUpArea,
-                        value:numericValue,
-                      },
-                    });
-                  
+
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    BuiltUpArea: {
+                      ...AreaDetailsData.BuiltUpArea,
+                      value: numericValue,
+                    },
+                  });
                 }}
               />
               <input
@@ -231,8 +245,6 @@ export default function AreaDetailsSection({
                 className="unit"
                 value={AreaDetailsData.BuiltUpArea?.unit || ""}
               />
-
-              
             </div>
             {AlertObj.BuiltUpAreaAlert && (
               <div className="alert-in-area-section">
@@ -243,7 +255,7 @@ export default function AreaDetailsSection({
           {/* Carpet Area  */}
           <div className="form-group">
             <label htmlFor="carpetArea">Carpet Area</label>
-            <div className="unit-input">
+            <div className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                 type="text"
                 id="carpetArea"
@@ -253,23 +265,21 @@ export default function AreaDetailsSection({
                   const numericValue = String(e.target.value).replace(
                     /[^0-9]/g,
                     ""
-                  )
+                  );
 
                   // eslint-disable-next-line
-                  
-                    setAreaDetailsData({
-                      ...AreaDetailsData,
-                      CarpetArea: {
-                        ...AreaDetailsData.CarpetArea,
-                        value: numericValue,
-                      },
-                    });
-                  
+
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    CarpetArea: {
+                      ...AreaDetailsData.CarpetArea,
+                      value: numericValue,
+                    },
+                  });
                 }}
                 placeholder="Carpet Area"
               />
 
-               
               <input
                 type="text"
                 readOnly
@@ -286,8 +296,6 @@ export default function AreaDetailsSection({
           </div>
         </>
       )}
-
- 
     </>
   );
 }

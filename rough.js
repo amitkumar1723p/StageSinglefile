@@ -80,9 +80,11 @@ export default function CreatePostMain() {
   //  BasicDetils Component submit -- Start
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
-    "Independent House/Villa",
-    "1 RK/Studio Apartment",
     "Independent/Builder Floor",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+"1 RK/PG",
+    "Independent House/Villa",
     "Serviced Apartment",
   ];
 

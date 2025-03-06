@@ -230,7 +230,7 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
-  // console.log(PropertyAddType)
+ 
 
   return (
     <><Helmet>
