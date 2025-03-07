@@ -7,6 +7,7 @@ export default function Amenities({
   setAmenitiesDetailsData,
   update,
   BasicDetailsData,
+  Error,
 }) {
   const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
   const YesNoArray = [true, false];
@@ -123,7 +124,7 @@ export default function Amenities({
                     key={i}
                     className={`tab ${
                       AmenitiesDetailsData.Furnishing === text ? "select" : ""
-                    }`}
+                    }    ${Error.Furnishing? 'inputShake shake' : ''}`}
                     onClick={() => {
                       if (text === "Un-Furnished") {
                         setAmenitiesDetailsData({
@@ -168,12 +169,15 @@ export default function Amenities({
                   {/* ModularKitchen */}
 
                   <div className="field-group">
-                    <label htmlFor="modular-kitchen">Modular Kitchen</label>
+                    <label
+                   
+                     htmlFor="light">Modular Kitchen</label>
                     <div className="row">
                       {YesNoArray.map((text, i) => {
                         return (
                           <div className="row" key={i}>
                             <input
+                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
                               type="radio"
                               id={`modular-kitchen-${i}`}
                               name="modular-kitchen"
@@ -193,7 +197,9 @@ export default function Amenities({
                                 });
                               }}
                             />
-                            <label htmlFor={`modular-kitchen-${i}`}>
+                            <label
+                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
+                             htmlFor={`modular-kitchen-${i}`}>
                               {text === true ? "Yes" : "No"}
                             </label>
                           </div>
@@ -589,7 +595,7 @@ export default function Amenities({
                         )
                           ? "select"
                           : ""
-                      }
+                      } ${Error.SocietyAndBuildingFeature? 'inputShake shake' : ''}
                     `}
                       onClick={() => {
                         if (
@@ -646,7 +652,6 @@ export default function Amenities({
       {/* Power Back up */}
       <div className="fom-group">
         <p className="label">Power Back up*</p>
-
         <div className="tab-box">
           {PowerBackUpArray.map((text, i) => {
             return (
@@ -654,7 +659,7 @@ export default function Amenities({
                 key={i}
                 className={`tab ${
                   AmenitiesDetailsData.PowerBackUp === text ? "select" : ""
-                }`}
+                }  ${Error.PowerBackUp? 'inputShake shake' : ''}`}
                 onClick={() => {
                   setAmenitiesDetailsData({
                     ...AmenitiesDetailsData,
@@ -686,12 +691,13 @@ export default function Amenities({
               return (
                 <div
                   key={i}
-                  className={`tab ${
-                    AmenitiesDetailsData.WaterSource?.includes(text)
-                      ? "select"
-                      : ""
-                  }
-               `}
+              className={`tab ${
+                  AmenitiesDetailsData.WaterSource?.includes(text)
+                    ? "select"
+                    : ""
+                }
+                    ${Error.WaterSource? 'inputShake shake' : ''} `}
+               
                   onClick={(event) => {
                     if (!AmenitiesDetailsData.WaterSource?.includes(text)) {
                       setAmenitiesDetailsData({
@@ -745,7 +751,7 @@ export default function Amenities({
                       AmenitiesDetailsData.ProjectAmmenities?.includes(text)
                         ? "select"
                         : ""
-                    }
+                    }  ${Error.ProjectAmmenities? 'inputShake shake' : ''}
                     `}
                     onClick={() => {
                       if (
@@ -796,8 +802,11 @@ export default function Amenities({
               {OtherFeatureArray.map((text, i) => {
                 return (
                   <div key={i}>
-                    <label htmlFor={`other-feature-${i}`}>{text}</label>
+                    <label
+                    className={` ${Error.OtherFeature? ' shake' : ''}`}
+                     htmlFor={`other-feature-${i}`}>{text}</label>
                     <input
+                    className={` ${Error.OtherFeature? ' shake' : ''}`}
                       type="checkbox"
                       name=""
                       id={`other-feature-${i}`}

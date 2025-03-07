@@ -5,6 +5,7 @@ export default function PropertyDetailsSection({
   PropertyDetailsData,
   setPropertyDetailsData,
   BasicDetailsData,
+  Error,
 }) {
   const [bhkcount, setbhkcount] = useState([]);
 
@@ -88,6 +89,10 @@ export default function PropertyDetailsSection({
     "Servant Room",
     "Store Room",
   ];
+
+
+
+
   return (
     <>
       <p className="Property-Details-heading">Property Details</p>
@@ -95,6 +100,8 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="bhk-type">BHK Type*</label>
           <select
+           className={` ${Error.BHKType? 'inputShake shake' : ''}`}
+
             id="bhk-type"
             required
             value={PropertyDetailsData.BHKType || ""}
@@ -124,6 +131,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="flooring-type">Flooring Type*</label>
           <select
+           className={` ${Error.FlooringType? 'inputShake shake' : ''}`}
             id="flooring-type"
             required
             value={PropertyDetailsData.FlooringType || ""}
@@ -158,11 +166,9 @@ export default function PropertyDetailsSection({
                 <div
                   key={i}
                   className={`tab ${
-                    PropertyDetailsData.OtherRoom?.includes(text)
-                      ? "select"
-                      : ""
-                  }
-                    `}
+                    PropertyDetailsData.OtherRoom?.includes(text) ? "select" : ""
+                  }  ${Error.OtherRoom? 'inputShake shake' : ''}
+                      `}
                   onClick={() => {
                     if (!PropertyDetailsData.OtherRoom?.includes(text)) {
                       setPropertyDetailsData({

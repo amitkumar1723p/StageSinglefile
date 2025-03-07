@@ -17,7 +17,7 @@ const RentAgreement = () => {
           <div className="RentAgreement__icon">
             <img src="./img/Submityourdraft.svg" alt="Submit your draft" />
           </div>
-          <div>
+          <div  className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Submit your Draft</h2>
             <p>
               Begin your process by sending us your preliminary rent agreement
@@ -32,7 +32,7 @@ const RentAgreement = () => {
               alt="Review & Custmization"
             />
           </div>
-          <div>
+          <div  className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">
               Review & Customization
             </h2>
@@ -46,7 +46,7 @@ const RentAgreement = () => {
           <div className="RentAgreement__icon">
             <img src="./img/Stamp&Validate.svg" alt="Stamp & Validate" />
           </div>
-          <div>
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Stamp & Validate</h2>
             <p>
               We stamp your finalized documents using traditional or e-stamping
@@ -61,7 +61,7 @@ const RentAgreement = () => {
               alt="Delivery At Your Door step.svg"
             />
           </div>
-          <div>
+          <div  className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">
               Delivery at your Doorstep
             </h2>

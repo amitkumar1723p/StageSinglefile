@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useImperativeHandle, forwardRef, useState  } from "react";
 
 export default function AreaDetailsSection({
   AreaDetailsData,
   setAreaDetailsData,
   BasicDetailsData,
   AlertObj,
+  Error,
 }) {
   useEffect(() => {
     if (
@@ -45,6 +46,17 @@ export default function AreaDetailsSection({
       }, 0);
     }
   }, [BasicDetailsData.ApartmentType]);
+
+
+//  const [amit ,setamit ] =useState(false)
+
+//   const HandleAreaDerailsAlert=()=>{
+//     if(!AreaDetailsData.PlotSize){
+//       setamit(true)
+//     }
+//   }
+
+
   return (
     <>
       <p className="step-section-heading-p">
@@ -56,9 +68,12 @@ export default function AreaDetailsSection({
       {BasicDetailsData.ApartmentType === "Plot/Land" && (
         <>
           <div className="form-group">
+          {/* <p> {Error.PlotSize && "Plot Area Error"}</p> */}
             <label htmlFor="plotSize">Plot Size*</label>
-            <div className="unit-input">
+             
+            <div className={`unit-input  ${Error.PlotSize? 'inputShake shake' : ''}`}>
               <input
+              
                 type="text"
                 id="plotSize"
                 name="plotSize"
@@ -88,10 +103,12 @@ export default function AreaDetailsSection({
               />
             </div>
           </div>
-          <div className="form-group">
+          <div className="form-group ">
+           
+          {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
             <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
-
             <input
+            className={`${Error.PlotDimensions? 'inputShake shake' : ''}`}
               id="plot-dimensions"
               required
               value={AreaDetailsData.PlotDimensions?.trimStart() || ""}
@@ -112,8 +129,9 @@ export default function AreaDetailsSection({
 
           <div className="form-group">
             <label htmlFor="plotArea">Plot Area*</label>
-            <div className="unit-input">
+            <div className={`unit-input ${Error.PlotArea? "inputShake shake":''}`}>
               <input
+             
                 type="text"
                 id="plotArea"
                 name="plotArea"
@@ -159,8 +177,10 @@ export default function AreaDetailsSection({
           {/* Super Built Up Area* */}
           <div className="form-group">
             <label htmlFor="super-built-up-area"> Super Built Up Area* </label>
-            <div className="unit-input">
+            <div className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
+               
+
                 type="text"
                 id="super-built-up-area"
                 placeholder="Built Up Area"
@@ -194,7 +214,7 @@ export default function AreaDetailsSection({
           {/* Built Up Area */}
           <div className="form-group">
             <label htmlFor="built-up-area">Built Up Area</label>
-            <div className="unit-input">
+            <div  className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                 type="text"
                 id="built-up-area"
@@ -233,7 +253,7 @@ export default function AreaDetailsSection({
           {/* Carpet Area  */}
           <div className="form-group">
             <label htmlFor="carpetArea">Carpet Area</label>
-            <div className="unit-input">
+            <div className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                 type="text"
                 id="carpetArea"

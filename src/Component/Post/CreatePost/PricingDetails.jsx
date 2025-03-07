@@ -273,6 +273,47 @@ export default function PricingDetails({
 
     return "";
   }, []);
+
+  // Alert
+  const [priceAlert,setPriceAlert]= useState(false);
+  const [expectedRentAlert,setExpectedRentAlert]= useState(false);
+  const [depositeAlert, setDepositeAlert] = useState(false);
+  const  HandlePricingAlert =()=>{
+    
+
+
+   
+
+     if(BasicDetailsData.PropertyAdType === "Rent"){
+      if(PricingDetailsData.ExpectedRent =="" || PricingDetailsData.ExpectedRent == undefined){
+        console.log("Console.log");
+        setExpectedRentAlert(true);
+        setTimeout(()=>setExpectedRentAlert(false),1500)
+        return;
+         }
+  
+     }else{
+
+      if(!PricingDetailsData.ExpectedPrice){
+        setPriceAlert(true);
+        setTimeout(()=>setPriceAlert(false),1500)
+        return;
+         }
+     }
+  
+ 
+     if(!PricingDetailsData.DepositePrice){
+      
+      setDepositeAlert(true);
+      setTimeout(()=>setDepositeAlert(false),1500)
+      return;
+     }
+
+
+  
+  } 
+
+
   return (
     <>
       <ScrollToTop />
@@ -297,6 +338,7 @@ export default function PricingDetails({
                 <div className="form-group">
                   <label htmlFor="expected-price"> Expected Price*</label>
                   <input
+                  className={`${priceAlert? 'inputShake shake':''}`}
                     type="text"
                     id="expected-price"
                     placeholder="Expected Price ₹"
@@ -387,11 +429,12 @@ export default function PricingDetails({
                 <div className="form-group">
                   <label htmlFor="expected-rent"> Expected Rent* </label>
                   <input
+                   className={`${expectedRentAlert? 'inputShake shake':''}`}
                     type="text"
                     id="expected-rent"
                     placeholder="Expected Price"
                     required
-                    value={PricingDetailsData.ExpectedRent || ""}
+                    value={PricingDetailsData.ExpectedRent || ''}
                     onChange={(e) => {
                       const numericValue = String(e.target.value).replace(
                         /[^0-9]/g,
@@ -426,6 +469,7 @@ export default function PricingDetails({
                 <div className="form-group">
                   <label htmlFor="deposite-price"> Deposite Price*</label>
                   <input
+                   className={`${depositeAlert? 'inputShake shake':''}`}
                     type="text"
                     id="price"
                     placeholder="deposite-price"
@@ -735,7 +779,7 @@ export default function PricingDetails({
                 </div>{" "}
               </>
 
-              <button type="Submit-next"> Next</button>
+              <button onClick={HandlePricingAlert} type="Submit-next"> Next</button>
             </div>
           </form>
         </div>

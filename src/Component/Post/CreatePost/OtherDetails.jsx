@@ -1,6 +1,10 @@
+import { useEffect } from "react";
+
 export default function OtherDetails({
   OtherDetailsData,
   setOtherDetailsData,
+  Error,
+  filederror ,
   // eslint-disable-next-line
   BasicDetailsData,
 }) {
@@ -49,13 +53,14 @@ export default function OtherDetails({
     "Main Road",
     "Others",
   ];
-
+  
   return (
     <>
       <p className="Property-Details-heading"> Other Details </p>
       <div className="form-group">
         <label htmlFor="constructor-allowed"> Construction Allowed*</label>
         <input
+         className={` ${Error.ConstructionAllowed? 'inputShake shake' : ''}`}
           type="text"
           id="constructor-allowed"
           placeholder="eg., 3 Floors"
@@ -74,7 +79,7 @@ export default function OtherDetails({
 
       <div className="fom-group">
         <p className="label">Plot Direction *</p>
-
+ {/* <small>{ filederror && "field error"}</small> */}
         <div className="tab-box">
           {PropertyfacingArray.map((text, i) => {
             return (
@@ -82,7 +87,7 @@ export default function OtherDetails({
                 key={i}
                 className={`tab ${
                   OtherDetailsData.PlotDirection === text ? "select" : ""
-                }`}
+                }  ${Error.PlotDirection? 'inputShake shake' : ''} `}
                 onClick={() => {
                   setOtherDetailsData({
                     ...OtherDetailsData,
@@ -117,7 +122,7 @@ export default function OtherDetails({
                 key={i}
                 className={`tab ${
                   OtherDetailsData.PlotFacing === text ? "select" : ""
-                }`}
+                }  ${Error.PlotFacing? 'inputShake shake' : ''}`}
                 onClick={() => {
                   setOtherDetailsData({
                     ...OtherDetailsData,
@@ -149,10 +154,11 @@ export default function OtherDetails({
           Width of Front Road* only in mt
         </label>
         <input
+        className={` ${Error.FrontRoadWidth? 'inputShake shake' : ''}`}
           type="text"
           id="front-road-width"
           placeholder="eg., 3 Floors"
-          required
+          // required
           value={OtherDetailsData.FrontRoadWidth || ""}
           onChange={(e) => {
             setOtherDetailsData({

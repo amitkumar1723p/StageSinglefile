@@ -4,6 +4,7 @@ export default function FloorDetails({
   FloorDetailsData,
   setFloorDetailsData,
   BasicDetailsData,
+  Error
 }) {
   const [floorCount, setFloorCount] = useState([]);
 
@@ -67,12 +68,14 @@ export default function FloorDetails({
       <p className="Property-Details-heading">Floor Details</p>
       <div className="form-row">
         <div className="form-group">
+          
           <label htmlFor="total-floors">Total Floors*</label>
           <input
+          className={` ${Error.TotalFloors? 'inputShake shake' : ''}`}
             type="text"
             id="total-floors"
-            placeholder="Total Floors"
             required
+            placeholder="Total Floors"
             value={FloorDetailsData.TotalFloors || ""}
             onChange={(e) => {
               const regex = /^[1-9][0-9]*$/;
@@ -88,6 +91,7 @@ export default function FloorDetails({
               }
             }}
           />
+         
         </div>
 
         {[
@@ -101,7 +105,7 @@ export default function FloorDetails({
           <div className="form-group">
             <label htmlFor="floor">Property on Floor*</label>
             <select
-              className="date-time-lable"
+              className={`date-time-lable ${Error.PropertyOnFloor? 'inputShake shake' : ''}`}
               id="floor"
               required
               value={FloorDetailsData.PropertyOnFloor || ""}
@@ -144,7 +148,7 @@ export default function FloorDetails({
                 key={i}
                 className={`tab ${
                   FloorDetailsData.PropertyDirection === text ? "select" : ""
-                }`}
+                } ${Error.PropertyDirection? 'inputShake shake' : ''} `}
                 onClick={() => {
                   setFloorDetailsData({
                     ...FloorDetailsData,
@@ -208,7 +212,7 @@ export default function FloorDetails({
                   FloorDetailsData.OverLookingView?.includes(text)
                     ? "select"
                     : ""
-                }
+                } ${Error.OverLookingView? 'inputShake shake' : ''}
       `}
                 onClick={() => {
                   if (!FloorDetailsData.OverLookingView?.includes(text)) {

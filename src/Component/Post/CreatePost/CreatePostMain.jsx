@@ -88,6 +88,11 @@ export default function CreatePostMain() {
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
+  
+
+  // userstates for alert  shake
+    const [propertyTypeShake, setPropertyTypeShake] = useState(false);
+
 
   const BasicDetailsFormSubmit = () => {
     if (!BasicDetailsData.PropertyType) {
@@ -174,7 +179,7 @@ export default function CreatePostMain() {
       BasicDetailsData.ApartmentType === "Plot/Land" &&
       !BasicDetailsData.CurrentPropertyStatus
     ) {
-      return alert("Current Possession Status is Required");
+      return alert("Current Property Status is Required");
     }
     if (
       BasicDetailsData.ApartmentType === "Plot/Land" &&

@@ -1,0 +1,59 @@
+.blog-insights-container{
+    width: 100%;
+    height: 300px;
+    margin-bottom: 30px;
+    background-color: rgba(0, 145, 255, 0.623);
+    background-image: url('/public/img/blog-insights-background-image.svg');
+    /* background-repeat:repeat-x; */
+}
+
+.blog-insights-container img{
+ 
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+
+}
+
+.blog-insights-background-color{
+    background-color: rgba(0, 128, 255, 0.598);
+    height: 100%;
+    margin: 0 auto;
+
+
+}
+
+.blog-insights-headings{
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.blog-insights-headings h1{
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+}
+.blog-insights-headings p{
+    font-size: 24px;
+    font-weight: 400;
+    color: white;
+}
+@media(max-width:768px){
+    .blog-insights-headings{
+        width: 90%;
+    }
+    .blog-insights-headings p{
+        font-size: 15px;
+
+    }
+    .blog-insights-headings h1{
+        font-size: 24px;
+    }
+}

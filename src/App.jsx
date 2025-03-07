@@ -45,6 +45,8 @@ import { UserContext } from "./Component/CreateContext/CreateContext";
 import OurService from "./Component/Home/OurService";
 import ReportPage from "./Component/Home/ReportPage";
 import TermsAndConditions from "./Component/Home/TermsAndConditions";
+import BlogPage from "./Component/Home/BlogContent/BlogPage";
+import SingleBlog from "./Component/Home/BlogContent/Components/SingleBlog";
 import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
 import ProfileUpdate from "./Component/User/Profile/ProfileUpdate";
@@ -196,7 +198,9 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-      // if (data.success === true && ["CreatePostRequest"].includes(LodingType)) { }
+      // if (
+      //   data.success === true && ["CreatePostRequest"].includes(LodingType)
+      // ) {
 
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
@@ -245,7 +249,7 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
         setalertShow(true);
         dispatch({ type: "UserClear" });
       }
-   
+    
     // eslint-disable-next-line
 }}, [data]);
 
@@ -787,6 +791,16 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
           exact
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
+        />
+         <Route
+          exact
+          path="/blog-page"
+          element={<BlogPage />}
+        />
+        <Route
+          exact
+          path="/blog-page/:title"
+          element={<SingleBlog />}
         />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
         {/* protect route for user */}
