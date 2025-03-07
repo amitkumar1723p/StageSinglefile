@@ -18,6 +18,7 @@ export default function CreatePostMain() {
   const dispatch = useDispatch();
   const Params = useParams();
   const location = useLocation();
+ 
 
   const update = location.pathname.includes("update");
   const navigate = useNavigate();
@@ -225,7 +226,7 @@ export default function CreatePostMain() {
       if (getSinglePostData) {
         if (getSinglePostData.success === true) {
           const { SinglePost } = getSinglePostData;
-          
+
           const {
             BasicDetails,
             LocationDetails,
@@ -355,7 +356,7 @@ export default function CreatePostMain() {
       // delete BasicDetailsData_Rest.CurrentPropertyStatus;
       // delete BasicDetailsData_Rest.PossessionStatus;
       setBasicDetailsData(BasicDetailsData_Rest);
-      
+
       //  if(A)
       if (sessionStorage.getItem("BasicDetailsData")) {
         StoreDataInSession("BasicDetailsData", BasicDetailsData_Rest);
@@ -480,7 +481,9 @@ export default function CreatePostMain() {
           AreaDetailsData;
 
         if (
-          ["Independent House/Villa"].includes(BasicDetailsData.ApartmentType)
+          ["Independent House/Villa", "Independent/Builder Floor"].includes(
+            BasicDetailsData.ApartmentType
+          )
         ) {
           // Floor Details Sort
           const { PropertyOnFloor, ...FloorDetailsData_Rest } =
@@ -493,7 +496,6 @@ export default function CreatePostMain() {
         } else if (
           [
             "Apartment",
-            "Independent/Builder Floor",
             // "1 RK/Studio Apartment",
             "Studio Apartment",
             "1 RK/PG",
@@ -502,6 +504,8 @@ export default function CreatePostMain() {
         ) {
           delete AreaDetailsData_Rest.PlotArea;
         }
+
+        // Remove Basement Filed
 
         setAreaDetailsData(AreaDetailsData_Rest);
         if (sessionStorage.getItem("AreaDetailsData")) {
@@ -523,6 +527,9 @@ export default function CreatePostMain() {
           ...AmenitiesDetailsData_Rest
         } = AmenitiesDetailsData;
 
+        if (BasicDetailsData.PropertyStatus == "Under Construction") {
+          delete AmenitiesDetailsData_Rest.WaterSource;
+        }
         setAmenitiesDetailsData(AmenitiesDetailsData_Rest);
         if (sessionStorage.getItem("AmenitiesDetailsData")) {
           StoreDataInSession("AmenitiesDetailsData", AmenitiesDetailsData_Rest);
@@ -547,6 +554,22 @@ export default function CreatePostMain() {
       if (sessionStorage.getItem("PricingDetailsData")) {
         StoreDataInSession("PricingDetailsData", PricingDetailsData_Rest);
       }
+    }
+    //  Remove Basement
+    if (
+      [
+        "Apartment",
+        "Independent House/Villa",
+        "Plot/Land",
+        "Studio Apartment",
+        "1 RK/PG",
+        "Serviced Apartment",
+      ].includes(BasicDetailsData.ApartmentType)
+    ) {
+      const { Basement, BasementArea, ...PropertyDetailsData_Rest } =
+        PropertyDetailsData; // Destructure to remove PropertyStatus
+
+      setPropertyDetailsData(PropertyDetailsData_Rest);
     }
 
     // eslint-disable-next-line
@@ -728,7 +751,12 @@ export default function CreatePostMain() {
                         Progress
                       </span>
                     ) : next + 1 >= 1 ? (
-                      <span className="text-primary fw-normal  d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal  d-flex justify-content-center cursor-pointer"
+                        onClick={() => {
+                          setnext(0);
+                        }}
+                      >
                         Edit
                       </span>
                     ) : (
@@ -785,7 +813,12 @@ export default function CreatePostMain() {
                         Progress
                       </span>
                     ) : next + 1 >= 2 ? (
-                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                        onClick={() => {
+                          BasicDetailsFormSubmit();
+                        }}
+                      >
                         Edit{" "}
                       </span>
                     ) : (
@@ -877,7 +910,17 @@ export default function CreatePostMain() {
                           Progress
                         </span>
                       ) : next + 1 >= 3 ? (
-                        <span className="text-primary fw-normal   d-flex justify-content-center ">
+                        <span
+                          className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit(); // ✅ This triggers validation
+                            }, 0);
+                          }}
+                        >
                           Edit
                         </span>
                       ) : (
@@ -915,8 +958,8 @@ export default function CreatePostMain() {
                           LocationDetailsSubmiRef?.current?.requestSubmit();
                           setTimeout(() => {
                             ApartmentFeaturesRef?.current?.requestSubmit();
-                          }, 0);
-                        }, 0);
+                          }, 100);
+                        }, 50);
                       }}
                     >
                       &#10003;
@@ -927,14 +970,14 @@ export default function CreatePostMain() {
                         <span
                           className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
                           onClick={(e) => {
-                            e.preventDefault();
+                            // e.preventDefault();
                             BasicDetailsFormSubmit(e);
                             setTimeout(() => {
                               LocationDetailsSubmiRef?.current?.requestSubmit();
                               setTimeout(() => {
                                 ApartmentFeaturesRef?.current?.requestSubmit();
-                              }, 0);
-                            }, 0);
+                              }, 100);
+                            }, 50);
                           }}
                         >
                           &#10003; {/* This is the checkmark (tick) symbol */}
@@ -960,7 +1003,19 @@ export default function CreatePostMain() {
                           Progress
                         </span>
                       ) : next + 1 >= 4 ? (
-                        <span className="text-primary fw-normal   d-flex justify-content-center">
+                        <span
+                          className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                ApartmentFeaturesRef?.current?.requestSubmit();
+                              }, 100);
+                            }, 50);
+                          }}
+                        >
                           Edit
                         </span>
                       ) : (
@@ -992,7 +1047,7 @@ export default function CreatePostMain() {
                   <span
                     className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
                     onClick={(e) => {
-                      e.preventDefault();
+                      // e.preventDefault();
                       BasicDetailsFormSubmit(e);
                       setTimeout(() => {
                         LocationDetailsSubmiRef?.current?.requestSubmit();
@@ -1000,9 +1055,9 @@ export default function CreatePostMain() {
                           ApartmentFeaturesRef?.current?.requestSubmit();
                           setTimeout(() => {
                             PricingDetailsRef?.current?.requestSubmit();
-                          }, 0);
-                        }, 0);
-                      }, 0);
+                          }, 150);
+                        }, 100);
+                      }, 50);
                     }}
                   >
                     &#10003;
@@ -1015,6 +1070,8 @@ export default function CreatePostMain() {
                         // onClick={() => setnext(4)}
 
                         onClick={(e) => {
+
+                          
                           e.preventDefault();
                           BasicDetailsFormSubmit(e);
                           setTimeout(() => {
@@ -1023,9 +1080,9 @@ export default function CreatePostMain() {
                               ApartmentFeaturesRef?.current?.requestSubmit();
                               setTimeout(() => {
                                 PricingDetailsRef?.current?.requestSubmit();
-                              }, 0);
-                            }, 0);
-                          }, 0);
+                              }, 150);
+                            }, 100);
+                          }, 50);
                         }}
                       >
                         &#10003; {/* This is the checkmark (tick) symbol */}
@@ -1051,7 +1108,22 @@ export default function CreatePostMain() {
                         Progress
                       </span>
                     ) : next + 1 >= 5 ? (
-                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal   d-flex justify-content-center"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          BasicDetailsFormSubmit(e);
+                          setTimeout(() => {
+                            LocationDetailsSubmiRef?.current?.requestSubmit();
+                            setTimeout(() => {
+                              ApartmentFeaturesRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                PricingDetailsRef?.current?.requestSubmit();
+                              }, 150);
+                            }, 100);
+                          }, 50);
+                        }}
+                      >
                         Edit
                       </span>
                     ) : (
@@ -1082,6 +1154,7 @@ export default function CreatePostMain() {
               // setBasicDetailsSubmit ={setBasicDetailsSubmit}
               BasicDetailsFormSubmit={BasicDetailsFormSubmit}
               // BasicDetailsFormRef={BasicDetailsFormRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 1 && (
@@ -1091,6 +1164,7 @@ export default function CreatePostMain() {
               setnext={setnext}
               update={update}
               LocationDetailsSubmiRef={LocationDetailsSubmiRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 2 && (
@@ -1110,6 +1184,7 @@ export default function CreatePostMain() {
               FloorDetailsData={FloorDetailsData}
               setFloorDetailsData={setFloorDetailsData}
               ApartmentFeaturesRef={ApartmentFeaturesRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 3 && (
@@ -1124,6 +1199,7 @@ export default function CreatePostMain() {
               setPricingDetailsData={setPricingDetailsData}
               next={next}
               PricingDetailsRef={PricingDetailsRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 4 && (

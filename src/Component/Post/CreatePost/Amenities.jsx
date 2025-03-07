@@ -55,6 +55,9 @@ export default function Amenities({
     "Security Guard",
   ];
 
+  {
+    console.log(AmenitiesDetailsData);
+  }
   useEffect(() => {
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
       setTimeout(() => {
@@ -78,15 +81,24 @@ export default function Amenities({
                 Fans: prevData.FurnishingOption?.Fans || 0,
                 Geyser: prevData.FurnishingOption?.Geyser || 0,
                 AC: prevData.FurnishingOption?.AC || 0,
-                TV: prevData.FurnishingOption?.TV || 0,
-                Beds: prevData.FurnishingOption?.Beds || 0,
+                TV:
+                  AmenitiesDetailsData.Furnishing == "Furnished"
+                    ? prevData.FurnishingOption?.TV || 0
+                    : undefined,
+                Beds:
+                  AmenitiesDetailsData.Furnishing == "Furnished"
+                    ? prevData.FurnishingOption?.Beds || 0
+                    : undefined,
                 Wardrobe: prevData.FurnishingOption?.Wardrobe || 0,
               }
             : AmenitiesDetailsData.Furnishing === "Un-Furnished" && update
             ? AmenitiesDetailsData.FurnishingOption
             : {},
           SocietyAndBuildingFeature: prevData.SocietyAndBuildingFeature || [],
-          WaterSource: prevData.WaterSource || [],
+          WaterSource:
+            BasicDetailsData.PropertyStatus != "Under Construction"
+              ? prevData.WaterSource || []
+              : undefined,
         }));
       }, 0);
     }
@@ -156,7 +168,7 @@ export default function Amenities({
                   {/* ModularKitchen */}
 
                   <div className="field-group">
-                    <label htmlFor="light">Modular Kitchen</label>
+                    <label htmlFor="modular-kitchen">Modular Kitchen</label>
                     <div className="row">
                       {YesNoArray.map((text, i) => {
                         return (
@@ -225,7 +237,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -275,7 +287,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -328,7 +340,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -377,7 +389,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -393,101 +405,115 @@ export default function Amenities({
                     </div>
                   </div>
 
-                  {/* TV */}
-
-                  <div className="field-group">
-                    <label htmlFor="tv">TV*</label>
-                    <div className="counter">
-                      <div
-                        className="decrement button"
-                        onClick={() => {
-                          if (AmenitiesDetailsData.FurnishingOption?.TV > 0) {
-                            setAmenitiesDetailsData({
-                              ...AmenitiesDetailsData,
-                              FurnishingOption: {
-                                ...AmenitiesDetailsData.FurnishingOption,
-                                TV:
-                                  AmenitiesDetailsData.FurnishingOption?.TV - 1,
-                              },
-                            });
-                          }
-                        }}
-                      >
-                        -
+                  {AmenitiesDetailsData.Furnishing == "Furnished" && (
+                    <>
+                      {" "}
+                      {/* TV */}
+                      <div className="field-group">
+                        <label htmlFor="tv">TV*</label>
+                        <div className="counter">
+                          <div
+                            className="decrement button"
+                            onClick={() => {
+                              if (
+                                AmenitiesDetailsData.FurnishingOption?.TV > 0
+                              ) {
+                                setAmenitiesDetailsData({
+                                  ...AmenitiesDetailsData,
+                                  FurnishingOption: {
+                                    ...AmenitiesDetailsData.FurnishingOption,
+                                    TV:
+                                      AmenitiesDetailsData.FurnishingOption
+                                        ?.TV - 1,
+                                  },
+                                });
+                              }
+                            }}
+                          >
+                            -
+                          </div>
+                          <input
+                            type="number"
+                            id="tv"
+                            name="tv"
+                            min="0"
+                            value={
+                              AmenitiesDetailsData.FurnishingOption?.TV || 0
+                            }
+                            readOnly
+                          />
+                          <div
+                            className="increment button not-select-text"
+                            onClick={() => {
+                              setAmenitiesDetailsData({
+                                ...AmenitiesDetailsData,
+                                FurnishingOption: {
+                                  ...AmenitiesDetailsData.FurnishingOption,
+                                  TV:
+                                    AmenitiesDetailsData.FurnishingOption?.TV +
+                                    1,
+                                },
+                              });
+                            }}
+                          >
+                            +
+                          </div>
+                        </div>
                       </div>
-                      <input
-                        type="number"
-                        id="tv"
-                        name="tv"
-                        min="0"
-                        value={AmenitiesDetailsData.FurnishingOption?.TV || 0}
-                        readOnly
-                      />
-                      <div
-                        className="increment button"
-                        onClick={() => {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-                            FurnishingOption: {
-                              ...AmenitiesDetailsData.FurnishingOption,
-                              TV: AmenitiesDetailsData.FurnishingOption?.TV + 1,
-                            },
-                          });
-                        }}
-                      >
-                        +
+                      {/* Beds */}
+                      <div className="field-group">
+                        <label htmlFor="beds">Beds*</label>
+                        <div className="counter">
+                          <div
+                            className="decrement button"
+                            onClick={() => {
+                              if (
+                                AmenitiesDetailsData.FurnishingOption?.Beds > 0
+                              ) {
+                                setAmenitiesDetailsData({
+                                  ...AmenitiesDetailsData,
+                                  FurnishingOption: {
+                                    ...AmenitiesDetailsData.FurnishingOption,
+                                    Beds:
+                                      AmenitiesDetailsData.FurnishingOption
+                                        ?.Beds - 1,
+                                  },
+                                });
+                              }
+                            }}
+                          >
+                            -
+                          </div>
+                          <input
+                            type="number"
+                            id="beds"
+                            name="beds"
+                            min="0"
+                            value={
+                              AmenitiesDetailsData.FurnishingOption?.Beds || 0
+                            }
+                            readOnly
+                          />
+                          <div
+                            className="increment button not-select-text"
+                            onClick={() => {
+                              setAmenitiesDetailsData({
+                                ...AmenitiesDetailsData,
+                                FurnishingOption: {
+                                  ...AmenitiesDetailsData.FurnishingOption,
+                                  Beds:
+                                    AmenitiesDetailsData.FurnishingOption
+                                      ?.Beds + 1,
+                                },
+                              });
+                            }}
+                          >
+                            +
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Beds */}
-
-                  <div className="field-group">
-                    <label htmlFor="beds">Beds*</label>
-                    <div className="counter">
-                      <div
-                        className="decrement button"
-                        onClick={() => {
-                          if (AmenitiesDetailsData.FurnishingOption?.Beds > 0) {
-                            setAmenitiesDetailsData({
-                              ...AmenitiesDetailsData,
-                              FurnishingOption: {
-                                ...AmenitiesDetailsData.FurnishingOption,
-                                Beds:
-                                  AmenitiesDetailsData.FurnishingOption?.Beds -
-                                  1,
-                              },
-                            });
-                          }
-                        }}
-                      >
-                        -
-                      </div>
-                      <input
-                        type="number"
-                        id="beds"
-                        name="beds"
-                        min="0"
-                        value={AmenitiesDetailsData.FurnishingOption?.Beds || 0}
-                        readOnly
-                      />
-                      <div
-                        className="increment button"
-                        onClick={() => {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-                            FurnishingOption: {
-                              ...AmenitiesDetailsData.FurnishingOption,
-                              Beds:
-                                AmenitiesDetailsData.FurnishingOption?.Beds + 1,
-                            },
-                          });
-                        }}
-                      >
-                        +
-                      </div>
-                    </div>
-                  </div>
+                    </>
+                  )}
 
                   {/* Wardrobe */}
 
@@ -525,7 +551,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -652,53 +678,57 @@ export default function Amenities({
       </div>
 
       {/* Water Source  */}
-
-      <div className="fom-group">
-        <p className="label"> Water Source *</p>
-        <div className="tab-box">
-          {WaterSourceArray.map((text, i) => {
-            return (
-              <div
-                key={i}
-                className={`tab ${
-                  AmenitiesDetailsData.WaterSource?.includes(text)
-                    ? "select"
-                    : ""
-                }
-                    `}
-                onClick={(event) => {
-                  if (!AmenitiesDetailsData.WaterSource?.includes(text)) {
-                    setAmenitiesDetailsData({
-                      ...AmenitiesDetailsData,
-                      WaterSource: [...AmenitiesDetailsData.WaterSource, text],
-                    });
-                  }
-                  if (AmenitiesDetailsData.WaterSource.includes(text)) {
-                    setAmenitiesDetailsData({
-                      ...AmenitiesDetailsData,
-                      WaterSource: AmenitiesDetailsData.WaterSource?.filter(
-                        (item) => {
-                          return item !== text;
-                        }
-                      ),
-                    });
-                  }
-                }}
-              >
-                {text}{" "}
-                <img
-                  alt=""
-                  src={
+      {BasicDetailsData.PropertyStatus != "Under Construction" && (
+        <div className="fom-group">
+          <p className="label"> Water Source *</p>
+          <div className="tab-box">
+            {WaterSourceArray.map((text, i) => {
+              return (
+                <div
+                  key={i}
+                  className={`tab ${
                     AmenitiesDetailsData.WaterSource?.includes(text)
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
+                      ? "select"
+                      : ""
                   }
-                />
-              </div>
-            );
-          })}
+               `}
+                  onClick={(event) => {
+                    if (!AmenitiesDetailsData.WaterSource?.includes(text)) {
+                      setAmenitiesDetailsData({
+                        ...AmenitiesDetailsData,
+                        WaterSource: [
+                          ...AmenitiesDetailsData.WaterSource,
+                          text,
+                        ],
+                      });
+                    }
+                    if (AmenitiesDetailsData.WaterSource.includes(text)) {
+                      setAmenitiesDetailsData({
+                        ...AmenitiesDetailsData,
+                        WaterSource: AmenitiesDetailsData.WaterSource?.filter(
+                          (item) => {
+                            return item !== text;
+                          }
+                        ),
+                      });
+                    }
+                  }}
+                >
+                  {text}{" "}
+                  <img
+                    alt=""
+                    src={
+                      AmenitiesDetailsData.WaterSource?.includes(text)
+                        ? "/img/white-tick.svg"
+                        : "/img/plus-create.svg"
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* plot and Land Fields  */}
 

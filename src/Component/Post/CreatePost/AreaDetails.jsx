@@ -10,8 +10,6 @@ export default function AreaDetailsSection({
     if (
       [
         "Apartment",
-        "Independent/Builder Floor",
-        // "1 RK/Studio Apartment",
         "Studio Apartment",
         "1 RK/PG",
         "Serviced Apartment",
@@ -26,7 +24,7 @@ export default function AreaDetailsSection({
         }));
       }, 0);
     }
-    if (["Independent House/Villa"].includes(BasicDetailsData.ApartmentType)) {
+    if (["Independent House/Villa" ,"Independent/Builder Floor"].includes(BasicDetailsData.ApartmentType)) {
       setTimeout(() => {
         setAreaDetailsData((prevData) => ({
           ...prevData,
@@ -108,7 +106,7 @@ export default function AreaDetailsSection({
         </>
       )}
 
-      {BasicDetailsData.ApartmentType == "Independent House/Villa" && (
+      { ["Independent House/Villa","Independent/Builder Floor"].includes(BasicDetailsData.ApartmentType) && (
         <>
           {/* plot area  */}
 
@@ -274,6 +272,8 @@ export default function AreaDetailsSection({
               </div>
             )}
           </div>
+
+           
         </>
       )}
     </>

@@ -424,7 +424,7 @@ export default function BasicDetailsSection({
                               readOnly
                             />
                             <div
-                              className="increment button"
+                              className="increment button not-select-text"
                               onClick={() => {
                                 setBasicDetailsData({
                                   ...BasicDetailsData,

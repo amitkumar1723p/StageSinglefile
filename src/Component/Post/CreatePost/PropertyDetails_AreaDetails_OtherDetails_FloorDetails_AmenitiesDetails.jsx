@@ -23,13 +23,13 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
   FloorDetailsData,
   setFloorDetailsData,
   ApartmentFeaturesRef,
+  CreatePostRef
 }) {
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
-    // "1 RK/Studio Apartment",
     "Studio Apartment",
-"1 RK/PG",
+    "1 RK/PG",
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
@@ -77,8 +77,9 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
     AreaDetailsData.SuperBuiltUpArea?.value,
   ]);
 
-  useEffect(() => {}, [BasicDetailsData.PropertyAdType]);
+  useEffect(() => { }, [BasicDetailsData.PropertyAdType]);
   const PostSubmitHandler = (e) => {
+    console.log("Apartmentfetaure");
     e.preventDefault();
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
       if (!OtherDetailsData.PlotDirection) {
@@ -139,7 +140,10 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       return alert(" PowerBackUp  Field is Required");
     }
 
-    if (AmenitiesDetailsData?.WaterSource?.length <= 0) {
+    if (
+      AmenitiesDetailsData?.WaterSource?.length <= 0 &&
+      BasicDetailsData.PropertyStatus != "Under Construction"
+    ) {
       return alert("WaterSource is Required");
     }
 
@@ -176,13 +180,14 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (
-              <div className="Prop-detials-box-form">
-                <PropertyDetailsSection
-                  PropertyDetailsData={PropertyDetailsData}
-                  setPropertyDetailsData={setPropertyDetailsData}
-                />
-              </div>
-            )}
+                <div className="Prop-detials-box-form">
+                  <PropertyDetailsSection
+                    PropertyDetailsData={PropertyDetailsData}
+                    setPropertyDetailsData={setPropertyDetailsData}
+                    BasicDetailsData={BasicDetailsData}
+                  />
+                </div>
+              )}
 
             <div className="Prop-detials-box-form-area">
               <AreaDetailsSection
@@ -196,14 +201,14 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (
-              <div className="Prop-detials-box-floor">
-                <FloorDetails
-                  FloorDetailsData={FloorDetailsData}
-                  setFloorDetailsData={setFloorDetailsData}
-                  BasicDetailsData={BasicDetailsData}
-                />
-              </div>
-            )}
+                <div className="Prop-detials-box-floor">
+                  <FloorDetails
+                    FloorDetailsData={FloorDetailsData}
+                    setFloorDetailsData={setFloorDetailsData}
+                    BasicDetailsData={BasicDetailsData}
+                  />
+                </div>
+              )}
 
             {BasicDetailsData.ApartmentType == "Plot/Land" && (
               <>
@@ -248,8 +253,14 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
               </>
 
               <button type="Submit-next"> Next</button>
+             
             </div>
+             
           </form>
+          {update && <button onClick={() => {
+              console.log(CreatePostRef)
+                CreatePostRef?.current?.requestSubmit()
+              }}>Update Post</button>}
         </div>
       </div>
     </>

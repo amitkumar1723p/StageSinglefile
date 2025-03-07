@@ -24,7 +24,8 @@ export default function LocationDetails({
       StoreDataInSession("next", 2);
       StoreDataInSession("LocationDetailsData", LocationDetailsData);
     }
-    setnext(2);
+      console.log("Locationdetails")
+      setnext(2);
   };
 
   return (

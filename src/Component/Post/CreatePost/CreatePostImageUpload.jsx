@@ -37,6 +37,8 @@ export default function CreatePostImageUpload({
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
+
+   
 }) {
   const dispatch = useDispatch();
 
@@ -59,7 +61,8 @@ export default function CreatePostImageUpload({
   
 
   useEffect(() => {
-    // Create a copy of the data to avoid mutating the original object
+      setTimeout(() => {
+           // Create a copy of the data to avoid mutating the original object
     const CopyObj = { ...PricingDetailsData };
 
     if (BasicDetailsData.PropertyAdType === "Rent") {
@@ -121,11 +124,13 @@ export default function CreatePostImageUpload({
     }
 
     // Log the modified object before setting it in state
-
+    
     // Set the new state
     setPricingDetailsData(CopyObj);
-  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
-
+      }, 0);
+ 
+  }, [BasicDetailsData ]); // Add dependency on BasicDetailsData
+ 
   // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
 
   const CratePostHandler = (e) => {
