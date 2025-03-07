@@ -103,7 +103,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               >
                 <option value="">Choose property type</option>
                 <option value="Appartment">Appartment</option>
-                <option value="BuilderFloor">Builder Floor</option>
+                <option value="Builder Floor">Builder Floor</option>
                 <option value="Plot">Plot/Land</option>
                 
               </select>
