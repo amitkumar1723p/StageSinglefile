@@ -8,12 +8,16 @@ const PostPropertyRequerment = ({ SetShow }) => {
   const dispatch = useDispatch();
   const [PostPropertyRequirementData, setPostPropertyRequirementData] =
     useState({
+      PropertyType:"",
       ProjectName: "",
       BHKType: "",
       Budget: "",
       FloorPreference: "",
+      plotSize:""
     });
   const [unit, setUnit] = useState("Cr");
+  const [plotUnit, setplotUnit] = useState("Sqft");
+
   const [status, setStatus] = useState(""); // Possession Status
   const { loading, data, LodingType } = useSelector((state) => state.userData);
 
@@ -25,6 +29,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           BHKType: "",
           Budget: "",
           FloorPreference: "",
+          PlotSize:""
         });
         setUnit("Cr");
         setStatus("");
@@ -36,11 +41,34 @@ const PostPropertyRequerment = ({ SetShow }) => {
   const CreateQuerryFormHandler = (e) => {
     e.preventDefault();
     // Merge unit and PossessionStatus into the submission data
-    const dataToSubmit = {
+
+    if( PostPropertyRequirementData.PropertyType !=="Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.ProjectName ||!PostPropertyRequirementData.BHKType||!PostPropertyRequirementData.FloorPreference||!PostPropertyRequirementData.Budget)){
+      alert("please fill all data")
+      return ;
+    }
+    if( PostPropertyRequirementData.PropertyType ==="Plot" && (!PostPropertyRequirementData.PropertyType ||!PostPropertyRequirementData.plotSize||!PostPropertyRequirementData.Budget)){
+      console.log(PostPropertyRequirementData)
+      alert("please fill all data")
+      return ;
+    }
+    let dataToSubmit ;
+    
+    if(PostPropertyRequirementData.plotSize!==""){
+      dataToSubmit={
       ...PostPropertyRequirementData,
       unit,
       PossessionStatus: status,
-    };
+    plotUnit
+    };}else{
+      dataToSubmit={
+        ...PostPropertyRequirementData,
+        unit,
+        PossessionStatus: status,
+    
+      };
+    }
+    
+
     dispatch(PostPropertyRequirementAction(dataToSubmit));
   };
 
@@ -60,6 +88,26 @@ const PostPropertyRequerment = ({ SetShow }) => {
           onSubmit={CreateQuerryFormHandler}
         >
           <div className="property-form-details-top">
+          <div className="form-group form-bhk">
+              <p className="postreq-form " >Property type</p>
+              <select
+                className="form-input"
+                required
+                value={PostPropertyRequirementData.PropertyType.trimStart()}
+                onChange={(e) =>
+                  setPostPropertyRequirementData({
+                    ...PostPropertyRequirementData,
+                    PropertyType: e.target.value,
+                  })
+                }
+              >
+                <option value="">Choose property type</option>
+                <option value="Appartment">Appartment</option>
+                <option value="BuilderFloor">Builder Floor</option>
+                <option value="Plot">Plot/Land</option>
+                
+              </select>
+            </div>
             <div className="form-group">
               <p className="postreq-form ">Locality</p>
               <ProjectNameSection
@@ -70,6 +118,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               />
             </div>
 
+           {PostPropertyRequirementData.PropertyType !== "Plot" && <>
             <div className="form-group form-bhk">
               <p className="postreq-form " >BHK Type</p>
               <select
@@ -110,6 +159,11 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 <option value="high">High Floor</option>
               </select>
             </div>
+           </>  
+
+           }
+           
+     
           </div>
 
           <div className="property-form-details-bottom">
@@ -148,7 +202,9 @@ const PostPropertyRequerment = ({ SetShow }) => {
               </div>
             </div>
 
-            <div className="possession-status">
+          {
+            PostPropertyRequirementData.PropertyType !=="Plot" && 
+              <div className="possession-status">
               <p className="possession-status-title">Possession Status</p>
               <div className="radio-group">
                 <label>
@@ -173,6 +229,37 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 </label>
               </div>
             </div>
+          }
+             {PostPropertyRequirementData.PropertyType==="Plot" && 
+             <div className="form-group form-budget">
+             <div className="budget-container">
+               <p className="postreq-form ">Plot size</p>
+               <input
+                 required
+                 value={PostPropertyRequirementData.plotSize}
+                 onChange={(e) => {
+                   // Allow numbers and one decimal point only
+                   let value = e.target.value;
+               console.log(value)
+                   setPostPropertyRequirementData({
+                     ...PostPropertyRequirementData,
+                     plotSize: value,
+                   });
+                 }}
+                 type="text"
+                 placeholder="Enter your Budget"
+                 className="form-input"
+               />
+             </div>
+
+             <div className="form-budget-option">
+               <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
+                 <option value="Sqft">Sqft</option>
+                 <option value="Sqrd">Sq.yrd</option>
+               </select>
+             </div>
+           </div>
+        }
 
             <div className="form-group">
               <button

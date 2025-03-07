@@ -79,6 +79,15 @@ export default function MyVisits() {
             })}
           </tbody>
         </table>
+        {MyVisitsData.ScheduleVisits.length==0 &&
+           <> <div class="user-all-noreponse-container">
+           <img src="/img/User-all-response.png" alt="No Response Yet" class="user-all-noreponse-img" />
+           <h2 class="user-all-noreponse-title">No Response Yet – Looks Like There’s Nothing to Review</h2>
+           <p class="user-all-noreponse-text">
+               No activity detected. As soon as responses come in, they’ll show up on this screen.
+           </p>
+       </div></>
+        }
       </div>
     )
   );

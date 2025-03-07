@@ -32,24 +32,29 @@ export default function AdminListingCard({
     ExpiredDate: "",
   });
 
-  
+
   const navigate = useNavigate();
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
-      return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
+      const value = Math.floor(price / 100000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} Cr`;
     } else if (price >= 100000) {
-      return `₹ ${(Math.floor(price / 1000) / 100).toFixed(2)} L`;
+      const value = Math.floor(price / 1000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} L`;
     } else if (price >= 1000) {
-      return `₹ ${(Math.floor(price / 10) / 100).toFixed(2)} K`;
+      const value = Math.floor(price / 10) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} K`;
     } else {
       return `₹ ${price.toFixed(2)}`;
     }
   };
+  
 
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
+
   useEffect(() => {
     let dateString = PostData?.PostVerifyData?.Time;
     if (!dateString) {
@@ -60,20 +65,21 @@ export default function AdminListingCard({
     } else {
       const date = new Date(dateString);
       const After90Days = new Date(date.getTime() + 90 * 24 * 60 * 60 * 1000);
-      let activedate = date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-      let postExpireddate = After90Days.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-
+  
+      // Define month names (abbreviated)
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  
+      // Format Active Date as DD-Month-YY
+      let activedate = `${("0" + date.getDate()).slice(-2)}-${monthNames[date.getMonth()]}-${date.getFullYear().toString().slice(-2)}`;
+  
+      // Format Expired Date as DD-Month-YY (90 days after)
+      let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${monthNames[After90Days.getMonth()]}-${After90Days.getFullYear().toString().slice(-2)}`;
+  
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
   }, [PostData?.PostVerifyData?.Time]);
+  
+
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -83,7 +89,7 @@ export default function AdminListingCard({
   const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
-      `${PostData?.PropertyDetails?.BHKType? `${PostData?.PropertyDetails?.BHKType} BHk`:""}  ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails?.City}`
+      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHk` : ""}  ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -109,7 +115,7 @@ export default function AdminListingCard({
   }, [PostData?.PostVerifyShow]);
 
   useEffect(() => {
-     
+
     if (AssignPostData?.success == true) {
       let AssingPosts = AssignPostData?.AssignProperty?.filter((item) => {
         return (
@@ -160,12 +166,12 @@ export default function AdminListingCard({
                     <input
                       type="checkbox"
                       checked={isChecked(index)}
-                      // checked={
-                      //   selectAllProperty ||
-                      //   AssignProperty.some(
-                      //     (item) => item.PostId === PostData?._id
-                      //   )
-                      // }
+                    // checked={
+                    //   selectAllProperty ||
+                    //   AssignProperty.some(
+                    //     (item) => item.PostId === PostData?._id
+                    //   )
+                    // }
                     />
                   </label>
                 </div>
@@ -211,7 +217,7 @@ export default function AdminListingCard({
               {PostData?.LocationDetails?.ProjectName}
               {medata?.user?.Role != "Agent" && (
                 <>
-              
+
                   <div className="edit-del-section">
                     {/* {AssignProperty && ( */}
                     <div className="asign-user">
@@ -232,7 +238,7 @@ export default function AdminListingCard({
                                       AdminId: AssignPropertys.AdminId._id,
                                       PostId: PostData?._id,
                                     };
-  
+
                                     let confrim = window.confirm(
                                       "Are You Sure About This"
                                     );
@@ -245,7 +251,7 @@ export default function AdminListingCard({
                                     }
                                   }
 
-                                  
+
                                 }}
                               >
                                 {AssignPropertys.AdminId?.Name} - (
@@ -268,8 +274,8 @@ export default function AdminListingCard({
                             <>
                               <div>
                                 <button
-                                 className="px-1 py-2 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
-                                //  className="post-verify-btn"
+                                  className="px-1 py-2 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+                                  //  className="post-verify-btn"
                                   onClick={(e) => {
                                     let confirm = window.confirm(
                                       "Are you sure Restore This Post"
@@ -369,6 +375,7 @@ export default function AdminListingCard({
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
+                         <span className="rent-admin-section">Rent : </span> 
                             {formatReservePrice(
                               PostData?.PricingDetails?.ExpectedRent
                             )}
@@ -380,6 +387,7 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
+                    
                     {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>
@@ -415,7 +423,11 @@ export default function AdminListingCard({
                   <div className="poston-date">
                     <p className="admin-card-heading">Create on</p>
                     <p className="admin-card-heading-ans">
-                      {new Date(PostData?.createAt).toLocaleDateString("en-GB")}
+                      {new Date(PostData?.createAt).toLocaleDateString("en-GB", {
+                        day: '2-digit',
+                        month: 'short',
+                        year: '2-digit'
+                      })}
                     </p>
                   </div>
 
@@ -439,11 +451,10 @@ export default function AdminListingCard({
               <div className="response-section">
                 <p
                   // className={location.pathname.includes("schedule-visit"?"select":"")}
-                  className={`${
-                    location.pathname.includes("/admin/schedule-visit")
+                  className={`${location.pathname.includes("/admin/schedule-visit")
                       ? "active-btn"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
                     if (
                       medata?.user?.Role == "Owner" &&
@@ -465,11 +476,10 @@ export default function AdminListingCard({
                   )
                 </p>
                 <p
-                  className={`${
-                    location.pathname.includes("/admin/recive-offer")
+                  className={`${location.pathname.includes("/admin/recive-offer")
                       ? "active-btn"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
                     if (
                       medata?.user?.Role == "Owner" &&
@@ -505,15 +515,14 @@ export default function AdminListingCard({
 
               <div className="admin-btn-active-btn">
                 <Link
-                  to={`${
-                    medata?.user?.Role == "Owner" &&
-                    PostData?.PostDelete?.Status == "delete"
+                  to={`${medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
                       ? "/admin/deleted-post"
                       : "/post-detail"
-                  }/${PropertyAddress.toLowerCase()
-                    .replaceAll(" ", "-")
-                    .replace(",", "")
-                    .replaceAll("/", "-")}-${PostData?._id}`}
+                    }/${PropertyAddress.toLowerCase()
+                      .replaceAll(" ", "-")
+                      .replace(",", "")
+                      .replaceAll("/", "-")}-${PostData?._id}`}
                 >
                   <button className="contact-button btn-sm" >
                     View Listing

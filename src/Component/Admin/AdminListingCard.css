@@ -604,6 +604,15 @@
   font-size: 10px;
 }
 
+.rent-admin-section{
+  color: #333 !important;
+    font-size: 12px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
+    text-transform: capitalize !important; ; 
+}
+
 /* .profile-name-ans{
     padding: 5px 10px;
     border: 1px solid #BEBEBE;
