@@ -54,7 +54,6 @@ export default function AreaDetailsSection({
 
 //   const HandleAreaDerailsAlert=()=>{
 //     if(!AreaDetailsData.PlotSize){
-//       console.log("i am AM");
 //       setamit(true)
 //     }
 //   }
@@ -107,7 +106,7 @@ export default function AreaDetailsSection({
             </div>
           </div>
           <div className="form-group ">
-            {console.log(Error)}
+           
           {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
             <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
             <input
@@ -132,8 +131,9 @@ export default function AreaDetailsSection({
 
           <div className="form-group">
             <label htmlFor="plotArea">Plot Area*</label>
-            <div className="unit-input">
+            <div className={`unit-input ${Error.PlotArea? "inputShake shake":''}`}>
               <input
+             
                 type="text"
                 id="plotArea"
                 name="plotArea"

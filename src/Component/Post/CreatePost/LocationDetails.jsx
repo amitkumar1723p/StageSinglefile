@@ -35,8 +35,6 @@ export default function LocationDetails({
 
 
   const LocationDetailsAlertShake = ()=>{
-
-    console.log("i am AM")
     if(LocationDetailsData.Landmark?.length == 0){
       setSectorShake(true);
       setTimeout(()=> setSectorShake(false),1600);

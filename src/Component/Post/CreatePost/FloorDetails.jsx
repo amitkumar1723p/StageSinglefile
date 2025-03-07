@@ -74,6 +74,7 @@ export default function FloorDetails({
           className={` ${Error.TotalFloors? 'inputShake shake' : ''}`}
             type="text"
             id="total-floors"
+            required
             placeholder="Total Floors"
             value={FloorDetailsData.TotalFloors || ""}
             onChange={(e) => {
@@ -106,6 +107,7 @@ export default function FloorDetails({
             <select
               className={`date-time-lable ${Error.PropertyOnFloor? 'inputShake shake' : ''}`}
               id="floor"
+              required
               value={FloorDetailsData.PropertyOnFloor || ""}
               onChange={(e) => {
                 setFloorDetailsData({

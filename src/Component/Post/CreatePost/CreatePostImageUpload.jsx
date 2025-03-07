@@ -131,7 +131,7 @@ export default function CreatePostImageUpload({
   const CratePostHandler = (e) => {
     e.preventDefault();
     if (previewImage.length <= 0) {
-      alert("image field is required");
+      // alert("image field is required");
     } else {
       let formData = new FormData(e.target);
 
@@ -212,6 +212,18 @@ export default function CreatePostImageUpload({
     }
   };
 
+
+// Alert
+const [imageAlert, setImageAlert] = useState(false)
+
+const HandleImageAlert = ()=>{
+  if (previewImage.length <= 0) {
+    setImageAlert(true);
+    setTimeout(()=>setImageAlert(false),1500);
+   return;
+  }
+}
+
   return (
     <>
       <ScrollToTop />
@@ -226,7 +238,7 @@ export default function CreatePostImageUpload({
             encType="multipart/form-data"
             id="myform"
           >
-            <div htmlFor="" className="uploadfile-input">
+            <div htmlFor="" className={`uploadfile-input ${imageAlert? "shakeShake":''}`}>
               <div className="file-label">
                 {/* Backup Icon  */}
                 <svg
@@ -252,7 +264,7 @@ export default function CreatePostImageUpload({
                   />
                 </svg>
 
-                <p className="p-img-upload">
+                <p className={`p-img-upload ${imageAlert? "shake":''}`}>
                   Drag and drop or click to choose file
                 </p>
                 <p className="p-img-upload-i">
@@ -402,7 +414,7 @@ export default function CreatePostImageUpload({
               >
                 Previous
               </div>
-              <button className="Submit-Next" ref={CreatePostRef}>
+              <button onClick={HandleImageAlert} className="Submit-Next" ref={CreatePostRef}>
                 {update ? "Update Post" : "Create Post"}
               </button>
             </div>

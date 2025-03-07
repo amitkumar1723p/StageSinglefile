@@ -88,7 +88,6 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
 
       }
 
-       
       if (!OtherDetailsData.PlotFacing) {
         return;
       }
@@ -113,11 +112,11 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         return;
       }
       if (Object.keys(AlertObj).length > 0) {
-        alert("resove Area field error");
+       
         return;
       }
       if (!FloorDetailsData.PropertyDirection) {
-        return alert("PropertyDirection Field Required");
+        return;
       }
 
       if (FloorDetailsData?.OverLookingView?.length <= 0) {
@@ -129,7 +128,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       }
 
       if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
-        return alert(" Society And Building Feature is Required");
+        return;
       }
       if (update && AmenitiesDetailsData.Furnishing == "Un-Furnished") {
         const { FurnishingOption, ...AmenitiesDetailsRest } =
@@ -186,37 +185,64 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       return;
      }
      if(!OtherDetailsData.PlotDirection){
+      const targetScroll = document.querySelector("#ScrollToOtherDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
       setTimeout(()=>showError({PlotDirection:true}),200);
       setTimeout(()=>showError({PlotDirection:false}),1500);
       return;
      }
      if(!OtherDetailsData.PlotFacing){
+      const targetScroll = document.querySelector("#ScrollToOtherDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
       setTimeout(()=>showError({PlotFacing:true}),200);
       setTimeout(()=>showError({PlotFacing:false}),1500);
       return;
      }
      if(!OtherDetailsData.FrontRoadWidth){
+      const targetScroll = document.querySelector("#ScrollToOtherDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
       setTimeout(()=>showError({FrontRoadWidth:true}),100);
       setTimeout(()=>showError({FrontRoadWidth:false}),1500);
       return;
      }
      if(!AmenitiesDetailsData.PowerBackUp){
+      const targetScroll = document.querySelector("#ScrollToAmenities");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
       setTimeout(()=>showError({PowerBackUp:true}),100);
       setTimeout(()=>showError({PowerBackUp:false}),1500);
       return;
      }
      if(AmenitiesDetailsData.WaterSource?.length<=0){
+      const targetScroll = document.querySelector("#ScrollToAmenities");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
       setTimeout(()=>showError({WaterSource:true}),100);
       setTimeout(()=>showError({WaterSource:false}),1500);
       return;
      }
      if(AmenitiesDetailsData.ProjectAmmenities?.length<=0){
-      console.log(AmenitiesDetailsData.ProjectAmmenities?.length)
+      const targetScroll = document.querySelector("#ScrollToAmenities");
+      targetScroll.scrollIntoView({
+        behavior: 'smooth',    
+      });
       showError({ProjectAmmenities:true});
       setTimeout(()=>showError({ProjectAmmenities:false}),1500);
       return;
      }
      if(AmenitiesDetailsData?.OtherFeature?.length <= 0){
+      const targetScroll = document.querySelector("#ScrollToAmenities");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
       showError({OtherFeature:true});
       setTimeout(()=>showError({OtherFeature:false}),1500);
       return;
@@ -233,81 +259,137 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         setTimeout(()=>showError({FlooringType:false}),1800);
         return;
       }
-      if(PropertyDetailsData.OtherRoom <=0){
-        setTimeout(()=>showError({OtherRoom:true}),800);
-        setTimeout(()=>showError({OtherRoom:false}),1800);
-        return;
-      }
-      if(FloorDetailsData.TotalFloors <=0 || FloorDetailsData.TotalFloors === undefined){
-        console.log("hii i Am console 😍")
+      // if(PropertyDetailsData.OtherRoom.length==0){
+      
+      //   setTimeout(()=>showError({OtherRoom:true}),800);
+      //   setTimeout(()=>showError({OtherRoom:false}),1800);
+      //   return;
+      // }
+      if(FloorDetailsData.TotalFloors === undefined || FloorDetailsData.TotalFloors == 0 ){
+  
         setTimeout(()=>showError({TotalFloors:true}),800);
         setTimeout(()=>showError({TotalFloors:false}),1800);
         return;
       }
-      if(FloorDetailsData.PropertyOnFloor <=0 || FloorDetailsData.PropertyOnFloor === undefined){
-        if(BasicDetailsData.ApartmentType == "Indepedent House/Villa"){
-          console.log("done");
-         
-        }else{
-          setTimeout(()=>showError({PropertyOnFloor:true}),800);
-          setTimeout(()=>showError({PropertyOnFloor:false}),1800);
-          return;
-        }
-        
-       
-        
-      }
-      if(FloorDetailsData.PropertyDirection <=0 || FloorDetailsData.PropertyDirection === undefined){
-        setTimeout(()=>showError({PropertyDirection:true}),800);
-        setTimeout(()=>showError({PropertyDirection:false}),1800);
+      if(FloorDetailsData.PropertyOnFloor === ''){
+        setTimeout(()=>showError({PropertyOnFloor:true}),800);
+        setTimeout(()=>showError({PropertyOnFloor:false}),1800);
         return;
       }
+
+      if(FloorDetailsData.PropertyDirection <=0 || FloorDetailsData.PropertyDirection === undefined){
+        const targetScroll = document.querySelector("#ScrollToFloorDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+
+        setTimeout(()=>showError({PropertyDirection:true}),650);
+        setTimeout(()=>showError({PropertyDirection:false}),1650);
+        return;
+      }
+      // if(BasicDetailsData.ApartmentType == "Independent House/Villa"){
+      //   if(AreaDetailsData.PlotArea === '' || AreaDetailsData.PlotArea === undefined ){
+     
+      //     setTimeout(()=>showError({PlotArea:true}),650);
+      //     setTimeout(()=>showError({PlotArea:false}),1650);
+      //     return;
+      //   }
+      // }
+
       if (
         !AreaDetailsData.SuperBuiltUpArea?.value &&
         !AreaDetailsData.CarpetArea?.value &&
         !AreaDetailsData.BuiltUpArea?.value
       ){
-        setTimeout(()=>showError({AreaDetailData:true}),500);
-        setTimeout(()=>showError({AreaDetailData:false}),1500);
+        const targetScroll = document.querySelector("#ScrollToAreaDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+        setTimeout(()=>showError({AreaDetailData:true}),600);
+        setTimeout(()=>showError({AreaDetailData:false}),1600);
         return;
       }
       
       if(FloorDetailsData?.OverLookingView?.length <= 0){
+        const targetScroll = document.querySelector("#ScrollToFloorDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+
         setTimeout(()=>showError({OverLookingView:true}),500);
         setTimeout(()=>showError({OverLookingView:false}),1500);
         return;
       }
       if (!AmenitiesDetailsData.Furnishing) {
+        const targetScroll = document.querySelector("#ScrollToAmenities");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
         setTimeout(()=>showError({Furnishing:true}),500);
         setTimeout(()=>showError({Furnishing:false}),1500);
         return;
       }
+      if(["Un-Furnished"].includes(AmenitiesDetailsData.Furnishing)){
+        if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
+          const targetScroll = document.querySelector("#ScrollToAmenities");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+          setTimeout(()=>showError({SocietyAndBuildingFeature:true}),500);
+          setTimeout(()=>showError({SocietyAndBuildingFeature:false}),1500);
+          
+          return; 
+        }
+      }else{
+          if(AmenitiesDetailsData.FurnishingOption?.ModularKitchen === undefined ){
+            const targetScroll = document.querySelector("#ScrollToAmenities");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+            setTimeout(()=>showError({ModularKitchen:true}),500);
+            setTimeout(()=>showError({ModularKitchen:false}),1500);
+           
+            return;
+          }
+          if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
+            const targetScroll = document.querySelector("#ScrollToAmenities");
+            targetScroll.scrollIntoView({
+              behavior: 'smooth',    
+            });
+            setTimeout(()=>showError({SocietyAndBuildingFeature:true}),500);
+            setTimeout(()=>showError({SocietyAndBuildingFeature:false}),1500);
+           
+            return; 
+          }
+      }
+      if(!AmenitiesDetailsData.PowerBackUp){
+        setTimeout(()=>showError({PowerBackUp:true}),100);
+        setTimeout(()=>showError({PowerBackUp:false}),1500);
+        return;
+       }
 
-     
+       if(AmenitiesDetailsData.WaterSource?.length<=0){
+        setTimeout(()=>showError({WaterSource:true}),100);
+        setTimeout(()=>showError({WaterSource:false}),1500);
+        return;
+       }
 
-      
+       if (Object.keys(AlertObj).length > 0) {
+        const targetScroll = document.querySelector("#ScrollToAreaDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
 
+
+        setTimeout(()=>showError({AreaFieldError:true}),700);
+        setTimeout(()=>showError({AreaFieldError:false}),1700);
+        return;
+      }
     }
 
 
-
-    
-
-
-
-  
-
-     
-     
-     
-  
-
-
-
-
   }
-
-
+    
   return (
     <>
       <ScrollToTop />
@@ -334,7 +416,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
               </div>
             )}
 
-            <div className="Prop-detials-box-form-area">
+            <div className={`Prop-detials-box-form-area ${Error.AreaFieldError? "inputShake shake":''}`}  id="ScrollToAreaDetails" style={{scrollMarginTop:'80px'}}>
               <AreaDetailsSection
                 AreaDetailsData={AreaDetailsData}
                 setAreaDetailsData={setAreaDetailsData}
@@ -347,7 +429,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
             {ApartMentTypeArrayRemovePlotAndLand.includes(
               BasicDetailsData.ApartmentType
             ) && (
-              <div className="Prop-detials-box-floor">
+              <div className="Prop-detials-box-floor" id="ScrollToFloorDetails" style={{scrollMarginTop:'80px'}}>
                 <FloorDetails
                   FloorDetailsData={FloorDetailsData}
                   setFloorDetailsData={setFloorDetailsData}
@@ -358,7 +440,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
             )}
 
             {BasicDetailsData.ApartmentType == "Plot/Land" && (
-              <>
+              <div id="ScrollToOtherDetails" style={{scrollMarginTop:'80px'}}>
                 <OtherDetails
                   OtherDetailsData={OtherDetailsData}
                   setOtherDetailsData={setOtherDetailsData}
@@ -373,10 +455,10 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                   setAmenitiesDetailsData={setAmenitiesDetailsData}
                   BasicDetailsData={BasicDetailsData}
                 /> */}
-              </>
+              </div>
             )}
 
-            <div className="Prop-detials-box-form-Amenities">
+            <div className="Prop-detials-box-form-Amenities" id="ScrollToAmenities" style={{scrollMarginTop:'80px'}}>
               <Amenities
                 update={update}
                 AmenitiesDetailsData={AmenitiesDetailsData}

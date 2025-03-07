@@ -364,6 +364,10 @@ td{
   color: red !important;
   animation: justshake 0.5s ease-in-out;
 }
+.shakeShake{
+  border: 1px dashed red !important;
+  animation: justshake 0.5s ease-in-out;
+}
 .inputShake{
   border: 1px solid red !important;
   animation: justshake 0.5s ease-in-out;

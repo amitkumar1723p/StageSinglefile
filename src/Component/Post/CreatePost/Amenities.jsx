@@ -157,12 +157,15 @@ export default function Amenities({
                   {/* ModularKitchen */}
 
                   <div className="field-group">
-                    <label htmlFor="light">Modular Kitchen</label>
+                    <label
+                   
+                     htmlFor="light">Modular Kitchen</label>
                     <div className="row">
                       {YesNoArray.map((text, i) => {
                         return (
                           <div className="row" key={i}>
                             <input
+                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
                               type="radio"
                               id={`modular-kitchen-${i}`}
                               name="modular-kitchen"
@@ -182,7 +185,9 @@ export default function Amenities({
                                 });
                               }}
                             />
-                            <label htmlFor={`modular-kitchen-${i}`}>
+                            <label
+                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
+                             htmlFor={`modular-kitchen-${i}`}>
                               {text === true ? "Yes" : "No"}
                             </label>
                           </div>
@@ -564,7 +569,7 @@ export default function Amenities({
                         )
                           ? "select"
                           : ""
-                      }
+                      } ${Error.SocietyAndBuildingFeature? 'inputShake shake' : ''}
                     `}
                       onClick={() => {
                         if (
