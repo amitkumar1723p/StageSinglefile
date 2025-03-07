@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+
 import "./CreatePost.css"
+import { useEffect } from "react";
+
 export default function OtherDetails({
   OtherDetailsData,
   setOtherDetailsData,

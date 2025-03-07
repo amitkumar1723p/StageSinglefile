@@ -57,6 +57,7 @@ export default function AdminListingCard({
 
   useEffect(() => {
     let dateString = PostData?.PostVerifyData?.Time;
+    //  console.log( "post id with date",PostData._id ,PostData)
     if (!dateString) {
       setFormatDate({
         ExpiredDate: "Invalid Date",

@@ -44,7 +44,7 @@
   font-weight: 600;
   line-height: normal;
   border-radius: 3px;
-  background: var(--Pirmary, #0078d4);
+  background: var(--Pirmary, #1877f2);
   border: none;
   padding: 10px 20px;
 }
@@ -226,7 +226,7 @@
 
 .edit-btn-dashborad span {
   border-radius: 3px;
-  background: var(--Pirmary, #0078d4);
+  background: var(--Pirmary, #1877f2);
   color: #fff;
   padding: 5px 10px;
   font-size: 14px;
@@ -420,7 +420,7 @@
     font-weight: 600;
     line-height: normal;
     border-radius: 3px;
-    background: var(--Pirmary, #0078d4);
+    background: var(--Pirmary, #1877f2);
     border: none;
     padding: 5px 10px;
   }
@@ -476,7 +476,7 @@
   }
   .edit-btn-dashborad span {
     border-radius: 3px;
-    background: var(--Pirmary, #0078d4);
+    background: var(--Pirmary, #1877f2);
     color: #fff;
     padding: 5px 10px;
     font-size: 10px;

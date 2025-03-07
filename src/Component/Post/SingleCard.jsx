@@ -328,7 +328,7 @@ const SingleCard = ({ PostData, index }) => {
                                 onClick={() => setIsFavorite(!isFavorite)}
                                 className="single-card-icon-button"
                             >
-                                <Heart fill={isFavorite ? "#3B82F6" : "none"} color={isFavorite ? "#3B82F6" : "#9CA3AF"} size={20} />
+                                <Heart fill={isFavorite ? "1877f2" : "none"} color={isFavorite ? "1877f2" : "#9CA3AF"} size={20} />
                             </button>
                             <button className="single-card-icon-button">
                                 <Share2 size={20} color="#9CA3AF" />

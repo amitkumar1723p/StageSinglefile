@@ -541,7 +541,8 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/plot_dimension.svg"
+                            src="/img/Plot-Dimension.svg"
+
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -559,7 +560,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/status.png"
+                            src="/img/possession_.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -576,7 +577,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/power-backup.png"
+                            src="/img/current_prop_status.svg"
                             alt="icon"
                           />
 
@@ -1490,11 +1491,8 @@ export default function SinglePostDetails() {
                       Component={ViewOwnerDetailsAlert}
                       SetShow={setshowOwnerDetailsForm}
                       BtnRef={showOwnerDetailsFormRef}
-                      Contact={
-                        paidPropertyData?.getOwnerDetail?.CreatePostUser
-                          ?.ContactNumber
-                      }
-                      // PropertyAddress={PropertyAddress}
+                      Contact={"7837840785"}
+                    // PropertyAddress={PropertyAddress}
                     />
                   )}
 

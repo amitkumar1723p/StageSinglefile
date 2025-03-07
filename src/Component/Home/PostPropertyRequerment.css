@@ -143,14 +143,14 @@
 
 .form-input:focus {
   outline: none;
-  border-color: #0078d4;
+  border-color: #1877f2;
 }
 
 .form-submit-btn {
   /* padding: 10px; */
   font-size: 14px;
   color: #ffffff;
-  background-color: #0078d4;
+  background-color: #1877f2;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -242,7 +242,7 @@
 }
 
 input[type="radio"] {
-  accent-color:#0078d4;
+  accent-color:#1877f2;
   cursor: pointer;
   width: 15px;
   height: 15px;
