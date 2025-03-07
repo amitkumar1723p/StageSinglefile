@@ -1,8 +1,12 @@
 
 import "./CreatePost.css"
+import { useEffect } from "react";
+
 export default function OtherDetails({
   OtherDetailsData,
   setOtherDetailsData,
+  Error,
+  filederror ,
   // eslint-disable-next-line
   BasicDetailsData,
 }) {
@@ -51,7 +55,7 @@ export default function OtherDetails({
     "Main Road",
     "Others",
   ];
-
+  
   return (
     <>
       <div className="other-details-plot">

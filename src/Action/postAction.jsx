@@ -845,7 +845,7 @@ export const OwnerUploadExcelFile = (file)=>{
       };
  
       const { data } = await axios.post(url, formData, config);  // Pass postId as an object
-//  console.log(similar)
+ 
      
       dispatch({
         type: "OwnerAllExcelFileSuccess",

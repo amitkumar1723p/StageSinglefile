@@ -187,6 +187,10 @@ text-decoration: underline;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+.login-form-alert{
+  /* outline: 1px solid black; */
+  height: 10px;
+}
 
 .login-continue-login {
   width: 100%;

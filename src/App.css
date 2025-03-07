@@ -342,6 +342,43 @@ td{
   color: #0056b3;
 }
 
+.ttc{
+ color: #0056b3;
+}
+
+
+/* input shake when user put wrong values */
+
+@keyframes justshake {
+  25% {
+    transform: translateX(10px);
+  }
+
+  50% {
+    transform: translateX(-10px);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX-(10px);
+  }
+}
+.shake {
+  color: red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+.shakeShake{
+  border: 1px dashed red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+.inputShake{
+  border: 1px solid red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+
 /* not select text  */
 .not-select-text {
   user-select: none; /* Prevent text selection */

@@ -52,7 +52,7 @@ export default function BlogSubscribe() {
                         <div className='blog-email-svg'>
                           <img src="/img/blog-email-logo.svg" alt="email-logo" />
                         </div>
-                      <input type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Email Id'className={`${shake ? 'shake' : ''} ${shake ? 'invalid' : ''}`} ></input>
+                      <input type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Email Id'className={`${shake ? 'shake' : ''} `} ></input>
                       
                       </div>
                        
