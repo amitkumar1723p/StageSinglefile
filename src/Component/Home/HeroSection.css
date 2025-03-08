@@ -11,11 +11,15 @@
 
 .logo-nav-bar {
   align-items: end;
-gap: 5px;
+  gap: 5px;
 }
+
 /* holi csss */
 /* Basic Styles */
-.WishingHoli, .YouHoli, .HappyHoli, .holiholi {
+.WishingHoli,
+.YouHoli,
+.HappyHoli,
+.holiholi {
   font-size: 14px;
   font-weight: 600;
   display: inline-block;
@@ -49,18 +53,22 @@ gap: 5px;
     transform: translateY(0);
     color: coral;
   }
+
   25% {
     transform: translateY(-10px);
     color: #4CAF50;
   }
+
   50% {
     transform: translateY(0);
     color: green;
   }
+
   75% {
     transform: translateY(-10px);
     color: #1877f2;
   }
+
   100% {
     transform: translateY(0);
     color: coral;
@@ -76,7 +84,7 @@ gap: 5px;
   width: 100%;
   height: 100%;
   z-index: -1;
- 
+
   /* Put the video behind other content */
   overflow: hidden;
 }
@@ -773,6 +781,14 @@ gap: 5px;
     padding: 20px 0 0 0;
   }
 
+  .WishingHoli,
+  .YouHoli,
+  .HappyHoli,
+  .holiholi {
+    font-size: 8px;
+   
+  }
+
   .AnimatedNav-container {
     position: relative;
     display: flex;
@@ -896,7 +912,7 @@ gap: 5px;
   .requirement-heading-h2 {
     position: relative;
     width: auto;
-    color: #fff;
+    color: #333;
     font-family: Inter;
     font-size: 18px;
     font-style: normal;
@@ -1037,6 +1053,13 @@ gap: 5px;
     width: 110px;
   }
 
+  .WishingHoli,
+.YouHoli,
+.HappyHoli,
+.holiholi {
+  font-size: 12px;
+}
+
   .icon img {
     width: 90%;
     height: auto;
@@ -1167,6 +1190,13 @@ gap: 5px;
     margin: 22px 0px 0px 0px;
   }
 
+  .WishingHoli,
+.YouHoli,
+.HappyHoli,
+.holiholi {
+  font-size: 8px;
+ 
+}
 
 
   .hero-content h1 {
@@ -1193,7 +1223,7 @@ gap: 5px;
   .search-box input {
     background-color: #fff;
     height: 35.1px;
-    width: 120px;
+    width: 200px;
     padding: 10px 0;
     border: none;
     font-size: 10px;
