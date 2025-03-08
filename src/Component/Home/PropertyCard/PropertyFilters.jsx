@@ -33,14 +33,17 @@ const PropertyFilters = () => {
     setter((prev) =>
       checked ? [...prev, name] : prev.filter((item) => item !== name)
     );
+    
   };
+  let len;
   const { data } = useSelector((state) => {
     return state.GetAllPost;
   });
-     // serach property 
-     const { data: serachResponse } = useSelector((state) => {
-       return state.serachResponse;
-     });
+  // serach property 
+  const { data: serachResponse } = useSelector((state) => {
+    return state.serachResponse;
+  });
+  len = data?.allPost || serachResponse?.results;
 
   const handleClicked = (v) => {
     setIsClicked(v);
@@ -73,12 +76,13 @@ const PropertyFilters = () => {
   };
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
+   const [querryProjectName ,setquerryProjectName] =useState("")
 
   useEffect(() => {
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
       // dispatch(
       //   GetAllPostAction({
-      //     ProjectName: querry.get("ProjectName"),
+      //     ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
       //     PropertyAdType: querry.get("PropertyAddType"),
       //     BHK: Filter.BHK,
       //     ApartmentType: Filter.ApartmentType,
@@ -86,7 +90,7 @@ const PropertyFilters = () => {
       //     Furnishing: Filter.Furnishing,
       //   })
       // );
-      dispatch(getSerachProperty(querry.get("ProjectName"),{}, {
+      dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
    
         PropertyAdType: querry.get("PropertyAddType"),
         BHK: Filter.BHK,
@@ -100,7 +104,7 @@ const PropertyFilters = () => {
   }, [Filter, querry]);
 
   // useEffect(() => {
-  //   if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
+  //   if (!querry.get("ProjectName")?.replaceAll("-", " ") || !querry.get("PropertyAddType")) {
   //     return navigate("/");
   //   } else {
   //     // Check if it is the first page load
@@ -108,12 +112,12 @@ const PropertyFilters = () => {
   //       sessionStorage.setItem("isFirstLoad", "true");
   //       dispatch(
   //         GetSingleProjectNameDataAction({
-  //           ProjectName: querry.get("ProjectName"),
+  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
   //         })
   //       );
   //       dispatch(
   //         GetAllPostAction({
-  //           ProjectName: querry.get("ProjectName"),
+  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
   //           PropertyAdType: querry.get("PropertyAddType"),
   //         })
   //       );
@@ -126,12 +130,12 @@ const PropertyFilters = () => {
 
   //       dispatch(
   //         GetSingleProjectNameDataAction({
-  //           ProjectName: querry.get("ProjectName"),
+  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
   //         })
   //       );
   //       dispatch(
   //         GetAllPostAction({
-  //           ProjectName: querry.get("ProjectName"),
+  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
   //           PropertyAdType: querry.get("PropertyAddType"),
   //         })
   //       );
@@ -156,23 +160,22 @@ const PropertyFilters = () => {
   //   }
   // }, []);
   useEffect(()=>{
-    
+
     return ()=>{
     dispatch({type:"GetSerachPropertyClear"})
 
-      console.log("suffff");
     
     }
   },[])
   useEffect(()=>{
  if(!serachResponse ){
   // GetAllPostAction({
-  //               ProjectName: querry.get("ProjectName"),
+  //               ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
   //              PropertyAdType: querry.get("PropertyAddType"),
   //           })
 
 
-            dispatch(getSerachProperty(querry.get("ProjectName"), {
+            dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "), {
               
               PropertyAdType: querry.get("PropertyAddType"),
               BHK: Filter.BHK,
@@ -215,6 +218,7 @@ const PropertyFilters = () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
+  console.log("eewew ",querry.get("ProjectName")?.replaceAll("-", " "))
    
   return (
     <>
@@ -237,7 +241,7 @@ const PropertyFilters = () => {
                 onClick={() => {
                   dispatch(
                     GetAllPostAction({
-                      ProjectName: querry.get("ProjectName"),
+                      ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
                       PropertyAdType: querry.get("PropertyAddType"),
                       BHK: "",
                       ApartmentType: "",
@@ -262,7 +266,7 @@ const PropertyFilters = () => {
                     <button
                       onClick={() => {
                         setquerry({
-                          ProjectName: querry.get("ProjectName"),
+                          ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
                           PropertyAddType: `${text}`,
                         });
                         setremoveFilterField(true);
@@ -496,7 +500,7 @@ const PropertyFilters = () => {
             <div className="filter-home-card">
               <div className="total-post-length-container">
                 <p className="total-post-lable-allpost">
-                  Showing {data?.allPost?.length} Lisitng
+                  Showing <span className="property-length-color">{len?.length}</span> Lisitng
                 </p>
 
                 <button
@@ -532,7 +536,7 @@ const PropertyFilters = () => {
                         onClick={() => {
                           dispatch(
                             GetAllPostAction({
-                              ProjectName: querry.get("ProjectName"),
+                              ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
                               PropertyAdType: querry.get("PropertyAddType"),
                               BHK: "",
                               ApartmentType: "",
@@ -553,7 +557,7 @@ const PropertyFilters = () => {
                           key={text}
                           onClick={() => {
                             setquerry({
-                              ProjectName: querry.get("ProjectName"),
+                              ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
                               PropertyAddType: `${text}`,
                             });
                             setremoveFilterField(true);

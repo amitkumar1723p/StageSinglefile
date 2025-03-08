@@ -199,15 +199,16 @@ const HeroSection = () => {
           //   .replace(",", "")
           //   .replaceAll("/", "-")}-${PostData._id}`
 
-          navigate(
-            `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
-          );
           // navigate(
-          //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
-          //       .replaceAll(" ", "-")
-          //       .replaceAll(",", "")
-          //      .replaceAll("/", "-")}&&PropertyAddType=${SearchPropertyAddType}`
+          //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
           // );
+          
+          navigate(
+            `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
+                .All(" ", "-")
+                .replaceAll(",", "")
+               .replaceAll("/", "-")}&&PropertyAddType=${SearchPropertyAddType}`
+          );
         }
       }
     }

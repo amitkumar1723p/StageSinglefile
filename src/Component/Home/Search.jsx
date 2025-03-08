@@ -92,8 +92,14 @@ export default function Search({
       return;
     }
   
+    // navigate(
+    //   `/home/card?ProjectName=${localQuery}&&PropertyAddType=${typeOfProperty}`
+    // );
     navigate(
-      `/home/card?ProjectName=${localQuery}&&PropertyAddType=${typeOfProperty}`
+      `/home/card?ProjectName=${localQuery?.toLowerCase()
+        .replaceAll(" ", "-")
+          .replaceAll(",", "")
+         .replaceAll("/", "-")}&&PropertyAddType=${typeOfProperty}`
     );
   };
 
