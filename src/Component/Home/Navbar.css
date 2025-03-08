@@ -111,7 +111,8 @@
 .navbar {
   /* width: 80%; */
   /* margin: 0 auto; */
-  background: url("/public/img/holi-nav.svg");
+  /* background: url("/public/img/holi-nav.svg"); */
+  background-color: #fff;
   padding: 12px 0; /* Decreased padding */
   position: sticky;
   top: 0;
@@ -409,7 +410,7 @@
   }
   
   .navbar {
-    background: url("/public/img/holi-nav.svg");
+    /* background: url("/public/img/holi-nav.svg"); */
   }
   .header-free {
     background-color: #94D1FF;
