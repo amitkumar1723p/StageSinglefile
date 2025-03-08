@@ -35,7 +35,7 @@ import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
-import PayButton from "./PayButton";
+// import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();

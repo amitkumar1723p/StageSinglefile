@@ -65,6 +65,7 @@ export default function OtherDetails({
         <div className="form-group">
           <label htmlFor="constructor-allowed"> Construction Allowed*</label>
           <input
+           className={` ${Error.ConstructionAllowed? 'inputShake shake' : ''}`}
             type="text"
             id="constructor-allowed"
             placeholder="eg., 3 Floors"
@@ -89,8 +90,9 @@ export default function OtherDetails({
               return (
                 <div
                   key={i}
-                  className={`tab ${OtherDetailsData.PlotDirection === text ? "select" : ""
-                    }`}
+                  className={`tab ${
+                    OtherDetailsData.PlotDirection === text ? "select" : ""
+                  }  ${Error.PlotDirection? 'inputShake shake' : ''} `}
                   onClick={() => {
                     setOtherDetailsData({
                       ...OtherDetailsData,
@@ -123,8 +125,9 @@ export default function OtherDetails({
               return (
                 <div
                   key={i}
-                  className={`tab ${OtherDetailsData.PlotFacing === text ? "select" : ""
-                    }`}
+                  className={`tab ${
+                    OtherDetailsData.PlotFacing === text ? "select" : ""
+                  }  ${Error.PlotFacing? 'inputShake shake' : ''}`}
                   onClick={() => {
                     setOtherDetailsData({
                       ...OtherDetailsData,
@@ -156,10 +159,12 @@ export default function OtherDetails({
             Width of Front Road* only in mt
           </label>
           <input
+
+className={` ${Error.FrontRoadWidth? 'inputShake shake' : ''}`}
             type="text"
             id="front-road-width"
             placeholder="eg., 3 Floors"
-            required
+            // required
             value={OtherDetailsData.FrontRoadWidth || ""}
             onChange={(e) => {
               setOtherDetailsData({

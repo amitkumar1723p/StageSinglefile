@@ -249,7 +249,6 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
         setalertShow(true);
         dispatch({ type: "UserClear" });
       }
-    // }
     // eslint-disable-next-line
 }}, [data]);
 
