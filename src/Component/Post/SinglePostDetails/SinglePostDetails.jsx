@@ -502,15 +502,24 @@ export default function SinglePostDetails() {
                             src="/img/overlooking.png"
                             alt="icon"
                           />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {
-                                getSinglePostData?.SinglePost?.FloorDetails
-                                  ?.OverLookingView[0]
-                              }
-                            </span>
-                            <p> Overlooking View </p>
-                          </div>
+
+                          {
+                            getSinglePostData?.SinglePost?.FloorDetails
+                              ?.OverLookingView && <>
+
+                              <div className="img-box-imp-data">
+                                <span className="img-box-details-span">
+                                  {
+                                    getSinglePostData?.SinglePost?.FloorDetails
+                                      ?.OverLookingView[0]
+
+                                  }
+                                </span>
+                                {/* <p> Overlooking View </p> */}
+                              </div>
+                            </>
+                          }
+
                         </div>
                         <div className="property-info-tags">
                           <img

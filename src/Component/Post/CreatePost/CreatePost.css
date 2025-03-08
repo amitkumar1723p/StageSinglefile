@@ -612,15 +612,15 @@ button:hover,
   background-color: white;
   color: black;
   position: absolute;
-  top: 40px;
-  z-index: 1;
+  top: 92px;
+  z-index: 2;
   overflow: auto;
   text-align: justify;
   border: none;
   padding: 10px;
   /* border-radius: 10px; */
   /* right: -35px; */
-  width: 500px;
+  width: 460px;
 }
 
 /* .create-post-search-project .dropdown  input {

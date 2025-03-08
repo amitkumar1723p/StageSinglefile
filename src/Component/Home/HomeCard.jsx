@@ -12,12 +12,12 @@ import SingleCard from "../Post/SingleCard";
 export default function HomeCard() {
   const dispatch = useDispatch();
 
-  const { loading, data } = useSelector((state) => {
-    return state.GetAllPost;
+  // const { loading, data } = useSelector((state) => {
+  //   return state.GetAllPost;
+  // });
+  const { data: serachResponse, loading } = useSelector((state) => {
+    return state.serachResponse;
   });
-   const { data: serachResponse } = useSelector((state) => {
-      return state.serachResponse;
-    });
   const [filterdPost, setFilterdPost] = useState(null);
   const [allData, setAllData] = useState([]);
 
@@ -38,17 +38,18 @@ export default function HomeCard() {
       }
     }
     filter();
+    window.scrollTo(0,0);
   }, [serachResponse]);
 
   useEffect(() => {
-    
+
 
     setAllData(() => {
       return filterdPost;
     });
   }, [filterdPost]);
 
-   console.log(serachResponse?.results[0])
+
   return (
     <>
       <div className="home">
@@ -67,15 +68,53 @@ export default function HomeCard() {
             <Notifyme />
           ))} */}
 
-<div className="home-postContainer">
+        <div className="home-postContainer">
+          {
+            loading ?
               <div className="allPostrender-showpost">
-                {serachResponse?.results?.map((e, i) => {
-                
-                  return <SingleCard key={i} PostData={e} index={i} />;
-                })}
+                {
+                  Array.from({ length: 9 }).map((_, index) => (<AllPostSkeleton key={index} />))
+                }
               </div>
-            </div>
+              :<>
+                {
+                  filterdPost?.length< 1 ? <>
+                    <p>sorry no post found</p>
+                  </>:  <div className="allPostrender-showpost">
+                  {filterdPost?.map((e, i) => {
+  
+                    return <SingleCard key={i} PostData={e} index={i} />;
+                  })}
+                </div>
+                }
+                </>
+            
+          }
+        </div>
       </div>
     </>
+  );
+}
+
+const AllPostSkeleton = () => {
+
+  return (
+    <div className="all-post-skeleton-card">
+      <div className="all-post-skeleton-image"></div>
+
+      <div className="all-post-skeleton-text all-post-skeleton-title"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle-1"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle"></div>
+
+      <div className="all-post-skeleton-info-container">
+        <div className="all-post-skeleton-info"></div>
+        <div className="all-post-skeleton-info"></div>
+      </div>
+
+      <div className="all-post-skeleton-footer">
+        <div className="all-post-skeleton-button"></div>
+        <div className="all-post-skeleton-button"></div>
+      </div>
+    </div>
   );
 }

@@ -720,6 +720,7 @@ export const getSerachPropertyReducer=(state={},action)=>{
       return {
         ...state,
         loading: true,
+
       };
 
     case"GetSerachPropertySuccess":
@@ -738,10 +739,10 @@ export const getSerachPropertyReducer=(state={},action)=>{
     };
 
     case"GetSerachPropertyClear":
-return{}
+    console.log("clearr")
+    return {}; // Clears state when necessary
+
     default:
-      return{
-        ...state,
-      };
+      return state;
   }
 }

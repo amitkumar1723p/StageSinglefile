@@ -76,16 +76,24 @@ const PropertyFilters = () => {
 
   useEffect(() => {
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
-      dispatch(
-        GetAllPostAction({
-          ProjectName: querry.get("ProjectName"),
-          PropertyAdType: querry.get("PropertyAddType"),
-          BHK: Filter.BHK,
-          ApartmentType: Filter.ApartmentType,
-          PropertyStatus: undefined,
-          Furnishing: Filter.Furnishing,
-        })
-      );
+      // dispatch(
+      //   GetAllPostAction({
+      //     ProjectName: querry.get("ProjectName"),
+      //     PropertyAdType: querry.get("PropertyAddType"),
+      //     BHK: Filter.BHK,
+      //     ApartmentType: Filter.ApartmentType,
+      //     PropertyStatus: undefined,
+      //     Furnishing: Filter.Furnishing,
+      //   })
+      // );
+      dispatch(getSerachProperty(querry.get("ProjectName"),{}, {
+   
+        PropertyAdType: querry.get("PropertyAddType"),
+        BHK: Filter.BHK,
+        ApartmentType: Filter.ApartmentType,
+        PropertyStatus: undefined,
+        Furnishing: Filter.Furnishing,
+      }));
     }
 
     // eslint-disable-next-line
@@ -147,17 +155,34 @@ const PropertyFilters = () => {
   //     };
   //   }
   // }, []);
+  useEffect(()=>{
+    
+    return ()=>{
+    dispatch({type:"GetSerachPropertyClear"})
 
+      console.log("suffff");
+    
+    }
+  },[])
   useEffect(()=>{
  if(!serachResponse ){
   // GetAllPostAction({
   //               ProjectName: querry.get("ProjectName"),
   //              PropertyAdType: querry.get("PropertyAddType"),
   //           })
- 
-            dispatch(getSerachProperty(  querry.get("ProjectName"), querry.get("PropertyAddType")));
+
+
+            dispatch(getSerachProperty(querry.get("ProjectName"), {
+              
+              PropertyAdType: querry.get("PropertyAddType"),
+              BHK: Filter.BHK,
+              ApartmentType: Filter.ApartmentType,
+              PropertyStatus: undefined,
+              Furnishing: Filter.Furnishing,
+            }));
  }
-  } ,[])
+
+} ,[])
   
   const bhkOptions = [1, 2, 3, 4, 5];
   const ApartmentTypeOptions = [
@@ -226,10 +251,7 @@ const PropertyFilters = () => {
                 Clear Filter <img src="/img/clear-filter.svg" alt="" />
               </div>
             </div>
-            <div className="filter-title">
-              <h2 className="filter-title-1">Filter Your Search</h2>
-              {/* <p className="filter-title-1">clear Filter</p> */}
-            </div>
+     
 
             <div className="filter-dummyLine"></div>
             <div className="flex">

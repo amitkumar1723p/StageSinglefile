@@ -1155,8 +1155,10 @@ export const GetDeletedPostsAction = () => {
 
 
 // elastic search action
-export const getSerachProperty=(query,propertyAdType)=>{
-  console.log(query,propertyAdType,"post")
+export const getSerachProperty=(query,propertyAdType,body)=>{
+  // console.log(query,propertyAdType,"post")
+  // console.log("boo ",body)
+  
   return async(dispatch)=>{
   try {
     dispatch({
@@ -1171,7 +1173,7 @@ export const getSerachProperty=(query,propertyAdType)=>{
       withCredentials: true,
     };
     console.log(url)
-    const { data } = await axios.post(url,{propertyAdType}, config);
+    const { data } = await axios.post(url,body, config);
     
     dispatch({ type: "GetSerachPropertySuccess", payload: data });
   } catch (error) {

@@ -358,6 +358,12 @@ const SingleCard = ({ PostData, index }) => {
               {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                 <div className={`add-favourite-box  flex`}>
                   <button
+                      disabled={
+                        PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
+                          ? false
+                          : true
+                      }
                     className={`add-favourite-btn ${index}`}
                     onClick={() => {
                       if (medata && medata.IsAuthenticated == true) {
