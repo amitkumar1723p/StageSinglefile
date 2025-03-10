@@ -35,7 +35,7 @@ import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
-import PayButton from "./PayButton";
+// import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -66,6 +66,9 @@ export default function SinglePostDetails() {
   // payment
   const [status, setStatus] = useState(false);
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
+
+
+  console.log(showOwnerDetailsForm, "j")
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
@@ -226,13 +229,16 @@ export default function SinglePostDetails() {
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
-      return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
+      const value = Math.floor(price / 100000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} Cr`;
     } else if (price >= 100000) {
-      return `₹ ${(Math.floor(price / 1000) / 100).toFixed(2)} L`;
+      const value = Math.floor(price / 1000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} L`;
     } else if (price >= 1000) {
-      return `₹ ${(Math.floor(price / 10) / 100).toFixed(2)} K`;
+      const value = Math.floor(price / 10) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} K`;
     } else {
-      return `₹ ${price?.toFixed(2)}`;
+      return `₹ ${price.toFixed(2)}`;
     }
   };
 
@@ -251,7 +257,8 @@ export default function SinglePostDetails() {
         sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
         medata?.user?.Role == "Tenant"
       ) {
-        setshowTenantDetailsForm(true);
+        setshowOwnerDetailsForm(true)
+        // setshowTenantDetailsForm(true);
       }
 
       sessionStorage.removeItem("RedirectPath");
@@ -534,7 +541,8 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/parking.png"
+                            src="/img/Plot-Dimension.svg"
+
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -552,7 +560,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/status.png"
+                            src="/img/possession_.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -569,7 +577,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/power-backup.png"
+                            src="/img/current_prop_status.svg"
                             alt="icon"
                           />
 
@@ -862,6 +870,17 @@ export default function SinglePostDetails() {
                     WhatsApp
                     {/* </button> */}
                   </Link>
+
+
+                  {/* <button
+                    className="original-price border-0"
+                    ref={showOwnerDetailsFormRef}
+                    onClick={() => {
+                      setshowOwnerDetailsForm(true);
+                    }}
+                  >
+                    View Number
+                  </button> */}
                   {getSinglePostData?.SinglePost?.BasicDetails
                     ?.PropertyAdType === "Rent" ? (
                     <div>
@@ -873,10 +892,23 @@ export default function SinglePostDetails() {
                             navigate("/login");
                           }}
                         >
-                          View Owner Details
+                        View Number
                         </span>
                       ) : (
                         <>
+                          <button
+                            className="original-price border-0"
+                            ref={showOwnerDetailsFormRef}
+                            onClick={() => {
+                              setshowOwnerDetailsForm(true);
+                            }}
+                          >
+                            View Number
+                          </button>
+
+                          {/* <>  
+
+                         Rozer pay Logic
                           {
                             // Check if paidPropertyData?.data contains data and satisfies the condition
                             Array.isArray(paidPropertyData?.data) &&
@@ -899,10 +931,12 @@ export default function SinglePostDetails() {
                               />
                             ) // Show PayButton if the condition is not satisfied
                           }
+                           </> */}
                         </>
                       )}
                     </div>
                   ) : null}
+
                 </div>
                 {getSinglePostData?.SinglePost?.PostVerifyData?.Time && (
                   <div className="posted-by-section">
@@ -918,9 +952,16 @@ export default function SinglePostDetails() {
                       Posted On :{" "}
                       <span>
                         {
-                          new Date(
-                            getSinglePostData?.SinglePost?.PostVerifyData?.Time
-                          ).toLocaleDateString("en-GB") // UK format: day/month/year
+                          (() => {
+                            const date = new Date(getSinglePostData?.SinglePost?.PostVerifyData?.Time);
+                            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                            const day = ("0" + date.getDate()).slice(-2);  // Ensures two-digit day
+                            const month = monthNames[date.getMonth()];     // Get abbreviated month name
+                            const year = date.getFullYear().toString().slice(-2);  // Get last two digits of the year
+
+                            return `${day}-${month}-${year}`;
+                          })()
                         }
                       </span>
                     </p>
@@ -1450,11 +1491,8 @@ export default function SinglePostDetails() {
                       Component={ViewOwnerDetailsAlert}
                       SetShow={setshowOwnerDetailsForm}
                       BtnRef={showOwnerDetailsFormRef}
-                      Contact={
-                        paidPropertyData?.getOwnerDetail?.CreatePostUser
-                          ?.ContactNumber
-                      }
-                      // PropertyAddress={PropertyAddress}
+                      Contact={"7837840785"}
+                    // PropertyAddress={PropertyAddress}
                     />
                   )}
 

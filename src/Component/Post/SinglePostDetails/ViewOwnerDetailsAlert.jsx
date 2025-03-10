@@ -29,31 +29,25 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
         {/* <h2 className="view-owner-details-title">Payment Successful!</h2> */}
       </div>
       <div className="view-owner-details-content">
-        <div className="success-icon">
-          <FaCheckCircle color="#28a745" size={50} />
-        </div>
-        <p>
-          Congratulations! Your payment was successfully processed. Here are
-          the details:
-        </p>
-        <strong>
-          Property Owner Contact No: <b>{Contact}</b>
-        </strong>
-        <p>
-          You can now directly reach out to the owner for further
-          communication and discussions.
-        </p>
-        {/* <div className="cta-btn-container">
-          <button
-            className="cta-btn"
-            onClick={() => {
-              alert("Opening contact options...");
-            }}
-          >
-            Contact Owner
-          </button>
-        </div> */}
-      </div>
+  <div className="success-icon">
+    <FaCheckCircle color="#28a745" size={50} />
+  </div>
+
+  <p>
+    <strong>Here are our team contact details for rental property inquiries:</strong>
+  </p>
+  <p>
+    Team Contact No: <b>{Contact}</b>
+  </p>
+  <p>
+    Email: <b>sales@propertydekho247.com</b>
+  </p>
+  <p>
+    Our team is available to assist you with any rental property-related inquiries. Don't hesitate to get in touch, and we'll be happy to help!
+  </p>
+</div>
+
+
     </div>
   );
 }

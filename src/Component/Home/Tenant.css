@@ -94,9 +94,14 @@
     justify-content: center;
     align-items: center;
   }
+
+  .for-tenant-introduction-img-container img{
+    width: 30px;
+  }
   
   .for-tenant-introduction {
     display: flex;
+    align-items: center;
     /* border: 1px solid black; */
   }
   

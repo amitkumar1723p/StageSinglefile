@@ -230,7 +230,7 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
- 
+
 
   return (
     <><Helmet>
@@ -243,7 +243,9 @@ const HeroSection = () => {
 
 
       <header className="hero-section" id="Hero-section">
-        <div className="overlay"></div>
+        <div className="overlay">
+          <img src="/img/hero-img9.png" alt="" srcset="" className="home-hero-img" />
+        </div>
         <div className="hero-content">
           <div className="hero-img-section">
             {/* <div className="hero-img-section" style={{backgroundImage:"url(/img/mobile-img.svg)"}}> */}
@@ -252,10 +254,12 @@ const HeroSection = () => {
           src="/img/mobile-img.svg"
           alt="hero img"
         /> */}
+
+            {/* Do changes in hero-section */}
           </div>
           <div className="heading-hero">
             <h1>
-              Market Value of <span>Property </span> – Pay the Right <span> Price</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time price
@@ -519,8 +523,8 @@ const HeroSection = () => {
 
 
             {/* <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink> */}
-            <div className="property-section">
-              {/* Property Listing Section */}
+            {/* <div className="property-section">
+              Property Listing Section
               <div
                 className="property-link"
                 onClick={() => {
@@ -540,7 +544,7 @@ const HeroSection = () => {
                     <button className="btn-hero">I am an Owner</button>
                   </div>
                   <div className="arrow">
-                    {/* <span>&#x2192;</span> */}
+                    <span>&#x2192;</span>
                     <div className="icon">
                       <img
                         src="/img/needbuyer.svg"
@@ -551,7 +555,7 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Property Requirement Section */}
+              Property Requirement Section
 
               <div
                 ref={PropertyRequirementBtnRef.current[0]}
@@ -571,17 +575,90 @@ const HeroSection = () => {
                   </h3>
                   <button className="btn-hero"> I am a Buyer</button>
                 </div>
-                <div className="arrow">{/* <span>&#x2192;</span> */}</div>
+                <div className="arrow"><span>&#x2192;</span></div>
                 <div className="icon">
                   <img src="/img/Postreqire.svg" alt="Property Listing Icon" />
                 </div>
-              </div>
-              {/* </a> */}
-            </div>
+              </div> */}
+            {/* </a> */}
+            {/* </div> */}
           </div>
 
         </div>
       </header>
+
+
+
+
+      {/* holi hain guyz */}
+
+      {/* <div className="requirement-container">
+       
+        <video autoPlay muted loop id="background-video">
+          <source src="/img/holi-video.mp4" type="video/mp4" />
+        
+        </video>
+
+        
+        <div className="requirement-main">
+          <div className="requirement-heading">
+            <h2 className="requirement-heading-h2">
+              Tell us what you’re looking for, and we’ll notify you when we
+              find a match!
+            </h2>
+
+            <div ref={PropertyRequirementBtnRef.current[0]}
+              onClick={() => {
+                if (medata && medata.IsAuthenticated == true) {
+                  setshowPropertyRequirement(true);
+                } else {
+                  setRedirectPath("/post-requirement");
+                  navigate("/login");
+                }
+              }} className="requirement-button">
+              <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
+            </div>
+          </div>
+          <div className="requirement-svg">
+            <img src="/img/House4.svg" alt="house" srcset="" className="requirement-img" />
+          </div>
+        </div>
+
+      </div> */}
+
+      {/* normal waala  */}
+      <div className="requirement-container">
+        <img src="/img/overlay2.svg" alt="" className="overlay-lines" />
+        <div className="requirement-overlay">
+        </div>
+        <div className="requirement-main">
+          <div className="requirement-heading">
+            <h2 className="requirement-heading-h2">
+              Tell us what you’re looking for, and we’ll notify you when we
+              find a match!
+            </h2>
+
+            <div ref={PropertyRequirementBtnRef.current[0]}
+              onClick={() => {
+                if (medata && medata.IsAuthenticated == true) {
+                  setshowPropertyRequirement(true);
+                } else {
+                  setRedirectPath("/post-requirement");
+                  navigate("/login");
+                }
+              }} className="requirement-button">
+              <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
+            </div>
+          </div>
+          <div className="requirement-svg">
+            <img src="/img/House4.svg" alt="house" srcset="" className="requirement-img" />
+          </div>
+        </div>
+
+      </div>
+
+      {/* changes is complete in hero-section */}
+
       {!isHidden && (
         <div className="floating-buttons ">
           {/* Call Button */}
@@ -739,13 +816,13 @@ const HeroSection = () => {
         <>
           <Tenant />
           <BrowseProperties />
-          <ListYourProperty/>
+          <ListYourProperty />
           <LandLord />
           <PropertyDetailsForm />
           <RentAgreement />
           <RentalBanner />
           {/* <VerifiedComponent /> */}
-          <RentAuthentication/>
+          <RentAuthentication />
           {/* <TenantDetailsForm /> */}
         </>
       )}

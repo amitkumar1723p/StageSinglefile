@@ -1,6 +1,6 @@
 /* Container Styling */
 .file-handler-container {
-    max-width: 100%;
+    width: 100%;
     margin: 0px auto;
     padding: 0 20px;
     background-color: #f8f9fa;
@@ -8,6 +8,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
     text-align: center;
+  }
+  .owner-excel-table-container{
+    max-width: 90vw;
+    /* outline: 1px solid red; */
+    height: 60vh;
+    overflow: scroll;
   }
   
   /* Title */
