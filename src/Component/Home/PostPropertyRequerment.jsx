@@ -72,6 +72,33 @@ const PostPropertyRequerment = ({ SetShow }) => {
     dispatch(PostPropertyRequirementAction(dataToSubmit));
   };
 
+
+  const [propertyTypeAlert, setPropertyTypeAlert] = useState(false);
+  const [locationAlert,setLocationAlert] = useState({});
+  const [bhkType,setBhkType]  = useState(false);
+
+  const HandleRequirementAlert = ()=>{
+    if(!PostPropertyRequirementData.PropertyType){
+      setPropertyTypeAlert(true);
+      setTimeout(()=>setPropertyTypeAlert(false),1400)
+      return;
+    }
+    // if(!ProjectNameObjectData.ProjectName){
+    //   setLocationAlert({ProjectName:true})
+    //   setTimeout(() => {
+    //     setLocationAlert({ProjectName:false})
+    //   }, 1400);
+    // }
+
+
+    if(!PostPropertyRequirementData.BHKType){
+      setBhkType(true);
+      setTimeout(()=>setBhkType(false),1400);
+      return;
+    }
+
+  }
+
   return (
     <div className="form-container">
       <div className="form-right">
@@ -91,7 +118,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           <div className="form-group form-bhk">
               <p className="postreq-form " >Property type</p>
               <select
-                className="form-input"
+                className={`form-input ${propertyTypeAlert? "shake inputShake" : ""}`}
                 required
                 value={PostPropertyRequirementData.PropertyType.trimStart()}
                 onChange={(e) =>
@@ -115,6 +142,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 ProjectNameObjectData={PostPropertyRequirementData}
                 setProjectNameObjectData={setPostPropertyRequirementData}
                 placeholder={"Search by locality, project name"}
+                locationAlert = {locationAlert}
               />
             </div>
 
@@ -122,7 +150,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
             <div className="form-group form-bhk">
               <p className="postreq-form " >BHK Type</p>
               <select
-                className="form-input"
+                className={`form-input ${bhkType? "shake ":""}`}
                 required
                 value={PostPropertyRequirementData.BHKType.trimStart()}
                 onChange={(e) =>
@@ -266,6 +294,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 disabled={loading ? true : false}
                 type="submit"
                 className="form-submit-btn"
+                onClick={ HandleRequirementAlert}
               >
                 Submit
               </button>
@@ -276,7 +305,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
       <div
         className="cross-Btn"
         onClick={() => {
-          SetShow(false);
+          SetShow(false); 
+         
         }}
       >
         X

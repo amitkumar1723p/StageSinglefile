@@ -12,6 +12,7 @@ export default function ProjectNameSection({
   placeholder,
   ProjectInputType,
   setrunSearchButton,
+  locationAlert,
 }) {
   const dispatch = useDispatch();
   const [ProjectName, setProjectName] = useState([]);
@@ -210,7 +211,7 @@ export default function ProjectNameSection({
         >
           <input
             onKeyDown={handleKeyDown}
-            className={inputClass}
+            className={`${inputClass}`}
             autoComplete="off"
             type="text"
             id="property-name"
