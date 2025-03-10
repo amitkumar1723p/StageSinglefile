@@ -56,9 +56,6 @@ export default function Amenities({
     "Security Guard",
   ];
 
-  {
-    console.log(AmenitiesDetailsData);
-  }
   useEffect(() => {
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
       setTimeout(() => {

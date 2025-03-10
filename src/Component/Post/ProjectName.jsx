@@ -179,6 +179,7 @@ export default function ProjectNameSection({
     }
   }, [FilterProjectName, listRef]);
 
+
   return (
     <>
       <div
@@ -208,7 +209,6 @@ export default function ProjectNameSection({
           }`}
         >
           <input
-          
             onKeyDown={handleKeyDown}
             className={inputClass}
             autoComplete="off"

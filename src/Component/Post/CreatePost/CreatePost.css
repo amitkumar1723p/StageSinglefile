@@ -793,7 +793,7 @@ input[type="checkbox"]#whatsapp-updates {
 
 .property-form {
   padding: 0;
-  gap: 0;
+  gap: 10;
 }
 
 form {
@@ -1588,7 +1588,7 @@ input[type="number"] {
   }
 
   .unit-input {
-    width: 60%;
+    width: 100%;
     border: 1px solid red;
     position: relative;
     border: 1px solid #daeaf9;
@@ -1852,7 +1852,7 @@ input[type="number"] {
     justify-content: space-between;
   }
   .basement-box{ 
-    grid-template-columns :repeat(2, 1fr); ;
+    grid-template-columns :repeat(1, 1fr); ;
  
    }
 

@@ -263,6 +263,28 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         setTimeout(()=>showError({FlooringType:false}),1800);
         return;
       }
+
+
+      if(["Independent/Builder Floor"].includes(
+        BasicDetailsData.ApartmentType
+      )){
+        if(PropertyDetailsData.Basement === undefined){
+          
+          setTimeout(()=>showError({Basement:true}),800);
+        setTimeout(()=>showError({Basement:false}),1800);
+        return;
+        }
+      }
+   
+      if(PropertyDetailsData.Basement == true){
+        if(!PropertyDetailsData.BasementArea.value){
+          console.log("console.log")
+          setTimeout(()=>showError({BasementAreaShake:true}),800);
+          setTimeout(()=>showError({BasementAreaShake:false}),1800);
+        return;
+        }
+      }
+      
       // if(PropertyDetailsData.OtherRoom.length==0){
       
       //   setTimeout(()=>showError({OtherRoom:true}),800);

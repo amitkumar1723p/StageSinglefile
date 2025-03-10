@@ -14,7 +14,7 @@ export default function LocationDetails({
   update,
   setnext,
   // LocationDetailsSubmit
-  LocationDetailsSubmiRef
+  LocationDetailsSubmiRef,
 }) {
   const dispatch = useDispatch();
 
@@ -24,7 +24,6 @@ export default function LocationDetails({
       StoreDataInSession("next", 2);
       StoreDataInSession("LocationDetailsData", LocationDetailsData);
     }
-      console.log("Locationdetails")
       setnext(2);
   };
 
@@ -35,7 +34,8 @@ export default function LocationDetails({
   const [localityShake,setLocalityShake] = useState(false)
 
 
-  const LocationDetailsAlertShake = ()=>{
+  const LocationDetailsAlertShake = (e)=>{
+
     if(LocationDetailsData.Landmark?.length == 0){
       setSectorShake(true);
       setTimeout(()=> setSectorShake(false),1600);
@@ -49,10 +49,13 @@ export default function LocationDetails({
     if(LocationDetailsData.Locality?.length == 0){
       setLocalityShake(true);
       setTimeout(()=> setLocalityShake(false),1600);
-
     }
 
   }
+
+
+
+ 
 
   return (
     <>
@@ -143,7 +146,7 @@ export default function LocationDetails({
               Previous
             </div>
 
-            <button className="Submit-next" onClick={()=>LocationDetailsAlertShake()}>Next</button>
+            <button className="Submit-next" onClick={LocationDetailsAlertShake}>Next</button>
           </div>
         </form>
       </div>
