@@ -206,13 +206,15 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
     // eslint-disable-next-line
   }, [location]);
 
+ 
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-      // if (
-      //   data.success === true && ["CreatePostRequest"].includes(LodingType)
-      // ) {
-
+ 
+      if(data?.success &&LodingType=="ProfileUpdateRequest"){
+        
+        dispatch(GetMeDetailsAction()); }
+      
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
@@ -245,7 +247,7 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
 
         dispatch({ type: "UserClear" });
       }
-
+   
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MapComponent from "./MapComponent";
 
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
@@ -24,8 +24,35 @@ export default function LocationDetails({
       StoreDataInSession("next", 2);
       StoreDataInSession("LocationDetailsData", LocationDetailsData);
     }
-    setnext(2);
+      console.log("Locationdetails")
+      setnext(2);
   };
+
+  // handle Alert Shake
+
+  const [sectorShake,setSectorShake] = useState(false);
+  const [cityShake,setCityShake] = useState(false);
+  const [localityShake,setLocalityShake] = useState(false)
+
+
+  const LocationDetailsAlertShake = ()=>{
+    if(LocationDetailsData.Landmark?.length == 0){
+      setSectorShake(true);
+      setTimeout(()=> setSectorShake(false),1600);
+
+    }
+    if(LocationDetailsData.City?.length == 0){
+      setCityShake(true);
+      setTimeout(()=> setCityShake(false),1600);
+
+    }
+    if(LocationDetailsData.Locality?.length == 0){
+      setLocalityShake(true);
+      setTimeout(()=> setLocalityShake(false),1600);
+
+    }
+
+  }
 
   return (
     <>
@@ -49,6 +76,7 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="street">Sector *</label>
               <input
+              className={`${sectorShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="street"
                 name="street"
@@ -67,6 +95,7 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="city">City *</label>
               <input
+               className={`${cityShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="city"
                 name="city"
@@ -83,6 +112,7 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="locality">Locality *</label>
               <input
+              className={`${localityShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="locality"
                 name="locality"
@@ -113,7 +143,7 @@ export default function LocationDetails({
               Previous
             </div>
 
-            <button className="Submit-next">Next</button>
+            <button className="Submit-next" onClick={()=>LocationDetailsAlertShake()}>Next</button>
           </div>
         </form>
       </div>

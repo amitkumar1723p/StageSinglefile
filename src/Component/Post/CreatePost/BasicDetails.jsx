@@ -8,20 +8,23 @@ export default function BasicDetailsSection({
   setBasicDetailsData,
   setnext,
   update,
-  BasicDetailsFormSubmit
+  BasicDetailsFormSubmit,
 }) {
   // eslint-disable-next-line
   const [ApartMentTypeTab, setApartMentTypeTab] = useState([
     "Apartment",
     "Independent House/Villa",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
     "Independent/Builder Floor",
-    "Serviced Apartment",
+    // "Serviced Apartment",
   ]);
+
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+    "1 RK/PG",
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
@@ -51,19 +54,33 @@ export default function BasicDetailsSection({
   // Property Ad type (useEffect)  add plot/land
   useEffect(() => {
     if (BasicDetailsData.PropertyAdType === "Sale") {
-      if (!ApartMentTypeTab.includes("Plot/Land")) {
-        setApartMentTypeTab([...ApartMentTypeTab, "Plot/Land"]);
-      }
+      setApartMentTypeTab([
+        "Apartment",
+        "Independent/Builder Floor",
+        "Studio Apartment",
+        "Independent House/Villa",
+        "Plot/Land",
+      ]);
+      // if (!ApartMentTypeTab.includes("Plot/Land")) {
+      // setApartMentTypeTab([...ApartMentTypeTab, ]);
+      // }
     }
 
     if (BasicDetailsData.PropertyAdType === "Rent") {
-      if (ApartMentTypeTab.includes("Plot/Land")) {
-        setApartMentTypeTab(
-          ApartMentTypeTab.filter((e) => {
-            return e !== "Plot/Land";
-          })
-        );
-      }
+      setApartMentTypeTab([
+        "Apartment",
+        "Independent/Builder Floor",
+        "1 RK/PG",
+        "Independent House/Villa",
+        "Serviced Apartment",
+      ]);
+      // if (ApartMentTypeTab.includes("Plot/Land")) {
+      //   setApartMentTypeTab(
+      //     ApartMentTypeTab.filter((e) => {
+      //       return e !== "Plot/Land";
+      //     })
+      //   );
+      // }
     }
 
     // eslint-disable-next-line
@@ -83,10 +100,154 @@ export default function BasicDetailsSection({
     // eslint-disable-next-line
   }, [BasicDetailsData.ApartmentType]);
 
-
-
   // const BasicDetailsSubmitForm =()=>{}
 
+
+    const [error, setError] = useState(' ');
+
+
+    const [propertyTypeShake, setPropertyTypeShake] = useState(false);
+    const [sellRentShake, setSellRentShake] = useState(false);
+    const [choosePropertyShake,setChoosePropertyShake] = useState(false);
+    const [availableFromShake,setAvailableFromShake] = useState(false);
+    const [propertyStatusShake,setPropertyStatusShake] = useState(false);
+    const [currentpropertyStatusReadytoMove, setCurrentpropertyStatusReadytoMove ] = useState(false);
+    const [propertyAgeShake,setPropertyAgeShake] = useState(false);
+    const [underConstructionPossessionShake,setUnderConstructionPossessionShake] = useState(false);
+    const [plotLandPossessionShake,setPlotLandPossessionShake] = useState(false);
+    const [currentpropertyStatuPlotLand, setCurrentpropertyStatusPlotLand] = useState(false);
+
+
+
+
+const HandleAlertShake = ()=>{
+  if(!BasicDetailsData.PropertyType) {
+    if(BasicDetailsData.PropertyAdType){
+      setPropertyTypeShake(true);
+    setTimeout(()=>setPropertyTypeShake(false),1000);
+    return;
+    }
+    setPropertyTypeShake(true);
+    setTimeout(()=>setPropertyTypeShake(false),1000);
+
+  }
+  if(!BasicDetailsData.PropertyAdType){
+    if(BasicDetailsData.ApartmentType){
+      setSellRentShake(true);
+    setTimeout(()=>setSellRentShake(false),1000);
+    return;
+    }
+    setSellRentShake(true);
+    setTimeout(()=>setSellRentShake(false),1000);
+
+  }
+  if(!BasicDetailsData.ApartmentType){
+    setChoosePropertyShake(true);
+    setTimeout(()=>setChoosePropertyShake(false),1000);
+    return;
+  }
+  if (
+    BasicDetailsData.PropertyAdType === "Rent" &&
+    !BasicDetailsData.AvailableFrom
+  ) {
+    setAvailableFromShake(true);
+    setTimeout(()=> setAvailableFromShake(false),1000);
+    return;
+  }
+  if (
+    BasicDetailsData.PropertyAdType === "Rent" &&
+    BasicDetailsData.AvailableFrom
+  ) {
+    // const currentDate = new Date(Date.now());
+    const currentDate = new Date().toISOString().split("T")[0];
+    const selectedDate = BasicDetailsData.AvailableFrom;
+
+    if (selectedDate < currentDate) {
+      return alert("Enter valid Date");
+    }
+
+    // if (selectedDate >= currentDate) {
+    //   setBasicDetailsData({
+    //     ...BasicDetailsData,
+    //     AvailableFrom: e.target.value,
+    //   });
+    // }
+  }
+  if (
+    BasicDetailsData.PropertyAdType === "Sale" &&
+    ApartMentTypeArrayRemovePlotAndLand.includes(
+      BasicDetailsData.ApartmentType
+    ) &&
+    !BasicDetailsData.PropertyStatus
+  ) {
+    setPropertyStatusShake(true);
+    setTimeout(()=>setPropertyStatusShake(false),1000);
+    return;
+  }
+  if (
+    BasicDetailsData.PropertyAdType === "Sale" &&
+    ApartMentTypeArrayRemovePlotAndLand.includes(
+      BasicDetailsData.ApartmentType
+    ) &&
+    BasicDetailsData.PropertyStatus == "Ready to move" &&
+    !BasicDetailsData.CurrentPropertyStatus
+  ) {
+    setCurrentpropertyStatusReadytoMove(true);
+    setTimeout(()=>setCurrentpropertyStatusReadytoMove(false),1000);
+    
+    return;
+  }
+ 
+  if (
+    BasicDetailsData.PropertyAdType === "Sale" &&
+    ApartMentTypeArrayRemovePlotAndLand.includes(
+      BasicDetailsData.ApartmentType
+    ) &&
+    BasicDetailsData.PropertyStatus == "Ready to move" &&
+    !BasicDetailsData.PropertyAge
+  ) {
+    setPropertyAgeShake(true);
+    setTimeout(()=> setPropertyAgeShake(false),1000);
+    return;
+  }
+  if (
+    BasicDetailsData.PropertyAdType === "Sale" &&
+    ApartMentTypeArrayRemovePlotAndLand.includes(
+      BasicDetailsData.ApartmentType
+    ) &&
+    BasicDetailsData.PropertyStatus == "Under Construction" &&
+    !BasicDetailsData.PossessionStatus
+  ) {
+    setUnderConstructionPossessionShake(true);
+    setTimeout(()=>setUnderConstructionPossessionShake(false),1000);
+    return;
+  }
+  if (
+    BasicDetailsData.ApartmentType === "Plot/Land" &&
+    !BasicDetailsData.CurrentPropertyStatus
+  ) {
+    setCurrentpropertyStatusPlotLand(true);
+    setTimeout(()=>setCurrentpropertyStatusPlotLand(false),1000);
+    return;
+  }
+  if (
+    BasicDetailsData.ApartmentType === "Plot/Land" &&
+    !BasicDetailsData.PossessionStatus
+  ) {
+    setPlotLandPossessionShake(true);
+    setTimeout(()=>setPlotLandPossessionShake(false),1000);
+    return;
+  }
+  if (!update) {
+        // StoreDataInSession("BasicDetailsDataUpdate", BasicDetailsData);
+        StoreDataInSession("BasicDetailsData", BasicDetailsData);
+        StoreDataInSession("next", 1);
+      }
+
+      
+    setnext(1);
+    return true;
+}
 
   return (
     <>
@@ -98,15 +259,16 @@ export default function BasicDetailsSection({
         {/* <div className="create-banner-box">
           <img src="/img/create-banner.svg" alt="create-banner" />
         </div> */}
-        <div className="form-container-step-1" >
+        <div className="form-container-step-1">
           <div className="form-content">
             <h3 className="basic-details-heading">Property Type*</h3>
             <div className="tabs">
               <button
-                className={`tab ${BasicDetailsData.PropertyType === "Residential"
+                className={`tab ${
+                  BasicDetailsData.PropertyType === "Residential"
                     ? "select"
                     : ""
-                  }`}
+                }   ${propertyTypeShake? 'inputShake shake' : ''}  `}
                 value={"Residential"}
                 onClick={() => {
                   if (!update) {
@@ -127,6 +289,7 @@ export default function BasicDetailsSection({
                   }
                 />
               </button>
+              <div>{error && <p style={{color: 'red', fontSize: '12px' }}>{error}</p>}</div>
             </div>
             <h3 className="basic-details-heading">I am Looking To *</h3>
             <div className="ad-type rent-sale">
@@ -135,8 +298,9 @@ export default function BasicDetailsSection({
                   <button
                     key={i}
                     value={text}
-                    className={`ad-btn tab img add-btn-${text} ${BasicDetailsData.PropertyAdType === text ? "select" : ""
-                      }`}
+                    className={`ad-btn tab img add-btn-${text} ${
+                      BasicDetailsData.PropertyAdType === text ? "select" : ""
+                    }  ${sellRentShake? 'inputShake shake' : ''} `}
                     onClick={() => {
                       if (!update) {
                         setBasicDetailsData({
@@ -166,8 +330,9 @@ export default function BasicDetailsSection({
               {ApartMentTypeTab.map((e, i) => {
                 return (
                   <button
-                    className={`tab ${BasicDetailsData.ApartmentType === e ? "select" : ""
-                      }`}
+                    className={`tab ${
+                      BasicDetailsData.ApartmentType === e ? "select" : ""
+                    }  ${choosePropertyShake? 'inputShake shake' : ''}  `}
                     key={i}
                     onClick={() => {
                       if (["Owner"].includes(medata?.user?.Role) || !update) {
@@ -195,248 +360,251 @@ export default function BasicDetailsSection({
             {[...ApartMentTypeArrayRemovePlotAndLand, "Plot/Land"].includes(
               BasicDetailsData.ApartmentType
             ) && (
-                <>
-                  {BasicDetailsData.PropertyAdType === "Rent" && (
-                    <div className="date-time">
-                      <label
-                        htmlFor="available-from"
-                        className="basic-details-heading"
-                      >
-                        Available From *
-                      </label>
+              <>
+                {BasicDetailsData.PropertyAdType === "Rent" && (
+                  <div className="date-time">
+                    <label
+                      htmlFor="available-from"
+                      className="basic-details-heading"
+                    >
+                      Available From *
+                    </label>
 
-                      <input
-                        className="date-time-lable"
-                        type="date"
-                        id="available-from"
-                        required
-                        value={BasicDetailsData.AvailableFrom || ""}
-                        onChange={(e) => {
-                          // const currentDate = new Date(Date.now());
-                          const currentDate = new Date()
-                            .toISOString()
-                            .split("T")[0];
-                          const selectedDate = e.target.value;
+                    <input
+                    className={`date-time-lable ${availableFromShake?'inputShake shake' :''} `}
+                      type="date"
+                      id="available-from"
+                      required
+                      value={BasicDetailsData.AvailableFrom || ""}
+                      onChange={(e) => {
+                        // const currentDate = new Date(Date.now());
+                        const currentDate = new Date()
+                          .toISOString()
+                          .split("T")[0];
+                        const selectedDate = e.target.value;
 
-                          if (selectedDate >= currentDate) {
-                            setBasicDetailsData({
-                              ...BasicDetailsData,
-                              AvailableFrom: e.target.value,
-                            });
-                          }
-                        }}
-                      />
-                    </div>
-                  )}
+                        if (selectedDate >= currentDate) {
+                          setBasicDetailsData({
+                            ...BasicDetailsData,
+                            AvailableFrom: e.target.value,
+                          });
+                        }
+                      }}
+                    />
+                  </div>
+                )}
 
-                  {BasicDetailsData.PropertyAdType === "Sale" && (
-                    <>
-                      {/* not enable plot and land  */}
-                      {ApartMentTypeArrayRemovePlotAndLand.includes(
-                        BasicDetailsData.ApartmentType
-                      ) && (
-                          <div className="fom-group">
-                            <h4 className="basic-details-heading">
-                              {" "}
-                              Property Status*{" "}
-                            </h4>
-                            <div className="PropertyStatus-box">
-                              {PropertyStatusArray.map((text, i) => {
-                                return (
-                                  <div
-                                    key={i}
-                                    className="PropertyStatus-box-content"
-                                  >
-                                    <label htmlFor={`property-status-${i}`}>
-                                      {text}
-                                    </label>
-                                    <input
-                                      type="radio"
-                                      name="Property Stattus"
-                                      required
-                                      id={`property-status-${i}`}
-                                      value={text}
-                                      checked={
-                                        BasicDetailsData.PropertyStatus === text
-                                      }
-                                      onChange={() => {
-                                        setBasicDetailsData({
-                                          ...BasicDetailsData,
-                                          PropertyStatus: text,
-                                        });
-                                      }}
-                                    />
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-
-                      {(BasicDetailsData.PropertyStatus == "Ready to move" ||
-                        BasicDetailsData.ApartmentType == "Plot/Land") && (
-                          <>
-                            {" "}
-                            <div className="fom-group">
-                              <p className="basic-details-heading">
-                                Current Property Status*{" "}
-                                <small> (Choose only one) </small>
-                              </p>
-
-                              <div className="PropertyStatus-box">
-                                {CurrentPropertyStatusArray.map((text, i) => {
-                                  return (
-                                    <div
-                                      key={i}
-                                      className="PropertyStatus-box-content"
-                                    >
-                                      <label
-                                        htmlFor={`current-property-status-${i}`}
-                                      >
-                                        {text}
-                                      </label>
-                                      <input
-                                        type="radio"
-                                        name="current-property-status"
-                                        required
-                                        id={`current-property-status-${i}`}
-                                        value={text}
-                                        checked={
-                                          BasicDetailsData.CurrentPropertyStatus ===
-                                          text
-                                        }
-                                        onChange={() => {
-                                          setBasicDetailsData({
-                                            ...BasicDetailsData,
-                                            CurrentPropertyStatus: text,
-                                          });
-                                        }}
-                                      />
-                                    </div>
-                                  );
-                                })}
+                {BasicDetailsData.PropertyAdType === "Sale" && (
+                  <>
+                    {/* not enable plot and land  */}
+                    {ApartMentTypeArrayRemovePlotAndLand.includes(
+                      BasicDetailsData.ApartmentType
+                    ) && (
+                      <div className="fom-group">
+                        <h4 className="basic-details-heading">
+                          {" "}
+                          Property Status*{" "}
+                        </h4>
+                        <div className="PropertyStatus-box">
+                          {PropertyStatusArray.map((text, i) => {
+                            return (
+                              <div
+                                key={i}
+                                className="PropertyStatus-box-content"
+                              >
+                                <label
+                                className={` ${propertyStatusShake?' shake' :''}`}
+                                 htmlFor={`property-status-${i}`}>
+                                  {text}
+                                </label>
+                                <input
+                                className={` ${propertyStatusShake?'inputShake  ' :''}`}
+                                  type="radio"
+                                  name="Property Stattus"
+                                  required
+                                  id={`property-status-${i}`}
+                                  value={text}
+                                  checked={
+                                    BasicDetailsData.PropertyStatus === text
+                                  }
+                                  onChange={() => {
+                                    setBasicDetailsData({
+                                      ...BasicDetailsData,
+                                      PropertyStatus: text,
+                                    });
+                                  }}
+                                />
                               </div>
-                            </div>
-                            {/* not enable plot and land  */}
-                            {ApartMentTypeArrayRemovePlotAndLand.includes(
-                              BasicDetailsData.ApartmentType
-                            ) && (
-                                <div className="form-group">
-                                  <label htmlFor="property-age">Property Age*</label>
-                                  <select
-                                    className="date-time-lable"
-                                    id="property-age"
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {(BasicDetailsData.PropertyStatus == "Ready to move" ||
+                      BasicDetailsData.ApartmentType == "Plot/Land") && (
+                      <>
+                        {" "}
+                        <div className="fom-group">
+                          <p className="basic-details-heading">
+                            Current Property Status*{" "}
+                            <small> (Choose only one) </small>
+                          </p>
+
+                          <div className="PropertyStatus-box">
+                            {CurrentPropertyStatusArray.map((text, i) => {
+                              return (
+                                <div
+                                  key={i}
+                                  className="PropertyStatus-box-content"
+                                >
+                                  <label
+                                  className={` ${currentpropertyStatusReadytoMove?'shake  ' :''}  ${currentpropertyStatuPlotLand?'shake  ' :''} `}
+                                    htmlFor={`current-property-status-${i}`}
+                                  >
+                                    {text}
+                                  </label>
+                                  <input
+                                  className={` ${currentpropertyStatusReadytoMove?'shake  ' :''}  ${currentpropertyStatuPlotLand?'shake  ' :''}`}
+                                    type="radio"
+                                    name="current-property-status"
                                     required
-                                    value={BasicDetailsData.PropertyAge || ""}
-                                    onChange={(e) => {
+                                    id={`current-property-status-${i}`}
+                                    value={text}
+                                    checked={
+                                      BasicDetailsData.CurrentPropertyStatus ===
+                                      text
+                                    }
+                                    onChange={() => {
                                       setBasicDetailsData({
                                         ...BasicDetailsData,
-                                        PropertyAge: e.target.value,
+                                        CurrentPropertyStatus: text,
                                       });
                                     }}
-                                  >
-                                    <option value="">Select</option>
-                                    <option value="0-5">0-5 years</option>
-                                    <option value="5-10">5-10 years</option>
-                                    <option value="10-20">10-20 years</option>
-                                  </select>
+                                  />
                                 </div>
-                              )}
-                          </>
-                        )}
-
-                      {(BasicDetailsData.PropertyStatus == "Under Construction" ||
-                        BasicDetailsData.ApartmentType == "Plot/Land") && (
+                              );
+                            })}
+                          </div>
+                        </div>
+                        {/* not enable plot and land  */}
+                        {ApartMentTypeArrayRemovePlotAndLand.includes(
+                          BasicDetailsData.ApartmentType
+                        ) && (
                           <div className="form-group">
-                            <label htmlFor="property-age">Possession Status*</label>
+                            <label htmlFor="property-age">Property Age*</label>
                             <select
-                              className="date-time-lable"
+                          className={`date-time-lable  ${propertyAgeShake? 'shake inputShake' : ''} `}
                               id="property-age"
                               required
-                              value={BasicDetailsData.PossessionStatus || ""}
+                              value={BasicDetailsData.PropertyAge || ""}
                               onChange={(e) => {
                                 setBasicDetailsData({
                                   ...BasicDetailsData,
-                                  PossessionStatus: e.target.value,
+                                  PropertyAge: e.target.value,
                                 });
                               }}
                             >
                               <option value="">Select</option>
-                              {PossessionStatusOption.map((e, i) => {
-                                return (
-                                  <option key={i} value={e}>
-                                    {e}
-                                  </option>
-                                );
-                              })}
-                              {/* <option value="0-5">0-5 years</option>
-                          <option value="5-10">5-10 years</option>
-                          <option value="10-20">10-20 years</option> */}
+                              <option value="0-5">0-5 years</option>
+                              <option value="5-10">5-10 years</option>
+                              <option value="10-20">10-20 years</option>
                             </select>
                           </div>
                         )}
-                      {BasicDetailsData.ApartmentType == "Plot/Land" && (
-                        <div className="open-side-box not-select-text">
-                          <div className="Counter">
-                            <p className="basic-details-heading">
-                              Open Sides
-                              <small> (optional) </small>
-                            </p>
+                      </>
+                    )}
 
-                            <div className="counter">
-                              <div
-                                className="decrement button"
-                                onClick={() => {
-                                  if (BasicDetailsData.NoOfOpenSide > 0) {
-                                    setBasicDetailsData({
-                                      ...BasicDetailsData,
-                                      NoOfOpenSide:
-                                        BasicDetailsData.NoOfOpenSide - 1,
-                                    });
-                                  }
-                                }}
-                              >
-                                -
-                              </div>
-                              <input
-                                type="number"
-                                id="bathroom"
-                                name="bathroom"
-                                min="0"
-                                value={BasicDetailsData.NoOfOpenSide || 0}
-                                readOnly
-                              />
-                              <div
-                                className="increment button"
-                                onClick={() => {
+                    {(BasicDetailsData.PropertyStatus == "Under Construction" ||
+                      BasicDetailsData.ApartmentType == "Plot/Land") && (
+                      <div className="form-group">
+                        <label htmlFor="property-age">Possession Status*</label>
+                        <select
+                           className={`date-time-lable  ${underConstructionPossessionShake? 'shake inputShake' : ''}  ${plotLandPossessionShake? 'shake inputShake' : ''} `}
+                          id="property-age"
+                          required
+                          value={BasicDetailsData.PossessionStatus || ""}
+                          onChange={(e) => {
+                            setBasicDetailsData({
+                              ...BasicDetailsData,
+                              PossessionStatus: e.target.value,
+                            });
+                          }}
+                        >
+                          <option value="">Select</option>
+                          {PossessionStatusOption.map((e, i) => {
+                            return (
+                              <option key={i} value={e}>
+                                {e}
+                              </option>
+                            );
+                          })}
+                          {/* <option value="0-5">0-5 years</option>
+                          <option value="5-10">5-10 years</option>
+                          <option value="10-20">10-20 years</option> */}
+                        </select>
+                      </div>
+                    )}
+                    {BasicDetailsData.ApartmentType == "Plot/Land" && (
+                      <div className="open-side-box not-select-text">
+                        <div className="Counter">
+                          <p className="basic-details-heading">
+                            Open Sides
+                            <small> (optional) </small>
+                          </p>
+
+                          <div className="counter">
+                            <div
+                              className="decrement button"
+                              onClick={() => {
+                                if (BasicDetailsData.NoOfOpenSide > 0) {
                                   setBasicDetailsData({
                                     ...BasicDetailsData,
                                     NoOfOpenSide:
-                                      BasicDetailsData.NoOfOpenSide + 1,
+                                      BasicDetailsData.NoOfOpenSide - 1,
                                   });
-                                }}
-                              >
-                                +
-                              </div>
+                                }
+                              }}
+                            >
+                              -
+                            </div>
+                            <input
+                              type="number"
+                              id="bathroom"
+                              name="bathroom"
+                              min="0"
+                              value={BasicDetailsData.NoOfOpenSide || 0}
+                              readOnly
+                            />
+                            <div
+                              className="increment button not-select-text"
+                              onClick={() => {
+                                setBasicDetailsData({
+                                  ...BasicDetailsData,
+                                  NoOfOpenSide:
+                                    BasicDetailsData.NoOfOpenSide + 1,
+                                });
+                              }}
+                            >
+                              +
                             </div>
                           </div>
                         </div>
-                      )}
-                    </>
-                  )}
-                </>
-              )}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </main>
 
       <div className="next-prev-box">
-        <button
-          id="Submit-Next"
-          onClick={BasicDetailsFormSubmit}
-        >
-          Next
-        </button>
+        {/*  BasicDetailsFormSubmit();  include this for default alert and include this for shakeAlert HandleAlertShake();  */}
+      <button id="Submit-Next" onClick={() => { HandleAlertShake();  }}>     
+  Next
+</button>
       </div>
     </>
   );

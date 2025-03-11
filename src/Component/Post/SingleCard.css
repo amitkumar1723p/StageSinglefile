@@ -91,7 +91,7 @@
 }
 
 .single-card-icon-button:hover {
-  color: #3B82F6;
+  color: 1877f2;
 }
 
 
@@ -250,7 +250,7 @@
 .single-card-detail-icon {
   width: 20px;
   height: 20px;
-  color: #3B82F6;
+  color: 1877f2;
 }
 
 .single-card-detail-text {
@@ -356,7 +356,7 @@
 }
 
 .single-card-action-button {
-  background-color: #3B82F6;
+  background-color: #1877f2;
   color: white;
   border: none;
   padding: 8px 10px;

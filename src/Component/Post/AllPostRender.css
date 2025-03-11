@@ -66,7 +66,12 @@ color: #333;
     display: none;
     gap: 10px;
 }
-  
+  .all-post-render-skeleton-container{
+    display: grid;
+    /* background: red; */
+   grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
   
 .all-post-skeleton-card {
 
@@ -160,7 +165,7 @@ color: #333;
     color: white;
 
   }
-.allPostrender-showpost{
+.allPostrender-showpost {
       display: grid;
       gap: 15px;
       grid-template-columns: repeat(3, 1fr);
@@ -172,14 +177,14 @@ color: #333;
       width: auto;
     }
   
-    .allPostrender-showpost {
+    .allPostrender-showpost .all-post-render-skeleton-container{
       display: grid;
       gap: 5px;
       grid-template-columns: repeat(2, 1fr);
       margin-bottom: 300px;
     }
   
-    .allPostrender-showpost {
+    .allPostrender-showpost .all-post-render-skeleton-container{
       display: grid;
       gap: 20px;
       grid-template-columns: repeat(2, 1fr);
@@ -197,7 +202,7 @@ color: #333;
     .home {
       width: auto;
     }
-    .allPostrender-showpost {
+    .allPostrender-showpost .all-post-render-skeleton-container{
       display: grid;
       gap: 5px;
       grid-template-columns: repeat(2, 1fr);
@@ -372,6 +377,14 @@ color: #333;
   }
 
   @media (min-width: 0px) and (max-width: 480px) {
+    .all-post-render-skeleton-container{
+      display: flex;
+      /* background: red; */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
     .home {
       width: auto;
       margin: 5px auto;

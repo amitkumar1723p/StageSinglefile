@@ -36,6 +36,7 @@ import ProjectNameSection from "../Post/ProjectName";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   GetAllPostAction,
+  getPostsByAddress,
   GetSingleProjectNameDataAction,
 } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -187,6 +188,8 @@ const HeroSection = () => {
       return state.SingleProjectName;
     });
 
+const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
+    
   const PropertyRequirementBtnRef = useRef([]);
   const SearchContainerRef = useRef(null);
 
@@ -224,6 +227,10 @@ const HeroSection = () => {
     }
   }, [medata]);
   useEffect(() => {
+    if(!propertyByAdress){
+
+      dispatch(getPostsByAddress())
+    }
     dispatch({ type: "GetAllPostClear" });
     dispatch({ type: "GetSingleProjectNameDataClear" });
     setRedirectPathIsHomeCard(false);
@@ -234,7 +241,7 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
-  // console.log(PropertyAddType)
+
 
   
   const [typeOfProperty, setTypeOfProperty] = useState('Sale');  // Example type of property
@@ -270,11 +277,11 @@ const HeroSection = () => {
           alt="hero img"
         /> */}
 
-        {/* Do changes in hero-section */}
+            {/* Do changes in hero-section */}
           </div>
           <div className="heading-hero">
             <h1>
-            Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time price
@@ -450,53 +457,77 @@ const HeroSection = () => {
         </div>
       </header>
 
+
+
+
+      {/* holi hain guyz */}
+
+      {/* <div className="requirement-container">
+       
+        <video autoPlay muted loop id="background-video">
+          <source src="/img/holi-video.mp4" type="video/mp4" />
+        
+        </video>
+
+        
+        <div className="requirement-main">
+          <div className="requirement-heading">
+            <h2 className="requirement-heading-h2">
+              Tell us what you’re looking for, and we’ll notify you when we
+              find a match!
+            </h2>
+
+            <div ref={PropertyRequirementBtnRef.current[0]}
+              onClick={() => {
+                if (medata && medata.IsAuthenticated == true) {
+                  setshowPropertyRequirement(true);
+                } else {
+                  setRedirectPath("/post-requirement");
+                  navigate("/login");
+                }
+              }} className="requirement-button">
+              <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
+            </div>
+          </div>
+          <div className="requirement-svg">
+            <img src="/img/House4.svg" alt="house" srcset="" className="requirement-img" />
+          </div>
+        </div>
+
+      </div> */}
+
+      {/* normal waala  */}
       <div className="requirement-container">
-          <img src="/img/overlay2.svg" alt=""  className="overlay-lines"/>
-      <div className="requirement-overlay">
+        <img src="/img/overlay2.svg" alt="" className="overlay-lines" />
+        <div className="requirement-overlay">
         </div>
         <div className="requirement-main">
-              <div className="requirement-heading">
-                <h2 className="requirement-heading-h2">
-                  Tell us what you’re looking for, and we’ll notify you when we
-                  find a match!
-                </h2>
-              
-              <div  ref={PropertyRequirementBtnRef.current[0]}
-                onClick={() => {
-                  if (medata && medata.IsAuthenticated == true) {
-                    setshowPropertyRequirement(true);
-                  } else {
-                    setRedirectPath("/post-requirement");
-                    navigate("/login");
-                  }
-                }}  className="requirement-button">
-                <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
-              </div>
-              </div>
-              <div className="requirement-svg">
-                <img src="/img/House4.svg" alt="house" srcset=""  className="requirement-img"/>
-              </div>
-              </div>
-         
+          <div className="requirement-heading">
+            <h2 className="requirement-heading-h2">
+              Tell us what you’re looking for, and we’ll notify you when we
+              find a match!
+            </h2>
+
+            <div ref={PropertyRequirementBtnRef.current[0]}
+              onClick={() => {
+                if (medata && medata.IsAuthenticated == true) {
+                  setshowPropertyRequirement(true);
+                } else {
+                  setRedirectPath("/post-requirement");
+                  navigate("/login");
+                }
+              }} className="requirement-button">
+              <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
             </div>
+          </div>
+          <div className="requirement-svg">
+            <img src="/img/House4.svg" alt="house" srcset="" className="requirement-img" />
+          </div>
+        </div>
 
+      </div>
 
-
-  
-
-
-
-
-
-{/* searching start  */}
-
-
-
-
-<PropertySection />
-
-
-            {/* changes is complete in hero-section */}
+      {/* changes is complete in hero-section */}
 
       {!isHidden && (
         <div className="floating-buttons ">
@@ -515,6 +546,10 @@ const HeroSection = () => {
           </Link>
         </div>
       )}
+{/* poperty section */}
+
+<PropertySection />
+
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">
@@ -655,13 +690,13 @@ const HeroSection = () => {
         <>
           <Tenant />
           <BrowseProperties />
-          <ListYourProperty/>
+          <ListYourProperty />
           <LandLord />
           <PropertyDetailsForm />
           <RentAgreement />
           <RentalBanner />
           {/* <VerifiedComponent /> */}
-          <RentAuthentication/>
+          <RentAuthentication />
           {/* <TenantDetailsForm /> */}
         </>
       )}

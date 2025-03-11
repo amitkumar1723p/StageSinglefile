@@ -9,6 +9,7 @@ import Loader from "../Loader/Loader";
 // import NotifyForm from "../";/
 import Notifyme from "./PropertyCard/NotifyMe";
 import SingleCard from "../Post/SingleCard";
+import NotifyMe from "./PropertyCard/NotifyMe";
 export default function HomeCard() {
   const dispatch = useDispatch();
 
@@ -32,9 +33,9 @@ export default function HomeCard() {
         const available = serachResponse?.results?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
         );
-        // console.log(available, soldout);
+        
         setFilterdPost([...available, ...soldout]);
-        // console.log(filterdPost);
+        
       }
     }
     filter();
@@ -79,7 +80,9 @@ export default function HomeCard() {
               :<>
                 {
                   filterdPost?.length< 1 ? <>
-                    <p>sorry no post found</p>
+               
+            <NotifyMe />
+        
                   </>:  <div className="allPostrender-showpost">
                   {filterdPost?.map((e, i) => {
   

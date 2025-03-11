@@ -4,7 +4,7 @@ const EndToEndSupportSeller = () => {
   return (
     <>
       <div className="databox-sellertoseller">
-        <h2 className="support-title underline-on-text">End-to-End <span style={{ color: '#0078d4' }}> Support </span>
+        <h2 className="support-title underline-on-text">End-to-End <span style={{ color: '#1877f2' }}> Support </span>
         </h2>
        
      

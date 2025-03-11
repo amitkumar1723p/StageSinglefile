@@ -192,7 +192,9 @@ const PropertyFilters = () => {
     "Apartment",
     "Independent House/Villa",
     "Independent/Builder Floor",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+    "1 RK/PG",
     "Serviced Apartment",
     "Plot/Land",
   ];

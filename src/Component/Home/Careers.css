@@ -8,7 +8,7 @@
 }
 
 :root {
-  /* --main-dark-clr: #0078d4;
+  /* --main-dark-clr: #1877f2;
   --main-light-hover-clr: #96c8ef; */
   --main-white-clr: #fff;
   --main-black-clr: #222;
@@ -25,7 +25,7 @@
 
 .heading-container {
   position: relative;
-  top: 128px;
+  top: 210px;
 }
 .Career-Hero-Heading {
   color: var(--main-black-clr);
@@ -62,12 +62,16 @@
 /* CareerSearch.css */
 :root {
   --main-black-clr: #333;
-  --main-dark-clr: #0078d4;
+  --main-dark-clr: #1877f2;
   --light-blue-bg: #f1f9ff;
   --border-color: #bdd9ef;
   --shadow-color: rgba(146, 146, 146, 0.25);
   --white: #fff;
   --font-family: "Inter", sans-serif;
+}
+.custon-accordian-header{
+  background: var(--main-light-clr) !important;
+  color: white  !important;
 }
 
 .career-search-container {
@@ -273,7 +277,7 @@
 }
 
 .Career-Heading span {
-  color: #0078d4;
+  color: #1877f2;
   font-family: Inter;
   font-size: 28px;
   font-style: normal;
@@ -634,7 +638,7 @@ h2 span {
   gap: 16px;
 }
 .Simple-Step-Title {
-  color: #0078d4;
+  color: #1877f2;
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
@@ -1045,8 +1049,8 @@ label {
 .career-explore-page {
   display: flex;
   gap: 20px;
-  flex-direction: column;
-  margin: 20px 222px;
+  /* flex-direction: column;
+  margin: 20px 222px; */
 }
 
 .first-explore-page {
@@ -1165,7 +1169,7 @@ label {
 }
 
 .Career-thankyoufor-applying-container {
-  display: none;
+  /* display: none; */
   width: 712px;
   padding: 28px;
   align-items: flex-start;

@@ -43,12 +43,10 @@ const PostPropertyRequerment = ({ SetShow }) => {
     // Merge unit and PossessionStatus into the submission data
 
     if( PostPropertyRequirementData.PropertyType !=="Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.ProjectName ||!PostPropertyRequirementData.BHKType||!PostPropertyRequirementData.FloorPreference||!PostPropertyRequirementData.Budget)){
-      console.log(PostPropertyRequirementData)
-
       alert("please fill all data")
       return ;
     }
-    if( PostPropertyRequirementData.PropertyType ==="Plot" && !PostPropertyRequirementData.ProjectName ||!PostPropertyRequirementData.plotSize||!PostPropertyRequirementData.Budget){
+    if( PostPropertyRequirementData.PropertyType ==="Plot" && (!PostPropertyRequirementData.PropertyType ||!PostPropertyRequirementData.plotSize||!PostPropertyRequirementData.Budget)){
       console.log(PostPropertyRequirementData)
       alert("please fill all data")
       return ;
@@ -105,7 +103,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               >
                 <option value="">Choose property type</option>
                 <option value="Appartment">Appartment</option>
-                <option value="BuilderFloor">Builder Floor</option>
+                <option value="Builder Floor">Builder Floor</option>
                 <option value="Plot">Plot/Land</option>
                 
               </select>

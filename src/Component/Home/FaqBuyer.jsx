@@ -21,15 +21,15 @@ const FAQ = () => {
               className="accordion-button"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
+              data-bs-target="#collapse1"
               aria-expanded="true"
-              aria-controls="collapseOne"
+              aria-controls="collapse1"
             >
               What do you mean by Verified Property?
             </button>
           </h2>
           <div
-            id="collapseOne"
+            id="collapse1"
             className="accordion-collapse collapse"
             aria-labelledby="headingOne"
             data-bs-parent="#accordionPanelsStayOpenExample"

@@ -35,7 +35,8 @@ import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
-import PayButton from "./PayButton";
+import SocietyAndBuildingFeature from "./SocietyAndBuildingFeature";
+// import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
   const dispatch = useDispatch();
@@ -66,6 +67,9 @@ export default function SinglePostDetails() {
   // payment
   const [status, setStatus] = useState(false);
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
+
+
+  console.log(showOwnerDetailsForm, "j")
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
@@ -251,7 +255,8 @@ export default function SinglePostDetails() {
         sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
         medata?.user?.Role == "Tenant"
       ) {
-        setshowTenantDetailsForm(true);
+        setshowOwnerDetailsForm(true)
+        // setshowTenantDetailsForm(true);
       }
 
       sessionStorage.removeItem("RedirectPath");
@@ -440,14 +445,14 @@ export default function SinglePostDetails() {
                               {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
                                 (text) => {
                                   return `+ ${text == "Pooja Room"
-                                    ? "Pooja"
-                                    : text == "Servant Room"
-                                      ? "SQ"
-                                      : text == "Study Room"
-                                        ? "Study"
-                                        : text == "Store Room"
-                                          ? "Store"
-                                          : ""
+                                      ? "Pooja"
+                                      : text == "Servant Room"
+                                        ? "SQ"
+                                        : text == "Study Room"
+                                          ? "Study"
+                                          : text == "Store Room"
+                                            ? "Store"
+                                            : ""
                                     }`;
                                 }
                               )}
@@ -535,7 +540,6 @@ export default function SinglePostDetails() {
                           </div>
                         </div>
 
-
                         {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
                           ?.CoveredParking > 0 ||
                           getSinglePostData?.SinglePost?.PropertyDetails?.Parking
@@ -543,7 +547,8 @@ export default function SinglePostDetails() {
                           <div className="property-info-tags">
                             <img
                               className="icon-detials"
-                              src="/img/parking.png"
+                              src="/img/Plot-Dimension.svg"
+
                               alt="icon"
                             />
                             <div className="img-box-imp-data">
@@ -561,7 +566,7 @@ export default function SinglePostDetails() {
                           <div className="property-info-tags">
                             <img
                               className="icon-detials"
-                              src="/img/status.png"
+                              src="/img/possession_.svg"
                               alt="icon"
                             />
                             <div className="img-box-imp-data">
@@ -578,7 +583,7 @@ export default function SinglePostDetails() {
                           <div className="property-info-tags">
                             <img
                               className="icon-detials"
-                              src="/img/power-backup.png"
+                              src="/img/current_prop_status.svg"
                               alt="icon"
                             />
 
@@ -595,10 +600,6 @@ export default function SinglePostDetails() {
                         )}
                       </>
                     )}
-
-
-
-
 
                   {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType ==
                     "Plot/Land" && (
@@ -723,24 +724,26 @@ export default function SinglePostDetails() {
                                   ?.ExpectedPrice
                               )}
                             </span>
-                            {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType == "Plot/Land" ? (
+                            {getSinglePostData?.SinglePost?.BasicDetails
+                              ?.ApartmentType == "Plot/Land" ? (
                               <>
                                 <p className="lisitng-area-section">
-                                  ₹
+                                  ₹{" "}
                                   {
                                     getSinglePostData?.SinglePost?.PricingDetails
                                       ?.PricePerSqYd
-                                  } Per sq.yd
+                                  }{" "}
+                                  Per sq.yd
                                 </p>
                               </>
                             ) : (
                               <>
                                 <p className="lisitng-area-section">
-                                  ₹
+                                  ₹{" "}
                                   {
                                     getSinglePostData?.SinglePost?.PricingDetails
                                       ?.PricePerSqFt
-                                  }
+                                  }{" "}
                                   Per sqft
                                 </p>
                               </>
@@ -749,7 +752,7 @@ export default function SinglePostDetails() {
 
                           {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                             <span
-                              className="original-price make-offer-btn"
+                              className="original-price"
                               ref={BiddingFormOpenBtnRef}
                               onClick={() => {
                                 if (medata && medata.IsAuthenticated === true) {
@@ -829,7 +832,13 @@ export default function SinglePostDetails() {
                   </div>
                 </div>
 
-                <div className={`property-actions ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType == "Rent" ? "property-actions-rent" : "property-actions-sale"}`}>
+                <div
+                  className={`property-actions ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
+                      "Rent"
+                      ? "property-actions-rent"
+                      : "property-actions-sale"
+                    }`}
+                >
                   {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                     getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType != "Rent" && (
@@ -866,6 +875,17 @@ export default function SinglePostDetails() {
                     WhatsApp
                     {/* </button> */}
                   </Link>
+
+
+                  {/* <button
+                    className="original-price border-0"
+                    ref={showOwnerDetailsFormRef}
+                    onClick={() => {
+                      setshowOwnerDetailsForm(true);
+                    }}
+                  >
+                    View Number
+                  </button> */}
                   {getSinglePostData?.SinglePost?.BasicDetails
                     ?.PropertyAdType === "Rent" ? (
                     <div>
@@ -877,15 +897,28 @@ export default function SinglePostDetails() {
                             navigate("/login");
                           }}
                         >
-                          View Owner Details
+                          View Number
                         </span>
                       ) : (
                         <>
+                          <button
+                            className="original-price border-0"
+                            ref={showOwnerDetailsFormRef}
+                            onClick={() => {
+                              setshowOwnerDetailsForm(true);
+                            }}
+                          >
+                            View Number
+                          </button>
+
+                          {/* <>  
+
+                         Rozer pay Logic
                           {
                             // Check if paidPropertyData?.data contains data and satisfies the condition
                             Array.isArray(paidPropertyData?.data) &&
-                              paidPropertyData?.data.length > 0 &&
-                              paidPropertyData?.data[0]?.userId ===
+                            paidPropertyData?.data.length > 0 &&
+                            paidPropertyData?.data[0]?.userId ===
                               medata?.user?._id ? (
                               <button
                                 className="original-price border-0"
@@ -903,10 +936,12 @@ export default function SinglePostDetails() {
                               />
                             ) // Show PayButton if the condition is not satisfied
                           }
+                           </> */}
                         </>
                       )}
                     </div>
                   ) : null}
+
                 </div>
                 {getSinglePostData?.SinglePost?.PostVerifyData?.Time && (
                   <div className="posted-by-section">
@@ -1070,6 +1105,50 @@ export default function SinglePostDetails() {
                             Data={"Overlooking View"}
                           />
 
+                          {/* Possission Status  */}
+                          {getSinglePostData?.SinglePost?.FloorDetails
+                            ?.PossessionStatus && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.PossessionStatus
+                              }
+                              Icon="/img/area.png"
+                              Data={" Possission Status"}
+                            />
+                          }
+                          {/* additional pricing details */}
+                          {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges &&  <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges 
+                              }
+                              Icon="/img/area.png"
+                              Data={"Maintanance Details"}
+                            />}
+
+    {/* additional pricing details */}
+    {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent
+                              }
+                              Icon="/img/area.png"
+                              Data={"Monthly Expected Rent"}
+                            />}
+
+
+
+                          {/* current property status  */}
+
+                          {getSinglePostData?.SinglePost?.BasicDetails
+                            ?.CurrentPropertyStatus && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.CurrentPropertyStatus
+                              }
+                              Icon="/img/area.png"
+                              Data={"Current Property Status"}
+                            />
+                          }
+
                           {/* Property on Floor  , Total Floors" */}
                           {getSinglePostData?.SinglePost?.BasicDetails
                             ?.PropertyAdType == "Sale" && (
@@ -1140,13 +1219,34 @@ export default function SinglePostDetails() {
                       Icon="/img/power-backup.png"
                       Data={"Power BackUp"}
                     />
-
-                    {/* Water Source */}
-                    <PropertyDataBox
-                      Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                      Icon="/img/parking.png"
-                      Data={"Water Source"}
-                    />
+                    {getSinglePostData?.SinglePost?.AmenitiesDetails
+                      ?.WaterSource && (
+                        <>
+                          {/* Water Source */}
+                          <PropertyDataBox
+                            Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
+                            Icon="/img/parking.png"
+                            Data={"Water Source"}
+                          />
+                        </>
+                      )}
+                    {(getSinglePostData?.SinglePost?.PropertyDetails
+                      ?.Basement == true ||
+                      getSinglePostData?.SinglePost?.PropertyDetails
+                        ?.Basement == false) && (
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PropertyDetails
+                              ?.Basement == true
+                              ? "Yes"
+                              : getSinglePostData?.SinglePost?.PropertyDetails
+                                ?.Basement == false
+                                ? "No"
+                                : ""
+                            } `}
+                          Icon="/img/parking.png"
+                          Data={"Basment"}
+                        />
+                      )}
 
                     {/* Property Age */}
                     {getSinglePostData?.SinglePost?.BasicDetails
@@ -1220,6 +1320,12 @@ export default function SinglePostDetails() {
                             Icon="/img/Property-age.png"
                             Data={"Plot Facing"}
                           />
+                           {/* Plot openside  */}
+                           <PropertyDataBox
+                            Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
+                            Icon="/img/Property-age.png"
+                            Data={"Plot Facing"}
+                          />
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
                             Icon="/img/total-floor.png"
@@ -1256,6 +1362,7 @@ export default function SinglePostDetails() {
                                       }
                                     )}
                                   </p>
+
                                 </div>
                               </div>
                             )}
@@ -1263,9 +1370,20 @@ export default function SinglePostDetails() {
                       )}
                   </div>
                 </div>
+                {/* furnishing details */}
                 <FurnishDetails
                   furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                 />
+                {/* society features */}
+                {getSinglePostData?.SinglePost?.AmenitiesDetails?.SocietyAndBuildingFeature &&
+                  <SocietyAndBuildingFeature feature={getSinglePostData?.SinglePost?.AmenitiesDetails?.SocietyAndBuildingFeature} />
+                }
+                {/* plot features */}
+                {getSinglePostData?.SinglePost?.AmenitiesDetails?.ProjectAmmenities &&
+                  <SocietyAndBuildingFeature feature={getSinglePostData?.SinglePost?.AmenitiesDetails?.ProjectAmmenities} />
+                }
+
+
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">
                     <div className="location-section">
@@ -1438,10 +1556,7 @@ export default function SinglePostDetails() {
                       Component={ViewOwnerDetailsAlert}
                       SetShow={setshowOwnerDetailsForm}
                       BtnRef={showOwnerDetailsFormRef}
-                      Contact={
-                        paidPropertyData?.getOwnerDetail?.CreatePostUser
-                          ?.ContactNumber
-                      }
+                      Contact={"7837840785"}
                     // PropertyAddress={PropertyAddress}
                     />
                   )}

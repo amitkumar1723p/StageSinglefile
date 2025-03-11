@@ -845,7 +845,7 @@ export const OwnerUploadExcelFile = (file)=>{
       };
  
       const { data } = await axios.post(url, formData, config);  // Pass postId as an object
-//  console.log(similar)
+ 
      
       dispatch({
         type: "OwnerAllExcelFileSuccess",
@@ -1291,6 +1291,43 @@ export const ApplyJobAction = (formdata) => {
       } else {
         dispatch({
           type: "ApplyJobActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//get post by address
+
+export const getPostsByAddress = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "GetPostsByAddressRequest",
+        payload: "GetPostsByAddressRequest",
+      });
+
+      const url = `${api_Base_Url}/post/properties-by-address`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const d= "new gurgaon";
+      const { data } = await axios.post(url,{address:d}, config);
+      
+      dispatch({ type: "GetPostsByAddressSuccess", payload: data });
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        dispatch({
+          type: "GetPostsByAddressFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetPostsByAddressFail",
           payload: { message: error.message, success: false },
         });
       }

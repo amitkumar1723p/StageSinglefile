@@ -49,7 +49,7 @@
 }
 
 .signup-form-content-unique h2 {
-  color: var(--Pirmary, #0078d4);
+  color: var(--Pirmary, #1877f2);
   font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -94,7 +94,7 @@
 .signup-form-content-unique button {
   width: 100%;
   padding: 14px;
-  background-color: #0078d4;
+  background-color: #1877f2;
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -115,7 +115,7 @@
 }
 
 .signup-form-content-unique p a {
-  color: #0078d4;
+  color: #1877f2;
   text-decoration: none;
 }
 
@@ -125,7 +125,7 @@
 }
 
 .signup-link-unique {
-  color: #0078d4;
+  color: #1877f2;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;

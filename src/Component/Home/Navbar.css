@@ -109,7 +109,9 @@
 
 /* Navbar styles */
 .navbar {
-  background-color: #fff;
+  /* width: 80%; */
+  /* margin: 0 auto; */
+  background: url("/public/img/holi-nav.svg");
   padding: 12px 0; /* Decreased padding */
   position: sticky;
   top: 0;
@@ -275,7 +277,7 @@
   background-color: #fff;
   /* width: 20vw; */
   height: 200vw;
-  margin-top: 16px;
+  margin-top: 13px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   border: 1px solid #b5d6f1;
@@ -406,7 +408,9 @@
     font-size: 12px;
   }
   
-
+  .navbar {
+    background: url("/public/img/holi-nav.svg");
+  }
   .header-free {
     background-color: #94D1FF;
     color: white;
@@ -525,8 +529,10 @@
     display: none;
   }
   .logo h2 {
+    background-color: #fff;
+
     border: none;
-    font-size: 16px; /* Decreased font size */
+    font-size: 14px; /* Decreased font size */
     color: var(--main-light-clr);
     cursor: pointer;
     display: flex;

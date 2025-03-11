@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./ProfileHeader.css";
 import { useSelector } from "react-redux";
-import { GetPost_BiddingDocumentAction } from "../../../Action/userAction";
+import { GetMeDetailsAction, GetPost_BiddingDocumentAction, ProfileUpdateAction } from "../../../Action/userAction";
 import { UserContext } from "../../CreateContext/CreateContext";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -74,30 +74,53 @@ function ProfileHeader() {
 
   // Toggle the state when the button is clicked
   const handleToggleChange = () => {
+    console.log("toggled ",isToggled)
     setIsToggled(!isToggled);
   };
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++Editing start here+++++++++++++++++
   // Initialize state with the data from the backend
 
   const { setVarb } = useContext(UserContext);
-  const [name, setName] = useState(medata?.user?.Name);
+  const [name, setName] = useState( medata?.user?.Name.charAt(0).toUpperCase() + medata?.user?.Name.slice(1));
+  const [Lastname, setLastName] = useState(medata?.user?.LastName.charAt(0).toUpperCase() + medata?.user?.LastName.slice(1));
   const [email, setEmail] = useState(medata?.user?.email);
   const [number, setNumber] = useState(medata?.user?.ContactNumber);
   // Function to handle the edit button click
   const handleEdit = () => {
-    setVarb({ Name: name, email: email, ContactNumber: number });
-    dispatch(ProfileEditAction({ ContactNumber: number }));
+    setVarb({ Name: name,LastName:Lastname, email: email, ContactNumber: number });
+    if(number !== medata?.user?.ContactNumber){
+ 
+      dispatch(ProfileEditAction({ ContactNumber: number }));
+    }
+    else{
+      const updateData={ Name: name,LastName:Lastname, email: email, ContactNumber: number };
+           
+          dispatch(ProfileUpdateAction(updateData))
+    }
   };
   // Check if any changes were made to the fields
   const hasChanges =
     name !== medata?.user?.Name ||
+    Lastname !== medata?.user?.LastName ||
     email !== medata?.user?.email ||
     number !== medata?.user?.ContactNumber;
   // Effect to handle navigation on successful profile update
-  const handleEnableEdit = () => {
+
+  
+   
+  //  useEffect(()=>{
+ 
+  //      console.log(AlertData)
+  //       console.log(AlertType)
+  //   if(AlertData?.success){
+  //     alert("get user details")
+  //     dispatch(GetMeDetailsAction());     }
+
+  //  },[AlertData])
+   const handleEnableEdit = (e) => {
+    e.preventDefault();
     alert("please make changes !");
   };
-
   return (
     <>
       <div className="main-profile-dashboard-section">
@@ -121,15 +144,37 @@ function ProfileHeader() {
                     </div>
                     <div className="profileNameEmail">
                       <div className="profile-section-data">
-                        <label>Name:</label>
+                        <label>First Name:</label>
                         <input
                           className="profile-name"
                           type="text"
-                          value={name}
+                          value={name }
                           onChange={(e) => setName(e.target.value)} // Update name state
                         />
                       </div>
                       <div className="profile-section-data">
+                        <label>Last Name:</label>
+                        <input
+                          className="profile-name"
+                          type="text"
+                          value={Lastname}
+                          onChange={(e) => setLastName(e.target.value)} // Update name state
+                        />
+                      </div>
+                
+                    </div>
+
+              <div className="profileNameEmail">
+              <div className="profile-section-data">
+                      <label>Contact Number:</label>
+                      <input
+                        className="profile-email"
+                        type="tel"
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)} // Update number state
+                      />
+                    </div>
+                    <div className="profile-section-data">
                         <label>Email:</label>
                         <input
                           className="profile-email"
@@ -138,20 +183,10 @@ function ProfileHeader() {
                           onChange={(e) => setEmail(e.target.value)} // Update email state
                         />
                       </div>
-                    </div>
-
-                    <div className="profile-section-data">
-                      <label>Contact Number:</label>
-                      <input
-                        className="profile-name-ans ans"
-                        type="tel"
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)} // Update number state
-                      />
-                    </div>
+              </div>
                     {hasChanges ? (
                       <Link
-                        to="/user/profileUpdate"
+                        to={number !== medata?.user?.ContactNumber ? `/user/profileUpdate`:""}
                         className="editProfileButton"
                         onClick={handleEdit}
                       >
@@ -160,7 +195,7 @@ function ProfileHeader() {
                     ) : (
                       <div
                         className="editProfileButton"
-                        onClick={handleEnableEdit}
+                        
                       >
                         <div className="button-section-dashborad">
                           <div className="whatapp-notify ">
@@ -204,7 +239,7 @@ function ProfileHeader() {
                       </Link>
                     </div> */}
                         </div>
-                        <button>Edit Profile</button>
+                        <button onClick={handleEnableEdit}>Edit Profile</button>
                       </div>
                     )}
                   </form>

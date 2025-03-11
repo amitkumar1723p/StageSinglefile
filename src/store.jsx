@@ -43,7 +43,8 @@ import {
   fetchAllAdminFilesReducer,
   fetchAllAgentFilesReducer,
   removeExcelFromAdminReducer,
-  getSerachPropertyReducer
+  getSerachPropertyReducer,
+  getPostsByAddressReducer
 } from "./Reducer/postReducer.jsx";
 
 const reducer = combineReducers({
@@ -87,7 +88,8 @@ const reducer = combineReducers({
 
   getTransactionDetail:getTransactionDetailReducer,
 
-  serachResponse:getSerachPropertyReducer
+  serachResponse:getSerachPropertyReducer,
+  postByAddress:getPostsByAddressReducer
 });
 
 let initialState = {};

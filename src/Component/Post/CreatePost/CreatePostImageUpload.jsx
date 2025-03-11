@@ -37,6 +37,8 @@ export default function CreatePostImageUpload({
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
+
+   
 }) {
   const dispatch = useDispatch();
 
@@ -56,58 +58,11 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  // console.log("BasicDetailsData", BasicDetailsData);
-  // console.log("LocationDetailsData", LocationDetailsData);
-  // console.log("PropertyDetailsData", PropertyDetailsData);
-  // console.log("OtherDetailsData", OtherDetailsData);
-  // console.log("AreaDetailsData", AreaDetailsData);
-  // console.log("FloorDetailsData", FloorDetailsData);
-  // console.log("AmenitiesDetailsData", AmenitiesDetailsData);
-  // console.log("PricingDetailsData", PricingDetailsData);
-
-  // useEffect(() => {
-  //   // remove Coma
-
-  //   const CopyObj = { ...PricingDetailsData };
-
-  //   if (BasicDetailsData.PropertyAdType == "Rent") {
-  //     const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(/,/g,"");
-  //     CopyObj.ExpectedRent =parseInt( ExpectedRentRemoveComa);
-
-  //     const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
-  //       /,/g,
-  //       ""
-  //     );
-  //     CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
-  //   }
-
-  //   if (BasicDetailsData.PropertyAdType == "Sale") {
-  //     const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
-  //       /,/g,
-  //       ""
-  //     );
-  //     CopyObj.ExpectedPrice =parseInt( ExpectedPriceRemoveComa);
-
-  //     if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-  //       const MonthlyExpectedRentRemoveComa = String(
-  //         CopyObj?.AdditionalDetails?.MonthlyExpectedRent
-  //       )?.replace(/,/g, "");
-  //       CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt (MonthlyExpectedRentRemoveComa);
-  //     }
-  //   }
-  //   if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-  //     const MaintenanceChargesRemoveComa = String(
-  //       CopyObj.AdditionalDetails.MaintenanceCharges
-  //     )?.replace(/,/g, "");
-  //     CopyObj.AdditionalDetails.MaintenanceCharges =parseInt(MaintenanceChargesRemoveComa) ;
-  //   }
-
-  //    setPricingDetailsData(CopyObj);
-  //
-  // }, []);
+  
 
   useEffect(() => {
-    // Create a copy of the data to avoid mutating the original object
+      setTimeout(() => {
+           // Create a copy of the data to avoid mutating the original object
     const CopyObj = { ...PricingDetailsData };
 
     if (BasicDetailsData.PropertyAdType === "Rent") {
@@ -169,17 +124,19 @@ export default function CreatePostImageUpload({
     }
 
     // Log the modified object before setting it in state
-
+    
     // Set the new state
     setPricingDetailsData(CopyObj);
-  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
-
+      }, 0);
+ 
+  }, [BasicDetailsData ]); // Add dependency on BasicDetailsData
+ 
   // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
 
   const CratePostHandler = (e) => {
     e.preventDefault();
     if (previewImage.length <= 0) {
-      alert("image field is required");
+      // alert("image field is required");
     } else {
       let formData = new FormData(e.target);
 
@@ -260,6 +217,18 @@ export default function CreatePostImageUpload({
     }
   };
 
+
+// Alert
+const [imageAlert, setImageAlert] = useState(false)
+
+const HandleImageAlert = ()=>{
+  if (previewImage.length <= 0) {
+    setImageAlert(true);
+    setTimeout(()=>setImageAlert(false),1500);
+   return;
+  }
+}
+
   return (
     <>
       <ScrollToTop />
@@ -274,7 +243,7 @@ export default function CreatePostImageUpload({
             encType="multipart/form-data"
             id="myform"
           >
-            <div htmlFor="" className="uploadfile-input">
+            <div htmlFor="" className={`uploadfile-input ${imageAlert? "shakeShake":''}`}>
               <div className="file-label">
                 {/* Backup Icon  */}
                 <svg
@@ -300,7 +269,7 @@ export default function CreatePostImageUpload({
                   />
                 </svg>
 
-                <p className="p-img-upload">
+                <p className={`p-img-upload ${imageAlert? "shake":''}`}>
                   Drag and drop or click to choose file
                 </p>
                 <p className="p-img-upload-i">
@@ -450,7 +419,7 @@ export default function CreatePostImageUpload({
               >
                 Previous
               </div>
-              <button className="Submit-Next" ref={CreatePostRef}>
+              <button onClick={HandleImageAlert} className="Submit-Next" ref={CreatePostRef}>
                 {update ? "Update Post" : "Create Post"}
               </button>
             </div>

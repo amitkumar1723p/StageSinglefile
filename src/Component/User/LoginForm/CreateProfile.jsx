@@ -71,7 +71,18 @@ const CreateProfile = ({
                 }
                 required
               />
-
+              <input
+                type="text"
+                placeholder="Enter your Last Name"
+                value={CreateProfileData?.LastName?.trimStart() || ""}
+                onChange={(e) =>
+                  setCreateProfileData({
+                    ...CreateProfileData,
+                    LastName: e.target.value,
+                  })
+                }
+                
+              />
               <input
                 type="email"
                 placeholder="Enter your Email*"

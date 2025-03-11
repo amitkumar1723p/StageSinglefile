@@ -537,7 +537,7 @@ const OwnerAgentExcel = () => {
   useEffect(() => {
     const agentIdsSet = new Set(AssinedAdmins.map(agent => agent.AdminId._id));
 
-    console.log("seeting agent  ", agentIdsSet)
+   
     // Find common AdminIds
     const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
     console.log("thi sis matchinggg ", matchingAdmins)
