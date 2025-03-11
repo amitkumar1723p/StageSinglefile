@@ -275,15 +275,15 @@ const NotifyRequirements = () => {
                   {activeTab === "notifies" ? (
                     <>
 
+                      <th className="notify-requirements-th">Project Name</th>
                       <th className="notify-requirements-th">Name</th>
                       <th className="notify-requirements-th">Phone</th>
                       <th className="notify-requirements-th">Date </th>
-                      <th className="notify-requirements-th">Room</th>
                       <th className="notify-requirements-th">BHK</th>
+                      <th className="notify-requirements-th">Room</th>
                       <th className="notify-requirements-th">
                         Floor Preference
                       </th>
-                      <th className="notify-requirements-th">Project Name</th>
                       {/* <th className="notify-requirements-th">Email</th> */}
                     </>
                   ) : (
@@ -311,6 +311,9 @@ const NotifyRequirements = () => {
                     <tr key={item._id}>
                       {activeTab === "notifies" ? (
                         <>
+                          <td className="notify-requirements-td">
+                            {item.ProjectName}
+                          </td>
 
                           <td className="notify-requirements-td">
                             {item?.User?.Name}
@@ -329,19 +332,16 @@ const NotifyRequirements = () => {
                             }
                           </td>
                         
+                          <td className="notify-requirements-td">
+                            {item?.BHKType} 
+                          </td>
 
                           <td className="notify-requirements-td ">
                             {item?.Room?.join(" , ")}
                           </td>
 
                           <td className="notify-requirements-td">
-                            {item?.BHKType} 
-                          </td>
-                          <td className="notify-requirements-td">
                             {item.FloorPreference}
-                          </td>
-                          <td className="notify-requirements-td">
-                            {item.ProjectName}
                           </td>
                           {/* <td className="notify-requirements-td">{item?.User?.Name}</td> */}
                         </>

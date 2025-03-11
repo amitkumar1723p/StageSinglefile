@@ -63,6 +63,8 @@ export default function FloorDetails({
     "Others",
   ];
 
+
+
   return (
     <>
       <p className="Property-Details-heading">Floor Details</p>
@@ -71,6 +73,7 @@ export default function FloorDetails({
           
           <label htmlFor="total-floors">Total Floors*</label>
           <input
+
           className={` ${Error.TotalFloors? 'inputShake shake' : ''}`}
             type="text"
             id="total-floors"
@@ -105,6 +108,7 @@ export default function FloorDetails({
           <div className="form-group">
             <label htmlFor="floor">Property on Floor*</label>
             <select
+ 
               className={`date-time-lable ${Error.PropertyOnFloor? 'inputShake shake' : ''}`}
               id="floor"
               required
@@ -145,6 +149,7 @@ export default function FloorDetails({
           {PropertyfacingArray.map((text, i) => {
             return (
               <div
+  
                 key={i}
                 className={`tab ${
                   FloorDetailsData.PropertyDirection === text ? "select" : ""

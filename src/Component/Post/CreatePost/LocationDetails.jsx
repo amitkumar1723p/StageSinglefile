@@ -14,7 +14,7 @@ export default function LocationDetails({
   update,
   setnext,
   // LocationDetailsSubmit
-  LocationDetailsSubmiRef
+  LocationDetailsSubmiRef,
 }) {
   const dispatch = useDispatch();
 
@@ -24,18 +24,27 @@ export default function LocationDetails({
       StoreDataInSession("next", 2);
       StoreDataInSession("LocationDetailsData", LocationDetailsData);
     }
-      console.log("Locationdetails")
       setnext(2);
   };
 
   // handle Alert Shake
+
+
+  
+      const transitionDuration = '0.3s';
+  const [locationAlert, setlocationAlert] = useState({});
 
   const [sectorShake,setSectorShake] = useState(false);
   const [cityShake,setCityShake] = useState(false);
   const [localityShake,setLocalityShake] = useState(false)
 
 
-  const LocationDetailsAlertShake = ()=>{
+  const LocationDetailsAlertShake = (e)=>{
+    
+    // if(ProjectNameObjectData === undefined){
+    //   console.log("console");
+    // }
+    
     if(LocationDetailsData.Landmark?.length == 0){
       // setSectorShake(true);
       // setTimeout(()=> setSectorShake(false),1600);
@@ -54,8 +63,9 @@ export default function LocationDetails({
       return
 
     }
-
   }
+
+
 
   return (
     <>
@@ -74,12 +84,14 @@ export default function LocationDetails({
               setProjectNameObjectData={setLocationDetailsData}
               placeholder={"Project Name"}
               inputClass ={"locationdetails-input"}
+              locationAlert={locationAlert}
             />
 
             <div className="form-group">
               <label htmlFor="street">Sector *</label>
               <input
-              className={`${sectorShake? 'inputShake shake' : ''}`}
+              style={{transitionDuration}}
+              className={`${sectorShake? '' : ''}`}
                 type="text"
                 id="street"
                 name="street"
@@ -98,6 +110,7 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="city">City *</label>
               <input
+              style={{transitionDuration}}
                className={`${cityShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="city"
@@ -115,6 +128,7 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="locality">Locality *</label>
               <input
+              style={{transitionDuration}}
               className={`${localityShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="locality"

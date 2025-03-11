@@ -263,6 +263,27 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         setTimeout(()=>showError({FlooringType:false}),1800);
         return;
       }
+
+
+      if(["Independent/Builder Floor"].includes(
+        BasicDetailsData.ApartmentType
+      )){
+        if(PropertyDetailsData.Basement === undefined){
+          
+          setTimeout(()=>showError({Basement:true}),800);
+        setTimeout(()=>showError({Basement:false}),1800);
+        return;
+        }
+      }
+   
+      if(PropertyDetailsData.Basement == true){
+        if(!PropertyDetailsData.BasementArea.value){
+          setTimeout(()=>showError({BasementAreaShake:true}),800);
+          setTimeout(()=>showError({BasementAreaShake:false}),1800);
+        return;
+        }
+      }
+      
       // if(PropertyDetailsData.OtherRoom.length==0){
       
       //   setTimeout(()=>showError({OtherRoom:true}),800);
@@ -270,12 +291,22 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       //   return;
       // }
       if(FloorDetailsData.TotalFloors === undefined || FloorDetailsData.TotalFloors == 0 ){
-  
+        const targetScroll = document.querySelector("#ScrollToFloorDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+
         setTimeout(()=>showError({TotalFloors:true}),800);
         setTimeout(()=>showError({TotalFloors:false}),1800);
         return;
       }
       if(FloorDetailsData.PropertyOnFloor === ''){
+        const targetScroll = document.querySelector("#ScrollToFloorDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+
+
         setTimeout(()=>showError({PropertyOnFloor:true}),800);
         setTimeout(()=>showError({PropertyOnFloor:false}),1800);
         return;
@@ -421,7 +452,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
               </div>
             )}
 
-            <div className={`Prop-detials-box-form-area ${Error.AreaFieldError? "inputShake shake":''}`}  id="ScrollToAreaDetails" style={{scrollMarginTop:'80px'}}>
+            <div className={`Prop-detials-box-form-area ${Error.AreaFieldError? "inputShake shake":''}`}  id="ScrollToAreaDetails" style={{scrollMarginTop:'80px'}} >
               <AreaDetailsSection
                 AreaDetailsData={AreaDetailsData}
                 setAreaDetailsData={setAreaDetailsData}

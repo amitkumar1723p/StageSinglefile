@@ -56,9 +56,6 @@ export default function Amenities({
     "Security Guard",
   ];
 
-  {
-    console.log(AmenitiesDetailsData);
-  }
   useEffect(() => {
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
       setTimeout(() => {
@@ -107,6 +104,7 @@ export default function Amenities({
     // eslint-disable-next-line
   }, [AmenitiesDetailsData.Furnishing]);
 
+
   return (
     <>
       {ApartMentTypeArrayRemovePlotAndLand.includes(
@@ -121,6 +119,7 @@ export default function Amenities({
               {FurnishingOptions.map((text, i) => {
                 return (
                   <div
+                  
                     key={i}
                     className={`tab ${
                       AmenitiesDetailsData.Furnishing === text ? "select" : ""
@@ -177,6 +176,7 @@ export default function Amenities({
                         return (
                           <div className="row" key={i}>
                             <input
+                             
                              className={` ${Error.ModularKitchen? ' shake' : ''}`}
                               type="radio"
                               id={`modular-kitchen-${i}`}
@@ -198,6 +198,8 @@ export default function Amenities({
                               }}
                             />
                             <label
+                            
+                             
                              className={` ${Error.ModularKitchen? ' shake' : ''}`}
                              htmlFor={`modular-kitchen-${i}`}>
                               {text === true ? "Yes" : "No"}
@@ -588,6 +590,7 @@ export default function Amenities({
                 (text, i) => {
                   return (
                     <div
+                    
                       key={i}
                       className={`tab ${
                         AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
@@ -656,6 +659,7 @@ export default function Amenities({
           {PowerBackUpArray.map((text, i) => {
             return (
               <div
+              
                 key={i}
                 className={`tab ${
                   AmenitiesDetailsData.PowerBackUp === text ? "select" : ""
@@ -690,6 +694,7 @@ export default function Amenities({
             {WaterSourceArray.map((text, i) => {
               return (
                 <div
+                
                   key={i}
               className={`tab ${
                   AmenitiesDetailsData.WaterSource?.includes(text)
@@ -746,6 +751,7 @@ export default function Amenities({
               {ProjectAmmenitiesArray.map((text, i) => {
                 return (
                   <div
+                  
                     key={i}
                     className={`tab ${
                       AmenitiesDetailsData.ProjectAmmenities?.includes(text)
@@ -803,9 +809,11 @@ export default function Amenities({
                 return (
                   <div key={i}>
                     <label
+                     
                     className={` ${Error.OtherFeature? ' shake' : ''}`}
                      htmlFor={`other-feature-${i}`}>{text}</label>
                     <input
+                     
                     className={` ${Error.OtherFeature? ' shake' : ''}`}
                       type="checkbox"
                       name=""
