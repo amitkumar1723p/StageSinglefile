@@ -278,7 +278,6 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
    
       if(PropertyDetailsData.Basement == true){
         if(!PropertyDetailsData.BasementArea.value){
-          console.log("console.log")
           setTimeout(()=>showError({BasementAreaShake:true}),800);
           setTimeout(()=>showError({BasementAreaShake:false}),1800);
         return;
@@ -292,12 +291,22 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       //   return;
       // }
       if(FloorDetailsData.TotalFloors === undefined || FloorDetailsData.TotalFloors == 0 ){
-  
+        const targetScroll = document.querySelector("#ScrollToFloorDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+
         setTimeout(()=>showError({TotalFloors:true}),800);
         setTimeout(()=>showError({TotalFloors:false}),1800);
         return;
       }
       if(FloorDetailsData.PropertyOnFloor === ''){
+        const targetScroll = document.querySelector("#ScrollToFloorDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+
+
         setTimeout(()=>showError({PropertyOnFloor:true}),800);
         setTimeout(()=>showError({PropertyOnFloor:false}),1800);
         return;

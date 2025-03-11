@@ -55,7 +55,7 @@ export default function AreaDetailsSection({
 //       setamit(true)
 //     }
 //   }
-const transitionDuration = '0.3s';
+
 
   return (
     <>
@@ -71,7 +71,7 @@ const transitionDuration = '0.3s';
           {/* <p> {Error.PlotSize && "Plot Area Error"}</p> */}
             <label htmlFor="plotSize">Plot Size*</label>
              
-            <div  style={{transitionDuration}} className={`unit-input  ${Error.PlotSize? 'inputShake shake' : ''}`}>
+            <div className={`unit-input  ${Error.PlotSize? 'inputShake shake' : ''}`}>
               <input
               
                 type="text"
@@ -108,7 +108,7 @@ const transitionDuration = '0.3s';
           {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
             <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
             <input
-             style={{transitionDuration}}
+
             className={`${Error.PlotDimensions? 'inputShake shake' : ''}`}
               id="plot-dimensions"
               required
@@ -130,7 +130,7 @@ const transitionDuration = '0.3s';
 
           <div className="form-group">
             <label htmlFor="plotArea">Plot Area*</label>
-            <div  style={{transitionDuration}} className={`unit-input ${Error.PlotArea? "inputShake shake":''}`}>
+            <div className={`unit-input ${Error.PlotArea? "inputShake shake":''}`}>
               <input
              
                 type="text"
@@ -178,7 +178,7 @@ const transitionDuration = '0.3s';
           {/* Super Built Up Area* */}
           <div className="form-group">
             <label htmlFor="super-built-up-area"> Super Built Up Area* </label>
-            <div  style={{transitionDuration}} className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
+            <div className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                
 
@@ -215,7 +215,7 @@ const transitionDuration = '0.3s';
           {/* Built Up Area */}
           <div className="form-group">
             <label htmlFor="built-up-area">Built Up Area</label>
-            <div  style={{transitionDuration}}  className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
+            <div   className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                 type="text"
                 id="built-up-area"
@@ -254,7 +254,7 @@ const transitionDuration = '0.3s';
           {/* Carpet Area  */}
           <div className="form-group">
             <label htmlFor="carpetArea">Carpet Area</label>
-            <div  style={{transitionDuration}} className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
+            <div  className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
               <input
                 type="text"
                 id="carpetArea"
