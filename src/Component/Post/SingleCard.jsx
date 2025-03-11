@@ -834,13 +834,15 @@ const SingleCard = ({ PostData, index }) => {
               </div>
             </>
           )}
-          <p className="single-card-publish-date">
-            <span className="single-card-date-label">Publish on: </span>
-            <span className="single-card-date-value">
-             
-              {formatDate(PostData?.PostVerifyData?.Time)}
-            </span>
-          </p>
+        {PostData?.propertyStatus?.currentPropertyStatus !== "sold out" && (
+  <p className="single-card-publish-date">
+    <span className="single-card-date-label">Publish on: </span>
+    <span className="single-card-date-value">
+      {formatDate(PostData?.PostVerifyData?.Time)}
+    </span>
+  </p>
+)}
+
         </div>
 
         {/* Action Buttons */}
