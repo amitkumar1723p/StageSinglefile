@@ -16,7 +16,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
       plotSize:""
     });
   const [unit, setUnit] = useState("Cr");
-  const [plotUnit, setplotUnit] = useState("Sqft");
+  const [plotUnit, setplotUnit] = useState("Sq.yard");
 
   const [status, setStatus] = useState(""); // Possession Status
   const { loading, data, LodingType } = useSelector((state) => state.userData);
@@ -254,7 +254,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
 
              <div className="form-budget-option">
                <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
-                 <option value="Sqft">Sqft</option>
+               
                  <option value="Sqrd">Sq.yrd</option>
                </select>
              </div>

@@ -1,0 +1,33 @@
+.mainImage {
+    background-image: url('../../../public/img/hero-img9.png');
+    background-size: cover;
+    background-position: center;
+    /* Optional: Set a height for the background to show properly */
+  }
+  /* ./img/hero-img9.png */
+  .search-box-container{
+    /* background-color: red; */
+    /* height: 400px; */
+  }
+
+  .search-list-skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    border-radius: 8px;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  .search-list-skeleton {
+    height: 30px;
+    margin-bottom: 5px;
+
+  }

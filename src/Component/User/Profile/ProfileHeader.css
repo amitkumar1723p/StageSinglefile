@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row; /* Align children in a row */
   width: auto; /* Adjust width as needed */
+  padding: 10px;
   justify-content: space-between; /* Space out the children */
 }
 
@@ -274,7 +275,7 @@
   border: 1px solid #daeaf9;
   background: #fff;
   padding: 10px;
-  width: 40%;
+  width: 100%;
 }
 
 .dash-que {
@@ -368,6 +369,9 @@
   color: #333;
   text-align: center;
   text-decoration: underline;
+}
+.profile-ssection-email-phone{
+  display: flex;
 }
 
 @media (max-width: 768px) {

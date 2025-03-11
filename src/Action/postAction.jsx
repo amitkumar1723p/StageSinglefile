@@ -1153,6 +1153,47 @@ export const GetDeletedPostsAction = () => {
   };
 };
 
+
+// elastic search action
+export const getSerachProperty=(query,propertyAdType,body)=>{
+  // console.log(query,propertyAdType,"post")
+  console.log("boo ",body)
+  
+  return async(dispatch)=>{
+  try {
+    dispatch({
+      type: "GetSerachPropertyRequest",
+      payload: "GetSerachPropertyRequest",
+    });
+
+    const url = `${api_Base_Url}/post/allpost?query=${query}`;
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    console.log(url)
+  //  const body.propertyAdType:propertyAdType
+    const { data } = await axios.post(url,body, config);
+    
+    dispatch({ type: "GetSerachPropertySuccess", payload: data });
+  } catch (error) {
+    console.log(error);
+    if (error.response) {
+      dispatch({
+        type: "GetSerachPropertyFail",
+        payload: error.response.data,
+      });
+    } else {
+      dispatch({
+        type: "GetSerachPropertyFail",
+        payload: { message: error.message, success: false },
+      });
+    }
+  }
+  }
+}
+
 //report page reportaction
 
 
@@ -1251,6 +1292,43 @@ export const ApplyJobAction = (formdata) => {
       } else {
         dispatch({
           type: "ApplyJobActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//get post by address
+
+export const getPostsByAddress = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "GetPostsByAddressRequest",
+        payload: "GetPostsByAddressRequest",
+      });
+
+      const url = `${api_Base_Url}/post/properties-by-address`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const d= "new gurgaon";
+      const { data } = await axios.post(url,{address:d}, config);
+      
+      dispatch({ type: "GetPostsByAddressSuccess", payload: data });
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        dispatch({
+          type: "GetPostsByAddressFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetPostsByAddressFail",
           payload: { message: error.message, success: false },
         });
       }

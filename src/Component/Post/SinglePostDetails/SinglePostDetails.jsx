@@ -35,6 +35,7 @@ import { StoreDataInSession } from "../../../utils/SessionStorage";
 import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
+import SocietyAndBuildingFeature from "./SocietyAndBuildingFeature";
 // import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
@@ -304,10 +305,10 @@ export default function SinglePostDetails() {
   }, [AlertData, AlertType]);
 
   // Check Tenent Response IsExit  Dispatch
-  useEffect(() => {
-    if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
-    dispatch(TenentResponseIsExitAction(SinglePostId));
-  }, [SinglePostId, medata?.user?.Role]);
+  // useEffect(() => {
+  //   if (!SinglePostId || medata?.user?.Role !== "Tenant") return;
+  //   dispatch(TenentResponseIsExitAction(SinglePostId));
+  // }, [SinglePostId, medata?.user?.Role]);
 
   useEffect(() => {
     if (!Params?.PostAddress) return; // Avoid running when undefined
@@ -506,15 +507,24 @@ export default function SinglePostDetails() {
                             src="/img/overlooking.png"
                             alt="icon"
                           />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {
-                                getSinglePostData?.SinglePost?.FloorDetails
-                                  ?.OverLookingView[0]
-                              }
-                            </span>
-                            <p> Overlooking View </p>
-                          </div>
+
+                          {
+                            getSinglePostData?.SinglePost?.FloorDetails
+                              ?.OverLookingView && <>
+
+                              <div className="img-box-imp-data">
+                                <span className="img-box-details-span">
+                                  {
+                                    getSinglePostData?.SinglePost?.FloorDetails
+                                      ?.OverLookingView[0]
+
+                                  }
+                                </span>
+                                {/* <p> Overlooking View </p> */}
+                              </div>
+                            </>
+                          }
+
                         </div>
                         <div className="property-info-tags">
                           <img
@@ -852,16 +862,18 @@ export default function SinglePostDetails() {
                     )}
 
                   <Link
-                    to={`https://wa.me/7837840785?text=Hello,%20I%20would%20like%20to%20get%20more%20information%20about%20this%20property.%20The%20Property%20ID%20is%20${encodeURIComponent(getSinglePostData?._id)}.%20Could%20you%20please%20provide%20more%20details?`}
+                    to="https://wa.me/7837840785?text=Hello"
                     target="_blank"
                     className="contact-expert-btn"
                   >
+                    {/* <button className="contact-expert-btn"> */}
                     <img
                       className="whatapp-ing-section-details"
                       src="/img/whatapp.png"
                       alt="icon"
                     />
                     WhatsApp
+                    {/* </button> */}
                   </Link>
 
 
@@ -1093,6 +1105,50 @@ export default function SinglePostDetails() {
                             Data={"Overlooking View"}
                           />
 
+                          {/* Possission Status  */}
+                          {getSinglePostData?.SinglePost?.FloorDetails
+                            ?.PossessionStatus && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.PossessionStatus
+                              }
+                              Icon="/img/area.png"
+                              Data={" Possission Status"}
+                            />
+                          }
+                          {/* additional pricing details */}
+                          {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges &&  <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges 
+                              }
+                              Icon="/img/area.png"
+                              Data={"Maintanance Details"}
+                            />}
+
+    {/* additional pricing details */}
+    {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent
+                              }
+                              Icon="/img/area.png"
+                              Data={"Monthly Expected Rent"}
+                            />}
+
+
+
+                          {/* current property status  */}
+
+                          {getSinglePostData?.SinglePost?.BasicDetails
+                            ?.CurrentPropertyStatus && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.CurrentPropertyStatus
+                              }
+                              Icon="/img/area.png"
+                              Data={"Current Property Status"}
+                            />
+                          }
+
                           {/* Property on Floor  , Total Floors" */}
                           {getSinglePostData?.SinglePost?.BasicDetails
                             ?.PropertyAdType == "Sale" && (
@@ -1264,6 +1320,12 @@ export default function SinglePostDetails() {
                             Icon="/img/Property-age.png"
                             Data={"Plot Facing"}
                           />
+                           {/* Plot openside  */}
+                           <PropertyDataBox
+                            Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
+                            Icon="/img/Property-age.png"
+                            Data={"Plot Facing"}
+                          />
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
                             Icon="/img/total-floor.png"
@@ -1300,6 +1362,7 @@ export default function SinglePostDetails() {
                                       }
                                     )}
                                   </p>
+
                                 </div>
                               </div>
                             )}
@@ -1307,9 +1370,20 @@ export default function SinglePostDetails() {
                       )}
                   </div>
                 </div>
+                {/* furnishing details */}
                 <FurnishDetails
                   furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                 />
+                {/* society features */}
+                {getSinglePostData?.SinglePost?.AmenitiesDetails?.SocietyAndBuildingFeature &&
+                  <SocietyAndBuildingFeature feature={getSinglePostData?.SinglePost?.AmenitiesDetails?.SocietyAndBuildingFeature} />
+                }
+                {/* plot features */}
+                {getSinglePostData?.SinglePost?.AmenitiesDetails?.ProjectAmmenities &&
+                  <SocietyAndBuildingFeature feature={getSinglePostData?.SinglePost?.AmenitiesDetails?.ProjectAmmenities} />
+                }
+
+
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">
                     <div className="location-section">
