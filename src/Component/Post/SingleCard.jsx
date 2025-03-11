@@ -20,7 +20,7 @@ const SingleCard = ({ PostData, index }) => {
   const { data, LodingType } = useSelector((state) => {
     return state.userData;
   });
-    console.log("data",data)
+  
   const [floorDetails, setFloorDetails] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 

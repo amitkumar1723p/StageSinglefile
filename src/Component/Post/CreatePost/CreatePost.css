@@ -1648,6 +1648,19 @@ background-color: var(--main-lighter-clr);
 }
 
 @media (max-width: 480px) {
+
+
+
+
+
+  .apartmentname-container {
+   
+    top: 92px;
+    padding: 10px;
+    width: auto;
+    left: 30px;
+    min-width: 300px;
+  }
   /* .post-img-upload{
     width: 90%;
   } */

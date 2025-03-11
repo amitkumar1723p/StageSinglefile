@@ -549,7 +549,7 @@ const { data: propertyByAdress, loading } = useSelector((store) => store.postByA
       )}
 {/* poperty section */}
 
-<PropertySection />
+{/* <PropertySection /> */}
 
 
       <div className="select-options" id="select-option-section">
@@ -687,7 +687,7 @@ const { data: propertyByAdress, loading } = useSelector((store) => store.postByA
       )}
 
       {/* Rent Component./ */}
-      {PropertyAddType == "Rent" && (
+      {/* {PropertyAddType == "Rent" && (
         <>
           <Tenant />
           <BrowseProperties />
@@ -696,11 +696,11 @@ const { data: propertyByAdress, loading } = useSelector((store) => store.postByA
           <PropertyDetailsForm />
           <RentAgreement />
           <RentalBanner />
-          {/* <VerifiedComponent /> */}
+          <VerifiedComponent />
           <RentAuthentication />
-          {/* <TenantDetailsForm /> */}
+          <TenantDetailsForm />
         </>
-      )}
+      )} */}
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 

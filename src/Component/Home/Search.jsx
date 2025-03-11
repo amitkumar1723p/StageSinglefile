@@ -8,7 +8,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 export default function Search({
   typeOfProperty
 }) {
-  console.log("thi ",typeOfProperty)
+
   const dispatch = useDispatch()
   const [localQuery, setLocalQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
