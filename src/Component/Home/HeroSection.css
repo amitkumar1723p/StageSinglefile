@@ -313,10 +313,7 @@
   background-color: #fff;
 }
 
-.img-searchbar {
-  /* padding: 5px; */
-  /* margin-right: 10px; */
-}
+
 .elastic-section-input-tag{
   background-color: #fff;
   height: 31.2px;
@@ -1150,9 +1147,7 @@
     /* Improves line spacing for readability */
   }
 
-  .heading-span-h1 {
-    /* color: #3361e0; Keeps the styled span consistent */
-  }
+  
 
   .heading-hero p {
     font-size: 12px;
