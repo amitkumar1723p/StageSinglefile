@@ -37,18 +37,21 @@ export default function LocationDetails({
 
   const LocationDetailsAlertShake = ()=>{
     if(LocationDetailsData.Landmark?.length == 0){
-      setSectorShake(true);
-      setTimeout(()=> setSectorShake(false),1600);
+      // setSectorShake(true);
+      // setTimeout(()=> setSectorShake(false),1600);
+      return
 
     }
     if(LocationDetailsData.City?.length == 0){
       setCityShake(true);
       setTimeout(()=> setCityShake(false),1600);
+      return
 
     }
     if(LocationDetailsData.Locality?.length == 0){
       setLocalityShake(true);
       setTimeout(()=> setLocalityShake(false),1600);
+      return
 
     }
 
@@ -143,7 +146,7 @@ export default function LocationDetails({
               Previous
             </div>
 
-            <button className="Submit-next" onClick={()=>LocationDetailsAlertShake()}>Next</button>
+            <button className="Submit-next" onClick={LocationDetailsAlertShake}>Next</button>
           </div>
         </form>
       </div>
