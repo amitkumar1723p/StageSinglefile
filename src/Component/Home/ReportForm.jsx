@@ -32,20 +32,20 @@ export default function ReportForm() {
   const [feedbackdescription, setFeedbackDescription] = useState(false);
 
 const handleAlert = ()=>{
-  if(!feedback.type){
-    console.log(feedback.type)
-    setFeedkacTypeAlert(true)
-    setTimeout(() => {
-      setFeedkacTypeAlert(false)
-    }, 1400);
-  }
-  if(!feedback.description){
-     setFeedbackDescription(true)
-    setTimeout(() => {
-      setFeedbackDescription(false)
-    }, 1400);
-    return;
-  }
+  // if(!feedback.type){
+  //   console.log(feedback.type)
+  //   setFeedkacTypeAlert(true)
+  //   setTimeout(() => {
+  //     setFeedkacTypeAlert(false)
+  //   }, 1400);
+  // }
+  // if(!feedback.description){
+  //    setFeedbackDescription(true)
+  //   setTimeout(() => {
+  //     setFeedbackDescription(false)
+  //   }, 1400);
+  //   return;
+  // }
 }
 
   return (

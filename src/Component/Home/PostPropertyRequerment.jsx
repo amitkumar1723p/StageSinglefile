@@ -128,8 +128,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
           className="property-form post-property-form"
           onSubmit={CreateQuerryFormHandler}
         >
-          <div className="property-form-details-top">
-          <div className="form-group form-bhk">
+          <div className="property-form-type">
+             <div className="form-group form-bhk">
               <p className="postreq-form " >Property type</p>
               <select
                 className={`form-input`}
@@ -149,7 +149,10 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 
               </select>
             </div>
-            <div className="form-group">
+            </div>
+          <div className="property-form-details-top">
+          {/* style={{ width: PostPropertyRequirementData.PropertyType !== "Plot" ? '220px' : '100%' }} */}
+            <div className='form-group post-prop-form-group'>
               <p className="postreq-form ">Locality</p>
               <ProjectNameSection
                 ProjectInputType={"PostRequirement"}
@@ -187,7 +190,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               <p className="postreq-form "> Floor Preference</p>
               <select
                 required
-                className={`form-input  ${floorPrefAlert? "shake inputShake ":''}`}
+                className={`form-input post-prop-floor  ${floorPrefAlert? "shake inputShake ":''}`}
                 onChange={(e) =>
                   setPostPropertyRequirementData({
                     ...PostPropertyRequirementData,
@@ -204,6 +207,36 @@ const PostPropertyRequerment = ({ SetShow }) => {
            </>  
 
            }
+            {PostPropertyRequirementData.PropertyType==="Plot" && 
+             <div className="form-group form-budget">
+             <div className="budget-container">
+               <p className="postreq-form ">Plot size</p>
+               <input
+                 required
+                 value={PostPropertyRequirementData.plotSize}
+                 onChange={(e) => {
+                   // Allow numbers and one decimal point only
+                   let value = e.target.value;
+               console.log(value)
+                   setPostPropertyRequirementData({
+                     ...PostPropertyRequirementData,
+                     plotSize: value,
+                   });
+                 }}
+                 type="text"
+                 placeholder="Enter your Budget"
+                 className="form-input"
+               />
+             </div>
+
+             <div className="form-budget-option">
+               <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
+                 <option value="Sqft">Sqft</option>
+                 <option value="Sqrd">Sq.yrd</option>
+               </select>
+             </div>
+           </div>
+        }
            
      
           </div>
@@ -272,36 +305,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               </div>
             </div>
           }
-             {PostPropertyRequirementData.PropertyType==="Plot" && 
-             <div className="form-group form-budget">
-             <div className="budget-container">
-               <p className="postreq-form ">Plot size</p>
-               <input
-                 required
-                 value={PostPropertyRequirementData.plotSize}
-                 onChange={(e) => {
-                   // Allow numbers and one decimal point only
-                   let value = e.target.value;
-               console.log(value)
-                   setPostPropertyRequirementData({
-                     ...PostPropertyRequirementData,
-                     plotSize: value,
-                   });
-                 }}
-                 type="text"
-                 placeholder="Enter your Budget"
-                 className="form-input"
-               />
-             </div>
-
-             <div className="form-budget-option">
-               <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
-                 <option value="Sqft">Sqft</option>
-                 <option value="Sqrd">Sq.yrd</option>
-               </select>
-             </div>
-           </div>
-        }
+            
 
             <div className="form-group">
               <button
