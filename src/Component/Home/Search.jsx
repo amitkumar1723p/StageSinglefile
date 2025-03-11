@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSerachProperty } from '../../Action/postAction';
 import './Search.css'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Search({
   typeOfProperty
@@ -21,6 +21,7 @@ export default function Search({
   const listRef = useRef(null);
   const searchBoxRef = useRef(null);
   const [hight, sethight] = useState(0);
+  const [querry, setquerry] = useSearchParams();
 
   // serach property 
   const { data: serachResponse, loading: searchLoading } = useSelector((state) => {
@@ -42,8 +43,7 @@ export default function Search({
         // Log the cleaned value
 
       // Dispatch your action
-      const b = {PropertyAdType:typeOfProperty, Furnishing:"",BHK:"",ApartmentType:""};
-      dispatch(getSerachProperty(query,{},b));
+      dispatch(getSerachProperty(query, {},{PropertyAdType:querry.get("PropertyAddType")}));
       // Don't set isLoading to false here - will be handled by useEffect
     } catch (error) {
       console.error('Error fetching suggestions:', error);
@@ -220,6 +220,7 @@ export default function Search({
   
 
   return (
+    
     <div className="search-box-container">
       <div className='elastic-search-input' ref={searchBoxRef}>
         

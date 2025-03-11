@@ -5,7 +5,7 @@ import HomeCard from "../HomeCard";
 import { Helmet } from "react-helmet";
 import { UserContext } from "../../CreateContext/CreateContext";
 // import _ from "lodash";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
   GetAllPostAction,
   getSerachProperty,
@@ -76,6 +76,7 @@ const PropertyFilters = () => {
   };
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
+  // const qq=useParams();
    const [querryProjectName ,setquerryProjectName] =useState("")
 
   useEffect(() => {
@@ -90,6 +91,7 @@ const PropertyFilters = () => {
       //     Furnishing: Filter.Furnishing,
       //   })
       // );
+      console.log(querry.get("PropertyAddType"))
       dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
    
         PropertyAdType: querry.get("PropertyAddType"),
@@ -175,7 +177,7 @@ const PropertyFilters = () => {
   //           })
 
 
-            dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "), {
+            dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
               
               PropertyAdType: querry.get("PropertyAddType"),
               BHK: Filter.BHK,
@@ -220,7 +222,7 @@ const PropertyFilters = () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
-  console.log("eewew ",querry.get("ProjectName")?.replaceAll("-", " "))
+  // console.log("eewew ",querry.get("ProjectName")?.replaceAll("-", " "))
    
   return (
     <>
@@ -241,16 +243,14 @@ const PropertyFilters = () => {
               <div
                 className="allpost-clear-filter"
                 onClick={() => {
-                  dispatch(
-                    GetAllPostAction({
-                      ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-                      PropertyAdType: querry.get("PropertyAddType"),
-                      BHK: "",
-                      ApartmentType: "",
-                      PropertyStatus: undefined,
-                      Furnishing: "",
-                    })
-                  );
+                  dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
+              
+                    PropertyAdType: querry.get("PropertyAddType"),
+                    BHK: "",
+                    ApartmentType: "",
+                    PropertyStatus: undefined,
+                    Furnishing: "",
+                  }));
                   setFilter({});
                 }}
               >
@@ -537,8 +537,8 @@ const PropertyFilters = () => {
                         className="allpost-clear-filter"
                         onClick={() => {
                           dispatch(
-                            GetAllPostAction({
-                              ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
+                            GetAllPostAction( querry.get("ProjectName")?.replaceAll("-", " "),{},{
+                             
                               PropertyAdType: querry.get("PropertyAddType"),
                               BHK: "",
                               ApartmentType: "",

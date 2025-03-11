@@ -1157,7 +1157,7 @@ export const GetDeletedPostsAction = () => {
 // elastic search action
 export const getSerachProperty=(query,propertyAdType,body)=>{
   // console.log(query,propertyAdType,"post")
-  console.log("boo ",body)
+ 
   
   return async(dispatch)=>{
   try {
