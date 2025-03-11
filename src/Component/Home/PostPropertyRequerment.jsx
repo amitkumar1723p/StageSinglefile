@@ -72,30 +72,44 @@ const PostPropertyRequerment = ({ SetShow }) => {
     dispatch(PostPropertyRequirementAction(dataToSubmit));
   };
 
-
   const [propertyTypeAlert, setPropertyTypeAlert] = useState(false);
   const [locationAlert,setLocationAlert] = useState({});
   const [bhkType,setBhkType]  = useState(false);
+  const [floorPrefAlert, setFloorPrefAlert] = useState(false);
+  const [budgetAlert, setBudgetAlert] = useState(false);
+
+
 
   const HandleRequirementAlert = ()=>{
-    if(!PostPropertyRequirementData.PropertyType){
-      setPropertyTypeAlert(true);
-      setTimeout(()=>setPropertyTypeAlert(false),1400)
-      return;
-    }
-    // if(!ProjectNameObjectData.ProjectName){
-    //   setLocationAlert({ProjectName:true})
-    //   setTimeout(() => {
-    //     setLocationAlert({ProjectName:false})
-    //   }, 1400);
-    // }
+  //   if(!PostPropertyRequirementData.PropertyType){
+  //     setPropertyTypeAlert(true);
+  //     setTimeout(()=>setPropertyTypeAlert(false),1400)
+  //     return;
+  //   }
+  //   // if(!ProjectNameObjectData.ProjectName){
+  //   //   setLocationAlert({ProjectName:true})
+  //   //   setTimeout(() => {
+  //   //     setLocationAlert({ProjectName:false})
+  //   //   }, 1400);
+  //   // }
 
 
-    if(!PostPropertyRequirementData.BHKType){
-      setBhkType(true);
-      setTimeout(()=>setBhkType(false),1400);
-      return;
-    }
+  //   if(!PostPropertyRequirementData.BHKType){
+  //     // setBhkType(true);
+  //     // setTimeout(()=>setBhkType(false),1400);
+  //     return;
+  //   }
+  //   if(!PostPropertyRequerment.FloorPreference){
+
+  //     return;
+  //   }
+
+  //   if(PostPropertyRequirementData.Budget === ""){
+  //     console.log("console.consloe")
+  //     setBudgetAlert(true);
+  //     setTimeout(()=> setBudgetAlert(false),1400)
+  //     return;
+  //   }
 
   }
 
@@ -118,7 +132,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           <div className="form-group form-bhk">
               <p className="postreq-form " >Property type</p>
               <select
-                className={`form-input ${propertyTypeAlert? "shake inputShake" : ""}`}
+                className={`form-input`}
                 required
                 value={PostPropertyRequirementData.PropertyType.trimStart()}
                 onChange={(e) =>
@@ -150,7 +164,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
             <div className="form-group form-bhk">
               <p className="postreq-form " >BHK Type</p>
               <select
-                className={`form-input ${bhkType? "shake ":""}`}
+                className={`form-input `}
                 required
                 value={PostPropertyRequirementData.BHKType.trimStart()}
                 onChange={(e) =>
@@ -173,7 +187,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               <p className="postreq-form "> Floor Preference</p>
               <select
                 required
-                className="form-input"
+                className={`form-input  ${floorPrefAlert? "shake inputShake ":''}`}
                 onChange={(e) =>
                   setPostPropertyRequirementData({
                     ...PostPropertyRequirementData,
@@ -218,7 +232,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                   }}
                   type="text"
                   placeholder="Enter your Budget"
-                  className="form-input"
+                  className={`form-input `}
                 />
               </div>
 

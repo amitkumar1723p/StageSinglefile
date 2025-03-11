@@ -56,6 +56,7 @@ export default function OtherDetails({
     "Others",
   ];
   
+  const transitionDuration = '0.3s'
   return (
     <>
       <div className="other-details-plot">
@@ -65,6 +66,7 @@ export default function OtherDetails({
         <div className="form-group">
           <label htmlFor="constructor-allowed"> Construction Allowed*</label>
           <input
+           style={{transitionDuration}}
            className={` ${Error.ConstructionAllowed? 'inputShake shake' : ''}`}
             type="text"
             id="constructor-allowed"
@@ -89,6 +91,7 @@ export default function OtherDetails({
             {PropertyfacingArray.map((text, i) => {
               return (
                 <div
+                style={{transitionDuration}}
                   key={i}
                   className={`tab ${
                     OtherDetailsData.PlotDirection === text ? "select" : ""
@@ -124,6 +127,7 @@ export default function OtherDetails({
             {OverLookingViewArray.map((text, i) => {
               return (
                 <div
+                style={{transitionDuration}}
                   key={i}
                   className={`tab ${
                     OtherDetailsData.PlotFacing === text ? "select" : ""
@@ -159,7 +163,7 @@ export default function OtherDetails({
             Width of Front Road* only in mt
           </label>
           <input
-
+           style={{transitionDuration}}
 className={` ${Error.FrontRoadWidth? 'inputShake shake' : ''}`}
             type="text"
             id="front-road-width"

@@ -443,7 +443,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
               </div>
             )}
 
-            <div className={`Prop-detials-box-form-area ${Error.AreaFieldError? "inputShake shake":''}`}  id="ScrollToAreaDetails" style={{scrollMarginTop:'80px'}}>
+            <div className={`Prop-detials-box-form-area ${Error.AreaFieldError? "inputShake shake":''}`}  id="ScrollToAreaDetails" style={{scrollMarginTop:'80px'}} >
               <AreaDetailsSection
                 AreaDetailsData={AreaDetailsData}
                 setAreaDetailsData={setAreaDetailsData}

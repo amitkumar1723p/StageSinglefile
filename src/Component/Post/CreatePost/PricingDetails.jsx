@@ -312,7 +312,7 @@ export default function PricingDetails({
 
   
   } 
-
+  const transitionDuration = '0.3s'
 
   return (
     <>
@@ -338,6 +338,7 @@ export default function PricingDetails({
                 <div className="form-group">
                   <label htmlFor="expected-price"> Expected Price*</label>
                   <input
+                  style={{transitionDuration}}
                   className={`${priceAlert? 'inputShake shake':''}`}
                     type="text"
                     id="expected-price"
@@ -429,6 +430,7 @@ export default function PricingDetails({
                 <div className="form-group">
                   <label htmlFor="expected-rent"> Expected Rent* </label>
                   <input
+                  style={{transitionDuration}}
                    className={`${expectedRentAlert? 'inputShake shake':''}`}
                     type="text"
                     id="expected-rent"
@@ -469,6 +471,7 @@ export default function PricingDetails({
                 <div className="form-group">
                   <label htmlFor="deposite-price"> Deposite Price*</label>
                   <input
+                  style={{transitionDuration}}
                    className={`${depositeAlert? 'inputShake shake':''}`}
                     type="text"
                     id="price"

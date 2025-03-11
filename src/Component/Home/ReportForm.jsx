@@ -27,6 +27,27 @@ export default function ReportForm() {
     }));
   };
 
+  // alert
+  const [feedkacTypeAlert,setFeedkacTypeAlert] = useState(false);
+  const [feedbackdescription, setFeedbackDescription] = useState(false);
+
+const handleAlert = ()=>{
+  if(!feedback.type){
+    console.log(feedback.type)
+    setFeedkacTypeAlert(true)
+    setTimeout(() => {
+      setFeedkacTypeAlert(false)
+    }, 1400);
+  }
+  if(!feedback.description){
+     setFeedbackDescription(true)
+    setTimeout(() => {
+      setFeedbackDescription(false)
+    }, 1400);
+    return;
+  }
+}
+
   return (
     <div className="reporting-container">
       <div className="reporting-headings">
@@ -57,7 +78,8 @@ export default function ReportForm() {
 
             <div className="reporting-form-group">
               <select
-                className="reporting-select"
+              required
+                className={`reporting-select ${feedkacTypeAlert? " inputShake":''}`}
                 value={feedback.type}
                 onChange={(e) => setFeedback({ ...feedback, type: e.target.value })}
               >
@@ -75,7 +97,7 @@ export default function ReportForm() {
               <label className="reporting-label-section">Describe</label>
               <input
                 type="text"
-                className="reporting-input-section"
+                className={`reporting-input-section  ${feedbackdescription? " inputShake":''}`}
                 placeholder="Describe your concern"
                 value={feedback.description}
                 onChange={(e) => setFeedback({ ...feedback, description: e.target.value })}
@@ -109,7 +131,7 @@ export default function ReportForm() {
                 type: "",
                 description: "",
                 file: [],
-              })
+              })  ; handleAlert()
               }}>
               Submit
             </button>

@@ -103,6 +103,7 @@ export default function BasicDetailsSection({
   // const BasicDetailsSubmitForm =()=>{}
 
 
+    const transitionDuration = '0.3s';
     const [error, setError] = useState(' ');
 
 
@@ -264,6 +265,7 @@ const HandleAlertShake = ()=>{
             <h3 className="basic-details-heading">Property Type*</h3>
             <div className="tabs">
               <button
+              style={{transitionDuration}}
                 className={`tab ${
                   BasicDetailsData.PropertyType === "Residential"
                     ? "select"
@@ -298,6 +300,7 @@ const HandleAlertShake = ()=>{
                   <button
                     key={i}
                     value={text}
+                    style={{transitionDuration}}
                     className={`ad-btn tab img add-btn-${text} ${
                       BasicDetailsData.PropertyAdType === text ? "select" : ""
                     }  ${sellRentShake? 'inputShake shake' : ''} `}
@@ -330,6 +333,7 @@ const HandleAlertShake = ()=>{
               {ApartMentTypeTab.map((e, i) => {
                 return (
                   <button
+                  style={{transitionDuration}}
                     className={`tab ${
                       BasicDetailsData.ApartmentType === e ? "select" : ""
                     }  ${choosePropertyShake? 'inputShake shake' : ''}  `}
@@ -371,6 +375,7 @@ const HandleAlertShake = ()=>{
                     </label>
 
                     <input
+                    style={{transitionDuration}}
                     className={`date-time-lable ${availableFromShake?'inputShake shake' :''} `}
                       type="date"
                       id="available-from"
@@ -413,11 +418,13 @@ const HandleAlertShake = ()=>{
                                 className="PropertyStatus-box-content"
                               >
                                 <label
+                                style={{transitionDuration}}
                                 className={` ${propertyStatusShake?' shake' :''}`}
                                  htmlFor={`property-status-${i}`}>
                                   {text}
                                 </label>
                                 <input
+                                style={{transitionDuration}}
                                 className={` ${propertyStatusShake?'inputShake  ' :''}`}
                                   type="radio"
                                   name="Property Stattus"
@@ -459,12 +466,14 @@ const HandleAlertShake = ()=>{
                                   className="PropertyStatus-box-content"
                                 >
                                   <label
+                                  style={{transitionDuration}}
                                   className={` ${currentpropertyStatusReadytoMove?'shake  ' :''}  ${currentpropertyStatuPlotLand?'shake  ' :''} `}
                                     htmlFor={`current-property-status-${i}`}
                                   >
                                     {text}
                                   </label>
                                   <input
+                                  style={{transitionDuration}}
                                   className={` ${currentpropertyStatusReadytoMove?'shake  ' :''}  ${currentpropertyStatuPlotLand?'shake  ' :''}`}
                                     type="radio"
                                     name="current-property-status"
@@ -494,6 +503,7 @@ const HandleAlertShake = ()=>{
                           <div className="form-group">
                             <label htmlFor="property-age">Property Age*</label>
                             <select
+                            style={{transitionDuration}}
                           className={`date-time-lable  ${propertyAgeShake? 'shake inputShake' : ''} `}
                               id="property-age"
                               required
@@ -520,6 +530,7 @@ const HandleAlertShake = ()=>{
                       <div className="form-group">
                         <label htmlFor="property-age">Possession Status*</label>
                         <select
+                        style={{transitionDuration}}
                            className={`date-time-lable  ${underConstructionPossessionShake? 'shake inputShake' : ''}  ${plotLandPossessionShake? 'shake inputShake' : ''} `}
                           id="property-age"
                           required

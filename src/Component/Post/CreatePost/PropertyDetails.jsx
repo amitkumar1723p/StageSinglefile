@@ -92,6 +92,7 @@ export default function PropertyDetailsSection({
 
 
 
+    const transitionDuration = '0.3s';
 
   return (
     <>
@@ -100,6 +101,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="bhk-type">BHK Type*</label>
           <select
+           style={{transitionDuration}}
            className={` ${Error.BHKType? 'inputShake shake' : ''}`}
 
             id="bhk-type"
@@ -131,6 +133,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="flooring-type">Flooring Type*</label>
           <select
+           style={{transitionDuration}}
            className={` ${Error.FlooringType? 'inputShake shake' : ''}`}
             id="flooring-type"
             required
@@ -165,6 +168,7 @@ export default function PropertyDetailsSection({
               return (
                 <div
                   key={i}
+                  style={{transitionDuration}}
                   className={`tab ${
                     PropertyDetailsData.OtherRoom?.includes(text) ? "select" : ""
                   }  ${Error.OtherRoom? 'inputShake shake' : ''}
@@ -215,6 +219,7 @@ export default function PropertyDetailsSection({
                   return (
                     <div className="d-flex" key={i}>
                       <input
+                       style={{transitionDuration}}
                       className={`me-2 ${Error.Basement? 'inputShake shake' : ''}`}
                         type="radio"
                         id={`basement-${i}`}
@@ -231,6 +236,7 @@ export default function PropertyDetailsSection({
                       />
                       &nbsp;
                       <label
+                       style={{transitionDuration}}
                         htmlFor={`basement-${i}`}
                         className={`basement-label-${i} ${Error.Basement? ' shake' : ''}`}
                       >
@@ -245,8 +251,9 @@ export default function PropertyDetailsSection({
             {PropertyDetailsData.Basement == true && (
               <div className="form-group">
                 <label htmlFor="BasementArea">Basement Area*</label>
-                <div className={`unit-input basement-unit-input ${Error.BasementAreaShake? 'inputShake shake' : ''}`}>
+                <div  style={{transitionDuration}} className={`unit-input basement-unit-input ${Error.BasementAreaShake? 'inputShake shake' : ''}`}>
                   <input
+                   style={{transitionDuration}}
                    
                     type="text"
                     id="BasementArea"

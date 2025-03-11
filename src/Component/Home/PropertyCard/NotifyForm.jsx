@@ -51,6 +51,29 @@ const NotifyForm = ({ SetShow }) => {
     // eslint-disable-next-line
   }, [data]);
 
+
+  // Alerts
+  const [bhkalert, setBhkAlert] = useState(false);
+  const [floorPrefAlert, setFloorPrefAlert] = useState(false);
+
+const HandleNotifyFormSubmit = ()=>{
+  if(!NotifyData.BHKType){
+    setBhkAlert(true);
+    setTimeout(() => {
+      setBhkAlert(false)
+    }, 1400);
+    return;
+  }
+  if(!NotifyData.FloorPreference){
+    setFloorPrefAlert(true);
+    setTimeout(() => {
+      setFloorPrefAlert(false);
+    }, 1400);
+    return;
+  }
+
+}
+  
   return (
     <>
       {/* <Loader />= */}
@@ -88,7 +111,7 @@ const NotifyForm = ({ SetShow }) => {
               <select
                 required
                 value={NotifyData.BHKType}
-                className="form-select"
+                className={`form-select  ${bhkalert? "shake inputShake":''}`}
                 onChange={(e) => {
                   setNotifyData({ ...NotifyData, BHKType: e.target.value });
                 }}
@@ -149,7 +172,7 @@ const NotifyForm = ({ SetShow }) => {
               <label className="notify-lable">Floor Preference</label>
               <select
                 value={NotifyData.FloorPreference}
-                className="form-select"
+                className={`form-select  ${floorPrefAlert? "shake inputShake":''}`}
                 required
                 onChange={(e) => {
                   setNotifyData({
@@ -167,7 +190,7 @@ const NotifyForm = ({ SetShow }) => {
               </div>
               
               <div className="notify-button-container">
-              <button type="submit" className="notify-submit-button">
+              <button onClick={HandleNotifyFormSubmit} type="submit" className="notify-submit-button">
                 Submit
               </button>
               </div>
