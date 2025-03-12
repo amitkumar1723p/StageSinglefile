@@ -1169,7 +1169,7 @@ export default function SinglePostDetails() {
                           {/* Water Source */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                            Icon="/img/parking.png"
+                            Icon="/img/Water.png"
                             Data={"Water Source"}
                           />
                         </>
@@ -1197,7 +1197,7 @@ export default function SinglePostDetails() {
                       ?.PropertyAge && (
                         <PropertyDataBox
                           Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
-                          Icon="/img/bathroom.png"
+                          Icon="/img/Property-Age.png"
                           Data={"Property Age"}
                         />
                       )}
