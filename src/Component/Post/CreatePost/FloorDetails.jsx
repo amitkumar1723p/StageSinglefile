@@ -4,46 +4,91 @@ export default function FloorDetails({
   FloorDetailsData,
   setFloorDetailsData,
   BasicDetailsData,
-  Error
+  Error,
 }) {
   const [floorCount, setFloorCount] = useState([]);
 
-  useEffect(() => {
-    if (FloorDetailsData.TotalFloors) {
-      let count = [];
-      for (let i = 1; i <= FloorDetailsData.TotalFloors; i++) {
-        count.push(i);
-      }
-      setFloorCount(count);
-    } else {
-      if (
-        [
-          "Apartment",
-          "Independent/Builder Floor",
-          // "1 RK/Studio Apartment",
-          "Studio Apartment",
-          "1 RK/PG",
-          "Serviced Apartment",
-        ].includes(BasicDetailsData.ApartmentType)
-      ) {
-        setFloorDetailsData({
-          ...FloorDetailsData,
-          PropertyOnFloor: "",
-        });
-      }
+  // useEffect(() => {
+  //   const FloorDetailsDataCopy = { ...FloorDetailsData };
+  //   if (FloorDetailsData.TotalFloors) {
+  //     let count = [];
+  //     for (let i = 1; i <= FloorDetailsData.TotalFloors; i++) {
+  //       count.push(i);
+  //     }
+  //     setFloorCount(count);
+  //   } else {
+  //     if (
+  //       [
+  //         "Apartment",
+  //         "Independent/Builder Floor",
+  //         // "1 RK/Studio Apartment",
+  //         "Studio Apartment",
+  //         "1 RK/PG",
+  //         "Serviced Apartment",
+  //       ].includes(BasicDetailsData.ApartmentType)
+  //     ) {
+  //       // const FloorDetailsDataCopy = {...FloorDetailsData}
 
-      setFloorCount([]);
-    }
-    // eslint-disable-next-line
-  }, [FloorDetailsData.TotalFloors]);
+  //       // setFloorDetailsData({
+  //       //   ...FloorDetailsData,
+  //       //   PropertyOnFloor: "",
+  //       // });
+
+  //       FloorDetailsDataCopy.PropertyOnFloor = "";
+  //     }
+
+  //     setFloorCount([]);
+  //   }
+  //   if (
+  //     !FloorDetailsDataCopy?.OverLookingView ||
+  //     !Array.isArray(FloorDetailsDataCopy?.OverLookingView)
+  //   ) {
+  //     FloorDetailsDataCopy.OverLookingView = [];
+  //   }
+  //   setFloorDetailsData(FloorDetailsDataCopy);
+  //   // eslint-disable-next-line
+  // }, [FloorDetailsData.TotalFloors]);
+
+  // useEffect(() => {
+  //   setFloorDetailsData((prevData) => ({
+  //     ...prevData,
+  //     OverLookingView: prevData.OverLookingView || [],
+  //   }));
+  //   // eslint-disable-next-line
+  // }, []);
+
+
+
 
   useEffect(() => {
-    setFloorDetailsData((prevData) => ({
-      ...prevData,
-      OverLookingView: prevData.OverLookingView || [],
-    }));
-    // eslint-disable-next-line
-  }, []);
+    setFloorDetailsData((prevData) => {
+      let updatedData = { ...prevData };
+  
+      if (prevData.TotalFloors) {
+        setFloorCount(Array.from({ length: prevData.TotalFloors }, (_, i) => i + 1));
+      } else {
+        if (
+          [
+            "Apartment",
+            "Independent/Builder Floor",
+            "Studio Apartment",
+            "1 RK/PG",
+            "Serviced Apartment",
+          ].includes(BasicDetailsData.ApartmentType)
+        ) {
+          updatedData.PropertyOnFloor = "";
+        }
+        setFloorCount([]);
+      }
+  
+      if (!Array.isArray(updatedData.OverLookingView)) {
+        updatedData.OverLookingView = [];
+      }
+  
+      return updatedData;
+    });
+  }, [FloorDetailsData.TotalFloors, BasicDetailsData.ApartmentType]); 
+  
   const PropertyfacingArray = [
     "North",
     "South",
@@ -68,10 +113,9 @@ export default function FloorDetails({
       <p className="Property-Details-heading">Floor Details</p>
       <div className="form-row">
         <div className="form-group">
-          
           <label htmlFor="total-floors">Total Floors*</label>
           <input
-          className={` ${Error.TotalFloors? 'inputShake shake' : ''}`}
+            className={` ${Error.TotalFloors ? "inputShake shake" : ""}`}
             type="text"
             id="total-floors"
             required
@@ -91,7 +135,6 @@ export default function FloorDetails({
               }
             }}
           />
-         
         </div>
 
         {[
@@ -105,7 +148,9 @@ export default function FloorDetails({
           <div className="form-group">
             <label htmlFor="floor">Property on Floor*</label>
             <select
-              className={`date-time-lable ${Error.PropertyOnFloor? 'inputShake shake' : ''}`}
+              className={`date-time-lable ${
+                Error.PropertyOnFloor ? "inputShake shake" : ""
+              }`}
               id="floor"
               required
               value={FloorDetailsData.PropertyOnFloor || ""}
@@ -148,7 +193,7 @@ export default function FloorDetails({
                 key={i}
                 className={`tab ${
                   FloorDetailsData.PropertyDirection === text ? "select" : ""
-                } ${Error.PropertyDirection? 'inputShake shake' : ''} `}
+                } ${Error.PropertyDirection ? "inputShake shake" : ""} `}
                 onClick={() => {
                   setFloorDetailsData({
                     ...FloorDetailsData,
@@ -212,7 +257,7 @@ export default function FloorDetails({
                   FloorDetailsData.OverLookingView?.includes(text)
                     ? "select"
                     : ""
-                } ${Error.OverLookingView? 'inputShake shake' : ''}
+                } ${Error.OverLookingView ? "inputShake shake" : ""}
       `}
                 onClick={() => {
                   if (!FloorDetailsData.OverLookingView?.includes(text)) {

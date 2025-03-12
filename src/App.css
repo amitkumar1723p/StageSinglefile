@@ -375,6 +375,7 @@ td{
   animation: justshake 0.5s ease-in-out;
 }
 .inputShake{
+  transition-duration: 0.3s;
   border: 1px solid red !important;
   animation: justshake 0.5s ease-in-out;
 }
