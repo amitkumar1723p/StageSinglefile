@@ -147,7 +147,7 @@ Stay updated with the latest home décor ideas on [PropertyDekho247.com](https:/
         },
         {
             id:4,
-            date:"19 Dec 2025",
+            date:"19 Dec 2024",
             title:"LIFESTYLE & LIVINGS",
             heading:"Urban vs. Suburban Living",
             imgUrl:"/img/blogImg/lifestyle.svg",
