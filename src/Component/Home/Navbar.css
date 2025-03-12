@@ -210,7 +210,7 @@
   padding: 8px 13.5px; /* Decreased padding */
   background-color: var(--main-light-clr);
   color: #fff;
-  /* font-size: 12px; */
+  font-size: 12px;
   border-radius: 4.5px; /* Decreased border radius */
   transition: background-color 0.3s ease;
 }

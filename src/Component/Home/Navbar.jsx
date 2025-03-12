@@ -133,8 +133,8 @@ const Navbar = () => {
               </h2>
             </div>
             <small>
-              <span className="WishingHoli"> Wishing</span>
-              <span className="YouHoli">You</span>
+              {/* <span className="WishingHoli"> Wishing</span>
+              <span className="YouHoli">You</span> */}
               <span className="HappyHoli">Happy</span>
               <span className="holiholi">Holi !!</span>
             </small>

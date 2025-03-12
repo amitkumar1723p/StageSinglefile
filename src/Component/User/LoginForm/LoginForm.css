@@ -261,3 +261,15 @@ line-height: normal;
     border-top: 1px solid #f0f0f0;
   }
 }
+
+@media (max-width: 480px) {
+  .login-form-main {
+   
+   
+    margin: 0 auto;
+  }
+
+ 
+
+  
+}

@@ -1,5 +1,5 @@
 .sub-heading {
-  display: inline-flex;
+  /* display: inline-flex; */
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
@@ -987,7 +987,7 @@ font-weight: 600;
   }
 
   .search-button-mob {
-    display: flex;
+    display: none;
     gap: 5px;
     align-items: center;
 
