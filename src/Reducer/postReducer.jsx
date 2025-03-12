@@ -25,6 +25,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileRequest":
     case "OwnerAllExcelFileRequest":
     case "ReportPagePostRequest":
+    
       return {
         ...state,
         loading: true,
@@ -55,6 +56,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileSuccess":
     case "OwnerAllExcelFileSuccess":
       case "ReportPagePostSuccess":
+   
      
     return {
         ...state,
@@ -86,6 +88,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileFail":
     case "OwnerAllExcelFileFail":
     case "ReportPagePostFail":
+   
+
       return {
         ...state,
         loading: false,
@@ -716,6 +720,7 @@ export const getSerachPropertyReducer=(state={},action)=>{
       return {
         ...state,
         loading: true,
+
       };
 
     case"GetSerachPropertySuccess":
@@ -734,10 +739,43 @@ export const getSerachPropertyReducer=(state={},action)=>{
     };
 
     case"GetSerachPropertyClear":
-return{}
+    console.log("clearr")
+    return {}; // Clears state when necessary
+
     default:
-      return{
+      return state;
+  }
+}
+
+export const getPostsByAddressReducer=(state={},action)=>{
+  switch(action.type){
+    case "GetPostsByAddressRequest":
+      return {
         ...state,
-      };
+        loading: true,
+
+      };
+
+    case"GetPostsByAddressSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"GeetPostsByAddressFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"GeetPostsByAddressClear":
+
+    return {}; // Clears state when necessary
+
+    default:
+      return state;
   }
 }

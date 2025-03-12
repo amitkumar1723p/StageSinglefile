@@ -57,6 +57,7 @@ export default function AdminListingCard({
 
   useEffect(() => {
     let dateString = PostData?.PostVerifyData?.Time;
+    //  console.log( "post id with date",PostData._id ,PostData)
     if (!dateString) {
       setFormatDate({
         ExpiredDate: "Invalid Date",
@@ -375,6 +376,7 @@ export default function AdminListingCard({
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
+                         <span className="rent-admin-section">Rent : </span> 
                             {formatReservePrice(
                               PostData?.PricingDetails?.ExpectedRent
                             )}
@@ -386,6 +388,7 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
+                    
                     {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>

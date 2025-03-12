@@ -6,6 +6,7 @@ import "./AllPostRender.css";
 import "../Home/PropertyCard/card.css";
 import NotifyMe from "../Home/PropertyCard/NotifyMe";
 import SingleCard from "./SingleCard";
+import ScrollToTop from "../../ScrollToTop";
 
 const AllPostRender = () => {
   const [filters, setFilters] = useState({
@@ -31,21 +32,19 @@ const AllPostRender = () => {
   const [showModal, setShowModal] = useState(false); // Modal visibility state
   const [filterdPost, setFilterdPost] = useState([]);
 
+  useEffect(() => {
+    if (!GetAllPostData) return;
 
+    const soldOut = GetAllPostData.filter(
+      (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
+    );
+    const available = GetAllPostData.filter(
+      (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
+    );
 
-    useEffect(() => {
-      if (!GetAllPostData ) return;
-  
-      const soldOut = GetAllPostData.filter(
-        (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
-      );
-      const available = GetAllPostData.filter(
-        (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
-      );
-  
-      setFilterdPost([...available, ...soldOut]);
-    }, [GetAllPostData]);
-  
+    setFilterdPost([...available, ...soldOut]);
+  }, [GetAllPostData]);
+
   // const { data: SingleProjectData } = useSelector((state) => state.SingleProjectName);
 
   useEffect(() => {
@@ -56,7 +55,9 @@ const AllPostRender = () => {
           `${process.env.REACT_APP_API_URL}/post/all-property/`
         );
         if (res.data.success) {
+         
           setGetAllData(res.data.properties);
+
         }
       } catch (error) {
         console.log(error);
@@ -66,6 +67,10 @@ const AllPostRender = () => {
     }
     getData();
   }, []);
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0); // Scrolls to the top of the page
+  // }, [GetAllPostData])
 
   useEffect(() => {
     if (!GetAllPostData.length) return;
@@ -92,10 +97,10 @@ const AllPostRender = () => {
         (post) => post.AmenitiesDetails?.Furnishing === filters.furnishing
       );
     }
- 
+    window.scrollTo(0, 0)
 
     setFilteredData(filtered);
-  }, [filters, GetAllPostData,filterdPost]);
+  }, [filters, GetAllPostData, filterdPost]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({
@@ -106,6 +111,7 @@ const AllPostRender = () => {
 
   return (
     <>
+   
       <div className="property-post-filters-box-allpost">
         <aside className="property-filters">
           <div className="allpost-clear-filter-title">
@@ -176,7 +182,9 @@ const AllPostRender = () => {
                 "Apartment",
                 "Independent House/Villa",
                 "Independent/Builder Floor",
-                "1 RK/Studio Apartment",
+                // "1 RK/Studio Apartment",
+                "Studio Apartment",
+                "1 RK/PG",
                 "Serviced Apartment",
                 "Plot/Land",
               ].map((type, i) => (
@@ -224,7 +232,7 @@ const AllPostRender = () => {
 
           <div className="total-post-length-container">
             <p className="total-post-lable-allpost">
-             Showing {filteredData?.length} Listing
+              Showing {filteredData?.length} Listing
             </p>
 
             <button
@@ -237,15 +245,17 @@ const AllPostRender = () => {
           </div>
           {loading ? (
             <div className="allPostrender-showpost">
-              {Array.from({ length: 8 }).map((_, index) => (
+             <div className="all-post-render-skeleton-container">
+             {Array.from({ length: 8 }).map((_, index) => (
                 <AllPostSkeleton key={index} />
               ))}
+             </div>
             </div>
-          ) : filteredData.length === 0 ? (
+          ) : filteredData?.length === 0 ? (
             <NotifyMe />
-            
           ) : (
             <div className="allPostrender-showpost">
+                <ScrollToTop />
               {filteredData?.map((e, i) => (
                 <SingleCard key={i} PostData={e} index={i} />
               ))}
@@ -323,7 +333,9 @@ const AllPostRender = () => {
                     "Apartment",
                     "Independent House/Villa",
                     "Independent/Builder Floor",
-                    "1 RK/Studio Apartment",
+                    // "1 RK/Studio Apartment",
+                    "Studio Apartment",
+                    "1 RK/PG",
                     "Serviced Apartment",
                     "Plot/Land",
                   ].map((type) => (
@@ -374,24 +386,23 @@ export default AllPostRender;
 
 const AllPostSkeleton = () => {
   return (
+    
     <div className="all-post-skeleton-card">
-    <div className="all-post-skeleton-image"></div>
+      <div className="all-post-skeleton-image"></div>
 
-    <div className="all-post-skeleton-text all-post-skeleton-title"></div>
-    <div className="all-post-skeleton-text all-post-skeleton-subtitle-1"></div>
-    <div className="all-post-skeleton-text all-post-skeleton-subtitle"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-title"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle-1"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle"></div>
 
-    <div className="all-post-skeleton-info-container">
-      <div className="all-post-skeleton-info"></div>
-      <div className="all-post-skeleton-info"></div>
+      <div className="all-post-skeleton-info-container">
+        <div className="all-post-skeleton-info"></div>
+        <div className="all-post-skeleton-info"></div>
+      </div>
+
+      <div className="all-post-skeleton-footer">
+        <div className="all-post-skeleton-button"></div>
+        <div className="all-post-skeleton-button"></div>
+      </div>
     </div>
-
-    <div className="all-post-skeleton-footer">
-      <div className="all-post-skeleton-button"></div>
-      <div className="all-post-skeleton-button"></div>
-    </div>
-  </div>
   );
 };
-
-

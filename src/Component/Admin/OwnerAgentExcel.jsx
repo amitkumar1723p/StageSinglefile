@@ -273,23 +273,85 @@ const OwnerAgentExcel = () => {
     return state.meDetails;
   });
   const { id } = useParams("id")
-console.log(id)
-  // const fetchedAllFiles =useSelector((store)=>store.OwnerAllExcelFiles.data)
+ 
   useEffect(() => {
-    const handleKeyUp = (event) => {
-      if (event.key === "PrintScreen") {
+    const handleKeyDown = (event) => {
+      // Prevent Developer Tools
+      if (
+        event.key === "F12" || // F12 Key
+        (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "i") || // Ctrl + Shift + I
+        (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "j") || // Ctrl + Shift + J
+        (event.ctrlKey && event.key.toLowerCase() === "u") // Ctrl + U (View Source) 
+        ||  (event.shiftKey && event.metaKey )
+      ) {
+        event.preventDefault();
+    
         setIsHidden(true);
+  
+        // alert("Screenshot detected! Your activity is being monitored.");
+
         setTimeout(() => {
           setIsHidden(false);
-        }, 2000);
+        }, 2000); // Restore UI after 2 seconds
+      }
+
+      // Prevent Printing (Ctrl + P)
+      if (event.ctrlKey && event.key.toLowerCase() === "p") {
+        event.preventDefault();
+          setIsHidden(true);
+    
+          // alert("Screenshot detected! Your activity is being monitored.");
+  
+          setTimeout(() => {
+            setIsHidden(false);
+          }, 2000); // Restore UI after 2 seconds
+      }
+
+      // Prevent Snipping Tool (Win + Shift + S)
+      if (event.shiftKey && event.metaKey && event.key.toLowerCase() === "s") {
+        event.preventDefault();
+        setIsHidden(true);
+  
+        // alert("Screenshot detected! Your activity is being monitored.");
+
+        setTimeout(() => {
+          setIsHidden(false);
+        }, 2000); // Restore UI after 2 seconds
       }
     };
 
-    document.addEventListener("keyup", handleKeyUp);
+    const handlePrintScreen = (event) => {
+      if (event.key === "PrintScreen") {
+        event.preventDefault();
+          setIsHidden(true);
+    
+          // alert("Screenshot detected! Your activity is being monitored.");
+  
+          setTimeout(() => {
+            setIsHidden(false);
+          }, 2000); // Restore UI after 2 seconds
+      }
+    };
+
+    const handleRightClick = (event) => {
+      event.preventDefault();
+      alert("Right-click is disabled!");
+    };
+
+    // Add event listeners
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handlePrintScreen);
+    document.addEventListener("contextmenu", handleRightClick);
+
+    // Cleanup event listeners when component unmounts
     return () => {
-      document.removeEventListener("keyup", handleKeyUp);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handlePrintScreen);
+      document.removeEventListener("contextmenu", handleRightClick);
     };
   }, []);
+
+
 
 
   async function getAllAdminsAgents(Keyword) {
@@ -436,7 +498,13 @@ console.log(id)
       alert(`${changes.length} column headers updated successfully!`);
 
       // Refresh data to update original columns
-      fetchSingleFileData(fileId);
+      if(medata.user.Role==="Owner")
+      {
+        fetchSingleFileDataOwner(fileId)
+      }else{
+
+        fetchSingleFileData(fileId);
+      }
       setHasHeaderChanges(false);
     } catch (err) {
       console.error("Error saving header changes:", err);
@@ -469,7 +537,7 @@ console.log(id)
   useEffect(() => {
     const agentIdsSet = new Set(AssinedAdmins.map(agent => agent.AdminId._id));
 
-    console.log("seeting agent  ", agentIdsSet)
+   
     // Find common AdminIds
     const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
     console.log("thi sis matchinggg ", matchingAdmins)
@@ -543,7 +611,7 @@ console.log(id)
 
   return (
 
-    <div className='file-handler-table-container'>
+    <div className='file-handler-table-container' style={{ userSelect: "none" }}>
 
       {/* Add Column Button */}
       {medata?.user?.Role === "Owner" &&
@@ -586,83 +654,7 @@ console.log(id)
 <button onClick={saveChanges} className="file-handler-save-button">
             Save Changes
           </button>
-      {/* Data Table */}
-      {!isHidden && data?.length > 0 && (
-        <table className="file-handler-table">
-
-
-          {medata?.user?.Role === "Owner" ?
-            <thead>
-              <tr>
-                <th className="file-handler-table-header">Sno.</th>
-                {columns.map((col, index) => (
-                  <th
-                    key={index}
-                    className={`file-handler-table-header ${col.editable ? "editable-header" : ""} ${col.name !== originalColumns[index]?.name ? "modified-header" : ""
-                      }`}
-                    onClick={() => handleHeaderClick(index)}
-                  >
-                    {editingHeader === index ? (
-                      <input
-                        type="text"
-                        value={col.name}
-                        onChange={(e) => handleHeaderChange(index, e.target.value)}
-                        onBlur={() => finishEditingHeader()}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            finishEditingHeader();
-                          }
-                        }}
-                        autoFocus
-                      />
-                    ) : (
-                      <>
-                        {col.name}
-                        {col.editable && medata?.user?.Role === "Owner" && (
-                          <span className="header-edit-icon"> ✎</span>
-                        )}
-                      </>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            </thead> : <thead>
-              <tr>
-                <th className="file-handler-table-header">Sno.</th>
-                {columns.map((col, index) => (
-                  <th key={index} className="file-handler-table-header">
-                    {col.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>}
-          <tbody>
-            {data.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                <td className="file-handler-table-data">{rowIndex + 1}</td>
-                {columns.map((col, colIndex) => (
-                  <td key={colIndex} className="file-handler-table-data">
-                    {col.editable ? (
-                      <input
-                        type="text"
-                        value={row[col.name]}
-                        onChange={(e) =>
-                          handleCellChange(rowIndex, col.name, e.target.value)
-                        }
-                      />
-                    ) : (
-                      row[col.name]
-                    )}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      {/* Save Buttons Container */}
-      {data?.length > 0 && (
+          {data?.length > 0 && (
         <div className="file-handler-buttons-container">
           {/* Save Row Data Button (Original) */}
           {/* <button onClick={saveChanges} className="file-handler-save-button">
@@ -677,6 +669,85 @@ console.log(id)
           )}
         </div>
       )}
+      {/* Data Table */}
+      {!isHidden && data?.length > 0 && (
+       <div  className='owner-excel-table-container'>
+         <table className="file-handler-table">
+
+
+{medata?.user?.Role === "Owner" ?
+  <thead>
+    <tr>
+      <th className="file-handler-table-header">Sno.</th>
+      {columns.map((col, index) => (
+        <th
+          key={index}
+          className={`file-handler-table-header ${col.editable ? "editable-header" : ""} ${col.name !== originalColumns[index]?.name ? "modified-header" : ""
+            }`}
+          onClick={() => handleHeaderClick(index)}
+        >
+          {editingHeader === index ? (
+            <input
+              type="text"
+              value={col.name}
+              onChange={(e) => handleHeaderChange(index, e.target.value)}
+              onBlur={() => finishEditingHeader()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  finishEditingHeader();
+                }
+              }}
+              autoFocus
+            />
+          ) : (
+            <>
+              {col.name}
+              {col.editable && medata?.user?.Role === "Owner" && (
+                <span className="header-edit-icon"> ✎</span>
+              )}
+            </>
+          )}
+        </th>
+      ))}
+    </tr>
+  </thead> : <thead>
+    <tr>
+      <th className="file-handler-table-header">Sno.</th>
+      {columns.map((col, index) => (
+        <th key={index} className="file-handler-table-header">
+          {col.name}
+        </th>
+      ))}
+    </tr>
+  </thead>}
+<tbody>
+  {data.map((row, rowIndex) => (
+    <tr key={rowIndex}>
+      <td className="file-handler-table-data">{rowIndex + 1}</td>
+      {columns.map((col, colIndex) => (
+        <td key={colIndex} className="file-handler-table-data">
+          {col.editable ? (
+            <input
+              type="text"
+              value={row[col.name]}
+              onChange={(e) =>
+                handleCellChange(rowIndex, col.name, e.target.value)
+              }
+            />
+          ) : (
+            row[col.name]
+          )}
+        </td>
+      ))}
+    </tr>
+  ))}
+</tbody>
+</table>
+        </div>
+      )}
+
+      {/* Save Buttons Container */}
+   
 
     </div>
   )

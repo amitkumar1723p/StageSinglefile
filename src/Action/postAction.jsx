@@ -845,7 +845,7 @@ export const OwnerUploadExcelFile = (file)=>{
       };
  
       const { data } = await axios.post(url, formData, config);  // Pass postId as an object
-//  console.log(similar)
+ 
      
       dispatch({
         type: "OwnerAllExcelFileSuccess",
@@ -1155,8 +1155,10 @@ export const GetDeletedPostsAction = () => {
 
 
 // elastic search action
-export const getSerachProperty=(query,propertyAdType)=>{
-  console.log(query,propertyAdType,"post")
+export const getSerachProperty=(query,propertyAdType,body)=>{
+  // console.log(query,propertyAdType,"post")
+ 
+  
   return async(dispatch)=>{
   try {
     dispatch({
@@ -1171,7 +1173,8 @@ export const getSerachProperty=(query,propertyAdType)=>{
       withCredentials: true,
     };
     console.log(url)
-    const { data } = await axios.post(url,{propertyAdType}, config);
+  //  const body.propertyAdType:propertyAdType
+    const { data } = await axios.post(url,body, config);
     
     dispatch({ type: "GetSerachPropertySuccess", payload: data });
   } catch (error) {
@@ -1203,7 +1206,7 @@ export const ReportPagePostAction = (formdata) => {
       });
 
       const url = `${api_Base_Url}/feedback/report-feedback`;
-      console.log('mu ddd ',formdata)
+      // console.log('mu ddd ',formdata)
 
       const feedBack = new FormData();
       feedBack.append("feedbackType", formdata.type);
@@ -1235,6 +1238,97 @@ export const ReportPagePostAction = (formdata) => {
       } else {
         dispatch({
           type: "ReportPagePostFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//handle submit applyjob 
+
+export const ApplyJobAction = (formdata) => {
+  return async (dispatch) => {
+    console.log(formdata)
+    try {
+      dispatch({
+        type: "ApplyJobActionRequest",
+        payload: "ApplyJobActionRequest",
+      });
+
+      const url = `${api_Base_Url}/application/apply-job`;
+      // console.log('mu ddd ',formdata)
+
+      const userApplication = new FormData();
+      userApplication.append("jobName", formdata.jobName);
+      userApplication.append("fullName", formdata.fullName);
+      userApplication.append("mobileNo", formdata.mobile);
+      userApplication.append("email", formdata.email);
+      userApplication.append("linkedIn", formdata.LinkedIn);
+
+      // Append multiple files correctly
+      if (formdata.resume) {
+        // console.log(formdata.file)
+        
+     
+        userApplication.append("resume", formdata.resume);
+      
+      }
+      // console.log('mu ddd ',feedBack)
+
+      const config = {
+     
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, userApplication, config);
+      dispatch({ type: "ApplyJobActionSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "ApplyJobActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "ApplyJobActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+};
+
+//get post by address
+
+export const getPostsByAddress = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "GetPostsByAddressRequest",
+        payload: "GetPostsByAddressRequest",
+      });
+
+      const url = `${api_Base_Url}/post/properties-by-address`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const d= "new gurgaon";
+      const { data } = await axios.post(url,{address:d}, config);
+      
+      dispatch({ type: "GetPostsByAddressSuccess", payload: data });
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        dispatch({
+          type: "GetPostsByAddressFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "GetPostsByAddressFail",
           payload: { message: error.message, success: false },
         });
       }

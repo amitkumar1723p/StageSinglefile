@@ -51,8 +51,6 @@ import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
 import ProfileUpdate from "./Component/User/Profile/ProfileUpdate";
 import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
-
-import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
@@ -61,7 +59,7 @@ import OwnerAgentExcelData from "./Component/Admin/OwnerAgentExcelData";
 import OwnerAgentExcel from "./Component/Admin/OwnerAgentExcel";
 import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse";
 import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
-// import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
@@ -73,6 +71,7 @@ import Search from "./Component/Home/Search";
 import AllUserResponseAction from "./Component/Admin/AllUserResponseAction";
 import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseAction";
 // import MyVisits from "./Component/Post/CreatePost/m";
+
 
 function App() {
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
@@ -216,13 +215,15 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
     // eslint-disable-next-line
   }, [location]);
 
+ 
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-      if (
-        data.success === true && ["CreatePostRequest"].includes(LodingType)
-      ) {
-
+ 
+      if(data?.success &&LodingType=="ProfileUpdateRequest"){
+        
+        dispatch(GetMeDetailsAction()); }
+      
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
@@ -255,7 +256,7 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
 
         dispatch({ type: "UserClear" });
       }
-
+   
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(
@@ -270,7 +271,7 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
         setalertShow(true);
         dispatch({ type: "UserClear" });
       }
-    }
+ 
     // eslint-disable-next-line
 }}, [data]);
 

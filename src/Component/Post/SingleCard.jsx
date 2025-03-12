@@ -20,6 +20,7 @@ const SingleCard = ({ PostData, index }) => {
   const { data, LodingType } = useSelector((state) => {
     return state.userData;
   });
+  
   const [floorDetails, setFloorDetails] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -148,9 +149,11 @@ const SingleCard = ({ PostData, index }) => {
   }, [RunImageSlider, ImageTranlate, RunInterval]);
 
   useEffect(() => {
+   
     if (data && LodingType == "AddFavouriteAndUnFavouriteRequest") {
       if (data.success == true) {
-        dispatch(GetMeDetailsAction());
+        // alert("run")
+         dispatch(GetMeDetailsAction());
       }
     }
   }, [data]);
@@ -177,7 +180,7 @@ const SingleCard = ({ PostData, index }) => {
           label: "Plot Area",
         });
       } else if (SuperBuiltUpArea?.value) {
-        console.log("PostId", PostData._id);
+         
         setAreaDetails({
           value: SuperBuiltUpArea?.value,
           unit: SuperBuiltUpArea.unit,
@@ -233,7 +236,7 @@ const SingleCard = ({ PostData, index }) => {
     setPropertyAddress(
 
 
-      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHk` : ""} ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
+      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHK` : ""} ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -293,6 +296,7 @@ const SingleCard = ({ PostData, index }) => {
               className="single-card-image"
             />
           </Link>
+          
           {PostData?.PostVerifyShow ? (
             PostData?.PostVerify ? (
               <div className="single-card-verified-badge">
@@ -327,7 +331,7 @@ const SingleCard = ({ PostData, index }) => {
                                 onClick={() => setIsFavorite(!isFavorite)}
                                 className="single-card-icon-button"
                             >
-                                <Heart fill={isFavorite ? "#3B82F6" : "none"} color={isFavorite ? "#3B82F6" : "#9CA3AF"} size={20} />
+                                <Heart fill={isFavorite ? "1877f2" : "none"} color={isFavorite ? "1877f2" : "#9CA3AF"} size={20} />
                             </button>
                             <button className="single-card-icon-button">
                                 <Share2 size={20} color="#9CA3AF" />
@@ -355,6 +359,12 @@ const SingleCard = ({ PostData, index }) => {
               {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                 <div className={`add-favourite-box  flex`}>
                   <button
+                      disabled={
+                        PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
+                          ? false
+                          : true
+                      }
                     className={`add-favourite-btn ${index}`}
                     onClick={() => {
                       if (medata && medata.IsAuthenticated == true) {
@@ -833,13 +843,15 @@ const SingleCard = ({ PostData, index }) => {
               </div>
             </>
           )}
-          <p className="single-card-publish-date">
-            <span className="single-card-date-label">Publish on: </span>
-            <span className="single-card-date-value">
-             
-              {formatDate(PostData?.PostVerifyData?.Time)}
-            </span>
-          </p>
+        {PostData?.propertyStatus?.currentPropertyStatus !== "sold out" && (
+  <p className="single-card-publish-date">
+    <span className="single-card-date-label">Publish on: </span>
+    <span className="single-card-date-value">
+      {formatDate(PostData?.PostVerifyData?.Time)}
+    </span>
+  </p>
+)}
+
         </div>
 
         {/* Action Buttons */}

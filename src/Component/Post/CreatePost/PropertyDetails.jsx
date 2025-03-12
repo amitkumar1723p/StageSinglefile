@@ -1,30 +1,71 @@
+import { CloudSnow } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 export default function PropertyDetailsSection({
   PropertyDetailsData,
   setPropertyDetailsData,
+  BasicDetailsData,
+  Error,
 }) {
   const [bhkcount, setbhkcount] = useState([]);
 
-  useEffect(() => {
-    let bhknumber = [];
-    for (let i = 1; i <= 15; i++) {
-      bhknumber.push(i);
-    }
-    setbhkcount(bhknumber);
+  // useEffect(() => {
+  //   setTimeout(() => {
 
-    setPropertyDetailsData((prevData) => ({
-      ...prevData,
-      OtherRoom: prevData.OtherRoom || [],
-      Balcony: prevData.Balcony || 0,
-      Bathroom: prevData.Bathroom || 0,
-      Parking: prevData.Bathroom || 0,
-      Parking: {
-        CoveredParking: prevData.Parking?.CoveredParking || 0,
-        OpenParking: prevData.Parking?.OpenParking || 0,
-      },
-    }));
-  }, []);
+  //     let bhknumber = [];
+  //     for (let i = 1; i <= 15; i++) {
+  //       bhknumber.push(i);
+  //     }
+  //     setbhkcount(bhknumber);
+
+  //     setPropertyDetailsData((prevData) => ({
+  //       ...prevData,
+  //       OtherRoom: prevData.OtherRoom || [],
+  //       Balcony: prevData.Balcony || 0,
+  //       Bathroom: prevData.Bathroom || 0,
+  //       Parking: prevData.Bathroom || 0,
+  //       Parking: {
+  //         CoveredParking: prevData.Parking?.CoveredParking || 0,
+  //         OpenParking: prevData.Parking?.OpenParking || 0,
+  //       },
+  //       BasementArea : {
+  //         unit :  BasicDetailsData.ApartmentType === "Independent/Builder Floor" && prevData.Basement==true ? "sq.ft":undefined
+  //        }
+  //     }));
+  //   }, 0);
+  // }, [PropertyDetailsData.Basement]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      // Generate numbers 1 to 15 for the BHK count
+      let bhknumber = [];
+      for (let i = 1; i <= 15; i++) {
+        bhknumber.push(i);
+      }
+      setbhkcount(bhknumber);
+
+      setPropertyDetailsData((prevData) => {
+        const newParking = prevData.Parking || {
+          CoveredParking: 0,
+          OpenParking: 0,
+        };
+    
+        // Update the PropertyDetailsData state with defaults
+        return {
+          ...prevData,
+          OtherRoom: prevData.OtherRoom || [],
+          Balcony: prevData.Balcony || 0,
+          Bathroom: prevData.Bathroom || 0,
+          Parking: newParking, // Nested Parking object
+          BasementArea:
+            BasicDetailsData.ApartmentType === "Independent/Builder Floor" &&
+            prevData.Basement
+              ? { ...prevData.BasementArea  , unit: "sq.ft" }
+              : {},
+        };
+      });
+    }, 0);
+  }, [PropertyDetailsData.Basement, BasicDetailsData.ApartmentType]);
 
   const FlooringArray = [
     "Marble",
@@ -48,13 +89,19 @@ export default function PropertyDetailsSection({
     "Servant Room",
     "Store Room",
   ];
+
+
+
+
   return (
     <>
-        <p className="Property-Details-heading">Property Details</p>
+      <p className="Property-Details-heading">Property Details</p>
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="bhk-type">BHK Type*</label>
           <select
+           className={` ${Error.BHKType? 'inputShake shake' : ''}`}
+
             id="bhk-type"
             required
             value={PropertyDetailsData.BHKType || ""}
@@ -84,6 +131,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="flooring-type">Flooring Type*</label>
           <select
+           className={` ${Error.FlooringType? 'inputShake shake' : ''}`}
             id="flooring-type"
             required
             value={PropertyDetailsData.FlooringType || ""}
@@ -106,49 +154,131 @@ export default function PropertyDetailsSection({
         </div>
       </div>
 
-      {/* Other Room Tab  */}
-      <div className="fom-group">
-        <p className="label parking-label">Other Room*</p>
-        <div className="tab-box">
-          {OtherRoomArray.map((text, i) => {
-            return (
-              <div
-                key={i}
-                className={`tab ${
-                  PropertyDetailsData.OtherRoom?.includes(text) ? "select" : ""
-                }
-                    `}
-                onClick={() => {
-                  if (!PropertyDetailsData.OtherRoom?.includes(text)) {
-                    setPropertyDetailsData({
-                      ...PropertyDetailsData,
-                      OtherRoom: [...PropertyDetailsData.OtherRoom, text],
-                    });
-                  }
-                  if (PropertyDetailsData.OtherRoom?.includes(text)) {
-                    setPropertyDetailsData({
-                      ...PropertyDetailsData,
-                      OtherRoom: PropertyDetailsData.OtherRoom?.filter(
-                        (item) => {
-                          return item !== text;
-                        }
-                      ),
-                    });
-                  }
-                }}
-              >
-                {text}{" "}
-                <img
-                  src={
-                    PropertyDetailsData.OtherRoom?.includes(text)
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
-                  }
-                />
-              </div>
-            );
-          })}
+      {/* Other Room Tab   and Basement*/}
+
+      <div className="form-row ">
+        {/* Other Room Tab */}
+        <div className="fom-group first">
+          <p className="label parking-label">Other Room*</p>
+          <div className="tab-box">
+            {OtherRoomArray.map((text, i) => {
+              return (
+                <div
+                  key={i}
+                  className={`tab ${
+                    PropertyDetailsData.OtherRoom?.includes(text) ? "select" : ""
+                  }  ${Error.OtherRoom? 'inputShake shake' : ''}
+                      `}
+                  onClick={() => {
+                    if (!PropertyDetailsData.OtherRoom?.includes(text)) {
+                      setPropertyDetailsData({
+                        ...PropertyDetailsData,
+                        OtherRoom: [...PropertyDetailsData.OtherRoom, text],
+                      });
+                    }
+                    if (PropertyDetailsData.OtherRoom?.includes(text)) {
+                      setPropertyDetailsData({
+                        ...PropertyDetailsData,
+                        OtherRoom: PropertyDetailsData.OtherRoom?.filter(
+                          (item) => {
+                            return item !== text;
+                          }
+                        ),
+                      });
+                    }
+                  }}
+                >
+                  {text}{" "}
+                  <img
+                    src={
+                      PropertyDetailsData.OtherRoom?.includes(text)
+                        ? "/img/white-tick.svg"
+                        : "/img/plus-create.svg"
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
+
+        {/* {} */}
+        {["Independent/Builder Floor"].includes(
+          BasicDetailsData.ApartmentType
+        ) && (
+          <div className="basement-box">
+            <div className="field-group second">
+              <p className="label parking-label mb-2">Basement*</p>
+
+              <div className="d-flex">
+                {[true, false].map((text, i) => {
+                  return (
+                    <div className="d-flex" key={i}>
+                      <input
+                        type="radio"
+                        id={`basement-${i}`}
+                        className="me-2"
+                        name="basement"
+                        value={text}
+                        required
+                        checked={PropertyDetailsData.Basement === text}
+                        onChange={() => {
+                          setPropertyDetailsData({
+                            ...PropertyDetailsData,
+                            Basement: text,
+                          });
+                        }}
+                      />
+                      &nbsp;
+                      <label
+                        htmlFor={`basement-${i}`}
+                        className={`basement-label-${i}`}
+                      >
+                        {text === true ? "Yes" : "No"}
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            {PropertyDetailsData.Basement == true && (
+              <div className="form-group">
+                <label htmlFor="BasementArea">Basement Area*</label>
+                <div className=" unit-input basement-unit-input">
+                  <input
+                    type="text"
+                    id="BasementArea"
+                    name="BasementArea"
+                    required
+                    value={PropertyDetailsData?.BasementArea?.value || ""}
+                    onChange={(e) => {
+                      const numericValue = String(e.target.value).replace(
+                        /[^0-9]/g,
+                        ""
+                      );
+
+                      setPropertyDetailsData({
+                        ...PropertyDetailsData,
+                        BasementArea: {
+                          ...PropertyDetailsData.BasementArea,
+                          value: numericValue,
+                        },
+                      });
+                    }}
+                    placeholder={"Basement Area"}
+                  />
+                  <input
+                    type="text"
+                    readOnly
+                    className="unit"
+                    value={PropertyDetailsData?.BasementArea?.unit || ""}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/*  { Bathroom  } */}
@@ -172,7 +302,7 @@ export default function PropertyDetailsSection({
                 -
               </div>
               <input
-                type="number"
+                type="text"
                 id="bathroom"
                 name="bathroom"
                 min="0"
@@ -180,7 +310,7 @@ export default function PropertyDetailsSection({
                 readOnly
               />
               <div
-                className="increment button"
+                className="increment button not-select-text"
                 onClick={() => {
                   setPropertyDetailsData({
                     ...PropertyDetailsData,
@@ -209,7 +339,7 @@ export default function PropertyDetailsSection({
                 -
               </div>
               <input
-                type="number"
+                type="text"
                 id="balcony"
                 name="balcony"
                 min="0"
@@ -217,7 +347,7 @@ export default function PropertyDetailsSection({
                 readOnly
               />
               <div
-                className="increment button"
+                className="increment button not-select-text"
                 onClick={() => {
                   setPropertyDetailsData({
                     ...PropertyDetailsData,
@@ -256,7 +386,7 @@ export default function PropertyDetailsSection({
                 </div>
 
                 <input
-                  type="number"
+                  type="text"
                   id="coveredParking"
                   name="coveredParking"
                   min="0"
@@ -264,7 +394,7 @@ export default function PropertyDetailsSection({
                   readOnly
                 />
                 <div
-                  className="increment button"
+                  className="increment button not-select-text"
                   onClick={() => {
                     setPropertyDetailsData({
                       ...PropertyDetailsData,
@@ -302,7 +432,7 @@ export default function PropertyDetailsSection({
                   -
                 </div>
                 <input
-                  type="number"
+                  type="text"
                   id="openParking"
                   name="openParking"
                   min="0"
@@ -310,7 +440,7 @@ export default function PropertyDetailsSection({
                   readOnly
                 />
                 <div
-                  className="increment button"
+                  className="increment button not-select-text"
                   onClick={() => {
                     setPropertyDetailsData({
                       ...PropertyDetailsData,

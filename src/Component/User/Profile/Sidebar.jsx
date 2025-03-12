@@ -93,7 +93,10 @@ function Sidebar() {
               </li>
             </NavLink>
             <NavLink to="/user/transactions">
-              <li className="navItem mob-hide">
+              <li 
+               className={`navItem mob-hide ${
+                location.pathname == "/user/transactions" ? "active-btn-nav" : ""
+              }`}>
                 <img
                   className="icons"
                   src="/img/Transactions.svg"

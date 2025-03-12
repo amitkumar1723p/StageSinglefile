@@ -24,7 +24,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ReportSuspiciousPropertyRequest":
 
     case"verifiedPaymentRequest":
-  
+    case "ApplyJobActionRequest":
     
       return {
         ...state,
@@ -53,6 +53,7 @@ export const CreateUserReducer = (state = {}, action) => {
 
     case"ReportSuspiciousPropertySuccess":
 case"verifiedPaymentSuccess":
+case "ApplyJobActionSuccess":
   
       return {
         ...state,
@@ -81,6 +82,7 @@ case"verifiedPaymentSuccess":
     case"ProfileUpdateFail":
     case"ReportSuspiciousPropertyFail":
    case"verifiedPaymentFail":
+   case "ApplyJobActionFail":
       return {
         ...state,
         loading: false,

@@ -273,12 +273,12 @@ export default function AllRegistrationResponse({ }) {
                         roleIndex === index ? <div className="owner-user-role-submit-button d-flex gap-1 ">
                           <select name="" onChange={(e) => setUserRole(e.target.value)}>
                             <option value={item.Role}><small>{item.Role}</small></option>
-                            <option value="Tanent"><small>Tanent</small></option>
+                            <option value="Tenant"><small>Tenant</small></option>
                             <option value="Buyer"><small>Buyer</small></option>
-                            <option value="Seller"><small>Seller</small></option>
+                            {/* <option value="Seller"><small>Seller</small></option> */}
                             <option value="Property Owner"><small>Property Owner</small></option>
                             <option value="NRI"><small>NRI</small></option>
-                            <option value="ChannelPartner"><small>ChannelPartner</small></option>
+                            <option value="Channel Partner"><small>Channel Partner</small></option>
                           </select> <button className="border" onClick={() => {
                             setRoleIndex(null)
                             dispatch(UserRoleUpdation({

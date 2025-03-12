@@ -24,8 +24,7 @@ export default function Transaction({}){
   console.log(medata,"jg")
 return(
     <>
-
-    helloxhbcjhdsbhjsbjhvsdcjjbsck,sdbc
+<p>Sorry no transaction found</p>
     </>
 )
 
