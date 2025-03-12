@@ -16,7 +16,12 @@ import {
   paymentReducer,
   getPaidPropertyReducer,
 
-  getTransactionDetailReducer
+  getTransactionDetailReducer,
+
+getAllUserResponseActionReducer,
+
+
+getSingleUserResponseActionReducer
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -87,7 +92,9 @@ const reducer = combineReducers({
 
   getTransactionDetail:getTransactionDetailReducer,
 
-  serachResponse:getSerachPropertyReducer
+  serachResponse:getSerachPropertyReducer,
+  AllUserResponseAction_Store:getAllUserResponseActionReducer,
+  SingleUserResponseAction_Store:getSingleUserResponseActionReducer
 });
 
 let initialState = {};
