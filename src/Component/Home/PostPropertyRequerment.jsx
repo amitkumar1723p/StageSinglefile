@@ -16,7 +16,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
       plotSize:""
     });
   const [unit, setUnit] = useState("Cr");
-  const [plotUnit, setplotUnit] = useState("Sqft");
+  const [plotUnit, setplotUnit] = useState("Sq.yard");
 
   const [status, setStatus] = useState(""); // Possession Status
   const { loading, data, LodingType } = useSelector((state) => state.userData);
@@ -305,7 +305,36 @@ const PostPropertyRequerment = ({ SetShow }) => {
               </div>
             </div>
           }
-            
+             {PostPropertyRequirementData.PropertyType==="Plot" && 
+             <div className="form-group form-budget">
+             <div className="budget-container">
+               <p className="postreq-form ">Plot size</p>
+               <input
+                 required
+                 value={PostPropertyRequirementData.plotSize}
+                 onChange={(e) => {
+                   // Allow numbers and one decimal point only
+                   let value = e.target.value;
+               console.log(value)
+                   setPostPropertyRequirementData({
+                     ...PostPropertyRequirementData,
+                     plotSize: value,
+                   });
+                 }}
+                 type="text"
+                 placeholder="Enter your Budget"
+                 className="form-input"
+               />
+             </div>
+
+             <div className="form-budget-option">
+               <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
+               
+                 <option value="Sqrd">Sq.yrd</option>
+               </select>
+             </div>
+           </div>
+        }
 
             <div className="form-group">
               <button

@@ -20,6 +20,7 @@ const SingleCard = ({ PostData, index }) => {
   const { data, LodingType } = useSelector((state) => {
     return state.userData;
   });
+  
   const [floorDetails, setFloorDetails] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -148,9 +149,11 @@ const SingleCard = ({ PostData, index }) => {
   }, [RunImageSlider, ImageTranlate, RunInterval]);
 
   useEffect(() => {
+   
     if (data && LodingType == "AddFavouriteAndUnFavouriteRequest") {
       if (data.success == true) {
-        dispatch(GetMeDetailsAction());
+        // alert("run")
+         dispatch(GetMeDetailsAction());
       }
     }
   }, [data]);
@@ -356,6 +359,12 @@ const SingleCard = ({ PostData, index }) => {
               {!["Owner", "Admin"].includes(medata?.user?.Role) && (
                 <div className={`add-favourite-box  flex`}>
                   <button
+                      disabled={
+                        PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
+                          ? false
+                          : true
+                      }
                     className={`add-favourite-btn ${index}`}
                     onClick={() => {
                       if (medata && medata.IsAuthenticated == true) {
@@ -834,13 +843,15 @@ const SingleCard = ({ PostData, index }) => {
               </div>
             </>
           )}
-          <p className="single-card-publish-date">
-            <span className="single-card-date-label">Publish on: </span>
-            <span className="single-card-date-value">
-             
-              {formatDate(PostData?.PostVerifyData?.Time)}
-            </span>
-          </p>
+        {PostData?.propertyStatus?.currentPropertyStatus !== "sold out" && (
+  <p className="single-card-publish-date">
+    <span className="single-card-date-label">Publish on: </span>
+    <span className="single-card-date-value">
+      {formatDate(PostData?.PostVerifyData?.Time)}
+    </span>
+  </p>
+)}
+
         </div>
 
         {/* Action Buttons */}

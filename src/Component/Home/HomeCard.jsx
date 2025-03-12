@@ -48,9 +48,16 @@ export default function HomeCard() {
   return (
     <>
       <div className="home">
-        {data &&
-          data.success === true &&
-          (data.allPost.length > 0 ? (
+
+        
+        {
+          loading ?   <div className="allPostrender-showpost">
+          {
+            Array.from({ length: 9 }).map((_, index) => (<AllPostSkeleton key={index} />))
+          }
+        </div>:
+           
+          (data?.allPost?.length > 0 ? (
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
                 {allData?.map((e, i) => {
@@ -63,5 +70,27 @@ export default function HomeCard() {
           ))}
       </div>
     </>
+  );
+}
+const AllPostSkeleton = () => {
+
+  return (
+    <div className="all-post-skeleton-card">
+      <div className="all-post-skeleton-image"></div>
+
+      <div className="all-post-skeleton-text all-post-skeleton-title"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle-1"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle"></div>
+
+      <div className="all-post-skeleton-info-container">
+        <div className="all-post-skeleton-info"></div>
+        <div className="all-post-skeleton-info"></div>
+      </div>
+
+      <div className="all-post-skeleton-footer">
+        <div className="all-post-skeleton-button"></div>
+        <div className="all-post-skeleton-button"></div>
+      </div>
+    </div>
   );
 }

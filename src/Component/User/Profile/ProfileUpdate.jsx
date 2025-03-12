@@ -22,7 +22,7 @@ const {varb}=useContext(UserContext);
 
   const handleNumber = async (e) => {
     e.preventDefault();
-    const updateData={ContactNumber:varb.ContactNumber,email:varb.email,Name:varb.Name,Otp:otp};
+    const updateData={ContactNumber:varb.ContactNumber,LastName:varb.LastName,email:varb.email,Name:varb.Name,Otp:otp};
      
     dispatch(ProfileUpdateAction(updateData))
     

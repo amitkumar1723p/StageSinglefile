@@ -92,8 +92,11 @@ function Sidebar() {
                 Shortlisted Property
               </li>
             </NavLink>
-            {/* <NavLink to="#">
-              <li className="navItem mob-hide">
+            <NavLink to="/user/transactions">
+              <li 
+               className={`navItem mob-hide ${
+                location.pathname == "/user/transactions" ? "active-btn-nav" : ""
+              }`}>
                 <img
                   className="icons"
                   src="/img/Transactions.svg"
@@ -101,7 +104,7 @@ function Sidebar() {
                 />
                 Transactions
               </li>
-            </NavLink> */}
+            </NavLink>
             <NavLink to="/user/my-visits">
               <li
                 className={`navItem ${

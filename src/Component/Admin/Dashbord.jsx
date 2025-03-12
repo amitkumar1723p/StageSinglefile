@@ -84,7 +84,14 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
   })
-
+  // paid user transaction detail 
+  const { data:getTransactionDetail} = useSelector((state) => {
+    return state.getTransactionDetail;
+  });
+    // const { data2} = useSelector((state) => {
+    //   return state;
+    // });
+    // console.log(data2,"hello1");
   // console.log("assongg ",assignedExcles)
 
   // On dashboard we get all property
@@ -334,6 +341,23 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       Notify & Requirments
+                    </h3>
+                    <p className="viewall">View All</p>
+                  </div>
+                </Link>
+              </>
+            )}
+
+{medata?.user?.Role === "Owner" && (
+              <>
+                <Link to="/admin/Transaction">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{getTransactionDetail?.data?.length}</p>
+                      <img src="/img/ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 onClick={() => setPostVerify(false)}>
+                    Transaction Detail
                     </h3>
                     <p className="viewall">View All</p>
                   </div>
