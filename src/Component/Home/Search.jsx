@@ -226,7 +226,7 @@ export default function Search({
         
         
         <input
-          className='elastic-section-input-tag '
+          className='elastic-section-input-tag'
           type="text"
           value={localQuery}
           onChange={handleInputChange}

@@ -5,10 +5,9 @@ import HomeCard from "../HomeCard";
 import { Helmet } from "react-helmet";
 import { UserContext } from "../../CreateContext/CreateContext";
 // import _ from "lodash";
-import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
   GetAllPostAction,
-  getSerachProperty,
   GetSingleProjectNameDataAction,
 } from "../../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,17 +32,11 @@ const PropertyFilters = () => {
     setter((prev) =>
       checked ? [...prev, name] : prev.filter((item) => item !== name)
     );
-    
   };
-  let len;
   const { data } = useSelector((state) => {
     return state.GetAllPost;
   });
-  // serach property 
-  const { data: serachResponse } = useSelector((state) => {
-    return state.serachResponse;
-  });
-  len = data?.allPost || serachResponse?.results;
+   
 
   const handleClicked = (v) => {
     setIsClicked(v);
@@ -76,119 +69,81 @@ const PropertyFilters = () => {
   };
   // eslint-disable-next-line
   const [querry, setquerry] = useSearchParams();
-  // const qq=useParams();
-   const [querryProjectName ,setquerryProjectName] =useState("")
 
   useEffect(() => {
     if (Object.keys(Filter).length > 0 || removeFilterField == true) {
-      // dispatch(
-      //   GetAllPostAction({
-      //     ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-      //     PropertyAdType: querry.get("PropertyAddType"),
-      //     BHK: Filter.BHK,
-      //     ApartmentType: Filter.ApartmentType,
-      //     PropertyStatus: undefined,
-      //     Furnishing: Filter.Furnishing,
-      //   })
-      // );
-      // console.log(querry.get("PropertyAddType"))
-      dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
-   
-        PropertyAdType: querry.get("PropertyAddType"),
-        BHK: Filter.BHK,
-        ApartmentType: Filter.ApartmentType,
-        PropertyStatus: undefined,
-        Furnishing: Filter.Furnishing,
-      }));
+      dispatch(
+        GetAllPostAction({
+          ProjectName: querry.get("ProjectName"),
+          PropertyAdType: querry.get("PropertyAddType"),
+          BHK: Filter.BHK,
+          ApartmentType: Filter.ApartmentType,
+          PropertyStatus: undefined,
+          Furnishing: Filter.Furnishing,
+        })
+      );
     }
 
     // eslint-disable-next-line
   }, [Filter, querry]);
 
-  // useEffect(() => {
-  //   if (!querry.get("ProjectName")?.replaceAll("-", " ") || !querry.get("PropertyAddType")) {
-  //     return navigate("/");
-  //   } else {
-  //     // Check if it is the first page load
-  //     if (!sessionStorage.getItem("isFirstLoad")) {
-  //       sessionStorage.setItem("isFirstLoad", "true");
-  //       dispatch(
-  //         GetSingleProjectNameDataAction({
-  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-  //         })
-  //       );
-  //       dispatch(
-  //         GetAllPostAction({
-  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-  //           PropertyAdType: querry.get("PropertyAddType"),
-  //         })
-  //       );
-  //     }
+  useEffect(() => {
+    if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
+      return navigate("/");
+    } else {
+      // Check if it is the first page load
+      if (!sessionStorage.getItem("isFirstLoad")) {
+        sessionStorage.setItem("isFirstLoad", "true");
+        dispatch(
+          GetSingleProjectNameDataAction({
+            ProjectName: querry.get("ProjectName"),
+          })
+        );
+        dispatch(
+          GetAllPostAction({
+            ProjectName: querry.get("ProjectName"),
+            PropertyAdType: querry.get("PropertyAddType"),
+          })
+        );
+      }
 
-  //     // Detect page refresh
-  //     if (sessionStorage.getItem("isReloaded")) {
-  //       sessionStorage.removeItem("isReloaded");
+      // Detect page refresh
+      if (sessionStorage.getItem("isReloaded")) {
+        sessionStorage.removeItem("isReloaded");
 
 
-  //       dispatch(
-  //         GetSingleProjectNameDataAction({
-  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-  //         })
-  //       );
-  //       dispatch(
-  //         GetAllPostAction({
-  //           ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-  //           PropertyAdType: querry.get("PropertyAddType"),
-  //         })
-  //       );
-  //     }
+        dispatch(
+          GetSingleProjectNameDataAction({
+            ProjectName: querry.get("ProjectName"),
+          })
+        );
+        dispatch(
+          GetAllPostAction({
+            ProjectName: querry.get("ProjectName"),
+            PropertyAdType: querry.get("PropertyAddType"),
+          })
+        );
+      }
 
-  //     // Handle page unload event for refresh detection
-  //     const handleBeforeUnload = () => {
-  //       if (sessionStorage.getItem("isFirstLoad")) {
-  //         sessionStorage.setItem("isReloaded", "true");
-  //       }
-  //     };
+      // Handle page unload event for refresh detection
+      const handleBeforeUnload = () => {
+        if (sessionStorage.getItem("isFirstLoad")) {
+          sessionStorage.setItem("isReloaded", "true");
+        }
+      };
 
-  //     window.addEventListener("beforeunload", handleBeforeUnload);
-  //     // setRedirectPath(location.pathname);
-  //     // setRedirectPath(location.pathname);
-  //     setRedirectPathIsHomeCard(true);
-  //     // Cleanup event listeners on component unmount
-  //     return () => {
-  //       window.removeEventListener("beforeunload", handleBeforeUnload);
-  //       sessionStorage.removeItem("isFirstLoad");
-  //     };
-  //   }
-  // }, []);
-  useEffect(()=>{
-
-    return ()=>{
-    dispatch({type:"GetSerachPropertyClear"})
-
-    
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      // setRedirectPath(location.pathname);
+      // setRedirectPath(location.pathname);
+      setRedirectPathIsHomeCard(true);
+      // Cleanup event listeners on component unmount
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+        sessionStorage.removeItem("isFirstLoad");
+      };
     }
-  },[])
-  useEffect(()=>{
- if(!serachResponse ){
-  // GetAllPostAction({
-  //               ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
-  //              PropertyAdType: querry.get("PropertyAddType"),
-  //           })
+  }, []);
 
-
-            dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
-              
-              PropertyAdType: querry.get("PropertyAddType"),
-              BHK: Filter.BHK,
-              ApartmentType: Filter.ApartmentType,
-              PropertyStatus: undefined,
-              Furnishing: Filter.Furnishing,
-            }));
- }
-
-} ,[])
-  
   const bhkOptions = [1, 2, 3, 4, 5];
   const ApartmentTypeOptions = [
     "Apartment",
@@ -222,7 +177,6 @@ const PropertyFilters = () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount and unmount
-  // console.log("eewew ",querry.get("ProjectName")?.replaceAll("-", " "))
    
   return (
     <>
@@ -243,21 +197,26 @@ const PropertyFilters = () => {
               <div
                 className="allpost-clear-filter"
                 onClick={() => {
-                  dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
-              
-                    PropertyAdType: querry.get("PropertyAddType"),
-                    BHK: "",
-                    ApartmentType: "",
-                    PropertyStatus: undefined,
-                    Furnishing: "",
-                  }));
+                  dispatch(
+                    GetAllPostAction({
+                      ProjectName: querry.get("ProjectName"),
+                      PropertyAdType: querry.get("PropertyAddType"),
+                      BHK: "",
+                      ApartmentType: "",
+                      PropertyStatus: undefined,
+                      Furnishing: "",
+                    })
+                  );
                   setFilter({});
                 }}
               >
                 Clear Filter <img src="/img/clear-filter.svg" alt="" />
               </div>
             </div>
-     
+            <div className="filter-title">
+              <h2 className="filter-title-1">Filter Your Search</h2>
+              {/* <p className="filter-title-1">clear Filter</p> */}
+            </div>
 
             <div className="filter-dummyLine"></div>
             <div className="flex">
@@ -268,7 +227,7 @@ const PropertyFilters = () => {
                     <button
                       onClick={() => {
                         setquerry({
-                          ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
+                          ProjectName: querry.get("ProjectName"),
                           PropertyAddType: `${text}`,
                         });
                         setremoveFilterField(true);
@@ -502,7 +461,7 @@ const PropertyFilters = () => {
             <div className="filter-home-card">
               <div className="total-post-length-container">
                 <p className="total-post-lable-allpost">
-                  Showing <span className="property-length-color">{len?.length}</span> Lisitng
+                  Showing {data?.allPost?.length} Lisitng
                 </p>
 
                 <button
@@ -536,14 +495,16 @@ const PropertyFilters = () => {
                       <div
                         className="allpost-clear-filter"
                         onClick={() => {
-                          dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
-                      
-                            PropertyAdType: querry.get("PropertyAddType"),
-                            BHK: "",
-                            ApartmentType: "",
-                            PropertyStatus: undefined,
-                            Furnishing: "",
-                          }));
+                          dispatch(
+                            GetAllPostAction({
+                              ProjectName: querry.get("ProjectName"),
+                              PropertyAdType: querry.get("PropertyAddType"),
+                              BHK: "",
+                              ApartmentType: "",
+                              PropertyStatus: undefined,
+                              Furnishing: "",
+                            })
+                          );
                           setFilter({});
                         }}
                       >
@@ -557,7 +518,7 @@ const PropertyFilters = () => {
                           key={text}
                           onClick={() => {
                             setquerry({
-                              ProjectName: querry.get("ProjectName")?.replaceAll("-", " "),
+                              ProjectName: querry.get("ProjectName"),
                               PropertyAddType: `${text}`,
                             });
                             setremoveFilterField(true);
@@ -672,14 +633,6 @@ const PropertyFilters = () => {
           )}
         </div>
       </div>
-
-
-
-      {/* serachResponse.results.map(post => {
-        const { LocationDetails } = post;
-        return `${LocationDetails.ProjectName}, ${LocationDetails.Locality}, ${LocationDetails.City}`;
-      } */}
-
     </>
   );
 };
