@@ -79,7 +79,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
   const [filederror ,setfielderror]= useState("")
   useEffect(() => {}, [BasicDetailsData.PropertyAdType]);
   const PostSubmitHandler = (e) => {
-    console.log("Apartmentfetaure");
+  
     e.preventDefault();
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
       if (!OtherDetailsData.PlotDirection) {
@@ -92,6 +92,10 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       if (!OtherDetailsData.PlotFacing) {
         return;
       }
+      if(!OtherDetailsData.FrontRoadWidth){
+        return;
+      }
+      
 
       if (AmenitiesDetailsData?.ProjectAmmenities?.length <= 0) {
         return ;
