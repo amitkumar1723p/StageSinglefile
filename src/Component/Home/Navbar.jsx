@@ -132,12 +132,12 @@ const Navbar = () => {
                 Property <span> Dekho247</span>
               </h2>
             </div>
-            <small>
-              {/* <span className="WishingHoli"> Wishing</span>
-              <span className="YouHoli">You</span> */}
+            {/* <small>
+              <span className="WishingHoli"> Wishing</span>
+              <span className="YouHoli">You</span>
               <span className="HappyHoli">Happy</span>
               <span className="holiholi">Holi !!</span>
-            </small>
+            </small> */}
           </div>
           {/* <Link to={"sqpt/admin/request"}>Admin</Link>
           <Link to={"sqpt/admin/login"}>AdminLogin</Link>
