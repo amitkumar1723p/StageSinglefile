@@ -69,7 +69,7 @@ export default function SinglePostDetails() {
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
 
 
-  console.log(showOwnerDetailsForm, "j")
+
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;

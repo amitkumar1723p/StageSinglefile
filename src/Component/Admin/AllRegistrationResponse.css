@@ -96,3 +96,23 @@
   display: flex;
   background: red;
 }
+
+
+/* Alll user Response Action CSSS */
+.userName{
+  width: 25%;
+}
+.userContact{
+  width: 20%;
+}
+.userDetail{
+  width: 55%;
+}
+.singleUser_mainbtn{
+  background-color: #a9a9a926;
+}
+.activebtn{
+  color: #9e9090;
+}
+
+
