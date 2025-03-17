@@ -70,21 +70,31 @@ const Dashboard = () => {
     return state.AdminProperty;
   });
   const { data } = useSelector((state) => {
-    return state.OwnerAllExcelFiles;}
- );
- const {data:AdminAllExcelFilesData} = useSelector((state) => {
-  return state.AdminAllExcelFiles}
-);
+    return state.OwnerAllExcelFiles;
+  }
+  );
+  const { data: AdminAllExcelFilesData } = useSelector((state) => {
+    return state.AdminAllExcelFiles
+  }
+  );
 
-const {data:AgentAllExcelFilesData} = useSelector((state) => {
-  return state.AgentAllExcelFiles}
-);
+  const { data: AgentAllExcelFilesData } = useSelector((state) => {
+    return state.AgentAllExcelFiles
+  }
+  );
 
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
   })
-
+  // paid user transaction detail 
+  const { data: getTransactionDetail } = useSelector((state) => {
+    return state.getTransactionDetail;
+  });
+  // const { data2} = useSelector((state) => {
+  //   return state;
+  // });
+  // console.log(data2,"hello1");
   // console.log("assongg ",assignedExcles)
 
   // On dashboard we get all property
@@ -126,15 +136,15 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
       setAllPropertyData(AllPost);
       setUnVerifyPost(unverify);
       setTotalListing(PostVerify.length + unverify.length);
-    
-    const successPost = AllPost.Post.filter((item) => {
-        // console.log("ittem  ",item)
-      return item?.propertyStatus?.currentPropertyStatus === "sold out";
-    });
 
-  
-        setSuccessPostLength(successPost?.length);
-  }
+      const successPost = AllPost.Post.filter((item) => {
+        // console.log("ittem  ",item)
+        return item?.propertyStatus?.currentPropertyStatus === "sold out";
+      });
+
+
+      setSuccessPostLength(successPost?.length);
+    }
   }, [AllPost]);
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent
@@ -170,11 +180,10 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
       ) : (
         <>
           <h4
-            className={`main-dash ${
-              location.pathname.includes("/admin/dashboard")
+            className={`main-dash ${location.pathname.includes("/admin/dashboard")
                 ? "active-btn-admin"
                 : ""
-            }`}
+              }`}
           >
             {" "}
             Dashboard
@@ -241,48 +250,48 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
             )}
 
 
-      {medata?.user?.Role === "Owner" && (
+            {medata?.user?.Role === "Owner" && (
               <>
-                   <Link to="/admin/all-excel">
-              <div className="card p-3 cursor-pointer">
-                <div className="Admin-box">
-                  <p className="total-number">{data?.length}</p>
-                  <img src="/img/In-ActivePosts.png" alt="post" />
-                </div>
-                <h3 >All Excel Data</h3>
-                <p className="viewall">View All</p>
-              </div>
-            </Link>
+                <Link to="/admin/all-excel">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{data?.length}</p>
+                      <img src="/img/In-ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 >All Excel Data</h3>
+                    <p className="viewall">View All</p>
+                  </div>
+                </Link>
               </>
             )}
             {medata?.user?.Role === "Admin" && (
               <>
-                 <Link to="/admin/all-excel-both">
-              <div className="card p-3 cursor-pointer">
-                <div className="Admin-box">
-                  <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
-                  <img src="/img/In-ActivePosts.png" alt="post" />
-                </div>
-                <h3 >All Excel Data</h3>
-                <p className="viewall">View All</p>
-              </div>
-            </Link>
+                <Link to="/admin/all-excel-both">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
+                      <img src="/img/In-ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 >All Excel Data</h3>
+                    <p className="viewall">View All</p>
+                  </div>
+                </Link>
               </>
             )}
-               {medata?.user?.Role === "Agent" && (
+            {medata?.user?.Role === "Agent" && (
               <>
-                 <Link to="/admin/all-excel-both">
-              <div className="card p-3 cursor-pointer">
-                <div className="Admin-box">
-                  <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
-                  {!AgentAllExcelFilesData && <p className="total-number">0</p>}
+                <Link to="/admin/all-excel-both">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
+                      {!AgentAllExcelFilesData && <p className="total-number">0</p>}
 
-                  <img src="/img/In-ActivePosts.png" alt="post" />
-                </div>
-                <h3 >All Excel Data</h3>
-                <p className="viewall">View All</p>
-              </div>
-            </Link>
+                      <img src="/img/In-ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 >All Excel Data</h3>
+                    <p className="viewall">View All</p>
+                  </div>
+                </Link>
               </>
             )}
             {medata?.user?.Role === "Owner" && (
@@ -340,13 +349,28 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
                 </Link>
               </>
             )}
+
+            {/* {medata?.user?.Role === "Owner" && (
+              <>
+                <Link to="/admin/Transaction">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{getTransactionDetail?.data?.length}</p>
+                      <img src="/img/ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 onClick={() => setPostVerify(false)}>
+                      Transaction Detail
+                    </h3>
+                    <p className="viewall">View All</p>
+                  </div>
+                </Link>
+              </>
+            )} */}
           </div>
         </>
       )}
 
-      {/* <div className="main-content"> */}
 
-      {/* </div> */}
     </>
   );
 }

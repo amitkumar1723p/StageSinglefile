@@ -611,7 +611,7 @@ const OwnerAgentExcel = () => {
 
   return (
 
-    <div className='file-handler-table-container'>
+    <div className='file-handler-table-container' style={{ userSelect: "none" }}>
 
       {/* Add Column Button */}
       {medata?.user?.Role === "Owner" &&

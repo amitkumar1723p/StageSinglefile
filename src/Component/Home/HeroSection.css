@@ -1,13 +1,21 @@
 .sub-heading {
-  display: inline-flex;
+  /* display: inline-flex; */
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   border-radius: 5px;
   background: #1877f2;
   margin: 10px 0px 10px 0px;
 }
+
+.hero-span-main-line{
+color: #f8ef3c;
+text-transform: uppercase;
+font-weight: 600;
+}
+
+
 
 .logo-nav-bar {
   align-items: end;
@@ -229,7 +237,12 @@
   /* font-weight: 600; */
   line-height: normal;
 }
-
+.elastic-search-input{
+  display: flex;
+  /* background: red; */
+  /* width: 500px; */
+  justify-content: space-between;
+}
 .search-tab.active {
   font-weight: 500;
   background-color: var(--main-light-clr);
@@ -301,19 +314,15 @@
 }
 
 .search-box select {
-  font-size: 12.8px;
+  font-size: 10px;
   height: 40.8px;
   border: none;
   color: #4c4c4c;
   background-color: #fff;
 }
 
-.img-searchbar {
-  /* padding: 5px; */
-  /* margin-right: 10px; */
-}
 
-.search-box input {
+.elastic-section-input-tag{
   background-color: #fff;
   height: 31.2px;
   width: 470px;
@@ -840,7 +849,7 @@
   }
 
   .requirement-img {
-    width: 252px;
+    width: 160px;
     height: 161px;
     margin: 22px 0px 0px 0px;
   }
@@ -929,7 +938,7 @@
     position: absolute;
     opacity: .2;
     top: 50px;
-    left: 143px;
+    left: 195px;
   }
 
   .requirement-main {
@@ -955,7 +964,7 @@
   .search-box input {
     background-color: #fff;
     height: 35.1px;
-    width: 165px;
+    width: 225px;
     padding: 10px 0;
     border: none;
     font-size: 10px;
@@ -997,6 +1006,12 @@
     display: none;
   } */
 
+.elastic-section-input-tag{
+  display: flex;
+  background: rgb(206, 137, 137);
+  /* width: 170px !important; */
+  justify-content: space-between;
+}
   .search-box {
     display: flex;
     gap: 0;
@@ -1140,9 +1155,7 @@
     /* Improves line spacing for readability */
   }
 
-  .heading-span-h1 {
-    /* color: #3361e0; Keeps the styled span consistent */
-  }
+  
 
   .heading-hero p {
     font-size: 12px;
@@ -1190,6 +1203,12 @@
     margin: 22px 0px 0px 0px;
   }
 
+  .requirement-svg {
+    opacity: .2;
+    top: 50px;
+    left: 180px;
+  }
+
   .WishingHoli,
 .YouHoli,
 .HappyHoli,
@@ -1223,7 +1242,7 @@
   .search-box input {
     background-color: #fff;
     height: 35.1px;
-    width: 200px;
+    width: 180px;
     padding: 10px 0;
     border: none;
     font-size: 10px;
@@ -1244,6 +1263,14 @@
 }
 
 @media (max-width: 320px) {
+
+  .requirement-svg {
+    opacity: .2;
+    top: 50px;
+    left: 120px !important; 
+  }
+
+
   .heading-hero h1 {
     font-size: 13px;
     margin-top: 50px;
@@ -1263,7 +1290,7 @@
   .search-box input {
     background-color: #fff;
     height: 35.1px;
-    width: 80px;
+    width:112px;
     padding: 10px 0;
     border: none;
     font-size: 10px;

@@ -48,19 +48,20 @@ export default function LocationDetails({
     if(LocationDetailsData.Landmark?.length == 0){
       // setSectorShake(true);
       // setTimeout(()=> setSectorShake(false),1600);
-      return;
+      return
 
     }
     if(LocationDetailsData.City?.length == 0){
       setCityShake(true);
       setTimeout(()=> setCityShake(false),1600);
-     return;
+      return
 
     }
     if(LocationDetailsData.Locality?.length == 0){
       setLocalityShake(true);
       setTimeout(()=> setLocalityShake(false),1600);
-     return;
+      return
+
     }
   }
 

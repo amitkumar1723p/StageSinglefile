@@ -203,3 +203,15 @@
     border-radius: 0 0 10px 10px;
   }
 }
+
+@media (max-width: 480px){
+  .otp-wrapper-unique{
+    margin: 0;
+  }
+}
+
+@media (max-width: 376px){
+  .otp-wrapper-unique{
+    margin: 0;
+  }
+}

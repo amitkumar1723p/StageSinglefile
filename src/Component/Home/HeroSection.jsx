@@ -8,6 +8,7 @@ import React, {
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 
+
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
 
@@ -35,6 +36,7 @@ import ProjectNameSection from "../Post/ProjectName";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   GetAllPostAction,
+  // getPostsByAddress,
   GetSingleProjectNameDataAction,
 } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -220,6 +222,10 @@ const HeroSection = () => {
     }
   }, [medata]);
   useEffect(() => {
+    // if(!propertyByAdress){
+
+    //   dispatch(getPostsByAddress())
+    // }
     dispatch({ type: "GetAllPostClear" });
     dispatch({ type: "GetSingleProjectNameDataClear" });
     setRedirectPathIsHomeCard(false);
@@ -262,8 +268,8 @@ const HeroSection = () => {
               Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
-              India's 1st online proptech platform that delivers real-time price
-              alerts to property owners.
+              India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
+              alerts</span>  to property owners.
             </p>
           </div>
           {/* nav bar search button  */}
@@ -416,7 +422,7 @@ const HeroSection = () => {
                     ProjectInputType={"Search"}
                     searchInput={true}
                     setrunSearchButton={setrunSearchButton}
-                    inputClass={"hero-search-button"}
+                    inputClass={"elastic-section-input-tag"}
                     ProjectNameObjectData={ProjectNameObjectData}
                     setProjectNameObjectData={setProjectNameObjectData}
                     placeholder={"Search by Project name or society name"}
@@ -812,7 +818,7 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {PropertyAddType == "Rent" && (
+      {/* {PropertyAddType == "Rent" && (
         <>
           <Tenant />
           <BrowseProperties />
@@ -821,11 +827,11 @@ const HeroSection = () => {
           <PropertyDetailsForm />
           <RentAgreement />
           <RentalBanner />
-          {/* <VerifiedComponent /> */}
+          <VerifiedComponent />
           <RentAuthentication />
-          {/* <TenantDetailsForm /> */}
+          <TenantDetailsForm />
         </>
-      )}
+      )} */}
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 

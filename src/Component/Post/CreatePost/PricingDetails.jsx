@@ -286,7 +286,7 @@ export default function PricingDetails({
 
      if(BasicDetailsData.PropertyAdType === "Rent"){
       if(PricingDetailsData.ExpectedRent =="" || PricingDetailsData.ExpectedRent == undefined){
-        console.log("Console.log");
+      
         setExpectedRentAlert(true);
         setTimeout(()=>setExpectedRentAlert(false),1500)
         return;

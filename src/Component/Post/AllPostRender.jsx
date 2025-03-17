@@ -6,6 +6,7 @@ import "./AllPostRender.css";
 import "../Home/PropertyCard/card.css";
 import NotifyMe from "../Home/PropertyCard/NotifyMe";
 import SingleCard from "./SingleCard";
+import ScrollToTop from "../../ScrollToTop";
 
 const AllPostRender = () => {
   const [filters, setFilters] = useState({
@@ -54,7 +55,9 @@ const AllPostRender = () => {
           `${process.env.REACT_APP_API_URL}/post/all-property/`
         );
         if (res.data.success) {
+         
           setGetAllData(res.data.properties);
+
         }
       } catch (error) {
         console.log(error);
@@ -64,6 +67,10 @@ const AllPostRender = () => {
     }
     getData();
   }, []);
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0); // Scrolls to the top of the page
+  // }, [GetAllPostData])
 
   useEffect(() => {
     if (!GetAllPostData.length) return;
@@ -90,6 +97,7 @@ const AllPostRender = () => {
         (post) => post.AmenitiesDetails?.Furnishing === filters.furnishing
       );
     }
+    window.scrollTo(0, 0)
 
     setFilteredData(filtered);
   }, [filters, GetAllPostData, filterdPost]);
@@ -103,6 +111,7 @@ const AllPostRender = () => {
 
   return (
     <>
+   
       <div className="property-post-filters-box-allpost">
         <aside className="property-filters">
           <div className="allpost-clear-filter-title">
@@ -236,14 +245,17 @@ const AllPostRender = () => {
           </div>
           {loading ? (
             <div className="allPostrender-showpost">
-              {Array.from({ length: 8 }).map((_, index) => (
+             <div className="all-post-render-skeleton-container">
+             {Array.from({ length: 8 }).map((_, index) => (
                 <AllPostSkeleton key={index} />
               ))}
+             </div>
             </div>
-          ) : filteredData.length === 0 ? (
+          ) : filteredData?.length === 0 ? (
             <NotifyMe />
           ) : (
             <div className="allPostrender-showpost">
+                <ScrollToTop />
               {filteredData?.map((e, i) => (
                 <SingleCard key={i} PostData={e} index={i} />
               ))}
@@ -374,6 +386,7 @@ export default AllPostRender;
 
 const AllPostSkeleton = () => {
   return (
+    
     <div className="all-post-skeleton-card">
       <div className="all-post-skeleton-image"></div>
 
