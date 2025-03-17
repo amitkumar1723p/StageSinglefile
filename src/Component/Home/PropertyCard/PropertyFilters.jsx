@@ -91,7 +91,7 @@ const PropertyFilters = () => {
       //     Furnishing: Filter.Furnishing,
       //   })
       // );
-      console.log(querry.get("PropertyAddType"))
+      // console.log(querry.get("PropertyAddType"))
       dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
    
         PropertyAdType: querry.get("PropertyAddType"),
@@ -536,18 +536,17 @@ const PropertyFilters = () => {
                       <div
                         className="allpost-clear-filter"
                         onClick={() => {
-                          dispatch(
-                            GetAllPostAction( querry.get("ProjectName")?.replaceAll("-", " "),{},{
-                             
-                              PropertyAdType: querry.get("PropertyAddType"),
-                              BHK: "",
-                              ApartmentType: "",
-                              PropertyStatus: undefined,
-                              Furnishing: "",
-                            })
-                          );
+                          dispatch(getSerachProperty(querry.get("ProjectName")?.replaceAll("-", " "),{}, {
+                      
+                            PropertyAdType: querry.get("PropertyAddType"),
+                            BHK: "",
+                            ApartmentType: "",
+                            PropertyStatus: undefined,
+                            Furnishing: "",
+                          }));
                           setFilter({});
                         }}
+                        
                       >
                         Clear Filter <img src="/img/clear-filter.svg" alt="" />
                       </div>

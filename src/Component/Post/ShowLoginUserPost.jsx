@@ -65,7 +65,7 @@ export default function ShowLoginUserPost() {
 
       {loading ? (
         <Loader className="componentloader" />
-      ) : AllPost.length > 0 ? (
+      ) :(
         <>
           <h3 className="user-section-heading">{PropertyAdType} Post</h3>
           <div className="filter-btn-section">
@@ -98,9 +98,7 @@ export default function ShowLoginUserPost() {
             <NoListThere />
           )}
         </>
-      ) : (
-        <NoListThere />
-      )}
+      ) }
     </>
   );
 }
