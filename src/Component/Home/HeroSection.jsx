@@ -683,6 +683,8 @@ const HeroSection = () => {
         </div>
       )}
 
+    
+
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">
           <div className="heading-section-all">
