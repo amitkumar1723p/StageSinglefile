@@ -19,8 +19,8 @@ export default function SingleUserRespponseAction() {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
-      });
-  
+    });
+
     return (
         <div className="border border-primary border-opacity-25 ">
             <div className="ps-3 pt-2">
@@ -65,7 +65,7 @@ export default function SingleUserRespponseAction() {
                                     >
                                         {item?.PostData?.PostId}
                                     </td>
-                                    <td>{item?.VisitDate?dateTimeFormatter.format(new Date(item?.VisitDate)) : 'N/A'}</td>
+                                    <td>{item?.VisitDate ? dateTimeFormatter.format(new Date(item?.VisitDate)) : 'N/A'}</td>
                                     <td>{item?.VisitStatusData?.Status}</td>
                                     <td>{item?.VisitTime?.From}-{item?.VisitTime?.To}</td>
                                 </tr>)
@@ -85,7 +85,7 @@ export default function SingleUserRespponseAction() {
                             <tr>
                                 <th scope="col">Post Id</th>
                                 <th scope="col">BidPrice</th>
-                                
+
                                 <th scope="col">VisitTime</th>
                             </tr>
                         </thead>
@@ -94,12 +94,14 @@ export default function SingleUserRespponseAction() {
                                 return (<tr>
 
 
-                                    <td  onClick={(e)=>{
+                                    <td onClick={(e) => {
                                         window.open(`/post-detail/${item?.PostData?.PostId}`, 'SinglePostDetail2')
                                     }}
                                     >{item?.PostData?.PostId}</td>
-                                    <td>{item?.BidPrice}</td>
-                                  
+
+                                    {item?.BidPrice?.toString().length == 8 ? <td>{item?.BidPrice / 10000000} Cr</td> : item?.BidPrice?.toString().length == 7 ? <td>{item?.BidPrice / 1000000} Lakh</td> : item?.BidPrice?.toString().length == 6 ? <td>{item?.BidPrice / 100000} lakh</td> : null}
+
+
                                     <td>{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</td>
                                 </tr>)
                             })}
@@ -126,15 +128,15 @@ export default function SingleUserRespponseAction() {
                                 return (<tr>
 
 
-                                    <td onClick={(e)=>{
+                                    <td onClick={(e) => {
                                         window.open(`/post-detail/${item?._id}`, 'SinglePostDetail3')
                                     }}
                                     >{item?._id}</td>
 
-                         
 
 
-<td>{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</td>
+
+                                    <td>{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</td>
 
                                     <td>{item?.propertyStatus?.currentPropertyStatus}</td>
                                     <td>{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</td>

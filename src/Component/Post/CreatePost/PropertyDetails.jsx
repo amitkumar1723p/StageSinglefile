@@ -93,6 +93,7 @@ export default function PropertyDetailsSection({
 
 
 
+
   return (
     <>
       <p className="Property-Details-heading">Property Details</p>
@@ -131,6 +132,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="flooring-type">Flooring Type*</label>
           <select
+           
            className={` ${Error.FlooringType? 'inputShake shake' : ''}`}
             id="flooring-type"
             required
@@ -165,6 +167,7 @@ export default function PropertyDetailsSection({
               return (
                 <div
                   key={i}
+                  
                   className={`tab ${
                     PropertyDetailsData.OtherRoom?.includes(text) ? "select" : ""
                   }  ${Error.OtherRoom? 'inputShake shake' : ''}
@@ -215,9 +218,10 @@ export default function PropertyDetailsSection({
                   return (
                     <div className="d-flex" key={i}>
                       <input
+                       
+                      className={`me-2 ${Error.Basement? 'inputShake shake' : ''}`}
                         type="radio"
                         id={`basement-${i}`}
-                        className="me-2"
                         name="basement"
                         value={text}
                         required
@@ -231,8 +235,9 @@ export default function PropertyDetailsSection({
                       />
                       &nbsp;
                       <label
+                       
                         htmlFor={`basement-${i}`}
-                        className={`basement-label-${i}`}
+                        className={`basement-label-${i} ${Error.Basement? ' shake' : ''}`}
                       >
                         {text === true ? "Yes" : "No"}
                       </label>
@@ -245,8 +250,10 @@ export default function PropertyDetailsSection({
             {PropertyDetailsData.Basement == true && (
               <div className="form-group">
                 <label htmlFor="BasementArea">Basement Area*</label>
-                <div className=" unit-input basement-unit-input">
+                <div   className={`unit-input basement-unit-input ${Error.BasementAreaShake? 'inputShake shake' : ''}`}>
                   <input
+                   
+                   
                     type="text"
                     id="BasementArea"
                     name="BasementArea"

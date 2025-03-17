@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import WindowComponent from "../../WindowComponent";
 import CreatePostSubmitAlert from "./CreatePostSubmitAlert";
 
+const imagePath = "your-image.png"; // Replace with your image path
+
 export default function CreatePostImageUpload({
   setnext,
   next,
@@ -37,8 +39,6 @@ export default function CreatePostImageUpload({
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
-
-   
 }) {
   const dispatch = useDispatch();
 
@@ -58,86 +58,82 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  
-
   useEffect(() => {
-      setTimeout(() => {
-           // Create a copy of the data to avoid mutating the original object
-    const CopyObj = { ...PricingDetailsData };
+    setTimeout(() => {
+      // Create a copy of the data to avoid mutating the original object
+      const CopyObj = { ...PricingDetailsData };
 
-    if (BasicDetailsData.PropertyAdType === "Rent") {
-      // Remove commas from ExpectedRent and DepositePrice for Rent
-      const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
-
-      const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
-    }
-
-    if (BasicDetailsData.PropertyAdType === "Sale") {
-      // Remove commas from ExpectedPrice for Sale
-      const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
-        /,/g,
-        ""
-      );
-      if (BasicDetailsData.ApartmentType == "Plot/Land") {
-        const PricePerSqYdRemoveComa = String(CopyObj?.PricePerSqYd)?.replace(
+      if (BasicDetailsData.PropertyAdType === "Rent") {
+        // Remove commas from ExpectedRent and DepositePrice for Rent
+        const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
           /,/g,
           ""
         );
-        CopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
-      } else {
-        const PricePerSqFtRemoveComa = String(CopyObj?.PricePerSqFt)?.replace(
+        CopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
+
+        const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
           /,/g,
           ""
         );
-        CopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
+        CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
       }
 
-      CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
+      if (BasicDetailsData.PropertyAdType === "Sale") {
+        // Remove commas from ExpectedPrice for Sale
+        const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
+          /,/g,
+          ""
+        );
+        if (BasicDetailsData.ApartmentType == "Plot/Land") {
+          const PricePerSqYdRemoveComa = String(CopyObj?.PricePerSqYd)?.replace(
+            /,/g,
+            ""
+          );
+          CopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
+        } else {
+          const PricePerSqFtRemoveComa = String(CopyObj?.PricePerSqFt)?.replace(
+            /,/g,
+            ""
+          );
+          CopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
+        }
 
-      // Check and remove commas from MonthlyExpectedRent if it exists
-      if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-        const MonthlyExpectedRentRemoveComa = String(
-          CopyObj?.AdditionalDetails?.MonthlyExpectedRent
+        CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
+
+        // Check and remove commas from MonthlyExpectedRent if it exists
+        if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+          const MonthlyExpectedRentRemoveComa = String(
+            CopyObj?.AdditionalDetails?.MonthlyExpectedRent
+          )?.replace(/,/g, "");
+          CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(
+            MonthlyExpectedRentRemoveComa
+          );
+        }
+      }
+
+      // Remove commas from MaintenanceCharges if it exists
+      if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
+        const MaintenanceChargesRemoveComa = String(
+          CopyObj.AdditionalDetails.MaintenanceCharges
         )?.replace(/,/g, "");
-        CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(
-          MonthlyExpectedRentRemoveComa
+        CopyObj.AdditionalDetails.MaintenanceCharges = parseInt(
+          MaintenanceChargesRemoveComa
         );
       }
-    }
 
-    // Remove commas from MaintenanceCharges if it exists
-    if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-      const MaintenanceChargesRemoveComa = String(
-        CopyObj.AdditionalDetails.MaintenanceCharges
-      )?.replace(/,/g, "");
-      CopyObj.AdditionalDetails.MaintenanceCharges = parseInt(
-        MaintenanceChargesRemoveComa
-      );
-    }
+      // Log the modified object before setting it in state
 
-    // Log the modified object before setting it in state
-    
-    // Set the new state
-    setPricingDetailsData(CopyObj);
-      }, 0);
- 
-  }, [BasicDetailsData ]); // Add dependency on BasicDetailsData
- 
+      // Set the new state
+      setPricingDetailsData(CopyObj);
+    }, 0);
+  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
+
   // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
 
   const CratePostHandler = (e) => {
     e.preventDefault();
-    if (previewImage.length <= 0) {
-      // alert("image field is required");
-    } else {
+   
+ 
       let formData = new FormData(e.target);
 
       formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
@@ -150,10 +146,7 @@ export default function CreatePostImageUpload({
 
       if (BasicDetailsData.ApartmentType == "Plot/Land") {
         //  alert("form details")
-        formData.append(
-          "OtherDetails",
-          `${JSON.stringify( OtherDetailsData )}`
-        );
+        formData.append("OtherDetails", `${JSON.stringify(OtherDetailsData)}`);
       } else {
         formData.append(
           "PropertyDetails",
@@ -197,9 +190,11 @@ export default function CreatePostImageUpload({
           }
         }
       } else {
-        uploadimages.forEach((e) => {
-          formData.append("PropertyImages", e, e.name);
-        });
+    
+          uploadimages.forEach((e) => {
+            formData.append("PropertyImages", e, e.name);
+          });
+        
       }
 
       if (update) {
@@ -214,20 +209,19 @@ export default function CreatePostImageUpload({
           setshowCreatePostSubmitAlert("showLoading");
         }
       }
-    }
+     
   };
 
+  // Alert
+  const [imageAlert, setImageAlert] = useState(false);
 
-// Alert
-const [imageAlert, setImageAlert] = useState(false)
-
-const HandleImageAlert = ()=>{
-  if (previewImage.length <= 0) {
-    setImageAlert(true);
-    setTimeout(()=>setImageAlert(false),1500);
-   return;
-  }
-}
+  const HandleImageAlert = () => {
+    if (previewImage.length <= 0 && update) {
+      setImageAlert(true);
+      setTimeout(() => setImageAlert(false), 1500);
+      return;
+    }
+  };
 
   return (
     <>
@@ -243,7 +237,10 @@ const HandleImageAlert = ()=>{
             encType="multipart/form-data"
             id="myform"
           >
-            <div htmlFor="" className={`uploadfile-input ${imageAlert? "shakeShake":''}`}>
+            <div
+              htmlFor=""
+              className={`uploadfile-input ${imageAlert ? "shakeShake" : ""}`}
+            >
               <div className="file-label">
                 {/* Backup Icon  */}
                 <svg
@@ -269,7 +266,7 @@ const HandleImageAlert = ()=>{
                   />
                 </svg>
 
-                <p className={`p-img-upload ${imageAlert? "shake":''}`}>
+                <p className={`p-img-upload ${imageAlert ? "shake" : ""}`}>
                   Drag and drop or click to choose file
                 </p>
                 <p className="p-img-upload-i">
@@ -284,12 +281,13 @@ const HandleImageAlert = ()=>{
               </div>
 
               <input
-              className="RemoveCusImg"
+                className="RemoveCusImg"
                 type="file"
                 name=""
                 id=""
-               multiple accept=".jpg,.jpeg,.png,.webp,.avif"
-                required={previewImage.length === 0 ? true : false}
+                multiple
+                accept=".jpg,.jpeg,.png,.webp,.avif"
+                // required={update && previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 
@@ -419,7 +417,7 @@ const HandleImageAlert = ()=>{
               >
                 Previous
               </div>
-              <button onClick={HandleImageAlert} className="Submit-Next" ref={CreatePostRef}>
+              <button className="Submit-Next" ref={CreatePostRef}>
                 {update ? "Update Post" : "Create Post"}
               </button>
             </div>
