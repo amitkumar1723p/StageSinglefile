@@ -1,0 +1,128 @@
+/* Alll user Response Action CSSS */
+.userName {
+    width: 25%;
+
+}
+
+.userContact {
+    width: 20%;
+}
+
+.userDetail {
+    width: 55%;
+}
+
+.singleUser_mainbtn {
+    background-color: #a9a9a926;
+}
+
+.activebtn {
+    color: #9e9090;
+}
+
+
+
+
+
+.All-response-section-name,
+.All-response-section-Email,
+.All-response-section-Contact,
+.All-response-section-noFav-prop {
+    font-size: 12px;
+    color: #333;
+}
+
+.All-response-section-View-response {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid var(--main-light-clr);
+    background-color: var(--main-light-clr);
+    color: #fff;
+    font-size: 10px;
+}
+
+.All-response-section-View-response:hover {
+   opacity: .8;
+}
+
+.btn-inactive-home{
+    border: 1px solid var(--main-light-clr);
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: var(--main-light-clr);
+}
+.btn-active-home{
+    
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+
+
+
+
+
+
+
+.all-user-response {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.all-user-response-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+}
+
+.all-user-response-box {
+    height: 20px;
+    border-radius: 4px;
+    /* background: #ddd; */
+    animation: all-user-response-pulse 1.5s infinite ease-in-out;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    border-radius: 8px;
+}
+
+.all-user-response-name {
+    width: 150px;
+}
+
+.all-user-response-email {
+    width: 200px;
+}
+
+.all-user-response-phone {
+    width: 120px;
+}
+
+.all-user-response-fav {
+    width: 80px;
+}
+
+.all-user-response-button {
+    width: 120px;
+    height: 30px;
+    border-radius: 4px;
+    background: #ccc;
+}
+
+@keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
