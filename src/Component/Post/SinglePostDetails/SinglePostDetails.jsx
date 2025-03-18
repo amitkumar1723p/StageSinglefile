@@ -1268,7 +1268,7 @@ export default function SinglePostDetails() {
                               }-${new Date(
                                 getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                               ).getFullYear()}`}
-                            Icon="/img/bathroom.png"
+                            Icon="/img/Available-From.svg"
                             Data={"Available From"}
                           />
 
@@ -1280,20 +1280,20 @@ export default function SinglePostDetails() {
                                     return text;
                                   }
                                 )}`}
-                                Icon="/img/bathroom.png"
+                                Icon="/img/preferred-tenant.svg"
                                 Data={"Preferred Tenant"}
                               />
                             )}
 
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
-                            Icon="/img/bathroom.png"
+                            Icon="/img/Expected-rent.svg"
                             Data={"Expected Rent"}
                           />
 
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
-                            Icon="/img/Property-age.png"
+                            Icon="/img/Security-deposit.svg"
                             Data={"Security Deposit"}
                           />
                         </>

@@ -87,7 +87,7 @@ export default function AllUserResponseAction() {
               <div className="userName border-end border-primary px-2  border-opacity-25">
                 <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none">
                   <div>
-                    <p className="  fw-light  All-response-section-name fw-medium ">{item?.Name}</p>
+                    <p className="  fw-light  All-response-section-name fw-medium ">{item?.Name} <span className="All-response-section-role"> ( {item?.Role} ) </span> </p>
                     <small className=" fw-light All-response-section-Email">{item?.email}</small>
                   </div>
                 </Link>

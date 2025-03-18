@@ -275,13 +275,13 @@ const NotifyRequirements = () => {
                   {activeTab === "notifies" ? (
                     <>
 
-                      <th className="notify-requirements-th">Project Name</th>
-                      <th className="notify-requirements-th">Name</th>
-                      <th className="notify-requirements-th">Phone</th>
-                      <th className="notify-requirements-th">Date </th>
-                      <th className="notify-requirements-th">BHK</th>
-                      <th className="notify-requirements-th">Room</th>
-                      <th className="notify-requirements-th">
+                      <th className="notify-requirements-th text-nowrap">Project Name</th>
+                      <th className="notify-requirements-th text-nowrap">Name</th>
+                      <th className="notify-requirements-th text-nowrap">Phone</th>
+                      <th className="notify-requirements-th text-nowrap">Date </th>
+                      <th className="notify-requirements-th text-nowrap">BHK</th>
+                      <th className="notify-requirements-th text-nowrap">Room</th>
+                      <th className="notify-requirements-th text-nowrap">
                         Floor Preference
                       </th>
                       {/* <th className="notify-requirements-th">Email</th> */}
@@ -289,18 +289,18 @@ const NotifyRequirements = () => {
                   ) : (
                     <>
 
-                      <th className="notify-requirements-th">Name</th>
-                      <th className="notify-requirements-th">Phone</th>
-                      <th className="notify-requirements-th">Date</th>
-                      <th className="notify-requirements-th">Property type</th>
+                      <th className="notify-requirements-th text-nowrap">Name</th>
+                      <th className="notify-requirements-th text-nowrap">Phone</th>
+                      <th className="notify-requirements-th text-nowrap">Date</th>
+                      <th className="notify-requirements-th text-nowrap">Property type</th>
 
-                      <th className="notify-requirements-th">BHK / Area</th>
-                      <th className="notify-requirements-th">
+                      <th className="notify-requirements-th text-nowrap">BHK / Area</th>
+                      <th className="notify-requirements-th text-nowrap">
                         Floor Preference
                       </th>
-                      <th className="notify-requirements-th">Budget</th>
-                      <th className="notify-requirements-th">Project Name</th>
-                      <th className="notify-requirements-th">Possession Status</th>
+                      <th className="notify-requirements-th text-nowrap">Budget</th>
+                      <th className="notify-requirements-th text-nowrap" >Project Name</th>
+                      <th className="notify-requirements-th text-nowrap">Possession Status</th>
                     </>
                   )}
                 </tr>
@@ -311,17 +311,17 @@ const NotifyRequirements = () => {
                     <tr key={item._id}>
                       {activeTab === "notifies" ? (
                         <>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.ProjectName}
                           </td>
 
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item?.User?.Name}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item?.User?.ContactNumber}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {
                               new Date(item.createAt)
                                 .toLocaleDateString("en-GB", { year: '2-digit', month: 'short', day: '2-digit' }) // Format with month name
@@ -332,15 +332,15 @@ const NotifyRequirements = () => {
                             }
                           </td>
                         
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item?.BHKType} 
                           </td>
 
-                          <td className="notify-requirements-td ">
+                          <td className="notify-requirements-td text-nowrap ">
                             {item?.Room?.join(" , ")}
                           </td>
 
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.FloorPreference}
                           </td>
                           {/* <td className="notify-requirements-td">{item?.User?.Name}</td> */}
@@ -348,13 +348,13 @@ const NotifyRequirements = () => {
                       ) : (
                         <>
 
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item?.RequirementUser?.Name}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item?.RequirementUser?.ContactNumber}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {
 
 
@@ -369,23 +369,23 @@ const NotifyRequirements = () => {
                             }
                           </td>
                           {/* <td className="notify-requirements-td">{item?.Room?.map((room)=><span>{room}</span>)}</td> */}
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.PropertyType}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.BHKType} {item?.plotSize} {item?.plotUnit} 
                           </td>
 
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.FloorPreference}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.Budget} {item.unit}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.ProjectName}
                           </td>
-                          <td className="notify-requirements-td">
+                          <td className="notify-requirements-td text-nowrap">
                             {item.PossessionStatus}
                           </td>
                         </>

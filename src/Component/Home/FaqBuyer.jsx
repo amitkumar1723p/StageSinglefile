@@ -123,8 +123,7 @@ const FAQ = () => {
           >
             <div className="accordion-body">
               You will receive notifications if someone places a higher offer
-              than yours. Additionally, on our platform, you can see the offers
-              against each listing.
+              than yours.
             </div>
           </div>
         </div>

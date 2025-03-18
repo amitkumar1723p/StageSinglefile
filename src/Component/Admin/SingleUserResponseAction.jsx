@@ -31,7 +31,7 @@ export default function SingleUserRespponseAction() {
                     <div className="card-header fw-medium">User Info...</div>
 
                     <ul className="list-group list-group-flush ">
-                        <li className="list-group-item fw-light"><small>Name :  <span> {SingleUserResponseAction_Store?.user?.Name}</span></small></li>
+                        <li className="list-group-item fw-light"><small>Name :  <span> {SingleUserResponseAction_Store?.user?.Name}  <span className="All-response-section-role"> ({SingleUserResponseAction_Store?.user?.Role})</span>  </span></small></li>
                         <li className="list-group-item fw-light"><small>Contact:  <span> {SingleUserResponseAction_Store?.user?.ContactNumber}</span></small></li>
                         <li className="list-group-item fw-light "><small>Email : <span> {SingleUserResponseAction_Store?.user?.email}</span></small></li>
                     </ul>
