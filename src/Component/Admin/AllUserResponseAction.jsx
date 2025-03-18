@@ -14,14 +14,14 @@ const [searchbtn,setSearchbtn]=useState(false)
   const { data: AllUserResponseAction_Store } = useSelector((state) => {
     return state.AllUserResponseAction_Store;
   });
-  useEffect(() => {
-    if (AllUserResponseAction_Store?.data) {
-      const sortedData = [...AllUserResponseAction_Store.data] // Make a shallow copy of the data
-        .sort((a, b) => new Date(a.createAt) - new Date(b.createAt)); // Ensure you use the correct field name
+  // useEffect(() => {
+  //   if (AllUserResponseAction_Store?.data) {
+  //     const sortedData = [...AllUserResponseAction_Store.data] // Make a shallow copy of the data
+  //       .sort((a, b) => new Date(b.createAt) - new Date(a.createAt)); // Ensure you use the correct field name
 
-      setSort(sortedData); // Update the state with sorted data
-    }
-  }, [AllUserResponseAction_Store]);
+  //     setSort(sortedData); // Update the state with sorted data
+  //   }
+  // }, [AllUserResponseAction_Store]);
 
 
   // console.log(sort,"lgjk")
@@ -105,7 +105,7 @@ useEffect(() => {
         <div className="container-fluid ">
 
 
-          {sort?.map((item) => {
+          {AllUserResponseAction_Store?.data?.map((item) => {
             return (
 
               <div className="d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2">
@@ -114,9 +114,9 @@ useEffect(() => {
                   <div className="">
                     <p className="">{item?.Name}- <small className="fw-light">({item?.Role})</small></p>
                     {/* <small className="fw-light">{item?.email}</small> */}
-                    {/* <small className="fw-light">
+                    <small className="fw-light">
                       {item?.createAt ? new Date(item.createAt).toLocaleDateString() : 'N/A'}
-                    </small> */}
+                    </small>
                   </div>
                 </div>
 
