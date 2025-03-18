@@ -7,7 +7,7 @@ const TermsAndConditions = () => {
      <Helmet>
                 <meta charSet="utf-8" />
                 <title>Terms and Conditions - PropertyDekho247.com</title>
-                <meta name="description" content=" Welcome to our website. By accessing or using our services, you agree to comply with the following Terms and Conditions. These terms govern your use of our platform, and by continuing to browse, register, or interact with our content, you acknowledge that you have read, understood, and accepted these terms. If you do not agree with any part of these terms, please refrain from using our website or services. For any questions or clarifications, feel free to contact us."></meta>
+                <meta name="description" content="By using our website, you agree to our Terms and Conditions. For any questions, feel free to contact us."></meta>
                 <link rel="canonical" href="https://www.propertydekho247.com/terms-and-conditions/"/>
             </Helmet>
 

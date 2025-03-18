@@ -98,6 +98,21 @@
 }
 
 
-
+/* Alll user Response Action CSSS */
+.userName{
+  width: 22%;
+}
+.userContact{
+  width: 11%;
+}
+.userDetail{
+  width:0%;
+}
+.singleUser_mainbtn{
+  background-color: #a9a9a926;
+}
+.activebtn{
+  color: #9e9090;
+}
 
 

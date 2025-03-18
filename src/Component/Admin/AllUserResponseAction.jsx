@@ -9,27 +9,49 @@ export default function AllUserResponseAction() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // All user response action
-
-
-
-  const { data: AllUserResponseAction_Store,loading } = useSelector((state) => {
+const [searchbtn,setSearchbtn]=useState(false)
+  const [searchText, setSearchText] = useState("");
+  const [sort, setSort] = useState([])
+  const { data: AllUserResponseAction_Store } = useSelector((state) => {
     return state.AllUserResponseAction_Store;
   });
+  useEffect(() => {
+    if (AllUserResponseAction_Store?.data) {
+      const sortedData = [...AllUserResponseAction_Store.data] // Make a shallow copy of the data
+        .sort((a, b) => new Date(a.createAt) - new Date(b.createAt)); // Ensure you use the correct field name
 
+      setSort(sortedData); // Update the state with sorted data
+    }
+  }, [AllUserResponseAction_Store]);
+
+
+  // console.log(sort,"lgjk")
   // Pagination logic state
   const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
-
+  // console.log(AllUserResponseAction_Store)
   const totalPages = AllUserResponseAction_Store?.totalPages
-  const itemsPerPage = 10; // Number of items per page
+  // const itemsPerPage = 10; // Number of items per page
 
   // console.log(AllUserResponseAction_Store)
-  useEffect(() => {
-     console.log(AllUserResponseAction_Store,loading)
-    if(AllUserResponseAction_Store,loading==undefined){
-      dispatch(getAllUserResponseAction(page))
-    }
-   
-  }, [page])
+useEffect(() => {
+
+  
+
+    dispatch(getAllUserResponseAction(page));
+
+}, [page]);
+useEffect(() => {
+  // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
+  if (searchText && searchbtn===true) {
+    dispatch(getAllUserResponseAction(page, searchText));
+    
+    setSearchbtn(false)
+  }
+  
+
+
+}, [page, searchText, searchbtn]);
+
 
   const handlePrevPage = () => {
     if (page > 1) {
@@ -53,132 +75,139 @@ export default function AllUserResponseAction() {
     setPage(newPage); // Go to the selected page
     dispatch({type:"AllUserResponseActionFailClear"})
   };
-// console.log(loading)
+
+
+  // searching
+
+
+  // Function to handle input changes
+  const handleInputChange = (event) => {
+    setSearchText(event.target.value); // Update state with input value
+  };
+
+  // Function to handle search button click
+  const handleSearch = () => {
+   setSearchbtn(true)
+    // For example, log the search text
+  };
+  
   return (
     <>
-    {
-      loading ? <div class="all-user-response">
-      <div class="all-user-response-card">
-          <div class="all-user-response-box all-user-response-name"></div>
-          <div class="all-user-response-box all-user-response-email"></div>
-          <div class="all-user-response-box all-user-response-phone"></div>
-          <div class="all-user-response-box all-user-response-fav"></div>
-          <div class="all-user-response-box all-user-response-button"></div>
+      <div className="border border-primary border-opacity-25 ">
+        <div className="d-flex justify-content-between">
+        <div className=""> 
+           <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
+           </div>
+           <div className="px-4 mt-3 d-flex">
+      <input
+        type="text"
+        value={searchText} // Bind input value to state
+        onChange={handleInputChange} // Handle input change
+      />
+      <div className="px-2">
+        <button className="px-2" onClick={handleSearch}>Search</button>
       </div>
-      <div class="all-user-response-card">
-          <div class="all-user-response-box all-user-response-name"></div>
-          <div class="all-user-response-box all-user-response-email"></div>
-          <div class="all-user-response-box all-user-response-phone"></div>
-          <div class="all-user-response-box all-user-response-fav"></div>
-          <div class="all-user-response-box all-user-response-button"></div>
-      </div>
-      
-  </div>
-   :<div className="border border-primary border-opacity-25 ">
-
-      {/* <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p> */}
-      <div className="container-fluid d-flex flex-column gap-3   ">
-        {AllUserResponseAction_Store?.data?.map((item) => {
-          return (
+    </div>
+        </div>
+     
+        <div className="container-fluid ">
 
 
-            <div className="d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-1 rounded ">
+          {sort?.map((item) => {
+            return (
 
-              <div className="userName border-end border-primary px-2  border-opacity-25">
-                <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none">
-                  <div>
-                    <p className="  fw-light  All-response-section-name fw-medium ">{item?.Name} <span className="All-response-section-role"> ( {item?.Role} ) </span> </p>
-                    <small className=" fw-light All-response-section-Email">{item?.email}</small>
+              <div className="d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2">
+
+                <div className="userName border-end border-primary px-2  border-opacity-25">
+                  <div className="">
+                    <p className="">{item?.Name}- <small className="fw-light">({item?.Role})</small></p>
+                    {/* <small className="fw-light">{item?.email}</small> */}
+                    {/* <small className="fw-light">
+                      {item?.createAt ? new Date(item.createAt).toLocaleDateString() : 'N/A'}
+                    </small> */}
                   </div>
-                </Link>
-              </div>
+                </div>
 
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-              <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none">
-                  <p className="All-response-section-Contact fw-light fw-medium">{item?.ContactNumber}</p>
-              </Link>
+                  <p className=" fw-light">{item?.ContactNumber}</p>
                 </div>
-              <div className="userDetail px-5 d-flex justify-content-between">
+
+                
+                
+                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" fw-lighter">scheduleData:<small className="fw-light">{item?.scheduleData}</small></p>
+                </div>
+                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" fw-lighter">postData: <small className="fw-light">{item?.postData}</small></p>
+                </div>
+                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" fw-lighter">offerData:<small className="fw-light">{item?.offerData}</small></p>
+                </div>
+                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" fw-lighter">notifyData:<small className="fw-light">{item?.notifyData}</small></p>
+                </div>
+                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" fw-lighter">requireData:<small className="fw-light">{item?.requireData}</small></p>
+                </div>
+                {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
 
 
-                <select className="border-0" onChange={(e) => {
-                  if (e.target.value) {
-                    window.open(`/post-detail/${e.target.value}`, 'SinglePostDetail')
-                  }
-                  // navigate(`/post-detail/${e.target.value}`)
+                
 
-
-                }} >
-                  <option className="All-response-section-noFav-prop" value={null}> No. of favourite Property : <span className="px-2">{item?.FavouritePost.length} </span></option>
-                  {item.FavouritePost.map((data) => {
-                    return (
-
-                      <option value={`${data?.PostData?.PostId}`} >
-                        {data?.PostData?.PostId}
-                      </option>
-                    )
-                  })}
-
-                </select>
-                <div className="d-flex align-items-center justify-content-center">
-                  <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none">
-
-                    <button className="All-response-section-View-response fw-light text-end  ">View Response</button>
+                  <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none ">
+                    <small className="fw-light px-4">click me</small>
 
                   </Link>
-                </div>
 
 
+                {/* </div> */}
               </div>
-            </div>
 
-          )
-        })}
+            )
+          })}
 
-      </div>
+        </div>
 
 
-      <div className=" text-center">
-        {/* Pagination controls start */}
-        <nav aria-label="Page navigation example">
-          <ul className="pagination justify-content-center">
-            <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-              <button className="page-link" onClick={handlePrevPage}>
-                <span aria-hidden="true">&laquo;</span>
-              </button>
-            </li>
-
-            {/* Dynamic page numbers */}
-
-            {Array.from({ length: totalPages }, (_, i) => (
-              <li
-                key={i + 1}
-                className={`page-item ${page === i + 1 ? "active" : ""}`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handlePageChange(i + 1)}
-                >
-                  {i + 1}
+        <div className=" text-center">
+          {/* Pagination controls start */}
+          <nav aria-label="Page navigation example">
+            <ul className="pagination justify-content-center">
+              <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
+                <button className="page-link" onClick={handlePrevPage}>
+                  <span aria-hidden="true">&laquo;</span>
                 </button>
               </li>
-            ))}
 
-            <li className={`page-item ${page === totalPages ? "disabled" : ""}`}>
-              <button className="page-link" onClick={handleNextPage}>
-                <span aria-hidden="true">&raquo;</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
+              {/* Dynamic page numbers */}
 
-        {/* Pagination controls end  */}
+              {Array.from({ length: totalPages }, (_, i) => (
+                <li
+                  key={i + 1}
+                  className={`page-item ${page === i + 1 ? "active" : ""}`}
+                >
+                  <button
+                    className="page-link"
+                    onClick={() => handlePageChange(i + 1)}
+                  >
+                    {i + 1}
+                  </button>
+                </li>
+              ))}
+
+              <li className={`page-item ${page === totalPages ? "disabled" : ""}`}>
+                <button className="page-link" onClick={handleNextPage}>
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Pagination controls end  */}
+
+        </div>
 
       </div>
-
-    </div >
-    }
-      
     </>
   )
 }

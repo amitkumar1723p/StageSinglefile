@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserContext } from "../CreateContext/CreateContext";
 import { useContext } from "react";
+import { Helmet } from "react-helmet";
 function OurService() {
   const [activeTab, setActiveTab] = useState("PropertyOwner");
 
@@ -23,6 +24,13 @@ function OurService() {
     const { setRedirectPath } =useContext(UserContext);
   return (
     <>
+    <Helmet>
+
+
+<title>Expert Support for Smooth Buying, Selling, and Renting</title>
+<meta name="description" content="Seamless real estate services in Gurgaon for buying, selling, and renting with expert support every step of the way."></meta>
+<link rel="canonical" href="https://propertydekho247.com/Our-Service/" />
+</Helmet>
       <header>
         <div className="hero-container">
           <div className="hero-img">
