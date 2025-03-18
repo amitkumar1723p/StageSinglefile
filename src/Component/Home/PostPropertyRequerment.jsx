@@ -8,12 +8,12 @@ const PostPropertyRequerment = ({ SetShow }) => {
   const dispatch = useDispatch();
   const [PostPropertyRequirementData, setPostPropertyRequirementData] =
     useState({
-      PropertyType:"",
+      PropertyType: "",
       ProjectName: "",
       BHKType: "",
       Budget: "",
       FloorPreference: "",
-      plotSize:""
+      plotSize: ""
     });
   const [unit, setUnit] = useState("Cr");
   const [plotUnit, setplotUnit] = useState("Sq.yard");
@@ -29,7 +29,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           BHKType: "",
           Budget: "",
           FloorPreference: "",
-          PlotSize:""
+          PlotSize: ""
         });
         setUnit("Cr");
         setStatus("");
@@ -42,74 +42,75 @@ const PostPropertyRequerment = ({ SetShow }) => {
     e.preventDefault();
     // Merge unit and PossessionStatus into the submission data
 
-    if( PostPropertyRequirementData.PropertyType !=="Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.ProjectName ||!PostPropertyRequirementData.BHKType||!PostPropertyRequirementData.FloorPreference||!PostPropertyRequirementData.Budget)){
+    if (PostPropertyRequirementData.PropertyType !== "Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.ProjectName || !PostPropertyRequirementData.BHKType || !PostPropertyRequirementData.FloorPreference || !PostPropertyRequirementData.Budget)) {
       alert("please fill all data")
-      return ;
+      return;
     }
-    if( PostPropertyRequirementData.PropertyType ==="Plot" && (!PostPropertyRequirementData.PropertyType ||!PostPropertyRequirementData.plotSize||!PostPropertyRequirementData.Budget)){
+    if (PostPropertyRequirementData.PropertyType === "Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.plotSize || !PostPropertyRequirementData.Budget)) {
       console.log(PostPropertyRequirementData)
       alert("please fill all data")
-      return ;
+      return;
     }
-    let dataToSubmit ;
-    
-    if(PostPropertyRequirementData.plotSize!==""){
-      dataToSubmit={
-      ...PostPropertyRequirementData,
-      unit,
-      PossessionStatus: status,
-    plotUnit
-    };}else{
-      dataToSubmit={
+    let dataToSubmit;
+
+    if (PostPropertyRequirementData.plotSize !== "") {
+      dataToSubmit = {
         ...PostPropertyRequirementData,
         unit,
         PossessionStatus: status,
-    
+        plotUnit
+      };
+    } else {
+      dataToSubmit = {
+        ...PostPropertyRequirementData,
+        unit,
+        PossessionStatus: status,
+
       };
     }
-    
+
 
     dispatch(PostPropertyRequirementAction(dataToSubmit));
   };
 
   const [propertyTypeAlert, setPropertyTypeAlert] = useState(false);
-  const [locationAlert,setLocationAlert] = useState({});
-  const [bhkType,setBhkType]  = useState(false);
+  const [locationAlert, setLocationAlert] = useState({});
+  const [bhkType, setBhkType] = useState(false);
   const [floorPrefAlert, setFloorPrefAlert] = useState(false);
   const [budgetAlert, setBudgetAlert] = useState(false);
 
 
 
-  const HandleRequirementAlert = ()=>{
-  //   if(!PostPropertyRequirementData.PropertyType){
-  //     setPropertyTypeAlert(true);
-  //     setTimeout(()=>setPropertyTypeAlert(false),1400)
-  //     return;
-  //   }
-  //   // if(!ProjectNameObjectData.ProjectName){
-  //   //   setLocationAlert({ProjectName:true})
-  //   //   setTimeout(() => {
-  //   //     setLocationAlert({ProjectName:false})
-  //   //   }, 1400);
-  //   // }
+  const HandleRequirementAlert = () => {
+    //   if(!PostPropertyRequirementData.PropertyType){
+    //     setPropertyTypeAlert(true);
+    //     setTimeout(()=>setPropertyTypeAlert(false),1400)
+    //     return;
+    //   }
+    //   // if(!ProjectNameObjectData.ProjectName){
+    //   //   setLocationAlert({ProjectName:true})
+    //   //   setTimeout(() => {
+    //   //     setLocationAlert({ProjectName:false})
+    //   //   }, 1400);
+    //   // }
 
 
-  //   if(!PostPropertyRequirementData.BHKType){
-  //     // setBhkType(true);
-  //     // setTimeout(()=>setBhkType(false),1400);
-  //     return;
-  //   }
-  //   if(!PostPropertyRequerment.FloorPreference){
+    //   if(!PostPropertyRequirementData.BHKType){
+    //     // setBhkType(true);
+    //     // setTimeout(()=>setBhkType(false),1400);
+    //     return;
+    //   }
+    //   if(!PostPropertyRequerment.FloorPreference){
 
-  //     return;
-  //   }
+    //     return;
+    //   }
 
-  //   if(PostPropertyRequirementData.Budget === ""){
-  //     console.log("console.consloe")
-  //     setBudgetAlert(true);
-  //     setTimeout(()=> setBudgetAlert(false),1400)
-  //     return;
-  //   }
+    //   if(PostPropertyRequirementData.Budget === ""){
+    //     console.log("console.consloe")
+    //     setBudgetAlert(true);
+    //     setTimeout(()=> setBudgetAlert(false),1400)
+    //     return;
+    //   }
 
   }
 
@@ -129,7 +130,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           onSubmit={CreateQuerryFormHandler}
         >
           <div className="property-form-type">
-             <div className="form-group form-bhk">
+            <div className="form-group form-bhk">
               <p className="postreq-form " >Property type</p>
               <select
                 className={`form-input`}
@@ -146,12 +147,12 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 <option value="Appartment">Appartment</option>
                 <option value="Builder Floor">Builder Floor</option>
                 <option value="Plot">Plot/Land</option>
-                
+
               </select>
             </div>
-            </div>
+          </div>
           <div className="property-form-details-top">
-          {/* style={{ width: PostPropertyRequirementData.PropertyType !== "Plot" ? '220px' : '100%' }} */}
+            {/* style={{ width: PostPropertyRequirementData.PropertyType !== "Plot" ? '220px' : '100%' }} */}
             <div className='form-group post-prop-form-group'>
               <p className="postreq-form ">Locality</p>
               <ProjectNameSection
@@ -159,86 +160,86 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 ProjectNameObjectData={PostPropertyRequirementData}
                 setProjectNameObjectData={setPostPropertyRequirementData}
                 placeholder={"Search by locality, project name"}
-                locationAlert = {locationAlert}
+                locationAlert={locationAlert}
               />
             </div>
 
-           {PostPropertyRequirementData.PropertyType !== "Plot" && <>
-            <div className="form-group form-bhk">
-              <p className="postreq-form " >BHK Type</p>
-              <select
-                className={`form-input `}
-                required
-                value={PostPropertyRequirementData.BHKType.trimStart()}
-                onChange={(e) =>
-                  setPostPropertyRequirementData({
-                    ...PostPropertyRequirementData,
-                    BHKType: e.target.value,
-                  })
-                }
-              >
-                <option value="">Select BHK Type</option>
-                <option value="1">1 BHK</option>
-                <option value="2">2 BHK</option>
-                <option value="3">3 BHK</option>
-                <option value="4">4 BHK</option>
-                <option value="5">5 BHK</option>
-              </select>
-            </div>
+            {PostPropertyRequirementData.PropertyType !== "Plot" && <>
+              <div className="form-group form-bhk">
+                <p className="postreq-form " >BHK Type</p>
+                <select
+                  className={`form-input `}
+                  required
+                  value={PostPropertyRequirementData.BHKType.trimStart()}
+                  onChange={(e) =>
+                    setPostPropertyRequirementData({
+                      ...PostPropertyRequirementData,
+                      BHKType: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">Select BHK Type</option>
+                  <option value="1">1 BHK</option>
+                  <option value="2">2 BHK</option>
+                  <option value="3">3 BHK</option>
+                  <option value="4">4 BHK</option>
+                  <option value="5">5 BHK</option>
+                </select>
+              </div>
 
-            <div className="form-group form-floor">
-              <p className="postreq-form "> Floor Preference</p>
-              <select
-                required
-                className={`form-input post-prop-floor  ${floorPrefAlert? "shake inputShake ":''}`}
-                onChange={(e) =>
-                  setPostPropertyRequirementData({
-                    ...PostPropertyRequirementData,
-                    FloorPreference: e.target.value,
-                  })
-                }
-              >
-                <option value="">Floor Preference</option>
-                <option value="ground">Ground Floor</option>
-                <option value="mid">Mid Floor</option>
-                <option value="high">High Floor</option>
-              </select>
-            </div>
-           </>  
+              <div className="form-group form-floor">
+                <p className="postreq-form "> Floor Preference</p>
+                <select
+                  required
+                  className={`form-input post-prop-floor  ${floorPrefAlert ? "shake inputShake " : ''}`}
+                  onChange={(e) =>
+                    setPostPropertyRequirementData({
+                      ...PostPropertyRequirementData,
+                      FloorPreference: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">Floor Preference</option>
+                  <option value="ground">Ground Floor</option>
+                  <option value="mid">Mid Floor</option>
+                  <option value="high">High Floor</option>
+                </select>
+              </div>
+            </>
 
-           }
-            {PostPropertyRequirementData.PropertyType==="Plot" && 
-             <div className="form-group form-budget">
-             <div className="budget-container">
-               <p className="postreq-form ">Plot size</p>
-               <input
-                 required
-                 value={PostPropertyRequirementData.plotSize}
-                 onChange={(e) => {
-                   // Allow numbers and one decimal point only
-                   let value = e.target.value;
-               console.log(value)
-                   setPostPropertyRequirementData({
-                     ...PostPropertyRequirementData,
-                     plotSize: value,
-                   });
-                 }}
-                 type="text"
-                 placeholder="Enter your Budget"
-                 className="form-input"
-               />
-             </div>
+            }
+            {PostPropertyRequirementData.PropertyType === "Plot" &&
+              <div className="form-group form-budget">
+                <div className="budget-container">
+                  <p className="postreq-form ">Plot size</p>
+                  <input
+                    required
+                    value={PostPropertyRequirementData.plotSize}
+                    onChange={(e) => {
+                      // Allow numbers and one decimal point only
+                      let value = e.target.value;
+                      console.log(value)
+                      setPostPropertyRequirementData({
+                        ...PostPropertyRequirementData,
+                        plotSize: value,
+                      });
+                    }}
+                    type="text"
+                    placeholder="Enter your Budget"
+                    className="form-input"
+                  />
+                </div>
 
-             <div className="form-budget-option">
-               <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
-                 <option value="Sqft">Sqft</option>
-                 <option value="Sqrd">Sq.yrd</option>
-               </select>
-             </div>
-           </div>
-        }
-           
-     
+                <div className="form-budget-option">
+                  <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
+                    <option value="Sqft">Sqft</option>
+                    <option value="Sqrd">Sq.yrd</option>
+                  </select>
+                </div>
+              </div>
+            }
+
+
           </div>
 
           <div className="property-form-details-bottom">
@@ -277,71 +278,42 @@ const PostPropertyRequerment = ({ SetShow }) => {
               </div>
             </div>
 
-          {
-            PostPropertyRequirementData.PropertyType !=="Plot" && 
+            {
+              PostPropertyRequirementData.PropertyType !== "Plot" &&
               <div className="possession-status">
-              <p className="possession-status-title">Possession Status</p>
-              <div className="radio-group">
-                <label>
-                  <input
-                    type="radio"
-                    name="possession"
-                    value="Ready to Move"
-                    checked={status === "Ready to Move"}
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                  Ready to Move
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="possession"
-                    value="Under Construction"
-                    checked={status === "Under Construction"}
-                    onChange={(e) => setStatus(e.target.value)}
-                  />
-                  Under Construction
-                </label>
+                <p className="possession-status-title">Possession Status</p>
+                <div className="radio-group">
+                  <label>
+                    <input
+                      type="radio"
+                      name="possession"
+                      value="Ready to Move"
+                      checked={status === "Ready to Move"}
+                      onChange={(e) => setStatus(e.target.value)}
+                    />
+                    Ready to Move
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="possession"
+                      value="Under Construction"
+                      checked={status === "Under Construction"}
+                      onChange={(e) => setStatus(e.target.value)}
+                    />
+                    Under Construction
+                  </label>
+                </div>
               </div>
-            </div>
-          }
-             {PostPropertyRequirementData.PropertyType==="Plot" && 
-             <div className="form-group form-budget">
-             <div className="budget-container">
-               <p className="postreq-form ">Plot size</p>
-               <input
-                 required
-                 value={PostPropertyRequirementData.plotSize}
-                 onChange={(e) => {
-                   // Allow numbers and one decimal point only
-                   let value = e.target.value;
-               console.log(value)
-                   setPostPropertyRequirementData({
-                     ...PostPropertyRequirementData,
-                     plotSize: value,
-                   });
-                 }}
-                 type="text"
-                 placeholder="Enter your Budget"
-                 className="form-input"
-               />
-             </div>
-
-             <div className="form-budget-option">
-               <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
-               
-                 <option value="Sqrd">Sq.yrd</option>
-               </select>
-             </div>
-           </div>
-        }
+            }
+           
 
             <div className="form-group">
               <button
                 disabled={loading ? true : false}
                 type="submit"
                 className="form-submit-btn"
-                onClick={ HandleRequirementAlert}
+                onClick={HandleRequirementAlert}
               >
                 Submit
               </button>
@@ -352,8 +324,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
       <div
         className="cross-Btn"
         onClick={() => {
-          SetShow(false); 
-         
+          SetShow(false);
+
         }}
       >
         X

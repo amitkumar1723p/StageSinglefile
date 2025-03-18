@@ -268,8 +268,8 @@ const HeroSection = () => {
               Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
-              India's 1st online proptech platform that delivers real-time price
-              alerts to property owners.
+              India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
+              alerts</span>  to property owners.
             </p>
           </div>
           {/* nav bar search button  */}

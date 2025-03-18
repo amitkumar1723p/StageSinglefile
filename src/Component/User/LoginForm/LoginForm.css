@@ -187,10 +187,7 @@ text-decoration: underline;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
-.login-form-alert{
-  /* outline: 1px solid black; */
-  height: 10px;
-}
+
 
 .login-continue-login {
   width: 100%;
@@ -263,4 +260,16 @@ line-height: normal;
     border-left: none;
     border-top: 1px solid #f0f0f0;
   }
+}
+
+@media (max-width: 480px) {
+  .login-form-main {
+   
+   
+    margin: 0 auto;
+  }
+
+ 
+
+  
 }

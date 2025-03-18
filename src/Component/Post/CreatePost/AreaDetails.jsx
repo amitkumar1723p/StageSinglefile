@@ -1,4 +1,9 @@
-import React, { useEffect,useImperativeHandle, forwardRef, useState  } from "react";
+import React, {
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+  useState,
+} from "react";
 
 export default function AreaDetailsSection({
   AreaDetailsData,
@@ -25,7 +30,11 @@ export default function AreaDetailsSection({
         }));
       }, 0);
     }
-    if (["Independent House/Villa" ,"Independent/Builder Floor"].includes(BasicDetailsData.ApartmentType)) {
+    if (
+      ["Independent House/Villa", "Independent/Builder Floor"].includes(
+        BasicDetailsData.ApartmentType
+      )
+    ) {
       setTimeout(() => {
         setAreaDetailsData((prevData) => ({
           ...prevData,
@@ -47,15 +56,13 @@ export default function AreaDetailsSection({
     }
   }, [BasicDetailsData.ApartmentType]);
 
+  //  const [amit ,setamit ] =useState(false)
 
-//  const [amit ,setamit ] =useState(false)
-
-//   const HandleAreaDerailsAlert=()=>{
-//     if(!AreaDetailsData.PlotSize){
-//       setamit(true)
-//     }
-//   }
-
+  //   const HandleAreaDerailsAlert=()=>{
+  //     if(!AreaDetailsData.PlotSize){
+  //       setamit(true)
+  //     }
+  //   }
 
   return (
     <>
@@ -63,17 +70,21 @@ export default function AreaDetailsSection({
         Area Details <small>(At least one area type is mandatory.) </small>{" "}
       </p>
 
+  { console.log(AreaDetailsData)}
       {/* Plot Area  */}
 
       {BasicDetailsData.ApartmentType === "Plot/Land" && (
         <>
           <div className="form-group">
-          {/* <p> {Error.PlotSize && "Plot Area Error"}</p> */}
+            {/* <p> {Error.PlotSize && "Plot Area Error"}</p> */}
             <label htmlFor="plotSize">Plot Size*</label>
-             
-            <div className={`unit-input  ${Error.PlotSize? 'inputShake shake' : ''}`}>
+
+            <div
+              className={`unit-input  ${
+                Error.PlotSize ? "inputShake shake" : ""
+              }`}
+            >
               <input
-              
                 type="text"
                 id="plotSize"
                 name="plotSize"
@@ -104,35 +115,58 @@ export default function AreaDetailsSection({
             </div>
           </div>
           <div className="form-group ">
-           
-          {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
+            {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
             <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
-            <input
 
-            className={`${Error.PlotDimensions? 'inputShake shake' : ''}`}
-              id="plot-dimensions"
-              required
-              value={AreaDetailsData.PlotDimensions?.trimStart() || ""}
-              onChange={(e) => {
-                setAreaDetailsData({
-                  ...AreaDetailsData,
-                  PlotDimensions: e.target.value,
-                });
-              }}
-            />
+            <div className="d-flex align-items-center">
+              {/* Length  */}
+              <input
+                placeholder="Length"
+                className={`${Error.PlotDimensions ? "inputShake shake" : ""}`}
+                id="plot-dimensions"
+                required
+                value={AreaDetailsData?.PlotDimensions?.Length?.trimStart() || ""}
+                onChange={(e) => {
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    PlotDimensions: {...AreaDetailsData.PlotDimensions ,Length : e.target.value},
+                  });
+                }}
+              />
+              <span className="p-1">X</span>
+              {/* Breadth  */}
+              <input
+                className={`${Error.PlotDimensions ? "inputShake shake" : ""}`}
+                id="plot-dimensions"
+                required
+                placeholder="Breadth"
+                value={AreaDetailsData?.PlotDimensions?.Breadth?.trimStart() || ""}
+                onChange={(e) => {
+                  setAreaDetailsData({
+                    ...AreaDetailsData,
+                    PlotDimensions: {...AreaDetailsData.PlotDimensions ,Breadth : e.target.value},
+                  });
+                }}
+              />
+            </div>
           </div>
         </>
       )}
 
-      { ["Independent House/Villa","Independent/Builder Floor"].includes(BasicDetailsData.ApartmentType) && (
+      {["Independent House/Villa", "Independent/Builder Floor"].includes(
+        BasicDetailsData.ApartmentType
+      ) && (
         <>
           {/* plot area  */}
 
           <div className="form-group">
             <label htmlFor="plotArea">Plot Area*</label>
-            <div className={`unit-input ${Error.PlotArea? "inputShake shake":''}`}>
+            <div
+              className={`unit-input ${
+                Error.PlotArea ? "inputShake shake" : ""
+              }`}
+            >
               <input
-             
                 type="text"
                 id="plotArea"
                 name="plotArea"
@@ -178,10 +212,12 @@ export default function AreaDetailsSection({
           {/* Super Built Up Area* */}
           <div className="form-group">
             <label htmlFor="super-built-up-area"> Super Built Up Area* </label>
-            <div className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
+            <div
+              className={`unit-input ${
+                Error.AreaDetailData ? "inputShake shake" : ""
+              }`}
+            >
               <input
-               
-
                 type="text"
                 id="super-built-up-area"
                 placeholder="Built Up Area"
@@ -215,7 +251,11 @@ export default function AreaDetailsSection({
           {/* Built Up Area */}
           <div className="form-group">
             <label htmlFor="built-up-area">Built Up Area</label>
-            <div   className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
+            <div
+              className={`unit-input ${
+                Error.AreaDetailData ? "inputShake shake" : ""
+              }`}
+            >
               <input
                 type="text"
                 id="built-up-area"
@@ -254,7 +294,11 @@ export default function AreaDetailsSection({
           {/* Carpet Area  */}
           <div className="form-group">
             <label htmlFor="carpetArea">Carpet Area</label>
-            <div  className={`unit-input ${Error.AreaDetailData? 'inputShake shake' : ''}`}>
+            <div
+              className={`unit-input ${
+                Error.AreaDetailData ? "inputShake shake" : ""
+              }`}
+            >
               <input
                 type="text"
                 id="carpetArea"
@@ -293,8 +337,6 @@ export default function AreaDetailsSection({
               </div>
             )}
           </div>
-
-           
         </>
       )}
     </>

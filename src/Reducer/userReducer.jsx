@@ -424,8 +424,7 @@ export const getTransactionDetailReducer=(state={},action)=>{
       return {
         ...state,
         loading: true,
-      };
-
+      }
     case"getTransactionDetailSuccess":
     return {
       ...state,
@@ -442,6 +441,72 @@ export const getTransactionDetailReducer=(state={},action)=>{
     };
 
     case"getTransactionDetailFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}
+
+
+// Get All user with property data if they posted 
+export const getAllUserResponseActionReducer=(state={},action)=>{
+  switch(action.type){
+    case "AllUserResponseActionRequest":
+      return {
+        ...state,
+        loading: true,
+      }
+    case"AllUserResponseActionSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"AllUserResponseActionFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"AllUserResponseActionFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}
+
+
+// Get All user with property data if they posted 
+export const getSingleUserResponseActionReducer=(state={},action)=>{
+  switch(action.type){
+    case "SingleUserResponseActionRequest":
+      return {
+        ...state,
+        loading: true,
+      }
+    case"SingleUserResponseActionSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"SingleUserResponseActionFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"SingleUserResponseActionFailClear":
 return{}
     default:
       return{

@@ -8,55 +8,70 @@ const PostFreeContainer = () => {
     return state.meDetails;
   });
   return (
-    <div className="property-list-container">
-    <div className="property-list">
-    <div className="property-list-left">
-        <img
-          alt="landlord-img"
-          src="/img/postfreepost.svg"
-        />
-      </div>
-      <div className="property-list-right">
-      <div className="property-list-heading-container">
-      <h2 className="property-list-heading">List Your Property with PropertyDekho247</h2>
-
-
-       {/* <p className="post-free-description">
-            Typically, when an owner seeks to sell their property, they rely on
-            various stakeholders or property listing portals. However, due to
-            limited options or a lack of market insight, sellers often struggle
-            to achieve the best price. Our technology platform simplifies and
-            enhances the selling process, ensuring sellers achieve the best
-            price through direct buyer offers.
-          </p> */}
-      <p >PropertyDekho247.com India's 1st Online Reselling platform with 100% transparency</p>
-      </div>
-        
-        <ul className="property-list-content">
-            <li><span>&#x2713;</span> 100% Verified Buyer’s</li>
-            <li> <span>&#x2713;</span> A real-time alert for scheduling a
-            property visit’s</li>
-            <li> <span>&#x2713;</span> Real time notification of Price offer by
-            buyer's</li>
-            <li><span>&#x2713;</span> Sell Property at highest price offer
-            </li>
-        </ul>
-        <button
-            className="property-list-button"
-            onClick={() => {
-              if (medata && medata.IsAuthenticated === true) {
-                navigate("/user/post");
-              } else {
-                navigate("/login");
-              }
-            }}
-          >
-            Get Started !
-          </button>
-      </div>
-    </div>
-      
-    </div>
+    <div className="home-banner-container">
+            <div className="home-banner-content">
+              <div className="home-banner-text">
+                <h2 className="home-banner-title">
+                  LIST YOUR PROPERTY{" "}
+                  <span className="home-banner-span">WITH</span>
+                </h2>
+                <h3 className="home-banner-subtitle">PROPERTYDEKHO247</h3>
+                <p className="home-banner-description">
+                  India's 1st online proptech platform that delivers real-time
+                  price alerts to property owners.
+                </p>
+                <ul className="home-banner-list">
+                  <li className="home-banner-list-item">
+                    <img
+                       src="/img/TickIconBuyer.svg"
+                      alt="TickIconBuyer"
+                      className="home-banner-icon"
+                    />
+                    <span>100% Verified Buyers</span>
+                  </li>
+                  <li className="home-banner-list-item">
+                    <img
+                        src="/img/TickIconBuyer.svg"
+                      alt="TickIconBuyer"
+                      srcset=""
+                      className="home-banner-icon"
+                    />
+                    <span>
+                      A real-time alert for scheduling a property visit's
+                    </span>
+                  </li>
+                  <li className="home-banner-list-item">
+                    <img
+                       src="/img/TickIconBuyer.svg"
+                      alt="TickIconBuyer"
+                      className="home-banner-icon"
+                    />
+                    <span>
+                      Real time notification of Price offer by buyer's
+                    </span>
+                  </li>
+                  <li className="home-banner-list-item">
+                    <img
+                      src="/img/TickIconBuyer.svg"
+                      alt="TickIconBuyer"
+                    
+                      className="home-banner-icon"
+                    />
+                    <span>Sell Property at highest price offer</span>
+                  </li>
+                </ul>
+                <button className="home-banner-button">GET STARTED NOW</button>
+              </div>
+              <div className="home-banner-image">
+                <img
+                  src="./img/ListYourProp.png"
+                  alt="Illustration of people shaking hands in front of a house"
+                  className="home-banner-img"
+                />
+              </div>
+            </div>
+          </div>
   );
 };
 export default PostFreeContainer;
+

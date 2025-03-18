@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import Alert from "./Component/Alert/Alert";
 import Profile from "./Component/User/Profile/Profile";
 import ProtectedRoutes from "./Component/ProtectedRoutes";
@@ -68,9 +68,16 @@ import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
 import Search from "./Component/Home/Search";
-
+import AllUserResponseAction from "./Component/Admin/AllUserResponseAction";
+import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseAction";
+// import MyVisits from "./Component/Post/CreatePost/m";
+ import { FormatDate } from "./utils/CommonFunction";
 
 function App() {
+
+  //  console.log(FormatDate("2025-02-20T06:48:35.238+00:00"))
+    
+   
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
   const dispatch = useDispatch();
@@ -179,6 +186,14 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
   return state.AdminAllExcelFiles;
 });
  
+// All user response action
+const { data: AllUserResponseAction_Store } = useSelector((state) => {
+  return state.AllUserResponseAction_Store;
+});
+// single user response action
+const { data: SingleUserResponseAction_Store } = useSelector((state) => {
+  return state.SingleUserResponseAction_Store;
+});
     
   const location = useLocation();
 
@@ -591,6 +606,40 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
+// All user response action
+  useEffect(() => {
+    if (AllUserResponseAction_Store) {
+      if (AllUserResponseAction_Store.success === false) {
+        if (AllUserResponseAction_Store.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{AllUserResponseAction_Store.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "SimilarPropertyClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [AllUserResponseAction_Store]);
+
+// single user response action
+useEffect(() => {
+  if (SingleUserResponseAction_Store) {
+    if (SingleUserResponseAction_Store.success === false) {
+      if (SingleUserResponseAction_Store.IsAuthenticated === false) {
+        navigate("/");
+      }
+      setalertMessage(<p>{SingleUserResponseAction_Store.message}</p>);
+      setalertType("error");
+      setalertShow(true);
+
+      dispatch({ type: "SimilarPropertyClear" });
+    }
+  }
+  // eslint-disable-next-line
+}, [SingleUserResponseAction_Store]);
+
     // search property
     useEffect(() => {
       if (serachResponse) {
@@ -919,6 +968,7 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
               <AdminOwnerRoutes Component={OwnerAgentExcelData} isOwner={true} />
             }
           />
+
              <Route
             
             path="all-excel-both"
@@ -931,6 +981,20 @@ const { data: AdminAllExcelFilesData } = useSelector((state) => {
             path="excel/:id"
             element={
               <AdminOwnerRoutes Component={OwnerAgentExcel} />
+            }
+          />
+             <Route
+            exact
+            path="all-user-Response-action"
+            element={
+              <AdminOwnerRoutes Component={AllUserResponseAction} isOwner={true} />
+            }
+          />
+                  <Route
+            exact
+            path="single-user-Response-action/:id"
+            element={
+              <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
             }
           />
           {/* <Route

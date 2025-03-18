@@ -287,7 +287,7 @@ export default function CreatePostImageUpload({
                 id=""
                 multiple
                 accept=".jpg,.jpeg,.png,.webp,.avif"
-                // required={update && previewImage.length === 0 ? true : false}
+                  required={update && previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 

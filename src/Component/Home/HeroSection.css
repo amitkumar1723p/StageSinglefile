@@ -1,13 +1,21 @@
 .sub-heading {
-  display: inline-flex;
+  /* display: inline-flex; */
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   border-radius: 5px;
   background: #1877f2;
   margin: 10px 0px 10px 0px;
 }
+
+.hero-span-main-line{
+color: #f8ef3c;
+text-transform: uppercase;
+font-weight: 600;
+}
+
+
 
 .logo-nav-bar {
   align-items: end;
@@ -841,7 +849,7 @@
   }
 
   .requirement-img {
-    width: 252px;
+    width: 160px;
     height: 161px;
     margin: 22px 0px 0px 0px;
   }
@@ -979,7 +987,7 @@
   }
 
   .search-button-mob {
-    display: flex;
+    display: none;
     gap: 5px;
     align-items: center;
 

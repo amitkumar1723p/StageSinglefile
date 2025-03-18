@@ -1093,7 +1093,7 @@ export const UserRoleUpdation = (updateData) => {
 };
 
 export const getTransactionDetailAction=()=>{
-  console.log("jg")
+
   return async (dispatch) => {
     try {
       dispatch({ type: "getTransactionDetailRequest" });
@@ -1153,3 +1153,71 @@ export const deleteExcelFile = (excelId) => {
 // if (medata.user.Role === "Owner") {
 //   dispatch(fetchAllOwnerFiles());
 // }
+// for
+// Get All user with property data if they posted 
+export const getAllUserResponseAction=(page)=>{
+  // console.log("sdkhgjseh")
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "AllUserResponseActionRequest",
+        payload: "AllUserResponseActionRequest",
+      });
+      const url = `${api_Base_Url}/admin-owner/allUserAction?page=${page}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.get(url, config);
+      dispatch({ type: "AllUserResponseActionSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "AllUserResponseActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "AllUserResponseActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+}
+
+export const getSingleUserResponseAction=(id)=>{
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: "SingleUserResponseActionRequest",
+        payload: "SingleUserResponseActionRequest",
+      });
+      console.log(
+        id
+      )
+      const url = `${api_Base_Url}/admin-owner/getSingleUser/${id}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
+      const { data } = await axios.get(url, config);
+      console.log(data)
+      dispatch({ type: "SingleUserResponseActionSuccess", payload: data });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "SingleUserResponseActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "SingleUserResponseActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  };
+}
