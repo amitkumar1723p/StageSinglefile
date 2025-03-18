@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import "./AllUserResponseAction.css"
 import { getSingleUserResponseAction } from "../../Action/userAction";
 export default function SingleUserRespponseAction() {
     const dispatch = useDispatch()
@@ -8,7 +9,7 @@ export default function SingleUserRespponseAction() {
 
     const [activeTable, setActiveTable] = useState(1);
     // single user response action
-    const { data: SingleUserResponseAction_Store } = useSelector((state) => {
+    const { data: SingleUserResponseAction_Store, loading } = useSelector((state) => {
         return state.SingleUserResponseAction_Store;
     });
 
@@ -20,6 +21,8 @@ export default function SingleUserRespponseAction() {
         month: 'short',
         year: 'numeric',
     });
+    console.log(loading
+    )
 
     return (
         <div className="border border-primary border-opacity-25 ">
@@ -36,9 +39,11 @@ export default function SingleUserRespponseAction() {
             </div>
             <div className="px-3">
                 <div className="d-flex  mt-3  singleUser_mainbtn" >
-                    <div className="col-3 text-center py-3 " ><small className={activeTable === 1 ? 'border-bottom user-select-none' : ' activebtn  border-bottom user-select-none'} onClick={() => setActiveTable(1)}>View All Scheduled Visits({SingleUserResponseAction_Store?.schedules?.length})</small></div>
-                    <div className="col-3 text-center py-3"><small className={activeTable === 2 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(2)}>View All Offers Made({SingleUserResponseAction_Store?.offers?.length})</small></div>
-                    <div className="col-3 text-center py-3"><small className={activeTable === 3 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(3)}>All Post Property({SingleUserResponseAction_Store?.posts?.length})</small></div>
+                    <div className="col-3 text-center py-3 " ><small className={activeTable === 1 ? 'btn-inactive-home  user-select-none cursor-pointer' : ' btn-active-home activebtn   user-select-none cursor-pointer'} onClick={() => setActiveTable(1)}>View All Scheduled Visits({SingleUserResponseAction_Store?.schedules?.length})</small></div>
+
+                    <div className="col-3 text-center py-3"><small className={activeTable === 2 ? '  user-select-none cursor-pointer btn-inactive-home' : ' btn-active-home cursor-pointer activebtn  user-select-none '} onClick={() => setActiveTable(2)}>View All Offers Made({SingleUserResponseAction_Store?.offers?.length})</small></div>
+
+                    <div className=" col-3 text-center py-3"><small className={activeTable === 3 ? '  user-select-none cursor-pointer btn-inactive-home' : ' btn-active-home cursor-pointer activebtn  user-select-none'} onClick={() => setActiveTable(3)}>All Post Property({SingleUserResponseAction_Store?.posts?.length})</small></div>
                 </div>
             </div>
             {
@@ -47,10 +52,10 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Post Id</th>
-                                <th scope="col">VisitDate</th>
-                                <th scope="col">VisitStatusData</th>
-                                <th scope="col">VisitTime</th>
+                                <th scope="col">Post ID</th>
+                                <th scope="col">Visit Date</th>
+                                <th scope="col">Visit Status Data</th>
+                                <th scope="col">Visit Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,6 +64,7 @@ export default function SingleUserRespponseAction() {
 
 
                                     <td
+                                        className="cursor-pointer"
                                         onClick={(e) => {
                                             window.open(`/post-detail/${item?.PostData?.PostId}`, 'SinglePostDetail');
                                         }}
@@ -66,7 +72,7 @@ export default function SingleUserRespponseAction() {
                                         {item?.PostData?.PostId}
                                     </td>
                                     <td>{item?.VisitDate ? dateTimeFormatter.format(new Date(item?.VisitDate)) : 'N/A'}</td>
-                                    <td>{item?.VisitStatusData?.Status}</td>
+                                    <td>{item?.PostVerify}</td>
                                     <td>{item?.VisitTime?.From}-{item?.VisitTime?.To}</td>
                                 </tr>)
                             })}
@@ -83,10 +89,10 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Post Id</th>
-                                <th scope="col">BidPrice</th>
+                                <th scope="col">Post ID</th>
+                                <th scope="col">Bid Price</th>
 
-                                <th scope="col">VisitTime</th>
+                                <th scope="col">Project Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,9 +100,11 @@ export default function SingleUserRespponseAction() {
                                 return (<tr>
 
 
-                                    <td onClick={(e) => {
-                                        window.open(`/post-detail/${item?.PostData?.PostId}`, 'SinglePostDetail2')
-                                    }}
+                                    <td
+                                        className="cursor-pointer"
+                                        onClick={(e) => {
+                                            window.open(`/post-detail/${item?.PostData?.PostId}`, 'SinglePostDetail2')
+                                        }}
                                     >{item?.PostData?.PostId}</td>
 
                                     {item?.BidPrice?.toString().length == 8 ? <td>{item?.BidPrice / 10000000} Cr</td> : item?.BidPrice?.toString().length == 7 ? <td>{item?.BidPrice / 1000000} Lakh</td> : item?.BidPrice?.toString().length == 6 ? <td>{item?.BidPrice / 100000} lakh</td> : null}
@@ -117,10 +125,12 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Post Id</th>
-                                <th scope="col">BidPrice</th>
-                                <th scope="col">New</th>
-                                <th scope="col">VisitTime</th>
+                                <th scope="col">Post ID</th>
+                                <th scope="col">Post Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Property Type</th>
+
+                                <th scope="col">Project</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -128,9 +138,11 @@ export default function SingleUserRespponseAction() {
                                 return (<tr>
 
 
-                                    <td onClick={(e) => {
-                                        window.open(`/post-detail/${item?._id}`, 'SinglePostDetail3')
-                                    }}
+                                    <td
+                                        className="cursor-pointer"
+                                        onClick={(e) => {
+                                            window.open(`/post-detail/${item?._id}`, 'SinglePostDetail3')
+                                        }}
                                     >{item?._id}</td>
 
 
@@ -138,8 +150,9 @@ export default function SingleUserRespponseAction() {
 
                                     <td>{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</td>
 
-                                    <td>{item?.propertyStatus?.currentPropertyStatus}</td>
-                                    <td>{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</td>
+                                    <td>{item?.PostVerify == true ? "Active" : "Inactive"}</td>
+                                    <td>{item?.BasicDetails?.PropertyAdType}</td>
+                                    <td>{item?.LocationDetails?.ProjectName}, {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City}</td>
                                 </tr>)
                             })}
 

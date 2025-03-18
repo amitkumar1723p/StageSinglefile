@@ -44,6 +44,18 @@ function Sidebar() {
                 Profile
               </li>
             </NavLink>
+
+            <NavLink to="/user/post">
+              <li className="navItem mob-hide">
+                <img
+                  className=""
+                  src="/img/PostProperty.svg"
+                  alt="post property"
+                />
+                Post Property - Free
+              </li>
+            </NavLink> 
+
             <NavLink to="/user/my-listing ">
               <li
                 className={`navItem ${
@@ -70,16 +82,7 @@ function Sidebar() {
                 All Response
               </li>
             </NavLink>
-            <NavLink to="/user/post">
-              <li className="navItem mob-hide">
-                <img
-                  className=""
-                  src="/img/PostProperty.svg"
-                  alt="post property"
-                />
-                Post Property - Free
-              </li>
-            </NavLink>
+            
             <NavLink to="/user/favourite-post">
               <li
                 className={`navItem ${
@@ -92,7 +95,7 @@ function Sidebar() {
                 Shortlisted Property
               </li>
             </NavLink>
-            <NavLink to="/user/transactions">
+            {/* <NavLink to="/user/transactions">
               <li 
                className={`navItem mob-hide ${
                 location.pathname == "/user/transactions" ? "active-btn-nav" : ""
@@ -104,8 +107,8 @@ function Sidebar() {
                 />
                 Transactions
               </li>
-            </NavLink>
-            <NavLink to="/user/my-visits">
+            </NavLink> */}
+            {/* <NavLink to="/user/my-visits">
               <li
                 className={`navItem ${
                   location.pathname == "/user/my-visits" ? "active-btn-nav" : ""
@@ -114,7 +117,7 @@ function Sidebar() {
                 <img className="" src="/img/Admin.svg" alt="my-visits" />
                 Schedule Visit
               </li>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink to="#">
               <li className="navItem mob-hide">
