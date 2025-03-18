@@ -82,7 +82,7 @@ export default function LocationDetails({
               ProjectInputType={"PostForm"}
               ProjectNameObjectData={LocationDetailsData}
               setProjectNameObjectData={setLocationDetailsData}
-              placeholder={"Project Name"}
+              placeholder={"Project / Sector / Area Name"}
               inputClass ={"locationdetails-input"}
               locationAlert={locationAlert}
             />
@@ -95,7 +95,7 @@ export default function LocationDetails({
                 type="text"
                 id="street"
                 name="street"
-                placeholder="e.g. Evergreen street"
+                placeholder="e.g. Sector 65"
                 required
                 value={LocationDetailsData.Landmark?.trimStart() || ""}
                 onChange={(e) => {
@@ -115,6 +115,7 @@ export default function LocationDetails({
                 type="text"
                 id="city"
                 name="city"
+                placeholder="Enter City Name"
                 required
                 value={LocationDetailsData.City?.trimStart() || ""}
                 onChange={(e) => {
@@ -133,7 +134,7 @@ export default function LocationDetails({
                 type="text"
                 id="locality"
                 name="locality"
-                placeholder="Enter location / society name"
+                placeholder="e.g. New Gurgaon / SPR"
                 required
                 // readOnly={!LocationDetailsData.Locality?false:true}
                 // defaultValue={LocationDetailsData.Locality}

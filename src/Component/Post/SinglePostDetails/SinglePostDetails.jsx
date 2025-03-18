@@ -69,7 +69,7 @@ export default function SinglePostDetails() {
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
 
 
-  console.log(showOwnerDetailsForm, "j")
+
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
@@ -732,9 +732,8 @@ export default function SinglePostDetails() {
                                   {
                                     getSinglePostData?.SinglePost?.PricingDetails
                                       ?.PricePerSqYd
-                                  }
-                                  Per sq.yd
-                                </p>
+                                  } Per sq.yd
+        </p>
                               </>
                             ) : (
                               <>
@@ -743,8 +742,7 @@ export default function SinglePostDetails() {
                                   {
                                     getSinglePostData?.SinglePost?.PricingDetails
                                       ?.PricePerSqFt
-                                  }{" "}
-                                  Per sqft
+                                  } Per sqft
                                 </p>
                               </>
                             )}
