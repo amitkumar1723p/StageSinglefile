@@ -89,7 +89,7 @@ export default function AllRegistrationResponse({ }) {
       }
 
       // Set the filtered or full data
-      setTableData(filteredData); 
+      setTableData(filteredData);
     }
   }, [AllUserResponseData, viewfilterUser]);
 
@@ -251,13 +251,12 @@ export default function AllRegistrationResponse({ }) {
                               hour: "2-digit",
                               minute: "2-digit",
                               hour12: false,
-                            }).replace(",", "").replace(" ", "-").replace(":", "").replace(/(\d{2})(\d{2})/, `($1:$2)`)
+                            }).replace(",", "").replace(" ", "-").replace(":", "").replace(/(\d{2})(\d{2})$/, `($1:$2)`)
                             : "..."
                         }
-
-
                       </small>
                     </td>
+
                     <td className="text-light-emphasis border-end">
                       {item.Name ? (
                         <small>

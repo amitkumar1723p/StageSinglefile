@@ -23,18 +23,21 @@ const FutureAsist = () => {
           experience.
         </p>
         <div className="assistance-banner-actions">
-          <button
-            className="assistance-banner-button"
-            onClick={() => {
-              window.open(
-                "https://wa.me/7837840785?text=Hello%20propertydekho247%20team%2C%20I%20am%20interested%20in%20learning%20more%20about%20your%20properties.",
-                "_blank"
-              );
-            }}
-          >
-            <img className="icon-btn" src="/img/whatapp.png" alt="whatsapp" />
-            Whatsapp
-          </button>
+        <div className="assistance-banner-actions">
+  <button
+    className="assistance-banner-button"
+    onClick={() => {
+      window.open(
+        "https://wa.me/7837840785?text=%20Hi%20PropertyDekho247%20Team%2C%20I%20need%20further%20assistance%2C%20Kindly%20get%20in%20touch%20with%20me.",
+        "_blank"
+      );
+    }}
+  >
+    <img className="icon-btn" src="/img/whatapp.png" alt="whatsapp" />
+    Whatsapp
+  </button>
+</div>
+
 
           <span className="assistance-banner-or">Or</span>
           <span className="assistance-banner-phone">+91 783-784-0785</span>

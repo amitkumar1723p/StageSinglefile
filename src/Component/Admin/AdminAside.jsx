@@ -84,6 +84,23 @@ export default function AdminAside() {
               medata.user.Role === "Owner" &&
               medata.user.OwnerVerify && (
                 <>
+   <NavLink
+              to="/admin/all-user-Response-action"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              }
+            >
+              <img
+                src="/img/Dashboard.svg"
+                alt="Dashboard Icon"
+                className={`AdminAside-icon ${
+                  location.pathname === "/admin/all-user-Response-action" ? "active" : ""
+                }`}
+              />
+            All Response
+            </NavLink>
+
+
                   <NavLink
                     to="/admin/agent/dashboard?Role=Admin"
                     className={({ isActive }) =>
@@ -218,7 +235,7 @@ export default function AdminAside() {
             />
             All Post
           </NavLink> */}
-
+ 
             <button className="AdminAside-button">
               <img src="/img/Report.svg" className="AdminAside-icon" alt="" />
               Report
