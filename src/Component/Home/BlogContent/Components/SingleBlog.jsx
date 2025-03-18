@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from "react-markdown";
-
+import { Helmet } from "react-helmet";
 import "./SingleBlog.css";
 
 export default function SingleBlog() {
@@ -372,7 +372,14 @@ The real estate market in 2025 is expected to be dynamic, with strong growth in 
 
     if(singleblog){
         return(
+            
             <div className='single-blog-main-container'>
+
+<Helmet>
+<title>{singleblog.heading}</title>
+<meta name="description" content={`${singleblog.title}-${singleblog.heading}`}></meta>
+<link rel="canonical" href={`https://propertydekho247.com/blog-page/${title}`} />
+</Helmet>
         <div className='single-blog-container'>
             <div className='single-blog-image'>
                 

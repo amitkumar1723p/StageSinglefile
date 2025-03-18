@@ -58,7 +58,7 @@ export default function ShowLoginUserPost() {
         <title>My Listings - PropertyDekho247.com</title>
         <meta
           name="description"
-          content="Manage all your property listings in one place. View, edit, or remove your active posts and keep your listings up to date on PropertyDekho247.com."
+          content="Manage all your property listings in one place. View, edit, or remove posts and keep them up to date on PropertyDekho247.com."
         />
         <link rel="canonical" href="https://www.propertydekho247.com/user/my-listing/" />
       </Helmet>

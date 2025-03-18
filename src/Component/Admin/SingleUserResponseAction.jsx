@@ -34,11 +34,13 @@ export default function SingleUserRespponseAction() {
                     </ul>
                 </div>
             </div>
-            <div className="px-3">
+            <div className="px-0">
                 <div className="d-flex  mt-3  singleUser_mainbtn" >
-                    <div className="col-3 text-center py-3 " ><small className={activeTable === 1 ? 'border-bottom user-select-none' : ' activebtn  border-bottom user-select-none'} onClick={() => setActiveTable(1)}>View All Scheduled Visits({SingleUserResponseAction_Store?.schedules?.length})</small></div>
-                    <div className="col-3 text-center py-3"><small className={activeTable === 2 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(2)}>View All Offers Made({SingleUserResponseAction_Store?.offers?.length})</small></div>
-                    <div className="col-3 text-center py-3"><small className={activeTable === 3 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(3)}>All Post Property({SingleUserResponseAction_Store?.posts?.length})</small></div>
+                    <div className="col-2 text-center py-3 " ><small className={activeTable === 1 ? 'border-bottom user-select-none' : ' activebtn  border-bottom user-select-none'} onClick={() => setActiveTable(1)}>Scheduled Visits({SingleUserResponseAction_Store?.schedules?.length})</small></div>
+                    <div className="col-2 text-center py-3"><small className={activeTable === 2 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(2)}> Offers Made({SingleUserResponseAction_Store?.offers?.length})</small></div>
+                    <div className="col-2 text-center py-3"><small className={activeTable === 3 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(3)}>Post Property({SingleUserResponseAction_Store?.posts?.length})</small></div>
+                    <div className="col-2 text-center py-3"><small className={activeTable === 4 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(4)}>Notify ({SingleUserResponseAction_Store?.notifyData?.length})</small></div>
+                    <div className="col-2 text-center py-3"><small className={activeTable === 5 ? ' border-bottom user-select-none' : ' activebtn border-bottom user-select-none'} onClick={() => setActiveTable(5)}>Requirement({SingleUserResponseAction_Store?.requireData?.length})</small></div>
                 </div>
             </div>
             {
@@ -47,10 +49,10 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Post Id</th>
-                                <th scope="col">VisitDate</th>
-                                <th scope="col">VisitStatusData</th>
-                                <th scope="col">VisitTime</th>
+                                <th scope="col"><span className="fw-normal">Post Id</span></th>
+                                <th scope="col"><span className="fw-normal">VisitDate</span></th>
+                                <th scope="col"><span className="fw-normal">VisitStatusData</span></th>
+                                <th scope="col"><span className="fw-normal">VisitTime</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,11 +65,11 @@ export default function SingleUserRespponseAction() {
                                             window.open(`/post-detail/${item?.PostData?.PostId}`, 'SinglePostDetail');
                                         }}
                                     >
-                                        {item?.PostData?.PostId}
+                                      <small className="fw-light"> {item?.PostData?.PostId}</small>
                                     </td>
-                                    <td>{item?.VisitDate ? dateTimeFormatter.format(new Date(item?.VisitDate)) : 'N/A'}</td>
-                                    <td>{item?.VisitStatusData?.Status}</td>
-                                    <td>{item?.VisitTime?.From}-{item?.VisitTime?.To}</td>
+                                    <td><small className="fw-light">{item?.VisitDate ? dateTimeFormatter.format(new Date(item?.VisitDate)) : 'N/A'}</small></td>
+                                    <td><small className="fw-light">{item?.VisitStatusData?.Status}</small></td>
+                                    <td><small className="fw-light">{item?.VisitTime?.From}-{item?.VisitTime?.To}</small></td>
                                 </tr>)
                             })}
 
@@ -83,10 +85,10 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Post Id</th>
-                                <th scope="col">BidPrice</th>
+                                <th scope="col"> <span className="fw-normal">Post Id</span></th>
+                                <th scope="col"><span className="fw-normal">Offer</span></th>
 
-                                <th scope="col">VisitTime</th>
+                                <th scope="col"><span className="fw-normal">VisitTime</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,12 +99,12 @@ export default function SingleUserRespponseAction() {
                                     <td onClick={(e) => {
                                         window.open(`/post-detail/${item?.PostData?.PostId}`, 'SinglePostDetail2')
                                     }}
-                                    >{item?.PostData?.PostId}</td>
+                                    ><small className="fw-light">{item?.PostData?.PostId}</small></td>
 
-                                    {item?.BidPrice?.toString().length == 8 ? <td>{item?.BidPrice / 10000000} Cr</td> : item?.BidPrice?.toString().length == 7 ? <td>{item?.BidPrice / 1000000} Lakh</td> : item?.BidPrice?.toString().length == 6 ? <td>{item?.BidPrice / 100000} lakh</td> : null}
+                                    {item?.BidPrice?.toString().length == 8 ? <td> <small className="fw-light">{item?.BidPrice / 10000000} Cr</small></td> : item?.BidPrice?.toString().length == 7 ? <td> <small className="fw-light">{item?.BidPrice / 1000000} Lakh</small></td> : item?.BidPrice?.toString().length == 6 ? <td><small className="fw-light">{item?.BidPrice / 100000} lakh</small></td> : null}
 
 
-                                    <td>{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</td>
+                                    <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'} </small></td>
                                 </tr>)
                             })}
 
@@ -117,10 +119,10 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Post Id</th>
-                                <th scope="col">BidPrice</th>
-                                <th scope="col">New</th>
-                                <th scope="col">VisitTime</th>
+                                <th scope="col"> <span className="fw-normal">Post Id</span></th>
+                                <th scope="col"> <span className="fw-normal">BidPrice</span></th>
+                                <th scope="col"> <span className="fw-normal">New</span></th>
+                                <th scope="col"> <span className="fw-normal">VisitTime</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,15 +133,76 @@ export default function SingleUserRespponseAction() {
                                     <td onClick={(e) => {
                                         window.open(`/post-detail/${item?._id}`, 'SinglePostDetail3')
                                     }}
-                                    >{item?._id}</td>
+                                    ><small className="fw-light">{item?._id}</small></td>
 
 
 
 
-                                    <td>{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</td>
+                                    <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
 
-                                    <td>{item?.propertyStatus?.currentPropertyStatus}</td>
-                                    <td>{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</td>
+                                    <td><small className="fw-light">{item?.propertyStatus?.currentPropertyStatus}</small></td>
+                                    <td><small className="fw-light">{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</small></td>
+                                </tr>)
+                            })}
+
+
+                        </tbody>
+                    </table></div>
+                )
+            }
+             {
+                activeTable === 4 && (
+                    <div className="px-3">    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                
+                                <th scope="col"><span className="fw-normal">ProjectName</span></th>
+                                <th scope="col"><span className="fw-normal">Floor Prefrence</span></th>
+                                <th scope="col"><span className="fw-normal">Bhk Type</span></th>
+                                <th scope="col"><span className="fw-normal">Date</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {SingleUserResponseAction_Store?.notifyData.map((item) => {
+                                return (<tr>
+
+
+                                    <td><small className="fw-light">{item?.ProjectName}</small></td>
+                                    <td><small className="fw-light">{item?.FloorPreference}</small></td>
+                                    <td><small className="fw-light">{item?.BHKType}</small></td>
+                                    <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
+                                </tr>)
+                            })}
+
+
+                        </tbody>
+                    </table></div>
+                )
+            }
+
+
+{
+                activeTable === 5 && (
+                    <div className="px-3">    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col"><span className="fw-normal">ProjectName</span></th>
+                                <th scope="col"><span className="fw-normal">Floor Prefrence</span></th>
+                                <th scope="col"><span className="fw-normal">Bhk Type</span></th>
+                                <th scope="col"><span className="fw-normal">Budget</span></th>
+                                <th scope="col"><span className="fw-normal">Date</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {SingleUserResponseAction_Store?.requireData.map((item) => {
+                                return (<tr>
+
+
+<td><small className="fw-light">{item?.ProjectName}</small></td>
+                                    <td><small className="fw-light">{item?.FloorPreference}</small></td>
+                                    <td><small className="fw-light">{item?.BHKType}</small></td>
+                                    <td><small className="fw-light">{item?.Budget}</small></td>
+                                    <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
                                 </tr>)
                             })}
 

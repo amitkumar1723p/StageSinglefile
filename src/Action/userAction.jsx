@@ -1155,15 +1155,15 @@ export const deleteExcelFile = (excelId) => {
 // }
 // for
 // Get All user with property data if they posted 
-export const getAllUserResponseAction=(page)=>{
-  // console.log("sdkhgjseh")
+export const getAllUserResponseAction=(page,searchText)=>{
+  console.log(searchText)
   return async (dispatch) => {
     try {
       dispatch({
         type: "AllUserResponseActionRequest",
         payload: "AllUserResponseActionRequest",
       });
-      const url = `${api_Base_Url}/admin-owner/allUserAction?page=${page}`;
+      const url = `${api_Base_Url}/admin-owner/allUserAction?page=${page}&searchText=${searchText}`;
 
       const config = {
         headers: { "Content-Type": "application/json" },

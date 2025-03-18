@@ -100,13 +100,13 @@
 
 /* Alll user Response Action CSSS */
 .userName{
-  width: 25%;
+  width: 22%;
 }
 .userContact{
-  width: 20%;
+  width: 11%;
 }
 .userDetail{
-  width: 55%;
+  width:0%;
 }
 .singleUser_mainbtn{
   background-color: #a9a9a926;

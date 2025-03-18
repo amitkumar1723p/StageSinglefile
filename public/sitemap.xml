@@ -1,68 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+      xmlns="http://sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://sitemaps.org/schemas/sitemap/0.9
+            http://sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>https://www.propertydekho247.com/</loc>
+  <loc>https://propertydekho247.com/</loc>
   <lastmod>2025-02-08T12:24:18+00:00</lastmod>
 </url>
 <url>
-<loc>https://www.propertydekho247.com/user/my-listing</loc>
+<loc>https://propertydekho247.com/user/my-listing</loc>
 <lastmod>2025-02-11</lastmod>
 <changefreq>weekly</changefreq>
 </url>
 
 
 <url>
-    <loc>https://www.propertydekho247.com/privacy-policy/</loc>
+    <loc>https://propertydekho247.com/privacy-policy/</loc>
     <lastmod>2025-02-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/terms-and-conditions/</loc>
+    <loc>https://propertydekho247.com/terms-and-conditions/</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/login/</loc>
+    <loc>https://propertydekho247.com/login/</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/user/my-listing</loc>
+    <loc>https://propertydekho247.com/user/my-listing</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/user/</loc>
+    <loc>https://propertydekho247.com/user/</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/user/my-post/all-visits/</loc>
+    <loc>https://propertydekho247.com/user/my-post/all-visits/</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/user/post/</loc>
+    <loc>https://propertydekho247.com/user/post/</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.propertydekho247.com/user/my-visits/</loc>
+    <loc>https://propertydekho247.com/user/my-visits/</loc>
     <lastmod>2025-02-11</lastmod>
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
+<!-- nw add -->
+    <url>
+    <loc>https://propertydekho247.com/blog-page/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+      <url>
+    <loc>https://propertydekho247.com/Our-Service/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+      <url>
+    <loc>https://propertydekho247.com/Report/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+
+
+     <url>
+    <loc>https://propertydekho247.com/blog-page/buying-tips/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+       <url>
+    <loc>https://propertydekho247.com/blog-page/investment-insights/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+         <url>
+    <loc>https://propertydekho247.com/blog-page/home-decors/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+
+   <url>
+    <loc>https://propertydekho247.com/blog-page/financial-advice/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+           <url>
+    <loc>https://propertydekho247.com/blog-page/luxury-homes/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+           <url>
+    <loc>https://propertydekho247.com/blog-page/market-trends/</loc>
+    <lastmod>2025-02-11</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
 
 </urlset>
