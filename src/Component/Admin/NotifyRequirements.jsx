@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./NotifyRequirements.css"; // External CSS
 import axios from "axios";
+import { FormatDate } from "../../utils/CommonFunction";
 
 const NotifyRequirements = () => {
   const [activeTab, setActiveTab] = useState("notifies");
@@ -323,12 +324,8 @@ const NotifyRequirements = () => {
                           </td>
                           <td className="notify-requirements-td">
                             {
-                              new Date(item.createAt)
-                                .toLocaleDateString("en-GB", { year: '2-digit', month: 'short', day: '2-digit' }) // Format with month name
-                                .split(" ") // Splitting the result into [DD, MonthName, YYYY]
-                                .map((part, index) => index === 2 ? part.slice(-2) : part) // Keep only the last 2 digits of the year
-                                .join(" ") // Recombine the parts back into DD MonthName YY
 
+                               FormatDate(item.createAt)
                             }
                           </td>
                         
@@ -356,16 +353,7 @@ const NotifyRequirements = () => {
                           </td>
                           <td className="notify-requirements-td">
                             {
-
-
-                              new Date(item.createAt)
-                                .toLocaleDateString("en-GB") // This formats the date as DD/MM/YYYY
-                                .split("/") // Splitting the date into [DD, MM, YYYY]
-                                .map((part, index) =>
-                                  index === 1 ? monthNames[parseInt(part, 10) - 1] : // Convert month number to month name
-                                    index === 2 ? part.slice(-2) : part // Keep only the last 2 digits of the year
-                                )
-                                .join("-") // Recombine the parts b
+                          FormatDate(item?.createAt)  
                             }
                           </td>
                           {/* <td className="notify-requirements-td">{item?.Room?.map((room)=><span>{room}</span>)}</td> */}

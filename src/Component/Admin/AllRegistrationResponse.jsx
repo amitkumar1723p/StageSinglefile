@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllUserAction, ProfileUpdateAction, UserRoleUpdation } from "../../Action/userAction";
 import { acknowledgeProfile } from "../../Action/postAction";
 import { Pointer } from "lucide-react";
+import { FormatDate } from "../../utils/CommonFunction";
 // import "./AllRegistrationResponse.css"
 // Define the functional component
 export default function AllRegistrationResponse({ }) {
@@ -232,26 +233,15 @@ export default function AllRegistrationResponse({ }) {
             </thead>
             <tbody>
               {tableData?.map((item, index) => {
-                const date = new Date(item.updatedAt);
-                const formattedDate = date
-                  .toLocaleDateString("en-GB")
-                  .replace(/\//g, "-")
-                  .slice(2);
                 return (
                   <tr key={index}>
+                    
 
                     <td className="text-light-emphasis border-end">
                       <small>
                         {
                           item?.createAt
-                            ? new Date(item?.createAt).toLocaleString("en-IN", {
-                              day: "2-digit",
-                              month: "short",  // This will use the abbreviated month (e.g., "Mar" for March)
-                              year: "2-digit",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              hour12: false,
-                            }).replace(",", "").replace(" ", "-").replace(":", "").replace(/(\d{2})(\d{2})/, `($1:$2)`)
+                            ? FormatDate(item?.createAt)
                             : "..."
                         }
 
