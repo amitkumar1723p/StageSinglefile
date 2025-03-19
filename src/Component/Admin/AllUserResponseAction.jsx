@@ -15,14 +15,7 @@ const [searchbtn,setSearchbtn]=useState(false)
   const { data: AllUserResponseAction_Store } = useSelector((state) => {
     return state.AllUserResponseAction_Store;
   });
-  useEffect(() => {
-    if (AllUserResponseAction_Store?.data) {
-      const sortedData = [...AllUserResponseAction_Store.data] // Make a shallow copy of the data
-        .sort((a, b) => new Date(a.createAt) - new Date(b.createAt)); // Ensure you use the correct field name
-
-      setSort(sortedData); // Update the state with sorted data
-    }
-  }, [AllUserResponseAction_Store]);
+  
 
 
   // console.log(sort,"lgjk")
@@ -113,7 +106,7 @@ useEffect(() => {
         <div className="container-fluid ">
 
 
-          {sort?.map((item) => {
+          {AllUserResponseAction_Store?.data?.map((item) => {
             return (
 
               <div className="d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2">
@@ -122,9 +115,9 @@ useEffect(() => {
                   <div className="">
                     <p className="">{item?.Name}- <small className="fw-light">({item?.Role})</small></p>
                     {/* <small className="fw-light">{item?.email}</small> */}
-                    {/* <small className="fw-light">
+                    <small className="fw-light">
                       {item?.createAt ? new Date(item.createAt).toLocaleDateString() : 'N/A'}
-                    </small> */}
+                    </small>
                   </div>
                 </div>
 
@@ -135,19 +128,19 @@ useEffect(() => {
                 
                 
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-lighter">scheduleData:<small className="fw-light">{item?.scheduleData}</small></p>
+                  <p className=" fw-light">Schedule Data:<small className="fw-light">{item?.scheduleData}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-lighter">postData: <small className="fw-light">{item?.postData}</small></p>
+                  <p className=" fw-light">Post Data: <small className="fw-light">{item?.postData}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-lighter">offerData:<small className="fw-light">{item?.offerData}</small></p>
+                  <p className=" fw-light">Offer Data:<small className="fw-light">{item?.offerData}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-lighter">notifyData:<small className="fw-light">{item?.notifyData}</small></p>
+                  <p className=" fw-light">Notify Data:<small className="fw-light">{item?.notifyData}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-lighter">requireData:<small className="fw-light">{item?.requireData}</small></p>
+                  <p className="fw-light">Requirement:<small className="fw-light">{item?.requireData}</small></p>
                 </div>
                 {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
 
