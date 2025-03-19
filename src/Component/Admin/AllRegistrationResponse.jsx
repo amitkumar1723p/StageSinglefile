@@ -90,7 +90,7 @@ export default function AllRegistrationResponse({ }) {
       }
 
       // Set the filtered or full data
-      setTableData(filteredData); 
+      setTableData(filteredData);
     }
   }, [AllUserResponseData, viewfilterUser]);
 
@@ -244,10 +244,9 @@ export default function AllRegistrationResponse({ }) {
                             ? FormatDate(item?.createAt)
                             : "..."
                         }
-
-
                       </small>
                     </td>
+
                     <td className="text-light-emphasis border-end">
                       {item.Name ? (
                         <small>

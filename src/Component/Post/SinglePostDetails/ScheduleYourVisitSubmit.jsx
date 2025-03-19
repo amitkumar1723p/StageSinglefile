@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import "./ScheduleYourVisitSubmit.css"; // Import the CSS file
 import { useNavigate } from "react-router-dom";
+import { FormatDate } from "../../../utils/CommonFunction";
 
 const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
  
@@ -40,11 +41,14 @@ const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
             Your visit is scheduled{" "}
             {formatTime(ScheduleVistData.VisitTime.From)} on{" "}
             {/* {formatTime(ScheduleVistData.VisitTime.To)} on{" "} */}
-            {new Date(ScheduleVistData.VisitDate).toLocaleDateString("en-US", {
+
+        
+          { FormatDate(ScheduleVistData?.VisitDate)}
+            {/* {new Date(ScheduleVistData.VisitDate).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric",
-            })}
+            })} */}
             .
           </span>
         </div>

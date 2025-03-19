@@ -10,6 +10,7 @@ import {
   GetMeDetailsAction,
 } from "../../Action/userAction";
 import ShareModal from "./SinglePostDetails/ShareModal";
+import { FormatDate } from "../../utils/CommonFunction";
 const SingleCard = ({ PostData, index }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
@@ -903,7 +904,8 @@ const SingleCard = ({ PostData, index }) => {
             <p className="single-card-publish-date">
               <span className="single-card-date-label">Publish on: </span>
               <span className="single-card-date-value">
-                {formatDate(PostData?.PostVerifyData?.Time)}
+                {FormatDate(PostData?.PostVerifyData?.Time)}
+                {/* {formatDate(PostData?.PostVerifyData?.Time)} */}
               </span>
             </p>
           )}

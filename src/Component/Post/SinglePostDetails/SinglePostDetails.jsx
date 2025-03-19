@@ -36,6 +36,7 @@ import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
 import SocietyAndBuildingFeature from "./SocietyAndBuildingFeature";
+import { FormatDate } from "../../../utils/CommonFunction";
 // import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
@@ -964,31 +965,9 @@ export default function SinglePostDetails() {
                     <p>
                       Posted On :{" "}
                       <span>
-                        {(() => {
-                          const date = new Date(
-                            getSinglePostData?.SinglePost?.PostVerifyData?.Time
-                          );
-                          const monthNames = [
-                            "Jan",
-                            "Feb",
-                            "Mar",
-                            "Apr",
-                            "May",
-                            "Jun",
-                            "Jul",
-                            "Aug",
-                            "Sep",
-                            "Oct",
-                            "Nov",
-                            "Dec",
-                          ];
 
-                          const day = ("0" + date.getDate()).slice(-2); // Ensures two-digit day
-                          const month = monthNames[date.getMonth()]; // Get abbreviated month name
-                          const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
-
-                          return `${day}-${month}-${year}`;
-                        })()}
+                        {FormatDate(getSinglePostData?.SinglePost?.PostVerifyData?.Time)}
+                         
                       </span>
                     </p>
                   </div>
@@ -1291,16 +1270,9 @@ export default function SinglePostDetails() {
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
                       <>
+                      
                         <PropertyDataBox
-                          Answer={`${new Date(
-                            getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                          ).getDate()}-${
-                            new Date(
-                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                            ).getMonth() + 1
-                          }-${new Date(
-                            getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                          ).getFullYear()}`}
+                          Answer={FormatDate(getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom) }
                           Icon="/img/bathroom.png"
                           Data={"Available From"}
                         />

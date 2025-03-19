@@ -5,6 +5,7 @@ import "./MyVisits.css"; // Import the vanilla CSS file
 import { useNavigate } from "react-router-dom";
 
 import { Helmet } from "react-helmet";
+import { FormatDate } from "../../../utils/CommonFunction";
 export default function MyVisits() {
   const { data: MyVisitsData } = useSelector((state) => {
     return state.MyVisits;
@@ -54,11 +55,8 @@ export default function MyVisits() {
               return (
                 <tr key={visit._id}>
                   <td className="myvisit-table-cell">
-                    {new Date(visit.VisitDate).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                    {FormatDate(visit.VisitDate)}
+                     
                   </td>
                   <td className="myvisit-table-cell">
                     {formatTime(visit.VisitTime.From)}
