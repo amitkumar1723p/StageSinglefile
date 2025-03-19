@@ -609,22 +609,28 @@ export default function SinglePostDetails() {
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              <span>
-                                {
-                                  getSinglePostData?.SinglePost?.AreaDetails
-                                    ?.PlotDimensions.Length
-                                }
-                              </span>
-                              <span> X </span>
-                              <span>
-                                {" "}
-                                {
-                                  getSinglePostData?.SinglePost?.AreaDetails
-                                    ?.PlotDimensions.Breadth
-                                }
-                              </span>
+                          <span className="img-box-details-span">
+                            {typeof getSinglePostData?.SinglePost?.AreaDetails
+                              ?.PlotDimensions == "string"
+                              ? getSinglePostData?.SinglePost?.AreaDetails
+                                  ?.PlotDimensions
+                              : <> <span>
+                              {
+                                getSinglePostData?.SinglePost?.AreaDetails
+                                  ?.PlotDimensions.Length
+                              }
                             </span>
+                            <span> X </span>
+                            <span>
+                              {" "}
+                              {
+                                getSinglePostData?.SinglePost?.AreaDetails
+                                  ?.PlotDimensions.Breadth
+                              }
+                            </span></>}
+                           
+                          </span>
+
                             <p> Plot Dimensions</p>
                           </div>
                         </div>
@@ -1393,10 +1399,13 @@ export default function SinglePostDetails() {
                 </div>
                 {/* furnishing details */}
                 
-               
-                <FurnishDetails
-                  furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
-                />
+                
+                {getSinglePostData?.SinglePost?.BasicDetails
+                      ?.ApartmentType !== "Plot/Land" &&
+                  <FurnishDetails
+                    furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
+                  />
+                }
                 {/* society features */}
 
                 {getSinglePostData?.SinglePost?.AmenitiesDetails

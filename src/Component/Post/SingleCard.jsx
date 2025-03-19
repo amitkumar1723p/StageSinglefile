@@ -349,7 +349,7 @@ const SingleCard = ({ PostData, index }) => {
           {
          <div className="inactive-post">
           {/* <p>your post is currently inactive please contact our support team</p> */}
-            <p className="inactive-post-para">Your Property is Inactive (Please contact our support team)</p>
+            <p className="inactive-post-para">Your listing is under review and will be activated soon.</p>
             
           </div>
           }
@@ -668,12 +668,15 @@ const SingleCard = ({ PostData, index }) => {
                         : "sold-out"
                     }`}
                   >
-                    <span>{PostData?.AreaDetails?.PlotDimensions.Length}</span>
-                    <span> X </span>
-                    <span>
-                     
-                      {PostData?.AreaDetails?.PlotDimensions.Breadth}
-                    </span>
+                    {
+                       typeof PostData?.AreaDetails?.PlotDimensions =="string" ? PostData?.AreaDetails?.PlotDimensions : <> <span>{PostData?.AreaDetails?.PlotDimensions?.Length}</span>
+                       <span> X </span>
+                       <span>
+                        
+                         {PostData?.AreaDetails?.PlotDimensions?.Breadth}
+                       </span></>
+                      
+                     }
                   </p>
                   <p
                     className={`single-card-detail-subtitle  ${
