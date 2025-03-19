@@ -9,28 +9,24 @@ import Loader from "../Loader/Loader";
 // import NotifyForm from "../";/
 import Notifyme from "./PropertyCard/NotifyMe";
 import SingleCard from "../Post/SingleCard";
-import NotifyMe from "./PropertyCard/NotifyMe";
 export default function HomeCard() {
   const dispatch = useDispatch();
 
-  // const { loading, data } = useSelector((state) => {
-  //   return state.GetAllPost;
-  // });
-  const { data: serachResponse, loading } = useSelector((state) => {
-    return state.serachResponse;
+  const { loading, data } = useSelector((state) => {
+    return state.GetAllPost;
   });
   const [filterdPost, setFilterdPost] = useState(null);
   const [allData, setAllData] = useState([]);
 
   useEffect(() => {
     function filter() {
-      if (!serachResponse || !serachResponse?.results) {
+      if (!data || !data.allPost) {
         return;
       } else {
-        const soldout = serachResponse?.results?.filter(
+        const soldout = data?.allPost?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
         );
-        const available = serachResponse?.results?.filter(
+        const available = data?.allPost?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
         );
         
@@ -39,66 +35,43 @@ export default function HomeCard() {
       }
     }
     filter();
-    window.scrollTo(0,0);
-  }, [serachResponse]);
+  }, [data]);
 
   useEffect(() => {
-
+    
 
     setAllData(() => {
       return filterdPost;
     });
   }, [filterdPost]);
 
-
   return (
     <>
       <div className="home">
-        {/* {serachResponse &&
-          serachResponse.success === true &&
-          (serachResponse?.results?.length > 0 ? (
+
+        
+        {
+          loading ?   <div className="allPostrender-showpost">
+          {
+            Array.from({ length: 9 }).map((_, index) => (<AllPostSkeleton key={index} />))
+          }
+        </div>:
+           
+          (data?.allPost?.length > 0 ? (
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
-                {serachResponse?.results?.map((e, i) => {
-                  console.log(e)
+                {allData?.map((e, i) => {
                   return <SingleCard key={i} PostData={e} index={i} />;
                 })}
               </div>
             </div>
           ) : (
             <Notifyme />
-          ))} */}
-
-        <div className="home-postContainer">
-          {
-            loading ?
-              <div className="allPostrender-showpost">
-                {
-                  Array.from({ length: 9 }).map((_, index) => (<AllPostSkeleton key={index} />))
-                }
-              </div>
-              :<>
-                {
-                  filterdPost?.length< 1 ? <>
-               
-            <NotifyMe />
-        
-                  </>:  <div className="allPostrender-showpost">
-                  {filterdPost?.map((e, i) => {
-  
-                    return <SingleCard key={i} PostData={e} index={i} />;
-                  })}
-                </div>
-                }
-                </>
-            
-          }
-        </div>
+          ))}
       </div>
     </>
   );
 }
-
 const AllPostSkeleton = () => {
 
   return (

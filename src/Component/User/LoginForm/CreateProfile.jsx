@@ -61,7 +61,7 @@ const CreateProfile = ({
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="Enter your Name*"
+                placeholder="Enter your First Name*"
                 value={CreateProfileData?.Name?.trimStart() || ""}
                 onChange={(e) =>
                   setCreateProfileData({

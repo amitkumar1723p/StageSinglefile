@@ -8,6 +8,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 export default function Search({
   typeOfProperty
 }) {
+
   const dispatch = useDispatch()
   const [localQuery, setLocalQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -36,8 +37,8 @@ export default function Search({
     setIsLoading(true);
     try {
       // Clean the 'typeOfProperty' to ensure it's a valid string
-      let propertyAdType = typeOfProperty;
-      console.log("prop type : ",typeOfProperty);
+
+      // console.log(propertyAdType);
 
         // Log the cleaned value
 
@@ -225,7 +226,7 @@ export default function Search({
         
         
         <input
-          className='elastic-section-input-tag '
+          className='elastic-section-input-tag'
           type="text"
           value={localQuery}
           onChange={handleInputChange}

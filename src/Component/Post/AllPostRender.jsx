@@ -7,8 +7,19 @@ import "../Home/PropertyCard/card.css";
 import NotifyMe from "../Home/PropertyCard/NotifyMe";
 import SingleCard from "./SingleCard";
 import ScrollToTop from "../../ScrollToTop";
+import { getPostsByAddress } from "../../Action/postAction";
 
 const AllPostRender = () => {
+
+  const dispatch = useDispatch();
+  const{data:GetAllPostData,loading}=useSelector(store=>store.postByAddress)
+
+  useEffect(() => {
+    // console.log(allProperties)
+    if(!GetAllPostData?.properties){
+      dispatch(getPostsByAddress());
+    }
+  }, []);
   const [filters, setFilters] = useState({
     propertyType: "",
     bhk: "",
@@ -27,53 +38,35 @@ const AllPostRender = () => {
   };
 
   const [filteredData, setFilteredData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [GetAllPostData, setGetAllData] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [GetAllPostData?.properties, setGetAllData] = useState([]);
   const [showModal, setShowModal] = useState(false); // Modal visibility state
   const [filterdPost, setFilterdPost] = useState([]);
 
   useEffect(() => {
-    if (!GetAllPostData) return;
+    if (!GetAllPostData?.properties) return;
 
-    const soldOut = GetAllPostData.filter(
+    const soldOut = GetAllPostData?.properties.filter(
       (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
     );
-    const available = GetAllPostData.filter(
+    const available = GetAllPostData?.properties.filter(
       (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
     );
 
     setFilterdPost([...available, ...soldOut]);
-  }, [GetAllPostData]);
+  }, [GetAllPostData?.properties]);
 
   // const { data: SingleProjectData } = useSelector((state) => state.SingleProjectName);
 
-  useEffect(() => {
-    async function getData() {
-      setLoading(true);
-      try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/post/all-property/`
-        );
-        if (res.data.success) {
-         
-          setGetAllData(res.data.properties);
 
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getData();
-  }, []);
+ 
 
   // useEffect(() => {
   //   window.scrollTo(0, 0); // Scrolls to the top of the page
-  // }, [GetAllPostData])
+  // }, [GetAllPostData?.properties])
 
   useEffect(() => {
-    if (!GetAllPostData.length) return;
+    if (!GetAllPostData?.properties?.length) return;
 
     let filtered = [...filterdPost];
 
@@ -100,7 +93,7 @@ const AllPostRender = () => {
     window.scrollTo(0, 0)
 
     setFilteredData(filtered);
-  }, [filters, GetAllPostData, filterdPost]);
+  }, [filters, GetAllPostData?.properties, filterdPost]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({

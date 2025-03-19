@@ -82,8 +82,17 @@
 }
 @media (max-width: 768px){
 
+  
+  .support-container {
+    flex-direction: column;
+  }
+  .support-image{
+    width: 60%;
+    margin: 0 auto;
+  }
   .support-content {
-    padding: 0 30px;
+    margin: 0 auto;
+    padding: 0px 0px;
 }
   .databox-sellertoseller {
     background-color: var(--main-lighter-clr);

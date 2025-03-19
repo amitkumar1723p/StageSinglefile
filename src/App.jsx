@@ -51,8 +51,6 @@ import PrivacyPolicy from "./Component/Home/PrivacyPolicy";
 import ProfileEdit from "./Component/User/Profile/ProfileEdit";
 import ProfileUpdate from "./Component/User/Profile/ProfileUpdate";
 import AdminAgentDashboard from "./Component/Admin/AdminAgentDashboard";
-
-import AdminAgentAssignPost from "./Component/Admin/AdminAgentAssignPost";
 import AdminAgentOwnerPost from "./Component/Admin/AdminAgentOwnerPost";
 import PageNotFound from "./PageNotFound";
 import MyVisits from "./Component/User/Profile/MyVisits";
@@ -61,7 +59,7 @@ import OwnerAgentExcelData from "./Component/Admin/OwnerAgentExcelData";
 import OwnerAgentExcel from "./Component/Admin/OwnerAgentExcel";
 import OwnerPostAllResponse from "./Component/User/Profile/OwnerPostAllResponse";
 import AllRegistrationResponse from "./Component/Admin/AllRegistrationResponse";
-// import OwnerPostAllVisits from "./Component/User/Profile/OwnerPostAllVisits";
+
 import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
@@ -70,7 +68,7 @@ import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
 import Search from "./Component/Home/Search";
-// import MyVisits from "./Component/Post/CreatePost/m";
+
 
 function App() {
   const { setRedirectPath, RedirectPath } = useContext(UserContext);

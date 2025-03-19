@@ -81,8 +81,8 @@ function ProfileHeader() {
   // Initialize state with the data from the backend
 
   const { setVarb } = useContext(UserContext);
-  const [name, setName] = useState( medata?.user?.Name.charAt(0).toUpperCase() + medata?.user?.Name.slice(1));
-  const [Lastname, setLastName] = useState(medata?.user?.LastName.charAt(0).toUpperCase() + medata?.user?.LastName.slice(1));
+  const [name, setName] = useState( medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1));
+  const [Lastname, setLastName] = useState(medata?.user?.LastName?.charAt(0).toUpperCase() + medata?.user?.LastName?.slice(1));
   const [email, setEmail] = useState(medata?.user?.email);
   const [number, setNumber] = useState(medata?.user?.ContactNumber);
   // Function to handle the edit button click
@@ -100,8 +100,8 @@ function ProfileHeader() {
   };
   // Check if any changes were made to the fields
   const hasChanges =
-    name !== medata?.user?.Name ||
-    Lastname !== medata?.user?.LastName ||
+    name !== medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1) ||
+    Lastname !== medata?.user?.LastName?.charAt(0).toUpperCase() + medata?.user?.LastName?.slice(1)||
     email !== medata?.user?.email ||
     number !== medata?.user?.ContactNumber;
   // Effect to handle navigation on successful profile update
@@ -157,7 +157,8 @@ function ProfileHeader() {
                         <input
                           className="profile-name"
                           type="text"
-                          value={Lastname}
+                          value={Lastname? Lastname :""}
+                          placeholder={Lastname? "" :"Please Update Your Last Name"}
                           onChange={(e) => setLastName(e.target.value)} // Update name state
                         />
                       </div>

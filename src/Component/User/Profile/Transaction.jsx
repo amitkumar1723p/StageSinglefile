@@ -21,7 +21,7 @@ export default function Transaction({}){
       dispatch(getTransactionDetailAction)
     }
   }, []);
-  console.log(medata,"jg")
+  // console.log(medata,"jg")
 return(
     <>
 <p>Sorry no transaction found</p>

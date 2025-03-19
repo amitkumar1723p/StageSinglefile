@@ -1157,7 +1157,7 @@ export const GetDeletedPostsAction = () => {
 // elastic search action
 export const getSerachProperty=(query,propertyAdType,body)=>{
   // console.log(query,propertyAdType,"post")
-  console.log("boody ",propertyAdType)
+ 
   
   return async(dispatch)=>{
   try {
@@ -1173,6 +1173,7 @@ export const getSerachProperty=(query,propertyAdType,body)=>{
       withCredentials: true,
     };
     console.log(url)
+  //  const body.propertyAdType:propertyAdType
     const { data } = await axios.post(url,body, config);
     
     dispatch({ type: "GetSerachPropertySuccess", payload: data });
@@ -1298,7 +1299,9 @@ export const ApplyJobAction = (formdata) => {
   };
 };
 
-//get post by address
+
+
+//get all post for hero and all-post section 
 
 export const getPostsByAddress = () => {
   return async (dispatch) => {
@@ -1308,14 +1311,14 @@ export const getPostsByAddress = () => {
         payload: "GetPostsByAddressRequest",
       });
 
-      const url = `${api_Base_Url}/post/properties-by-address`;
+      const url = `${api_Base_Url}/post/all-property/`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       };
       const d= "new gurgaon";
-      const { data } = await axios.post(url,{address:d}, config);
+      const { data } = await axios.get(url, config);
       
       dispatch({ type: "GetPostsByAddressSuccess", payload: data });
     } catch (error) {

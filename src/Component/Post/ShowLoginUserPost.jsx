@@ -41,7 +41,7 @@ export default function ShowLoginUserPost() {
     setFilterdPost([...available, ...soldOut]);
   }, [data]);
 
-  // Update `AllPost` when `filterdPost` or `PropertyAdType` changes
+  // Update AllPost when filterdPost or PropertyAdType changes
   useEffect(() => {
     if (PropertyAdType === "Rent") {
       setAllPost(filterdPost.filter((e) => e.BasicDetails.PropertyAdType === "Rent"));

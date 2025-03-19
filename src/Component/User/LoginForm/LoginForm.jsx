@@ -137,7 +137,7 @@ const LoginForm = ({
                   }
                 }}
               />
-              <div className="login-form-alert">{loginError && <p style={{color: 'red', fontSize: '12px' }}>{loginError}</p>}</div>
+           
               <small className="t-candp-v">
                 By clicking you agree{" "}
                 <Link

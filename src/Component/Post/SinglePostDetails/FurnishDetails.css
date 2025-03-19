@@ -87,6 +87,7 @@ grid-template-columns: 1fr 1;
   width: fit-content;
   padding:5px 10px;
   border-radius: 10px;
+  white-space: nowrap;
 
 }
 

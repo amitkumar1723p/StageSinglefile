@@ -20,7 +20,7 @@ const SingleCard = ({ PostData, index }) => {
   const { data, LodingType } = useSelector((state) => {
     return state.userData;
   });
-    console.log("data",data)
+  
   const [floorDetails, setFloorDetails] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -297,8 +297,8 @@ const SingleCard = ({ PostData, index }) => {
             />
           </Link>
           
-          {PostData?.PostVerifyShow ? (
-            PostData?.PostVerify ? (
+          {/* { PostData?.PostVerify? (
+            PostData?.PostVerifyShow ? (
               <div className="single-card-verified-badge">
                 <img
                   src="/img/verified-tag.svg"
@@ -308,11 +308,34 @@ const SingleCard = ({ PostData, index }) => {
                 <p className="active-post-para">Verified</p>
               </div>
             ) : (
-              <div className="inactive-post">
-                <p className="inactive-post-para">Inactive</p>
+              null
+            )
+          ) :<div className="inactive-post">
+          <p className="inactive-post-para">Inactive</p>
+        </div>} */}
+        
+            {/* to be fixed */}
+
+            { PostData?.PostVerify ? (
+            PostData?.PostVerifyShow && (
+              <div className="single-card-verified-badge">
+                <img
+                  src="/img/verified-tag.svg"
+                  className="single-card-verified-icon"
+                  alt="verified-tag"
+                />
+                <p className="active-post-para">Verified</p>
               </div>
             )
-          ) : null}
+          ) : <>
+          {
+         <div className="inactive-post">
+          {/* <p>your post is currently inactive please contact our support team</p> */}
+            <p className="inactive-post-para">Inactive (Please contact our support team)</p>
+            
+          </div>
+          }
+          </>}
         </div>
 
         {/* Property Title Section */}
@@ -843,13 +866,15 @@ const SingleCard = ({ PostData, index }) => {
               </div>
             </>
           )}
-          <p className="single-card-publish-date">
-            <span className="single-card-date-label">Publish on: </span>
-            <span className="single-card-date-value">
-             
-              {formatDate(PostData?.PostVerifyData?.Time)}
-            </span>
-          </p>
+        {PostData?.propertyStatus?.currentPropertyStatus !== "sold out" && (
+  <p className="single-card-publish-date">
+    <span className="single-card-date-label">Publish on: </span>
+    <span className="single-card-date-value">
+      {formatDate(PostData?.PostVerifyData?.Time)}
+    </span>
+  </p>
+)}
+
         </div>
 
         {/* Action Buttons */}
