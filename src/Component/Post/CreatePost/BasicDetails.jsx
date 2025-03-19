@@ -39,6 +39,7 @@ export default function BasicDetailsSection({
   );
 
   const PossessionStatusOption = [
+    "Immediate",
     "Within 3 Month",
     "Within 6 Month",
     "By 2025",

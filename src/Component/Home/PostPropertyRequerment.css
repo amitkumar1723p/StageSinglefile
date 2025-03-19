@@ -193,7 +193,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 121.065%;
-  width: 220px;
+  width: 250px;
   /* width: 100%; */
   font-size: 12px;
   background: #fff;
@@ -274,6 +274,10 @@ input[type="radio"] {
 
 
 @media (max-width: 768px) {
+
+  .search-container {
+    top: 25px;
+}
   .property-form-details-top{
     flex-direction: column;
   }
