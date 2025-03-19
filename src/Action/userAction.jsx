@@ -335,7 +335,7 @@ export const GetAllAdminAction = (Keyword) => {
         url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]
           }=${Keyword[Object.keys(Keyword)[0]]}`;
       } else {
-        url = `/admin-owner/admin-data`;
+        url = `${api_Base_Url}/admin-owner/admin-data`;
       }
       // if(ke)
 
