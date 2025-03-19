@@ -17,6 +17,7 @@ import {
 } from "../../Action/postAction";
 import "./AdminListingCard.css";
 import { UserContext } from "../CreateContext/CreateContext";
+import { FormatDate } from "../../utils/CommonFunction";
 
 export default function AdminListingCard({
   PostData,
@@ -424,11 +425,14 @@ export default function AdminListingCard({
                   <div className="poston-date">
                     <p className="admin-card-heading">Create on</p>
                     <p className="admin-card-heading-ans">
-                      {new Date(PostData?.createAt).toLocaleDateString("en-GB", {
+                       {
+                       FormatDate(PostData?.createAt)
+                       }
+                      {/* {new Date(PostData?.createAt).toLocaleDateString("en-GB", {
                         day: '2-digit',
                         month: 'short',
                         year: '2-digit'
-                      })}
+                      })} */}
                     </p>
                   </div>
 

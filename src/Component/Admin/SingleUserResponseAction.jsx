@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./AllUserResponseAction.css"
 import { getSingleUserResponseAction } from "../../Action/userAction";
+import { FormatDate } from "../../utils/CommonFunction";
 export default function SingleUserRespponseAction() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -71,7 +72,7 @@ export default function SingleUserRespponseAction() {
                                     >
                                       <small className="fw-light"> {item?.PostData?.PostId}</small>
                                     </td>
-                                    <td><small className="fw-light">{item?.VisitDate ? dateTimeFormatter.format(new Date(item?.VisitDate)) : 'N/A'}</small></td>
+                                    <td><small className="fw-light">{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'}</small></td>
                                     <td><small className="fw-light">{item?.VisitStatusData?.Status}</small></td>
                                     <td><small className="fw-light">{item?.VisitTime?.From}-{item?.VisitTime?.To}</small></td>
                                 </tr>)
@@ -142,7 +143,7 @@ export default function SingleUserRespponseAction() {
 
 
 
-                                    <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
+                                    <td><small className="fw-light">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small></td>
 
                                     <td><small className="fw-light">{item?.propertyStatus?.currentPropertyStatus}</small></td>
                                     <td><small className="fw-light">{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</small></td>

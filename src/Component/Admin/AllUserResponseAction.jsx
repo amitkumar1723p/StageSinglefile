@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 // CSS file is here at bottom of this page 
 import "./AllUserResponseAction.css"
 import { useDispatch, useSelector } from "react-redux";
-import "./AllRegistrationResponse.css"
+import "./AllRegistrationResponse.css";
 import { getAllUserResponseAction } from "../../Action/userAction";
 export default function AllUserResponseAction() {
   const navigate = useNavigate()
@@ -21,17 +21,15 @@ const [searchbtn,setSearchbtn]=useState(false)
   // console.log(sort,"lgjk")
   // Pagination logic state
   const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
-  // console.log(AllUserResponseAction_Store)
+const [runPagination, setrunPagination] = useState(false);
   const totalPages = AllUserResponseAction_Store?.totalPages
   // const itemsPerPage = 10; // Number of items per page
 
   // console.log(AllUserResponseAction_Store)
 useEffect(() => {
-
-  
-
+  if (AllUserResponseAction_Store == undefined || runPagination == true) {
     dispatch(getAllUserResponseAction(page));
-
+  }
 }, [page]);
 useEffect(() => {
   // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
@@ -48,25 +46,21 @@ useEffect(() => {
 
   const handlePrevPage = () => {
     if (page > 1) {
-     
-      dispatch({type:"AllUserResponseActionFailClear"})
       setPage(page - 1);
-      
+      setrunPagination(true);
     }
   };
 
   const handleNextPage = () => {
     if (page < totalPages) {
-      
-      dispatch({type:"AllUserResponseActionFailClear"})
       setPage(page + 1);
- 
+      setrunPagination(true);
     }
   };
 
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
-    dispatch({type:"AllUserResponseActionFailClear"})
+    setrunPagination(true);
   };
 
 
@@ -204,4 +198,3 @@ useEffect(() => {
     </>
   )
 }
-

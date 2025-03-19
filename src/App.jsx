@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import Alert from "./Component/Alert/Alert";
 import Profile from "./Component/User/Profile/Profile";
 import ProtectedRoutes from "./Component/ProtectedRoutes";
@@ -71,9 +71,13 @@ import Search from "./Component/Home/Search";
 import AllUserResponseAction from "./Component/Admin/AllUserResponseAction";
 import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseAction";
 // import MyVisits from "./Component/Post/CreatePost/m";
-
+ import { FormatDate } from "./utils/CommonFunction";
 
 function App() {
+
+  //  console.log(FormatDate("2025-02-20T06:48:35.238+00:00"))
+    
+   
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
   const dispatch = useDispatch();

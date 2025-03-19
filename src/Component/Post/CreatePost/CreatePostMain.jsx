@@ -486,7 +486,7 @@ export default function CreatePostMain() {
           AreaDetailsData;
 
         if (
-          ["Independent House/Villa", "Independent/Builder Floor"].includes(
+          ["Independent House/Villa"].includes(
             BasicDetailsData.ApartmentType
           )
         ) {

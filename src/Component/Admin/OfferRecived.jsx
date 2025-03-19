@@ -13,6 +13,7 @@ import HeaderCard from "./HeaderCard";
 import { Admin_OwnerGetAllScheduleVisits } from "../../Action/postAction";
 import SinglePostImageSlider from "../Post/SinglePostDetails/SinglePostImageSlider";
 import WindowComponent from "../WindowComponent";
+import { FormatDate } from "../../utils/CommonFunction";
 const OfferReceived = () => {
   const dispatch = useDispatch();
   const [showImageSlideBox, setshowImageSlideBox] = useState(false);
@@ -73,7 +74,6 @@ const OfferReceived = () => {
     if (BidData?.success == false) {
       // navigate(-1);
       if (location.pathname.includes("recive-offer/deleted-post")) {
-
         navigate("/admin/deleted-post");
       } else {
         navigate("/admin/allpost");
@@ -115,10 +115,8 @@ const OfferReceived = () => {
                   </span>
                   <p className="offer-received-date ">
                     <span className="offer-received-date">
-                      {new Date(reciveOffer.createAt).toLocaleDateString(
-                        "en-US",
-                        { month: "short", day: "numeric", year: "numeric" }
-                      )}
+                      {/* <h1>kd</h1> */}
+                      {FormatDate(reciveOffer.createAt)}
                     </span>
                   </p>
                 </div>

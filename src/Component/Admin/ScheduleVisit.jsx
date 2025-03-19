@@ -7,7 +7,7 @@ import {
 } from "../../Action/postAction";
 import HeaderCard from "./HeaderCard";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
+import { FormatDate } from "../../utils/CommonFunction";
 const ScheduleVisit = () => {
   const { data: VisitStatusData, LodingType } = useSelector((state) => {
     return state.Post;
@@ -165,22 +165,16 @@ const ScheduleVisit = () => {
                       <p className="visit-time-date">
                         Date:
                         <span className="schedule-visit-date">
-                          {new Date(visitData.VisitDate).toLocaleDateString(
-                            "en-US",
-                            {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            }
-                          )}
+                          {
+                            FormatDate(visitData.VisitDate)
+                          }
+                            
                         </span>
                       </p>
                       <p className="visit-time-date">
                         Time:
                         <span className="schedule-visit-time">
                           {formatTime(visitData.VisitTime.From)}
-                          {/* to{" "} */}
-                          {/* {formatTime(visitData.VisitTime.To)} */}
                         </span>
                       </p>
                     </div>

@@ -584,7 +584,7 @@ export default function Amenities({
           )}{" "}
           {/* Society And Building feature   */}
           <div className="fom-group">
-            <p className="label"> Society / Property feature *</p>
+            <p className="label"> Society / Property feature  {BasicDetailsData.ApartmentType !=="Independent/Builder Floor" &&`*`}</p>
             <div className="tab-box">
               {SocietyAndBuildingfeature_And_ProjectAmmenities_Array.map(
                 (text, i) => {

@@ -54,6 +54,7 @@ const PropertyFilters = () => {
   const { loading, data: GetAllPostData } = useSelector((state) => {
     return state.GetAllPost;
   });
+  
 
   const { data: SingleProjectData } = useSelector((state) => {
     return state.SingleProjectName;
@@ -91,6 +92,10 @@ const PropertyFilters = () => {
     if (!querry.get("ProjectName") || !querry.get("PropertyAddType")) {
       return navigate("/");
     } else {
+        
+      //  console.log(GetAllPostData)
+      // console.log()
+       
       // Check if it is the first page load
       if (!sessionStorage.getItem("isFirstLoad")) {
         sessionStorage.setItem("isFirstLoad", "true");

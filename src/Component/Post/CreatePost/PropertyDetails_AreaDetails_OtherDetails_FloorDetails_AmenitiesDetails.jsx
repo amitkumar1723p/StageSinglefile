@@ -132,7 +132,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         return ;
       }
 
-      if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
+      if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0 && BasicDetailsData.ApartmentType!=="Independent/Builder Floor") {
         return;
       }
       if (update && AmenitiesDetailsData.Furnishing == "Un-Furnished") {
@@ -182,11 +182,17 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       setTimeout(()=>showError({PlotSize:false}),1500);
       return;
     }
-     if(!AreaDetailsData.PlotDimensions){
+     if(!AreaDetailsData?.PlotDimensions?.Length){
       setTimeout(()=>showError({PlotDimensions:true}),500);
       setTimeout(()=>showError({PlotDimensions:false}),1500);
       return;
      }
+     if(!AreaDetailsData.PlotDimensions?.Breadth){
+      setTimeout(()=>showError({PlotDimensions:true}),500);
+      setTimeout(()=>showError({PlotDimensions:false}),1500);
+      return;
+     }
+
      if(!OtherDetailsData.ConstructionAllowed){
       setTimeout(()=>showError({ConstructionAllowed:true}),500);
       setTimeout(()=>showError({ConstructionAllowed:false}),1500);
@@ -334,7 +340,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       //     return;
       //   }
       // }
-
+   
       if (
         !AreaDetailsData.SuperBuiltUpArea?.value &&
         !AreaDetailsData.CarpetArea?.value &&
@@ -359,6 +365,8 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         setTimeout(()=>showError({OverLookingView:false}),1500);
         return;
       }
+
+      
       if (!AmenitiesDetailsData.Furnishing) {
         const targetScroll = document.querySelector("#ScrollToAmenities");
         targetScroll.scrollIntoView({
@@ -369,7 +377,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
         return;
       }
       if(["Un-Furnished"].includes(AmenitiesDetailsData.Furnishing)){
-        if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
+        if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0  && BasicDetailsData.ApartmentType!=="Independent/Builder Floor" ) {
           const targetScroll = document.querySelector("#ScrollToAmenities");
         targetScroll.scrollIntoView({
           behavior: 'smooth',    
@@ -390,7 +398,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
            
             return;
           }
-          if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0) {
+          if (AmenitiesDetailsData?.SocietyAndBuildingFeature?.length <= 0  && BasicDetailsData.ApartmentType!=="Independent/Builder Floor" ) {
             const targetScroll = document.querySelector("#ScrollToAmenities");
             targetScroll.scrollIntoView({
               behavior: 'smooth',    

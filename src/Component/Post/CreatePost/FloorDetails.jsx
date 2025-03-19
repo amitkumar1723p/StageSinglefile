@@ -146,6 +146,7 @@ export default function FloorDetails({
           "Serviced Apartment",
         ].includes(BasicDetailsData.ApartmentType) && (
           <div className="form-group">
+            {console.log(FloorDetailsData)}
             <label htmlFor="floor">Property on Floor*</label>
             <select
               className={`date-time-lable ${
