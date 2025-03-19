@@ -678,7 +678,7 @@ const OwnerAgentExcel = () => {
 {medata?.user?.Role === "Owner" ?
   <thead>
     <tr>
-      <th className="file-handler-table-header">Sno.</th>
+      <th className="file-handler-table-header file-handle-table-header-default">Sno.</th>
       {columns.map((col, index) => (
         <th
           key={index}
@@ -712,7 +712,7 @@ const OwnerAgentExcel = () => {
     </tr>
   </thead> : <thead>
     <tr>
-      <th className="file-handler-table-header">Sno.</th>
+      <th className="file-handler-table-header file-handle-table-header-default">Sno.</th>
       {columns.map((col, index) => (
         <th key={index} className="file-handler-table-header">
           {col.name}
