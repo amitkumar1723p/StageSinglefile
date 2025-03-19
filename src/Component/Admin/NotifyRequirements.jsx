@@ -270,7 +270,7 @@ const NotifyRequirements = () => {
           <>
             {/* <p className="notify-requirement-lable">{activeTab == "notifies" ? notifies.length  : requirements.length} {activeTab === "notifies" ? "Notifications" : " Requirements"}</p> */}
             <table className="notify-requirements-table">
-              <thead>
+              <thead className="notify-requirements-table-thead">
                 <tr>
                   {activeTab === "notifies" ? (
                     <>
