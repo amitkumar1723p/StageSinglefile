@@ -67,7 +67,7 @@ const PropertySection = () => {
   
       // Step 5: Sort by number of properties in descending order
       result.sort((a, b) => b.properties.length - a.properties.length);
-        console.log(filterdData)
+        console.log(result)
       // Step 6: Set the filtered and sorted data
       setFilterdData(result);
   
@@ -154,8 +154,7 @@ const PropertySection = () => {
       filterdData?.map((area,ind)=>{
         return <>
         <button key={ind} onClick={()=>{
-        console.log("display ",todisplay)
-        console.log("d ",filterdData," ",ind)
+     
        settodisplay(filterdData[ind]);
         setAreas(ind)
         }}   className={`filter-button ${areas===ind ? "chooesd-area":""} `}>
@@ -213,11 +212,15 @@ const PropertySection = () => {
     <h3 className="card-title property-truncate-text">{property?.PropertyDetails?.BHKType} BHK {property?.BasicDetails?.PropertyType} {property?.BasicDetails?.ApartmentType}</h3>
     <p className="card-location">{property?.LocationDetails?.Landmark} {property?.LocationDetails?.Locality}</p>
     <p className="card-price" > { formatReservePrice(property?.PricingDetails?.ExpectedPrice) || formatReservePrice(property?.PricingDetails?.ExpectedRent)} |  <span className="property-section-sqft">{  String(
-             property?.PricingDetails?.PricePerSqFt
-            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {property?.AreaDetails?.BuiltUpArea?.unit}</span></p>
+             property?.PricingDetails?.PricePerSqFt || property?.PricingDetails?.PricePerSqYd
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            
+            
+            
+             {property?.AreaDetails?.BuiltUpArea?.unit || " Sq yard"}</span></p>
 
 
-    <p className={`card-status   `}>Status : <span className={`card-status ${property?.BasicDetails?.PropertyStatus==="Ready to move" ? "property-section-status":"property-section-nodata"}  `} >{property?.BasicDetails?.PropertyStatus}</span> </p>
+    <p className={`card-status   `}>Status : <span className={`card-status ${property?.BasicDetails?.PropertyStatus==="Ready to move" ? "property-section-status":"property-section-nodata"}  `} >{property?.BasicDetails?.PropertyStatus}  {property?.BasicDetails?.PropertyStatus!=="Ready to move"  && <>{property?.BasicDetails?.CurrentPropertyStatus}</>}  </span>  </p>
 
 
     {
@@ -231,6 +234,7 @@ const PropertySection = () => {
           property?.BasicDetails?.AvailableFrom
         ).getFullYear()}</p>
     }
+
 
 
     <button onClick={
