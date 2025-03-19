@@ -1249,7 +1249,7 @@ export const ReportPagePostAction = (formdata) => {
 
 export const ApplyJobAction = (formdata) => {
   return async (dispatch) => {
-    console.log(formdata)
+    
     try {
       dispatch({
         type: "ApplyJobActionRequest",

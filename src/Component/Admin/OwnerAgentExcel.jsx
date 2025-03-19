@@ -538,7 +538,7 @@ const OwnerAgentExcel = () => {
    
     // Find common AdminIds
     const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
-    console.log("thi sis matchinggg ", matchingAdmins)
+    
     setFilterAdmin(matchingAdmins)
   }, [allAdmins, AssinedAdmins])
 
@@ -587,7 +587,7 @@ const OwnerAgentExcel = () => {
         return;
       }
 
-      console.log("Updates to be sent:", updates);
+      
 
       // Send update request to backend
       await axios.put(

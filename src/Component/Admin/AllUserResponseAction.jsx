@@ -122,19 +122,19 @@ useEffect(() => {
                 
                 
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Schedule Data:<small className="fw-light">{item?.scheduleData}</small></p>
+                  <p className=" fw-light">Schedule Data:<small className="fw-light">{item?.scheduleData?.length}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Post Data: <small className="fw-light">{item?.postData}</small></p>
+                  <p className=" fw-light">Post Data: <small className="fw-light">{item?.postData?.length}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Offer Data:<small className="fw-light">{item?.offerData}</small></p>
+                  <p className=" fw-light">Offer Data:<small className="fw-light">{item?.offerData?.length}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Notify Data:<small className="fw-light">{item?.notifyData}</small></p>
+                  <p className=" fw-light">Notify Data:<small className="fw-light">{item?.notifyData?.length}</small></p>
                 </div>
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className="fw-light">Requirement:<small className="fw-light">{item?.requireData}</small></p>
+                  <p className="fw-light">Requirement:<small className="fw-light">{item?.requireData?.length}</small></p>
                 </div>
                 {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
 
