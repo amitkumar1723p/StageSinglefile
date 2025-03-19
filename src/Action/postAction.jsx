@@ -1299,7 +1299,9 @@ export const ApplyJobAction = (formdata) => {
   };
 };
 
-//get post by address
+
+
+//get all post for hero and all-post section 
 
 export const getPostsByAddress = () => {
   return async (dispatch) => {
@@ -1309,14 +1311,14 @@ export const getPostsByAddress = () => {
         payload: "GetPostsByAddressRequest",
       });
 
-      const url = `${api_Base_Url}/post/properties-by-address`;
+      const url = `${api_Base_Url}/post/all-property/`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       };
       const d= "new gurgaon";
-      const { data } = await axios.post(url,{address:d}, config);
+      const { data } = await axios.get(url, config);
       
       dispatch({ type: "GetPostsByAddressSuccess", payload: data });
     } catch (error) {

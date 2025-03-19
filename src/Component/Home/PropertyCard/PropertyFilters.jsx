@@ -507,6 +507,7 @@ const PropertyFilters = () => {
                           );
                           setFilter({});
                         }}
+                        
                       >
                         Clear Filter <img src="/img/clear-filter.svg" alt="" />
                       </div>

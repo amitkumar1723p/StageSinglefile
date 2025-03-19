@@ -36,7 +36,7 @@ import ProjectNameSection from "../Post/ProjectName";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   GetAllPostAction,
-  // getPostsByAddress,
+  getPostsByAddress,
   GetSingleProjectNameDataAction,
 } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,6 +70,7 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 // import DreamHomeBanner from "./DreamHomeBanner.jsx";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
+import PropertySection from "./PropertySection.jsx";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -185,7 +186,7 @@ const HeroSection = () => {
     useSelector((state) => {
       return state.SingleProjectName;
     });
-
+    const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
   const PropertyRequirementBtnRef = useRef([]);
   const SearchContainerRef = useRef(null);
 
@@ -222,10 +223,10 @@ const HeroSection = () => {
     }
   }, [medata]);
   useEffect(() => {
-    // if(!propertyByAdress){
+    if(!propertyByAdress){
 
-    //   dispatch(getPostsByAddress())
-    // }
+      dispatch(getPostsByAddress())
+    }
     dispatch({ type: "GetAllPostClear" });
     dispatch({ type: "GetSingleProjectNameDataClear" });
     setRedirectPathIsHomeCard(false);
@@ -595,43 +596,6 @@ const HeroSection = () => {
 
 
 
-
-      {/* holi hain guyz */}
-
-      {/* <div className="requirement-container">
-       
-        <video autoPlay muted loop id="background-video">
-          <source src="/img/holi-video.mp4" type="video/mp4" />
-        
-        </video>
-
-        
-        <div className="requirement-main">
-          <div className="requirement-heading">
-            <h2 className="requirement-heading-h2">
-              Tell us what you’re looking for, and we’ll notify you when we
-              find a match!
-            </h2>
-
-            <div ref={PropertyRequirementBtnRef.current[0]}
-              onClick={() => {
-                if (medata && medata.IsAuthenticated == true) {
-                  setshowPropertyRequirement(true);
-                } else {
-                  setRedirectPath("/post-requirement");
-                  navigate("/login");
-                }
-              }} className="requirement-button">
-              <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
-            </div>
-          </div>
-          <div className="requirement-svg">
-            <img src="/img/House4.svg" alt="house" srcset="" className="requirement-img" />
-          </div>
-        </div>
-
-      </div> */}
-
       {/* normal waala  */}
       <div className="requirement-container">
         <img src="/img/overlay2.svg" alt="" className="overlay-lines" />
@@ -682,6 +646,8 @@ const HeroSection = () => {
           </Link>
         </div>
       )}
+
+      <PropertySection />
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">

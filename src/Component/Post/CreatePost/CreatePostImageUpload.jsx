@@ -43,10 +43,13 @@ export default function CreatePostImageUpload({
   const dispatch = useDispatch();
 
   const [singlepreviewImage, setsinglepreviewImage] = useState("");
+  const [defaultImg, setDefaultImg] = useState(null);
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
 
+  //  console.log("uploadimages" ,uploadimages)
+  //   console.log("previewImages" ,previewImage)
   useEffect(() => {
     if (update) {
       setuploadimagesName(
@@ -132,97 +135,121 @@ export default function CreatePostImageUpload({
 
   const CratePostHandler = (e) => {
     e.preventDefault();
-   
- 
-      let formData = new FormData(e.target);
 
-      formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
+
+    let formData = new FormData(e.target);
+
+    formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
+    formData.append(
+      "LocationDetails",
+      `${JSON.stringify(LocationDetailsData)}`
+    );
+
+    formData.append("AreaDetails", `${JSON.stringify(AreaDetailsData)}`);
+
+    if (BasicDetailsData.ApartmentType == "Plot/Land") {
+      //  alert("form details")
+      formData.append("OtherDetails", `${JSON.stringify(OtherDetailsData)}`);
+    } else {
       formData.append(
-        "LocationDetails",
-        `${JSON.stringify(LocationDetailsData)}`
+        "PropertyDetails",
+        `${JSON.stringify(PropertyDetailsData)}`
       );
 
-      formData.append("AreaDetails", `${JSON.stringify(AreaDetailsData)}`);
+      formData.append("FloorDetails", `${JSON.stringify(FloorDetailsData)}`);
+    }
 
-      if (BasicDetailsData.ApartmentType == "Plot/Land") {
-        //  alert("form details")
-        formData.append("OtherDetails", `${JSON.stringify(OtherDetailsData)}`);
-      } else {
+    formData.append(
+      "AmenitiesDetails",
+      `${JSON.stringify(AmenitiesDetailsData)}`
+    );
+    formData.append(
+      "PricingDetails",
+      `${JSON.stringify(PricingDetailsData)}`
+    );
+
+    if (update) {
+      if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
+        uploadimages.forEach((e) => {
+          formData.append("PropertyImages", e, e.name);
+        });
+      }
+      if (update_RemoveImage.length > 0 && uploadimages.length === 0) {
+        // if(update_RemoveImage.length>0){
         formData.append(
-          "PropertyDetails",
-          `${JSON.stringify(PropertyDetailsData)}`
+          "PropertyImages",
+          `${JSON.stringify(update_RemoveImage)}`
         );
-
-        formData.append("FloorDetails", `${JSON.stringify(FloorDetailsData)}`);
       }
 
-      formData.append(
-        "AmenitiesDetails",
-        `${JSON.stringify(AmenitiesDetailsData)}`
-      );
-      formData.append(
-        "PricingDetails",
-        `${JSON.stringify(PricingDetailsData)}`
-      );
-
-      if (update) {
-        if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
-          uploadimages.forEach((e) => {
-            formData.append("PropertyImages", e, e.name);
-          });
-        }
-        if (update_RemoveImage.length > 0 && uploadimages.length === 0) {
-          // if(update_RemoveImage.length>0){
+      if (uploadimages.length > 0) {
+        uploadimages.forEach((e) => {
+          formData.append("PropertyImages", e, e.name);
+        });
+        if (update_RemoveImage.length > 0) {
           formData.append(
             "PropertyImages",
             `${JSON.stringify(update_RemoveImage)}`
           );
         }
-        if (uploadimages.length > 0) {
-          uploadimages.forEach((e) => {
-            formData.append("PropertyImages", e, e.name);
-          });
-          if (update_RemoveImage.length > 0) {
-            formData.append(
-              "PropertyImages",
-              `${JSON.stringify(update_RemoveImage)}`
-            );
-          }
-        }
-      } else {
-    
-          uploadimages.forEach((e) => {
-            formData.append("PropertyImages", e, e.name);
-          });
-        
       }
+    } else {
 
-      if (update) {
-        let confrim = window.confirm("Are you update this Post");
-        if (confrim) {
-          dispatch(UpdatePostAction(formData, PostId));
-        }
-      } else {
-        dispatch(CreatePostAction(formData));
+      uploadimages.forEach((e) => {
+        formData.append("PropertyImages", e, e.name);
+      });
 
-        if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
-          setshowCreatePostSubmitAlert("showLoading");
-        }
+    }
+
+    if (update) {
+      let confrim = window.confirm("Are you update this Post");
+      if (confrim) {
+        dispatch(UpdatePostAction(formData, PostId));
       }
-     
+    } else {
+      dispatch(CreatePostAction(formData));
+
+      if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
+        setshowCreatePostSubmitAlert("showLoading");
+      }
+    }
+
   };
 
   // Alert
   const [imageAlert, setImageAlert] = useState(false);
 
   const HandleImageAlert = () => {
+
     if (previewImage.length <= 0 && update) {
       setImageAlert(true);
       setTimeout(() => setImageAlert(false), 1500);
       return;
     }
-  };
 
+  };
+  // console.log(defaultImg)
+  // console.log("uploadimages", uploadimages)
+  // console.log("previewImage", previewImage)
+
+  // useEffect(() => {
+  //   if (defaultImg >= 0) {
+  //     console.log("calleddddd")
+
+  //     setuploadimages(
+  //       (files, defaultImg) => {
+  //         const updatedFiles = [...files]; // Create a copy of the array
+  //         console.log(defaultImg)
+  //         const fileToMove = updatedFiles.splice(defaultImg, 1)[0]; // Remove the element at moveIndex
+  //         console.log(fileToMove, ' ffileee')
+  //         updatedFiles.unshift(fileToMove); // Insert it at the beginning
+  //         console.log("up ", updatedFiles)
+  //         return updatedFiles;
+  //       }
+  //     )
+  //   }
+
+  // }, [defaultImg])
   return (
     <>
       <ScrollToTop />
@@ -339,10 +366,33 @@ export default function CreatePostImageUpload({
               />
             </div>
 
+            {/* <p className="upload-image-defaultimage">Please choose defalut image* ( Default will be first )</p> */}
+
             <div className="showpreviewImage-Container upload-img-section">
               {previewImage.map((image, index) => {
                 return (
                   <div className="showpreviewImage-box" key={index}>
+                    {/* default img input */}
+                    {/* <input
+                      type="checkbox"
+                      checked={defaultImg === index}
+                      className="default-image"
+                      onClick={() => {
+                         setDefaultImg(index);
+                          //  const uploadimages =uploadimages
+                           setuploadimages((prevFiles) => {
+                            console.log(prevFiles)
+                            const updatedFiles = [...prevFiles]; // Create a copy of the array
+                            const fileToMove = updatedFiles.splice(defaultImg, 1)[0]; // Remove the element at index
+                            updatedFiles.unshift(fileToMove); // Insert it at the beginning
+                            console.log("updated files ",updatedFiles)
+                            return updatedFiles;
+                          });
+                        
+                      
+                        
+                      }}
+                    /> */}
                     <img
                       className="showpreviewImage"
                       key={index}

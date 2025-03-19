@@ -297,8 +297,8 @@ const SingleCard = ({ PostData, index }) => {
             />
           </Link>
           
-          {PostData?.PostVerifyShow ? (
-            PostData?.PostVerify ? (
+          {/* { PostData?.PostVerify? (
+            PostData?.PostVerifyShow ? (
               <div className="single-card-verified-badge">
                 <img
                   src="/img/verified-tag.svg"
@@ -308,11 +308,34 @@ const SingleCard = ({ PostData, index }) => {
                 <p className="active-post-para">Verified</p>
               </div>
             ) : (
-              <div className="inactive-post">
-                <p className="inactive-post-para">Inactive</p>
+              null
+            )
+          ) :<div className="inactive-post">
+          <p className="inactive-post-para">Inactive</p>
+        </div>} */}
+        
+            {/* to be fixed */}
+
+            { PostData?.PostVerify ? (
+            PostData?.PostVerifyShow && (
+              <div className="single-card-verified-badge">
+                <img
+                  src="/img/verified-tag.svg"
+                  className="single-card-verified-icon"
+                  alt="verified-tag"
+                />
+                <p className="active-post-para">Verified</p>
               </div>
             )
-          ) : null}
+          ) : <>
+          {
+         <div className="inactive-post">
+          {/* <p>your post is currently inactive please contact our support team</p> */}
+            <p className="inactive-post-para">Inactive (Please contact our support team)</p>
+            
+          </div>
+          }
+          </>}
         </div>
 
         {/* Property Title Section */}

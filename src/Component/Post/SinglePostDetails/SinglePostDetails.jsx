@@ -729,20 +729,27 @@ export default function SinglePostDetails() {
                               <>
                                 <p className="lisitng-area-section">
                                   ₹
-                                  {
-                                    getSinglePostData?.SinglePost?.PricingDetails
-                                      ?.PricePerSqYd
-                                  } Per sq.yd
-        </p>
+                                  { String(
+              getSinglePostData?.SinglePost?.PricingDetails
+              ?.PricePerSqYd
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    
+                                  }
+                                  Per sq.yd
+                                </p>
                               </>
                             ) : (
                               <>
                                 <p className="lisitng-area-section">
                                   ₹{" "}
-                                  {
-                                    getSinglePostData?.SinglePost?.PricingDetails
-                                      ?.PricePerSqFt
-                                  } Per sqft
+                                  { String(
+              getSinglePostData?.SinglePost?.PricingDetails
+              ?.PricePerSqFt
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    
+                                  }
+                                  {" "}
+                                  Per sqft
                                 </p>
                               </>
                             )}

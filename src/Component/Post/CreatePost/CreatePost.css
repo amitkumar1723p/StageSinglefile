@@ -1366,6 +1366,11 @@ input[type="number"] {
   z-index: 4;
 }
 
+.upload-image-defaultimage{
+  color: red;
+    text-align:center;
+}
+
 .showpreviewImage-box:last-child {
   margin-right: 0;
 }
@@ -1384,7 +1389,20 @@ input[type="number"] {
   top: 5px;
   transition: .5s;
 }
-
+.showpreviewImage-box .default-image {
+  font-size: 12px;
+  position: absolute;
+  cursor: pointer;
+  left: 5px;
+  color: #fff;
+  background-color: var(--main-light-clr);
+  border-radius: 50%;
+  padding: 0px 10px;
+  /* background-color: #fff; */
+  padding: 0 5px;
+  top: 5px;
+  transition: .5s;
+}
 .showpreviewImage-box .cut-image:hover{
 color: red;
 background-color: var(--main-lighter-clr);

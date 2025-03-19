@@ -244,7 +244,6 @@
 // export default OwnerAgentExcel
 
 
-
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeExcelFromAdminAction } from '../../Action/postAction';
@@ -253,11 +252,11 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver"
 import "./OwnerAgentExcelData.css"
 import { useNavigate, useParams } from 'react-router-dom';
+
 const OwnerAgentExcel = () => {
-
-
   const [fileId, setFileId] = useState(null);
   const [data, setData] = useState([]);
+  const [originalData, setOriginalData] = useState([]); // Track original data for comparison
   const [columns, setColumns] = useState([]);
   const [originalColumns, setOriginalColumns] = useState([]); // To track original column names
   const [isHidden, setIsHidden] = useState(false);
@@ -351,9 +350,6 @@ const OwnerAgentExcel = () => {
     };
   }, []);
 
-
-
-
   async function getAllAdminsAgents(Keyword) {
     try {
       let url;
@@ -363,17 +359,13 @@ const OwnerAgentExcel = () => {
       } else {
         url = `/admin-owner/admin-data`;
       }
-      // if(ke)
 
       const config = {
         headers: { "Content-Type": "application/json" },
-
         withCredentials: true,
       };
 
       const { data } = await axios.get(url, config);
-
-
 
       setAllAdmins((prev) => {
         return [...prev, ...data.Admin]
@@ -382,10 +374,7 @@ const OwnerAgentExcel = () => {
     } catch (error) {
       console.log(error)
     }
-
-
   }
-
 
   const fetchSingleFileDataOwner = async (id) => {
     try {
@@ -394,32 +383,42 @@ const OwnerAgentExcel = () => {
       setColumns(res.data.fileData.columns);
       setOriginalColumns([...res.data.fileData.columns]); // Store original column names
       setData(res.data.fileData.rows);
+      // Create a deep copy of the original data for comparison
+      setOriginalData(JSON.parse(JSON.stringify(res.data.fileData.rows)));
       setFileId(id);
       setHasHeaderChanges(false);
     } catch (err) {
-      // navigate("/admin/dashboard")
       console.error("Error fetching file data:", err);
     }
   };
 
-
+  const fetchSingleFileData = async (id) => {
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/file/${id}`, { withCredentials: true });
+      setAssignedAdmins(res.data.admins);
+      setColumns(res.data.fileData.columns);
+      setOriginalColumns([...res.data.fileData.columns]); // Store original column names
+      setData(res.data.fileData.rows);
+      // Create a deep copy of the original data for comparison
+      setOriginalData(JSON.parse(JSON.stringify(res.data.fileData.rows)));
+      setFileId(id);
+      setHasHeaderChanges(false);
+    } catch (err) {
+      navigate("/admin/dashboard")
+      console.error("Error fetching file data:", err);
+    }
+  };
 
   useEffect(() => {
     if (medata.user.Role === "Owner") {
-
       fetchSingleFileDataOwner(id)
     } else {
       fetchSingleFileData(id);
-
     }
     setAllAdmins([])
     getAllAdminsAgents({ AgentVerify: true })
     getAllAdminsAgents({ AdminVerify: true })
-    // console.log(object)
   }, [id])
-
-
-
 
   const handleCellChange = (rowIndex, columnName, value) => {
     setData((prevData) => {
@@ -502,7 +501,6 @@ const OwnerAgentExcel = () => {
       {
         fetchSingleFileDataOwner(fileId)
       }else{
-
         fetchSingleFileData(fileId);
       }
       setHasHeaderChanges(false);
@@ -523,12 +521,13 @@ const OwnerAgentExcel = () => {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/excel/file/${fileId}/add-column`, {
         columnName,
       },
-        {
-          withCredentials: true
-        });
+      {
+        withCredentials: true
+      });
       setColumns(res.data.file.columns);
       setOriginalColumns(res.data.file.columns);
       setData(res.data.file.rows);
+      setOriginalData(JSON.parse(JSON.stringify(res.data.file.rows))); // Update originalData too
     } catch (err) {
       console.error("Error adding column:", err);
     }
@@ -536,7 +535,6 @@ const OwnerAgentExcel = () => {
 
   useEffect(() => {
     const agentIdsSet = new Set(AssinedAdmins.map(agent => agent.AdminId._id));
-
    
     // Find common AdminIds
     const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
@@ -544,44 +542,67 @@ const OwnerAgentExcel = () => {
     setFilterAdmin(matchingAdmins)
   }, [allAdmins, AssinedAdmins])
 
-  // Save row changes (original functionality preserved)
+  // Updated saveChanges function to only send actual changes
   const saveChanges = async () => {
     if (!fileId) return alert("Please select a file first!");
 
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${fileId}/update`, {
-        updates: data.map((row, index) =>
-          columns
-            .filter((col) => col.editable)
-            .map((col) => ({
-              rowIndex: index,
-              columnName: col.name,
-              newValue: row[col.name],
-            }))
-        ).flat(),
-      }, {
-        withCredentials: true
+      // Create updates array to track changed values only
+      const updates = [];
+
+      // Compare current data with original data to find changes
+      data.forEach((row, rowIndex) => {
+        if (rowIndex < originalData.length) { // For existing rows
+          columns.forEach((col) => {
+            const columnName = col.name;
+            // Check if the column exists in the original data
+            const originalValue = originalData[rowIndex][columnName];
+            const currentValue = row[columnName];
+            
+            // Only add to updates if value has changed
+            if (currentValue !== originalValue) {
+              updates.push({
+                rowIndex,
+                columnName,
+                newValue: currentValue || ""
+              });
+            }
+          });
+        } else { // For newly added rows
+          columns.forEach((col) => {
+            const columnName = col.name;
+            if (row[columnName] !== undefined) {
+              updates.push({
+                rowIndex,
+                columnName,
+                newValue: row[columnName] || ""
+              });
+            }
+          });
+        }
       });
-      alert("Cell data changes saved successfully!");
+
+      if (updates.length === 0) {
+        alert("No changes detected.");
+        return;
+      }
+
+      console.log("Updates to be sent:", updates);
+
+      // Send update request to backend
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/excel/file/${fileId}/update`,
+        { updates },
+        { withCredentials: true }
+      );
+
+      // Update originalData to match current data after successful save
+      setOriginalData(JSON.parse(JSON.stringify(data)));
+      
+      alert("Changes saved successfully!");
     } catch (err) {
       console.error("Error saving changes:", err);
-      alert("Error saving cell changes: " + (err.response?.data?.message || err.message));
-    }
-  };
-
-  // Fetch single file data
-  const fetchSingleFileData = async (id) => {
-    try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/file/${id}`, { withCredentials: true });
-      setAssignedAdmins(res.data.admins);
-      setColumns(res.data.fileData.columns);
-      setOriginalColumns([...res.data.fileData.columns]); // Store original column names
-      setData(res.data.fileData.rows);
-      setFileId(id);
-      setHasHeaderChanges(false);
-    } catch (err) {
-      navigate("/admin/dashboard")
-      console.error("Error fetching file data:", err);
+      alert("Error saving changes: " + (err.response?.data?.message || err.message));
     }
   };
 
@@ -610,9 +631,7 @@ const OwnerAgentExcel = () => {
   }
 
   return (
-
     <div className='file-handler-table-container' style={{ userSelect: "none" }}>
-
       {/* Add Column Button */}
       {medata?.user?.Role === "Owner" &&
         <div>
@@ -622,11 +641,6 @@ const OwnerAgentExcel = () => {
           <button onClick={handleDownload} className="file-handler-add-button">
             Download
           </button>
-          {/* <button onClick={saveChanges} className="file-handler-save-button">
-            Save Changes
-          </button> */}
-
-
         </div>
       }
 
@@ -638,11 +652,9 @@ const OwnerAgentExcel = () => {
               <button onClick={() => {
                 dispatch(removeExcelFromAdminAction(item._id, id));
                 setFilterAdmin((prev) => {
-
                   const newAdmins = prev.filter((admin) => {
                     return admin._id !== item._id
                   })
-
                   return newAdmins
                 })
               }}>X</button>
@@ -651,16 +663,12 @@ const OwnerAgentExcel = () => {
         </div>
       }
 
-<button onClick={saveChanges} className="file-handler-save-button">
-            Save Changes
-          </button>
-          {data?.length > 0 && (
+      <button onClick={saveChanges} className="file-handler-save-button">
+        Save Changes
+      </button>
+      
+      {data?.length > 0 && (
         <div className="file-handler-buttons-container">
-          {/* Save Row Data Button (Original) */}
-          {/* <button onClick={saveChanges} className="file-handler-save-button">
-                Save Cell Changes
-              </button> */}
-
           {/* Save Headers Button (New) */}
           {medata?.user?.Role === "Owner" && hasHeaderChanges && (
             <button onClick={saveHeaderChanges} className="file-handler-save-headers-button">
@@ -669,86 +677,83 @@ const OwnerAgentExcel = () => {
           )}
         </div>
       )}
+      
       {/* Data Table */}
       {!isHidden && data?.length > 0 && (
-       <div  className='owner-excel-table-container'>
-         <table className="file-handler-table">
-
-
-{medata?.user?.Role === "Owner" ?
-  <thead>
-    <tr>
-      <th className="file-handler-table-header">Sno.</th>
-      {columns.map((col, index) => (
-        <th
-          key={index}
-          className={`file-handler-table-header ${col.editable ? "editable-header" : ""} ${col.name !== originalColumns[index]?.name ? "modified-header" : ""
-            }`}
-          onClick={() => handleHeaderClick(index)}
-        >
-          {editingHeader === index ? (
-            <input
-              type="text"
-              value={col.name}
-              onChange={(e) => handleHeaderChange(index, e.target.value)}
-              onBlur={() => finishEditingHeader()}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  finishEditingHeader();
-                }
-              }}
-              autoFocus
-            />
-          ) : (
-            <>
-              {col.name}
-              {col.editable && medata?.user?.Role === "Owner" && (
-                <span className="header-edit-icon"> ✎</span>
-              )}
-            </>
-          )}
-        </th>
-      ))}
-    </tr>
-  </thead> : <thead>
-    <tr>
-      <th className="file-handler-table-header">Sno.</th>
-      {columns.map((col, index) => (
-        <th key={index} className="file-handler-table-header">
-          {col.name}
-        </th>
-      ))}
-    </tr>
-  </thead>}
-<tbody>
-  {data.map((row, rowIndex) => (
-    <tr key={rowIndex}>
-      <td className="file-handler-table-data">{rowIndex + 1}</td>
-      {columns.map((col, colIndex) => (
-        <td key={colIndex} className="file-handler-table-data">
-          {col.editable ? (
-            <input
-              type="text"
-              value={row[col.name]}
-              onChange={(e) =>
-                handleCellChange(rowIndex, col.name, e.target.value)
-              }
-            />
-          ) : (
-            row[col.name]
-          )}
-        </td>
-      ))}
-    </tr>
-  ))}
-</tbody>
-</table>
+        <div className='owner-excel-table-container'>
+          <table className="file-handler-table">
+            {medata?.user?.Role === "Owner" ?
+              <thead>
+                <tr>
+                  <th className="file-handler-table-header">Sno.</th>
+                  {columns.map((col, index) => (
+                    <th
+                      key={index}
+                      className={`file-handler-table-header ${col.editable ? "editable-header" : ""} ${col.name !== originalColumns[index]?.name ? "modified-header" : ""}`}
+                      onClick={() => handleHeaderClick(index)}
+                    >
+                      {editingHeader === index ? (
+                        <input
+                          type="text"
+                          value={col.name}
+                          onChange={(e) => handleHeaderChange(index, e.target.value)}
+                          onBlur={() => finishEditingHeader()}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              finishEditingHeader();
+                            }
+                          }}
+                          autoFocus
+                        />
+                      ) : (
+                        <>
+                          {col.name}
+                          {col.editable && medata?.user?.Role === "Owner" && (
+                            <span className="header-edit-icon"> ✎</span>
+                          )}
+                        </>
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              </thead> : 
+              <thead>
+                <tr>
+                  <th className="file-handler-table-header">Sno.</th>
+                  {columns.map((col, index) => (
+                    <th key={index} className="file-handler-table-header">
+                      {col.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            }
+            <tbody>
+              {data.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  <td className="file-handler-table-data">{rowIndex + 1}</td>
+                  {columns.map((col, colIndex) => (
+                    <td key={colIndex} className="file-handler-table-data">
+                      {col.editable ? (
+                        <input
+                          type="text"
+                          value={row[col.name] || ""}
+                          onChange={(e) =>
+                            handleCellChange(rowIndex, col.name, e.target.value)
+                          }
+                        />
+                      ) : (
+                        row[col.name]
+                      )}
+                      
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
-
-      {/* Save Buttons Container */}
-   
-
     </div>
   )
 }
