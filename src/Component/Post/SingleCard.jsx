@@ -637,7 +637,7 @@ const SingleCard = ({ PostData, index }) => {
                       : "sold-out"
                       }`}
                   >
-                    {PostData?.AreaDetails?.PlotDimensions}
+                    {/* {PostData?.AreaDetails?.PlotDimensions} */}
                   </p>
                   <p
                     className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==

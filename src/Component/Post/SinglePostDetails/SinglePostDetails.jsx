@@ -614,10 +614,10 @@ export default function SinglePostDetails() {
                           />
                           <div className="img-box-imp-data">
                             <span className="img-box-details-span">
-                              {
+                              {/* {
                                 getSinglePostData?.SinglePost?.AreaDetails
                                   ?.PlotDimensions
-                              }
+                              } */}
                             </span>
                             <p> Plot Dimensions</p>
                           </div>
