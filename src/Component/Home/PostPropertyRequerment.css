@@ -33,6 +33,24 @@
 
 }
 
+.one-img-cross-btn {
+  color: var(--main-light-clr);
+  cursor: pointer;
+  background-color: var(--main-lighter-clr);
+  padding: 5px 10px;
+  border-radius: 100%;
+  font-size: 14px;
+  position: absolute;
+  right: 30px;
+  top:3vh;
+}
+.one-img-rotate-btn{
+  color: var(--main-light-clr);
+  padding: 5px;
+  font-size: 14px;
+  height: 30px;
+  width: 35px;
+}
 /* 
 .form-left {
   flex: 1;
