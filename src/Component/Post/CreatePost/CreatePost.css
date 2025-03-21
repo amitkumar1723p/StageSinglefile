@@ -561,6 +561,9 @@ button:hover,
   padding: 5px;
   /* letter-spacing: .4px; */
 }
+#plot-dimensions{
+  width: 20%;
+}
 
 .post-requermient-search .apartmentname-container {
   background-color: white;

@@ -83,17 +83,30 @@ export default function PropertyDetailsSection({
     "Vinyl",
     "Others",
   ];
-  const OtherRoomArray = [
-    "Pooja Room",
+  // const OtherRoomArray = [
+  //   "Pooja Room",
+  //   "Study Room",
+  //   "Servant Room",
+  //   "Store Room",
+  // ];
+
+
+ const [OtherRoomArray ,setOtherRoomArray]  =useState(["Pooja Room",
     "Study Room",
     "Servant Room",
     "Store Room",
-  ];
-
-
-
-
-
+  ])
+   
+ useEffect(()=>{
+    if(BasicDetailsData.ApartmentType=="Independent/Builder Floor"){
+      setOtherRoomArray([... OtherRoomArray ,"Terrace"])
+    } else{
+       let Terrace_Remove = OtherRoomArray.filter((text)=>{ return text !="Terrace"})
+       setOtherRoomArray(Terrace_Remove)
+    }
+  
+ },[BasicDetailsData.ApartmentTyp])
+ 
   return (
     <>
       <p className="Property-Details-heading">Property Details</p>

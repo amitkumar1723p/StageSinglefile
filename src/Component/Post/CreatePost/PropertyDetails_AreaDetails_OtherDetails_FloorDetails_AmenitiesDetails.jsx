@@ -192,6 +192,15 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       setTimeout(()=>showError({PlotDimensions:false}),1500);
       return;
      }
+     if(AmenitiesDetailsData?.OtherFeature?.length <= 0){
+      const targetScroll = document.querySelector("#ScrollToAreaDetails");
+        targetScroll.scrollIntoView({
+          behavior: 'smooth',    
+        });
+      showError({OtherFeature:true});
+      setTimeout(()=>showError({OtherFeature:false}),1500);
+      return;
+     }
 
      if(!OtherDetailsData.ConstructionAllowed){
       setTimeout(()=>showError({ConstructionAllowed:true}),500);
@@ -252,15 +261,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
       setTimeout(()=>showError({ProjectAmmenities:false}),1500);
       return;
      }
-     if(AmenitiesDetailsData?.OtherFeature?.length <= 0){
-      const targetScroll = document.querySelector("#ScrollToAmenities");
-        targetScroll.scrollIntoView({
-          behavior: 'smooth',    
-        });
-      showError({OtherFeature:true});
-      setTimeout(()=>showError({OtherFeature:false}),1500);
-      return;
-     }
+  
 
     }else{
       if(!PropertyDetailsData.BHKType){
@@ -470,7 +471,9 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
                 setAreaDetailsData={setAreaDetailsData}
                 BasicDetailsData={BasicDetailsData}
                 AlertObj={AlertObj}
-                Error={Error}
+                Error={Error} 
+                AmenitiesDetailsData ={AmenitiesDetailsData}
+                setAmenitiesDetailsData ={setAmenitiesDetailsData}
               />
             </div>
 

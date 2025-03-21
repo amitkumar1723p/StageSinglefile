@@ -6,6 +6,8 @@ import React, {
 } from "react";
 
 export default function AreaDetailsSection({
+  AmenitiesDetailsData,
+  setAmenitiesDetailsData,
   AreaDetailsData,
   setAreaDetailsData,
   BasicDetailsData,
@@ -56,13 +58,7 @@ export default function AreaDetailsSection({
     }
   }, [BasicDetailsData.ApartmentType]);
 
-  //  const [amit ,setamit ] =useState(false)
-
-  //   const HandleAreaDerailsAlert=()=>{
-  //     if(!AreaDetailsData.PlotSize){
-  //       setamit(true)
-  //     }
-  //   }
+  const OtherFeatureArray = ["Gated Property", "Corner Property"];
 
   return (
     <>
@@ -70,7 +66,6 @@ export default function AreaDetailsSection({
         Area Details <small>(At least one area type is mandatory.) </small>{" "}
       </p>
 
-  
       {/* Plot Area  */}
 
       {BasicDetailsData.ApartmentType === "Plot/Land" && (
@@ -114,41 +109,111 @@ export default function AreaDetailsSection({
               />
             </div>
           </div>
+          <div className="form-row">
           <div className="form-group ">
             {/* <p> {Error.PlotDimensions && "PlotDimensions Area Error"}</p> */}
             <label htmlFor="plot-Dimensons">Plot Dimensions*</label>
 
-            <div className="d-flex align-items-center">
+            <div className="  d-flex align-items-center ">
               {/* Length  */}
               <input
                 placeholder="Length"
                 className={`${Error.PlotDimensions ? "inputShake shake" : ""}`}
                 id="plot-dimensions"
                 required
-                value={AreaDetailsData?.PlotDimensions?.Length?.trimStart() || ""}
+                value={
+                  AreaDetailsData?.PlotDimensions?.Length?.trimStart() || ""
+                }
                 onChange={(e) => {
                   setAreaDetailsData({
                     ...AreaDetailsData,
-                    PlotDimensions: {...AreaDetailsData.PlotDimensions ,Length : e.target.value},
+                    PlotDimensions: {
+                      ...AreaDetailsData.PlotDimensions,
+                      Length: e.target.value,
+                    },
                   });
                 }}
               />
-              <span className="p-1">X</span>
+              <span className="p-1">x</span>
               {/* Breadth  */}
               <input
                 className={`${Error.PlotDimensions ? "inputShake shake" : ""}`}
                 id="plot-dimensions"
                 required
                 placeholder="Breadth"
-                value={AreaDetailsData?.PlotDimensions?.Breadth?.trimStart() || ""}
+                value={
+                  AreaDetailsData?.PlotDimensions?.Breadth?.trimStart() || ""
+                }
                 onChange={(e) => {
                   setAreaDetailsData({
                     ...AreaDetailsData,
-                    PlotDimensions: {...AreaDetailsData.PlotDimensions ,Breadth : e.target.value},
+                    PlotDimensions: {
+                      ...AreaDetailsData.PlotDimensions,
+                      Breadth: e.target.value,
+                    },
                   });
                 }}
               />
             </div>
+          </div>
+
+
+ 
+          {/* This Filed Part of Amenities ( AmenitiesDetailsData) */}
+          <div>
+            <p className="label">Other Feature*</p>
+
+            <div className="row">
+              {OtherFeatureArray.map((text, i) => {
+                return (
+                  <div key={i} className="d-flex gap-2">
+                    <label
+                      className={` ${Error.OtherFeature ? " shake" : ""} d-flex align-items-center `}
+                      htmlFor={`other-feature-${i}`}
+                    >
+                      {text}
+                    </label>
+                    <input
+                      className={` ${Error.OtherFeature ? " shake" : ""}`}
+                      type="checkbox"
+                      name=""
+                      id={`other-feature-${i}`}
+                      checked={
+                        AmenitiesDetailsData?.OtherFeature?.includes(text)
+                          ? true
+                          : false
+                      }
+                      onChange={(event) => {
+                        if (event.target.checked === false) {
+                          setAmenitiesDetailsData({
+                            ...AmenitiesDetailsData,
+
+                            OtherFeature:
+                              AmenitiesDetailsData?.OtherFeature?.filter(
+                                (item) => {
+                                  return item !== text;
+                                }
+                              ),
+                          });
+                        }
+                        if (event.target.checked === true) {
+                          setAmenitiesDetailsData({
+                            ...AmenitiesDetailsData,
+
+                            OtherFeature: [
+                              ...AmenitiesDetailsData?.OtherFeature,
+
+                              text,
+                            ],
+                          });
+                        }
+                      }}
+                    />
+                  </div>
+                );
+              })}{" "}
+            </div>
+          </div>
           </div>
         </>
       )}

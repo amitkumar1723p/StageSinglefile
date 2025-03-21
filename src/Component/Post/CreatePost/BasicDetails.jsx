@@ -9,6 +9,7 @@ export default function BasicDetailsSection({
   setnext,
   update,
   BasicDetailsFormSubmit,
+  SinglePost,
 }) {
   // eslint-disable-next-line
   const [ApartMentTypeTab, setApartMentTypeTab] = useState([
@@ -33,7 +34,7 @@ export default function BasicDetailsSection({
   const PropertyAdTypeArray = ["Sale", "Rent"];
 
   // const CurrentPropertyStatusArray = ["Vacant", "Rented", "Self Occupied"];
-
+  const TransitionTypeArray = ["Transfer Case", "Registry Case"];
   const [CurrentPropertyStatusArray, setCurrentPropertyStatusArray] = useState(
     []
   );
@@ -103,153 +104,177 @@ export default function BasicDetailsSection({
 
   // const BasicDetailsSubmitForm =()=>{}
 
+  const transitionDuration = "0.3s";
+  const [error, setError] = useState(" ");
 
-    const transitionDuration = '0.3s';
-    const [error, setError] = useState(' ');
+  const [propertyTypeShake, setPropertyTypeShake] = useState(false);
+  const [sellRentShake, setSellRentShake] = useState(false);
+  const [TransitionTypeShake, setTransitionTypeShake] = useState(false);
 
+  const [choosePropertyShake, setChoosePropertyShake] = useState(false);
+  const [availableFromShake, setAvailableFromShake] = useState(false);
+  const [propertyStatusShake, setPropertyStatusShake] = useState(false);
+  const isValidTransitionType = update
+    ? ["Registry Case", "Transfer Case"].includes(
+        SinglePost?.BasicDetails?.TransitionType
+      )
+    : true;
 
-    const [propertyTypeShake, setPropertyTypeShake] = useState(false);
-    const [sellRentShake, setSellRentShake] = useState(false);
-    const [choosePropertyShake,setChoosePropertyShake] = useState(false);
-    const [availableFromShake,setAvailableFromShake] = useState(false);
-    const [propertyStatusShake,setPropertyStatusShake] = useState(false);
-    const [currentpropertyStatusReadytoMove, setCurrentpropertyStatusReadytoMove ] = useState(false);
-    const [propertyAgeShake,setPropertyAgeShake] = useState(false);
-    const [underConstructionPossessionShake,setUnderConstructionPossessionShake] = useState(false);
-    const [plotLandPossessionShake,setPlotLandPossessionShake] = useState(false);
-    const [currentpropertyStatuPlotLand, setCurrentpropertyStatusPlotLand] = useState(false);
+  const [
+    currentpropertyStatusReadytoMove,
+    setCurrentpropertyStatusReadytoMove,
+  ] = useState(false);
 
+  const [propertyAgeShake, setPropertyAgeShake] = useState(false);
+  const [
+    underConstructionPossessionShake,
+    setUnderConstructionPossessionShake,
+  ] = useState(false);
+  const [plotLandPossessionShake, setPlotLandPossessionShake] = useState(false);
+  const [currentpropertyStatuPlotLand, setCurrentpropertyStatusPlotLand] =
+    useState(false);
 
-
-
-const HandleAlertShake = ()=>{
-  if(!BasicDetailsData.PropertyType) {
-    if(BasicDetailsData.PropertyAdType){
+  const HandleAlertShake = () => {
+    if (!BasicDetailsData.PropertyType) {
+      if (BasicDetailsData.PropertyAdType) {
+        setPropertyTypeShake(true);
+        setTimeout(() => setPropertyTypeShake(false), 1000);
+        return;
+      }
       setPropertyTypeShake(true);
-    setTimeout(()=>setPropertyTypeShake(false),1000);
-    return;
+      setTimeout(() => setPropertyTypeShake(false), 1000);
     }
-    setPropertyTypeShake(true);
-    setTimeout(()=>setPropertyTypeShake(false),1000);
-
-  }
-  if(!BasicDetailsData.PropertyAdType){
-    if(BasicDetailsData.ApartmentType){
+    if (!BasicDetailsData.PropertyAdType) {
+      if (BasicDetailsData.ApartmentType) {
+        setSellRentShake(true);
+        setTimeout(() => setSellRentShake(false), 1000);
+        return;
+      }
       setSellRentShake(true);
-    setTimeout(()=>setSellRentShake(false),1000);
-    return;
+      setTimeout(() => setSellRentShake(false), 1000);
     }
-    setSellRentShake(true);
-    setTimeout(()=>setSellRentShake(false),1000);
-
-  }
-  if(!BasicDetailsData.ApartmentType){
-    setChoosePropertyShake(true);
-    setTimeout(()=>setChoosePropertyShake(false),1000);
-    return;
-  }
-  if (
-    BasicDetailsData.PropertyAdType === "Rent" &&
-    !BasicDetailsData.AvailableFrom
-  ) {
-    setAvailableFromShake(true);
-    setTimeout(()=> setAvailableFromShake(false),1000);
-    return;
-  }
-  if (
-    BasicDetailsData.PropertyAdType === "Rent" &&
-    BasicDetailsData.AvailableFrom
-  ) {
-    // const currentDate = new Date(Date.now());
-    const currentDate = new Date().toISOString().split("T")[0];
-    const selectedDate = BasicDetailsData.AvailableFrom;
-
-    if (selectedDate < currentDate) {
-      return alert("Enter valid Date");
+    if (!BasicDetailsData.ApartmentType) {
+      setChoosePropertyShake(true);
+      setTimeout(() => setChoosePropertyShake(false), 1000);
+      return;
     }
 
-    // if (selectedDate >= currentDate) {
-    //   setBasicDetailsData({
-    //     ...BasicDetailsData,
-    //     AvailableFrom: e.target.value,
-    //   });
-    // }
-  }
-  if (
-    BasicDetailsData.PropertyAdType === "Sale" &&
-    ApartMentTypeArrayRemovePlotAndLand.includes(
-      BasicDetailsData.ApartmentType
-    ) &&
-    !BasicDetailsData.PropertyStatus
-  ) {
-    setPropertyStatusShake(true);
-    setTimeout(()=>setPropertyStatusShake(false),1000);
-    return;
-  }
-  if (
-    BasicDetailsData.PropertyAdType === "Sale" &&
-    ApartMentTypeArrayRemovePlotAndLand.includes(
-      BasicDetailsData.ApartmentType
-    ) &&
-    BasicDetailsData.PropertyStatus == "Ready to move" &&
-    !BasicDetailsData.CurrentPropertyStatus
-  ) {
-    setCurrentpropertyStatusReadytoMove(true);
-    setTimeout(()=>setCurrentpropertyStatusReadytoMove(false),1000);
-    
-    return;
-  }
- 
-  if (
-    BasicDetailsData.PropertyAdType === "Sale" &&
-    ApartMentTypeArrayRemovePlotAndLand.includes(
-      BasicDetailsData.ApartmentType
-    ) &&
-    BasicDetailsData.PropertyStatus == "Ready to move" &&
-    !BasicDetailsData.PropertyAge
-  ) {
-    setPropertyAgeShake(true);
-    setTimeout(()=> setPropertyAgeShake(false),1000);
-    return;
-  }
-  if (
-    BasicDetailsData.PropertyAdType === "Sale" &&
-    ApartMentTypeArrayRemovePlotAndLand.includes(
-      BasicDetailsData.ApartmentType
-    ) &&
-    BasicDetailsData.PropertyStatus == "Under Construction" &&
-    !BasicDetailsData.PossessionStatus
-  ) {
-    setUnderConstructionPossessionShake(true);
-    setTimeout(()=>setUnderConstructionPossessionShake(false),1000);
-    return;
-  }
-  if (
-    BasicDetailsData.ApartmentType === "Plot/Land" &&
-    !BasicDetailsData.CurrentPropertyStatus
-  ) {
-    setCurrentpropertyStatusPlotLand(true);
-    setTimeout(()=>setCurrentpropertyStatusPlotLand(false),1000);
-    return;
-  }
-  if (
-    BasicDetailsData.ApartmentType === "Plot/Land" &&
-    !BasicDetailsData.PossessionStatus
-  ) {
-    setPlotLandPossessionShake(true);
-    setTimeout(()=>setPlotLandPossessionShake(false),1000);
-    return;
-  }
-  if (!update) {
-        // StoreDataInSession("BasicDetailsDataUpdate", BasicDetailsData);
-        StoreDataInSession("BasicDetailsData", BasicDetailsData);
-        StoreDataInSession("next", 1);
+    //  let Date = SinglePost?.createAt
+    const EnableTransitionTypeDate = new Date("3/20/2025");
+
+    //  ["Registry Case" ,"Transfer Case"].includes(SinglePost?.BasicDetails?.TransitionType)
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      !BasicDetailsData.TransitionType &&
+      isValidTransitionType
+    ) {
+      setTransitionTypeShake(true);
+      setTimeout(() => setTransitionTypeShake(false), 1000);
+      return;
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Rent" &&
+      !BasicDetailsData.AvailableFrom
+    ) {
+      setAvailableFromShake(true);
+      setTimeout(() => setAvailableFromShake(false), 1000);
+      return;
+    }
+    if (
+      BasicDetailsData.PropertyAdType === "Rent" &&
+      BasicDetailsData.AvailableFrom
+    ) {
+      // const currentDate = new Date(Date.now());
+      const currentDate = new Date().toISOString().split("T")[0];
+      const selectedDate = BasicDetailsData.AvailableFrom;
+
+      if (selectedDate < currentDate) {
+        return alert("Enter valid Date");
       }
 
-      
+      // if (selectedDate >= currentDate) {
+      //   setBasicDetailsData({
+      //     ...BasicDetailsData,
+      //     AvailableFrom: e.target.value,
+      //   });
+      // }
+    }
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      !BasicDetailsData.PropertyStatus
+    ) {
+      setPropertyStatusShake(true);
+      setTimeout(() => setPropertyStatusShake(false), 1000);
+      return;
+    }
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Ready to move" &&
+      !BasicDetailsData.CurrentPropertyStatus
+    ) {
+      setCurrentpropertyStatusReadytoMove(true);
+      setTimeout(() => setCurrentpropertyStatusReadytoMove(false), 1000);
+
+      return;
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Ready to move" &&
+      !BasicDetailsData.PropertyAge
+    ) {
+      setPropertyAgeShake(true);
+      setTimeout(() => setPropertyAgeShake(false), 1000);
+      return;
+    }
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Under Construction" &&
+      !BasicDetailsData.PossessionStatus
+    ) {
+      setUnderConstructionPossessionShake(true);
+      setTimeout(() => setUnderConstructionPossessionShake(false), 1000);
+      return;
+    }
+    if (
+      BasicDetailsData.ApartmentType === "Plot/Land" &&
+      !BasicDetailsData.CurrentPropertyStatus
+    ) {
+      setCurrentpropertyStatusPlotLand(true);
+      setTimeout(() => setCurrentpropertyStatusPlotLand(false), 1000);
+      return;
+    }
+    if (
+      BasicDetailsData.ApartmentType === "Plot/Land" &&
+      !BasicDetailsData.PossessionStatus
+    ) {
+      setPlotLandPossessionShake(true);
+      setTimeout(() => setPlotLandPossessionShake(false), 1000);
+      return;
+    }
+    if (!update) {
+      // StoreDataInSession("BasicDetailsDataUpdate", BasicDetailsData);
+      StoreDataInSession("BasicDetailsData", BasicDetailsData);
+      StoreDataInSession("next", 1);
+    }
+
     setnext(1);
     return true;
-}
+  };
 
   return (
     <>
@@ -266,12 +291,12 @@ const HandleAlertShake = ()=>{
             <h3 className="basic-details-heading">Property Type*</h3>
             <div className="tabs">
               <button
-              style={{transitionDuration}}
+                style={{ transitionDuration }}
                 className={`tab ${
                   BasicDetailsData.PropertyType === "Residential"
                     ? "select"
                     : ""
-                }   ${propertyTypeShake? 'inputShake shake' : ''}  `}
+                }   ${propertyTypeShake ? "inputShake shake" : ""}  `}
                 value={"Residential"}
                 onClick={() => {
                   if (!update) {
@@ -292,7 +317,11 @@ const HandleAlertShake = ()=>{
                   }
                 />
               </button>
-              <div>{error && <p style={{color: 'red', fontSize: '12px' }}>{error}</p>}</div>
+              <div>
+                {error && (
+                  <p style={{ color: "red", fontSize: "12px" }}>{error}</p>
+                )}
+              </div>
             </div>
             <h3 className="basic-details-heading">I am Looking To *</h3>
             <div className="ad-type rent-sale">
@@ -301,10 +330,10 @@ const HandleAlertShake = ()=>{
                   <button
                     key={i}
                     value={text}
-                    style={{transitionDuration}}
+                    style={{ transitionDuration }}
                     className={`ad-btn tab img add-btn-${text} ${
                       BasicDetailsData.PropertyAdType === text ? "select" : ""
-                    }  ${sellRentShake? 'inputShake shake' : ''} `}
+                    }  ${sellRentShake ? "inputShake shake" : ""} `}
                     onClick={() => {
                       if (!update) {
                         setBasicDetailsData({
@@ -334,10 +363,10 @@ const HandleAlertShake = ()=>{
               {ApartMentTypeTab.map((e, i) => {
                 return (
                   <button
-                  style={{transitionDuration}}
+                    style={{ transitionDuration }}
                     className={`tab ${
                       BasicDetailsData.ApartmentType === e ? "select" : ""
-                    }  ${choosePropertyShake? 'inputShake shake' : ''}  `}
+                    }  ${choosePropertyShake ? "inputShake shake" : ""}  `}
                     key={i}
                     onClick={() => {
                       if (["Owner"].includes(medata?.user?.Role) || !update) {
@@ -362,6 +391,58 @@ const HandleAlertShake = ()=>{
                 );
               })}
             </div>
+            {/* Transition Type  */}
+            {BasicDetailsData.PropertyAdType == "Sale" && (
+              <>
+                <h3 className="basic-details-heading">Transition Type *</h3>
+
+                <div className="tab-box">
+                  {TransitionTypeArray.map((e, i) => {
+                    return (
+                      <button
+                        style={{ transitionDuration }}
+                        className={`tab ${
+                          BasicDetailsData.TransitionType === e ? "select" : ""
+                        }  ${TransitionTypeShake ? "inputShake shake" : ""}  `}
+                        key={i}
+                        onClick={() => {
+                          if (
+                             !update  ||   
+                            ["Owner"].includes(medata?.user?.Role)
+                          ) {
+                            if (BasicDetailsData.TransitionType == e) {
+                              if (update) {
+                                setBasicDetailsData({
+                                  ...BasicDetailsData,
+                                  TransitionType: "",
+                                });
+                              }
+                            } else {
+                              setBasicDetailsData({
+                                ...BasicDetailsData,
+                                TransitionType: e,
+                              });
+                            }
+                          }
+                        }}
+                      >
+                        {e}
+                        <img
+                          className="select-img"
+                          alt=""
+                          src={
+                            BasicDetailsData.TransitionType === e
+                              ? "/img/white-tick.svg"
+                              : `/img/plus-create.svg`
+                          }
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+
             {[...ApartMentTypeArrayRemovePlotAndLand, "Plot/Land"].includes(
               BasicDetailsData.ApartmentType
             ) && (
@@ -376,8 +457,10 @@ const HandleAlertShake = ()=>{
                     </label>
 
                     <input
-                    style={{transitionDuration}}
-                    className={`date-time-lable ${availableFromShake?'inputShake shake' :''} `}
+                      style={{ transitionDuration }}
+                      className={`date-time-lable ${
+                        availableFromShake ? "inputShake shake" : ""
+                      } `}
                       type="date"
                       id="available-from"
                       required
@@ -419,14 +502,19 @@ const HandleAlertShake = ()=>{
                                 className="PropertyStatus-box-content"
                               >
                                 <label
-                                style={{transitionDuration}}
-                                className={` ${propertyStatusShake?' shake' :''}`}
-                                 htmlFor={`property-status-${i}`}>
+                                  style={{ transitionDuration }}
+                                  className={` ${
+                                    propertyStatusShake ? " shake" : ""
+                                  }`}
+                                  htmlFor={`property-status-${i}`}
+                                >
                                   {text}
                                 </label>
                                 <input
-                                style={{transitionDuration}}
-                                className={` ${propertyStatusShake?'inputShake  ' :''}`}
+                                  style={{ transitionDuration }}
+                                  className={` ${
+                                    propertyStatusShake ? "inputShake  " : ""
+                                  }`}
                                   type="radio"
                                   name="Property Stattus"
                                   required
@@ -467,15 +555,31 @@ const HandleAlertShake = ()=>{
                                   className="PropertyStatus-box-content"
                                 >
                                   <label
-                                  style={{transitionDuration}}
-                                  className={` ${currentpropertyStatusReadytoMove?'shake  ' :''}  ${currentpropertyStatuPlotLand?'shake  ' :''} `}
+                                    style={{ transitionDuration }}
+                                    className={` ${
+                                      currentpropertyStatusReadytoMove
+                                        ? "shake  "
+                                        : ""
+                                    }  ${
+                                      currentpropertyStatuPlotLand
+                                        ? "shake  "
+                                        : ""
+                                    } `}
                                     htmlFor={`current-property-status-${i}`}
                                   >
                                     {text}
                                   </label>
                                   <input
-                                  style={{transitionDuration}}
-                                  className={` ${currentpropertyStatusReadytoMove?'shake  ' :''}  ${currentpropertyStatuPlotLand?'shake  ' :''}`}
+                                    style={{ transitionDuration }}
+                                    className={` ${
+                                      currentpropertyStatusReadytoMove
+                                        ? "shake  "
+                                        : ""
+                                    }  ${
+                                      currentpropertyStatuPlotLand
+                                        ? "shake  "
+                                        : ""
+                                    }`}
                                     type="radio"
                                     name="current-property-status"
                                     required
@@ -504,8 +608,10 @@ const HandleAlertShake = ()=>{
                           <div className="form-group">
                             <label htmlFor="property-age">Property Age*</label>
                             <select
-                            style={{transitionDuration}}
-                          className={`date-time-lable  ${propertyAgeShake? 'shake inputShake' : ''} `}
+                              style={{ transitionDuration }}
+                              className={`date-time-lable  ${
+                                propertyAgeShake ? "shake inputShake" : ""
+                              } `}
                               id="property-age"
                               required
                               value={BasicDetailsData.PropertyAge || ""}
@@ -531,8 +637,14 @@ const HandleAlertShake = ()=>{
                       <div className="form-group">
                         <label htmlFor="property-age">Possession Status*</label>
                         <select
-                        style={{transitionDuration}}
-                           className={`date-time-lable  ${underConstructionPossessionShake? 'shake inputShake' : ''}  ${plotLandPossessionShake? 'shake inputShake' : ''} `}
+                          style={{ transitionDuration }}
+                          className={`date-time-lable  ${
+                            underConstructionPossessionShake
+                              ? "shake inputShake"
+                              : ""
+                          }  ${
+                            plotLandPossessionShake ? "shake inputShake" : ""
+                          } `}
                           id="property-age"
                           required
                           value={BasicDetailsData.PossessionStatus || ""}
@@ -569,7 +681,7 @@ const HandleAlertShake = ()=>{
                             <div
                               className="decrement button"
                               onClick={() => {
-                                if (BasicDetailsData.NoOfOpenSide > 0) {
+                                if (BasicDetailsData.NoOfOpenSide > 1) {
                                   setBasicDetailsData({
                                     ...BasicDetailsData,
                                     NoOfOpenSide:
@@ -585,7 +697,7 @@ const HandleAlertShake = ()=>{
                               id="bathroom"
                               name="bathroom"
                               min="0"
-                              value={BasicDetailsData.NoOfOpenSide || 0}
+                              value={BasicDetailsData.NoOfOpenSide || 1}
                               readOnly
                             />
                             <div
@@ -614,9 +726,14 @@ const HandleAlertShake = ()=>{
 
       <div className="next-prev-box">
         {/*  BasicDetailsFormSubmit();  include this for default alert and include this for shakeAlert HandleAlertShake();  */}
-      <button id="Submit-Next" onClick={() => { HandleAlertShake();  }}>     
-  Next
-</button>
+        <button
+          id="Submit-Next"
+          onClick={() => {
+            HandleAlertShake();
+          }}
+        >
+          Next
+        </button>
       </div>
     </>
   );

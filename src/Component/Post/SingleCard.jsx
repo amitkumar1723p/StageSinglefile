@@ -660,6 +660,7 @@ const SingleCard = ({ PostData, index }) => {
                 </div>
 
                 <div className="single-card-detail-text ">
+                
                   <p
                     className={`single-card-detail-title  ${
                       PostData?.propertyStatus?.currentPropertyStatus !==
@@ -668,7 +669,8 @@ const SingleCard = ({ PostData, index }) => {
                         : "sold-out"
                     }`}
                   >
-                    {
+                
+                     {
                        typeof PostData?.AreaDetails?.PlotDimensions =="string" ? PostData?.AreaDetails?.PlotDimensions : <> <span>{PostData?.AreaDetails?.PlotDimensions?.Length}</span>
                        <span> X </span>
                        <span>
@@ -676,7 +678,11 @@ const SingleCard = ({ PostData, index }) => {
                          {PostData?.AreaDetails?.PlotDimensions?.Breadth}
                        </span></>
                       
-                     }
+                     }
+                     
+                   
+
+
                   </p>
                   <p
                     className={`single-card-detail-subtitle  ${

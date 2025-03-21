@@ -1307,32 +1307,32 @@ export default function SinglePostDetails() {
                               />
                             )}
 
-                          {getSinglePostData.SinglePost.PricingDetails
-                            .AdditionalDetails?.PreferredTenant?.length > 0 && (
-                              <PropertyDataBox
-                                Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
-                                  (text) => {
-                                    return text;
-                                  }
-                                )}`}
-                                Icon="/img/preferred-tenant.svg"
-                                Data={"Preferred Tenant"}
-                              />
-                            )}
-
+                        {getSinglePostData.SinglePost.PricingDetails
+                          .AdditionalDetails?.PreferredTenant?.length > 0 && (
                           <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
-                            Icon="/img/Expected-rent.svg"
-                            Data={"Expected Rent"}
+                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
+                              (text) => {
+                                return text;
+                              }
+                            )}`}
+                            Icon="/img/preferred-tenant.svg"
+                            Data={"Preferred Tenant"}
                           />
+                        )}
 
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
-                            Icon="/img/Security-deposit.svg"
-                            Data={"Security Deposit"}
-                          />
-                        </>
-                      )}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
+                          Icon="/img/Expected-rent.svg"
+                          Data={"Expected Rent"}
+                        />
+
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
+                          Icon="/img/Security-deposit.svg"
+                          Data={"Security Deposit"}
+                        />
+                      </>
+                    )}
 
                     {/* Plot Land  */}
                     {getSinglePostData?.SinglePost?.BasicDetails

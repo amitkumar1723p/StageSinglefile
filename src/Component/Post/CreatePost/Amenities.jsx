@@ -44,7 +44,7 @@ export default function Amenities({
     "Serviced Apartment",
   ];
 
-  const OtherFeatureArray = ["Gated Property", "Corner Property"];
+ 
 
   //  Plot And Land Amenities
 
@@ -801,59 +801,7 @@ export default function Amenities({
             </div>
           </div>
 
-          <div>
-            <p className="label">Other Feature*</p>
-
-            <div className="row">
-              {OtherFeatureArray.map((text, i) => {
-                return (
-                  <div key={i}>
-                    <label
-                     
-                    className={` ${Error.OtherFeature? ' shake' : ''}`}
-                     htmlFor={`other-feature-${i}`}>{text}</label>
-                    <input
-                     
-                    className={` ${Error.OtherFeature? ' shake' : ''}`}
-                      type="checkbox"
-                      name=""
-                      id={`other-feature-${i}`}
-                      checked={
-                        AmenitiesDetailsData?.OtherFeature?.includes(text)
-                          ? true
-                          : false
-                      }
-                      onChange={(event) => {
-                        if (event.target.checked === false) {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-
-                            OtherFeature:
-                              AmenitiesDetailsData?.OtherFeature?.filter(
-                                (item) => {
-                                  return item !== text;
-                                }
-                              ),
-                          });
-                        }
-                        if (event.target.checked === true) {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-
-                            OtherFeature: [
-                              ...AmenitiesDetailsData?.OtherFeature,
-
-                              text,
-                            ],
-                          });
-                        }
-                      }}
-                    />
-                  </div>
-                );
-              })}{" "}
-            </div>
-          </div>
+          
         </>
       )}
     </>

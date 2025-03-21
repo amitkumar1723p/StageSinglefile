@@ -347,6 +347,7 @@ export default function PostCard({ PostData, index }) {
                     <p className={`  answer-box  ${PostData?.propertyStatus?.currentPropertyStatus!=="sold out" ? "" : "sold-out"}`}>
                       {`${PostData?.PropertyDetails.BHKType} BHK`}{" "}
                       {PostData?.PropertyDetails?.OtherRoom?.map((text) => {
+                          
                         return `+ ${text == "Pooja Room"
                             ? "Pooja"
                             : text == "Servant Room"
@@ -354,8 +355,7 @@ export default function PostCard({ PostData, index }) {
                               : text == "Study Room"
                                 ? "Study"
                                 : text == "Store Room"
-                                  ? "Store"
-                                  : ""
+                                  ? "Store":text == "Terrace"? "Tr": ""
                           }`;
                       })}
                     </p>

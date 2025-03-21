@@ -18,7 +18,6 @@ export default function CreatePostMain() {
   const dispatch = useDispatch();
   const Params = useParams();
   const location = useLocation();
- 
 
   const update = location.pathname.includes("update");
   const navigate = useNavigate();
@@ -58,6 +57,7 @@ export default function CreatePostMain() {
     if (update) {
       dispatch(GetSinglePostAction(Params.PostId));
     }
+     
 
     // eslint-disable-next-line
   }, [update]);
@@ -76,7 +76,7 @@ export default function CreatePostMain() {
   //     // formRef.current.submit();   // This will trigger form submission
   //   }
   // };
-
+  console.log(BasicDetailsData)
   // Form Submit  Start
   //  BasicDetils Component submit -- Start
   const ApartMentTypeArrayRemovePlotAndLand = [
@@ -88,11 +88,9 @@ export default function CreatePostMain() {
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
-  
 
   // userstates for alert  shake
-    const [propertyTypeShake, setPropertyTypeShake] = useState(false);
-
+  const [propertyTypeShake, setPropertyTypeShake] = useState(false);
 
   const BasicDetailsFormSubmit = () => {
     if (!BasicDetailsData.PropertyType) {
@@ -105,7 +103,16 @@ export default function CreatePostMain() {
     if (!BasicDetailsData.ApartmentType) {
       return alert("Apartment Type is Required");
     }
-
+    const isValidTransitionType = update
+    ? ["Registry Case", "Transfer Case"].includes(
+        getSinglePostData.SinglePost?.BasicDetails?.TransitionType
+      )
+    : true;
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&!BasicDetailsData.TransitionType &&isValidTransitionType 
+    ) {
+      return alert("Transition Type is Required");
+    }
     if (
       BasicDetailsData.PropertyAdType === "Rent" &&
       !BasicDetailsData.AvailableFrom
@@ -243,6 +250,11 @@ export default function CreatePostMain() {
             PricingDetails,
             OtherDetails,
           } = SinglePost;
+           
+          
+           if(!["Admin", "Owner"].includes(medata?.user?.Role)&&BasicDetails.PropertyAdType=="Sale"){
+   navigate("/user/my-listing")
+           }
 
           if (BasicDetails.PropertyAdType === "Rent") {
             let getDate = new Date(BasicDetails?.AvailableFrom);
@@ -346,7 +358,7 @@ export default function CreatePostMain() {
         CurrentPropertyStatus,
         PropertyAge,
         PossessionStatus,
-
+        TransitionType ,
         ...BasicDetailsData_Rest
       } = BasicDetailsData; // Destructure to remove PropertyStatus
 
@@ -411,7 +423,7 @@ export default function CreatePostMain() {
         ) {
           delete BasicDetailsData_Rest.CurrentPropertyStatus;
         }
-        BasicDetailsData_Rest.NoOfOpenSide = 0;
+        BasicDetailsData_Rest.NoOfOpenSide = 1;
         delete BasicDetailsData_Rest.PropertyStatus;
 
         delete BasicDetailsData_Rest.PropertyAge;
@@ -486,9 +498,7 @@ export default function CreatePostMain() {
           AreaDetailsData;
 
         if (
-          ["Independent House/Villa"].includes(
-            BasicDetailsData.ApartmentType
-          )
+          ["Independent House/Villa"].includes(BasicDetailsData.ApartmentType)
         ) {
           // Floor Details Sort
           const { PropertyOnFloor, ...FloorDetailsData_Rest } =
@@ -573,7 +583,14 @@ export default function CreatePostMain() {
     ) {
       const { Basement, BasementArea, ...PropertyDetailsData_Rest } =
         PropertyDetailsData; // Destructure to remove PropertyStatus
-
+    
+      if (PropertyDetailsData_Rest?.OtherRoom?.includes("Terrace")) {
+        PropertyDetailsData_Rest.OtherRoom =
+          PropertyDetailsData_Rest?.OtherRoom?.filter((text) => {
+            return text !== "Terrace";
+          });
+      }
+      // PropertyDetailsData_Rest.
       setPropertyDetailsData(PropertyDetailsData_Rest);
     }
 
@@ -1075,8 +1092,6 @@ export default function CreatePostMain() {
                         // onClick={() => setnext(4)}
 
                         onClick={(e) => {
-
-                          
                           e.preventDefault();
                           BasicDetailsFormSubmit(e);
                           setTimeout(() => {
@@ -1160,6 +1175,7 @@ export default function CreatePostMain() {
               BasicDetailsFormSubmit={BasicDetailsFormSubmit}
               // BasicDetailsFormRef={BasicDetailsFormRef}
               CreatePostRef={CreatePostRef}
+               SinglePost ={getSinglePostData?.SinglePost}
             />
           )}
           {next === 1 && (
