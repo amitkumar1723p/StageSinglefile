@@ -96,7 +96,9 @@ export const GetAllPostAction = ({
         withCredentials: true,
       };
 
-      const { data } = await axios.get(url, config);
+      const { data } = await axios.post(`${api_Base_Url}/post/allpost`,{
+        query:ProjectName?.trim()
+      }, config);
 
       dispatch({ type: "GetAllPostSuccess", payload: data });
     } catch (error) {
