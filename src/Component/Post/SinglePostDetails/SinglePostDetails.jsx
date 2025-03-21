@@ -455,6 +455,8 @@ export default function SinglePostDetails() {
                                     ? "Study"
                                     : text == "Store Room"
                                     ? "Store"
+                                    : text == "Terrace"
+                                    ? "Ter"
                                     : ""
                                 }`;
                               }
@@ -521,7 +523,7 @@ export default function SinglePostDetails() {
                                     ?.OverLookingView[0]
                                 }
                               </span>
-                              {/* <p> Overlooking View </p> */}
+                              <p> Overlooking View </p>
                             </div>
                           </>
                         )}
@@ -614,20 +616,29 @@ export default function SinglePostDetails() {
                         />
                         <div className="img-box-imp-data">
                           <span className="img-box-details-span">
-                            <span>
-                              {
-                                getSinglePostData?.SinglePost?.AreaDetails
-                                  ?.PlotDimensions.Length
-                              }
-                            </span>
-                            <span> X </span>
-                            <span>
-                              {" "}
-                              {
-                                getSinglePostData?.SinglePost?.AreaDetails
-                                  ?.PlotDimensions.Breadth
-                              }
-                            </span>
+                            {typeof getSinglePostData?.SinglePost?.AreaDetails
+                              ?.PlotDimensions == "string" ? (
+                              getSinglePostData?.SinglePost?.AreaDetails
+                                ?.PlotDimensions
+                            ) : (
+                              <>
+                                {" "}
+                                <span>
+                                  {
+                                    getSinglePostData?.SinglePost?.AreaDetails
+                                      ?.PlotDimensions.Length
+                                  }
+                                </span>
+                                <span> X </span>
+                                <span>
+                                  {" "}
+                                  {
+                                    getSinglePostData?.SinglePost?.AreaDetails
+                                      ?.PlotDimensions.Breadth
+                                  }
+                                </span>
+                              </>
+                            )}
                           </span>
                           <p> Plot Dimensions</p>
                         </div>
@@ -725,47 +736,38 @@ export default function SinglePostDetails() {
                   <div className="property-price">
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Sale" && (
- 
-                        <>
-                          <span className="ReservePrice-section">
-                            Reserve Price :{" "}
-                            <span className="price-value-in-span">
-                              {formatReservePrice(
-                                getSinglePostData?.SinglePost?.PricingDetails
-                                  ?.ExpectedPrice
-                              )}
-                            </span>
-                            {getSinglePostData?.SinglePost?.BasicDetails
-                              ?.ApartmentType == "Plot/Land" ? (
-                              <>
-                                <p className="lisitng-area-section">
-                                  ₹
-                                  { String(
-              getSinglePostData?.SinglePost?.PricingDetails
-              ?.PricePerSqYd
-            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                    
-                                  }
-                                  Per sq.yd
-                                </p>
-                              </>
-                            ) : (
-                              <>
-                                <p className="lisitng-area-section">
-                                  ₹{" "}
-                                  { String(
-              getSinglePostData?.SinglePost?.PricingDetails
-              ?.PricePerSqFt
-            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                    
-                                  }
-                                  {" "}
-                                  Per sqft
-                                </p>
-                              </>
- 
-   
-                           
+                      <>
+                        <span className="ReservePrice-section">
+                          Reserve Price :{" "}
+                          <span className="price-value-in-span">
+                            {formatReservePrice(
+                              getSinglePostData?.SinglePost?.PricingDetails
+                                ?.ExpectedPrice
+                            )}
+                          </span>
+                          {getSinglePostData?.SinglePost?.BasicDetails
+                            ?.ApartmentType == "Plot/Land" ? (
+                            <>
+                              <p className="lisitng-area-section">
+                                ₹
+                                {String(
+                                  getSinglePostData?.SinglePost?.PricingDetails
+                                    ?.PricePerSqYd
+                                ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                Per sq.yd
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="lisitng-area-section">
+                                ₹{" "}
+                                {String(
+                                  getSinglePostData?.SinglePost?.PricingDetails
+                                    ?.PricePerSqFt
+                                ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                                Per sqft
+                              </p>
+                            </>
                           )}
                         </span>
 
@@ -974,9 +976,9 @@ export default function SinglePostDetails() {
                     <p>
                       Posted On :{" "}
                       <span>
-
-                        {FormatDate(getSinglePostData?.SinglePost?.PostVerifyData?.Time)}
-                         
+                        {FormatDate(
+                          getSinglePostData?.SinglePost?.PostVerifyData?.Time
+                        )}
                       </span>
                     </p>
                   </div>
@@ -1251,26 +1253,39 @@ export default function SinglePostDetails() {
                       ?.Basement == true ||
                       getSinglePostData?.SinglePost?.PropertyDetails
                         ?.Basement == false) && (
-                      <PropertyDataBox
-                        Answer={`${
-                          getSinglePostData?.SinglePost?.PropertyDetails
-                            ?.Basement == true
-                            ? "Yes"
-                            : getSinglePostData?.SinglePost?.PropertyDetails
-                                ?.Basement == false
-                            ? "No"
-                            : ""
-                        } `}
-                        Icon="/img/parking.png"
-                        Data={"Basment"}
-                      />
+                      <>
+                        <PropertyDataBox
+                          Answer={`${
+                            getSinglePostData?.SinglePost?.PropertyDetails
+                              ?.Basement == true
+                              ? "Yes"
+                              : getSinglePostData?.SinglePost?.PropertyDetails
+                                  ?.Basement == false
+                              ? "No"
+                              : ""
+                          } `}
+                          Icon="/img/parking.png"
+                          Data={"Basment"}
+                        />
+
+                        {getSinglePostData?.SinglePost?.PropertyDetails
+                          ?.Basement == true && (
+                          <>
+                            <PropertyDataBox
+                              Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
+                              Icon="/img/parking.png"
+                              Data={"Basment Area"}
+                            />
+                          </>
+                        )}
+                      </>
                     )}
 
                     {/* Property Age */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAge && (
                       <PropertyDataBox
-                        Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
+                        Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Years`}
                         Icon="/img/Property-Age.png"
                         Data={"Property Age"}
                       />
@@ -1279,9 +1294,11 @@ export default function SinglePostDetails() {
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
                       <>
-                      
                         <PropertyDataBox
-                          Answer={FormatDate(getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom) }
+                          Answer={FormatDate(
+                            getSinglePostData?.SinglePost?.BasicDetails
+                              ?.AvailableFrom
+                          )}
                           Icon="/img/bathroom.png"
                           Data={"Available From"}
                         />
@@ -1291,43 +1308,44 @@ export default function SinglePostDetails() {
                           <PropertyDataBox
                             Answer={`${new Date(
                               getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                            ).getDate()}-${new Date(
-                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                            ).getMonth() + 1
-                              }-${new Date(
+                            ).getDate()}-${
+                              new Date(
                                 getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                              ).getFullYear()}`}
+                              ).getMonth() + 1
+                            }-${new Date(
+                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
+                            ).getFullYear()}`}
                             Icon="/img/Available-From.svg"
                             Data={"Available From"}
                           />
                         )}
 
-                          {getSinglePostData.SinglePost.PricingDetails
-                            .AdditionalDetails?.PreferredTenant?.length > 0 && (
-                              <PropertyDataBox
-                                Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
-                                  (text) => {
-                                    return text;
-                                  }
-                                )}`}
-                                Icon="/img/preferred-tenant.svg"
-                                Data={"Preferred Tenant"}
-                              />
-                            )}
-
+                        {getSinglePostData.SinglePost.PricingDetails
+                          .AdditionalDetails?.PreferredTenant?.length > 0 && (
                           <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
-                            Icon="/img/Expected-rent.svg"
-                            Data={"Expected Rent"}
+                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
+                              (text) => {
+                                return text;
+                              }
+                            )}`}
+                            Icon="/img/preferred-tenant.svg"
+                            Data={"Preferred Tenant"}
                           />
+                        )}
 
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
-                            Icon="/img/Security-deposit.svg"
-                            Data={"Security Deposit"}
-                          />
-                        </>
-                      )}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
+                          Icon="/img/Expected-rent.svg"
+                          Data={"Expected Rent"}
+                        />
+
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
+                          Icon="/img/Security-deposit.svg"
+                          Data={"Security Deposit"}
+                        />
+                      </>
+                    )}
 
                     {/* Plot Land  */}
                     {getSinglePostData?.SinglePost?.BasicDetails
@@ -1352,7 +1370,7 @@ export default function SinglePostDetails() {
                         <PropertyDataBox
                           Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
                           Icon="/img/Property-age.png"
-                          Data={"Plot Facing"}
+                          Data={"Open Side"}
                         />
                         <PropertyDataBox
                           Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
@@ -1371,9 +1389,7 @@ export default function SinglePostDetails() {
                               />
                             </div>
                             <div className="para-span">
-                              <p className="p-ans">{"Other Feature"}</p>
-
-                              <p className="p-deta">
+                              <p className="p-ans">
                                 {getSinglePostData?.SinglePost?.AmenitiesDetails?.OtherFeature?.map(
                                   (text, i) => {
                                     const isLast =
@@ -1390,9 +1406,15 @@ export default function SinglePostDetails() {
                                   }
                                 )}
                               </p>
+                              <p className="p-deta">{"Other Feature"}</p>
                             </div>
                           </div>
                         )}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.ConstructionAllowed}`}
+                          Icon="/img/total-floor.png"
+                          Data={"Construction Allowed"}
+                        />
                       </>
                     )}
                   </div>

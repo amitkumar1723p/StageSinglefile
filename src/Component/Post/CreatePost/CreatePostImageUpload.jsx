@@ -48,8 +48,7 @@ export default function CreatePostImageUpload({
     return state.meDetails;
   });
 
-  //  console.log("uploadimages" ,uploadimages)
-  //   console.log("previewImages" ,previewImage)
+ 
   useEffect(() => {
     if (update) {
       setuploadimagesName(

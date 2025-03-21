@@ -64,30 +64,28 @@ export default function FloorDetails({
     setFloorDetailsData((prevData) => {
       let updatedData = { ...prevData };
   
-      if (prevData.TotalFloors) {
-        setFloorCount(Array.from({ length: prevData.TotalFloors }, (_, i) => i + 1));
-      } else {
-        if (
-          [
-            "Apartment",
-            "Independent/Builder Floor",
-            "Studio Apartment",
-            "1 RK/PG",
-            "Serviced Apartment",
-          ].includes(BasicDetailsData.ApartmentType)
-        ) {
-          updatedData.PropertyOnFloor = "";
-        }
-        setFloorCount([]);
-      }
-  
       if (!Array.isArray(updatedData.OverLookingView)) {
         updatedData.OverLookingView = [];
       }
   
+      if (
+        !prevData.TotalFloors &&
+        ["Apartment", "Independent/Builder Floor", "Studio Apartment", "1 RK/PG", "Serviced Apartment"].includes(BasicDetailsData.ApartmentType)
+      ) {
+        updatedData.PropertyOnFloor = "";
+      }
+  
       return updatedData;
     });
-  }, [FloorDetailsData.TotalFloors, BasicDetailsData.ApartmentType]); 
+  
+    // Set floor count separately to avoid conflicts
+    if (FloorDetailsData.TotalFloors) {
+      setFloorCount(Array.from({ length: FloorDetailsData.TotalFloors }, (_, i) => i + 1));
+    } else {
+      setFloorCount([]);
+    }
+  }, [FloorDetailsData.TotalFloors, BasicDetailsData.ApartmentType]);
+  
   
   const PropertyfacingArray = [
     "North",

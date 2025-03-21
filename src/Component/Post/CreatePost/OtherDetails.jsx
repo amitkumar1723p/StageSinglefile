@@ -160,7 +160,7 @@ export default function OtherDetails({
         <div className="form-group">
           <label htmlFor="front-road-width">
             {" "}
-            Width of Front Road* only in mt
+            Width of Front Road* only in mtr
           </label>
           <input
            style={{transitionDuration}}
