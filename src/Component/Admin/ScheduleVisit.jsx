@@ -120,7 +120,7 @@ const ScheduleVisit = () => {
                   </p>
                 </div>
                 <div className="schedule-visit-footer">
-                  <div className="schedule-visit-schedule-info">
+                  <div className="schedule-visit-schedule-info ">
                     <div>
                       <p>
                         Schedule Visit:

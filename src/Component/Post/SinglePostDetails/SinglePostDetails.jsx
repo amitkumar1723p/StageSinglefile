@@ -301,6 +301,11 @@ export default function SinglePostDetails() {
       //   ProfessionDetails: { WorkType: "" },
       // });
     }
+
+    if (AlertData?.success && AlertType == "ReportSuspiciousPropertyRequest") {
+      setOpenReportForm(false);
+      ;
+    }
   }, [AlertData, AlertType]);
 
   // Check Tenent Response IsExit  Dispatch

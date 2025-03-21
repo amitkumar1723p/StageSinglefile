@@ -83,7 +83,7 @@ export default function AdminAside() {
               medata.user.Role === "Owner" &&
               medata.user.OwnerVerify && (
                 <>
-                  {/* <NavLink
+                  <NavLink
                     to="/admin/all-user-Response-action"
                     className={({ isActive }) =>
                       `AdminAside-navLink ${isActive ? "active" : "hover"}`
@@ -96,7 +96,7 @@ export default function AdminAside() {
                         }`}
                     />
                     All Response
-                  </NavLink> */}
+                  </NavLink>
 
 
                   <NavLink

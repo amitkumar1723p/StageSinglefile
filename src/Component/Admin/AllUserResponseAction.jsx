@@ -5,43 +5,44 @@ import "./AllUserResponseAction.css"
 import { useDispatch, useSelector } from "react-redux";
 import "./AllRegistrationResponse.css";
 import { getAllUserResponseAction } from "../../Action/userAction";
+import { FormatDate } from "../../utils/CommonFunction";
 export default function AllUserResponseAction() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // All user response action
-const [searchbtn,setSearchbtn]=useState(false)
+  const [searchbtn, setSearchbtn] = useState(false)
   const [searchText, setSearchText] = useState("");
   const [sort, setSort] = useState([])
   const { data: AllUserResponseAction_Store } = useSelector((state) => {
     return state.AllUserResponseAction_Store;
   });
-  
+
 
 
   // console.log(sort,"lgjk")
   // Pagination logic state
   const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
-const [runPagination, setrunPagination] = useState(false);
+  const [runPagination, setrunPagination] = useState(false);
   const totalPages = AllUserResponseAction_Store?.totalPages
   // const itemsPerPage = 10; // Number of items per page
 
   // console.log(AllUserResponseAction_Store)
-useEffect(() => {
-  if (AllUserResponseAction_Store == undefined || runPagination == true) {
-    dispatch(getAllUserResponseAction(page));
-  }
-}, [page]);
-useEffect(() => {
-  // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
-  if (searchText && searchbtn===true) {
-    dispatch(getAllUserResponseAction(page, searchText));
-    
-    setSearchbtn(false)
-  }
-  
+  useEffect(() => {
+    if (AllUserResponseAction_Store == undefined || runPagination == true) {
+      dispatch(getAllUserResponseAction(page));
+    }
+  }, [page]);
+  useEffect(() => {
+    // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
+    if (searchText && searchbtn === true) {
+      dispatch(getAllUserResponseAction(page, searchText));
+
+      setSearchbtn(false)
+    }
 
 
-}, [page, searchText, searchbtn]);
+
+  }, [page, searchText, searchbtn]);
 
 
   const handlePrevPage = () => {
@@ -74,77 +75,81 @@ useEffect(() => {
 
   // Function to handle search button click
   const handleSearch = () => {
-   setSearchbtn(true)
+    setSearchbtn(true)
     // For example, log the search text
   };
-  
+
   return (
     <>
       <div className="border border-primary border-opacity-25 ">
         <div className="d-flex justify-content-between">
-        <div className=""> 
-           <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
-           </div>
-           <div className="px-4 mt-3 d-flex">
-      <input
-        type="text"
-        value={searchText} // Bind input value to state
-        onChange={handleInputChange} // Handle input change
-      />
-      <div className="px-2">
-        <button className="px-2" onClick={handleSearch}>Search</button>
-      </div>
-    </div>
+          <div className="">
+            <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
+          </div>
+          <div className="px-4 mt-3 d-flex">
+            <input
+             className="allresponse-search-input"
+             placeholder="e.g.  9053608395"
+              type="text"
+              value={searchText} // Bind input value to state
+              onChange={handleInputChange} // Handle input change
+            />
+            <div className=" px-2">
+              <button className=" allresponse-search-input-btn px-2" onClick={handleSearch}>Search</button>
+            </div>
+          </div>
         </div>
-     
-        <div className="container-fluid ">
+
+        <div className="container-fluid d-flex flex-column  gap-3 rounded">
 
 
           {AllUserResponseAction_Store?.data?.map((item) => {
             return (
 
-              <div className="d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2">
+              <div className=" main-box-all-response-section all-response-section-admin  d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2 rounded w-fit d-flex justify-content-center align-items-center">
 
                 <div className="userName border-end border-primary px-2  border-opacity-25">
                   <div className="">
-                    <p className="">{item?.Name}- <small className="fw-light">({item?.Role})</small></p>
+                    <p className="All-response-common-section  ">{item?.Name}- <small className="fw-light">({item?.Role})</small></p>
                     {/* <small className="fw-light">{item?.email}</small> */}
-                    <small className="fw-light">
-                      {item?.createAt ? new Date(item.createAt).toLocaleDateString() : 'N/A'}
+                    <small className="">
+ {item?.latestCreateAt ? FormatDate(item.latestCreateAt) : 'N/A'}
                     </small>
                   </div>
                 </div>
 
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">{item?.ContactNumber}</p>
+                  <p className="All-response-common-section d-flex justify-content-center align-items-center">{item?.ContactNumber}</p>
                 </div>
 
-                
-                
-                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Schedule Data:<small className="fw-light">{item?.scheduleData?.length}</small></p>
+
+
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" all-response-data-section d-flex justify-content-center align-items-center ">Schedule :  &nbsp; <small className="fw-bold">  {  item?.scheduleData?.length } </small> </p>
                 </div>
-                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Post Data: <small className="fw-light">{item?.postData?.length}</small></p>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Offer Data : &nbsp; <small className="fw-bold"> {item?.offerData?.length}</small></p>
                 </div>
-                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Offer Data:<small className="fw-light">{item?.offerData?.length}</small></p>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Requirement : &nbsp; <small className="fw-bold"> {item?.requireData?.length}</small></p>
                 </div>
-                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" fw-light">Notify Data:<small className="fw-light">{item?.notifyData?.length}</small></p>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2  ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Notify : &nbsp; <small className="fw-bold"> {item?.notifyData?.length}</small></p>
                 </div>
-                <div className="userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className="fw-light">Requirement:<small className="fw-light">{item?.requireData?.length}</small></p>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" all-response-data-section  d-flex justify-content-center align-items-center ">Lisitng : &nbsp; <small className="fw-bold">  {item?.postData?.length}</small></p>
                 </div>
                 {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
 
 
-                
+
+                <div className="btn-allresponse-section-main">
 
                   <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none ">
-                    <small className="fw-light px-4">click me</small>
+                    <button className="btn-allresponse-section fw-light px-4">View Details</button>
 
                   </Link>
+                </div>
 
 
                 {/* </div> */}

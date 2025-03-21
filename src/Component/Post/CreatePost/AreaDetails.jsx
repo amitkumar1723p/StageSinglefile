@@ -70,7 +70,7 @@ export default function AreaDetailsSection({
         Area Details <small>(At least one area type is mandatory.) </small>{" "}
       </p>
 
-  { console.log(AreaDetailsData)}
+  
       {/* Plot Area  */}
 
       {BasicDetailsData.ApartmentType === "Plot/Land" && (

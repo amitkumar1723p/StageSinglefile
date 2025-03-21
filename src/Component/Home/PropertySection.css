@@ -86,7 +86,7 @@
   /* justify-content: center;
     align-items: center; */
   overflow-x: scroll;
-  padding: 16px;
+  padding: 15px 15px 10px 15px;
   /* position: relative; */
   /* white-space: nowrap; */
 
@@ -171,7 +171,7 @@
   margin: 0 auto;
   position: relative;
   width: 100% !important;
-  padding: 10px !important;
+  padding: 0px 10px 10 10px !important;
 }
 
 .chooesd-area {
@@ -186,6 +186,7 @@
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
   scrollbar-width: none;
+  gap: 5px;
   /* Firefox */
 }
 
@@ -197,11 +198,11 @@
 .property-cards {
   background-color: white;
   border-radius: 8px;
-  margin: 1rem 0;
+  margin: .5rem ;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   min-width: 246px;
-  margin-right: 16px;
+  /* margin-top: 5px; */
 }
 
 .card-image {
@@ -454,7 +455,7 @@
 
   .requirement-button {
     position: fixed;
-    top: 83%;
+    top: 60%;
     right: -16%;
     transform: rotate(-90deg);
     z-index: 10;
@@ -464,7 +465,7 @@
   .floating-buttons {
     position: fixed;
     bottom: 20px;
-    right: 375px;
+    right: 15px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -591,7 +592,7 @@
 
   .requirement-button {
     position: fixed;
-    top: 83%;
+    top: 65%;
     right: -18%;
     transform: rotate(-90deg);
     z-index: 10;
@@ -601,7 +602,7 @@
   .floating-buttons {
     position: fixed;
     bottom: 20px;
-    right: 325px;
+    right: 15px;
     display: flex;
     flex-direction: column;
     gap: 15px;
