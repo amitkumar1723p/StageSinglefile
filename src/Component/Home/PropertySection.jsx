@@ -11,13 +11,13 @@ import { getPostsByAddress } from "../../Action/postAction";
 const PropertySection = () => {
   // State to track which category is active
 
-  const [todisplay,settodisplay]=useState();
-  const [filterdData,setFilterdData]=useState([]);
-  const [areas,setAreas]=useState(0);
+  const [todisplay, settodisplay] = useState();
+  const [filterdData, setFilterdData] = useState([]);
+  const [areas, setAreas] = useState(0);
   // const [loading,setLoading]=useState(false);
   // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const{data:allProperties,loading}=useSelector(store=>store.postByAddress)
+  const { data: allProperties, loading } = useSelector(store => store.postByAddress)
   const navigate = useNavigate();
   const scrollRight = () => {
     document.querySelector('.scroll-container').scrollBy({
@@ -40,7 +40,7 @@ const PropertySection = () => {
     if (allProperties?.properties?.length > 0) {
       // Step 1: Filter only 'Sale' properties
       const saleProperties = allProperties?.properties.filter(post => post?.BasicDetails?.PropertyAdType === 'Sale');
-  
+
       // Step 2: Create a formatted result combining Landmark and City
       const formattedResults = saleProperties.map(post => {
         const { LocationDetails } = post;
@@ -49,7 +49,7 @@ const PropertySection = () => {
           post,
         };
       });
-  
+
       // Step 3: Group by the area (Landmark, City combination)
       const groupedByArea = formattedResults.reduce((acc, { area, post }) => {
         if (!acc[area]) {
@@ -58,27 +58,27 @@ const PropertySection = () => {
         acc[area].push(post);
         return acc;
       }, {});
-  
+
       // Step 4: Create an object with the area as the key and an array of properties for each area
       const result = Object.keys(groupedByArea).map(area => ({
         areaName: area,
         properties: groupedByArea[area],
       }));
-  
+
       // Step 5: Sort by number of properties in descending order
       result.sort((a, b) => b.properties.length - a.properties.length);
-        console.log(filterdData)
+      // console.log(result)
       // Step 6: Set the filtered and sorted data
       setFilterdData(result);
-  
+
       // Step 7: Set the first (largest) area as default display, if available
       if (result.length > 0) {
         settodisplay(result[0]);
       }
     }
   }, [allProperties]);
-  
-  
+
+
 
   // const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
 
@@ -105,8 +105,8 @@ const PropertySection = () => {
 
   // console.log(propertyByAdress)
   const formatReservePrice = (price) => {
-  
-    if(!price){
+
+    if (!price) {
       return
     }
     if (price >= 10000000) {
@@ -142,38 +142,37 @@ const PropertySection = () => {
             </div>
           </div>
 
-      <div className="area-buttons">
-      <button className="scroll-button-area left" onClick={scrollAreaLeft}>
-                  <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
-                  </svg>
-                </button>
-          <div className="filter-buttons">
-          
-    {
-      filterdData?.map((area,ind)=>{
-        return <>
-        <button key={ind} onClick={()=>{
-        console.log("display ",todisplay)
-        console.log("d ",filterdData," ",ind)
-       settodisplay(filterdData[ind]);
-        setAreas(ind)
-        }}   className={`filter-button ${areas===ind ? "chooesd-area":""} `}>
-          
-        <span className="button-span">{area.areaName}</span>
-      </button>
-        </>
-      })
-    }
-        
+          <div className="area-buttons">
+            <button className="scroll-button-area left" onClick={scrollAreaLeft}>
+              <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            <div className="filter-buttons">
 
-          </div>
-      
-                <button className="scroll-button-area right" onClick={scrollAreaRight}>
-                  <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-                </button>
+              {
+                filterdData?.map((area, ind) => {
+                  return <>
+                    <button key={ind} onClick={() => {
+
+                      settodisplay(filterdData[ind]);
+                      setAreas(ind)
+                    }} className={`filter-button ${areas === ind ? "chooesd-area" : ""} `}>
+
+                      <span className="button-span">{area.areaName}</span>
+                    </button>
+                  </>
+                })
+              }
+
+
+            </div>
+
+            <button className="scroll-button-area right" onClick={scrollAreaRight}>
+              <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
           </div>
 
           {/* Content section */}
@@ -182,82 +181,82 @@ const PropertySection = () => {
             <div className={`category-content `}>
               <div className="container">
                 <div className="scroll-container">
-{
-  loading ? (
-    // Skeleton loader
-    Array.from({ length: 4 }).map((_, index) => (
-      <div className="property-section-card-skeleton" key={index}>
-        <div className="property-section-card-image-skeleton"></div>
-        <div className="property-section-card-content-skeleton">
-          <div className="property-section-card-title-skeleton"></div>
-          <div className="property-section-card-location-skeleton"></div>
-          <div className="property-section-card-price-skeleton"></div>
-          <div className="property-section-card-button-skeleton"></div>
-        </div>
-      </div>
-    ))
-  ) :
-  <>
-  
-  {todisplay?.properties?.map((property, index) => 
-{ 
- return property?.BasicDetails?.PropertyAdType==="Sale" && <div className="property-cards" key={index}>
-  <img
-    src={property?.PropertyImages[0]?.url}
-    // alt={property.altText}
-    className="card-image"
-  />
-  <div className="card-content">
-  <h2 className="card-title-projectname">{property?.LocationDetails
-?.ProjectName}</h2>
-    <h3 className="card-title property-truncate-text">{property?.PropertyDetails?.BHKType} BHK {property?.BasicDetails?.PropertyType} {property?.BasicDetails?.ApartmentType}</h3>
-    <p className="card-location">{property?.LocationDetails?.Landmark} {property?.LocationDetails?.Locality}</p>
-    <p className="card-price" > { formatReservePrice(property?.PricingDetails?.ExpectedPrice) || formatReservePrice(property?.PricingDetails?.ExpectedRent)} |  <span className="property-section-sqft">{  String(
-             property?.PricingDetails?.PricePerSqFt
-            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {property?.AreaDetails?.BuiltUpArea?.unit}</span></p>
+                  {
+                    loading ? (
+                      // Skeleton loader
+                      Array.from({ length: 4 }).map((_, index) => (
+                        <div className="property-section-card-skeleton" key={index}>
+                          <div className="property-section-card-image-skeleton"></div>
+                          <div className="property-section-card-content-skeleton">
+                            <div className="property-section-card-title-skeleton"></div>
+                            <div className="property-section-card-location-skeleton"></div>
+                            <div className="property-section-card-price-skeleton"></div>
+                            <div className="property-section-card-button-skeleton"></div>
+                          </div>
+                        </div>
+                      ))
+                    ) :
+                      <>
+
+                        {todisplay?.properties?.map((property, index) => {
+                          return property?.BasicDetails?.PropertyAdType === "Sale" && <div className="property-cards" key={index}>
+                            <img
+                              src={property?.PropertyImages[0]?.url}
+                              // alt={property.altText}
+                              className="card-image"
+                            />
+                            <div className="card-content">
+                              <h2 className="card-title-projectname">{property?.LocationDetails
+                                ?.ProjectName}</h2>
+                              <h3 className="card-title property-truncate-text">{property?.PropertyDetails?.BHKType} BHK {property?.BasicDetails?.PropertyType} {property?.BasicDetails?.ApartmentType}</h3>
+                              <p className="card-location">{property?.LocationDetails?.Landmark} {property?.LocationDetails?.Locality}</p>
+                              <p className="card-price" > {formatReservePrice(property?.PricingDetails?.ExpectedPrice) || formatReservePrice(property?.PricingDetails?.ExpectedRent)} |  <span className="property-section-sqft"> {String(
+                                property?.PricingDetails?.PricePerSqFt || property?.PricingDetails?.PricePerSqYd
+                              ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {property?.AreaDetails?.BuiltUpArea?.unit || " Sq yard"}</span></p>
 
 
-    <p className={`card-status   `}>Status : <span className={`card-status ${property?.BasicDetails?.PropertyStatus==="Ready to move" ? "property-section-status":"property-section-nodata"}  `} >{property?.BasicDetails?.PropertyStatus}</span> </p>
+                              <p className={`card-status   `}>Status : <span className={`card-status ${property?.BasicDetails?.PropertyStatus === "Ready to move" ? "property-section-status" : "property-section-nodata"}  `} >{property?.BasicDetails?.PropertyStatus}  {property?.BasicDetails?.PropertyStatus !== "Ready to move" && <>{property?.BasicDetails?.CurrentPropertyStatus}</>}  </span>  </p>
 
 
-    {
-      property?.BasicDetails?.AvailableFrom && <p className={`card-status ${property.statusColor}`}>
-        <span className="card-location">Avialiable from</span> {new Date(
-          property?.BasicDetails?.AvailableFrom
-        ).getDate()}-{new Date(
-          property?.BasicDetails?.AvailableFrom
-        ).getMonth() + 1
-        }-{new Date(
-          property?.BasicDetails?.AvailableFrom
-        ).getFullYear()}</p>
-    }
+                              {
+                                property?.BasicDetails?.AvailableFrom && <p className={`card-status ${property.statusColor}`}>
+                                  <span className="card-location">Avialiable from</span> {new Date(
+                                    property?.BasicDetails?.AvailableFrom
+                                  ).getDate()}-{new Date(
+                                    property?.BasicDetails?.AvailableFrom
+                                  ).getMonth() + 1
+                                  }-{new Date(
+                                    property?.BasicDetails?.AvailableFrom
+                                  ).getFullYear()}</p>
+                              }
 
 
-    <button onClick={
-      () => {
-        const link = `${property?.PropertyDetails?.BHKType ? `${property?.PropertyDetails?.BHKType} BHK` : ""} ${property?.BasicDetails?.ApartmentType} For ${property?.BasicDetails?.PropertyAdType} In ${property?.LocationDetails?.Landmark} ${property?.LocationDetails?.City}`
+
+                              <button onClick={
+                                () => {
+                                  const link = `${property?.PropertyDetails?.BHKType ? `${property?.PropertyDetails?.BHKType} BHK` : ""} ${property?.BasicDetails?.ApartmentType} For ${property?.BasicDetails?.PropertyAdType} In ${property?.LocationDetails?.Landmark} ${property?.LocationDetails?.City}`
 
 
-        navigate(
-          `/post-detail/${link.toLowerCase()
-            .replaceAll(" ", "-")
-            .replace(",", "")
-            .replaceAll("/", "-")}-${property?._id}`)
+                                  navigate(
+                                    `/post-detail/${link.toLowerCase()
+                                      .replaceAll(" ", "-")
+                                      .replace(",", "")
+                                      .replaceAll("/", "-")}-${property?._id}`)
 
-      }
-    } className="card-button"><span className="view-details-text">View Details</span></button>
+                                }
+                              } className="card-button"><span className="view-details-text">View Details</span></button>
 
-  </div>
-</div>
-}
-   
+                            </div>
+                          </div>
+                        }
 
-  )}
-  </>
-}
+
+                        )}
+                      </>
+                  }
 
                 </div>
-                
+
                 <button className="scroll-button left" onClick={scrollLeft}>
                   <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>

@@ -70,6 +70,10 @@
     text-align: center;
   }
 
+  .file-handler-table-header{
+    position: sticky;
+    top: -2px;
+  }
 
   .file-handler-table th {
     background-color: #007bff;

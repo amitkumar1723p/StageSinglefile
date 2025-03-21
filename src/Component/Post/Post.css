@@ -121,7 +121,7 @@ height: 100%;
   width: 100%;
   /* border-radius: 5px; */
   /* transform: rotate(45deg); */
-  padding: 5px;
+  padding: 0px;
 }
 .active-post {
   padding: 2px;
@@ -181,7 +181,7 @@ transition: .5s;
   
   margin-top: 135px; 
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
 }
 
 /* Post Card Css  */

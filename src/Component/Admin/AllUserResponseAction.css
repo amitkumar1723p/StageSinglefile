@@ -20,6 +20,30 @@
     color: #9e9090;
 }
 
+.all-response-data-section {
+    font-size: 14px;
+}
+
+.all-response-section-admin p {
+    color: #333;
+}
+
+.btn-allresponse-section {
+    background-color: var(--main-light-clr);
+    border: none;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-allresponse-section-main {
+    display: flex;
+    align-items: center;
+    margin: 0px 10px;
+    justify-content: center;
+}
+
+
 
 
 
@@ -42,22 +66,77 @@
 }
 
 .All-response-section-View-response:hover {
-   opacity: .8;
+    opacity: .8;
 }
 
-.btn-inactive-home{
+.btn-inactive-home {
     border: 1px solid var(--main-light-clr);
     padding: 5px;
     border-radius: 5px;
     color: #fff;
     background-color: var(--main-light-clr);
 }
-.btn-active-home{
-    
+
+.btn-active-home {
+
     padding: 5px;
     border-radius: 5px;
     background-color: #fff;
 }
+
+.main-box-all-response-section {
+    width: 100%;
+}
+
+.All-response-common-section {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.all-response-active {
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    background-color: var(--main-light-clr);
+    cursor: pointer;
+}
+
+.all-response-inactive {
+    background-color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.all-response-inactive:hover {
+background-color: var(--main-light-clr);
+color: #fff;
+transition: .5s;
+}
+
+.allresponse-search-input{
+border: 1px solid var(--main-light-clr);
+border-radius: 5px;
+padding: 5px;
+}
+
+.allresponse-search-input-btn{
+    background-color: var(--main-light-clr);
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding:5px;
+}
+
+.card-header{
+    background-color: var(--main-light-clr);
+    color: #fff;
+}
+
+/* .mian-form-data-section{
+    background-color: red;
+} */
 
 
 
@@ -119,15 +198,16 @@
 
 @keyframes skeleton-loading {
     0% {
-      background-position: 200% 0;
+        background-position: 200% 0;
     }
-    100% {
-      background-position: -200% 0;
-    }
-  }
-  
 
-  .All-response-section-role{
-font-weight: 500;
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+.All-response-section-role {
+    font-weight: 500;
     font-size: 10px;
-  }
+}

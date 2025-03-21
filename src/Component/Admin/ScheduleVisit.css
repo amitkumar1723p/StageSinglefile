@@ -126,6 +126,7 @@
   font-size: 14px;
   color: #2c3e50;
    display: flex;
+   flex-direction: column;
 }
 .schedule-visit-time {
   color: #585959;

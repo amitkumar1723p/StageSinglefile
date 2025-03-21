@@ -349,7 +349,7 @@ const SingleCard = ({ PostData, index }) => {
           {
          <div className="inactive-post">
           {/* <p>your post is currently inactive please contact our support team</p> */}
-            <p className="inactive-post-para">Inactive (Please contact our support team)</p>
+            <p className="inactive-post-para">Your listing is under review and will be activated soon.</p>
             
           </div>
           }
