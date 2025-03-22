@@ -4,45 +4,91 @@ export default function FloorDetails({
   FloorDetailsData,
   setFloorDetailsData,
   BasicDetailsData,
+  Error,
 }) {
   const [floorCount, setFloorCount] = useState([]);
 
+  // useEffect(() => {
+  //   const FloorDetailsDataCopy = { ...FloorDetailsData };
+  //   if (FloorDetailsData.TotalFloors) {
+  //     let count = [];
+  //     for (let i = 1; i <= FloorDetailsData.TotalFloors; i++) {
+  //       count.push(i);
+  //     }
+  //     setFloorCount(count);
+  //   } else {
+  //     if (
+  //       [
+  //         "Apartment",
+  //         "Independent/Builder Floor",
+  //         // "1 RK/Studio Apartment",
+  //         "Studio Apartment",
+  //         "1 RK/PG",
+  //         "Serviced Apartment",
+  //       ].includes(BasicDetailsData.ApartmentType)
+  //     ) {
+  //       // const FloorDetailsDataCopy = {...FloorDetailsData}
+
+  //       // setFloorDetailsData({
+  //       //   ...FloorDetailsData,
+  //       //   PropertyOnFloor: "",
+  //       // });
+
+  //       FloorDetailsDataCopy.PropertyOnFloor = "";
+  //     }
+
+  //     setFloorCount([]);
+  //   }
+  //   if (
+  //     !FloorDetailsDataCopy?.OverLookingView ||
+  //     !Array.isArray(FloorDetailsDataCopy?.OverLookingView)
+  //   ) {
+  //     FloorDetailsDataCopy.OverLookingView = [];
+  //   }
+  //   setFloorDetailsData(FloorDetailsDataCopy);
+  //   // eslint-disable-next-line
+  // }, [FloorDetailsData.TotalFloors]);
+
+  // useEffect(() => {
+  //   setFloorDetailsData((prevData) => ({
+  //     ...prevData,
+  //     OverLookingView: prevData.OverLookingView || [],
+  //   }));
+  //   // eslint-disable-next-line
+  // }, []);
+
+
+
+
   useEffect(() => {
-    if (FloorDetailsData.TotalFloors) {
-      let count = [];
-      for (let i = 1; i <= FloorDetailsData.TotalFloors; i++) {
-        count.push(i);
+    setFloorDetailsData((prevData) => {
+      let updatedData = { ...prevData };
+  
+      if (prevData.TotalFloors) {
+        setFloorCount(Array.from({ length: prevData.TotalFloors }, (_, i) => i + 1));
+      } else {
+        if (
+          [
+            "Apartment",
+            "Independent/Builder Floor",
+            "Studio Apartment",
+            "1 RK/PG",
+            "Serviced Apartment",
+          ].includes(BasicDetailsData.ApartmentType)
+        ) {
+          updatedData.PropertyOnFloor = "";
+        }
+        setFloorCount([]);
       }
-      setFloorCount(count);
-    } else {
-      if (
-        [
-          "Apartment",
-          "Independent/Builder Floor",
-          "1 RK/Studio Apartment",
-          "Serviced Apartment",
-        ].includes(BasicDetailsData.ApartmentType)
-      ) {
-        setFloorDetailsData({
-          ...FloorDetailsData,
-          PropertyOnFloor: "",
-        });
+  
+      if (!Array.isArray(updatedData.OverLookingView)) {
+        updatedData.OverLookingView = [];
       }
-
-      setFloorCount([]);
-    }
-    // eslint-disable-next-line
-  }, [FloorDetailsData.TotalFloors]);
-
-
-    useEffect(() => {
-      setFloorDetailsData((prevData) => ({
-        ...prevData,
-        OverLookingView: prevData.OverLookingView || [],
-     
-      }));
-      // eslint-disable-next-line
-    }, []);
+  
+      return updatedData;
+    });
+  }, [FloorDetailsData.TotalFloors, BasicDetailsData.ApartmentType]); 
+  
   const PropertyfacingArray = [
     "North",
     "South",
@@ -64,15 +110,16 @@ export default function FloorDetails({
 
   return (
     <>
-     <p className="Property-Details-heading">Floor Details</p>
+      <p className="Property-Details-heading">Floor Details</p>
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="total-floors">Total Floors*</label>
           <input
+            className={` ${Error.TotalFloors ? "inputShake shake" : ""}`}
             type="text"
             id="total-floors"
-            placeholder="Total Floors"
             required
+            placeholder="Total Floors"
             value={FloorDetailsData.TotalFloors || ""}
             onChange={(e) => {
               const regex = /^[1-9][0-9]*$/;
@@ -93,13 +140,17 @@ export default function FloorDetails({
         {[
           "Apartment",
           "Independent/Builder Floor",
-          "1 RK/Studio Apartment",
+          // "1 RK/Studio Apartment",
+          "Studio Apartment",
+          "1 RK/PG",
           "Serviced Apartment",
         ].includes(BasicDetailsData.ApartmentType) && (
           <div className="form-group">
             <label htmlFor="floor">Property on Floor*</label>
             <select
-            className="date-time-lable"
+              className={`date-time-lable ${
+                Error.PropertyOnFloor ? "inputShake shake" : ""
+              }`}
               id="floor"
               required
               value={FloorDetailsData.PropertyOnFloor || ""}
@@ -132,8 +183,6 @@ export default function FloorDetails({
         )}
       </div>
 
-      
-
       <div className="fom-group">
         <p className="label">Property Direction *</p>
 
@@ -144,7 +193,7 @@ export default function FloorDetails({
                 key={i}
                 className={`tab ${
                   FloorDetailsData.PropertyDirection === text ? "select" : ""
-                }`}
+                } ${Error.PropertyDirection ? "inputShake shake" : ""} `}
                 onClick={() => {
                   setFloorDetailsData({
                     ...FloorDetailsData,
@@ -154,7 +203,7 @@ export default function FloorDetails({
               >
                 {text}
                 <img
-                alt=""
+                  alt=""
                   src={
                     FloorDetailsData.PropertyDirection === text
                       ? "/img/white-tick.svg"
@@ -200,76 +249,58 @@ export default function FloorDetails({
             );
           })} */}
 
-
-
-
-{OverLookingViewArray.map(
-  (text, i) => {
-    return (
-      <div
-        key={i}
-        className={`tab ${
-          FloorDetailsData.OverLookingView?.includes(
-            text
-          )
-            ? "select"
-            : ""
-        }
+          {OverLookingViewArray.map((text, i) => {
+            return (
+              <div
+                key={i}
+                className={`tab ${
+                  FloorDetailsData.OverLookingView?.includes(text)
+                    ? "select"
+                    : ""
+                } ${Error.OverLookingView ? "inputShake shake" : ""}
       `}
-        onClick={() => {
-          if (
-            !FloorDetailsData.OverLookingView?.includes(
-              text
-            )
-          ) {
-            setFloorDetailsData({
-              ...FloorDetailsData,
-              OverLookingView: [
-                ...FloorDetailsData.OverLookingView,
-                text,
-              ],
-            });
-          }
-          if (
-            FloorDetailsData.OverLookingView?.includes(
-              text
-            )
-          ) {
-            setFloorDetailsData({
-              ...FloorDetailsData,
-              OverLookingView:
-              FloorDetailsData.OverLookingView?.filter(
-                  (item) => {
-                    return item !== text;
+                onClick={() => {
+                  if (!FloorDetailsData.OverLookingView?.includes(text)) {
+                    setFloorDetailsData({
+                      ...FloorDetailsData,
+                      OverLookingView: [
+                        ...FloorDetailsData.OverLookingView,
+                        text,
+                      ],
+                    });
                   }
-                ),
-            });
-          }
-        }}
-      >
-        {text}{" "}
-        <img
-        alt=""
-          src={
-            FloorDetailsData.OverLookingView?.includes(
-              text
-            )
-              ? "/img/white-tick.svg"
-              : "/img/plus-create.svg"
-          }
-        />
-      </div>
-    );
-  }
-)}
+                  if (FloorDetailsData.OverLookingView?.includes(text)) {
+                    setFloorDetailsData({
+                      ...FloorDetailsData,
+                      OverLookingView: FloorDetailsData.OverLookingView?.filter(
+                        (item) => {
+                          return item !== text;
+                        }
+                      ),
+                    });
+                  }
+                }}
+              >
+                {text}{" "}
+                <img
+                  alt=""
+                  src={
+                    FloorDetailsData.OverLookingView?.includes(text)
+                      ? "/img/white-tick.svg"
+                      : "/img/plus-create.svg"
+                  }
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
   );
 }
 
-
-{/* <div className="tab-box">
+{
+  /* <div className="tab-box">
 {SocietyAndBuildingfeature_And_ProjectAmmenities_Array.map(
   (text, i) => {
     return (
@@ -329,4 +360,5 @@ export default function FloorDetails({
     );
   }
 )}
-</div> */}
+</div> */
+}

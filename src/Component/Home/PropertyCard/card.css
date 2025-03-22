@@ -378,10 +378,10 @@
   line-height: normal;
   cursor: pointer;
   border-radius: 5px;
-  border: 2px solid #5cadeb;
+  border: 2px solid #1877f2;
 }
 .bhk-option-1:hover{
-  background-color: #5cadeb;
+  background-color: #1877f2;
   color: #fff;
 }
 

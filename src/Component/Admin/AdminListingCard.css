@@ -204,7 +204,7 @@
 
 }
 .Admin-property-post-card-main {
-  width: 835px;
+  width: 875px;
   padding: 15px;
   border-radius: 8px;
   border-radius: 8px 8px 0px 0px;
@@ -475,11 +475,11 @@
   line-height: normal;
   cursor: pointer;
   border-radius: 5px;
-  border: 2px solid #5cadeb;
+  border: 2px solid #1877f2;
 }
 
 .bhk-option:hover {
-  background-color: #5cadeb;
+  background-color: #1877f2;
   color: #fff;
 }
 
@@ -602,6 +602,15 @@
 
 .price-section span {
   font-size: 10px;
+}
+
+.rent-admin-section{
+  color: #333 !important;
+    font-size: 12px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
+    text-transform: capitalize !important; ; 
 }
 
 /* .profile-name-ans{
@@ -786,7 +795,7 @@
   transform: translateX(-16px);
   top: 67px;
   z-index: 2;
-  width: 850px;
+  width: 890px;
 
   padding: 15px 0px 0px 15px;
   padding-top: 15px;
@@ -1024,12 +1033,28 @@
 }
 
 .Assing-Property-btn {
-  background-color: var(--main-lighter-clr);
+  background-color: var(--main-light-clr);
   border: 1px solid #d0e5f6;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.Assing-Property-btn:hover{
+  opacity: .8;
+}
+
+.delete-Property-btn {
+  background-color: red;
+  border: 1px solid #d0e5f6;
+  color: white;
   padding: 5px;
   border-radius: 5px;
 }
 
+.delete-Property-btn:hover{
+  opacity: .8;
+}
 .Assing-Property-btn:hover {
   background-color: var(--main-light-clr);
   color: #fff;

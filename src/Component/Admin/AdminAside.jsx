@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import "./AdminAside.css"; // Import the vanilla CSS file
-import { getAllUserAction } from "../../Action/userAction";
+import { getAllUserAction, getPaidPropertyAction, getTransactionDetailAction } from "../../Action/userAction";
 // import { useDispatch, useSelector } from "react-redux";
 // import { NavLink, Outlet, useLocation } from "react-router-dom";
 // import './AdminAside.css'; // Import the vanilla CSS file
 import {
   GetAllNotificationsAndRequirements,
   Admin_OwnerGetAllPostAction,
+  GetDeletedPostsAction,
 } from "../../Action/postAction";
 
 export default function AdminAside() {
@@ -25,26 +26,38 @@ export default function AdminAside() {
   // const{data:AllUserResponseData}=useSelector((state)=>{
   //   return state.AllUserResponse
   // })
-// this useEffect get All user reponse 
-  useEffect(()=>{
+  // this useEffect get All user reponse
+  useEffect(() => {
     // dispatch(getAllUserAction())
     //have to protect for agent
 
-    // console.log(medata?.user?.Role)
-    if(["Owner", "Admin"].includes(medata?.user?.Role)){
-
-      dispatch(GetAllNotificationsAndRequirements())
+    
+    if (["Owner"].includes(medata?.user?.Role)) {
+      dispatch(GetAllNotificationsAndRequirements());
     }
     if (medata?.user?.Role === "Owner") {
+      console.log("owner")
       dispatch(getAllUserAction());
       dispatch(Admin_OwnerGetAllPostAction());
+      dispatch(getTransactionDetailAction())
     }
-  },[])
+  }, []);
 
   
- 
+  const { data: adminAlertData, LodingType: AlertType } = useSelector(
+    (state) => {
+      return state.Post;
+    }
+  );
+  // useEffect(() => {
+  //   if (adminAlertData && ["DeletePostRequest"].includes(AlertType)) {
+  //     if (adminAlertData.success === true) {
+  //       dispatch(GetDeletedPostsAction());
+  //     }
+  //   }
 
-  // console.log(AllUserResponseData,"hello")
+  //   // eslint-disable-next-line
+  // }, [adminAlertData]);
 
   return (
     <div className="">
@@ -109,6 +122,8 @@ export default function AdminAside() {
                     />
                     Agent
                   </NavLink>
+
+                  
                   {/* All repose user route  */}
                   {/* <NavLink
                     to="/admin/all-registration-response"

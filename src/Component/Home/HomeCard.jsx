@@ -15,43 +15,83 @@ export default function HomeCard() {
   const { loading, data } = useSelector((state) => {
     return state.GetAllPost;
   });
-  const [filterdPost,setFilterdPost] = useState(null);
+  const [filterdPost, setFilterdPost] = useState(null);
+  const [allData, setAllData] = useState([]);
 
-  useEffect(()=>{
-
-    function filter(){
-      console.log(data)
-      if(!data || !data?.allPost){
-        return 
+  useEffect(() => {
+    function filter() {
+      if (!data || !data.allPost) {
+        return;
+      } else {
+        const soldout = data?.allPost?.filter(
+          (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
+        );
+        const available = data?.allPost?.filter(
+          (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
+        );
+        
+        setFilterdPost([...available, ...soldout]);
+        
       }
-        const soldout = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus==="sold out")
-        const available = data?.allPost?.filter((item)=>item.propertyStatus?.currentPropertyStatus!=="sold out")
-
-        setFilterdPost(()=>{
-          return [...available,...soldout]
-        });
-        // console.log(filterdPost)
     }
-    filter()
-  },[data])
+    filter();
+  }, [data]);
+
+  useEffect(() => {
+    
+
+    setAllData(() => {
+      return filterdPost;
+    });
+  }, [filterdPost]);
 
   return (
     <>
       <div className="home">
-        {
-          data?.success === true ?
-          (
+       
+        
+      {
+          loading ?   <div className="allPostrender-showpost">
+          {
+            Array.from({ length: 9 }).map((_, index) => (<AllPostSkeleton key={index} />))
+          }
+        </div>:
+           
+          (data?.allPost?.length > 0 ? (
+
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
-                {filterdPost?.map((e, i) => {
+                {allData?.map((e, i) => {
                   return <SingleCard key={i} PostData={e} index={i} />;
                 })}
               </div>
             </div>
           ) : (
             <Notifyme />
-          )}
+          ))}
       </div>
     </>
+  );
+}
+const AllPostSkeleton = () => {
+
+  return (
+    <div className="all-post-skeleton-card">
+      <div className="all-post-skeleton-image"></div>
+
+      <div className="all-post-skeleton-text all-post-skeleton-title"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle-1"></div>
+      <div className="all-post-skeleton-text all-post-skeleton-subtitle"></div>
+
+      <div className="all-post-skeleton-info-container">
+        <div className="all-post-skeleton-info"></div>
+        <div className="all-post-skeleton-info"></div>
+      </div>
+
+      <div className="all-post-skeleton-footer">
+        <div className="all-post-skeleton-button"></div>
+        <div className="all-post-skeleton-button"></div>
+      </div>
+    </div>
   );
 }

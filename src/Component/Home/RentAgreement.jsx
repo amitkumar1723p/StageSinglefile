@@ -1,5 +1,7 @@
 import React from "react";
 import "./RentAgreement.css";
+import { Link } from "react-router-dom";
+
 
 const RentAgreement = () => {
   return (
@@ -15,7 +17,7 @@ const RentAgreement = () => {
           <div className="RentAgreement__icon">
             <img src="./img/Submityourdraft.svg" alt="Submit your draft" />
           </div>
-          <div>
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Submit your Draft</h2>
             <p>
               Begin your process by sending us your preliminary rent agreement
@@ -30,7 +32,7 @@ const RentAgreement = () => {
               alt="Review & Custmization"
             />
           </div>
-          <div>
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">
               Review & Customization
             </h2>
@@ -44,7 +46,7 @@ const RentAgreement = () => {
           <div className="RentAgreement__icon">
             <img src="./img/Stamp&Validate.svg" alt="Stamp & Validate" />
           </div>
-          <div>
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Stamp & Validate</h2>
             <p>
               We stamp your finalized documents using traditional or e-stamping
@@ -59,7 +61,7 @@ const RentAgreement = () => {
               alt="Delivery At Your Door step.svg"
             />
           </div>
-          <div>
+          <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">
               Delivery at your Doorstep
             </h2>
@@ -70,10 +72,22 @@ const RentAgreement = () => {
           </div>
         </div>
       </div>
-      <button className="RentAgreement__upload-button">
-       <img src="./img/upload.svg" alt="upload" /> Upload your Draft
-      </button>
-    </div>
+      <Link
+        to="https://wa.me/7837840785"
+        target="_blank"
+        rel="noopener noreferrer"
+
+      >
+        <button className="UploadYourDraftMain ">
+
+          <img src="/img/whatapp.png" alt="WhatsApp" />
+          Share Your Draft
+
+        </button>
+      </Link>
+
+
+    </div >
   );
 };
 

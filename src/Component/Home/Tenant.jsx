@@ -16,7 +16,7 @@ const Tenant = () => {
         <div className="for-tenant-heading">
           <div className="for-tenant-title"> FOR TENANT</div>
           <h2 className="for-tenant-main-heading">
-            Search, Connect, and Move In- <span>All Free!</span>
+            Search, Connect and Move In- <span>All Free!</span>
           </h2>
         </div>
         <div className="for-tenant-content">
@@ -31,7 +31,7 @@ const Tenant = () => {
           </div>
           <div className="for-tenant-introduction">
             <div className="for-tenant-introduction-img-container">
-              <img src="/img/StartExploring.svg" alt="" />
+              <img src="/img/StartExplore_Rent.svg" alt="" />
             </div>
             <div className="for-tenant-content-container">
               <h3>Start Exploring</h3>

@@ -4,6 +4,8 @@ import { GetAllAdminAction } from "../../Action/userAction";
 import {
   Admin_OwnerGetAllScheduleVisits,
   adminAssigned,
+  DeleteAndRestorePostAction,
+  PermanentPostDeleteAction,
   showVeirifyPostIconAction,
 } from "../../Action/postAction";
 import { RemoveAssignPropertyAction } from "../../Action/postAction";
@@ -31,26 +33,31 @@ export default function AdminListingCard({
   });
 
 
-  // console.log(selectAllProperty)
   const navigate = useNavigate();
 
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
-      return `₹ ${(Math.floor(price / 100000) / 100).toFixed(2)} Cr`;
+      const value = Math.floor(price / 100000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} Cr`;
     } else if (price >= 100000) {
-      return `₹ ${(Math.floor(price / 1000) / 100).toFixed(2)} L`;
+      const value = Math.floor(price / 1000) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} L`;
     } else if (price >= 1000) {
-      return `₹ ${(Math.floor(price / 10) / 100).toFixed(2)} K`;
+      const value = Math.floor(price / 10) / 100;
+      return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} K`;
     } else {
       return `₹ ${price.toFixed(2)}`;
     }
   };
+  
 
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
+
   useEffect(() => {
-    let dateString = PostData.PostVerifyData?.Time;
+    let dateString = PostData?.PostVerifyData?.Time;
+    //  console.log( "post id with date",PostData._id ,PostData)
     if (!dateString) {
       setFormatDate({
         ExpiredDate: "Invalid Date",
@@ -59,20 +66,21 @@ export default function AdminListingCard({
     } else {
       const date = new Date(dateString);
       const After90Days = new Date(date.getTime() + 90 * 24 * 60 * 60 * 1000);
-      let activedate = date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-      let postExpireddate = After90Days.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-
+  
+      // Define month names (abbreviated)
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  
+      // Format Active Date as DD-Month-YY
+      let activedate = `${("0" + date.getDate()).slice(-2)}-${monthNames[date.getMonth()]}-${date.getFullYear().toString().slice(-2)}`;
+  
+      // Format Expired Date as DD-Month-YY (90 days after)
+      let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${monthNames[After90Days.getMonth()]}-${After90Days.getFullYear().toString().slice(-2)}`;
+  
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
-  }, [PostData.PostVerifyData?.Time]);
+  }, [PostData?.PostVerifyData?.Time]);
+  
+
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -82,7 +90,7 @@ export default function AdminListingCard({
   const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
-      `${PostData.PropertyDetails.BHKType} BHk ${PostData.BasicDetails.ApartmentType} For  ${PostData.BasicDetails.PropertyAdType} In ${PostData.LocationDetails.Landmark}  ${PostData.LocationDetails.City}`
+      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHk` : ""}  ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails?.City}`
     );
   }, [PostData]);
 
@@ -108,10 +116,11 @@ export default function AdminListingCard({
   }, [PostData?.PostVerifyShow]);
 
   useEffect(() => {
+
     if (AssignPostData?.success == true) {
-      let AssingPosts = AssignPostData.AssignProperty.filter((item) => {
+      let AssingPosts = AssignPostData?.AssignProperty?.filter((item) => {
         return (
-          item.AssignedPropertys.some((item) => item.PostId === PostData._id) &&
+          item.AssignedPropertys.some((item) => item.PostId === PostData?._id) &&
           item.AdminId._id !== medata?.user?._id
         );
       });
@@ -124,7 +133,7 @@ export default function AdminListingCard({
     if (VistAndOfferData?.success == true) {
       let VisitsAndOffers_Data = VistAndOfferData?.VisitAndOffer?.find(
         (item) => {
-          return PostData._id == item.PostId;
+          return PostData?._id == item.PostId;
         }
       );
       if (VisitsAndOffers_Data) {
@@ -158,12 +167,12 @@ export default function AdminListingCard({
                     <input
                       type="checkbox"
                       checked={isChecked(index)}
-                      // checked={
-                      //   selectAllProperty ||
-                      //   AssignProperty.some(
-                      //     (item) => item.PostId === PostData._id
-                      //   )
-                      // }
+                    // checked={
+                    //   selectAllProperty ||
+                    //   AssignProperty.some(
+                    //     (item) => item.PostId === PostData?._id
+                    //   )
+                    // }
                     />
                   </label>
                 </div>
@@ -174,16 +183,16 @@ export default function AdminListingCard({
                       <input
                         type="checkbox"
                         checked={AssignProperty.some(
-                          (item) => item.PostId === PostData._id
+                          (item) => item.PostId === PostData?._id
                         )}
                         onChange={(e) => {
                           if (e.target.checked == true) {
                             setAssignProperty([
                               ...AssignProperty,
 
-                              // PostData._id,
+                              // PostData?._id,
                               {
-                                PostId: PostData._id,
+                                PostId: PostData?._id,
                                 CreatedBy: medata?.user?._id,
                               },
                             ]);
@@ -191,7 +200,7 @@ export default function AdminListingCard({
                           if (e.target.checked == false) {
                             let removeAssignProperty = AssignProperty.filter(
                               (e) => {
-                                return e.PostId != PostData._id;
+                                return e.PostId != PostData?._id;
                               }
                             );
                             setAssignProperty(removeAssignProperty);
@@ -206,23 +215,29 @@ export default function AdminListingCard({
           )}
           <div className="admin-property-card-info">
             <div className="heading-name">
-              {PostData.LocationDetails.ProjectName}
+              {PostData?.LocationDetails?.ProjectName}
               {medata?.user?.Role != "Agent" && (
                 <>
+
                   <div className="edit-del-section">
-                    {AssignProperty && (
-                      <div className="asign-user">
-                        {isAssignedToAnyUser.length > 0 && (
-                          <div className="show-admin-data">
-                            {isAssignedToAnyUser.map((AssignPropertys, i) => {
-                              return (
-                                <div
-                                  key={i}
-                                  className="adminNameButton"
-                                  onClick={() => {
+                    {/* {AssignProperty && ( */}
+                    <div className="asign-user">
+                      {isAssignedToAnyUser.length > 0 && (
+                        <div className="show-admin-data">
+                          {isAssignedToAnyUser.map((AssignPropertys, i) => {
+                            return (
+                              <div
+                                key={i}
+                                className="adminNameButton"
+                                onClick={() => {
+                                  if (
+                                    PostData?.PostDelete?.Status !== "delete"
+                                  ) {
+
+
                                     const RemoveAssignProperty = {
                                       AdminId: AssignPropertys.AdminId._id,
-                                      PostId: PostData._id,
+                                      PostId: PostData?._id,
                                     };
 
                                     let confrim = window.confirm(
@@ -235,25 +250,99 @@ export default function AdminListingCard({
                                         })
                                       );
                                     }
-                                  }}
-                                >
-                                  {AssignPropertys.AdminId?.Name} - (
-                                  {AssignPropertys.AdminId?.Role}){" "}
-                                  <span>🗑️</span>{" "}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )}
+                                  }
+
+
+                                }}
+                              >
+                                {AssignPropertys.AdminId?.Name} - (
+                                {AssignPropertys.AdminId?.Role}){" "}
+                                {PostData?.PostDelete?.Status != "delete" && (
+                                  <span>🗑️</span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    {/* // )} */}
 
                     {location.pathname.includes("admin") && (
-                      <div className="delete-edit-box">
-                        <Link to={`/admin/post/update/${PostData._id}`}>
-                          <img src="/img/edit.png" className="editIcon" />
-                        </Link>
-                      </div>
+                      <>
+                        {medata?.user?.Role == "Owner" &&
+                          (PostData?.PostDelete?.Status == "delete" ? (
+                            <>
+                              <div>
+                                <button
+                                  className="px-1 py-2 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+                                  //  className="post-verify-btn"
+                                  onClick={(e) => {
+                                    let confirm = window.confirm(
+                                      "Are you sure Restore This Post"
+                                    );
+                                    if (confirm) {
+                                      dispatch(
+                                        DeleteAndRestorePostAction({
+                                          postId: PostData?._id,
+                                          Status: "restore",
+                                        })
+                                      );
+                                    }
+                                  }}
+                                >
+                                  Re Store
+                                </button>
+                                {/* <button
+                                  onClick={() => {
+                                    let confrim = window.confirm(
+                                      "Are You Sure Parmanent Delete This Post"
+                                    );
+
+                                    if (confrim) {
+                                      dispatch(PermanentPostDeleteAction());
+                                    }
+                                  }}
+                                >
+                                  {" "}
+                                  Permanent delete
+                                </button> */}
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="delete-edit-box">
+                                <Link to={`/admin/post/update/${PostData?._id}`}>
+                                  <img
+                                    src="/img/edit.png"
+                                    className="editIcon"
+                                  />
+                                </Link>
+                              </div>{" "}
+                              <div
+                                className="PostData?.PostDelete?.Status-edit-box"
+                                onClick={(e) => {
+                                  const confrim = window.confirm(
+                                    `Are you sure you want to delete the post with ID (${PostData?._id})`
+                                  );
+                                  if (confrim) {
+                                    dispatch(
+                                      DeleteAndRestorePostAction({
+                                        postId: PostData?._id,
+                                        Status: "delete",
+                                      })
+                                    );
+                                  }
+                                }}
+                              >
+                                <img
+                                  src="/img/delete.png"
+                                  className="editIcon"
+                                />
+                              </div>{" "}
+                            </>
+                          ))}
+                      </>
                     )}
                   </div>
                 </>
@@ -270,25 +359,26 @@ export default function AdminListingCard({
                   <div className="Reserveprice-sec">
                     <p className="admin-price-pr-anwser">
                       {/* Show Reserve Price  */}
-                      {PostData.BasicDetails.PropertyAdType == "Sale" && (
+                      {PostData?.BasicDetails?.PropertyAdType == "Sale" && (
                         <>
                           <span className="price-rp-que"> Reserve Price </span>:
                           <span className="price-section">
                             {formatReservePrice(
-                              PostData.PricingDetails.ExpectedPrice
+                              PostData?.PricingDetails?.ExpectedPrice
                             )}
                           </span>
                         </>
                       )}
                     </p>
                   </div>
-                  {PostData.BasicDetails.PropertyAdType == "Rent" && (
+                  {PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                     <>
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
+                         <span className="rent-admin-section">Rent : </span> 
                             {formatReservePrice(
-                              PostData.PricingDetails.ExpectedRent
+                              PostData?.PricingDetails?.ExpectedRent
                             )}
                             <span>/Month </span>
                           </p>
@@ -298,25 +388,26 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
-                    {PostData.PricingDetails.PricePerSqFt} Per sqft
+                    
+                    {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>
 
                 <div className="property-id">
                   <p className="admin-card-heading">property id</p>
-                  <p className="admin-card-heading-ans">{PostData._id}</p>
+                  <p className="admin-card-heading-ans">{PostData?._id}</p>
                 </div>
 
                 <div className="Property-status-section">
                   <p className="admin-card-heading">Current status</p>
-                  {PostData.PostExpired ? (
+                  {PostData?.PostExpired ? (
                     <p className="Status-section-admin inactive-sign">
                       {" "}
                       Expired
                     </p>
                   ) : (
                     <>
-                      {PostData.PostVerify ? (
+                      {PostData?.PostVerify ? (
                         <p className="Status-section-admin active-sign">
                           Active
                         </p>
@@ -333,7 +424,11 @@ export default function AdminListingCard({
                   <div className="poston-date">
                     <p className="admin-card-heading">Create on</p>
                     <p className="admin-card-heading-ans">
-                      {new Date(PostData.createAt).toLocaleDateString("en-GB")}
+                      {new Date(PostData?.createAt).toLocaleDateString("en-GB", {
+                        day: '2-digit',
+                        month: 'short',
+                        year: '2-digit'
+                      })}
                     </p>
                   </div>
 
@@ -341,7 +436,7 @@ export default function AdminListingCard({
                     <p className="admin-card-heading">Active on</p>
                     <p className="admin-card-heading-ans">
                       {formatDate.ActiveDate}
-                      {/* {formatDate(PostData.PostVerifyData?.Time)} */}
+                      {/* {formatDate(PostData?.PostVerifyData?.Time)} */}
                     </p>
                   </div>
 
@@ -357,13 +452,22 @@ export default function AdminListingCard({
               <div className="response-section">
                 <p
                   // className={location.pathname.includes("schedule-visit"?"select":"")}
-                  className={`${
-                    location.pathname.includes("/admin/schedule-visit")
+                  className={`${location.pathname.includes("/admin/schedule-visit")
                       ? "active-btn"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
-                    navigate(`/admin/schedule-visit/${PostData._id}`);
+                    if (
+                      medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
+                    ) {
+                      // schedule-visit/deleted-post
+                      navigate(
+                        `/admin/schedule-visit/deleted-post/${PostData?._id}`
+                      );
+                    } else {
+                      navigate(`/admin/schedule-visit/${PostData?._id}`);
+                    }
                   }}
                 >
                   Schedule Visit (
@@ -373,13 +477,21 @@ export default function AdminListingCard({
                   )
                 </p>
                 <p
-                  className={`${
-                    location.pathname.includes("/admin/recive-offer")
+                  className={`${location.pathname.includes("/admin/recive-offer")
                       ? "active-btn"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
-                    navigate(`/admin/recive-offer/${PostData._id}`);
+                    if (
+                      medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
+                    ) {
+                      navigate(
+                        `/admin/recive-offer/deleted-post/${PostData?._id}`
+                      );
+                    } else {
+                      navigate(`/admin/recive-offer/${PostData?._id}`);
+                    }
                   }}
                 >
                   View Offer Received (
@@ -392,11 +504,11 @@ export default function AdminListingCard({
                     <div className="user-name-contact">
                       <span>Posted by : </span>
 
-                      <span>{PostData.CreatePostUser?.Name}</span>
+                      <span>{PostData?.CreatePostUser?.Name}</span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>
-                      <span>{PostData.CreatePostUser?.ContactNumber}</span>
+                      <span>{PostData?.CreatePostUser?.ContactNumber}</span>
                     </div>{" "}
                   </>
                 )}
@@ -404,101 +516,108 @@ export default function AdminListingCard({
 
               <div className="admin-btn-active-btn">
                 <Link
-                  to={`/post-detail/${PropertyAddress.toLowerCase()
-                    .replaceAll(" ", "-")
-                    .replace(",", "")
-                    .replaceAll("/", "-")}-${PostData._id}`}
+                  to={`${medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
+                      ? "/admin/deleted-post"
+                      : "/post-detail"
+                    }/${PropertyAddress.toLowerCase()
+                      .replaceAll(" ", "-")
+                      .replace(",", "")
+                      .replaceAll("/", "-")}-${PostData?._id}`}
                 >
-                  <button className="contact-button btn-sm">
+                  <button className="contact-button btn-sm" >
                     View Listing
                   </button>
                 </Link>
-                <div className="d-flex gap-5">
-                  <div className="Verified-lable">
-                    <p className="varified-lable">Verified lable :</p>
-                    <label className="toggle-switch-container">
-                      <input
-                        type="checkbox"
-                        checked={ToggleBtn}
-                        onChange={(e) => {
-                          setToggleBtn(!ToggleBtn);
-                          if (e.target.checked == true) {
-                            let postdata = { PostVerifyShow: true };
-                            let postid = PostData._id;
-                            dispatch(
-                              showVeirifyPostIconAction({ postdata }, postid)
-                            );
-                          }
-                          if (e.target.checked == false) {
-                            let postdata = { PostVerifyShow: false };
-                            let postid = PostData._id;
-                            dispatch(
-                              showVeirifyPostIconAction({ postdata }, postid)
-                            );
-                          }
-                        }}
-                        className="toggle-switch-input"
-                      />
-                      <span className="toggle-btn-slider"></span>
-                    </label>
-                  </div>
-                  {medata?.user?.Role != "Agent" && (
-                    <div className="verify-box-section">
-                      {/* {location.pathname.includes("admin") && ( */}
-                      {PostData.PostExpired ? (
-                        <button
-                          onClick={() => {
-                            dispatch(ReOpenPostAction(PostData._id));
-                          }}
-                        >
-                          Re-Open
-                        </button>
-                      ) : (
-                        <>
-                          {PostData.PostVerify ? (
-                            <button
-                              className="post-verify-btn In-Active-btn"
-                              onClick={() => {
-                                let Confrimbox = window.confirm(
-                                  "Are you Sure In-Active This Post"
-                                );
-                                if (Confrimbox) {
-                                  let postdata = { PostVerify: false };
-                                  let postid = PostData._id;
-                                  dispatch(
-                                    VerifyPostAction({ postdata }, postid)
-                                  );
-                                }
-                              }}
-                            >
-                              {/* Unverify  */} In-Active
-                            </button>
-                          ) : (
-                            <button
-                              className="post-verify-btn Active-btn "
-                              onClick={() => {
-                                let Confrimbox = window.confirm(
-                                  "Are you Sure Active This Post"
-                                );
 
-                                if (Confrimbox) {
-                                  let postdata = { PostVerify: true };
-                                  let postid = PostData._id;
-                                  dispatch(
-                                    VerifyPostAction({ postdata }, postid)
-                                  );
-                                }
-                              }}
-                            >
-                              {/* Verify */}
-                              Active
-                            </button>
-                          )}
-                        </>
-                      )}
+                {PostData?.PostDelete?.Status != "delete" && (
+                  <div className="d-flex gap-5">
+                    <div className="Verified-lable">
+                      <p className="varified-lable">Verified lable :</p>
+                      <label className="toggle-switch-container">
+                        <input
+                          type="checkbox"
+                          checked={ToggleBtn}
+                          onChange={(e) => {
+                            setToggleBtn(!ToggleBtn);
+                            if (e.target.checked == true) {
+                              let postdata = { PostVerifyShow: true };
+                              let postid = PostData?._id;
+                              dispatch(
+                                showVeirifyPostIconAction({ postdata }, postid)
+                              );
+                            }
+                            if (e.target.checked == false) {
+                              let postdata = { PostVerifyShow: false };
+                              let postid = PostData?._id;
+                              dispatch(
+                                showVeirifyPostIconAction({ postdata }, postid)
+                              );
+                            }
+                          }}
+                          className="toggle-switch-input"
+                        />
+                        <span className="toggle-btn-slider"></span>
+                      </label>
                     </div>
-                  )}
-                </div>
+                    {medata?.user?.Role != "Agent" && (
+                      <div className="verify-box-section">
+                        {/* {location.pathname.includes("admin") && ( */}
+                        {PostData?.PostExpired ? (
+                          <button
+                            onClick={() => {
+                              dispatch(ReOpenPostAction(PostData?._id));
+                            }}
+                          >
+                            Re-Open
+                          </button>
+                        ) : (
+                          <>
+                            {PostData?.PostVerify ? (
+                              <button
+                                className="post-verify-btn In-Active-btn"
+                                onClick={() => {
+                                  let Confrimbox = window.confirm(
+                                    "Are you Sure In-Active This Post"
+                                  );
+                                  if (Confrimbox) {
+                                    let postdata = { PostVerify: false };
+                                    let postid = PostData?._id;
+                                    dispatch(
+                                      VerifyPostAction({ postdata }, postid)
+                                    );
+                                  }
+                                }}
+                              >
+                                {/* Unverify  */} In-Active
+                              </button>
+                            ) : (
+                              <button
+                                className="post-verify-btn Active-btn "
+                                onClick={() => {
+                                  let Confrimbox = window.confirm(
+                                    "Are you Sure Active This Post"
+                                  );
+
+                                  if (Confrimbox) {
+                                    let postdata = { PostVerify: true };
+                                    let postid = PostData?._id;
+                                    dispatch(
+                                      VerifyPostAction({ postdata }, postid)
+                                    );
+                                  }
+                                }}
+                              >
+                                {/* Verify */}
+                                Active
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

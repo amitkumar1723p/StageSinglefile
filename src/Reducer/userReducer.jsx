@@ -22,6 +22,9 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ProfileUpdateRequest":
 
     case"ReportSuspiciousPropertyRequest":
+
+    case"verifiedPaymentRequest":
+    case "ApplyJobActionRequest":
     
       return {
         ...state,
@@ -49,6 +52,9 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ProfileUpdateSuccess":
 
     case"ReportSuspiciousPropertySuccess":
+case"verifiedPaymentSuccess":
+case "ApplyJobActionSuccess":
+  
       return {
         ...state,
         loading: false,
@@ -75,7 +81,8 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ProfileEditFail":
     case"ProfileUpdateFail":
     case"ReportSuspiciousPropertyFail":
-  
+   case"verifiedPaymentFail":
+   case "ApplyJobActionFail":
       return {
         ...state,
         loading: false,
@@ -307,6 +314,134 @@ export const getAllUserReducer=(state={},action)=>{
     };
 
     case"GetAllUserFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}
+
+export const paymentReducer=(state={},action)=>{
+  switch(action.type){
+    case "PaymentActionRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case"PaymentActionSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"PaymentActionFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"PaymentActionClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}
+
+// paid property 
+export const getPaidPropertyReducer=(state={},action)=>{
+  switch(action.type){
+    case "getPaidPropertyRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case"getPaidPropertySuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"getPaidPropertyFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"getPaidPropertyFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}
+
+// export const getTransactionDetailReducer=(state={},action)=>{
+//   switch(action.type){
+//     case "getTransactionDetailRequest":
+//       return {
+//         ...state,
+//         data:action.payload,
+//         loading:true,
+//       };
+
+//       case"getTransactionDetailSuccess":
+//       return {
+//         ...state,
+//         data:action.payload,
+//         loading:false
+//       };
+
+//       case"getTransactionDetailFail":
+//       return {
+//         ...state,
+//         data:action.payload,
+//         loading:false
+//       }
+
+//       case"getPaidPropertyFailClear":
+//       return{}
+//           default:
+//             return{
+//               ...state,
+//             };
+//   }
+// }
+export const getTransactionDetailReducer=(state={},action)=>{
+  switch(action.type){
+    case "getTransactionDetailRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case"getTransactionDetailSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"getTransactionDetailFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"getTransactionDetailFailClear":
 return{}
     default:
       return{

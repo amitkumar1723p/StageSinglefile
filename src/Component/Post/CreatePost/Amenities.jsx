@@ -1,59 +1,109 @@
 import React from "react";
 import { useEffect } from "react";
+import OtherDetails from "./OtherDetails";
 
 export default function Amenities({
   AmenitiesDetailsData,
   setAmenitiesDetailsData,
   update,
   BasicDetailsData,
+  Error,
 }) {
   const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
   const YesNoArray = [true, false];
   const PowerBackUpArray = ["None", "Partial", "Full"];
   const SocietyAndBuildingfeature_And_ProjectAmmenities_Array = [
-    "Club house",
+    "Club House",
     "Swimming Pool",
     "GYM",
-    "Community Center",
+    "Community Centre",
     "Security Guard",
+    "Maintenance Staff",
+    "Piped Gas",
+    "Visitor Parking",
+    "Lift",
+    "Park",
+    "Intercom Facility",
+    "Waste Disposal",
+    "Cafeteria/Food Court",
+    "Conference Room",
+    "Library",
+    "ATMs",
+    "Jogging Track",
+    "Kids Play Area",
   ];
   const WaterSourceArray = ["Municipal corporation", "Borewell/Tank"];
 
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
-    "1 RK/Studio Apartment",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+    "1 RK/PG",
     "Independent/Builder Floor",
     "Serviced Apartment",
   ];
 
   const OtherFeatureArray = ["Gated Property", "Corner Property"];
+
+  //  Plot And Land Amenities
+
+  let ProjectAmmenitiesArray = [
+    "Club House",
+    "Swimming Pool",
+    "GYM",
+    "Community Centre",
+    "Security Guard",
+  ];
+
   useEffect(() => {
-    setAmenitiesDetailsData((prevData) => ({
-      ...prevData,
-      FurnishingOption: ["Furnished", "Semi-Furnished"].includes(
-        AmenitiesDetailsData.Furnishing
-      )
-        ? {
-            ...prevData.FurnishingOption,
-            Light: prevData.FurnishingOption?.Light || 0,
-            Fans: prevData.FurnishingOption?.Fans || 0,
-            Geyser: prevData.FurnishingOption?.Geyser || 0,
-            AC: prevData.FurnishingOption?.AC || 0,
-            TV: prevData.FurnishingOption?.TV || 0,
-            Beds: prevData.FurnishingOption?.Beds || 0,
-            Wardrobe: prevData.FurnishingOption?.Wardrobe || 0,
-          }
-        : AmenitiesDetailsData.Furnishing === "Un-Furnished" && update
-        ? AmenitiesDetailsData.FurnishingOption
-        : {},
-      SocietyAndBuildingFeature: prevData.SocietyAndBuildingFeature || [],
-      ProjectAmmenities: prevData.ProjectAmmenities || [],
-      WaterSource: prevData.WaterSource || [],
-      OtherFeature: prevData.OtherFeature || [],
-    }));
+    if (BasicDetailsData.ApartmentType == "Plot/Land") {
+      setTimeout(() => {
+        setAmenitiesDetailsData((prevData) => ({
+          ...prevData,
+          ProjectAmmenities: prevData.ProjectAmmenities || [],
+          WaterSource: prevData.WaterSource || [],
+          OtherFeature: prevData.OtherFeature || [],
+        }));
+      }, 0);
+    } else {
+      setTimeout(() => {
+        setAmenitiesDetailsData((prevData) => ({
+          ...prevData,
+          FurnishingOption: ["Furnished", "Semi-Furnished"].includes(
+            AmenitiesDetailsData.Furnishing
+          )
+            ? {
+                ...prevData.FurnishingOption,
+                Light: prevData.FurnishingOption?.Light || 0,
+                Fans: prevData.FurnishingOption?.Fans || 0,
+                Geyser: prevData.FurnishingOption?.Geyser || 0,
+                AC: prevData.FurnishingOption?.AC || 0,
+                TV:
+                  AmenitiesDetailsData.Furnishing == "Furnished"
+                    ? prevData.FurnishingOption?.TV || 0
+                    : undefined,
+                Beds:
+                  AmenitiesDetailsData.Furnishing == "Furnished"
+                    ? prevData.FurnishingOption?.Beds || 0
+                    : undefined,
+                Wardrobe: prevData.FurnishingOption?.Wardrobe || 0,
+              }
+            : AmenitiesDetailsData.Furnishing === "Un-Furnished" && update
+            ? AmenitiesDetailsData.FurnishingOption
+            : {},
+          SocietyAndBuildingFeature: prevData.SocietyAndBuildingFeature || [],
+          WaterSource:
+            BasicDetailsData.PropertyStatus != "Under Construction"
+              ? prevData.WaterSource || []
+              : undefined,
+        }));
+      }, 0);
+    }
+
     // eslint-disable-next-line
   }, [AmenitiesDetailsData.Furnishing]);
+
 
   return (
     <>
@@ -69,10 +119,11 @@ export default function Amenities({
               {FurnishingOptions.map((text, i) => {
                 return (
                   <div
+                  
                     key={i}
                     className={`tab ${
                       AmenitiesDetailsData.Furnishing === text ? "select" : ""
-                    }`}
+                    }    ${Error.Furnishing? 'inputShake shake' : ''}`}
                     onClick={() => {
                       if (text === "Un-Furnished") {
                         setAmenitiesDetailsData({
@@ -117,12 +168,16 @@ export default function Amenities({
                   {/* ModularKitchen */}
 
                   <div className="field-group">
-                    <label htmlFor="light">Modular Kitchen</label>
+                    <label
+                   
+                     htmlFor="light">Modular Kitchen</label>
                     <div className="row">
                       {YesNoArray.map((text, i) => {
                         return (
                           <div className="row" key={i}>
                             <input
+                             
+                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
                               type="radio"
                               id={`modular-kitchen-${i}`}
                               name="modular-kitchen"
@@ -142,7 +197,11 @@ export default function Amenities({
                                 });
                               }}
                             />
-                            <label htmlFor={`modular-kitchen-${i}`}>
+                            <label
+                            
+                             
+                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
+                             htmlFor={`modular-kitchen-${i}`}>
                               {text === true ? "Yes" : "No"}
                             </label>
                           </div>
@@ -186,7 +245,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -236,7 +295,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -289,7 +348,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -338,7 +397,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -354,101 +413,115 @@ export default function Amenities({
                     </div>
                   </div>
 
-                  {/* TV */}
-
-                  <div className="field-group">
-                    <label htmlFor="tv">TV*</label>
-                    <div className="counter">
-                      <div
-                        className="decrement button"
-                        onClick={() => {
-                          if (AmenitiesDetailsData.FurnishingOption?.TV > 0) {
-                            setAmenitiesDetailsData({
-                              ...AmenitiesDetailsData,
-                              FurnishingOption: {
-                                ...AmenitiesDetailsData.FurnishingOption,
-                                TV:
-                                  AmenitiesDetailsData.FurnishingOption?.TV - 1,
-                              },
-                            });
-                          }
-                        }}
-                      >
-                        -
+                  {AmenitiesDetailsData.Furnishing == "Furnished" && (
+                    <>
+                      {" "}
+                      {/* TV */}
+                      <div className="field-group">
+                        <label htmlFor="tv">TV*</label>
+                        <div className="counter">
+                          <div
+                            className="decrement button"
+                            onClick={() => {
+                              if (
+                                AmenitiesDetailsData.FurnishingOption?.TV > 0
+                              ) {
+                                setAmenitiesDetailsData({
+                                  ...AmenitiesDetailsData,
+                                  FurnishingOption: {
+                                    ...AmenitiesDetailsData.FurnishingOption,
+                                    TV:
+                                      AmenitiesDetailsData.FurnishingOption
+                                        ?.TV - 1,
+                                  },
+                                });
+                              }
+                            }}
+                          >
+                            -
+                          </div>
+                          <input
+                            type="text"
+                            id="tv"
+                            name="tv"
+                            min="0"
+                            value={
+                              AmenitiesDetailsData.FurnishingOption?.TV || 0
+                            }
+                            readOnly
+                          />
+                          <div
+                            className="increment button not-select-text"
+                            onClick={() => {
+                              setAmenitiesDetailsData({
+                                ...AmenitiesDetailsData,
+                                FurnishingOption: {
+                                  ...AmenitiesDetailsData.FurnishingOption,
+                                  TV:
+                                    AmenitiesDetailsData.FurnishingOption?.TV +
+                                    1,
+                                },
+                              });
+                            }}
+                          >
+                            +
+                          </div>
+                        </div>
                       </div>
-                      <input
-                        type="number"
-                        id="tv"
-                        name="tv"
-                        min="0"
-                        value={AmenitiesDetailsData.FurnishingOption?.TV || 0}
-                        readOnly
-                      />
-                      <div
-                        className="increment button"
-                        onClick={() => {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-                            FurnishingOption: {
-                              ...AmenitiesDetailsData.FurnishingOption,
-                              TV: AmenitiesDetailsData.FurnishingOption?.TV + 1,
-                            },
-                          });
-                        }}
-                      >
-                        +
+                      {/* Beds */}
+                      <div className="field-group">
+                        <label htmlFor="beds">Beds*</label>
+                        <div className="counter">
+                          <div
+                            className="decrement button"
+                            onClick={() => {
+                              if (
+                                AmenitiesDetailsData.FurnishingOption?.Beds > 0
+                              ) {
+                                setAmenitiesDetailsData({
+                                  ...AmenitiesDetailsData,
+                                  FurnishingOption: {
+                                    ...AmenitiesDetailsData.FurnishingOption,
+                                    Beds:
+                                      AmenitiesDetailsData.FurnishingOption
+                                        ?.Beds - 1,
+                                  },
+                                });
+                              }
+                            }}
+                          >
+                            -
+                          </div>
+                          <input
+                            type="text"
+                            id="beds"
+                            name="beds"
+                            min="0"
+                            value={
+                              AmenitiesDetailsData.FurnishingOption?.Beds || 0
+                            }
+                            readOnly
+                          />
+                          <div
+                            className="increment button not-select-text"
+                            onClick={() => {
+                              setAmenitiesDetailsData({
+                                ...AmenitiesDetailsData,
+                                FurnishingOption: {
+                                  ...AmenitiesDetailsData.FurnishingOption,
+                                  Beds:
+                                    AmenitiesDetailsData.FurnishingOption
+                                      ?.Beds + 1,
+                                },
+                              });
+                            }}
+                          >
+                            +
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Beds */}
-
-                  <div className="field-group">
-                    <label htmlFor="beds">Beds*</label>
-                    <div className="counter">
-                      <div
-                        className="decrement button"
-                        onClick={() => {
-                          if (AmenitiesDetailsData.FurnishingOption?.Beds > 0) {
-                            setAmenitiesDetailsData({
-                              ...AmenitiesDetailsData,
-                              FurnishingOption: {
-                                ...AmenitiesDetailsData.FurnishingOption,
-                                Beds:
-                                  AmenitiesDetailsData.FurnishingOption?.Beds -
-                                  1,
-                              },
-                            });
-                          }
-                        }}
-                      >
-                        -
-                      </div>
-                      <input
-                        type="number"
-                        id="beds"
-                        name="beds"
-                        min="0"
-                        value={AmenitiesDetailsData.FurnishingOption?.Beds || 0}
-                        readOnly
-                      />
-                      <div
-                        className="increment button"
-                        onClick={() => {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-                            FurnishingOption: {
-                              ...AmenitiesDetailsData.FurnishingOption,
-                              Beds:
-                                AmenitiesDetailsData.FurnishingOption?.Beds + 1,
-                            },
-                          });
-                        }}
-                      >
-                        +
-                      </div>
-                    </div>
-                  </div>
+                    </>
+                  )}
 
                   {/* Wardrobe */}
 
@@ -486,7 +559,7 @@ export default function Amenities({
                         readOnly
                       />
                       <div
-                        className="increment button"
+                        className="increment button not-select-text"
                         onClick={() => {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
@@ -517,6 +590,7 @@ export default function Amenities({
                 (text, i) => {
                   return (
                     <div
+                    
                       key={i}
                       className={`tab ${
                         AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
@@ -524,7 +598,7 @@ export default function Amenities({
                         )
                           ? "select"
                           : ""
-                      }
+                      } ${Error.SocietyAndBuildingFeature? 'inputShake shake' : ''}
                     `}
                       onClick={() => {
                         if (
@@ -581,15 +655,15 @@ export default function Amenities({
       {/* Power Back up */}
       <div className="fom-group">
         <p className="label">Power Back up*</p>
-
         <div className="tab-box">
           {PowerBackUpArray.map((text, i) => {
             return (
               <div
+              
                 key={i}
                 className={`tab ${
                   AmenitiesDetailsData.PowerBackUp === text ? "select" : ""
-                }`}
+                }  ${Error.PowerBackUp? 'inputShake shake' : ''}`}
                 onClick={() => {
                   setAmenitiesDetailsData({
                     ...AmenitiesDetailsData,
@@ -613,158 +687,165 @@ export default function Amenities({
       </div>
 
       {/* Water Source  */}
-
-      <div className="fom-group">
-        <p className="label"> Water Source *</p>
-        <div className="tab-box">
-          {WaterSourceArray.map((text, i) => {
-            return (
-              <div
-                key={i}
-                className={`tab ${
+      {BasicDetailsData.PropertyStatus != "Under Construction" && (
+        <div className="fom-group">
+          <p className="label"> Water Source *</p>
+          <div className="tab-box">
+            {WaterSourceArray.map((text, i) => {
+              return (
+                <div
+                
+                  key={i}
+              className={`tab ${
                   AmenitiesDetailsData.WaterSource?.includes(text)
                     ? "select"
                     : ""
                 }
-                    `}
-                onClick={(event) => {
-                  if (!AmenitiesDetailsData.WaterSource?.includes(text)) {
-                    setAmenitiesDetailsData({
-                      ...AmenitiesDetailsData,
-                      WaterSource: [...AmenitiesDetailsData.WaterSource, text],
-                    });
-                  }
-                  if (AmenitiesDetailsData.WaterSource.includes(text)) {
-                    setAmenitiesDetailsData({
-                      ...AmenitiesDetailsData,
-                      WaterSource: AmenitiesDetailsData.WaterSource?.filter(
-                        (item) => {
-                          return item !== text;
-                        }
-                      ),
-                    });
-                  }
-                }}
-              >
-                {text}{" "}
-                <img
-                  alt=""
-                  src={
-                    AmenitiesDetailsData.WaterSource?.includes(text)
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
-                  }
-                />
-              </div>
-            );
-          })}
+                    ${Error.WaterSource? 'inputShake shake' : ''} `}
+               
+                  onClick={(event) => {
+                    if (!AmenitiesDetailsData.WaterSource?.includes(text)) {
+                      setAmenitiesDetailsData({
+                        ...AmenitiesDetailsData,
+                        WaterSource: [
+                          ...AmenitiesDetailsData.WaterSource,
+                          text,
+                        ],
+                      });
+                    }
+                    if (AmenitiesDetailsData.WaterSource.includes(text)) {
+                      setAmenitiesDetailsData({
+                        ...AmenitiesDetailsData,
+                        WaterSource: AmenitiesDetailsData.WaterSource?.filter(
+                          (item) => {
+                            return item !== text;
+                          }
+                        ),
+                      });
+                    }
+                  }}
+                >
+                  {text}{" "}
+                  <img
+                    alt=""
+                    src={
+                      AmenitiesDetailsData.WaterSource?.includes(text)
+                        ? "/img/white-tick.svg"
+                        : "/img/plus-create.svg"
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* plot and Land Fields  */}
 
       {BasicDetailsData.ApartmentType === "Plot/Land" && (
         <>
-          {/* Society And Building feature   */}
           <div className="fom-group">
             <p className="label"> Project Ammenities*</p>
             <div className="tab-box">
-              {SocietyAndBuildingfeature_And_ProjectAmmenities_Array.map(
-                (text, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className={`tab ${
-                        AmenitiesDetailsData.ProjectAmmenities?.includes(text)
-                          ? "select"
-                          : ""
-                      }
+              {ProjectAmmenitiesArray.map((text, i) => {
+                return (
+                  <div
+                  
+                    key={i}
+                    className={`tab ${
+                      AmenitiesDetailsData.ProjectAmmenities?.includes(text)
+                        ? "select"
+                        : ""
+                    }  ${Error.ProjectAmmenities? 'inputShake shake' : ''}
                     `}
-                      onClick={() => {
-                        if (
-                          !AmenitiesDetailsData.ProjectAmmenities?.includes(
-                            text
-                          )
-                        ) {
+                    onClick={() => {
+                      if (
+                        !AmenitiesDetailsData.ProjectAmmenities?.includes(text)
+                      ) {
+                        setAmenitiesDetailsData({
+                          ...AmenitiesDetailsData,
+                          ProjectAmmenities: [
+                            ...AmenitiesDetailsData.ProjectAmmenities,
+                            text,
+                          ],
+                        });
+                      }
+                      if (
+                        AmenitiesDetailsData.ProjectAmmenities?.includes(text)
+                      ) {
+                        setAmenitiesDetailsData({
+                          ...AmenitiesDetailsData,
+                          ProjectAmmenities:
+                            AmenitiesDetailsData.ProjectAmmenities?.filter(
+                              (item) => {
+                                return item !== text;
+                              }
+                            ),
+                        });
+                      }
+                    }}
+                  >
+                    {text}{" "}
+                    <img
+                      alt="tick"
+                      src={
+                        AmenitiesDetailsData.ProjectAmmenities?.includes(text)
+                          ? "/img/white-tick.svg"
+                          : "/img/plus-create.svg"
+                      }
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <p className="label">Other Feature*</p>
+
+            <div className="row">
+              {OtherFeatureArray.map((text, i) => {
+                return (
+                  <div key={i}>
+                    <label
+                     
+                    className={` ${Error.OtherFeature? ' shake' : ''}`}
+                     htmlFor={`other-feature-${i}`}>{text}</label>
+                    <input
+                     
+                    className={` ${Error.OtherFeature? ' shake' : ''}`}
+                      type="checkbox"
+                      name=""
+                      id={`other-feature-${i}`}
+                      checked={
+                        AmenitiesDetailsData?.OtherFeature?.includes(text)
+                          ? true
+                          : false
+                      }
+                      onChange={(event) => {
+                        if (event.target.checked === false) {
                           setAmenitiesDetailsData({
                             ...AmenitiesDetailsData,
-                            ProjectAmmenities: [
-                              ...AmenitiesDetailsData.ProjectAmmenities,
-                              text,
-                            ],
-                          });
-                        }
-                        if (
-                          AmenitiesDetailsData.ProjectAmmenities?.includes(text)
-                        ) {
-                          setAmenitiesDetailsData({
-                            ...AmenitiesDetailsData,
-                            ProjectAmmenities:
-                              AmenitiesDetailsData.ProjectAmmenities?.filter(
+
+                            OtherFeature:
+                              AmenitiesDetailsData?.OtherFeature?.filter(
                                 (item) => {
                                   return item !== text;
                                 }
                               ),
                           });
                         }
-                      }}
-                    >
-                      {text}{" "}
-                      <img
-                        alt="tick"
-                        src={
-                          AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
-                            text
-                          )
-                            ? "/img/white-tick.svg"
-                            : "/img/plus-create.svg"
-                        }
-                      />
-                    </div>
-                  );
-                }
-              )}
-            </div>
-          </div>
-
-          <div>
-            <h1>Other Feature</h1>
-
-            <div className="row">
-              {OtherFeatureArray.map((text, i) => {
-                return (
-                  <div key={i}>
-                    <label htmlFor={`other-feature-${i}`}>{text}</label>
-                    <input
-                      type="checkbox"
-                      name=""
-                      id={`other-feature-${i}`}
-                      //  checked={AmenitiesDetailsData.OtherFeature?.includes(
-                      //   text
-                      // )}
-                      checked={true}
-                      onChange={(event) => {
-                        if (event.target.checked === false) {
-                          alert("false");
-                          // setAmenitiesDetailsData({
-                          //   ...AmenitiesDetailsData,
-                          //   OtherFeature: [
-                          //     ...AmenitiesDetailsData.OtherFeature,
-                          //     text,
-                          //   ],
-                          // });
-                        }
                         if (event.target.checked === true) {
-                          alert("true");
-                          // setAmenitiesDetailsData({
-                          //   ...AmenitiesDetailsData,
-                          //   OtherFeature:
-                          //     AmenitiesDetailsData.OtherFeature?.filter(
-                          //       (item) => {
-                          //         return item !== text;
-                          //       }
-                          //     ),
-                          // });
+                          setAmenitiesDetailsData({
+                            ...AmenitiesDetailsData,
+
+                            OtherFeature: [
+                              ...AmenitiesDetailsData?.OtherFeature,
+
+                              text,
+                            ],
+                          });
                         }
                       }}
                     />

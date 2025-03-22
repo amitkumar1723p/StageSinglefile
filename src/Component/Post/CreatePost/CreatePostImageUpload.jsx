@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import WindowComponent from "../../WindowComponent";
 import CreatePostSubmitAlert from "./CreatePostSubmitAlert";
 
+const imagePath = "your-image.png"; // Replace with your image path
+
 export default function CreatePostImageUpload({
   setnext,
-
+  next,
   previewImage,
   setpreviewImage,
   uploadimages,
@@ -33,7 +35,7 @@ export default function CreatePostImageUpload({
   AmenitiesDetailsData,
   PricingDetailsData,
   setPricingDetailsData,
-
+  OtherDetailsData,
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
@@ -41,10 +43,13 @@ export default function CreatePostImageUpload({
   const dispatch = useDispatch();
 
   const [singlepreviewImage, setsinglepreviewImage] = useState("");
+  const [defaultImg, setDefaultImg] = useState(null);
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
 
+   console.log("uploadimages" ,uploadimages)
+    console.log("previewImages" ,previewImage)
   useEffect(() => {
     if (update) {
       setuploadimagesName(
@@ -57,120 +62,194 @@ export default function CreatePostImageUpload({
   }, [uploadimages, update]);
 
   useEffect(() => {
-    // remove Coma
+    setTimeout(() => {
+      // Create a copy of the data to avoid mutating the original object
+      const CopyObj = { ...PricingDetailsData };
 
-    const CopyObj = { ...PricingDetailsData };
+      if (BasicDetailsData.PropertyAdType === "Rent") {
+        // Remove commas from ExpectedRent and DepositePrice for Rent
+        const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
+          /,/g,
+          ""
+        );
+        CopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
 
-    if (BasicDetailsData.PropertyAdType == "Rent") {
-      const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.ExpectedRent = ExpectedRentRemoveComa;
-
-      const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.DepositePrice = DepositePriceRemoveComa;
-    }
-
-    if (BasicDetailsData.PropertyAdType == "Sale") {
-      const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
-        /,/g,
-        ""
-      );
-      CopyObj.ExpectedPrice = ExpectedPriceRemoveComa;
-
-      if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-        const MonthlyExpectedRentRemoveComa = String(
-          CopyObj?.AdditionalDetails?.MonthlyExpectedRent
-        )?.replace(/,/g, "");
-        CopyObj.AdditionalDetails.MonthlyExpectedRent =
-          MonthlyExpectedRentRemoveComa;
+        const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
+          /,/g,
+          ""
+        );
+        CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
       }
-    }
-    if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-      const MaintenanceChargesRemoveComa = String(
-        CopyObj.AdditionalDetails.MaintenanceCharges
-      )?.replace(/,/g, "");
-      CopyObj.AdditionalDetails.MaintenanceCharges =
-        MaintenanceChargesRemoveComa;
-    }
-    setPricingDetailsData(CopyObj);
-  }, []);
+
+      if (BasicDetailsData.PropertyAdType === "Sale") {
+        // Remove commas from ExpectedPrice for Sale
+        const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
+          /,/g,
+          ""
+        );
+        if (BasicDetailsData.ApartmentType == "Plot/Land") {
+          const PricePerSqYdRemoveComa = String(CopyObj?.PricePerSqYd)?.replace(
+            /,/g,
+            ""
+          );
+          CopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
+        } else {
+          const PricePerSqFtRemoveComa = String(CopyObj?.PricePerSqFt)?.replace(
+            /,/g,
+            ""
+          );
+          CopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
+        }
+
+        CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
+
+        // Check and remove commas from MonthlyExpectedRent if it exists
+        if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+          const MonthlyExpectedRentRemoveComa = String(
+            CopyObj?.AdditionalDetails?.MonthlyExpectedRent
+          )?.replace(/,/g, "");
+          CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(
+            MonthlyExpectedRentRemoveComa
+          );
+        }
+      }
+
+      // Remove commas from MaintenanceCharges if it exists
+      if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
+        const MaintenanceChargesRemoveComa = String(
+          CopyObj.AdditionalDetails.MaintenanceCharges
+        )?.replace(/,/g, "");
+        CopyObj.AdditionalDetails.MaintenanceCharges = parseInt(
+          MaintenanceChargesRemoveComa
+        );
+      }
+
+      // Log the modified object before setting it in state
+
+      // Set the new state
+      setPricingDetailsData(CopyObj);
+    }, 0);
+  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
+
+  // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
+
   const CratePostHandler = (e) => {
     e.preventDefault();
-    if (previewImage.length <= 0) {
-      alert("image field is required");
-    } else {
-      let formData = new FormData(e.target);
 
-      formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
-      formData.append(
-        "LocationDetails",
-        `${JSON.stringify(LocationDetailsData)}`
-      );
+
+    let formData = new FormData(e.target);
+
+    formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
+    formData.append(
+      "LocationDetails",
+      `${JSON.stringify(LocationDetailsData)}`
+    );
+
+    formData.append("AreaDetails", `${JSON.stringify(AreaDetailsData)}`);
+
+    if (BasicDetailsData.ApartmentType == "Plot/Land") {
+      //  alert("form details")
+      formData.append("OtherDetails", `${JSON.stringify(OtherDetailsData)}`);
+    } else {
       formData.append(
         "PropertyDetails",
         `${JSON.stringify(PropertyDetailsData)}`
       );
-      formData.append("AreaDetails", `${JSON.stringify(AreaDetailsData)}`);
-      formData.append("FloorDetails", `${JSON.stringify(FloorDetailsData)}`);
-      formData.append(
-        "AmenitiesDetails",
-        `${JSON.stringify(AmenitiesDetailsData)}`
-      );
-      formData.append(
-        "PricingDetails",
-        `${JSON.stringify(PricingDetailsData)}`
-      );
 
-      if (update) {
-        if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
-          uploadimages.forEach((e) => {
-            formData.append("PropertyImages", e, e.name);
-          });
-        }
-        if (update_RemoveImage.length > 0 && uploadimages.length === 0) {
-          // if(update_RemoveImage.length>0){
+      formData.append("FloorDetails", `${JSON.stringify(FloorDetailsData)}`);
+    }
+
+    formData.append(
+      "AmenitiesDetails",
+      `${JSON.stringify(AmenitiesDetailsData)}`
+    );
+    formData.append(
+      "PricingDetails",
+      `${JSON.stringify(PricingDetailsData)}`
+    );
+
+    if (update) {
+      if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
+        uploadimages.forEach((e) => {
+          formData.append("PropertyImages", e, e.name);
+        });
+      }
+      if (update_RemoveImage.length > 0 && uploadimages.length === 0) {
+        // if(update_RemoveImage.length>0){
+        formData.append(
+          "PropertyImages",
+          `${JSON.stringify(update_RemoveImage)}`
+        );
+      }
+
+      if (uploadimages.length > 0) {
+        uploadimages.forEach((e) => {
+          formData.append("PropertyImages", e, e.name);
+        });
+        if (update_RemoveImage.length > 0) {
           formData.append(
             "PropertyImages",
             `${JSON.stringify(update_RemoveImage)}`
           );
         }
-        if (uploadimages.length > 0) {
-          uploadimages.forEach((e) => {
-            formData.append("PropertyImages", e, e.name);
-          });
-          if (update_RemoveImage.length > 0) {
-            formData.append(
-              "PropertyImages",
-              `${JSON.stringify(update_RemoveImage)}`
-            );
-          }
-        }
-      } else {
-        uploadimages.forEach((e) => {
-          formData.append("PropertyImages", e, e.name);
-        });
       }
+    } else {
 
-      if (update) {
-        let confrim = window.confirm("Are you update this Post");
-        if (confrim) {
-          dispatch(UpdatePostAction(formData, PostId));
-        }
-      } else {
-        dispatch(CreatePostAction(formData));
+      uploadimages.forEach((e) => {
+        formData.append("PropertyImages", e, e.name);
+      });
 
-        if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
-          setshowCreatePostSubmitAlert("showLoading");
-        }
+    }
+
+    if (update) {
+      let confrim = window.confirm("Are you update this Post");
+      if (confrim) {
+        dispatch(UpdatePostAction(formData, PostId));
+      }
+    } else {
+      dispatch(CreatePostAction(formData));
+
+      if (!["Admin", "Owner"].includes(medata?.user?.Role)) {
+        setshowCreatePostSubmitAlert("showLoading");
       }
     }
+
   };
 
+  // Alert
+  const [imageAlert, setImageAlert] = useState(false);
+
+  const HandleImageAlert = () => {
+
+    if (previewImage.length <= 0 && update) {
+      setImageAlert(true);
+      setTimeout(() => setImageAlert(false), 1500);
+      return;
+    }
+
+  };
+  console.log(defaultImg)
+  // console.log("uploadimages", uploadimages)
+  // console.log("previewImage", previewImage)
+
+  // useEffect(() => {
+  //   if (defaultImg >= 0) {
+  //     console.log("calleddddd")
+
+  //     setuploadimages(
+  //       (files, defaultImg) => {
+  //         const updatedFiles = [...files]; // Create a copy of the array
+  //         console.log(defaultImg)
+  //         const fileToMove = updatedFiles.splice(defaultImg, 1)[0]; // Remove the element at moveIndex
+  //         console.log(fileToMove, ' ffileee')
+  //         updatedFiles.unshift(fileToMove); // Insert it at the beginning
+  //         console.log("up ", updatedFiles)
+  //         return updatedFiles;
+  //       }
+  //     )
+  //   }
+
+  // }, [defaultImg])
   return (
     <>
       <ScrollToTop />
@@ -185,7 +264,10 @@ export default function CreatePostImageUpload({
             encType="multipart/form-data"
             id="myform"
           >
-            <div htmlFor="" className="uploadfile-input">
+            <div
+              htmlFor=""
+              className={`uploadfile-input ${imageAlert ? "shakeShake" : ""}`}
+            >
               <div className="file-label">
                 {/* Backup Icon  */}
                 <svg
@@ -211,7 +293,7 @@ export default function CreatePostImageUpload({
                   />
                 </svg>
 
-                <p className="p-img-upload">
+                <p className={`p-img-upload ${imageAlert ? "shake" : ""}`}>
                   Drag and drop or click to choose file
                 </p>
                 <p className="p-img-upload-i">
@@ -221,22 +303,22 @@ export default function CreatePostImageUpload({
                     src="/img/i-icon.png"
                     alt="i-icon"
                   />{" "}
-                  Supported Format: JPEG, PNG,SVG{" "}
+                  Supported Format: JPEG, PNG{" "}
                 </p>
               </div>
 
               <input
+                className="RemoveCusImg"
                 type="file"
                 name=""
                 id=""
                 multiple
-                accept="image/*"
-                required={previewImage.length === 0 ? true : false}
+                accept=".jpg,.jpeg,.png,.webp,.avif"
+                // required={update && previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 
                   files.forEach((file) => {
-                    //  console.log(file)
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = () => {
@@ -284,10 +366,32 @@ export default function CreatePostImageUpload({
               />
             </div>
 
+            <p className="upload-image-defaultimage">Please choose defalut image* ( Default will be first )</p>
+
             <div className="showpreviewImage-Container upload-img-section">
               {previewImage.map((image, index) => {
                 return (
                   <div className="showpreviewImage-box" key={index}>
+                    <input
+                      type="checkbox"
+                      checked={defaultImg === index}
+                      className="default-image"
+                      onClick={() => {
+                         setDefaultImg(index);
+                          //  const uploadimages =uploadimages
+                           setuploadimages((prevFiles) => {
+                            console.log(prevFiles)
+                            const updatedFiles = [...prevFiles]; // Create a copy of the array
+                            const fileToMove = updatedFiles.splice(defaultImg, 1)[0]; // Remove the element at index
+                            updatedFiles.unshift(fileToMove); // Insert it at the beginning
+                            console.log("updated files ",updatedFiles)
+                            return updatedFiles;
+                          });
+                        
+                      
+                        
+                      }}
+                    />
                     <img
                       className="showpreviewImage"
                       key={index}
@@ -362,7 +466,11 @@ export default function CreatePostImageUpload({
               >
                 Previous
               </div>
-              <button className="Submit-Next" ref={CreatePostRef}>
+              <button className="Submit-Next" onClick={() => {
+  
+                // console.log(uploadimages)
+   
+  }} ref={CreatePostRef}>
                 {update ? "Update Post" : "Create Post"}
               </button>
             </div>

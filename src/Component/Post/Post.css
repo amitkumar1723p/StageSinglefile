@@ -55,7 +55,7 @@ height: 100%;
  left: 5;
 } */
 .glass-effect {
-  height: 44%;
+  height: 50%;
   width: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -114,9 +114,13 @@ height: 100%;
 .inactive-post-para {
   background-color: red;
   color: #fff;
-  font-size: 10px;
+  font-size: 14px;
   text-align: center;
-  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  /* border-radius: 5px; */
+  /* transform: rotate(45deg); */
   padding: 5px;
 }
 .active-post {
@@ -264,7 +268,7 @@ transition: .5s;
  position: relative;
 } */
 .property-details-main-box .uploadfile-input {
-  height: 240px;
+  height: 130px;
   color: #555592;
 
   position: relative;
@@ -326,20 +330,21 @@ transition: .5s;
 .icon-i p {
   margin-left: 5px;
 }
-input[type="file"] {
-  cursor: pointer;
 
+/* this has to be change for admin upload excel file */
+.RemoveCusImg{
+  cursor: pointer;
   margin: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
 }
 
-input[type="file"]::file-selector-button {
+.RemoveCusImg::file-selector-button {
   display: none !important;
 }
 
-input[type="file"]::-webkit-file-upload-button {
+.RemoveCusImg::-webkit-file-upload-button {
   display: none;
 }
 
@@ -368,10 +373,8 @@ input[type="file"]::-webkit-file-upload-button {
 .imageSlide img {
   width: 168px; /* Set the fixed width to 300px */
   height: 176px;
-
   min-width: 100%;
   max-width: 100%;
-
   transition: all 1s ease-in-out;
 }
 

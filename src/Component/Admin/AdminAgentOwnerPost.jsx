@@ -12,7 +12,12 @@ import {
 import Loader from "../Loader/Loader";
 import AdminListingCard from "./AdminListingCard";
 // import PostCard from "../Post/PostCard";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import "./AdminListingCard.css";
 import { GetAllAdminAction } from "../../Action/userAction";
 import { adminAssigned } from "../../Action/postAction";
@@ -25,8 +30,7 @@ export default function AdminAgentOwnerPost() {
   const location = useLocation();
   const navigate = useNavigate();
   // for btn color
-  const { postVerify } = useContext(UserContext)
-
+  const { postVerify } = useContext(UserContext);
 
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -44,7 +48,7 @@ export default function AdminAgentOwnerPost() {
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
-  const [selectAll, setSelectAll] = useState(false)//used for selectAll key 
+  const [selectAll, setSelectAll] = useState(false); //used for selectAll key
   const [status, setStatus] = useState("");
   const { setAllPropertyData } = useContext(UserContext);
   const [currentDataLength, setCurrentDataLength] = useState(null);
@@ -67,10 +71,8 @@ export default function AdminAgentOwnerPost() {
   });
 
   const queryParams = new URLSearchParams(location.search);
-  const [myQuery, setMyQuery] = useState(queryParams.get("type"))
+  const [myQuery, setMyQuery] = useState(queryParams.get("type"));
   // const myQuery = queryParams.get("type");
-
-  // console.log(myQuery,"my query hiiiii")
 
   // useEffect(()=>{
   //   if (sortOrder !== undefined) {
@@ -86,69 +88,70 @@ export default function AdminAgentOwnerPost() {
     function settingFilter() {
       // setActive(status);
       if (myQuery === "true") {
-        setCurrentSelected("All Active posts")
+        setCurrentSelected("All Active posts");
         setActive(true);
-
       } else if (myQuery === "false") {
-        setCurrentSelected("All In-Active posts")
+        setCurrentSelected("All In-Active posts");
 
         setActive(false);
-      }else if(myQuery==="success"){
-        // console.log()
-        setActive("success")
-        setCurrentSelected("Success Post ") 
-       }
-       else {
-        setCurrentSelected("All posts")
+      } else if (myQuery === "success") {
+        setActive("success");
+        setCurrentSelected("Success Post ");
+      } else {
+        setCurrentSelected("All posts");
 
         setActive(null);
-
       }
     }
-    settingFilter()
-  }, [])
+    settingFilter();
+  }, []);
 
   useEffect(() => {
-
     var filterdData = AllPost;
-    // console.log(AllPost)
-    setCurrentDataLength(AllPost?.Post?.length)
-    if (currenSelected === "All In-Active posts") {
-      filterdData = AllPost?.Post?.filter(item => !item?.PostVerify)
-      setCurrentDataLength(filterdData?.length);
-    }
-    if (currenSelected === "All Active posts") {
-      filterdData = AllPost?.Post?.filter(item => item?.PostVerify)
-      filterdData = AllPost?.Post?.filter(item => !item.PostVerify)
-      setCurrentDataLength(filterdData?.length);
-    }
-    if (currenSelected === "All Active posts") {
-      filterdData = AllPost?.Post?.filter(item => item.PostVerify)
-      setCurrentDataLength(filterdData?.length)
-    }
-    if(currenSelected==="rent"){
-        filterdData = AllPost?.Post?.filter((item) => {
-          return item?.BasicDetails?.PropertyAdType === PropertyType;
-        })
 
-        setCurrentDataLength(filterdData?.length)
+    setCurrentDataLength(AllPost?.Post?.length);
+    if (currenSelected === "All In-Active posts") {
+      filterdData = AllPost?.Post?.filter((item) => !item?.PostVerify);
+      setCurrentDataLength(filterdData?.length);
     }
-    if(currenSelected==="sale"){
+    if (currenSelected === "All Active posts") {
+      filterdData = AllPost?.Post?.filter((item) => item?.PostVerify);
+      filterdData = AllPost?.Post?.filter((item) => !item.PostVerify);
+      setCurrentDataLength(filterdData?.length);
+    }
+    if (currenSelected === "All Active posts") {
+      filterdData = AllPost?.Post?.filter((item) => item.PostVerify);
+      setCurrentDataLength(filterdData?.length);
+    }
+    if (currenSelected === "rent") {
       filterdData = AllPost?.Post?.filter((item) => {
         return item?.BasicDetails?.PropertyAdType === PropertyType;
-      })
+      });
 
-      setCurrentDataLength(filterdData?.length)
-  }
-  if(currenSelected==="Success Post"){
-    filterdData = AllPost?.Post?.filter((item) => {
-      return item?.propertyStatus?.currentPropertyStatus === "sold out";
-    })
+      setCurrentDataLength(filterdData?.length);
+    }
+    if (currenSelected === "sale") {
+      filterdData = AllPost?.Post?.filter((item) => {
+        return item?.BasicDetails?.PropertyAdType === PropertyType;
+      });
 
-    setCurrentDataLength(filterdData?.length)
-}
+      setCurrentDataLength(filterdData?.length);
+    }
+    if (currenSelected === "sale") {
+      filterdData = AllPost?.Post?.filter((item) => {
+        return item?.BasicDetails?.PropertyAdType === PropertyType;
+      });
 
-  }, [currenSelected, AllPost])
+      setCurrentDataLength(filterdData?.length);
+    }
+    if (currenSelected === "Success Post") {
+      filterdData = AllPost?.Post?.filter((item) => {
+        return item?.propertyStatus?.currentPropertyStatus === "sold out";
+      });
+
+      setCurrentDataLength(filterdData?.length);
+    }
+  }, [currenSelected, AllPost]);
 
   //  function handleCurrentSlected(a){
   //   setCurrentSelected(a);
@@ -165,17 +168,18 @@ export default function AdminAgentOwnerPost() {
     }
   }, [AssignProperty, AdminData]);
 
-
   useEffect(() => {
     if (["Admin", "Owner"].includes(medata?.user?.Role)) {
       dispatch(GetAllAssignProperty());
       // setSelectAll(false)
     }
-    dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
+
+    if (!VistAndOfferData) {
+      dispatch(GetAllScheduleVisitsAndMakeOffer_Length());
+    }
   }, []);
 
   // Active In Active start
-
 
   useEffect(() => {
     if (status !== "") {
@@ -184,7 +188,6 @@ export default function AdminAgentOwnerPost() {
       // setAssignProperty([]);
     }
   }, [AssignProperty, status]);
-
 
   // Active In Active end
   useEffect(() => {
@@ -195,34 +198,34 @@ export default function AdminAgentOwnerPost() {
         "ReOpenPostActionRequest",
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
-        "changePropertyStatusRequest"
+        "changePropertyStatusRequest",
+        "DeletePostRequest",
       ].includes(LodingType)
-
     ) {
       // alert("Admin_OwnerGetAllPostAction PostVerify")
       if (adminAlertData.success === true && medata?.user?.Role == "Owner") {
-        setStatus("")
+        setStatus("");
         setAssignProperty([]);
-        setSelectAll(false)
+        setSelectAll(false);
         dispatch(Admin_OwnerGetAllPostAction());
 
-
+        if (LodingType == "DeletePostRequest") {
+          dispatch({ type: "GetDeletedPostsClear" });
+        }
       }
       if (adminAlertData.success === true && medata?.user?.Role == "Admin") {
         if (querry.get("PostVerify")) {
-
           setAssignProperty([]);
-          setStatus("")
-          setSelectAll(false)
+          setStatus("");
+          setSelectAll(false);
           dispatch(
-
             Admin_AgentGetAllPostAction({
               PostVerify: querry.get("PostVerify"),
             })
           );
         } else {
           setAssignProperty([]);
-          setSelectAll(false)
+          setSelectAll(false);
           dispatch(Admin_AgentGetAllPostAction());
         }
       }
@@ -235,7 +238,7 @@ export default function AdminAgentOwnerPost() {
     ) {
       if (adminAlertData.success === true) {
         setAssignProperty([]);
-        setSelectAll(false)
+        setSelectAll(false);
 
         dispatch(GetAllAssignProperty());
       }
@@ -246,27 +249,20 @@ export default function AdminAgentOwnerPost() {
 
   useEffect(() => {
     dispatch(Admin_OwnerGetAllPostAction());
-  }, [])
+  }, []);
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent  setData
   useEffect(() => {
-
     if (AllPost && AllPost.success) {
-      // console.log("this is data ",AllPost.Post.reverse())
-
-      setAllPropertyData(AllPost)
-
+      setAllPropertyData(AllPost);
     }
   }, [AllPost]);
 
   useEffect(() => {
     if (AgentAdminAllPost && AgentAdminAllPost.success) {
-
-      setAllPropertyData(AgentAdminAllPost)
+      setAllPropertyData(AgentAdminAllPost);
     }
   }, [AgentAdminAllPost]);
-
-
 
   // sorting property start  at created filter
 
@@ -280,35 +276,31 @@ export default function AdminAgentOwnerPost() {
   // handle active and inactive filter sectionfilter
 
   const handleActive = (status, buttonType) => {
-    setMyQuery("")
-    setPageActive(buttonType)
+    setMyQuery("");
+    setPageActive(buttonType);
     setActive(status);
     if (status === true) {
-      setCurrentSelected("All Active posts")
+      setCurrentSelected("All Active posts");
 
       setActive(true);
-
     } else if (status === false) {
-      setCurrentSelected("All In-Active posts")
+      setCurrentSelected("All In-Active posts");
       setActive(false);
-    }else if(status==="success"){
-     setActive("success") 
-    }
-     else {
-      setCurrentSelected("All posts")
+    } else if (status === "success") {
+      setActive("success");
+    } else {
+      setCurrentSelected("All posts");
       setActive(null);
-
     }
   };
 
-  //handle items per page 
+  //handle items per page
   const handleItemsPerPageChange = (value) => {
     // console.log(value)
     setItemsPerPage(parseInt(value, 10)); // Update the state with the selected value
-    // console.log(itemsPerPage)
+
     // setCurrentPage(1); // Reset to first page when changing items per page
   };
-
 
   // Handle button click to update state active amd inactoive
   const handleStatusChange = (value) => {
@@ -316,52 +308,48 @@ export default function AdminAgentOwnerPost() {
       const isConfirmed = window.confirm("Are you sure about it?");
       if (isConfirmed) {
         setStatus(value);
-
       } else {
         // Handle the cancel action if needed
         console.log("Status change canceled.");
       }
     } else {
-      alert("Please Select for Change Property Status!")
+      alert("Please Select for Change Property Status!");
     }
-
   };
 
-  // this is used for empty checked box 
+  // this is used for empty checked box
   useEffect(() => {
     if (!selectAll) {
-      
       setAssignProperty([]);
     }
-
   }, [selectAll]);
 
-    // this fn is used for the updated available or sold out
-    const handlePropertyStatus=(value)=>{
-      // console.log(AssignProperty,"hj")
-     
-      const changePropertyStatusData = {
-        propertyStatus:value,
-        AssignedPropertys: AssignProperty,
-      };
-      if(changePropertyStatusData?.AssignedPropertys?.length>1 || changePropertyStatusData?.AssignedPropertys?.length<1){
-       return 0
-      }
-      let result = window.confirm("Are you sure you want to proceed?");
-      if (result&&changePropertyStatusData?.AssignedPropertys?.length===1) {
-        dispatch(changePropertyStatus(changePropertyStatusData))
-       
-      } else {
-          console.log("Cancel");
-      }
-    
+  // this fn is used for the updated available or sold out
+  const handlePropertyStatus = (value) => {
+    const changePropertyStatusData = {
+      propertyStatus: value,
+      AssignedPropertys: AssignProperty,
+    };
+    if (
+      changePropertyStatusData?.AssignedPropertys?.length > 1 ||
+      changePropertyStatusData?.AssignedPropertys?.length < 1
+    ) {
+      return 0;
     }
+    let result = window.confirm("Are you sure you want to proceed?");
+    if (result && changePropertyStatusData?.AssignedPropertys?.length === 1) {
+      dispatch(changePropertyStatus(changePropertyStatusData));
+    } else {
+      console.log("Cancel");
+    }
+  };
 
   return (
     <>
       <div className="admin-filter-main-parent-box">
-
-        <p className="AllListing-admin">{currenSelected} ({currentDataLength})</p>
+        <p className="AllListing-admin">
+          {currenSelected} ({currentDataLength})
+        </p>
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
             <div>
@@ -369,7 +357,9 @@ export default function AdminAgentOwnerPost() {
             </div>
 
             <button
-              className={myQuery === "all" || onPageActive === "all" ? "select" : ""}
+              className={
+                myQuery === "all" || onPageActive === "all" ? "select" : ""
+              }
               onClick={() => handleActive(null, "all")}
             >
               <span>All Post</span>
@@ -379,48 +369,87 @@ export default function AdminAgentOwnerPost() {
               // onClick={(e) => {
               //   navigate("/admin/allpost?PostVerify=true");
               // }}
-              className={myQuery === "true" || onPageActive === "true" ? "select" : ""}
-
+              className={
+                myQuery === "true" || onPageActive === "true" ? "select" : ""
+              }
               onClick={() => handleActive(true, "true")}
-            // className={active == true ? "select" : ""}
+              // className={active == true ? "select" : ""}
             >
               Active
             </button>
-            <button className={myQuery === "false" || onPageActive === "false" ? "select" : ""}
-              onClick={() => handleActive(false, "false")}>
+            <button
+              className={
+                myQuery === "false" || onPageActive === "false" ? "select" : ""
+              }
+              onClick={() => handleActive(false, "false")}
+            >
               Inactive
             </button>
-            <button className={myQuery === "success" || onPageActive === "Success Post" ? "select" : ""}  onClick={() => {handleActive("success", "Success Post");
-                              setCurrentSelected("Success Post")
-
-            }}>
+            <button
+              className={
+                myQuery === "success" || onPageActive === "Success Post"
+                  ? "select"
+                  : ""
+              }
+              onClick={() => {
+                handleActive("success", "Success Post");
+                setCurrentSelected("Success Post");
+              }}
+            >
               Success
             </button>
-            <button  >
-              Expired
-            </button>
-            <button onClick={handlePropertyOrder} style={{ pointerEvents: "auto" }}>
+            {/* <button>Expired</button> */}
+            {medata?.user?.Role == "Owner" && (
+              <button
+                onClick={() => {
+                  window.open(
+                    "/admin/deleted-post?Type=AllPost",
+                    "DeletedPostTab"
+                  );
+                }}
+              >
+                Deleted Post
+              </button>
+            )}
+            {/* <Link to={`/admin/deleted-post?Type=AllPost` } target="_blank"> </Link> */}
+
+            <button
+              onClick={handlePropertyOrder}
+              style={{ pointerEvents: "auto" }}
+            >
               {propertyOrder === "ascending" ? <>Sort (↑)</> : <>Sort(↓)</>}
             </button>
-            <select id="itemsPerPage" onChange={(e) => handleItemsPerPageChange(e.target.value)}>
+            <select
+              id="itemsPerPage"
+              onChange={(e) => handleItemsPerPageChange(e.target.value)}
+            >
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="100">100</option>
             </select>
-            <button className={onPageActive === "sale" ? "select" : ""} onClick={()=>{
-              setPropertyType("Sale");
+            <button
+              className={onPageActive === "sale" ? "select" : ""}
+              onClick={() => {
+                setPropertyType("Sale");
                 setPageActive("sale");
-                setCurrentSelected("sale")
-                setMyQuery(null)
-              }}>Sale</button>
-              <button className={onPageActive === "rent" ? "select" : ""} onClick={()=>{setPropertyType("Rent");
-                // console.log("called rent")
-                setPageActive("rent")
-                setCurrentSelected("rent")
-                setMyQuery(null)
+                setCurrentSelected("sale");
+                setMyQuery(null);
+              }}
+            >
+              Sale
+            </button>
+            <button
+              className={onPageActive === "rent" ? "select" : ""}
+              onClick={() => {
+                setPropertyType("Rent");
 
-              }}>Rent</button>
-           
+                setPageActive("rent");
+                setCurrentSelected("rent");
+                setMyQuery(null);
+              }}
+            >
+              Rent
+            </button>
           </div>
 
           {/* <button>Exprired</button>
@@ -457,9 +486,19 @@ export default function AdminAgentOwnerPost() {
         </div>
 
         <div className="select-section-admin">
-        <div className="admin-filter-select" onClick={() => setSelectAll(prev => !prev)} >
-         <><input type="checkbox" checked={selectAll} id="vehicle1" name="vehicle1" />
-          <label className="admin-filter-select-lable">Select All</label></>
+          <div
+            className="admin-filter-select"
+            onClick={() => setSelectAll((prev) => !prev)}
+          >
+            <>
+              <input
+                type="checkbox"
+                checked={selectAll}
+                id="vehicle1"
+                name="vehicle1"
+              />
+              <label className="admin-filter-select-lable">Select All</label>
+            </>
           </div>
 
           <div>
@@ -470,11 +509,9 @@ export default function AdminAgentOwnerPost() {
                 if (e.target.value == "Admin") {
                   dispatch({ type: "GetAllAdminClear" });
                   dispatch(GetAllAdminAction({ AdminVerify: true }));
-
                 } else if (e.target.value == "Agent") {
                   dispatch({ type: "GetAllAdminClear" });
                   dispatch(GetAllAdminAction({ AgentVerify: true }));
-
                 } else {
                   dispatch({ type: "GetAllAdminClear" });
 
@@ -485,18 +522,19 @@ export default function AdminAgentOwnerPost() {
               className="selectAssign"
             >
               <option value="">Assign</option>
-              {AssignProperty.length > 0 && <>
-                {medata?.user?.Role == "Owner" && (
-                  <option value={`Admin`}>Admin</option>
-                )}
+              {AssignProperty.length > 0 && (
+                <>
+                  {medata?.user?.Role == "Owner" && (
+                    <option value={`Admin`}>Admin</option>
+                  )}
 
-                <option value={`Agent`}>Agent</option></>
-
-              }
+                  <option value={`Agent`}>Agent</option>
+                </>
+              )}
             </select>
           </div>
           {/* here start */}
-      
+
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -539,34 +577,35 @@ export default function AdminAgentOwnerPost() {
               Assing Property
             </button>
           )}
- 
+
           {/* Buttons to change the status */}
           <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className="px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handleStatusChange("Active")}
           >
             Active
           </button>
           <button
-            className="px-1 mx-3 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+            className="px-1 mx-0 py bg-primary bg-opacity-10 border border-info-subtle rounded"
             onClick={() => handleStatusChange("InActive")}
           >
             In-Active
           </button>
-          <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
-          onClick={()=>handlePropertyStatus("sold out")}
+          <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => handlePropertyStatus("sold out")}
           >
-           Sold Out
+            Sold Out
           </button>
-          {/* <button className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded" 
-          onClick={()=>handlePropertyStatus("available")}
+          <button
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => handlePropertyStatus("available")}
           >
-          Available
-          </button> */}
+            Available
+          </button>
           {/* Display the current status */}
         </div>
       </div>
-
 
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (

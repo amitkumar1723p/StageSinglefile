@@ -109,11 +109,14 @@
 
 /* Navbar styles */
 .navbar {
+  /* width: 80%; */
+  /* margin: 0 auto; */
+  /* background: url("/public/img/holi-nav.svg"); */
   background-color: #fff;
   padding: 12px 0; /* Decreased padding */
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 16;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -173,7 +176,7 @@
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 18px; /* Decreased gap */
+  gap: 10px; /* Decreased gap */
 }
 
 .nav-link {
@@ -191,7 +194,7 @@
 
 .nav-link.sell-btn {
   font-weight: 600;
-  padding: 9px 13.5px; /* Decreased padding */
+  padding: 8px 13.5px; /* Decreased padding */
   border: 1px solid var(--main-light-clr);
   color: var(--main-light-clr);
   border-radius: 4.5px; /* Decreased border radius */
@@ -204,7 +207,7 @@
 }
 
 .nav-link.buy-btn {
-  padding: 5px 10px; /* Decreased padding */
+  padding: 8px 13.5px; /* Decreased padding */
   background-color: var(--main-light-clr);
   color: #fff;
   font-size: 12px;
@@ -275,7 +278,7 @@
   background-color: #fff;
   /* width: 20vw; */
   height: 200vw;
-  margin-top: 16px;
+  margin-top: 13px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   border: 1px solid #b5d6f1;
@@ -401,7 +404,14 @@
 }
 
 @media (max-width: 480px) {
-
+  .nav-link.sell-btn{
+    padding: 8px 13.5px;
+    font-size: 12px;
+  }
+  
+  /* .navbar {
+    background: url("/public/img/holi-nav.svg");
+  }  */
   .header-free {
     background-color: #94D1FF;
     color: white;
@@ -512,7 +522,7 @@
     padding: 0;
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 100;
     /* border-bottom: 2px solid #e9e6e6; */
   }
 
@@ -520,8 +530,10 @@
     display: none;
   }
   .logo h2 {
+    background-color: #fff;
+
     border: none;
-    font-size: 16px; /* Decreased font size */
+    font-size: 14px; /* Decreased font size */
     color: var(--main-light-clr);
     cursor: pointer;
     display: flex;

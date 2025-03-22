@@ -6,6 +6,7 @@ import { CreateUserOtpAction } from "../../../Action/userAction";
 import ScrollToTop from "../../../ScrollToTop";
 import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
+import { useFormState } from "react-dom";
 
 // import { LoginUserAction } from "../../../Action/userAction";
 
@@ -21,10 +22,14 @@ const LoginForm = ({
   //  const [SignUpData, setSignUpData] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const location = useLocation();
+  const [loginError, setloginError] = useState(' ');  // error message that displayed when value is null or wrong
+  const [inputShake, setInputShake] = useState(false); // input field shake when value is empty or wrong
+  const [shake, setShake] = useState(false);  // input text become red if wrong
   const { data, loading, LodingType } = useSelector((state) => {
     return state.userData;
   });
 
+  const loginButton = document.querySelector(".login-continue-login");
   // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,14 +37,35 @@ const LoginForm = ({
     if (ISNRI) {
       setSignUpData({ ...SignUpData, Role: "NRI" });
       if (!SignUpData.email) {
-        return alert("Email is Required");
+        setloginError("Email is required")
+        setInputShake(true);
+        setShake(true);
+        setTimeout(() => {setShake(false); setInputShake(false);setloginError('')}, 1000);
+        return;
+        
       }
     } else {
       if (SignUpData?.ContactNumber?.length !== 10) {
-        return alert("Enter Valid Contact Number");
+        // console.log(SignUpData?.ContactNumber?.length)
+        if(SignUpData?.ContactNumber?.length == 0 || SignUpData?.ContactNumber?.length === undefined){
+          setloginError("Enter Phone Number")
+          setInputShake(true);
+          // loginButton.disabled = true;
+          setTimeout(()=>setInputShake(false),1000);
+          setTimeout(()=>setloginError(''),1000);
+          
+          return;
+        }else{
+          setloginError("Enter Correct Phone Number")
+          setInputShake(true);
+          setShake(true);
+          loginButton.disabled = true;
+          setTimeout(() => {setShake(false); setInputShake(false);setloginError(''); loginButton.disabled = false}, 1000);
+          return;
+        }
+
       }
     }
-
     dispatch(CreateUserOtpAction(SignUpData));
     setViewState({
       ...viewState,
@@ -63,7 +89,7 @@ const LoginForm = ({
           <div className="login-form-content-unique">
             <h2 className="heading-h2">Login or Register </h2>
             <p className="login-h2-p">
-              Welcome to Propertydekho247.com Log in to your account
+              Welcome to PropertyDekho247 Log in to your account
             </p>
             <form onSubmit={handleSubmit}>
               <label className="lable-login" htmlFor="login-form">
@@ -72,7 +98,7 @@ const LoginForm = ({
                 {ISNRI ? "Email Address" : "Phone Number"}
               </label>
               <input
-                className="border"
+                className={`border  ${inputShake? 'inputShake' : ''} ${shake ? 'shake' : ''}`}
                 id="login-form"
                 type={ISNRI ? "email" : "text"}
                 autoComplete="off"
@@ -111,6 +137,7 @@ const LoginForm = ({
                   }
                 }}
               />
+           
               <small className="t-candp-v">
                 By clicking you agree{" "}
                 <Link
@@ -129,7 +156,7 @@ const LoginForm = ({
                   rel="noopener noreferrer"
                   className="link-t-c-p-v"
                 >
-                  Privicy Policy
+                  Privacy Policy
                 </Link>
               </small>
               <button

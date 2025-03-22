@@ -8,7 +8,7 @@ const ChannelPartnerForm = () => {
         // remove parent container when adding this to somewere else!, this parent container is only used for align the form in center
         <div className="Parent-container w-full flex justify-center relative  mt-3 mb-3">  
     <div className="Form-container w-[590px] bg-white rounded-[17px] shadow-[0px_0px_16px_0px_rgba(207,218,226,1.00)] border flex-col justify-start items-start inline-flex">
-        <div className=" Form-container-upper self-stretch px-[30px] py-[20px] bg-[#0078d4] rounded-tl-xl rounded-tr-xl justify-between items-center gap-2.5 inline-flex">
+        <div className=" Form-container-upper self-stretch px-[30px] py-[20px] bg-[#1877f2] rounded-tl-xl rounded-tr-xl justify-between items-center gap-2.5 inline-flex">
             <div className="text-white text-lg font-medium font-['Inter'] leading-tight">Channel Partner Form</div>
             <button className="w-6 h-6  bg-white rounded-[62px] " onClick={()=>{console.log("I am Clicked")}}>
                 <img

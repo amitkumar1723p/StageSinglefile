@@ -1,0 +1,154 @@
+.help-user-main-container{
+    width: 100%;
+    /* margin: 20px 0px 20px 0px; */
+    padding: 30px 0px 30px 0px;
+    background-color: #e9f5ff;
+}
+
+.help-user-container{
+    max-width: 1300px;
+    width: 80%;
+
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.help-user-headings{
+  
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    /* border: 1px solid black; */
+}
+.help-user-headings p{
+    color: #333;
+    width: 70%;
+    text-align: center;
+    /* border: 1px solid black; */
+}
+.help-user-headings h2{
+    font-size: 30px;
+}
+.help-user-headings h2 span{
+    color: var(--main-light-clr);
+    font-weight: 500;
+    /* line-height: 60px; */
+
+}
+
+.help-user-cards{
+  /* display: flex;
+    align-items: center;
+    justify-content:center;
+    gap: 10px; */
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 10px;
+
+    /* border: 1px solid black; */
+    
+}
+.help-user-cards-one{
+    background-color: white;
+    /* outline: 1px solid red; */
+    box-shadow: 8px 8px 20px 0px rgba(180, 185, 191, 0.50);;
+    padding: 20px;
+    border-radius: 12px;
+    /* width: 275px; */
+    /* min-height: 235px; */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    transition-duration: .5s;
+
+    &:hover{
+         /* box-shadow: 0px 0px 6px rgb(54 92 140 / 73%); */
+        transform: translate(1.05);
+    }
+
+}
+.help-user-cards-one h3{
+    color: #333;
+    font-weight: 600;
+    line-height: 21px;
+    font-size: 18px;
+    
+}
+.help-user-cards-one p{
+    font-size: 16px;
+    color: #333;
+}
+
+.user-card-count{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    border-radius: 50px;
+    border: 1px solid #333;
+}
+
+
+
+
+
+
+@media(max-width:1024px){
+    .help-user-headings p{
+        width: 100%;
+    }
+    .help-user-cards{
+       
+          display: grid;
+          grid-template-columns: repeat(2,1fr);
+          grid-gap: 10px;  
+      }
+
+      .help-user-cards-one{
+        /* padding: 10px; */
+      }
+}
+
+@media(max-width:768px){
+    .help-user-cards-one{
+        gap: 12px;
+        padding: 15px;
+    }
+    .help-user-cards-one h3{
+        line-height: 21px;
+        font-size: 16px;
+        
+    }
+    .help-user-cards-one p{
+        font-size: 14px;
+        
+    }
+    .help-user-container{
+        width: 90%;
+    }
+
+}
+
+@media(max-width:480px){
+    .help-user-cards{
+       
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 10px;  
+    }
+    .help-user-cards-one {
+        gap: 10px;
+        padding: 10px;
+    }
+    .help-user-headings p {
+        font-size: 16px;
+    }
+    .help-user-headings h2{
+        font-size: 28px;
+    }
+}

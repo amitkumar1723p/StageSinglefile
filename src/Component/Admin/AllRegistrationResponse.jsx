@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ProfileUpdateAction } from "../../Action/userAction";
+import { getAllUserAction, ProfileUpdateAction, UserRoleUpdation } from "../../Action/userAction";
 import { acknowledgeProfile } from "../../Action/postAction";
 import { Pointer } from "lucide-react";
+// import "./AllRegistrationResponse.css"
 // Define the functional component
-export default function AllRegistrationResponse({}) {
+export default function AllRegistrationResponse({ }) {
   const dispatch = useDispatch();
   const [verified, setVerified] = useState();
   const [unverified, setUnverified] = useState();
@@ -13,6 +14,8 @@ export default function AllRegistrationResponse({}) {
   const [tableData, setTableData] = useState([]);
   const [checkNotify, setCheckNotfiy] = useState([]);
   const [require, setRequire] = useState([]);
+  const [roleIndex, setRoleIndex] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   // login user detail
   const { medata } = useSelector((state) => state.meDetails);
 
@@ -33,6 +36,9 @@ export default function AllRegistrationResponse({}) {
     setCheckNotfiy(notification);
     setRequire(requirement);
   }, [allData]);
+
+
+
 
   useEffect(() => {
     if (Array.isArray(AllUserResponseData?.data)) {
@@ -66,7 +72,7 @@ export default function AllRegistrationResponse({}) {
       let filteredData = [...AllUserResponseData.data];
 
       if (viewfilterUser === "verified") {
-        // console.log(viewfilterUser);
+
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === true
         ); // Only verified
@@ -74,7 +80,7 @@ export default function AllRegistrationResponse({}) {
         filteredData = filteredData.filter(
           (item) => item?.CRTVerifyUser === false
         ); // Only unverified
-        // console.log(viewfilterUser);
+
       } else if (viewfilterUser === "newUser") {
         filteredData = filteredData.filter(
           (item) => item?.acknowledge === false
@@ -83,14 +89,30 @@ export default function AllRegistrationResponse({}) {
       }
 
       // Set the filtered or full data
-      setTableData(filteredData); // No need to spread here
+      setTableData(filteredData); 
     }
   }, [AllUserResponseData, viewfilterUser]);
 
-  console.log(AllPost, "j");
+
+  // show alert data 
+  const { data: adminAlertData, LodingType: adminAlertType, } = useSelector((state) => {
+    return state.Post;
+  });
+  // console.log(adminAlertData)
+
+  useEffect(() => {
+
+    if (adminAlertData?.success === true && adminAlertType == "UserRoleUpdationRequest") {
+
+      dispatch(getAllUserAction());
+    }
+  }, [adminAlertData])
+
+
+
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" >
         <div className="d-flex flex-row mb-2 gap-2">
           <div
             className={
@@ -182,8 +204,15 @@ export default function AllRegistrationResponse({}) {
           <table className="table table-hover">
             <thead className="table-info ">
               <tr className="">
-                <th scope="col" className="text-primary col-3 border-end">
-                  <small>Name-(Role)</small>
+
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small>Date</small>
+                </th>
+                <th scope="col" className="text-primary col-1 border-end">
+                  <small>Name </small>
+                </th>
+                <th scope="col" className="text-primary col-2 border-end">
+                  <small> Role</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
                   <small>Phone</small>
@@ -192,15 +221,13 @@ export default function AllRegistrationResponse({}) {
                   <small>Email</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
-                  <small>Posting</small>
+                  <small>Lisitng</small>
                 </th>
                 <th scope="col" className="text-primary col-1 border-end">
-                  <small>Notification</small>
+                  <small>Notify</small>
                 </th>
 
-                <th scope="col" className="text-primary col-2 border-end">
-                  <small>Date</small>
-                </th>
+
               </tr>
             </thead>
             <tbody>
@@ -212,14 +239,60 @@ export default function AllRegistrationResponse({}) {
                   .slice(2);
                 return (
                   <tr key={index}>
+
+                    <td className="text-light-emphasis border-end">
+                      <small>
+                        {
+                          item?.createAt
+                            ? new Date(item?.createAt).toLocaleString("en-IN", {
+                              day: "2-digit",
+                              month: "short",  // This will use the abbreviated month (e.g., "Mar" for March)
+                              year: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: false,
+                            }).replace(",", "").replace(" ", "-").replace(":", "").replace(/(\d{2})(\d{2})/, `($1:$2)`)
+                            : "..."
+                        }
+
+
+                      </small>
+                    </td>
                     <td className="text-light-emphasis border-end">
                       {item.Name ? (
                         <small>
-                          {item.Name}- {item.Role}
+                          {item.Name}
                         </small>
                       ) : (
                         <></>
                       )}
+                    </td>
+
+                    <td className="text-light-emphasis border-end" >
+                      {
+                        roleIndex === index ? <div className="owner-user-role-submit-button d-flex gap-1 ">
+                          <select name="" onChange={(e) => setUserRole(e.target.value)}>
+                            <option value={item.Role}><small>{item.Role}</small></option>
+                            <option value="Tenant"><small>Tenant</small></option>
+                            <option value="Buyer"><small>Buyer</small></option>
+                            {/* <option value="Seller"><small>Seller</small></option> */}
+                            <option value="Property Owner"><small>Property Owner</small></option>
+                            <option value="NRI"><small>NRI</small></option>
+                            <option value="Channel Partner"><small>Channel Partner</small></option>
+                          </select> <button className="border" onClick={() => {
+                            setRoleIndex(null)
+                            dispatch(UserRoleUpdation({
+                              userId: item._id,
+                              role: userRole
+                            }))
+                            // window.location.reload();
+
+                          }}>✅</button></div> : <div onClick={() => {
+
+                            setRoleIndex(index)
+
+                          }}>{item.Role}</div>
+                      }
                     </td>
                     <td className="text-light-emphasis border-end">
                       <small>{item.ContactNumber}</small>
@@ -242,27 +315,14 @@ export default function AllRegistrationResponse({}) {
                       {checkNotify?.some(
                         (user) => user?.User?._id === item._id
                       ) ||
-                      require?.some((user) => user?.User?._id === item._id) ? (
+                        require?.some((user) => user?.RequirementUser?._id === item._id) ? (
                         <small>Yes</small>
                       ) : (
                         <small>No</small>
                       )}
                     </td>
 
-                    <td className="text-light-emphasis border-end">
-                      <small>
-                        {item?.createAt
-                          ? new Date(item?.createAt).toLocaleDateString(
-                              "en-GB"
-                            ) +
-                            " (" +
-                            new Date(item?.createAt)
-                              .toLocaleTimeString("en-GB", { hour12: false })
-                              .slice(0, 5) +
-                            ")"
-                          : "..."}
-                      </small>
-                    </td>
+
                   </tr>
                 );
               })}

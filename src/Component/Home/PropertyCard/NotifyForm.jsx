@@ -51,6 +51,29 @@ const NotifyForm = ({ SetShow }) => {
     // eslint-disable-next-line
   }, [data]);
 
+
+  // Alerts
+  const [bhkalert, setBhkAlert] = useState(false);
+  const [floorPrefAlert, setFloorPrefAlert] = useState(false);
+
+const HandleNotifyFormSubmit = ()=>{
+  if(!NotifyData.BHKType){
+    setBhkAlert(true);
+    setTimeout(() => {
+      setBhkAlert(false)
+    }, 1400);
+    return;
+  }
+  if(!NotifyData.FloorPreference){
+    setFloorPrefAlert(true);
+    setTimeout(() => {
+      setFloorPrefAlert(false);
+    }, 1400);
+    return;
+  }
+
+}
+  
   return (
     <>
       {/* <Loader />= */}
@@ -59,7 +82,7 @@ const NotifyForm = ({ SetShow }) => {
       ) : (
         <div className="notify-form-container">
           <div
-            className="cross-btn"
+            className="notify-cross-btn"
             onClick={() => {
               SetShow(false);
             }}
@@ -81,11 +104,14 @@ const NotifyForm = ({ SetShow }) => {
             </p>
 
             <form onSubmit={handleSubmit}>
-              <label className="notify-lable">BHK Type</label>
+
+              <div className="notify-form-main-content">
+                <div className="notify-form-bhk-section">
+                <label className="notify-lable">BHK Type</label>
               <select
                 required
                 value={NotifyData.BHKType}
-                className="form-select"
+                className={`form-select  ${bhkalert? "shake inputShake":''}`}
                 onChange={(e) => {
                   setNotifyData({ ...NotifyData, BHKType: e.target.value });
                 }}
@@ -98,15 +124,15 @@ const NotifyForm = ({ SetShow }) => {
                 <option value="5">5 BHK</option>
               </select>
 
+                </div>
+             
               <div className="room-section">
-                <p>Room</p>
+                <p>Rooms</p>
                 <div className=" checkbox-notify">
                   {Room.map((room, index) => {
                     return (
                       <div className="data-notify" key={index}>
-                        <label className="notify-lable" htmlFor={index}>
-                          {room}
-                        </label>
+                       
 
                         <input
                           type="checkbox"
@@ -131,16 +157,22 @@ const NotifyForm = ({ SetShow }) => {
                             }
                           }}
                         />
+                         <label className="notify-lable" htmlFor={index}>
+                          {room}
+                        </label>
                       </div>
                     );
                   })}
                 </div>
               </div>
+              </div>
 
+              <div className="notify-form-main-content-bottom">
+              <div className="notify-form-floor">
               <label className="notify-lable">Floor Preference</label>
               <select
                 value={NotifyData.FloorPreference}
-                className="form-select"
+                className={`form-select  ${floorPrefAlert? "shake inputShake":''}`}
                 required
                 onChange={(e) => {
                   setNotifyData({
@@ -155,9 +187,16 @@ const NotifyForm = ({ SetShow }) => {
                 <option value="high">High Floor</option>
               </select>
 
-              <button type="submit" className="submit-button">
+              </div>
+              
+              <div className="notify-button-container">
+              <button onClick={HandleNotifyFormSubmit} type="submit" className="notify-submit-button">
                 Submit
               </button>
+              </div>
+              
+              </div>
+              
             </form>
           </div>
         </div>

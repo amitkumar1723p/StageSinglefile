@@ -1,0 +1,167 @@
+.blog-subscribe-main-container{
+    background-color: #e9f5ff;
+    
+}
+
+.blog-subscribe-container{
+    max-width: 1300px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 70px 0px 70px 0px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+   
+}
+
+.blog-subscribe-form-container{
+    width: 48%;
+    min-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+}
+.blog-subscribe-headings{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.blog-subscribe-form-container h2{
+  
+    font-size: 28px;
+    font-weight: 600;
+    color: rgba(23, 48, 67, 1);
+}
+.blog-subscribe-form-container p{
+
+    font-size: 16px;
+    color: rgba(62, 71, 78, 1);
+}
+.blog-subscribe-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.blog-input-wrapper{
+    background-color: white;
+    display: flex;
+    width: 60%;
+    border-radius: 8px;
+    padding: 12px 5px;
+    border: 1px solid #9c9c9c;
+}
+.blog-input-wrapper:focus-within{
+    border: 1px solid #1877f2;
+}
+
+.blog-email-svg{
+    width: 40px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+}
+.blog-subscribe-input{
+    display: flex;
+    gap: 25px;
+}
+
+.blog-subscribe-input input{
+    border: none;
+    width: 85%;
+    color: #666;
+    font-size: 16px;
+}
+
+.blog-subscribe-button{
+    border: none;
+    padding: 10px 40px;
+    border-radius: 8px;
+    background-color:rgba(0, 120, 212, 1);
+    color: white;
+    font-size: 16px;
+    transition-duration: .3s;
+    box-shadow: 0px 0px 14px rgba(4, 104, 255, 0.295);
+
+
+    &:hover{
+        opacity: 0.9;
+    }
+}
+
+.blog-subscribe-error{
+    height: 20px;
+}
+
+.blog-subscribe-links p{
+    font-size: 14px;
+}
+
+
+.blog-subscribe-image{
+    border-radius: 10px;
+
+    width: 48%;
+}
+.blog-subscribe-image img{
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+@media(max-width:1024px){
+    .blog-subscribe-container{
+        width: 90%;
+    }
+}
+
+
+@media(max-width:768px){
+    .blog-subscribe-form-container{
+        width: 100%;
+    }
+    .blog-subscribe-container{
+        flex-direction: column-reverse;
+        gap: 30px;
+    }
+    .blog-subscribe-image{
+        width: 100%;
+    }
+}
+
+@media(max-width:480px){
+    
+    .blog-subscribe-form-container{
+        min-width: 0px;
+    }
+    .blog-subscribe-form-container h2{
+        font-size: 20px;
+    }
+    .blog-subscribe-form-container p{
+        font-size: 14px;
+    }
+    .blog-subscribe-container{
+        padding: 40px 0px 40px 0px;
+        gap: 10px;
+    }
+    .blog-subscribe-headings{
+        gap: 15px;
+    }
+    .blog-input-wrapper {
+        width: 100%;
+    }
+    .blog-subscribe-input{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .blog-subscribe-input input{
+        font-size: 14px;
+    }
+}

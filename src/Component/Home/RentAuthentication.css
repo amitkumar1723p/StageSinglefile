@@ -1,0 +1,156 @@
+.rent-auth-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.rent-auth-headings {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    h2 {
+        font-size: 28px;
+        font-weight: 600;
+        text-align: center;
+        color: #333;
+
+        span {
+            color: rgba(0, 120, 212, 1);
+        }
+    }
+
+    p {
+        font-size: 16px;
+
+    }
+}
+
+.rent-auth-main-content {
+
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.rent-auth-image-container {
+    width: 45%;
+
+
+    img {
+        /* height: 100%; */
+        width: 90%;
+        object-fit: cover;
+    }
+}
+
+.rent-auth-cards-container {
+
+    width: 45%;
+    /* min-width: 380px; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rent-auth-card {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 16px rgba(191, 213, 230, 1);
+
+}
+
+.rent-auth-card-text {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    h2 {
+        font-size: 18px;
+        font-weight: 600;
+        color: rgba(34, 38, 51, 1);
+    }
+
+    p {
+        font-size: 14px;
+        color: rgba(84, 87, 95, 1);
+    }
+}
+
+
+@media(max-width:768px) {
+    .rent-auth-main-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .rent-auth-cards-container {
+        width: 100%;
+        gap: 20px;
+    }
+
+    .rent-auth-image-container {
+        width: 55%;
+    }
+
+    .rent-auth-headings {
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+}
+
+@media(max-width:480px) {
+    .rent-auth-container {
+        width: 90%;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rent-auth-card-text {
+        h2 {
+            font-size: 14px;
+        }
+
+        p {
+            font-size: 12px;
+            color: rgba(84, 87, 95, 1);
+        }
+    }
+
+    .rent-auth-headings {
+        h2 {
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 12px;
+        }
+    }
+
+    .rent-auth-card {
+        gap: 10px;
+        padding: 8px;
+        border-radius: 8px;
+    }
+
+}

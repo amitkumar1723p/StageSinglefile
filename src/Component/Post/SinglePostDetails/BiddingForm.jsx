@@ -16,12 +16,15 @@ export default function BiddingFormForm({
   const { loading, data, LodingType } = useSelector((state) => {
     return state.userData;
   });
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
   const [uploadimages, setuploadimages] = useState([]);
   const [previewImage, setpreviewImage] = useState([]);
   const [timeoutId, setTimeoutId] = useState(null);
   const [BiddingFormData, setBiddingFormData] = useState({
-    // Name: "",
-    // Email: "",
+    Name: "",
+    Email: medata.user.email,
     BidPrice: "",
     AcceptPolicy: false,
     WhatsAppUpdate: false,
@@ -30,9 +33,7 @@ export default function BiddingFormForm({
   const [standardPrices, setstandardPrices] = useState([]);
   const [lowerPrices, setlowerPrices] = useState([]);
 
-  const { medata } = useSelector((state) => {
-    return state.meDetails;
-  });
+
   const [isLowerOffer, setIsLowerOffer] = useState(null); // State for toggling
   
   const [showMakeOfferAlert, setshowMakeOfferAlert] = useState(false);

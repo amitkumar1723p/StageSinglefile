@@ -64,7 +64,7 @@
 }
 
 .mke-you-offer-title {
-  color: var(--Pirmary, #0078d4);
+  color: var(--Pirmary, #1877f2);
   font-family: "Inter", Sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -311,7 +311,7 @@
   font-weight: 500;
   line-height: normal;
   text-transform: uppercase;
-  background: #0078d4;
+  background: #1877f2;
 }
 
 .prop-id-number {
@@ -371,7 +371,7 @@
 }
 
 .name-upload {
-  color: var(--Pirmary, #0078d4);
+  color: var(--Pirmary, #1877f2);
   text-align: center;
   font-family: "Inter", Sans-serif;
   font-size: 14px;

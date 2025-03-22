@@ -8,12 +8,15 @@ import React, {
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 
+
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
 
 // import TenantDetailsForm from "./TenantDetailsForm";
 import Tenant from "./Tenant";
 import RentalBanner from "./RentalBanner";
+import ListYourProperty from "./ListYourProperty.jsx";
+import RentAuthentication from "./RentAuthentication.jsx";
 import BrowseProperties from "./BrowseProperties";
 // import LandLord from "./LandLord";
 
@@ -33,6 +36,7 @@ import ProjectNameSection from "../Post/ProjectName";
 import { Link, NavLink, Location, useNavigate, useLocation } from "react-router-dom";
 import {
   GetAllPostAction,
+  getPostsByAddress,
   GetSingleProjectNameDataAction,
 } from "../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,8 +57,8 @@ import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
 import { UserContext } from "../CreateContext/CreateContext";
-import ReportListingForm from "./ReportListingForm";
-import TermsAndConditions from "./TermsAndConditions";
+import RentAgreement from "./RentAgreement";
+// import TenantDetailsForm from "./TenantDetailsForm";
 import PrivacyPolicy from "./PrivacyPolicy";
 import FurtherAssistance from "./FurtherAssistance";
 import { toast } from "react-toastify";
@@ -65,6 +69,8 @@ import DreamHomeBanner from "./DreamHomeBanner.jsx";
 import BuyingSellingTenant from "./BuyingSellingTenant";
 // import DreamHomeBanner from "./DreamHomeBanner.jsx";
 import { Helmet } from "react-helmet";
+import VerifiedComponent from "./VerifiedComponent.jsx";
+import PropertySection from "./PropertySection.jsx";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -84,7 +90,7 @@ const HeroSection = () => {
         if (activeButton) {
           const buttonRect = activeButton.getBoundingClientRect();
           const containerRect = containerRef.current.getBoundingClientRect();
-          
+
           setPosition({
             width: buttonRect.width,
             height: buttonRect.height,
@@ -137,7 +143,7 @@ const HeroSection = () => {
   }, []);
 
 
-  
+
 
   const [navSearchInputVisible, setnavSearchInputVisible] = useState(false);
   const sectionRef = useRef(null); // Reference to track the target section
@@ -180,7 +186,7 @@ const HeroSection = () => {
     useSelector((state) => {
       return state.SingleProjectName;
     });
-
+    const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
   const PropertyRequirementBtnRef = useRef([]);
   const SearchContainerRef = useRef(null);
   useEffect(() => {
@@ -216,6 +222,10 @@ const HeroSection = () => {
     }
   }, [medata]);
   useEffect(() => {
+    if(!propertyByAdress){
+
+      dispatch(getPostsByAddress())
+    }
     dispatch({ type: "GetAllPostClear" });
     dispatch({ type: "GetSingleProjectNameDataClear" });
     setRedirectPathIsHomeCard(false);
@@ -226,20 +236,21 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
-  // console.log(PropertyAddType)
 
   return (
     <><Helmet>
-             
-    {/* <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title> */}
-    <title>Buy & Sell Resale Properties in Gurgaon</title>
-    <meta name="description" content="PropertyDekho247 India's 1st online Proptech Reselling platform that delivers real-time price alerts to property owners."></meta>
-    <link rel="canonical" href="https://wwww.propertydekho247.com/" />
-</Helmet>
+
+      {/* <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title> */}
+      <title>Buy & Sell Resale Properties in Gurgaon</title>
+      <meta name="description" content="PropertyDekho247 India's 1st online Proptech Reselling platform that delivers real-time price alerts to property owners."></meta>
+      <link rel="canonical" href="https://wwww.propertydekho247.com/" />
+    </Helmet>
 
 
       <header className="hero-section" id="Hero-section">
-        <div className="overlay"></div>
+        <div className="overlay">
+          <img src="/img/hero-img9.png" alt="" srcset="" className="home-hero-img" />
+        </div>
         <div className="hero-content">
           <div className="hero-img-section">
             {/* <div className="hero-img-section" style={{backgroundImage:"url(/img/mobile-img.svg)"}}> */}
@@ -248,54 +259,56 @@ const HeroSection = () => {
           src="/img/mobile-img.svg"
           alt="hero img"
         /> */}
+
+            {/* Do changes in hero-section */}
           </div>
           <div className="heading-hero">
             <h1>
-              Market Value of <span>Property </span> – Pay the Right <span> Price</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
-              India's 1st online proptech platform that delivers real-time price
-              alerts to property owners.
+              India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
+              alerts</span>  to property owners.
             </p>
           </div>
-        {/* nav bar search button  */}
-        {
-          navSearchInputVisible &&   <div className={`search-main-box-section-nav`}>
-              
-          <div className="search-box-nav">
-   
-          <select className="" onChange={(e) => {
-                    // if (e == PropertyAddType) {
-                    // setPropertyAddType("");
-                    // } else {
-                    setSearchPropertyAddType(e.target.value);
-                    // console.log(e.target.value)
-                    // }
-                  }}>
-              <option selected={PropertyAddType === "Sale"} value="Sale">Buy</option>
-              <option  selected={PropertyAddType === "Rent"} value="Rent">Rent</option>
+          {/* nav bar search button  */}
+          {
+            navSearchInputVisible && <div className={`search-main-box-section-nav`}>
 
-              {/* <option value="Noida">Noida</option>
-            <option value="Delhi">Delhi</option> */}
-            </select>
-       
-            <select>
-              <option value="Gurgaon">Gurgaon</option>
-              {/* <option value="Noida">Noida</option>
-            <option value="Delhi">Delhi</option> */}
-            </select>
+              <div className="search-box-nav">
 
-            <div className="search-section-box-nav">
-              <ProjectNameSection
-                ProjectInputType={"Search"}
-                searchInput={true}
-                setrunSearchButton={setrunSearchButton}
-                inputClass={"hero-search-button"}
-                ProjectNameObjectData={ProjectNameObjectData}
-                setProjectNameObjectData={setProjectNameObjectData}
-                placeholder={"Search by Project name or society name"}
-              />
-              {/* <img
+                <select className="" onChange={(e) => {
+                  // if (e == PropertyAddType) {
+                  // setPropertyAddType("");
+                  // } else {
+                  setSearchPropertyAddType(e.target.value);
+             
+                  // }
+                }}>
+                  <option selected={PropertyAddType === "Sale"} value="Sale">Buy</option>
+                  <option selected={PropertyAddType === "Rent"} value="Rent">Rent</option>
+
+                  {/* <option value="Noida">Noida</option>
+            <option value="Delhi">Delhi</option> */}
+                </select>
+
+                <select>
+                  <option value="Gurgaon">Gurgaon</option>
+                  {/* <option value="Noida">Noida</option>
+            <option value="Delhi">Delhi</option> */}
+                </select>
+
+                <div className="search-section-box-nav">
+                  <ProjectNameSection
+                    ProjectInputType={"Search"}
+                    searchInput={true}
+                    setrunSearchButton={setrunSearchButton}
+                    inputClass={"hero-search-button"}
+                    ProjectNameObjectData={ProjectNameObjectData}
+                    setProjectNameObjectData={setProjectNameObjectData}
+                    placeholder={"Search by Project name or society name"}
+                  />
+                  {/* <img
                 className="img-searchbar"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -305,71 +318,75 @@ const HeroSection = () => {
                 alt="tst"
               /> */}
 
-              {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
+                  {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
-              <button
-                disabled={
-                  GetAllPostLoading || GetProjectNameLoding ? true : false
-                }
-                className="search-button-nav"
-                onClick={() => {
-              
-                  if (
-                    runSearchButton == true &&
-                    ProjectNameObjectData.ProjectName?.length > 0
-                  ) {
-                    // setRedirectPath("/");
-                    // dispatch(
-                    //   GetSingleProjectNameDataAction({
-                    //     ProjectName:
-                    //       ProjectNameObjectData.ProjectName?.trim(),
-                    //   })
-                    // );
-                    dispatch(
-                      GetAllPostAction({
-                        ProjectName:
-                        ProjectNameObjectData?.ProjectName?.trim(),
-                        PropertyAdType: SearchPropertyAddType,
-                      })
-                    );
+                  <button
+                    disabled={
+                      GetAllPostLoading || GetProjectNameLoding ? true : false
+                    }
+                    className="search-button-nav"
+                    onClick={() => {
+                      if (runSearchButton == false) {
+                        return alert("Write correct ProjectName");
+                      }
+                      if (
+                        runSearchButton == true &&
+                        ProjectNameObjectData.ProjectName.length > 0
+                      ) {
+                        // setRedirectPath("/");
+                        // dispatch(
+                        //   GetSingleProjectNameDataAction({
+                        //     ProjectName:
+                        //       ProjectNameObjectData.ProjectName.trim(),
+                        //   })
+                        // );
+                        dispatch(
+                          GetAllPostAction({
+                            ProjectName:
+                              ProjectNameObjectData.ProjectName.trim(),
+                            PropertyAdType: SearchPropertyAddType,
+                          })
+                        );
 
-                    // navigate(
-                    //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
-                    // );
-                  }
-                }}
-              >
-                <img
-                  src="/img/Search-icon.svg"
-                  alt=""
-                  className="img-searchbar"
-                />
-              </button>
+                        // navigate(
+                        //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
+                        // );
+                      }
+                    }}
+                  >
+                    <img
+                      src="/img/Search-icon.svg"
+                      alt=""
+                      className="img-searchbar"
+                    />
+                  </button>
 
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        }
+          }
+
+
+
           {/* Search Container */}
           <div ref={sectionRef} className="search-container">
-          
-            
+
+
             <div className="search-main-box-section">
               <div className="search-options">
                 {SearchTab.map((e, i) => {
                   return (
                     <div
                       key={i}
-                      className={`search-tab ${
-                        e == SearchPropertyAddType ? "active" : ""
-                      }
+                      className={`search-tab ${e == SearchPropertyAddType ? "active" : ""
+                        }
                     `}
                       onClick={() => {
                         // if (e == PropertyAddType) {
                         // setPropertyAddType("");
                         // } else {
                         setSearchPropertyAddType(e);
-                        // console.log(e)
+                      
                         // }
                       }}
                     >
@@ -407,7 +424,7 @@ const HeroSection = () => {
                     ProjectInputType={"Search"}
                     searchInput={true}
                     setrunSearchButton={setrunSearchButton}
-                    inputClass={"hero-search-button"}
+                    inputClass={"elastic-section-input-tag"}
                     ProjectNameObjectData={ProjectNameObjectData}
                     setProjectNameObjectData={setProjectNameObjectData}
                     placeholder={"Search by Project name or society name"}
@@ -443,8 +460,7 @@ const HeroSection = () => {
                         //   })
                         // );
 
-                         console.log("project",ProjectNameObjectData)
-                         console.log("type",SearchPropertyAddType)
+                       
                         dispatch(
                           GetAllPostAction({
                             ProjectName:ProjectNameObjectData?.ProjectName?.trim()
@@ -490,7 +506,7 @@ const HeroSection = () => {
                           GetAllPostAction({
                             ProjectName:
                               ProjectNameObjectData.ProjectName?.trim(),
-                            PropertyAdType: "Sale",
+                            PropertyAdType:SearchPropertyAddType,
                           })
                         );
 
@@ -514,9 +530,9 @@ const HeroSection = () => {
             </div>
 
 
-            <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink>
-            <div className="property-section">
-              {/* Property Listing Section */}
+            {/* <NavLink to={"/all-post"}  className="hero-section-all-post-button">all posts</NavLink> */}
+            {/* <div className="property-section">
+              Property Listing Section
               <div
                 className="property-link"
                 onClick={() => {
@@ -536,7 +552,7 @@ const HeroSection = () => {
                     <button className="btn-hero">I am an Owner</button>
                   </div>
                   <div className="arrow">
-                    {/* <span>&#x2192;</span> */}
+                    <span>&#x2192;</span>
                     <div className="icon">
                       <img
                         src="/img/needbuyer.svg"
@@ -547,7 +563,7 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Property Requirement Section */}
+              Property Requirement Section
 
               <div
                 ref={PropertyRequirementBtnRef.current[0]}
@@ -567,17 +583,53 @@ const HeroSection = () => {
                   </h3>
                   <button className="btn-hero"> I am a Buyer</button>
                 </div>
-                <div className="arrow">{/* <span>&#x2192;</span> */}</div>
+                <div className="arrow"><span>&#x2192;</span></div>
                 <div className="icon">
                   <img src="/img/Postreqire.svg" alt="Property Listing Icon" />
                 </div>
-              </div>
-              {/* </a> */}
-            </div>
+              </div> */}
+            {/* </a> */}
+            {/* </div> */}
           </div>
-         
+
         </div>
       </header>
+
+
+
+      {/* normal waala  */}
+      <div className="requirement-container">
+        <img src="/img/overlay2.svg" alt="" className="overlay-lines" />
+        <div className="requirement-overlay">
+        </div>
+        <div className="requirement-main">
+          <div className="requirement-heading">
+            <h2 className="requirement-heading-h2">
+              Tell us what you’re looking for, and we’ll notify you when we
+              find a match!
+            </h2>
+
+            <div ref={PropertyRequirementBtnRef.current[0]}
+              onClick={() => {
+                if (medata && medata.IsAuthenticated == true) {
+                  setshowPropertyRequirement(true);
+                } else {
+                  setRedirectPath("/post-requirement");
+                  navigate("/login");
+                }
+              }} className="requirement-button">
+              <button className="requirement-btn"><span className="requirement-span">SHARE YOUR REQUIREMENT</span></button>
+            </div>
+          </div>
+          <div className="requirement-svg">
+            <img src="/img/House4.svg" alt="house" srcset="" className="requirement-img" />
+          </div>
+        </div>
+
+      </div>
+
+      {/* changes is complete in hero-section */}
+
       {!isHidden && (
         <div className="floating-buttons ">
           {/* Call Button */}
@@ -595,6 +647,8 @@ const HeroSection = () => {
           </Link>
         </div>
       )}
+
+      <PropertySection />
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">
@@ -626,48 +680,51 @@ const HeroSection = () => {
             })}
 
               <BuyingSellingTenant /> */}
-      <div 
-      ref={containerRef} 
-      className="AnimatedNav-container"
-    >
-      <motion.div
-        className="AnimatedNav-slider"
-        animate={{ 
-          width: position.width,
-          height: position.height,
-          left: position.left,
-          top: position.top
-        }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      />
-      <button
-        key="seller"
-        onClick={() => {setActiveIndex(0);
-          setPropertyAddType("Buy")
-        }}
-        className={`AnimatedNav-button ${activeIndex === 0 ? 'AnimatedNav-button--active' : ''}`}
-      >
-        Buying
-      </button>
-      <button
-        key="buyer"
-        onClick={() => {setActiveIndex(1);
-          setPropertyAddType("Sale")
-        }}
-        className={`AnimatedNav-button ${activeIndex === 1 ? 'AnimatedNav-button--active' : ''}`}
-      >
-        Selling
-      </button>
-      <button
-        key="tenant"
-        onClick={() => {setActiveIndex(2);
-          setPropertyAddType("Rent")
-        }}
-        className={`AnimatedNav-button ${activeIndex === 2 ? 'AnimatedNav-button--active' : ''}`}
-      >
-        Renting
-      </button>
-    </div>
+            <div
+              ref={containerRef}
+              className="AnimatedNav-container"
+            >
+              <motion.div
+                className="AnimatedNav-slider"
+                animate={{
+                  width: position.width,
+                  height: position.height,
+                  left: position.left,
+                  top: position.top
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+              <button
+                key="seller"
+                onClick={() => {
+                  setActiveIndex(0);
+                  setPropertyAddType("Buy")
+                }}
+                className={`AnimatedNav-button ${activeIndex === 0 ? 'AnimatedNav-button--active' : ''}`}
+              >
+                Buying
+              </button>
+              <button
+                key="buyer"
+                onClick={() => {
+                  setActiveIndex(1);
+                  setPropertyAddType("Sale")
+                }}
+                className={`AnimatedNav-button ${activeIndex === 1 ? 'AnimatedNav-button--active' : ''}`}
+              >
+                Selling
+              </button>
+              <button
+                key="tenant"
+                onClick={() => {
+                  setActiveIndex(2);
+                  setPropertyAddType("Rent")
+                }}
+                className={`AnimatedNav-button ${activeIndex === 2 ? 'AnimatedNav-button--active' : ''}`}
+              >
+                Renting
+              </button>
+            </div>
 
           </div>
         </div>
@@ -711,7 +768,7 @@ const HeroSection = () => {
           <ComparisonTableSeller />
           <EndToEndSupportSeller />
           {/* <DreamHomeBanner/> */}
-          
+
           <PostFreeContainer />
           <Services />
           <FutureAsist />
@@ -730,12 +787,15 @@ const HeroSection = () => {
       {/* Rent Component./ */}
       {/* {PropertyAddType == "Rent" && (
         <>
-          <BrowseProperties />
-          <LandLord />
-          <RentAgreement/>
-          <PropertyDetailsForm />
-          <RentalBanner />
           <Tenant />
+          <BrowseProperties />
+          <ListYourProperty />
+          <LandLord />
+          <PropertyDetailsForm />
+          <RentAgreement />
+          <RentalBanner />
+          <VerifiedComponent />
+          <RentAuthentication />
           <TenantDetailsForm />
         </>
       )} */}

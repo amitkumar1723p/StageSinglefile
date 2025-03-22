@@ -27,18 +27,19 @@ const FutureAsist = () => {
             className="assistance-banner-button"
             onClick={() => {
               window.open(
-                "https://wa.me/7837840785?text=Hello%20Propfuture%20AI%20Technologies,%20I%20would%20like%20to%20know%20more%20about%20the%20opportunity.",
+                "https://wa.me/7837840785?text=Hello%20propertydekho247%20team%2C%20I%20am%20interested%20in%20learning%20more%20about%20your%20properties.",
                 "_blank"
               );
             }}
           >
             <img className="icon-btn" src="/img/whatapp.png" alt="whatsapp" />
-           Whatsapp
+            Whatsapp
           </button>
 
           <span className="assistance-banner-or">Or</span>
           <span className="assistance-banner-phone">+91 783-784-0785</span>
         </div>
+
       </div>
     </div>
   );

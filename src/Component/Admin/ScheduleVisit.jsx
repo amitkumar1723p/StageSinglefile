@@ -27,7 +27,11 @@ const ScheduleVisit = () => {
   });
 
   useEffect(() => {
-    dispatch(Admin_OwnerGetAllScheduleVisits(Params.PostId));
+    if (location.pathname.includes("schedule-visit/deleted-post")) {
+      dispatch(Admin_OwnerGetAllScheduleVisits(Params.PostId, true));
+    } else {
+      dispatch(Admin_OwnerGetAllScheduleVisits(Params.PostId));
+    }
   }, []);
 
   useEffect(() => {
@@ -56,29 +60,31 @@ const ScheduleVisit = () => {
 
   useEffect(() => {
     if (ScheduleVisitsData?.success == false) {
-      navigate("/admin/allpost");
+      if (location.pathname.includes("schedule-visit/deleted-post")) {
+        navigate("/admin/deleted-post");
+      } else {
+        navigate("/admin/allpost");
+      }
     }
   }, [ScheduleVisitsData]);
+
+  const { loading, data: getSinglePostData } = useSelector((state) => {
+    return state.GetSinglePost;
+  });
+ 
 
   return (
     <>
       <HeaderCard />
-      {/* <button
-        onClick={() => {
-          setcount(count + 1);
-        }}
-      >
-        {count}
-      </button> */}
       {ScheduleVisitsData &&
         ScheduleVisitsData.success == true &&
         ScheduleVisitsData.ScheduleVisits.map((visitData, i) => {
           const { PostId } = visitData.PostData;
-          let FullPropertyAddress = `${`${PostId?.PropertyDetails.BHKType} BHK`} ${
-            PostId?.BasicDetails.ApartmentType
-          } For ${PostId?.BasicDetails.PropertyAdType} In ${
-            PostId?.LocationDetails.Locality
-          }`;
+          let FullPropertyAddress = `${`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`} ${
+            getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType
+          } For ${
+            getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType
+          } In ${getSinglePostData?.SinglePost?.LocationDetails?.Locality}`;
 
           return (
             <div className="schedule-visit-card" key={i}>
@@ -106,7 +112,7 @@ const ScheduleVisit = () => {
                       {PostId?._id}
                     </span>
                     {/* {} */}
-                    {PostId?.PostVerify ? (
+                    {getSinglePostData?.SinglePost?.PostVerify ? (
                       <span className="schedule-visit-status">Active</span>
                     ) : (
                       <span className="schedule-visit-status">InActive</span>
@@ -116,46 +122,45 @@ const ScheduleVisit = () => {
                 <div className="schedule-visit-footer">
                   <div className="schedule-visit-schedule-info">
                     <div>
+                      <p>
+                        Schedule Visit:
+                        <span className="schedule-visit-status">
+                          {/*  ,setVisitStatus */}
+                          <select
+                            value={VisitStatus[visitData._id]}
+                            // onChange={(e) => {
+                            //   setVisitStatus(e.target.value);
+                            // }}
+                            onChange={(e) =>
+                              setVisitStatus((prev) => ({
+                                ...prev,
+                                [visitData._id]: e.target.value,
+                              }))
+                            }
+                          >
+                            <option value="Re-Plan">Re-Plan</option>
+                            <option value="Done">Done</option>
+                          </select>
+                          <span>{visitData.VisitStatusData.Status} </span>
+                        </span>
+                        <button
+                          className="submit-schedule"
+                          onClick={() => {
+                            const status =
+                              VisitStatus[visitData._id] || "Re-Plan";
 
-                    
-                    <p>
-                      Schedule Visit:
-                      <span className="schedule-visit-status">
-                        {/*  ,setVisitStatus */}
-                        <select
-                          value={VisitStatus[visitData._id]}
-                          // onChange={(e) => {
-                          //   setVisitStatus(e.target.value);
-                          // }}
-                          onChange={(e) =>
-                            setVisitStatus((prev) => ({
-                              ...prev,
-                              [visitData._id]: e.target.value,
-                            }))
-                          }
+                            dispatch(
+                              Admin_OwnerScheduleVisitDone(
+                                { VisitStatus: status },
+                                visitData._id
+                              )
+                            );
+                          }}
                         >
-                          <option value="Re-Plan">Re-Plan</option>
-                          <option value="Done">Done</option>
-                        </select>
-                        <span>{visitData.VisitStatusData.Status} </span>
-                      </span>
-                      <button
-                        className="submit-schedule"
-                        onClick={() => {
-                          const status =
-                            VisitStatus[visitData._id] || "Re-Plan";
-
-                          dispatch(
-                            Admin_OwnerScheduleVisitDone(
-                              { VisitStatus: status },
-                              visitData._id
-                            )
-                          );
-                        }}
-                      >
-                        Submit
-                      </button>
-                    </p></div>
+                          Submit
+                        </button>
+                      </p>
+                    </div>
                     <div className="visit-admin-box">
                       <p className="visit-time-date">
                         Date:
@@ -174,7 +179,7 @@ const ScheduleVisit = () => {
                         Time:
                         <span className="schedule-visit-time">
                           {formatTime(visitData.VisitTime.From)}
-                           {/* to{" "} */}
+                          {/* to{" "} */}
                           {/* {formatTime(visitData.VisitTime.To)} */}
                         </span>
                       </p>

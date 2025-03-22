@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MapComponent from "./MapComponent";
 
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
@@ -13,6 +13,8 @@ export default function LocationDetails({
   setLocationDetailsData,
   update,
   setnext,
+  // LocationDetailsSubmit
+  LocationDetailsSubmiRef,
 }) {
   const dispatch = useDispatch();
 
@@ -22,8 +24,48 @@ export default function LocationDetails({
       StoreDataInSession("next", 2);
       StoreDataInSession("LocationDetailsData", LocationDetailsData);
     }
-    setnext(2);
+      setnext(2);
   };
+
+  // handle Alert Shake
+
+
+  
+      const transitionDuration = '0.3s';
+  const [locationAlert, setlocationAlert] = useState({});
+
+  const [sectorShake,setSectorShake] = useState(false);
+  const [cityShake,setCityShake] = useState(false);
+  const [localityShake,setLocalityShake] = useState(false)
+
+
+  const LocationDetailsAlertShake = (e)=>{
+    
+    // if(ProjectNameObjectData === undefined){
+    //   console.log("console");
+    // }
+    
+    if(LocationDetailsData.Landmark?.length == 0){
+      // setSectorShake(true);
+      // setTimeout(()=> setSectorShake(false),1600);
+      return
+
+    }
+    if(LocationDetailsData.City?.length == 0){
+      setCityShake(true);
+      setTimeout(()=> setCityShake(false),1600);
+      return
+
+    }
+    if(LocationDetailsData.Locality?.length == 0){
+      setLocalityShake(true);
+      setTimeout(()=> setLocalityShake(false),1600);
+      return
+
+    }
+  }
+
+
 
   return (
     <>
@@ -33,18 +75,23 @@ export default function LocationDetails({
         </div> */}
       <div className="container w-80%">
         <h2 className="location-heading">Location Details</h2>
-        <form id="locationForm" onSubmit={submitHandler}>
+        <form id="locationForm" onSubmit={submitHandler} ref={ LocationDetailsSubmiRef}>
           <div className="location-box">
             <ProjectNameSection
+            
               ProjectInputType={"PostForm"}
               ProjectNameObjectData={LocationDetailsData}
               setProjectNameObjectData={setLocationDetailsData}
               placeholder={"Project Name"}
+              inputClass ={"locationdetails-input"}
+              locationAlert={locationAlert}
             />
 
             <div className="form-group">
               <label htmlFor="street">Sector *</label>
               <input
+              style={{transitionDuration}}
+              className={`${sectorShake? '' : ''}`}
                 type="text"
                 id="street"
                 name="street"
@@ -63,6 +110,8 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="city">City *</label>
               <input
+              style={{transitionDuration}}
+               className={`${cityShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="city"
                 name="city"
@@ -79,6 +128,8 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="locality">Locality *</label>
               <input
+              style={{transitionDuration}}
+              className={`${localityShake? 'inputShake shake' : ''}`}
                 type="text"
                 id="locality"
                 name="locality"
@@ -109,7 +160,7 @@ export default function LocationDetails({
               Previous
             </div>
 
-            <button className="Submit-next">Next</button>
+            <button className="Submit-next" onClick={LocationDetailsAlertShake}>Next</button>
           </div>
         </form>
       </div>

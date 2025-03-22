@@ -1,0 +1,133 @@
+.list-your-property-main-container{
+    width: 80%;
+    max-width: 1300px;
+    margin: 50px auto;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px rgba(191, 213, 230, 1);
+}
+.list-your-property-text-container{
+
+    padding: 20px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.list-your-property-heading{
+
+    h2{
+        font-size: 28px;
+        font-weight: 600;
+        color: #333;
+
+        span{
+            color: #037edb;
+        }
+    }
+}
+.list-your-property-title{
+    color: #333;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #e9f5ff;
+    font-weight: 600;
+}
+.list-your-property-list-item{
+    padding-left: 0;
+}
+.list-your-property-list{
+    list-style-type: none ;
+}
+.list-your-property-list li{
+    position: relative;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #333;
+
+}
+.list-your-property-list li::before{
+    content: "✔";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #333;
+
+}
+
+
+.list-your-property-button button{
+    padding: 10px 30px 10px 30px;
+    background-color: var(--main-light-clr);
+    color: white;
+    border-radius: 6px;
+    border: 1px soild var(--main-light-clr);
+
+    &:hover{
+        opacity: 0.9;
+    }
+}
+
+.list-your-property-image{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 45%;
+}
+.list-your-property-image img{
+    width: 60%;
+
+    object-fit: cover;
+}
+
+
+@media(max-width:768px){
+    .list-your-property-main-container{
+        flex-direction: column-reverse;
+    }
+    .list-your-property-text-container {
+        width: 100%;
+    }
+    .list-your-property-image {
+        width: 80%;
+        margin: 0 auto;
+        height: 300px;
+    }
+}
+
+@media(max-width:480px){
+    .list-your-property-image {
+        height: 210px;
+    }
+    .list-your-property-image img {
+        width: 65%;
+        object-fit: cover;
+    }
+    .list-your-property-heading {
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
+    }
+    .list-your-property-title p{
+        font-size: 12px;
+    }
+    .list-your-property-list li {
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .list-your-property-text-container {
+        gap: 12px;
+        padding: 10px;
+    }
+
+}
+
+@media(max-width:350px){
+    .list-your-property-image {
+        height: 180px;
+    }
+}

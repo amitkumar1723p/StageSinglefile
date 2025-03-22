@@ -87,6 +87,11 @@
 
 }
 
+.otp-error-msg-container{
+  height: 10px;
+
+}
+
 .otp-login-h2-p{
   color: #333;
   margin-bottom: 10px;
@@ -100,7 +105,7 @@
 }
 
 .otp-form-content-unique h2 {
-  color: var(--primary-color, #0078d4);
+  color: var(--primary-color, #1877f2);
   font-family: Inter, sans-serif;
   font-size: 18px;
   font-weight: 600;
@@ -196,5 +201,17 @@
     border-left: none;
     border-top: 1px solid #f0f0f0;
     border-radius: 0 0 10px 10px;
+  }
+}
+
+@media (max-width: 480px){
+  .otp-wrapper-unique{
+    margin: 0;
+  }
+}
+
+@media (max-width: 376px){
+  .otp-wrapper-unique{
+    margin: 0;
   }
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./ViewOwnerDetailsAlert.css";
-export default function ViewOwnerDetails({ SetShow }) {
+import { FaCheckCircle } from "react-icons/fa"; // Import an icon for success
+
+export default function ViewOwnerDetails({ SetShow, Contact }) {
   const [OwnerDetails, setOwnerDetals] = useState({});
 
   useEffect(() => {
@@ -13,8 +15,6 @@ export default function ViewOwnerDetails({ SetShow }) {
     };
   }, []);
 
-  console.log(OwnerDetails);
-
   return (
     <div className="view-owner-details-modal">
       <div className="view-owner-details-header">
@@ -26,24 +26,28 @@ export default function ViewOwnerDetails({ SetShow }) {
         >
           X
         </span>
-        <h1 className="view-owner-details-title">View Response Form</h1>
+        {/* <h2 className="view-owner-details-title">Payment Successful!</h2> */}
       </div>
       <div className="view-owner-details-content">
-        <p>
-          <strong>Name:</strong> {OwnerDetails.OwnerName}
-        </p>
-        <p>
-          <strong>Phone No:</strong> {OwnerDetails.OwnerContactNumber}
-        </p>
-        <p>
-          Dear Tenant, here is the contact information for the property owner.
-          You can directly reach out to the owner to inquire about the listing.
-          Additionally, we have sent your details to the owner. If they choose
-          to proceed with you, you will receive a call from their side. You also
-          have the option to contact the owner directly for further discussions
-          and to move forward with the property process.
-        </p>
-      </div>
+  <div className="success-icon">
+    <FaCheckCircle color="#28a745" size={50} />
+  </div>
+
+  <p>
+    <strong>Here are our team contact details for rental property inquiries:</strong>
+  </p>
+  <p>
+    Team Contact No: <b>{Contact}</b>
+  </p>
+  <p>
+    Email: <b>sales@propertydekho247.com</b>
+  </p>
+  <p>
+    Our team is available to assist you with any rental property-related inquiries. Don't hesitate to get in touch, and we'll be happy to help!
+  </p>
+</div>
+
+
     </div>
   );
 }

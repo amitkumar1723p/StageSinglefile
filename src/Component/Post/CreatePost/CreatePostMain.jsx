@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Loader/Loader.jsx";
 import { Helmet } from "react-helmet";
-import PropertyDetailsAreaDetailsConstructionDetailsFloorDetailsAmenitiesDetailsSection from "./PropertyDetails_AreaDetails_ConstructionDetails_FloorDetails_AmenitiesDetails.jsx";
+import PropertyDetailsAreaDetailsOtherDetailsFloorDetailsAmenitiesDetailsSection from "./PropertyDetails_AreaDetails_OtherDetails_FloorDetails_AmenitiesDetails.jsx";
 import PricingDetailsSection from "./PricingDetails.jsx";
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
 import WindowComponent from "../../WindowComponent.jsx";
@@ -18,6 +18,7 @@ export default function CreatePostMain() {
   const dispatch = useDispatch();
   const Params = useParams();
   const location = useLocation();
+ 
 
   const update = location.pathname.includes("update");
   const navigate = useNavigate();
@@ -26,8 +27,9 @@ export default function CreatePostMain() {
   const [BasicDetailsData, setBasicDetailsData] = useState({});
   const [LocationDetailsData, setLocationDetailsData] = useState({});
   const [PropertyDetailsData, setPropertyDetailsData] = useState({});
-  const [ConstructionDetailsData, setConstructionDetailsData] = useState({});
+  const [OtherDetailsData, setOtherDetailsData] = useState({});
   const [AreaDetailsData, setAreaDetailsData] = useState({});
+
   const [FloorDetailsData, setFloorDetailsData] = useState({});
   const [AmenitiesDetailsData, setAmenitiesDetailsData] = useState({});
   const [PricingDetailsData, setPricingDetailsData] = useState({});
@@ -39,6 +41,8 @@ export default function CreatePostMain() {
   const [previewImage, setpreviewImage] = useState([]);
   const [update_RemoveImage, setupdate_RemoveImage] = useState([]);
   const [uploadimagesName, setuploadimagesName] = useState([]);
+
+  //  Form Submit  State
 
   //  Update Post Logic
 
@@ -60,6 +64,157 @@ export default function CreatePostMain() {
 
   // getSingle PostData
 
+  const BasicDetailsForm = useRef(null);
+
+  const handleNextClick = () => {
+    if (BasicDetailsForm.current) {
+      BasicDetailsForm.current.submit(); // This will trigger form submission
+    }
+  };
+  // const handleNextClick = () => {
+  //   if (formRef.current) {
+  //     // formRef.current.submit();   // This will trigger form submission
+  //   }
+  // };
+
+  // Form Submit  Start
+  //  BasicDetils Component submit -- Start
+  const ApartMentTypeArrayRemovePlotAndLand = [
+    "Apartment",
+    "Independent House/Villa",
+    // "1 RK/Studio Apartment",
+    "Studio Apartment",
+    "1 RK/PG",
+    "Independent/Builder Floor",
+    "Serviced Apartment",
+  ];
+  
+
+  // userstates for alert  shake
+    const [propertyTypeShake, setPropertyTypeShake] = useState(false);
+
+
+  const BasicDetailsFormSubmit = () => {
+    if (!BasicDetailsData.PropertyType) {
+      return alert(" Poperty Type is Required");
+    }
+
+    if (!BasicDetailsData.PropertyAdType) {
+      return alert("Property Ad Type is Required");
+    }
+    if (!BasicDetailsData.ApartmentType) {
+      return alert("Apartment Type is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Rent" &&
+      !BasicDetailsData.AvailableFrom
+    ) {
+      return alert("Available From is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Rent" &&
+      BasicDetailsData.AvailableFrom
+    ) {
+      // const currentDate = new Date(Date.now());
+      const currentDate = new Date().toISOString().split("T")[0];
+      const selectedDate = BasicDetailsData.AvailableFrom;
+
+      if (selectedDate < currentDate) {
+        return alert("Enter valid Date");
+      }
+
+      // if (selectedDate >= currentDate) {
+      //   setBasicDetailsData({
+      //     ...BasicDetailsData,
+      //     AvailableFrom: e.target.value,
+      //   });
+      // }
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      !BasicDetailsData.PropertyStatus
+    ) {
+      return alert("Property Status is Required");
+    }
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Ready to move" &&
+      !BasicDetailsData.CurrentPropertyStatus
+    ) {
+      return alert("Current Property Status is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Ready to move" &&
+      !BasicDetailsData.PropertyAge
+    ) {
+      return alert("PropertyAge is Required");
+    }
+
+    if (
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      ApartMentTypeArrayRemovePlotAndLand.includes(
+        BasicDetailsData.ApartmentType
+      ) &&
+      BasicDetailsData.PropertyStatus == "Under Construction" &&
+      !BasicDetailsData.PossessionStatus
+    ) {
+      return alert("Possession Status is Required");
+    }
+
+    if (
+      BasicDetailsData.ApartmentType === "Plot/Land" &&
+      !BasicDetailsData.CurrentPropertyStatus
+    ) {
+      return alert("Current Property Status is Required");
+    }
+    if (
+      BasicDetailsData.ApartmentType === "Plot/Land" &&
+      !BasicDetailsData.PossessionStatus
+    ) {
+      return alert("Possession Status is Required");
+    }
+
+    if (!update) {
+      // StoreDataInSession("BasicDetailsDataUpdate", BasicDetailsData);
+      StoreDataInSession("BasicDetailsData", BasicDetailsData);
+      StoreDataInSession("next", 1);
+    }
+
+    setnext(1);
+    return true;
+  };
+
+  const LocationDetailsSubmiRef = useRef(null);
+  const ApartmentFeaturesRef = useRef(null);
+  const PricingDetailsRef = useRef(null);
+  //  const LocationDetailsSubmit =(e) => {
+  //      e.preventDefault();
+  //      if (!update) {
+  //        StoreDataInSession("next", 2);
+  //        StoreDataInSession("LocationDetailsData", LocationDetailsData);
+  //      }
+  //      setnext(2);
+  //    }
+  // BasicDetails Component Submit  -- End
+
+  //  LocationDetails Component Submit  -- Start
+
+  //  Form Submit End
+
   const { loading: SinglePostLoading, data: getSinglePostData } = useSelector(
     (state) => {
       return state.GetSinglePost;
@@ -76,6 +231,7 @@ export default function CreatePostMain() {
       if (getSinglePostData) {
         if (getSinglePostData.success === true) {
           const { SinglePost } = getSinglePostData;
+
           const {
             BasicDetails,
             LocationDetails,
@@ -85,6 +241,7 @@ export default function CreatePostMain() {
             AmenitiesDetails,
             PropertyImages,
             PricingDetails,
+            OtherDetails,
           } = SinglePost;
 
           if (BasicDetails.PropertyAdType === "Rent") {
@@ -118,7 +275,7 @@ export default function CreatePostMain() {
           setAreaDetailsData({ ...AreaDetails });
           setAmenitiesDetailsData({ ...AmenitiesDetails });
           setPricingDetailsData({ ...PricingDetails });
-
+          setOtherDetailsData({ ...OtherDetails });
           setpreviewImage(
             PropertyImages.map((e) => {
               return { name: e.name, url: e.url };
@@ -127,16 +284,6 @@ export default function CreatePostMain() {
         }
       }
     } else {
-      // sessionStorage.removeItem("next");
-      // sessionStorage.removeItem("BasicDetailsData");
-      // sessionStorage.removeItem("LocationDetailsData");
-      // sessionStorage.removeItem("PropertyDetailsData");
-      // sessionStorage.removeItem("AreaDetailsData");
-      // sessionStorage.removeItem("FloorDetailsData");
-      // sessionStorage.removeItem("AmenitiesDetailsData");
-      // sessionStorage.removeItem("PropertyDetailsData");
-      // sessionStorage.removeItem("PricingDetailsData");
-
       if (sessionStorage.getItem("next")) {
         setnext(JSON.parse(sessionStorage.getItem("next")));
       }
@@ -179,28 +326,17 @@ export default function CreatePostMain() {
           JSON.parse(sessionStorage.getItem("PropertyDetailsData"))
         );
       }
-      if (sessionStorage.getItem("PricingDetailsData")) {
-        setPricingDetailsData(
-          JSON.parse(sessionStorage.getItem("PricingDetailsData"))
+
+      if (sessionStorage.getItem("OtherDetailsData")) {
+        setOtherDetailsData(
+          JSON.parse(sessionStorage.getItem("OtherDetailsData"))
         );
       }
-
-      // setBasicDetailsData({});
-      // setLocationDetailsData({});
-      // setPropertyDetailsData({});
-      // setConstructionDetailsData({});
-      // setAreaDetailsData({});
-      // setFloorDetailsData({});
-      // setAmenitiesDetailsData({});
-      // setPricingDetailsData({});
-      // setshow_Maintenance_Charges(false);
-      // setuploadimages([]);
-      // setpreviewImage([]);
     }
     // eslint-disable-next-line
   }, [getSinglePostData, update]);
 
-  //  Rent And Sale   Validate Field
+  //  Rent And Sale   Validate Field ()
   useEffect(() => {
     if (BasicDetailsData.PropertyAdType === "Rent") {
       setshow_Maintenance_Charges(true);
@@ -214,7 +350,11 @@ export default function CreatePostMain() {
         ...BasicDetailsData_Rest
       } = BasicDetailsData; // Destructure to remove PropertyStatus
 
-      if (BasicDetailsData.ApartmentType === "Plot/Land") {
+      if (
+        ["Plot/Land", "Studio Apartment"].includes(
+          BasicDetailsData.ApartmentType
+        )
+      ) {
         delete BasicDetailsData_Rest.ApartmentType;
       }
       delete BasicDetailsData_Rest.NoOfOpenSide;
@@ -222,13 +362,14 @@ export default function CreatePostMain() {
       // delete BasicDetailsData_Rest.PossessionStatus;
       setBasicDetailsData(BasicDetailsData_Rest);
 
+      //  if(A)
       if (sessionStorage.getItem("BasicDetailsData")) {
         StoreDataInSession("BasicDetailsData", BasicDetailsData_Rest);
       }
       const {
         ExpectedPrice,
         PricePerSqFt,
-
+        PricePerSqYd,
         ...PricingDetailsData_Rest
       } = PricingDetailsData;
 
@@ -241,22 +382,166 @@ export default function CreatePostMain() {
     } else if (BasicDetailsData.PropertyAdType === "Sale") {
       const { AvailableFrom, ...BasicDetailsData_Rest } = BasicDetailsData; // Destructure to remove PropertyStatus
 
+      if (
+        ["Serviced Apartment", "1 RK/PG"].includes(
+          BasicDetailsData.ApartmentType
+        )
+      ) {
+        delete BasicDetailsData_Rest.ApartmentType;
+      }
+
+      // remove price field
+
+      const {
+        ExpectedRent,
+        DepositePrice,
+
+        // PreferredTenant,
+        ...PricingDetailsData_Rest
+      } = PricingDetailsData;
+      delete PricingDetailsData_Rest.AdditionalDetails?.PreferredTenant;
+      delete PricingDetailsData_Rest.AdditionalDetails
+        ?.ElectrictyAndWaterCharges;
+
       if (BasicDetailsData.ApartmentType === "Plot/Land") {
+        if (
+          !["Vacant", "Boundary Wall", "Construction Done"].includes(
+            BasicDetailsData_Rest.CurrentPropertyStatus
+          )
+        ) {
+          delete BasicDetailsData_Rest.CurrentPropertyStatus;
+        }
         BasicDetailsData_Rest.NoOfOpenSide = 0;
         delete BasicDetailsData_Rest.PropertyStatus;
-        delete BasicDetailsData_Rest.CurrentPropertyStatus;
+
         delete BasicDetailsData_Rest.PropertyAge;
+
+        // // Area details validation
+        const {
+          BuiltUpArea,
+          CarpetArea,
+          PlotArea,
+          SuperBuiltUpArea,
+          ...AreaDetailsData_Rest
+        } = AreaDetailsData;
+
+        setAreaDetailsData(AreaDetailsData_Rest);
+        if (sessionStorage.getItem("AreaDetailsData")) {
+          StoreDataInSession("AreaDetailsData", AreaDetailsData_Rest);
+        }
+
+        //  Flooring data
+        setFloorDetailsData({});
+        if (sessionStorage.getItem("FloorDetailsData")) {
+          StoreDataInSession("FloorDetailsData", {});
+        }
+
+        // property details data
+
+        setPropertyDetailsData({});
+        if (sessionStorage.getItem("PropertyDetailsData")) {
+          StoreDataInSession("PropertyDetailsData", {});
+        }
+
+        // Amenities Details
+
+        const {
+          Furnishing,
+          FurnishingOption,
+          SocietyAndBuildingFeature,
+          ...AmenitiesDetailsData_Rest
+        } = AmenitiesDetailsData;
+
+        setAmenitiesDetailsData(AmenitiesDetailsData_Rest);
+        if (sessionStorage.getItem("AmenitiesDetailsData")) {
+          StoreDataInSession("AmenitiesDetailsData", AmenitiesDetailsData_Rest);
+        }
+
+        // remove price details
+        delete PricingDetailsData_Rest.PricePerSqFt;
+        delete PricingDetailsData_Rest.AdditionalDetails?.MonthlyExpectedRent;
       } else if (
         [
+          "Independent House/Villa",
           "Apartment",
           "Independent/Builder Floor",
-          "1 RK/Studio Apartment",
+          // "1 RK/Studio Apartment",
+          "Studio Apartment",
+          "1 RK/PG",
           "Serviced Apartment",
         ].includes(BasicDetailsData.ApartmentType)
       ) {
+        if (
+          !["Vacant", "Rented", "Self Occupied"].includes(
+            BasicDetailsData_Rest.CurrentPropertyStatus
+          )
+        ) {
+          delete BasicDetailsData_Rest.CurrentPropertyStatus;
+        }
+
         delete BasicDetailsData_Rest.NoOfOpenSide;
-        // delete BasicDetailsData_Rest.CurrentPropertyStatus;
-        // delete BasicDetailsData_Rest.PossessionStatus;
+
+        // Area Details Sort
+        const { PlotSize, PlotDimensions, ...AreaDetailsData_Rest } =
+          AreaDetailsData;
+
+        if (
+          ["Independent House/Villa", "Independent/Builder Floor"].includes(
+            BasicDetailsData.ApartmentType
+          )
+        ) {
+          // Floor Details Sort
+          const { PropertyOnFloor, ...FloorDetailsData_Rest } =
+            FloorDetailsData;
+          setFloorDetailsData(FloorDetailsData_Rest);
+
+          if (sessionStorage.getItem("FloorDetailsData")) {
+            StoreDataInSession("FloorDetailsData", FloorDetailsData_Rest);
+          }
+        } else if (
+          [
+            "Apartment",
+            // "1 RK/Studio Apartment",
+            "Studio Apartment",
+            "1 RK/PG",
+            "Serviced Apartment",
+          ].includes(BasicDetailsData.ApartmentType)
+        ) {
+          delete AreaDetailsData_Rest.PlotArea;
+        }
+
+        // Remove Basement Filed
+
+        setAreaDetailsData(AreaDetailsData_Rest);
+        if (sessionStorage.getItem("AreaDetailsData")) {
+          StoreDataInSession("AreaDetailsData", AreaDetailsData_Rest);
+        }
+
+        //  Other details Sort
+        setOtherDetailsData({});
+
+        if (sessionStorage.getItem("OtherDetailsData")) {
+          StoreDataInSession("OtherDetailsData", {});
+        }
+
+        //  Amenities Details  Sort
+
+        const {
+          ProjectAmmenities,
+          OtherFeature,
+          ...AmenitiesDetailsData_Rest
+        } = AmenitiesDetailsData;
+
+        if (BasicDetailsData.PropertyStatus == "Under Construction") {
+          delete AmenitiesDetailsData_Rest.WaterSource;
+        }
+        setAmenitiesDetailsData(AmenitiesDetailsData_Rest);
+        if (sessionStorage.getItem("AmenitiesDetailsData")) {
+          StoreDataInSession("AmenitiesDetailsData", AmenitiesDetailsData_Rest);
+        }
+
+        // delete Price Per Sq. Yd
+        delete PricingDetailsData_Rest.PricePerSqYd;
       }
 
       if (BasicDetailsData.PropertyStatus === "Ready to move") {
@@ -269,51 +554,27 @@ export default function CreatePostMain() {
       if (sessionStorage.getItem("BasicDetailsData")) {
         StoreDataInSession("BasicDetailsData", BasicDetailsData_Rest);
       }
-      const {
-        ExpectedRent,
-        DepositePrice,
-        // PreferredTenant,
-        ...PricingDetailsData_Rest
-      } = PricingDetailsData;
-      delete PricingDetailsData_Rest.AdditionalDetails?.PreferredTenant;
-      delete PricingDetailsData_Rest.AdditionalDetails
-        ?.ElectrictyAndWaterCharges;
+
       setPricingDetailsData(PricingDetailsData_Rest);
       if (sessionStorage.getItem("PricingDetailsData")) {
         StoreDataInSession("PricingDetailsData", PricingDetailsData_Rest);
       }
     }
-
-    if (["Independent House/Villa"].includes(BasicDetailsData.ApartmentType)) {
-      // const {
-      //   BuiltUpArea,
-      //   CarpetArea,
-      //   SuperBuiltUpArea,
-      //   ...AreaDetailsData_Rest
-      // } = AreaDetailsData;
-      // setAreaDetailsData(AreaDetailsData_Rest);
-      // if (sessionStorage.getItem("AreaDetailsData")) {
-      //   StoreDataInSession("AreaDetailsData", AreaDetailsData_Rest);
-      // }
-      const { PropertyOnFloor, ...FloorDetailsData_Rest } = FloorDetailsData;
-      setFloorDetailsData(FloorDetailsData_Rest);
-
-      if (sessionStorage.getItem("FloorDetailsData")) {
-        StoreDataInSession("FloorDetailsData", FloorDetailsData_Rest);
-      }
-    } else if (
+    //  Remove Basement
+    if (
       [
         "Apartment",
-        "Independent/Builder Floor",
-        "1 RK/Studio Apartment",
+        "Independent House/Villa",
+        "Plot/Land",
+        "Studio Apartment",
+        "1 RK/PG",
         "Serviced Apartment",
       ].includes(BasicDetailsData.ApartmentType)
     ) {
-      const { PlotArea, ...AreaDetailsData_Rest } = AreaDetailsData;
-      setAreaDetailsData(AreaDetailsData_Rest);
-      if (sessionStorage.getItem("AreaDetailsData")) {
-        StoreDataInSession("AreaDetailsData", AreaDetailsData_Rest);
-      }
+      const { Basement, BasementArea, ...PropertyDetailsData_Rest } =
+        PropertyDetailsData; // Destructure to remove PropertyStatus
+
+      setPropertyDetailsData(PropertyDetailsData_Rest);
     }
 
     // eslint-disable-next-line
@@ -471,7 +732,7 @@ export default function CreatePostMain() {
                   </div>
                 ) : next + 1 >= 1 ? (
                   <span
-                    className=" text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
+                    className=" text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
                     onClick={() => setnext(0)}
                   >
                     &#10003;
@@ -495,7 +756,12 @@ export default function CreatePostMain() {
                         Progress
                       </span>
                     ) : next + 1 >= 1 ? (
-                      <span className="text-primary fw-normal  d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal  d-flex justify-content-center cursor-pointer"
+                        onClick={() => {
+                          setnext(0);
+                        }}
+                      >
                         Edit
                       </span>
                     ) : (
@@ -517,8 +783,8 @@ export default function CreatePostMain() {
                   </div>
                 ) : next + 1 >= 2 ? (
                   <span
-                    className="text-white fw-normal   completecircleForm  d-flex justify-content-center align-items-center"
-                    onClick={() => setnext(1)}
+                    className="text-white fw-normal   completecircleForm  d-flex justify-content-center align-items-center cursor-pointer"
+                    onClick={() => BasicDetailsFormSubmit()}
                   >
                     &#10003;
                   </span>
@@ -526,8 +792,8 @@ export default function CreatePostMain() {
                   <>
                     {Object.keys(LocationDetailsData).length > 0 ? (
                       <span
-                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                        onClick={() => setnext(1)}
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                        onClick={() => BasicDetailsFormSubmit()}
                       >
                         &#10003; {/* This is the checkmark (tick) symbol */}
                       </span>
@@ -552,7 +818,12 @@ export default function CreatePostMain() {
                         Progress
                       </span>
                     ) : next + 1 >= 2 ? (
-                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                        onClick={() => {
+                          BasicDetailsFormSubmit();
+                        }}
+                      >
                         Edit{" "}
                       </span>
                     ) : (
@@ -564,6 +835,7 @@ export default function CreatePostMain() {
                 </p>
               </div>
             </div>
+
             {next + 1 === 3 ? (
               <hr className="progressLine   border border-primary border-3 opacity-75" />
             ) : next + 1 >= 3 ? (
@@ -582,17 +854,43 @@ export default function CreatePostMain() {
                     </div>
                   ) : next + 1 >= 3 ? (
                     <span
-                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                      onClick={() => setnext(2)}
+                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        BasicDetailsFormSubmit(e);
+                        setTimeout(() => {
+                          LocationDetailsSubmiRef?.current?.requestSubmit(); // ✅ This triggers validation
+                        }, 0);
+                      }}
                     >
                       &#10003;
                     </span>
                   ) : (
                     <>
-                      {Object.keys(FloorDetailsData).length > 0 ? (
+                      {Object.keys(
+                        BasicDetailsData.ApartmentType == "Plot/Land"
+                          ? {
+                              ...AreaDetailsData,
+                              ...AmenitiesDetailsData,
+                              ...OtherDetailsData,
+                            }
+                          : {
+                              ...AreaDetailsData,
+                              ...AmenitiesDetailsData,
+                              ...FloorDetailsData,
+                              ...PropertyDetailsData,
+                            }
+                      ).length > 0 ? (
                         <span
-                          className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                          onClick={() => setnext(2)}
+                          className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit(); // ✅ This triggers validation
+                            }, 0);
+                          }}
                         >
                           &#10003; {/* This is the checkmark (tick) symbol */}
                         </span>
@@ -617,7 +915,17 @@ export default function CreatePostMain() {
                           Progress
                         </span>
                       ) : next + 1 >= 3 ? (
-                        <span className="text-primary fw-normal   d-flex justify-content-center ">
+                        <span
+                          className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit(); // ✅ This triggers validation
+                            }, 0);
+                          }}
+                        >
                           Edit
                         </span>
                       ) : (
@@ -647,8 +955,17 @@ export default function CreatePostMain() {
                     </div>
                   ) : next + 1 >= 4 ? (
                     <span
-                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                      onClick={() => setnext(3)}
+                      className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        BasicDetailsFormSubmit(e);
+                        setTimeout(() => {
+                          LocationDetailsSubmiRef?.current?.requestSubmit();
+                          setTimeout(() => {
+                            ApartmentFeaturesRef?.current?.requestSubmit();
+                          }, 100);
+                        }, 50);
+                      }}
                     >
                       &#10003;
                     </span>
@@ -656,8 +973,17 @@ export default function CreatePostMain() {
                     <>
                       {Object.keys(PricingDetailsData).length > 0 ? (
                         <span
-                          className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                          onClick={() => setnext(3)}
+                          className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                          onClick={(e) => {
+                            // e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                ApartmentFeaturesRef?.current?.requestSubmit();
+                              }, 100);
+                            }, 50);
+                          }}
                         >
                           &#10003; {/* This is the checkmark (tick) symbol */}
                         </span>
@@ -682,7 +1008,19 @@ export default function CreatePostMain() {
                           Progress
                         </span>
                       ) : next + 1 >= 4 ? (
-                        <span className="text-primary fw-normal   d-flex justify-content-center">
+                        <span
+                          className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                ApartmentFeaturesRef?.current?.requestSubmit();
+                              }, 100);
+                            }, 50);
+                          }}
+                        >
                           Edit
                         </span>
                       ) : (
@@ -712,8 +1050,20 @@ export default function CreatePostMain() {
                   </div>
                 ) : next + 1 >= 5 ? (
                   <span
-                    className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                    onClick={() => setnext(4)}
+                    className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                    onClick={(e) => {
+                      // e.preventDefault();
+                      BasicDetailsFormSubmit(e);
+                      setTimeout(() => {
+                        LocationDetailsSubmiRef?.current?.requestSubmit();
+                        setTimeout(() => {
+                          ApartmentFeaturesRef?.current?.requestSubmit();
+                          setTimeout(() => {
+                            PricingDetailsRef?.current?.requestSubmit();
+                          }, 150);
+                        }, 100);
+                      }, 50);
+                    }}
                   >
                     &#10003;
                   </span>
@@ -721,8 +1071,24 @@ export default function CreatePostMain() {
                   <>
                     {uploadimages.length !== 0 || previewImage.length !== 0 ? (
                       <span
-                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center"
-                        onClick={() => setnext(4)}
+                        className="text-white fw-normal   completecircleForm d-flex justify-content-center align-items-center cursor-pointer"
+                        // onClick={() => setnext(4)}
+
+                        onClick={(e) => {
+
+                          
+                          e.preventDefault();
+                          BasicDetailsFormSubmit(e);
+                          setTimeout(() => {
+                            LocationDetailsSubmiRef?.current?.requestSubmit();
+                            setTimeout(() => {
+                              ApartmentFeaturesRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                PricingDetailsRef?.current?.requestSubmit();
+                              }, 150);
+                            }, 100);
+                          }, 50);
+                        }}
                       >
                         &#10003; {/* This is the checkmark (tick) symbol */}
                       </span>
@@ -747,7 +1113,22 @@ export default function CreatePostMain() {
                         Progress
                       </span>
                     ) : next + 1 >= 5 ? (
-                      <span className="text-primary fw-normal   d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal   d-flex justify-content-center"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          BasicDetailsFormSubmit(e);
+                          setTimeout(() => {
+                            LocationDetailsSubmiRef?.current?.requestSubmit();
+                            setTimeout(() => {
+                              ApartmentFeaturesRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                PricingDetailsRef?.current?.requestSubmit();
+                              }, 150);
+                            }, 100);
+                          }, 50);
+                        }}
+                      >
                         Edit
                       </span>
                     ) : (
@@ -775,6 +1156,10 @@ export default function CreatePostMain() {
               update={update}
               PricingDetailsData={PricingDetailsData}
               setPricingDetailsData={setPricingDetailsData}
+              // setBasicDetailsSubmit ={setBasicDetailsSubmit}
+              BasicDetailsFormSubmit={BasicDetailsFormSubmit}
+              // BasicDetailsFormRef={BasicDetailsFormRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 1 && (
@@ -783,10 +1168,12 @@ export default function CreatePostMain() {
               setLocationDetailsData={setLocationDetailsData}
               setnext={setnext}
               update={update}
+              LocationDetailsSubmiRef={LocationDetailsSubmiRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 2 && (
-            <PropertyDetailsAreaDetailsConstructionDetailsFloorDetailsAmenitiesDetailsSection
+            <PropertyDetailsAreaDetailsOtherDetailsFloorDetailsAmenitiesDetailsSection
               BasicDetailsData={BasicDetailsData}
               setnext={setnext}
               update={update}
@@ -794,13 +1181,15 @@ export default function CreatePostMain() {
               setPropertyDetailsData={setPropertyDetailsData}
               AreaDetailsData={AreaDetailsData}
               setAreaDetailsData={setAreaDetailsData}
-              ConstructionDetailsData={ConstructionDetailsData}
-              setConstructionDetailsData={setConstructionDetailsData}
+              OtherDetailsData={OtherDetailsData}
+              setOtherDetailsData={setOtherDetailsData}
               AmenitiesDetailsData={AmenitiesDetailsData}
               setAmenitiesDetailsData={setAmenitiesDetailsData}
               // floor and Amenities
               FloorDetailsData={FloorDetailsData}
               setFloorDetailsData={setFloorDetailsData}
+              ApartmentFeaturesRef={ApartmentFeaturesRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 3 && (
@@ -813,11 +1202,15 @@ export default function CreatePostMain() {
               AreaDetailsData={AreaDetailsData}
               PricingDetailsData={PricingDetailsData}
               setPricingDetailsData={setPricingDetailsData}
+              next={next}
+              PricingDetailsRef={PricingDetailsRef}
+              CreatePostRef={CreatePostRef}
             />
           )}
           {next === 4 && (
             <CreatePostImageUploadSection
               setnext={setnext}
+              next={next}
               uploadimages={uploadimages}
               setuploadimages={setuploadimages}
               previewImage={previewImage}
@@ -837,10 +1230,13 @@ export default function CreatePostMain() {
               FloorDetailsData={FloorDetailsData}
               AmenitiesDetailsData={AmenitiesDetailsData}
               PricingDetailsData={PricingDetailsData}
+              OtherDetailsData={OtherDetailsData}
               //  submit Alert
               setPricingDetailsData={setPricingDetailsData}
               setshowCreatePostSubmitAlert={setshowCreatePostSubmitAlert}
               CreatePostRef={CreatePostRef}
+
+              // BasicDetailsForm
             />
           )}
 
