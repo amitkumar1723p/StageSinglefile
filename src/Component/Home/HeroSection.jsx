@@ -33,7 +33,7 @@ import WhoWeAre from "./WhoWeAre";
 import SimpleSteps from "./SimpleSteps";
 import FaqBuyer from "./FaqBuyer";
 import ProjectNameSection from "../Post/ProjectName";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, Location, useNavigate, useLocation } from "react-router-dom";
 import {
   GetAllPostAction,
   getPostsByAddress,
@@ -74,7 +74,7 @@ import PropertySection from "./PropertySection.jsx";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
-  const [runSearchButton, setrunSearchButton] = useState(false);
+  const [runSearchButton, setrunSearchButton] = useState(true);
   // const handleTabClick = (tab) => {
   //   setActiveTab(tab);
 
@@ -110,7 +110,7 @@ const HeroSection = () => {
   const { setRedirectPath, RedirectPathIsHomeCard, setRedirectPathIsHomeCard } =
     useContext(UserContext);
   const navigate = useNavigate();
-  const location = useLocation();
+  const Location = useLocation();
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -189,10 +189,9 @@ const HeroSection = () => {
   const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
   const PropertyRequirementBtnRef = useRef([]);
   const SearchContainerRef = useRef(null);
-
   useEffect(() => {
-    if (AllPostData && GetProjectNameData) {
-      if (AllPostData.success == true && GetProjectNameData.success == true) {
+    if (AllPostData) {
+      if (AllPostData.success == true) {
         if (RedirectPathIsHomeCard == false) {
           //  `/post-detail/${PropertyAddress.toLowerCase()
           //   .replaceAll(" ", "-")
@@ -200,7 +199,7 @@ const HeroSection = () => {
           //   .replaceAll("/", "-")}-${PostData._id}`
 
           navigate(
-            `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&&PropertyAddType=${SearchPropertyAddType}`
+            `/home/card?ProjectName=${ProjectNameObjectData.ProjectName.trim()}&PropertyAddType=${SearchPropertyAddType}`
           );
           // navigate(
           //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
@@ -236,7 +235,6 @@ const HeroSection = () => {
     // sessionStorage.removeItem("isFirstLoad");
     setRedirectPath("");
   }, []);
-
 
 
   return (
@@ -284,7 +282,7 @@ const HeroSection = () => {
                   // setPropertyAddType("");
                   // } else {
                   setSearchPropertyAddType(e.target.value);
-                  console.log(e.target.value)
+             
                   // }
                 }}>
                   <option selected={PropertyAddType === "Sale"} value="Sale">Buy</option>
@@ -336,12 +334,12 @@ const HeroSection = () => {
                         ProjectNameObjectData.ProjectName.length > 0
                       ) {
                         // setRedirectPath("/");
-                        dispatch(
-                          GetSingleProjectNameDataAction({
-                            ProjectName:
-                              ProjectNameObjectData.ProjectName.trim(),
-                          })
-                        );
+                        // dispatch(
+                        //   GetSingleProjectNameDataAction({
+                        //     ProjectName:
+                        //       ProjectNameObjectData.ProjectName.trim(),
+                        //   })
+                        // );
                         dispatch(
                           GetAllPostAction({
                             ProjectName:
@@ -367,6 +365,9 @@ const HeroSection = () => {
               </div>
             </div>
           }
+
+
+
           {/* Search Container */}
           <div ref={sectionRef} className="search-container">
 
@@ -385,7 +386,7 @@ const HeroSection = () => {
                         // setPropertyAddType("");
                         // } else {
                         setSearchPropertyAddType(e);
-                        // console.log(e)
+                      
                         // }
                       }}
                     >
@@ -446,24 +447,24 @@ const HeroSection = () => {
                     }
                     className="search-button"
                     onClick={() => {
-                      if (runSearchButton == false) {
-                        return alert("Write correct ProjectName");
-                      }
+                    
                       if (
                         runSearchButton == true &&
-                        ProjectNameObjectData.ProjectName.length > 0
+                        ProjectNameObjectData.ProjectName?.length > 0
                       ) {
                         // setRedirectPath("/");
-                        dispatch(
-                          GetSingleProjectNameDataAction({
-                            ProjectName:
-                              ProjectNameObjectData.ProjectName.trim(),
-                          })
-                        );
+                        // dispatch(
+                        //   GetSingleProjectNameDataAction({
+                        //     ProjectName:
+                        //       ProjectNameObjectData.ProjectName?.trim(),
+                        //   })
+                        // );
+
+                       
                         dispatch(
                           GetAllPostAction({
-                            ProjectName:
-                              ProjectNameObjectData.ProjectName.trim(),
+                            ProjectName:ProjectNameObjectData?.ProjectName?.trim()
+                              ,
                             PropertyAdType: SearchPropertyAddType,
                           })
                         );
@@ -492,20 +493,20 @@ const HeroSection = () => {
                       }
                       if (
                         runSearchButton == true &&
-                        ProjectNameObjectData.ProjectName.length > 0
+                        ProjectNameObjectData.ProjectName?.length > 0
                       ) {
                         // setRedirectPath("/");
-                        dispatch(
-                          GetSingleProjectNameDataAction({
-                            ProjectName:
-                              ProjectNameObjectData.ProjectName.trim(),
-                          })
-                        );
+                        // dispatch(
+                        //   GetSingleProjectNameDataAction({
+                        //     ProjectName:
+                        //       ProjectNameObjectData.ProjectName?.trim(),
+                        //   })
+                        // );
                         dispatch(
                           GetAllPostAction({
                             ProjectName:
-                              ProjectNameObjectData.ProjectName.trim(),
-                            PropertyAdType: SearchPropertyAddType,
+                              ProjectNameObjectData.ProjectName?.trim(),
+                            PropertyAdType:SearchPropertyAddType,
                           })
                         );
 
