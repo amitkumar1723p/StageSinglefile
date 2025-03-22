@@ -437,31 +437,34 @@ export default function SinglePostDetails() {
                   {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType !=
                     "Plot/Land" && (
                       <>
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="/img/typology.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
-                              {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
-                                (text) => {
-                                  return `+ ${text == "Pooja Room"
-                                      ? "Pooja"
-                                      : text == "Servant Room"
-                                        ? "SQ"
-                                        : text == "Study Room"
-                                          ? "Study"
-                                          : text == "Store Room"
-                                            ? "Store"
-                                            : ""
-                                    }`;
-                                }
-                              )}
-                            </span>
-                            <p> Type </p>
+ <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="/img/typology.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
+                            {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
+                              (text) => {
+                                return `+ ${
+                                  text == "Pooja Room"
+                                    ? "Pooja"
+                                    : text == "Servant Room"
+                                    ? "SQ"
+                                    : text == "Study Room"
+                                    ? "Study"
+                                    : text == "Store Room"
+                                    ? "Store"
+                                    : text == "Terrace"
+                                    ? "Ter"
+                                    : ""
+                                }`;
+                              }
+                            )}
+                          </span>
+                          <p> Type </p>
                           </div>
                         </div>
                       </>
@@ -522,7 +525,7 @@ export default function SinglePostDetails() {
                                         ?.OverLookingView[0]
                                     }
                                   </span>
-                                  {/* <p> Overlooking View </p> */}
+                                  <p> Overlooking View </p>
                                 </div>
                               </>
                             )}
@@ -759,7 +762,7 @@ export default function SinglePostDetails() {
                             ) : (
                               <>
                                 <p className="lisitng-area-section">
-                                  ₹{" "}
+                                  ₹
                                   {String(
                                     getSinglePostData?.SinglePost?.PricingDetails
                                       ?.PricePerSqFt
@@ -1257,25 +1260,39 @@ export default function SinglePostDetails() {
                       ?.Basement == true ||
                       getSinglePostData?.SinglePost?.PropertyDetails
                         ?.Basement == false) && (
+                      <>
                         <PropertyDataBox
-                          Answer={`${getSinglePostData?.SinglePost?.PropertyDetails
+                          Answer={`${
+                            getSinglePostData?.SinglePost?.PropertyDetails
                               ?.Basement == true
                               ? "Yes"
                               : getSinglePostData?.SinglePost?.PropertyDetails
-                                ?.Basement == false
-                                ? "No"
-                                : ""
-                            } `}
+                                  ?.Basement == false
+                              ? "No"
+                              : ""
+                          } `}
                           Icon="/img/parking.png"
                           Data={"Basment"}
                         />
-                      )}
+
+                        {getSinglePostData?.SinglePost?.PropertyDetails
+                          ?.Basement == true && (
+                          <>
+                            <PropertyDataBox
+                              Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
+                              Icon="/img/parking.png"
+                              Data={"Basment Area"}
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
 
                     {/* Property Age */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAge && (
                         <PropertyDataBox
-                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
+                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Years`}
                           Icon="/img/Property-Age.png"
                           Data={"Property Age"}
                         />
@@ -1337,69 +1354,73 @@ export default function SinglePostDetails() {
                     {/* Plot Land  */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.ApartmentType == "Plot/Land" && (
-                        <>
-                          {" "}
-                          {/* Plot Land Other Details  */}
-                          {/* Plot Direction  */}
-                          <PropertyDataBox
-                            Id={"plot-dir"}
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotDirection}`}
-                            Icon="/img/facing.png"
-                            Data={"Plot Direction"}
-                          />
-                          {/* Plot Facing  */}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotFacing}`}
-                            Icon="/img/Property-age.png"
-                            Data={"Plot Facing"}
-                          />
-                          {/* Plot openside  */}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
-                            Icon="/img/Property-age.png"
-                            Data={"Plot Facing"}
-                          />
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
-                            Icon="/img/total-floor.png"
-                            Data={"Front Road Width"}
-                          />
-                          {/* Other Feature   */}
-                          {getSinglePostData?.SinglePost?.AmenitiesDetails
-                            ?.OtherFeature?.length > 0 && (
-                              <div className="overview-box">
-                                <div className="img-icon">
-                                  <img
-                                    className="icon-overview"
-                                    src={"/img/bathroom.png"}
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div className="para-span">
-                                  <p className="p-ans">{"Other Feature"}</p>
-
-                                  <p className="p-deta">
-                                    {getSinglePostData?.SinglePost?.AmenitiesDetails?.OtherFeature?.map(
-                                      (text, i) => {
-                                        const isLast =
-                                          i ===
-                                          getSinglePostData.SinglePost
-                                            .AmenitiesDetails.OtherFeature.length -
-                                          1;
-                                        return (
-                                          <span key={i}>
-                                            {text}
-                                            {!isLast && ", "}
-                                          </span>
-                                        );
-                                      }
-                                    )}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                        </>
-                      )}
+                      <>
+                        {" "}
+                        {/* Plot Land Other Details  */}
+                        {/* Plot Direction  */}
+                        <PropertyDataBox
+                          Id={"plot-dir"}
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotDirection}`}
+                          Icon="/img/facing.png"
+                          Data={"Plot Direction"}
+                        />
+                        {/* Plot Facing  */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotFacing}`}
+                          Icon="/img/Property-age.png"
+                          Data={"Plot Facing"}
+                        />
+                        {/* Plot openside  */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
+                          Icon="/img/Property-age.png"
+                          Data={"Open Side"}
+                        />
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
+                          Icon="/img/total-floor.png"
+                          Data={"Front Road Width"}
+                        />
+                        {/* Other Feature   */}
+                        {getSinglePostData?.SinglePost?.AmenitiesDetails
+                          ?.OtherFeature?.length > 0 && (
+                          <div className="overview-box">
+                            <div className="img-icon">
+                              <img
+                                className="icon-overview"
+                                src={"/img/bathroom.png"}
+                                alt="icon"
+                              />
+                            </div>
+                            <div className="para-span">
+                              <p className="p-ans">
+                                {getSinglePostData?.SinglePost?.AmenitiesDetails?.OtherFeature?.map(
+                                  (text, i) => {
+                                    const isLast =
+                                      i ===
+                                      getSinglePostData.SinglePost
+                                        .AmenitiesDetails.OtherFeature.length -
+                                        1;
+                                    return (
+                                      <span key={i}>
+                                        {text}
+                                        {!isLast && ", "}
+                                      </span>
+                                    );
+                                  }
+                                )}
+                              </p>
+                              <p className="p-deta">{"Other Feature"}</p>
+                            </div>
+                          </div>
+                        )}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.ConstructionAllowed}`}
+                          Icon="/img/total-floor.png"
+                          Data={"Construction Allowed"}
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
                 {/* furnishing details */}

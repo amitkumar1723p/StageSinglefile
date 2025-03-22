@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./AllUserResponseAction.css"
 import { getSingleUserResponseAction } from "../../Action/userAction";
-import { FormatDate } from "../../utils/CommonFunction";
+import { FormatDate ,FormatDateAndTime } from "../../utils/CommonFunction";
+ 
 export default function SingleUserRespponseAction() {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -60,16 +61,18 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col"><span className="fw-normal">Post Id</span></th>
+                                <th scope="col"> <span className="fw-normal">Project Name</span></th>
+
+                                {/* <th scope="col"><span className="fw-normal">Post Id</span></th> */}
+                                <th scope="col"><span className="fw-normal">Visit Status & Time </span></th>
                                 <th scope="col"><span className="fw-normal">Visit Date</span></th>
-                                <th scope="col"><span className="fw-normal">Visit Status Data</span></th>
-                                <th scope="col"><span className="fw-normal">Visit Time</span></th>
+                                {/* <th scope="col"><span className="fw-normal">Visit Time</span></th> */}
                             </tr>
                         </thead>
                         <tbody>
                             {SingleUserResponseAction_Store?.schedules?.map((item) => {
                                 return (<tr>
-
+                                    {/* <td><small className="fw-light">{item?.LocationDetails?.ProjectName}</small></td> */}
 
                                     <td
                                         className="cursor-pointer"
@@ -79,9 +82,9 @@ export default function SingleUserRespponseAction() {
                                     >
                                         <small className="fw-light"> {item?.PostData?.PostId}</small>
                                     </td>
-                                    <td><small className="fw-light">{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'}</small></td>
                                     <td><small className="fw-light">{item?.VisitStatusData?.Status}</small></td>
-                                    <td><small className="fw-light">{item?.VisitTime?.From}-{item?.VisitTime?.To}</small></td>
+                                    <td><small className="fw-light">{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'} ({item?.VisitTime?.From} {item?.VisitTime?.To})</small></td>
+                                    {/* <td><small className="fw-light">{item?.VisitTime?.From} {item?.VisitTime?.To}</small></td> */}
                                 </tr>)
                             })}
 
@@ -97,9 +100,10 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
+                                {/* <th scope="col"> <span className="fw-normal">Project Name</span></th> */}
+
                                 <th scope="col"> <span className="fw-normal">Post Id</span></th>
                                 <th scope="col"><span className="fw-normal">Offer</span></th>
-
                                 <th scope="col"><span className="fw-normal">Date</span></th>
                             </tr>
                         </thead>
@@ -131,16 +135,29 @@ export default function SingleUserRespponseAction() {
                     <div className="px-3">    <table className="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col"> <span className="fw-normal">Post Id</span></th>
-                                <th scope="col"> <span className="fw-normal">Date</span></th>
-                                <th scope="col"> <span className="fw-normal">Type</span></th>
                                 <th scope="col"> <span className="fw-normal">Project Name</span></th>
+                                <th scope="col"> <span className="fw-normal">Property Type</span></th>
+                                <th scope="col"> <span className="fw-normal">Listing Status</span></th>
+
+                                <th scope="col"> <span className="fw-normal">Date</span></th>
+                                <th scope="col"> <span className="fw-normal">Post Id</span></th>
                             </tr>
                         </thead>
                         <tbody>
                             {SingleUserResponseAction_Store?.posts.map((item) => {
                                 return (<tr>
 
+                                    <td><small className="fw-light">{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</small></td>
+
+                                    <td><small className="fw-light">{item?.BasicDetails?.ApartmentType}</small></td>
+                                    <td>
+                                        <small className="fw-light">
+                                            {item?.PostVerify === "True" ? "Active" : "Inactive"}
+                                        </small>
+                                    </td>
+
+
+                                    <td><small className="fw-light">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small></td>
 
                                     <td onClick={(e) => {
                                         window.open(`/post-detail/${item?._id}`, 'SinglePostDetail3')
@@ -150,10 +167,9 @@ export default function SingleUserRespponseAction() {
 
 
 
-                                    <td><small className="fw-light">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small></td>
 
-                                    <td><small className="fw-light">{item?.BasicDetails?.ApartmentType}</small></td>
-                                    <td><small className="fw-light">{item?.LocationDetails?.ProjectName},{item?.LocationDetails?.Landmark},{item?.LocationDetails?.City}</small></td>
+
+
                                 </tr>)
                             })}
 
@@ -213,8 +229,10 @@ export default function SingleUserRespponseAction() {
                                     <td><small className="fw-light">{item?.ProjectName}</small></td>
                                     <td><small className="fw-light">{item?.FloorPreference}</small></td>
                                     <td><small className="fw-light">{item?.BHKType}</small></td>
-                                    <td><small className="fw-light">{item?.Budget}</small></td>
-                                    <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
+                                    <td><small className="fw-light">{item?.Budget} {item?.unit}</small></td>
+                                    <td><small className="fw-light">{item?.createAt ? 
+                                 FormatDateAndTime(item?.createAt)
+                                      : 'N/A'}</small></td>
                                 </tr>)
                             })}
 

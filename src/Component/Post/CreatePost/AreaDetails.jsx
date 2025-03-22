@@ -121,15 +121,17 @@ export default function AreaDetailsSection({
                 className={`${Error.PlotDimensions ? "inputShake shake" : ""}`}
                 id="plot-dimensions"
                 required
+                
                 value={
                   AreaDetailsData?.PlotDimensions?.Length?.trimStart() || ""
                 }
                 onChange={(e) => {
+                  const numericValue = String(e.target.value).replace(/[^0-9.]/g, "");
                   setAreaDetailsData({
                     ...AreaDetailsData,
                     PlotDimensions: {
                       ...AreaDetailsData.PlotDimensions,
-                      Length: e.target.value,
+                      Length:  numericValue,
                     },
                   });
                 }}
@@ -145,11 +147,12 @@ export default function AreaDetailsSection({
                   AreaDetailsData?.PlotDimensions?.Breadth?.trimStart() || ""
                 }
                 onChange={(e) => {
+                  const numericValue = String(e.target.value).replace(/[^0-9.]/g, "");
                   setAreaDetailsData({
                     ...AreaDetailsData,
                     PlotDimensions: {
                       ...AreaDetailsData.PlotDimensions,
-                      Breadth: e.target.value,
+                      Breadth: numericValue,
                     },
                   });
                 }}
