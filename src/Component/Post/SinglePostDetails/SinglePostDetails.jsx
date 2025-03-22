@@ -1357,7 +1357,7 @@ export default function SinglePostDetails() {
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
                             Icon="/img/Property-age.png"
-                            Data={"Plot Facing"}
+                            Data={"No of Open Side"}
                           />
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth}`}
