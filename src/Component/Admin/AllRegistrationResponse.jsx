@@ -247,7 +247,7 @@ export default function AllRegistrationResponse({ }) {
                       </small>
                     </td>
 
-                    <td className="text-light-emphasis border-end">
+                    <td className="text-light-emphasis border-end text-capitalize">
                       {item.Name ? (
                         <small>
                           {item.Name}
@@ -256,6 +256,7 @@ export default function AllRegistrationResponse({ }) {
                         <></>
                       )}
                     </td>
+                    
 
                     <td className="text-light-emphasis border-end" >
                       {

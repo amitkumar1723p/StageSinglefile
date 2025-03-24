@@ -206,7 +206,7 @@ const PropertySection = () => {
                               className="card-image"
                             />
                             <div className="card-content">
-                              <h2 className="card-title-projectname">{property?.LocationDetails
+                              <h2 className="card-title-projectname property-truncate-text ">{property?.LocationDetails
                                 ?.ProjectName}</h2>
                               <h3 className="card-title property-truncate-text">{property?.PropertyDetails?.BHKType} BHK {property?.BasicDetails?.PropertyType} {property?.BasicDetails?.ApartmentType}</h3>
                               <p className="card-location">{property?.LocationDetails?.Landmark} {property?.LocationDetails?.Locality}</p>

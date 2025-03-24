@@ -1112,7 +1112,8 @@ useEffect(() => {
           <Route
             exact
             path="post/update/:PostId"
-            element={<CreatePostMain />}
+            
+            element={<AdminOwnerRoutes Component={CreatePostMain} isOwner={true} />    }
           />
         </Route>
         {/*All post route*/}

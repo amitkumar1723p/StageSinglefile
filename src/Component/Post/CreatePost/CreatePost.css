@@ -151,6 +151,29 @@ h1 {
   font-size: 24px;
   margin-bottom: 20px;
 }
+
+.other-feature-section{
+  display: flex;
+  gap:10px;
+  cursor: pointer;
+}
+
+
+#plot-dimensions{
+  width: 150px;
+}
+
+
+.plot-dimension-section{
+  padding: 10px;
+  opacity: .5;
+  
+}
+
+.other-feature-section input{
+  cursor: pointer;
+}
+
 .form-container-step-1 {
   display: flex;
   background-color: #fff;
@@ -158,6 +181,7 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 80%;
   margin: 10px auto;
+  border-radius: 12px;
 }
 
 .form-content {

@@ -54,9 +54,14 @@
   align-items: center;
   gap: 10px;
   border-radius: 100px;
-  background-color: white;
+  background-color: #FFF;
   border: 1px solid #afb8c0;
 }
+
+/* .property-btn:hover{
+color: #FFF;
+  background-color: var(--main-light-clr)
+} */
 
 .view-btn-span {
   color: var(--main-light-clr);
@@ -202,6 +207,8 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   min-width: 246px;
+  max-width: 245.9px;
+
   /* margin-top: 5px; */
 }
 
@@ -225,7 +232,7 @@
 
 .card-location {
   color: #4b5563;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .card-price {
