@@ -55,6 +55,7 @@ import { motion } from "framer-motion";
 // import { useState, useEffect, useRef } from "react";
 import "./BuyingSellingTenant.css";
 import Services from "./Services";
+import FreshBookingForm from "./FreshBookingForm.jsx";
 
 import { UserContext } from "../CreateContext/CreateContext";
 import RentAgreement from "./RentAgreement";
@@ -766,6 +767,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
+          <FreshBookingForm/>
         </>
       )}
       {/* Sale Component  */}
