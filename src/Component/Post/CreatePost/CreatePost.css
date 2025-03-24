@@ -726,12 +726,12 @@ button:hover,
   margin-bottom: 0px;
   
 }
-.apartmentname-container p:first-child {
-  /* margin-bottom: 0px; */
+/* .apartmentname-container p:first-child {
+  
   display: flex;
   justify-content: space-between;
   background: #000;
-}
+} */
 .apartmentname-option {
   cursor: pointer;
   padding: 3px 5px;
