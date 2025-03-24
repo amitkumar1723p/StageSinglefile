@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: row; /* Align children in a row */
   width: auto; /* Adjust width as needed */
-  padding: 10px;
+  padding: 10px 0;
   justify-content: space-between; /* Space out the children */
 }
 
@@ -68,6 +68,7 @@
 .editProfileButton {
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
 }
 
 .medata-role {

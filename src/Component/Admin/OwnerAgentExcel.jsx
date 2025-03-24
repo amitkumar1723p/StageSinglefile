@@ -694,6 +694,7 @@ const OwnerAgentExcel = () => {
                     >
                       {editingHeader === index ? (
                         <input
+                        className={`file-handle-table-input`}
                           type="text"
                           value={col.name}
                           onChange={(e) => handleHeaderChange(index, e.target.value)}
@@ -728,7 +729,7 @@ const OwnerAgentExcel = () => {
                 </tr>
               </thead>
             }
-            <tbody>
+            <tbody className='tbody'>
               {data.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   <td className="file-handler-table-data">{rowIndex + 1}</td>

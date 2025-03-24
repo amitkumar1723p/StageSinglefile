@@ -76,7 +76,7 @@ export default function CreatePostMain() {
   //     // formRef.current.submit();   // This will trigger form submission
   //   }
   // };
-  console.log(BasicDetailsData)
+  
   // Form Submit  Start
   //  BasicDetils Component submit -- Start
   const ApartMentTypeArrayRemovePlotAndLand = [

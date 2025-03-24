@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllUserAction, ProfileUpdateAction, UserRoleUpdation } from "../../Action/userAction";
 import { acknowledgeProfile } from "../../Action/postAction";
 import { Pointer } from "lucide-react";
-import { FormatDate } from "../../utils/CommonFunction";
+import { FormatDate,FormatDateAndTime } from "../../utils/CommonFunction";
 // import "./AllRegistrationResponse.css"
 // Define the functional component
 export default function AllRegistrationResponse({ }) {
@@ -201,7 +201,7 @@ export default function AllRegistrationResponse({ }) {
           </div>
         </div>
 
-        <div className=" border-top border-end border-start "  style={{ maxHeight: "600px", overflow: 'scroll' }}>
+        <div className=" border-top border-end border-start " style={{ maxHeight: "600px", overflow: 'scroll' }}>
           <table className="table table-hover">
             <thead className="table-info sticky-top z-0">
               <tr className="">
@@ -235,16 +235,18 @@ export default function AllRegistrationResponse({ }) {
               {tableData?.map((item, index) => {
                 return (
                   <tr key={index}>
-                    
+
 
                     <td className="text-light-emphasis border-end">
                       <small>
                         {
                           item?.createAt
-                            ? FormatDate(item?.createAt)
+                            ? FormatDateAndTime(item?.createAt)
                             : "..."
                         }
                       </small>
+                      
+
                     </td>
 
                     <td className="text-light-emphasis border-end text-capitalize">

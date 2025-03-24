@@ -112,7 +112,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh; /* Full screen height */
+  height: 86vh; /* Full screen height */
   padding: 20px;
   box-sizing: border-box;
 }

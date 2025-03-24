@@ -762,7 +762,7 @@ export default function SinglePostDetails() {
                             ) : (
                               <>
                                 <p className="lisitng-area-section">
-                                  ₹{" "}
+                                  ₹
                                   {String(
                                     getSinglePostData?.SinglePost?.PricingDetails
                                       ?.PricePerSqFt

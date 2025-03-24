@@ -67,7 +67,7 @@ const PropertySection = () => {
 
       // Step 5: Sort by number of properties in descending order
       result.sort((a, b) => b.properties.length - a.properties.length);
-      // console.log(result)
+        // console.log(result)
       // Step 6: Set the filtered and sorted data
       setFilterdData(result);
 

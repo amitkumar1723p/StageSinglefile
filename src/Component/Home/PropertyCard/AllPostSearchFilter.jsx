@@ -78,7 +78,6 @@ const AllPostSearchFilter = () => {
         })
       );
     }
-    window.scrollTo(0,0);
   }, [Filter, searchParams]);
 
   const handleClicked = (v) => {

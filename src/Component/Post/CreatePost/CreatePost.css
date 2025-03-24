@@ -585,6 +585,9 @@ button:hover,
   padding: 5px;
   /* letter-spacing: .4px; */
 }
+#plot-dimensions{
+  width: 20%;
+}
 
 .post-requermient-search .apartmentname-container {
   background-color: white;
@@ -721,8 +724,14 @@ button:hover,
 
 .apartmentname-container p:last-child {
   margin-bottom: 0px;
+  
 }
-
+.apartmentname-container p:first-child {
+  /* margin-bottom: 0px; */
+  display: flex;
+  justify-content: space-between;
+  background: #000;
+}
 .apartmentname-option {
   cursor: pointer;
   padding: 3px 5px;

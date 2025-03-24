@@ -174,7 +174,7 @@ export default function PropertyDetailsSection({
       <div className="form-row ">
         {/* Other Room Tab */}
         <div className="fom-group first">
-          <p className="label parking-label">Other Room*</p>
+          <p className="label parking-label">Other*</p>
           <div className="tab-box">
             {OtherRoomArray.map((text, i) => {
               return (

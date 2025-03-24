@@ -28,8 +28,10 @@ export default function MyVisits() {
   }, []);
 
   return (
+    <>{
+
     MyVisitsData &&
-    MyVisitsData.success === true && (
+    MyVisitsData?.success === true && (
       <div className="myvisit-overflow-x-auto">
            <Helmet>
                 
@@ -88,5 +90,18 @@ export default function MyVisits() {
         }
       </div>
     )
+    
+   }
+   <> {
+  
+    MyVisitsData?.ScheduleVisits?.length === 0 && <div class="user-all-noreponse-container">
+    <img src="/img/User-all-response.png" alt="No Response Yet" class="user-all-noreponse-img" />
+    <h2 class="user-all-noreponse-title">No Scheduled Visits Yet – Looks Like There’s Nothing to Review</h2>
+    <p class="user-all-noreponse-text">
+        No activity detected. As soon as Scheduled Visits come in, they’ll show up on this screen.
+    </p>
+</div>
+   }</>
+    </>
   );
 }

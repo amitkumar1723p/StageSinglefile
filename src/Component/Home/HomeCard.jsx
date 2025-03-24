@@ -48,9 +48,9 @@ export default function HomeCard() {
   return (
     <>
       <div className="home">
-
+       
         
-        {
+      {
           loading ?   <div className="allPostrender-showpost">
           {
             Array.from({ length: 9 }).map((_, index) => (<AllPostSkeleton key={index} />))
@@ -58,6 +58,7 @@ export default function HomeCard() {
         </div>:
            
           (data?.allPost?.length > 0 ? (
+
             <div className="home-postContainer">
               <div className="allPostrender-showpost">
                 {allData?.map((e, i) => {
