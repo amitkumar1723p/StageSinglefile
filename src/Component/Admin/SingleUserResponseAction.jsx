@@ -125,7 +125,7 @@ export default function SingleUserRespponseAction() {
                         <thead>
                             <tr>
                                 <th scope="col"> <span className="fw-normal">Post Id</span></th>
-                                <th scope="col"> <span className="fw-normal">BidPrice</span></th>
+                                <th scope="col"> <span className="fw-normal">Date</span></th>
                                 <th scope="col"> <span className="fw-normal">New</span></th>
                                 <th scope="col"> <span className="fw-normal">VisitTime</span></th>
                             </tr>
@@ -141,7 +141,7 @@ export default function SingleUserRespponseAction() {
                                     ><small className="fw-light">{item?._id}</small></td>
 
 
-
+  {console.log(item)}
 
                                     <td><small className="fw-light">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small></td>
 
