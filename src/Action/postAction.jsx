@@ -83,13 +83,15 @@ export const GetAllPostAction = ({
   ApartmentType = "",
   PropertyStatus = "",
   Furnishing = "",
-}) => {
+  City = "",
+  Sector = "",
 
+}) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllPostRequest" });
 
-      // let url = `${api_Base_Url}/post/allpost?ProjectName=${ProjectName?.trim()}&BasicDetails.PropertyAdType=${PropertyAdType?.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}`;
+      let url = `${api_Base_Url}/post/allpost?LocationDetails.ProjectName=${ProjectName.trim()}&BasicDetails.PropertyAdType=${PropertyAdType.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}&LocationDetails.Landmark=${Sector}&LocationDetails.City=${City}`;
       // &Pricing[$gte]=${Price}
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -97,14 +99,7 @@ export const GetAllPostAction = ({
         withCredentials: true,
       };
 
-      const { data } = await axios.post(`${api_Base_Url}/post/allpost`,{
-        Searched:ProjectName?.trim(),
-        PropertyAdType:PropertyAdType,
-        BHKType :BHK,
-        ApartmentType :ApartmentType,
-        PropertyStatus :PropertyStatus,
-        Furnishing:Furnishing
-      }, config);
+      const { data } = await axios.get(url, config);
 
       dispatch({ type: "GetAllPostSuccess", payload: data });
     } catch (error) {

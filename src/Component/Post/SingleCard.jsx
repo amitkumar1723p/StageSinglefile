@@ -913,7 +913,7 @@ const SingleCard = ({ PostData, index }) => {
           <Link
             target="_blank"
             className=""
-            to={`/post-detail/${PropertyAddress.toLowerCase()
+            to={`/post-detail/${PropertyAddress.trim().toLowerCase()
               .replaceAll(" ", "-")
               .replace(",", "")
               .replaceAll("/", "-")}-${PostData?._id}`}

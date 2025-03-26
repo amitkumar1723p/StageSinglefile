@@ -31,7 +31,10 @@ export default function WindowComponent({
         }
 
         if (hideElement == false && !BtnElement) {
-          SetShow(false);
+        
+            SetShow(false);
+          
+      
           if (Type == "CreatePostSubmitAlert") {
             navigate("/user/my-listing");
           }

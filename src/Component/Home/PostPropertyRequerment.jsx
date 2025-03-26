@@ -4,8 +4,11 @@ import { PostPropertyRequirementAction } from "../../Action/userAction";
 import { useSelector, useDispatch } from "react-redux";
 import ProjectNameSection from "../Post/ProjectName";
 
+
+
 const PostPropertyRequerment = ({ SetShow }) => {
   const dispatch = useDispatch();
+ const [PostPropertyRequiremenLocalitytData,setPostPropertyRequiremenLocalitytData] = useState({});
   const [PostPropertyRequirementData, setPostPropertyRequirementData] =
     useState({
       PropertyType: "",
@@ -41,13 +44,19 @@ const PostPropertyRequerment = ({ SetShow }) => {
   const CreateQuerryFormHandler = (e) => {
     e.preventDefault();
     // Merge unit and PossessionStatus into the submission data
+    let data = {
+      ...PostPropertyRequirementData,
+      ProjectName:PostPropertyRequiremenLocalitytData.projectName,
+      City:PostPropertyRequiremenLocalitytData.city
+    }
 
-    if (PostPropertyRequirementData.PropertyType !== "Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.ProjectName || !PostPropertyRequirementData.BHKType || !PostPropertyRequirementData.FloorPreference || !PostPropertyRequirementData.Budget)) {
+    console.log(PostPropertyRequiremenLocalitytData)
+    console.log(data)
+    if (data.PropertyType !== "Plot" && (!data.PropertyType || !data.ProjectName || !data.BHKType || !data.FloorPreference || !data.Budget)) {
       alert("please fill all data")
       return;
     }
-    if (PostPropertyRequirementData.PropertyType === "Plot" && (!PostPropertyRequirementData.PropertyType || !PostPropertyRequirementData.plotSize || !PostPropertyRequirementData.Budget)) {
-      console.log(PostPropertyRequirementData)
+    if (data.PropertyType === "Plot" && (!data.PropertyType || !data.plotSize || !data.Budget)) {
       alert("please fill all data")
       return;
     }
@@ -55,14 +64,14 @@ const PostPropertyRequerment = ({ SetShow }) => {
 
     if (PostPropertyRequirementData.plotSize !== "") {
       dataToSubmit = {
-        ...PostPropertyRequirementData,
+        ...data,
         unit,
         PossessionStatus: status,
         plotUnit
       };
     } else {
       dataToSubmit = {
-        ...PostPropertyRequirementData,
+        ...data,
         unit,
         PossessionStatus: status,
 
@@ -135,7 +144,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               <select
                 className={`form-input`}
                 required
-                value={PostPropertyRequirementData.PropertyType.trimStart()}
+                value={PostPropertyRequirementData?.PropertyType?.trimStart()}
                 onChange={(e) =>
                   setPostPropertyRequirementData({
                     ...PostPropertyRequirementData,
@@ -157,8 +166,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
               <p className="postreq-form ">Locality</p>
               <ProjectNameSection
                 ProjectInputType={"PostRequirement"}
-                ProjectNameObjectData={PostPropertyRequirementData}
-                setProjectNameObjectData={setPostPropertyRequirementData}
+                ProjectNameObjectData={PostPropertyRequiremenLocalitytData}
+                setProjectNameObjectData={setPostPropertyRequiremenLocalitytData}
                 placeholder={"Search by locality, project name"}
                 locationAlert={locationAlert}
               />
@@ -170,7 +179,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 <select
                   className={`form-input `}
                   required
-                  value={PostPropertyRequirementData.BHKType.trimStart()}
+                  value={PostPropertyRequirementData?.BHKType?.trimStart()}
                   onChange={(e) =>
                     setPostPropertyRequirementData({
                       ...PostPropertyRequirementData,
@@ -214,7 +223,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                   <p className="postreq-form ">Plot size</p>
                   <input
                     required
-                    value={PostPropertyRequirementData.plotSize}
+                    value={PostPropertyRequirementData?.plotSize}
                     onChange={(e) => {
                       // Allow numbers and one decimal point only
                       let value = e.target.value;
@@ -248,7 +257,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 <p className="postreq-form ">Budget</p>
                 <input
                   required
-                  value={PostPropertyRequirementData.Budget}
+                  value={PostPropertyRequirementData?.Budget}
                   onChange={(e) => {
                     // Allow numbers and one decimal point only
                     let value = e.target.value;

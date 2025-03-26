@@ -8,12 +8,14 @@ import NotifyMe from "../Home/PropertyCard/NotifyMe";
 import SingleCard from "./SingleCard";
 import ScrollToTop from "../../ScrollToTop";
 import { getPostsByAddress } from "../../Action/postAction";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AllPostRender = () => {
 
   const dispatch = useDispatch();
   const{data:GetAllPostData,loading}=useSelector(store=>store.postByAddress)
-
+  const {type}= useParams("type");
+  const navigate = useNavigate();
   useEffect(() => {
     // console.log(allProperties)
     if(!GetAllPostData?.properties){
@@ -68,8 +70,8 @@ const AllPostRender = () => {
   useEffect(() => {
     if (!GetAllPostData?.properties?.length) return;
 
-    let filtered = [...filterdPost];
-
+    let filtered = filterdPost.filter((post) => post.BasicDetails?.PropertyAdType === type);
+  
     if (filters.propertyType) {
       filtered = filtered.filter(
         (post) => post.BasicDetails?.PropertyAdType === filters.propertyType
@@ -93,7 +95,7 @@ const AllPostRender = () => {
     window.scrollTo(0, 0)
 
     setFilteredData(filtered);
-  }, [filters, GetAllPostData?.properties, filterdPost]);
+  }, [filters, GetAllPostData?.properties, filterdPost,type]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({
@@ -134,9 +136,11 @@ const AllPostRender = () => {
               {["Sale", "Rent"].map((text) => (
                 <button
                   key={text}
-                  onClick={() => handleFilterChange("propertyType", text)}
+                  onClick={() =>{
+                    // handleFilterChange("propertyType", text)
+                     navigate(`/all-post/${text}`)}}
                   className={`bhk-option ${
-                    filters.propertyType === text ? "selected" : ""
+                    type === text ? "selected" : ""
                   }`}
                 >
                   {text}
