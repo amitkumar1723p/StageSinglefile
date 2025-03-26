@@ -42,22 +42,22 @@ export default function TenantVsLandlord() {
     {tenantORlandlord ==="Tenant" && (
         <div>
           <Tenant/>
-          {/* <BrowseProperties />
+          <BrowseProperties />
           <PropertyDetailsForm />
-          <RentAgreement />
-          <RentalBanner />
-          <VerifiedComponent /> */}
+          {/* <RentAgreement /> */}
+          {/* <RentalBanner /> */}
+          {/* <VerifiedComponent /> */}
         </div>
     )}
     {tenantORlandlord === "LandLord" && (
         <div>
 
           <LandLord/>
-          {/* <BrowseProperties />
-          <PropertyDetailsForm />
-          <RentAgreement />
-          <RentalBanner />
-          <VerifiedComponent /> */}
+          <BrowseProperties />
+          {/* <PropertyDetailsForm /> */}
+          {/* <RentAgreement /> */}
+          {/* <RentalBanner /> */}
+          {/* <VerifiedComponent /> */}
         </div>
     ) }
 
