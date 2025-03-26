@@ -66,6 +66,7 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 // import DreamHomeBanner from "./DreamHomeBanner.jsx";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
+import TenantVsLandlord from "./TenantVsLandlord.jsx";
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -735,13 +736,14 @@ const HeroSection = () => {
       {/* Rent Component./ */}
       {PropertyAddType == "Rent" && (
         <>
-          <Tenant />
+        <TenantVsLandlord/>
+          {/* <Tenant />
           <BrowseProperties />
           <LandLord />
           <PropertyDetailsForm />
           <RentAgreement />
           <RentalBanner />
-          <VerifiedComponent />
+          <VerifiedComponent /> */}
           {/* <TenantDetailsForm /> */}
         </>
       )}
