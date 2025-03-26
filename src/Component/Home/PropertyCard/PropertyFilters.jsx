@@ -27,54 +27,74 @@ const AllPostSearchFilter = () => {
   useEffect(() => {
     const projectName = searchParams.get("ProjectName");
     const propertyAddType = searchParams.get("PropertyAddType");
-    
-    if (projectName) {
-      sessionStorage.setItem("lastProjectName", projectName);
+    const sector = searchParams.get("sector");
+    const city = searchParams.get("city");
+  
+    if (projectName || propertyAddType || sector || city) {
+      sessionStorage.setItem("lastProjectName", projectName || "");
       sessionStorage.setItem("lastPropertyAddType", propertyAddType || "");
+      sessionStorage.setItem("lastSector", sector || "");
+      sessionStorage.setItem("lastCity", city || "");
     }
   }, [searchParams]);
-
+  
   // Handle navigation and restore query parameters
   useEffect(() => {
-    const currentProjectName = searchParams.get("ProjectName");
     
-    if (!currentProjectName) {
-      const lastProjectName = sessionStorage.getItem("lastProjectName");
-      const lastPropertyAddType = sessionStorage.getItem("lastPropertyAddType");
-      
-      if (lastProjectName) {
-        const queryParams = new URLSearchParams();
-        queryParams.set("ProjectName", lastProjectName);
-        if (lastPropertyAddType) {
-          queryParams.set("PropertyAddType", lastPropertyAddType);
-        }
-        navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
-        return;
-      }
-    }
+    const currentProjectName = searchParams.get("ProjectName");
+    const currentPropertyAddType = searchParams.get("PropertyAddType");
+    const currentSector = searchParams.get("sector");
+    const currentCity = searchParams.get("city");
+  
+   
+      // const lastProjectName = sessionStorage.getItem("lastProjectName");
+      // const lastPropertyAddType = sessionStorage.getItem("lastPropertyAddType");
+      // const lastSector = sessionStorage.getItem("lastSector");
+      // const lastCity = sessionStorage.getItem("lastCity");
+  
+      // if (lastProjectName || lastPropertyAddType || lastSector || lastCity) {
+      //   const queryParams = new URLSearchParams();
+      //   if (lastProjectName) queryParams.set("ProjectName", lastProjectName);
+      //   if (lastPropertyAddType) queryParams.set("PropertyAddType", lastPropertyAddType);
+      //   if (lastSector) queryParams.set("sector", lastSector);
+      //   if (lastCity) queryParams.set("city", lastCity);
+  
+      //   navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+      //   return;
+      // }
+    
+     
+     
+    if ((currentProjectName || currentCity || currentSector) && !data) {
 
-    if (currentProjectName && !data) {
       dispatch(
         GetAllPostAction({
-          ProjectName: currentProjectName,
-          PropertyAdType: searchParams.get("PropertyAddType"),
+          ProjectName:currentProjectName?.replaceAll("-"," "),
+          City: currentCity ,
+          Sector: currentSector?.replaceAll("-"," "),
+          PropertyAdType: currentPropertyAddType ,
         })
       );
     }
-
+  
     setRedirectPathIsHomeCard(true);
   }, [location.pathname, searchParams]);
+  
 
   useEffect(() => {
     if (Object.keys(Filter).length > 0 || removeFilterField) {
+      // console.log(searchParams.get("ProjectName"))
       dispatch(
         GetAllPostAction({
-          ProjectName: searchParams.get("ProjectName"),
+          ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-"," "),
+          City: searchParams.get("city") ,
+          Sector: searchParams.get("sector")?.replaceAll("-"," "),
           PropertyAdType: searchParams.get("PropertyAddType"),
           BHK: Filter.BHK,
           ApartmentType: Filter.ApartmentType,
           PropertyStatus: undefined,
           Furnishing: Filter.Furnishing,
+          
         })
       );
     }
@@ -132,11 +152,14 @@ const AllPostSearchFilter = () => {
           <aside className="property-filters">
             <div className="allpost-clear-filter-title">
               <h2 className="filter-title-1">Filter Your Search</h2>
-              <div className='allpost-clear-filter' onClick={() => {
+              <div className='allpost-clear-filter' 
+              onClick={() => {
                 dispatch(
                   GetAllPostAction({
                     ProjectName: searchParams.get("ProjectName"),
                     PropertyAdType: searchParams.get("PropertyAddType"),
+                    City: searchParams.get("city") ,
+                    Sector: searchParams.get("sector"),
                     BHK: "",
                     ApartmentType: "",
                     PropertyStatus: undefined,
@@ -155,10 +178,13 @@ const AllPostSearchFilter = () => {
                   <button
                     key={text}
                     onClick={() => {
-                      setSearchParams({
-                        ProjectName: searchParams.get("ProjectName"),
-                        PropertyAddType: text,
-                      });
+                    navigate(`/home/card?ProjectName=${searchParams.get("ProjectName") && searchParams.get("ProjectName")}&sector=${searchParams.get("sector")}&city=${searchParams.get("city")}&PropertyAddType=${text}`)
+                      // setSearchParams({
+                      //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
+                      //   city:searchParams.get("city"),
+                      //   sector:searchParams.get("sector"),
+                      //   PropertyAddType: text,
+                      // });
                       setRemoveFilterField(true);
                     }}
                     className={`bhk-option ${searchParams.get("PropertyAddType") === text ? "selected" : ""}`}

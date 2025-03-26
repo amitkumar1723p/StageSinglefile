@@ -1,5 +1,7 @@
 import { ColorScheme } from "@vis.gl/react-google-maps";
-import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import debounce from "debounce";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // const [AlertObj, setAlertObj] = useState({});
 
@@ -28,6 +30,31 @@ export default function ProjectNameSection({
   const { data } = useSelector((state) => {
     return state.ProjectName;
   });
+  const [query, setQuery] = useState('');
+
+
+
+  const fetchSuggestions = async (searchTerm) => {
+    try{
+
+      const suggestion= await axios.get(`${process.env.REACT_APP_API_URL}/post/suggestion?term=${searchTerm}`)
+      if(suggestion?.data?.suggestions.length >0){
+
+        setFilterProjectName(suggestion?.data?.suggestions)
+      }
+      // console.log(suggestion)
+    }
+    catch{
+
+    }
+    // Call your API here
+  };
+
+  const debouncedFetchSuggestions = useCallback(debounce(fetchSuggestions, 150), []);
+
+ 
+
+
   useEffect(() => {
     if (data) {
       if (data.success === true) {
@@ -128,6 +155,7 @@ export default function ProjectNameSection({
       }
     }
   }, [inputValue, ProjectInputType]);
+
   const handleKeyDown = (event) => {
     setkeydown(true);
     if (FilterProjectName.length > 0) {
@@ -145,10 +173,10 @@ export default function ProjectNameSection({
         }
       } else if (event.key === "Enter") {
         if (FilterProjectName.length > 0) {
-          setProjectNameObjectData({
-            ...ProjectNameObjectData,
-            ProjectName: FilterProjectName[highlightedIndex]["Project Name"],
-          });
+       
+          setProjectNameObjectData(FilterProjectName[highlightedIndex]);
+
+          setQuery(FilterProjectName[highlightedIndex].combinedLocation?.replaceAll(","," "))
           setFilterProjectName([]);
           setHighlightedIndex(0);
         }
@@ -217,42 +245,22 @@ export default function ProjectNameSection({
             id="property-name"
             placeholder={placeholder}
             required
-            value={ProjectNameObjectData.ProjectName?.trimStart() || ""}
+            value={query}
             onChange={(e) => {
+              setQuery(e.target.value.replaceAll(","," "));
+              debouncedFetchSuggestions(e.target.value);
               setHighlightedIndex(0);
-              setProjectNameObjectData({
-                ...ProjectNameObjectData,
-                ProjectName: e.target.value,
-              });
-
+              // setProjectNameObjectData(()=>{return {
+              //   ...ProjectNameObjectData,
+              //   ProjectName: e.target.value,
+              // }});
+              
               if (e.target.value == "" || e.target.value == " ") {
                 setHighlightedIndex(0);
-                setFilterProjectName([]);
+               
               } else {
                 let SearchWord = e.target.value.split(" ");
-
-                const result = ProjectName.filter((item) => {
-                  const matchProjectNameAndSector = SearchWord?.every(
-                    (word) => {
-                      return (
-                        item["Project Name"]
-                          ?.toUpperCase()
-                          ?.includes(word?.toUpperCase()) ||
-                        item["Sector"]
-                          ?.toUpperCase()
-                          ?.includes(word?.toUpperCase()) ||
-                        item["City"]
-                          ?.toUpperCase()
-                          ?.includes(word?.toUpperCase())
-                      );
-                    }
-                  );
-
-                  return matchProjectNameAndSector;
-                });
-
-                setFilterProjectName(result);
-                setExactMatchObj(result);
+            
 
                 // if (!searchInput) {
                 //   if (result.length == 0) {
@@ -278,6 +286,7 @@ export default function ProjectNameSection({
               {FilterProjectName.map((ApartmentFilter, index) => {
                 return (
                   <p
+                  
                     // onMouseEnter={() => setHighlightedIndex(index)}
                     onMouseEnter={() => {
                       setkeydown(false);
@@ -285,23 +294,29 @@ export default function ProjectNameSection({
                         setHighlightedIndex(index);
                       }
                     }}
-                    className={index === highlightedIndex ? "highlighted" : ""}
+                    className={`suggestion-p-tag ${index === highlightedIndex ? "highlighted" : ""}`}
                     key={index}
                     onClick={(e) => {
-                      let innerText = e.target.innerText.split(",");
-
-                      setProjectNameObjectData({
-                        ...ProjectNameObjectData,
-                        ProjectName: innerText[0].trim(),
-                      });
-                      setTimeout(() => {
+                    
+                      let innerText = ApartmentFilter?.combinedLocation.replaceAll(",", "");
+                      setQuery(innerText)
+                     
                         setHighlightedIndex(0);
-                        setFilterProjectName([]);
-                      }, 0);
+                     
+                  
+                      setProjectNameObjectData(
+                        ApartmentFilter
+                      );
                     }}
-                  >
-                    {ApartmentFilter["Project Name"]},{" "}
-                    {ApartmentFilter["Sector"]}, {ApartmentFilter["City"]}
+                  >{
+                    ApartmentFilter?.combinedLocation
+                  }
+                <span>
+                  {(ApartmentFilter.mostMatchedField === "Project Name" || ApartmentFilter.s_type === "Project Name")
+                    ? "Project Name"
+                    : "Locality"}
+                </span>
+
                   </p>
                 );
               })}
@@ -313,3 +328,7 @@ export default function ProjectNameSection({
     </>
   );
 }
+
+
+
+

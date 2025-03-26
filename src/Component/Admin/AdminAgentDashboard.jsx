@@ -108,7 +108,7 @@ const AdminAgentDashboard = () => {
                             </p>
                             <img src="/img/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Unverify Admin </h3>
+                          <h3> Unverified Admin </h3>
                           <p className="viewall">View All</p>
                         </div>
                       </Link>
@@ -120,7 +120,7 @@ const AdminAgentDashboard = () => {
                             </p>
                             <img src="/img/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Verify Admin </h3>
+                          <h3> Verified Admin </h3>
                           <p className="viewall">View All</p>
                         </div>
                       </Link>
@@ -150,7 +150,7 @@ const AdminAgentDashboard = () => {
                             </p>
                             <img src="/img/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Unverify Agent </h3>
+                          <h3> Unverified Agent </h3>
                           <p className="viewall">View All</p>
                         </div>
                       </Link>
@@ -160,7 +160,7 @@ const AdminAgentDashboard = () => {
                             <p className="total-number">{VerifyAgent.length}</p>
                             <img src="/img/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Verify Agent </h3>
+                          <h3> Verified Agent </h3>
                           <p className="viewall">View All</p>
                         </div>
                       </Link>

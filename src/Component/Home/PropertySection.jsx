@@ -135,7 +135,7 @@ const PropertySection = () => {
                 <h3 className="property-section-h3">Handpicked properties that match your needs – from trending to luxurious, all in one place.</h3>
               </div>
               <div className="property-btn">
-                <button className="view-btn" onClick={() => navigate("/all-post")}>
+                <button className="view-btn" onClick={() => navigate("/all-post/Sale")}>
                   <span className="view-btn-span">View All Properties <img src="/img/right-arrow.svg" alt="" /></span>
                 </button>
               </div>

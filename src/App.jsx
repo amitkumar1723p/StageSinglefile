@@ -1121,7 +1121,7 @@ useEffect(() => {
           />
         </Route>
         {/*All post route*/}
-        <Route path={"/all-post"} element={<AllPostRender />} />
+        <Route path={"/all-post/:type"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

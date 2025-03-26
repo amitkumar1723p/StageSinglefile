@@ -172,7 +172,7 @@ const Dashboard = () => {
           <p className="dashboard-skeleton-heading skeleton"></p>
 
           <div className="dashboard-skeleton-container">
-            {Array.from({ length: 8 }).map((_, index) => (
+            {Array.from({ length: 9 }).map((_, index) => (
               <DashboardSkeletonCard key={index} />
             ))}
           </div>
