@@ -15,7 +15,7 @@ const Tenant = () => {
 
 
       </div>
-      {/* <div className="for-tenant-right">
+      <div className="for-tenant-right">
         <div className="for-tenant-heading">
           <div className="for-tenant-title"> FOR TENANT</div>
           <h2 className="for-tenant-main-heading">
@@ -60,9 +60,7 @@ const Tenant = () => {
             </div>
           </div>
         </div>
-      </div> */}
-
-      
+      </div>
     </div>
   );
 };
