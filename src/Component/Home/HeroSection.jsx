@@ -282,7 +282,7 @@ const HeroSection = () => {
                   // setPropertyAddType("");
                   // } else {
                   setSearchPropertyAddType(e.target.value);
-             
+
                   // }
                 }}>
                   <option selected={PropertyAddType === "Sale"} value="Sale">Buy</option>
@@ -386,7 +386,7 @@ const HeroSection = () => {
                         // setPropertyAddType("");
                         // } else {
                         setSearchPropertyAddType(e);
-                      
+
                         // }
                       }}
                     >
@@ -447,7 +447,7 @@ const HeroSection = () => {
                     }
                     className="search-button"
                     onClick={() => {
-                    
+
                       if (
                         runSearchButton == true &&
                         ProjectNameObjectData.ProjectName?.length > 0
@@ -460,11 +460,11 @@ const HeroSection = () => {
                         //   })
                         // );
 
-                       
+
                         dispatch(
                           GetAllPostAction({
-                            ProjectName:ProjectNameObjectData?.ProjectName?.trim()
-                              ,
+                            ProjectName: ProjectNameObjectData?.ProjectName?.trim()
+                            ,
                             PropertyAdType: SearchPropertyAddType,
                           })
                         );
@@ -506,7 +506,7 @@ const HeroSection = () => {
                           GetAllPostAction({
                             ProjectName:
                               ProjectNameObjectData.ProjectName?.trim(),
-                            PropertyAdType:SearchPropertyAddType,
+                            PropertyAdType: SearchPropertyAddType,
                           })
                         );
 
@@ -669,28 +669,7 @@ const HeroSection = () => {
             </h2>
           </div>
           <div className="rent-sell">
-            {/* {Tab.map((e, i) => {
-              return (
-                <div
-                  key={i}
-                  className={`search-tab-ing ${
-                    e == PropertyAddType ? "active" : ""
-                  }
-              `}
-                  onClick={() => {
-                    // if (e == PropertyAddType) {
-                    // setPropertyAddType("");
-                    // } else {
-                    setPropertyAddType(e);
-                    // }
-                  }}
-                >
-                  {e == "Sale" ? "Sell" : e}ing
-                </div>
-              );
-            })}
 
-              <BuyingSellingTenant /> */}
             <div
               ref={containerRef}
               className="AnimatedNav-container"
@@ -740,7 +719,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div></div>
+
 
       {PropertyAddType == "Buy" && (
         <>
@@ -796,7 +775,7 @@ const HeroSection = () => {
       )}
 
       {/* Rent Component./ */}
-      {/* {PropertyAddType == "Rent" && (
+      {PropertyAddType == "Rent" && (
         <>
           <Tenant />
           <BrowseProperties />
@@ -807,10 +786,10 @@ const HeroSection = () => {
           <RentalBanner />
           <VerifiedComponent />
           <RentAuthentication />
-          <TenantDetailsForm />
+         
         </>
-      )} */}
-      {/* <TenantDetailsForm /> */}
+      )}
+   
       {/* Buy Component  */}
 
       {showPropertyRequirement && (

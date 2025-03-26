@@ -2,7 +2,7 @@ import React from 'react'
 
 const SocietyAndBuildingFeature = ({ feature }) => {
     // console.log("feature  ",feature)
-    const featur=["Pipeline","Parking","motor","goodies","Pipeline","Parking","motor","goodies","asdasd","asasasde","werjhwbiuw","opodpee","nsdijfweifw"]
+    const featur = ["Pipeline", "Parking", "motor", "goodies", "Pipeline", "Parking", "motor", "goodies", "asdasd", "asasasde", "werjhwbiuw", "opodpee", "nsdijfweifw"]
     return (
         <div className="society-feature-parent">
             <h2 className="furnish-heading">Property Features</h2>

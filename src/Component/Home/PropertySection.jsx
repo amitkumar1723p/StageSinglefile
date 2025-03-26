@@ -212,9 +212,9 @@ const PropertySection = () => {
                               <p className="card-location">{property?.LocationDetails?.Landmark} {property?.LocationDetails?.Locality}</p>
                               <p className="card-price" > {formatReservePrice(property?.PricingDetails?.ExpectedPrice) || formatReservePrice(property?.PricingDetails?.ExpectedRent)} |  <span className="property-section-sqft"> {String(
                                 property?.PricingDetails?.PricePerSqFt || property?.PricingDetails?.PricePerSqYd
-                              ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {property?.AreaDetails?.BuiltUpArea?.unit || " Sq yard"}</span></p>
+                              ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} <span className="area-section-hero-section">{property?.AreaDetails?.BuiltUpArea?.unit || " Sq yard"}  </span>    </span></p>
 
-
+  
                               <p className={`card-status   `}>Status : <span className={`card-status ${property?.BasicDetails?.PropertyStatus === "Ready to move" ? "property-section-status" : "property-section-nodata"}  `} >{property?.BasicDetails?.PropertyStatus}  {property?.BasicDetails?.PropertyStatus !== "Ready to move" && <>{property?.BasicDetails?.CurrentPropertyStatus}</>}  </span>  </p>
 
 

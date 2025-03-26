@@ -121,7 +121,7 @@ const ScheduleVisit = () => {
                 </div>
                 <div className="schedule-visit-footer">
                   <div className="schedule-visit-schedule-info ">
-                    <div>
+                    <div >
                       <p>
                         Schedule Visit:
                         <span className="schedule-visit-status">
@@ -165,17 +165,15 @@ const ScheduleVisit = () => {
                       <p className="visit-time-date">
                         Date:
                         <span className="schedule-visit-date">
-                          {
-                            FormatDate(visitData.VisitDate)
-                          }
+                           {FormatDate(visitData.VisitDate)} 
                             
                         </span>
                       </p>
                       <p className="visit-time-date">
                         Time:
-                        <span className="schedule-visit-time">
-                          {formatTime(visitData.VisitTime.From)}
-                        </span>
+                         <span className="schedule-visit-time">
+                           {formatTime(visitData.VisitTime.From)}
+                         </span>
                       </p>
                     </div>
                   </div>

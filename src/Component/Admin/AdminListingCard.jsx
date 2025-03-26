@@ -501,7 +501,7 @@ export default function AdminListingCard({
                   View Offer Received (
                   {VisitAndOfferLength ? VisitAndOfferLength.makeoffer : "0"})
                 </p>
-                <p>Extend Duration</p>
+                {/* <p>Extend Duration</p> */}
 
                 {medata.user.Role != "Agent" && (
                   <>

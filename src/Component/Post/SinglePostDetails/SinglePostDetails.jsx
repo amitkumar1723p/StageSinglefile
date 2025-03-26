@@ -1225,8 +1225,7 @@ export default function SinglePostDetails() {
                           Data={"Open Parking"}
                         />
                       )}
-
-                    {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
+                                          {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
                       ?.CoveredParking > 0 && (
                         <PropertyDataBox
                           Answer={
@@ -1251,7 +1250,7 @@ export default function SinglePostDetails() {
                           {/* Water Source */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                            Icon="/img/Water.png"
+                            Icon="/img/water.png"
                             Data={"Water Source"}
                           />
                         </>
@@ -1302,11 +1301,11 @@ export default function SinglePostDetails() {
                       ?.PropertyAdType == "Rent" && (
                         <>
 
-                          <PropertyDataBox
+                          {/* <PropertyDataBox
                             Answer={FormatDate(getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom)}
                             Icon="/img/bathroom.png"
                             Data={"Available From"}
-                          />
+                          /> */}
 
                           {getSinglePostData.SinglePost.PricingDetails
                             .AdditionalDetails?.PreferredTenant?.length > 0 && (
@@ -1319,7 +1318,7 @@ export default function SinglePostDetails() {
                                   }-${new Date(
                                     getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                                   ).getFullYear()}`}
-                                Icon="/img/Available-From.svg"
+                                Icon="/img/available-From.svg"
                                 Data={"Available From"}
                               />
                             )}
@@ -1338,15 +1337,15 @@ export default function SinglePostDetails() {
                         )}
 
                         <PropertyDataBox
-                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
+                          Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
                           Icon="/img/Expected-rent.svg"
                           Data={"Expected Rent"}
                         />
 
                         <PropertyDataBox
-                          Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice}`}
+                          Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice} `}
                           Icon="/img/Security-deposit.svg"
-                          Data={"Security Deposit"}
+                          Data={"Security Deposit "}
                         />
                       </>
                     )}
@@ -1432,6 +1431,7 @@ export default function SinglePostDetails() {
                     furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                   />
                 }
+
                 {/* society features */}
 
                 {getSinglePostData?.SinglePost?.AmenitiesDetails

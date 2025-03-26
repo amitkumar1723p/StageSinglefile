@@ -3,16 +3,19 @@ import "./Tenant.css";
 
 const Tenant = () => {
   return (
+
+
+
     <div className="for-tenant-details">
       <div className="for-tenant-left">
         <img alt="tenant-img" src="/img/TenantBackground.png" />
         <img alt="TenantMobile" src="/img/TenantMobile.png" />
         <img alt="TenantArrow" src="/img/TenantArrow.png" />
-        <img alt="Owner's-Phn-Numb" src="/img/OwnerPhnNummber.svg"/>
-        
-        
+        <img alt="Owner's-Phn-Numb" src="/img/OwnerPhnNummber.svg" />
+
+
       </div>
-      <div className="for-tenant-right">
+      {/* <div className="for-tenant-right">
         <div className="for-tenant-heading">
           <div className="for-tenant-title"> FOR TENANT</div>
           <h2 className="for-tenant-main-heading">
@@ -57,7 +60,9 @@ const Tenant = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      
     </div>
   );
 };
