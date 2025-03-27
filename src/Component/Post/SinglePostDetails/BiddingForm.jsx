@@ -237,14 +237,12 @@ console.log(PropertyAddress)
               <div className="reserve-price-section-form">
                 <div>
                   <p className="price-que-form">
-                    Reserved price :{" "}
-                    <span className="price-ans-form">
-                      {" "}
+                    Reserved price : <span className="price-ans-form">
+                      
                       {formatReservePrice(
                         SinglePostData.SinglePost.PricingDetails.ExpectedPrice
-                      )}{" "}
-                    </span><span className="area-section-from pt-1">{" ₹"}{SinglePostData.SinglePost.PricingDetails.PricePerSqFt}
-                    /sqft{" "}</span>
+                      )}
+                    </span> <span className="area-section-from pt-1">{" ₹"}{SinglePostData.SinglePost.PricingDetails.PricePerSqFt} Sq.Ft</span>
                   </p>
 
                   {/* <p className="area-section-from pt-1">

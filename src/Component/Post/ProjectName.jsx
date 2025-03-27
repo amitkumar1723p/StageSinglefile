@@ -30,7 +30,7 @@ export default function ProjectNameSection({
   const { data } = useSelector((state) => {
     return state.ProjectName;
   });
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(ProjectInputType == "PostForm" ?ProjectNameObjectData.ProjectName:'');
 
 
 
@@ -101,50 +101,50 @@ export default function ProjectNameSection({
     };
   }, [FilterProjectName, ProjectNameFormGroupref]);
 
-  useEffect(() => {
-    if (ExactMatchObj.length > 0) {
-      const exactMatch = ExactMatchObj.find((item) => {
-        // Check if "Project Name" matches exactly with ProjectNameObjectData
-        return (
-          item["Project Name"].trim().toUpperCase() ===
-          ProjectNameObjectData.ProjectName.trim().toUpperCase()
-        );
-      });
+  // useEffect(() => {
+  //   if (ExactMatchObj.length > 0) {
+  //     const exactMatch = ExactMatchObj.find((item) => {
+  //       // Check if "Project Name" matches exactly with ProjectNameObjectData
+  //       return (
+  //         item["Project Name"].trim().toUpperCase() ===
+  //         ProjectNameObjectData.ProjectName.trim().toUpperCase()
+  //       );
+  //     });
 
-      if (ProjectInputType == "Search") {
-        if (exactMatch) {
-          setrunSearchButton(true);
-        } else {
-          setrunSearchButton(false);
-        }
-      }
-      if (ProjectInputType == "PostForm") {
-        // if (exactMatch) {
+  //     if (ProjectInputType == "Search") {
+  //       if (exactMatch) {
+  //         setrunSearchButton(true);
+  //       } else {
+  //         setrunSearchButton(false);
+  //       }
+  //     }
+  //     if (ProjectInputType == "PostForm") {
+  //       // if (exactMatch) {
 
-        setinputValue({
-          City: exactMatch?.["City"] || "",
-          Locality: exactMatch?.["Locality"] || "",
-          Landmark: exactMatch?.["Sector"] || "",
-        });
-        // } else {
+  //       setinputValue({
+  //         City: exactMatch?.["City"] || "",
+  //         Locality: exactMatch?.["Locality"] || "",
+  //         Landmark: exactMatch?.["Sector"] || "",
+  //       });
+  //       // } else {
 
-        // setinputValue({
-        //   city: "",
-        //   Locality: "",
-        // });
-        // }
-      }
-    }
-  }, [ExactMatchObj, ProjectNameObjectData.ProjectName, ProjectInputType]);
+  //       // setinputValue({
+  //       //   city: "",
+  //       //   Locality: "",
+  //       // });
+  //       // }
+  //     }
+  //   }
+  // }, [ExactMatchObj, ProjectNameObjectData.ProjectName, ProjectInputType]);
 
   useEffect(() => {
     if (ProjectInputType == "PostForm") {
       if (inputValue) {
         setProjectNameObjectData((prevData) => {
           if (
-            prevData.Locality !== inputValue.Locality ||
-            prevData.City !== inputValue.City ||
-            prevData.Landmark !== inputValue.Landmark
+            prevData.Locality !== inputValue.locality ||
+            prevData.City !== inputValue.city ||
+            prevData.Landmark !== inputValue.landmark
           ) {
             return {
               ...prevData,
@@ -254,15 +254,16 @@ export default function ProjectNameSection({
             id="property-name"
             placeholder={placeholder}
             required
-            value={ProjectInputType == "PostForm" ? ProjectNameObjectData?.projectName:query}
+            value={query}
             onChange={(e) => {
               setQuery(e.target.value.replaceAll(","," "));
+          
               debouncedFetchSuggestions(e.target.value);
               setHighlightedIndex(0);
            
               setProjectNameObjectData(()=>{return {
                 ...ProjectNameObjectData,
-                projectName: e.target.value,
+                ProjectName: e.target.value,
               }});
               
               if (e.target.value == "" || e.target.value == " ") {
@@ -323,7 +324,7 @@ export default function ProjectNameSection({
                   >{
                     ApartmentFilter?.combinedLocation
                   }
-           {  ProjectInputType === "PostReqSearchuirement"  &&  <span>
+           {  ProjectInputType === "Search"  &&  <span>
                   {(ApartmentFilter.mostMatchedField === "Project Name" || ApartmentFilter.s_type === "Project Name")
                     ? "Project Name"
                     : "Locality"}
