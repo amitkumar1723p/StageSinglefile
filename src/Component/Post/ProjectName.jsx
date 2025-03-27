@@ -4,6 +4,7 @@ import debounce from "debounce";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // const [AlertObj, setAlertObj] = useState({});
+import "./Post.css"
 
 export default function ProjectNameSection({
   ProjectNameObjectData,
@@ -329,9 +330,9 @@ export default function ProjectNameSection({
                   >{
                     ApartmentFilter?.combinedLocation
                   }
-           {  ProjectInputType === "Search"  &&  <span>
+           {  ProjectInputType === "Search"  &&  <span className="dropdown-section-hero">
                   {(ApartmentFilter.mostMatchedField === "Project Name" || ApartmentFilter.s_type === "Project Name")
-                    ? "Project Name"
+                    ? "Project"
                     : "Locality"}
                 </span>}
 

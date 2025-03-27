@@ -1,5 +1,6 @@
 import React from 'react';
 import './BrowseProperties.css';
+import { Link, } from "react-router-dom";
 
 
 
@@ -18,8 +19,9 @@ const BrowseProperties = () => {
                 Find your perfect rental home with 100% verified listings, Connect property owner's directly. PropertyDekho247 offers a wide range of properties at competitive prices and free from misleading and fake listings. Enjoy a simple, transparent process with fully verified listings for a stress-free rental experience.
                 </div>
                 <div className='BrowseProperties-Button-Container'>
-                    <button className='BrowseProperties-Button'>Browse Properties</button>
+                   <Link to="/all-post/Rent" >  <button className='BrowseProperties-Button'>Browse Properties</button></Link>
                 </div>
+
             </div>
             <div className='BrowseProperties-Right'>
                 <img
