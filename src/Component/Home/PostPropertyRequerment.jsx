@@ -46,12 +46,12 @@ const PostPropertyRequerment = ({ SetShow }) => {
     // Merge unit and PossessionStatus into the submission data
     let data = {
       ...PostPropertyRequirementData,
-      ProjectName:PostPropertyRequiremenLocalitytData.projectName,
-      City:PostPropertyRequiremenLocalitytData.city
+      ProjectName:PostPropertyRequiremenLocalitytData?.projectName,
+      City:PostPropertyRequiremenLocalitytData?.city
     }
 
     console.log(PostPropertyRequiremenLocalitytData)
-    console.log(data)
+
     if (data.PropertyType !== "Plot" && (!data.PropertyType || !data.ProjectName || !data.BHKType || !data.FloorPreference || !data.Budget)) {
       alert("please fill all data")
       return;
@@ -62,7 +62,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
     }
     let dataToSubmit;
 
-    if (PostPropertyRequirementData.plotSize !== "") {
+    if (PostPropertyRequirementData?.plotSize !== "") {
       dataToSubmit = {
         ...data,
         unit,
@@ -84,9 +84,9 @@ const PostPropertyRequerment = ({ SetShow }) => {
 
   const [propertyTypeAlert, setPropertyTypeAlert] = useState(false);
   const [locationAlert, setLocationAlert] = useState({});
-  const [bhkType, setBhkType] = useState(false);
+
   const [floorPrefAlert, setFloorPrefAlert] = useState(false);
-  const [budgetAlert, setBudgetAlert] = useState(false);
+
 
 
 
@@ -173,7 +173,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
               />
             </div>
 
-            {PostPropertyRequirementData.PropertyType !== "Plot" && <>
+            {PostPropertyRequirementData?.PropertyType !== "Plot" && <>
               <div className="form-group form-bhk">
                 <p className="postreq-form " >BHK Type</p>
                 <select
@@ -217,7 +217,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
             </>
 
             }
-            {PostPropertyRequirementData.PropertyType === "Plot" &&
+            {PostPropertyRequirementData?.PropertyType === "Plot" &&
               <div className="form-group form-budget">
                 <div className="budget-container">
                   <p className="postreq-form ">Plot size</p>

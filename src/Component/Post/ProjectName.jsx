@@ -30,7 +30,7 @@ export default function ProjectNameSection({
   const { data } = useSelector((state) => {
     return state.ProjectName;
   });
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(ProjectInputType == "PostForm" ?ProjectNameObjectData.ProjectName:'');
 
 
 
@@ -83,7 +83,10 @@ export default function ProjectNameSection({
           let element = ProjectNameFormGroupref.current.contains(e.target);
           if (element == false) {
             setHighlightedIndex(0);
-            setFilterProjectName([]);
+            setTimeout(() => {
+              setFilterProjectName([]);
+            }, 0);
+            
           }
         }
       }
@@ -177,11 +180,17 @@ export default function ProjectNameSection({
           setProjectNameObjectData(FilterProjectName[highlightedIndex]);
 
           setQuery(FilterProjectName[highlightedIndex].combinedLocation?.replaceAll(","," "))
-          setFilterProjectName([]);
+          setTimeout(() => {
+            setFilterProjectName([]);
+          }, 0);
+          
           setHighlightedIndex(0);
         }
       } else if (event.key === "Escape") {
-        setFilterProjectName([]); // Reset the filter on Escape
+        setTimeout(() => {
+          setFilterProjectName([]); // Reset the filter on Escape
+        }, 0);
+          
       }
     }
   };
@@ -245,20 +254,17 @@ export default function ProjectNameSection({
             id="property-name"
             placeholder={placeholder}
             required
-
-            value={ ProjectInputType == "PostForm" ? ProjectNameObjectData?.projectName :query}
+            value={query}
             onChange={(e) => {
               setQuery(e.target.value.replaceAll(","," "));
-              setProjectNameObjectData({
-                ...ProjectNameObjectData,
-                projectName: e.target.value
-              })
+          
               debouncedFetchSuggestions(e.target.value);
               setHighlightedIndex(0);
-              // setProjectNameObjectData(()=>{return {
-              //   ...ProjectNameObjectData,
-              //   ProjectName: e.target.value,
-              // }});
+           
+              setProjectNameObjectData(()=>{return {
+                ...ProjectNameObjectData,
+                ProjectName: e.target.value,
+              }});
               
               if (e.target.value == "" || e.target.value == " ") {
                 setHighlightedIndex(0);
@@ -307,7 +313,9 @@ export default function ProjectNameSection({
                       setQuery(innerText)
                      
                         setHighlightedIndex(0);
-                     
+                    setTimeout(() => {
+                      setFilterProjectName([])
+                    }, 0);
                   
                       setProjectNameObjectData(
                         ApartmentFilter
@@ -316,11 +324,11 @@ export default function ProjectNameSection({
                   >{
                     ApartmentFilter?.combinedLocation
                   }
-                <span>
+           {  ProjectInputType === "Search"  &&  <span>
                   {(ApartmentFilter.mostMatchedField === "Project Name" || ApartmentFilter.s_type === "Project Name")
                     ? "Project Name"
                     : "Locality"}
-                </span>
+                </span>}
 
                   </p>
                 );

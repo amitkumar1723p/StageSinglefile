@@ -38,6 +38,19 @@ export default function LocationDetails({
   const [cityShake,setCityShake] = useState(false);
   const [localityShake,setLocalityShake] = useState(false)
 
+  const[dataTosent,setDataToSent]= useState(LocationDetailsData)
+// console.log(dataTosent)
+  useEffect(()=>{
+    // console.log("data to sent ",dataTosent)
+      setLocationDetailsData({
+        City:dataTosent?.City || dataTosent?.city,
+        Landmark:dataTosent?.sector || dataTosent?.Landmark,
+        Locality:dataTosent?.Locality || dataTosent?.locality,
+        ProjectName:dataTosent?.ProjectName || dataTosent?.projectName
+      })
+    //  console.log(LocationDetailsData)
+  },[dataTosent])
+
 
   const LocationDetailsAlertShake = (e)=>{
     
@@ -45,19 +58,19 @@ export default function LocationDetails({
     //   console.log("console");
     // }
     
-    if(LocationDetailsData.Landmark?.length == 0){
+    if(LocationDetailsData?.Landmark?.length == 0){
       // setSectorShake(true);
       // setTimeout(()=> setSectorShake(false),1600);
       return
 
     }
-    if(LocationDetailsData.City?.length == 0){
+    if(LocationDetailsData?.City?.length == 0){
       setCityShake(true);
       setTimeout(()=> setCityShake(false),1600);
       return
 
     }
-    if(LocationDetailsData.Locality?.length == 0){
+    if(LocationDetailsData?.Locality?.length == 0){
       setLocalityShake(true);
       setTimeout(()=> setLocalityShake(false),1600);
       return
@@ -65,7 +78,7 @@ export default function LocationDetails({
     }
   }
 
-
+  // console.log(LocationDetailsData)
 
   return (
     <>
@@ -80,8 +93,8 @@ export default function LocationDetails({
             <ProjectNameSection
             
               ProjectInputType={"PostForm"}
-              ProjectNameObjectData={LocationDetailsData}
-              setProjectNameObjectData={setLocationDetailsData}
+              ProjectNameObjectData={dataTosent}
+              setProjectNameObjectData={setDataToSent}
               placeholder={"Project / Sector / Area Name"}
               inputClass ={"locationdetails-input"}
               locationAlert={locationAlert}
@@ -97,7 +110,7 @@ export default function LocationDetails({
                 name="street"
                 placeholder="e.g. Sector 65"
                 required
-                value={LocationDetailsData.Landmark?.trimStart() || ""}
+                value={LocationDetailsData?.Landmark?.trimStart() || ""}
                 onChange={(e) => {
                   setLocationDetailsData({
                     ...LocationDetailsData,
@@ -117,7 +130,7 @@ export default function LocationDetails({
                 name="city"
                 placeholder="Enter City Name"
                 required
-                value={LocationDetailsData.City?.trimStart() || ""}
+                value={LocationDetailsData?.City?.trimStart() || ""}
                 onChange={(e) => {
                   setLocationDetailsData({
                     ...LocationDetailsData,
@@ -136,9 +149,10 @@ export default function LocationDetails({
                 name="locality"
                 placeholder="e.g. New Gurgaon / SPR"
                 required
+                
                 // readOnly={!LocationDetailsData.Locality?false:true}
                 // defaultValue={LocationDetailsData.Locality}
-                value={LocationDetailsData.Locality?.trimStart() || ""}
+                value={LocationDetailsData?.Locality?.trimStart() || ""}
                 onChange={(e) => {
                   setLocationDetailsData({
                     ...LocationDetailsData,

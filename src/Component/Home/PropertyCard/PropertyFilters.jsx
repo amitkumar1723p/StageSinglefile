@@ -70,7 +70,7 @@ const AllPostSearchFilter = () => {
       dispatch(
         GetAllPostAction({
           ProjectName:currentProjectName?.replaceAll("-"," "),
-          City: currentCity ,
+          City: currentCity?.replaceAll("-"," ") ,
           Sector: currentSector?.replaceAll("-"," "),
           PropertyAdType: currentPropertyAddType ,
         })
@@ -87,7 +87,7 @@ const AllPostSearchFilter = () => {
       dispatch(
         GetAllPostAction({
           ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-"," "),
-          City: searchParams.get("city") ,
+          City: searchParams.get("city")?.replaceAll("-"," ") ,
           Sector: searchParams.get("sector")?.replaceAll("-"," "),
           PropertyAdType: searchParams.get("PropertyAddType"),
           BHK: Filter.BHK,
@@ -158,7 +158,7 @@ const AllPostSearchFilter = () => {
                   GetAllPostAction({
                     ProjectName: searchParams.get("ProjectName"),
                     PropertyAdType: searchParams.get("PropertyAddType"),
-                    City: searchParams.get("city") ,
+                    City: searchParams.get("city")?.replaceAll("-"," ") ,
                     Sector: searchParams.get("sector"),
                     BHK: "",
                     ApartmentType: "",

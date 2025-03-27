@@ -173,9 +173,7 @@ const HeroSection = () => {
   const Tab = ["Buy", "Sale", "Rent"];
   const [PropertyAddType, setPropertyAddType] = useState("Buy");
   const [SearchPropertyAddType, setSearchPropertyAddType] = useState("Sale");
-  const [ProjectNameObjectData, setProjectNameObjectData] = useState({
-    
-  });
+  const [ProjectNameObjectData, setProjectNameObjectData] = useState({});
 
   const [showPropertyRequirement, setshowPropertyRequirement] = useState(false);
   const { loading: GetAllPostLoading, data: AllPostData } = useSelector(
@@ -242,7 +240,7 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
-console.log(ProjectNameObjectData)
+
   return (
     <div className="hero-main-parent-div"><Helmet>
 
@@ -332,12 +330,12 @@ console.log(ProjectNameObjectData)
                     }
                     className="search-button-nav"
                     onClick={() => {
-                      if (runSearchButton == false) {
+                      if (Object.keys(ProjectNameObjectData).length===0) {
                         return alert("Write correct ProjectName");
                       }
                       if (
-                        runSearchButton == true &&
-                        ProjectNameObjectData.projectName.length > 0
+                        
+                        ProjectNameObjectData?.projectName?.length > 0
                       ) {
                         // setRedirectPath("/");
                         // dispatch(
@@ -453,10 +451,12 @@ console.log(ProjectNameObjectData)
                   
                     className="search-button"
                     onClick={() => {
-
+                      if (Object.keys(ProjectNameObjectData).length===0) {
+                        return alert("Please select an option from the dropdown suggestions.");
+                      }
                       if (
                         
-                        ProjectNameObjectData.projectName?.length > 0
+                        ProjectNameObjectData?.projectName?.length > 0
                       ) {
                         // setRedirectPath("/");
                         // dispatch(
@@ -493,7 +493,10 @@ console.log(ProjectNameObjectData)
                    
                     className="search-button-mob"
                     onClick={() => {
-                
+                    
+                      if (Object.keys(ProjectNameObjectData).length===0) {
+                        return alert("Please select an option from the dropdown suggestions.");
+                      }
                       if (
                       
                         ProjectNameObjectData?.projectName?.length > 0
