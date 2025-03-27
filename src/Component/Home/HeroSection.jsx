@@ -493,10 +493,10 @@ console.log(ProjectNameObjectData)
                    
                     className="search-button-mob"
                     onClick={() => {
-                  
+                
                       if (
                       
-                        ProjectNameObjectData.projectName?.length > 0
+                        ProjectNameObjectData?.projectName?.length > 0
                       ) {
                         // setRedirectPath("/");
                         // dispatch(
