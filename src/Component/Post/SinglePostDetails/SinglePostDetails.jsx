@@ -1418,6 +1418,7 @@ export default function SinglePostDetails() {
                           Icon="/img/total-floor.png"
                           Data={"Construction Allowed"}
                         />
+                     
                       </>
                     )}
                   </div>
