@@ -312,36 +312,41 @@ const AllPostSearchFilter = () => {
                   <div className="filter-group">
                     <div className="allpost-clear-filter-title-2">
                       <h2>Filter Your Search</h2>
-                      <div className='allpost-clear-filter' onClick={() => {
-                        dispatch(
-                          GetAllPostAction({
-                            ProjectName: searchParams.get("ProjectName"),
-                            PropertyAdType: searchParams.get("PropertyAddType"),
-                            BHK: "",
-                            ApartmentType: "",
-                            PropertyStatus: undefined,
-                            Furnishing: "",
-                          })
-                        );
-                        setFilter({});
+                      <div className='allpost-clear-filter'    onClick={() => {
+                dispatch(
+                  GetAllPostAction({
+                    ProjectName: searchParams.get("ProjectName"),
+                    PropertyAdType: searchParams.get("PropertyAddType"),
+                    City: searchParams.get("city")?.replaceAll("-"," ") ,
+                    Sector: searchParams.get("sector"),
+                    BHK: "",
+                    ApartmentType: "",
+                    PropertyStatus: undefined,
+                    Furnishing: "",
+                  })
+                );
+                setFilter({});
                       }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
                     </div>
 
                     <div className="button-section">
-                      {PropertyAdTypeArray.map((text) => (
-                        <button
-                          key={text}
-                          onClick={() => {
-                            setSearchParams({
-                              ProjectName: searchParams.get("ProjectName"),
-                              PropertyAddType: text,
-                            });
-                            setRemoveFilterField(true);
-                          }}
-                          className={`bhk-option ${searchParams.get("PropertyAddType") === text ? "selected" : ""}`}
-                        >
-                          {text}
-                        </button>
+                    {PropertyAdTypeArray.map((text) => (
+                  <button
+                    key={text}
+                    onClick={() => {
+                    navigate(`/home/card?ProjectName=${searchParams.get("ProjectName") && searchParams.get("ProjectName")}&sector=${searchParams.get("sector")}&city=${searchParams.get("city")}&PropertyAddType=${text}`)
+                      // setSearchParams({
+                      //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
+                      //   city:searchParams.get("city"),
+                      //   sector:searchParams.get("sector"),
+                      //   PropertyAddType: text,
+                      // });
+                      setRemoveFilterField(true);
+                    }}
+                    className={`bhk-option ${searchParams.get("PropertyAddType") === text ? "selected" : ""}`}
+                  >
+                    {text}
+                  </button>
                       ))}
                     </div>
                   </div>

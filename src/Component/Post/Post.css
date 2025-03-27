@@ -459,6 +459,12 @@ transition: .5s;
     overflow: hidden;
     position: relative;
   }
+
+  .dropdown-section-hero{
+    font-size: 10px;
+   
+  }
+
 }
 
 
