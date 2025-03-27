@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./AllUserResponseAction.css"
 import { getSingleUserResponseAction } from "../../Action/userAction";
-import { FormatDate ,FormatDateAndTime } from "../../utils/CommonFunction";
+import { FormatDate ,FormatDateAndTime ,formatPrice } from "../../utils/CommonFunction";
  
 export default function SingleUserRespponseAction() {
     const dispatch = useDispatch()
@@ -50,7 +50,7 @@ export default function SingleUserRespponseAction() {
 
 
                     <div className="col-2 text-center py-3"><small className={activeTable === 4 ? ' border-bottom user-select-none  all-response-active ' : ' all-response-inactive activebtn border-bottom user-select-none'} onClick={() => setActiveTable(4)}>Notify ({SingleUserResponseAction_Store?.notifyData?.length})</small></div>
-
+ 
 
                     <div className="col-2 text-center py-3"><small className={activeTable === 5 ? ' border-bottom user-select-none all-response-active  ' : ' all-response-inactive activebtn border-bottom user-select-none'} onClick={() => setActiveTable(5)}>Requirement({SingleUserResponseAction_Store?.requireData?.length})</small></div>
                 </div>
@@ -109,6 +109,7 @@ export default function SingleUserRespponseAction() {
                         </thead>
                         <tbody>
                             {SingleUserResponseAction_Store?.offers?.map((item) => {
+                             console.log(item)
                                 return (<tr>
 
 
@@ -117,7 +118,9 @@ export default function SingleUserRespponseAction() {
                                     }}
                                     ><small className="fw-light">{item?.PostData?.PostId}</small></td>
 
-                                    {item?.BidPrice?.toString().length == 8 ? <td> <small className="fw-light">{item?.BidPrice / 10000000} Cr</small></td> : item?.BidPrice?.toString().length == 7 ? <td> <small className="fw-light">{item?.BidPrice / 1000000} Lakh</small></td> : item?.BidPrice?.toString().length == 6 ? <td><small className="fw-light">{item?.BidPrice / 100000} lakh</small></td> : null}
+ <td>  { formatPrice( item?.BidPrice)}</td>
+
+                                    {/* {item?.BidPrice?.toString().length == 8 ? <td> <small className="fw-light">{item?.BidPrice / 10000000} Cr</small></td> : item?.BidPrice?.toString().length == 7 ? <td> <small className="fw-light">{item?.BidPrice / 1000000} Lakh</small></td> : item?.BidPrice?.toString().length == 6 ? <td><small className="fw-light">{item?.BidPrice / 100000} lakh</small></td> : null} */}
 
 
                                     <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'} </small></td>

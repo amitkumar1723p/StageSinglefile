@@ -27,3 +27,18 @@ export function FormatDateAndTime(inputDate) {
   return `${day}-${month}-${year}, (${hours}:${minutes})`;
 }
 
+
+ export const formatPrice = (price) => {
+  if (price >= 10000000) {
+    const value = Math.floor(price / 100000) / 100;
+    return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} Cr`;
+  } else if (price >= 100000) {
+    const value = Math.floor(price / 1000) / 100;
+    return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} L`;
+  } else if (price >= 1000) {
+    const value = Math.floor(price / 10) / 100;
+    return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} K`;
+  } else {
+    return `₹ ${price.toFixed(2)}`;
+  }
+};
