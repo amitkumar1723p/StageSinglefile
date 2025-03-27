@@ -46,11 +46,11 @@ const PostPropertyRequerment = ({ SetShow }) => {
     // Merge unit and PossessionStatus into the submission data
     let data = {
       ...PostPropertyRequirementData,
-      ProjectName:PostPropertyRequiremenLocalitytData?.projectName,
+      ProjectName:PostPropertyRequiremenLocalitytData?.ProjectName,
       City:PostPropertyRequiremenLocalitytData?.city
     }
 
-    console.log(PostPropertyRequiremenLocalitytData)
+    // console.log(PostPropertyRequiremenLocalitytData)
 
     if (data.PropertyType !== "Plot" && (!data.PropertyType || !data.ProjectName || !data.BHKType || !data.FloorPreference || !data.Budget)) {
       alert("please fill all data")
