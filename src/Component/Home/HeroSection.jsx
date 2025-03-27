@@ -451,7 +451,7 @@ const HeroSection = () => {
                   
                     className="search-button"
                     onClick={() => {
-                      if (Object.keys(ProjectNameObjectData).length===0) {
+                      if (Object.keys(ProjectNameObjectData).length<=1 ) {
                         return alert("Please select an option from the dropdown suggestions.");
                       }
                       if (
@@ -494,7 +494,7 @@ const HeroSection = () => {
                     className="search-button-mob"
                     onClick={() => {
                     
-                      if (Object.keys(ProjectNameObjectData).length===0) {
+                      if (Object.keys(ProjectNameObjectData).length<=1) {
                         return alert("Please select an option from the dropdown suggestions.");
                       }
                       if (
