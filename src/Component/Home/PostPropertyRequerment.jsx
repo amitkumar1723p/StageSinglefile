@@ -46,7 +46,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
     // Merge unit and PossessionStatus into the submission data
     let data = {
       ...PostPropertyRequirementData,
-      ProjectName:PostPropertyRequiremenLocalitytData?.projectName,
+      ProjectName:PostPropertyRequiremenLocalitytData?.ProjectName,
       City:PostPropertyRequiremenLocalitytData?.city
     }
 
@@ -241,8 +241,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
 
                 <div className="form-budget-option">
                   <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
-                    <option value="Sqft">Sqft</option>
-                    <option value="Sqrd">Sq.yrd</option>
+                    <option value="Sq.Ft">Sq.Ft</option>
+                    <option value="Sq.Yard">Sq.yard</option>
                   </select>
                 </div>
               </div>
