@@ -97,7 +97,7 @@ export default function LocationDetails({
                 name="street"
                 placeholder="e.g. Sector 65"
                 required
-                value={LocationDetailsData.Landmark?.trimStart() || ""}
+                value={LocationDetailsData?.sector?.trimStart() || ""}
                 onChange={(e) => {
                   setLocationDetailsData({
                     ...LocationDetailsData,
@@ -117,7 +117,7 @@ export default function LocationDetails({
                 name="city"
                 placeholder="Enter City Name"
                 required
-                value={LocationDetailsData.City?.trimStart() || ""}
+                value={LocationDetailsData?.city?.trimStart() || ""}
                 onChange={(e) => {
                   setLocationDetailsData({
                     ...LocationDetailsData,
@@ -138,7 +138,7 @@ export default function LocationDetails({
                 required
                 // readOnly={!LocationDetailsData.Locality?false:true}
                 // defaultValue={LocationDetailsData.Locality}
-                value={LocationDetailsData.Locality?.trimStart() || ""}
+                value={LocationDetailsData?.locality?.trimStart() || ""}
                 onChange={(e) => {
                   setLocationDetailsData({
                     ...LocationDetailsData,

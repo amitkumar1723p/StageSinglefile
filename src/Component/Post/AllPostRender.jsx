@@ -123,7 +123,7 @@ const AllPostRender = () => {
                 })
               }
             >
-              Clear Filter <img src="./img/clear-filter.svg" alt="" />
+              Clear Filter <img src="/img/clear-filter.svg" alt="" />
             </div>
           </div>
 
