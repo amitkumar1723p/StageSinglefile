@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./TimePicker.css";
-const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
+
+const TimePicker = ({ onChange, selectedDate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState(9);
   const [selectedMinute, setSelectedMinute] = useState(0);
   const [period, setPeriod] = useState("AM");
+  const [error, setError] = useState("");
+
   const radius = 80;
   const center = { x: 100, y: 100 };
 
@@ -20,38 +23,45 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
     return period === "AM" ? hour12 : hour12 + 12;
   };
 
+  const getCurrentTime = () => {
+    const now = new Date();
+    return { hour: now.getHours(), minute: now.getMinutes() };
+  };
+
+  const isToday = (date) => {
+    const today = new Date();
+    return date?.toDateString() === today.toDateString();
+  };
+
   const isTimeAllowed = (hour12, periodToCheck) => {
     const hour24 = to24HourFormat(hour12, periodToCheck);
+    const now = getCurrentTime();
+
+    if (isToday(selectedDate)) {
+      return hour24 >= now.hour && hour24 <= 19;
+    }
     return hour24 >= 9 && hour24 <= 19;
   };
 
   useEffect(() => {
-    if (initialTime) {
-      const [time, meridiem] = initialTime.split(" ");
-      const [hour, minute] = time.split(":").map(Number);
-      if (isTimeAllowed(hour, meridiem)) {
-        setSelectedHour(hour);
-        setSelectedMinute(minute);
-        setPeriod(meridiem);
+    if (selectedDate) {
+      const now = getCurrentTime();
+
+      if (isToday(selectedDate) && to24HourFormat(selectedHour, period) < now.hour) {
+        setError("Selected time is invalid for today's date. Please choose a valid time.");
+        setSelectedHour(to12HourFormat(now.hour).hour);
+        setPeriod(to12HourFormat(now.hour).period);
+        setSelectedMinute(now.minute);
       } else {
-        setSelectedHour(9);
-        setSelectedMinute(0);
-        setPeriod("AM");
+        setError("");
       }
     }
-  }, [initialTime]);
+  }, [selectedDate]);
 
   const handleHourClick = (hour) => {
-    const validInAM = isTimeAllowed(hour, "AM");
-    const validInPM = isTimeAllowed(hour, "PM");
-
-    if (validInAM || validInPM) {
+    if (isTimeAllowed(hour, "AM") || isTimeAllowed(hour, "PM")) {
       setSelectedHour(hour);
-      if (!validInAM && validInPM) {
-        setPeriod("PM");
-      } else if (validInAM && !validInPM) {
-        setPeriod("AM");
-      }
+      setError("");
     }
   };
 
@@ -60,20 +70,25 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
   };
 
   const handleTimeSelection = () => {
-    // Convert to 24-hour format for the onChange event
     const hour24 = to24HourFormat(selectedHour, period);
+    const now = getCurrentTime();
+
+    if (isToday(selectedDate) && hour24 < now.hour) {
+      setError("Cannot select past time for today.");
+      return;
+    }
+
     const timeString24 = `${hour24.toString().padStart(2, "0")}:${selectedMinute
       .toString()
       .padStart(2, "0")}`;
     onChange?.(timeString24);
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 0);
+    setIsOpen(false);
   };
 
   const togglePeriod = (newPeriod) => {
     if (isTimeAllowed(selectedHour, newPeriod)) {
       setPeriod(newPeriod);
+      setError("");
     }
   };
 
@@ -90,9 +105,7 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
         <g
           key={hour}
           onClick={() => isAllowed && handleHourClick(hour)}
-          className={`time-picker-number ${
-            !isAllowed ? "time-picker-number-disabled" : ""
-          }`}
+          className={`time-picker-number ${!isAllowed ? "time-picker-number-disabled" : ""}`}
         >
           <circle
             cx={x}
@@ -128,104 +141,44 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
   const handX = center.x + radius * 0.8 * Math.cos(selectedAngle);
   const handY = center.y + radius * 0.8 * Math.sin(selectedAngle);
 
-  const isAMValid = isTimeAllowed(selectedHour, "AM");
-  const isPMValid = isTimeAllowed(selectedHour, "PM");
-
-  // Get 24-hour format for display
-  const hour24 = to24HourFormat(selectedHour, period);
-
   return (
     <div className="time-picker-container">
-      <div
-        onClick={() => setIsOpen(true)}
-        className="time-picker-button"
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
-      >
-        {/* Display both 24-hour and 12-hour formats */}
-        <span>{`${selectedHour}:${selectedMinute
-          .toString()
-          .padStart(2, "0")} ${period}`}</span>
-        <span className="timepicker-format-dispaly">{`(${hour24
-          .toString()
-          .padStart(2, "0")}:${selectedMinute
-          .toString()
-          .padStart(2, "0")})`}</span>
+      <div onClick={() => setIsOpen(true)} className="time-picker-button">
+        <span>{`${selectedHour}:${selectedMinute.toString().padStart(2, "0")} ${period}`}</span>
       </div>
+      {error && <div className="time-picker-error">{error}</div>}
       {isOpen && (
         <div className="time-picker-overlay">
           <div className="time-picker-modal">
             <div className="time-picker-header">
-              <span className="time-picker-time">
-                {`${selectedHour}:${selectedMinute
-                  .toString()
-                  .padStart(2, "0")}`}
-              </span>
+              <span className="time-picker-time">{`${selectedHour}:${selectedMinute
+                .toString()
+                .padStart(2, "0")}`}</span>
               <div className="time-picker-period-container">
                 <div
-                  onClick={() => isAMValid && togglePeriod("AM")}
-                  className={`time-picker-period-btn ${
-                    period === "AM" ? "time-picker-period-selected" : ""
-                  } ${!isAMValid ? "time-picker-period-disabled" : ""}`}
-                  role="button"
-                  tabIndex={isAMValid ? 0 : -1}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && isAMValid && togglePeriod("AM")
-                  }
+                  onClick={() => togglePeriod("AM")}
+                  className={`time-picker-period-btn ${period === "AM" ? "time-picker-period-selected" : ""}`}
                 >
                   AM
                 </div>
                 <div
-                  onClick={() => isPMValid && togglePeriod("PM")}
-                  className={`time-picker-period-btn ${
-                    period === "PM" ? "time-picker-period-selected" : ""
-                  } ${!isPMValid ? "time-picker-period-disabled" : ""}`}
-                  role="button"
-                  tabIndex={isPMValid ? 0 : -1}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" && isPMValid && togglePeriod("PM")
-                  }
+                  onClick={() => togglePeriod("PM")}
+                  className={`time-picker-period-btn ${period === "PM" ? "time-picker-period-selected" : ""}`}
                 >
                   PM
                 </div>
               </div>
             </div>
             <svg width="200" height="200" className="time-picker-clock">
-              <circle
-                cx={center.x}
-                cy={center.y}
-                r={radius}
-                className="time-picker-clock-face"
-              />
-              <line
-                x1={center.x}
-                y1={center.y}
-                x2={handX}
-                y2={handY}
-                className="time-picker-hand"
-              />
+              <circle cx={center.x} cy={center.y} r={radius} className="time-picker-clock-face" />
+              <line x1={center.x} y1={center.y} x2={handX} y2={handY} className="time-picker-hand" />
               {renderNumbers()}
             </svg>
             <div className="time-picker-actions">
-              <div
-                onClick={() => setTimeout(() => setIsOpen(false), 0)}
-                className="time-picker-cancel-btn"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && setTimeout(() => setIsOpen(false), 0)
-                }
-              >
+              <div onClick={() => setIsOpen(false)} className="time-picker-cancel-btn">
                 Cancel
               </div>
-              <div
-                onClick={handleTimeSelection}
-                className="time-picker-ok-btn"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && handleTimeSelection()}
-              >
+              <div onClick={handleTimeSelection} className="time-picker-ok-btn">
                 OK
               </div>
             </div>
