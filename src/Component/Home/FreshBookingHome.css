@@ -1,0 +1,218 @@
+
+.resh-booking-home-card-container {
+    overflow: scroll;
+}
+.fresh-booking-post-container{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1300px;
+}
+
+.fresh-booking-post-search-container{
+ border:2px solid rgba(29, 53, 87, 1);
+ border-radius: 6px;
+ height: 40px;
+ min-width: 20px;
+ width: 40%;
+}
+
+.fresh-booking-input-field{
+    margin-left: 10px;
+    border: none;
+}
+
+.fresh-booking-home-card-container{
+    gap: 12px;
+}
+.fresh-booking-search-button{
+    background-color:rgba(29, 53, 87, 1);
+    max-width: 100px;
+    border: none;
+
+    img{
+        height: 22px;
+        width: 22px;
+    }
+}
+.fresh-booking-home-card{
+    min-width: 255px;
+    max-width: 225px;
+    /* max-width: 380px; */
+    height: 360px;
+    margin: 0 auto;
+    border-radius: 8px;
+    transition-duration: .5s;
+    
+     
+}
+.fresh-booking-home-card:hover {
+
+    
+        .fresh-booking-home-card-content{
+            /* top:182px; */
+           transform:translateY(-113px);
+           /* animation:  move2bottom 0.8s ease-in-out forwards; */
+        }
+        .fresh-booking-home-card-price{
+            opacity: 1;
+        }
+        .fresh-booking-home-card-location{
+            opacity: 1;
+        }
+        .fresh-booking-home-card-projectname{
+            font-size: 18px;
+        
+        }
+        
+    }
+    
+    .fresh-booking-home-card-content.hovered {
+        animation: moveUp 0.8s ease-in-out forwards;
+    }
+    
+    /* Unhover Animation */
+    .fresh-booking-home-card-content.unhovered {
+        animation: moveDown 0.8s ease-in-out forwards;
+    }
+    
+
+/* ---------animations-------------- */
+@keyframes scrollText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes move2bottom{
+    0%{
+        transform:translateY(0px)
+    }
+    80%{
+       transform: translateY(-130px)
+    }
+    100%{
+       transform: translateY(-120px)
+    }
+} 
+
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-120px);
+    }
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(-120px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.fresh-booking-home-card-projectname{
+    transition-duration: .8s;
+    
+    font-size: 26px;
+
+}
+
+.fresh-booking-home-card-button{
+     background-color: transparent;
+     color: white;
+     transition-duration: 0.3s;
+    &:hover{
+        background-color:  rgb(0, 10, 47);
+        color: rgba(245, 130, 32, 1);
+    }
+}
+
+.fresh-booking-home-card-shadow{
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    background-color:rgba(0,0,0,0);
+    transition-duration: .8s;
+
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.436);
+    }
+}
+
+.fresh-booking-status{
+    color: rgb(255, 255, 255);
+}
+.statusGreeen{
+    color: green !important;
+}
+.fresh-booking-home-card-content{
+    top: 245px;
+    transition-duration: .6s ;
+    transition-timing-function: ease-in-out;
+    animation-play-state: paused;
+  
+}
+.fresh-booking-home-card-upper-content{
+    border-bottom: 3px solid rgba(245, 130, 32, 1);
+    padding-bottom: 5px;
+}
+.fresh-booking-home-card-price{
+    transition-duration: .8s;
+    opacity: 0;
+}
+.fresh-booking-home-card-location{
+    font-size: 14px;
+    transition-duration: .8s;
+    opacity: 0;
+}
+.fresh-booking-home-card-amanities{
+    font-size: 14px;
+}
+
+
+
+
+@media(max-width:1440px){
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+}
+@media(max-width:1024px){
+
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
+@media(max-width:768px){
+    .fresh-booking-post-container{
+        width: 90%;
+
+    }
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+       }
+}
+
+@media(max-width:575px){
+
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+}
+
+

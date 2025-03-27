@@ -4,7 +4,9 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
+
+} 
+from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 
@@ -71,7 +73,9 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
+import FreshBookingHome from "./FreshBookingHome.jsx";
 const HeroSection = () => {
+
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
   const [runSearchButton, setrunSearchButton] = useState(false);
@@ -79,6 +83,7 @@ const HeroSection = () => {
   //   setActiveTab(tab);
 
   // };
+ 
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ width: 0, left: 0, height: 0, top: 0 });
   const containerRef = useRef(null);
@@ -238,6 +243,9 @@ const HeroSection = () => {
   }, []);
 
 
+  const HandleFreshbookingNavigation=()=>{
+    navigate('/fresh-bookings')
+  }
 
   return (
     <div className="hero-main-parent-div"><Helmet>
@@ -375,7 +383,9 @@ const HeroSection = () => {
               <div className="search-options">
                 {SearchTab.map((e, i) => {
                   return (
+                    
                     <div
+                   
                       key={i}
                       className={`search-tab ${e == SearchPropertyAddType ? "active" : ""
                         }
@@ -393,6 +403,9 @@ const HeroSection = () => {
                     </div>
                   );
                 })}
+                <div> 
+                  <button onClick={HandleFreshbookingNavigation}>button</button>
+                </div>
               </div>
               <div className="search-box">
                 <img
@@ -659,6 +672,7 @@ const HeroSection = () => {
       )}
 
       <PropertySection />
+      <FreshBookingHome/>
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">

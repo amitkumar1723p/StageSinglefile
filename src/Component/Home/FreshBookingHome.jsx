@@ -1,0 +1,197 @@
+import React from 'react'
+import {useNavigate}  from 'react-router-dom';
+import './FreshBookingHome.css'
+export default function FreshBookingHome(){
+
+
+  const scrollFreshBookingLeft = ()=>{
+    document.querySelector('.fresh-booking-home-card-container').scrollBy({
+      left: -400,
+      behavior: 'smooth'
+    });
+  }
+  const scrollFreshBookingRight = ()=>{
+    document.querySelector('.fresh-booking-home-card-container').scrollBy({
+      left: 400,
+      behavior: 'smooth'
+    });
+  }
+
+const HandleFreshBookingNavigation = (post)=>{
+  navigate('/fresh-bookings', { state: { users: posts } })
+}
+
+  const posts = [
+    {
+        id:1,
+        imgUrl:'/img/buiding-6.jpg',
+        price:'269.435 Cr',
+        projectName:'DLF NOT MUCH PRIMUS ANYMORE',
+        location:'DLF Phase 1, Gurugram ',
+        amanities:'36574 BbHhKk Rrersidential Appurttment',
+        status:'New Launched'
+    },
+    {
+        id:2,
+        imgUrl:'/img/buiding-2.jpg',
+        price:'2.5 Cr',
+        projectName:'PRIMUS PRIMUS',
+        location:'DLF Phase 60, Gurugram UP INDIA EARTH',
+        amanities:'3BHK Residential Appartment',
+        status:'Ready To Move'
+    },
+    {
+        id:3,
+        imgUrl:'/img/building-3.jpg',
+        price:'2.5 Cr',
+        projectName:' PRIMUS THE DLF',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'Under Construction'
+    },
+    {
+        id:4,
+        imgUrl:'/img/About-img.webp',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:5,
+        imgUrl:'/img/buiding-4.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:6,
+        imgUrl:'/img/About-img.webp',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:7,
+        imgUrl:'/img/building-5.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:8,
+        imgUrl:'/img/buiding-6.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:9,
+        imgUrl:'/img/buiding-2.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:10,
+        imgUrl:'/img/building-5.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:11,
+        imgUrl:'/img/buiding-6.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    {
+        id:12,
+        imgUrl:'/img/buiding-2.jpg',
+        price:'2.5 Cr',
+        projectName:'DLF THE PRIMUS',
+        location:'DLF Phase 1, Gurugram',
+        amanities:'3BHK Residential Appartment',
+        status:'New Launched'
+    },
+    
+]
+      const navigate = useNavigate();
+  return (
+    <div className='m-auto' style={{width:'80%' }}>
+      <div className='d-md-flex justify-content-between'>
+        <div>
+          <h2 className='' style={{ fontWeight:'700', color:'rgba(51, 51, 51, 1)'}}>Discover Your Perfect Home!</h2>
+          <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
+        </div>
+        <div className=' ' style={{minWidth:'202px'}}>
+        <button className=" d-flex justify-content-center align-content-center gap-2   " onClick={()=>{navigate('/Fresh-bookings ')}} style={{padding:'10px 16px', borderRadius:'100px',backgroundColor:'white' , border:'1px solid #afb8c0 '}} >
+                  <span className="fs-6 fw-semibold lh-base " style={{color:'var(--main-light-clr)'}} >View All Properties <img src="/img/right-arrow.svg" alt="" /></span>
+                </button>
+        </div>
+      </div>
+      <div className='d-flex justify-content-between align-items-center position-relative'>
+        <div className='d-flex justify-content-center align-items-center position-absolute'style={{left:'-18px', zIndex:'3'}}>
+          <button onClick={scrollFreshBookingLeft} className='bg-transparent border-0 d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px', backdropFilter:'blur(10px)' }}>
+          <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+                  </svg>
+          </button>
+        </div>
+        <div className='fresh-booking-home-card-container d-flex overflow-scroll ' style={{width:'100%' , margin:'0 auto', scrollbarWidth:'none'}}>
+          {posts.map(posts => (
+             <div className="fresh-booking-home-card d-flex align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${posts.imgUrl})`, position:'relative'}} >
+        
+        <div className='fresh-booking-home-card-shadow '>
+        <div className="fresh-booking-home-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgb(29, 53, 87)', padding:'8px 12px 12px 12px', position:'absolute' }} >
+               <div  className="fresh-booking-home-card-upper-content d-flex flex-column  w-100 h-50  pb-2" >
+                 <div className="fresh-booking-home-card-price w-100 h-50  fw-bold overflow-hidden text-nowrap text-truncate " style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {posts.price}</div>
+                 <div  className="fresh-booking-home-card-projectname w-100 g-50  text-white overflow-hidden text-nowrap text-truncate "style={{ height:'fitContent'}}><span>{posts.projectName}</span></div>
+                 <div className="fresh-booking-home-card-location w-100  fw-normal overflow-hidden text-nowrap text-truncate" style={{color:'rgba(255, 255, 255, 1)'}} >{posts.location}</div>
+                 <div className="fresh-booking-home-card-amanities w-100 text-light  overflow-hidden text-nowrap text-truncate "  style={{ fontWeight: "600", fontSize:'14px' }}>{posts.amanities}</div>
+               </div>
+               <div  className="d-flex flex-column gap-2 w-100 h-50" >
+               <div  className={` fresh-booking-status w-100  fw-light fs-6  `} >Status: <span className={` ${posts.status =='New Launched'? 'statusGreen':''}`}>{posts.status}</span></div>
+                
+                 <div className='w-100' >
+                   <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
+                  >
+                     View More <img src="/img/solar_arrow-right-up-outline.svg" alt="logo" />
+                   </button>
+                 </div>
+               </div>
+             </div>
+        </div>
+          
+           
+         </div>
+     
+    ))}
+        </div>
+        <div className='d-flex justify-content-center align-items-center position-absolute' style={{right:'-18px', zIndex:'3'}}>
+          <button  onClick={scrollFreshBookingRight} className=' border-0 bg-transparent d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px' , backdropFilter:'blur(10px)'  }}>
+          <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}

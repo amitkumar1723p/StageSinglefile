@@ -72,6 +72,7 @@ import AllUserResponseAction from "./Component/Admin/AllUserResponseAction";
 import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseAction";
 // import MyVisits from "./Component/Post/CreatePost/m";
  import { FormatDate } from "./utils/CommonFunction";
+import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingPost";
 
 function App() {
 
@@ -888,6 +889,12 @@ useEffect(() => {
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
         />
+          <Route
+          exact
+          path="/fresh-bookings"
+          element={<FreshBookingPost />}
+        />
+
          <Route
           exact
           path="/blog-page"
