@@ -462,6 +462,7 @@ transition: .5s;
 
   .dropdown-section-hero{
     font-size: 10px;
+    align-self: end;
    
   }
 

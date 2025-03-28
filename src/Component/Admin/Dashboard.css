@@ -11,6 +11,17 @@
   background-color: red;
 } */
 
+.agent-verifed-btn{
+  padding: 5px;
+  background-color: var(--main-light-clr);
+  border-radius:5px;
+  color: #fff;
+  border: none;
+  
+}
+
+
+
 .card {
   display: flex;
   flex-direction: column;

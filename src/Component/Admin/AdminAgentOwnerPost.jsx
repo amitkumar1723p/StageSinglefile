@@ -248,7 +248,16 @@ export default function AdminAgentOwnerPost() {
   }, [adminAlertData]);
 
   useEffect(() => {
-    dispatch(Admin_OwnerGetAllPostAction());
+    if (medata?.user?.Role === "Owner") { 
+
+      dispatch(Admin_OwnerGetAllPostAction());
+    }  
+     
+      if(["Admin" ,"Agent"].includes(medata?.user?.Role)) {
+    
+        dispatch(Admin_AgentGetAllPostAction()) 
+      }
+    
   }, []);
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent  setData

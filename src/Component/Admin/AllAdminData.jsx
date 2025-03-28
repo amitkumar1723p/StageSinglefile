@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { GetAllAdminAction, LogoutAction } from "../../Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
-
+import "./Dashboard.css"
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { VerifyAdminAction } from "../../Action/userAction";
@@ -86,6 +86,8 @@ export default function AllAdminData() {
               return (
                 <div key={index} className="admin-data-card">
                   <p>Name - {admin.Name}</p>
+                  <p>Phone - {admin.ContactNumber}</p>
+
                   <p>Role - {admin.Role}</p>
                   {admin.Role=="Admin" && <>
                   <p> Status - {admin.AdminVerify==true && "Verify"}  {admin.AdminVerify==false && "UnVerify"}</p>
@@ -93,6 +95,7 @@ export default function AllAdminData() {
 
                   {admin.AdminVerify && (
                     <button
+                    className="agent-verifed-btn"
                       onClick={() => {
                         let userdata = { AdminVerify: false };
                         let UserId = admin._id;
@@ -108,7 +111,9 @@ export default function AllAdminData() {
                     </button>
                   )}
                   {!admin.AdminVerify && (
-                    <button
+                    <button 
+                    className="agent-verifed-btn"
+
                       onClick={() => {
                         let userdata = { AdminVerify: true };
                         let UserId = admin._id;
@@ -129,6 +134,9 @@ export default function AllAdminData() {
                     <p> Status - {admin.AgentVerify==true && "Verify"}  {admin.AgentVerify==false && "UnVerify"}</p>
                     {admin.AgentVerify && (
                     <button
+
+                    className="agent-verifed-btn"
+
                       onClick={() => {
                         let userdata = { AgentVerify: false };
                         let UserId = admin._id;
@@ -145,6 +153,9 @@ export default function AllAdminData() {
                   )}
                   {!admin.AgentVerify && (
                     <button
+
+                    className="agent-verifed-btn"
+
                       onClick={() => {
                         let userdata = { AgentVerify: true };
                         let UserId = admin._id;
