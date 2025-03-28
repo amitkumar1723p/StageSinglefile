@@ -1,7 +1,5 @@
 
-.resh-booking-home-card-container {
-    overflow: scroll;
-}
+
 .fresh-booking-post-container{
     width: 80%;
     margin: 0 auto;
@@ -9,6 +7,7 @@
 }
 
 .fresh-booking-post-search-container{
+
  border:2px solid rgba(29, 53, 87, 1);
  border-radius: 6px;
  height: 40px;
@@ -22,6 +21,7 @@
 }
 
 .fresh-booking-home-card-container{
+    /* transform: rotate(-1deg); */
     gap: 12px;
 }
 .fresh-booking-search-button{
@@ -35,6 +35,7 @@
     }
 }
 .fresh-booking-home-card{
+    /* animation: infiniteScroll 40s linear infinite; */
     min-width: 255px;
     max-width: 225px;
     /* max-width: 380px; */
@@ -50,10 +51,12 @@
     
         .fresh-booking-home-card-content{
             /* top:182px; */
-           transform:translateY(-113px);
+           transform:translateY(-146px);
+           background-color: rgb(29, 53, 87);
            /* animation:  move2bottom 0.8s ease-in-out forwards; */
         }
         .fresh-booking-home-card-price{
+            line-height: 25px;
             opacity: 1;
         }
         .fresh-booking-home-card-location{
@@ -61,20 +64,14 @@
         }
         .fresh-booking-home-card-projectname{
             font-size: 18px;
+            line-height: 32px;
+            color: white;
         
         }
         
+   
+        
     }
-    
-    .fresh-booking-home-card-content.hovered {
-        animation: moveUp 0.8s ease-in-out forwards;
-    }
-    
-    /* Unhover Animation */
-    .fresh-booking-home-card-content.unhovered {
-        animation: moveDown 0.8s ease-in-out forwards;
-    }
-    
 
 /* ---------animations-------------- */
 @keyframes scrollText {
@@ -85,6 +82,18 @@
         transform: translateX(-100%);
     }
 }
+
+@keyframes infiniteScroll {
+    0% {
+      transform: translateX(0px);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+  }
 
 @keyframes move2bottom{
     0%{
@@ -119,8 +128,10 @@
 
 .fresh-booking-home-card-projectname{
     transition-duration: .8s;
-    
-    font-size: 26px;
+    color:white;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 20px;
 
 }
 
@@ -153,10 +164,11 @@
     color: green !important;
 }
 .fresh-booking-home-card-content{
-    top: 245px;
+    top: 300px;
     transition-duration: .6s ;
+    border-radius: 8px;
     transition-timing-function: ease-in-out;
-    animation-play-state: paused;
+    background-color: rgba(42, 42, 42, 0.836);
   
 }
 .fresh-booking-home-card-upper-content{
@@ -164,6 +176,7 @@
     padding-bottom: 5px;
 }
 .fresh-booking-home-card-price{
+    line-height: 14px;
     transition-duration: .8s;
     opacity: 0;
 }
