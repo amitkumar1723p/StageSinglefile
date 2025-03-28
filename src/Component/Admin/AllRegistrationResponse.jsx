@@ -201,9 +201,9 @@ export default function AllRegistrationResponse({ }) {
           </div>
         </div>
 
-        <div className="border-top border-end border-start">
+        <div className=" border-top border-end border-start "  style={{ maxHeight: "600px", overflow: 'scroll' }}>
           <table className="table table-hover">
-            <thead className="table-info ">
+            <thead className="table-info sticky-top z-0">
               <tr className="">
 
                 <th scope="col" className="text-primary col-2 border-end">

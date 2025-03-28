@@ -71,13 +71,16 @@ import Search from "./Component/Home/Search";
 import AllUserResponseAction from "./Component/Admin/AllUserResponseAction";
 import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseAction";
 // import MyVisits from "./Component/Post/CreatePost/m";
- import { FormatDate } from "./utils/CommonFunction";
+import { FormatDate } from "./utils/CommonFunction";
+import { Component } from "lucide-react";
+// import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
+import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
 
 function App() {
 
   //  console.log(FormatDate("2025-02-20T06:48:35.238+00:00"))
-    
-   
+
+
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
   const dispatch = useDispatch();
@@ -135,7 +138,7 @@ function App() {
     return state.SimilarProperty;
   });
   // serach property 
-  const { data:serachResponse } = useSelector((state) => {
+  const { data: serachResponse } = useSelector((state) => {
     return state.serachResponse;
   });
   // paid property
@@ -143,7 +146,7 @@ function App() {
     return state.paidPropertyData;
   });
   // paid user transaction detail 
-  const { data:getTransactionDetail} = useSelector((state) => {
+  const { data: getTransactionDetail } = useSelector((state) => {
     return state.getTransactionDetail;
   });
 
@@ -174,27 +177,27 @@ function App() {
     return state.deletePosts;
   });
 
-//  excel file  
+  //  excel file  
 
-const { data: OwnerAllExcelFilesData } = useSelector((state) => {
-  return state.OwnerAllExcelFiles;
-});
-const { data: AgentAllExcelFilesData } = useSelector((state) => {
-  return state.AgentAllExcelFiles;
-});
-const { data: AdminAllExcelFilesData } = useSelector((state) => {
-  return state.AdminAllExcelFiles;
-});
- 
-// All user response action
-const { data: AllUserResponseAction_Store } = useSelector((state) => {
-  return state.AllUserResponseAction_Store;
-});
-// single user response action
-const { data: SingleUserResponseAction_Store } = useSelector((state) => {
-  return state.SingleUserResponseAction_Store;
-});
-    
+  const { data: OwnerAllExcelFilesData } = useSelector((state) => {
+    return state.OwnerAllExcelFiles;
+  });
+  const { data: AgentAllExcelFilesData } = useSelector((state) => {
+    return state.AgentAllExcelFiles;
+  });
+  const { data: AdminAllExcelFilesData } = useSelector((state) => {
+    return state.AdminAllExcelFiles;
+  });
+
+  // All user response action
+  const { data: AllUserResponseAction_Store } = useSelector((state) => {
+    return state.AllUserResponseAction_Store;
+  });
+  // single user response action
+  const { data: SingleUserResponseAction_Store } = useSelector((state) => {
+    return state.SingleUserResponseAction_Store;
+  });
+
   const location = useLocation();
 
   useEffect(() => {
@@ -219,15 +222,16 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
     // eslint-disable-next-line
   }, [location]);
 
- 
+
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
- 
-      if(data?.success &&LodingType=="ProfileUpdateRequest"){
-        
-        dispatch(GetMeDetailsAction()); }
-      
+
+      if (data?.success && LodingType == "ProfileUpdateRequest") {
+
+        dispatch(GetMeDetailsAction());
+      }
+
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
         sessionStorage.removeItem("next");
         sessionStorage.removeItem("BasicDetailsData");
@@ -260,7 +264,7 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
 
         dispatch({ type: "UserClear" });
       }
-   
+
       if (data.success === false) {
         if (data.fielderrors) {
           setalertMessage(
@@ -275,9 +279,10 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
         setalertShow(true);
         dispatch({ type: "UserClear" });
       }
- 
-    // eslint-disable-next-line
-}}, [data]);
+
+      // eslint-disable-next-line
+    }
+  }, [data]);
 
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
@@ -606,7 +611,7 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
     }
     // eslint-disable-next-line
   }, [SimilarPropertyData]);
-// All user response action
+  // All user response action
   useEffect(() => {
     if (AllUserResponseAction_Store) {
       if (AllUserResponseAction_Store.success === false) {
@@ -623,41 +628,41 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
     // eslint-disable-next-line
   }, [AllUserResponseAction_Store]);
 
-// single user response action
-useEffect(() => {
-  if (SingleUserResponseAction_Store) {
-    if (SingleUserResponseAction_Store.success === false) {
-      if (SingleUserResponseAction_Store.IsAuthenticated === false) {
-        navigate("/");
-      }
-      setalertMessage(<p>{SingleUserResponseAction_Store.message}</p>);
-      setalertType("error");
-      setalertShow(true);
-
-      dispatch({ type: "SimilarPropertyClear" });
-    }
-  }
-  // eslint-disable-next-line
-}, [SingleUserResponseAction_Store]);
-
-    // search property
-    useEffect(() => {
-      if (serachResponse) {
-        if (serachResponse.success === false) {
-          if (serachResponse.IsAuthenticated === false) {
-            navigate("/");
-          }
-          setalertMessage(<p>{serachResponse.message}</p>);
-          setalertType("error");
-          setalertShow(true);
-  
-          dispatch({ type: "SimilarPropertyClear" });
+  // single user response action
+  useEffect(() => {
+    if (SingleUserResponseAction_Store) {
+      if (SingleUserResponseAction_Store.success === false) {
+        if (SingleUserResponseAction_Store.IsAuthenticated === false) {
+          navigate("/");
         }
+        setalertMessage(<p>{SingleUserResponseAction_Store.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "SimilarPropertyClear" });
       }
-      // eslint-disable-next-line
-    }, [serachResponse]);
-   //  paid property 
-   useEffect(() => {
+    }
+    // eslint-disable-next-line
+  }, [SingleUserResponseAction_Store]);
+
+  // search property
+  useEffect(() => {
+    if (serachResponse) {
+      if (serachResponse.success === false) {
+        if (serachResponse.IsAuthenticated === false) {
+          navigate("/");
+        }
+        setalertMessage(<p>{serachResponse.message}</p>);
+        setalertType("error");
+        setalertShow(true);
+
+        dispatch({ type: "SimilarPropertyClear" });
+      }
+    }
+    // eslint-disable-next-line
+  }, [serachResponse]);
+  //  paid property 
+  useEffect(() => {
     if (paidPropertyData) {
       if (paidPropertyData.success === false) {
         if (paidPropertyData.IsAuthenticated === false) {
@@ -672,7 +677,7 @@ useEffect(() => {
     }
     // eslint-disable-next-line
   }, [paidPropertyData]);
-// get transaction paid detail 
+  // get transaction paid detail 
   useEffect(() => {
     if (getTransactionDetail) {
       if (getTransactionDetail.success === false) {
@@ -769,7 +774,7 @@ useEffect(() => {
     }
     // eslint-disable-next-line
   }, [OwnerAllExcelFilesData]);
-// excel file (admin)
+  // excel file (admin)
   useEffect(() => {
     if (AdminAllExcelFilesData) {
       if (AdminAllExcelFilesData.success === false) {
@@ -791,7 +796,7 @@ useEffect(() => {
     // eslint-disable-next-line
   }, [AdminAllExcelFilesData]);
 
-// excel file (ajent)
+  // excel file (ajent)
 
   useEffect(() => {
     if (AgentAllExcelFilesData) {
@@ -857,7 +862,7 @@ useEffect(() => {
         />
 
         {/* test */}
-        <Route exact path="/test" element={<Search/>}/>
+        <Route exact path="/test" element={<Search />} />
         {/* test */}
         <Route exact path="/" element={<HeroSection />} />
         <Route exact path="/home/card" element={<PropertyFiltersCard />} />
@@ -866,17 +871,17 @@ useEffect(() => {
           path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
         />
-         <Route
+        <Route
           exact
           path="/Our-Service"
           element={<OurService />}
         />
-         <Route
+        <Route
           exact
           path="/Career"
           element={<Career />}
         />
-        
+
         <Route
           exact
           path="/Report"
@@ -888,7 +893,7 @@ useEffect(() => {
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
         />
-         <Route
+        <Route
           exact
           path="/blog-page"
           element={<BlogPage />}
@@ -899,6 +904,8 @@ useEffect(() => {
           element={<SingleBlog />}
         />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+
+
         {/* protect route for user */}
         <>
           <Route
@@ -922,15 +929,15 @@ useEffect(() => {
               path="my-post/all-response"
               element={<OwnerPostAllResponse />}
             />
-   <Route
+            <Route
               exact
               path="transactions"
-              element={<Transaction/>}
+              element={<Transaction />}
             />
 
-            
+
             <Route
-            
+
               exact
               path="favourite-post"
               element={<ShowUserFavouritePost />}
@@ -944,7 +951,10 @@ useEffect(() => {
           </Route>
         </>
         {/*admin routes*/}
-        {/* This Routes available For Admin Owner Agent  */}
+
+
+        <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
+        {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
 
         <Route
           exact
@@ -953,6 +963,9 @@ useEffect(() => {
         >
           <Route exact path="dashboard" element={<Dashbord />} />
           {/* This routes Avaliable for Owner Only  */}
+ 
+ <Route exact path="fres-project-create" element={<AdminOwnerRoutes Component={FreshBookingForm}/>}/>
+          
           <Route
             exact
             path="data"
@@ -969,65 +982,36 @@ useEffect(() => {
             }
           />
 
-             <Route
-            
+          <Route
+
             path="all-excel-both"
             element={
-              <AdminAgentExcelData  />
+              <AdminAgentExcelData />
             }
           />
-             <Route
+          <Route
             exact
             path="excel/:id"
             element={
               <AdminOwnerRoutes Component={OwnerAgentExcel} />
             }
           />
-             <Route
+          <Route
             exact
             path="all-user-Response-action"
             element={
               <AdminOwnerRoutes Component={AllUserResponseAction} isOwner={true} />
             }
           />
-                  <Route
+          <Route
             exact
             path="single-user-Response-action/:id"
             element={
               <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
             }
           />
-          {/* <Route
-            exact
-            path="data/unverify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          {/* <Route
-            exact
-            path="data/total"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          {/* Agent Data  */}
-          {/* <Route
-            exact
-            path="agent/data/total"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
+       
 
-          {/* <Route
-            exact
-            path="agent/data/verify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          
           <Route
             exact
             path="notify"
@@ -1048,7 +1032,7 @@ useEffect(() => {
               />
             }
           />
-            <Route
+          <Route
             exact
             path="Transaction"
             element={
@@ -1115,7 +1099,9 @@ useEffect(() => {
             element={<CreatePostMain />}
           />
         </Route>
-        {/*All post route*/}
+        {/*All post route admin routes end here*/}
+
+
         <Route path={"/all-post"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

@@ -9,6 +9,24 @@
   margin: 10px 0px 10px 0px;
 }
 
+.hero-main-parent-div{
+  position: relative;
+}
+
+.requirement-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+   /* Adjust this value for spacing from the right */
+  transform: translateY(-50%);
+  z-index: 1000; /* Ensures it stays on top */
+}
+
+
+
+
+
+
 .hero-span-main-line{
 color: #f8ef3c;
 text-transform: uppercase;
@@ -438,15 +456,7 @@ font-weight: 600;
   transition: 1s;
 }
 
-.requirement-container {
-  width: 100%;
-  /* height: 309.584px; */
-  flex-shrink: 0;
-  /* aspect-ratio: 1440.00/345.58; */
-  position: relative;
-  /* height: 50vh; */
-  /* background: #f5f9ff; */
-}
+
 
 .requirement-main {
   display: flex;
@@ -475,9 +485,13 @@ font-weight: 600;
 }
 
 .requirement-button {
-  display: flex;
-  position: relative;
-  z-index: 0;
+  /* display: flex; */
+  position: fixed;
+  top: 50%;
+  right: -6.8%;
+  transform: rotate(-90deg);
+  z-index: 10;
+
 }
 
 .requirement-btn {
@@ -486,11 +500,38 @@ font-weight: 600;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 7px;
+  border-top-right-radius: 7px;
+
+  border-top-left-radius: 7px;
   border: 1px solid #f2811e;
   background: #f2811e;
   z-index: 10;
 }
+@keyframes waveMotion {
+  0%, 100% {
+    transform: rotate(-90deg) translateY(0) translateX(0);
+  }
+  25% {
+    transform: rotate(-90deg) translateY(5px) translateX(3px);
+  }
+  50% {
+    transform: rotate(-90deg) translateY(0) translateX(0);
+  }
+  75% {
+    transform: rotate(-90deg) translateY(0px) translateX(0px);
+  }
+}
+
+.requirement-button {
+  position: fixed;
+  top: 50%;
+  right: -5.5%;
+  transform: rotate(-90deg);
+  z-index: 10;
+  animation: waveMotion 2s ease-in-out infinite;
+}
+
+
 
 .requirement-span {
   color: #fff;
@@ -514,7 +555,8 @@ font-weight: 600;
 .property-heading {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: end;
+  gap: 5px;
 }
 
 .property-heading-btn {

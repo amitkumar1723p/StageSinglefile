@@ -73,7 +73,7 @@ export default function LocationDetails({
         {/* <div className="create-banner-box">
           <img src="/img/create-banner.svg" alt="create-banner" />
         </div> */}
-      <div className="container w-80%">
+      <div className="container-location w-80%">
         <h2 className="location-heading">Location Details</h2>
         <form id="locationForm" onSubmit={submitHandler} ref={ LocationDetailsSubmiRef}>
           <div className="location-box">

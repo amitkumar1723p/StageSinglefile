@@ -335,7 +335,7 @@ export const GetAllAdminAction = (Keyword) => {
         url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]
           }=${Keyword[Object.keys(Keyword)[0]]}`;
       } else {
-        url = `/admin-owner/admin-data`;
+        url = `${api_Base_Url}/admin-owner/admin-data`;
       }
       // if(ke)
 
@@ -1156,7 +1156,7 @@ export const deleteExcelFile = (excelId) => {
 // for
 // Get All user with property data if they posted 
 export const getAllUserResponseAction=(page,searchText)=>{
-  console.log(searchText)
+ 
   return async (dispatch) => {
     try {
       dispatch({
@@ -1194,9 +1194,7 @@ export const getSingleUserResponseAction=(id)=>{
         type: "SingleUserResponseActionRequest",
         payload: "SingleUserResponseActionRequest",
       });
-      console.log(
-        id
-      )
+      
       const url = `${api_Base_Url}/admin-owner/getSingleUser/${id}`;
 
       const config = {
@@ -1204,7 +1202,7 @@ export const getSingleUserResponseAction=(id)=>{
         withCredentials: true,
       };
       const { data } = await axios.get(url, config);
-      console.log(data)
+      
       dispatch({ type: "SingleUserResponseActionSuccess", payload: data });
     } catch (error) {
       if (error.response) {

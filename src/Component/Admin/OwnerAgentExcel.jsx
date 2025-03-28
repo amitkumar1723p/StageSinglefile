@@ -538,7 +538,7 @@ const OwnerAgentExcel = () => {
    
     // Find common AdminIds
     const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
-    console.log("thi sis matchinggg ", matchingAdmins)
+    
     setFilterAdmin(matchingAdmins)
   }, [allAdmins, AssinedAdmins])
 
@@ -587,7 +587,7 @@ const OwnerAgentExcel = () => {
         return;
       }
 
-      console.log("Updates to be sent:", updates);
+      
 
       // Send update request to backend
       await axios.put(
@@ -694,6 +694,7 @@ const OwnerAgentExcel = () => {
                     >
                       {editingHeader === index ? (
                         <input
+                        className={`file-handle-table-input`}
                           type="text"
                           value={col.name}
                           onChange={(e) => handleHeaderChange(index, e.target.value)}
@@ -728,7 +729,7 @@ const OwnerAgentExcel = () => {
                 </tr>
               </thead>
             }
-            <tbody>
+            <tbody className='tbody'>
               {data.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   <td className="file-handler-table-data">{rowIndex + 1}</td>

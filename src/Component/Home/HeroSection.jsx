@@ -56,6 +56,7 @@ import { motion } from "framer-motion";
 import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
+
 import { UserContext } from "../CreateContext/CreateContext";
 import RentAgreement from "./RentAgreement";
 // import TenantDetailsForm from "./TenantDetailsForm";
@@ -186,7 +187,7 @@ const HeroSection = () => {
     useSelector((state) => {
       return state.SingleProjectName;
     });
-    const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
+  const { data: propertyByAdress, loading } = useSelector((store) => store.postByAddress)
   const PropertyRequirementBtnRef = useRef([]);
   const SearchContainerRef = useRef(null);
 
@@ -223,7 +224,7 @@ const HeroSection = () => {
     }
   }, [medata]);
   useEffect(() => {
-    if(!propertyByAdress){
+    if (!propertyByAdress) {
 
       dispatch(getPostsByAddress())
     }
@@ -240,7 +241,7 @@ const HeroSection = () => {
 
 
   return (
-    <><Helmet>
+    <div className="hero-main-parent-div"><Helmet>
 
       {/* <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title> */}
       <title>Buy & Sell Resale Properties in Gurgaon</title>
@@ -270,7 +271,7 @@ const HeroSection = () => {
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
-              alerts</span>  to property owners.
+                alerts</span>  to property owners.
             </p>
           </div>
           {/* nav bar search button  */}
@@ -594,10 +595,21 @@ const HeroSection = () => {
         </div>
       </header>
 
-
+      <div
+        ref={PropertyRequirementBtnRef.current[0]}
+        onClick={() => {
+          if (medata && medata.IsAuthenticated == true) {
+            setshowPropertyRequirement(true);
+          } else {
+            setRedirectPath("/post-requirement");
+            navigate("/login");
+          }
+        }} className="requirement-button">
+        <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
+      </div>
 
       {/* normal waala  */}
-      <div className="requirement-container">
+      {/* <div className="requirement-container">
         <img src="/img/overlay2.svg" alt="" className="overlay-lines" />
         <div className="requirement-overlay">
         </div>
@@ -625,7 +637,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-      </div>
+      </div> */}
 
       {/* changes is complete in hero-section */}
 
@@ -755,6 +767,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
+        
         </>
       )}
       {/* Sale Component  */}
@@ -801,14 +814,14 @@ const HeroSection = () => {
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
-      {showPropertyRequirement && (
+      {/* {showPropertyRequirement && (
         <WindowComponent
           Component={PostPropertyRequerment}
           SetShow={setshowPropertyRequirement}
           BtnRef={PropertyRequirementBtnRef}
         />
-      )}
-    </>
+      )} */}
+    </div>
   );
 };
 

@@ -43,6 +43,7 @@
   /* Table */
   .notify-requirements-table-container {
     width: 100%;
+    max-height: 600px;
     overflow-x: auto;
   }
   
@@ -53,6 +54,10 @@
 
 
 
+  }
+  .notify-requirements-table{
+    position: sticky;
+    top: 0px;
   }
   .notify-requirements-container {
     padding: 20px;
@@ -126,6 +131,10 @@
     border-collapse: collapse;
   }
   
+  .notify-requirements-table-thead{
+    position: sticky;
+    top: -1px;
+  }
   .notify-table th, .notify-table td {
     padding: 8px;
     border: 1px solid #ddd;

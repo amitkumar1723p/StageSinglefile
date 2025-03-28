@@ -22,8 +22,7 @@ export default function SingleUserRespponseAction() {
         month: 'short',
         year: 'numeric',
     });
-    console.log(loading
-    )
+   
 
     return (
         <div className="border border-primary border-opacity-25 ">
