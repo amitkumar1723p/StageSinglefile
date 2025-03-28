@@ -1,0 +1,445 @@
+.single-fresh-curved-section {
+  width: 90%;
+  height: 85%;
+  /* background: linear-gradient(to right, rgb(167, 219, 255), rgb(167, 219, 255) ); */
+  background: #9cecfb; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #9cecfb, #65c7f7, #0052d4); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4);
+  border-top-left-radius: 180px;
+  border-bottom-left-radius: 180px;
+  position: absolute;
+  left: 300px;
+  /* top: 33px; */
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* .Single-fresh-navbar-container {
+  display: flex
+;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+.single-fresh-dlf-logo {
+  width: 160px;
+}
+
+.single-fresh-hero-content {
+  top: 200px;
+  left: 70px;
+}
+
+.single-fresh-hero-start-price {
+  background-color: white;
+  color: #F58220;
+  padding: 7px;
+  border-radius: 7px;
+}
+
+.Single-fresh-user-img {
+  background: url('/public/img/Single-fresh-user.svg') no-repeat left center;
+  background-size: 20px 20px;
+  padding-left: 30px;
+}
+.Single-fresh-email-img {
+  background: url('/public/img/Single-main-email.svg') no-repeat left center;
+  background-size: 20px 20px;
+  padding-left: 30px;
+}
+.Single-fresh-number-img {
+  background: url('/public/img/Single-fresh-call.svg') no-repeat left center;
+  background-size: 20px 20px;
+  padding-left: 30px;
+}
+
+.Single-fresh-form {
+  max-width: 300px;
+  width: 87%;
+  padding: 37px 17px;
+  right: 90px;
+  background-color: white;
+  top: 159px;
+}
+
+
+
+.Single-fresh-list-footer {
+  display: flex
+  ;
+      flex-direction: column;
+      gap: 15px;
+}
+
+.Single-fresh-about-project-p {
+  line-height: 2;
+  text-align: justify;
+}
+
+.Single-Fresh-table {
+  margin: 20px 0px;
+}
+
+.single-fresh-map-img {
+  /* width: 90% !important; */
+  margin: 0px auto;
+}
+
+.Single-fresh-Highlight-main {
+  display: flex;
+}
+.Single-fresh-about-project-main {
+  display: flex;
+}
+
+.Single-fresh-unit-main {
+  display: flex;
+  gap: 30px;
+}
+
+
+.single-fresh-hero-icon {
+  display: flex
+;
+    width: 100%;
+}
+
+.main-about-project-container {
+  /* background-image: url("/img/pattern-bg.png"); */
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+
+
+.Single-fresh-reserve-post-btn {
+  display: inline-flex;
+  padding: 3px 9px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-top-right-radius: 7px;
+
+  border-top-left-radius: 7px;
+  border: 1px solid #f2811e;
+  background: #f2811e;
+  z-index: 10;
+}
+@keyframes waveMotion {
+  0%, 100% {
+    transform: rotate(-90deg) translateY(0) translateX(0);
+  }
+  25% {
+    transform: rotate(-90deg) translateY(5px) translateX(3px);
+  }
+  50% {
+    transform: rotate(-90deg) translateY(0) translateX(0);
+  }
+  75% {
+    transform: rotate(-90deg) translateY(0px) translateX(0px);
+  }
+}
+
+.Single-fresh-reserve-post-button {
+  position: fixed;
+  top: 40%;
+  right: -20.5%;
+  transform: rotate(-90deg);
+  z-index: 10;
+  animation: waveMotion 2s ease-in-out infinite;
+}
+
+
+
+.Single-fresh-reserve-post-span {
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* @keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+} */
+
+/* .Single-fresh-flashing {
+  animation: flash 1s infinite;
+} */
+
+.single-fresh-hero-value {
+  font-size: 23px;
+}
+
+.Single-fresh-Size-Price {
+  font-size: 28px;
+}
+
+.Single-fresh-Size-Price-heading {
+  font-size: 32px;
+}
+
+.Single-fresh-gallery-p {
+  font-size: 28px;
+}
+
+.Single-fresh-gallery-h3 {
+  font-size: 32px;
+}
+
+.Single-fresh-facilities {
+  font-size: 28px;
+}
+
+.Single-fresh-amenities {
+  font-size: 32px;
+}
+
+.Single-fresh-floor-plan-h3 {
+  font-size: 28px;
+}
+
+.Single-fresh-floor-plan-h2 {
+  font-size: 32px;
+}
+
+.Single-fresh-location-map-h3 {
+  font-size: 28px;
+}
+
+.Single-fresh-location-map-h2 {
+  font-size: 32px;
+}
+
+.Single-fresh-location-map-li {
+  gap: 20px;
+}
+
+.Single-fresh-site-map-h3 {
+  font-size: 28px;
+}
+
+.Single-fresh-site-map-h2 {
+  font-size: 32px;
+}
+
+.single-fresh-builder-h3 {
+  margin: 20px 0px;
+  font-size: 28px;
+}
+.single-fresh-builder-h2 {
+  font-size: 32px;
+}
+
+.single-fresh-builder-p {
+  text-align: justify;
+  line-height: 2;
+}
+
+
+.Single-fresh-location-map-list {
+  font-size: 17px;
+}
+
+
+.Single-fresh-unit {
+  font-size: 24px;
+}
+
+.Single-fresh-about-project-h3 {
+  font-size: 22px;
+}
+.Single-fresh-about-project-h2 {
+  font-size: 32px;
+}
+
+.Single-fresh-highlights-h3 {
+  font-size: 22px;
+}
+.Single-fresh-highlights-h2 {
+  font-size: 32px;
+}
+
+
+
+.single-fresh-hero-label {
+  font-size: 16px;
+}
+
+.Single-fresh-form-input {
+  padding: 5px;
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.Single-fresh-form-input:focus {
+  border-color: #f58220; 
+  box-shadow: 0 0 5px rgba(245, 130, 32, 0.5);
+  outline: none; 
+}
+
+.single-fresh-form-content {
+  width: 92%;
+  margin: auto;
+}
+
+.Single-fresh-footer-container {
+  padding: 40px 30px;
+}
+
+
+@media (max-width: 768px) { 
+    .single-fresh-curved-section {
+       background: radial-gradient(circle at 70% 50%, rgb(167, 219, 255) 0%, rgb(167, 219, 255) 0%, transparent 0%);
+    }
+
+    .Single-fresh-reserve-post-button {
+      right: -9.5%;
+    }
+}
+
+@media (max-width: 480px) {
+  .Single-fresh-form {
+    width: 73%;
+    padding: 13px;
+    top: 25px;
+    right: 0px;
+  }
+
+  .single-fresh-dlf-logo {
+    width: 100px;
+  }
+
+  .single-fresh-hero-value {
+    font-size: 14px;
+  }
+
+  .Single-fresh-highlight-list {
+  font-size: 12px;
+  }
+
+  .Single-fresh-Size-Price {
+    font-size: 19px;
+  }
+
+  .Single-fresh-unit {
+    font-size: 19px;
+  }
+
+  .Single-fresh-about-project-h3 {
+    font-size: 18px;
+  }
+  .Single-fresh-about-project-h2 {
+    font-size: 25px;
+  }
+
+  .Single-fresh-highlights-h3 {
+    font-size: 18px;
+  }
+  .Single-fresh-highlights-h2 {
+    font-size: 25px;
+  }
+
+  .Single-fresh-gallery-p {
+    font-size: 19px;
+  }
+
+  .Single-fresh-gallery-h3 {
+    font-size: 22px;
+  }
+
+  .Single-fresh-facilities {
+    font-size: 19px;
+  }
+  
+  .Single-fresh-amenities {
+    font-size: 22px;
+  }
+
+  .Single-fresh-floor-plan-h3 {
+    font-size: 19px;
+  }
+
+  .Single-fresh-floor-plan-h2 {
+    font-size: 22px;
+  }
+
+  .Single-fresh-location-map-h3 {
+    font-size: 19px;
+  }
+  
+  .Single-fresh-location-map-h2 {
+    font-size: 22px;
+  }
+  
+  .Single-fresh-location-map-li {
+    gap: 13px;
+  }
+
+  .Single-fresh-location-map-list {
+    font-size: 13px;
+}
+
+.single-fresh-builder-p { 
+  font-size: 12px;
+}
+
+  .Single-fresh-site-map-h3 {
+    font-size: 19px;
+  }
+  
+  .Single-fresh-site-map-h2 {
+    font-size: 22px;
+  }
+
+  .single-fresh-builder-h3 {
+    font-size: 19px;
+  }
+  .single-fresh-builder-h2 {
+    font-size: 22px;
+  }
+  
+
+  .Single-fresh-Size-Price-heading {
+    font-size: 22px;
+  }
+
+  .Single-fresh-about-project-p {
+    font-size: 12px;
+  }
+
+  .single-fresh-hero-label {
+    font-size: 12px;
+  }
+
+  .Single-fresh-reserve-post-button {
+    right: -15.5%;
+  }
+  
+
+  .singel-fresh-about-project-img {
+    max-width: 10px 0px !important;
+  }
+
+  .single-fresh-hero-icon {
+    /* padding: 5px !important; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+}
+
+@media (max-width: 375px) { 
+  .Single-fresh-reserve-post-button{
+    right: -20.5%;
+  }
+}

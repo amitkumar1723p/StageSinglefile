@@ -11,7 +11,7 @@
   background-color: red;
 } */
 
-.card {
+.Admin-dashboard-row {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,7 +19,7 @@
   min-height: 100%;
 }
 
-.card h3{
+.Admin-dashboard-row h3{
   font-size: 16px;
 }
 
@@ -127,7 +127,7 @@
   margin-top: 20px;
 }
 
-.card:hover {
+.Admin-dashboard-row:hover {
   transition: 1s;
   transform: translateY(-5px);
 }
@@ -146,7 +146,7 @@
 }
 
 
-.main-content .cards .card {
+.main-content .cards .Admin-dashboard-row {
   width: 220px;
   height: 120px;
   background-color: white;
@@ -167,7 +167,7 @@
 }
 
 
-.main-content .cards .card h3 {
+.main-content .cards .Admin-dashboard-row h3 {
   color: #575859;
   font-family: "Inter", Sans-serif;
   font-size: 14px;

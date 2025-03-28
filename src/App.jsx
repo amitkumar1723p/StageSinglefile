@@ -64,6 +64,7 @@ import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
 import Career from "./Component/Home/Careers";
+import SingleFreshBooking from  "./Component/Home/FreshBooking/SingleFreshBooking";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
@@ -72,6 +73,7 @@ import AllUserResponseAction from "./Component/Admin/AllUserResponseAction";
 import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseAction";
 // import MyVisits from "./Component/Post/CreatePost/m";
  import { FormatDate } from "./utils/CommonFunction";
+import { Component, Home } from "lucide-react";
 
 function App() {
 
@@ -875,6 +877,11 @@ useEffect(() => {
           exact
           path="/Career"
           element={<Career />}
+        />
+         <Route
+          exact
+          path="/SingleFreshBooking"
+          element={<SingleFreshBooking />}
         />
         
         <Route

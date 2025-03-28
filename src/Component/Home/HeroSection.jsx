@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
-
+import { Headset, PhoneCall, MessageCircle, MousePointerClick } from 'lucide-react';
 
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
@@ -71,7 +71,10 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
+import PostDetails from "./PostDetails.jsx";
+// import SingleFreshBooking from "../FreshBooking/SingleFreshBooking.jsx";
 const HeroSection = () => {
+  const [hoveredItem, setHoveredItem] = useState(null);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
   const [runSearchButton, setrunSearchButton] = useState(false);
@@ -594,7 +597,7 @@ const HeroSection = () => {
         </div>
       </header>
 
-      <div
+      {/* <div
         ref={PropertyRequirementBtnRef.current[0]}
         onClick={() => {
           if (medata && medata.IsAuthenticated == true) {
@@ -605,7 +608,7 @@ const HeroSection = () => {
           }
         }} className="requirement-button">
         <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
-      </div>
+      </div> */}
 
       {/* normal waala  */}
       {/* <div className="requirement-container">
@@ -641,21 +644,75 @@ const HeroSection = () => {
       {/* changes is complete in hero-section */}
 
       {!isHidden && (
-        <div className="floating-buttons ">
-          {/* Call Button */}
-          <Link to="tel:+917837840785" className="call-button">
-            <img src="/img/call.png" alt="Call" />
-          </Link>
-          {/* WhatsApp Button */}
-          <Link
-            to="https://wa.me/7837840785"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatapps-section-floating"
-          >
-            <img src="/img/whatapp.png" alt="WhatsApp" />
-          </Link>
+      <div className="contact-sidebar">
+      {/* Customer Support */}
+      <div 
+        className="contact-item"
+        onMouseEnter={() => setHoveredItem(0)}
+        onMouseLeave={() => setHoveredItem(null)}
+      >
+        <div 
+          className={`contact-text ${hoveredItem === 0 ? 'visible' : ''}`}
+        >
+          Customer Support
         </div>
+
+        <div className={`contact-icon ${hoveredItem === 0 ? 'hovered' : ''}`}>
+          <Headset color="#2563eb" size={24} />
+        </div>
+      </div>
+
+      {/* Call Us */}
+      <div 
+        className="contact-item"
+        onMouseEnter={() => setHoveredItem(1)}
+        onMouseLeave={() => setHoveredItem(null)}
+      >
+        <div 
+          className={`contact-text ${hoveredItem === 1 ? 'visible' : ''}`}
+        >
+          Call Us
+        </div>
+
+        <div className={`contact-icon ${hoveredItem === 1 ? 'hovered' : ''}`}>
+          <PhoneCall color="#dc2626" size={24} />
+        </div>
+      </div>
+
+      {/* WhatsApp */}
+      <div 
+        className="contact-item"
+        onMouseEnter={() => setHoveredItem(2)}
+        onMouseLeave={() => setHoveredItem(null)}
+      >
+        <div 
+          className={`contact-text ${hoveredItem === 2 ? 'visible' : ''}`}
+        >
+          WhatsApp
+        </div>
+
+        <div className={`contact-icon ${hoveredItem === 2 ? 'hovered' : ''}`}>
+          <MessageCircle color="#16a34a" size={24} />
+        </div>
+      </div>
+
+      {/* Apply Online */}
+      <div 
+        className="contact-item"
+        onMouseEnter={() => setHoveredItem(3)}
+        onMouseLeave={() => setHoveredItem(null)}
+      >
+        <div 
+          className={`contact-text ${hoveredItem === 3 ? 'visible' : ''}`}
+        >
+          Apply Online
+        </div>
+
+        <div className={`contact-icon ${hoveredItem === 3 ? 'hovered' : ''}`}>
+          <MousePointerClick color="#ef4444" size={24} />
+        </div>
+      </div>
+    </div>
       )}
 
       <PropertySection />
@@ -791,6 +848,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FAQ />
           </div>
+         
         </>
       )}
 
