@@ -38,17 +38,21 @@
 
 
 .tenant-vs-landlord-button-container{
-    padding:6px 12px 6px 12px ;
-    border-radius: 100px;
-    background-color: #e9f5ff;
+    padding:10px ;
+    border-radius: 10px;
+    background-color: var(--main-lighter-clr);
 }
 
 .tenant-vs-landlord-button{
     padding: 5px 14px 5px 14px;
-    color: rgba(109, 119, 132, 1);
+    color: #333;
     border: none;
     background-color: transparent;
     font-size: 16px;
+    border: 1px solid var(--main-light-clr);
+    font-size: 14px;
+    margin: 5px;
+    border-radius: 5px;
 
 
 
@@ -56,8 +60,9 @@
 .tenant-vs-landlord-active{
     transition-duration: .3s;
     color: var(--main-light-clr);
-    background-color: #fff;
-    border-radius: 20px;
+    background-color:var(--main-light-clr);
+    border-radius: 5px;
+    color: #fff;
 }
 
 
