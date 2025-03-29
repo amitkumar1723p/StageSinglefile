@@ -51,55 +51,74 @@ const CreateProfile = ({
   return (
     <>
       <ScrollToTop />
-      <div className="main-sign-box">
-        <div className="signup-form-wrapper-unique">
-          <div className="signup-image-section-unique">
-            <img src="/img/login-form.png" alt="City Buildings" />
-          </div>
-          <div className="signup-form-content-unique">
-            <h2>Create Profile </h2>
+      <div className="login-main-parent">
+        <img src="/img/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
+
+        <div className="login-form-container">
+
+          <div className="create-profile-form">
+            <h2>Create Account</h2>
+            <p>
+              It seems you are logging in for the first time. Please sign in to explore more!
+            </p>
             <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Enter your First Name*"
-                value={CreateProfileData?.Name?.trimStart() || ""}
-                onChange={(e) =>
-                  setCreateProfileData({
-                    ...CreateProfileData,
-                    Name: e.target.value,
-                  })
-                }
-                required
-              />
-              <input
-                type="text"
-                placeholder="Enter your Last Name"
-                value={CreateProfileData?.LastName?.trimStart() || ""}
-                onChange={(e) =>
-                  setCreateProfileData({
-                    ...CreateProfileData,
-                    LastName: e.target.value,
-                  })
-                }
-                
-              />
-              <input
-                type="email"
-                placeholder="Enter your Email*"
-                value={
-                  ISNRI
-                    ? SignUpData?.email || ""
-                    : CreateProfileData?.email || ""
-                }
-                readOnly={ISNRI ? true : false}
-                required
-                onChange={(e) => {
-                  setCreateProfileData({
-                    ...CreateProfileData,
-                    email: e.target.value,
-                  });
-                }}
-              />
+              <div className="input-group">
+
+                <span className="icon">👤</span>
+                <input
+                  type="text"
+                  placeholder="Enter your First Name*"
+                  value={CreateProfileData?.Name?.trimStart() || ""}
+                  onChange={(e) =>
+                    setCreateProfileData({
+                      ...CreateProfileData,
+                      Name: e.target.value,
+                    })
+                  }
+                  required
+                />
+
+
+              </div>
+
+              <div className="input-group">
+                <span className="icon">👤</span>
+
+                <input
+                  type="text"
+                  placeholder="Enter your Last Name"
+                  value={CreateProfileData?.LastName?.trimStart() || ""}
+                  onChange={(e) =>
+                    setCreateProfileData({
+                      ...CreateProfileData,
+                      LastName: e.target.value,
+                    })
+                  }
+
+                />
+              </div>
+
+              <div className="input-group">
+                <img src="/img/email-icon.svg" alt="" className="icon" />
+
+                <input
+                  type="email"
+                  placeholder="Enter your Email*"
+                  value={
+                    ISNRI
+                      ? SignUpData?.email || ""
+                      : CreateProfileData?.email || ""
+                  }
+                  readOnly={ISNRI ? true : false}
+                  required
+                  onChange={(e) => {
+                    setCreateProfileData({
+                      ...CreateProfileData,
+                      email: e.target.value,
+                    });
+                  }}
+                />
+              </div>
 
               {ISNRI && (
                 <>
@@ -140,57 +159,69 @@ const CreateProfile = ({
                   </select> */}
 
                   <>
-                    <input
-                      required
-                      className="nri-contact-number"
-                      type="text"
-                      placeholder="Enter your International Number*"
-                      value={
-                        CreateProfileData?.ContactNumber?.trimStart() || ""
-                      }
-                      onChange={(e) => {
-                        const numericValue = String(e.target.value).replace(
-                          /[^0-9]/g,
+                    <div className="input-group">
+                      <img src="/img/new-phone-iocn.svg" alt="" className="icon" />
+
+                      <input
+                        required
+                        className="nri-contact-number"
+                        type="text"
+                        placeholder="Enter your International Number*"
+                        value={
+                          CreateProfileData?.ContactNumber?.trimStart() || ""
+                        }
+                        onChange={(e) => {
+                          const numericValue = String(e.target.value).replace(
+                            /[^0-9]/g,
+                            ""
+                          );
+                          setCreateProfileData({
+                            ...CreateProfileData,
+                            ContactNumber: numericValue,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="input-group">
+                      <img src="/img/new-phone-iocn.svg" alt="" className="icon" />
+
+                      <input
+                        className="nri-contact-another-number"
+                        type="text"
+                        placeholder="Enter your Indian Number"
+                        value={
+                          CreateProfileData?.AnotherContactNumber?.trimStart() ||
                           ""
-                        );
-                        setCreateProfileData({
-                          ...CreateProfileData,
-                          ContactNumber: numericValue,
-                        });
-                      }}
-                    />
-                    <input
-                      className="nri-contact-another-number"
-                      type="text"
-                      placeholder="Enter your Indian Number"
-                      value={
-                        CreateProfileData?.AnotherContactNumber?.trimStart() ||
-                        ""
-                      }
-                      onChange={(e) => {
-                        const numericValue = String(e.target.value).replace(
-                          /[^0-9]/g,
-                          ""
-                        );
-                        setCreateProfileData({
-                          ...CreateProfileData,
-                          AnotherContactNumber: numericValue,
-                        });
-                      }}
-                    />
+                        }
+                        onChange={(e) => {
+                          const numericValue = String(e.target.value).replace(
+                            /[^0-9]/g,
+                            ""
+                          );
+                          setCreateProfileData({
+                            ...CreateProfileData,
+                            AnotherContactNumber: numericValue,
+                          });
+                        }}
+                      />
+                    </div>
                   </>
                 </>
               )}
               {!ISNRI && (
                 <>
-                  <input
-                    type="text"
-                    placeholder="Enter your Contact Number"
-                    value={SignUpData?.ContactNumber}
-                    readOnly={true}
-                  />
+                  <div className="input-group">
+                    <img src="/img/new-phone-iocn.svg" alt="" className="icon" />
+                    <input
+                      type="text"
+                      placeholder="Enter your Contact Number"
+                      value={SignUpData?.ContactNumber}
+                      readOnly={true}
+                    />
+                  </div>
+
                   <select
-                    className="role-select"
+                    className="input-group-select"
                     required
                     value={CreateProfileData.Role}
                     onChange={(e) => {
@@ -213,9 +244,31 @@ const CreateProfile = ({
                 </>
               )}
 
-              <button type="submit">Get Started</button>
+              <button type="submit" className="continue-btn">Get Started</button>
             </form>
           </div>
+
+          {/* <div className='login-right-container-parent'>
+            <div className='login-page-right-container'>
+              <div className='login-page-logo'>
+                <div
+                  className="logo"
+
+                >
+                  <h2 className="logo-heading-navbar">
+                    Property <span> Dekho247</span>
+                  </h2>
+                </div>
+              </div>
+
+              <p className='login-form-right-heading'>Smart Search, Perfect Homes,
+                Just for You.</p>
+              <p className='login-page-right-text'>PropertyDekho247 simplifies property buying, selling, and renting with free listings, verified leads, and a fully digital transaction process. Whether you're a homeowner or a seeker, find trusted deals effortlessly with expert insights and a seamless experience.</p>
+            </div>
+          </div> */}
+          <img src="/img/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg' />
+          <img src="/img/login-page.gif" alt="" className='create-page-gif' />
+
         </div>
       </div>
     </>

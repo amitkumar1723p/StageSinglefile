@@ -11,7 +11,7 @@ const Tenant = () => {
         <img alt="tenant-img" src="/img/TenantBackground.png" />
         <img alt="TenantMobile" src="/img/TenantMobile.png" />
         <img alt="TenantArrow" src="/img/TenantArrow.png" />
-        <img alt="Owner's-Phn-Numb" src="/img/OwnerPhnNummber.svg" />
+        <img alt="Owner's-Phn-Numb" src="/img/rent-section-number.png" />
 
 
       </div>

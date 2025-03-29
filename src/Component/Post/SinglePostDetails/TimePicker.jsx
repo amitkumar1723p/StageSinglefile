@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./TimePicker.css";
-const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
+
+const TimePicker = ({ onChange, initialTime = "09:00 AM", selectedDate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState(9);
   const [selectedMinute, setSelectedMinute] = useState(0);
   const [period, setPeriod] = useState("AM");
+  const [error, setError] = useState(null);
   const radius = 80;
   const center = { x: 100, y: 100 };
 
@@ -20,10 +22,57 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
     return period === "AM" ? hour12 : hour12 + 12;
   };
 
+  const getCurrentTime = () => {
+    const now = new Date();
+    return { hour: now.getHours(), minute: now.getMinutes() };
+  };
+
+  const isToday = selectedDate ? new Date(selectedDate)?.toDateString() === new Date().toDateString() : false;
+
   const isTimeAllowed = (hour12, periodToCheck) => {
     const hour24 = to24HourFormat(hour12, periodToCheck);
-    return hour24 >= 9 && hour24 <= 19;
+    if (selectedDate && isToday) {
+      const { hour: currentHour, minute: currentMinute } = getCurrentTime();
+      const currentTimeInMinutes = currentHour * 60 + currentMinute;
+      const selectedTimeInMinutes = hour24 * 60 + selectedMinute;
+      return (
+        hour24 >= currentHour &&
+        selectedTimeInMinutes >= currentTimeInMinutes &&
+        hour24 <= 19
+      );
+    }
+    return hour24 >= 9 && hour24 <= 19; // For non-today dates
   };
+
+  const adjustTimeForNewDate = () => {
+    if (selectedDate) {
+      const currentDate = new Date();
+      const selectedDateObj = new Date(selectedDate);
+
+      if (selectedDateObj.toDateString() === currentDate.toDateString()) {
+        const { hour: currentHour, minute: currentMinute } = getCurrentTime();
+        
+        // Adjust hour to current hour or 9 AM, whichever is later
+        const validHour = Math.max(currentHour, 9);
+        const { hour: adjustedHour12, period: adjustedPeriod } = to12HourFormat(validHour);
+        // console.log(adjustedPeriod)
+        
+        setSelectedHour(adjustedHour12);
+        setSelectedMinute(0);
+        setPeriod(adjustedPeriod);
+        isTimeAllowed()
+      } else {
+        // For future or past dates, reset to default time
+        setSelectedHour(9);
+        setSelectedMinute(0);
+        setPeriod("AM");
+      }
+    }
+  };
+
+  useEffect(() => {
+    adjustTimeForNewDate();
+  }, [selectedDate]);
 
   useEffect(() => {
     if (initialTime) {
@@ -34,12 +83,25 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
         setSelectedMinute(minute);
         setPeriod(meridiem);
       } else {
-        setSelectedHour(9);
-        setSelectedMinute(0);
-        setPeriod("AM");
+        resetToValidTime();
       }
     }
-  }, [initialTime]);
+  }, [initialTime, selectedDate]);
+
+  const resetToValidTime = () => {
+    if (selectedDate && isToday) {
+      const { hour: currentHour } = getCurrentTime();
+      const validHour = Math.max(currentHour, 9);
+      const { hour: hour12, period: newPeriod } = to12HourFormat(validHour);
+      setSelectedHour(hour12+1);
+      setSelectedMinute(0);
+      setPeriod(newPeriod);
+    } else {
+      setSelectedHour(9);
+      setSelectedMinute(0);
+      setPeriod("AM");
+    }
+  };
 
   const handleHourClick = (hour) => {
     const validInAM = isTimeAllowed(hour, "AM");
@@ -52,28 +114,42 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
       } else if (validInAM && !validInPM) {
         setPeriod("AM");
       }
+      setError(null);
     }
   };
 
   const handleMinuteClick = (minute) => {
     setSelectedMinute(minute);
+    setError(null);
   };
 
   const handleTimeSelection = () => {
     // Convert to 24-hour format for the onChange event
     const hour24 = to24HourFormat(selectedHour, period);
+    if (selectedDate && isToday) {
+      const { hour: currentHour, minute: currentMinute } = getCurrentTime();
+      const currentTimeInMinutes = currentHour * 60 + currentMinute;
+      const selectedTimeInMinutes = hour24 * 60 + selectedMinute;
+      if (selectedTimeInMinutes < currentTimeInMinutes) {
+        setError("Selected time cannot be earlier than the current time.");
+        return;
+      }
+    }
+
     const timeString24 = `${hour24.toString().padStart(2, "0")}:${selectedMinute
       .toString()
       .padStart(2, "0")}`;
     onChange?.(timeString24);
     setTimeout(() => {
       setIsOpen(false);
+      setError(null);
     }, 0);
   };
 
   const togglePeriod = (newPeriod) => {
     if (isTimeAllowed(selectedHour, newPeriod)) {
       setPeriod(newPeriod);
+      setError(null);
     }
   };
 
@@ -131,7 +207,6 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
   const isAMValid = isTimeAllowed(selectedHour, "AM");
   const isPMValid = isTimeAllowed(selectedHour, "PM");
 
-  // Get 24-hour format for display
   const hour24 = to24HourFormat(selectedHour, period);
 
   return (
@@ -143,11 +218,10 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
         tabIndex={0}
         onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
       >
-        {/* Display both 24-hour and 12-hour formats */}
         <span>{`${selectedHour}:${selectedMinute
           .toString()
           .padStart(2, "0")} ${period}`}</span>
-        <span className="timepicker-format-dispaly">{`(${hour24
+        <span className="timepicker-format-display">{`(${hour24
           .toString()
           .padStart(2, "0")}:${selectedMinute
           .toString()
@@ -156,6 +230,7 @@ const TimePicker = ({ onChange, initialTime = "09:00 AM" }) => {
       {isOpen && (
         <div className="time-picker-overlay">
           <div className="time-picker-modal">
+            {error && <div className="time-picker-error">{error}</div>}
             <div className="time-picker-header">
               <span className="time-picker-time">
                 {`${selectedHour}:${selectedMinute

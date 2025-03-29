@@ -3,7 +3,7 @@ import "./card.css";
 import HomeCard from "../HomeCard";
 import { UserContext } from "../../CreateContext/CreateContext";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { GetAllPostAction } from "../../../Action/postAction";
+import { GetAllPostAction, GetSingleProjectNameDataAction } from "../../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderCard from "./HeaderCard";
 
@@ -37,7 +37,11 @@ const AllPostSearchFilter = () => {
       sessionStorage.setItem("lastCity", city || "");
     }
   }, [searchParams]);
-  
+  useEffect(()=>{
+    if(searchParams?.get("ProjectName")){
+      dispatch(GetSingleProjectNameDataAction({ProjectName:searchParams?.get("ProjectName")?.replaceAll("-"," ")}))
+    }
+  },[])
   // Handle navigation and restore query parameters
   useEffect(() => {
     

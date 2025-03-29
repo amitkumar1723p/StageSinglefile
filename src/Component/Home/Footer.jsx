@@ -226,7 +226,7 @@ const Footer = () => {
               <div className="company__underline"></div>
             </div>
             <p className="company__description">
-            India's first online Proptech platform that delivers real-time price alerts to property owners. We focused on building Transparency, Trust with fair price value
+            India's first online Proptech platform that delivers real-time price alerts to property owners. We focused on building Transparency, Trust with fair price value.
 
             </p>
             <div className="company__social">

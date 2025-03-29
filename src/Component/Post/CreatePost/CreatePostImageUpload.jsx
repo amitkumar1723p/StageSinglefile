@@ -201,7 +201,7 @@ export default function CreatePostImageUpload({
     }
 
     if (update) {
-      let confrim = window.confirm("Are you update this Post");
+      let confrim = window.confirm("Are Your Sure ???");
       if (confrim) {
         dispatch(UpdatePostAction(formData, PostId));
       }

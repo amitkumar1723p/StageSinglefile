@@ -310,8 +310,7 @@ export default function ProjectNameSection({
                     key={index}
                     onClick={(e) => {
                     
-                      let innerText = ApartmentFilter?.combinedLocation.replaceAll(",", "");
-                      innerText.split(",")
+                      let innerText = ApartmentFilter?.combinedLocation
                       
                       if( ProjectInputType == "PostForm"){
                         innerText=ApartmentFilter?.combinedLocation.split(",")
