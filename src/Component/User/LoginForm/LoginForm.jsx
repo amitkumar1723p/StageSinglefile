@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./LoginForm.css";
+import "./Login.css";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateUserOtpAction } from "../../../Action/userAction";
@@ -22,6 +22,8 @@ const LoginForm = ({
   //  const [SignUpData, setSignUpData] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const location = useLocation();
+
+  
   const [loginError, setloginError] = useState(' ');  // error message that displayed when value is null or wrong
   const [inputShake, setInputShake] = useState(false); // input field shake when value is empty or wrong
   const [shake, setShake] = useState(false);  // input text become red if wrong
@@ -29,7 +31,7 @@ const LoginForm = ({
     return state.userData;
   });
 
-  const loginButton = document.querySelector(".login-continue-login");
+  const loginButton = document.querySelector(".login-form-button");
   // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +51,7 @@ const LoginForm = ({
         // console.log(SignUpData?.ContactNumber?.length)
         if(SignUpData?.ContactNumber?.length == 0 || SignUpData?.ContactNumber?.length === undefined){
           setloginError("Enter Phone Number")
+          
           setInputShake(true);
           // loginButton.disabled = true;
           setTimeout(()=>setInputShake(false),1000);
@@ -77,29 +80,29 @@ const LoginForm = ({
   return (
     <>
       <ScrollToTop />
-      <div className="login-form-main">
-        <div className="login-wrapper-unique">
-          <div className="login-image-section-unique">
-            <img
-              // src="/img/LoginNri.svg"
-              src={ISNRI ? "/img/LoginNri.svg" : "/img/Login.svg"}
-              alt="City Buildings"
-            />
-          </div>
-          <div className="login-form-content-unique">
-            <h2 className="heading-h2">Login or Register </h2>
-            <p className="login-h2-p">
-              Welcome to PropertyDekho247 Log in to your account
-            </p>
-            <form onSubmit={handleSubmit}>
-              <label className="lable-login" htmlFor="login-form">
+      <div className="login-main-parent">
+        <div className="login-form-container">
+         
+          <div className="login-page-form">
+          <img src="/img/login-page.gif" alt="" className='login-page-gif'/>
+
+            <h2 className="login-form-login">Login or Register </h2>
+         
+            <form onSubmit={handleSubmit} className="login-form">
+              <div className="phone-input-container">
+                <div >
+                <label className="login-form-lable" htmlFor="Login-phone-number">
                 {/* {ISNRI? } */}
 
                 {ISNRI ? "Email Address" : "Phone Number"}
               </label>
+              <div className={`login-phone-icon-container  ${inputShake? 'inputShake' : ''} ${shake ? 'shake' : ''}`}>
+
+              <img src={`${ISNRI ?"/img/email-icon.svg" :"/img/new-phone-iocn.svg"}`} alt="" className='login-form-phone'/>
+              {/* <img src="" alt="" className="icon"/> */}
               <input
-                className={`border  ${inputShake? 'inputShake' : ''} ${shake ? 'shake' : ''}`}
-                id="login-form"
+                
+                id="Login-phone-number"
                 type={ISNRI ? "email" : "text"}
                 autoComplete="off"
                 // placeholder="Enter your Phone Number"
@@ -136,7 +139,12 @@ const LoginForm = ({
                     }
                   }
                 }}
-              />
+                />
+              </div>
+                </div>
+              <div className="">{loginError && <p style={{color: 'red', fontSize: '12px' }}>{loginError}</p>}</div>
+              </div>
+       
            
               <small className="t-candp-v">
                 By clicking you agree{" "}
@@ -160,11 +168,11 @@ const LoginForm = ({
                 </Link>
               </small>
               <button
-                className="login-continue-login"
+                className="login-form-button"
                 type="submit"
                 disabled={loading ? true : false}
               >
-                Continue<span> &#8594; </span>
+                Get OTP<span> &#8594; </span>
               </button>
             </form>
             <div className="d-flex gap-1 d-flex align-items-center  nri-main-section center">
@@ -183,7 +191,28 @@ const LoginForm = ({
                  }, 0);
                }}>Click</button> */}
           </div>
+
+
+          <div className='login-right-container-parent'>
+           <div className='login-page-right-container'>
+               <div className='login-page-logo'>
+               <div
+              className="logo"
+     
+            >
+              <h2 className="logo-heading-navbar">
+                Property <span> Dekho247</span>
+              </h2>
+            </div>
+               </div>
+               
+                <p className='login-form-right-heading'>Smart Search, Perfect Homes, 
+                Just for You.</p>
+                <p className='login-page-right-text'>PropertyDekho247 simplifies property buying, selling, and renting with free listings, verified leads, and a fully digital transaction process. Whether you're a homeowner or a seeker, find trusted deals effortlessly with expert insights and a seamless experience.</p>
+            </div>
+           </div>
         </div>
+        <img src="/img/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg'/>
       </div>
     </>
   );

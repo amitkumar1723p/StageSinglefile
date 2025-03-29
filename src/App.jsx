@@ -75,6 +75,7 @@ import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseActio
 // import MyVisits from "./Component/Post/CreatePost/m";
  import { FormatDate } from "./utils/CommonFunction";
 
+
 function App() {
 
   //  console.log(FormatDate("2025-02-20T06:48:35.238+00:00"))
@@ -263,20 +264,28 @@ const { data: SingleUserResponseAction_Store } = useSelector((state) => {
         dispatch({ type: "UserClear" });
       }
    
-      if (data.success === false) {
-        if (data.fielderrors) {
-          setalertMessage(
-            data.fielderrors.map((e, index) => {
-              return <p key={index}>{e.msg}</p>;
-            })
-          );
-        } else {
-          setalertMessage(<p> {data.message}</p>);
-        }
-        setalertType("error");
-        setalertShow(true);
+      
+
+      if (data.success === false &&["VerifyUserOtpRequest"].includes(LodingType)) {
         dispatch({ type: "UserClear" });
+        setalertShow(false);
+      } else{
+        if (data.success === false) {
+          if (data.fielderrors) {
+            setalertMessage(
+              data.fielderrors.map((e, index) => {
+                return <p key={index}>{e.msg}</p>;
+              })
+            );
+          } else {
+            setalertMessage(<p> {data.message}</p>);
+          }
+          setalertType("error");
+          setalertShow(true);
+          dispatch({ type: "UserClear" });
+        }
       }
+     
  
     // eslint-disable-next-line
 }}, [data]);
@@ -830,7 +839,8 @@ useEffect(() => {
   return (
     <>
       {/* <PinnacleSms /> */}
-      <Navbar />
+      {location.pathname !="/login" && <>   <Navbar /></>}
+    
 
       {alertData && alertData.AlertShow === true && (
         <Alert
@@ -1123,8 +1133,14 @@ useEffect(() => {
         {/*All post route*/}
         <Route path={"/all-post/:type"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
-      </Routes>
-      <Footer />
+
+     
+
+
+      </Routes> 
+      {location.pathname !="/login" && <>   <Footer /></>}
+    
+     
     </>
   );
 }

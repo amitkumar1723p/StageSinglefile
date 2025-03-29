@@ -159,7 +159,7 @@ const PropertySection = () => {
                       setAreas(ind)
                     }} className={`filter-button ${areas === ind ? "chooesd-area" : ""} `}>
 
-                      <span className="button-span">{area.areaName}</span>
+                      <span className="button-span"> {area.areaName}</span>
                     </button>
                   </>
                 })

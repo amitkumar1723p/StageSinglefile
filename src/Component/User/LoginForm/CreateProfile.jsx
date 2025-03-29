@@ -51,14 +51,18 @@ const CreateProfile = ({
   return (
     <>
       <ScrollToTop />
-      <div className="main-sign-box">
-        <div className="signup-form-wrapper-unique">
-          <div className="signup-image-section-unique">
-            <img src="/img/login-form.png" alt="City Buildings" />
-          </div>
-          <div className="signup-form-content-unique">
-            <h2>Create Profile </h2>
+      <div className="login-main-parent">
+        <div className="login-form-container">
+         
+          <div className="create-profile-form">
+          <h2>Create Account</h2>
+        <p>
+          It seems you are logging in for the first time. Please sign in to explore more!
+        </p>
             <form onSubmit={handleSubmit}>
+            <div className="input-group">
+       
+          <span className="icon">👤</span>
               <input
                 type="text"
                 placeholder="Enter your First Name*"
@@ -71,7 +75,14 @@ const CreateProfile = ({
                 }
                 required
               />
-              <input
+            
+            
+            </div>
+
+          <div className="input-group">
+          <span className="icon">👤</span>
+
+          <input
                 type="text"
                 placeholder="Enter your Last Name"
                 value={CreateProfileData?.LastName?.trimStart() || ""}
@@ -83,7 +94,12 @@ const CreateProfile = ({
                 }
                 
               />
-              <input
+          </div>
+          
+          <div className="input-group">
+          <img src="/img/email-icon.svg" alt="" className="icon"/>
+            
+          <input
                 type="email"
                 placeholder="Enter your Email*"
                 value={
@@ -100,6 +116,7 @@ const CreateProfile = ({
                   });
                 }}
               />
+          </div>
 
               {ISNRI && (
                 <>
@@ -140,7 +157,10 @@ const CreateProfile = ({
                   </select> */}
 
                   <>
-                    <input
+                  <div className="input-group">
+            <img src="/img/new-phone-iocn.svg" alt="" className="icon"/>
+
+                  <input
                       required
                       className="nri-contact-number"
                       type="text"
@@ -159,7 +179,11 @@ const CreateProfile = ({
                         });
                       }}
                     />
-                    <input
+                  </div>
+                  <div className="input-group">
+            <img src="/img/new-phone-iocn.svg" alt="" className="icon"/>
+
+                  <input
                       className="nri-contact-another-number"
                       type="text"
                       placeholder="Enter your Indian Number"
@@ -178,19 +202,24 @@ const CreateProfile = ({
                         });
                       }}
                     />
+                  </div>
                   </>
                 </>
               )}
               {!ISNRI && (
                 <>
-                  <input
+                <div className="input-group">
+            <img src="/img/new-phone-iocn.svg" alt="" className="icon"/>
+            <input
                     type="text"
                     placeholder="Enter your Contact Number"
                     value={SignUpData?.ContactNumber}
                     readOnly={true}
                   />
+                </div>
+              
                   <select
-                    className="role-select"
+                    className="input-group-select"
                     required
                     value={CreateProfileData.Role}
                     onChange={(e) => {
@@ -213,11 +242,33 @@ const CreateProfile = ({
                 </>
               )}
 
-              <button type="submit">Get Started</button>
+              <button type="submit" className="continue-btn">Get Started</button>
             </form>
           </div>
-        </div>
-      </div>
+
+          <div className='login-right-container-parent'>
+           <div className='login-page-right-container'>
+               <div className='login-page-logo'>
+               <div
+              className="logo"
+     
+            >
+              <h2 className="logo-heading-navbar">
+                Property <span> Dekho247</span>
+              </h2>
+            </div>
+               </div>
+               
+                <p className='login-form-right-heading'>Smart Search, Perfect Homes, 
+                Just for You.</p>
+                <p className='login-page-right-text'>PropertyDekho247 simplifies property buying, selling, and renting with free listings, verified leads, and a fully digital transaction process. Whether you're a homeowner or a seeker, find trusted deals effortlessly with expert insights and a seamless experience.</p>
+            </div>
+           </div>
+    <img src="/img/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg'/>
+    <img src="/img/login-page.gif" alt="" className='create-page-gif'/>
+
+    </div>
+    </div>
     </>
   );
 };
