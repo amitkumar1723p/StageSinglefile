@@ -155,7 +155,7 @@ export default function SingleUserRespponseAction() {
                                     <td><small className="fw-light">{item?.BasicDetails?.ApartmentType}</small></td>
                                     <td>
                                         <small className="fw-light">
-                                            {item?.PostVerify === "True" ? "Active" : "Inactive"}
+                                            {item?.PostVerify === true ? "Active" : "Inactive"}
                                         </small>
                                     </td>
 
