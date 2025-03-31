@@ -211,3 +211,23 @@ padding: 5px;
     font-weight: 500;
     font-size: 10px;
 }
+
+/* Agent user response css */
+.agentuserName {
+    width: 22%;
+
+}
+
+.agentuserContact {
+    width: 16%;
+}
+
+.agentbtn-allresponse-section-main {
+    display: flex;
+    align-items: center;
+    margin: 1px 1px;
+    justify-content: center;
+}
+/* .agentuserDetail {
+    width: 55%;
+} */

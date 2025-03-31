@@ -3,18 +3,14 @@ import { useSelector } from "react-redux";
 import "./NotifyRequirements.css"; // External CSS
 import axios from "axios";
 import { FormatDate } from "../../utils/CommonFunction";
-
 const NotifyRequirements = () => {
   const [activeTab, setActiveTab] = useState("notifies");
   const [showUnacknowledged, setShowUnacknowledged] = useState("all"); // Toggle state
   const [enterdDate, setEnterdDate] = useState("");
-
   const { loading, data } = useSelector(
     (state) => state?.AllNotifiesAndReq || {}
   );
-
   const allData = useSelector((state) => state?.AllNotifiesAndReq);
-
   const [unacknowledgedNotifies, setUnacknowledgedNotifies] = useState([]);
   const [acknowledgedNotifies, setAcknowledgedNotifies] = useState([]);
   const [unacknowledgedRequirements, setUnacknowledgedRequirements] = useState(
@@ -28,12 +24,10 @@ const NotifyRequirements = () => {
   const [madeNotifyAck, setMadeNotifyAck] = useState(false);
   const [apiType, setApiType] = useState("");
   // console.log(data)
-
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
     "Sep", "Oct", "Nov", "Dec"
   ];
-
   useEffect(() => {
     // console.log(enterdDate)
     const currentData =
@@ -49,19 +43,15 @@ const NotifyRequirements = () => {
         return item;
       }
     });
-
     setDisplayData(filterdData);
   }, [enterdDate]);
-
   useEffect(() => {
     if (allData?.data) {
       const notifies = allData.data.notifies || [];
       const requirements = allData.data.requirements || [];
-
       setDisplayData(notifies);
       setAcknowledgedNotifies(notifies);
       setAcknowledgedRequirements(requirements);
-
       // Filtering Unacknowledged Notifies
       const filteredUnacknowledgedNotifies = notifies.filter(
         (item) => !item.Acknowledged
@@ -87,7 +77,6 @@ const NotifyRequirements = () => {
       setNewNotifiesId(unacknowledgedNotifiesId); // Assuming setNewNotifyId is the correct function for notifies
     }
   }, [allData]); // Runs whenever `allData` updates
-
   //  async function handleSubmit(){
   //   console.log("called",newNotifiesId)
 
@@ -125,15 +114,13 @@ const NotifyRequirements = () => {
   //   }
 
   async function handleSubmit() {
-    // console.log("API Type:", apiType);
-    // console.log("New Notifies IDs:", newNotifiesId);
-    // console.log("New Request IDs:", newReqId);
+   
 
     try {
       let res;
 
       if (apiType === "Notify" && newNotifiesId.length > 0 && !madeNotifyAck) {
-        // console.log("Calling Notify API");
+       
         res = await axios.post(
           `${process.env.REACT_APP_API_URL}/notify/acknowledeg`,
           { ids: newNotifiesId },
@@ -149,7 +136,7 @@ const NotifyRequirements = () => {
       }
 
       if (apiType === "Requests" && newReqId.length > 0 && !madeReqAck) {
-        // console.log("Calling Requests API");
+        
         res = await axios.post(
           `${process.env.REACT_APP_API_URL}/property-requirement/acknowledge`,
           { ids: newReqId },
@@ -269,7 +256,7 @@ const NotifyRequirements = () => {
           <SkeletonTable rows={5} columns={activeTab === "notifies" ? 5 : 4} />
         ) : (
           <>
-            {/* <p className="notify-requirement-lable">{activeTab == "notifies" ? notifies.length  : requirements.length} {activeTab === "notifies" ? "Notifications" : " Requirements"}</p> */}
+            
             <table className="notify-requirements-table">
               <thead className="notify-requirements-table-thead">
                 <tr>
@@ -285,7 +272,7 @@ const NotifyRequirements = () => {
                       <th className="notify-requirements-th text-nowrap">
                         Floor Preference
                       </th>
-                      {/* <th className="notify-requirements-th">Email</th> */}
+                      
                     </>
                   ) : (
                     <>
@@ -340,7 +327,7 @@ const NotifyRequirements = () => {
                           <td className="notify-requirements-td text-nowrap">
                             {item.FloorPreference}
                           </td>
-                          {/* <td className="notify-requirements-td">{item?.User?.Name}</td> */}
+                          
                         </>
                       ) : (
                         <>
@@ -356,7 +343,7 @@ const NotifyRequirements = () => {
                           FormatDate(item?.createAt)  
                             }
                           </td>
-                          {/* <td className="notify-requirements-td">{item?.Room?.map((room)=><span>{room}</span>)}</td> */}
+                        
                           <td className="notify-requirements-td text-nowrap">
                             {item.PropertyType}
                           </td>

@@ -292,7 +292,7 @@ export default function AdminListingCard({
                                     }
                                   }}
                                 >
-                                  Re Store
+                                  Re-Call
                                 </button>
                                 {/* <button
                                   onClick={() => {
@@ -515,7 +515,7 @@ export default function AdminListingCard({
                         </span>
                     </div>
                     <div className="user-name-contact">
-                      <span>Mobile No. : </span>x
+                      <span>Mobile No. : </span>
                       <span>{PostData?.CreatePostUser?.ContactNumber}</span>
                     </div>
                   </>

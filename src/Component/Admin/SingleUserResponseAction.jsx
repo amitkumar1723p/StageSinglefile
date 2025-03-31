@@ -14,7 +14,7 @@ export default function SingleUserRespponseAction() {
     const { data: SingleUserResponseAction_Store, loading } = useSelector((state) => {
         return state.SingleUserResponseAction_Store;
     });
-
+  
     useEffect(() => {
         dispatch(getSingleUserResponseAction(id))
     }, [id])
@@ -27,20 +27,23 @@ export default function SingleUserRespponseAction() {
 
     return (
         <div className="border border-primary border-opacity-25 ">
-            <div className="ps-3 pt-2">
-                <div className="card col-4" >
-                    <div className="card-header fw-medium">User Info...</div>
+       
+                <div className="ps-3 pt-2">
+                    <div className="card col-4" >
+                        <div className="card-header fw-medium">User Info...</div>
 
-                    <ul className="list-group list-group-flush ">
-                        <li className="list-group-item fw-light"><small>Name :  <span> {SingleUserResponseAction_Store?.user?.Name}  <span className="All-response-section-role"> ({SingleUserResponseAction_Store?.user?.Role})</span>  </span></small></li>
-                        <li className="list-group-item fw-light"><small>Contact:  <span> {SingleUserResponseAction_Store?.user?.ContactNumber}</span></small></li>
-                        <li className="list-group-item fw-light "><small>Email : <span> {SingleUserResponseAction_Store?.user?.email}</span></small></li>
-                    </ul>
-                </div>
-            </div>
+                        <ul className="list-group list-group-flush ">
+                            <li className="list-group-item fw-light"><small>Name :  <span> {SingleUserResponseAction_Store?.user?.Name}  <span className="All-response-section-role"> ({SingleUserResponseAction_Store?.user?.Role})</span>  </span></small></li>
+                            <li className="list-group-item fw-light"><small>Contact:  <span> {SingleUserResponseAction_Store?.user?.ContactNumber}</span></small></li>
+                            <li className="list-group-item fw-light "><small>Email : <span> {SingleUserResponseAction_Store?.user?.email}</span></small></li>
+                        </ul>
+                    </div>
+                </div> 
             <div className="px-0">
                 <div className=" mian-form-data-section d-flex  mt-3  singleUser_mainbtn" >
+               
                     <div className="col-2 text-center py-3"><small className={activeTable === 3 ? ' border-bottom user-select-none all-response-active ' : ' all-response-inactive activebtn border-bottom user-select-none'} onClick={() => setActiveTable(3)}>View  Listing({SingleUserResponseAction_Store?.posts?.length})</small></div>
+                   
 
                     <div className="col-2 text-center py-3 " ><small className={activeTable === 1 ? 'border-bottom user-select-none all-response-active ' : ' all-response-inactive activebtn  border-bottom user-select-none'} onClick={() => setActiveTable(1)}>View Scheduled Visits({SingleUserResponseAction_Store?.schedules?.length})</small></div>
 
@@ -48,12 +51,14 @@ export default function SingleUserRespponseAction() {
 
 
 
-
+                  
                     <div className="col-2 text-center py-3"><small className={activeTable === 4 ? ' border-bottom user-select-none  all-response-active ' : ' all-response-inactive activebtn border-bottom user-select-none'} onClick={() => setActiveTable(4)}>Notify ({SingleUserResponseAction_Store?.notifyData?.length})</small></div>
-
+       
 
                     <div className="col-2 text-center py-3"><small className={activeTable === 5 ? ' border-bottom user-select-none all-response-active  ' : ' all-response-inactive activebtn border-bottom user-select-none'} onClick={() => setActiveTable(5)}>Requirement({SingleUserResponseAction_Store?.requireData?.length})</small></div>
-                </div>
+              
+             
+                     </div>
             </div>
             {
                 activeTable === 1 && (
@@ -109,7 +114,6 @@ export default function SingleUserRespponseAction() {
                         </thead>
                         <tbody>
                             {SingleUserResponseAction_Store?.offers?.map((item) => {
-
                                 return (<tr>
 
 
