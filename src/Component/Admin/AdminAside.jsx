@@ -36,7 +36,7 @@ export default function AdminAside() {
       dispatch(GetAllNotificationsAndRequirements());
     }
     if (medata?.user?.Role === "Owner") {
-     
+
       dispatch(getAllUserAction());
       dispatch(Admin_OwnerGetAllPostAction());
       dispatch(getTransactionDetailAction())
@@ -79,11 +79,13 @@ export default function AdminAside() {
               />
               Dashboard
             </NavLink>
+
+
             {medata?.IsAuthenticated &&
               medata.user.Role === "Owner" &&
               medata.user.OwnerVerify && (
                 <>
-                  <NavLink
+                  {/* <NavLink
                     to="/admin/all-user-Response-action"
                     className={({ isActive }) =>
                       `AdminAside-navLink ${isActive ? "active" : "hover"}`
@@ -96,7 +98,7 @@ export default function AdminAside() {
                         }`}
                     />
                     All Response
-                  </NavLink>
+                  </NavLink> */}
 
 
                   <NavLink
@@ -229,7 +231,38 @@ export default function AdminAside() {
             />
             All Post
           </NavLink> */}
-
+          {/* all-asign-post-Response-action */}
+          {medata.user.Role =="Agent"?
+            <NavLink
+              to="/admin/agent-user-Response-action"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              }
+            >
+              <img
+                src="/img/Dashboard.svg"
+                alt="Dashboard Icon"
+                className={`AdminAside-icon ${location.pathname === "/admin/all-asign-post-Response-action" ? "active" : ""
+                  }`}
+              />
+              All Response
+            </NavLink>: 
+             <NavLink
+              to="/admin/all-user-Response-action"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              }
+            >
+              <img
+                src="/img/Dashboard.svg"
+                alt="Dashboard Icon"
+                className={`AdminAside-icon ${location.pathname === "/admin/all-user-Response-action" ? "active" : ""
+                  }`}
+              />
+              All Response
+            </NavLink>}
+           
+            
             <button className="AdminAside-button">
               <img src="/img/Report.svg" className="AdminAside-icon" alt="" />
               Report
