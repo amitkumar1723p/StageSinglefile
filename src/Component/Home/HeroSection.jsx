@@ -198,13 +198,29 @@ const HeroSection = () => {
           //   .replaceAll("/", "-")}-${PostData._id}`
 
           navigate(
-            `/home/card?ProjectName=${ProjectNameObjectData?.s_type?.trim() === "Project Name" || ProjectNameObjectData?.mostMatchedField?.trim() === "Project Name" ? ProjectNameObjectData?.projectName?.toLowerCase()?.replaceAll(" ", "-")
-              
-            :""}&sector=${ProjectNameObjectData?.sector?.toLowerCase().replaceAll(" ", "-")
-              
-             }&city=${ProjectNameObjectData?.city?.toLowerCase().replaceAll(" ", "-")
-              }&PropertyAddType=${SearchPropertyAddType}`
+            `/home/card?${ 
+              (ProjectNameObjectData?.s_type?.trim() === "ProjectName" || 
+              ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName") && ProjectNameObjectData?.projectName 
+              ? `ProjectName=${ProjectNameObjectData?.projectName.toLowerCase().replaceAll(" ", "-")}&`
+              : ""
+            }${
+              (ProjectNameObjectData?.s_type?.trim() === "Locality" || 
+              ProjectNameObjectData?.mostMatchedField?.trim() === "Locality") && ProjectNameObjectData?.locality
+              ? `locality=${ProjectNameObjectData?.locality.toLowerCase().replaceAll(" ", "-")}&`
+              : ""
+            }${
+              (ProjectNameObjectData?.s_type?.trim() === "City" || 
+              ProjectNameObjectData?.mostMatchedField?.trim() === "City") && ProjectNameObjectData?.city
+              ? `city=${ProjectNameObjectData?.city.toLowerCase().replaceAll(" ", "-")}&`
+              : ""
+            }${
+              (ProjectNameObjectData?.s_type?.trim() === "Landmark" || 
+              ProjectNameObjectData?.mostMatchedField?.trim() === "Landmark") && ProjectNameObjectData?.sector
+              ? `sector=${ProjectNameObjectData?.sector.toLowerCase().replaceAll(" ", "-")}&`
+              : ""
+            }PropertyAddType=${SearchPropertyAddType}`
           );
+          
           // navigate(
           //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
           //       .replaceAll(" ", "-")
@@ -346,7 +362,7 @@ const HeroSection = () => {
                         // );
                         dispatch(
                           GetAllPostAction({
-                            ProjectName:ProjectNameObjectData?.s_type?.trim() === "Project Name" || ProjectNameObjectData?.mostMatchedField?.trim() === "Project Name" ? ProjectNameObjectData?.projectName?.trim() :"" ,
+                            ProjectName:ProjectNameObjectData?.s_type?.trim() === "ProjectName" || ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName" ? ProjectNameObjectData?.projectName?.trim() :"" ,
                             City : ProjectNameObjectData?.city?.trim(),
                             Sector : ProjectNameObjectData?.sector?.trim(),
                             PropertyAdType: SearchPropertyAddType,
@@ -467,15 +483,28 @@ const HeroSection = () => {
                         // );
 
 
-                        dispatch(
-                          GetAllPostAction({
-                            ProjectName:ProjectNameObjectData?.s_type?.trim() === "Project Name" || ProjectNameObjectData?.mostMatchedField?.trim() === "Project Name" ? ProjectNameObjectData?.projectName?.trim() :"" ,
-                            City : ProjectNameObjectData?.city?.trim(),
-                            Sector : ProjectNameObjectData?.sector?.trim(),
-                            PropertyAdType: SearchPropertyAddType,
-                          })
-                        );
+                        const { s_type, mostMatchedField, projectName, city, sector, locality } = ProjectNameObjectData || {};
 
+                        // Determine the parameters to send
+                        let dispatchPayload = {
+                          PropertyAdType: SearchPropertyAddType
+                        };
+                        
+                        if (s_type?.trim() === "ProjectName" || mostMatchedField?.trim() === "ProjectName") {
+                          dispatchPayload.ProjectName = projectName?.trim();
+                          dispatchPayload.City = city?.trim();
+                        } else if (s_type?.trim() === "Locality" || mostMatchedField?.trim() === "Locality") {
+                          dispatchPayload.Locality = locality?.trim();
+                          dispatchPayload.City = city?.trim();
+                        } else if (s_type?.trim() === "City" || mostMatchedField?.trim() === "City") {
+                          dispatchPayload.City = city?.trim();
+                        } else if (s_type?.trim() === "Landmark" || mostMatchedField?.trim() === "Landmark") {
+                          dispatchPayload.Sector = sector?.trim();
+                        }
+                        
+                        // Dispatch action
+                        dispatch(GetAllPostAction(dispatchPayload));
+                        
                         // navigate(
                         //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
                         // );
@@ -508,15 +537,27 @@ const HeroSection = () => {
                         //       ProjectNameObjectData.ProjectName?.trim(),
                         //   })
                         // );
-                        dispatch(
-                          GetAllPostAction({
-                            ProjectName:ProjectNameObjectData?.s_type?.trim() === "Project Name" || ProjectNameObjectData?.mostMatchedField?.trim() === "Project Name" ? ProjectNameObjectData?.projectName?.trim() :"" ,
-                            City : ProjectNameObjectData?.city?.trim(),
-                            Sector : ProjectNameObjectData?.sector?.trim(),
-                            PropertyAdType: SearchPropertyAddType,
-                          })
-                        );
+                        const { s_type, mostMatchedField, projectName, city, sector, locality } = ProjectNameObjectData || {};
 
+                        // Determine the parameters to send
+                        let dispatchPayload = {
+                          PropertyAdType: SearchPropertyAddType
+                        };
+                        
+                        if (s_type?.trim() === "ProjectName" || mostMatchedField?.trim() === "ProjectName") {
+                          dispatchPayload.ProjectName = projectName?.trim();
+                          dispatchPayload.City = city?.trim();
+                        } else if (s_type?.trim() === "Locality" || mostMatchedField?.trim() === "Locality") {
+                          dispatchPayload.Locality = locality?.trim();
+                          dispatchPayload.City = city?.trim();
+                        } else if (s_type?.trim() === "City" || mostMatchedField?.trim() === "City") {
+                          dispatchPayload.City = city?.trim();
+                        } else if (s_type?.trim() === "Landmark" || mostMatchedField?.trim() === "Landmark") {
+                          dispatchPayload.Sector = sector?.trim();
+                        }
+                        
+                        // Dispatch action
+                        dispatch(GetAllPostAction(dispatchPayload));
                         // navigate(
                         //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
                         // );

@@ -329,9 +329,9 @@ export default function ProjectNameSection({
                     ApartmentFilter?.combinedLocation
                   }
            {  ProjectInputType === "Search"  &&  <span>
-                  {(ApartmentFilter.mostMatchedField === "Project Name" || ApartmentFilter.s_type === "Project Name")
+                  {(ApartmentFilter.mostMatchedField === "ProjectName" || ApartmentFilter.s_type === "ProjectName")
                     ? "Project Name"
-                    : "Locality"}
+                    : (ApartmentFilter.mostMatchedField === "Landmark" || ApartmentFilter.s_type === "Landmark")? "Land Mark":(ApartmentFilter.mostMatchedField === "City" || ApartmentFilter.s_type === "City")?"City":"Locality"}
                 </span>}
 
                   </p>

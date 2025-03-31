@@ -3,7 +3,7 @@ import "./card.css";
 import HomeCard from "../HomeCard";
 import { UserContext } from "../../CreateContext/CreateContext";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { GetAllPostAction } from "../../../Action/postAction";
+import { GetAllPostAction, GetSingleProjectNameDataAction } from "../../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderCard from "./HeaderCard";
 
@@ -23,83 +23,83 @@ const AllPostSearchFilter = () => {
 
   const { data } = useSelector((state) => state.GetAllPost);
 
-  // Store query parameters when they change
+
+  // Fetch single project data if ProjectName is available in URL
   useEffect(() => {
     const projectName = searchParams.get("ProjectName");
-    const propertyAddType = searchParams.get("PropertyAddType");
-    const sector = searchParams.get("sector");
-    const city = searchParams.get("city");
-  
-    if (projectName || propertyAddType || sector || city) {
-      sessionStorage.setItem("lastProjectName", projectName || "");
-      sessionStorage.setItem("lastPropertyAddType", propertyAddType || "");
-      sessionStorage.setItem("lastSector", sector || "");
-      sessionStorage.setItem("lastCity", city || "");
-    }
-  }, [searchParams]);
-  
-  // Handle navigation and restore query parameters
-  useEffect(() => {
-    
-    const currentProjectName = searchParams.get("ProjectName");
-    const currentPropertyAddType = searchParams.get("PropertyAddType");
-    const currentSector = searchParams.get("sector");
-    const currentCity = searchParams.get("city");
-  
-   
-      // const lastProjectName = sessionStorage.getItem("lastProjectName");
-      // const lastPropertyAddType = sessionStorage.getItem("lastPropertyAddType");
-      // const lastSector = sessionStorage.getItem("lastSector");
-      // const lastCity = sessionStorage.getItem("lastCity");
-  
-      // if (lastProjectName || lastPropertyAddType || lastSector || lastCity) {
-      //   const queryParams = new URLSearchParams();
-      //   if (lastProjectName) queryParams.set("ProjectName", lastProjectName);
-      //   if (lastPropertyAddType) queryParams.set("PropertyAddType", lastPropertyAddType);
-      //   if (lastSector) queryParams.set("sector", lastSector);
-      //   if (lastCity) queryParams.set("city", lastCity);
-  
-      //   navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
-      //   return;
-      // }
-    
-     
-     
-    if ((currentProjectName || currentCity || currentSector) && !data) {
-
+    if (projectName) {
+      console.log(projectName.replaceAll("-", " "));
       dispatch(
-        GetAllPostAction({
-          ProjectName:currentProjectName?.replaceAll("-"," "),
-          City: currentCity?.replaceAll("-"," ") ,
-          Sector: currentSector?.replaceAll("-"," "),
-          PropertyAdType: currentPropertyAddType ,
-        })
+        GetSingleProjectNameDataAction({ ProjectName: projectName.replaceAll("-", " ") })
       );
     }
-  
-    setRedirectPathIsHomeCard(true);
-  }, [location.pathname, searchParams]);
-  
+  }, [searchParams, dispatch]);
 
+  // Store query parameters in session storage
+  useEffect(() => {
+    const queryParams = ["ProjectName", "PropertyAddType", "sector", "city", "locality"];
+    queryParams.forEach((param) => {
+      const value = searchParams.get(param) || "";
+      sessionStorage.setItem(`last${param}`, value);
+    });
+  }, [searchParams]);
+
+  // Fetch all posts based on query params with correct condition handling
+  useEffect(() => {
+    const currentProjectName = searchParams.get("ProjectName")?.replaceAll("-", " ");
+    const currentPropertyAddType = searchParams.get("PropertyAddType");
+    const currentSector = searchParams.get("sector")?.replaceAll("-", " ");
+    const currentCity = searchParams.get("city")?.replaceAll("-", " ");
+    const currentLocality = searchParams.get("locality")?.replaceAll("-", " ");
+
+    if ((currentProjectName || currentCity || currentSector || currentLocality) && !data) {
+      let payload = {
+        ProjectName: currentProjectName,
+        PropertyAdType: currentPropertyAddType,
+      };
+
+      // Condition-based API request logic
+      const sType = searchParams.get("s_type");
+      const mostMatchedField = searchParams.get("mostMatchedField");
+
+      if (sType === "locality" || mostMatchedField === "locality") {
+        payload.Locality = currentLocality;
+        payload.City = currentCity;
+      } else if (sType === "city" || mostMatchedField === "city") {
+        payload.City = currentCity;
+      } else if (sType === "landmark" || mostMatchedField === "landmark") {
+        payload.Sector = currentSector;
+      } else {
+        // Default case where all fields are included
+        payload.City = currentCity;
+        payload.Sector = currentSector;
+      }
+
+      dispatch(GetAllPostAction(payload));
+    }
+
+    setRedirectPathIsHomeCard(true);
+  }, [searchParams, dispatch, data, setRedirectPathIsHomeCard]);
+
+  // Fetch posts when filters change
   useEffect(() => {
     if (Object.keys(Filter).length > 0 || removeFilterField) {
-      // console.log(searchParams.get("ProjectName"))
       dispatch(
         GetAllPostAction({
-          ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-"," "),
-          City: searchParams.get("city")?.replaceAll("-"," ") ,
-          Sector: searchParams.get("sector")?.replaceAll("-"," "),
+          ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-", " "),
+          City: searchParams.get("city")?.replaceAll("-", " "),
+          Sector: searchParams.get("sector")?.replaceAll("-", " "),
+          Locality: searchParams.get("locality")?.replaceAll("-", " "),
           PropertyAdType: searchParams.get("PropertyAddType"),
           BHK: Filter.BHK,
           ApartmentType: Filter.ApartmentType,
-          PropertyStatus: undefined,
+          PropertyStatus: undefined, // Keeping undefined explicitly
           Furnishing: Filter.Furnishing,
-          
         })
       );
     }
-    window.scrollTo(0,0);
-  }, [Filter, searchParams]);
+    window.scrollTo(0, 0);
+  }, [Filter, searchParams, dispatch, removeFilterField]);
 
   const handleClicked = (v) => {
     setIsClicked(v);
@@ -160,6 +160,7 @@ const AllPostSearchFilter = () => {
                     PropertyAdType: searchParams.get("PropertyAddType"),
                     City: searchParams.get("city")?.replaceAll("-"," ") ,
                     Sector: searchParams.get("sector"),
+                    Locality:searchParams.get("locality"),
                     BHK: "",
                     ApartmentType: "",
                     PropertyStatus: undefined,
@@ -178,7 +179,15 @@ const AllPostSearchFilter = () => {
                   <button
                     key={text}
                     onClick={() => {
-                    navigate(`/home/card?ProjectName=${searchParams.get("ProjectName") && searchParams.get("ProjectName")}&sector=${searchParams.get("sector")}&city=${searchParams.get("city")}&PropertyAddType=${text}`)
+                      navigate(
+                        `/home/card?${searchParams.get("ProjectName") ? `ProjectName=${encodeURIComponent(searchParams.get("ProjectName"))}` : ""}
+                        ${searchParams.get("sector") ? `&sector=${encodeURIComponent(searchParams.get("sector"))}` : ""}
+                        ${searchParams.get("city") ? `&city=${encodeURIComponent(searchParams.get("city"))}` : ""}
+                        ${searchParams.get("locality") ? `&locality=${encodeURIComponent(searchParams.get("locality"))}` : ""}
+                        ${text ? `&PropertyAddType=${encodeURIComponent(text)}` : ""}`.replace(/\s+/g, "")
+                      );
+                      
+                      
                       // setSearchParams({
                       //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
                       //   city:searchParams.get("city"),
@@ -334,8 +343,15 @@ const AllPostSearchFilter = () => {
                   <button
                     key={text}
                     onClick={() => {
-                    navigate(`/home/card?ProjectName=${searchParams.get("ProjectName") && searchParams.get("ProjectName")}&sector=${searchParams.get("sector")}&city=${searchParams.get("city")}&PropertyAddType=${text}`)
-                      // setSearchParams({
+                      navigate(
+                        `/home/card?${searchParams.get("ProjectName") ? `ProjectName=${encodeURIComponent(searchParams.get("ProjectName"))}` : ""}
+                        ${searchParams.get("sector") ? `&sector=${encodeURIComponent(searchParams.get("sector"))}` : ""}
+                        ${searchParams.get("city") ? `&city=${encodeURIComponent(searchParams.get("city"))}` : ""}
+                        ${searchParams.get("locality") ? `&locality=${encodeURIComponent(searchParams.get("locality"))}` : ""}
+                        ${text ? `&PropertyAddType=${encodeURIComponent(text)}` : ""}`.replace(/\s+/g, "")
+                      );
+                      
+                      
                       //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
                       //   city:searchParams.get("city"),
                       //   sector:searchParams.get("sector"),
