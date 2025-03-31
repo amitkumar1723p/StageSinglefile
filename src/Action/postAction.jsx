@@ -462,7 +462,7 @@ export const ReOpenPostAction = (postId) => {
         withCredentials: true,
       };
 
-      const { data } = await axios.put(url, config);
+      const { data } = await axios.get(url, config);
       dispatch({ type: "ReOpenPostActionSuccess", payload: data });
     } catch (error) {
       if (error.response) {

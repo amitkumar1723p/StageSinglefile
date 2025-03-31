@@ -180,7 +180,7 @@ export default function ProjectNameSection({
        
           setProjectNameObjectData(FilterProjectName[highlightedIndex]);
 
-          setQuery(FilterProjectName[highlightedIndex].combinedLocation?.replaceAll(","," "))
+          setQuery(FilterProjectName[highlightedIndex].combinedLocation)
           setTimeout(() => {
             setFilterProjectName([]);
           }, 0);

@@ -515,4 +515,15 @@
     z-index: 1;
     width: 100%;
   }
+
+  .blue-login-top-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(180deg);
+    z-index: 0;
+    height: 50%;
+  }
+
+
 }

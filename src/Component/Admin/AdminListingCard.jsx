@@ -50,7 +50,7 @@ export default function AdminListingCard({
       return `₹ ${price.toFixed(2)}`;
     }
   };
-  
+
 
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -67,20 +67,20 @@ export default function AdminListingCard({
     } else {
       const date = new Date(dateString);
       const After90Days = new Date(date.getTime() + 90 * 24 * 60 * 60 * 1000);
-  
+
       // Define month names (abbreviated)
       const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  
+
       // Format Active Date as DD-Month-YY
       let activedate = `${("0" + date.getDate()).slice(-2)}-${monthNames[date.getMonth()]}-${date.getFullYear().toString().slice(-2)}`;
-  
+
       // Format Expired Date as DD-Month-YY (90 days after)
       let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${monthNames[After90Days.getMonth()]}-${After90Days.getFullYear().toString().slice(-2)}`;
-  
+
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
   }, [PostData?.PostVerifyData?.Time]);
-  
+
 
 
   const location = useLocation();
@@ -377,7 +377,7 @@ export default function AdminListingCard({
                       <div className="admin-rent-deposite-section">
                         <div>
                           <p className="price-ans">
-                         <span className="rent-admin-section">Rent : </span> 
+                            <span className="rent-admin-section">Rent : </span>
                             {formatReservePrice(
                               PostData?.PricingDetails?.ExpectedRent
                             )}
@@ -389,7 +389,7 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
-                    
+
                     {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>
@@ -425,9 +425,9 @@ export default function AdminListingCard({
                   <div className="poston-date">
                     <p className="admin-card-heading">Create on</p>
                     <p className="admin-card-heading-ans">
-                       {
-                       FormatDate(PostData?.createAt)
-                       }
+                      {
+                        FormatDate(PostData?.createAt)
+                      }
                       {/* {new Date(PostData?.createAt).toLocaleDateString("en-GB", {
                         day: '2-digit',
                         month: 'short',
@@ -457,8 +457,8 @@ export default function AdminListingCard({
                 <p
                   // className={location.pathname.includes("schedule-visit"?"select":"")}
                   className={`${location.pathname.includes("/admin/schedule-visit")
-                      ? "active-btn"
-                      : ""
+                    ? "active-btn"
+                    : ""
                     }`}
                   onClick={() => {
                     if (
@@ -482,8 +482,8 @@ export default function AdminListingCard({
                 </p>
                 <p
                   className={`${location.pathname.includes("/admin/recive-offer")
-                      ? "active-btn"
-                      : ""
+                    ? "active-btn"
+                    : ""
                     }`}
                   onClick={() => {
                     if (
@@ -508,12 +508,16 @@ export default function AdminListingCard({
                     <div className="user-name-contact">
                       <span>Posted by : </span>
 
-                      <span>{PostData?.CreatePostUser?.Name}</span>
+                      <span>
+                        
+                        {PostData?.CreatePostUser?.Name}
+                      
+                        </span>
                     </div>
                     <div className="user-name-contact">
-                      <span>Mobile No. : </span>
+                      <span>Mobile No. : </span>x
                       <span>{PostData?.CreatePostUser?.ContactNumber}</span>
-                    </div>{" "}
+                    </div>
                   </>
                 )}
               </div>
@@ -521,9 +525,9 @@ export default function AdminListingCard({
               <div className="admin-btn-active-btn">
                 <Link
                   to={`${medata?.user?.Role == "Owner" &&
-                      PostData?.PostDelete?.Status == "delete"
-                      ? "/admin/deleted-post"
-                      : "/post-detail"
+                    PostData?.PostDelete?.Status == "delete"
+                    ? "/admin/deleted-post"
+                    : "/post-detail"
                     }/${PropertyAddress.toLowerCase()
                       .replaceAll(" ", "-")
                       .replace(",", "")
