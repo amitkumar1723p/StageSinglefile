@@ -329,10 +329,10 @@ export default function ProjectNameSection({
                   >{
                     ApartmentFilter?.combinedLocation
                   }
-           {  ProjectInputType === "Search"  &&  <span className="dropdown-section-hero">
-                  {(ApartmentFilter.mostMatchedField === "Project Name" || ApartmentFilter.s_type === "Project Name")
-                    ? "Project"
-                    : "Locality"}
+           {  ProjectInputType === "Search"  &&  <span>
+                  {(ApartmentFilter.mostMatchedField === "ProjectName" || ApartmentFilter.s_type === "ProjectName")
+                    ? "Project Name"
+                    : (ApartmentFilter.mostMatchedField === "Landmark" || ApartmentFilter.s_type === "Landmark")? "Land Mark":(ApartmentFilter.mostMatchedField === "City" || ApartmentFilter.s_type === "City")?"City":"Locality"}
                 </span>}
 
                   </p>
