@@ -58,6 +58,7 @@ import { motion } from "framer-motion";
 import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
+
 import { UserContext } from "../CreateContext/CreateContext";
 import RentAgreement from "./RentAgreement";
 // import TenantDetailsForm from "./TenantDetailsForm";
@@ -780,6 +781,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
+        
         </>
       )}
       {/* Sale Component  */}
@@ -826,13 +828,13 @@ const HeroSection = () => {
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
-      {showPropertyRequirement && (
+      {/* {showPropertyRequirement && (
         <WindowComponent
           Component={PostPropertyRequerment}
           SetShow={setshowPropertyRequirement}
           BtnRef={PropertyRequirementBtnRef}
         />
-      )}
+      )} */}
     </div>
   );
 };
