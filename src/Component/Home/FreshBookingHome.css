@@ -46,7 +46,7 @@
     }
 }
 .fresh-booking-home-card{
-    /* box-shadow: 0px 0px 10px rgb(46, 46, 46); */
+   
     /* animation: infiniteScroll 40s linear infinite; */
     min-width: 255px;
     max-width: 225px;
@@ -56,12 +56,14 @@
     border-radius: 8px;
     transition-duration: .5s;
     
+    
      
 }
 .fresh-booking-home-card:hover {
-    .fresh-booking-home-card img{
-        transform: scale(1.1);
-    }
+    
+        transform: scale(1.02);
+        transition-duration: .5s;
+        box-shadow: 2px 2px 12px rgb(46 46 46 / 89%);
         .fresh-booking-home-card-content{
             /* top:182px; */
             border-radius: 8px;
