@@ -75,6 +75,8 @@ import { FormatDate } from "./utils/CommonFunction";
 import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
 import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
+import FreshBookingPost from "./Component/Home/FreshBookingPost";
+import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
 
@@ -954,6 +956,8 @@ function App() {
 
 
         <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
+        <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/>
+        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
         {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
 
         <Route

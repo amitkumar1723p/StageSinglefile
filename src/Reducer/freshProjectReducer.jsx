@@ -9,14 +9,14 @@ export const createfreshProjectReducer=(state = {}, action)=>{
         case "createfreshProjectSuccess":
           return {
             ...state,
-            logoutdata: action.payload,
+            data: action.payload,
             loading: false,
           };
     
         case "createfreshProjectFail":
           return {
             ...state,
-            logoutdata: action.payload,
+          data: action.payload,
             loading: false,
           };
         case "createfreshProjectClear":
@@ -26,4 +26,35 @@ export const createfreshProjectReducer=(state = {}, action)=>{
             ...state,
           };
       }
+}
+
+
+export const getAllFreshProjectReducer=(state = {}, action)=>{
+  console.log("listen reducer")
+  switch (action.type) {
+      case "getAllFreshProjectRequest":
+        return {
+          ...state,
+          loading: true,
+        };
+      case "getAllFreshProjectSuccess":
+        return {
+          ...state,
+          data: action.payload,
+          loading: false,
+        };
+  
+      case "getAllFreshProjectFail":
+        return {
+          ...state,
+          data: action.payload,
+          loading: false,
+        };
+      case "getAllFreshProjectClear":
+        return {};
+      default:
+        return {
+          ...state,
+        };
+    }
 }

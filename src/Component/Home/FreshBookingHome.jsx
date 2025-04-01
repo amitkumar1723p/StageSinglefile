@@ -1,9 +1,45 @@
-import React from 'react'
-import {useNavigate}  from 'react-router-dom';
+import React, { useEffect,useState } from 'react'
+import {useNavigate ,Link}  from 'react-router-dom';
 import './FreshBookingHome.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllFreshProjectAction } from '../../Action/freshProjectAction';
+import { LuOrigami } from 'react-icons/lu';
+
+import FreshBookingPost from './FreshBookingPost';
+
 export default function FreshBookingHome(){
 
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "New Launch":
+        return "text-warning "; 
+      case "Ready to Move":
+        return "text-success fw-medium"; 
+      case "Under Construction":
+        return "text-danger fw-medium"; 
+      default:
+        return "text-white"; 
+    }
+  };
+  
+
+  const HandleFreshbookingUrl = (projectName)=>{
+    return projectName.split(" ").join("-").toLowerCase();
+  }
+  
+
+
+const dispatch=useDispatch()
+
+  const { data:allFreshProjectData } = useSelector((state) => {
+    return state.allFreshProjectData;
+  });
+  const allFreshBookingCard = allFreshProjectData?.projectData ||  [] ;
+
+  useEffect(()=>{
+dispatch(getAllFreshProjectAction())
+  },[])
   const scrollFreshBookingLeft = ()=>{
     document.querySelector('.fresh-booking-home-card-container').scrollBy({
       left: -400,
@@ -17,9 +53,9 @@ export default function FreshBookingHome(){
     });
   }
 
-const HandleFreshBookingNavigation = (post)=>{
-  navigate('/fresh-bookings', { state: { users: posts } })
-}
+// const HandleFreshBookingNavigation = (post)=>{
+//   navigate('/fresh-bookings', { state: { users: posts } })
+// }
 
   const posts = [
     {
@@ -133,16 +169,21 @@ const HandleFreshBookingNavigation = (post)=>{
     
 ]
       const navigate = useNavigate();
+
+
+  
+      console.log(allFreshBookingCard);
+
   return (
 
-    <div className=' d-flex flex-column gap-4' style={{width:'90%', margin:'40px auto'}}>
+    <div className=' d-flex flex-column gap-4' style={{width:'80%',maxWidth:'1300px', margin:'40px auto'}}>
       <div className='d-md-flex justify-content-between m-auto ' style={{width:'100%'}}>
         <div>
           <h2 className='' style={{ fontWeight:'700', color:'rgba(51, 51, 51, 1)'}}>Discover Your Perfect Home!</h2>
           <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
         </div>
         <div className=' ' style={{minWidth:'202px'}}>
-        <button className=" d-flex justify-content-center align-content-center gap-2   " onClick={()=>{navigate('/Fresh-bookings ')}} style={{padding:'10px 16px', borderRadius:'100px',backgroundColor:'white' , border:'1px solid #afb8c0 '}} >
+        <button className=" d-flex justify-content-center align-content-center gap-2   " onClick={()=>{navigate('/fresh-bookings', { state: {allCardData:allFreshBookingCard} } )}} style={{padding:'10px 16px', borderRadius:'100px',backgroundColor:'white' , border:'1px solid #afb8c0 '}} >
                   <span className="fs-6 fw-semibold lh-base " style={{color:'var(--main-light-clr)'}} >View All Properties <img src="/img/right-arrow.svg" alt="" /></span>
                 </button>
         </div>
@@ -152,47 +193,66 @@ const HandleFreshBookingNavigation = (post)=>{
           <button onClick={scrollFreshBookingLeft} className='bg-white border-0 d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px',boxShadow:'#000 0px 2px 8px' }}>
           <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
-                  </svg>
+          </svg>
           </button>
         </div>
         <div className='fresh-booking-home-card-container d-flex overflow-scroll ' style={{width:'100%' , margin:'0 auto', scrollbarWidth:'none'}}>
-          {posts.map(posts => (
-             <div className="fresh-booking-home-card d-flex align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${posts.imgUrl})`, position:'relative'}} >
-        
-        <div className='fresh-booking-home-card-shadow '>
-        <div className="fresh-booking-home-card-content w-100 d-flex flex-column  gap-2 " style={{ padding:'8px 12px 12px 12px', position:'absolute' }} >
-               <div  className="fresh-booking-home-card-upper-content d-flex flex-column  w-100 h-50  pb-2" >
-                 <div className="fresh-booking-home-card-price w-100 h-50  fw-bold overflow-hidden text-nowrap text-truncate " style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {posts.price}</div>
-                 <div  className="fresh-booking-home-card-projectname w-100 g-50 overflow-hidden text-nowrap text-truncate "style={{ height:'fitContent'}}><span>{posts.projectName}</span></div>
-                 <div className="fresh-booking-home-card-location w-100  fw-normal overflow-hidden text-nowrap text-truncate" style={{color:'rgba(255, 255, 255, 1)'}} >{posts.location}</div>
-                 <div className="fresh-booking-home-card-amanities w-100 text-light  overflow-hidden text-nowrap text-truncate "  style={{ fontWeight: "600", fontSize:'14px' }}>{posts.amanities}</div>
-               </div>
-               <div  className="d-flex flex-column gap-2 w-100 h-50" >
-               <div  className={` fresh-booking-status w-100  fw-light fs-6  `} >Status: <span className={` ${posts.status =='New Launched'? 'statusGreen':''}`}>{posts.status}</span></div>
-                
-                 <div className='w-100 ' >
-                   <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
-                  >
-                     View More <img src="/img/solar_arrow-right-up-outline.svg" alt="logo" />
-                   </button>
-                 </div>
-               </div>
+
+          {allFreshBookingCard.length>0?( 
+                allFreshBookingCard.map(cardData => (
+                  <div className="fresh-booking-home-card d-flex align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
+             
+             <div className='fresh-booking-home-card-shadow '>
+             <div className="fresh-booking-home-card-content w-100 d-flex flex-column  gap-2 " style={{ padding:'8px 12px 12px 12px', position:'absolute' }} >
+                    <div  className="fresh-booking-home-card-upper-content d-flex flex-column  w-100 h-50  pb-2" >
+                      <div className="fresh-booking-home-card-price w-100 h-50  fw-bold overflow-hidden text-nowrap text-truncate " style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {cardData?.projectBasicDetail?.minPrice} Cr</div>
+                      <div  className="fresh-booking-home-card-projectname w-100 g-50 overflow-hidden text-nowrap text-truncate "style={{ height:'fitContent'}}><span>{cardData?.projectBasicDetail?.projectName}</span></div>
+                      <div className="fresh-booking-home-card-location w-100  fw-normal overflow-hidden text-nowrap text-truncate" style={{color:'rgba(255, 255, 255, 1)'}} >{cardData?.projectBasicDetail?.locality}, {cardData?.projectBasicDetail?.projectCity}</div>
+                      <div className="fresh-booking-home-card-amanities w-100 text-light  overflow-hidden text-nowrap text-truncate "  style={{ fontWeight: "600", fontSize:'14px' }}>{cardData?.projectBasicDetail?.projectType} {cardData?.projectBasicDetail?.projectAdType}</div>
+                    </div>
+                    <div  className="d-flex flex-column gap-2 w-100 h-50" >
+                    <div  className={`fresh-booking-status w-100 fw-light fs-6 `} >Status: <span className={`${getStatusColor(cardData?.projectBasicDetail?.projectStatus)}`} >{cardData?.projectBasicDetail?.projectStatus}</span></div>
+                     
+                      <div className='w-100 ' >
+                      <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
+                        <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
+                       >
+                          View More <img src="/img/solar_arrow-right-up-outline.svg" alt="logo" />
+                        </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
              </div>
-        </div>
+               
+                
+              </div>
           
-           
-         </div>
-     
-    ))}
+         ))
+          ):(<p>Ruko jra sabar kro</p>)}
+
+      
         </div>
         <div className='d-flex d-none justify-content-center  position-absolute' style={{right:'0px',top:'100px', zIndex:'3'}}>
-          <button  onClick={scrollFreshBookingRight} className=' border-0 bg-white d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px' ,boxShadow:'#000 0px 2px 8px'  }}>
+
+       
+        <button  onClick={scrollFreshBookingRight} className=' border-0 bg-white d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px' ,boxShadow:'#000 0px 2px 8px'  }}>
           <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                  </svg>
-          </button>
+          </svg>
+        </button>
+      
+         
         </div>
       </div>
     </div>
+    
+    // <div>
+    //   {allFreshBookingCard.projectData.map((cardData)=>(
+    //     <p>{cardData?.projectBasicDetail?.projectName}</p>
+    //   ))}
+    // </div>
   )
 }
+
+

@@ -259,7 +259,6 @@ const PropertySection = () => {
   )}
   </>
 }
-
                 </div>
                 
                 <button className="scroll-button left" onClick={scrollLeft}>

@@ -75,6 +75,7 @@ import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
 import FreshBookingHome from "./FreshBookingHome.jsx";
+import FreshBookingPost from "./FreshBookingPost.jsx";
 const HeroSection = () => {
 
   const dispatch = useDispatch();
@@ -244,9 +245,9 @@ const HeroSection = () => {
   }, []);
 
 
-  const HandleFreshbookingNavigation=()=>{
-    navigate('/fresh-bookings')
-  }
+  // const HandleFreshbookingNavigation=()=>{
+  //   navigate('/fresh-bookings')
+  // }
 
   return (
     <div className="hero-main-parent-div"><Helmet>
@@ -405,7 +406,7 @@ const HeroSection = () => {
                   );
                 })}
                 <div> 
-                  <button onClick={HandleFreshbookingNavigation}>button</button>
+                  {/* <button onClick={HandleFreshbookingNavigation}>button</button> */}
                 </div>
               </div>
               <div className="search-box">
@@ -674,6 +675,7 @@ const HeroSection = () => {
 
       <PropertySection />
       <FreshBookingHome/>
+      {/* <FreshBookingPost/> */}
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">

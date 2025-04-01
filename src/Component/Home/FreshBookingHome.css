@@ -21,7 +21,7 @@
 }
 
 .fresh-booking-home-card-container{
-    /* transform: rotate(-1deg); */
+    /* transform: rotate(-2deg); */
     gap: 12px;
 }
 .fresh-booking-search-button{
@@ -51,7 +51,7 @@
     
         .fresh-booking-home-card-content{
             /* top:182px; */
-           transform:translateY(-146px);
+           transform:translateY(-71%);
            background-color: rgb(29, 53, 87);
            /* animation:  move2bottom 0.8s ease-in-out forwards; */
         }

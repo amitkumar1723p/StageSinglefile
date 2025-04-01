@@ -1,10 +1,13 @@
 import React from 'react'
-
+import { useLocation,Link } from 'react-router-dom';
 import './FreshBookingPost.css';
 export default function FreshBookingPost() {
 
-
-
+const capturedData = useLocation();
+const cardData = capturedData.state?.allCardData;
+const HandleFreshbookingUrl = (projectName)=>{
+    return projectName.split(" ").join("-").toLowerCase();
+  }
 const posts = [
     {
         id:1,
@@ -117,6 +120,8 @@ const posts = [
     
 ]
 
+console.log(cardData)
+
   return (
    
  
@@ -196,24 +201,28 @@ const posts = [
 </div>
 
 <div className={`fresh-booking-card-container`}  >
-{posts.map(posts => (
-      <div className="fresh-booking-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${posts.imgUrl})`, position:'relative'}} >
+{cardData.map(cardData => (
+      <div className="fresh-booking-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
         
           <div className="fresh-booking-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgb(29, 53, 87)', padding:'8px 12px 12px 12px', position:'absolute' }} >
             <div  className="fresh-booking-card-upper-content d-flex flex-column gap-1 w-100 h-50  pb-2" >
-              <div className="fresh-booking-card-price w-100 h-50 fs-5  fw-bold " style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {posts.price}</div>
-              <div  className="fresh-booking-card-projectname w-100 g-50 fw-bold text-white fs-5">{posts.projectName}</div>
-              <div className="fresh-booking-card-location w-100  fw-normal" style={{color:'rgba(255, 255, 255, 1)'}} >{posts.location}</div>
-              <div className="fresh-booking-card-amanities w-100 text-light  "  style={{ fontWeight: "600", fontSize:'14px' }}>{posts.amanities}</div>
+              <div className="fresh-booking-card-price w-100 h-50 fs-5  fw-bold " style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {cardData?.projectBasicDetail?.minPrice} Cr</div>
+              <div  className="fresh-booking-card-projectname w-100 g-50 fw-bold text-white fs-5">{cardData?.projectBasicDetail?.projectName}</div>
+              <div className="fresh-booking-card-location w-100  fw-normal" style={{color:'rgba(255, 255, 255, 1)'}} >{cardData?.projectBasicDetail?.locality}, {cardData?.projectBasicDetail?.projectCity}</div>
+              <div className="fresh-booking-card-amanities w-100 text-light  "  style={{ fontWeight: "600", fontSize:'14px' }}>{cardData?.projectBasicDetail?.projectType} {cardData?.projectBasicDetail?.projectAdType}</div>
             </div>
             <div  className="d-flex flex-column gap-2 w-100 h-50" >
             <div  className={` fresh-booking-status w-100  fw-light fs-6  `} >Status: <span className={` ${posts.status =='New Launched'? 'statusGreen':''}`}>{posts.status}</span></div>
              
               <div className='w-100' >
-                <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
+
+                 <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
+                 <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
                >
                   View More <img src="/img/solar_arrow-right-up-outline.svg" alt="logo" />
                 </button>
+                 </Link>
+              
               </div>
             </div>
           </div>
@@ -221,7 +230,6 @@ const posts = [
       </div>
     ))}
 </div>
-
 </div>
 
 
