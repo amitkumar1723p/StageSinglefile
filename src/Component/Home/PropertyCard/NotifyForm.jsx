@@ -27,9 +27,18 @@ const NotifyForm = ({ SetShow }) => {
       ...NotifyData,
       Name: medata.user.Name,
       Email: medata.user.email,
-      ProjectName: querry.get("ProjectName"),
+      
     };
-
+    if( querry.get("ProjectName")) {
+      NotifyDataObj.ProjectName= querry.get("ProjectName")
+    }else if( querry.get("locality")){
+      NotifyDataObj.Locality= querry.get("locality")
+    }else if(querry.get("sector")){
+      NotifyDataObj.Landmark= querry.get("sector")
+    }
+    else{
+      NotifyDataObj.City=querry.get("city")
+    }
     dispatch(NotifyAction(NotifyDataObj));
   };
 

@@ -196,6 +196,7 @@ const HeroSection = () => {
           //   .replaceAll(" ", "-")
           //   .replace(",", "")
           //   .replaceAll("/", "-")}-${PostData._id}`
+          console.log(ProjectNameObjectData)
 
           navigate(
             `/home/card?${ 
@@ -206,7 +207,7 @@ const HeroSection = () => {
             }${
               (ProjectNameObjectData?.s_type?.trim() === "Locality" || 
               ProjectNameObjectData?.mostMatchedField?.trim() === "Locality") && ProjectNameObjectData?.locality
-              ? `locality=${ProjectNameObjectData?.locality.toLowerCase().replaceAll(" ", "-")}&`
+              ? `locality=${ProjectNameObjectData?.locality.toLowerCase().replaceAll(" ", "-")}&city=${ProjectNameObjectData?.city.toLowerCase().replaceAll(" ", "-")}&`
               : ""
             }${
               (ProjectNameObjectData?.s_type?.trim() === "City" || 
@@ -216,7 +217,7 @@ const HeroSection = () => {
             }${
               (ProjectNameObjectData?.s_type?.trim() === "Landmark" || 
               ProjectNameObjectData?.mostMatchedField?.trim() === "Landmark") && ProjectNameObjectData?.sector
-              ? `sector=${ProjectNameObjectData?.sector.toLowerCase().replaceAll(" ", "-")}&`
+              ? `sector=${ProjectNameObjectData?.sector.toLowerCase().replaceAll(" ", "-")}&city=${ProjectNameObjectData?.city.toLowerCase().replaceAll(" ", "-")}&`
               : ""
             }PropertyAddType=${SearchPropertyAddType}`
           );
@@ -500,6 +501,7 @@ const HeroSection = () => {
                           dispatchPayload.City = city?.trim();
                         } else if (s_type?.trim() === "Landmark" || mostMatchedField?.trim() === "Landmark") {
                           dispatchPayload.Sector = sector?.trim();
+                          dispatchPayload.City = city?.trim();
                         }
                         
                         // Dispatch action
@@ -554,6 +556,7 @@ const HeroSection = () => {
                           dispatchPayload.City = city?.trim();
                         } else if (s_type?.trim() === "Landmark" || mostMatchedField?.trim() === "Landmark") {
                           dispatchPayload.Sector = sector?.trim();
+                          dispatchPayload.City = city?.trim();
                         }
                         
                         // Dispatch action
