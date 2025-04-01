@@ -35,6 +35,7 @@ export default function AllUserResponseAction() {
   useEffect(() => {
     // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
     if (searchText && searchbtn === true) {
+  
       dispatch(getAllUserResponseAction(page, searchText));
 
       setSearchbtn(false)
