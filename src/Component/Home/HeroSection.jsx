@@ -56,6 +56,7 @@ import { motion } from "framer-motion";
 import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
+
 import { UserContext } from "../CreateContext/CreateContext";
 import RentAgreement from "./RentAgreement";
 // import TenantDetailsForm from "./TenantDetailsForm";
@@ -643,7 +644,28 @@ const HeroSection = () => {
 
       {/* changes is complete in hero-section */}
 
+      {/* <div className="floating-buttons ">
+          Call Button
+          <Link to="tel:+917837840785" className="call-button">
+            <img src="/img/call.png" alt="Call" />
+          </Link>
+          WhatsApp Button
+          <Link
+            to="https://wa.me/7837840785"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whatapps-section-floating"
+          >
+            <img src="/img/whatapp.png" alt="WhatsApp" />
+          </Link>
+        </div> */}
+
+
       {!isHidden && (
+
+
+
+        
       <div className="contact-sidebar">
       {/* Customer Support */}
       <div 
@@ -823,6 +845,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
+        
         </>
       )}
       {/* Sale Component  */}
@@ -870,13 +893,13 @@ const HeroSection = () => {
       {/* <TenantDetailsForm /> */}
       {/* Buy Component  */}
 
-      {showPropertyRequirement && (
+      {/* {showPropertyRequirement && (
         <WindowComponent
           Component={PostPropertyRequerment}
           SetShow={setshowPropertyRequirement}
           BtnRef={PropertyRequirementBtnRef}
         />
-      )}
+      )} */}
     </div>
   );
 };

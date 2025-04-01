@@ -1,6 +1,6 @@
 import React from 'react';
 import './SingleFreshBooking.css';
-export default function SingleFreshBookingSizeAndPrice() {
+export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}) {
 
   const handleRippleEffect = (e) => {
     const button = e.currentTarget;
@@ -23,40 +23,45 @@ export default function SingleFreshBookingSizeAndPrice() {
   };
   return (
     <>
-      <div className="bg-white d-flex justify-content-center align-items-center min-vh-100">
+      <div className="bg-white d-flex justify-content-center align-items-center min-vh-80">
         <div className="container">
           <h3 className="mb-3 mt-3   Single-fresh-Size-Price">How Much</h3>
-          <h3 className=" fw-bold  mb-5 Single-fresh-Size-Price-heading " style={{color: '#1D3557'}}>DLF Primus Size And Price</h3>
+          <h3 className=" fw-bold  mb-5 Single-fresh-Size-Price-heading " style={{color: '#1D3557'}}>{project?.projectName} Size And Price</h3>
           <div className="Single-fresh-unit-main">
             {/* Unit Type Column */}
 
             <div className="col-12 col-md-4 text-center d-flex flex-column Single-Fresh-table">
               <div className=" text-white py-1 Single-fresh-unit" style={{  backgroundColor: '#1D3557' , borderRadius: '32px 32px 0px 0px' }}>UNIT TYPE</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">3 BHK + S</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">3 BHK + S</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">3 BHK + S</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">3 BHK + S</div>
+              {projectPrice?.map((projectPrice, index) => (
+              <div key={index} className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">
+                {projectPrice?.type} 
+              </div>
+            ))}
             </div>
 
             {/* Unit Size Column */}
 
             <div className="col-12 col-md-4 text-center d-flex flex-column Single-Fresh-table">
               <div className=" text-white py-1 Single-fresh-unit" style={{  backgroundColor: '#1D3557' , borderRadius: '32px 32px 0px 0px' }}>UNIT SIZE</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">141 SQ.YD</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">158 SQ.YD</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">141 SQ.YD</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">158 SQ.YD</div>
+              {projectPrice?.map((projectPrice, index) => (
+              <div key={index} className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">
+                {projectPrice?.size} 
+              </div>
+            ))}
             </div>
 
             {/* Unit Price Column */}
 
             <div className="col-12 col-md-4 text-center d-flex flex-column Single-Fresh-table">
-              <div className=" text-white py-1 Single-fresh-unit" style={{  backgroundColor: '#1D3557' , borderRadius: '32px 32px 0px 0px' }}>UNIT PRICE</div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">2.5 Cr <sup>*</sup></div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">2.5 Cr <sup>*</sup></div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">2.5 Cr <sup>*</sup></div>
-              <div className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">2.5 Cr <sup>*</sup></div>
+            <div className="text-white py-1 Single-fresh-unit" style={{ backgroundColor: '#1D3557', borderRadius: '32px 32px 0px 0px' }}>
+              UNIT PRICE
             </div>
+            {projectPrice?.map((projectPrice, index) => (
+              <div key={index} className="py-3 flex-fill d-flex align-items-center justify-content-center fw-medium">
+                {projectPrice?.price} <sup>*</sup>
+              </div>
+            ))}
+          </div>
           </div>
         </div>
       </div>

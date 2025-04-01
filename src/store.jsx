@@ -52,6 +52,8 @@ import {
   getPostsByAddressReducer
 } from "./Reducer/postReducer.jsx";
 
+import { createfreshProjectReducer , getviewoneProjectReducer} from "./Reducer/freshProjectReducer.jsx";
+
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
   userData: CreateUserReducer,
@@ -96,7 +98,11 @@ const reducer = combineReducers({
   serachResponse:getSerachPropertyReducer,
   AllUserResponseAction_Store:getAllUserResponseActionReducer,
   SingleUserResponseAction_Store:getSingleUserResponseActionReducer,
-  postByAddress:getPostsByAddressReducer
+  postByAddress:getPostsByAddressReducer,
+
+  // fresh project reducer
+  // createfreshProjectReducer,
+  getFreshProject:getviewoneProjectReducer
 });
 
 let initialState = {};

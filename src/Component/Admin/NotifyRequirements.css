@@ -131,6 +131,10 @@
     border-collapse: collapse;
   }
   
+  .notify-requirements-table-thead{
+    position: sticky;
+    top: -1px;
+  }
   .notify-table th, .notify-table td {
     padding: 8px;
     border: 1px solid #ddd;

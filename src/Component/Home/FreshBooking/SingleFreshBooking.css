@@ -3,7 +3,12 @@
   height: 85%;
   /* background: linear-gradient(to right, rgb(167, 219, 255), rgb(167, 219, 255) ); */
   background: #9cecfb; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #9cecfb, #65c7f7, #0052d4); /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    #9cecfb,
+    #65c7f7,
+    #0052d4
+  ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4);
   border-top-left-radius: 180px;
   border-bottom-left-radius: 180px;
@@ -22,34 +27,43 @@
     justify-content: space-between;
 } */
 
+.Single-fresh-logo-a  {
+  width: 117px;
+}
+
 .single-fresh-dlf-logo {
-  width: 160px;
+  width: 100%;
+  height: auto;
+}
+
+.single-fresh-hero-conainer-main {
+  background-color: #00000075;
 }
 
 .single-fresh-hero-content {
-  top: 200px;
-  left: 70px;
+  top: 189px;
+  left: 52px;
 }
 
 .single-fresh-hero-start-price {
   background-color: white;
-  color: #F58220;
+  color: #f58220;
   padding: 7px;
   border-radius: 7px;
 }
 
 .Single-fresh-user-img {
-  background: url('/public/img/Single-fresh-user.svg') no-repeat left center;
+  background: url("/public/img/Single-fresh-user.svg") no-repeat left center;
   background-size: 20px 20px;
   padding-left: 30px;
 }
 .Single-fresh-email-img {
-  background: url('/public/img/Single-main-email.svg') no-repeat left center;
+  background: url("/public/img/Single-main-email.svg") no-repeat left center;
   background-size: 20px 20px;
   padding-left: 30px;
 }
 .Single-fresh-number-img {
-  background: url('/public/img/Single-fresh-call.svg') no-repeat left center;
+  background: url("/public/img/Single-fresh-call.svg") no-repeat left center;
   background-size: 20px 20px;
   padding-left: 30px;
 }
@@ -63,13 +77,10 @@
   top: 159px;
 }
 
-
-
 .Single-fresh-list-footer {
-  display: flex
-  ;
-      flex-direction: column;
-      gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .Single-fresh-about-project-p {
@@ -98,11 +109,9 @@
   gap: 30px;
 }
 
-
 .single-fresh-hero-icon {
-  display: flex
-;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .main-about-project-container {
@@ -112,8 +121,6 @@
 .text-justify {
   text-align: justify;
 }
-
-
 
 .Single-fresh-reserve-post-btn {
   display: inline-flex;
@@ -129,7 +136,8 @@
   z-index: 10;
 }
 @keyframes waveMotion {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(-90deg) translateY(0) translateX(0);
   }
   25% {
@@ -151,8 +159,6 @@
   z-index: 10;
   animation: waveMotion 2s ease-in-out infinite;
 }
-
-
 
 .Single-fresh-reserve-post-span {
   color: #fff;
@@ -201,6 +207,49 @@
   font-size: 32px;
 }
 
+.Single-fresh-amenities-content {
+  height: 170px;
+  padding: 20px;
+  background-color: white;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.Single-fresh-map-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.Single-fresh-map-buttons button {
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.Single-fresh-map-buttons button:hover {
+  color: #007bff;
+}
+
+.Single-fresh-map-buttons button svg {
+  width: 16px;
+  height: 16px;
+  fill: #333;
+  transition: fill 0.3s ease;
+}
+
+.Single-fresh-map-buttons button:hover svg {
+  fill: #007bff;
+}
+
 .Single-fresh-floor-plan-h3 {
   font-size: 28px;
 }
@@ -242,11 +291,9 @@
   line-height: 2;
 }
 
-
 .Single-fresh-location-map-list {
   font-size: 17px;
 }
-
 
 .Single-fresh-unit {
   font-size: 24px;
@@ -266,8 +313,6 @@
   font-size: 32px;
 }
 
-
-
 .single-fresh-hero-label {
   font-size: 16px;
 }
@@ -280,9 +325,9 @@
 }
 
 .Single-fresh-form-input:focus {
-  border-color: #f58220; 
+  border-color: #f58220;
   box-shadow: 0 0 5px rgba(245, 130, 32, 0.5);
-  outline: none; 
+  outline: none;
 }
 
 .single-fresh-form-content {
@@ -294,15 +339,19 @@
   padding: 40px 30px;
 }
 
+@media (max-width: 768px) {
+  .single-fresh-curved-section {
+    background: radial-gradient(
+      circle at 70% 50%,
+      rgb(167, 219, 255) 0%,
+      rgb(167, 219, 255) 0%,
+      transparent 0%
+    );
+  }
 
-@media (max-width: 768px) { 
-    .single-fresh-curved-section {
-       background: radial-gradient(circle at 70% 50%, rgb(167, 219, 255) 0%, rgb(167, 219, 255) 0%, transparent 0%);
-    }
-
-    .Single-fresh-reserve-post-button {
-      right: -9.5%;
-    }
+  .Single-fresh-reserve-post-button {
+    right: -9.5%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -314,7 +363,7 @@
   }
 
   .single-fresh-dlf-logo {
-    width: 100px;
+    width: 50%;
   }
 
   .single-fresh-hero-value {
@@ -322,7 +371,28 @@
   }
 
   .Single-fresh-highlight-list {
-  font-size: 12px;
+    font-size: 12px;
+  }
+
+  .Single-fresh-unit-main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .Single-fresh-about-project-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Single-fresh-Highlight-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Single-fresh-unit-main {
+    display: flex;
+    flex-direction: column;
   }
 
   .Single-fresh-Size-Price {
@@ -358,7 +428,7 @@
   .Single-fresh-facilities {
     font-size: 19px;
   }
-  
+
   .Single-fresh-amenities {
     font-size: 22px;
   }
@@ -374,27 +444,27 @@
   .Single-fresh-location-map-h3 {
     font-size: 19px;
   }
-  
+
   .Single-fresh-location-map-h2 {
     font-size: 22px;
   }
-  
+
   .Single-fresh-location-map-li {
     gap: 13px;
   }
 
   .Single-fresh-location-map-list {
     font-size: 13px;
-}
+  }
 
-.single-fresh-builder-p { 
-  font-size: 12px;
-}
+  .single-fresh-builder-p {
+    font-size: 12px;
+  }
 
   .Single-fresh-site-map-h3 {
     font-size: 19px;
   }
-  
+
   .Single-fresh-site-map-h2 {
     font-size: 22px;
   }
@@ -405,7 +475,6 @@
   .single-fresh-builder-h2 {
     font-size: 22px;
   }
-  
 
   .Single-fresh-Size-Price-heading {
     font-size: 22px;
@@ -422,7 +491,6 @@
   .Single-fresh-reserve-post-button {
     right: -15.5%;
   }
-  
 
   .singel-fresh-about-project-img {
     max-width: 10px 0px !important;
@@ -434,12 +502,10 @@
     align-items: center;
     justify-content: center;
   }
-
-
 }
 
-@media (max-width: 375px) { 
-  .Single-fresh-reserve-post-button{
+@media (max-width: 375px) {
+  .Single-fresh-reserve-post-button {
     right: -20.5%;
   }
 }

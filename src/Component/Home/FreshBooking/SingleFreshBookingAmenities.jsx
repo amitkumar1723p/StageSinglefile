@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-export default function SingleFreshBookingAmenities() {
+export default function SingleFreshBookingAmenities({project , amenitiesContent}) {
  const [count, setCount] = useState(0);
     
   const amenities = [
@@ -47,31 +47,34 @@ export default function SingleFreshBookingAmenities() {
     color: white !important; /* Change text color to white */
   }`}
   </style>
-<div className="container mt-5 mb-5">
-      <h3 className="mb-3 Single-fresh-facilities">Project Facilities</h3>
-      <h3 className=" fw-bold  mb-3 Single-fresh-amenities" style={{ color: '#1D3557'}}>The DLF Primus Amenities</h3>
-      <div className="row row-cols-2 row-cols-md-6 mt-4 mb-4 g-4">
-        {amenities.map((amenity, index) => (
-          <div key={index} className="col d-flex">
-            <div
-              className="d-flex flex-column justify-content-between align-items-center text-center w-100 hover-effect"
-              style={{
-                height: "170px",
-                padding: "20px",
-                backgroundColor: "white",
-                transition: "0.3s ease-in-out",
-                cursor: "pointer",
-              }}
-            >
-              <div className="icon-container">
-                <img src={amenity.icon} alt={amenity.name} className="amenity-icon" />
-              </div>
-              <p className="mt-2 mb-0 fw-medium amenity-text">{amenity.name}</p>
-            </div>
+  <div className="container mt-5 mb-5">
+  <h3 className="mb-3 Single-fresh-facilities">Project Facilities</h3>
+  <h3 className="fw-bold mb-3 Single-fresh-amenities" style={{ color: '#1D3557' }}>
+    {project?.projectName} Amenities
+  </h3>
+  <div className="row row-cols-2 row-cols-md-6 mt-4 mb-4 g-4">
+    {Array.isArray(amenitiesContent) && amenitiesContent.map((item, index) => (
+      <div key={index} className="col d-flex">
+        <div
+          className="d-flex flex-column justify-content-between align-items-center text-center w-100 hover-effect Single-fresh-amenities-content"
+          style={{
+            height: "170px",
+            padding: "20px",
+            backgroundColor: "white",
+            transition: "0.3s ease-in-out",
+            cursor: "pointer",
+          }}
+        >
+          <div className="icon-container">
+            <img src={amenities.icon || ""} alt={item.name || ""} className="amenity-icon" />
           </div>
-        ))}
+          <p className="mt-2 mb-0 fw-medium amenity-text text-black">{item.name || item}</p>
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   </>
   )
 }

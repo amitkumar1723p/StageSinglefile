@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SingleFreshFooter() {
+export default function SingleFreshFooter({project}) {
   return (
     <div className=" bg-custom text-white Single-fresh-footer-container " style={{ backgroundColor: '#1a3b5d', backgroundImage: 'url(/img/Single-footer-bg1.png)' }}>
       <div className="row">
@@ -12,7 +12,7 @@ export default function SingleFreshFooter() {
           <p className="mt-2 fw-medium" style={{fontSize:'19px'}}> <img src="/img/hero-whatsapp.png" alt="whatsapp" style={{ width: '20px', height: '20px' }} /> Chat on WhatsApp</p>
         </div>
         <div className="col-md-4  text-md-left mb-4 mb-md-0">
-          <h2 className="font-weight-bold text-justify  mb-4">THE DLF PRIMUS</h2>
+          <h2 className="font-weight-bold text-justify  mb-4">{project?.projectName}</h2>
           <div className="row text-justify">
             <div className="col-6">
               <ul className="list-unstyled Single-fresh-list-footer">
@@ -39,7 +39,7 @@ export default function SingleFreshFooter() {
         <div className="col-md-4">
         <form className="Single-fresh-footer-form  top-3 end-0 me-3 container rounded shadow-lg text-light" style={{ maxWidth: '600px', width: '90%'  , padding:'20px' , backgroundColor: 'white'}}>
             <h2 className="text-center mb-2" style={{ color: '#333333', fontSize: '15px'}}>Get Expert Advice and Information for</h2>
-            <p className="text-center mb-4 fw-bold" style={{ color: '#333', fontSize: '17px'}}>DLF THE PRIMUS</p>
+            <p className="text-center mb-4 fw-bold" style={{ color: '#333', fontSize: '17px'}}>{project?.projectName}</p>
             <div className="d-flex flex-column gap-2">
             <div className="position-relative">
           <img src="/img/Single-fresh-user.svg" alt=""  className='position-absolute top-50 start-0 translate-middle-y ms-2'/>

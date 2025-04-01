@@ -1,6 +1,6 @@
 import React from 'react';
 import "./SingleFreshBooking.css";
-export default function SingleFreshBookingAboutProject() {
+export default function SingleFreshBookingAboutProject({projectHightlight , projectContent , project}) {
   return (
     <>
     <div className='about-project-container'>
@@ -103,29 +103,17 @@ export default function SingleFreshBookingAboutProject() {
                 <div className=" align-items-center Single-fresh-about-project-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxWidth: '550px' }}>
-                      <img 
-                        src="/img/building12.jpg"
-                        alt="DLF The Primus Building"
-                        className="img-fluid"
-                      />
+                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxHeight:'400px', height:'auto' }}>
+                  <img  style={{width:'100%', height:'auto'}} src= {projectHightlight?.url} alt="" />
                     </div>
                   </div>
 
                 
                   <div className="col-12 col-md-7 ps-md-5 ">
-                    <h3 className="text-dark mb-3 Single-fresh-about-project-h3" >About The Project</h3>
-                    <h2 className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>DLF The Primus</h2>
+                    <h3 className="text-dark mb-3 Single-fresh-about-project-h3" > About Project</h3>
+                    <h2 className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
                     <p className="text-muted Single-fresh-about-project-p">
-                      Trust is not bestowed easily but results from consistent
-                      adherence to promises and a dedication to excellence. SS Group,
-                      the foremost real estate developer in Gurugram with nearly three
-                      decades of steadfast commitment, enjoys an impressive history
-                      of successfully executing residential and commercial projects
-                      within the city. This accomplishment stems from financial
-                      acumen, engineering proficiency, and innovative design. Our
-                      company ethos prioritizes the creation of people-centric
-                      developments while also upholding environmental responsibility.
+                    {projectContent}
                     </p>
                   </div>
                 </div>
@@ -155,11 +143,12 @@ export default function SingleFreshBookingAboutProject() {
                 <div className=" align-items-center  Single-fresh-Highlight-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxWidth: '550px' }}>
+                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxHeight:'400px', height:'auto' }}>
                       <img 
-                        src="/img/building13.jpg"
-                        alt="DLF The Primus Building"
+                        src= {projectHightlight?.url}
+                        alt= {project?.projectName} 
                         className="img-fluid"
+                        style={{width:'100%', height:'auto'}}
                       />
                     </div>
                   </div>
@@ -167,28 +156,9 @@ export default function SingleFreshBookingAboutProject() {
                 
                   <div className="col-12 col-md-7 ps-md-5">
                     <h3 className="text-dark mb-3 Single-fresh-highlights-h3" >Highlights</h3>
-                    <h2 className=" fw-bold mb-4 Single-fresh-highlights-h2" style={{color: '#1D3557'}}>DLF The Primus</h2>
+                    <h2 className=" fw-bold mb-4 Single-fresh-highlights-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
                     <ul className="list-unstyled lh-base d-flex flex-column gap-3 Single-fresh-highlight-list">
-                      <li className="d-flex align-items-center gap-2">
-                        <img src="/img/tick-list.svg" className="me-2" width="19" alt="tick" />
-                        LOCATED IN SECTOR 90 | DESIGNED BY ACPL
-                      </li>
-                      <li className="d-flex align-items-center gap-2">
-                        <img src="/img/tick-list.svg" className="me-2" width="19" alt="tick" />
-                        DEDICATED MULTI-LEVEL CLUBHOUSE
-                      </li>
-                      <li className="d-flex align-items-center gap-2">
-                        <img src="/img/tick-list.svg" className="me-2" width="19" alt="tick" />
-                        LIBRARY | LUXURY RETAIL | GAMING ZONE | BOWLING ALLEY
-                      </li>
-                      <li className="d-flex align-items-center gap-2">
-                        <img src="/img/tick-list.svg" className="me-2" width="19" alt="tick" />
-                        MULTI-PURPOSE HALL | MULTI-PURPOSE LAWNS
-                      </li>
-                      <li className="d-flex align-items-center gap-2">
-                        <img src="/img/tick-list.svg" className="me-2" width="19" alt="tick" />
-                        FULLY-LOADED GYMNASIUM
-                      </li>
+                    {projectContent}
                     </ul>
                   </div>
                 </div>

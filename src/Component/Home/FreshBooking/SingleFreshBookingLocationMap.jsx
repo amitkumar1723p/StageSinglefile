@@ -1,45 +1,62 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 
-export default function SingleFreshBookingLocationMap() {
+export default function SingleFreshBookingLocationMap({project ,
+   siteMapContent , builderContent ,
+    builderImage , loctionContent,
+    sendDataToChild,projectLocation
+  }) {
+
+
+
+  const [selectedCategory, setSelectedCategory] = useState("conectivityLocation");
+
+  const [activeState, setActiveState] = useState("");
+
+useEffect(()=>{
+sendDataToChild(selectedCategory)
+},[selectedCategory])
+// console.log(projectLocation,"kjdff")
+// console.log(loctionContent,selectedCategory)
+// console.log(projectLocation)
   return (
     <>
       <div className="container py-5">
-        
-       
+         
         <div className="row">
           <div className="col-md-6 mb-4">
           <h3 className=" mb-3 col Single-fresh-location-map-h3">Location Map</h3>
-          <h2 className=" fw-bold  mb-5 Single-fresh-location-map-h2" style={{color: '#1D3557'}}>The DLF Primus</h2>
+          <h2 className=" fw-bold  mb-2 Single-fresh-location-map-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
           
-            <div className="">
-              <ul className="list-unstyled d-flex flex-column gap-4 Single-fresh-location-map-list">
-                <li className="d-flex  Single-fresh-location-map-li">
-                  {" "}
-                  <img src="/img/tick-list.svg" alt="tick" sizes="" srcSet="" />
-                  Near to the Popular Schools, Hospitals and Shopping Malls
-                </li>
-                <li className="d-flex Single-fresh-location-map-li">
-                  {" "}
-                  <img src="/img/tick-list.svg" alt="tick" sizes="" srcSet="" />8 km
-                  Distance from Rajiv Chowk Medicity
-                </li>
-                <li className="d-flex Single-fresh-location-map-li">
-                  {" "}
-                  <img src="/img/tick-list.svg" alt="tick" sizes="" srcSet="" />
-                  25 km Distance from IGI Airport
-                </li>
-                <li className="d-flex  Single-fresh-location-map-li">
-                  {" "}
-                  <img src="/img/tick-list.svg" alt="tick" sizes="" srcSet="" />
-                  Strategically loacted in Sector 82, Gurgaon
-                </li>
-                <li className="d-flex Single-fresh-location-map-li">
-                  {" "}
-                  <img src="/img/tick-list.svg" alt="tick" sizes="" srcSet="" />
-                  Close Proximity to the Proposed Metro Station
-                </li>
-              </ul>
-            </div>
+
+          <div className="Single-fresh-info-section">
+      {/* <div className="Single-fresh-map-buttons">
+        <button onClick={() => setSelectedCategory("conectivityLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Connectivity</button>
+        <button onClick={() => setSelectedCategory("hospitalsLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Hospitals</button>
+        <button onClick={() => setSelectedCategory("schoolLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Schools</button>
+        <button onClick={() => setSelectedCategory("shoppingLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Malls & Markets</button>
+        <button onClick={() => setSelectedCategory("bussinessLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Office Spaces</button>
+      </div> */}
+
+      <div className="Single-fresh-map-buttons">
+        <button onClick={() => setSelectedCategory("conectivityLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Connectivity</button>
+        <button onClick={() => setSelectedCategory("hospitalsLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Hospitals</button>
+        <button onClick={() => setSelectedCategory("schoolLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Schools</button>
+        <button onClick={() => setSelectedCategory("shoppingLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Malls & Markets</button>
+        <button onClick={() => setSelectedCategory("bussinessLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Office Spaces</button>
+      </div>
+      {/* {sendDataToChild.conectivityLocation== "conectivityLocation" && (
+        <p>{conectivityLocation}</p>
+      )} */}
+
+      <hr></hr>
+      <div className="info-content">
+    {/* <h4>{selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}</h4> */}
+
+    <ul className="list-unstyled Single-fresh-location-map-list">
+       <li className="d-flex gap-2"> <img src="/img/tick-list.svg" alt="" /> {projectLocation} </li>
+    </ul>
+</div>
+    </div>
           </div>
           <div className="col-md-6 single-fresh-map-img">
             <img
@@ -55,7 +72,7 @@ export default function SingleFreshBookingLocationMap() {
       <div className="container mt-4 mb-5 ">
         <h3 className="mb-3 Single-fresh-site-map-h3">Site Map </h3>
         <h2 className="fw-bold  mb-5" style={{color: '#1D3557'}}>
-          Master Plan Of DLF Primus
+          Master Plan Of  {project?.projectName}
         </h2>
       </div>
       <div
@@ -63,7 +80,7 @@ export default function SingleFreshBookingLocationMap() {
         style={{ height: "500px", width: "80%", margin: "auto" }}
       >
         <img
-          src="/img/site-map.png"
+          src={siteMapContent?.url}
           alt="site map"
           className="img-fluid w-100 h-100 rounded shadow"
           style={{ objectFit: "cover" }}
@@ -97,24 +114,19 @@ export default function SingleFreshBookingLocationMap() {
                   <div className="col-12 col-md-7 ps-md-5 ">
                     <h3 className="text-dark  single-fresh-builder-h3">Builder</h3>
                     <h2 className="fw-bold mb-4 single-fresh-builder-h2" style={{color:'#1D3557'}}>
-                      About DLF The Primus
+                      About {project?.projectName}
                     </h2>
                     <p className=" single-fresh-builder-p">
-                      At DLF, we take pride in our uncompromising integrity in
-                      customer engagement and quality assurance, and throughout
-                      our 75-year legacy, we have made it our core mission to
-                      provide real-estate development, management, and
-                      investment services of the highest calibre.
+                      {builderContent?.projectAboutBuilderContent}
                     </p>
                   </div>
-
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
                     <div
                       className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0"
                       style={{ maxWidth: "500px" }}
                     >
                       <img
-                        src="/img/builder-discussion.png"
+                        src={builderImage?.url}
                         alt="DLF The Primus Building"
                         className="img-fluid"
                       />
