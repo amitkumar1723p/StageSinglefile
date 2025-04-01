@@ -259,7 +259,7 @@ export default function Search({
                 onClick={() => handleSuggestionClick(suggestion)}
                 onMouseEnter={() => {
                   setkeydown(false);
-                  console.log("clll")
+                
                   if (keydown === false) {
                     setHighlightedIndex(index);
                   }

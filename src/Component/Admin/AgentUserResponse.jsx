@@ -14,7 +14,7 @@ export default function AgentUserResponse() {
     const { data: AllUserResponseAction_Store } = useSelector((state) => {
         return state.AllUserResponseAction_Store;
     });
-    console.log(AllUserResponseAction_Store)
+    
 
     // Pagination logic state
     const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination

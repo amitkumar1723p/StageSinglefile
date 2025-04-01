@@ -79,7 +79,7 @@ export default function AllUserResponseAction() {
     setSearchbtn(true)
     // For example, log the search text
   };
-  console.log(AllUserResponseAction_Store)
+
   return (
     <>
       <div className="border border-primary border-opacity-25 ">

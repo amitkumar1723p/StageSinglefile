@@ -154,7 +154,7 @@ export default function OwnerPostAllResponse() {
 
       // Check if the date is valid
       if (isNaN(dateObject)) {
-        console.log("Invalid Date:", dateTimeString);
+       
         return new Date(0); // Return a fallback invalid date
       }
 

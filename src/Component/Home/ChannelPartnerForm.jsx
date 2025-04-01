@@ -10,7 +10,7 @@ const ChannelPartnerForm = () => {
     <div className="Form-container w-[590px] bg-white rounded-[17px] shadow-[0px_0px_16px_0px_rgba(207,218,226,1.00)] border flex-col justify-start items-start inline-flex">
         <div className=" Form-container-upper self-stretch px-[30px] py-[20px] bg-[#1877f2] rounded-tl-xl rounded-tr-xl justify-between items-center gap-2.5 inline-flex">
             <div className="text-white text-lg font-medium font-['Inter'] leading-tight">Channel Partner Form</div>
-            <button className="w-6 h-6  bg-white rounded-[62px] " onClick={()=>{console.log("I am Clicked")}}>
+            <button className="w-6 h-6  bg-white rounded-[62px] ">
                 <img
                 className="transition duration-300 ease-in-out group-hover:brightness-75" 
                 src="/img/goBack.png" alt="exit"></img>

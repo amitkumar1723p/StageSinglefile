@@ -74,7 +74,7 @@ function ProfileHeader() {
 
   // Toggle the state when the button is clicked
   const handleToggleChange = () => {
-    console.log("toggled ",isToggled)
+    
     setIsToggled(!isToggled);
   };
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++Editing start here+++++++++++++++++

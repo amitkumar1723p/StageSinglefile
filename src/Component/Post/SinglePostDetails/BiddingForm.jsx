@@ -194,7 +194,7 @@ export default function BiddingFormForm({
     // Update the input value to display with commas
     event.target.value = formattedPrice;
   };
-console.log(PropertyAddress)
+
   return (
     <>
       {/* <div className="bidding-form-container"> */}

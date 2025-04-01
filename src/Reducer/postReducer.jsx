@@ -739,7 +739,7 @@ export const getSerachPropertyReducer=(state={},action)=>{
     };
 
     case"GetSerachPropertyClear":
-    console.log("clearr")
+  
     return {}; // Clears state when necessary
 
     default:

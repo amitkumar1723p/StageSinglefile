@@ -18,7 +18,7 @@ const TenantsDetailsForm = () => {
       <div className="tenant-details__container">
         <div className="tenant-details__header">
           <h2 className="tenant-details__title">Owner Seeking Some More Informationgit </h2>
-          <button className="tenant-details__close "  onClick={()=>{console.log("clicked")}}>&times;</button>
+          <button className="tenant-details__close " >&times;</button>
         </div>
 
         <form className="tenant-details__form">

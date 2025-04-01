@@ -28,7 +28,7 @@ const AllPostSearchFilter = () => {
   useEffect(() => {
     const projectName = searchParams.get("ProjectName");
     if (projectName) {
-      console.log(projectName.replaceAll("-", " "));
+    
       dispatch(
         GetSingleProjectNameDataAction({ ProjectName: projectName.replaceAll("-", " ") })
       );

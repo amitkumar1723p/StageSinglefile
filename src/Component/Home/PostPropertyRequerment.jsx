@@ -50,7 +50,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
       City:PostPropertyRequiremenLocalitytData?.city
     }
 
-    console.log(data)
+
 
     if (data.PropertyType !== "Plot" && (!data.PropertyType || !data.ProjectName || !data.BHKType || !data.FloorPreference || !data.Budget)) {
       alert("please fill all data")
@@ -227,7 +227,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
                     onChange={(e) => {
                       // Allow numbers and one decimal point only
                       let value = e.target.value;
-                      console.log(value)
+                      // console.log(value)
                       setPostPropertyRequirementData({
                         ...PostPropertyRequirementData,
                         plotSize: value,
