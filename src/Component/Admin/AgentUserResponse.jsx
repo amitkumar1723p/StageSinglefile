@@ -1,7 +1,7 @@
 // this page custom css insidet the file at bottom All user response action
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FormatDate } from '../../utils/CommonFunction'
+import { FormatDate, formatPrice } from '../../utils/CommonFunction'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserResponseAction } from '../../Action/userAction';
 import "./AllRegistrationResponse.css";
@@ -14,12 +14,12 @@ export default function AgentUserResponse() {
     const { data: AllUserResponseAction_Store } = useSelector((state) => {
         return state.AllUserResponseAction_Store;
     });
+    console.log(AllUserResponseAction_Store)
 
     // Pagination logic state
     const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
 
     const totalPages = AllUserResponseAction_Store?.totalPages
-
     useEffect(() => {
         if (AllUserResponseAction_Store == undefined || runPagination == true) {
 
@@ -34,9 +34,6 @@ export default function AgentUserResponse() {
 
             setSearchbtn(false)
         }
-
-
-
     }, [page, searchText, searchbtn]);
 
     const handlePrevPage = () => {
@@ -45,39 +42,28 @@ export default function AgentUserResponse() {
             setrunPagination(true);
         }
     };
-
     const handleNextPage = () => {
         if (page < totalPages) {
             setPage(page + 1);
             setrunPagination(true);
         }
     };
-
     const handlePageChange = (newPage) => {
         setPage(newPage); // Go to the selected page
         setrunPagination(true);
     };
-
     // Function to handle input changes
     const handleInputChange = (event) => {
         setSearchText(event.target.value); // Update state with input value
     };
-
     const handleSearch = () => {
         setSearchbtn(true)
         // For example, log the search text
     };
-
     return (
-
-
-
-
-
         <div className="border border-primary border-opacity-25 ">
             {AllUserResponseAction_Store?.data.length > 0 ? (
                 <>
-
                     <div className="d-flex justify-content-between">
                         <div className="">
                             <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
@@ -101,14 +87,14 @@ export default function AgentUserResponse() {
                         {AllUserResponseAction_Store?.data?.map((item) => {
                             return (
 
-                                <div className=" main-box-all-response-section all-response-section-admin  d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2 rounded w-fit d-flex justify-content-center align-items-center">
+                                <div className=" main-box-all-response-section all-response-section-admin  d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2 rounded w-fit ">
 
                                     <div className="agentuserName border-end border-primary px-1  border-opacity-25">
                                         <div className="">
                                             <p className="All-response-common-section  ">{item?.propertyDetail?.LocationDetails?.ProjectName}- <small className="fw-light">( {item?.propertyDetail?._id})</small></p>
                                             {/* <small className="fw-light">{item?.email}</small> */}
                                             <small className="">
-                                                {item?.latestCreateAt ? FormatDate(item?.propertyDetail?.createAt) : 'N/A'}
+                                                {item?.latestCreateAt ? FormatDate(item?.latestCreateAt) : 'N/A'}
                                             </small>
                                         </div>
                                     </div>
@@ -126,58 +112,29 @@ export default function AgentUserResponse() {
                                         <p className="text-center">
 
                                             <small className='fw-light'>User Name</small> <br />  <small className="fw-medium">{item?.userDetail?.Name} {item?.userDetail?.LastName}</small>
-
                                         </p>
                                     </div>
 
                                     <div className="  agentuserContact border-end border-primary border-opacity-25 px-1 ">
                                         <p className="text-center">
-                                            <small className='fw-light'>Response Date</small> <br /><small className="fw-medium">{item?.createAt ? FormatDate(item?.propertyDetail?.createAt) : 'N/A'}</small>
+                                            {/* {console.log("item.crateat",item.createAt)} */}
+                                            <small className='fw-light'>Response Date</small> <br /><small className="fw-medium">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small>
 
                                         </p>
-
                                     </div>
                                     <div className="  userContact border-end border-primary border-opacity-25 px-1 ">
                                         <p className="text-center">
-
-                                            {item?.Biddinguser ? <><small className='fw-light'>Offer Price</small><br />{item?.BidPrice}</> : <> <small className='fw-light'>Visit Date</small><br /><small className='fw-medium'>{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'}</small></>}
+                                            {item?.Biddinguser ? <><small className='fw-light'>Offer Price</small><br />{formatPrice(item?.BidPrice)}</> : <> <small className='fw-light'>Visit Date</small><br /><small className='fw-medium'>{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'}</small></>}
                                         </p>
                                     </div>
-
-
-                                    {/* 
-                                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                                    <p className=" all-response-data-section d-flex justify-content-center align-items-center ">Schedule :  &nbsp; <small className="fw-bold">  {item?.scheduleData?.length} </small> </p>
-                                </div>
-                                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                                    <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Offer Data : &nbsp; <small className="fw-bold"> {item?.offerData?.length}</small></p>
-                                </div> */}
-
-                                    {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
-
-
-
-                                    <div className="px-1">
-
-
-
+                                    <div className="agentuserContact  border-primary border-opacity-25 px-1 ">
                                         <p className="text-center">
                                             <small className='fw-light'>Lead Type</small> <br /><small className="fw-medium">{item?.Biddinguser ? <>Offer</> : <>Schedule</>}</small>
-
                                         </p>
-
                                     </div>
-
-
-                                    {/* </div> */}
-                                </div>
-
-                            )
+                                </div>)
                         })}
-
                     </div>
-
-
                     <div className=" text-center">
                         {/* Pagination controls start */}
                         <nav aria-label="Page navigation example">
@@ -187,9 +144,7 @@ export default function AgentUserResponse() {
                                         <span aria-hidden="true">&laquo;</span>
                                     </button>
                                 </li>
-
                                 {/* Dynamic page numbers */}
-
                                 {Array.from({ length: totalPages }, (_, i) => (
                                     <li
                                         key={i + 1}
@@ -203,7 +158,6 @@ export default function AgentUserResponse() {
                                         </button>
                                     </li>
                                 ))}
-
                                 <li className={`page-item ${page === totalPages ? "disabled" : ""}`}>
                                     <button className="page-link" onClick={handleNextPage}>
                                         <span aria-hidden="true">&raquo;</span>
@@ -211,9 +165,6 @@ export default function AgentUserResponse() {
                                 </li>
                             </ul>
                         </nav>
-
-                        {/* Pagination controls end  */}
-
                     </div>
                 </>
             ) : <>Sorry, there are currently no leads for the property assigned to you.</>}
