@@ -8,117 +8,20 @@ const cardData = capturedData.state?.allCardData;
 const HandleFreshbookingUrl = (projectName)=>{
     return projectName.split(" ").join("-").toLowerCase();
   }
-const posts = [
-    {
-        id:1,
-        imgUrl:'/img/buiding-1.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:2,
-        imgUrl:'/img/buiding-2.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'Ready To Move'
-    },
-    {
-        id:3,
-        imgUrl:'/img/building-3.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'Under Construction'
-    },
-    {
-        id:4,
-        imgUrl:'/img/About-img.webp',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:5,
-        imgUrl:'/img/buiding-4.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:6,
-        imgUrl:'/img/About-img.webp',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:7,
-        imgUrl:'/img/building-5.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:8,
-        imgUrl:'/img/buiding-6.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:9,
-        imgUrl:'/img/buiding-2.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:10,
-        imgUrl:'/img/building-5.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:11,
-        imgUrl:'/img/buiding-6.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    {
-        id:12,
-        imgUrl:'/img/buiding-2.jpg',
-        price:'2.5 Cr',
-        projectName:'DLF THE PRIMUS',
-        location:'DLF Phase 1, Gurugram',
-        amanities:'3BHK Residential Appartment',
-        status:'New Launched'
-    },
-    
-]
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "New Launch":
+        return "text-warning "; 
+      case "Ready to Move":
+        return "text-success fw-medium"; 
+      case "Under Construction":
+        return "text-danger fw-medium"; 
+      default:
+        return "text-white"; 
+    }
+  };
+
+
 
 console.log(cardData)
 
@@ -163,8 +66,8 @@ console.log(cardData)
 
 <div className=' fresh-booking-post-container d-flex flex-column gap-4'>
 
-<div className=' d-flex justify-content-between py-2'> 
-    <div  className=" d-flex align-items-center gap-4 w-50 ">
+<div className=' fresh-booking-post-search-filter-container d-flex justify-content-between py-2'> 
+    <div  className="fresh-booking-filter d-flex align-items-center justify-content-between gap-2 w-50 ">
         <div> 
             <select className='p-2' style={{border:'1px solid  rgba(29, 53, 87, 1)', borderRadius:'4px', minWidth:'150px'}}>  
             <option value="">Property Type</option>
@@ -203,16 +106,16 @@ console.log(cardData)
 <div className={`fresh-booking-card-container`}  >
 {cardData.map(cardData => (
       <div className="fresh-booking-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
-        
+        <div className='fresh-booking-home-card-shadow d-flex w-100 align-items-end overflow-hidden '>
           <div className="fresh-booking-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgb(29, 53, 87)', padding:'8px 12px 12px 12px', position:'absolute' }} >
             <div  className="fresh-booking-card-upper-content d-flex flex-column gap-1 w-100 h-50  pb-2" >
-              <div className="fresh-booking-card-price w-100 h-50 fs-5  fw-bold " style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {cardData?.projectBasicDetail?.minPrice} Cr</div>
-              <div  className="fresh-booking-card-projectname w-100 g-50 fw-bold text-white fs-5">{cardData?.projectBasicDetail?.projectName}</div>
-              <div className="fresh-booking-card-location w-100  fw-normal" style={{color:'rgba(255, 255, 255, 1)'}} >{cardData?.projectBasicDetail?.locality}, {cardData?.projectBasicDetail?.projectCity}</div>
-              <div className="fresh-booking-card-amanities w-100 text-light  "  style={{ fontWeight: "600", fontSize:'14px' }}>{cardData?.projectBasicDetail?.projectType} {cardData?.projectBasicDetail?.projectAdType}</div>
+              <div className="fresh-booking-card-price w-100 h-50 fs-6  fw-bold  overflow-hidden text-nowrap text-truncate" style={{ color: 'rgba(245, 130, 32, 1)' }} >₹ {cardData?.projectBasicDetail?.minPrice} Cr</div>
+              <div  className="fresh-booking-card-projectname w-100 g-50 fw-bold text-white fs-5 overflow-hidden text-nowrap text-truncate">{cardData?.projectBasicDetail?.projectName}</div>
+              <div className="fresh-booking-card-location w-100  fw-normal overflow-hidden text-nowrap text-truncate" style={{color:'rgba(255, 255, 255, 1)'}} >{cardData?.projectBasicDetail?.locality}, {cardData?.projectBasicDetail?.projectCity}</div>
+              <div className="fresh-booking-card-amanities w-100 text-light overflow-hidden text-nowrap text-truncate  "  style={{ fontWeight: "600", fontSize:'14px' }}>{cardData?.projectBasicDetail?.projectType} {cardData?.projectBasicDetail?.projectAdType}</div>
             </div>
             <div  className="d-flex flex-column gap-2 w-100 h-50" >
-            <div  className={` fresh-booking-status w-100  fw-light fs-6  `} >Status: <span className={` ${posts.status =='New Launched'? 'statusGreen':''}`}>{posts.status}</span></div>
+            <div  className={` fresh-booking-status w-100  fw-light fs-6 overflow-hidden text-nowrap text-truncate  `} >Status: <span  className={`${getStatusColor(cardData?.projectBasicDetail?.projectStatus)}`} >{cardData?.projectBasicDetail?.projectStatus}</span></div>
              
               <div className='w-100' >
 
@@ -226,6 +129,7 @@ console.log(cardData)
               </div>
             </div>
           </div>
+          </div>
         
       </div>
     ))}
@@ -235,3 +139,7 @@ console.log(cardData)
 
   )
 }
+
+
+
+

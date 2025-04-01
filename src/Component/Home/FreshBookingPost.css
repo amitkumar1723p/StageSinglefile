@@ -4,6 +4,9 @@
     margin: 0 auto;
     max-width: 1300px;
 }
+.freshbooking-post-search-filter-container{
+
+}
 
 .fresh-booking-post-search-container{
  border:2px solid rgba(29, 53, 87, 1);
@@ -96,6 +99,16 @@
     
 }
 @media(max-width:1024px){
+    .fresh-booking-post-search-filter-container{
+    flex-direction: column-reverse;
+    gap: 15px;
+    }
+
+    .fresh-booking-post-search-container{
+        width: 80%;
+        /* margin: 0 auto; */
+    }
+    
 
     .fresh-booking-card-container{
         display: grid;
@@ -120,6 +133,10 @@
 
 @media(max-width:575px){
 
+    .fresh-booking-post-search-container{
+        width: 100%;
+        /* margin: 0 auto; */
+    }
     .fresh-booking-card-container{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
