@@ -509,3 +509,34 @@
     right: -20.5%;
   }
 }
+
+
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #4b5563;
+  color: white;
+}
+
+
+
+th,
+td {
+  border: 1px solid #000;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+  padding: 8px;
+}
+
+
+tbody tr:nth-child(even) {
+  background-color: white;
+}

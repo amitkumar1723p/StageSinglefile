@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getviewOneProjectAction } from '../../../Action/freshProjectAction'
 export default function SingleFreshBooking() {
   const dispatch =useDispatch()
-let id='67ebcefec5b40466d81b3162'
+let id='67ebd7bb60d7d81302754d0c'
 
   useEffect(()=>{
    dispatch(getviewOneProjectAction(id))
@@ -40,6 +40,7 @@ let id='67ebcefec5b40466d81b3162'
   const[projectAboutBuilderImage,setprojectAboutBuilderImage]=useState()
   const[projectFloorplan,setprojectFloorplan]=useState()
   const[projectLocation,setprojectLocation]=useState()
+  const[locationImage,setlocationImage]=useState()
   
   useEffect(()=>{
  setprojectLogoImage(getFreshProjectdata?.projectData?.projectLogoImage)
@@ -55,6 +56,7 @@ let id='67ebcefec5b40466d81b3162'
  setprojectAboutBuilderImage(getFreshProjectdata?.projectData?.projectAboutBuilder?.projectAboutBuilderImage)
  setprojectFloorplan(getFreshProjectdata?.projectData?.projectFloorplan)
  setprojectLocation(getFreshProjectdata?.projectData?.projectLocation)
+ setlocationImage(getFreshProjectdata?.projectData?.projectLocation?.locationImage)
 
   }     ,[getFreshProjectdata])
 
@@ -66,10 +68,11 @@ let id='67ebcefec5b40466d81b3162'
    useEffect(() => {
      // This will run whenever locationContent or selectedCategory changes
      if (projectLocation && projectLocation[locationStatus]) {
-      projectLocation[locationStatus].map((item) => {
-         setVisibleLocation(item)
-        // console.log(item)
-       });
+      setVisibleLocation([projectLocation[locationStatus]])
+      // projectLocation[locationStatus].map((item) => {
+      //    setVisibleLocation(item)
+      //   // console.log(item)
+      //  });
      } else {
        console.log("No valid category or data.");
      }
@@ -90,8 +93,8 @@ let id='67ebcefec5b40466d81b3162'
       {/* <SingleFreshBookingLocationMap  project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} loctionContent={projectLocation}/>  */}
       {/* <PostDetails/> */}
       {/* <SingleFreshBookingFAQs/> */}
-      <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage}  />
-      <SingleFreshFooter project={projectBasicDetail}/>
+      <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} locationImageContent= {locationImage} />
+      <SingleFreshFooter project={projectBasicDetail}    />
     </div>
   )
 }

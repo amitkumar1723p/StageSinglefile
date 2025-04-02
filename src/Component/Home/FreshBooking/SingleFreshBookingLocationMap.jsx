@@ -3,7 +3,7 @@ import React, { useState ,useEffect} from "react";
 export default function SingleFreshBookingLocationMap({project ,
    siteMapContent , builderContent ,
     builderImage , loctionContent,
-    sendDataToChild,projectLocation
+    sendDataToChild,projectLocation ,  locationImageContent
   }) {
 
 
@@ -17,7 +17,7 @@ sendDataToChild(selectedCategory)
 },[selectedCategory])
 // console.log(projectLocation,"kjdff")
 // console.log(loctionContent,selectedCategory)
-// console.log(projectLocation)
+console.log(projectLocation,"hgfhtdf")
   return (
     <>
       <div className="container py-5">
@@ -53,7 +53,12 @@ sendDataToChild(selectedCategory)
     {/* <h4>{selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}</h4> */}
 
     <ul className="list-unstyled Single-fresh-location-map-list">
-       <li className="d-flex gap-2"> <img src="/img/tick-list.svg" alt="" /> {projectLocation} </li>
+  {projectLocation?.map((item, index) => (
+    <li className="d-flex gap-2" key={index}>
+      <img src="/img/tick-list.svg" alt="" />
+      {item}
+    </li>
+  ))}   
     </ul>
 </div>
     </div>
@@ -61,7 +66,7 @@ sendDataToChild(selectedCategory)
           <div className="col-md-6 single-fresh-map-img">
             <img
               style={{ transform: "scale(1)" }}
-              src="/img/property-map.jpg"
+              src={locationImageContent?.url}
               className="img-fluid rounded shadow"
               alt="map img"
             />
