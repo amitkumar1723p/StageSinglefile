@@ -203,6 +203,7 @@ const Footer = () => {
   const companyLinks = [
     { name: 'FAQs', hash: 'FAQ-SECTION' },
     // { name: 'Careers', url: "/Career" },
+    {name: 'SingleFreshBooking' , url: "/SingleFreshBooking"}
   ];
 
   return (

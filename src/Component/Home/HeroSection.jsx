@@ -9,7 +9,7 @@ import React, {
 from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
-
+import { Headset, PhoneCall, MessageCircle, MousePointerClick } from 'lucide-react';
 
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
@@ -609,7 +609,7 @@ const HeroSection = () => {
         </div>
       </header>
 
-      <div
+      {/* <div
         ref={PropertyRequirementBtnRef.current[0]}
         onClick={() => {
           if (medata && medata.IsAuthenticated == true) {
@@ -620,7 +620,7 @@ const HeroSection = () => {
           }
         }} className="requirement-button">
         <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
-      </div>
+      </div> */}
 
       {/* normal waala  */}
       {/* <div className="requirement-container">
@@ -655,13 +655,12 @@ const HeroSection = () => {
 
       {/* changes is complete in hero-section */}
 
-      {!isHidden && (
-        <div className="floating-buttons ">
-          {/* Call Button */}
+      {/* <div className="floating-buttons ">
+          Call Button
           <Link to="tel:+917837840785" className="call-button">
             <img src="/img/call.png" alt="Call" />
           </Link>
-          {/* WhatsApp Button */}
+          WhatsApp Button
           <Link
             to="https://wa.me/7837840785"
             target="_blank"
@@ -670,8 +669,9 @@ const HeroSection = () => {
           >
             <img src="/img/whatapp.png" alt="WhatsApp" />
           </Link>
-        </div>
-      )}
+        </div> */}
+
+
 
       <PropertySection />
       <FreshBookingHome/>
@@ -809,6 +809,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FAQ />
           </div>
+         
         </>
       )}
 

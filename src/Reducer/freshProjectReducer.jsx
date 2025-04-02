@@ -58,3 +58,60 @@ export const getAllFreshProjectReducer=(state = {}, action)=>{
         };
     }
 }
+// export const getviewoneProjectReducer=(state={},action)=>{
+//   try {
+//     switch (action.type) {
+//       case "viewOneProjectRequest":
+//         return {
+//           ...state,
+//           loading: true,
+//         };
+//         case "viewOneProjectSuccess":
+//         return {
+//           ...state,
+//           loading: true,
+//         };
+//         case "viewOneProjectFail":
+//         return {
+//           ...state,
+//           loading: true,
+//         };
+//       }
+      
+//   } catch (error) {
+      
+//   }
+// }
+
+
+export const getviewoneProjectReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "viewOneProjectRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "viewOneProjectSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "viewOneProjectFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "viewOneProjectClear":
+      // alert("get All Post Clear")
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};

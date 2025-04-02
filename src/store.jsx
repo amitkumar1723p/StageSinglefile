@@ -52,7 +52,7 @@ import {
   getPostsByAddressReducer
 } from "./Reducer/postReducer.jsx";
 
-import { createfreshProjectReducer,getAllFreshProjectReducer } from "./Reducer/freshProjectReducer.jsx";
+import { createfreshProjectReducer,getAllFreshProjectReducer, getviewoneProjectReducer } from "./Reducer/freshProjectReducer.jsx";
 
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
@@ -102,7 +102,9 @@ const reducer = combineReducers({
 
   // fresh project reducer
   createfreshProjectReducer,
-  allFreshProjectData:getAllFreshProjectReducer
+  allFreshProjectData:getAllFreshProjectReducer,
+  // createfreshProjectReducer,
+  getFreshProject:getviewoneProjectReducer
 });
 
 let initialState = {};

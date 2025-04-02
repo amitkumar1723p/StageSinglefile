@@ -78,3 +78,30 @@ export const getAllFreshProjectAction=()=>{
         }
     }
 }
+export const getviewOneProjectAction=(id)=>{
+    console.log("jewhtugh")
+    console.log(id,"jkjjk")
+    return async (dispatch) => {
+    try {  
+        dispatch({ type : "viewOneProjectRequest",payload:"viewOneProjectRequest"});
+
+        let url = `${api_Base_Url}/fresh/viewOneProject/${id}`
+        
+        let config=({
+            headers:{},
+   withCredentials:true
+        })
+        const {data}= await axios.get(url,config)
+        console.log(data,id,"gjghg")
+        dispatch({type:"viewOneProjectSuccess", payload:data})
+        
+    } catch (error) {
+        
+    }
+}
+}
+
+
+
+
+

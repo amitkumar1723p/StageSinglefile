@@ -164,17 +164,17 @@ export default function Amenities({
               {" "}
               <div className="Furnishing-box">
                 {/* count Value  */}
-                <div className="row ">
+                <div className="Create-post-row ">
                   {/* ModularKitchen */}
 
                   <div className="field-group">
                     <label
                    
                      htmlFor="light">Modular Kitchen</label>
-                    <div className="row">
+                    <div className="Create-post-row">
                       {YesNoArray.map((text, i) => {
                         return (
-                          <div className="row" key={i}>
+                          <div className="Create-post-row" key={i}>
                             <input
                              
                              className={` ${Error.ModularKitchen? ' shake' : ''}`}
@@ -804,7 +804,7 @@ export default function Amenities({
           <div>
             <p className="label">Other Feature*</p>
 
-            <div className="row">
+            <div className="Create-post-row">
               {OtherFeatureArray.map((text, i) => {
                 return (
                   <div key={i}>

@@ -802,7 +802,7 @@ form {
   gap: 10px;
 }
 
-.row {
+.Create-post-row {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(3, 1fr);
@@ -810,7 +810,7 @@ form {
   margin: 10px 0;
 }
 
-.price-sectipn-main .row {
+.price-sectipn-main .Create-post-row {
   display: grid;
   /* gap: 20px; */
   grid-template-columns: repeat(2, 1fr);
@@ -1886,7 +1886,7 @@ background-color: var(--main-lighter-clr);
     border-radius: 10px;
   }
 
-  .row {
+  .Create-post-row {
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(2, 1fr);
