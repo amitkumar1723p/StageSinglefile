@@ -8,6 +8,20 @@ import './FreshBookingForm.css'
 export default function FreshBookingForm() {
     const dispatch = useDispatch()
 
+  
+    const [inputValue, setInputValue] = useState("");
+    const [items, setItems] = useState([]);
+
+    const handleAddProjectHighlights = () => {
+      if (inputValue.trim() !== "") {
+        setItems([...items, inputValue]);
+        setInputValue(""); // Clear input field after adding
+        
+      }
+    };
+    const handleDeleteProjectHighlight = (index) => {
+        setItems(items.filter((_, i) => i !== index)); // Remove item at the given index
+      };
     const projectType = ["Residential", "Commercial"]
 
     const projectAdTypeResidential = ["Apartment", "Residential Flats", "Plot/land", "Villa", "Farm House", "Independent Floors"]
@@ -21,6 +35,7 @@ export default function FreshBookingForm() {
     const [cardImagePreview, setCardImagePriview] = useState(null);
     const [aboutProject, setAboutProject] = useState(null);
     const [handleProjectHighlight, setProjectHighLight] = useState(null);
+
     const [galleryImages, setGalleryImages] = useState([]);
     const [floorPlanUpload, setFloorPlanUpload] = useState([]);
     const [sitePlan, setSitePlan] = useState(null);
@@ -450,7 +465,7 @@ export default function FreshBookingForm() {
 
                                 <input type="text"
                                     onChange={(e) =>  { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, projectName: e.target.value } }) }}
-                                    name="projectName" id="" className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} placeholder='Project Name' />
+                                    name="projectName" id="" className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} placeholder='e.g DLF Corporate Greens' />
 
                             </div>
                             <div>
@@ -468,7 +483,7 @@ export default function FreshBookingForm() {
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Locality*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type="text" placeholder='e.g sector 86'
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type="text" placeholder='e.g Sector 74A'
                                     onChange={(e) => setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, locality: e.target.value } })} />
                             </div>
                             <div>
@@ -483,20 +498,20 @@ export default function FreshBookingForm() {
                         </div>
                         <div className='d-flex flex-wrap gap-4  p-2'>
                             <div>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}>Minimum Price*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='Number' placeholder='e.g 2.6' required onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, minPrice: e.target.value } }) }} />
+                                <p style={{ color: "#16315F", fontSize: '14px' }}>Minimum Price (In CR)*</p>
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g 2.6' required onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, minPrice: e.target.value } }) }} />
                             </div>
                             <div>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}>Maximum Price*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g 9634755090' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, maxPrice: e.target.value } }) }} />
+                                <p style={{ color: "#16315F", fontSize: '14px' }}>Maximum Price (In CR)*</p>
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g 5.7' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, maxPrice: e.target.value } }) }} />
                             </div>
                             <div>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}>Possession Year (optional)</p>
-                                <input className='  rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g 9' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, possessionStatus: e.target.value } }) }} />
+                                <p style={{ color: "#16315F", fontSize: '14px' }}>Possession Year</p>
+                                <input className='  rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g 2077' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, possessionStatus: e.target.value } }) }} />
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Payment Plan</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, projectPaymentPlan: e.target.value } }) }} />
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g  50|50  30|70' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, projectPaymentPlan: e.target.value } }) }} />
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>RERA Id (optional)</p>
@@ -506,16 +521,16 @@ export default function FreshBookingForm() {
 
                         <div className='d-flex flex-wrap gap-4  p-2'>
                             <div>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}>Total Land*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder='e.g 100 acres' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, totalLandArea: e.target.value } }) }} />
+                                <p style={{ color: "#16315F", fontSize: '14px' }}>Total Land (In Acres)*</p>
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder='e.g 8' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, totalLandArea: e.target.value } }) }} />
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Total Tower*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder='e.g 1024 towers' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, towerNumber: e.target.value } }) }} />
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder='e.g 4' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, towerNumber: e.target.value } }) }} />
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Total Units*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder='e.g 500' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, totalUnit: e.target.value } }) }} />
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder='e.g 340' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, totalUnit: e.target.value } }) }} />
                             </div>
 
                         </div>
@@ -747,6 +762,124 @@ export default function FreshBookingForm() {
 
 
 
+                {/* ------------------------------------------ Project About Start  ------------------------------------------------ */}
+
+                <div className=' rounded-3 d-flex flex-column gap-3 p-3' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
+                    <div >
+                        <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }} >About Project</h2>
+                    </div>
+
+                    <div className='freshbooking-project-highlight-main-coctainer d-flex gap-2 justify-content-between'>
+
+                        <div className='freshbooking-projekt-highlight-container'>
+
+                            <div className='freshbooking-highlights-description'>
+                                <p className="mb-2" style={{ color: "#16315F", fontSize: '14px' }}>Project Description</p>
+                                <textarea placeholder="Enter your message here..." className=' rounded-1 w-100 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minHeight: '155px', resize: "none" }} type='text' onChange={(e) => { setFromData({ ...formData, projectHightlight: { ...formData.projectHightlight, hightlightContent: e.target.value } }) }} />
+                            </div>
+
+                        </div>
+
+                       
+                            <div className="freshbooking-highlight-image-upload-container d-flex justify-content-between gap-4" >
+
+                                <div className="upload-image-dragdrop-container mb-3 " >
+                                    <label htmlFor="imageUpload" className="form-label fw-bold">Upload Highlights Image*</label>
+
+                                    <div className="position-relative ">
+                                        <div
+                                            style={{
+                                                borderWidth: '2px',
+                                                borderStyle: 'dashed',
+                                                borderColor: '#cce5ff',
+                                                borderRadius: '0.25rem',
+                                                backgroundColor: '#f8f9fa',
+                                                cursor: 'pointer',
+                                                minHeight: '160px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                padding: '1.5rem',
+
+                                            }}
+                                        >
+                                            <div style={{ color: '#6c757d' }}>
+                                                <i className="bi bi-upload fs-2"></i>
+                                            </div>
+
+                                            <div style={{ fontSize: '14px', color: '#0d6efd', marginTop: '0.5rem' }}>
+                                                Drag and drop or click to choose file
+                                            </div>
+
+                                            <div style={{ fontSize: '12px', color: '#6c757d', display: 'flex', alignItems: 'center', marginTop: '0.5rem' }}>
+                                                <i className="bi bi-info-circle me-1"></i>
+                                                Supported Format: JPEG, PNG, SVG
+                                            </div>
+
+                                            <input
+                                                type="file"
+                                                id="imageUpload"
+                                                className="position-absolute border top-0 start-0 w-100 h-100 opacity-0"
+                                                style={{ cursor: 'pointer' }}
+                                                accept=".jpg,.jpeg,.png,.svg"
+                                                onChange={handleProjectHeighlight}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div className="upload-image-container col-md-4">
+                                    <div
+                                        className="border rounded position-relative"
+                                        style={{
+                                            backgroundColor: '#e9ecef',
+                                            height: '188px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}
+                                    >
+                                        {handleProjectHighlight ? (
+                                            <img
+                                                src={handleProjectHighlight}
+                                                alt="Preview"
+                                                className="img-fluid"
+                                                style={{ maxHeight: '180px' }}
+                                            />
+                                        ) : (
+                                            <img
+                                                src="/img/PreviewImg.svg"
+                                                alt="Preview"
+
+                                                style={{ maxHeight: '180px' }}
+                                            />
+                                        )}
+
+                                        {handleProjectHighlight && (
+                                            <div
+                                                type="div"
+                                                className="btn-close position-absolute top-0 end-0 m-2"
+                                                style={{ backgroundColor: '#6c757d' }}
+                                                aria-label="Close"
+                                                onClick={clearProjecthighlight}
+                                            ></div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        
+
+
+                    </div>
+                </div>
+                {/* ------------------------------------------ Project About End  ------------------------------------------------ */}
+
+
+
+
+
                 {/* ------------------------------------------ Project highlights Start  ------------------------------------------------ */}
 
                 <div className=' rounded-3 d-flex flex-column gap-3 p-3' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
@@ -759,8 +892,25 @@ export default function FreshBookingForm() {
                         <div className='freshbooking-projekt-highlight-container'>
 
                             <div className='freshbooking-highlights-description'>
-                                <p className="mb-2" style={{ color: "#16315F", fontSize: '14px' }}>Highlights Description</p>
-                                <textarea className=' rounded-1 w-100 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minHeight: '155px', resize: "none" }} type='text' onChange={(e) => { setFromData({ ...formData, projectHightlight: { ...formData.projectHightlight, hightlightContent: e.target.value } }) }} />
+                                <p className="mb-2" style={{ color: "#16315F", fontSize: '14px' }}>Add Highlight</p>
+                                <div className='d-flex gap-2'>
+                                <input type="text" className=' rounded-1 p-2'
+                                style={{ border: "1px solid rgba(198, 230, 255, 1)", width: '220px' }} placeholder="Enter item..." value={inputValue} onChange={(e) => setInputValue(e.target.value)}/> 
+                            <div className=" " onClick={handleAddProjectHighlights}>Add</div>
+                                </div>
+                            </div>
+                            <div>
+                            <ul className="mt-3 list-group">
+        {items.map((item, index) => (
+          <li key={index} className="list-group-item">
+            {item}
+            <div type="button" className="" onClick={() => handleDeleteProjectHighlight(index)}>
+              X
+            </div>
+            </li>
+        ))}
+      </ul>
+
                             </div>
 
                         </div>
@@ -860,6 +1010,7 @@ export default function FreshBookingForm() {
                     </div>
                 </div>
                 {/* ------------------------------------------ Project highlights End  ------------------------------------------------ */}
+
 
 
 
