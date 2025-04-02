@@ -896,16 +896,17 @@ export default function FreshBookingForm() {
                                 <div className='d-flex gap-2'>
                                 <input type="text" className=' rounded-1 p-2'
                                 style={{ border: "1px solid rgba(198, 230, 255, 1)", width: '220px' }} placeholder="Enter item..." value={inputValue} onChange={(e) => setInputValue(e.target.value)}/> 
-                            <div className=" " onClick={handleAddProjectHighlights}>Add</div>
+                            <div  className='freshbooking-highlights-add-button mt-auto border text-center align-content-center' style={{ minWidth:'150px', cursor:'pointer ', height:'fit-content'}} onClick={handleAddProjectHighlights}>Add</div>
                                 </div>
                             </div>
                             <div>
                             <ul className="mt-3 list-group">
         {items.map((item, index) => (
-          <li key={index} className="list-group-item">
-            {item}
-            <div type="button" className="" onClick={() => handleDeleteProjectHighlight(index)}>
-              X
+          <li key={index}  className='p-2 m-2 d-flex gap-2 rounded-pill text-white' style={{ backgroundColor:'#1877f2', fontSize:'14px' , width:'fit-content' }}>
+            <div> {item}</div>
+           
+            <div type="button"className='rounded-2 text-white' onClick={() => handleDeleteProjectHighlight(index)}>
+            <img style={{ height: "22px", width: "auto" }} src='/img/icons8-wrong.svg'></img>
             </div>
             </li>
         ))}

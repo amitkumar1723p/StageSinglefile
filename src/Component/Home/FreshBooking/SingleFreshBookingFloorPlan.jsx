@@ -4,33 +4,7 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
  
-  const floorPlans = [
-    {
-      id: 1,
-      src: "/img/floor-plan-img1.jpg", 
-      alt: "Floor Plan 1"
-    },
-    {
-      id: 2,
-      src: "/img/floor-plan-img1.jpg", 
-      alt: "Floor Plan 2"
-    },
-    {
-      id: 3,
-      src: "/img/floor-plan-img1.jpg", 
-      alt: "Floor Plan 3"
-    },
-    {
-      id: 4,
-      src: "/img/floor-plan-img1.jpg", 
-      alt: "Floor Plan 4"
-    },
-    {
-      id: 5,
-      src: "/img/floor-plan-img1.jpg", 
-      alt: "Floor Plan 5"
-    }
-  ];
+ 
 
   const scroll = (direction) => {
     const { current } = scrollRef;
@@ -82,18 +56,18 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
 
         <div 
           ref={scrollRef}
-          className="d-flex overflow-auto pb-3 px-3"
+          className="d-flex overflow-scroll pb-3 px-3 border"
           style={{ scrollBehavior: 'smooth', msOverflowStyle: 'none', scrollbarWidth: 'none' }}
         >
           {FloorPlanContent?.map((FloorPlanContent, index) => (
-            <div key={FloorPlanContent?.id} className="col-12 col-md-8 col-lg-9 Single-Fresh-Floor-Plan" style={{ maxWidth: '900px' }}>
-              <div className="card border-0 shadow-sm">
+            <div key={FloorPlanContent?.id} className=" Single-Fresh-Floor-Plan">
+              <div className="card border-0 shadow-sm " >
                 <img 
                   src={FloorPlanContent?.url} 
-                  className={`card-img-top floor-plan-image ${activeIndex === index ? 'zoomed' : ''}`} 
+                  className={`card-img-top floor-plan-image w-auto h-100 ${activeIndex === index ? 'zoomed' : ''}`} 
                   alt={FloorPlanContent?.alt || 'Floor Plan'} 
                   onClick={() => setActiveIndex(index)}
-                  style={{ transition: 'transform 0.3s ease-in-out', transform: activeIndex === index ? 'scale(1.1)' : 'scale(1)' }}
+                  style={{ transition: 'transform 0.3s ease-in-out',maxHeight:'400px', width:'auto', transform: activeIndex === index ? 'scale(1.1)' : 'scale(1)' }}
                 />
               </div>
             </div>

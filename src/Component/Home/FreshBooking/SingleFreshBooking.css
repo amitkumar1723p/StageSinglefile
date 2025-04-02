@@ -76,6 +76,7 @@
   color: #f58220;
   padding: 7px 15px 7px 15px;
   border-radius: 7px;
+  font-size: 24px;
 }
 
 .Single-fresh-user-img {
@@ -361,7 +362,10 @@
   width: 92%;
   margin: auto;
 }
-
+.single-freshbooking-gallery-image-container{
+  max-height: 450px;
+  width: 80%;
+}
 .Single-fresh-footer-container {
   padding: 40px 30px;
 }
@@ -387,9 +391,15 @@
   }
 }
 
+
+
+
 @media (max-width: 480px) {
 
-  
+  .single-freshbooking-gallery-image-container{
+    max-height: 250px;
+    width: 80%;
+  }
   .single-fresh-hero-content {
     top: 180px;
     left: 12px;
