@@ -3,8 +3,8 @@ import React from 'react'
 export default function SingleFreshFooter({project}) {
   return (
     <div className=" bg-custom text-white Single-fresh-footer-container " style={{ backgroundColor: '#1a3b5d', backgroundImage: 'url(/img/Single-footer-bg1.png)' }}>
-      <div className="row">
-        <div className="col-md-4 text-md-left mb-4 mb-md-0">
+      <div className="d-flex Single-fresh-booking-footer">
+        <div className="col-md-4 text-md-left mb-4 mb-md-0 Single-fresh-booking-footer-details">
           <div className='mb-4'>
           <img src="/img/dlf-logo.png" alt="" /></div>
           <h3 className=" font-weight-bold mb-4">For an Enquiry <span className=""><img src="/img/for-enquiry.png" alt="" /></span></h3>
@@ -13,7 +13,7 @@ export default function SingleFreshFooter({project}) {
         </div>
         <div className="col-md-4  text-md-left mb-4 mb-md-0">
           <h2 className="font-weight-bold text-justify  mb-4">{project?.projectName}</h2>
-          <div className="row text-justify">
+          <div className="d-flex text-justify">
             <div className="col-6">
               <ul className="list-unstyled Single-fresh-list-footer">
                 <li>Home</li>

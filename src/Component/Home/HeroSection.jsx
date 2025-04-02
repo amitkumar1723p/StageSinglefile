@@ -4,7 +4,9 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
+
+} 
+from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 import { Headphones, Phone, Hand } from "lucide-react"
@@ -72,10 +74,10 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
-import PostDetails from "./PostDetails.jsx";
-// import SingleFreshBooking from "../FreshBooking/SingleFreshBooking.jsx";
+import FreshBookingHome from "./FreshBookingHome.jsx";
+import FreshBookingPost from "./FreshBookingPost.jsx";
 const HeroSection = () => {
-  const [hoveredItem, setHoveredItem] = useState(null);
+
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
   const [runSearchButton, setrunSearchButton] = useState(false);
@@ -246,6 +248,9 @@ const HeroSection = () => {
   }, []);
 
 
+  // const HandleFreshbookingNavigation=()=>{
+  //   navigate('/fresh-bookings')
+  // }
 
   return (
     <div className="hero-main-parent-div"><Helmet>
@@ -383,7 +388,9 @@ const HeroSection = () => {
               <div className="search-options">
                 {SearchTab.map((e, i) => {
                   return (
+                    
                     <div
+                   
                       key={i}
                       className={`search-tab ${e == SearchPropertyAddType ? "active" : ""
                         }
@@ -401,6 +408,9 @@ const HeroSection = () => {
                     </div>
                   );
                 })}
+                <div> 
+                  {/* <button onClick={HandleFreshbookingNavigation}>button</button> */}
+                </div>
               </div>
               <div className="search-box">
                 <img
@@ -734,6 +744,8 @@ const HeroSection = () => {
       )}
 
       <PropertySection />
+      <FreshBookingHome/>
+      {/* <FreshBookingPost/> */}
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">

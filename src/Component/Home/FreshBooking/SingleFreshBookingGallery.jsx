@@ -32,7 +32,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
         </div>
       </div>
 
-      <div className="row">
+      <div className="d-flex gap-2">
         {galleryContent?.map((image) => (
           <div key={image.id} className="col-6 col-md-4 col-lg-2 mb-3">
             <div

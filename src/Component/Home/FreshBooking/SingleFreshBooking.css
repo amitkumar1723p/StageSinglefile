@@ -27,7 +27,7 @@
     justify-content: space-between;
 } */
 
-.Single-fresh-logo-a  {
+.Single-fresh-logo-a {
   width: 117px;
 }
 
@@ -215,6 +215,12 @@
   cursor: pointer;
 }
 
+.single-fresh-booking-amenities {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
 .Single-fresh-map-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -339,6 +345,14 @@
   padding: 40px 30px;
 }
 
+@media (max-width: 1024px) {
+  .single-fresh-booking-amenities {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .single-fresh-curved-section {
     background: radial-gradient(
@@ -347,6 +361,12 @@
       rgb(167, 219, 255) 0%,
       transparent 0%
     );
+  }
+
+  .single-fresh-booking-amenities {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
 
   .Single-fresh-reserve-post-button {
@@ -360,6 +380,12 @@
     padding: 13px;
     top: 25px;
     right: 0px;
+  }
+
+  .single-fresh-booking-amenities {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .single-fresh-dlf-logo {
@@ -502,41 +528,18 @@
     align-items: center;
     justify-content: center;
   }
+
+  .Single-fresh-booking-footer {
+    flex-direction: column;
+  }
+
+  .Single-fresh-booking-footer-details {
+    margin: 0px auto;
+  }
 }
 
 @media (max-width: 375px) {
   .Single-fresh-reserve-post-button {
     right: -20.5%;
   }
-}
-
-
-
-
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-thead {
-  background-color: #4b5563;
-  color: white;
-}
-
-
-
-th,
-td {
-  border: 1px solid #000;
-  border-left: none;
-  border-right: none;
-  text-align: center;
-  padding: 8px;
-}
-
-
-tbody tr:nth-child(even) {
-  background-color: white;
 }

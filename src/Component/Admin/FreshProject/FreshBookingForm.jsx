@@ -3,17 +3,16 @@ import { useState } from 'react';
 import { Form, Button, Image } from "react-bootstrap";
 import { createfreshProjectAction } from '../../../Action/freshProjectAction';
 import { useDispatch } from 'react-redux';
+import './FreshBookingForm.css'
+
 export default function FreshBookingForm() {
-    // const
     const dispatch = useDispatch()
 
     const projectType = ["Residential", "Commercial"]
 
     const projectAdTypeResidential = ["Apartment", "Residential Flats", "Plot/land", "Villa", "Farm House", "Independent Floors"]
     const projectAdTypeCommercial = ["WareHouse", "Office", "Plot/land", "Retail Space"]
-
     const otherRooms = ["Pooja Room", "Study Room", "Servent Room", "Store Room"]
-
     const amanities = ["Club House", "Swimming Pool", "GYM", "Community Centre", "Security Guard", "Maintenance Staff", "Piped Gas", "Visitor Parking", "Lift", "Park", "Intercom Facility", "Waste Disposal", "Cafeteria/Food Court", "Conference Room", "Library", "ATMs", "Jogging Track", "Kids Play Area"]
     const locationMap = ["shoppingLocation", "conectivityLocation", "hospitalsLocation", "bussinessLocation", "schoolLocation"]
 
@@ -55,10 +54,8 @@ export default function FreshBookingForm() {
     };
     const clearPreviewImage = () => {
         setPreviewImage(null);
-
-        setFromData({
-            ...formData, projectLogoImage: undefined
-        });
+        console.log(formData)
+        setFromData({});
     };
 
     // -----------------------------------------------------------//
@@ -421,7 +418,7 @@ export default function FreshBookingForm() {
  
     return (
 
-        <div className='d-flex flex-column gap-3  mx-auto' style={{ width: '80%' }}>
+        <div className='freshbooking-main-container d-flex flex-column gap-3  my-3 mx-auto' >
             <div className=' text-center'> <h2 className='fs-4' style={{ color: "rgba(84, 84, 84, 1)" }}>Fresh Booking</h2></div>
 
             <form onSubmit={handleSubmit} encType='multipart/form-data'>
@@ -439,9 +436,9 @@ export default function FreshBookingForm() {
                                         <div key={index} onClick={() => {
                                             setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, projectType: item, projectAdType: '' } })
 
-                                        }} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white ${formData.projectBasicDetail?.projectType === item ? "select" : ""}`} style={{ border: "2px solid rgba(198, 230, 255, 1)" }} >
-                                            {item}
-                                            <img style={{ height: "18px", width: "auto" }} src='/img/plus-create.svg'></img>
+                                        }} className={`project-details-button p-2 m-2 d-flex align-items-center gap-2 rounded-2 bg-white ${formData.projectBasicDetail?.projectType === item ? "select " : ""}`} style={{ cursor: "pointer",outline:formData.projectBasicDetail?.projectType === item ? "2px solid #1877f2" : "2px solid rgb(198, 230, 255)"       }} >
+                                            <p style={{fontSize:'14px'}}>{item}</p>
+                                            <img style={{ width: "15px" }} src={`${formData.projectBasicDetail?.projectType === item ? "/img/white-tick.svg" : "/img/plus-create.svg"}`  }></img>
                                         </div>
                                     );
                                 })}</div>
@@ -476,7 +473,7 @@ export default function FreshBookingForm() {
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>City*</p>
-                                <input className='rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type="text" placeholder='e.g Titan'
+                                <input className='rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type="text" placeholder='e.g Gurugram'
                                     onChange={(e) => setFromData({
                                         ...formData, projectBasicDetail: {
                                             ...formData.projectBasicDetail, projectCity: e.target.value
@@ -487,7 +484,7 @@ export default function FreshBookingForm() {
                         <div className='d-flex flex-wrap gap-4  p-2'>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Minimum Price*</p>
-                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='Number' placeholder='e.g 9634755090' onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, minPrice: e.target.value } }) }} />
+                                <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='Number' placeholder='e.g 2.6' required onChange={(e) => { setFromData({ ...formData, projectBasicDetail: { ...formData.projectBasicDetail, minPrice: e.target.value } }) }} />
                             </div>
                             <div>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Maximum Price*</p>
@@ -530,13 +527,13 @@ export default function FreshBookingForm() {
                                     <>
                                         {projectAdTypeResidential.map((item, index) => {
                                             return (
-                                                <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${formData?.projectBasicDetail?.projectAdType === item ? "select" : ""}`} style={{ border: "2px solid rgba(198, 230, 255, 1)" }}
+                                                <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${formData?.projectBasicDetail?.projectAdType === item ? "select" : ""}`}  style={{ cursor: "pointer",outline:formData.projectBasicDetail?.projectAdType === item ? "2px solid #1877f2" : "2px solid rgb(198, 230, 255)"       }}
                                                     onClick={() => setFromData({
                                                         ...formData
                                                         , projectBasicDetail: { ...formData.projectBasicDetail, projectAdType: item }
                                                     })} >
-                                                    {item}
-                                                    <img style={{ height: "18px", width: "auto" }} src='/img/plus-create.svg'></img>
+                                                    <p style={{fontSize:'14px'}}>{item}</p>
+                                                    <img style={{ width: "15px" }} src={`${formData.projectBasicDetail?.projectAdType === item ? "/img/white-tick.svg" : "/img/plus-create.svg"}`  } ></img>
                                                 </div>
                                             );
                                         })}
@@ -544,12 +541,13 @@ export default function FreshBookingForm() {
                                     <>
                                         {projectAdTypeCommercial.map((item, index) => {
                                             return (
-                                                <div key={index} className='p-2 m-2 d-flex gap-2 rounded-2 bg-white' style={{ border: "2px solid rgba(198, 230, 255, 1)" }} onClick={() => setFromData({
+                                                <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${formData?.projectBasicDetail?.projectAdType === item ? "select" : ""}`} style={{ cursor: "pointer",outline:formData.projectBasicDetail?.projectAdType === item ? "2px solid #1877f2" : "2px solid rgb(198, 230, 255)" }}
+                                                 onClick={() => setFromData({
                                                     ...formData
                                                     , projectBasicDetail: { ...formData.projectBasicDetail, projectAdType: item }
                                                 })} >
-                                                    {item}
-                                                    <img style={{ height: "18px", width: "auto" }} src='/img/plus-create.svg'></img>
+                                                    <p style={{fontSize:'14px'}}>{item}</p>
+                                                    <img style={{ width: '15px' }}  src={`${formData.projectBasicDetail?.projectAdType === item ? "/img/white-tick.svg" : "/img/plus-create.svg"}`  } ></img>
                                                 </div>
                                             );
                                         })}
@@ -559,9 +557,9 @@ export default function FreshBookingForm() {
                         </div>
 
                         <div className="container mt-4">
-                            <div className="d-flex justify-content-between" style={{ gap: '20px' }}>
+                            <div className="upload-image-container d-flex  justify-content-between">
 
-                                <div className="mb-3" style={{ width: '50%' }}>
+                                <div className="upload-image-dragdrop-container w-100">
                                     <label htmlFor="imageUpload" className="form-label fw-bold">Upload Image Logo*</label>
 
                                     <div className="position-relative ">
@@ -614,7 +612,7 @@ export default function FreshBookingForm() {
                                         className="border rounded position-relative"
                                         style={{
                                             backgroundColor: '#e9ecef',
-                                            height: '200px',
+                                            height: '188px',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -652,9 +650,9 @@ export default function FreshBookingForm() {
 
 
                         <div className="container mt-4">
-                            <div className="d-flex justify-content-between" style={{ gap: '20px' }}>
+                            <div className="upload-image-container d-flex justify-content-between" >
 
-                                <div className="mb-3 " style={{ width: '50%' }}>
+                                <div className="upload-image-dragdrop-container w-100 ">
                                     <label htmlFor="imageUpload" className="form-label fw-bold">Upload Card Image*</label>
 
                                     <div className="position-relative ">
@@ -672,7 +670,6 @@ export default function FreshBookingForm() {
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
                                                 padding: '1.5rem',
-
                                             }}
                                         >
                                             <div style={{ color: '#6c757d' }}>
@@ -706,7 +703,7 @@ export default function FreshBookingForm() {
                                         className="border rounded position-relative"
                                         style={{
                                             backgroundColor: '#e9ecef',
-                                            height: '200px',
+                                            height: '188px',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -750,34 +747,29 @@ export default function FreshBookingForm() {
 
 
 
-
-
-
-
-
-                {/* ------------------------------------------ Project heighlights Start  ------------------------------------------------ */}
+                {/* ------------------------------------------ Project highlights Start  ------------------------------------------------ */}
 
                 <div className=' rounded-3 d-flex flex-column gap-3 p-3' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
                     <div >
-                        <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }} >Project Heighlights</h2>
+                        <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }} >Project Highlights</h2>
                     </div>
 
-                    <div className='d-flex gap-5'>
+                    <div className='freshbooking-project-highlight-main-coctainer d-flex gap-2 justify-content-between'>
 
-                        <div style={{ width: '70%' }}>
+                        <div className='freshbooking-projekt-highlight-container'>
 
-                            <div>
-                                <p className="mb-2" style={{ color: "#16315F", fontSize: '14px' }}>Heighlights Description</p>
-                                <textarea className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minHeight: '155px', minWidth: '650px', resize: "none" }} type='text' onChange={(e) => { setFromData({ ...formData, projectHightlight: { ...formData.projectHightlight, hightlightContent: e.target.value } }) }} />
+                            <div className='freshbooking-highlights-description'>
+                                <p className="mb-2" style={{ color: "#16315F", fontSize: '14px' }}>Highlights Description</p>
+                                <textarea className=' rounded-1 w-100 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minHeight: '155px', resize: "none" }} type='text' onChange={(e) => { setFromData({ ...formData, projectHightlight: { ...formData.projectHightlight, hightlightContent: e.target.value } }) }} />
                             </div>
 
                         </div>
 
-                        <div className="container ">
-                            <div className="d-flex justify-content-between" >
+                       
+                            <div className="freshbooking-highlight-image-upload-container d-flex justify-content-between gap-4" >
 
-                                <div className="mb-3 " >
-                                    <label htmlFor="imageUpload" className="form-label fw-bold">Upload Heighlights Image*</label>
+                                <div className="upload-image-dragdrop-container mb-3 " >
+                                    <label htmlFor="imageUpload" className="form-label fw-bold">Upload Highlights Image*</label>
 
                                     <div className="position-relative ">
                                         <div
@@ -823,12 +815,12 @@ export default function FreshBookingForm() {
                                 </div>
 
 
-                                <div className="col-md-4">
+                                <div className="upload-image-container col-md-4">
                                     <div
                                         className="border rounded position-relative"
                                         style={{
                                             backgroundColor: '#e9ecef',
-                                            height: '200px',
+                                            height: '188px',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -862,12 +854,13 @@ export default function FreshBookingForm() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        
 
 
                     </div>
                 </div>
-                {/* ------------------------------------------ Project heighlights End  ------------------------------------------------ */}
+                {/* ------------------------------------------ Project highlights End  ------------------------------------------------ */}
+
 
 
 
@@ -882,32 +875,31 @@ export default function FreshBookingForm() {
                     <div className='d-flex  flex-wrap gap-4  p-2'>
                         <div >
                             <p style={{ color: "#16315F", fontSize: '14px' }}>Unit Type*</p>
-                            <select className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} name="" id=""
+                            <select className=' rounded-1 w-100 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minWidth:'220px', fontSize:'14px' }} name="" id=""
                                 //    onChange={(e)=>setProjectSize([{type:e.target.value}])}  
                                 value={projectSize?.type || ""}
                                 onChange={(e) => setProjectSize({ ...projectSize, type: e.target.value })}
-
                             >
                                 <option >Select Unit Type*</option>
-                                <option>1-BHK</option>
-                                <option>2-BHK</option>
-                                <option>2-BHK + Servent</option>
-                                <option>3-BHK</option>
-                                <option>3-BHK + Servent</option>
-                                <option>4-BHK</option>
-                                <option>4-BHK + Servent</option>
+                                <option>1 BHK</option>
+                                <option>2 BHK</option>
+                                <option>2 BHK + Servent</option>
+                                <option>3 BHK</option>
+                                <option>3 BHK + Servent</option>
+                                <option>4 BHK</option>
+                                <option>4 BHK + Servent</option>
                             </select>
                         </div>
                         <div>
                             <p style={{ color: "#16315F", fontSize: '14px' }}>Unit Size*</p>
-                            <input className='  rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' placeholder='e.g 9' value={projectSize?.size || ''} onChange={(e) => setProjectSize({ ...projectSize, size: e.target.value })} />
+                            <input className='  rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minWidth:'220px' }} type='phone' placeholder='e.g 9' value={projectSize?.size || ''} onChange={(e) => setProjectSize({ ...projectSize, size: e.target.value })} />
                         </div>
                         <div>
                             <p style={{ color: "#16315F", fontSize: '14px' }}>Unit Price*</p>
-                            <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone'
+                            <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" , minWidth:'220px'}} type='phone'
                                 value={projectSize?.price || ''} onChange={(e) => setProjectSize({ ...projectSize, price: e.target.value })} />
                         </div>
-                        <div className='px-5 py-0' onClick={handleAddProjectSize}>Add</div>
+                        <div className='freshbooking-pricing-details-add-button mt-auto border text-center align-content-center' style={{ minWidth:'150px', cursor:'pointer ', height:'fit-content'}} onClick={handleAddProjectSize}>Add</div>
                     </div>
 
                     <div>
@@ -916,9 +908,9 @@ export default function FreshBookingForm() {
                         <div className='d-flex flex-wrap justify-center align-content-center'>
                             {formData?.projectPriceSize?.map((item, index) => {
                                 return (
-                                    <div key={index} className='p-2 m-2 d-flex gap-2 rounded-2 bg-white' style={{ border: "2px solid rgba(198, 230, 255, 1)" }}>
-                                        {item.type}-{item.size}-{item.price}  <div onClick={() => handleAddProjectSizeRemove(index)} >***</div>
-                                        <img style={{ height: "18px", width: "auto" }} src='/img/plus-create.svg'></img>
+                                    <div key={index} className='p-2 m-2 d-flex gap-2 rounded-2 text-white' style={{ backgroundColor:'#1877f2', fontSize:'14px' }}>
+                                        {item.type}{item.size ?  " | " :" " }{item.size}{ item.price ? " | ":''}{item.price} <div className='freshbooking-optional-room-remover' style={{cursor:'pointer'}} onClick={() => handleAddProjectSizeRemove(index)} > <img style={{ height: "22px", width: "auto" }} src='/img/icons8-wrong.svg'></img></div>
+                                      
                                     </div>);
 
                             })}
@@ -932,25 +924,16 @@ export default function FreshBookingForm() {
 
 
 
+
                 {/* ------------------------------------------  Gallery Image Upload Start  ------------------------------------------------ */}
 
                 <div className="rounded-3 d-flex flex-column gap-3 p-3 " style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
                     <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }}>Gallery Image Upload</h2>
-                    <div className=" position-relative p-4 text-center rounded" style={{
-                        borderWidth: '2px',
-                        borderStyle: 'dashed',
-                        borderColor: '#cce5ff',
-                        borderRadius: '0.25rem',
-                        backgroundColor: '#f8f9fa',
+                    <div className=" freshbooking-gallery-image-section position-relative m-auto p-4 text-center rounded d-flex flex-column align-items-center justify-content-center" style={{
                         cursor: 'pointer',
                         minHeight: '160px',
-                        display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
                         padding: '1.5rem',
-                        width: "50%",
-                        margin: "0 auto",
                     }}>
                         <input className='position-absolute border top-0 start-0 w-100 h-100 opacity-0' type="file" multiple accept="image/jpeg, image/png, image/svg+xml" onChange={handleGalleryImages} id="file-upload" />
                         <label htmlFor="file-upload" className="d-block">
@@ -964,7 +947,7 @@ export default function FreshBookingForm() {
 
 
                     </div>
-                    <div className='w-100 d-flex ' style={{ minHeight: '215px' }} >
+                    <div className='freshbooking-gallery-image-viewer w-100 d-flex' >
                         {galleryImages.length > 0 && (
                             <div className="p-4 d-flex flex-wrap gap-3" >
                                 {galleryImages.map((src, index) => (
@@ -1001,12 +984,12 @@ export default function FreshBookingForm() {
                         <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }}>Amenities</h2>
                     </div>
 
-                    <div className='d-flex  flex-wrap gap-4  p-2'>
+                    {/* <div className='d-flex  flex-wrap gap-4  p-2'>
                         <div>
                             <p style={{ color: "#16315F", fontSize: '14px' }}>Facilities*</p>
                             <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='phone' />
                         </div>
-                    </div>
+                    </div> */}
 
                     <div>
 
@@ -1015,7 +998,7 @@ export default function FreshBookingForm() {
                             {amanities?.map((item, index) => {
                                 return (
 
-                                    <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${formData?.projectAmenities && formData?.projectAmenities.includes(item) ? "select" : ""}`} style={{ border: "2px solid rgba(198, 230, 255, 1)" }}
+                                    <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white ${formData?.projectAmenities && formData?.projectAmenities.includes(item) ? "select" : ""}`} style={{ cursor: "pointer",fontSize:'14px',outline:formData?.projectAmenities?.includes(item) ? "2px solid #1877f2" : "2px solid rgb(198, 230, 255)"}}
                                         onClick={() => {
 
 
@@ -1038,7 +1021,7 @@ export default function FreshBookingForm() {
 
                                         }>
                                         {item}
-                                        <img style={{ height: "18px", width: "auto" }} src='/img/plus-create.svg'></img>
+                                        <img style={{ width: "15px" }} src={`${formData?.projectAmenities?.includes(item) ? "/img/white-tick.svg" : "/img/plus-create.svg"}`}></img>
                                     </div>
 
 
@@ -1054,15 +1037,16 @@ export default function FreshBookingForm() {
 
 
 
+
                 {/* ------------------------------------------ Floor Plan Upload Start  ------------------------------------------------ */}
 
                 <div className="rounded-3 d-flex flex-column gap-3 p-3 " style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
                     <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }}>Floor Plan Upload</h2>
 
-                    <div className='d-flex justify-content-between'>
+                    <div className='d-flex justify-content-between w-100'>
 
 
-                        <div className=" position-relative p-4 text-center rounded" style={{
+                        <div className=" freshbooking-floor-plan-image-upload position-relative p-4 text-center rounded m-auto" style={{
                             borderWidth: '2px',
                             borderStyle: 'dashed',
                             borderColor: '#cce5ff',
@@ -1075,7 +1059,9 @@ export default function FreshBookingForm() {
                             alignItems: 'center',
                             justifyContent: 'center',
                             padding: '1.5rem',
-                            width: "50%",
+                            
+                            
+
 
                         }}>
                             <input className='position-absolute border top-0 start-0 w-100 h-100 opacity-0' type="file" multiple accept="image/jpeg, image/png, image/svg+xml" onChange={handleFloorPlan} id="file-upload" />
@@ -1092,7 +1078,7 @@ export default function FreshBookingForm() {
                         </div>
                     </div>
 
-                    <div className='w-100 d-flex ' style={{ minHeight: '215px' }} >
+                    <div className='w-100 d-flex ' >
                         {floorPlanUpload.length > 0 && (
                             <div className="p-4 d-flex flex-wrap gap-3" >
                                 {floorPlanUpload?.map((src, index) => (
@@ -1117,6 +1103,7 @@ export default function FreshBookingForm() {
 
 
                 </div>
+
                 {/* ------------------------------------------  Floor Plan Upload End  ------------------------------------------------ */}
 
 
@@ -1130,39 +1117,49 @@ export default function FreshBookingForm() {
                     </div>
 
                     <div className='d-flex flex-wrap'>
+                
+                    {/* {formData?.projectLocation?.[locationKey]?.length >0? "yes":'no'} */}
+                    
                         {locationMap.map((item, index) => {
                             return (
-                                <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${locationKey === item ? "select" : ""}`} style={{ border: "2px solid rgba(198, 230, 255, 1)" }}
+                            
+                                <div key={index} className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${locationKey === item ? "select" : ""}`} style={{outline:locationKey === item ? "2px solid #1877f2" : "2px solid rgb(198, 230, 255)",fontSize:'14px' , cursor:'pointer' }}
                                     onClick={() => setLocationKey(item)} >
                                     {/* {item} */}
-                                    {item.split("Location")}
+                                  
+                                   <div style={{position:'relative'}}>
+                                
+                                   {item.split("Location")} {formData?.projectLocation?.[item]?.length>0 && <span style={{position:'absolute', top:'-15px', fontSize:'8px'}} className='border bg-danger rounded-circle px-1 text-white' >{formData?.projectLocation?.[item]?.length}</span>}
+                                    </div> 
+                                    
                                 </div>
                             );
                         })}</div>
 
-                    <div className='d-flex gap-3'>
+                    <div className='freshbooking-loaction-details-add-field d-flex gap-4'>
 
                         <div>
                             <p style={{ color: "#16315F", fontSize: '14px' }}>{locationKey?.split("Location")} Location Details</p>
                             <input
                                 className=' rounded-1 p-2'
-                                style={{ border: "1px solid rgba(198, 230, 255, 1)", width: '280px' }} value={locationDetail}
-                                onChange={(e) => setLocationDetails(e.target.value.trim())}
+                                style={{ border: "1px solid rgba(198, 230, 255, 1)", width: '220px' }} value={locationDetail}
+                                onChange={(e) => setLocationDetails(e.target.value)}
                                 type='text'
                                 placeholder='e.g Near to SPR' />
                         </div>
-                        <div onClick={handleAddLocationDetails} className='  ' style={{ padding: '5px 35px 5px 35px' }}>Add</div>
+                        <div onClick={handleAddLocationDetails} className='freshbooking-location-map-add-button border text-center align-content-center mt-auto ' style={{ padding: '6px 35px 6px 35px', maxWidth:'120px',height:'fit-content' }}>Add</div>
 
                     </div>
                     <div>
-                        <ul className="list-disc pl-5">
+                        <ul className="list-disc d-flex flex-wrap pl-5">
                             {formData?.projectLocation?.[locationKey]?.map((item, index) => (
-                                <li key={index} className="border-b p-2 list-unstyled " style={{ fontSize: '12px', color: "#666" }} >
-                                    {locationKey.split("Location")} :  {item}
-                                    <div className="mx-2 px-1" onClick={() => handleRemove(index)}>
-                                        ❌
-                                    </div>
+                                <li key={index} className=" border rounded-pill py-2 px-3 m-1 list-unstyled text-white" style={{ fontSize: '14px',maxWidth:'100%' , width:'fit-content', backgroundColor:'#1877f2' }} >
+                                     {item}
+                                    <span className="ml-2 px-1 " style={{cursor:'pointer'}} onClick={() => handleRemove(index)}>
+                                        <img style={{width:'15px', height:'auto' }} src="/img/icons8-wrong-60.png" alt="" />
+                                    </span>
                                 </li>
+                                
 
 
                             ))}
@@ -1170,9 +1167,9 @@ export default function FreshBookingForm() {
                     </div>
 
                     <div className="container mt-4 ">
-                        <div className="d-flex justify-content-between w-75">
+                        <div className=" freshbooking-location-map-image-upload-container  d-flex justify-content-between w-100 ">
 
-                            <div className="mb-3 " style={{ width: '50%' }}>
+                            <div className="upload-image-dragdrop-container mb-3 ">
                                 <label htmlFor="imageUpload" className="form-label fw-bold">Upload Card Image*</label>
 
                                 <div className="position-relative ">
@@ -1219,12 +1216,12 @@ export default function FreshBookingForm() {
                             </div>
 
 
-                            <div className="col-md-4">
+                            <div className="upload-image-container col-md-4">
                                 <div
                                     className="border rounded position-relative"
                                     style={{
                                         backgroundColor: '#e9ecef',
-                                        height: '200px',
+                                        height: '188px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center'
@@ -1238,7 +1235,12 @@ export default function FreshBookingForm() {
                                             style={{ maxHeight: '180px' }}
                                         />
                                     ) : (
-                                        <i className="bi bi-image fs-1 text-secondary"></i>
+                                    
+                                            <img
+                                                src="/img/PreviewImg.svg"
+                                                alt="Preview"
+
+                                                style={{ maxHeight: '180px' }}/>
                                     )}
 
                                     {locationMapImage && (
@@ -1263,24 +1265,19 @@ export default function FreshBookingForm() {
 
 
 
+
                 {/* ------------------------------------------ Site Plan Upload Start ------------------------------------------------ */}
                 <div className=' rounded-3 d-flex flex-column gap-3 p-3' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
                     <div >
                         <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }} >Site Plan Upload</h2>
                     </div>
 
-                    <div className='d-flex  gap-5'>
-
-                        <div>
-
-
-
-                        </div>
+                    <div className='d-flex'>
 
                         <div className="container mt-4">
-                            <div className="d-flex justify-content-between" style={{ gap: '20px' }}>
+                            <div className="freshbooking-site-plan-image-upload-container w-100 d-flex justify-content-between" >
 
-                                <div className="mb-3 " style={{ width: '50%' }}>
+                                <div className="upload-image-dragdrop-container mb-3 ">
                                     <label htmlFor="imageUpload" className="form-label fw-bold">Upload Card Image*</label>
 
                                     <div className="position-relative ">
@@ -1327,12 +1324,12 @@ export default function FreshBookingForm() {
                                 </div>
 
 
-                                <div className="col-md-4">
+                                <div className="upload-image-container col-md-4">
                                     <div
                                         className="border rounded position-relative"
                                         style={{
                                             backgroundColor: '#e9ecef',
-                                            height: '200px',
+                                            height: '188px',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -1345,9 +1342,14 @@ export default function FreshBookingForm() {
                                                 className="img-fluid"
                                                 style={{ maxHeight: '180px' }}
                                             />
-                                        ) : (
-                                            <i className="bi bi-image fs-1 text-secondary"></i>
-                                        )}
+                                        ) :  (
+                                    
+                                            <img
+                                                src="/img/PreviewImg.svg"
+                                                alt="Preview"
+
+                                                style={{ maxHeight: '180px' }}/>
+                                    )}
 
                                         {sitePlan && (
                                             <div
@@ -1372,33 +1374,33 @@ export default function FreshBookingForm() {
 
 
 
-                {/* ------------------------------------------  About Project Start  ------------------------------------------------ */}
+                {/* ------------------------------------------  About Builder Start  ------------------------------------------------ */}
                 <div className=' rounded-3 d-flex flex-column gap-3 p-3' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
                     <div >
                         <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }} >About Project Builder</h2>
                     </div>
 
-                    <div className='d-flex  gap-5'>
+                    <div className='freshbooking-about-project-data-container d-flex  gap-5'>
 
-                        <div style={{ width: '80%' }}>
-                            <div className='mb-2'>
+                        <div className='w-100 d-flex flex-column gap-3'>
+                            <div className=' d-flex flex-column gap-1'>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}> Project Builder Name*</p>
                                 <input className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder=' Project Builder Name*' onChange={(e) => { setFromData({ ...formData, projectAboutBuilder: { ...formData.projectAboutBuilder, projectAboutBuilderName: e.target.value } }) }} />
                             </div>
-                            <div>
+                            <div className='d-flex flex-column gap-1'>
                                 <p style={{ color: "#16315F", fontSize: '14px' }}>Project Builder Description*</p>
-                                <textarea className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minHeight: '120px', minWidth: '600px', resize: "none" }} type='text' placeholder='Project Builder Description*' onChange={(e) => { setFromData({ ...formData, projectAboutBuilder: { ...formData.projectAboutBuilder, projectAboutBuilderContent: e.target.value } }) }} />
+                                <textarea className=' rounded-1 p-2 w-100' style={{ border: "1px solid rgba(198, 230, 255, 1)", minHeight: '120px', resize: "none" }} type='text' placeholder='Project Builder Description*' onChange={(e) => { setFromData({ ...formData, projectAboutBuilder: { ...formData.projectAboutBuilder, projectAboutBuilderContent: e.target.value } }) }} />
                             </div>
 
                         </div>
 
                         <div className="container mt-4">
-                            <div className="d-flex justify-content-between" style={{ gap: '20px' }}>
+                            <div className="freshbooking-about-project-image-upload-container d-flex justify-content-between" >
 
-                                <div className="mb-3 " style={{ width: '70%' }}>
+                                <div className="upload-image-dragdrop-container mb-3 ">
                                     <label htmlFor="imageUpload" className="form-label fw-bold">Upload Card Image*</label>
 
-                                    <div className="position-relative ">
+                                    <div className="upload-image-dragdrop-container position-relative ">
                                         <div
                                             style={{
                                                 borderWidth: '2px',
@@ -1444,10 +1446,10 @@ export default function FreshBookingForm() {
 
                                 <div className="col-md-4">
                                     <div
-                                        className="border rounded position-relative"
+                                        className="upload-image-container border rounded position-relative"
                                         style={{
                                             backgroundColor: '#e9ecef',
-                                            height: '200px',
+                                            height: '188px',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center'
@@ -1486,45 +1488,50 @@ export default function FreshBookingForm() {
 
                     </div>
                 </div>
-                {/* ------------------------------------------  About Project End  ------------------------------------------------ */}
+                {/* ------------------------------------------  About Builder End  ------------------------------------------------ */}
+
+
+
+
 
                 {/* ------------------------------------------  About SEO Start  ------------------------------------------------ */}
-                <div className=' rounded-3 d-flex flex-column gap-3 p-3 mb-5' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
+                <div className=' rounded-3 d-flex flex-column gap-3 p-3 mb-3' style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}>
                     <div >
                         <h2 className='fs-5' style={{ color: "#16315F", fontSize: '14px' }} >SEO Detail</h2>
                     </div>
 
-                    <div className='  gap-5'>
+                    <div className=' d-flex flex-column gap-3 '>
 
-                        <div className='d-flex'>
-                            <div className='mb-2 '>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}> Project Meta Title</p>
-                                <input className=' rounded-1 p-3' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder=' Project Builder Name*'
+                        <div className='freshbooking-about-seo-container d-flex gap-3 flex-wrap'>
+                            <div className='freshbooking-project-meta-title-container d-flex flex-column gap-2 '>
+                                <p style={{ color: "#16315F", fontSize: '14px' }}> Project Meta Title*</p>
+                                <input className=' rounded-1 p-3' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type='text' placeholder=' Project Builder Name'
                                     onChange={(e) => { setFromData({ ...formData, projectMeta: { ...formData.projectMeta, projectTitle: e.target.value } }) }} />
                             </div>
-                            <div className='mb-2 px-2'>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}> Project Manager Contact</p>
+                            <div className='freshbooking-project-manager-contact-container d-flex flex-column gap-2 '>
+                                <p style={{ color: "#16315F", fontSize: '14px' }}> Project Manager Contact*</p>
                                 <input 
-                                    className=' rounded-1 p-3' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type="text" placeholder=' Project Manager Contact*'
+                                    className=' rounded-1 p-3' style={{ border: "1px solid rgba(198, 230, 255, 1)" }} type="text" placeholder=' Project Manager Contact'
                                     onChange={(e) => { setFromData({ ...formData, projectManagerContact: e.target.value.trim() }) }} />
                             </div>
-                            <div>
-                                <p style={{ color: "#16315F", fontSize: '14px' }}>Project Meta Description</p>
-                                <textarea className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)", minWidth: '700px', resize: "none" }} type='text' placeholder='Project Builder Description*'
-                                    onChange={(e) => { setFromData({ ...formData, projectMeta: { ...formData.projectMeta, projectDescripation: e.target.value } }) }} />
-                            </div>
+                           
 
 
                         </div>
+                        <div className='freshbooking-project-meta-description-container  d-flex flex-column gap-2 '>
+                                <p style={{ color: "#16315F", fontSize: '14px' }}>Project Meta Description*</p>
+                                <textarea className=' rounded-1 p-2' style={{ border: "1px solid rgba(198, 230, 255, 1)",minHeight:'120px',width:'100%',maxWidth:'500px',  resize: "none" }} type='text' placeholder='Project Meta Description'
+                                    onChange={(e) => { setFromData({ ...formData, projectMeta: { ...formData.projectMeta, projectDescripation: e.target.value } }) }} />
+                            </div>
 
 
 
                     </div>
                 </div>
-                {/* ------------------------------------------  About Project End  ------------------------------------------------ */}
+                {/* ------------------------------------------  About SEO End  ------------------------------------------------ */}
 
 
-                <button type='submit'>sumit</button>
+                <button className=' my-4 mx-auto py-2 px-5 border fs-5 rounded-3 text-white' style={{backgroundColor:'#1877f2'}} type='submit'>submit</button>
             </form>
         </div>
     )

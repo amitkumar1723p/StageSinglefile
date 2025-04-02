@@ -40,6 +40,44 @@ export const createfreshProjectAction = (formData) => {
     };
 };
 
+
+export const getAllFreshProjectAction=()=>{
+    console.log("hello")
+    return async(dispatch)=>{
+        try {
+            dispatch({
+                type: "getAllFreshProjectRequest",
+            });
+
+            let url = `${api_Base_Url}/fresh/viewAllProject`;
+
+            let config = {
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            };
+
+            // Post the FormData to the backend
+            const { data } = await axios.get(url, config);
+
+            dispatch({
+                type: "getAllFreshProjectSuccess",
+                payload: data
+            }); 
+        } catch (error) {
+            if (error.response) {
+                dispatch({
+                    type: "getAllFreshProjectFail",
+                    payload: error.response.data
+                });
+            } else {
+                dispatch({
+                    type: "getAllFreshProjectFail",
+                    payload: { message: error.message, success: false },
+                });
+            }
+        }
+    }
+}
 export const getviewOneProjectAction=(id)=>{
     console.log("jewhtugh")
     console.log(id,"jkjjk")

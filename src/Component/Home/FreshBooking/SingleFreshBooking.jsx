@@ -1,4 +1,5 @@
 import React, { useEffect ,useState} from 'react'
+import { useParams,useLocation } from 'react-router-dom';
 // import "./SingleFreshBooking.css";
 
 import SingleFreshBookingHero from './SingleFreshBookingHero'
@@ -9,7 +10,6 @@ import SingleFreshBookingGallery from './SingleFreshBookingGallery'
 import SingleFreshBookingAmenities from './SingleFreshBookingAmenities'
 import SingleFreshBookingFloorPlan from './SingleFreshBookingFloorPlan'
 import SingleFreshBookingLocationMap from './SingleFreshBookingLocationMap'
-import "bootstrap/dist/css/bootstrap.min.css";
 import SingleFreshBookingFAQs from './SingleFreshBookingFAQs'
 import PostDetails from './PostDetails'
 import SingleFreshFooter from './SingleFreshFooter'
@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getviewOneProjectAction } from '../../../Action/freshProjectAction'
 export default function SingleFreshBooking() {
   const dispatch =useDispatch()
-let id='67ebd7bb60d7d81302754d0c'
 
   useEffect(()=>{
    dispatch(getviewOneProjectAction(id))
@@ -77,6 +76,10 @@ let id='67ebd7bb60d7d81302754d0c'
        console.log("No valid category or data.");
      }
    }, [projectLocation, locationStatus]); 
+
+
+     const { id } = useParams();
+
 
 
   return (

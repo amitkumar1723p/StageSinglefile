@@ -341,7 +341,7 @@ const PropertySection = () => {
                                 )}
 
                                 <button
-                                  onMouseEnter={handleRippleEffect}
+                                  // onMouseEnter={handleRippleEffect}
                                   onClick={() => {
                                     const link = `${
                                       property?.PropertyDetails?.BHKType

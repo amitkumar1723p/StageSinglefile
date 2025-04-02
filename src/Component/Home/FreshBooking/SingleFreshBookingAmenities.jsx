@@ -52,7 +52,7 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
   <h3 className="fw-bold mb-3 Single-fresh-amenities" style={{ color: '#1D3557' }}>
     {project?.projectName} Amenities
   </h3>
-  <div className="row row-cols-2 row-cols-md-6 mt-4 mb-4 g-4">
+  <div className="row row-cols-2 row-cols-md-6 mt-4 mb-4 g-4 single-fresh-booking-amenities">
     {Array.isArray(amenitiesContent) && amenitiesContent.map((item, index) => (
       <div key={index} className="col d-flex">
         <div
