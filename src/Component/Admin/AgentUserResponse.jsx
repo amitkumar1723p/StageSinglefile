@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { FormatDate } from '../../utils/CommonFunction'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserResponseAction } from '../../Action/userAction';
+import { FormatDateAndTime, formatPrice } from "../../utils/CommonFunction";
 import "./AllRegistrationResponse.css";
 export default function AgentUserResponse() {
     const dispatch = useDispatch()
@@ -96,22 +97,30 @@ export default function AgentUserResponse() {
                     {AllUserResponseAction_Store?.data?.map((item) => {
                         return (
 
-                            <div className=" main-box-all-response-section all-response-section-admin  d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2 rounded w-fit d-flex justify-content-center align-items-center">
+                            <div className=" main-box-all-response-section all-response-section-admin  d-flex   border border-primary border-opacity-25 py-2 rounded  ">
 
                                 <div className="agentuserName border-end border-primary px-1  border-opacity-25">
                                     <div className="">
-                                        <p className="All-response-common-section  ">{item?.propertyDetail?.LocationDetails?.ProjectName}- <small className="fw-light">( {item?.propertyDetail?._id})</small></p>
-                                        {/* <small className="fw-light">{item?.email}</small> */}
-                                        <small className="">
-                                            {item?.latestCreateAt ? FormatDate(item?.propertyDetail?.createAt) : 'N/A'}
+                                        <small className=" fw-light text-primary border-primary border-bottom px-2 border-opacity-50  cursor-pointer"  
+                                        //    className=""
+                                           onClick={(e) => {
+                                               window.open(`/post-detail/${item?.propertyDetail?._id}`, 'SinglePostDetail');
+                                           }}
+                                        >
+                                            {item?.propertyDetail?.LocationDetails?.ProjectName} 
+                                            - {item?.propertyDetail?.LocationDetails?.Landmark} {item?.propertyDetail?.LocationDetails?.City}-
+                                             <small className="fw-light">( {item?.propertyDetail?._id})</small></small>
+                                        {/* <small className="fw-light">{item?.email}</small> */}<br/>
+                                        <small className="fw-light">
+                                        {item?.createAt ? FormatDate(item?.createAt) : 'N/A'}
                                         </small>
                                     </div>
                                 </div>
 
                                 <div className="agentuserContact border-end border-primary border-opacity-25 px-1 ">
                                     <p className="text-center">
-                                        <small className='fw-light'>    User Number </small><br/>
-                                        <small className="fw-medium"> {item?.userDetail?.ContactNumber}</small>
+                                        <small className='fw-light'>User Number </small><br/>
+                                        <small className="fw-normal"> {item?.userDetail?.ContactNumber}</small>
 
 
 
@@ -120,14 +129,14 @@ export default function AgentUserResponse() {
                                 <div className="  agentuserContact border-end border-primary border-opacity-25 px-1 ">
                                     <p className="text-center">
 
-                                     <small className='fw-light'>User Name</small> <br/>  <small className="fw-medium">{item?.userDetail?.Name} {item?.userDetail?.LastName}</small>
+                                     <small className='fw-light'>User Name</small> <br/>  <small className="fw-normal">{item?.userDetail?.Name} {item?.userDetail?.LastName}</small>
 
                                     </p>
                                 </div>
 
                                 <div className="  agentuserContact border-end border-primary border-opacity-25 px-1 ">
                                     <p className="text-center">
-                                        <small className='fw-light'>Response Date</small> <br/><small className="fw-medium">{item?.createAt ? FormatDate(item?.propertyDetail?.createAt) : 'N/A'}</small>
+                                        <small className='fw-light'>Response Date</small> <br/><small className="fw-normal">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small>
 
                                     </p>
 
@@ -135,11 +144,16 @@ export default function AgentUserResponse() {
                                 <div className="  userContact border-end border-primary border-opacity-25 px-1 ">
                                     <p className="text-center">
                                      
-                                        {item?.Biddinguser ? <><small className='fw-light'>Offer Price</small><br/>{item?.BidPrice}</> : <> <small className='fw-light'>Visit Date</small><br/><small className='fw-medium'>{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'}</small></>}
+                                        {item?.Biddinguser ?
+                                         <><small className='fw-light'>Offer Price</small><br/>{formatPrice(item?.BidPrice)}</>
+                                          :
+                                           <> <small className='fw-light'>
+                                            Visit Date</small><br/>
+                                            <small className='fw-normal'>{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'} - {(item?.VisitTime?.From)}</small></>}
                                     </p>
                                 </div>
 
-
+                             
                                 {/* 
                                 <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
                                     <p className=" all-response-data-section d-flex justify-content-center align-items-center ">Schedule :  &nbsp; <small className="fw-bold">  {item?.scheduleData?.length} </small> </p>
@@ -156,8 +170,8 @@ export default function AgentUserResponse() {
                                    
                                     
 
-                                       <p className="text-center">
-                                      <small className='fw-light'>Lead Type</small> <br/><small className="fw-medium">{item?.Biddinguser ? <>Offer</> : <>Schedule</>}</small>
+                                       <p className="text-center px-5">
+                                      <small className='fw-light'>Lead Type</small> <br/><small className="fw-normal">{item?.Biddinguser ? <>Offer</> : <>Schedule</>}</small>
 
                                     </p>
 

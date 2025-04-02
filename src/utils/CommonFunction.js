@@ -28,7 +28,17 @@ export function FormatDateAndTime(inputDate) {
 }
 
 
- export const formatPrice = (price) => {
+export const formatPrice = (price) => {
+  console.log(price, "hghie");
+
+  // Ensure price is a valid number
+  if (isNaN(price)) {
+    return "Invalid Price"; // Or handle it differently if needed
+  }
+
+  // Convert price to a number (if it's a string or any other type)
+  price = parseFloat(price);
+
   if (price >= 10000000) {
     const value = Math.floor(price / 100000) / 100;
     return `₹ ${value % 1 === 0 ? value.toFixed(0) : value.toFixed(2)} Cr`;
@@ -42,3 +52,5 @@ export function FormatDateAndTime(inputDate) {
     return `₹ ${price.toFixed(2)}`;
   }
 };
+
+ 
