@@ -746,24 +746,20 @@ export const getSerachPropertyReducer=(state={},action)=>{
       return state;
   }
 }
-
 export const getPostsByAddressReducer=(state={},action)=>{
   switch(action.type){
     case "GetPostsByAddressRequest":
       return {
         ...state,
         loading: true,
-
       };
-
+      
     case"GetPostsByAddressSuccess":
     return {
       ...state,
       data: action.payload,
       loading: false,
     };
-
-
     case"GeetPostsByAddressFail":
     return {
       ...state,
