@@ -74,8 +74,8 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
-import FreshBookingHome from "./FreshBookingHome.jsx";
-import FreshBookingPost from "./FreshBookingPost.jsx";
+import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
+
 const HeroSection = () => {
 
   const dispatch = useDispatch();
