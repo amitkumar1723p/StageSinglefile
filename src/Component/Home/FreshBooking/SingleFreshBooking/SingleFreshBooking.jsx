@@ -15,6 +15,7 @@ import SingleFreshBookingFAQs from './SingleFreshBookingFAQs'
 import SingleFreshFooter from './SingleFreshFooter'
 import { useDispatch, useSelector } from 'react-redux'
 import { getviewOneProjectAction } from '../../../../Action/freshProjectAction'
+import SingleFreshBookingViewMore from './SingleFreshBookingViewMore';
 export default function SingleFreshBooking() {
   const dispatch =useDispatch()
 
@@ -97,7 +98,11 @@ export default function SingleFreshBooking() {
       {/* <PostDetails/> */}
       {/* <SingleFreshBookingFAQs/> */}
       <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} LocationImageContent={locationImage}  />
+      <SingleFreshBookingViewMore />
       <SingleFreshFooter   projectLogoContent= {projectLogoImage} project={projectBasicDetail}/>
+      
+
+
     </div>
   )
 }

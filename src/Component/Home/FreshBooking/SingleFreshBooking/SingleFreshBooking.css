@@ -372,11 +372,11 @@
 }
 .single-fresh-booking-amenities{
   display:flex;
-  justify-content: center;
-  align-items: center;
+
+
   flex-wrap:wrap;
 
-  gap: 20px;
+  gap: 10px;
 }
 .single-fresh-booking-locaitonmap-container{
   display: flex;
@@ -437,12 +437,22 @@
 .single-freshbooking-price-custom-table tbody tr:hover {
   background-color: #f1f1f1;
 }
+.single-fresh-booking-amenities{
+  .single-fresh-booking-amenities-container{
+    .Single-fresh-amenities-content{
+     p{
+      font-size: 14px;
+     }
+    }
+  }
+
+}
 
 @media(max-width:1024px){
   .single-fresh-booking-amenities{
 
 
-    gap: 20px;
+    gap: 10px;
   }
 }
 
@@ -481,7 +491,7 @@
   } */
   .single-fresh-booking-amenities{
 
-    gap: 20px;
+
   }
   .single-fresh-hero-icon {
     display: grid;
@@ -519,7 +529,18 @@
     margin: 0 auto;
   }
   .single-fresh-booking-amenities{
+    align-items: center;
+    justify-content: center;
 
+  }
+  .single-fresh-booking-amenities{
+    .single-fresh-booking-amenities-container{
+      .Single-fresh-amenities-content{
+       p{
+        font-size: 12px;
+       }
+      }
+    }
 
   }
 

@@ -38,27 +38,31 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
   {`.hover-effect {
     background-color: #1D3557;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 2px;
     transition: all 0.3s ease-in-out;
-    border-left: 4px solid #1D3557;
-    border-bottom: 4px solid #1D3557;
-    border-bottom-left-radius: 12px;   
-    border-bottom-right-radius: 0 !important; 
+ 
+    box-shadow:
+    rgba(45, 35, 66, 0.2) 0 2px 4px,
+    rgba(45, 35, 66, 0.15) 0 7px 13px -3px,
+    #d6d6e7 0 -3px 0 inset;
   }
+    .hover-effect:focus {
+  box-shadow:
+    #d6d6e7 0 0 0 1.5px inset,
+    rgb(0, 0, 0) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+    #d6d6e7 0 -3px 0 inset;
+}
 
-  .hover-effect:hover {
-    background-color:rgb(6, 59, 111) !important; /* Change background to blue */
-    padding: 20px !important; /* Increase padding */
-    border-radius: 12px !important; /* Adjust rounding */
-  }
 
-  .hover-effect:hover .amenity-icon {
-    filter: brightness(0) invert(1); /* Change SVG color to white */
-  }
+ 
+  // .hover-effect:hover .amenity-icon {
+  //   filter: brightness(10) invert(.5); /* Change SVG color to white */
+  // }
 
-  .hover-effect:hover .amenity-text {
-    color: white !important; /* Change text color to white */
-  }`}
+  // .hover-effect:hover .amenity-text {
+  //   color:rgba(153, 153, 153, 0.8) !important; /* Change text color to white */
+  // }`}
   </style>
   <div className="container mt-5 mb-5">
   <h3 className="mb-3 Single-fresh-facilities">Project Facilities</h3>
@@ -71,12 +75,12 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
       const currentLogo = item.replace(/\s+/g, ""); 
 
       return (
-        <div key={index} className=" d-flex " style={{width:'140px'}}>
+        <div key={index} className=" single-fresh-booking-amenities-container d-flex " style={{width:'120px'}}>
           <div
-            className="d-flex flex-column justify-content-between align-items-center text-center w-100 hover-effect Single-fresh-amenities-content"
+            className="Single-fresh-amenities-content d-flex flex-column justify-content-between align-items-center text-center w-100 hover-effect "
             style={{
-              height: "140px",
-              padding: "20px",
+              height: "120px",
+              padding: "10px",
               backgroundColor: "white",
               transition: "0.3s ease-in-out",
               cursor: "pointer",
@@ -85,7 +89,7 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
             <div className="icon-container">
               <img src={amenities[currentLogo] || ""} alt={item.name || ""} className="amenity-icon" style={{height:'30px', width:'auto'}} />
             </div>
-            <p className="mt-2 mb-0 fw-medium amenity-text text-black">{item.name || item}</p>
+            <p className="mt-2 mb-0 fw-medium  amenity-text text-black">{item.name || item}</p>
           </div>
         </div>
       );
