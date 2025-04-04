@@ -836,7 +836,7 @@ function App() {
   return (
     <>
       {/* <PinnacleSms /> */}
-      {/* <Navbar /> */}
+      <Navbar />
 
       {alertData && alertData.AlertShow === true && (
         <Alert
