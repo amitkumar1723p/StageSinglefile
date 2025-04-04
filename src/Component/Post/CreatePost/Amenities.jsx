@@ -44,8 +44,6 @@ export default function Amenities({
     "Serviced Apartment",
   ];
 
- 
-
   //  Plot And Land Amenities
 
   let ProjectAmmenitiesArray = [
@@ -104,7 +102,6 @@ export default function Amenities({
     // eslint-disable-next-line
   }, [AmenitiesDetailsData.Furnishing]);
 
-
   return (
     <>
       {ApartMentTypeArrayRemovePlotAndLand.includes(
@@ -119,11 +116,10 @@ export default function Amenities({
               {FurnishingOptions.map((text, i) => {
                 return (
                   <div
-                  
                     key={i}
                     className={`tab ${
                       AmenitiesDetailsData.Furnishing === text ? "select" : ""
-                    }    ${Error.Furnishing? 'inputShake shake' : ''}`}
+                    }    ${Error.Furnishing ? "inputShake shake" : ""}`}
                     onClick={() => {
                       if (text === "Un-Furnished") {
                         setAmenitiesDetailsData({
@@ -168,16 +164,15 @@ export default function Amenities({
                   {/* ModularKitchen */}
 
                   <div className="field-group">
-                    <label
-                   
-                     htmlFor="light">Modular Kitchen</label>
+                    <label >Modular Kitchen</label>
                     <div className="row">
                       {YesNoArray.map((text, i) => {
                         return (
                           <div className="row" key={i}>
                             <input
-                             
-                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
+                              className={` ${
+                                Error.ModularKitchen ? " shake" : ""
+                              }`}
                               type="radio"
                               id={`modular-kitchen-${i}`}
                               name="modular-kitchen"
@@ -198,10 +193,90 @@ export default function Amenities({
                               }}
                             />
                             <label
-                            
+                              className={` ${
+                                Error.ModularKitchen ? " shake" : ""
+                              }`}
+                              htmlFor={`modular-kitchen-${i}`}
+                            >
+                              {text === true ? "Yes" : "No"}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* chimney */}
+                  <div className="field-group">
+                    <label>Chimney</label>
+                    <div className="row">
+                      {YesNoArray.map((text, i) => {
+                        return (
+                          <div className="row" key={i}>
+                            <input
+                              
+                              type="radio"
+                              id={`chimney-${i}`}
+                              name="chimney"
+                              value={text}
+                              
+                              checked={
+                                AmenitiesDetailsData.FurnishingOption
+                                  ?.Chimney === text
+                              }
+                              onChange={() => {
+                                setAmenitiesDetailsData({
+                                  ...AmenitiesDetailsData,
+                                  FurnishingOption: {
+                                    ...AmenitiesDetailsData.FurnishingOption,
+                                    Chimney: text,
+                                  },
+                                });
+                              }}
+                            />
+                            <label
+                              htmlFor={`chimney-${i}`}
+                            >
+                              {text === true ? "Yes" : "No"}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* exhaust fan */}
+                  <div className="field-group">
+                    <label htmlFor="light">Exhaust Fan</label>
+                    <div className="row">
+                      {YesNoArray.map((text, i) => {
+                        return (
+                          <div className="row" key={i}>
+                            <input
+                           
+                              type="radio"
+                              id={`exhaust-fan-${i}`}
+                              name="exhaust-fan"
+                              value={text}
                              
-                             className={` ${Error.ModularKitchen? ' shake' : ''}`}
-                             htmlFor={`modular-kitchen-${i}`}>
+                              checked={
+                                AmenitiesDetailsData.FurnishingOption
+                                  ?.ExhaustFan === text
+                              }
+                              onChange={() => {
+                                setAmenitiesDetailsData({
+                                  ...AmenitiesDetailsData,
+                                  FurnishingOption: {
+                                    ...AmenitiesDetailsData.FurnishingOption,
+                                    ExhaustFan: text,
+                                  },
+                                });
+                              }}
+                            />
+                            <label
+                              
+                              htmlFor={`exhaust-fan-${i}`}
+                            >
                               {text === true ? "Yes" : "No"}
                             </label>
                           </div>
@@ -584,13 +659,17 @@ export default function Amenities({
           )}{" "}
           {/* Society And Building feature   */}
           <div className="fom-group">
-            <p className="label"> Society / Property feature  {BasicDetailsData.ApartmentType !=="Independent/Builder Floor" &&`*`}</p>
+            <p className="label">
+              {" "}
+              Society / Property feature{" "}
+              {BasicDetailsData.ApartmentType !== "Independent/Builder Floor" &&
+                `*`}
+            </p>
             <div className="tab-box">
               {SocietyAndBuildingfeature_And_ProjectAmmenities_Array.map(
                 (text, i) => {
                   return (
                     <div
-                    
                       key={i}
                       className={`tab ${
                         AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
@@ -598,7 +677,11 @@ export default function Amenities({
                         )
                           ? "select"
                           : ""
-                      } ${Error.SocietyAndBuildingFeature? 'inputShake shake' : ''}
+                      } ${
+                        Error.SocietyAndBuildingFeature
+                          ? "inputShake shake"
+                          : ""
+                      }
                     `}
                       onClick={() => {
                         if (
@@ -659,11 +742,10 @@ export default function Amenities({
           {PowerBackUpArray.map((text, i) => {
             return (
               <div
-              
                 key={i}
                 className={`tab ${
                   AmenitiesDetailsData.PowerBackUp === text ? "select" : ""
-                }  ${Error.PowerBackUp? 'inputShake shake' : ''}`}
+                }  ${Error.PowerBackUp ? "inputShake shake" : ""}`}
                 onClick={() => {
                   setAmenitiesDetailsData({
                     ...AmenitiesDetailsData,
@@ -694,15 +776,13 @@ export default function Amenities({
             {WaterSourceArray.map((text, i) => {
               return (
                 <div
-                
                   key={i}
-              className={`tab ${
-                  AmenitiesDetailsData.WaterSource?.includes(text)
-                    ? "select"
-                    : ""
-                }
-                    ${Error.WaterSource? 'inputShake shake' : ''} `}
-               
+                  className={`tab ${
+                    AmenitiesDetailsData.WaterSource?.includes(text)
+                      ? "select"
+                      : ""
+                  }
+                    ${Error.WaterSource ? "inputShake shake" : ""} `}
                   onClick={(event) => {
                     if (!AmenitiesDetailsData.WaterSource?.includes(text)) {
                       setAmenitiesDetailsData({
@@ -751,13 +831,12 @@ export default function Amenities({
               {ProjectAmmenitiesArray.map((text, i) => {
                 return (
                   <div
-                  
                     key={i}
                     className={`tab ${
                       AmenitiesDetailsData.ProjectAmmenities?.includes(text)
                         ? "select"
                         : ""
-                    }  ${Error.ProjectAmmenities? 'inputShake shake' : ''}
+                    }  ${Error.ProjectAmmenities ? "inputShake shake" : ""}
                     `}
                     onClick={() => {
                       if (
@@ -800,8 +879,6 @@ export default function Amenities({
               })}
             </div>
           </div>
-
-          
         </>
       )}
     </>

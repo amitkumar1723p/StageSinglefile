@@ -49,7 +49,7 @@ export default function PropertyDetailsSection({
           CoveredParking: 0,
           OpenParking: 0,
         };
-    
+
         // Update the PropertyDetailsData state with defaults
         return {
           ...prevData,
@@ -60,7 +60,7 @@ export default function PropertyDetailsSection({
           BasementArea:
             BasicDetailsData.ApartmentType === "Independent/Builder Floor" &&
             prevData.Basement
-              ? { ...prevData.BasementArea  , unit: "sq.ft" }
+              ? { ...prevData.BasementArea, unit: "sq.ft" }
               : {},
         };
       });
@@ -90,23 +90,24 @@ export default function PropertyDetailsSection({
   //   "Store Room",
   // ];
 
-
- const [OtherRoomArray ,setOtherRoomArray]  =useState(["Pooja Room",
+  const [OtherRoomArray, setOtherRoomArray] = useState([
+    "Pooja Room",
     "Study Room",
     "Servant Room",
     "Store Room",
-  ])
-   
- useEffect(()=>{
-    if(BasicDetailsData.ApartmentType=="Independent/Builder Floor"){
-      setOtherRoomArray([... OtherRoomArray ,"Terrace"])
-    } else{
-       let Terrace_Remove = OtherRoomArray.filter((text)=>{ return text !="Terrace"})
-       setOtherRoomArray(Terrace_Remove)
+  ]);
+
+  useEffect(() => {
+    if (BasicDetailsData.ApartmentType == "Independent/Builder Floor") {
+      setOtherRoomArray([...OtherRoomArray, "Terrace"]);
+    } else {
+      let Terrace_Remove = OtherRoomArray.filter((text) => {
+        return text != "Terrace";
+      });
+      setOtherRoomArray(Terrace_Remove);
     }
-  
- },[BasicDetailsData.ApartmentTyp])
- 
+  }, [BasicDetailsData.ApartmentTyp]);
+
   return (
     <>
       <p className="Property-Details-heading">Property Details</p>
@@ -114,8 +115,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="bhk-type">BHK Type*</label>
           <select
-           className={` ${Error.BHKType? 'inputShake shake' : ''}`}
-
+            className={` ${Error.BHKType ? "inputShake shake" : ""}`}
             id="bhk-type"
             required
             value={PropertyDetailsData.BHKType || ""}
@@ -145,8 +145,7 @@ export default function PropertyDetailsSection({
         <div className="form-group">
           <label htmlFor="flooring-type">Flooring Type*</label>
           <select
-           
-           className={` ${Error.FlooringType? 'inputShake shake' : ''}`}
+            className={` ${Error.FlooringType ? "inputShake shake" : ""}`}
             id="flooring-type"
             required
             value={PropertyDetailsData.FlooringType || ""}
@@ -180,10 +179,11 @@ export default function PropertyDetailsSection({
               return (
                 <div
                   key={i}
-                  
                   className={`tab ${
-                    PropertyDetailsData.OtherRoom?.includes(text) ? "select" : ""
-                  }  ${Error.OtherRoom? 'inputShake shake' : ''}
+                    PropertyDetailsData.OtherRoom?.includes(text)
+                      ? "select"
+                      : ""
+                  }  ${Error.OtherRoom ? "inputShake shake" : ""}
                       `}
                   onClick={() => {
                     if (!PropertyDetailsData.OtherRoom?.includes(text)) {
@@ -231,13 +231,11 @@ export default function PropertyDetailsSection({
                   return (
                     <div className="d-flex" key={i}>
                       <input
-                       
-                      className={`me-2 ${Error.Basement? 'inputShake shake' : ''}`}
+                        className={`me-2`}
                         type="radio"
                         id={`basement-${i}`}
                         name="basement"
                         value={text}
-                        required
                         checked={PropertyDetailsData.Basement === text}
                         onChange={() => {
                           setPropertyDetailsData({
@@ -248,9 +246,10 @@ export default function PropertyDetailsSection({
                       />
                       &nbsp;
                       <label
-                       
                         htmlFor={`basement-${i}`}
-                        className={`basement-label-${i} ${Error.Basement? ' shake' : ''}`}
+                        className={`basement-label-${i} ${
+                          Error.Basement ? " shake" : ""
+                        }`}
                       >
                         {text === true ? "Yes" : "No"}
                       </label>
@@ -259,14 +258,16 @@ export default function PropertyDetailsSection({
                 })}
               </div>
             </div>
-            
+
             {PropertyDetailsData.Basement == true && (
               <div className="form-group">
                 <label htmlFor="BasementArea">Basement Area*</label>
-                <div   className={`unit-input basement-unit-input ${Error.BasementAreaShake? 'inputShake shake' : ''}`}>
+                <div
+                  className={`unit-input basement-unit-input ${
+                    Error.BasementAreaShake ? "inputShake shake" : ""
+                  }`}
+                >
                   <input
-                   
-                   
                     type="text"
                     id="BasementArea"
                     name="BasementArea"

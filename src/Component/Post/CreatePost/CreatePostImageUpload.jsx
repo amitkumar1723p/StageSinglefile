@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { CreatePostAction, UpdatePostAction } from "../../../Action/postAction";
 import { StoreDataInSession } from "../../../utils/SessionStorage";
 // import BackupIcon from "@mui/icons-material/Backup";
-import { UserContext } from "../../CreateContext/CreateContext";
+
 import ScrollToTop from "../../../ScrollToTop";
-import { useNavigate } from "react-router-dom";
-import WindowComponent from "../../WindowComponent";
-import CreatePostSubmitAlert from "./CreatePostSubmitAlert";
+import { Equal } from "lucide-react";
 
 const imagePath = "your-image.png"; // Replace with your image path
 
@@ -48,7 +46,6 @@ export default function CreatePostImageUpload({
     return state.meDetails;
   });
 
- 
   useEffect(() => {
     if (update) {
       setuploadimagesName(
@@ -135,7 +132,6 @@ export default function CreatePostImageUpload({
   const CratePostHandler = (e) => {
     e.preventDefault();
 
-
     let formData = new FormData(e.target);
 
     formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
@@ -162,10 +158,8 @@ export default function CreatePostImageUpload({
       "AmenitiesDetails",
       `${JSON.stringify(AmenitiesDetailsData)}`
     );
-    formData.append(
-      "PricingDetails",
-      `${JSON.stringify(PricingDetailsData)}`
-    );
+    formData.append("PricingDetails", `${JSON.stringify(PricingDetailsData)}`);
+    console.log(defaultImg, "default");
 
     if (update) {
       if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
@@ -180,7 +174,10 @@ export default function CreatePostImageUpload({
           `${JSON.stringify(update_RemoveImage)}`
         );
       }
-
+      if (defaultImg) {
+        formData.append("PreviewDefaultImage", defaultImg);
+      }
+      
       if (uploadimages.length > 0) {
         uploadimages.forEach((e) => {
           formData.append("PropertyImages", e, e.name);
@@ -193,11 +190,9 @@ export default function CreatePostImageUpload({
         }
       }
     } else {
-
       uploadimages.forEach((e) => {
         formData.append("PropertyImages", e, e.name);
       });
-
     }
 
     if (update) {
@@ -212,20 +207,17 @@ export default function CreatePostImageUpload({
         setshowCreatePostSubmitAlert("showLoading");
       }
     }
-
   };
 
   // Alert
   const [imageAlert, setImageAlert] = useState(false);
 
   const HandleImageAlert = () => {
-
     if (previewImage.length <= 0 && update) {
       setImageAlert(true);
       setTimeout(() => setImageAlert(false), 1500);
       return;
     }
-
   };
   // console.log(defaultImg)
   // console.log("uploadimages", uploadimages)
@@ -313,7 +305,7 @@ export default function CreatePostImageUpload({
                 id=""
                 multiple
                 accept=".jpg,.jpeg,.png,.webp,.avif"
-                  required={update && previewImage.length === 0 ? true : false}
+                required={update && previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 
@@ -364,86 +356,89 @@ export default function CreatePostImageUpload({
                 }}
               />
             </div>
-
-            {/* <p className="upload-image-defaultimage">Please choose defalut image* ( Default will be first )</p> */}
-
+            <p className="upload-image-defaultimage">
+              Please choose defalut image* ( Default will be first )
+            </p>
             <div className="showpreviewImage-Container upload-img-section">
-              {previewImage.map((image, index) => {
+              {previewImage.map((image) => {
                 return (
-                  <div className="showpreviewImage-box" key={index}>
-                    {/* default img input */}
-                    {/* <input
+                  <div className="showpreviewImage-box" key={image.name}>
+                    {/* Default Image Checkbox */}
+                    <input
                       type="checkbox"
-                      checked={defaultImg === index}
+                      checked={defaultImg === image.name} // Compare by image name
                       className="default-image"
                       onClick={() => {
-                         setDefaultImg(index);
-                          //  const uploadimages =uploadimages
-                           setuploadimages((prevFiles) => {
-                            console.log(prevFiles)
-                            const updatedFiles = [...prevFiles]; // Create a copy of the array
-                            const fileToMove = updatedFiles.splice(defaultImg, 1)[0]; // Remove the element at index
-                            updatedFiles.unshift(fileToMove); // Insert it at the beginning
-                            console.log("updated files ",updatedFiles)
-                            return updatedFiles;
-                          });
-                        
-                      
-                        
+                        setDefaultImg(image.name); // Store image name instead of index
+
+                        console.log("Selected Image:", image.name);
+
+                        // Find the image in uploadimages
+                        let selectedImage = uploadimages.find(
+                          (img) => img.name === image.name
+                        );
+                        if (!selectedImage) return;
+
+                        // Filter out the selected image and move it to the beginning
+                        let newArr = [
+                          selectedImage,
+                          ...uploadimages.filter(
+                            (img) => img.name !== image.name
+                          ),
+                        ];
+
+                        setuploadimages(newArr);
+                        console.log("Updated uploadimages:", newArr);
                       }}
-                    /> */}
+                    />
+
+                    {/* Preview Image */}
                     <img
                       className="showpreviewImage"
-                      key={index}
                       src={image.url}
                       alt="PropertyPost"
-                      onClick={(e) => {
+                      onClick={() =>
                         setsinglepreviewImage({
                           name: image.name,
                           url: image.url,
-                        });
-                      }}
+                        })
+                      }
                     />
+
+                    {/* Remove Image Button */}
                     <span
                       className="cut-image"
-                      onClick={(button, buttonindex) => {
-                        setpreviewImage(
-                          previewImage.filter((e) => {
-                            return e.name !== image.name;
-                          })
+                      onClick={() => {
+                        // Remove from previewImage
+                        setpreviewImage((prev) =>
+                          prev.filter((e) => e.name !== image.name)
                         );
 
                         if (update) {
-                          let removeImage = setupdate_RemoveImage((old) => {
-                            removeImage = previewImage.filter((e, i) => {
-                              return (
+                          setupdate_RemoveImage((old) => [
+                            ...old,
+                            ...previewImage.filter(
+                              (e) =>
                                 !uploadimagesName.includes(e.name) &&
                                 e.name === image.name
-                              );
-                              // if (uploadimagesName.includes(e.name) === false) {
-                              //   return e.name === image.name;
-                              // }
-                            });
-
-                            return [...old, ...removeImage];
-                          });
-                          setuploadimages(
-                            uploadimages.filter((e) => {
-                              return e.name !== image.name;
-                            })
-                          );
-                        } else {
-                          setuploadimages(
-                            uploadimages.filter((e) => {
-                              return e.name !== image.name;
-                            })
-                          );
+                            ),
+                          ]);
                         }
 
-                        if (singlepreviewImage) {
-                          if (singlepreviewImage.name === image.name) {
-                            setsinglepreviewImage();
-                          }
+                        // Remove from uploadimages
+                        setuploadimages((prev) =>
+                          prev.filter((e) => e.name !== image.name)
+                        );
+
+                        // Reset singlepreviewImage if the removed image was selected
+                        if (singlepreviewImage?.name === image.name) {
+                          setsinglepreviewImage(null);
+                        }
+
+                        // Default Save Image Default image
+                        if (image.name === defaultImg) {
+                          console.log(image);
+                          setDefaultImg(null);
                         }
                       }}
                     >
@@ -453,7 +448,7 @@ export default function CreatePostImageUpload({
                 );
               })}
             </div>
-
+            ;
             <div className="next-prev-box">
               <div
                 className="Submit-prev"

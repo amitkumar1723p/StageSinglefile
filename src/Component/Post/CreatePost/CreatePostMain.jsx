@@ -575,7 +575,6 @@ export default function CreatePostMain() {
       [
         "Apartment",
         "Independent House/Villa",
-        "Plot/Land",
         "Studio Apartment",
         "1 RK/PG",
         "Serviced Apartment",
@@ -600,7 +599,7 @@ export default function CreatePostMain() {
     BasicDetailsData.ApartmentType,
     BasicDetailsData.PropertyStatus,
   ]);
-
+//  aleter Create Post and update post show  alert and navigate logic 
   useEffect(() => {
     if (data) {
       if (data.success === true) {
