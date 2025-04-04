@@ -11,10 +11,10 @@ import SingleFreshBookingAmenities from './SingleFreshBookingAmenities'
 import SingleFreshBookingFloorPlan from './SingleFreshBookingFloorPlan'
 import SingleFreshBookingLocationMap from './SingleFreshBookingLocationMap'
 import SingleFreshBookingFAQs from './SingleFreshBookingFAQs'
-import PostDetails from './PostDetails'
+
 import SingleFreshFooter from './SingleFreshFooter'
 import { useDispatch, useSelector } from 'react-redux'
-import { getviewOneProjectAction } from '../../../Action/freshProjectAction'
+import { getviewOneProjectAction } from '../../../../Action/freshProjectAction'
 export default function SingleFreshBooking() {
   const dispatch =useDispatch()
 
@@ -40,6 +40,7 @@ export default function SingleFreshBooking() {
   const[projectAboutBuilderImage,setprojectAboutBuilderImage]=useState()
   const[projectFloorplan,setprojectFloorplan]=useState()
   const[projectLocation,setprojectLocation]=useState()
+  const[locationImage,setLocationImage] =useState()
   
   useEffect(()=>{
  setprojectLogoImage(getFreshProjectdata?.projectData?.projectLogoImage)
@@ -55,6 +56,7 @@ export default function SingleFreshBooking() {
  setprojectAboutBuilderImage(getFreshProjectdata?.projectData?.projectAboutBuilder?.projectAboutBuilderImage)
  setprojectFloorplan(getFreshProjectdata?.projectData?.projectFloorplan)
  setprojectLocation(getFreshProjectdata?.projectData?.projectLocation)
+ setLocationImage(getFreshProjectdata?.projectData?.projectLocation?.locationImage)
 
   }     ,[getFreshProjectdata])
 
@@ -94,8 +96,8 @@ export default function SingleFreshBooking() {
       {/* <SingleFreshBookingLocationMap  project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} loctionContent={projectLocation}/>  */}
       {/* <PostDetails/> */}
       {/* <SingleFreshBookingFAQs/> */}
-      <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage}  />
-      <SingleFreshFooter project={projectBasicDetail}/>
+      <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} LocationImageContent={locationImage}  />
+      <SingleFreshFooter   projectLogoContent= {projectLogoImage} project={projectBasicDetail}/>
     </div>
   )
 }

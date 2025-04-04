@@ -103,8 +103,8 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
                 <div className=" align-items-center Single-fresh-about-project-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxHeight:'400px', height:'auto' }}>
-                  <img  style={{width:'100%', height:'auto'}} src= {projectHightlight?.url} alt="" />
+                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{  height:'350px' }}>
+                  <img  style={{width:'auto', height:'100%', objectFit:'cover'}} src= {projectHightlight?.url} alt="" />
                     </div>
                   </div>
 
@@ -143,12 +143,12 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
                 <div className=" align-items-center  Single-fresh-Highlight-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxHeight:'400px', height:'auto' }}>
+                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{  height:'350px' }}>
                       <img 
                         src= {projectHightlight?.url}
                         alt= {project?.projectName} 
                         className="img-fluid"
-                        style={{width:'100%', height:'auto'}}
+                        style={{width:'auto', height:'100%', objectFit:'cover'}}
                       />
                     </div>
                   </div>

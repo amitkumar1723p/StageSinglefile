@@ -2,10 +2,10 @@ import React, { useEffect,useState } from 'react'
 import {useNavigate ,Link}  from 'react-router-dom';
 import './FreshBookingHome.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllFreshProjectAction } from '../../Action/freshProjectAction';
+import { getAllFreshProjectAction } from '../../../../Action/freshProjectAction';
 import { LuOrigami } from 'react-icons/lu';
 
-import FreshBookingPost from './FreshBookingPost';
+
 
 export default function FreshBookingHome(){
 

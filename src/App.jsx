@@ -64,7 +64,7 @@ import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
 import Career from "./Component/Home/Careers";
-import SingleFreshBooking from  "./Component/Home/FreshBooking/SingleFreshBooking";
+import SingleFreshBooking from  "./Component/Home/FreshBooking/SingleFreshBooking/SingleFreshBooking";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
@@ -76,7 +76,7 @@ import { FormatDate } from "./utils/CommonFunction";
 import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
 import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
-import FreshBookingPost from "./Component/Home/FreshBookingPost";
+import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {

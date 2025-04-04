@@ -30,7 +30,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
       backgroundImage: `url(${mainImage?.url})`, 
       backgroundSize: 'cover', 
       backgroundPosition: 'center', 
-      filter: 'blur(10px)', 
+      filter: 'blur(5px)', 
       zIndex: 0 
     }}
   ></div>

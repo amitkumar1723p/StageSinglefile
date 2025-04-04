@@ -3,7 +3,8 @@ import React, { useState ,useEffect} from "react";
 export default function SingleFreshBookingLocationMap({project ,
    siteMapContent , builderContent ,
     builderImage , loctionContent,
-    sendDataToChild,projectLocation
+    sendDataToChild,projectLocation,
+    LocationImageContent
   }) {
 
 
@@ -18,11 +19,12 @@ sendDataToChild(selectedCategory)
 // console.log(projectLocation,"kjdff")
 // console.log(loctionContent,selectedCategory)
 // console.log(projectLocation)
+console.log(siteMapContent)
   return (
     <>
       <div className="container py-5">
          
-        <div className="row">
+        <div className="single-fresh-booking-locaitonmap-container ">
           <div className="col-md-6 mb-4">
           <h3 className=" mb-3 col Single-fresh-location-map-h3">Location Map</h3>
           <h2 className=" fw-bold  mb-2 Single-fresh-location-map-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
@@ -58,11 +60,11 @@ sendDataToChild(selectedCategory)
 </div>
     </div>
           </div>
-          <div className="col-md-6 single-fresh-map-img">
+          <div className="freshbooking-location-image-container col-md-6 single-fresh-map-img">
             <img
               style={{ transform: "scale(1)" }}
-              src="/img/property-map.jpg"
-              className="img-fluid rounded shadow"
+              src={LocationImageContent?.url}
+              className="img-fluid rounded shadow "
               alt="map img"
             />
           </div>
@@ -77,7 +79,7 @@ sendDataToChild(selectedCategory)
       </div>
       <div
         className="overflow-hidden"
-        style={{ height: "500px", width: "80%", margin: "auto" }}
+        style={{ maxHeight: "500px", width: "80%", margin: "auto" }}
       >
         <img
           src={siteMapContent?.url}
@@ -107,31 +109,36 @@ sendDataToChild(selectedCategory)
                 className="container position-relative"
                 style={{ zIndex: 2 }}
               >
-                <div className="row ">
-                 
-
-           
-                  <div className="col-12 col-md-7 ps-md-5 ">
+                <div className="  ">
+                  <div className="col-12 col-md-7  ">
                     <h3 className="text-dark  single-fresh-builder-h3">Builder</h3>
-                    <h2 className="fw-bold mb-4 single-fresh-builder-h2" style={{color:'#1D3557'}}>
+                    <h2 className="fw-bold  single-fresh-builder-h2" style={{color:'#1D3557'}}>
                       About {project?.projectName}
                     </h2>
-                    <p className=" single-fresh-builder-p">
+                    
+                  </div>
+                  <div className="single-freshbooking-buildermap-container  w-100 justify-content-between">
+
+                    <div className="single-freshbooking-builder-about d-flex align-items-center ">
+                      <p className=" single-fresh-builder-p ">
                       {builderContent?.projectAboutBuilderContent}
                     </p>
-                  </div>
-                  <div className="col-12 col-md-5 mb-4 mb-md-0">
-                    <div
-                      className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0"
+                    </div>
+            
+                      <div
+                      className="single-freshbooking-builder-image-container card rounded-4 shadow  overflow-hidden border-0 mx-auto mx-md-0"
                       style={{ maxWidth: "500px" }}
                     >
                       <img
                         src={builderImage?.url}
                         alt="DLF The Primus Building"
-                        className="img-fluid"
+                        className="img-fluid w-auto h-100"
+                        style={{objectFit:'cover'}}
                       />
                     </div>
+                  
                   </div>
+                  
                 </div>
               </div>
             </div>

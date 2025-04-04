@@ -125,7 +125,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
       <div
         className="position-relative"
         style={{
-          height: "100vh",
+          height: "92vh",
           backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -207,7 +207,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
           style={{ maxWidth: "80px" }}
         />
         <div className="fw-normal mb-1 single-fresh-hero-label">{item.label}</div>
-        <div className="fw-bold single-fresh-hero-value">{item.value} {item.value == project?.minPrice ? "Cr*" : ""}</div>
+        <div className="fw-bold single-fresh-hero-value">{item.value} {item.value == project?.minPrice ? "Cr" : ""}{item.value == project?.totalLandArea ? "Acres":''}</div>
       </div>
     ))}
   </div>

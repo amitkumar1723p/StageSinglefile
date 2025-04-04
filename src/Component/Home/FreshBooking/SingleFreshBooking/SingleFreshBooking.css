@@ -317,6 +317,7 @@
 .single-fresh-builder-p {
   text-align: justify;
   line-height: 2;
+  font-size: 18px;
 }
 
 .Single-fresh-location-map-list {
@@ -369,8 +370,119 @@
 .Single-fresh-footer-container {
   padding: 40px 30px;
 }
+.single-fresh-booking-amenities{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap:wrap;
+
+  gap: 20px;
+}
+.single-fresh-booking-locaitonmap-container{
+  display: flex;
+}
+.single-freshbooking-buildermap-container{
+  display: flex;
+  gap: 10px;
+}
+.single-freshbooking-builder-about{
+  width: 50%;
+}
+.single-freshbooking-builder-image-container{
+  width: 50%;
+}
+.single-fresh-builder-h2 {
+  font-size: 38px;
+  margin-bottom: 20px;
+
+}
+
+
+/* Table container */
+.single-freshbooking-price-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+/* Custom table styling */
+.single-freshbooking-price-custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.single-freshbooking-price-custom-table thead {
+  background-color: #1d3557;
+  color: white;
+}
+
+.single-freshbooking-price-custom-table th {
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  border: 1px solid #ddd;
+}
+
+/* Table body styling */
+.single-freshbooking-price-custom-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Row hover effect */
+.single-freshbooking-price-custom-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media(max-width:1024px){
+  .single-fresh-booking-amenities{
+
+
+    gap: 20px;
+  }
+}
 
 @media (max-width: 768px) {
+  .single-freshbooking-price-custom-table th,
+  .single-freshbooking-price-custom-table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+  .single-fresh-builder-h3 {
+    margin: 5px 0px;
+    font-size: 28px;
+  }
+  .single-fresh-builder-h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .single-freshbooking-builder-image-container{
+    width: 100%;
+  }
+  .single-freshbooking-builder-about{
+    width: 100%;
+  }
+  .single-fresh-booking-locaitonmap-container{
+    flex-direction: column;
+  }
+  .single-freshbooking-buildermap-container{
+    flex-direction: column;
+    
+  }
+  /* .freshbooking-location-image-container{
+   img{
+    width: 100%;
+   }
+  } */
+  .single-fresh-booking-amenities{
+
+    gap: 20px;
+  }
   .single-fresh-hero-icon {
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -395,6 +507,25 @@
 
 
 @media (max-width: 480px) {
+  .single-freshbooking-price-custom-table th,
+  .single-freshbooking-price-custom-table td {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .Single-fresh-booking-footer{
+    flex-direction: column;
+  }
+  .Single-fresh-booking-footer-details{
+    margin: 0 auto;
+  }
+  .single-fresh-booking-amenities{
+
+
+  }
+
+
+
+
 
   .single-freshbooking-gallery-image-container{
     max-height: 250px;
@@ -544,9 +675,7 @@
   .single-fresh-builder-h3 {
     font-size: 19px;
   }
-  .single-fresh-builder-h2 {
-    font-size: 22px;
-  }
+
 
   .Single-fresh-Size-Price-heading {
     font-size: 22px;

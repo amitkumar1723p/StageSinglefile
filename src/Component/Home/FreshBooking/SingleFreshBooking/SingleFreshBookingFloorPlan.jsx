@@ -61,13 +61,13 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
         >
           {FloorPlanContent?.map((FloorPlanContent, index) => (
             <div key={FloorPlanContent?.id} className=" Single-Fresh-Floor-Plan">
-              <div className="card border-0 shadow-sm " >
+              <div className="card border-0 shadow-sm d-flex flex-column gap-2" >
                 <img 
                   src={FloorPlanContent?.url} 
                   className={`card-img-top floor-plan-image w-auto h-100 ${activeIndex === index ? 'zoomed' : ''}`} 
                   alt={FloorPlanContent?.alt || 'Floor Plan'} 
-                  onClick={() => setActiveIndex(index)}
-                  style={{ transition: 'transform 0.3s ease-in-out',maxHeight:'400px', width:'auto', transform: activeIndex === index ? 'scale(1.1)' : 'scale(1)' }}
+                 
+                  style={{ transition: 'transform 0.3s ease-in-out',height:'100%',maxHeight:'500px', width:'auto', transform: activeIndex === index ? 'scale(1.1)' : 'scale(1)' }}
                 />
               </div>
             </div>
