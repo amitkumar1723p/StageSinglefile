@@ -100,10 +100,10 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 
            
               <div className="container position-relative" style={{ zIndex: 2 }}>
-                <div className=" align-items-center Single-fresh-about-project-main">
+                <div className=" align-items-top Single-fresh-about-project-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{  height:'350px' }}>
+                    <div className=" Single-fresh-booking-about-img-main card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
                   <img  style={{width:'auto', height:'100%', objectFit:'cover'}} src= {projectHightlight?.url} alt="" />
                     </div>
                   </div>
@@ -140,10 +140,10 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 
            
               <div className="container position-relative" style={{ zIndex: 2 }}>
-                <div className=" align-items-center  Single-fresh-Highlight-main">
+                <div className=" align-items-top Single-fresh-Highlight-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{  height:'350px' }}>
+                    <div className=" Single-fresh-booking-about-img-main  card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
                       <img 
                         src= {projectHightlight?.url}
                         alt= {project?.projectName} 
