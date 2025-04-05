@@ -71,10 +71,10 @@ const SingleFreshBookingFloorPlan = ({project , FloorPlanContent}) => {
       </div>
     ))}
 
-    <button className="single-fresh-button prev" >
+    <button className="single-fresh-button prev"  onClick={goToPrevious}>
       <ChevronLeft size={24} />
     </button>
-    <button className="single-fresh-button next" >
+    <button className="single-fresh-button next" onClick={goToNext} >
       <ChevronRight size={24} />
     </button>
 
@@ -88,6 +88,7 @@ const SingleFreshBookingFloorPlan = ({project , FloorPlanContent}) => {
         />
       ))}
     </div>
+    
   </div>
   </div>
   {zoomedImage && (
