@@ -590,26 +590,6 @@
 }
 
 
-.single-fresh-carousel {
-  position: relative;
-  overflow: hidden; /* Hide overflow to prevent images from overlapping */
-  width: 100%; /* Ensure the carousel takes full width */
-}
-
-.single-fresh-slide {
-  position: absolute; /* Position slides absolutely */
-  top: 0;
-  left: 0;
-  width: 100%; /* Each slide takes full width */
-  transition: transform 0.5s ease; /* Smooth transition for sliding */
-}
-
-.single-fresh-image {
-  /* width: 100%; Ensure images take full width of the slide */
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Remove any inline spacing */
-}
-
 .zoom-overlay {
   position: fixed;
   top: 0;
