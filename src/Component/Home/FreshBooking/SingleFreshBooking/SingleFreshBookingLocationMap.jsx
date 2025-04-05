@@ -7,64 +7,86 @@ export default function SingleFreshBookingLocationMap({project ,
     LocationImageContent
   }) {
 
-
+console.log(projectLocation,"jk")
 
   const [selectedCategory, setSelectedCategory] = useState("conectivityLocation");
 
   const [activeState, setActiveState] = useState("");
 
 useEffect(()=>{
-sendDataToChild(selectedCategory)
-},[selectedCategory])
+  if (sendDataToChild) {
+    sendDataToChild(selectedCategory);
+  }
+}, [selectedCategory, sendDataToChild]);
+
+
+// const locationItems = projectLocation && projectLocation[selectedCategory] ? projectLocation[selectedCategory] : [];
 // console.log(projectLocation,"kjdff")
 // console.log(loctionContent,selectedCategory)
 // console.log(projectLocation)
-console.log(siteMapContent)
+// console.log(siteMapContent)
   return (
     <>
-      <div className="container py-5">
-         
-        <div className="single-fresh-booking-locaitonmap-container ">
+    <div className="container py-5">
+        <div className="single-fresh-booking-locationmap-container">
           <div className="col-md-6 mb-4">
-          <h3 className=" mb-3 col Single-fresh-location-map-h3">Location Map</h3>
-          <h2 className=" fw-bold  mb-2 Single-fresh-location-map-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
-          
+            <h3 className="mb-3 col Single-fresh-location-map-h3">Location Map</h3>
+            <h2 className="fw-bold mb-2 Single-fresh-location-map-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
 
-          <div className="Single-fresh-info-section">
-      {/* <div className="Single-fresh-map-buttons">
-        <button onClick={() => setSelectedCategory("conectivityLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Connectivity</button>
-        <button onClick={() => setSelectedCategory("hospitalsLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Hospitals</button>
-        <button onClick={() => setSelectedCategory("schoolLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Schools</button>
-        <button onClick={() => setSelectedCategory("shoppingLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Malls & Markets</button>
-        <button onClick={() => setSelectedCategory("bussinessLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Office Spaces</button>
-      </div> */}
+            <div className="Single-fresh-info-section">
+              <div className="Single-fresh-map-buttons">
+              <button 
+                  className={selectedCategory === "conectivityLocation" ? "active" : ""}
+                  onClick={() => setSelectedCategory("conectivityLocation")}
+                >
+                  <img src="/img/single-fresh-map.svg" alt="" /> Connectivity
+                </button>
+                <button 
+                  className={selectedCategory === "hospitalsLocation" ? "active" : ""}
+                  onClick={() => setSelectedCategory("hospitalsLocation")}
+                >
+                  <img src="/img/single-fresh-map.svg" alt="" /> Hospitals
+                </button>
+                <button 
+                  className={selectedCategory === "schoolLocation" ? "active" : ""}
+                  onClick={() => setSelectedCategory("schoolLocation")}
+                >
+                  <img src="/img/single-fresh-map.svg" alt="" /> Schools
+                </button>
+                <button 
+                  className={selectedCategory === "shoppingLocation" ? "active" : ""}
+                  onClick={() => setSelectedCategory("shoppingLocation")}
+                >
+                  <img src="/img/single-fresh-map.svg" alt="" /> Malls & Markets
+                </button>
+                <button 
+                  className={selectedCategory === "bussinessLocation" ? "active" : ""}
+                  onClick={() => setSelectedCategory("bussinessLocation")}
+                >
+                  <img src="/img/single-fresh-map.svg" alt="" /> Office Spaces
+                </button>
+              </div>
 
-      <div className="Single-fresh-map-buttons">
-        <button onClick={() => setSelectedCategory("conectivityLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Connectivity</button>
-        <button onClick={() => setSelectedCategory("hospitalsLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Hospitals</button>
-        <button onClick={() => setSelectedCategory("schoolLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Schools</button>
-        <button onClick={() => setSelectedCategory("shoppingLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Malls & Markets</button>
-        <button onClick={() => setSelectedCategory("bussinessLocation")}> <img src="/img/single-fresh-map.svg" alt="" /> Office Spaces</button>
-      </div>
-      {/* {sendDataToChild.conectivityLocation== "conectivityLocation" && (
-        <p>{conectivityLocation}</p>
-      )} */}
-
-      <hr></hr>
-      <div className="info-content">
-    {/* <h4>{selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}</h4> */}
-
-    <ul className="list-unstyled Single-fresh-location-map-list">
-       <li className="d-flex gap-2"> <img src="/img/tick-list.svg" alt="" /> {projectLocation} </li>
-    </ul>
-</div>
-    </div>
+              <hr />
+              <div className="info-content">
+             {projectLocation && projectLocation.length > 0 && Array.isArray(projectLocation[0]) && (
+  <ul className="list-unstyled Single-fresh-location-map-list">
+    {projectLocation[0].map((item, index) => (
+      <li className="d-flex gap-2" key={index}>
+        <img src="/img/tick-list.svg" alt="" />
+        {item}
+      </li>
+    ))}
+  </ul>
+)}
+              </div>
+            </div>
           </div>
           <div className="freshbooking-location-image-container col-md-6 single-fresh-map-img">
             <img
               style={{ transform: "scale(1)" }}
               src={LocationImageContent?.url}
-              className="img-fluid rounded shadow "
+              className="img-fluid rounded shadow"
               alt="map img"
             />
           </div>

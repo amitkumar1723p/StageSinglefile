@@ -19,7 +19,6 @@ import SingleFreshBookingViewMore from './SingleFreshBookingViewMore';
 export default function SingleFreshBooking() {
   const dispatch =useDispatch()
 
-
   useEffect(()=>{
    dispatch(getviewOneProjectAction(id))
   },[])
@@ -69,10 +68,11 @@ export default function SingleFreshBooking() {
    useEffect(() => {
      // This will run whenever locationContent or selectedCategory changes
      if (projectLocation && projectLocation[locationStatus]) {
-      projectLocation[locationStatus].map((item) => {
-         setVisibleLocation(item)
-        // console.log(item)
-       });
+      setVisibleLocation([projectLocation[locationStatus]])
+      // projectLocation[locationStatus].map((item) => {
+      //    setVisibleLocation(item)
+      //   // console.log(item)
+      //  });
      } else {
        console.log("No valid category or data.");
      }

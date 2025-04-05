@@ -12,8 +12,8 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-3 Single-fresh-gallery-p">Gallery</h3>
-      <h3 className="fw-bold mb-5 Single-fresh-gallery-h3" style={{ color: '#1D3557' }}>
+      <h3 className="mb-1 Single-fresh-gallery-p">Gallery</h3>
+      <h3 className="fw-bold mb-3 Single-fresh-gallery-h3" style={{ color: '#1D3557' }}>
         {project?.projectName}
       </h3>
 

@@ -53,7 +53,8 @@ export default function SingleFreshBookingViewMore() {
       }
        const navigate = useNavigate();
 
-
+    
+     
   return (
        <div className='freshbooking-home-main-container d-flex flex-column gap-4'>
          <div className='d-md-flex justify-content-between m-auto ' style={{width:'90%'}}>
@@ -79,6 +80,8 @@ export default function SingleFreshBookingViewMore() {
    
              {allFreshBookingCard.length>0?( 
                    allFreshBookingCard.map(cardData => (
+
+                    
                      <div className="fresh-booking-home-card d-flex align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
                 
                 <div className='fresh-booking-home-card-shadow '>

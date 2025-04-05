@@ -54,7 +54,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         className="navbar navbar-expand-lg position-sticky z-3  p-0"
         style={{
            backdropFilter: "blur(10px)",
-          backgroundColor: " rgb(0 0 0 / 82%",
+          backgroundColor: " rgb(0 0 0 )",
           top: "0px",
           width: "100%",
           zIndex: 1,
@@ -134,14 +134,14 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 <div className="w-100 h-100  single-fresh-hero-conainer-main">
 <div className="single-fresh-hero-main-content">
           <div className="col-lg-7  text-white position-absolute single-fresh-hero-content">
-            <p className="text-uppercase mb-0  fw-light">
+            <p className="text-uppercase   fw-light">
               {project?.projectCity}
             </p>
-            <p className="fw-medium mb-0 ">
+            <p className="">
               {project?.projectName}
             </p>
 
-            <p className="  mb-2 fw-medium">
+            <p className=" ">
               {" "}
               {/* {projectPrice && projectPrice.length > 0 ? (
                 projectPrice.map((item) => <span>{item?.type}/</span>)
@@ -150,7 +150,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
               )} */}
               { project?.projectAdType}  { project?.locality}
             </p>
-            <p className="mb-2 fw-medium">
+            <p className=" fw-medium">
               Possesions : <span className="fw-bold">{project?.possessionStatus?.slice(0, 4)}</span>
             </p>
             <p className=" fw-medium">
@@ -197,9 +197,9 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
         {/* Info Boxes */}
         <div className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
-  <div className="single-fresh-hero-icon mx-0 bg-dark bg-opacity-75 text-white pt-3 ">
+  <div className="single-fresh-hero-icon mx-0 bg-black text-white mt-4 p-3" >
     {heroData.map((item, index) => (
-      <div className="col-6 col-md-3 w-100 text-center p-1 mb-md-0" key={index}>
+      <div className="col-6 col-md-3 w-100 text-center p-1 mb-md-0" style={{borderLeft:'1px solid white', borderRight:'1px solid white' }} key={index}>
         <img
           src={`/img/${item.icon}`}
           alt={item.label}
@@ -207,7 +207,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
           style={{ maxWidth: "80px" }}
         />
         <div className="fw-normal mb-1 single-fresh-hero-label">{item.label}</div>
-        <div className="fw-bold single-fresh-hero-value">{item.value} {item.value == project?.minPrice ? "Cr" : ""}{item.value == project?.totalLandArea ? "Acres":''}</div>
+        <div className="fw-bold single-fresh-hero-value">{item.value} {item.value == project?.minPrice ? "Cr*" : ""}{item.value == project?.totalLandArea ? "Acres":''}</div>
       </div>
     ))}
   </div>
