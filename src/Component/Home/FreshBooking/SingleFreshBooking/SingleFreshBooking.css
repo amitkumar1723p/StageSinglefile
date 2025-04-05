@@ -1,4 +1,4 @@
-single-fresh-curved-section {
+.single-fresh-curved-section {
   width: 90%;
   height: 85%;
   /* background: linear-gradient(to right, rgb(167, 219, 255), rgb(167, 219, 255) ); */
@@ -108,6 +108,7 @@ single-fresh-curved-section {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  cursor: pointer;
 }
 
 .Single-fresh-about-project-p {
