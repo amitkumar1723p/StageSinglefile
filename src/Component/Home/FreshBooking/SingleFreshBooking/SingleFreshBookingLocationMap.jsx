@@ -84,7 +84,7 @@ useEffect(()=>{
           </div>
           <div className="freshbooking-location-image-container col-md-6 single-fresh-map-img">
             <img
-              style={{ transform: "scale(1)" }}
+              style={{ transform: "scale(0.7)" }}
               src={LocationImageContent?.url}
               className="img-fluid rounded shadow"
               alt="map img"

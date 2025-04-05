@@ -1,92 +1,108 @@
-import React, { useRef, useEffect, useState  } from 'react';
-
-export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}) {
-  const scrollRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
- 
- 
-
-  const scroll = (direction) => {
-    const { current } = scrollRef;
-    if (current) {
-      if (direction === 'left') {
-        current.scrollLeft -= 450;
-      } else {
-        current.scrollLeft += 450;
-      }
-    }
-  };
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+const SingleFreshBookingFloorPlan = ({project , FloorPlanContent}) => {
+  // const images = [
+  //   {
+  //     url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05"
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e"
+  //   },
+  //   {
+  //     url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e"
+  //   }
+  // ];
+  const [zoomedImage, setZoomedImage] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveIndex(Number(entry.target.dataset.index));
-          }
-        });
-      },
-      { threshold: 0.6, root: scrollRef.current, rootMargin: "0px" }
-    );
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === FloorPlanContent?.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
 
-    const images = document.querySelectorAll(".floor-plan-image");
-    images.forEach((img) => observer.observe(img));
+    return () => clearInterval(timer);
+  }, [FloorPlanContent?.length]);
 
-    return () => {
-      images.forEach((img) => observer.unobserve(img));
-    };
-  }, []);
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? FloorPlanContent.length - 1 : prevIndex - 1));
+  };
+  
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === FloorPlanContent.length - 1 ? 0 : prevIndex + 1));
+  };
+  
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
 
   return (
     <>
-    <div className="m-auto" style={{width:'85%'}}>
+    <div className='Single-fresh-floor-plan-main'>
+  <div className="m-auto" style={{width:'85%'}}>
                     <h3 className="mb-3 Single-fresh-floor-plan-h3">Floor Plan</h3>
                     <h2 className="fw-bold mb-3 Single-fresh-floor-plan-h2" style={{color: '#1D3557'}}>The {project?.projectName} Floor Plan</h2>
-                    </div>
-                    <div className="container-fluid  py-4 bg-light" style={{width:'90%'}}>
-
-                      <div className=' d-flex justify-content-between'>
-                      <button 
-          className="btn btn-primary   "
-          onClick={() => scroll('left')}
-          style={{ zIndex: 10, background: 'none', border: 'none', padding: 0 }}
-        >
-          <img src="/img/left-arr.png" alt="Scroll Left" style={{ width: '55px', height: '45px' }} />
-        </button>
-        <button 
-          className="btn btn-primary  "
-          onClick={() => scroll('right')}
-          style={{ zIndex: 10, background: 'none', border: 'none', padding: 0 }}
-        >
-          <img src="/img/right-arr.png" alt="Scroll Right" style={{ width: '55px', height: '45px' }} />
-        </button>
-                      </div>
-
-        
-
-        <div 
-          ref={scrollRef}
-          className="d-flex overflow-scroll pb-3 px-3"
-          style={{ scrollBehavior: 'smooth', msOverflowStyle: 'none', scrollbarWidth: 'none' }}
-        >
-          {FloorPlanContent?.map((FloorPlanContent, index) => (
-            <div key={FloorPlanContent?.id} className=" Single-Fresh-Floor-Plan">
-              <div className="card border-0 shadow-sm d-flex flex-column gap-2" >
-                <img 
-                  src={FloorPlanContent?.url} 
-                  className={`card-img-top floor-plan-image w-auto h-100 ${activeIndex === index ? 'zoomed' : ''}`} 
-                  alt={FloorPlanContent?.alt || 'Floor Plan'} 
-                 
-                  style={{ transition: 'transform 0.3s ease-in-out',height:'100%',maxHeight:'500px', width:'auto'}}
-                />
-              </div>
-            </div>
-          ))}
         </div>
+    <div className="single-fresh-carousel">
+    {FloorPlanContent?.map((plan, index) => (
+      <div
+        key={index}
+        className="single-fresh-slide"
+        style={{
 
-        
+          transform: `translateX(${(index - currentIndex) * 100}%)`,
+          zIndex: index === currentIndex ? 1 : 0
+        }}
+      >
+        <img
+          src={plan?.url}
+          alt={plan?.title}
+          onClick={() => setZoomedImage(plan?.url)}
+          className="single-fresh-image "
+        />
+        {/* <div className="single-fresh-content">
+          <h2 className="single-fresh-title">{image.title}</h2>
+          <p className="single-fresh-description">{image.description}</p>
+        </div> */}
+      </div>
+    ))}
 
+    <button className="single-fresh-button prev"  onClick={goToPrevious}>
+      <ChevronLeft size={24} />
+    </button>
+    <button className="single-fresh-button next" onClick={goToNext} >
+      <ChevronRight size={24} />
+    </button>
+
+    <div className="single-fresh-nav">
+      {FloorPlanContent?.map((_, index) => (
+        <button
+          key={index}
+          onClick={() => goToSlide(index)}
+          className={`single-fresh-dot ${currentIndex === index ? 'active' : ''}`}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
     </div>
-    </>
+    
+  </div>
+  </div>
+  {zoomedImage && (
+        <div className="zoom-overlay">
+          <div className="zoom-content">
+            <img src={zoomedImage} alt="Zoomed" className="zoomed-image" />
+            <button onClick={() => setZoomedImage(null)} className="close-zoom-button">
+              ✕ 
+            </button>
+          </div>
+        </div>
+      )}
+  </>
   );
-}
+};
+
+export default SingleFreshBookingFloorPlan;
