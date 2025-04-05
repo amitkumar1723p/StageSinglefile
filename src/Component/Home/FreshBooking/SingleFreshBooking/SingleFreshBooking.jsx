@@ -11,6 +11,7 @@ import SingleFreshBookingAmenities from './SingleFreshBookingAmenities'
 import SingleFreshBookingFloorPlan from './SingleFreshBookingFloorPlan'
 import SingleFreshBookingLocationMap from './SingleFreshBookingLocationMap'
 import SingleFreshBookingFAQs from './SingleFreshBookingFAQs'
+import SingleFreshBookingBuilder from './SingleFreshBookingBuilder';
 
 import SingleFreshFooter from './SingleFreshFooter'
 import { useDispatch, useSelector } from 'react-redux'
@@ -98,7 +99,9 @@ export default function SingleFreshBooking() {
       {/* <PostDetails/> */}
       {/* <SingleFreshBookingFAQs/> */}
       <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} LocationImageContent={locationImage}  />
+      <SingleFreshBookingBuilder   project={projectBasicDetail}   builderContent={projectAboutBuilder}  />
       <SingleFreshBookingViewMore />
+      
       <SingleFreshFooter   projectLogoContent= {projectLogoImage} project={projectBasicDetail}/>
       
 

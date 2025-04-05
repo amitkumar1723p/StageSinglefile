@@ -93,15 +93,17 @@ useEffect(()=>{
         </div>
       </div>
 
-      <div className="container mt-4 mb-5 ">
-        <h3 className="mb-3 Single-fresh-site-map-h3">Site Map </h3>
+      <div className="single-fresh-booking-sitemap-container w-100  m-auto" style={{backgroundColor:'#e9f5ff', paddingTop:'20px',paddingBottom:'40px'}}>
+
+      <div className="container mt-2 mb-2 ">
+        <h3 className="mb-1 Single-fresh-site-map-h3">Site Map </h3>
         <h2 className="fw-bold  mb-5" style={{color: '#1D3557'}}>
           Master Plan Of  {project?.projectName}
         </h2>
       </div>
       <div
-        className="overflow-hidden"
-        style={{ maxHeight: "500px", width: "80%", margin: "auto" }}
+        className="overflow-hidden d-flex align-items-center justify-content-center"
+        style={{ maxHeight: "500px", width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
       >
         <img
           src={siteMapContent?.url}
@@ -111,7 +113,12 @@ useEffect(()=>{
         />
       </div>
 
-      <div className="container-fluid p-0">
+      </div>
+
+      
+
+
+      {/* <div className="container-fluid p-0">
         <div className="row g-0">
           <div className="col-12">
             <div
@@ -132,16 +139,14 @@ useEffect(()=>{
                 style={{ zIndex: 2 }}
               >
                 <div className="  ">
-                  <div className="col-12 col-md-7  ">
+                 
+                  <div className="single-freshbooking-buildermap-container  w-100 justify-content-between">
+
+                    <div className="single-freshbooking-builder-about  ">
                     <h3 className="text-dark  single-fresh-builder-h3">Builder</h3>
                     <h2 className="fw-bold  single-fresh-builder-h2" style={{color:'#1D3557'}}>
                       About {project?.projectName}
                     </h2>
-                    
-                  </div>
-                  <div className="single-freshbooking-buildermap-container  w-100 justify-content-between">
-
-                    <div className="single-freshbooking-builder-about d-flex align-items-center ">
                       <p className=" single-fresh-builder-p ">
                       {builderContent?.projectAboutBuilderContent}
                     </p>
@@ -166,7 +171,7 @@ useEffect(()=>{
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

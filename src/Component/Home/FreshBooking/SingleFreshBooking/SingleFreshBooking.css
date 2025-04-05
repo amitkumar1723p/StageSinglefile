@@ -1,3 +1,69 @@
+.single-fresh-booking-builder-container{
+
+  gap: 15px;
+  padding: 50px 0px 50px 0px ;
+}
+
+.single-fresh-booking-builder-image-container{
+  width: 45%;
+  border-radius: 20px 0px 0px 0px;
+  overflow: hidden;
+  border-top: 10px solid rgb(212, 212, 212);
+  border-left: 10px solid rgb(212, 212, 212);
+}
+.single-fresh-booking-builder-image-container img{
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+.single-fresh-booking-builder-text-container{
+  width: 45%;
+}
+.single-fresh-booking-builder-headings h2:nth-child(1){
+  font-size: 28px;
+  margin: 10px 0px;
+  
+}
+.single-fresh-booking-builder-headings h2:nth-child(2){
+  font-size: 38px;
+  margin-bottom: 20px;
+  color: #1d3557;
+  font-weight: 700;
+}
+.single-fresh-booking-about-builder p{
+  line-height: 40px;
+  font-weight: 400;
+}
+
+
+
+
+
+.custom-underline-in-freshbooking-hero {
+  position: relative;
+  display: inline-block;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.custom-underline-in-freshbooking-hero::after {
+  content: "";
+  position: absolute;
+  left: 82%;
+  top: 75%;
+  width: 140px;
+  height: 2px;
+  background-color: white;
+  margin-left: 0px;
+
+}
+.single-fresh-booking-info-boxes{
+  border-left: 2px solid white;
+   max-width:'130px';
+}
+
 .single-fresh-curved-section {
   width: 90%;
   height: 85%;
@@ -34,6 +100,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 20px;
 
   img{
     height:auto ;
@@ -44,7 +111,7 @@
 
 
 
-.single-fresh-dlf-logo {
+.single-fresh-logo {
   width: 100%;
   height: auto;
 }
@@ -58,17 +125,36 @@
   left: 52px;
 }
 .single-fresh-hero-content p:nth-child(1) {
+  font-weight: 400;
   font-size: 24px;
+  line-height: 40px;
 }
 .single-fresh-hero-content p:nth-child(2) {
+  font-weight: 700;
   font-size: 40px;
 }
 .single-fresh-hero-content p:nth-child(3) {
   font-size: 18px;
+  font-weight: 500;
+  line-height: 40px;
 
 }
 .single-fresh-hero-content p:nth-child(4) {
   font-size: 18px;
+  font-weight: 500;
+  line-height: 40px;
+
+  span{
+
+    font-weight: 700;
+    font-size: 24px;
+  }
+}
+.single-fresh-hero-content p:nth-child(5) {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 80px;
+
 }
 
 
@@ -139,9 +225,12 @@
 }
 
 .single-fresh-hero-icon {
+  padding:10px 140px 10px 140px;
   display: grid;
   grid-template-columns: repeat(4,1fr);
   width: 100%;
+
+  
 }
 
 .main-about-project-container {
@@ -481,6 +570,22 @@
 }
 
 @media (max-width: 768px) {
+  .single-fresh-booking-builder-text-container{
+    width: 100%;
+  }
+  .single-fresh-booking-builder-container{
+    flex-direction: column-reverse;
+    padding: 30px 0px 30px 0px;
+    width: 90%;
+  }
+  .single-fresh-booking-builder-image-container{
+    border-bottom: 10px solid rgb(212, 212, 212);
+    border-right: 10px solid rgb(212, 212, 212);
+    border-radius: 20px;
+    width: 100%;
+  }
+
+
   .single-fresh-booking-about-card-image-container{
     height: 300px;
   }
@@ -521,6 +626,7 @@
 
   }
   .single-fresh-hero-icon {
+    padding:10px 80px 10px 80px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     width: 100%;
@@ -541,9 +647,56 @@
 }
 
 
+/* .single-fresh-hero-content {
+  top: 139px;
+  left: 52px;
+}
+.single-fresh-hero-content p:nth-child(1) {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 40px;
+}
+.single-fresh-hero-content p:nth-child(2) {
+  font-weight: 700;
+  font-size: 40px;
+}
+.single-fresh-hero-content p:nth-child(3) {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 40px;
+
+}
+.single-fresh-hero-content p:nth-child(4) {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 40px;
+
+  span{
+
+    font-weight: 700;
+    font-size: 24px;
+  }
+}
+.single-fresh-hero-content p:nth-child(5) {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 80px;
+
+}
+ */
+
+
 
 
 @media (max-width: 480px) {
+  .single-fresh-booking-about-builder p{
+    line-height: 30px;
+
+  }
+  .single-fresh-booking-builder-headings h2:nth-child(2){
+    font-size: 28px;
+
+  }
   .single-fresh-booking-about-main-container{
     min-height: 400px;
   }
@@ -599,7 +752,7 @@
     max-height: 250px;
     width: 80%;
   }
-  .single-fresh-hero-content {
+  /* .single-fresh-hero-content {
     top: 180px;
     left: 12px;
   }
@@ -614,12 +767,64 @@
   }
   .single-fresh-hero-content p:nth-child(4) {
     font-size: 16px;
+  } */
+
+
+
+  .single-fresh-hero-content {
+    top: 25%;
+    left: 12px;
   }
+  .single-fresh-hero-content p:nth-child(1) {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 40px;
+  }
+  .single-fresh-hero-content p:nth-child(2) {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  .single-fresh-hero-content p:nth-child(3) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 40px;
+  
+  }
+  .single-fresh-hero-content p:nth-child(4) {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+  
+    span{
+  
+      font-weight: 700;
+      font-size: 20px;
+    }
+  }
+  .single-fresh-hero-content p:nth-child(5) {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 60px;
+  
+  }
+  
+  .custom-underline-in-freshbooking-hero::after {
+    content: "";
+    position: absolute;
+    left: 85%;
+    top: 75%;
+    width: 80px;
+    height: 2px;
+    background-color: white;
+    margin-left: 0px;
+  
+  }
+  
 
 
 
   .single-fresh-hero-conainer-main {
-    background-color: #000000b6;
+    background-color: #000000a2;
   }
 
 
@@ -633,7 +838,7 @@
     right: 0px;
   }
 
-  .single-fresh-dlf-logo {
+  .single-fresh-logo {
     width: 50%;
   }
 
@@ -765,8 +970,20 @@
     max-width: 10px 0px !important;
   }
 
+  .single-fresh-hero-icon{
+
+    padding: 10px 0px 0px 0px;
+  }
+  .single-fresh-booking-info-boxes{
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    max-width: auto;
+  }
+  
 
 }
+
+
 
 @media (max-width: 375px) {
   .Single-fresh-reserve-post-button{

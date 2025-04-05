@@ -21,6 +21,11 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
       label: "Total Units",
       value: project?.totalUnit,
     },
+    // {
+    //   icon: "hero-building.png",
+    //   label: "Payment Plan",
+    //   value: project?.projectPaymentPlan,
+    // },
     {
       icon: "hero-rupee.png",
       label: "Starting Price",
@@ -50,17 +55,31 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
   return (
     <>
-      <nav
-        className="navbar navbar-expand-lg position-sticky z-3  p-0"
+    
+
+      {/* {projectPriceSize?.map((item,index)=>{return <span>{item?.type}</span>})} */}
+      <div
+        className="position-relative"
         style={{
-           backdropFilter: "blur(10px)",
-          backgroundColor: " rgb(0 0 0 )",
+          height: "92vh",
+          backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="w-100 h-100  single-fresh-hero-conainer-main">
+          <nav
+        className="navbar navbar-expand-lg position-relative z-3  p-0"
+        style={{
+           backdropFilter: "blur(0px)",
+          backgroundColor: "rgba(0, 0, 0, 0.20)",
           top: "0px",
           width: "100%",
           zIndex: 1,
+      
         }}
       >
-        <div className="container-fluid">
+        <div className="container-fluid ">
           <div className="navbar-brand Single-fresh-logo-a ">
             <img
               onClick={() => {
@@ -72,13 +91,14 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                 });
               }}
               src={projectLogoContent?.url}
-              className="single-fresh-dlf-logo"
+              className="single-fresh-logo "
               alt={project?.projectName}
-              style={{ background: "transparent" }}
+              style={{ background: "transparent", mixBlendMode:'multiply' }}
             />
           </div>
           <button
             className="navbar-toggler"
+            style={{}}
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -92,7 +112,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
             <ul className="navbar-nav d-flex justify-content-around gap-3">
               <li className="nav-item">
                 <a
-                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"
+                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"  style={{fontSize:'18px'}}
                   href="#"
                 >
                   <img
@@ -105,7 +125,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"
+                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center" style={{fontSize:'18px'}}
                   href="#"
                 >
                   <img
@@ -121,43 +141,15 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         </div>
       </nav>
 
-      {/* {projectPriceSize?.map((item,index)=>{return <span>{item?.type}</span>})} */}
-      <div
-        className="position-relative"
-        style={{
-          height: "92vh",
-          backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-<div className="w-100 h-100  single-fresh-hero-conainer-main">
 <div className="single-fresh-hero-main-content">
           <div className="col-lg-7  text-white position-absolute single-fresh-hero-content">
-            <p className="text-uppercase   fw-light">
-              {project?.projectCity}
-            </p>
-            <p className="">
-              {project?.projectName}
-            </p>
-
-            <p className=" ">
-              {" "}
-              {/* {projectPrice && projectPrice.length > 0 ? (
-                projectPrice.map((item) => <span>{item?.type}/</span>)
-              ) : (
-                <p>No data found.</p>
-              )} */}
-              { project?.projectAdType}  { project?.locality}
-            </p>
-            <p className=" fw-medium">
-              Possesions : <span className="fw-bold">{project?.possessionStatus?.slice(0, 4)}</span>
-            </p>
-            <p className=" fw-medium">
-              Starting <span className="text-decoration-underline">Price</span>{"  "}
-              <span className="single-fresh-hero-start-price fw-bold">
-                ₹ {project?.minPrice} Cr<sup>*</sup>
-              </span>
+            <p className="text-uppercase custom-underline-in-freshbooking-hero">{project?.projectCity}</p>
+            <p className="">{project?.projectName}</p>
+            <p className=" "> {" "}{ project?.projectAdType}  { project?.locality}</p>
+            <p className=" "> Possessions : <span className="">{project?.possessionStatus?.slice(0, 4)}</span> </p>
+            <p className=" "> Starting
+              <span className="text-decoration-underline">{" "}Price{" "}</span>
+              <span className="single-fresh-hero-start-price ms-1">{" "}₹ {project?.minPrice} Cr<sup>*</sup></span>
             </p>
             <div className="Single-fresh-reserve-post-button">
               {isSmallScreen && (
@@ -197,9 +189,9 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
         {/* Info Boxes */}
         <div className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
-  <div className="single-fresh-hero-icon mx-0 bg-black text-white mt-4 p-3" >
+  <div className="single-fresh-hero-icon mx-0 text-white mt-4" style={{ backgroundColor:'rgb(0 0 0 / 50%', backdropFilter: "blur(3px)",}} >
     {heroData.map((item, index) => (
-      <div className="col-6 col-md-3 w-100 text-center p-1 mb-md-0" style={{borderLeft:'1px solid white', borderRight:'1px solid white' }} key={index}>
+      <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
         <img
           src={`/img/${item.icon}`}
           alt={item.label}
