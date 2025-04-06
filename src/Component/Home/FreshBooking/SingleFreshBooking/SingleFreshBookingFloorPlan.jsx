@@ -42,55 +42,59 @@ const SingleFreshBookingFloorPlan = ({project , FloorPlanContent}) => {
 
   return (
     <>
-    <div className='Single-fresh-floor-plan-main'>
-  <div className="m-auto" style={{width:'85%'}}>
-                    <h3 className="mb-3 Single-fresh-floor-plan-h3">Floor Plan</h3>
-                    <h2 className="fw-bold mb-3 Single-fresh-floor-plan-h2" style={{color: '#1D3557'}}>The {project?.projectName} Floor Plan</h2>
-        </div>
-    <div className="single-fresh-carousel">
-    {FloorPlanContent?.map((plan, index) => (
-      <div
-        key={index}
-        className="single-fresh-slide"
-        style={{
-
-          transform: `translateX(${(index - currentIndex) * 100}%)`,
-          zIndex: index === currentIndex ? 1 : 0
-        }}
-      >
-        <img
-          src={plan?.url}
-          alt={plan?.title}
-          onClick={() => setZoomedImage(plan?.url)}
-          className="single-fresh-image "
-        />
-        {/* <div className="single-fresh-content">
-          <h2 className="single-fresh-title">{image.title}</h2>
-          <p className="single-fresh-description">{image.description}</p>
-        </div> */}
+  <div className='single-fresh-floor-plan-main'>
+      <div className="m-auto" style={{ width: '85%' }}>
+        <h3 className="mb-3 single-fresh-floor-plan-h3">Floor Plan</h3>
+        <h2 className="fw-bold mb-3 single-fresh-floor-plan-h2" style={{ color: '#1D3557' }}>
+          The {project?.projectName || 'Project'} Floor Plan
+        </h2>
       </div>
-    ))}
+      <div className="single-fresh-carousel">
+        {FloorPlanContent?.map((plan, index) => (
+          <div
+            key={index}
+            className="single-fresh-slide"
+            style={{
+              transform: `translateX(${(index - currentIndex) * 100}%)`,
+              zIndex: index === currentIndex ? 1 : 0,
+            }}
+          >
+            <img
+              src={plan?.url}
+              alt={plan?.title || 'Floor Plan Image'}
+              onClick={() => setZoomedImage(plan?.url)}
+              className="single-fresh-image"
+            />
+          </div>
+        ))}
 
-    <button className="single-fresh-button prev"  onClick={goToPrevious}>
-      <ChevronLeft size={24} />
-    </button>
-    <button className="single-fresh-button next" onClick={goToNext} >
-      <ChevronRight size={24} />
-    </button>
-
-    <div className="single-fresh-nav">
-      {FloorPlanContent?.map((_, index) => (
         <button
-          key={index}
-          onClick={() => goToSlide(index)}
-          className={`single-fresh-dot ${currentIndex === index ? 'active' : ''}`}
-          aria-label={`Go to slide ${index + 1}`}
-        />
-      ))}
+          className="single-fresh-button prev"
+          onClick={goToPrevious}
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          className="single-fresh-button next"
+          onClick={goToNext}
+          aria-label="Next slide"
+        >
+          <ChevronRight size={24} />
+        </button>
+
+        <div className="single-fresh-nav">
+          {FloorPlanContent?.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`single-fresh-dot ${currentIndex === index ? 'active' : ''}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
     </div>
-    
-  </div>
-  </div>
   {zoomedImage && (
         <div className="zoom-overlay">
           <div className="zoom-content">
