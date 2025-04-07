@@ -858,17 +858,24 @@ function App() {
   }, [alertType, alertMessage, alertshow]);
   useEffect(() => {
     dispatch(GetMeDetailsAction());
+        console.log(medata)
+   
   }, []);
-
+ console.log(medata)
+   useEffect(()=>{
+    if(medata?.isBlockedUser==true){
+      dispatch(LogoutAction())
+    } 
+   } ,[medata])
   return (
     <>
       {/* <PinnacleSms /> */}
       {
        
       }
-      { !["/login" ,"/nri/login"].includes(location.pathname) && <>   <Navbar /></>}
+       
     
-
+      <Navbar />
       {alertData && alertData.AlertShow === true && (
         <Alert
           AlertType={alertData.AlertType}
@@ -1179,9 +1186,9 @@ function App() {
 
 
       </Routes> 
-      {!["/login" ,"/nri/login"].includes(location.pathname) && <>   <Footer /></>}
+       
     
-     
+      <Footer />
     </>
   );
 }

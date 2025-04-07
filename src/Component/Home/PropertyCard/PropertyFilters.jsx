@@ -22,7 +22,7 @@ const AllPostSearchFilter = () => {
   const { setRedirectPathIsHomeCard } = useContext(UserContext);
 
   const { data } = useSelector((state) => state.GetAllPost);
-
+   
 
   // Fetch single project data if ProjectName is available in URL
   useEffect(() => {
@@ -286,10 +286,12 @@ useEffect(() => {
 
           <div>
             <HeaderCard />
-            
-            <div className="header-img-section">
+            {
+              searchParams.get("PropertyAddType") =="Sale" && <div className="header-img-section">
               <img className="header-img-section-img"  src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
             </div>
+            }
+             
 
             <div className="filter-home-card">
               <div className='total-post-length-container'>

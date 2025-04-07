@@ -8,8 +8,8 @@ export default function BasicDetailsSection({
   setBasicDetailsData,
   setnext,
   update,
-  BasicDetailsFormSubmit,
   SinglePost,
+  FormSubmitRef ,
 }) {
   // eslint-disable-next-line
   const [ApartMentTypeTab, setApartMentTypeTab] = useState([
@@ -725,6 +725,12 @@ export default function BasicDetailsSection({
       </main>
 
       <div className="next-prev-box">
+        {
+          update ==true &&  <button onClick={()=>{
+            FormSubmitRef?.current?.requestSubmit();
+          }}>Update Post</button>
+        }
+         
         {/*  BasicDetailsFormSubmit();  include this for default alert and include this for shakeAlert HandleAlertShake();  */}
         <button
           id="Submit-Next"
@@ -734,6 +740,7 @@ export default function BasicDetailsSection({
         >
           Next
         </button>
+         
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Admin_OwnerGetAllPostAction } from "../../Action/postAction";
 import AdminListingCard from "./AdminListingCard";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import "./AdminListingCard.css";
 import { UserContext } from "../CreateContext/CreateContext";
 
@@ -15,9 +15,17 @@ export default function AllPost({
   selectAll,
   postPerPage,
   propertAdType,
+  allPostFilterBoxRef,
+  onPageActive,
+  currenSelected,
+  OwnerPostsPageNo,
+  setOwnerPostsPageNo,
+  MarkUpdatedPost,
+  page  , //owner all post page
+  setPage // onwer all post setpage
 }) {
   const dispatch = useDispatch();
-  const { postVerify, allPropertyData, setPostVerify } =
+  const { postVerify, allPropertyData, setPostVerify, NavbarRef } =
     useContext(UserContext);
   // console.log(postVerify,"page all post")
   // console.log(postPerPage)
@@ -27,10 +35,15 @@ export default function AllPost({
     return state.meDetails;
   });
 
+   
   // Pagination logic state
-  const [page, setPage] = useState(1); // Current page for pagination
+  // const [page, setPage] = useState(OwnerPostsPageNo); // Current page for pagination   ( this state paste AdminAgenOwnerPost.jsx)
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const itemsPerPage = postPerPage; // Number of items per page
+  const [querry, setquerry] = useSearchParams();
+  // Create a URLSearchParams object from the query string (search part of the URL)
+  console.log(itemsPerPage ,"itemperpage")
+  
 
   useEffect(() => {
     if (activeFilter !== null && postVerify !== null) {
@@ -162,6 +175,7 @@ export default function AllPost({
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
   };
+
   // this useEffect is used to handle the selectAll functionality
   const endIndex = itemsPerPage * page;
   const startIndex = endIndex - itemsPerPage;
@@ -187,28 +201,47 @@ export default function AllPost({
     }
   }, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
 
+  //  owner update post scoll to post card ------------------------
+  // ( if enable post update right admin this useEffect paste AdminAgentOwner component do not use this useEffect in agent section)
+
+  // Empty dependency array to run once when the component mounts// Empty dependency array to run once when the component mounts
+
   return (
     <div className="Admin-property-post-card-main-box">
-      
-{/* here we itrate all available property for owner only start */}
-      {!loading ? OwnerPosts.length > 0 ? (
-        OwnerPosts.map((post, index) => (
-          <AdminListingCard
-            key={index}
-            index={index}
-            PostData={post}
-            setAssignProperty={setAssignProperty}
-            AssignProperty={AssignProperty}
-            selectAllProperty={selectAll}
-            page={page}
-            itemsPerPage={itemsPerPage}
-          />
-        ))
-      ):<p>No OwnerPosts Available</p> : (
-        Array.from({length:4}).map((_,index)=>(<SkeletonCard key={index}/>))
-      )}
-{/* here we itrate all available property for owner only end */}
+      {/* here we itrate all available property for owner only start */}
+      {!loading ? (
+        OwnerPosts.length > 0 ? (
+          OwnerPosts.map((post, index) => (
+            <AdminListingCard
+              key={index}
+              index={index}
+              PostData={post}
+              setAssignProperty={setAssignProperty}
+              AssignProperty={AssignProperty}
+              selectAllProperty={selectAll}
+              page={page}
+              itemsPerPage={itemsPerPage}
 
+              // required pops owner nativate update post route (show updated post)
+              activeFilter={activeFilter}
+              SearchPostId={SearchPostId}
+              propertAdType={propertAdType}
+              postPerPage={postPerPage}
+              onPageActive={onPageActive}
+              currenSelected={currenSelected}
+              MarkUpdatedPost={MarkUpdatedPost}
+              sortOrder ={sortOrder} //sorting
+            />
+          ))
+        ) : (
+          <p>No OwnerPosts Available</p>
+        )
+      ) : (
+        Array.from({ length: 4 }).map((_, index) => (
+          <SkeletonCard key={index} />
+        ))
+      )}
+      {/* here we itrate all available property for owner only end */}
 
       {/* Pagination controls start */}
       <nav aria-label="Page navigation example">

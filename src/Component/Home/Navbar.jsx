@@ -11,7 +11,7 @@ import ChannelPartner from "./ChannelPartner";
 
 import { UserContext } from "../CreateContext/CreateContext";
 const Navbar = () => {
-  const { setRedirectPath, RedirectPath } = useContext(UserContext);
+  const {  NavbarRef} = useContext(UserContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -112,7 +112,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar">
+      <nav className="navbar" >
 
         <div className="navbar-container">
           <div className="d-flex logo-nav-bar">

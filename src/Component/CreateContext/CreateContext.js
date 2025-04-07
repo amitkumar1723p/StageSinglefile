@@ -42,6 +42,11 @@ export function UserProvider({ children }) {
  const [showCreatePostSubmitAlert ,setshowCreatePostSubmitAlert] =useState(false)
   const CreatePostRef = useRef(null)
 const[postVerify,setPostVerify]=useState(null)
+  
+
+//  Navbar
+  
+ const NavbarRef = useRef(null)
  
   return (
     <UserContext.Provider
@@ -67,7 +72,10 @@ const[postVerify,setPostVerify]=useState(null)
 
         //  cretate post submit alert 
         showCreatePostSubmitAlert ,setshowCreatePostSubmitAlert ,
-        CreatePostRef
+        CreatePostRef ,
+
+        //  store navbar ref 
+        NavbarRef , 
       }}
     >
       {children}

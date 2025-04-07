@@ -15,6 +15,23 @@
   justify-content: center;
 }
 
+.updatebyamdin{
+  margin-right: 10px;
+    width: 120px;
+    background-color: #fff;
+    color: var(--main-light-clr);
+    font-family: "Inter", Sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 7px;
+    border: 1px solid #3f9fe8;
+    padding: 10px;
+    box-shadow: 0px 0px 0px var(--Breakpoints) rgba(0, 0, 0, 0.25), 0px 2px 8.8px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
 .next-prev-box {
   display: flex;
   justify-content: center;
@@ -1405,6 +1422,16 @@ input[type="number"] {
 .upload-image-defaultimage{
   color: red;
     text-align:center;
+    font-size: 14px;
+
+    
+    font-family: "Inter", Sans-serif;
+   
+   
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
 }
 
 .showpreviewImage-box:last-child {

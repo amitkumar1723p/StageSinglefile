@@ -13,6 +13,7 @@ export default function PricingDetails({
   update,
   next,
   PricingDetailsRef,
+  FormSubmitRef  
 }) {
   const PostSubmitHandler = (e) => {
     e.preventDefault();
@@ -768,6 +769,17 @@ export default function PricingDetails({
 
             <div className="next-prev-box">
               <>
+              {update == true && (
+              <div 
+
+              className="updatebyamdin"
+                onClick={() => {
+                  FormSubmitRef?.current?.requestSubmit();
+                }}
+              >
+                Update Post
+              </div>
+            )}
                 <div
                   className="Submit-prev"
                   onClick={() => {

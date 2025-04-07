@@ -13,15 +13,16 @@ import PricingDetailsSection from "./PricingDetails.jsx";
 import { StoreDataInSession } from "../../../utils/SessionStorage.js";
 import WindowComponent from "../../WindowComponent.jsx";
 import CreatePostSubmitAlert from "./CreatePostSubmitAlert.jsx";
-
 export default function CreatePostMain() {
   const dispatch = useDispatch();
   const Params = useParams();
   const location = useLocation();
 
   const update = location.pathname.includes("update");
+  console.log(location);
   const navigate = useNavigate();
   // Data State
+  console.log(location);
 
   const [BasicDetailsData, setBasicDetailsData] = useState({});
   const [LocationDetailsData, setLocationDetailsData] = useState({});
@@ -44,7 +45,7 @@ export default function CreatePostMain() {
   //  Form Submit  State
 
   //  Update Post Logic
-
+  console.log(location);
   // const []
   // show submit alert
   const [showCreatePostSubmitAlert, setshowCreatePostSubmitAlert] =
@@ -57,7 +58,6 @@ export default function CreatePostMain() {
     if (update) {
       dispatch(GetSinglePostAction(Params.PostId));
     }
-     
 
     // eslint-disable-next-line
   }, [update]);
@@ -66,17 +66,6 @@ export default function CreatePostMain() {
 
   const BasicDetailsForm = useRef(null);
 
-  const handleNextClick = () => {
-    if (BasicDetailsForm.current) {
-      BasicDetailsForm.current.submit(); // This will trigger form submission
-    }
-  };
-  // const handleNextClick = () => {
-  //   if (formRef.current) {
-  //     // formRef.current.submit();   // This will trigger form submission
-  //   }
-  // };
-  
   // Form Submit  Start
   //  BasicDetils Component submit -- Start
   const ApartMentTypeArrayRemovePlotAndLand = [
@@ -104,12 +93,14 @@ export default function CreatePostMain() {
       return alert("Apartment Type is Required");
     }
     const isValidTransitionType = update
-    ? ["Registry Case", "Transfer Case"].includes(
-        getSinglePostData.SinglePost?.BasicDetails?.TransitionType
-      )
-    : true;
+      ? ["Registry Case", "Transfer Case"].includes(
+          getSinglePostData.SinglePost?.BasicDetails?.TransitionType
+        )
+      : true;
     if (
-      BasicDetailsData.PropertyAdType === "Sale" &&!BasicDetailsData.TransitionType &&isValidTransitionType 
+      BasicDetailsData.PropertyAdType === "Sale" &&
+      !BasicDetailsData.TransitionType &&
+      isValidTransitionType
     ) {
       return alert("Transition Type is Required");
     }
@@ -208,19 +199,7 @@ export default function CreatePostMain() {
   const LocationDetailsSubmiRef = useRef(null);
   const ApartmentFeaturesRef = useRef(null);
   const PricingDetailsRef = useRef(null);
-  //  const LocationDetailsSubmit =(e) => {
-  //      e.preventDefault();
-  //      if (!update) {
-  //        StoreDataInSession("next", 2);
-  //        StoreDataInSession("LocationDetailsData", LocationDetailsData);
-  //      }
-  //      setnext(2);
-  //    }
-  // BasicDetails Component Submit  -- End
-
-  //  LocationDetails Component Submit  -- Start
-
-  //  Form Submit End
+  const FormSubmitRef = useRef(null);
 
   const { loading: SinglePostLoading, data: getSinglePostData } = useSelector(
     (state) => {
@@ -250,11 +229,13 @@ export default function CreatePostMain() {
             PricingDetails,
             OtherDetails,
           } = SinglePost;
-           
-          
-           if(!["Admin", "Owner"].includes(medata?.user?.Role)&&BasicDetails.PropertyAdType=="Sale"){
-   navigate("/user/my-listing")
-           }
+
+          if (
+            !["Admin", "Owner"].includes(medata?.user?.Role) &&
+            BasicDetails.PropertyAdType == "Sale"
+          ) {
+            navigate("/user/my-listing");
+          }
 
           if (BasicDetails.PropertyAdType === "Rent") {
             let getDate = new Date(BasicDetails?.AvailableFrom);
@@ -358,7 +339,7 @@ export default function CreatePostMain() {
         CurrentPropertyStatus,
         PropertyAge,
         PossessionStatus,
-        TransitionType ,
+        TransitionType,
         ...BasicDetailsData_Rest
       } = BasicDetailsData; // Destructure to remove PropertyStatus
 
@@ -575,7 +556,6 @@ export default function CreatePostMain() {
       [
         "Apartment",
         "Independent House/Villa",
-        "Plot/Land",
         "Studio Apartment",
         "1 RK/PG",
         "Serviced Apartment",
@@ -583,7 +563,7 @@ export default function CreatePostMain() {
     ) {
       const { Basement, BasementArea, ...PropertyDetailsData_Rest } =
         PropertyDetailsData; // Destructure to remove PropertyStatus
-    
+
       if (PropertyDetailsData_Rest?.OtherRoom?.includes("Terrace")) {
         PropertyDetailsData_Rest.OtherRoom =
           PropertyDetailsData_Rest?.OtherRoom?.filter((text) => {
@@ -600,12 +580,45 @@ export default function CreatePostMain() {
     BasicDetailsData.ApartmentType,
     BasicDetailsData.PropertyStatus,
   ]);
-
+  //  aleter Create Post and update post show  alert and navigate logic
   useEffect(() => {
+    // const postData = location.state?.postData;
+
     if (data) {
       if (data.success === true) {
         if (["Admin", "Owner"].includes(medata?.user?.Role)) {
-          navigate("/admin/allpost");
+          // Check if state.querry is a non-empty array
+          if (
+            Array.isArray(location?.state?.querry) &&
+            location?.state?.querry?.length > 0
+          ) {
+            // Construct the query string
+            const queryString = location?.state?.querry
+              .map((obj) => {
+                const key = encodeURIComponent(Object.keys(obj)[0]);
+                const value = encodeURIComponent(obj[Object.keys(obj)[0]]);
+                return `${key}=${value}`;
+              })
+              .join("&");
+
+            // Navigate with the query string
+            navigate(`/admin/allpost?${queryString}`, {
+              state: {
+                ...location.state,
+                updatePost: true,
+                PostId: Params.PostId,
+              },
+            });
+          } else {
+            // Navigate without the query string
+            navigate("/admin/allpost", {
+              state: {
+                ...location.state,
+                updatePost: true,
+                PostId: Params.PostId,
+              },
+            });
+          }
         } else {
           if (LodingType == "UpdatePostRequest") {
             navigate("/user/my-listing");
@@ -720,6 +733,7 @@ export default function CreatePostMain() {
       navigate("/user/my-listing");
     }
   }, [sessionStorage.getItem("CreatePostAlertIsRefreshed")]);
+
   return (
     <>
       {SinglePostLoading ||
@@ -782,7 +796,12 @@ export default function CreatePostMain() {
                         Edit
                       </span>
                     ) : (
-                      <span className="text-primary fw-normal  d-flex justify-content-center">
+                      <span
+                        className="text-primary fw-normal  d-flex justify-content-center cursor-pointer"
+                        onClick={() => {
+                          setnext(0);
+                        }}
+                      >
                         pending
                       </span>
                     )}
@@ -836,7 +855,11 @@ export default function CreatePostMain() {
                       </span>
                     ) : next + 1 >= 2 ? (
                       <span
-                        className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
+                        className={`text-primary fw-normal   d-flex justify-content-center ${
+                          Object.keys(LocationDetailsData).length > 0
+                            ? "cursor-pointer"
+                            : ""
+                        } `}
                         onClick={() => {
                           BasicDetailsFormSubmit();
                         }}
@@ -844,7 +867,18 @@ export default function CreatePostMain() {
                         Edit{" "}
                       </span>
                     ) : (
-                      <span className="text-secondary fw-normal   d-flex justify-content-center">
+                      <span
+                        className={`text-secondary fw-normal   d-flex justify-content-center ${
+                          Object.keys(LocationDetailsData).length > 0
+                            ? "cursor-pointer"
+                            : ""
+                        }`}
+                        onClick={() => {
+                          if (Object.keys(LocationDetailsData).length > 0) {
+                            BasicDetailsFormSubmit();
+                          }
+                        }}
+                      >
                         pending
                       </span>
                     )}
@@ -946,7 +980,51 @@ export default function CreatePostMain() {
                           Edit
                         </span>
                       ) : (
-                        <span className="text-secondary fw-normal   d-flex justify-content-center">
+                        <span
+                          className={`text-secondary fw-normal   d-flex justify-content-center ${
+                            Object.keys(
+                              BasicDetailsData.ApartmentType == "Plot/Land"
+                                ? {
+                                    ...AreaDetailsData,
+                                    ...AmenitiesDetailsData,
+                                    ...OtherDetailsData,
+                                  }
+                                : {
+                                    ...AreaDetailsData,
+                                    ...AmenitiesDetailsData,
+                                    ...FloorDetailsData,
+                                    ...PropertyDetailsData,
+                                  }
+                            ).length > 0
+                              ? "cursor-pointer"
+                              : ""
+                          } `}
+                          onClick={(e) => {
+                            if (
+                              Object.keys(
+                                BasicDetailsData.ApartmentType == "Plot/Land"
+                                  ? {
+                                      ...AreaDetailsData,
+                                      ...AmenitiesDetailsData,
+                                      ...OtherDetailsData,
+                                    }
+                                  : {
+                                      ...AreaDetailsData,
+                                      ...AmenitiesDetailsData,
+                                      ...FloorDetailsData,
+                                      ...PropertyDetailsData,
+                                    }
+                              ).length > 0
+                            ) {
+                              e.preventDefault();
+                              BasicDetailsFormSubmit(e);
+
+                              setTimeout(() => {
+                                LocationDetailsSubmiRef?.current?.requestSubmit(); // ✅ This triggers validation
+                              }, 0);
+                            }
+                          }}
+                        >
                           pending
                         </span>
                       )}
@@ -1041,7 +1119,25 @@ export default function CreatePostMain() {
                           Edit
                         </span>
                       ) : (
-                        <span className="text-secondary fw-normal   d-flex justify-content-center">
+                        <span
+                          className={`text-secondary fw-normal   d-flex justify-content-center ${
+                            Object.keys(PricingDetailsData).length > 0
+                              ? "cursor-pointer"
+                              : ""
+                          } `}
+                          onClick={(e) => {
+                            if (Object.keys(PricingDetailsData).length > 0) {
+                              e.preventDefault();
+                              BasicDetailsFormSubmit(e);
+                              setTimeout(() => {
+                                LocationDetailsSubmiRef?.current?.requestSubmit();
+                                setTimeout(() => {
+                                  ApartmentFeaturesRef?.current?.requestSubmit();
+                                }, 100);
+                              }, 50);
+                            }
+                          }}
+                        >
                           pending
                         </span>
                       )}
@@ -1129,7 +1225,7 @@ export default function CreatePostMain() {
                       </span>
                     ) : next + 1 >= 5 ? (
                       <span
-                        className="text-primary fw-normal   d-flex justify-content-center"
+                        className="text-primary fw-normal   d-flex justify-content-center cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
                           BasicDetailsFormSubmit(e);
@@ -1147,7 +1243,31 @@ export default function CreatePostMain() {
                         Edit
                       </span>
                     ) : (
-                      <span className="text-secondary fw-normal   d-flex justify-content-center">
+                      <span
+                        className={`text-secondary fw-normal d-flex justify-content-center ${
+                          uploadimages.length !== 0 || previewImage.length !== 0
+                            ? "cursor-pointer"
+                            : ""
+                        } `}
+                        onClick={(e) => {
+                          if (
+                            uploadimages.length !== 0 ||
+                            previewImage.length !== 0
+                          ) {
+                            e.preventDefault();
+                            BasicDetailsFormSubmit(e);
+                            setTimeout(() => {
+                              LocationDetailsSubmiRef?.current?.requestSubmit();
+                              setTimeout(() => {
+                                ApartmentFeaturesRef?.current?.requestSubmit();
+                                setTimeout(() => {
+                                  PricingDetailsRef?.current?.requestSubmit();
+                                }, 150);
+                              }, 100);
+                            }, 50);
+                          }
+                        }}
+                      >
                         pending
                       </span>
                     )}
@@ -1155,12 +1275,6 @@ export default function CreatePostMain() {
                 </p>
               </div>
             </div>
-            {/* {Array.from({ length: next }, (_, index) => (
-              <div className="ProgressBar" key={index}>
-                {index >= 0 ? <></> : null}
-                <hr className="progressLine pb-5 mb-5" />{" "}
-              </div>
-            ))} */}
           </div>
 
           {next === 0 && (
@@ -1175,7 +1289,8 @@ export default function CreatePostMain() {
               BasicDetailsFormSubmit={BasicDetailsFormSubmit}
               // BasicDetailsFormRef={BasicDetailsFormRef}
               CreatePostRef={CreatePostRef}
-               SinglePost ={getSinglePostData?.SinglePost}
+              FormSubmitRef={FormSubmitRef}
+              SinglePost={getSinglePostData?.SinglePost}
             />
           )}
           {next === 1 && (
@@ -1186,6 +1301,7 @@ export default function CreatePostMain() {
               update={update}
               LocationDetailsSubmiRef={LocationDetailsSubmiRef}
               CreatePostRef={CreatePostRef}
+              FormSubmitRef={FormSubmitRef}
             />
           )}
           {next === 2 && (
@@ -1206,6 +1322,7 @@ export default function CreatePostMain() {
               setFloorDetailsData={setFloorDetailsData}
               ApartmentFeaturesRef={ApartmentFeaturesRef}
               CreatePostRef={CreatePostRef}
+              FormSubmitRef={FormSubmitRef}
             />
           )}
           {next === 3 && (
@@ -1221,40 +1338,42 @@ export default function CreatePostMain() {
               next={next}
               PricingDetailsRef={PricingDetailsRef}
               CreatePostRef={CreatePostRef}
+              FormSubmitRef={FormSubmitRef}
             />
           )}
-          {next === 4 && (
-            <CreatePostImageUploadSection
-              setnext={setnext}
-              next={next}
-              uploadimages={uploadimages}
-              setuploadimages={setuploadimages}
-              previewImage={previewImage}
-              setpreviewImage={setpreviewImage}
-              update={update}
-              PostId={Params.PostId}
-              update_RemoveImage={update_RemoveImage}
-              setupdate_RemoveImage={setupdate_RemoveImage}
-              uploadimagesName={uploadimagesName}
-              setuploadimagesName={setuploadimagesName}
-              // new form object
+          {/* {next === 4 && ( */}
+          <CreatePostImageUploadSection
+            setnext={setnext}
+            next={next}
+            uploadimages={uploadimages}
+            setuploadimages={setuploadimages}
+            previewImage={previewImage}
+            setpreviewImage={setpreviewImage}
+            update={update}
+            PostId={Params.PostId}
+            update_RemoveImage={update_RemoveImage}
+            setupdate_RemoveImage={setupdate_RemoveImage}
+            uploadimagesName={uploadimagesName}
+            setuploadimagesName={setuploadimagesName}
+            // new form object
 
-              BasicDetailsData={BasicDetailsData}
-              LocationDetailsData={LocationDetailsData}
-              PropertyDetailsData={PropertyDetailsData}
-              AreaDetailsData={AreaDetailsData}
-              FloorDetailsData={FloorDetailsData}
-              AmenitiesDetailsData={AmenitiesDetailsData}
-              PricingDetailsData={PricingDetailsData}
-              OtherDetailsData={OtherDetailsData}
-              //  submit Alert
-              setPricingDetailsData={setPricingDetailsData}
-              setshowCreatePostSubmitAlert={setshowCreatePostSubmitAlert}
-              CreatePostRef={CreatePostRef}
+            BasicDetailsData={BasicDetailsData}
+            LocationDetailsData={LocationDetailsData}
+            PropertyDetailsData={PropertyDetailsData}
+            AreaDetailsData={AreaDetailsData}
+            FloorDetailsData={FloorDetailsData}
+            AmenitiesDetailsData={AmenitiesDetailsData}
+            PricingDetailsData={PricingDetailsData}
+            OtherDetailsData={OtherDetailsData}
+            FormSubmitRef={FormSubmitRef}
+            //  submit Alert
+            setPricingDetailsData={setPricingDetailsData}
+            setshowCreatePostSubmitAlert={setshowCreatePostSubmitAlert}
+            CreatePostRef={CreatePostRef}
 
-              // BasicDetailsForm
-            />
-          )}
+            // BasicDetailsForm
+          />
+          {/* )} */}
 
           {showCreatePostSubmitAlert == true && (
             <WindowComponent
