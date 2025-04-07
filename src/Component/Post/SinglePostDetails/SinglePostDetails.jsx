@@ -1565,7 +1565,7 @@ export default function SinglePostDetails() {
                                                 item?.PricingDetails
                                                   ?.ExpectedPrice
                                               )}
-                                              <span> Reserved price </span>
+                                              <span> Reserved Price </span>
                                             </div>
                                           </>
                                         )}

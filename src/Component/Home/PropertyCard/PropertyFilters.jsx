@@ -286,6 +286,11 @@ useEffect(() => {
 
           <div>
             <HeaderCard />
+            
+            <div className="header-img-section">
+              <img className="header-img-section-img"  src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
+            </div>
+
             <div className="filter-home-card">
               <div className='total-post-length-container'>
                 <p className='total-post-lable-allpost'>

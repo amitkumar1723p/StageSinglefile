@@ -604,7 +604,7 @@ export default function AdminListingCard({
                                 className="post-verify-btn Active-btn "
                                 onClick={() => {
                                   let Confrimbox = window.confirm(
-                                    "Are you Sure Active This Post"
+                                    "Are you sure you want to activate this post?"
                                   );
 
                                   if (Confrimbox) {

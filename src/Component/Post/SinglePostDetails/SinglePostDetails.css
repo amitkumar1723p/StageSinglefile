@@ -1604,9 +1604,15 @@ body {
 
     margin-top: 20px;
   }
+
+  .header-img-section-img{
+    width: 730px;
+  }
 }
 
 @media (max-width: 768px) {
+
+
   .prop-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1746,6 +1752,10 @@ body {
     width: 80vw; */
   /* margin: auto; */
   /* } */
+
+  .header-img-section{
+    display: none;
+  }
 
   .overviwe-main {
     border-radius: 12px;

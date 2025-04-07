@@ -2117,4 +2117,5 @@ background-color: var(--main-lighter-clr);
 .suggestion-p-tag{
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
