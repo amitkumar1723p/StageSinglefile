@@ -25,7 +25,7 @@ export default function FreshBookingHome(){
   
 
   const HandleFreshbookingUrl = (projectName)=>{
-    return projectName.split(" ").join("-").toLowerCase();
+    return projectName?.split(" ").join("-").toLowerCase();
   }
   
 

@@ -36,34 +36,34 @@ useEffect(()=>{
             <div className="Single-fresh-info-section">
               <div className="Single-fresh-map-buttons">
               <button 
-                  className={selectedCategory === "conectivityLocation" ? "active" : ""}
+                  className={`custom-button ${selectedCategory === "conectivityLocation" ? "active" : ""}` } 
                   onClick={() => setSelectedCategory("conectivityLocation")}
                 >
-                  <img src="/img/single-fresh-map.svg" alt="" /> Connectivity
+                  <img src="/img/single-fresh-map.svg" alt="arrow-svg" /> Connectivity
                 </button>
                 <button 
-                  className={selectedCategory === "hospitalsLocation" ? "active" : ""}
+                  className={`custom-button ${selectedCategory === "hospitalsLocation" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("hospitalsLocation")}
                 >
-                  <img src="/img/single-fresh-map.svg" alt="" /> Hospitals
+                  <img src="/img/single-fresh-map.svg" alt="arrow-svg" /> Hospitals
                 </button>
                 <button 
-                  className={selectedCategory === "schoolLocation" ? "active" : ""}
+                  className={`custom-button ${selectedCategory === "schoolLocation" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("schoolLocation")}
                 >
-                  <img src="/img/single-fresh-map.svg" alt="" /> Schools
+                  <img src="/img/single-fresh-map.svg" alt="arrow-svg" /> Schools
                 </button>
                 <button 
-                  className={selectedCategory === "shoppingLocation" ? "active" : ""}
+                  className={`custom-button ${selectedCategory === "shoppingLocation" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("shoppingLocation")}
                 >
-                  <img src="/img/single-fresh-map.svg" alt="" /> Malls & Markets
+                  <img src="/img/single-fresh-map.svg" alt="arrow-svg" /> Malls & Markets
                 </button>
                 <button 
-                  className={selectedCategory === "bussinessLocation" ? "active" : ""}
+                  className={`custom-button ${selectedCategory === "bussinessLocation" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("bussinessLocation")}
                 >
-                  <img src="/img/single-fresh-map.svg" alt="" /> Office Spaces
+                  <img src="/img/single-fresh-map.svg" alt="arrow-svg" /> Office Spaces
                 </button>
               </div>
 
@@ -72,8 +72,8 @@ useEffect(()=>{
              {projectLocation && projectLocation.length > 0 && Array.isArray(projectLocation[0]) && (
   <ul className="list-unstyled Single-fresh-location-map-list">
     {projectLocation[0].map((item, index) => (
-      <li className="d-flex gap-2" key={index}>
-        <img src="/img/tick-list.svg" alt="" />
+      <li className="d-flex gap-2" key={index} style={{lineHeight: '26px', marginBottom: '20px'}}>
+        <img src="/img/tick-list.svg" alt="tick-svg"    style={{height: 'fitcontent'}}/>
         {item}
       </li>
     ))}
@@ -84,7 +84,7 @@ useEffect(()=>{
           </div>
           <div className="freshbooking-location-image-container col-md-6 single-fresh-map-img">
             <img
-              style={{ transform: "scale(0.7)" }}
+              // style={{ transform: "scale(0.7)" }}
               src={LocationImageContent?.url}
               className="img-fluid rounded shadow"
               alt="map img"
@@ -93,7 +93,7 @@ useEffect(()=>{
         </div>
       </div>
 
-      <div className="single-fresh-booking-sitemap-container w-100  m-auto" style={{backgroundColor:'#e9f5ff', paddingTop:'20px',paddingBottom:'40px'}}>
+      <div className="single-fresh-booking-sitemap-container w-100  m-auto" style={{backgroundColor:'#F7F7F7'}}>
 
       <div className="container mt-2 mb-2 ">
         <h3 className="mb-1 Single-fresh-site-map-h3">Site Map </h3>

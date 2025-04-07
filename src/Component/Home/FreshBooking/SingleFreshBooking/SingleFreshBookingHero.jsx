@@ -175,7 +175,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         {isSmallScreen && showForm && (
           <div
             className="d-flex justify-content-center align-items-center vh-100 position-fixed top-0 start-0 w-100"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 1050 }}
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 50 }}
           >
             <div className="position-relative">
               {FormComponent()}
@@ -215,12 +215,6 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 const FormComponent = () => (
   <form
     className="Single-fresh-form rounded shadow-lg text-light"
-    style={{
-      width: "320px",
-      backgroundColor: "white",
-      overflowY: "auto",
-      maxHeight: "90vh",
-    }}
   >
     <h2
       className="text-center mb-2 fw-medium"
@@ -239,7 +233,7 @@ const FormComponent = () => (
       <div className="position-relative">
         <img
           src="/img/Single-fresh-user.svg"
-          alt=""
+          alt="user-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
@@ -253,7 +247,7 @@ const FormComponent = () => (
       <div className="position-relative">
         <img
           src="/img/Single-main-email.svg"
-          alt=""
+          alt="email-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
@@ -267,7 +261,7 @@ const FormComponent = () => (
       <div className="position-relative">
         <img
           src="/img/Single-fresh-call.svg"
-          alt=""
+          alt="call-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input

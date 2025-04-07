@@ -19,8 +19,8 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
 
   return (
     <>
-    <div className='single-fresh-floor-plan-main'>
-    <div className="m-auto" style={{ width: '85%' }}>
+    <div className='Single-fresh-floor-plan-main'>
+    <div className="m-auto" style={{ width: '90%' }}>
         <h3 className="mb-3 single-fresh-floor-plan-h3">Floor Plan</h3>
         <h2 className="fw-bold mb-3 single-fresh-floor-plan-h2" style={{ color: '#1D3557' }}>
           The {project?.projectName || 'Project'} Floor Plan

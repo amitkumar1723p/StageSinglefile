@@ -1,5 +1,5 @@
 import React from 'react';
-import "./SingleFreshBooking.css";
+// import "./SingleFreshBooking.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useState , useEffect } from 'react'
@@ -98,7 +98,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 <div className="container-fluid p-0">
         <div className="row g-0">
           <div className="col-12">
-            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden" style={{ minHeight: '600px' }}>
+            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden single-fresh-about-project-lineheight">
         
               <div className="position-absolute w-100 h-100" style={{
                 background: 'url("/img/pattern-bg.png")',
@@ -138,7 +138,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
       <div className="container-fluid p-0"  >
         <div className="row g-0">
           <div className="col-12">
-            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden" style={{ minHeight: '600px' }}>
+            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden single-fresh-highlight-lineheight">
         
               <div className="position-absolute w-100 h-100"    style={{
                 background: 'url("/img/pattern-bg.png")',

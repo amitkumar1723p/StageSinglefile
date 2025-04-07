@@ -20,7 +20,7 @@ export default function SingleFreshBookingViewMore() {
         }
       };
       const HandleFreshbookingUrl = (projectName)=>{
-        return projectName.split(" ").join("-").toLowerCase();
+        return projectName?.split(" ").join("-").toLowerCase();
       }
       
     const dispatch=useDispatch()
