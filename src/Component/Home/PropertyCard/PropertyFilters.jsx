@@ -147,10 +147,10 @@ useEffect(() => {
                     City: searchParams.get("city")?.replaceAll("-"," ") ,
                     Sector: searchParams.get("sector"),
                     Locality:searchParams.get("locality"),
-                    BHK: "",
-                    ApartmentType: "",
-                    PropertyStatus: undefined,
-                    Furnishing: "",
+                     
+                     
+                    
+                     
                   })
                 );
                 setFilter({});

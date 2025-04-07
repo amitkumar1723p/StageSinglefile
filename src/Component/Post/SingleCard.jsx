@@ -527,7 +527,7 @@ const SingleCard = ({ PostData, index }) => {
           }`}
         >
           {/* Left Button */}
-          <button
+          {/* <button
             className={`slider-btn slider-btn-left ${
               PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                 ? ""
@@ -541,7 +541,7 @@ const SingleCard = ({ PostData, index }) => {
             onClick={scrollLeft}
           >
             <FaChevronLeft size={17} />
-          </button>
+          </button> */}
 
           {/* Scrollable Container */}
           <div
@@ -790,7 +790,7 @@ const SingleCard = ({ PostData, index }) => {
           </div>
 
           {/* Right Button */}
-          <button
+          {/* <button
             className={`slider-btn slider-btn-right ${
               PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                 ? ""
@@ -804,7 +804,7 @@ const SingleCard = ({ PostData, index }) => {
             onClick={scrollRight}
           >
             <FaChevronRight size={17} />
-          </button>
+          </button> */}
         </div>
 
         {/* Price and Date Section */}

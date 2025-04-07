@@ -8,15 +8,16 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
   useEffect(() => {
     let OwnerDetails = sessionStorage.getItem("OwnerDetails");
     if (OwnerDetails) {
-      setOwnerDetals(JSON.parse(OwnerDetails));
+       setOwnerDetals(JSON.parse(OwnerDetails));
     }
+       console.log("OwnerDetails",OwnerDetails)
     return () => {
       sessionStorage.removeItem("OwnerDetails");
     };
   }, []);
 
   return (
-    <div className="view-owner-details-modal">
+    OwnerDetails?.success && (<div className="view-owner-details-modal">
       <div className="view-owner-details-header">
         <span
           className="close-btn"
@@ -34,20 +35,25 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
   </div>
 
   <p>
-    <strong>Here are our team contact details for rental property inquiries:</strong>
+    <strong>Here are Owner contact details for rental property inquiries:</strong>
   </p>
   <p>
-    Team Contact No: <b>{Contact}</b>
+    Owner Name: <b>{OwnerDetails?.ownerName}</b>
   </p>
   <p>
-    Email: <b>sales@propertydekho247.com</b>
+    Owner Contact No: <b>{OwnerDetails?.ownerPhonenumber}</b>
   </p>
   <p>
-    Our team is available to assist you with any rental property-related inquiries. Don't hesitate to get in touch, and we'll be happy to help!
+   Owner Email: <b>{OwnerDetails?.ownmerEmail}</b>
+  </p>
+  <p>
+  <span className="view-owner-details-desclaimer">Disclaimer:</span> The contact details provided have been verified to a reasonable extent; however, their accuracy and authenticity are not guaranteed. We disclaim all liability for any loss, dispute, or consequence arising from their use. Users are advised to exercise discretion.
   </p>
 </div>
 
 
-    </div>
+    </div>)
+
+    
   );
 }

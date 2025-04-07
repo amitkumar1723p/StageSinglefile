@@ -26,19 +26,19 @@ export default function AdminOwnerRoutes({ Component, isOwner }) {
       }
 
       if (medata.user) {
-        if (medata.user.Role == "Admin") {
+        if (medata.user.Role === "Admin") {
           if (medata.user.AdminVerify == false) {
             navigate("/");
             dispatch(LogoutAction());
           }
         }
-        if (medata.user.Role == "Owner") {
+        if (medata.user.Role === "Owner") {
           if (medata.user.OwnerVerify == false) {
             navigate("/");
             dispatch(LogoutAction());
           }
         }
-        if (medata.user.Role == "Agent") {
+        if (medata.user.Role === "Agent") {
           if (medata.user.AgentVerify == false) {
             navigate("/");
             dispatch(LogoutAction());

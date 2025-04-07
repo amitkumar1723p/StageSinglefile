@@ -39,12 +39,12 @@ const TenantsDetailsForm = ({ SetShow, SinglePostData }) => {
   let SubmitTenantDetails = (e) => {
     e.preventDefault();
 
-    dispatch(
-      ViewOwnerDetailsAction({
-        TenantsDetails,
-        PostId: SinglePostData?.SinglePost?._id,
-      })
-    );
+    // dispatch(
+    //   ViewOwnerDetailsAction({
+    //     TenantsDetails,
+    //     PostId: SinglePostData?.SinglePost?._id,
+    //   })
+    // );
   };
    
   //  show Owner details

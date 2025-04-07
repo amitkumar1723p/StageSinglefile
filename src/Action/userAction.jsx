@@ -3,6 +3,7 @@ const api_Base_Url = process.env.REACT_APP_API_URL;
 //  Create User Action    Change Genrate Otp  By User Create
 
 export const CreateUserOtpAction = (userData) => {
+  // console.log("usr data ",userData)
   return async (dispatch) => {
     try {
       dispatch({
@@ -585,6 +586,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 // Create Tenant Post Response
 
 export const ViewOwnerDetailsAction = (Document) => {
+    console.log(Document)
  
   return async (dispatch) => {
     try {
@@ -593,7 +595,8 @@ export const ViewOwnerDetailsAction = (Document) => {
         payload: "ViewOwnerDetailsRequest",
       });
 
-      const url = `${api_Base_Url}/tenant-post-response/create/${Document.PostId}`;
+      // const url = `${api_Base_Url}/tenant-post-response/create/${PostId}`;
+      const url = `${api_Base_Url}/payment/get-owner-number`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -602,15 +605,16 @@ export const ViewOwnerDetailsAction = (Document) => {
       };
 
       let data;
-      if (Document.TenantsDetails) {
+      if (Document) {
        
-        const response = await axios.post(url, Document.TenantsDetails, config);
+        const response = await axios.post(url,{postId:Document} , config);
         data = response.data;
-    } else {
+    } 
+    // else {
      
-        const response = await axios.get(url, config);
-        data = response.data;
-      }
+    //     const response = await axios.get(url, config);
+    //     data = response.data;
+    //   }
 
       dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
@@ -1074,7 +1078,27 @@ export const UserRoleUpdation = (updateData) => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       };
-      const { data } = await axios.put(url, updateData, config);
+      let toSend;
+      if(updateData.role==="Block"){
+        // console.log("idaodd")
+        toSend = {
+          ...updateData,
+          role:true
+        }
+        console.log(toSend)
+      }
+     else if(updateData.role==="UnBlock"){
+      console.log("idaodd")
+        toSend = {
+          ...updateData,
+          role:false
+        }
+      }else{
+        toSend = {
+          ...updateData
+        }
+      }
+      const { data } = await axios.put(url, toSend, config);
       dispatch({ type: "UserRoleUpdationSuccess", payload: data });
     } catch (error) {
       if (error.response) {

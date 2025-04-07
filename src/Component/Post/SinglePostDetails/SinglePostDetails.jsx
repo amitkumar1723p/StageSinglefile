@@ -36,7 +36,6 @@ import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
 import SocietyAndBuildingFeature from "./SocietyAndBuildingFeature";
-import { FormatDate } from "../../../utils/CommonFunction";
 // import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
@@ -69,6 +68,8 @@ export default function SinglePostDetails() {
   const [status, setStatus] = useState(false);
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
 
+
+  // console.log(showOwnerDetailsForm, "j")
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
@@ -80,6 +81,7 @@ export default function SinglePostDetails() {
   const { loading, data: getSinglePostData } = useSelector((state) => {
     return state.GetSinglePost;
   });
+  // console.log(getSinglePostData)
   const {
     loading: AlertLoding,
     data: AlertData,
@@ -254,7 +256,7 @@ export default function SinglePostDetails() {
         sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
         medata?.user?.Role == "Tenant"
       ) {
-        setshowOwnerDetailsForm(true);
+        setshowOwnerDetailsForm(true)
         // setshowTenantDetailsForm(true);
       }
 
@@ -288,10 +290,11 @@ export default function SinglePostDetails() {
 
   useEffect(() => {
     if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
-      StoreDataInSession("OwnerDetails", AlertData.OwnerDetails);
+       
+      StoreDataInSession("OwnerDetails", AlertData);
       setshowOwnerDetailsForm(true);
-      setshowTenantDetailsForm(false);
-
+   
+// 
       // if (!TenentResponseIsExitData?.TenantDetails) {
       //   sessionStorage.setItem("TenentFillForm", true);
       //   dispatch(TenentResponseIsExitAction(SinglePostId));
@@ -300,11 +303,6 @@ export default function SinglePostDetails() {
       //   FamilyDetails: { Adults: 0, Children: 0, Pets: null },
       //   ProfessionDetails: { WorkType: "" },
       // });
-    }
-
-    if (AlertData?.success && AlertType == "ReportSuspiciousPropertyRequest") {
-      setOpenReportForm(false);
-      ;
     }
   }, [AlertData, AlertType]);
 
@@ -514,20 +512,23 @@ export default function SinglePostDetails() {
                             alt="icon"
                           />
 
-                          {getSinglePostData?.SinglePost?.FloorDetails
-                            ?.OverLookingView && (
-                              <>
-                                <div className="img-box-imp-data">
-                                  <span className="img-box-details-span">
-                                    {
-                                      getSinglePostData?.SinglePost?.FloorDetails
-                                        ?.OverLookingView[0]
-                                    }
-                                  </span>
-                                  <p> Overlooking View </p>
-                                </div>
-                              </>
-                            )}
+                          {
+                            getSinglePostData?.SinglePost?.FloorDetails
+                              ?.OverLookingView && <>
+
+                              <div className="img-box-imp-data">
+                                <span className="img-box-details-span">
+                                  {
+                                    getSinglePostData?.SinglePost?.FloorDetails
+                                      ?.OverLookingView[0]
+
+                                  }
+                                </span>
+                                {/* <p> Overlooking View </p> */}
+                              </div>
+                            </>
+                          }
+
                         </div>
                         <div className="property-info-tags">
                           <img
@@ -612,7 +613,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/Plot-Dimension.svg"
+                            src="/img/parking.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -664,7 +665,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/current-status.svg"
+                            src="/img/bathroom.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -734,7 +735,6 @@ export default function SinglePostDetails() {
                   <div className="property-price">
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Sale" && (
-
                         <>
                           <span className="ReservePrice-section">
                             Reserve Price :{" "}
@@ -749,11 +749,11 @@ export default function SinglePostDetails() {
                               <>
                                 <p className="lisitng-area-section">
                                   ₹
-                                  {String(
-                                    getSinglePostData?.SinglePost?.PricingDetails
-                                      ?.PricePerSqYd
-                                  ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-
+                                  { String(
+              getSinglePostData?.SinglePost?.PricingDetails
+              ?.PricePerSqYd
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    
                                   }
                                   Per sq.yd
                                 </p>
@@ -761,20 +761,17 @@ export default function SinglePostDetails() {
                             ) : (
                               <>
                                 <p className="lisitng-area-section">
-                                  ₹
-                                  {String(
-                                    getSinglePostData?.SinglePost?.PricingDetails
-                                      ?.PricePerSqFt
-                                  ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-
+                                  ₹{" "}
+                                  { String(
+              getSinglePostData?.SinglePost?.PricingDetails
+              ?.PricePerSqFt
+            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    
                                   }
                                   {" "}
                                   Per sqft
                                 </p>
                               </>
-
-
-
                             )}
                           </span>
 
@@ -904,6 +901,7 @@ export default function SinglePostDetails() {
                     {/* </button> */}
                   </Link>
 
+
                   {/* <button
                     className="original-price border-0"
                     ref={showOwnerDetailsFormRef}
@@ -932,7 +930,8 @@ export default function SinglePostDetails() {
                             className="original-price border-0"
                             ref={showOwnerDetailsFormRef}
                             onClick={() => {
-                              setshowOwnerDetailsForm(true);
+                              // setshowOwnerDetailsForm(true);
+                              dispatch(ViewOwnerDetailsAction(getSinglePostData?.SinglePost?._id))
                             }}
                           >
                             View Number
@@ -968,6 +967,7 @@ export default function SinglePostDetails() {
                       )}
                     </div>
                   ) : null}
+
                 </div>
                 {getSinglePostData?.SinglePost?.PostVerifyData?.Time && (
                   <div className="posted-by-section">
@@ -982,9 +982,18 @@ export default function SinglePostDetails() {
                     <p>
                       Posted On :{" "}
                       <span>
+                        {
+                          (() => {
+                            const date = new Date(getSinglePostData?.SinglePost?.PostVerifyData?.Time);
+                            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-                        {FormatDate(getSinglePostData?.SinglePost?.PostVerifyData?.Time)}
+                            const day = ("0" + date.getDate()).slice(-2);  // Ensures two-digit day
+                            const month = monthNames[date.getMonth()];     // Get abbreviated month name
+                            const year = date.getFullYear().toString().slice(-2);  // Get last two digits of the year
 
+                            return `${day}-${month}-${year}`;
+                          })()
+                        }
                       </span>
                     </p>
                   </div>
@@ -1124,55 +1133,47 @@ export default function SinglePostDetails() {
 
                           {/* Possission Status  */}
                           {getSinglePostData?.SinglePost?.FloorDetails
-                            ?.PossessionStatus && (
-                              <PropertyDataBox
-                                Answer={
-                                  getSinglePostData?.SinglePost?.BasicDetails
-                                    ?.PossessionStatus
-                                }
-                                Icon="/img/area.png"
-                                Data={" Possission Status"}
-                              />
-                            )}
+                            ?.PossessionStatus && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.PossessionStatus
+                              }
+                              Icon="/img/area.png"
+                              Data={" Possission Status"}
+                            />
+                          }
                           {/* additional pricing details */}
-                          {getSinglePostData?.SinglePost?.PricingDetails
-                            ?.AdditionalDetails?.MaintenanceCharges && (
-                              <PropertyDataBox
-                                Answer={
-                                  getSinglePostData?.SinglePost?.PricingDetails
-                                    ?.AdditionalDetails?.MaintenanceCharges
-                                }
-                                Icon="/img/area.png"
-                                Data={"Maintanance Details"}
-                              />
-                            )}
+                          {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges && <PropertyDataBox
+                            Answer={
+                              getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges
+                            }
+                            Icon="/img/area.png"
+                            Data={"Maintanance Details"}
+                          />}
 
                           {/* additional pricing details */}
-                          {getSinglePostData?.SinglePost?.PricingDetails
-                            ?.AdditionalDetails?.MonthlyExpectedRent && (
-                              <PropertyDataBox
-                                Answer={
-                                  getSinglePostData?.SinglePost?.PricingDetails
-                                    ?.AdditionalDetails?.MonthlyExpectedRent
-                                }
-                                Icon="/img/area.png"
-                                Data={"Monthly Expected Rent"}
-                              />
-                            )}
+                          {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent && <PropertyDataBox
+                            Answer={
+                              getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent
+                            }
+                            Icon="/img/area.png"
+                            Data={"Monthly Expected Rent"}
+                          />}
+
+
 
                           {/* current property status  */}
 
                           {getSinglePostData?.SinglePost?.BasicDetails
-                            ?.CurrentPropertyStatus && (
-                              <PropertyDataBox
-                                Answer={
-                                  getSinglePostData?.SinglePost?.BasicDetails
-                                    ?.CurrentPropertyStatus
-                                }
-                                Icon="/img/area.png"
-                                Data={"Current Property Status"}
-                              />
-                            )}
+                            ?.CurrentPropertyStatus && <PropertyDataBox
+                              Answer={
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.CurrentPropertyStatus
+                              }
+                              Icon="/img/area.png"
+                              Data={"Current Property Status"}
+                            />
+                          }
 
                           {/* Property on Floor  , Total Floors" */}
                           {getSinglePostData?.SinglePost?.BasicDetails
@@ -1249,7 +1250,7 @@ export default function SinglePostDetails() {
                           {/* Water Source */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                            Icon="/img/water.png"
+                            Icon="/img/Water.png"
                             Data={"Water Source"}
                           />
                         </>
@@ -1289,7 +1290,7 @@ export default function SinglePostDetails() {
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAge && (
                         <PropertyDataBox
-                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Years`}
+                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
                           Icon="/img/Property-Age.png"
                           Data={"Property Age"}
                         />
@@ -1298,26 +1299,29 @@ export default function SinglePostDetails() {
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
                         <>
-
-                          {/* <PropertyDataBox
-                            Answer={FormatDate(getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom)}
+                          <PropertyDataBox
+                            Answer={`${new Date(
+                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
+                            ).getDate()}-${new Date(
+                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
+                            ).getMonth() + 1
+                              }-${new Date(
+                                getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
+                              ).getFullYear()}`}
                             Icon="/img/bathroom.png"
                             Data={"Available From"}
-                          /> */}
+                          />
 
                           {getSinglePostData.SinglePost.PricingDetails
                             .AdditionalDetails?.PreferredTenant?.length > 0 && (
                               <PropertyDataBox
-                                Answer={`${new Date(
-                                  getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                                ).getDate()}-${new Date(
-                                  getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                                ).getMonth() + 1
-                                  }-${new Date(
-                                    getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                                  ).getFullYear()}`}
-                                Icon="/img/available-From.svg"
-                                Data={"Available From"}
+                                Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
+                                  (text) => {
+                                    return text;
+                                  }
+                                )}`}
+                                Icon="/img/bathroom.png"
+                                Data={"Preferred Tenant"}
                               />
                             )}
 
@@ -1431,27 +1435,6 @@ export default function SinglePostDetails() {
                   />
                 }
 
-                {/* society features */}
-
-                {getSinglePostData?.SinglePost?.AmenitiesDetails
-                  ?.SocietyAndBuildingFeature && (
-                    <SocietyAndBuildingFeature
-                      feature={
-                        getSinglePostData?.SinglePost?.AmenitiesDetails
-                          ?.SocietyAndBuildingFeature
-                      }
-                    />
-                  )}
-                {/* plot features */}
-                {getSinglePostData?.SinglePost?.AmenitiesDetails
-                  ?.ProjectAmmenities && (
-                    <SocietyAndBuildingFeature
-                      feature={
-                        getSinglePostData?.SinglePost?.AmenitiesDetails
-                          ?.ProjectAmmenities
-                      }
-                    />
-                  )}
 
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">

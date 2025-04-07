@@ -233,6 +233,7 @@ export default function AllRegistrationResponse({ }) {
             </thead>
             <tbody>
               {tableData?.map((item, index) => {
+                
                 return (
                   <tr key={index}>
 
@@ -260,32 +261,62 @@ export default function AllRegistrationResponse({ }) {
                     </td>
                     
 
-                    <td className="text-light-emphasis border-end" >
-                      {
-                        roleIndex === index ? <div className="owner-user-role-submit-button d-flex gap-1 ">
-                          <select name="" onChange={(e) => setUserRole(e.target.value)}>
-                            <option value={item.Role}><small>{item.Role}</small></option>
-                            <option value="Tenant"><small>Tenant</small></option>
-                            <option value="Buyer"><small>Buyer</small></option>
-                            {/* <option value="Seller"><small>Seller</small></option> */}
-                            <option value="Property Owner"><small>Property Owner</small></option>
-                            <option value="NRI"><small>NRI</small></option>
-                            <option value="Channel Partner"><small>Channel Partner</small></option>
-                          </select> <button className="border" onClick={() => {
-                            setRoleIndex(null)
-                            dispatch(UserRoleUpdation({
-                              userId: item._id,
-                              role: userRole
-                            }))
-                            // window.location.reload();
+                    <td className={`text-light-emphasis border-end ${item?.isBlocked ? "owner-user-blocked" : ""}`}>
+  {
+    roleIndex === index ? (
+      <div className="owner-user-role-submit-button d-flex gap-1">
+        <select 
+          value={userRole || item.Role} 
+          onChange={(e) => setUserRole(e.target.value)}
+        >
+          {item?.isBlocked ? (
+         <>
+            <option className="owner-user-blocked" value="Block">
+              <small className="owner-user-blocked">Block</small>
+            </option>
+                 <option className="owner-user-blocked" value="UnBlock">
+                 <small className="owner-user-blocked">UnBlock</small>
+               </option></>
+          ) : (
+            <>
+              <option value={item.Role}><small>{item.Role}</small></option>
+              <option value="Tenant"><small>Tenant</small></option>
+              <option value="Buyer"><small>Buyer</small></option>
+              <option value="Property Owner"><small>Property Owner</small></option>
+              <option value="NRI"><small>NRI</small></option>
+              <option value="Channel Partner"><small>Channel Partner</small></option>
+              <option value="Block" className="owner-user-blocked">
+                <small className="owner-user-blocked">Block</small>
+              </option>
+            </>
+          )}
+        </select>
 
-                          }}>✅</button></div> : <div onClick={() => {
+        <button
+          className="border"
+          onClick={() => {
+            setRoleIndex(null);
+            dispatch(UserRoleUpdation({
+              userId: item._id,
+              role: userRole || item.Role
+            }));
+            // Optionally reset the userRole state if needed
+          }}
+        >
+          ✅
+        </button>
+      </div>
+    ) : (
+      <div onClick={() => {
+        setRoleIndex(index);
+        setUserRole(item.Role); // Ensure correct role is selected when edit starts
+      }}>
+        {item?.isBlocked ? "Blocked" : item.Role}
+      </div>
+    )
+  }
+</td>
 
-                            setRoleIndex(index)
-
-                          }}>{item.Role}</div>
-                      }
-                    </td>
                     <td className="text-light-emphasis border-end">
                       <small>{item.ContactNumber}</small>
                     </td>
