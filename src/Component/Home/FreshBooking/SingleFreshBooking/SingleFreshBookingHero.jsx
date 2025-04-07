@@ -59,6 +59,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
       {/* {projectPriceSize?.map((item,index)=>{return <span>{item?.type}</span>})} */}
       <div
+       data-aos="zoom-out"  data-aos-duration="1250" data-aos-once="true"
         className="position-relative"
         style={{
           height: "92vh",
@@ -110,7 +111,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
             id="navbarNav"
           >
             <ul className="navbar-nav d-flex justify-content-around gap-3">
-              <li className="nav-item">
+              <li  className="nav-item">
                 <a
                   className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"  style={{fontSize:'18px'}}
                   href="#"
@@ -143,11 +144,11 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
 <div className="single-fresh-hero-main-content">
           <div className="col-lg-7  text-white position-absolute single-fresh-hero-content">
-            <p className="text-uppercase custom-underline-in-freshbooking-hero">{project?.projectCity}</p>
-            <p className="">{project?.projectName}</p>
-            <p className=" "> {" "}{ project?.projectAdType}  { project?.locality}</p>
-            <p className=" "> Possessions : <span className="">{project?.possessionStatus?.slice(0, 4)}</span> </p>
-            <p className=" "> Starting
+            <p data-aos="fade-right"  data-aos-duration="1800" data-aos-once="true" className="text-uppercase custom-underline-in-freshbooking-hero">{project?.projectCity}</p>
+            <p data-aos="fade-right"  data-aos-duration="1200" data-aos-once="true"  className="">{project?.projectName}</p>
+            <p data-aos="fade-right"  data-aos-duration="1400" data-aos-once="true"  className=" "> {" "}{ project?.projectAdType}  { project?.locality}</p>
+            <p data-aos="fade-right"  data-aos-duration="1800" data-aos-once="true"  className=" "> Possessions : <span className="">{project?.possessionStatus?.slice(0, 4)}</span> </p>
+            <p data-aos="fade-right"  data-aos-duration="2000" data-aos-once="true"  className=" "> Starting
               <span className="text-decoration-underline">{" "}Price{" "}</span>
               <span className="single-fresh-hero-start-price ms-1">{" "}₹ {project?.minPrice} Cr<sup>*</sup></span>
             </p>
@@ -188,7 +189,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         )}
 
         {/* Info Boxes */}
-        <div className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
+        <div  data-aos="flip-up"  data-aos-duration="1200" data-aos-once="true" className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
   <div className="single-fresh-hero-icon mx-0 text-white mt-4" style={{ backgroundColor:'rgb(0 0 0 / 50%', backdropFilter: "blur(3px)",}} >
     {heroData.map((item, index) => (
       <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
@@ -214,35 +215,46 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 // ✅ Extracted Form Component - Used in both Popup & Large Screen
 const FormComponent = () => (
   <form
-    className="Single-fresh-form rounded shadow-lg text-light"
+  
+  data-aos="fade-left"  data-aos-once="true"
+    className="Single-fresh-form rounded  text-light overflow-hidden"
     style={{
       width: "320px",
-      backgroundColor: "white",
+      backgroundColor: "#00000031",
+      outline:'1px solid white',
+      boxShadow:'0px 0px 50px black',
       overflowY: "auto",
       maxHeight: "90vh",
+      backdropFilter:'blur(10px)'
     }}
   >
     <h2
+    data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"
       className="text-center mb-2 fw-medium"
-      style={{ color: "black", fontSize: "17px" }}
+      style={{ color: "white", fontSize: "17px" }}
     >
       Let’s Find Your Dream Home!
     </h2>
     <p
+     data-aos="fade-left"  data-aos-duration="1400" data-aos-once="true"
       className="text-center mb-4"
-      style={{ color: "#333333", fontSize: "14px" }}
+      style={{ color: "white", fontSize: "14px" }}
     >
       Please fill out the form below, our expert will get back to you soon.
     </p>
 
     <div className="d-flex flex-column gap-3">
-      <div className="position-relative">
+      <div
+       data-aos="fade-left"  data-aos-duration="1100" data-aos-once="true" 
+       className="position-relative">
+        
         <img
           src="/img/Single-fresh-user.svg"
           alt=""
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
+         
           type="text"
           className="Single-fresh-form-input border-2 ps-5 w-100"
           placeholder="Your Full Name"
@@ -250,13 +262,16 @@ const FormComponent = () => (
         />
       </div>
 
-      <div className="position-relative">
+      <div
+       data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true"
+       className="position-relative">
         <img
           src="/img/Single-main-email.svg"
           alt=""
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
+        
           type="email"
           className="Single-fresh-form-input border-2 ps-5 w-100"
           placeholder="Your Email"
@@ -264,13 +279,16 @@ const FormComponent = () => (
         />
       </div>
 
-      <div className="position-relative">
+      <div
+       data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true"
+       className="position-relative">
         <img
           src="/img/Single-fresh-call.svg"
           alt=""
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
+        
           type="tel"
           className="Single-fresh-form-input border-2 ps-5 w-100"
           placeholder="Your Number"
@@ -280,6 +298,7 @@ const FormComponent = () => (
       </div>
 
       <button
+       data-aos="fade-left"  data-aos-duration="1700" data-aos-once="true"
         type="submit"
         className="btn w-100 text-white"
         style={{ backgroundColor: "#F58220" }}

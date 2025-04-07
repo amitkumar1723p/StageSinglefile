@@ -85,7 +85,7 @@ export default function SingleFreshBooking() {
 
 
   return (
-    <div>
+    <div className='overflow-hidden'>
       <SingleFreshBookingHero   projectLogoContent= {projectLogoImage}  projectBannerImage = {bannerImage}
       project={projectBasicDetail}
       projectPrice={projectPriceSize} />

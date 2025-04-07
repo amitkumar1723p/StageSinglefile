@@ -6,6 +6,8 @@ import ProtectedRoutes from "./Component/ProtectedRoutes";
 import { useEffect } from "react";
 import { GetMeDetailsAction, LogoutAction } from "./Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import CreatePostMain from "./Component/Post/CreatePost/CreatePostMain";
 import AdminOwnerCreateProfileSection from "./Component/Admin/CreateProfile";
@@ -833,6 +835,20 @@ function App() {
     dispatch(GetMeDetailsAction());
   }, []);
 
+
+
+
+    useEffect(() => {
+      AOS.init({
+        duration: 1000,   // animation duration in ms
+        // once: true,       // animate only once when in view
+        offset: 80,      // offset (in px) from the original trigger point
+      });
+    }, []);
+
+
+
+    
   return (
     <>
       {/* <PinnacleSms /> */}

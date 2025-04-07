@@ -61,7 +61,7 @@ dispatch(getAllFreshProjectAction())
 
   return (
 
-    <div className='freshbooking-home-main-container d-flex flex-column gap-4'>
+    <div  data-aos="fade-right"  className='freshbooking-home-main-container d-flex flex-column gap-4'>
       <div className='d-md-flex justify-content-between m-auto ' style={{width:'90%'}}>
         <div className='mb-2' >
           <h2 className='' style={{ fontWeight:'700', color:'rgba(51, 51, 51, 1)'}}>Discover Your Perfect Home!</h2>

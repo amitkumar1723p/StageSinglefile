@@ -75,7 +75,7 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
       const currentLogo = item.replace(/\s+/g, ""); 
 
       return (
-        <div key={index} className=" single-fresh-booking-amenities-container d-flex " style={{width:'120px'}}>
+        <div data-aos="flip-left" data-aos-duration="1800"  key={index} className=" single-fresh-booking-amenities-container d-flex " style={{width:'120px'}}>
           <div
             className="Single-fresh-amenities-content d-flex flex-column justify-content-between align-items-center text-center w-100 hover-effect "
             style={{

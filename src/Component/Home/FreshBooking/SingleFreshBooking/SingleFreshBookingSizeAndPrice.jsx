@@ -44,10 +44,10 @@ export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}
     <>
       <div className="single-fresh-booking-chart-container bg-white d-flex py-3 justify-content-center align-items-center min-vh-80">
         <div className="container ">
-          <h3 className="mb-1 mt-3   Single-fresh-Size-Price">How Much</h3>
-          <h3 className=" fw-bold  mb-2 Single-fresh-Size-Price-heading " style={{color: '#1D3557'}}>{project?.projectName} Size And Price</h3>
+          <h3 data-aos="fade-right"  data-aos-duration="800" className="mb-1 mt-3   Single-fresh-Size-Price">How Much</h3>
+          <h3 data-aos="fade-right" data-aos-duration="1100" className=" fw-bold  mb-2 Single-fresh-Size-Price-heading " style={{color: '#1D3557'}}>{project?.projectName} Size And Price</h3>
          
-<table className="single-freshbooking-price-custom-table">
+<table data-aos="fade-up" className="single-freshbooking-price-custom-table">
   <thead>
     <tr>
       <th>UNIT TYPE</th>
@@ -55,10 +55,10 @@ export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}
       <th>UNIT PRICE</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody data-aos="fade-up">
     {projectPrice?.map((item, index) => (
-      <tr key={index}>
-        <td>{item?.type}</td>
+      <tr data-aos="fade-up" key={index}>
+        <td data-aos="fade-up">{item?.type}</td>
         <td>{item?.size}</td>
         <td>{item?.price} </td>
       </tr>

@@ -96,13 +96,13 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
               }}></div>
 
             
-              <div className="single-fresh-curved-section position-absolute" ></div>
+              <div data-aos="fade-left"  className="single-fresh-curved-section position-absolute" ></div>
 
            
               <div className="container position-relative" style={{ zIndex: 2 }}>
                 <div className=" align-items-top Single-fresh-about-project-main">
                
-                  <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img">
+                  <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img" data-aos="fade-up-right" data-aos-anchor-placement="bottom-bottom">
                     <div className=" Single-fresh-booking-about-img-main card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
                   <img  style={{width:'auto', height:'100%', objectFit:'cover'}} src= {projectHightlight?.url} alt="" />
                     </div>
@@ -110,9 +110,9 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 
                 
                   <div className="col-12 col-md-7 ps-md-5 ">
-                    <h3 className="text-dark mb-3 Single-fresh-about-project-h3" > About Project</h3>
-                    <h2 className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
-                    <p className="text-muted Single-fresh-about-project-p">
+                    <h3 data-aos="fade-left" className="text-dark mb-3 Single-fresh-about-project-h3" > About Project</h3>
+                    <h2 data-aos="fade-left" className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
+                    <p data-aos="fade-up" className="text-muted Single-fresh-about-project-p">
                     {projectContent}
                     </p>
                   </div>
@@ -136,14 +136,14 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
               }}></div>
 
             
-              <div className="single-fresh-curved-section position-absolute" ></div>
+              <div className="single-fresh-curved-section position-absolute " ></div>
 
            
               <div className="container position-relative" style={{ zIndex: 2 }}>
                 <div className=" align-items-top Single-fresh-Highlight-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
-                    <div className=" Single-fresh-booking-about-img-main  card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
+                    <div data-aos="fade-up" className=" Single-fresh-booking-about-img-main  card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
                       <img 
                         src= {projectHightlight?.url}
                         alt= {project?.projectName} 
@@ -155,9 +155,9 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 
                 
                   <div className="col-12 col-md-7 ps-md-5">
-                    <h3 className="text-dark mb-3 Single-fresh-highlights-h3" >Highlights</h3>
-                    <h2 className=" fw-bold mb-4 Single-fresh-highlights-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
-                    <ul className="list-unstyled lh-base d-flex flex-column gap-3 Single-fresh-highlight-list">
+                    <h3 data-aos="fade-left" className="text-dark mb-3 Single-fresh-highlights-h3" >Highlights</h3>
+                    <h2 data-aos="fade-left" className=" fw-bold mb-4 Single-fresh-highlights-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
+                    <ul data-aos="fade-up" className="list-unstyled lh-base d-flex flex-column gap-3 Single-fresh-highlight-list">
                     {projectContent}
                     </ul>
                   </div>
