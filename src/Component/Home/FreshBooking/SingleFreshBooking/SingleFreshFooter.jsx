@@ -7,9 +7,9 @@ export default function SingleFreshFooter({project, projectLogoContent}) {
       <div className="col-md-4 text-md-left mb-4 mb-md-0 Single-fresh-booking-footer-details">
         <div className='mb-4'>
         <img src={`${projectLogoContent?.url}`} alt="" style={{width:"220px"}} /></div>
-        <h3 className=" font-weight-bold mb-4">For an Enquiry <span className=""><img src="/img/for-enquiry.png" alt="" /></span></h3>
-        <p className="mt-2 fw-medium" style={{fontSize:'19px'}}>   <img src="/img/hero-dialer.png" alt="dialer"  style={{ width: '20px', height: '20px'  }} /> Call : 7837840785</p>
-        <p className="mt-2 fw-medium" style={{fontSize:'19px'}}> <img src="/img/hero-whatsapp.png" alt="whatsapp" style={{ width: '20px', height: '20px' }} /> Chat on WhatsApp</p>
+        <h3 className=" fw-bold mb-4">For an Enquiry <span className=""><img src="/img/for-enquiry.png" alt="" /></span></h3>
+        <p className="mt-2  fw-medium" style={{fontSize:'23px'}}>   <img src="/img/hero-dialer.png" alt="dialer"  style={{ width: '20px', height: '20px'  }} /> Call : 7837840785</p>
+        <p className="mt-2 fw-medium" style={{fontSize:'23px'}}> <img src="/img/hero-whatsapp.png" alt="whatsapp" style={{ width: '20px', height: '20px' }} /> Chat on WhatsApp</p>
       </div>
       <div className="col-md-4  text-md-left mb-4 mb-md-0">
         <h2 className="font-weight-bold  mb-4">{project?.projectName}</h2>

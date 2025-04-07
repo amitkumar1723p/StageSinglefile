@@ -15,7 +15,7 @@ export default function SingleFreshBookingBuilder({project, builderContent}) {
         <p>{builderContent?.projectAboutBuilderContent}</p>
       </div>
     </div>
-    <div className="single-fresh-booking-builder-image-container">
+    <div className="single-fresh-booking-builder-image-container" >
         <img src={builderContent?.projectAboutBuilderImage?.url} alt={builderContent?.projectAboutBuilderImage?.name} />
     </div>
 

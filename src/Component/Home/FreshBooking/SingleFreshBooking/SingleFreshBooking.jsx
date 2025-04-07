@@ -1,7 +1,8 @@
 import React, { useEffect ,useState} from 'react'
 import { useParams,useLocation } from 'react-router-dom';
 // import "./SingleFreshBooking.css";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import SingleFreshBookingHero from './SingleFreshBookingHero'
 import SingleFreshBookingAboutProject from './SingleFreshBookingAboutProject'
 import SingleFreshBookingHighlights from './SingleFreshBookingHighlights'
