@@ -573,7 +573,7 @@ export default function AdminListingCard({
                     <div className="user-name-contact">
                       <span>Posted by : </span>
 
-                      <span>{PostData?.CreatePostUser?.Name}</span>
+                      <span>{PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}</span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>
