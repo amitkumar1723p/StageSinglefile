@@ -221,6 +221,7 @@ export default function AllPost({
               selectAllProperty={selectAll}
               page={page}
               itemsPerPage={itemsPerPage}
+
               // required pops owner nativate update post route (show updated post)
               activeFilter={activeFilter}
               SearchPostId={SearchPostId}
@@ -229,6 +230,7 @@ export default function AllPost({
               onPageActive={onPageActive}
               currenSelected={currenSelected}
               MarkUpdatedPost={MarkUpdatedPost}
+              sortOrder ={sortOrder} //sorting
             />
           ))
         ) : (

@@ -34,7 +34,8 @@ export default function AdminListingCard({
   postPerPage,
   onPageActive,
   currenSelected,
-  MarkUpdatedPost
+  MarkUpdatedPost ,
+  sortOrder
 }) {
   const [formatDate, setFormatDate] = useState({
     ActiveDate: "",
@@ -378,6 +379,7 @@ export default function AdminListingCard({
                                           postPerPage: postPerPage,
                                           onPageActive: onPageActive,
                                           currenSelected: currenSelected,
+                                          sortOrder :sortOrder
                                         },
                                       }
                                     );

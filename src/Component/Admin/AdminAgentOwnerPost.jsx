@@ -61,8 +61,7 @@ export default function AdminAgentOwnerPost() {
   const [PropertyType, setPropertyType] = useState("");
   const [MarkUpdatedPost, setMarkUpdatedPost] = useState("");
   const [page, setPage] = useState(1); //  Current page for pagination   for ownerpost (all post.jsx)
-  const [UpdatePostNavigationData, setUpdatePostNavigationData] =
-    useState(undefined);
+  const [UpdatePostNavigationData, setUpdatePostNavigationData] =useState(undefined);
 
   const allPostFilterBoxRef = useRef(null); // store post filter box
   const {
@@ -90,8 +89,10 @@ export default function AdminAgentOwnerPost() {
       setSearchPostId(location?.state?.SearchPostId || "");
       setItemsPerPage(location?.state?.postPerPage);
       setPropertyType(location?.state?.propertAdType);
+      setPropertyOrder(location?.state?.sortOrder)
       setPage(location?.state?.pageNo);
       setMarkUpdatedPost(location?.state.PostId);
+      
       setTimeout(() => {
         setMarkUpdatedPost("");
       }, 5000);
