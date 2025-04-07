@@ -42,7 +42,7 @@ export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}
 
   return (
     <>
-      <div className="single-fresh-booking-chart-container bg-white d-flex py-3 justify-content-center align-items-center min-vh-80">
+      <div className="single-fresh-booking-chart-container bg-white d-flex py-3 justify-content-center align-items-center min-vh-80"  >
         <div className="container ">
           <h3 className="mb-1 mt-3   Single-fresh-Size-Price">How Much</h3>
           <h3 className=" fw-bold  mb-2 Single-fresh-Size-Price-heading " style={{color: '#1D3557'}}>{project?.projectName} Size And Price</h3>

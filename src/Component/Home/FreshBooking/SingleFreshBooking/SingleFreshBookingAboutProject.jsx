@@ -1,6 +1,16 @@
 import React from 'react';
 import "./SingleFreshBooking.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useState , useEffect } from 'react'
 export default function SingleFreshBookingAboutProject({projectHightlight , projectContent , project}) {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // animation duration in ms
+      once: true, // whether animation should happen only once
+    });
+  }, []);
   return (
     <>
     <div className='about-project-container'>
@@ -103,7 +113,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
                 <div className=" align-items-top Single-fresh-about-project-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img">
-                    <div className=" Single-fresh-booking-about-img-main card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
+                    <div className=" Single-fresh-booking-about-img-main card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" >
                   <img  style={{width:'auto', height:'100%', objectFit:'cover'}} src= {projectHightlight?.url} alt="" />
                     </div>
                   </div>
@@ -125,12 +135,12 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 
 
 {/* --------------------------Highlights--------------------------------------------------------- */}
-      <div className="container-fluid p-0">
+      <div className="container-fluid p-0"  >
         <div className="row g-0">
           <div className="col-12">
             <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden" style={{ minHeight: '600px' }}>
         
-              <div className="position-absolute w-100 h-100" style={{
+              <div className="position-absolute w-100 h-100"    style={{
                 background: 'url("/img/pattern-bg.png")',
                 zIndex: 0
               }}></div>

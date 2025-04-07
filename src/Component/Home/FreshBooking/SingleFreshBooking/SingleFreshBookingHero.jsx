@@ -142,7 +142,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
       </nav>
 
 <div className="single-fresh-hero-main-content">
-          <div className="col-lg-7  text-white position-absolute single-fresh-hero-content">
+          <div className="col-lg-7  text-white position-absolute single-fresh-hero-content " >
             <p className="text-uppercase custom-underline-in-freshbooking-hero">{project?.projectCity}</p>
             <p className="">{project?.projectName}</p>
             <p className=" "> {" "}{ project?.projectAdType}  { project?.locality}</p>
@@ -189,7 +189,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
         {/* Info Boxes */}
         <div className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
-  <div className="single-fresh-hero-icon mx-0 text-white mt-4" style={{ backgroundColor:'rgb(0 0 0 / 50%', backdropFilter: "blur(3px)",}} >
+  <div className="single-fresh-hero-icon mx-0 text-white mt-4"    style={{ backgroundColor:'rgb(0 0 0 / 50%', backdropFilter: "blur(3px)",}} >
     {heroData.map((item, index) => (
       <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
         <img
