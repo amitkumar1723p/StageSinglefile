@@ -24,6 +24,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
   setFloorDetailsData,
   ApartmentFeaturesRef,
   CreatePostRef,
+  FormSubmitRef,
 }) {
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
@@ -543,6 +544,15 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
 
             <div className="next-prev-box">
               <>
+                {update == true && (
+                  <div
+                    onClick={() => {
+                      FormSubmitRef?.current?.requestSubmit();
+                    }}
+                  >
+                    Update Post
+                  </div>
+                )}
                 <div
                   className="Submit-prev"
                   onClick={() => {
@@ -563,10 +573,6 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
               </button>
             </div>
           </form>
-          {/* {update && <button onClick={() => {
-              console.log(CreatePostRef)
-                CreatePostRef?.current?.requestSubmit()
-              }}>Update Post</button>} */}
         </div>
       </div>
     </>

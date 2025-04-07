@@ -37,6 +37,7 @@ export default function CreatePostImageUpload({
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
+  FormSubmitRef
 }) {
   const dispatch = useDispatch();
 
@@ -57,82 +58,84 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      // Create a copy of the data to avoid mutating the original object
-      const CopyObj = { ...PricingDetailsData };
-
-      if (BasicDetailsData.PropertyAdType === "Rent") {
-        // Remove commas from ExpectedRent and DepositePrice for Rent
-        const ExpectedRentRemoveComa = String(CopyObj?.ExpectedRent)?.replace(
-          /,/g,
-          ""
-        );
-        CopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
-
-        const DepositePriceRemoveComa = String(CopyObj?.DepositePrice)?.replace(
-          /,/g,
-          ""
-        );
-        CopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
-      }
-
-      if (BasicDetailsData.PropertyAdType === "Sale") {
-        // Remove commas from ExpectedPrice for Sale
-        const ExpectedPriceRemoveComa = String(CopyObj?.ExpectedPrice)?.replace(
-          /,/g,
-          ""
-        );
-        if (BasicDetailsData.ApartmentType == "Plot/Land") {
-          const PricePerSqYdRemoveComa = String(CopyObj?.PricePerSqYd)?.replace(
-            /,/g,
-            ""
-          );
-          CopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
-        } else {
-          const PricePerSqFtRemoveComa = String(CopyObj?.PricePerSqFt)?.replace(
-            /,/g,
-            ""
-          );
-          CopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
-        }
-
-        CopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
-
-        // Check and remove commas from MonthlyExpectedRent if it exists
-        if (CopyObj.AdditionalDetails?.MonthlyExpectedRent) {
-          const MonthlyExpectedRentRemoveComa = String(
-            CopyObj?.AdditionalDetails?.MonthlyExpectedRent
-          )?.replace(/,/g, "");
-          CopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(
-            MonthlyExpectedRentRemoveComa
-          );
-        }
-      }
-
-      // Remove commas from MaintenanceCharges if it exists
-      if (CopyObj.AdditionalDetails?.MaintenanceCharges) {
-        const MaintenanceChargesRemoveComa = String(
-          CopyObj.AdditionalDetails.MaintenanceCharges
-        )?.replace(/,/g, "");
-        CopyObj.AdditionalDetails.MaintenanceCharges = parseInt(
-          MaintenanceChargesRemoveComa
-        );
-      }
-
-      // Log the modified object before setting it in state
-
-      // Set the new state
-      setPricingDetailsData(CopyObj);
-    }, 0);
-  }, [BasicDetailsData]); // Add dependency on BasicDetailsData
+  
 
   // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
 
   const CratePostHandler = (e) => {
     e.preventDefault();
+ if(update && previewImage.length === 0 ){
+  setnext(4)
+  return alert("one image is required")
+  
 
+ }
     let formData = new FormData(e.target);
+
+
+    const PricingDetailsCopyObj = { ...PricingDetailsData };
+  //  Remove Coma  ---------------- >
+    if (BasicDetailsData.PropertyAdType === "Rent") {
+      // Remove commas from ExpectedRent and DepositePrice for Rent
+      const ExpectedRentRemoveComa = String(PricingDetailsCopyObj?.ExpectedRent)?.replace(
+        /,/g,
+        ""
+      );
+      PricingDetailsCopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
+
+      const DepositePriceRemoveComa = String(PricingDetailsCopyObj?.DepositePrice)?.replace(
+        /,/g,
+        ""
+      );
+      PricingDetailsCopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
+    }
+
+    if (BasicDetailsData.PropertyAdType === "Sale") {
+      // Remove commas from ExpectedPrice for Sale
+      const ExpectedPriceRemoveComa = String(PricingDetailsCopyObj?.ExpectedPrice)?.replace(
+        /,/g,
+        ""
+      );
+      if (BasicDetailsData.ApartmentType == "Plot/Land") {
+        const PricePerSqYdRemoveComa = String(PricingDetailsCopyObj?.PricePerSqYd)?.replace(
+          /,/g,
+          ""
+        );
+        PricingDetailsCopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
+      } else {
+        const PricePerSqFtRemoveComa = String(PricingDetailsCopyObj?.PricePerSqFt)?.replace(
+          /,/g,
+          ""
+        );
+        PricingDetailsCopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
+      }
+
+      PricingDetailsCopyObj.ExpectedPrice = parseInt(ExpectedPriceRemoveComa);
+
+      // Check and remove commas from MonthlyExpectedRent if it exists
+      if (PricingDetailsCopyObj.AdditionalDetails?.MonthlyExpectedRent) {
+        const MonthlyExpectedRentRemoveComa = String(
+          PricingDetailsCopyObj?.AdditionalDetails?.MonthlyExpectedRent
+        )?.replace(/,/g, "");
+        PricingDetailsCopyObj.AdditionalDetails.MonthlyExpectedRent = parseInt(
+          MonthlyExpectedRentRemoveComa
+        );
+      }
+    }
+
+    // Remove commas from MaintenanceCharges if it exists
+    if (PricingDetailsCopyObj.AdditionalDetails?.MaintenanceCharges) {
+      const MaintenanceChargesRemoveComa = String(
+        PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges
+      )?.replace(/,/g, "");
+      PricingDetailsCopyObj.AdditionalDetails.MaintenanceCharges = parseInt(
+        MaintenanceChargesRemoveComa
+      );
+    }
+
+
+  // Remove Coma End  ------------------->
+
 
     formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
     formData.append(
@@ -158,7 +161,7 @@ export default function CreatePostImageUpload({
       "AmenitiesDetails",
       `${JSON.stringify(AmenitiesDetailsData)}`
     );
-    formData.append("PricingDetails", `${JSON.stringify(PricingDetailsData)}`);
+    formData.append("PricingDetails", `${JSON.stringify(PricingDetailsCopyObj)}`);
     console.log(defaultImg, "default");
 
     if (update) {
@@ -219,28 +222,7 @@ export default function CreatePostImageUpload({
       return;
     }
   };
-  // console.log(defaultImg)
-  // console.log("uploadimages", uploadimages)
-  // console.log("previewImage", previewImage)
-
-  // useEffect(() => {
-  //   if (defaultImg >= 0) {
-  //     console.log("calleddddd")
-
-  //     setuploadimages(
-  //       (files, defaultImg) => {
-  //         const updatedFiles = [...files]; // Create a copy of the array
-  //         console.log(defaultImg)
-  //         const fileToMove = updatedFiles.splice(defaultImg, 1)[0]; // Remove the element at moveIndex
-  //         console.log(fileToMove, ' ffileee')
-  //         updatedFiles.unshift(fileToMove); // Insert it at the beginning
-  //         console.log("up ", updatedFiles)
-  //         return updatedFiles;
-  //       }
-  //     )
-  //   }
-
-  // }, [defaultImg])
+  
   return (
     <>
       <ScrollToTop />
@@ -248,9 +230,10 @@ export default function CreatePostImageUpload({
         <img src="/img/create-banner.svg" alt="create-banner" />
       </div> */}
 
-      <div className="property-details-main-box">
+      <div className="property-details-main-box" style={{display:next==4?"":"none"}}>
         <div className="postImage post-img-upload">
-          <form
+          <form 
+            ref={FormSubmitRef}
             onSubmit={CratePostHandler}
             encType="multipart/form-data"
             id="myform"
@@ -305,7 +288,7 @@ export default function CreatePostImageUpload({
                 id=""
                 multiple
                 accept=".jpg,.jpeg,.png,.webp,.avif"
-                required={update && previewImage.length === 0 ? true : false}
+                // required={update && previewImage.length === 0 ? true : false}
                 onChange={(e) => {
                   const files = Array.from(e.target.files);
 
@@ -448,7 +431,7 @@ export default function CreatePostImageUpload({
                 );
               })}
             </div>
-            ;
+            
             <div className="next-prev-box">
               <div
                 className="Submit-prev"

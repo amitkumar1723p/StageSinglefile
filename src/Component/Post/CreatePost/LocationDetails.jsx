@@ -15,6 +15,7 @@ export default function LocationDetails({
   setnext,
   // LocationDetailsSubmit
   LocationDetailsSubmiRef,
+  FormSubmitRef,
 }) {
   const dispatch = useDispatch();
 
@@ -24,87 +25,83 @@ export default function LocationDetails({
       StoreDataInSession("next", 2);
       StoreDataInSession("LocationDetailsData", LocationDetailsData);
     }
-      setnext(2);
+    setnext(2);
   };
 
   // handle Alert Shake
 
-
-  
-      const transitionDuration = '0.3s';
+  const transitionDuration = "0.3s";
   const [locationAlert, setlocationAlert] = useState({});
 
-  const [sectorShake,setSectorShake] = useState(false);
-  const [cityShake,setCityShake] = useState(false);
-  const [localityShake,setLocalityShake] = useState(false)
+  const [sectorShake, setSectorShake] = useState(false);
+  const [cityShake, setCityShake] = useState(false);
+  const [localityShake, setLocalityShake] = useState(false);
 
-  const[dataTosent,setDataToSent]= useState(LocationDetailsData)
-// console.log(dataTosent)
-  useEffect(()=>{
+  const [dataTosent, setDataToSent] = useState(LocationDetailsData);
+  // console.log(dataTosent)
+  useEffect(() => {
     // console.log("data to sent ",dataTosent)
-      setLocationDetailsData({
-        City:dataTosent?.City || dataTosent?.city,
-        Landmark:dataTosent?.sector || dataTosent?.Landmark,
-        Locality:dataTosent?.Locality || dataTosent?.locality,
-        ProjectName:dataTosent?.ProjectName || dataTosent?.projectName
-      })
+    setLocationDetailsData({
+      City: dataTosent?.City || dataTosent?.city,
+      Landmark: dataTosent?.sector || dataTosent?.Landmark,
+      Locality: dataTosent?.Locality || dataTosent?.locality,
+      ProjectName: dataTosent?.ProjectName || dataTosent?.projectName,
+    });
     //  console.log(LocationDetailsData)
-  },[dataTosent])
+  }, [dataTosent]);
 
-
-  const LocationDetailsAlertShake = (e)=>{
-    
+  const LocationDetailsAlertShake = (e) => {
     // if(ProjectNameObjectData === undefined){
     //   console.log("console");
     // }
-    
-    if(LocationDetailsData?.Landmark?.length == 0){
+
+    if (LocationDetailsData?.Landmark?.length == 0) {
       // setSectorShake(true);
       // setTimeout(()=> setSectorShake(false),1600);
-      return
-
+      return;
     }
-    if(LocationDetailsData?.City?.length == 0){
+    if (LocationDetailsData?.City?.length == 0) {
       setCityShake(true);
-      setTimeout(()=> setCityShake(false),1600);
-      return
-
+      setTimeout(() => setCityShake(false), 1600);
+      return;
     }
-    if(LocationDetailsData?.Locality?.length == 0){
+    if (LocationDetailsData?.Locality?.length == 0) {
       setLocalityShake(true);
-      setTimeout(()=> setLocalityShake(false),1600);
-      return
-
+      setTimeout(() => setLocalityShake(false), 1600);
+      return;
     }
-  }
+  };
 
   // console.log(LocationDetailsData)
 
   return (
     <>
       <ScrollToTop />
-        {/* <div className="create-banner-box">
+      {/* <div className="create-banner-box">
           <img src="/img/create-banner.svg" alt="create-banner" />
         </div> */}
       <div className="container-location w-80%">
         <h2 className="location-heading">Location Details</h2>
-        <form id="locationForm" onSubmit={submitHandler} ref={ LocationDetailsSubmiRef}>
+        <form
+          id="locationForm"
+          onSubmit={submitHandler}
+          ref={LocationDetailsSubmiRef}
+        >
           <div className="location-box">
             <ProjectNameSection
-            
               ProjectInputType={"PostForm"}
               ProjectNameObjectData={dataTosent}
               setProjectNameObjectData={setDataToSent}
               placeholder={"Project / Sector / Area Name"}
-              inputClass ={"locationdetails-input"}
+              inputClass={"locationdetails-input"}
               locationAlert={locationAlert}
             />
 
             <div className="form-group">
               <label htmlFor="street">Sector *</label>
               <input
-              style={{transitionDuration}}
-              className={`${sectorShake? '' : ''}`}
+                style={{ transitionDuration }}
+                className={`${sectorShake ? "" : ""}`}
                 type="text"
                 id="street"
                 name="street"
@@ -123,8 +120,8 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="city">City *</label>
               <input
-              style={{transitionDuration}}
-               className={`${cityShake? 'inputShake shake' : ''}`}
+                style={{ transitionDuration }}
+                className={`${cityShake ? "inputShake shake" : ""}`}
                 type="text"
                 id="city"
                 name="city"
@@ -142,14 +139,13 @@ export default function LocationDetails({
             <div className="form-group">
               <label htmlFor="locality">Locality *</label>
               <input
-              style={{transitionDuration}}
-              className={`${localityShake? 'inputShake shake' : ''}`}
+                style={{ transitionDuration }}
+                className={`${localityShake ? "inputShake shake" : ""}`}
                 type="text"
                 id="locality"
                 name="locality"
                 placeholder="e.g. New Gurgaon / SPR"
                 required
-                
                 // readOnly={!LocationDetailsData.Locality?false:true}
                 // defaultValue={LocationDetailsData.Locality}
                 value={LocationDetailsData?.Locality?.trimStart() || ""}
@@ -164,6 +160,15 @@ export default function LocationDetails({
           </div>
 
           <div className="next-prev-box">
+            {update == true && (
+              <div
+                onClick={() => {
+                  FormSubmitRef?.current?.requestSubmit();
+                }}
+              >
+                Update Post
+              </div>
+            )}
             <div
               className="Submit-prev"
               onClick={() => {
@@ -175,7 +180,9 @@ export default function LocationDetails({
               Previous
             </div>
 
-            <button className="Submit-next" onClick={LocationDetailsAlertShake}>Next</button>
+            <button className="Submit-next" onClick={LocationDetailsAlertShake}>
+              Next
+            </button>
           </div>
         </form>
       </div>

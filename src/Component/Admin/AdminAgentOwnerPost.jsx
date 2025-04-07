@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useContext } from "react";
+import React, { useEffect, useState, useMemo, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -14,6 +14,7 @@ import AdminListingCard from "./AdminListingCard";
 // import PostCard from "../Post/PostCard";
 import {
   Link,
+  useFetcher,
   useLocation,
   useNavigate,
   useSearchParams,
@@ -28,9 +29,8 @@ import AdminAgentAssignPost from "./AdminAgentAssignPost";
 export default function AdminAgentOwnerPost() {
   const dispatch = useDispatch();
   const location = useLocation();
+
   const navigate = useNavigate();
-  // for btn color
-  const { postVerify } = useContext(UserContext);
 
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -50,15 +50,21 @@ export default function AdminAgentOwnerPost() {
   const [SearchPostId, setSearchPostId] = useState("");
   const [selectAll, setSelectAll] = useState(false); //used for selectAll key
   const [status, setStatus] = useState("");
-  const { setAllPropertyData } = useContext(UserContext);
+  const { setAllPropertyData, NavbarRef } = useContext(UserContext);
   const [currentDataLength, setCurrentDataLength] = useState(null);
   const [active, setActive] = useState(null);
   const [onPageActive, setPageActive] = useState("");
   const [propertyOrder, setPropertyOrder] = useState("decending");
   const [currenSelected, setCurrentSelected] = useState("");
+  const [OwnerPostsPageNo, setOwnerPostsPageNo] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(25);
   const [PropertyType, setPropertyType] = useState("");
+  const [MarkUpdatedPost, setMarkUpdatedPost] = useState("");
+  const [page, setPage] = useState(1); //  Current page for pagination   for ownerpost (all post.jsx)
+  const [UpdatePostNavigationData, setUpdatePostNavigationData] =
+    useState(undefined);
 
+  const allPostFilterBoxRef = useRef(null); // store post filter box
   const {
     data: adminAlertData,
     LodingType,
@@ -72,38 +78,102 @@ export default function AdminAgentOwnerPost() {
 
   const queryParams = new URLSearchParams(location.search);
   const [myQuery, setMyQuery] = useState(queryParams.get("type"));
-  // const myQuery = queryParams.get("type");
-
-  // useEffect(()=>{
-  //   if (sortOrder !== undefined) {
-  //     filteredPosts.sort((a, b) => {
-  //       const dateA = new Date(a?.PostId?.createAt); // Ensure proper date handling
-  //       const dateB = new Date(b?.PostId?.createAt);
-  //       return sortOrder === "ascending" ? dateA - dateB : dateB - dateA;
-  //     });
-  //   }
-  // },[])
-
+  // const {  NavbarRef } =
+  //   useContext(UserContext);
+  console.log("MarkUpdatePost", MarkUpdatedPost);
   useEffect(() => {
-    function settingFilter() {
-      // setActive(status);
+    if (location?.state && location?.state?.updatePost == true) {
+      // Set all your state variables as before
+      setActive(location?.state?.activeFilter);
+      setPageActive(location?.state?.onPageActive);
+      setCurrentSelected(location?.state?.currenSelected);
+      setSearchPostId(location?.state?.SearchPostId || "");
+      setItemsPerPage(location?.state?.postPerPage);
+      setPropertyType(location?.state?.propertAdType);
+      setPage(location?.state?.pageNo);
+      setMarkUpdatedPost(location?.state.PostId);
+      setTimeout(() => {
+        setMarkUpdatedPost("");
+      }, 5000);
+  
+      // Handle query parameters
+      if (
+        Array.isArray(location?.state?.querry) &&
+        location?.state?.querry?.length > 0
+      ) {
+        const queryString = location?.state?.querry
+          .map((obj) => {
+            const key = encodeURIComponent(Object.keys(obj)[0]);
+            const value = encodeURIComponent(obj[Object.keys(obj)[0]]);
+            return `${key}=${value}`;
+          })
+          .join("&");
+  
+        navigate(`${location.pathname}?${queryString}`, { replace: true });
+      } else {
+        navigate(location.pathname, { replace: true });
+      }
+  
+      // Improved scroll handling with retry mechanism
+      let scrollAttempts = 0;
+      const maxAttempts = 10;
+      
+      const scrollToElement = () => {
+        const postCardId = document.getElementById(location?.state.PostId);
+        let allPostFilterBoxHight = allPostFilterBoxRef?.current?.offsetHeight || 0;
+        let NavbarHight = NavbarRef?.current?.offsetHeight || 0;
+        
+        if (postCardId) {
+          console.log("Found element:", postCardId.getBoundingClientRect());
+          const elementTop = postCardId.getBoundingClientRect().top + window.scrollY;
+          const offset = allPostFilterBoxHight + NavbarHight;
+  
+          // Add a small delay before scrolling to ensure layout is stable
+          setTimeout(() => {
+            window.scrollTo({
+              top: elementTop - offset,
+              behavior: "smooth",
+            });
+          }, 100);
+          
+          return true;
+        }
+        
+        return false;
+      };
+      
+      // First attempt after a short delay to allow for initial render
+      setTimeout(() => {
+        // Try scrolling
+        if (!scrollToElement() && scrollAttempts < maxAttempts) {
+          // If element not found, set up interval for retry
+          const scrollInterval = setInterval(() => {
+            scrollAttempts++;
+            if (scrollToElement() || scrollAttempts >= maxAttempts) {
+              clearInterval(scrollInterval);
+            }
+          }, 500); // Try every 500ms
+          
+          // Clean up interval after component unmounts or maxAttempts reached
+          return () => clearInterval(scrollInterval);
+        }
+      }, 300);
+    } else {
+      // Your existing fallback logic
       if (myQuery === "true") {
         setCurrentSelected("All Active posts");
         setActive(true);
       } else if (myQuery === "false") {
         setCurrentSelected("All In-Active posts");
-
         setActive(false);
       } else if (myQuery === "success") {
         setActive("success");
         setCurrentSelected("Success Post ");
       } else {
         setCurrentSelected("All posts");
-
         setActive(null);
       }
     }
-    settingFilter();
   }, []);
 
   useEffect(() => {
@@ -248,16 +318,13 @@ export default function AdminAgentOwnerPost() {
   }, [adminAlertData]);
 
   useEffect(() => {
-    if (medata?.user?.Role === "Owner") { 
-
+    if (medata?.user?.Role === "Owner") {
       dispatch(Admin_OwnerGetAllPostAction());
-    }  
-     
-      if(["Admin" ,"Agent"].includes(medata?.user?.Role)) {
-    
-        dispatch(Admin_AgentGetAllPostAction()) 
-      }
-    
+    }
+
+    if (["Admin", "Agent"].includes(medata?.user?.Role)) {
+      dispatch(Admin_AgentGetAllPostAction());
+    }
   }, []);
 
   //  by using this we show number of filtered or un-filtred property number on dashboard for Admin or Agent  setData
@@ -305,7 +372,6 @@ export default function AdminAgentOwnerPost() {
 
   //handle items per page
   const handleItemsPerPageChange = (value) => {
-    // console.log(value)
     setItemsPerPage(parseInt(value, 10)); // Update the state with the selected value
 
     // setCurrentPage(1); // Reset to first page when changing items per page
@@ -355,7 +421,7 @@ export default function AdminAgentOwnerPost() {
 
   return (
     <>
-      <div className="admin-filter-main-parent-box">
+      <div className="admin-filter-main-parent-box" ref={allPostFilterBoxRef}>
         <p className="AllListing-admin">
           {currenSelected} ({currentDataLength})
         </p>
@@ -429,6 +495,7 @@ export default function AdminAgentOwnerPost() {
               {propertyOrder === "ascending" ? <>Sort (↑)</> : <>Sort(↓)</>}
             </button>
             <select
+              value={itemsPerPage}
               id="itemsPerPage"
               onChange={(e) => handleItemsPerPageChange(e.target.value)}
             >
@@ -468,7 +535,7 @@ export default function AdminAgentOwnerPost() {
             <input
               className="controlled-input"
               type="text"
-              value={SearchPostId.trimStart()}
+              value={SearchPostId?.trimStart()}
               placeholder="Search Here"
               onChange={(e) => {
                 let value = e.target.value;
@@ -629,6 +696,15 @@ export default function AdminAgentOwnerPost() {
             selectAll={selectAll}
             postPerPage={itemsPerPage}
             propertAdType={PropertyType}
+            allPostFilterBoxRef={allPostFilterBoxRef}
+            onPageActive={onPageActive}
+            currenSelected={currenSelected}
+            OwnerPostsPageNo={OwnerPostsPageNo}
+            setOwnerPostsPageNo={setOwnerPostsPageNo}
+            // MarkUpdatedPost(location?.state.PostId)
+            page={page}
+            setPage={setPage}
+            MarkUpdatedPost={MarkUpdatedPost}
           />
         ) : (
           <AdminAgentAssignPost

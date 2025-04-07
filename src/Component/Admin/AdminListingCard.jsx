@@ -27,12 +27,19 @@ export default function AdminListingCard({
   selectAllProperty,
   itemsPerPage,
   page,
+
+  activeFilter,
+  SearchPostId,
+  propertAdType,
+  postPerPage,
+  onPageActive,
+  currenSelected,
+  MarkUpdatedPost
 }) {
   const [formatDate, setFormatDate] = useState({
     ActiveDate: "",
     ExpiredDate: "",
   });
-
 
   const navigate = useNavigate();
 
@@ -51,7 +58,6 @@ export default function AdminListingCard({
     }
   };
 
-
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -69,19 +75,34 @@ export default function AdminListingCard({
       const After90Days = new Date(date.getTime() + 90 * 24 * 60 * 60 * 1000);
 
       // Define month names (abbreviated)
-      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const monthNames = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
 
       // Format Active Date as DD-Month-YY
-      let activedate = `${("0" + date.getDate()).slice(-2)}-${monthNames[date.getMonth()]}-${date.getFullYear().toString().slice(-2)}`;
+      let activedate = `${("0" + date.getDate()).slice(-2)}-${
+        monthNames[date.getMonth()]
+      }-${date.getFullYear().toString().slice(-2)}`;
 
       // Format Expired Date as DD-Month-YY (90 days after)
-      let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${monthNames[After90Days.getMonth()]}-${After90Days.getFullYear().toString().slice(-2)}`;
+      let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${
+        monthNames[After90Days.getMonth()]
+      }-${After90Days.getFullYear().toString().slice(-2)}`;
 
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
   }, [PostData?.PostVerifyData?.Time]);
-
-
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -91,7 +112,15 @@ export default function AdminListingCard({
   const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
-      `${PostData?.PropertyDetails?.BHKType ? `${PostData?.PropertyDetails?.BHKType} BHk` : ""}  ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails.Landmark}  ${PostData?.LocationDetails?.City}`
+      `${
+        PostData?.PropertyDetails?.BHKType
+          ? `${PostData?.PropertyDetails?.BHKType} BHk`
+          : ""
+      }  ${PostData?.BasicDetails?.ApartmentType} For  ${
+        PostData?.BasicDetails?.PropertyAdType
+      } In ${PostData?.LocationDetails.Landmark}  ${
+        PostData?.LocationDetails?.City
+      }`
     );
   }, [PostData]);
 
@@ -117,12 +146,12 @@ export default function AdminListingCard({
   }, [PostData?.PostVerifyShow]);
 
   useEffect(() => {
-
     if (AssignPostData?.success == true) {
       let AssingPosts = AssignPostData?.AssignProperty?.filter((item) => {
         return (
-          item.AssignedPropertys.some((item) => item.PostId === PostData?._id) &&
-          item.AdminId._id !== medata?.user?._id
+          item.AssignedPropertys.some(
+            (item) => item.PostId === PostData?._id
+          ) && item.AdminId._id !== medata?.user?._id
         );
       });
 
@@ -157,7 +186,7 @@ export default function AdminListingCard({
   };
 
   return (
-    <div className="Admin-property-post-card-main-box">
+    <div className="Admin-property-post-card-main-box" id={PostData?._id} style={{outline:MarkUpdatedPost ==PostData._id ?"1px solid red":""}}>
       <div className="Admin-property-post-card-main">
         <div className="property-post-card" id="property-card-1">
           {medata?.user?.Role != "Agent" && AssignProperty && (
@@ -168,12 +197,12 @@ export default function AdminListingCard({
                     <input
                       type="checkbox"
                       checked={isChecked(index)}
-                    // checked={
-                    //   selectAllProperty ||
-                    //   AssignProperty.some(
-                    //     (item) => item.PostId === PostData?._id
-                    //   )
-                    // }
+                      // checked={
+                      //   selectAllProperty ||
+                      //   AssignProperty.some(
+                      //     (item) => item.PostId === PostData?._id
+                      //   )
+                      // }
                     />
                   </label>
                 </div>
@@ -219,7 +248,6 @@ export default function AdminListingCard({
               {PostData?.LocationDetails?.ProjectName}
               {medata?.user?.Role != "Agent" && (
                 <>
-
                   <div className="edit-del-section">
                     {/* {AssignProperty && ( */}
                     <div className="asign-user">
@@ -234,8 +262,6 @@ export default function AdminListingCard({
                                   if (
                                     PostData?.PostDelete?.Status !== "delete"
                                   ) {
-
-
                                     const RemoveAssignProperty = {
                                       AdminId: AssignPropertys.AdminId._id,
                                       PostId: PostData?._id,
@@ -252,8 +278,6 @@ export default function AdminListingCard({
                                       );
                                     }
                                   }
-
-
                                 }}
                               >
                                 {AssignPropertys.AdminId?.Name} - (
@@ -313,12 +337,52 @@ export default function AdminListingCard({
                           ) : (
                             <>
                               <div className="delete-edit-box">
-                                <Link to={`/admin/post/update/${PostData?._id}`}>
+                                {/* <Link
+                                  to={{
+                                    pathname: `/admin/post/update/${PostData?._id}`,
+                                    hash :"k33",
+                                    state  :{amit:"ekj"}
+                                  // Passing the PageNo data here, // Here, you store the PostData in state
+                                  }}
+                                   
+                                >
                                   <img
                                     src="/img/edit.png"
                                     className="editIcon"
                                   />
-                                </Link>
+                                </Link> */}
+
+                                <img
+                                  src="/img/edit.png"
+                                  className="editIcon"
+                                  onClick={(e) => {
+                                    const queryParams = new URLSearchParams(
+                                      location.search
+                                    );
+                                    // Dynamically get all query parameters (key-value pairs)
+                                    const queryObjectArray = Array.from(
+                                      queryParams.entries()
+                                    ).map(([key, value]) => ({
+                                      [key]: value,
+                                    }));
+                                    navigate(
+                                      `/admin/post/update/${PostData?._id}`,
+
+                                      {
+                                        state: {
+                                          pageNo: page,
+                                          querry: queryObjectArray,
+                                          activeFilter: activeFilter,
+                                          SearchPostId: SearchPostId,
+                                          propertAdType: propertAdType,
+                                          postPerPage: postPerPage,
+                                          onPageActive: onPageActive,
+                                          currenSelected: currenSelected,
+                                        },
+                                      }
+                                    );
+                                  }}
+                                />
                               </div>{" "}
                               <div
                                 className="PostData?.PostDelete?.Status-edit-box"
@@ -389,7 +453,6 @@ export default function AdminListingCard({
                     </>
                   )}
                   <p className="admin-card-area-section">
-
                     {PostData?.PricingDetails?.PricePerSqFt} Per sqft
                   </p>
                 </div>
@@ -425,9 +488,7 @@ export default function AdminListingCard({
                   <div className="poston-date">
                     <p className="admin-card-heading">Create on</p>
                     <p className="admin-card-heading-ans">
-                      {
-                        FormatDate(PostData?.createAt)
-                      }
+                      {FormatDate(PostData?.createAt)}
                       {/* {new Date(PostData?.createAt).toLocaleDateString("en-GB", {
                         day: '2-digit',
                         month: 'short',
@@ -456,10 +517,11 @@ export default function AdminListingCard({
               <div className="response-section">
                 <p
                   // className={location.pathname.includes("schedule-visit"?"select":"")}
-                  className={`${location.pathname.includes("/admin/schedule-visit")
-                    ? "active-btn"
-                    : ""
-                    }`}
+                  className={`${
+                    location.pathname.includes("/admin/schedule-visit")
+                      ? "active-btn"
+                      : ""
+                  }`}
                   onClick={() => {
                     if (
                       medata?.user?.Role == "Owner" &&
@@ -481,10 +543,11 @@ export default function AdminListingCard({
                   )
                 </p>
                 <p
-                  className={`${location.pathname.includes("/admin/recive-offer")
-                    ? "active-btn"
-                    : ""
-                    }`}
+                  className={`${
+                    location.pathname.includes("/admin/recive-offer")
+                      ? "active-btn"
+                      : ""
+                  }`}
                   onClick={() => {
                     if (
                       medata?.user?.Role == "Owner" &&
@@ -508,11 +571,7 @@ export default function AdminListingCard({
                     <div className="user-name-contact">
                       <span>Posted by : </span>
 
-                      <span>
-                        
-                        {PostData?.CreatePostUser?.Name}
-                      
-                        </span>
+                      <span>{PostData?.CreatePostUser?.Name}</span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>
@@ -524,16 +583,17 @@ export default function AdminListingCard({
 
               <div className="admin-btn-active-btn">
                 <Link
-                  to={`${medata?.user?.Role == "Owner" &&
+                  to={`${
+                    medata?.user?.Role == "Owner" &&
                     PostData?.PostDelete?.Status == "delete"
-                    ? "/admin/deleted-post"
-                    : "/post-detail"
-                    }/${PropertyAddress.toLowerCase()
-                      .replaceAll(" ", "-")
-                      .replace(",", "")
-                      .replaceAll("/", "-")}-${PostData?._id}`}
+                      ? "/admin/deleted-post"
+                      : "/post-detail"
+                  }/${PropertyAddress.toLowerCase()
+                    .replaceAll(" ", "-")
+                    .replace(",", "")
+                    .replaceAll("/", "-")}-${PostData?._id}`}
                 >
-                  <button className="contact-button btn-sm" >
+                  <button className="contact-button btn-sm">
                     View Listing
                   </button>
                 </Link>
