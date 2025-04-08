@@ -186,6 +186,7 @@ export default function AdminListingCard({
     return index === 0;
   };
 
+   
   return (
     <div className="Admin-property-post-card-main-box" id={PostData?._id} style={{outline:MarkUpdatedPost ==PostData._id ?"1px solid red":""}}>
       <div className="Admin-property-post-card-main">

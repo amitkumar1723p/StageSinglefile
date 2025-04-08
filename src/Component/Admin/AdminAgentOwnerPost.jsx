@@ -45,6 +45,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
+   console.log("AssignProperty",AssignProperty)
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -61,7 +62,8 @@ export default function AdminAgentOwnerPost() {
   const [PropertyType, setPropertyType] = useState("");
   const [MarkUpdatedPost, setMarkUpdatedPost] = useState("");
   const [page, setPage] = useState(1); //  Current page for pagination   for ownerpost (all post.jsx)
-  const [UpdatePostNavigationData, setUpdatePostNavigationData] =useState(undefined);
+  const [UpdatePostNavigationData, setUpdatePostNavigationData] =
+    useState(undefined);
 
   const allPostFilterBoxRef = useRef(null); // store post filter box
   const {
@@ -89,14 +91,14 @@ export default function AdminAgentOwnerPost() {
       setSearchPostId(location?.state?.SearchPostId || "");
       setItemsPerPage(location?.state?.postPerPage);
       setPropertyType(location?.state?.propertAdType);
-      setPropertyOrder(location?.state?.sortOrder)
+      setPropertyOrder(location?.state?.sortOrder);
       setPage(location?.state?.pageNo);
       setMarkUpdatedPost(location?.state.PostId);
-      
+
       setTimeout(() => {
         setMarkUpdatedPost("");
       }, 5000);
-  
+
       // Handle query parameters
       if (
         Array.isArray(location?.state?.querry) &&
@@ -109,26 +111,28 @@ export default function AdminAgentOwnerPost() {
             return `${key}=${value}`;
           })
           .join("&");
-  
+
         navigate(`${location.pathname}?${queryString}`, { replace: true });
       } else {
         navigate(location.pathname, { replace: true });
       }
-  
+
       // Improved scroll handling with retry mechanism
       let scrollAttempts = 0;
       const maxAttempts = 10;
-      
+
       const scrollToElement = () => {
         const postCardId = document.getElementById(location?.state.PostId);
-        let allPostFilterBoxHight = allPostFilterBoxRef?.current?.offsetHeight || 0;
+        let allPostFilterBoxHight =
+          allPostFilterBoxRef?.current?.offsetHeight || 0;
         let NavbarHight = NavbarRef?.current?.offsetHeight || 0;
-        
+
         if (postCardId) {
           console.log("Found element:", postCardId.getBoundingClientRect());
-          const elementTop = postCardId.getBoundingClientRect().top + window.scrollY;
+          const elementTop =
+            postCardId.getBoundingClientRect().top + window.scrollY;
           const offset = allPostFilterBoxHight + NavbarHight;
-  
+
           // Add a small delay before scrolling to ensure layout is stable
           setTimeout(() => {
             window.scrollTo({
@@ -136,13 +140,13 @@ export default function AdminAgentOwnerPost() {
               behavior: "smooth",
             });
           }, 100);
-          
+
           return true;
         }
-        
+
         return false;
       };
-      
+
       // First attempt after a short delay to allow for initial render
       setTimeout(() => {
         // Try scrolling
@@ -154,7 +158,7 @@ export default function AdminAgentOwnerPost() {
               clearInterval(scrollInterval);
             }
           }, 500); // Try every 500ms
-          
+
           // Clean up interval after component unmounts or maxAttempts reached
           return () => clearInterval(scrollInterval);
         }
@@ -683,6 +687,7 @@ export default function AdminAgentOwnerPost() {
           {/* Display the current status */}
         </div>
       </div>
+      
 
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (

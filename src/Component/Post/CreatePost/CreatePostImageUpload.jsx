@@ -37,7 +37,7 @@ export default function CreatePostImageUpload({
   // show subit alert
   setshowCreatePostSubmitAlert,
   CreatePostRef,
-  FormSubmitRef
+  FormSubmitRef,
 }) {
   const dispatch = useDispatch();
 
@@ -58,55 +58,45 @@ export default function CreatePostImageUpload({
     // eslint-disable-next-line
   }, [uploadimages, update]);
 
-  
-
   // If you want to log the PricingDetailsData after it is updated, use another useEffect to listen for state changes
 
   const CratePostHandler = (e) => {
     e.preventDefault();
- if(update && previewImage.length === 0 ){
-  setnext(4)
-  return alert("one image is required")
-  
-
- }
+    if (update && previewImage.length === 0) {
+      setnext(4);
+      return alert("one image is required");
+    }
     let formData = new FormData(e.target);
 
-
     const PricingDetailsCopyObj = { ...PricingDetailsData };
-  //  Remove Coma  ---------------- >
+    //  Remove Coma  ---------------- >
     if (BasicDetailsData.PropertyAdType === "Rent") {
       // Remove commas from ExpectedRent and DepositePrice for Rent
-      const ExpectedRentRemoveComa = String(PricingDetailsCopyObj?.ExpectedRent)?.replace(
-        /,/g,
-        ""
-      );
+      const ExpectedRentRemoveComa = String(
+        PricingDetailsCopyObj?.ExpectedRent
+      )?.replace(/,/g, "");
       PricingDetailsCopyObj.ExpectedRent = parseInt(ExpectedRentRemoveComa);
 
-      const DepositePriceRemoveComa = String(PricingDetailsCopyObj?.DepositePrice)?.replace(
-        /,/g,
-        ""
-      );
+      const DepositePriceRemoveComa = String(
+        PricingDetailsCopyObj?.DepositePrice
+      )?.replace(/,/g, "");
       PricingDetailsCopyObj.DepositePrice = parseInt(DepositePriceRemoveComa);
     }
 
     if (BasicDetailsData.PropertyAdType === "Sale") {
       // Remove commas from ExpectedPrice for Sale
-      const ExpectedPriceRemoveComa = String(PricingDetailsCopyObj?.ExpectedPrice)?.replace(
-        /,/g,
-        ""
-      );
+      const ExpectedPriceRemoveComa = String(
+        PricingDetailsCopyObj?.ExpectedPrice
+      )?.replace(/,/g, "");
       if (BasicDetailsData.ApartmentType == "Plot/Land") {
-        const PricePerSqYdRemoveComa = String(PricingDetailsCopyObj?.PricePerSqYd)?.replace(
-          /,/g,
-          ""
-        );
+        const PricePerSqYdRemoveComa = String(
+          PricingDetailsCopyObj?.PricePerSqYd
+        )?.replace(/,/g, "");
         PricingDetailsCopyObj.PricePerSqYd = parseInt(PricePerSqYdRemoveComa);
       } else {
-        const PricePerSqFtRemoveComa = String(PricingDetailsCopyObj?.PricePerSqFt)?.replace(
-          /,/g,
-          ""
-        );
+        const PricePerSqFtRemoveComa = String(
+          PricingDetailsCopyObj?.PricePerSqFt
+        )?.replace(/,/g, "");
         PricingDetailsCopyObj.PricePerSqFt = parseInt(PricePerSqFtRemoveComa);
       }
 
@@ -133,9 +123,7 @@ export default function CreatePostImageUpload({
       );
     }
 
-
-  // Remove Coma End  ------------------->
-
+    // Remove Coma End  ------------------->
 
     formData.append("BasicDetails", `${JSON.stringify(BasicDetailsData)}`);
     formData.append(
@@ -161,7 +149,10 @@ export default function CreatePostImageUpload({
       "AmenitiesDetails",
       `${JSON.stringify(AmenitiesDetailsData)}`
     );
-    formData.append("PricingDetails", `${JSON.stringify(PricingDetailsCopyObj)}`);
+    formData.append(
+      "PricingDetails",
+      `${JSON.stringify(PricingDetailsCopyObj)}`
+    );
     console.log(defaultImg, "default");
 
     if (update) {
@@ -180,7 +171,7 @@ export default function CreatePostImageUpload({
       if (defaultImg) {
         formData.append("PreviewDefaultImage", defaultImg);
       }
-      
+
       if (uploadimages.length > 0) {
         uploadimages.forEach((e) => {
           formData.append("PropertyImages", e, e.name);
@@ -222,7 +213,7 @@ export default function CreatePostImageUpload({
       return;
     }
   };
-  
+
   return (
     <>
       <ScrollToTop />
@@ -230,9 +221,12 @@ export default function CreatePostImageUpload({
         <img src="/img/create-banner.svg" alt="create-banner" />
       </div> */}
 
-      <div className="property-details-main-box" style={{display:next==4?"":"none"}}>
+      <div
+        className="property-details-main-box"
+        style={{ display: next == 4 ? "" : "none" }}
+      >
         <div className="postImage post-img-upload">
-          <form 
+          <form
             ref={FormSubmitRef}
             onSubmit={CratePostHandler}
             encType="multipart/form-data"
@@ -431,7 +425,7 @@ export default function CreatePostImageUpload({
                 );
               })}
             </div>
-            
+
             <div className="next-prev-box">
               <div
                 className="Submit-prev"

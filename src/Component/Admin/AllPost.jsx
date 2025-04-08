@@ -145,7 +145,8 @@ export default function AllPost({
       const endIndex = page * itemsPerPage;
       // console.log("filter post ",filteredPosts)
       const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
-
+     console.log(postsToDisplay)
+       console.log(postsToDisplay)
       setOwnerPosts(postsToDisplay); // Set the current page posts
     }
   }, [
@@ -176,30 +177,30 @@ export default function AllPost({
     setPage(newPage); // Go to the selected page
   };
 
-  // this useEffect is used to handle the selectAll functionality
-  const endIndex = itemsPerPage * page;
-  const startIndex = endIndex - itemsPerPage;
-  useEffect(() => {
-    if (
-      allPropertyData?.Post &&
-      Array.isArray(allPropertyData.Post) &&
-      selectAll === true
-    ) {
-      if (selectAll === true) {
-        const allAssignData = allPropertyData?.Post?.slice(
-          startIndex,
-          endIndex
-        ).map((post) => {
-          // This will log "hello" for each post
-          return {
-            PostId: post?._id,
-            CreatedBy: medata?.user?._id,
-          };
-        });
-        setAssignProperty(allAssignData);
-      }
-    }
-  }, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
+  // // this useEffect is used to handle the selectAll functionality
+  // const endIndex = itemsPerPage * page;
+  // const startIndex = endIndex - itemsPerPage;
+  // useEffect(() => {
+  //   if (
+  //     allPropertyData?.Post &&
+  //     Array.isArray(allPropertyData.Post) &&
+  //     selectAll === true
+  //   ) {
+  //     if (selectAll === true) {
+  //       const allAssignData = allPropertyData?.Post?.slice(
+  //         startIndex,
+  //         endIndex
+  //       ).map((post) => {
+  //         // This will log "hello" for each post
+  //         return {
+  //           PostId: post?._id,
+  //           CreatedBy: medata?.user?._id,
+  //         };
+  //       });
+  //       setAssignProperty(allAssignData);
+  //     }
+  //   }
+  // }, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
 
   //  owner update post scoll to post card ------------------------
   // ( if enable post update right admin this useEffect paste AdminAgentOwner component do not use this useEffect in agent section)
