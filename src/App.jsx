@@ -79,6 +79,7 @@ import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
 import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
 import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
+import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -841,8 +842,8 @@ function App() {
     useEffect(() => {
       AOS.init({
         duration: 1000,   // animation duration in ms
-        // once: true,       // animate only once when in view
-        offset: 80,      // offset (in px) from the original trigger point
+        once: true,       // animate only once when in view
+        offset: 10,      // offset (in px) from the original trigger point
       });
     }, []);
 
@@ -973,6 +974,7 @@ function App() {
 
         <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
         <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/>
+        <Route exact path = "/fresh-bookings2" element={<FreshBookingViewAlll/>}/>
         <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
 
         <Route exact path="/fresh-booking"  element={<SingleFreshBooking/>}/>

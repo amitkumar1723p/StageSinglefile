@@ -1,6 +1,6 @@
 import React, { useEffect ,useState} from 'react'
 import { useParams,useLocation } from 'react-router-dom';
-// import "./SingleFreshBooking.css";
+import "./SingleFreshBooking.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SingleFreshBookingHero from './SingleFreshBookingHero'
@@ -101,7 +101,7 @@ export default function SingleFreshBooking() {
       {/* <SingleFreshBookingFAQs/> */}
       <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} LocationImageContent={locationImage}  />
       <SingleFreshBookingBuilder   project={projectBasicDetail}   builderContent={projectAboutBuilder}  />
-      <SingleFreshBookingViewMore />
+      <SingleFreshBookingViewMore    project={projectBasicDetail} />
       
       <SingleFreshFooter   projectLogoContent= {projectLogoImage} project={projectBasicDetail}/>
       

@@ -103,7 +103,7 @@ useEffect(()=>{
       </div>
       <div
         className="overflow-hidden d-flex align-items-center justify-content-center"
-        style={{ maxHeight: "500px", width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
+        style={{ maxHeight: "700px", width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
       >
         <img
           src={siteMapContent?.url}

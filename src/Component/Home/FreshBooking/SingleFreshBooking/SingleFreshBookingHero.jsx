@@ -73,7 +73,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         className="navbar navbar-expand-lg position-relative z-3  p-0"
         style={{
            backdropFilter: "blur(0px)",
-          backgroundColor: "rgba(0, 0, 0, 0.20)",
+          backgroundColor: "rgb(255 255 255 / 26%)",
           top: "0px",
           width: "100%",
           zIndex: 1,
@@ -216,11 +216,11 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 const FormComponent = () => (
   <form
   
-  data-aos="fade-left"  data-aos-once="true"
+  // data-aos="fade-left"  data-aos-once="true"
     className="Single-fresh-form rounded  text-light overflow-hidden"
     style={{
       width: "320px",
-      backgroundColor: "#00000031",
+      backgroundColor: "rgb(112 112 112 / 24%)",
       outline:'1px solid white',
       boxShadow:'0px 0px 50px black',
       overflowY: "auto",

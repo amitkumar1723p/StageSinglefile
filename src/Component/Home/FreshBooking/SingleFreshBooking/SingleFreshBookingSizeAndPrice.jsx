@@ -1,5 +1,5 @@
 import React from 'react';
-import './SingleFreshBooking.css';
+// import './SingleFreshBooking.css';
 export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}) {
   const styles = `
   .custom-thead {

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./SingleFreshBooking.css";
+// import "./SingleFreshBooking.css";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useState , useEffect } from 'react'
@@ -121,7 +121,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
                 
                   <div className="col-12 col-md-7 ps-md-5 ">
                     <h3 data-aos="fade-left" className="text-dark mb-3 Single-fresh-about-project-h3" > About Project</h3>
-                    <h2 data-aos="fade-left" className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
+                    <h2 data-aos="fade-left"  className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
                     <p data-aos="fade-up" className="text-muted Single-fresh-about-project-p">
                     {projectContent}
                     </p>

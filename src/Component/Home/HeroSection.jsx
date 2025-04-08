@@ -609,7 +609,7 @@ const HeroSection = () => {
         </div>
       </header>
 
-      {/* <div
+      <div
         ref={PropertyRequirementBtnRef.current[0]}
         onClick={() => {
           if (medata && medata.IsAuthenticated == true) {
@@ -620,7 +620,7 @@ const HeroSection = () => {
           }
         }} className="requirement-button">
         <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
-      </div> */}
+      </div>
 
       {/* normal waala  */}
       {/* <div className="requirement-container">
