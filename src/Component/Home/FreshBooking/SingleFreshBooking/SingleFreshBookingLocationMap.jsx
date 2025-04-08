@@ -31,7 +31,7 @@ useEffect(()=>{
         <div className="single-fresh-booking-locationmap-container">
           <div className="col-md-6 mb-4">
             <h3 className="mb-3 col Single-fresh-location-map-h3">Location Map</h3>
-            <h2 className="fw-bold mb-2 Single-fresh-location-map-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
+            <h2 className="fw-bold mb-2 Single-fresh-location-map-h2" >{project?.projectName}</h2>
 
             <div className="Single-fresh-info-section">
               <div className="Single-fresh-map-buttons">
@@ -97,7 +97,7 @@ useEffect(()=>{
 
       <div className="container mt-2 mb-2 ">
         <h3 className="mb-1 Single-fresh-site-map-h3">Site Map </h3>
-        <h2 className="fw-bold  mb-5" style={{color: '#1D3557'}}>
+        <h2 className="fw-bold  mb-5 Single-fresh-site-map-h2" >
           Master Plan Of  {project?.projectName}
         </h2>
       </div>

@@ -1,7 +1,7 @@
 import React, { useEffect ,useState} from 'react'
 import { useParams,useLocation } from 'react-router-dom';
-import "./SingleFreshBooking.css";
-// import "./singlefreshbookingtest.css"
+// import "./SingleFreshBooking.css";
+import "./singlefreshbookingtest.css"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SingleFreshBookingHero from './SingleFreshBookingHero'

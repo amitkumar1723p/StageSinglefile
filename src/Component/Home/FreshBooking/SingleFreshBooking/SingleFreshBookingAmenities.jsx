@@ -66,7 +66,7 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
   </style>
   <div className="container mt-5 mb-5">
   <h3 className="mb-3 Single-fresh-facilities">Project Facilities</h3>
-  <h3 className="fw-bold mb-3 Single-fresh-amenities" style={{ color: '#1D3557' }}>
+  <h3 className="fw-bold mb-3 Single-fresh-amenities" >
     {project?.projectName} Amenities
   </h3>
   <div className=" mt-4 mb-4 g-4 single-fresh-booking-amenities">

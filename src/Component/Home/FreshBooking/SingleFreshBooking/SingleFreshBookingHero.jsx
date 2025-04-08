@@ -69,15 +69,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
       >
         <div className="w-100 h-100  single-fresh-hero-conainer-main">
           <nav
-        className="navbar navbar-expand-lg position-relative z-3  p-0"
-        style={{
-           backdropFilter: "blur(0px)",
-          backgroundColor: "rgba(0, 0, 0, 0.20)",
-          top: "0px",
-          width: "100%",
-          zIndex: 1,
-      
-        }}
+        className="navbar single-fresh-navbar navbar-expand-lg position-relative z-3  p-0"
       >
         <div className="container-fluid ">
           <div className="navbar-brand Single-fresh-logo-a ">
@@ -120,7 +112,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                     alt="dialer"
                     style={{ width: "20px", height: "20px" }}
                   />
-                  Get a Call Back
+                <span className="single-fresh-hero-dialer-text"> Get a Call Back</span> 
                 </a>
               </li>
               <li className="nav-item">
@@ -133,7 +125,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                     alt="whatsapp"
                     style={{ width: "20px", height: "20px" }}
                   />
-                  Chat on WhatsApp
+                 <span className="single-fresh-hero-whatsapp-text"> Chat on WhatsApp</span>
                 </a>
               </li>
             </ul>
@@ -189,13 +181,13 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
         {/* Info Boxes */}
         <div className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
-  <div className="single-fresh-hero-icon mx-0 text-white mt-4"    style={{ backgroundColor:'rgb(0 0 0 / 50%', backdropFilter: "blur(3px)",}} >
+  <div className="single-fresh-hero-icon mx-0 mt-4"    >
     {heroData.map((item, index) => (
       <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
         <img
           src={`/img/${item.icon}`}
           alt={item.label}
-          className="img-fluid mb-2"
+          className="img-fluid mb-2 Single-fresh-info-box-icon"
           style={{ maxWidth: "80px" }}
         />
         <div className="fw-normal mb-1 single-fresh-hero-label">{item.label}</div>
@@ -217,14 +209,14 @@ const FormComponent = () => (
     className="Single-fresh-form rounded shadow-lg text-light"
   >
     <h2
-      className="text-center mb-2 fw-medium"
-      style={{ color: "black", fontSize: "17px" }}
+      className="Single-fresh-form-h2   text-center mb-2 fw-medium"
+    
     >
       Let’s Find Your Dream Home!
     </h2>
     <p
-      className="text-center mb-4"
-      style={{ color: "#333333", fontSize: "14px" }}
+      className="Single-fresh-form-p  text-center mb-4"
+     
     >
       Please fill out the form below, our expert will get back to you soon.
     </p>
@@ -275,8 +267,8 @@ const FormComponent = () => (
 
       <button
         type="submit"
-        className="btn w-100 text-white"
-        style={{ backgroundColor: "#F58220" }}
+        className="Single-fresh-form-btn btn w-100 "
+      
       >
         Reserve Your Spot
       </button>
