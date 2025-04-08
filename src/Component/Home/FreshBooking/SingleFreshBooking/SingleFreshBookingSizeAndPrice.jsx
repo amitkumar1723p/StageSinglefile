@@ -45,7 +45,7 @@ export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}
       <div className="single-fresh-booking-chart-container bg-white d-flex py-3 justify-content-center align-items-center min-vh-80"  >
         <div className="container ">
           <h3 className="mb-2 mt-3   Single-fresh-Size-Price">How Much</h3>
-          <h3 className=" fw-bold  mb-3 Single-fresh-Size-Price-heading " style={{color: '#1D3557'}}>{project?.projectName} Size And Price</h3>
+          <h3 className=" fw-bold  mb-3 Single-fresh-Size-Price-heading " >{project?.projectName} Size And Price</h3>
          
 <table className="single-freshbooking-price-custom-table">
   <thead>

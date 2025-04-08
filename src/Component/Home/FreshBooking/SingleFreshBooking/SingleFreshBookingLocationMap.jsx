@@ -6,8 +6,9 @@ export default function SingleFreshBookingLocationMap({project ,
     sendDataToChild,projectLocation,
     LocationImageContent
   }) {
+   const [zoomedImage, setZoomedImage] = useState(null);
 
-console.log(projectLocation,"jk")
+// console.log(projectLocation,"jk")
 
   const [selectedCategory, setSelectedCategory] = useState("conectivityLocation");
 
@@ -86,13 +87,23 @@ useEffect(()=>{
             <img
               // style={{ transform: "scale(0.7)" }}
               src={LocationImageContent?.url}
-              className="img-fluid rounded shadow"
+              onClick={() => setZoomedImage(LocationImageContent?.url)}
+              className="img-fluid rounded shadow" style={{height: '100%' , cursor: 'pointer'}}
               alt="map img"
             />
           </div>
         </div>
       </div>
-
+      {zoomedImage && (
+      <div className="zoom-overlay">
+        <div className="zoom-content">
+          <img src={zoomedImage} alt="Zoomed" className="zoomed-image" />
+          <button onClick={() => setZoomedImage(null)} className="close-zoom-button">
+            ✕ 
+          </button>
+        </div>
+      </div>   
+    )}
       <div className="single-fresh-booking-sitemap-container w-100  m-auto" style={{backgroundColor:'#F7F7F7'}}>
 
       <div className="container mt-2 mb-2 ">
@@ -103,11 +114,12 @@ useEffect(()=>{
       </div>
       <div
         className="overflow-hidden d-flex align-items-center justify-content-center"
-        style={{ maxHeight: "500px", width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
+        style={{  width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
       >
         <img
           src={siteMapContent?.url}
           alt="site map"
+        
           className="img-fluid w-100 h-100 rounded shadow"
           style={{ objectFit: "cover" }}
         />
@@ -115,7 +127,6 @@ useEffect(()=>{
 
       </div>
 
-      
 
 
       {/* <div className="container-fluid p-0">

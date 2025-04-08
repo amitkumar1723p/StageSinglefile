@@ -61,7 +61,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
       <div
         className="position-relative"
         style={{
-          height: "92vh",
+          height: "100vh",
           backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -224,7 +224,7 @@ const FormComponent = () => (
     <div className="d-flex flex-column gap-3">
       <div className="position-relative">
         <img
-          src="/img/Single-fresh-user.svg"
+          src="/img/mdi_user.svg"
           alt="user-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
@@ -238,7 +238,7 @@ const FormComponent = () => (
 
       <div className="position-relative">
         <img
-          src="/img/Single-main-email.svg"
+          src="/img/ic_baseline-email.svg"
           alt="email-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
@@ -252,7 +252,7 @@ const FormComponent = () => (
 
       <div className="position-relative">
         <img
-          src="/img/Single-fresh-call.svg"
+          src="/img/ic_baseline-phone.svg"
           alt="call-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />

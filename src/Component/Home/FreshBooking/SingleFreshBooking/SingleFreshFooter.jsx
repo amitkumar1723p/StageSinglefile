@@ -8,8 +8,8 @@ export default function SingleFreshFooter({project, projectLogoContent}) {
         <div className='mb-4'>
         <img src={`${projectLogoContent?.url}`} alt="" style={{width:"220px"}} /></div>
         <h3 className=" fw-bold mb-4">For an Enquiry <span className=""><img src="/img/for-enquiry.png" alt="" /></span></h3>
-        <p className="mt-2  fw-medium" style={{fontSize:'23px'}}>   <img src="/img/hero-dialer.png" alt="dialer"  style={{ width: '20px', height: '20px'  }} /> Call : 7837840785</p>
-        <p className="mt-2 fw-medium" style={{fontSize:'23px'}}> <img src="/img/hero-whatsapp.png" alt="whatsapp" style={{ width: '20px', height: '20px' }} /> Chat on WhatsApp</p>
+        <p className="mt-2  fw-medium" style={{fontSize:'23px'}}>   <img src="/img/hero-dialer-white.svg" alt="dialer"  style={{ width: '20px', height: '20px'  }} /> Call : 7837840785</p>
+        <p className="mt-2 fw-medium" style={{fontSize:'23px'}}> <img src="/img/hero-whatsapp-white.svg" alt="whatsapp" style={{ width: '20px', height: '20px' }} /> Chat on WhatsApp</p>
       </div>
       <div className="col-md-4  text-md-left mb-4 mb-md-0">
         <h2 className="font-weight-bold  mb-4">{project?.projectName}</h2>
@@ -42,14 +42,14 @@ export default function SingleFreshFooter({project, projectLogoContent}) {
           <p className="text-center mb-4 fw-bold" style={{ color: '#333', fontSize: '17px'}}>{project?.projectName}</p>
           <div className="d-flex flex-column gap-2">
           <div className="position-relative">
-        <img src="/img/Single-fresh-user.svg" alt=""  className='position-absolute top-50 start-0 translate-middle-y ms-2'/>
-      <input type="text" className="Single-fresh-form-input border-2 ps-5 w-100" placeholder="Your Full Name" required />
+        <img src="/img/mdi_user-blue.svg" alt=""  className='position-absolute top-50 start-0 translate-middle-y ms-2'/>
+      <input type="text" className="Single-fresh-footer-form-input border-2 ps-5 w-100" placeholder="Your Full Name" required />
     </div>
     <div className="position-relative">
-     <img src="/img/Single-fresh-call.svg" alt=""  className='position-absolute top-50 start-0 translate-middle-y ms-2'/>
-      <input type="tel" className="Single-fresh-form-input border-2 ps-5 w-100" placeholder="Your Number" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" />
+     <img src="/img/ic_baseline-phone-blue.svg" alt=""  className='position-absolute top-50 start-0 translate-middle-y ms-2'/>
+      <input type="tel" className="Single-fresh-footer-form-input border-2 ps-5 w-100" placeholder="Your Number" required pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" />
     </div>
-    <textarea className="Single-fresh-form-input" id="message" placeholder="Write Message..."></textarea>
+    <textarea className="Single-fresh-footer-form-input" id="message" placeholder="Write Message..."></textarea>
     <div className="position-relative">
     <button type="submit" className="btn w-100 fw-medium single-fresh-booking-footer-form-btn" >Submit</button>
     </div>

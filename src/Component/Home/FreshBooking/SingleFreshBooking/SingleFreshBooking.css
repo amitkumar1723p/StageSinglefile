@@ -526,6 +526,10 @@ background-color: rgb(0 0 0 / 50%);
   font-size: 1rem;
 }
 
+.Single-fresh-form-input::placeholder {
+  color: grey;
+}
+
 .Single-fresh-form-input:focus {
   border-color: var(--main-single-fresh-booking-btn-clr);
   box-shadow: 0 0 5px rgba(245, 130, 32, 0.5);
@@ -631,7 +635,7 @@ background-color: rgb(0 0 0 / 50%);
 }
 
 .Single-fresh-amenities {
-  color: #0066CC;
+  color: var(--main-property-name-clr)
 }
 
 .single-fresh-booking-about-card-image-container{
@@ -756,6 +760,23 @@ background-color: rgb(0 0 0 / 50%);
   z-index: 10;
 }
 
+.Single-fresh-footer-form-input {
+  padding: 5px;
+  border: 2px solid lightgrey;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.Single-fresh-footer-form-input::placeholder {
+  color: grey;
+}
+
+.Single-fresh-footer-form-input:focus {
+  border-color: var(--main-single-fresh-booking-btn-clr);
+  box-shadow: 0 0 5px rgba(245, 130, 32, 0.5);
+  outline: none;
+}
+
 .single-fresh-button:hover {
   background: rgba(229, 229, 229, 0.5);
 }
@@ -843,6 +864,7 @@ background-color: rgb(0 0 0 / 50%);
   aspect-ratio: 4/3;
   object-fit: cover;
   background-color: #f8f9fa;
+  cursor: pointer;
 }
 
 .single-fresh-heading {
@@ -901,6 +923,12 @@ background-color: rgb(0 0 0 / 50%);
   cursor: pointer;
   z-index: 10000;
 }
+
+
+.freshbooking-location-image-container {
+  height: 500px;
+}
+
 
 @media(max-width:1024px){
   .single-fresh-booking-amenities{
@@ -1193,8 +1221,12 @@ background-color: rgb(0 0 0 / 50%);
     font-size: 14px;
   }
 
-  .Single-fresh-highlight-list {
-    font-size: 12px;
+  .Single-fresh-about-project-list {
+    font-size: 16px;
+  }
+
+  .Single-fresh-about-project-list-li {
+    font-size: 16px
   }
 
   .Single-fresh-unit-main {
