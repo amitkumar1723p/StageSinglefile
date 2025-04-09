@@ -92,45 +92,49 @@ dispatch(getAllFreshProjectAction())
      
 
     
-        useEffect(() => {
-          const container = containerRef.current;
-          let scrollAmount = 0;
+      useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
       
-          const scroll = () => {
-            if (!container) return;
-            container.scrollLeft += 1; // scroll 1px
-            scrollAmount += .5;
+        let scrollAmount = 0;
+        let animationFrameId;
       
-            // Reset scroll to beginning when it reaches end
-            if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
-              container.scrollLeft = 0;
-              scrollAmount = 0;
-            }
+        const scroll = () => {
+          container.scrollLeft += 1;
+          scrollAmount += 0.1;
       
-            requestAnimationFrame(scroll);
-          };
-
-
+          if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+            container.scrollLeft = 0;
+            scrollAmount = 0;
+          }
       
-          scroll(); // start scrolling
-        }, []);
-        
+          animationFrameId = requestAnimationFrame(scroll);
+        };
+      
+        scroll(); // start scrolling
+      
+        return () => cancelAnimationFrame(animationFrameId); // cleanup
+      }, []);
+      
         
         
     
 
   return (
 
-    <div   className='freshbooking-home-main-container d-flex flex-column gap-4'>
-      <div className='d-md-flex justify-content-between m-auto ' style={{width:'90%'}}>
-        <div className='mb-2' >
+    <div   className='freshbooking-home-main-container d-flex flex-column '>
+      <div className='fresh-booking-home-upper-container d-md-flex justify-content-between m-auto ' >
+        <div className='fresh-booking-home-headings mb-2' >
           <h2 className='' style={{ fontWeight:'700', color:'rgba(51, 51, 51, 1)'}}>Discover Your Perfect Home!</h2>
           <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
         </div>
-        <div className=' ' style={{minWidth:'202px'}}>
-        <button className=" d-flex justify-content-center align-content-center gap-2   " onClick={()=>{navigate('/fresh-bookings2', { state: {allCardData:allFreshBookingCard} } )}} style={{padding:'10px 16px', borderRadius:'100px',backgroundColor:'white' , border:'1px solid #afb8c0 '}} >
-                  <span className="fs-6 fw-semibold lh-base " style={{color:'var(--main-light-clr)'}} ><p>View All Properties<img src="/img/right-arrow.svg" alt="" /> </p> </span>
-                </button>
+        <div className='freshbooking-home-button-container d-flex align-items-center ' >
+        <button onClick={()=>{navigate('/fresh-bookings2', { state: {allCardData:allFreshBookingCard} } )}} class="freshbooking-home-button fresh-booking-view-more-more">
+  <span class="fresh-booking-button-circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+  <span class="fresh-booking-button-text">View All Properties</span>
+</button>
         </div>
       </div>
       <div className='fresh-booking-card-and-button-container d-flex justify-content-between align-items-center position-relative'>

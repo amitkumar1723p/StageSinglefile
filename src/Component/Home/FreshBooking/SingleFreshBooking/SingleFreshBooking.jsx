@@ -110,8 +110,6 @@ console.log(projectAboutBuilder?.projectAboutBuilderName,"pop")
       
       <SingleFreshFooter   projectLogoContent= {projectLogoImage} project={projectBasicDetail}/>
       
-
-
     </div>
   )
 }

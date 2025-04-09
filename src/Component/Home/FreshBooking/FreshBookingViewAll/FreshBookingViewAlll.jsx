@@ -180,11 +180,11 @@ const HandleFreshbookingUrl = (projectName)=>{
 <div className='freshbooking-view-alll-main-container  w-100 m-auto pb-4'>
 <div className={`freshbooking-view-alll-card-container m-auto`}  >
 {cardData?.map((cardData,index) => (
-      <div className="fresh-booking-view-alll-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover',boxShadow: '6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
+      <div data-aos="zoom-in"  data-aos-duration="600" data-aos-once="true" className="fresh-booking-view-alll-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover',boxShadow: '6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
         <div className='fresh-booking-view-alll-card-shadow d-flex w-100 h-100 align-items-end overflow-hidden '>
           <div className="fresh-booking-view-alll-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgba(255, 255, 255, 1)', padding:'4px 12px 12px 12px', position:'absolute' }} >
             <div  className="fresh-booking-view-alll-card-upper-content d-flex flex-column gap-1 w-100 h-50  pb-2" >
-              <div className="fresh-booking-view-alll-card-price w-100 h-50 fs-5   overflow-hidden text-nowrap text-truncate" style={{ color: 'rgba(30, 144, 255, 1)' }} >₹ <span className='fw-bold fs-6'>{cardData?.projectBasicDetail?.minPrice} Cr</span> </div>
+              <div  className="fresh-booking-view-alll-card-price w-100 h-50 fs-5   overflow-hidden text-nowrap text-truncate" style={{ color: 'rgba(0, 102, 204, 1)' }} >₹ <span className='fw-bold fs-6'>{cardData?.projectBasicDetail?.minPrice} Cr</span> </div>
               <div  className="fresh-booking-view-alll-card-projectname w-100 g-50 fw-bold fs-5 overflow-hidden text-nowrap text-truncate" style={{color:'rgba(51, 51, 51, 1)'}}>{cardData?.projectBasicDetail?.projectName}</div>
               <div className="fresh-booking-view-alll-card-location w-100  fw-normal overflow-hidden text-nowrap text-truncate" style={{color:'rgba(51, 51, 51, 1)'}} >{cardData?.projectBasicDetail?.locality}, {cardData?.projectBasicDetail?.projectCity}</div>
               <div className="fresh-booking-view-alll-card-amanities w-100  overflow-hidden text-nowrap text-truncate  "  style={{ fontWeight: "600", fontSize:'14px',color:'rgba(51, 51, 51, 1)' }}>{cardData?.projectBasicDetail?.projectType} {cardData?.projectBasicDetail?.projectAdType}</div>

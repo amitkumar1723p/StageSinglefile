@@ -207,7 +207,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 // ✅ Extracted Form Component - Used in both Popup & Large Screen
 const FormComponent = () => (
   <form
-    className="Single-fresh-form rounded shadow-lg text-light"
+    className="Single-fresh-form rounded shadow-lg text-light overflow-hidden"
   >
     <h2
      data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"

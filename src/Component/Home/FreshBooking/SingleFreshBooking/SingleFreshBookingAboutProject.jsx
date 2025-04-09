@@ -5,13 +5,7 @@ import 'aos/dist/aos.css';
 import { useState , useEffect } from 'react'
 export default function SingleFreshBookingAboutProject({projectHightlight , highlightContent, aboutContent , aboutImage , project}) {
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000, // animation duration in ms
-      once: true, // whether animation should happen only once
-    });
-  }, []);
-  console.log(highlightContent,"k;po")
+
   return (
     <>
     <div className='about-project-container'>

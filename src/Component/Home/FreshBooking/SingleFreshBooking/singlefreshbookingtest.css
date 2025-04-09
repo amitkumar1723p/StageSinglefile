@@ -85,7 +85,7 @@ width: 40%;
       width: 22px;
    }
   &:hover{
-      background-color:  rgba(30, 144, 255, 1);
+      background-color:  rgba(0, 102, 204, 1);
       color: rgb(255, 255, 255);
       
   }
