@@ -112,7 +112,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar" ref={NavbarRef}>
+      <nav className="navbar" >
 
         <div className="navbar-container">
           <div className="d-flex logo-nav-bar">

@@ -514,3 +514,36 @@ return{}
       };
   }
 }
+
+// get owner contact number 
+
+export const getViewOwnerDetailsActionReducer=(state={},action)=>{
+  switch(action.type){
+    case "ViewOwnerDetailsRequest":
+      return {
+        ...state,
+        loading: true,
+      }
+    case"ViewOwnerDetailsRequestSuccess":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+
+    case"ViewOwnerDetailsRequestFail":
+    return {
+      ...state,
+      data: action.payload,
+      loading: false,
+    };
+
+    case"ViewOwnerDetailsRequestFailClear":
+return{}
+    default:
+      return{
+        ...state,
+      };
+  }
+}

@@ -264,6 +264,9 @@ const AllPostSearchFilter = () => {
 
           <div>
             <HeaderCard />
+            {/* <div>
+              <img src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
+            </div> */}
             <div className="filter-home-card">
               <div className='total-post-length-container'>
                 <p className='total-post-lable-allpost'>

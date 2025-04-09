@@ -338,7 +338,7 @@
 
 .form-heading-name {
   color: #333;
-
+width: 80%;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -365,6 +365,7 @@
   outline: 2px dashed black;
   height: fit-content;
   width: fit-content;
+  width: 27%;
 }
 .prop-id-from {
   color: rgba(58, 58, 58, 1);
@@ -542,6 +543,10 @@
 
 @media(max-width:480px){
 
+  .make-offer-property-id{
+    width: fit-content;
+  }
+
   .main-box-content{
     padding: 10px;
   }
@@ -559,14 +564,12 @@
     width: 100%;
   }
 
-
-
-
   .price-que-form{
     font-size: 14px;
   }
   .form-heading-name{
     font-size: 16px;
+    width: 100%;
   }
   .highest-price-text{
     p{

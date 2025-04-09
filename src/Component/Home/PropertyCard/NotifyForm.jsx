@@ -30,14 +30,14 @@ const NotifyForm = ({ SetShow }) => {
       
     };
     if( querry.get("ProjectName")) {
-      NotifyDataObj.ProjectName= querry.get("ProjectName")
+      NotifyDataObj.ProjectName= querry.get("ProjectName")?.replaceAll("-"," ")
     }else if( querry.get("locality")){
-      NotifyDataObj.Locality= querry.get("locality")
+      NotifyDataObj.Locality= querry.get("locality")?.replaceAll("-"," ")
     }else if(querry.get("sector")){
-      NotifyDataObj.Landmark= querry.get("sector")
+      NotifyDataObj.Landmark= querry.get("sector")?.replaceAll("-"," ")
     }
     else{
-      NotifyDataObj.City=querry.get("city")
+      NotifyDataObj.City=querry.get("city")?.replaceAll("-"," ")
     }
     dispatch(NotifyAction(NotifyDataObj));
   };

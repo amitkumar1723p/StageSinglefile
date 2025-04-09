@@ -22,7 +22,7 @@ const AllPostSearchFilter = () => {
   const { setRedirectPathIsHomeCard } = useContext(UserContext);
 
   const { data } = useSelector((state) => state.GetAllPost);
-
+   
 
   // Fetch single project data if ProjectName is available in URL
   useEffect(() => {
@@ -147,10 +147,10 @@ useEffect(() => {
                     City: searchParams.get("city")?.replaceAll("-"," ") ,
                     Sector: searchParams.get("sector"),
                     Locality:searchParams.get("locality"),
-                    BHK: "",
-                    ApartmentType: "",
-                    PropertyStatus: undefined,
-                    Furnishing: "",
+                     
+                     
+                    
+                     
                   })
                 );
                 setFilter({});
@@ -286,6 +286,13 @@ useEffect(() => {
 
           <div>
             <HeaderCard />
+            {
+              searchParams.get("PropertyAddType") =="Sale" && <div className="header-img-section">
+              <img className="header-img-section-img"  src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
+            </div>
+            }
+             
+
             <div className="filter-home-card">
               <div className='total-post-length-container'>
                 <p className='total-post-lable-allpost'>

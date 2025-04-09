@@ -13,7 +13,9 @@
   margin-bottom: 1rem;
 }
 
-
+.owner-user-blocked{
+  color: red !important;
+}
 
 .filter-item {
   /* padding: 0.5rem 1rem; */
@@ -115,4 +117,21 @@
   color: #9e9090;
 }
 
+
+/* Agent user Response Action CSSS */
+.agentuserName {
+  width: 30%;
+}
+.agentuserContact{
+  width: 14%;
+}
+.userDetail{
+  width:0%;
+}
+.singleUser_mainbtn{
+  background-color: #a9a9a926;
+}
+.activebtn{
+  color: #9e9090;
+}
 

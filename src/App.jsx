@@ -265,13 +265,13 @@ function App() {
 
         dispatch({ type: "UserClear" });
       }
-   
-      
 
-      if (data.success === false &&["VerifyUserOtpRequest"].includes(LodingType)) {
+
+
+      if (data.success === false && ["VerifyUserOtpRequest"].includes(LodingType)) {
         dispatch({ type: "UserClear" });
         setalertShow(false);
-      } else{
+      } else {
         if (data.success === false) {
           if (data.fielderrors) {
             setalertMessage(
@@ -287,10 +287,16 @@ function App() {
           dispatch({ type: "UserClear" });
         }
       }
-     
- 
-    // eslint-disable-next-line
-}}, [data]);
+
+      if (data?.isBlockedUser == true ) {
+        dispatch(LogoutAction())
+        navigate("/")
+      }
+
+
+      // eslint-disable-next-line
+    }
+  }, [data]);
 
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
@@ -453,11 +459,13 @@ function App() {
       if (LoginUserPostData.success === false) {
         if (LoginUserPostData.IsAuthenticated === false) {
           navigate("/");
-          // setTimeout(() => {
-
-          //   navigate("/login")
-          // }, 0);
         }
+
+        if (LoginUserPostData?.isBlockedUser == true) {
+          dispatch(LogoutAction())
+          navigate("/")
+        }
+
         setalertMessage(<p>{LoginUserPostData.message}</p>);
         setalertType("error");
         setalertShow(true);
@@ -473,6 +481,10 @@ function App() {
       if (TenentResponseData.success === false) {
         if (TenentResponseData.IsAuthenticated === false) {
           navigate("/");
+        }
+        if (TenentResponseData?.isBlockedUser == true) {
+          dispatch(LogoutAction())
+          navigate("/")
         }
         setalertMessage(<p>{TenentResponseData.message}</p>);
         setalertType("error");
@@ -531,7 +543,7 @@ function App() {
         if (AssignPostData.AdminVerify === false) {
           navigate("/");
           dispatch(LogoutAction());
-        }
+        } 
         if (AssignPostData.IsAuthenticated === false) {
           navigate("/");
         }
@@ -572,10 +584,16 @@ function App() {
       if (MyVisitsData.success === false) {
         if (MyVisitsData.IsAuthenticated === false) {
           navigate("/");
+
           // setTimeout(() => {
 
           //   navigate("/login")
           // }, 0);
+        }
+
+        if (MyVisitsData?.isBlockedUser == true) {
+          dispatch(LogoutAction())
+          navigate("/")
         }
         setalertMessage(<p>{MyVisitsData.message}</p>);
         setalertType("error");
@@ -592,6 +610,10 @@ function App() {
       if (OwnerPostsVisitsData.success === false) {
         if (OwnerPostsVisitsData.IsAuthenticated === false) {
           navigate("/");
+        }
+        if (OwnerPostsVisitsData?.isBlockedUser == true) {
+          dispatch(LogoutAction())
+          navigate("/")
         }
         setalertMessage(<p>{OwnerPostsVisitsData.message}</p>);
         setalertType("error");
@@ -836,17 +858,24 @@ function App() {
   }, [alertType, alertMessage, alertshow]);
   useEffect(() => {
     dispatch(GetMeDetailsAction());
+        console.log(medata)
+   
   }, []);
-
+ console.log(medata)
+   useEffect(()=>{
+    if(medata?.isBlockedUser==true){
+      dispatch(LogoutAction())
+    } 
+   } ,[medata])
   return (
     <>
       {/* <PinnacleSms /> */}
       {
        
       }
-      { !["/login" ,"/nri/login"].includes(location.pathname) && <>   <Navbar /></>}
+       
     
-
+      <Navbar />
       {alertData && alertData.AlertShow === true && (
         <Alert
           AlertType={alertData.AlertType}
@@ -1002,7 +1031,6 @@ function App() {
               <AdminOwnerRoutes Component={OwnerAgentExcel} />
             }
           />
-
           <Route
             exact
             path="single-user-Response-action/:id"
@@ -1155,13 +1183,12 @@ function App() {
         <Route path={"/all-post/:type"} element={<AllPostRender />} />
         <Route path="*" element={<PageNotFound />} />
 
-     
 
 
       </Routes> 
-      {!["/login" ,"/nri/login"].includes(location.pathname) && <>   <Footer /></>}
+       
     
-     
+      <Footer />
     </>
   );
 }

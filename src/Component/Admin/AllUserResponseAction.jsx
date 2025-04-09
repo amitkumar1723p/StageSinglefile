@@ -40,7 +40,10 @@ export default function AllUserResponseAction() {
 
       setSearchbtn(false)
     }
-
+// for localstaorage
+    // useEffect(() => {
+    //   localStorage.setItem('items', JSON.stringify(items));
+    // }, [items]);
 
 
   }, [page, searchText, searchbtn]);
@@ -79,9 +82,9 @@ export default function AllUserResponseAction() {
     setSearchbtn(true)
     // For example, log the search text
   };
-
   return (
     <>
+
       <div className="border border-primary border-opacity-25 ">
         <div className="d-flex justify-content-between">
           <div className="">
@@ -104,17 +107,18 @@ export default function AllUserResponseAction() {
         <div className="container-fluid d-flex flex-column  gap-3 rounded">
 
 
-          {AllUserResponseAction_Store?.data?.map((item) => {
+          {AllUserResponseAction_Store?.data[0]?.users?.map((item) => {
+          
             return (
 
               <div className=" main-box-all-response-section all-response-section-admin  d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2 rounded w-fit d-flex justify-content-center align-items-center">
 
                 <div className="userName border-end border-primary px-2  border-opacity-25">
                   <div className="">
-                    <p className="All-response-common-section  ">{item?.Name}- <small className="fw-light">( {item?.Role})</small></p>
+                    <p className="All-response-common-section  ">{item?.Name} {item?.LastName} - <small className="fw-light">( {item?.Role})</small></p>
                     {/* <small className="fw-light">{item?.email}</small> */}
                     <small className="">
-                      {item?.latestCreateAt ? FormatDate(item.latestCreateAt) : 'N/A'}
+                      {item?.latestCreateAt ? FormatDate(item?.latestCreateAt) : 'N/A'}
                     </small>
                   </div>
                 </div>
@@ -127,13 +131,23 @@ export default function AllUserResponseAction() {
 
                   </p>
                 </div>
-
                 <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
                   <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
-                    Requirement : &nbsp; <small className="fw-bold">{item?.requireData?.length}</small>
+
+                    Lisitng : &nbsp; <small className="fw-bold">{item?.postData?.length}</small>
 
                   </p>
                 </div>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" all-response-data-section d-flex justify-content-center align-items-center ">Schedule :  &nbsp; <small className="fw-bold">  {item?.scheduleData?.length} </small> </p>
+                </div>
+
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Offer Data : &nbsp; <small className="fw-bold"> {item?.offerData?.length}</small></p>
+                </div>
+
+
+
                 <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
                   <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
                     Notify:&nbsp; <small className="fw-bold">{item?.notifyData?.length}</small>
@@ -142,19 +156,13 @@ export default function AllUserResponseAction() {
                 </div>
                 <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
                   <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
-
-                    Lisitng : &nbsp; <small className="fw-bold">{item?.postData?.length}</small>
+                    Requirement : &nbsp; <small className="fw-bold">{item?.requireData?.length}</small>
 
                   </p>
                 </div>
+            
+                
 
-
-                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" all-response-data-section d-flex justify-content-center align-items-center ">Schedule :  &nbsp; <small className="fw-bold">  {item?.scheduleData?.length} </small> </p>
-                </div>
-                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Offer Data : &nbsp; <small className="fw-bold"> {item?.offerData?.length}</small></p>
-                </div>
 
                 {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
 

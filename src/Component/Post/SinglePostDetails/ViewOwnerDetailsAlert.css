@@ -72,6 +72,9 @@
   color: #3b82f6;
   font-weight: 500;
 }
+.view-owner-details-desclaimer{
+  font-weight: 700;
+}
 
 /* Call-to-action Button */
 .cta-btn-container {

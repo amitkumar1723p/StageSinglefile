@@ -21,29 +21,27 @@ export default function AllPost({
   OwnerPostsPageNo,
   setOwnerPostsPageNo,
   MarkUpdatedPost,
-  page  , //owner all post page
-  setPage // onwer all post setpage
+  page, //owner all post page
+  setPage, // onwer all post setpage
+
+  OwnerPosts,
+  setOwnerPosts, // show post for owner
 }) {
   const dispatch = useDispatch();
   const { postVerify, allPropertyData, setPostVerify, NavbarRef } =
     useContext(UserContext);
-  // console.log(postVerify,"page all post")
-  // console.log(postPerPage)
-  const [OwnerPosts, setOwnerPosts] = useState([]);
+
   const { loading, data } = useSelector((state) => state.AdminGetAllPost);
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
 
-   
   // Pagination logic state
   // const [page, setPage] = useState(OwnerPostsPageNo); // Current page for pagination   ( this state paste AdminAgenOwnerPost.jsx)
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const itemsPerPage = postPerPage; // Number of items per page
   const [querry, setquerry] = useSearchParams();
   // Create a URLSearchParams object from the query string (search part of the URL)
-  console.log(itemsPerPage ,"itemperpage")
-  
 
   useEffect(() => {
     if (activeFilter !== null && postVerify !== null) {
@@ -145,9 +143,35 @@ export default function AllPost({
       const endIndex = page * itemsPerPage;
       // console.log("filter post ",filteredPosts)
       const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
-     console.log(postsToDisplay)
-       console.log(postsToDisplay)
       setOwnerPosts(postsToDisplay); // Set the current page posts
+
+
+
+
+//  Select All Post 
+
+let PosttoDisplay = postsToDisplay?.map((post) => {
+  return {
+    PostId: post?._id,
+    CreatedBy: medata?.user?._id,
+  };
+});
+
+if (selectAll === true) {
+  let AllSelectedProperty = [...PosttoDisplay, ...AssignProperty];
+    
+
+  // Remove duplicates by keeping the latest entry based on PostId
+  const uniqueData = Array.from(
+    new Map(AllSelectedProperty.map((item) => [item.PostId, item])).values()
+  );
+  if (SearchPostId.length > 0) {
+    setAssignProperty(uniqueData);
+  } else {
+    setAssignProperty(PosttoDisplay);
+  }
+}
+
     }
   }, [
     data,
@@ -159,6 +183,7 @@ export default function AllPost({
     itemsPerPage,
     allPropertyData,
     propertAdType,
+    selectAll,
   ]);
 
   const handlePrevPage = () => {
@@ -177,30 +202,12 @@ export default function AllPost({
     setPage(newPage); // Go to the selected page
   };
 
-  // // this useEffect is used to handle the selectAll functionality
-  // const endIndex = itemsPerPage * page;
-  // const startIndex = endIndex - itemsPerPage;
+  // this useEffect is used to handle the selectAll functionality
+  const endIndex = itemsPerPage * page;
+  const startIndex = endIndex - itemsPerPage;
   // useEffect(() => {
-  //   if (
-  //     allPropertyData?.Post &&
-  //     Array.isArray(allPropertyData.Post) &&
-  //     selectAll === true
-  //   ) {
-  //     if (selectAll === true) {
-  //       const allAssignData = allPropertyData?.Post?.slice(
-  //         startIndex,
-  //         endIndex
-  //       ).map((post) => {
-  //         // This will log "hello" for each post
-  //         return {
-  //           PostId: post?._id,
-  //           CreatedBy: medata?.user?._id,
-  //         };
-  //       });
-  //       setAssignProperty(allAssignData);
-  //     }
-  //   }
-  // }, [selectAll, OwnerPosts, allPropertyData, startIndex, endIndex, medata]);
+   
+  // }, [selectAll, OwnerPosts]);
 
   //  owner update post scoll to post card ------------------------
   // ( if enable post update right admin this useEffect paste AdminAgentOwner component do not use this useEffect in agent section)
@@ -222,7 +229,6 @@ export default function AllPost({
               selectAllProperty={selectAll}
               page={page}
               itemsPerPage={itemsPerPage}
-
               // required pops owner nativate update post route (show updated post)
               activeFilter={activeFilter}
               SearchPostId={SearchPostId}
@@ -231,7 +237,7 @@ export default function AllPost({
               onPageActive={onPageActive}
               currenSelected={currenSelected}
               MarkUpdatedPost={MarkUpdatedPost}
-              sortOrder ={sortOrder} //sorting
+              sortOrder={sortOrder} //sorting
             />
           ))
         ) : (

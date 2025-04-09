@@ -385,6 +385,11 @@
   color: #fff;
 }
 
+.header-img-section-img{
+  width: 980px;
+  /* height: 75px; */
+}
+
 .filter-home-card{
   
   display: flex;

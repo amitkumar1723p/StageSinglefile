@@ -334,7 +334,7 @@ export default function CreatePostImageUpload({
               />
             </div>
             <p className="upload-image-defaultimage">
-              Please choose defalut image* ( Default will be first )
+            Check the box on an image to make it Property-Profile picture* (By default, the first image will be set as your profile picture)
             </p>
             <div className="showpreviewImage-Container upload-img-section">
               {previewImage.map((image) => {

@@ -161,7 +161,8 @@ export default function LocationDetails({
 
           <div className="next-prev-box">
             {update == true && (
-              <div
+              <div 
+              className="updatebyamdin"
                 onClick={() => {
                   FormSubmitRef?.current?.requestSubmit();
                 }}

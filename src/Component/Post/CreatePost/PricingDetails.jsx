@@ -770,7 +770,9 @@ export default function PricingDetails({
             <div className="next-prev-box">
               <>
               {update == true && (
-              <div
+              <div 
+
+              className="updatebyamdin"
                 onClick={() => {
                   FormSubmitRef?.current?.requestSubmit();
                 }}

@@ -20,7 +20,7 @@ import {
 
 getAllUserResponseActionReducer,
 
-
+getViewOwnerDetailsActionReducer,
 getSingleUserResponseActionReducer
 } from "./Reducer/userReducer.jsx";
 
@@ -96,7 +96,8 @@ const reducer = combineReducers({
   serachResponse:getSerachPropertyReducer,
   AllUserResponseAction_Store:getAllUserResponseActionReducer,
   SingleUserResponseAction_Store:getSingleUserResponseActionReducer,
-  postByAddress:getPostsByAddressReducer
+  postByAddress:getPostsByAddressReducer,
+  ViewOwnerDetailsRequest:getViewOwnerDetailsActionReducer
 });
 
 let initialState = {};

@@ -114,6 +114,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
                         },
                       });
                     }}
+                    selectedDate={ScheduleVistData.VisitDate || ""}
                   />
                 </div>
                 {/* <small>available time 10:00 Am to 7:00 PM</small> */}
@@ -137,6 +138,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
         <ScheduleYourVisitSubmit
           SetShow={SetShow}
           ScheduleVistData={ScheduleVistData}
+         
         />
       )}
     </>

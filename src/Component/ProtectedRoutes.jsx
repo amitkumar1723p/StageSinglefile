@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Loader from "./Loader/Loader";
-import { GetMeDetailsAction } from "../Action/userAction";
+import { GetMeDetailsAction, LogoutAction } from "../Action/userAction";
 export default function ProtectedRoutes({ Component }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,9 +20,9 @@ export default function ProtectedRoutes({ Component }) {
   });
   useEffect(() => {
     if (medata) {
+
       // if (medata.IsAuthenticated == false ||   medata.user?.Role !== "User") {
-      if (
-        medata.IsAuthenticated == false ||
+      if (medata?.IsAuthenticated == false ||
         ![
           "Buyer",
           "Tenant",
@@ -33,6 +33,14 @@ export default function ProtectedRoutes({ Component }) {
       ) {
         navigate("/");
       }
+
+      
+      if (medata?.isBlockedUser == true) {
+        dispatch(LogoutAction());
+        navigate("/");
+
+      }
+
     }
 
     // eslint-disable-next-line
@@ -47,15 +55,15 @@ export default function ProtectedRoutes({ Component }) {
           {" "}
           {medata &&
             (medata.IsAuthenticated === false ||
-            // (medata.user && medata.user.Role !== "User") ? (
-            (medata.user &&
-              ![
-                "Buyer",
-                "Tenant",
-                "Property Owner",
-                "Channel Partner",
-                "NRI",
-              ].includes(medata.user.Role)) ? (
+              // (medata.user && medata.user.Role !== "User") ? (
+              (medata.user &&
+                ![
+                  "Buyer",
+                  "Tenant",
+                  "Property Owner",
+                  "Channel Partner",
+                  "NRI",
+                ].includes(medata.user.Role)) ? (
               <Navigate to={"/"} />
             ) : (
               <Component />

@@ -6,6 +6,7 @@ import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
   changePropertyStatus,
+  DeleteAndRestorePostAction,
   GetAllAssignProperty,
   GetAllScheduleVisitsAndMakeOffer_Length,
 } from "../../Action/postAction";
@@ -45,7 +46,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
-   console.log("AssignProperty",AssignProperty)
+  console.log("AssignProperty", AssignProperty);
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -64,12 +65,12 @@ export default function AdminAgentOwnerPost() {
   const [page, setPage] = useState(1); //  Current page for pagination   for ownerpost (all post.jsx)
   const [UpdatePostNavigationData, setUpdatePostNavigationData] =
     useState(undefined);
-
+  const [OwnerPosts, setOwnerPosts] = useState([]); // show post for owner
   const allPostFilterBoxRef = useRef(null); // store post filter box
   const {
     data: adminAlertData,
     LodingType,
-    loading: PostVerifyLoding,
+    loading: AlertLoding,
   } = useSelector((state) => {
     return state.Post;
   });
@@ -83,7 +84,11 @@ export default function AdminAgentOwnerPost() {
   //   useContext(UserContext);
   console.log("MarkUpdatePost", MarkUpdatedPost);
   useEffect(() => {
-    if (location?.state && location?.state?.updatePost == true) {
+    if (
+      location?.state &&
+      location?.state?.updatePost == true &&
+      medata.user.Role == "Owner"
+    ) {
       // Set all your state variables as before
       setActive(location?.state?.activeFilter);
       setPageActive(location?.state?.onPageActive);
@@ -397,13 +402,6 @@ export default function AdminAgentOwnerPost() {
     }
   };
 
-  // this is used for empty checked box
-  useEffect(() => {
-    if (!selectAll) {
-      setAssignProperty([]);
-    }
-  }, [selectAll]);
-
   // this fn is used for the updated available or sold out
   const handlePropertyStatus = (value) => {
     const changePropertyStatusData = {
@@ -428,7 +426,21 @@ export default function AdminAgentOwnerPost() {
     <>
       <div className="admin-filter-main-parent-box" ref={allPostFilterBoxRef}>
         <p className="AllListing-admin">
-          {currenSelected} ({currentDataLength})
+          <span>
+            {currenSelected} ({currentDataLength})
+          </span>
+          {medata?.user?.Role == "Owner" && (
+            <>
+            
+              <sapn>
+                {`>`}Selected Post ({AssignProperty.length})
+              </sapn>
+               {AssignProperty.length>0 && <>   <span>
+                {`>`} Display Post ({OwnerPosts.length}) 
+              </span> </>}
+            
+            </>
+          )}
         </p>
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
@@ -544,6 +556,9 @@ export default function AdminAgentOwnerPost() {
               placeholder="Search Here"
               onChange={(e) => {
                 let value = e.target.value;
+                if (selectAll == true) {
+                  setSelectAll(false);
+                }
                 setSearchPostId(value);
               }}
             />
@@ -569,7 +584,27 @@ export default function AdminAgentOwnerPost() {
         <div className="select-section-admin">
           <div
             className="admin-filter-select"
-            onClick={() => setSelectAll((prev) => !prev)}
+            onClick={(e) => {
+              setSelectAll((prev) => !prev);
+              if (e.target.checked == false) {
+                let PosttoDisplay = OwnerPosts?.map((post) => {
+                  return {
+                    PostId: post?._id,
+                    CreatedBy: medata?.user?._id,
+                  };
+                });
+
+                // Filter out posts that are already in PosttoDisplay by comparing PostId
+                let PriviousProperty = AssignProperty.filter((post) => {
+                  return !PosttoDisplay.some(
+                    (item) => item.PostId === post.PostId
+                  );
+                });
+                setAssignProperty(PriviousProperty);
+                // Assuming you want to set the filtered result back to some state or use it
+                // You can replace this with setState or any further action
+              }
+            }}
           >
             <>
               <input
@@ -684,10 +719,40 @@ export default function AdminAgentOwnerPost() {
           >
             Available
           </button>
+          <button
+            disabled={
+              AlertLoding && LodingType === "DeletePostRequest" ? true : false
+            }
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => {
+              if (AssignProperty.length <= 0) {
+                return alert(
+                  "Please select a property to continue with the delete action"
+                );
+              } else {
+                let confrim = window.confirm(
+                  "Are you sure you want to delete this property?"
+                );
+
+                if (confrim == true) {
+                  let getDeletePost = AssignProperty?.map((post) => {
+                    return { PostId: post.PostId };
+                  });
+                  dispatch(
+                    DeleteAndRestorePostAction({
+                      postData: getDeletePost,
+                      Status: "delete",
+                    })
+                  );
+                }
+              }
+            }}
+          >
+            Delete Post
+          </button>
           {/* Display the current status */}
         </div>
       </div>
-      
 
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (
@@ -711,6 +776,8 @@ export default function AdminAgentOwnerPost() {
             page={page}
             setPage={setPage}
             MarkUpdatedPost={MarkUpdatedPost}
+            OwnerPosts={OwnerPosts}
+            setOwnerPosts={setOwnerPosts}
           />
         ) : (
           <AdminAgentAssignPost

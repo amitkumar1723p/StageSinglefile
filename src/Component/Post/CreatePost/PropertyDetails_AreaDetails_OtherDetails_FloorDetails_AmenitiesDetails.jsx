@@ -546,6 +546,8 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
               <>
                 {update == true && (
                   <div
+
+                  className="updatebyamdin"
                     onClick={() => {
                       FormSubmitRef?.current?.requestSubmit();
                     }}
