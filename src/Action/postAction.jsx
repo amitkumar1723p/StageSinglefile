@@ -120,6 +120,7 @@ export const GetAllPostAction = ({
 // Delete Post Action and restore post
 
 export const DeleteAndRestorePostAction = (PostData) => {
+   console.log(PostData)
   return async (dispatch) => {
     try {
       dispatch({

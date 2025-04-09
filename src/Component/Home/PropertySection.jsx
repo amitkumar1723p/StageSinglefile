@@ -45,7 +45,7 @@ const PropertySection = () => {
       const formattedResults = saleProperties.map(post => {
         const { LocationDetails } = post;
         return {
-          area: `${LocationDetails.Landmark}, ${LocationDetails.City}`,
+          area: `${LocationDetails?.Landmark}, ${LocationDetails?.City}`,
           post,
         };
       });

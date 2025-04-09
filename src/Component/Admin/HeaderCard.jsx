@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { DeleteAndRestorePostAction, GetDeletedPostsAction, GetSinglePostAction } from "../../Action/postAction";
+import { GetDeletedPostsAction, GetSinglePostAction } from "../../Action/postAction";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AdminListingCard from "./AdminListingCard";
 import { useDispatch, useSelector } from "react-redux";

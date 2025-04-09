@@ -6,6 +6,7 @@ import {
   Admin_AgentGetAllPostAction,
   Admin_OwnerGetAllPostAction,
   changePropertyStatus,
+  DeleteAndRestorePostAction,
   GetAllAssignProperty,
   GetAllScheduleVisitsAndMakeOffer_Length,
 } from "../../Action/postAction";
@@ -45,6 +46,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
+  console.log("AssignProperty", AssignProperty);
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -61,13 +63,14 @@ export default function AdminAgentOwnerPost() {
   const [PropertyType, setPropertyType] = useState("");
   const [MarkUpdatedPost, setMarkUpdatedPost] = useState("");
   const [page, setPage] = useState(1); //  Current page for pagination   for ownerpost (all post.jsx)
-  const [UpdatePostNavigationData, setUpdatePostNavigationData] =useState(undefined);
-
+  const [UpdatePostNavigationData, setUpdatePostNavigationData] =
+    useState(undefined);
+  const [OwnerPosts, setOwnerPosts] = useState([]); // show post for owner
   const allPostFilterBoxRef = useRef(null); // store post filter box
   const {
     data: adminAlertData,
     LodingType,
-    loading: PostVerifyLoding,
+    loading: AlertLoding,
   } = useSelector((state) => {
     return state.Post;
   });
@@ -81,7 +84,11 @@ export default function AdminAgentOwnerPost() {
   //   useContext(UserContext);
   console.log("MarkUpdatePost", MarkUpdatedPost);
   useEffect(() => {
-    if (location?.state && location?.state?.updatePost == true) {
+    if (
+      location?.state &&
+      location?.state?.updatePost == true &&
+      medata.user.Role == "Owner"
+    ) {
       // Set all your state variables as before
       setActive(location?.state?.activeFilter);
       setPageActive(location?.state?.onPageActive);
@@ -89,14 +96,14 @@ export default function AdminAgentOwnerPost() {
       setSearchPostId(location?.state?.SearchPostId || "");
       setItemsPerPage(location?.state?.postPerPage);
       setPropertyType(location?.state?.propertAdType);
-      setPropertyOrder(location?.state?.sortOrder)
+      setPropertyOrder(location?.state?.sortOrder);
       setPage(location?.state?.pageNo);
       setMarkUpdatedPost(location?.state.PostId);
-      
+
       setTimeout(() => {
         setMarkUpdatedPost("");
       }, 5000);
-  
+
       // Handle query parameters
       if (
         Array.isArray(location?.state?.querry) &&
@@ -109,26 +116,28 @@ export default function AdminAgentOwnerPost() {
             return `${key}=${value}`;
           })
           .join("&");
-  
+
         navigate(`${location.pathname}?${queryString}`, { replace: true });
       } else {
         navigate(location.pathname, { replace: true });
       }
-  
+
       // Improved scroll handling with retry mechanism
       let scrollAttempts = 0;
       const maxAttempts = 10;
-      
+
       const scrollToElement = () => {
         const postCardId = document.getElementById(location?.state.PostId);
-        let allPostFilterBoxHight = allPostFilterBoxRef?.current?.offsetHeight || 0;
+        let allPostFilterBoxHight =
+          allPostFilterBoxRef?.current?.offsetHeight || 0;
         let NavbarHight = NavbarRef?.current?.offsetHeight || 0;
-        
+
         if (postCardId) {
           console.log("Found element:", postCardId.getBoundingClientRect());
-          const elementTop = postCardId.getBoundingClientRect().top + window.scrollY;
+          const elementTop =
+            postCardId.getBoundingClientRect().top + window.scrollY;
           const offset = allPostFilterBoxHight + NavbarHight;
-  
+
           // Add a small delay before scrolling to ensure layout is stable
           setTimeout(() => {
             window.scrollTo({
@@ -136,13 +145,13 @@ export default function AdminAgentOwnerPost() {
               behavior: "smooth",
             });
           }, 100);
-          
+
           return true;
         }
-        
+
         return false;
       };
-      
+
       // First attempt after a short delay to allow for initial render
       setTimeout(() => {
         // Try scrolling
@@ -154,7 +163,7 @@ export default function AdminAgentOwnerPost() {
               clearInterval(scrollInterval);
             }
           }, 500); // Try every 500ms
-          
+
           // Clean up interval after component unmounts or maxAttempts reached
           return () => clearInterval(scrollInterval);
         }
@@ -393,13 +402,6 @@ export default function AdminAgentOwnerPost() {
     }
   };
 
-  // this is used for empty checked box
-  useEffect(() => {
-    if (!selectAll) {
-      setAssignProperty([]);
-    }
-  }, [selectAll]);
-
   // this fn is used for the updated available or sold out
   const handlePropertyStatus = (value) => {
     const changePropertyStatusData = {
@@ -424,7 +426,23 @@ export default function AdminAgentOwnerPost() {
     <>
       <div className="admin-filter-main-parent-box" ref={allPostFilterBoxRef}>
         <p className="AllListing-admin">
-          {currenSelected} ({currentDataLength})
+          <span>
+            {currenSelected} ({currentDataLength})
+          </span>
+          {medata?.user?.Role == "Owner" && (
+            <>
+
+
+
+              <span>
+                {`>`} Display Post ({OwnerPosts.length})
+              </span>
+
+              {AssignProperty.length > 0 && <>   <sapn>
+                {`>`}Selected Post ({AssignProperty.length})
+              </sapn> </>}
+            </>
+          )}
         </p>
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
@@ -449,7 +467,7 @@ export default function AdminAgentOwnerPost() {
                 myQuery === "true" || onPageActive === "true" ? "select" : ""
               }
               onClick={() => handleActive(true, "true")}
-              // className={active == true ? "select" : ""}
+            // className={active == true ? "select" : ""}
             >
               Active
             </button>
@@ -540,6 +558,9 @@ export default function AdminAgentOwnerPost() {
               placeholder="Search Here"
               onChange={(e) => {
                 let value = e.target.value;
+                if (selectAll == true) {
+                  setSelectAll(false);
+                }
                 setSearchPostId(value);
               }}
             />
@@ -565,7 +586,27 @@ export default function AdminAgentOwnerPost() {
         <div className="select-section-admin">
           <div
             className="admin-filter-select"
-            onClick={() => setSelectAll((prev) => !prev)}
+            onClick={(e) => {
+              setSelectAll((prev) => !prev);
+              if (e.target.checked == false) {
+                let PosttoDisplay = OwnerPosts?.map((post) => {
+                  return {
+                    PostId: post?._id,
+                    CreatedBy: medata?.user?._id,
+                  };
+                });
+
+                // Filter out posts that are already in PosttoDisplay by comparing PostId
+                let PriviousProperty = AssignProperty.filter((post) => {
+                  return !PosttoDisplay.some(
+                    (item) => item.PostId === post.PostId
+                  );
+                });
+                setAssignProperty(PriviousProperty);
+                // Assuming you want to set the filtered result back to some state or use it
+                // You can replace this with setState or any further action
+              }
+            }}
           >
             <>
               <input
@@ -680,6 +721,37 @@ export default function AdminAgentOwnerPost() {
           >
             Available
           </button>
+          <button
+            disabled={
+              AlertLoding && LodingType === "DeletePostRequest" ? true : false
+            }
+            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            onClick={() => {
+              if (AssignProperty.length <= 0) {
+                return alert(
+                  "Please select a property to continue with the delete action"
+                );
+              } else {
+                let confrim = window.confirm(
+                  "Are you sure you want to delete this property?"
+                );
+
+                if (confrim == true) {
+                  let getDeletePost = AssignProperty?.map((post) => {
+                    return { PostId: post.PostId };
+                  });
+                  dispatch(
+                    DeleteAndRestorePostAction({
+                      postData: getDeletePost,
+                      Status: "delete",
+                    })
+                  );
+                }
+              }
+            }}
+          >
+            Delete Post
+          </button>
           {/* Display the current status */}
         </div>
       </div>
@@ -706,6 +778,8 @@ export default function AdminAgentOwnerPost() {
             page={page}
             setPage={setPage}
             MarkUpdatedPost={MarkUpdatedPost}
+            OwnerPosts={OwnerPosts}
+            setOwnerPosts={setOwnerPosts}
           />
         ) : (
           <AdminAgentAssignPost

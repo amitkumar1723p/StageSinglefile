@@ -981,7 +981,7 @@ const SingleCard = ({ PostData, index }) => {
                   } ${PostData?.BasicDetails.ApartmentType} In ${
                     PostData?.LocationDetails?.ProjectName
                   } For ${PostData?.BasicDetails.PropertyAdType} In ${
-                    PostData?.LocationDetails.Landmark
+                    PostData?.LocationDetails?.Landmark
                   } ${
                     PostData?.LocationDetails.City
                   }. Could you please share more details?`

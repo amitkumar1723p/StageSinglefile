@@ -119,7 +119,7 @@ export default function AdminListingCard({
           : ""
       }  ${PostData?.BasicDetails?.ApartmentType} For  ${
         PostData?.BasicDetails?.PropertyAdType
-      } In ${PostData?.LocationDetails.Landmark}  ${
+      } In ${PostData?.LocationDetails?.Landmark}  ${
         PostData?.LocationDetails?.City
       }`
     );
@@ -186,6 +186,7 @@ export default function AdminListingCard({
     return index === 0;
   };
 
+   
   return (
     <div className="Admin-property-post-card-main-box" id={PostData?._id} style={{outline:MarkUpdatedPost ==PostData._id ?"1px solid red":""}}>
       <div className="Admin-property-post-card-main">
@@ -197,13 +198,13 @@ export default function AdminListingCard({
                   <label>
                     <input
                       type="checkbox"
-                      checked={isChecked(index)}
-                      // checked={
-                      //   selectAllProperty ||
-                      //   AssignProperty.some(
-                      //     (item) => item.PostId === PostData?._id
-                      //   )
-                      // }
+                      // checked={isChecked(index)}
+                      checked={
+                        // selectAllProperty ||
+                        AssignProperty.some(
+                          (item) => item.PostId === PostData?._id
+                        )
+                      }
                     />
                   </label>
                 </div>
@@ -310,7 +311,8 @@ export default function AdminListingCard({
                                     if (confirm) {
                                       dispatch(
                                         DeleteAndRestorePostAction({
-                                          postId: PostData?._id,
+                                          // postId: PostData?._id,
+                                          postData:[{PostId:PostData?._id}] ,
                                           Status: "restore",
                                         })
                                       );
@@ -395,7 +397,7 @@ export default function AdminListingCard({
                                   if (confrim) {
                                     dispatch(
                                       DeleteAndRestorePostAction({
-                                        postId: PostData?._id,
+                                        postData:[{PostId:PostData?._id}] ,
                                         Status: "delete",
                                       })
                                     );
@@ -573,7 +575,7 @@ export default function AdminListingCard({
                     <div className="user-name-contact">
                       <span>Posted by : </span>
 
-                      <span>{PostData?.CreatePostUser?.Name}</span>
+                      <span>{PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}</span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>

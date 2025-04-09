@@ -1063,7 +1063,7 @@
 }
 /* assign to section css */
 .selectAssign {
-  width: 10rem;
+  width: 80px;
   background-color: var(--main-light-clr);
   border: 1px solid #d0e5f6;
   /* color: whitesmoke; */
