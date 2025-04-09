@@ -74,8 +74,8 @@ import BuyingSellingTenant from "./BuyingSellingTenant";
 import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
-import FreshBookingHome from "./FreshBookingHome.jsx";
-import FreshBookingPost from "./FreshBookingPost.jsx";
+import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
+
 const HeroSection = () => {
 
   const dispatch = useDispatch();
@@ -609,7 +609,7 @@ const HeroSection = () => {
         </div>
       </header>
 
-      {/* <div
+      <div
         ref={PropertyRequirementBtnRef.current[0]}
         onClick={() => {
           if (medata && medata.IsAuthenticated == true) {
@@ -620,7 +620,7 @@ const HeroSection = () => {
           }
         }} className="requirement-button">
         <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
-      </div> */}
+      </div>
 
       {/* normal waala  */}
       {/* <div className="requirement-container">

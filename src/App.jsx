@@ -6,6 +6,8 @@ import ProtectedRoutes from "./Component/ProtectedRoutes";
 import { useEffect } from "react";
 import { GetMeDetailsAction, LogoutAction } from "./Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import CreatePostMain from "./Component/Post/CreatePost/CreatePostMain";
 import AdminOwnerCreateProfileSection from "./Component/Admin/CreateProfile";
@@ -64,7 +66,7 @@ import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
 import Career from "./Component/Home/Careers";
-import SingleFreshBooking from "./Component/Home/FreshBooking/SingleFreshBooking";
+import SingleFreshBooking from  "./Component/Home/FreshBooking/SingleFreshBooking/SingleFreshBooking";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
@@ -76,12 +78,14 @@ import { FormatDate } from "./utils/CommonFunction";
 import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
 import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
-import FreshBookingPost from "./Component/Home/FreshBookingPost";
+// import FreshBookingPost from "./Component/Home/FreshBookingPost";
 import FreshProjectDashboard from "./Component/Admin/FreshProject/FreshProjectDashboard";
 import FreshProjectRoutingComponent from "./Component/Admin/FreshProject/FreshProjectRoutingComponent";
 import { FreshProjectViewAll } from "./Component/Admin/FreshProject/FreshProjectViewAll";
 import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLead";
 
+// import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
+import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -838,6 +842,20 @@ function App() {
     dispatch(GetMeDetailsAction());
   }, []);
 
+
+
+
+    useEffect(() => {
+      AOS.init({
+        duration: 1000,   // animation duration in ms
+        once: true,       // animate only once when in view
+        offset: 10,      // offset (in px) from the original trigger point
+      });
+    }, []);
+
+
+
+    
   return (
     <>
       {/* <PinnacleSms /> */}
@@ -960,9 +978,10 @@ function App() {
         {/*admin routes*/}
 
 
-        <Route exact path="/fresh-booking-project" element={<FreshBookingForm />} />
-        <Route exact path="/fresh-bookings" element={<FreshBookingPost />} />
-        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking />} />
+        <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
+        {/* <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/> */}
+        <Route exact path = "/fresh-bookings2" element={<FreshBookingViewAlll/>}/>
+        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
 
         <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
         {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}

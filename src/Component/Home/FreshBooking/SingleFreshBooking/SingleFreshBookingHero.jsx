@@ -7,22 +7,27 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
   const navigate = useNavigate();
   const heroData = [
     {
-      icon: "hero-flag.png",
+      icon: "hero-flag.svg",
       label: "Total Land",
       value: project?.totalLandArea,
     },
     {
-      icon: "hero-bridge.png",
+      icon: "hero-bridge.svg",
       label: "Total Tower",
       value: project?.towerNumber,
     },
     {
-      icon: "hero-building.png",
+      icon: "hero-building.svg",
       label: "Total Units",
       value: project?.totalUnit,
     },
+    // {
+    //   icon: "hero-building.png",
+    //   label: "Payment Plan",
+    //   value: project?.projectPaymentPlan,
+    // },
     {
-      icon: "hero-rupee.png",
+      icon: "hero-rupee.svg",
       label: "Starting Price",
       value: project?.minPrice,
     },
@@ -50,17 +55,24 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
   return (
     <>
-      <nav
-        className="navbar navbar-expand-lg position-sticky z-3  p-0"
+    
+
+      {/* {projectPriceSize?.map((item,index)=>{return <span>{item?.type}</span>})} */}
+      <div
+       data-aos="zoom-out"  data-aos-duration="1250" data-aos-once="true"
+        className="position-relative"
         style={{
-           backdropFilter: "blur(10px)",
-          backgroundColor: " rgb(0 0 0 / 82%",
-          top: "0px",
-          width: "100%",
-          zIndex: 1,
+          height: "100vh",
+          backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <div className="container-fluid">
+        <div className="w-100 h-100  single-fresh-hero-conainer-main">
+          <nav
+        className="navbar single-fresh-navbar navbar-expand-lg position-relative z-3  p-0"
+      >
+        <div className="container-fluid ">
           <div className="navbar-brand Single-fresh-logo-a ">
             <img
               onClick={() => {
@@ -72,13 +84,14 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                 });
               }}
               src={projectLogoContent?.url}
-              className="single-fresh-dlf-logo"
+              className="single-fresh-logo "
               alt={project?.projectName}
-              style={{ background: "transparent" }}
+              style={{ background: "transparent", mixBlendMode:'multiply' }}
             />
           </div>
           <button
             className="navbar-toggler"
+            style={{}}
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -90,9 +103,9 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
             id="navbarNav"
           >
             <ul className="navbar-nav d-flex justify-content-around gap-3">
-              <li className="nav-item">
+              <li  className="nav-item">
                 <a
-                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"
+                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"  style={{fontSize:'18px'}}
                   href="#"
                 >
                   <img
@@ -100,12 +113,12 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                     alt="dialer"
                     style={{ width: "20px", height: "20px" }}
                   />
-                  Get a Call Back
+                <span className="single-fresh-hero-dialer-text"> Get a Call Back</span> 
                 </a>
               </li>
               <li className="nav-item">
                 <a
-                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center"
+                  className="nav-link active p-2 rounded text-light d-flex gap-2 justify-content-center align-items-center" style={{fontSize:'18px'}}
                   href="#"
                 >
                   <img
@@ -113,7 +126,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                     alt="whatsapp"
                     style={{ width: "20px", height: "20px" }}
                   />
-                  Chat on WhatsApp
+                 <span className="single-fresh-hero-whatsapp-text"> Chat on WhatsApp</span>
                 </a>
               </li>
             </ul>
@@ -121,43 +134,15 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         </div>
       </nav>
 
-      {/* {projectPriceSize?.map((item,index)=>{return <span>{item?.type}</span>})} */}
-      <div
-        className="position-relative"
-        style={{
-          height: "100vh",
-          backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-<div className="w-100 h-100  single-fresh-hero-conainer-main">
 <div className="single-fresh-hero-main-content">
           <div className="col-lg-7  text-white position-absolute single-fresh-hero-content">
-            <p className="text-uppercase mb-0  fw-light">
-              {project?.projectCity}
-            </p>
-            <p className="fw-medium mb-0 ">
-              {project?.projectName}
-            </p>
-
-            <p className="  mb-2 fw-medium">
-              {" "}
-              {/* {projectPrice && projectPrice.length > 0 ? (
-                projectPrice.map((item) => <span>{item?.type}/</span>)
-              ) : (
-                <p>No data found.</p>
-              )} */}
-              { project?.projectAdType}  { project?.locality}
-            </p>
-            <p className="mb-2 fw-medium">
-              Possesions : <span className="fw-bold">{project?.possessionStatus?.slice(0, 4)}</span>
-            </p>
-            <p className=" fw-medium">
-              Starting <span className="text-decoration-underline">Price</span>{"  "}
-              <span className="single-fresh-hero-start-price fw-bold">
-                ₹ {project?.minPrice} Cr<sup>*</sup>
-              </span>
+            <p data-aos="fade-right"  data-aos-duration="1800" data-aos-once="true" className="text-uppercase custom-underline-in-freshbooking-hero">{project?.projectCity}</p>
+            <p data-aos="fade-right"  data-aos-duration="1200" data-aos-once="true"  className="">{project?.projectName}</p>
+            <p data-aos="fade-right"  data-aos-duration="1400" data-aos-once="true"  className=" "> {" "}{ project?.projectAdType}  { project?.locality}</p>
+            <p data-aos="fade-right"  data-aos-duration="1800" data-aos-once="true"  className=" "> Possessions : <span className="">{project?.possessionStatus?.slice(0, 4)}</span> </p>
+            <p data-aos="fade-right"  data-aos-duration="2000" data-aos-once="true"  className=" "> Starting
+              <span className="text-decoration-underline">{" "}Price{" "}</span>
+              <span className="single-fresh-hero-start-price ms-1">{" "}₹ {project?.minPrice} Cr<sup>*</sup></span>
             </p>
             <div className="Single-fresh-reserve-post-button">
               {isSmallScreen && (
@@ -183,7 +168,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         {isSmallScreen && showForm && (
           <div
             className="d-flex justify-content-center align-items-center vh-100 position-fixed top-0 start-0 w-100"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 1050 }}
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 50 }}
           >
             <div className="position-relative">
               {FormComponent()}
@@ -196,18 +181,18 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         )}
 
         {/* Info Boxes */}
-        <div className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
-  <div className="single-fresh-hero-icon mx-0 bg-dark bg-opacity-75 text-white pt-3 ">
+        <div  data-aos="flip-up"  data-aos-duration="1200" data-aos-once="true"  className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
+  <div className="single-fresh-hero-icon mx-0 mt-4"    >
     {heroData.map((item, index) => (
-      <div className="col-6 col-md-3 w-100 text-center p-1 mb-md-0" key={index}>
+      <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
         <img
           src={`/img/${item.icon}`}
           alt={item.label}
-          className="img-fluid mb-2"
+          className="img-fluid mb-2 Single-fresh-info-box-icon"
           style={{ maxWidth: "80px" }}
         />
         <div className="fw-normal mb-1 single-fresh-hero-label">{item.label}</div>
-        <div className="fw-bold single-fresh-hero-value">{item.value} {item.value == project?.minPrice ? "Cr*" : ""}</div>
+        <div className="fw-bold single-fresh-hero-value">{item.value} {item.value == project?.minPrice ? "Cr*" : ""}{item.value == project?.totalLandArea ? "Acres":''}</div>
       </div>
     ))}
   </div>
@@ -222,35 +207,35 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 // ✅ Extracted Form Component - Used in both Popup & Large Screen
 const FormComponent = () => (
   <form
-    className="Single-fresh-form rounded shadow-lg text-light"
-    style={{
-      width: "320px",
-      backgroundColor: "white",
-      overflowY: "auto",
-      maxHeight: "90vh",
-    }}
+    className="Single-fresh-form rounded shadow-lg text-light overflow-hidden"
   >
     <h2
-      className="text-center mb-2 fw-medium"
-      style={{ color: "black", fontSize: "17px" }}
+     data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"
+      className="Single-fresh-form-h2   text-center mb-2 fw-medium"
+    
     >
       Let’s Find Your Dream Home!
     </h2>
     <p
-      className="text-center mb-4"
-      style={{ color: "#333333", fontSize: "14px" }}
+     data-aos="fade-left"  data-aos-duration="1400" data-aos-once="true"
+      className="Single-fresh-form-p  text-center mb-4"
+     
     >
       Please fill out the form below, our expert will get back to you soon.
     </p>
 
     <div className="d-flex flex-column gap-3">
-      <div className="position-relative">
+      <div
+       data-aos="fade-left"  data-aos-duration="1100" data-aos-once="true" 
+       className="position-relative">
+        
         <img
-          src="/img/Single-fresh-user.svg"
-          alt=""
+          src="/img/mdi_user.svg"
+          alt="user-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
+         
           type="text"
           className="Single-fresh-form-input border-2 ps-5 w-100"
           placeholder="Your Full Name"
@@ -258,13 +243,16 @@ const FormComponent = () => (
         />
       </div>
 
-      <div className="position-relative">
+      <div
+       data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true"
+       className="position-relative">
         <img
-          src="/img/Single-main-email.svg"
-          alt=""
+          src="/img/ic_baseline-email.svg"
+          alt="email-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
+        
           type="email"
           className="Single-fresh-form-input border-2 ps-5 w-100"
           placeholder="Your Email"
@@ -272,13 +260,16 @@ const FormComponent = () => (
         />
       </div>
 
-      <div className="position-relative">
+      <div
+       data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true"
+       className="position-relative">
         <img
-          src="/img/Single-fresh-call.svg"
-          alt=""
+          src="/img/ic_baseline-phone.svg"
+          alt="call-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
+        
           type="tel"
           className="Single-fresh-form-input border-2 ps-5 w-100"
           placeholder="Your Number"
@@ -288,9 +279,10 @@ const FormComponent = () => (
       </div>
 
       <button
+       data-aos="fade-left"  data-aos-duration="1700" data-aos-once="true"
         type="submit"
-        className="btn w-100 text-white"
-        style={{ backgroundColor: "#F58220" }}
+        className="Single-fresh-form-btn btn w-100 "
+      
       >
         Reserve Your Spot
       </button>

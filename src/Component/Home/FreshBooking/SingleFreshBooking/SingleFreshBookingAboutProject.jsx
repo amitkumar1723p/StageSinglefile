@@ -1,6 +1,11 @@
 import React from 'react';
-import "./SingleFreshBooking.css";
-export default function SingleFreshBookingAboutProject({projectHightlight , projectContent , project}) {
+// import "./SingleFreshBooking.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useState , useEffect } from 'react'
+export default function SingleFreshBookingAboutProject({projectHightlight , highlightContent, aboutContent , aboutImage , project}) {
+
+
   return (
     <>
     <div className='about-project-container'>
@@ -88,32 +93,33 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 <div className="container-fluid p-0">
         <div className="row g-0">
           <div className="col-12">
-            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden" style={{ minHeight: '600px' }}>
+            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden single-fresh-about-project-lineheight">
         
               <div className="position-absolute w-100 h-100" style={{
-                background: 'url("/img/pattern-bg.png")',
-                zIndex: 0
+                backgroundColor: '#F7F7F7'
+                // background: 'url("/img/pattern-bg.png")',
+                // zIndex: 0
               }}></div>
 
             
-              <div className="single-fresh-curved-section position-absolute" ></div>
+              <div data-aos="fade-left"  className="single-fresh-curved-section position-absolute" ></div>
 
            
               <div className="container position-relative" style={{ zIndex: 2 }}>
-                <div className=" align-items-center Single-fresh-about-project-main">
+                <div className=" align-items-top Single-fresh-about-project-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0 mt-2 singel-fresh-about-project-img">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxHeight:'400px', height:'auto' }}>
-                  <img  style={{width:'100%', height:'auto'}} src= {projectHightlight?.url} alt="" />
+                    <div className=" Single-fresh-booking-about-img-main card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" >
+                  <img  style={{width:'auto', height:'100%', objectFit:'cover'}} src= {aboutImage?.url} alt="" />
                     </div>
                   </div>
 
                 
                   <div className="col-12 col-md-7 ps-md-5 ">
                     <h3 className="text-dark mb-3 Single-fresh-about-project-h3" > About Project</h3>
-                    <h2 className=" fw-bold mb-4 Single-fresh-about-project-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
+                    <h2 className=" fw-bold mb-4 Single-fresh-about-project-h2" >{project?.projectName}</h2>
                     <p className="text-muted Single-fresh-about-project-p">
-                    {projectContent}
+                  {aboutContent?.aboutProjectContent}
                     </p>
                   </div>
                 </div>
@@ -125,30 +131,31 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
 
 
 {/* --------------------------Highlights--------------------------------------------------------- */}
-      <div className="container-fluid p-0">
+      <div className="container-fluid p-0"  >
         <div className="row g-0">
           <div className="col-12">
-            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden" style={{ minHeight: '600px' }}>
+            <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden single-fresh-highlight-lineheight">
         
-              <div className="position-absolute w-100 h-100" style={{
-                background: 'url("/img/pattern-bg.png")',
-                zIndex: 0
+              <div className="position-absolute w-100 h-100"    style={{
+                backgroundColor: '#F7F7F7'
+                // background: 'url("/img/pattern-bg.png")',
+                // zIndex: 0
               }}></div>
 
             
-              <div className="single-fresh-curved-section position-absolute" ></div>
+              <div className="single-fresh-curved-section position-absolute " ></div>
 
            
               <div className="container position-relative" style={{ zIndex: 2 }}>
-                <div className=" align-items-center  Single-fresh-Highlight-main">
+                <div className=" align-items-top Single-fresh-Highlight-main">
                
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
-                    <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxHeight:'400px', height:'auto' }}>
+                    <div data-aos="fade-up" className=" Single-fresh-booking-about-img-main  card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0">
                       <img 
                         src= {projectHightlight?.url}
                         alt= {project?.projectName} 
                         className="img-fluid"
-                        style={{width:'100%', height:'auto'}}
+                        style={{width:'auto', height:'100%', objectFit:'cover'}}
                       />
                     </div>
                   </div>
@@ -156,9 +163,12 @@ export default function SingleFreshBookingAboutProject({projectHightlight , proj
                 
                   <div className="col-12 col-md-7 ps-md-5">
                     <h3 className="text-dark mb-3 Single-fresh-highlights-h3" >Highlights</h3>
-                    <h2 className=" fw-bold mb-4 Single-fresh-highlights-h2" style={{color: '#1D3557'}}>{project?.projectName}</h2>
-                    <ul className="list-unstyled lh-base d-flex flex-column gap-3 Single-fresh-highlight-list">
-                    {projectContent}
+                    <h2 className=" fw-bold mb-4 Single-fresh-highlights-h2" >{project?.projectName}</h2>
+                    <ul className="list-unstyled lh-base d-flex flex-column gap-3 Single-fresh-about-project-list">
+                         {highlightContent?.map((item) => { 
+  return     <li className='Single-fresh-about-project-list-li d-flex gap-4 ' ><img src="/img/tick-list-blue.svg" alt="" /> {item}</li>;
+})}
+
                     </ul>
                   </div>
                 </div>

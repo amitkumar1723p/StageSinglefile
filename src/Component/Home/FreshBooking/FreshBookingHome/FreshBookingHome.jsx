@@ -1,23 +1,25 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useState, useRef } from 'react'
 import {useNavigate ,Link}  from 'react-router-dom';
 import './FreshBookingHome.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllFreshProjectAction } from '../../Action/freshProjectAction';
+import { getAllFreshProjectAction } from '../../../../Action/freshProjectAction';
 import { LuOrigami } from 'react-icons/lu';
 
-import FreshBookingPost from './FreshBookingPost';
+
 
 export default function FreshBookingHome(){
+
+  const [isHovered, setIsHovered] = useState(false);
 
 
   const getStatusColor = (status) => {
     switch (status) {
       case "New Launch":
-        return "text-warning "; 
+        return "text-white "; 
       case "Ready to Move":
-        return "text-success fw-medium"; 
+        return "text-white "; 
       case "Under Construction":
-        return "text-danger fw-medium"; 
+        return "text-white"; 
       default:
         return "text-white"; 
     }
@@ -25,7 +27,7 @@ export default function FreshBookingHome(){
   
 
   const HandleFreshbookingUrl = (projectName)=>{
-    return projectName.split(" ").join("-").toLowerCase();
+    return projectName?.split(" ").join("-").toLowerCase();
   }
   
 
@@ -40,6 +42,20 @@ const dispatch=useDispatch()
   useEffect(()=>{
 dispatch(getAllFreshProjectAction())
   },[])
+
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     document.querySelector('.fresh-booking-home-card-container')?.scrollBy({
+  //       right: 30,
+  //       behavior: 'smooth',
+  //     });
+  //   }, 20); // runs every 2 seconds
+  
+  //   return () => clearInterval(interval); 
+  // }, []);
+
+
   const scrollFreshBookingLeft = ()=>{
     document.querySelector('.fresh-booking-home-card-container').scrollBy({
       left: -400,
@@ -56,32 +72,80 @@ dispatch(getAllFreshProjectAction())
       const navigate = useNavigate();
 
 
-  
-      console.log(allFreshBookingCard);
+      // useEffect(() => {
+      //   const container = document.querySelector(".fresh-booking-home-card-container");
+    
+      //   const interval = setInterval(() => {
+      //     if (container) {
+      //       container.scrollBy({
+      //         left: 300, // scroll 400px to the right
+      //         behavior: "smooth"
+      //       });
+      //     }
+      //   }, 3000); // every 2 seconds
+    
+      //   return () => clearInterval(interval); // cleanup
+      // }, []);
+    
+      const containerRef = useRef(null);
+
+     
+
+    
+      useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+      
+        let scrollAmount = 0;
+        let animationFrameId;
+      
+        const scroll = () => {
+          container.scrollLeft += 1;
+          scrollAmount += 0.1;
+      
+          if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+            container.scrollLeft = 0;
+            scrollAmount = 0;
+          }
+      
+          animationFrameId = requestAnimationFrame(scroll);
+        };
+      
+        scroll(); // start scrolling
+      
+        return () => cancelAnimationFrame(animationFrameId); // cleanup
+      }, []);
+      
+        
+        
+    
 
   return (
 
-    <div className='freshbooking-home-main-container d-flex flex-column gap-4'>
-      <div className='d-md-flex justify-content-between m-auto ' style={{width:'90%'}}>
-        <div className='mb-2' >
+    <div   className='freshbooking-home-main-container d-flex flex-column '>
+      <div className='fresh-booking-home-upper-container d-md-flex justify-content-between m-auto ' >
+        <div className='fresh-booking-home-headings mb-2' >
           <h2 className='' style={{ fontWeight:'700', color:'rgba(51, 51, 51, 1)'}}>Discover Your Perfect Home!</h2>
           <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
         </div>
-        <div className=' ' style={{minWidth:'202px'}}>
-        <button className=" d-flex justify-content-center align-content-center gap-2   " onClick={()=>{navigate('/fresh-bookings', { state: {allCardData:allFreshBookingCard} } )}} style={{padding:'10px 16px', borderRadius:'100px',backgroundColor:'white' , border:'1px solid #afb8c0 '}} >
-                  <span className="fs-6 fw-semibold lh-base " style={{color:'var(--main-light-clr)'}} ><p>View All Properties<img src="/img/right-arrow.svg" alt="" /> </p> </span>
-                </button>
+        <div className='freshbooking-home-button-container d-flex align-items-center ' >
+        <button onClick={()=>{navigate('/fresh-bookings2', { state: {allCardData:allFreshBookingCard} } )}} class="freshbooking-home-button fresh-booking-view-more-more">
+  <span class="fresh-booking-button-circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+  <span class="fresh-booking-button-text">View All Properties</span>
+</button>
         </div>
       </div>
       <div className='fresh-booking-card-and-button-container d-flex justify-content-between align-items-center position-relative'>
-        <div className='d-flex d-none justify-content-center  position-absolute'style={{left:'0px',top:'100px', zIndex:'3'}}>
-          <button onClick={scrollFreshBookingLeft} className='bg-white border-0 d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px',boxShadow:'#000 0px 2px 8px' }}>
+        <div className='d-flex  justify-content-center  position-absolute'style={{left:'0px',top:'100px', zIndex:'3'}}>
+          <button onClick={scrollFreshBookingLeft} className='bg-white d-none border-0 d-flex justify-content-center align-items-center' style={{borderRadius:'100%',boxShadow:' 0 2px 8px #0000001a', width:'35px', height:'35px',boxShadow:'#000 0px 2px 8px' }}>
           <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
           </svg>
           </button>
         </div>
-        <div className='fresh-booking-home-card-container d-flex overflow-scroll ' style={{width:'100%' , margin:'0 auto', scrollbarWidth:'none'}}>
+        <div  ref={containerRef} className='fresh-booking-home-card-container d-flex overflow-scroll ' style={{width:'100%' , margin:'0 auto', scrollbarWidth:'none'}}>
 
           {allFreshBookingCard.length>0?( 
                 allFreshBookingCard.map(cardData => (
@@ -102,7 +166,7 @@ dispatch(getAllFreshProjectAction())
                       <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
                         <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
                        >
-                          View More <img src="/img/solar_arrow-right-up-outline.svg" alt="logo" />
+                          View More <img src="/img/Vector-arrow-top-right.svg" alt="logo" />
                         </button>
                         </Link>
                       </div>

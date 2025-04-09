@@ -23,6 +23,13 @@
     width: 55%;
 
 }
+.freshbooking-highlights-add-button{
+    border-radius: 8px;
+    padding: 6px 12px 6px 12px;
+    background-color: var(--main-light-clr);
+    transition-duration: .3s;
+    color: white;
+}
 .freshbooking-pricing-details-add-button{
     border-radius: 8px;
     padding: 6px 12px 6px 12px;

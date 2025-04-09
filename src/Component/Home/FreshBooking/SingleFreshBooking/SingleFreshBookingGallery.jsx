@@ -11,30 +11,49 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
   }, [galleryContent]);
 
   return (
-    <div className="container mt-4">
-      <h3 className="mb-3 Single-fresh-gallery-p">Gallery</h3>
-      <h3 className="fw-bold mb-5 Single-fresh-gallery-h3" style={{ color: '#1D3557' }}>
+    <>
+    <div className='single-fresh-gallery-main'>
+    <div className="container " >
+      <h3 className="mb-1 Single-fresh-gallery-p">Gallery</h3>
+      <h3 className="fw-bold mb-3 Single-fresh-gallery-h3" >
         {project?.projectName}
       </h3>
 
       <div className="row mb-3 justify-content-center">
         <div className="col-12 d-flex justify-content-center">
-          <div className="overflow-hidden" style={{ height: '500px', width: '80%' }}>
-            {mainImage && (
-              <img
-                src={mainImage.url}
-                alt={mainImage.alt || 'Main Image'}
-                className="img-fluid w-100 h-100 rounded shadow"
-                style={{ objectFit: 'contain', backgroundColor: 'darkgrey' }}
-              />
-            )}
-          </div>
+        <div 
+  className="single-freshbooking-gallery-image-container overflow-hidden border position-relative" 
+  style={{ height: 'auto' }}
+>
+  {/* Blurred Background */}
+  <div 
+    className="position-absolute top-0 start-0 w-100 h-100"
+    style={{ 
+      backgroundImage: `url(/img/single-fresh-gallery-bg.png)`, 
+      backgroundSize: 'cover', 
+      backgroundPosition: 'center', 
+      zIndex: 0 
+    }}
+  ></div>
+
+  {/* Main Image */}
+  {mainImage && (
+    <img
+      src={mainImage.url}
+      alt={mainImage.alt || 'Main Image'}
+      className="img-fluid w-100 h-100 rounded shadow position-relative"
+      style={{ objectFit: 'contain', zIndex: 1 }}
+    />
+  )}
+</div>
+
+
         </div>
       </div>
 
-      <div className="d-flex gap-2">
+      <div className="d-flex gap-2  overflow-scroll " style={{scrollbarWidth:'none'}}>
         {galleryContent?.map((image) => (
-          <div key={image.id} className="col-6 col-md-4 col-lg-2 mb-3">
+          <div key={image.id} className="col-6 col-md-4 col-lg-2 ">
             <div
               className={`thumbnail-container ${mainImage?.id === image.id ? 'border border-primary border-3' : ''}`}
               onClick={() => setMainImage(image)}
@@ -62,5 +81,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
         ))}
       </div>
     </div>
+    </div>
+    </>
   );
 }

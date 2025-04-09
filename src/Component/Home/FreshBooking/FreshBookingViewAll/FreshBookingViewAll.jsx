@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation,Link } from 'react-router-dom';
-import './FreshBookingPost.css';
-export default function FreshBookingPost() {
+import './FreshBookingViewAll.css';
+export default function FreshBookingViewAll() {
 
 const capturedData = useLocation();
 
