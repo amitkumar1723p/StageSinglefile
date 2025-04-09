@@ -346,7 +346,7 @@ const AllPostSearchFilter = () => {
                   </div>
 
                   <div className="filter-group">
-                    <h3>Property Status</h3>
+                    <h3>Property Type</h3>
                     <div className="button-section">
                       {ApartmentTypeOptions.map((apartmenttype, i) => (
                         <div 

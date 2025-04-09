@@ -131,7 +131,8 @@ const PropertySection = () => {
           <div className="property-section-container">
             <div className="property-heading-btn">
               <div className="property-heading">
-                <h2 className="property-section-h2">Find Your Dream Home Today!</h2>
+                <h2 className="property-section-h2">No Fake Ads. Just Owner Verified Listings 
+</h2>
                 <h3 className="property-section-h3">Handpicked properties that match your needs – from trending to luxurious, all in one place.</h3>
               </div>
               <div className="property-btn">
@@ -149,35 +150,27 @@ const PropertySection = () => {
               </svg>
             </button>
             <div className="filter-buttons">
-
               {
                 filterdData?.map((area, ind) => {
                   return <>
                     <button key={ind} onClick={() => {
-
                       settodisplay(filterdData[ind]);
                       setAreas(ind)
                     }} className={`filter-button ${areas === ind ? "chooesd-area" : ""} `}>
-
                       <span className="button-span"> {area.areaName}</span>
                     </button>
                   </>
                 })
               }
-
-
             </div>
-
             <button className="scroll-button-area right" onClick={scrollAreaRight}>
               <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
               </svg>
             </button>
           </div>
-
           {/* Content section */}
           <div className="content-section">
-
             <div className={`category-content `}>
               <div className="container">
                 <div className="scroll-container">

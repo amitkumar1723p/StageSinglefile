@@ -858,10 +858,10 @@ function App() {
   }, [alertType, alertMessage, alertshow]);
   useEffect(() => {
     dispatch(GetMeDetailsAction());
-        console.log(medata)
+        
    
   }, []);
- console.log(medata)
+
    useEffect(()=>{
     if(medata?.isBlockedUser==true){
       dispatch(LogoutAction())

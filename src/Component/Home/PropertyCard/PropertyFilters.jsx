@@ -218,7 +218,7 @@ useEffect(() => {
             <div className="filter-dummyLine"></div>
 
             <div className="filter-group">
-              <h3>Property Status</h3>
+              <h3>Property Type</h3>
               <div className="Property-Status">
                 {ApartmentTypeOptions.map((apartmenttype, i) => (
                   <React.Fragment key={i}>
@@ -384,7 +384,7 @@ useEffect(() => {
                   </div>
 
                   <div className="filter-group">
-                    <h3>Property Status</h3>
+                    <h3>Property Type</h3>
                     <div className="button-section">
                       {ApartmentTypeOptions.map((apartmenttype, i) => (
                         <div 

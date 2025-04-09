@@ -127,11 +127,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
     <div className="form-container">
       <div className="form-right">
         <div className="form-right-heading-container">
-          <h3 className="form-header">Share Your Requirement</h3>
-          <p>
-            Tell us what you're looking for, and we'll help you find your
-            perfect property.
-          </p>
+          <h3 className="form-header">Let us Know Your Property Requirement</h3>
+          
         </div>
 
         <form
