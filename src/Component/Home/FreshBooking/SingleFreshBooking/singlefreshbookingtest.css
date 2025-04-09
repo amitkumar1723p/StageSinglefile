@@ -1070,6 +1070,7 @@ background-color: var(--main-white-clr);
 @media (max-width: 480px) {
   .single-fresh-booking-about-builder p{
     line-height: 30px;
+    font-size: 13px;
 
   }
   .single-fresh-booking-builder-headings h2:nth-child(2){
@@ -1340,8 +1341,12 @@ background-color: var(--main-white-clr);
   }
 
   .Single-fresh-about-project-p {
-    font-size: 12px;
+    font-size: 13px;
   }
+
+  .Single-fresh-about-project-list-li {
+  font-size: 13px;
+}
 
   .single-fresh-hero-label {
     font-size: 12px;
@@ -1354,18 +1359,24 @@ background-color: var(--main-white-clr);
   .singel-fresh-about-project-img {
     max-width: 10px 0px !important;
   }
+  .Single-fresh-floor-plan-main {
+    background-color: #F7F7F7;
+    padding: 25px 0px 0px 0px;
+  }
+  .freshbooking-location-image-container {
+    height: 250px;
+}
 
   .single-fresh-hero-icon{
-
     padding: 10px 0px 0px 0px;
   }
   .single-fresh-booking-info-boxes{
     border-left: 2px solid white;
     border-right: 2px solid white;
     max-width: auto;
-
-  
-
+}
+.single-fresh-gallery-container {
+  padding: 26px 17px;
 }
 .Single-fresh-booking-about-img-main {
   max-height: 190px;
@@ -1376,6 +1387,9 @@ background-color: var(--main-white-clr);
 @media (max-width: 375px) {
   .Single-fresh-reserve-post-button{
     right: -20.5%;
+  }
+  .single-fresh-gallery-container {
+    padding: 26px 0px;
   }
 
 }

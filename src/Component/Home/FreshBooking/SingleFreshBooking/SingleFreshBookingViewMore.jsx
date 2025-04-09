@@ -60,7 +60,7 @@ export default function SingleFreshBookingViewMore() {
          <div className='d-md-flex justify-content-between m-auto ' style={{width:'99%'}}>
            <div className='mb-2' >
              <h2 className='' style={{ fontWeight:'700', color:'rgba(51, 51, 51, 1)'}}>Discover Your Perfect Home!</h2>
-             <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
+             <p className='fw-normal ' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
            </div>
            <div className=' ' style={{minWidth:'202px'}}>
            <button className=" d-flex justify-content-center align-content-center gap-2   "  onClick={()=>{navigate('/fresh-bookings', { state: {allCardData:allFreshBookingCard} } )}} style={{padding:'10px 16px', borderRadius:'100px',backgroundColor:'white' , border:'1px solid #afb8c0 '}} >
