@@ -1107,6 +1107,16 @@ background-color: var(--main-white-clr);
   font-size: 16px;
 }
 
+.fresh-booking-view-more-h3 {
+  font-size: 28px;
+}
+
+
+.fresh-booking-view-more-h2 {
+  font-size: 32px;
+}
+
+
 
 @media(max-width:1024px){
   .single-fresh-booking-amenities{
@@ -1262,10 +1272,7 @@ background-color: var(--main-white-clr);
     font-size: 13px;
 
   }
-  .single-fresh-booking-builder-headings h2:nth-child(2){
-    font-size: 28px;
-
-  }
+ 
   .single-fresh-booking-about-main-container{
     min-height: 400px;
   }
@@ -1446,58 +1453,56 @@ background-color: var(--main-white-clr);
     flex-direction: column;
   }
 
-  .Single-fresh-Size-Price {
-    font-size: 19px;
-  }
+
 
   .Single-fresh-unit {
     font-size: 19px;
   }
 
   .Single-fresh-about-project-h3 {
-    font-size: 18px;
+    font-size: 22px;
   }
   .Single-fresh-about-project-h2 {
-    font-size: 25px;
+    font-size: 24px;
   }
 
   .Single-fresh-highlights-h3 {
-    font-size: 18px;
+    font-size: 22px;
   }
   .Single-fresh-highlights-h2 {
-    font-size: 25px;
+    font-size: 24px;
   }
 
   .Single-fresh-gallery-p {
-    font-size: 19px;
+    font-size: 22px;
   }
 
   .Single-fresh-gallery-h3 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .Single-fresh-facilities {
-    font-size: 19px;
+    font-size: 22px;
   }
 
   .Single-fresh-amenities {
+    font-size: 24px;
+  }
+
+  .single-fresh-floor-plan-h3 {
     font-size: 22px;
   }
 
-  .Single-fresh-floor-plan-h3 {
-    font-size: 19px;
-  }
-
-  .Single-fresh-floor-plan-h2 {
-    font-size: 22px;
+  .single-fresh-floor-plan-h2 {
+    font-size: 24px;
   }
 
   .Single-fresh-location-map-h3 {
-    font-size: 19px;
+    font-size: 22px;
   }
 
   .Single-fresh-location-map-h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .Single-fresh-location-map-li {
@@ -1508,25 +1513,48 @@ background-color: var(--main-white-clr);
     font-size: 13px;
   }
 
+  .Single-fresh-map-buttons {
+    gap: 12px;
+  }
   .single-fresh-builder-p {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .Single-fresh-site-map-h3 {
-    font-size: 19px;
-  }
-
-  .Single-fresh-site-map-h2 {
     font-size: 22px;
   }
 
-  .single-fresh-builder-h3 {
-    font-size: 19px;
+  .Single-fresh-site-map-h2 {
+    font-size: 24px;
   }
 
+  .single-fresh-builder-h3 {
+    font-size: 22px;
+  }
 
+  .single-fresh-booking-builder-headings h2:nth-child(1) {
+    font-size: 22px;
+    /* margin: 10px 0px; */
+}
+
+  .single-fresh-booking-builder-headings h2:nth-child(2){
+    font-size: 24px;
+  }
+
+  .fresh-booking-view-more-h3 {
+    font-size: 22px;
+  }
+  
+  
+  .fresh-booking-view-more-h2 {
+    font-size: 24px;
+  }
+
+  .Single-fresh-Size-Price {
+    font-size: 22px;
+  }
   .Single-fresh-Size-Price-heading {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .Single-fresh-about-project-p {

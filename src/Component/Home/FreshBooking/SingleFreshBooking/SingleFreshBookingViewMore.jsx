@@ -62,8 +62,8 @@ export default function SingleFreshBookingViewMore(builderContent) {
        <div className='freshbooking-view-more-main-container d-flex flex-column gap-4'>
          <div className='d-md-flex justify-content-between m-auto ' style={{width:'90%'}}>
            <div className='fresh-booking-view-more-headings d-flex flex-column ' >
-             <h2 className='fs-4 fw-medium' style={{ color:'rgba(51, 51, 51, 1)'}}>View More</h2>
-            <h2 style={{color:'rgba(0, 102, 204, 1)' , fontWeight:'700', fontSize:'32px'}}>
+             <h3 className=' fresh-booking-view-more-h3  fw-medium' style={{ color:'rgba(51, 51, 51, 1)'}}>View More</h3>
+            <h2  className='fresh-booking-view-more-h2'    style={{color:'rgba(0, 102, 204, 1)' , fontWeight:'700'}}>
               {builderContent?.projectAboutBuilderName}
                Other Properties</h2>
            </div>
@@ -98,7 +98,7 @@ export default function SingleFreshBookingViewMore(builderContent) {
                           <div className='fresh-booking-view-more-card-shadow d-flex w-100 align-items-end overflow-hidden '>
                             <div className="fresh-booking-view-more-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgba(255, 255, 255, 1)', padding:'4px 12px 12px 12px', position:'absolute' }} >
                               <div  className="fresh-booking-view-more-card-upper-content d-flex flex-column gap-1 w-100 h-50  pb-2" >
-                                <div className="fresh-booking-view-more-card-price w-100 h-50 fs-5   overflow-hidden text-nowrap text-truncate" style={{ color: 'rgba(0, 102, 204, 1)' }} >₹ <span className='fw-bold fs-6'>{cardData?.projectBasicDetail?.minPrice} Cr</span> </div>
+                                <div className="fresh-booking-view-more-card-price w-100 h-50 fs-5 fs-sm-6  overflow-hidden text-nowrap text-truncate" style={{ color: 'rgba(0, 102, 204, 1)' }} >₹ <span className='fw-bold fs-6'>{cardData?.projectBasicDetail?.minPrice} Cr</span> </div>
                                 <div  className="fresh-booking-view-more-card-projectname w-100 g-50 fw-bold fs-5 overflow-hidden text-nowrap text-truncate" style={{color:'rgba(51, 51, 51, 1)'}}>{cardData?.projectBasicDetail?.projectName}</div>
                                 <div className="fresh-booking-view-more-card-location w-100  fw-normal overflow-hidden text-nowrap text-truncate" style={{color:'rgba(51, 51, 51, 1)'}} >{cardData?.projectBasicDetail?.locality}, {cardData?.projectBasicDetail?.projectCity}</div>
                                 <div className="fresh-booking-view-more-card-amanities w-100  overflow-hidden text-nowrap text-truncate  "  style={{ fontWeight: "600", fontSize:'14px',color:'rgba(51, 51, 51, 1)' }}>{cardData?.projectBasicDetail?.projectType} {cardData?.projectBasicDetail?.projectAdType}</div>
