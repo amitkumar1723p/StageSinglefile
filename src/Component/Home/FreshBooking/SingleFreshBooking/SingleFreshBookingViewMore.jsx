@@ -5,7 +5,7 @@ import {useNavigate ,Link}  from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFreshProjectAction } from '../../../../Action/freshProjectAction';
 
-export default function SingleFreshBookingViewMore(project) {
+export default function SingleFreshBookingViewMore(builderContent) {
    const [isViewAllButtonHovered, setIsViewAllButtonHovered] = useState(null);
 
    const getStatusColor = (status) => {
@@ -23,7 +23,7 @@ export default function SingleFreshBookingViewMore(project) {
   };
 
       const HandleFreshbookingUrl = (projectName)=>{
-        return projectName.split(" ").join("-").toLowerCase();
+        return projectName?.split(" ").join("-").toLowerCase();
       }
       
     const dispatch=useDispatch()
@@ -56,7 +56,7 @@ export default function SingleFreshBookingViewMore(project) {
       }
        const navigate = useNavigate();
 
-    console.log(project?.project?.projectName,"Saurabh")
+  console.log(builderContent?.projectAboutBuilderName, "saurabh")
      
   return (
        <div className='freshbooking-view-more-main-container d-flex flex-column gap-4'>
@@ -64,7 +64,7 @@ export default function SingleFreshBookingViewMore(project) {
            <div className='fresh-booking-view-more-headings d-flex flex-column ' >
              <h2 className='fs-4 fw-medium' style={{ color:'rgba(51, 51, 51, 1)'}}>View More</h2>
             <h2 style={{color:'rgba(0, 102, 204, 1)' , fontWeight:'700', fontSize:'32px'}}>
-              {/* {project?.project?.projectName} */}
+              {builderContent?.projectAboutBuilderName}
                Other Properties</h2>
            </div>
            <div className=' d-none d-md-flex justify-content-end  align-items-end gap-4 ' style={{minWidth:'202px'}}>
@@ -94,7 +94,7 @@ export default function SingleFreshBookingViewMore(project) {
                    allFreshBookingCard.map((cardData,index) => (
 
                     
-                  <div className="fresh-booking-view-more-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover',boxShadow:'0px 5px 5px rgba(51, 51, 51, 0.2)', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
+                  <div className="fresh-booking-view-more-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover',boxShadow: 'rgb(197, 197, 197) 6px 6px 12px, rgb(255, 255, 255) -6px -6px 12px', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
                           <div className='fresh-booking-view-more-card-shadow d-flex w-100 align-items-end overflow-hidden '>
                             <div className="fresh-booking-view-more-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgba(255, 255, 255, 1)', padding:'4px 12px 12px 12px', position:'absolute' }} >
                               <div  className="fresh-booking-view-more-card-upper-content d-flex flex-column gap-1 w-100 h-50  pb-2" >

@@ -62,7 +62,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
        data-aos="zoom-out"  data-aos-duration="1250" data-aos-once="true"
         className="position-relative"
         style={{
-          height: "92vh",
+          height: "100vh",
           backgroundImage: `url(${projectBannerImage?.url || "/img/default-banner.jpg"})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -70,15 +70,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
       >
         <div className="w-100 h-100  single-fresh-hero-conainer-main">
           <nav
-        className="navbar navbar-expand-lg position-relative z-3  p-0"
-        style={{
-           backdropFilter: "blur(0px)",
-          backgroundColor: "rgb(255 255 255 / 26%)",
-          top: "0px",
-          width: "100%",
-          zIndex: 1,
-      
-        }}
+        className="navbar single-fresh-navbar navbar-expand-lg position-relative z-3  p-0"
       >
         <div className="container-fluid ">
           <div className="navbar-brand Single-fresh-logo-a ">
@@ -121,7 +113,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                     alt="dialer"
                     style={{ width: "20px", height: "20px" }}
                   />
-                  Get a Call Back
+                <span className="single-fresh-hero-dialer-text"> Get a Call Back</span> 
                 </a>
               </li>
               <li className="nav-item">
@@ -134,7 +126,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                     alt="whatsapp"
                     style={{ width: "20px", height: "20px" }}
                   />
-                  Chat on WhatsApp
+                 <span className="single-fresh-hero-whatsapp-text"> Chat on WhatsApp</span>
                 </a>
               </li>
             </ul>
@@ -176,7 +168,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         {isSmallScreen && showForm && (
           <div
             className="d-flex justify-content-center align-items-center vh-100 position-fixed top-0 start-0 w-100"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 1050 }}
+            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 50 }}
           >
             <div className="position-relative">
               {FormComponent()}
@@ -189,14 +181,14 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         )}
 
         {/* Info Boxes */}
-        <div  data-aos="flip-up"  data-aos-duration="1200" data-aos-once="true" className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
-  <div className="single-fresh-hero-icon mx-0 text-white mt-4" style={{ backgroundColor:'rgb(0 0 0 / 50%', backdropFilter: "blur(3px)",}} >
+        <div  data-aos="flip-up"  data-aos-duration="1200" data-aos-once="true"  className="container-fluid p-0 position-absolute bottom-0 start-0 end-0">
+  <div className="single-fresh-hero-icon mx-0 mt-4"    >
     {heroData.map((item, index) => (
       <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
         <img
           src={`/img/${item.icon}`}
           alt={item.label}
-          className="img-fluid mb-2"
+          className="img-fluid mb-2 Single-fresh-info-box-icon"
           style={{ maxWidth: "80px" }}
         />
         <div className="fw-normal mb-1 single-fresh-hero-label">{item.label}</div>
@@ -215,30 +207,19 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 // ✅ Extracted Form Component - Used in both Popup & Large Screen
 const FormComponent = () => (
   <form
-  
-  // data-aos="fade-left"  data-aos-once="true"
-    className="Single-fresh-form rounded  text-light overflow-hidden"
-    style={{
-      width: "320px",
-      backgroundColor: "rgb(112 112 112 / 24%)",
-      outline:'1px solid white',
-      boxShadow:'0px 0px 50px black',
-      overflowY: "auto",
-      maxHeight: "90vh",
-      backdropFilter:'blur(10px)'
-    }}
+    className="Single-fresh-form rounded shadow-lg text-light"
   >
     <h2
-    data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"
-      className="text-center mb-2 fw-medium"
-      style={{ color: "white", fontSize: "17px" }}
+     data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"
+      className="Single-fresh-form-h2   text-center mb-2 fw-medium"
+    
     >
       Let’s Find Your Dream Home!
     </h2>
     <p
      data-aos="fade-left"  data-aos-duration="1400" data-aos-once="true"
-      className="text-center mb-4"
-      style={{ color: "white", fontSize: "14px" }}
+      className="Single-fresh-form-p  text-center mb-4"
+     
     >
       Please fill out the form below, our expert will get back to you soon.
     </p>
@@ -249,8 +230,8 @@ const FormComponent = () => (
        className="position-relative">
         
         <img
-          src="/img/Single-fresh-user.svg"
-          alt=""
+          src="/img/mdi_user.svg"
+          alt="user-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
@@ -266,8 +247,8 @@ const FormComponent = () => (
        data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true"
        className="position-relative">
         <img
-          src="/img/Single-main-email.svg"
-          alt=""
+          src="/img/ic_baseline-email.svg"
+          alt="email-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
@@ -283,8 +264,8 @@ const FormComponent = () => (
        data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true"
        className="position-relative">
         <img
-          src="/img/Single-fresh-call.svg"
-          alt=""
+          src="/img/ic_baseline-phone.svg"
+          alt="call-svg"
           className="position-absolute top-50 start-0 translate-middle-y ms-2"
         />
         <input
@@ -300,8 +281,8 @@ const FormComponent = () => (
       <button
        data-aos="fade-left"  data-aos-duration="1700" data-aos-once="true"
         type="submit"
-        className="btn w-100 text-white"
-        style={{ backgroundColor: "#F58220" }}
+        className="Single-fresh-form-btn btn w-100 "
+      
       >
         Reserve Your Spot
       </button>

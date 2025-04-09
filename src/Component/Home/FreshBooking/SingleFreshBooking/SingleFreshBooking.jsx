@@ -1,6 +1,7 @@
 import React, { useEffect ,useState} from 'react'
 import { useParams,useLocation } from 'react-router-dom';
-import "./SingleFreshBooking.css";
+// import "./SingleFreshBooking.css";
+import "./singlefreshbookingtest.css"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SingleFreshBookingHero from './SingleFreshBookingHero'
@@ -33,8 +34,10 @@ export default function SingleFreshBooking() {
   const[bannerImage,setbannerImage]=useState()
   const[projectBasicDetail,setProjectBasicDetail]=useState()
   const[projectPriceSize,setProjectPriceSize]=useState()
+  const[aboutProjectImage,setaboutProjectImage]=useState()
   const[hightlightImage,sethightlightImage]=useState()
-  const[hightlightContent,sethightlightContent]=useState()
+  const[hightlightContent,sethightlightContent]=useState(getFreshProjectdata?.projectData?.projectHightlight?.hightlightContent)
+  const[aboutProject,setaboutProject]=useState(getFreshProjectdata?.projectData?.aboutProject)
   const[projectGallery,setprojectGallery]=useState()
   const[projectAmenities,setprojectAmenities]=useState()
   const[projectSitemap,setprojectSitemap]=useState()
@@ -49,7 +52,9 @@ export default function SingleFreshBooking() {
  setbannerImage(getFreshProjectdata?.projectData?.bannerImage)
  setProjectBasicDetail(getFreshProjectdata?.projectData?.projectBasicDetail)
  setProjectPriceSize(getFreshProjectdata?.projectData?.projectPriceSize)
+ setaboutProjectImage(getFreshProjectdata?.projectData?.aboutProject?.aboutProjectImage)
  sethightlightImage(getFreshProjectdata?.projectData?.projectHightlight?.hightlightImage)
+ setaboutProject(getFreshProjectdata?.projectData?.aboutProject)
  sethightlightContent(getFreshProjectdata?.projectData?.projectHightlight?.hightlightContent)
  setprojectGallery(getFreshProjectdata?.projectData?.projectGallery)
  setprojectAmenities(getFreshProjectdata?.projectData?.projectAmenities)
@@ -83,14 +88,14 @@ export default function SingleFreshBooking() {
 
      const { id } = useParams();
 
-
+console.log(projectAboutBuilder?.projectAboutBuilderName,"pop")
 
   return (
     <div className='overflow-hidden'>
       <SingleFreshBookingHero   projectLogoContent= {projectLogoImage}  projectBannerImage = {bannerImage}
       project={projectBasicDetail}
       projectPrice={projectPriceSize} />
-      <SingleFreshBookingAboutProject projectHightlight={hightlightImage} projectContent={hightlightContent}   project={projectBasicDetail}/>
+      <SingleFreshBookingAboutProject projectHightlight={hightlightImage}  aboutImage={aboutProjectImage} aboutContent={aboutProject}  highlightContent={hightlightContent}   project={projectBasicDetail}/>
       <SingleFreshBookingHighlights />
       <SingleFreshBookingSizeAndPrice   projectPrice={projectPriceSize} project={projectBasicDetail}/>
       <SingleFreshBookingGallery  project={projectBasicDetail} galleryContent={projectGallery}/>
@@ -101,7 +106,7 @@ export default function SingleFreshBooking() {
       {/* <SingleFreshBookingFAQs/> */}
       <SingleFreshBookingLocationMap  sendDataToChild={handleCurrentLocation}  projectLocation={visibleLocation} project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} LocationImageContent={locationImage}  />
       <SingleFreshBookingBuilder   project={projectBasicDetail}   builderContent={projectAboutBuilder}  />
-      <SingleFreshBookingViewMore    project={projectBasicDetail} />
+      <SingleFreshBookingViewMore builderContent={projectAboutBuilder}    project={projectBasicDetail} />
       
       <SingleFreshFooter   projectLogoContent= {projectLogoImage} project={projectBasicDetail}/>
       

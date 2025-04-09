@@ -6,7 +6,7 @@ export default function SingleFreshBookingBuilder({project, builderContent}) {
   return (
     
     <div className="single-fresh-booking-builder-container d-flex justify-content-between m-auto " style={{width:'90%'}}>
-    <div className="single-fresh-booking-builder-text-container ">
+    <div className="single-fresh-booking-builder-text-container " >
       <div className='single-fresh-booking-builder-headings ' >
         <h2>Builder</h2>
         <h2>About {project?.projectName} </h2>
