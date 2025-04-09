@@ -7,17 +7,17 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
   const navigate = useNavigate();
   const heroData = [
     {
-      icon: "hero-flag.png",
+      icon: "hero-flag.svg",
       label: "Total Land",
       value: project?.totalLandArea,
     },
     {
-      icon: "hero-bridge.png",
+      icon: "hero-bridge.svg",
       label: "Total Tower",
       value: project?.towerNumber,
     },
     {
-      icon: "hero-building.png",
+      icon: "hero-building.svg",
       label: "Total Units",
       value: project?.totalUnit,
     },
@@ -27,7 +27,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
     //   value: project?.projectPaymentPlan,
     // },
     {
-      icon: "hero-rupee.png",
+      icon: "hero-rupee.svg",
       label: "Starting Price",
       value: project?.minPrice,
     },

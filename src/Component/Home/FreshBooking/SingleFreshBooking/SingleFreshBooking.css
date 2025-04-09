@@ -1093,6 +1093,7 @@ background-color: rgb(0 0 0 / 50%);
 
   .single-fresh-booking-about-builder p{
     line-height: 30px;
+    font-size: 13px;
 
   }
   .single-fresh-booking-builder-headings h2:nth-child(2){
@@ -1389,10 +1390,20 @@ background-color: rgb(0 0 0 / 50%);
     border-left: 2px solid white;
     border-right: 2px solid white;
     max-width: auto;
-
-  
-
 }
+
+.Single-fresh-floor-plan-main {
+  background-color: #F7F7F7;
+  padding: 25px 0px 0px 0px;
+}
+.freshbooking-location-image-container {
+  height: 250px;
+}
+
+.single-fresh-gallery-container {
+  padding: 26px 17px;
+}
+
 .Single-fresh-booking-about-img-main {
   max-height: 190px;
   
@@ -1403,6 +1414,9 @@ background-color: rgb(0 0 0 / 50%);
 @media (max-width: 375px) {
   .Single-fresh-reserve-post-button{
     right: -20.5%;
+  }
+  .single-fresh-gallery-container {
+    padding: 26px 0px;
   }
 
 }
