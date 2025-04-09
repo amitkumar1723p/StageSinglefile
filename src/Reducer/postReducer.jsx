@@ -25,7 +25,9 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileRequest":
     case "OwnerAllExcelFileRequest":
     case "ReportPagePostRequest":
-    
+      // from here we used fresh project start
+      case "projectStatusRequest":
+       // from here we used fresh project end
       return {
         ...state,
         loading: true,
@@ -56,7 +58,9 @@ export const CreatePostReducer = (state = {}, action) => {
     case "Delete_ExcelFileSuccess":
     case "OwnerAllExcelFileSuccess":
       case "ReportPagePostSuccess":
-   
+      // from here we used fresh project start
+      case "projectStatusSuccess":
+       // from here we used fresh project end
      
     return {
         ...state,
@@ -89,7 +93,9 @@ export const CreatePostReducer = (state = {}, action) => {
     case "OwnerAllExcelFileFail":
     case "ReportPagePostFail":
    
-
+   // from here we used fresh project start
+   case "projectStatusFail":
+    // from here we used fresh project end
       return {
         ...state,
         loading: false,

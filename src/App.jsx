@@ -64,7 +64,7 @@ import NotifyRequirements from "./Component/Admin/NotifyRequirements";
 import AllPostRender from "./Component/Post/AllPostRender";
 import DeletePosts from "./Component/Admin/DeletePosts";
 import Career from "./Component/Home/Careers";
-import SingleFreshBooking from  "./Component/Home/FreshBooking/SingleFreshBooking";
+import SingleFreshBooking from "./Component/Home/FreshBooking/SingleFreshBooking";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
@@ -77,6 +77,11 @@ import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
 import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
 import FreshBookingPost from "./Component/Home/FreshBookingPost";
+import FreshProjectDashboard from "./Component/Admin/FreshProject/FreshProjectDashboard";
+import FreshProjectRoutingComponent from "./Component/Admin/FreshProject/FreshProjectRoutingComponent";
+import { FreshProjectViewAll } from "./Component/Admin/FreshProject/FreshProjectViewAll";
+import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLead";
+
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -836,7 +841,7 @@ function App() {
   return (
     <>
       {/* <PinnacleSms /> */}
-      {/* <Navbar /> */}
+      <Navbar />
 
       {alertData && alertData.AlertShow === true && (
         <Alert
@@ -955,11 +960,11 @@ function App() {
         {/*admin routes*/}
 
 
-        <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
-        <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/>
-        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
+        <Route exact path="/fresh-booking-project" element={<FreshBookingForm />} />
+        <Route exact path="/fresh-bookings" element={<FreshBookingPost />} />
+        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking />} />
 
-        <Route exact path="/fresh-booking"  element={<SingleFreshBooking/>}/>
+        <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
         {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
 
         <Route
@@ -969,9 +974,9 @@ function App() {
         >
           <Route exact path="dashboard" element={<Dashbord />} />
           {/* This routes Avaliable for Owner Only  */}
- 
- <Route exact path="fres-project-create" element={<AdminOwnerRoutes Component={FreshBookingForm}/>}/>
+
           
+
           <Route
             exact
             path="data"
@@ -1016,7 +1021,7 @@ function App() {
               <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
             }
           />
-       
+
 
           <Route
             exact
@@ -1104,12 +1109,32 @@ function App() {
             path="post/update/:PostId"
             element={<CreatePostMain />}
           />
-        </Route>
+
+
+
+          {/* Fresh property Routing start ----------- */}
+
+          <Route  path="fresh-property"  element={<FreshProjectRoutingComponent />} >
+          <Route index element={<FreshProjectDashboard />} />
+
+          <Route  path="create" element={<FreshBookingForm />} />
+          <Route  path="edit/:id" element={<FreshBookingForm />} />
+          <Route  path="view-all" element={<FreshProjectViewAll />} />
+          <Route path="view-all-Response" element={<FreshProjectLead/>}/>
+          </Route>
+           {/* Fresh property Routing end ----------- */}
+       </Route>
         {/*All post route admin routes end here*/}
 
 
         <Route path={"/all-post"} element={<AllPostRender />} />
+
+
         <Route path="*" element={<PageNotFound />} />
+
+
+
+
       </Routes>
       <Footer />
     </>
