@@ -31,7 +31,6 @@ export default function FreshBookingForm() {
     }, [getFreshProjectdata, id])
 
 //    ----------------
-//   console.log( "updatepost",getFreshProjectdata)
 
     const projectType = ["Residential", "Commercial"]
 
@@ -152,7 +151,7 @@ export default function FreshBookingForm() {
 
             const reader = new FileReader();
             reader.onload = (e) => {
-                setAboutProject(e.target.result);
+                setAboutBuilder(e.target.result);
             };
             reader.readAsDataURL(file);
         }
@@ -162,11 +161,11 @@ export default function FreshBookingForm() {
         if (input) {
             input.value = null; // This clears the input value
         }
-        setAboutProject(null);
+        setAboutBuilder(null);
         setFromData({ ...formData, projectAboutBuilder: { ...formData.projectAboutBuilder, projectAboutBuilderImage: undefined } })
     };
 
-    // --------------------------About Project---------------------------------//
+    // --------------------------About Project section---------------------------------//
     const handleAboutProjectSection = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -1810,23 +1809,23 @@ console.log(formData,"bhf")
                                                 justifyContent: 'center'
                                             }}
                                         >
-                                            {aboutProject ? (
+                                            {aboutBuidlder ? (
                                                 <img
-                                                    src={aboutProject}
+                                                    src={aboutBuidlder}
                                                     alt="Preview"
                                                     className="img-fluid"
                                                     style={{ maxHeight: '180px' }}
                                                 />
                                             ) : (
                                                 <img
-                                                    src={formData?.projectAboutBuilder?.projectAboutBuilderImage?.url||"/img/PreviewImg.svg"}
+                                                    src={"/img/PreviewImg.svg"}
                                                     alt="Preview"
 
                                                     style={{ maxHeight: '180px' }}
                                                 />
                                             )}
 
-                                            {aboutProject &&(
+                                            {aboutBuidlder &&(
                                                 <div
                                                     type="div"
                                                     className="btn-close position-absolute top-0 end-0 m-2"
