@@ -22,13 +22,18 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
     SwimmingPool: "/img/swimmer-amenities.png", name: "Swimming Pool" ,
     KidsPlayArea: "/img/teddy-amenities.png", name: "Kids Play Area" ,
     Park: "/img/lotus-amenities.png", name: "Garden" ,
-    VisitorParking: "/img/car-amenities.png", name: "Parking" ,
-    IntercomFacility: "/img/power-amenities.png", name: "Power" ,
-    JoggingTrack: "/img/bar-amenities.png", name: "Club" ,
-    ClubHouse: "/img/lotus-amenities.png", name: "Garden" ,
-    WasteDisposal: "/img/car-amenities.png", name: "Parking" ,
-    SecurityGuard: "/img/bar-amenities.png", name: "Club" ,
-    ConferenceRoom: "/img/lotus-amenities.png", name: "Garden" 
+    VisitorParking: "/img/fresh-booking-visitor-parking.svg", name: "Parking" ,
+    IntercomFacility: "/img/fresh-booking-intercome-facility.svg", name: "Power" ,
+    JoggingTrack: "/img/fresh-booking-jogging-track.svg", name: "Club" ,
+    ClubHouse: "/img/fresh-booking-club.svg", name: "Garden" ,
+    WasteDisposal: "/img/fresh-booking-waste-disposal.svg", name: "Parking" ,
+    SecurityGuard: "/img/fresh-booking-security-guard.svg", name: "Club" ,
+    ConferenceRoom: "/img/fresh-booking-conference-room.svg", name: "Garden",
+    Lift: "/img/fresh-booking-lift.svg", name: "Lift",
+    CafeteriaFoodCourt:"/img/fresh-booking-food-court.svg", name: "food-court",
+    CommunityCentre:"/img/fresh-booking-community-center.svg", name: "community-center",
+    MaintenanceStaff:"/img/fresh-booking-staff.svg", name: "staff",
+    MaintenanceStaff:"/img/fresh-booking-library.svg", name: "library",
   };
 
   return (

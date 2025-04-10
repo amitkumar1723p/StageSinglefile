@@ -1,5 +1,5 @@
 export const createfreshProjectReducer=(state = {}, action)=>{
-    console.log("listen reducer")
+   
     switch (action.type) {
         case "createfreshProjectRequest":
           return {
@@ -30,7 +30,7 @@ export const createfreshProjectReducer=(state = {}, action)=>{
 
 
 export const getAllFreshProjectReducer=(state = {}, action)=>{
-  console.log("listen reducer")
+
   switch (action.type) {
       case "getAllFreshProjectRequest":
         return {
@@ -115,3 +115,99 @@ export const getviewoneProjectReducer = (state = {}, action) => {
       };
   }
 };
+
+export const editFreshProjectionReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "editFreshProjectionRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "editFreshProjectionSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "editFreshProjectionFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "editFreshProjectionClear":
+      // alert("get All Post Clear")
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export const projectStatusReducer=(state = {}, action)=>{
+  switch (action.type) {
+    case "projectStatusRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "projectStatusSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "projectStatusFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "projectStatusClear":
+      // alert("get All Post Clear")
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export const getprojectLeadAllReducer=(state={},action)=>{
+  switch (action.type) {
+    case "getprojectLeadAllRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "getprojectLeadAllSuccess":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "getprojectLeadAllFail":
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+
+    case "getprojectLeadAllClear":
+      // alert("get All Post Clear")
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+}

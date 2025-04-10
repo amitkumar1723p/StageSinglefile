@@ -4,6 +4,7 @@ import './FreshBookingViewAll.css';
 export default function FreshBookingViewAll() {
 
 const capturedData = useLocation();
+
 const cardData = capturedData.state?.allCardData;
 const HandleFreshbookingUrl = (projectName)=>{
     return projectName.split(" ").join("-").toLowerCase();

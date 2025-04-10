@@ -36,7 +36,7 @@ export default function AdminAside() {
       dispatch(GetAllNotificationsAndRequirements());
     }
     if (medata?.user?.Role === "Owner") {
-     
+
       dispatch(getAllUserAction());
       dispatch(Admin_OwnerGetAllPostAction());
       dispatch(getTransactionDetailAction())
@@ -230,6 +230,20 @@ export default function AdminAside() {
             All Post
           </NavLink> */}
 
+
+
+
+            <NavLink
+              to="/admin/fresh-property"
+
+            >
+              <img
+                src="/img/Dashboard.svg"
+                alt="Dashboard Icon"
+
+              />
+              Fresh property
+            </NavLink>
             <button className="AdminAside-button">
               <img src="/img/Report.svg" className="AdminAside-icon" alt="" />
               Report
