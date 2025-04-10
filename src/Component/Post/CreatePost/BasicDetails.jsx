@@ -19,7 +19,6 @@ export default function BasicDetailsSection({
     "Independent/Builder Floor",
     // "Serviced Apartment",
   ]);
-
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
     "Independent House/Villa",
@@ -30,15 +29,12 @@ export default function BasicDetailsSection({
     "Serviced Apartment",
   ];
   const PropertyStatusArray = ["Ready to move", "Under Construction"];
-
   const PropertyAdTypeArray = ["Sale", "Rent"];
-
   // const CurrentPropertyStatusArray = ["Vacant", "Rented", "Self Occupied"];
   const TransitionTypeArray = ["Transfer Case", "Registry Case"];
   const [CurrentPropertyStatusArray, setCurrentPropertyStatusArray] = useState(
     []
   );
-
   const PossessionStatusOption = [
     "Immediate",
     "Within 3 Month",
@@ -49,7 +45,6 @@ export default function BasicDetailsSection({
     "By 2028",
     "By 2029",
   ];
-
   const { loading, medata } = useSelector((state) => {
     return state.meDetails;
   });
@@ -84,10 +79,8 @@ export default function BasicDetailsSection({
       //   );
       // }
     }
-
     // eslint-disable-next-line
   }, [BasicDetailsData.PropertyAdType]);
-
   // Property Ad type (useEffect)  add plot/land
   useEffect(() => {
     if (BasicDetailsData.ApartmentType == "Plot/Land") {
@@ -101,16 +94,12 @@ export default function BasicDetailsSection({
     }
     // eslint-disable-next-line
   }, [BasicDetailsData.ApartmentType]);
-
   // const BasicDetailsSubmitForm =()=>{}
-
   const transitionDuration = "0.3s";
   const [error, setError] = useState(" ");
-
   const [propertyTypeShake, setPropertyTypeShake] = useState(false);
   const [sellRentShake, setSellRentShake] = useState(false);
   const [TransitionTypeShake, setTransitionTypeShake] = useState(false);
-
   const [choosePropertyShake, setChoosePropertyShake] = useState(false);
   const [availableFromShake, setAvailableFromShake] = useState(false);
   const [propertyStatusShake, setPropertyStatusShake] = useState(false);
@@ -119,12 +108,10 @@ export default function BasicDetailsSection({
         SinglePost?.BasicDetails?.TransitionType
       )
     : true;
-
   const [
     currentpropertyStatusReadytoMove,
     setCurrentpropertyStatusReadytoMove,
   ] = useState(false);
-
   const [propertyAgeShake, setPropertyAgeShake] = useState(false);
   const [
     underConstructionPossessionShake,
@@ -133,7 +120,6 @@ export default function BasicDetailsSection({
   const [plotLandPossessionShake, setPlotLandPossessionShake] = useState(false);
   const [currentpropertyStatuPlotLand, setCurrentpropertyStatusPlotLand] =
     useState(false);
-
   const HandleAlertShake = () => {
     if (!BasicDetailsData.PropertyType) {
       if (BasicDetailsData.PropertyAdType) {
@@ -158,12 +144,9 @@ export default function BasicDetailsSection({
       setTimeout(() => setChoosePropertyShake(false), 1000);
       return;
     }
-
     //  let Date = SinglePost?.createAt
     const EnableTransitionTypeDate = new Date("3/20/2025");
-
     //  ["Registry Case" ,"Transfer Case"].includes(SinglePost?.BasicDetails?.TransitionType)
-
     if (
       BasicDetailsData.PropertyAdType === "Sale" &&
       !BasicDetailsData.TransitionType &&
@@ -173,7 +156,6 @@ export default function BasicDetailsSection({
       setTimeout(() => setTransitionTypeShake(false), 1000);
       return;
     }
-
     if (
       BasicDetailsData.PropertyAdType === "Rent" &&
       !BasicDetailsData.AvailableFrom
@@ -189,11 +171,9 @@ export default function BasicDetailsSection({
       // const currentDate = new Date(Date.now());
       const currentDate = new Date().toISOString().split("T")[0];
       const selectedDate = BasicDetailsData.AvailableFrom;
-
       if (selectedDate < currentDate) {
         return alert("Enter valid Date");
       }
-
       // if (selectedDate >= currentDate) {
       //   setBasicDetailsData({
       //     ...BasicDetailsData,
