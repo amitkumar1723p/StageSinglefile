@@ -978,7 +978,7 @@ function App() {
         {/*admin routes*/}
 
 
-        <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
+        {/* <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/> */}
         {/* <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/> */}
         <Route exact path = "/fresh-bookings2" element={<FreshBookingViewAlll/>}/>
         <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
