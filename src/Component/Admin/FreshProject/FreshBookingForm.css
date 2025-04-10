@@ -15,7 +15,6 @@
 }
 
 
-
 .freshbooking-projekt-highlight-container{
     width: 40%;
 
@@ -162,4 +161,29 @@
             width: 100%;
         }
     }
+}
+
+
+/* ===========================================filter Project  css */
+
+.form-select-viewAll, .form-input {
+    /* color: #727b85; */
+    font-family: "Inter", Sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  
+    background: #fff;
+    border-radius: 0px;
+    font-size: 12px;
+    width: 85%;
+    box-sizing: border-box;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.form-select-viewAll:focus {
+    border-color: #86b7fe;
+    outline: 1;
+    box-shadow: 0 0 0 .25rem #f7f7f800;
 }

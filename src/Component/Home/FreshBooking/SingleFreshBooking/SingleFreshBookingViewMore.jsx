@@ -57,31 +57,32 @@ export default function SingleFreshBookingViewMore(builderContent) {
        const navigate = useNavigate();
 
 
- const containerRef = useRef(null);
-  useEffect(() => {
-         const container = containerRef.current;
-         if (!container) return;
+       const containerRef = useRef(null);
+       const animationFrameIdRef = useRef(null); // store animation frame ID outside useEffect
        
-         let scrollAmount = 0;
-         let animationFrameId;
+      //  useEffect(() => {
+      //    const container = containerRef.current;
+      //    if (!container) return;
        
-         const scroll = () => {
-           container.scrollLeft += 1;
-           scrollAmount += 0.1;
+      //    let scrollAmount = 0;
        
-           if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
-             container.scrollLeft = 0;
-             scrollAmount = 0;
-           }
+      //    const scroll = () => {
+      //      container.scrollLeft += 1;
+      //      scrollAmount += 0.1;
        
-           animationFrameId = requestAnimationFrame(scroll);
-         };
+      //      if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+      //        container.scrollLeft = 0;
+      //        scrollAmount = 0;
+      //      }
        
-         scroll(); // start scrolling
+      //      animationFrameIdRef.current = requestAnimationFrame(scroll);
+      //    };
        
-         return () => cancelAnimationFrame(animationFrameId); // cleanup
-       }, []);
-
+      //    scroll();
+       
+      //    return () => cancelAnimationFrame(animationFrameIdRef.current);
+      //  }, []);
+       
 
   console.log(builderContent?.projectAboutBuilderName, "saurabh")
      

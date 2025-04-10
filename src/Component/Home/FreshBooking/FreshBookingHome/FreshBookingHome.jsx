@@ -98,6 +98,7 @@ dispatch(getAllFreshProjectAction())
       
         let scrollAmount = 0;
         let animationFrameId;
+        let delayTimer;
       
         const scroll = () => {
           container.scrollLeft += 1;
@@ -111,9 +112,15 @@ dispatch(getAllFreshProjectAction())
           animationFrameId = requestAnimationFrame(scroll);
         };
       
-        scroll(); // start scrolling
+        // Delay scroll start by 3 seconds
+        delayTimer = setTimeout(() => {
+          scroll(); // Start scrolling after delay
+        }, 1500);
       
-        return () => cancelAnimationFrame(animationFrameId); // cleanup
+        return () => {
+          clearTimeout(delayTimer); // Clear delay timer if component unmounts
+          cancelAnimationFrame(animationFrameId); // Stop animation
+        };
       }, []);
       
         
