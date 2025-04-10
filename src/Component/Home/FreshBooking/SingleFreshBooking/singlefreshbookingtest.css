@@ -1,3 +1,14 @@
+:root {
+  /* --main-dark-clr: #1877f2;
+  --main-light-hover-clr: #96c8ef; */
+  --main-white-clr: #ffff;
+  --main-black-clr: #222;
+  --main-property-name-clr: #0066CC;
+  --main-single-fresh-booking-btn-clr: #1E90FF;
+}
+
+
+
 .fresh-booking-new-amenities-card{
   width: 204px;
   height:180px;
@@ -284,14 +295,7 @@ width: 40%;
 
 
 
-:root {
-  /* --main-dark-clr: #1877f2;
-  --main-light-hover-clr: #96c8ef; */
-  --main-white-clr: #ffff;
-  --main-black-clr: #222;
-  --main-property-name-clr: #0066CC;
-  --main-single-fresh-booking-btn-clr: #1E90FF;
-}
+
 
 .single-fresh-booking-builder-container{
   gap: 15px;
@@ -898,6 +902,7 @@ background-color: var(--main-white-clr);
   text-align: left;
   font-weight: bold;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 /* Table body styling */
@@ -905,6 +910,7 @@ background-color: var(--main-white-clr);
   padding: 10px;
   border: 1px solid #ddd;
   transition:  0.3s ease-in-out;
+  text-align: center;
 }
 
 /* Row hover effect */
@@ -1228,6 +1234,86 @@ background-color: var(--main-white-clr);
 .fresh-booking-view-more-h2 {
   font-size: 32px;
 }
+
+.Single-fresh-booking-back-to-top-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(rgb(227, 203, 255), rgba(252, 235, 252, 1));
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  margin: 24px 0px;
+}
+
+.Single-fresh-booking-svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.Single-fresh-booking-svgIcon path {
+  fill: var(--main-property-name-clr);
+}
+
+.Single-fresh-booking-back-to-top-button:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: var(--main-property-name-clr);
+  align-items: center;
+}
+
+.Single-fresh-booking-back-to-top-button:hover .Single-fresh-booking-svgIcon {
+  /* width: 20px; */
+  transition-duration: 0.3s;
+  transform: translateY(-200%);
+}
+
+.Single-fresh-booking-back-to-top-button::before {
+  position: absolute;
+  bottom: -20px;
+  content: "Back to Top";
+  color: var(--main-property-name-clr);
+  /* transition-duration: .3s; */
+  font-family: 700;
+  font-size: 0px;
+}
+
+.Single-fresh-booking-back-to-top-button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  bottom: unset;
+ 
+  /* transform: translateY(-30px); */
+  transition-duration: 0.3s;
+
+  .bg-decor {
+    z-index: 0;
+    background: radial-gradient(circle at top left, rgba(0,123,255,0.3), transparent),
+                radial-gradient(circle at bottom right, rgba(111,66,193,0.3), transparent);
+    pointer-events: none;
+  }
+  .bg-gradient {
+    background: linear-gradient(to bottom right, #007bff, #0056b3);
+  }
+  .logo-shadow {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+  .hover-text-white:hover {
+    color: white !important;
+  }
+  
+
+
+}
+
 
 
 
@@ -1743,7 +1829,7 @@ background-color: var(--main-white-clr);
   font-family: inherit;
   width: 100%;
   border: none;
-  border-bottom: 2px solid #9b9b9b;
+  border-bottom: 3px solid var(--main-white-clr);
   outline: 0;
   font-size: 17px;
   color: #fff;
