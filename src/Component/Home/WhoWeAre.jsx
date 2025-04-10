@@ -19,9 +19,7 @@ const WhoWeAre = () => {
             transforms the traditional property buying and selling process into
             a fully digital experience. As the first online platform to provide
             real-time price alerts to property owners, we ensure complete
-            transparency and a seamless user journey. Our platform targets to ensure the best market prices and offers comprehensive transaction support,
-            including legal documentation and property registration, ensuring a
-            smooth and hassle-free process from start to finish.
+            transparency and a seamless user journey. Our platform focuses on providing the best market prices and offers full support throughout the entire process, including legal paperwork and property registration, making sure everything goes smoothly and without any hassle.
           </p>
           <div className="quote-right">”</div>
         </div>
