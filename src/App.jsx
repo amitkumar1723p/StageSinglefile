@@ -78,7 +78,7 @@ import { FormatDate } from "./utils/CommonFunction";
 import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
 import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
-import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
+
 import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
@@ -853,7 +853,7 @@ function App() {
   return (
     <>
       {/* <PinnacleSms /> */}
-      <Navbar />
+      {/* <Navbar /> */}
 
       {alertData && alertData.AlertShow === true && (
         <Alert
@@ -973,7 +973,6 @@ function App() {
 
 
         <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/>
-        <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/>
         <Route exact path = "/fresh-bookings2" element={<FreshBookingViewAlll/>}/>
         <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
 

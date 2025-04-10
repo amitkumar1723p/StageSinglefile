@@ -149,7 +149,7 @@ dispatch(getAllFreshProjectAction())
 
           {allFreshBookingCard.length>0?( 
                 allFreshBookingCard.map(cardData => (
-                  <div className="fresh-booking-home-card d-flex align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
+                  <div  className="fresh-booking-home-card d-flex align-items-end overflow-hidden " style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
              
              <div className='fresh-booking-home-card-shadow '>
              <div className="fresh-booking-home-card-content w-100 d-flex flex-column  gap-2 " style={{ padding:'8px 12px 12px 12px', position:'absolute' }} >
@@ -164,7 +164,7 @@ dispatch(getAllFreshProjectAction())
                      
                       <div className='w-100 ' >
                       <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
-                        <button  className="fresh-booking-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
+                        <button  className="fresh-booking-card-button w-100 d-flex align-items-center text-white justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
                        >
                           View More <img src="/img/Vector-arrow-top-right.svg" alt="logo" />
                         </button>
