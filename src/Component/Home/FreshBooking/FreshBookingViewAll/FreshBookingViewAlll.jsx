@@ -180,7 +180,7 @@ const HandleFreshbookingUrl = (projectName)=>{
 <div className='freshbooking-view-alll-main-container  w-100 m-auto pb-4'>
 <div className={`freshbooking-view-alll-card-container m-auto`}  >
 {cardData?.map((cardData,index) => (
-      <div data-aos="zoom-in"  data-aos-duration="600" data-aos-once="true" className="fresh-booking-view-alll-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover',boxShadow: '6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
+      <div data-aos="zoom-in"  data-aos-duration="600" data-aos-once="false" className="fresh-booking-view-alll-card d-flex w-100 align-items-end overflow-hidden " style={{ backgroundSize: 'cover',boxShadow: '6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff', backgroundPosition: 'center', backgroundImage: `url(${cardData?.bannerImage?.url})`, position:'relative'}} >
         <div className='fresh-booking-view-alll-card-shadow d-flex w-100 h-100 align-items-end overflow-hidden '>
           <div className="fresh-booking-view-alll-card-content w-100 d-flex flex-column  gap-2 " style={{backgroundColor:'rgba(255, 255, 255, 1)', padding:'4px 12px 12px 12px', position:'absolute' }} >
             <div  className="fresh-booking-view-alll-card-upper-content d-flex flex-column gap-1 w-100 h-50  pb-2" >

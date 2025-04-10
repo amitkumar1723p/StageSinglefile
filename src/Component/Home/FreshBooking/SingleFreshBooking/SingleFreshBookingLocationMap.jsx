@@ -31,8 +31,8 @@ useEffect(()=>{
     <div className="container py-5">
         <div className="single-fresh-booking-locationmap-container">
           <div className="col-md-6 mb-4">
-            <h3 className="mb-3 col Single-fresh-location-map-h3">Location Map</h3>
-            <h2 className="fw-bold mb-2 Single-fresh-location-map-h2" >{project?.projectName}</h2>
+            <h3   className="mb-3 col Single-fresh-location-map-h3">Location Map</h3>
+            <h2   className="fw-bold mb-2 Single-fresh-location-map-h2" >{project?.projectName}</h2>
 
             <div className="Single-fresh-info-section">
               <div className="Single-fresh-map-buttons">
@@ -107,16 +107,18 @@ useEffect(()=>{
       <div className="single-fresh-booking-sitemap-container w-100  m-auto" style={{backgroundColor:'#F7F7F7'}}>
 
       <div className="container mt-2 mb-2 ">
-        <h3 className="mb-1 Single-fresh-site-map-h3">Site Map </h3>
-        <h2 className="fw-bold  mb-5 Single-fresh-site-map-h2" >
+        <h3 data-aos="fade-up"  data-aos-once="false" className="mb-1 Single-fresh-site-map-h3">Site Map </h3>
+        <h2 data-aos="fade-up"  data-aos-once="false" className="fw-bold  mb-5 Single-fresh-site-map-h2" >
           Master Plan Of  {project?.projectName}
         </h2>
       </div>
       <div
+      data-aos="zoom-in"  data-aos-once="false"
         className="overflow-hidden d-flex align-items-center justify-content-center"
         style={{  width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
       >
         <img
+      
           src={siteMapContent?.url}
           alt="site map"
         

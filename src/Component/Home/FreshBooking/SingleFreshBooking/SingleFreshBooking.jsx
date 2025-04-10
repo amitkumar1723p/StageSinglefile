@@ -10,6 +10,7 @@ import SingleFreshBookingHighlights from './SingleFreshBookingHighlights'
 import SingleFreshBookingSizeAndPrice from './SingleFreshBookingSizeAndPrice'
 import SingleFreshBookingGallery from './SingleFreshBookingGallery'
 import SingleFreshBookingAmenities from './SingleFreshBookingAmenities'
+import SingleFreshBookingNewAmenities from './SingleFreshBookingNewAmenities';
 import SingleFreshBookingFloorPlan from './SingleFreshBookingFloorPlan'
 import SingleFreshBookingLocationMap from './SingleFreshBookingLocationMap'
 import SingleFreshBookingFAQs from './SingleFreshBookingFAQs'
@@ -99,7 +100,8 @@ console.log(projectAboutBuilder?.projectAboutBuilderName,"pop")
       <SingleFreshBookingHighlights />
       <SingleFreshBookingSizeAndPrice   projectPrice={projectPriceSize} project={projectBasicDetail}/>
       <SingleFreshBookingGallery  project={projectBasicDetail} galleryContent={projectGallery}/>
-      <SingleFreshBookingAmenities project={projectBasicDetail} amenitiesContent={projectAmenities}/>
+      {/* <SingleFreshBookingAmenities project={projectBasicDetail} amenitiesContent={projectAmenities}/> */}
+      <SingleFreshBookingNewAmenities project={projectBasicDetail} amenitiesContent={projectAmenities}/>
       <SingleFreshBookingFloorPlan project={projectBasicDetail} FloorPlanContent={projectFloorplan}/>
       {/* <SingleFreshBookingLocationMap  project={projectBasicDetail} siteMapContent={projectSitemap} builderContent={projectAboutBuilder} builderImage={projectAboutBuilderImage} loctionContent={projectLocation}/>  */}
       {/* <PostDetails/> */}

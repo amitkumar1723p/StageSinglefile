@@ -21,12 +21,12 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
     <>
     <div className='Single-fresh-floor-plan-main'>
     <div className="m-auto" style={{ width: '90%' }}>
-        <h3 className="mb-3 single-fresh-floor-plan-h3">Floor Plan</h3>
-        <h2 className="fw-bold mb-3 single-fresh-floor-plan-h2" >
+        <h3 data-aos="fade-up" data-aos-duration="1200" data-aos-once="false" className="mb-3 single-fresh-floor-plan-h3">Floor Plan</h3>
+        <h2 data-aos="fade-up" data-aos-duration="1400" data-aos-once="false" className="fw-bold mb-3 single-fresh-floor-plan-h2" >
           The {project?.projectName || 'Project'} Floor Plan
         </h2>
       </div>
-    <div className="single-fresh-carousel">
+    <div data-aos="fade-up" data-aos-duration="1200" data-aos-once="false" className="single-fresh-carousel">
       <div className="single-fresh-gallery-container">
         {FloorPlanContent?.map((plan, index) => (
           <div key={index} className="single-fresh-gallery-item"
