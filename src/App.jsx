@@ -299,6 +299,7 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
+      console.log("admin" ,CreatePost)
     if (CreatePost) {
       if (CreatePost.success === true) {
         setalertMessage(<p>{CreatePost.message}</p>);
@@ -335,6 +336,8 @@ function App() {
     // eslint-disable-next-line
   }, [CreatePost]);
 
+  // Fresh Property  show Alert ()
+   
   //  Alert show Single Post
   useEffect(() => {
     if (getSinglePostData) {
@@ -832,12 +835,65 @@ function App() {
   }, [AgentAllExcelFilesData]);
 
 
+
+
+
+
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
     }
     // eslint-disable-next-line
   }, [alertType, alertMessage, alertshow]);
+
+
+  
+   
+
+  //  Fresh Property For Admin 
+
+    //  console.log(allFreshProjectData ,"allfresh data")
+//   useEffect(() => {
+  
+//   if (CreatePost || allFreshProjectData) {
+//     if (CreatePost?.success === true || allFreshProjectData?.success === true ) {
+//       setalertMessage(<p>{CreatePost?<p>{CreatePost?.message}</p>:<p>{allFreshProjectData?.message}</p>}</p>);
+//       setalertType("success");
+//       setalertShow(true);
+//       dispatch({ type: "AdminAlertClear" });
+//     }
+//     if (CreatePost?.success === false) {
+//       if (CreatePost.AdminVerify === false) {
+//         dispatch(LogoutAction());
+//         navigate("/");
+//       }
+//       if (CreatePost?.IsAuthenticated === false) {
+//         navigate("/");
+//       }
+
+//       if (CreatePost?.fielderrors) {
+//         setalertMessage(
+//           CreatePost?.fielderrors?.map((e, index) => {
+//             return <p key={index}>{e.msg}</p>;
+//           })
+//         );
+//       } else {
+//         setalertMessage(<p> {CreatePost?.message}</p>);
+//       }
+
+//       // setalertMessage(<p>{CreatePost.message}</p>);
+//       setalertType("error");
+//       setalertShow(true);
+//       dispatch({ type: "AdminAlertClear" });
+//     }
+//   }
+
+//   // eslint-disable-next-line
+// }, [CreatePost,allFreshProjectData]);
+
+// console.log(allFreshProjectData.success,"uuu")
+
+
   useEffect(() => {
     dispatch(GetMeDetailsAction());
   }, []);

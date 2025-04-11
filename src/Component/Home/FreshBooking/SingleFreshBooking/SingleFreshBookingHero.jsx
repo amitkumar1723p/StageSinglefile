@@ -171,6 +171,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
             style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 50 }}
           >
             <div className="position-relative">
+               {/* <FormComponent /> */}
               {FormComponent()}
               <button
                 className="btn-close position-absolute top-0 end-0 m-2"
@@ -206,6 +207,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
 // ✅ Extracted Form Component - Used in both Popup & Large Screen
 const FormComponent = () => (
+  
   <form
     className="Single-fresh-form rounded shadow-lg text-light overflow-hidden"
   >

@@ -27,6 +27,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "ReportPagePostRequest":
       // from here we used fresh project start
       case "projectStatusRequest":
+        case"updateProjectLeadRequest":
+      // case "getAllFreshProjectRequest":
        // from here we used fresh project end
       return {
         ...state,
@@ -60,6 +62,8 @@ export const CreatePostReducer = (state = {}, action) => {
       case "ReportPagePostSuccess":
       // from here we used fresh project start
       case "projectStatusSuccess":
+      // case "getAllFreshProjectSuccess":   // getapi
+        case"updateProjectLeadSuccess":
        // from here we used fresh project end
      
     return {
@@ -95,6 +99,8 @@ export const CreatePostReducer = (state = {}, action) => {
    
    // from here we used fresh project start
    case "projectStatusFail":
+    case"updateProjectLeadFail":
+  //  case "getAllFreshProjectFail":
     // from here we used fresh project end
       return {
         ...state,

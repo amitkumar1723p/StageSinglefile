@@ -210,6 +210,44 @@ export const getprojectLeadAllAction=()=>{
     }
 }
 
+export const updateProjectLeadAction=(id,remark)=>{
+    console.log(remark)
+    
+     
+    return async(dispatch)=>{
+        try {
+            dispatch({
+                type: "updateProjectLeadRequest",
+            });
+       const data1={ remark }
+            let url = `${api_Base_Url}/fresh/update-remark/${id}`;
+            let config = {
+                headers: { "Content-Type": "application/json"  },
+                withCredentials: true,
+            };
+            // Post the FormData to the backend
+            const { data } = await axios.post(url,data1, config);
+    
+            dispatch({
+                type: "updateProjectLeadSuccess",
+                payload: data
+            });
+        } catch (error) {
+            if (error.response) {
+                dispatch({
+                    type: "updateProjectLeadFail",
+                    payload: error.response.data
+                });
+            } else {
+                dispatch({
+                    type: "updateProjectLeadFail",
+                    payload: { message: error.message, success: false },
+                });
+            }
+        }
+    }
+}
+
 
 
 

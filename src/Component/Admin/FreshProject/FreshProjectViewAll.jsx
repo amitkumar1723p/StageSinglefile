@@ -31,6 +31,41 @@ if(projectId!==null){
 },[projectId])
 
 
+
+  const {
+    data: adminAlertData,
+    LodingType,
+    loading: PostVerifyLoding,
+  } = useSelector((state) => {
+    return state.Post;
+  });
+//  useEffect(()=>{
+//    console.log()
+//      if(adminAlertData&&["projectStatusRequest"].includes(LodingType)){
+//       if(adminAlertData.sucess==true){
+//         alert("run")
+//       }
+//      }
+
+//  } ,[adminAlertData])
+
+  // if (
+  //     adminAlertData &&
+  //     (LodingType === "RemoveAssignPropertyRequest" ||
+  //       LodingType === "Admin_AssignedRequest")
+  //   ) {
+  //     if (adminAlertData.success === true) {
+  //       setAssignProperty([]);
+  //       setSelectAll(false);
+
+  //       dispatch(GetAllAssignProperty());
+  //     }
+  //   }
+
+  //   // eslint-disable-next-line
+  // }, [adminAlertData]);
+
+
   return (
 
 

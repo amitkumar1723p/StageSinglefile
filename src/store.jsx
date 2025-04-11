@@ -54,7 +54,7 @@ import {
 
 import { createfreshProjectReducer,getAllFreshProjectReducer,
    getviewoneProjectReducer,editFreshProjectionReducer,getprojectLeadAllReducer,
-  projectStatusReducer } from "./Reducer/freshProjectReducer.jsx";
+   } from "./Reducer/freshProjectReducer.jsx";
 
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
@@ -108,7 +108,7 @@ const reducer = combineReducers({
   // createfreshProjectReducer,
   getFreshProject:getviewoneProjectReducer,
   editFreshProjectionReducer,
-  projectStatusReducer,
+  // projectStatusReducer,
  getAllFreshProjectLead: getprojectLeadAllReducer
 
 });

@@ -29,6 +29,7 @@ export const createfreshProjectReducer=(state = {}, action)=>{
 }
 
 
+
 export const getAllFreshProjectReducer=(state = {}, action)=>{
 
   switch (action.type) {
@@ -148,37 +149,37 @@ export const editFreshProjectionReducer = (state = {}, action) => {
   }
 };
 
-export const projectStatusReducer=(state = {}, action)=>{
-  switch (action.type) {
-    case "projectStatusRequest":
-      return {
-        ...state,
-        loading: true,
-      };
+// export const projectStatusReducer=(state = {}, action)=>{
+//   switch (action.type) {
+//     case "projectStatusRequest":
+//       return {
+//         ...state,
+//         loading: true,
+//       };
 
-    case "projectStatusSuccess":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+//     case "projectStatusSuccess":
+//       return {
+//         ...state,
+//         loading: false,
+//         data: action.payload,
+//       };
 
-    case "projectStatusFail":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+//     case "projectStatusFail":
+//       return {
+//         ...state,
+//         loading: false,
+//         data: action.payload,
+//       };
 
-    case "projectStatusClear":
-      // alert("get All Post Clear")
-      return {};
-    default:
-      return {
-        ...state,
-      };
-  }
-};
+//     case "projectStatusClear":
+//       // alert("get All Post Clear")
+//       return {};
+//     default:
+//       return {
+//         ...state,
+//       };
+//   }
+// };
 
 export const getprojectLeadAllReducer=(state={},action)=>{
   switch (action.type) {
