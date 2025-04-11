@@ -32,7 +32,6 @@ export default function FreshBookingForm() {
 
 //    ----------------
 
-
     const projectType = ["Residential", "Commercial"]
 
     const projectAdTypeResidential = ["Apartment", "Residential Flats", "Plot/land", "Villa", "Farm House", "Independent Floors"]
@@ -584,7 +583,7 @@ export default function FreshBookingForm() {
 
     };
 
-
+// console.log(formData,"bhf")
     return (
 
         <div className="conatiner">
@@ -792,6 +791,8 @@ export default function FreshBookingForm() {
                                                 backgroundColor: '#e9ecef',
                                                 height: '188px',
                                                 display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center'
 
                                             }}
                                         >
@@ -807,7 +808,7 @@ export default function FreshBookingForm() {
                                                     src={formData?.projectLogoImage?.url || '/img/PreviewImg.svg'}
 
                                                     alt="Preview"
-
+                     
                                                     style={{ maxHeight: '180px' }}
                                                 />
                                             )}
@@ -893,14 +894,14 @@ export default function FreshBookingForm() {
                                                     src={cardImagePreview}
                                                     alt="Preview"
                                                     className="img-fluid"
-                                                    style={{ maxHeight: '180px' }}
+                                                    style={{Height: 'auto', width:"100%" }}
                                                 />
                                             ) : (
                                                 <img
                                                     src={formData?.bannerImage?.url || '/img/PreviewImg.svg'}
                                                     alt="Preview"
 
-                                                    style={{ height: '100%' }}
+                                                    style={{Height: 'auto', width:"100%" }}
                                                 />
                                             )}
 
@@ -1011,14 +1012,13 @@ export default function FreshBookingForm() {
                                                 src={aboutProject}
                                                 alt="Preview"
                                                 className="img-fluid"
-                                                style={{ maxHeight: '180px' }}
+                                                style={{Height: 'auto', width:"100%" }}
                                             />
                                         ) : (
                                             <img
                                                 src={formData?.aboutProject?.aboutProjectImage?.url || "/img/PreviewImg.svg"}
                                                 alt="Preview"
-
-                                                style={{ maxHeight: '180px' }}
+                                                style={{Height: 'auto', width:"100%" }}
                                             />
                                         )}
 
@@ -1147,14 +1147,14 @@ export default function FreshBookingForm() {
                                                 src={handleProjectHighlight}
                                                 alt="Preview"
                                                 className="img-fluid"
-                                                style={{ maxHeight: '180px' }}
+                                                style={{Height: 'auto', width:"100%" }}
                                             />
                                         ) : (
                                             <img
                                                 src={formData?.projectHightlight?.hightlightImage?.url || "/img/PreviewImg.svg"}
                                                 alt="Preview"
 
-                                                style={{ maxHeight: '180px' }}
+                                                style={{Height: 'auto', width:"100%" }}
                                             />
                                         )}
 
@@ -1584,14 +1584,14 @@ export default function FreshBookingForm() {
                                                 src={locationMapImage}
                                                 alt="Preview"
                                                 className="img-fluid"
-                                                style={{ maxHeight: '180px' }}
+                                                style={{Height: 'auto', width:"100%" }}
                                             />
                                         ) : (
 
                                             <img
                                                 src={formData?.projectLocation?.locationImage?.url||"/img/PreviewImg.svg"}
                                                 alt="Preview"
-                                                style={{ maxHeight: '180px' }} />
+                                                style={{Height: 'auto', width:"100%" }} />
                                         )}
 
                                         {locationMapImage && (
@@ -1691,7 +1691,7 @@ export default function FreshBookingForm() {
                                                     src={sitePlan}
                                                     alt="Preview"
                                                     className="img-fluid"
-                                                    style={{ maxHeight: '180px' }}
+                                                    style={{Height: 'auto', width:"100%" }}
                                                 />
                                             ) : (
 
@@ -1699,7 +1699,7 @@ export default function FreshBookingForm() {
                                                     src={formData?.projectSitemap?.url||"/img/PreviewImg.svg"}
                                                     alt="Preview"
 
-                                                    style={{ maxHeight: '180px' }} />
+                                                    style={{Height: 'auto', width:"100%" }} />
                                             )}
 
                                             {sitePlan && (
@@ -1813,14 +1813,14 @@ export default function FreshBookingForm() {
                                                     src={aboutBuidlder}
                                                     alt="Preview"
                                                     className="img-fluid"
-                                                    style={{ maxHeight: '180px' }}
+                                                    style={{Height: 'auto', width:"100%" }}
                                                 />
                                             ) : (
                                                 <img
-                                                    src={"/img/PreviewImg.svg"}
+                                                    src={formData?.projectAboutBuilder?.projectAboutBuilderImage?.url ||"/img/PreviewImg.svg"}
                                                     alt="Preview"
 
-                                                    style={{ maxHeight: '180px' }}
+                                                    style={{Height: 'auto', width:"100%" }}
                                                 />
                                             )}
 

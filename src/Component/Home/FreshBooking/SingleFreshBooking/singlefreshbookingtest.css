@@ -1,3 +1,127 @@
+:root {
+  /* --main-dark-clr: #1877f2;
+  --main-light-hover-clr: #96c8ef; */
+  --main-white-clr: #ffff;
+  --main-black-clr: #222;
+  --main-property-name-clr: #0066CC;
+  --main-single-fresh-booking-btn-clr: #1E90FF;
+}
+
+
+
+.fresh-booking-new-amenities-card{
+  width: 204px;
+  height:180px;
+  padding: 8px;
+  outline: 1px solid rgb(202, 202, 202);
+  border-radius: 8px ;
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25); */
+  transition-duration: .4s;
+  transition-timing-function: ease-in-out;
+
+}
+
+.fresh-booking-new-amenities-img-container{
+  height: 70%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 8px 0px 0px;
+  transition-duration: .4s;
+  transition-timing-function: ease-in-out;
+
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+  }
+}
+
+.fresh-booking-new-amenities-headings{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 auto;
+  transition-duration: .4s;
+  transition-timing-function: ease-in-out;
+
+
+  
+}
+
+.fresh-booking-new-amenities-headings h2:nth-child(1){
+  font-size: 24px;
+  font-weight: 500;
+
+}
+
+.fresh-booking-new-amenities-headings h2:nth-child(2){
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(0, 102, 204, 1);
+
+}
+.single-fresh-booking-amenities-container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0px;
+}
+.single-fresh-booking-amenities-card-container{
+
+}
+.fresh-booking-new-amenities-name-container{
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 0px 6px 6px;
+  transition-duration: .4s;
+  transition-timing-function: ease-in-out;
+
+
+  p{
+    color: rgba(108, 114, 127, 1);
+    transition-duration: .4s;
+    transition-timing-function: ease-in-out;
+  }
+}
+
+
+.fresh-booking-new-amenities-card:hover{
+  padding: 0px;
+  .fresh-booking-new-amenities-img-container{
+    height: 80%;
+  }
+  .fresh-booking-new-amenities-name-container{
+    height: 20%;
+    background-color: rgba(0, 102, 204, 1);
+    
+    p{
+      color: white;
+    }
+
+
+  }
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .freshbooking-view-more-main-container{
   width: 100%;
@@ -171,14 +295,7 @@ width: 40%;
 
 
 
-:root {
-  /* --main-dark-clr: #1877f2;
-  --main-light-hover-clr: #96c8ef; */
-  --main-white-clr: #ffff;
-  --main-black-clr: #222;
-  --main-property-name-clr: #0066CC;
-  --main-single-fresh-booking-btn-clr: #1E90FF;
-}
+
 
 .single-fresh-booking-builder-container{
   gap: 15px;
@@ -394,10 +511,10 @@ width: 40%;
 }
 
 .Single-fresh-form {
-  width: 320px;
-  padding: 37px 17px;
+  width: 380px;
+  padding: 22px 27px;
   right: 90px;
-  background-color:var(--main-property-name-clr);
+  background-color: var(--main-property-name-clr);
   top: 159px;
   overflow-y: auto;
   max-height: 90vh;
@@ -785,6 +902,7 @@ background-color: var(--main-white-clr);
   text-align: left;
   font-weight: bold;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 /* Table body styling */
@@ -792,6 +910,7 @@ background-color: var(--main-white-clr);
   padding: 10px;
   border: 1px solid #ddd;
   transition:  0.3s ease-in-out;
+  text-align: center;
 }
 
 /* Row hover effect */
@@ -1115,6 +1234,86 @@ background-color: var(--main-white-clr);
 .fresh-booking-view-more-h2 {
   font-size: 32px;
 }
+
+.Single-fresh-booking-back-to-top-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(rgb(227, 203, 255), rgba(252, 235, 252, 1));
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  margin: 24px 0px;
+}
+
+.Single-fresh-booking-svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.Single-fresh-booking-svgIcon path {
+  fill: var(--main-property-name-clr);
+}
+
+.Single-fresh-booking-back-to-top-button:hover {
+  width: 140px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: var(--main-property-name-clr);
+  align-items: center;
+}
+
+.Single-fresh-booking-back-to-top-button:hover .Single-fresh-booking-svgIcon {
+  /* width: 20px; */
+  transition-duration: 0.3s;
+  transform: translateY(-200%);
+}
+
+.Single-fresh-booking-back-to-top-button::before {
+  position: absolute;
+  bottom: -20px;
+  content: "Back to Top";
+  color: var(--main-property-name-clr);
+  /* transition-duration: .3s; */
+  font-family: 700;
+  font-size: 0px;
+}
+
+.Single-fresh-booking-back-to-top-button:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  bottom: unset;
+ 
+  /* transform: translateY(-30px); */
+  transition-duration: 0.3s;
+
+  .bg-decor {
+    z-index: 0;
+    background: radial-gradient(circle at top left, rgba(0,123,255,0.3), transparent),
+                radial-gradient(circle at bottom right, rgba(111,66,193,0.3), transparent);
+    pointer-events: none;
+  }
+  .bg-gradient {
+    background: linear-gradient(to bottom right, #007bff, #0056b3);
+  }
+  .logo-shadow {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  }
+  .hover-text-white:hover {
+    color: white !important;
+  }
+  
+
+
+}
+
 
 
 
@@ -1608,5 +1807,63 @@ background-color: var(--main-white-clr);
   .single-fresh-gallery-container {
     padding: 26px 0px;
   }
-
 }
+
+.form__group {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.form__icon {
+  position: absolute;
+  top: 56%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 23px;
+  margin-left: 10px;
+  pointer-events: none;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid var(--main-white-clr);
+  outline: 0;
+  font-size: 17px;
+  color: #fff;
+  padding: 6px 0 4px 40px; /* tighter top & bottom padding */
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__label {
+  position: absolute;
+  top: 13px;
+  left: 40px;
+  font-size: 13px;
+  color: var(--main-white-clr);
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+/* FLOATING LABEL */
+.form__field:focus ~ .form__label,
+.form__field:not(:placeholder-shown) ~ .form__label {
+  top: -10px;
+  font-size: 14px;
+  color: #38caef;
+  font-weight: 600;
+}
+
+.form__field:focus {
+  border-width: 2px;
+  border-color: #38caef;
+}
+
+

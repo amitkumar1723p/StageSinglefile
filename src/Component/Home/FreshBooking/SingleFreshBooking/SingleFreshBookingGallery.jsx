@@ -12,7 +12,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
 
   return (
     <>
-    <div className='single-fresh-gallery-main'>
+    <div className='single-fresh-gallery-main' id='Gallery'>
     <div className="container " >
       <h3 className="mb-1 Single-fresh-gallery-p">Gallery</h3>
       <h3 className="fw-bold mb-3 Single-fresh-gallery-h3" >
@@ -21,7 +21,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
 
       <div className="row mb-3 justify-content-center">
         <div className="col-12 d-flex justify-content-center">
-        <div 
+        <div data-aos="fade-up" data-aos-once="false"
   className="single-freshbooking-gallery-image-container overflow-hidden border position-relative" 
   style={{ height: 'auto' }}
 >
@@ -51,10 +51,10 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
         </div>
       </div>
 
-      <div className="d-flex gap-2  overflow-scroll " style={{scrollbarWidth:'none'}}>
+      <div  className="d-flex gap-2  overflow-scroll " style={{scrollbarWidth:'none'}}>
         {galleryContent?.map((image) => (
-          <div key={image.id} className="col-6 col-md-4 col-lg-2 ">
-            <div
+          <div  key={image.id} className="col-6 col-md-4 col-lg-2 ">
+            <div data-aos="flip-left" data-aos-once="false"
               className={`thumbnail-container ${mainImage?.id === image.id ? 'border border-primary border-3' : ''}`}
               onClick={() => setMainImage(image)}
               style={{

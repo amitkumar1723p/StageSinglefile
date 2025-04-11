@@ -226,58 +226,69 @@ const FormComponent = () => (
       Please fill out the form below, our expert will get back to you soon.
     </p>
 
-    <div className="d-flex flex-column gap-3">
+    <div className="d-flex flex-column ">
       <div
        data-aos="fade-left"  data-aos-duration="1100" data-aos-once="true" 
        className="position-relative">
         
-        <img
-          src="/img/mdi_user.svg"
-          alt="user-svg"
-          className="position-absolute top-50 start-0 translate-middle-y ms-2"
-        />
-        <input
-         
-          type="text"
-          className="Single-fresh-form-input border-2 ps-5 w-100"
-          placeholder="Your Full Name"
-          required
-        />
+<div className="form__group field">
+  
+  <img
+    src="/img/mdi_user.svg"
+    alt="user-icon"
+    className="form__icon"
+  />
+  <input
+    type="text"
+    className="form__field"
+    placeholder="Enter Your Name" // must be a non-empty string!
+    id="name"
+    required
+  />
+  <label htmlFor="name" className="form__label">Your Name</label>
+</div>
       </div>
 
       <div
        data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true"
        className="position-relative">
-        <img
-          src="/img/ic_baseline-email.svg"
-          alt="email-svg"
-          className="position-absolute top-50 start-0 translate-middle-y ms-2"
-        />
-        <input
-        
-          type="email"
-          className="Single-fresh-form-input border-2 ps-5 w-100"
-          placeholder="Your Email"
-          required
-        />
+     <div className="form__group field">
+  
+  <img
+    src="/img/ic_baseline-email.svg"
+    alt="user-icon"
+    className="form__icon"
+  />
+  <input
+    type="text"
+    className="form__field"
+    placeholder="Enter Your Email" // must be a non-empty string!
+    id="email"
+    required
+  />
+  <label htmlFor="email" className="form__label">Your Email</label>
+</div>
       </div>
 
       <div
        data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true"
        className="position-relative">
-        <img
-          src="/img/ic_baseline-phone.svg"
-          alt="call-svg"
-          className="position-absolute top-50 start-0 translate-middle-y ms-2"
-        />
-        <input
-        
-          type="tel"
-          className="Single-fresh-form-input border-2 ps-5 w-100"
-          placeholder="Your Number"
-          required
-          pattern="[0-9]{10}"
-        />
+       <div className="form__group field">
+  
+  <img
+    src="/img/ic_baseline-phone.svg"
+    alt="user-icon"
+    className="form__icon"
+  />
+  <input
+    type="number"
+    className="form__field"
+    placeholder="Enter Your Number" // must be a non-empty string!
+    id="number"
+    required
+  />
+  <label htmlFor="number" className="form__label">Your Number</label>
+</div>
       </div>
 
       <button

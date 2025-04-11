@@ -1,5 +1,5 @@
 import React from 'react'
-import  { useEffect,useState } from 'react'
+import  { useEffect,useState,useRef } from 'react'
 import {useNavigate ,Link}  from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,6 +56,34 @@ export default function SingleFreshBookingViewMore(builderContent) {
       }
        const navigate = useNavigate();
 
+
+       const containerRef = useRef(null);
+       const animationFrameIdRef = useRef(null); // store animation frame ID outside useEffect
+       
+      //  useEffect(() => {
+      //    const container = containerRef.current;
+      //    if (!container) return;
+       
+      //    let scrollAmount = 0;
+       
+      //    const scroll = () => {
+      //      container.scrollLeft += 1;
+      //      scrollAmount += 0.1;
+       
+      //      if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+      //        container.scrollLeft = 0;
+      //        scrollAmount = 0;
+      //      }
+       
+      //      animationFrameIdRef.current = requestAnimationFrame(scroll);
+      //    };
+       
+      //    scroll();
+       
+      //    return () => cancelAnimationFrame(animationFrameIdRef.current);
+      //  }, []);
+       
+
   console.log(builderContent?.projectAboutBuilderName, "saurabh")
      
   return (
@@ -88,7 +116,7 @@ export default function SingleFreshBookingViewMore(builderContent) {
            <div className='d-flex d-none justify-content-center  position-absolute'style={{left:'0px',top:'100px', zIndex:'3'}}>
             
            </div>
-           <div className='fresh-booking-view-more-card-container d-flex overflow-scroll ' style={{width:'100%' , margin:'0 auto', scrollbarWidth:'none'}}>
+           <div  ref={containerRef} className='fresh-booking-view-more-card-container d-flex overflow-scroll ' style={{width:'100%' , margin:'0 auto', scrollbarWidth:'none'}}>
    
              {allFreshBookingCard.length>0?( 
                    allFreshBookingCard.map((cardData,index) => (
