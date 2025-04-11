@@ -6,6 +6,8 @@ import ProtectedRoutes from "./Component/ProtectedRoutes";
 import { useEffect } from "react";
 import { GetMeDetailsAction, LogoutAction } from "./Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import CreatePostMain from "./Component/Post/CreatePost/CreatePostMain";
 import AdminOwnerCreateProfileSection from "./Component/Admin/CreateProfile";
@@ -66,6 +68,7 @@ import AllPostSearchFilter from "./Component/Home/PropertyCard/AllPostSearchFilt
 // import MyVisits from "./Component/Post/CreatePost/m";
 import DeletePosts from "./Component/Admin/DeletePosts";
 import Career from "./Component/Home/Careers";
+import SingleFreshBooking from "./Component/Home/FreshBooking/SingleFreshBooking/SingleFreshBooking";
 import AdminAgentExcelData from "./Component/Admin/AdminAgentExcelData";
 import AllTransactionResponse from "./Component/Admin/AllTransactionResponse";
 import Transaction from "./Component/User/Profile/Transaction";
@@ -76,6 +79,18 @@ import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseActio
 import { FormatDate } from "./utils/CommonFunction";
 import AgentUserResponse from "./Component/Admin/AgentUserResponse";
 
+import { Component } from "lucide-react";
+// import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
+import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm";
+// import FreshBookingPost from "./Component/Home/FreshBookingPost";
+import FreshProjectDashboard from "./Component/Admin/FreshProject/FreshProjectDashboard";
+import FreshProjectRoutingComponent from "./Component/Admin/FreshProject/FreshProjectRoutingComponent";
+import { FreshProjectViewAll } from "./Component/Admin/FreshProject/FreshProjectViewAll";
+import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLead";
+
+// import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
+import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
+// import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
 
@@ -288,7 +303,7 @@ function App() {
         }
       }
 
-      if (data?.isBlockedUser == true ) {
+      if (data?.isBlockedUser == true) {
         dispatch(LogoutAction())
         navigate("/")
       }
@@ -301,6 +316,7 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
+    console.log("admin", CreatePost)
     if (CreatePost) {
       if (CreatePost.success === true) {
         setalertMessage(<p>{CreatePost.message}</p>);
@@ -336,6 +352,8 @@ function App() {
 
     // eslint-disable-next-line
   }, [CreatePost]);
+
+  // Fresh Property  show Alert ()
 
   //  Alert show Single Post
   useEffect(() => {
@@ -543,7 +561,7 @@ function App() {
         if (AssignPostData.AdminVerify === false) {
           navigate("/");
           dispatch(LogoutAction());
-        } 
+        }
         if (AssignPostData.IsAuthenticated === false) {
           navigate("/");
         }
@@ -850,31 +868,96 @@ function App() {
   }, [AgentAllExcelFilesData]);
 
 
+
+
+
+
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
     }
     // eslint-disable-next-line
   }, [alertType, alertMessage, alertshow]);
+
+
+
+
+
+  //  Fresh Property For Admin 
+
+  //  console.log(allFreshProjectData ,"allfresh data")
+  //   useEffect(() => {
+
+  //   if (CreatePost || allFreshProjectData) {
+  //     if (CreatePost?.success === true || allFreshProjectData?.success === true ) {
+  //       setalertMessage(<p>{CreatePost?<p>{CreatePost?.message}</p>:<p>{allFreshProjectData?.message}</p>}</p>);
+  //       setalertType("success");
+  //       setalertShow(true);
+  //       dispatch({ type: "AdminAlertClear" });
+  //     }
+  //     if (CreatePost?.success === false) {
+  //       if (CreatePost.AdminVerify === false) {
+  //         dispatch(LogoutAction());
+  //         navigate("/");
+  //       }
+  //       if (CreatePost?.IsAuthenticated === false) {
+  //         navigate("/");
+  //       }
+
+  //       if (CreatePost?.fielderrors) {
+  //         setalertMessage(
+  //           CreatePost?.fielderrors?.map((e, index) => {
+  //             return <p key={index}>{e.msg}</p>;
+  //           })
+  //         );
+  //       } else {
+  //         setalertMessage(<p> {CreatePost?.message}</p>);
+  //       }
+
+  //       // setalertMessage(<p>{CreatePost.message}</p>);
+  //       setalertType("error");
+  //       setalertShow(true);
+  //       dispatch({ type: "AdminAlertClear" });
+  //     }
+  //   }
+
+  //   // eslint-disable-next-line
+  // }, [CreatePost,allFreshProjectData]);
+
+  // console.log(allFreshProjectData.success,"uuu")
+
+
   useEffect(() => {
     dispatch(GetMeDetailsAction());
-        
-   
+
+
   }, []);
 
-   useEffect(()=>{
-    if(medata?.isBlockedUser==true){
+  useEffect(() => {
+    if (medata?.isBlockedUser == true) {
       dispatch(LogoutAction())
-    } 
-   } ,[medata])
+    }
+  }, [medata])
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,   // animation duration in ms
+      once: true,       // animate only once when in view
+      offset: 10,      // offset (in px) from the original trigger point
+    });
+  }, []);
+
+
+
+
   return (
     <>
       {/* <PinnacleSms /> */}
       {
-       
+
       }
-       
-    
+
+
       <Navbar />
       {alertData && alertData.AlertShow === true && (
         <Alert
@@ -924,7 +1007,6 @@ function App() {
           path="/Career"
           element={<Career />}
         />
-
         <Route
           exact
           path="/Report"
@@ -947,6 +1029,8 @@ function App() {
           element={<SingleBlog />}
         />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+
+
         {/* protect route for user */}
         <>
           <Route
@@ -992,7 +1076,15 @@ function App() {
           </Route>
         </>
         {/*admin routes*/}
-        {/* This Routes available For Admin Owner Agent  */}
+
+
+        {/* <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/> */}
+        {/* <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/> */}
+        <Route exact path="/fresh-bookings2" element={<FreshBookingViewAlll />} />
+        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking />} />
+
+        <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
+        {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
 
         <Route
           exact
@@ -1001,6 +1093,9 @@ function App() {
         >
           <Route exact path="dashboard" element={<Dashbord />} />
           {/* This routes Avaliable for Owner Only  */}
+
+
+
           <Route
             exact
             path="data"
@@ -1033,55 +1128,25 @@ function App() {
           />
           <Route
             exact
+            path="all-user-Response-action"
+            element={
+              <AdminOwnerRoutes Component={AllUserResponseAction} isOwner={true} />
+            }
+          />
+          <Route
+            exact
+            path="agent-user-Response-action"
+            element={
+              <AgentUserResponse />
+            }
+          />
+          <Route
+            exact
             path="single-user-Response-action/:id"
             element={
               <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
             }
           />
-          <Route
-            exact
-            path="all-user-Response-action"
-         element={
-          <AdminOwnerRoutes Component={AllUserResponseAction} isOwner={true}/>
-         }
-          />
-            <Route
-            exact
-            path="agent-user-Response-action"
-         element={
-          <AgentUserResponse/>
-         }
-          />
-          {/* <Route
-            exact
-            path="data/unverify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          {/* <Route
-            exact
-            path="data/total"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-          {/* Agent Data  */}
-          {/* <Route
-            exact
-            path="agent/data/total"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
-
-          {/* <Route
-            exact
-            path="agent/data/verify"
-            element={
-              <AdminOwnerRoutes Component={AllAdminData} isOwner={true} />
-            }
-          /> */}
 
           <Route
             exact
@@ -1176,18 +1241,36 @@ function App() {
             element={
               < AllUserResponseAction />
             }
-          />
-        </Route>
 
-        {/*All post route*/}
-        <Route path={"/all-post/:type"} element={<AllPostRender />} />
+
+          />
+
+
+
+          {/* Fresh property Routing start ----------- */}
+
+          <Route path="fresh-property" element={<FreshProjectRoutingComponent />} >
+            <Route index element={<FreshProjectDashboard />} />
+
+            <Route path="create" element={<FreshBookingForm />} />
+            <Route path="edit/:id" element={<FreshBookingForm />} />
+            <Route path="view-all" element={<FreshProjectViewAll />} />
+            <Route path="view-all-Response" element={<FreshProjectLead />} />
+          </Route>
+          {/* Fresh property Routing end ----------- */}
+        </Route>
+        {/*All post route admin routes end here*/}
+
+
+        <Route path={"/all-post"} element={<AllPostRender />} />
+
+
         <Route path="*" element={<PageNotFound />} />
 
 
 
-      </Routes> 
-       
-    
+
+      </Routes>
       <Footer />
     </>
   );

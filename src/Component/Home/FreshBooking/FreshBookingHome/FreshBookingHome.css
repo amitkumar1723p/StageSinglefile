@@ -1,0 +1,399 @@
+.freshbooking-home-main-container{
+    width: 100%;
+    /* max-width: 1300px; */
+    margin: 40px auto;
+    gap: 10px;
+    
+}
+.fresh-booking-home-upper-container{
+    width: 80%;
+}
+
+
+.fresh-booking-post-search-container{
+
+ border:2px solid rgba(29, 53, 87, 1);
+ border-radius: 6px;
+ height: 40px;
+ min-width: 20px;
+ width: 40%;
+}
+
+.fresh-booking-input-field{
+    margin-left: 10px;
+    border: none;
+}
+
+.fresh-booking-home-card-container{
+    /* transform: rotate(-2deg); */
+    gap: 15px;
+    height: 100%;
+    padding: 15px;
+    align-items: center;
+
+   
+
+}
+.fresh-booking-card-and-button-container{
+    height: 400px;
+    /* border: 1px solid black; */
+   
+}
+.fresh-booking-search-button{
+    background-color:rgba(29, 53, 87, 1);
+    max-width: 100px;
+    border: none;
+
+    img{
+        height: 22px;
+        width: 22px;
+    }
+}
+.fresh-booking-home-card{
+   
+    /* animation: infiniteScroll 40s linear infinite; */
+    min-width: 255px;
+    max-width: 225px;
+    /* max-width: 380px; */
+    height: 360px;
+    margin: 0 auto;
+    border-radius: 8px;
+    transition-duration: .5s;
+    
+    
+     
+}
+.fresh-booking-home-card:hover {
+    
+        transform: scale(1.02);
+        transition-duration: .5s;
+        box-shadow: 2px 2px 12px rgb(46 46 46 / 89%);
+        .fresh-booking-home-card-content{
+            /* top:182px; */
+            border-radius: 8px;
+           transform:translateY(-77%);
+           background-color: rgb(29, 53, 87);
+           /* animation:  move2bottom 0.8s ease-in-out forwards; */
+        }
+        .fresh-booking-home-card-price{
+            line-height: 25px;
+            opacity: 1;
+        }
+        .fresh-booking-home-card-location{
+            opacity: 1;
+        }
+        .fresh-booking-home-card-projectname{
+            font-size: 18px;
+            line-height: 32px;
+            color: white;
+        
+        }
+        
+   
+        
+    }
+
+/* ---------animations-------------- */
+@keyframes scrollText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes infiniteScroll {
+    0% {
+      transform: translateX(0px);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+  }
+
+@keyframes move2bottom{
+    0%{
+        transform:translateY(0px)
+    }
+    80%{
+       transform: translateY(-130px)
+    }
+    100%{
+       transform: translateY(-120px)
+    }
+} 
+
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-120px);
+    }
+}
+
+@keyframes moveDown {
+    0% {
+        transform: translateY(-120px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes bgAnimation {
+    0%   { background-color: #0d6efd; } /* Primary */
+    25%  { background-color: #198754; } /* Success */
+    50%  { background-color: #dc3545; } /* Danger */
+    75%  { background-color: #ffc107; } /* Warning */
+    100% { background-color: #0d6efd; } /* Back to Primary */
+}
+
+.fresh-booking-home-card-projectname{
+    transition-duration: .8s;
+    color:white;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 20px;
+
+}
+
+.fresh-booking-home-card-button{
+     background-color: transparent;
+     color: white;
+     transition-duration: 0.3s;
+    &:hover{
+        background-color:  rgb(0, 10, 47);
+        color: rgba(245, 130, 32, 1);
+    }
+}
+
+.fresh-booking-home-card-shadow{
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    background-color:rgba(0,0,0,0);
+    transition-duration: .8s;
+    
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.436);
+    }
+}
+
+.fresh-booking-status{
+    color: rgb(255, 255, 255);
+}
+.statusGreeen{
+    color: green !important;
+}
+.fresh-booking-home-card-content{
+    top: 314px;
+    transition-duration: .6s ;
+    
+    transition-timing-function: ease-in-out;
+    background-color: rgba(42, 42, 42, 0.836);
+  
+}
+.fresh-booking-home-card-upper-content{
+    border-bottom: 3px solid rgba(245, 130, 32, 1);
+    padding-bottom: 5px;
+}
+.fresh-booking-home-card-price{
+    line-height: 5px;
+    transition-duration: .8s;
+    opacity: 0;
+}
+.fresh-booking-home-card-location{
+    font-size: 14px;
+    transition-duration: .8s;
+    opacity: 0;
+}
+.fresh-booking-home-card-amanities{
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+/* From Uiverse.io by cssbuttons-io */ 
+button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+   }
+   
+   .freshbooking-home-button {
+    min-width: 260px;
+    height: auto;
+   }
+   
+   .freshbooking-home-button.fresh-booking-view-more-more .fresh-booking-button-circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: rgba(0, 102, 204, 1);
+    border-radius: 1.625rem;
+   }
+   
+   .freshbooking-home-button.fresh-booking-view-more-more .fresh-booking-button-circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+   }
+   
+   .freshbooking-home-button.fresh-booking-view-more-more .fresh-booking-button-circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+   }
+   
+   .freshbooking-home-button.fresh-booking-view-more-more .fresh-booking-button-circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+   }
+   
+   .freshbooking-home-button.fresh-booking-view-more-more .fresh-booking-button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: rgba(0, 102, 204, 1);
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+   }
+   
+   .freshbooking-home-button:hover .fresh-booking-button-circle {
+    width: 100%;
+   }
+   
+   .freshbooking-home-button:hover .fresh-booking-button-circle .icon {
+    background: #fff;
+    transform: translate(1rem, 0);
+   }
+   
+   .freshbooking-home-button:hover .fresh-booking-button-text {
+    color: #fff;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:1440px){
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+}
+@media(max-width:1024px){
+
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
+@media(max-width:768px){
+
+
+    .fresh-booking-post-container{
+        width: 90%;
+
+    }
+    .fresh-booking-home-card-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+       }
+}
+
+@media(max-width:575px){
+    .freshbooking-home-main-container{
+
+        gap:0px;
+        
+    }
+    .freshbooking-home-button-container{
+        
+        button{
+            span{
+                p{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    .fresh-booking-home-upper-container{
+        width: 90%;
+    }
+    
+    .fresh-booking-home-headings{
+        h2{
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+
+
+
+    .freshbooking-home-main-container{
+        width: 100%;
+    }
+
+    .fresh-booking-home-card-container{
+
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+}
+
+

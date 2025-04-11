@@ -52,6 +52,10 @@ import {
   getPostsByAddressReducer
 } from "./Reducer/postReducer.jsx";
 
+import { createfreshProjectReducer,getAllFreshProjectReducer,
+   getviewoneProjectReducer,editFreshProjectionReducer,getprojectLeadAllReducer,
+   } from "./Reducer/freshProjectReducer.jsx";
+
 const reducer = combineReducers({
   Alert: ShowAlertReducer,
   userData: CreateUserReducer,
@@ -97,7 +101,17 @@ const reducer = combineReducers({
   AllUserResponseAction_Store:getAllUserResponseActionReducer,
   SingleUserResponseAction_Store:getSingleUserResponseActionReducer,
   postByAddress:getPostsByAddressReducer,
-  ViewOwnerDetailsRequest:getViewOwnerDetailsActionReducer
+  ViewOwnerDetailsRequest:getViewOwnerDetailsActionReducer,
+
+  // fresh project reducer++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  createfreshProjectReducer,
+  allFreshProjectData:getAllFreshProjectReducer,
+  // createfreshProjectReducer,
+  getFreshProject:getviewoneProjectReducer,
+  editFreshProjectionReducer,
+  // projectStatusReducer,
+ getAllFreshProjectLead: getprojectLeadAllReducer
+
 });
 
 let initialState = {};

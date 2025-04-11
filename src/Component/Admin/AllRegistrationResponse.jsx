@@ -113,7 +113,7 @@ export default function AllRegistrationResponse({ }) {
 
   return (
     <>
-      <div className="container-fluid" >
+      <div className="container-fluid p-5">
         <div className="d-flex flex-row mb-2 gap-2">
           <div
             className={

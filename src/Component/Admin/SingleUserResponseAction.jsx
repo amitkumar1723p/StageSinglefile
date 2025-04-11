@@ -172,7 +172,8 @@ export default function SingleUserRespponseAction() {
                                 <th scope="col"> <span className="fw-normal">Listing Status</span></th>
                                 <th scope="col"> <span className="fw-normal">Post Id</span></th>
                                 <th scope="col"> <span className="fw-normal">Date</span></th>
-
+                                <th scope="col"> <span className="fw-normal">New</span></th>
+                                <th scope="col"> <span className="fw-normal">VisitTime</span></th>
                             </tr>
                         </thead>
                         <tbody>

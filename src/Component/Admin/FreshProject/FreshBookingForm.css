@@ -1,0 +1,189 @@
+.freshbooking-main-container{
+    width: 80%;
+}
+
+
+
+
+
+.upload-image-container{
+    gap: 40px;
+}
+.upload-image-dragdrop-container{
+    /* max-width: 520px; */
+    width: 100%;
+}
+
+
+.freshbooking-projekt-highlight-container{
+    width: 40%;
+
+}
+.freshbooking-highlight-image-upload-container{
+    width: 55%;
+
+}
+.freshbooking-highlights-add-button{
+    border-radius: 8px;
+    padding: 6px 12px 6px 12px;
+    background-color: var(--main-light-clr);
+    transition-duration: .3s;
+    color: white;
+}
+.freshbooking-pricing-details-add-button{
+    border-radius: 8px;
+    padding: 6px 12px 6px 12px;
+    background-color: var(--main-light-clr);
+    transition-duration: .3s;
+    color: white;
+    
+}
+
+.freshbooking-pricing-details-add-button:hover{
+    opacity: 0.9;
+   
+}
+.freshbooking-location-map-add-button{
+    border-radius: 8px;
+    padding: 12px;
+    background-color: var(--main-light-clr);
+    transition-duration: .3s;
+    color: white;
+}
+.freshbooking-location-map-add-button:hover{
+    opacity: 0.9;
+}
+.freshbooking-floor-plan-image-upload{
+    width: 50%;
+}
+
+.freshbooking-location-map-image-upload-container{
+    gap: 40px;
+}
+.freshbooking-site-plan-image-upload-container{
+    gap: 40px;
+ 
+}
+.freshbooking-about-project-image-upload-container{
+    gap: 40px;
+}
+.freshbooking-gallery-image-section{
+    display: flex;
+    width: 50%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border: 2px dashed #cce5ff ;
+}
+
+@media(max-width:1024px){
+    .freshbooking-project-highlight-main-coctainer{
+        flex-direction: column;
+    }
+    .freshbooking-projekt-highlight-container{
+        width: 100%;
+    }
+    .freshbooking-highlight-image-upload-container{
+        width: 100%;
+    }
+    .freshbooking-about-project-data-container{
+        flex-direction: column;
+    }
+
+     
+}
+
+@media(max-width:768px){
+    .freshbooking-main-container{
+        width: 90%;
+    }
+    
+    .upload-image-container{
+        gap: 20px;
+        flex-direction: column;
+    }
+    .freshbooking-highlight-image-upload-container{
+        flex-direction: column;
+    }
+    .freshbooking-gallery-image-section{
+        width: 100%;
+    }
+    .freshbooking-floor-plan-image-upload{
+        width: 100%;
+    }
+    .freshbooking-floor-plan-image-upload{
+        width: 100%;
+    }
+    .freshbooking-location-map-image-upload-container{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .freshbooking-site-plan-image-upload-container{
+        flex-direction: column;
+        gap: 10px;
+
+    }
+    .freshbooking-about-project-image-upload-container{
+        flex-direction: column;
+        gap: 10px;
+
+    }
+}
+
+@media(max-width:480px){
+
+
+
+
+
+    .freshbooking-project-meta-title-container{
+        width: 100%;
+
+        input{
+            width: 100%;
+        }
+    }
+    .freshbooking-loaction-details-add-field{
+        flex-direction: column;
+    }
+    .freshbooking-project-manager-contact-container{
+        width: 100%;
+
+        input{
+            width: 100%;
+        }
+    }
+    .freshbooking-project-meta-description-container{
+        width: 100%;
+
+        textArea{
+            height:120px;
+            width: 100%;
+        }
+    }
+}
+
+
+/* ===========================================filter Project  css */
+
+.form-select-viewAll, .form-input {
+    /* color: #727b85; */
+    font-family: "Inter", Sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  
+    background: #fff;
+    border-radius: 0px;
+    font-size: 12px;
+    width: 85%;
+    box-sizing: border-box;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.form-select-viewAll:focus {
+    border-color: #86b7fe;
+    outline: 1;
+    box-shadow: 0 0 0 .25rem #f7f7f800;
+}
