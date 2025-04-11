@@ -8,7 +8,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , high
 
   return (
     <>
-    <div className='about-project-container'>
+    <div className='about-project-container' >
       {/* <div className="container-fluid p-0">
         <div className="row g-0">
           <div className="col-12">
@@ -90,7 +90,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , high
         </div>
       </div> */}
 
-<div className="container-fluid p-0">
+<div className="container-fluid p-0" id='About'>
         <div className="row g-0">
           <div className="col-12">
             <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden single-fresh-about-project-lineheight">
@@ -131,7 +131,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , high
 
 
 {/* --------------------------Highlights--------------------------------------------------------- */}
-      <div className="container-fluid p-0"  >
+      <div className="container-fluid p-0"  id='Highlights'>
         <div className="row g-0">
           <div className="col-12">
             <div className="d-flex flex-column flex-md-row align-items-center bg-light position-relative overflow-hidden single-fresh-highlight-lineheight">

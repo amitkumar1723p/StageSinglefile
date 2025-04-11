@@ -41,20 +41,7 @@ const Footer = ({project, projectLogoContent}) => {
               />
             </div>
             <h2 className="font-weight-bold  mb-4">{project?.projectName}</h2>
-            <div className="single-fresh-footer__social-links">
-              <a href="#" className="single-fresh-footer__social-link">
-                <Facebook className="single-fresh-footer__social-icon" />
-              </a>
-              <a href="#" className="single-fresh-footer__social-link">
-                <Twitter className="single-fresh-footer__social-icon" />
-              </a>
-              <a href="#" className="single-fresh-footer__social-link">
-                <Instagram className="single-fresh-footer__social-icon" />
-              </a>
-              <a href="#" className="single-fresh-footer__social-link">
-                <Linkedin className="single-fresh-footer__social-icon" />
-              </a>
-            </div>
+           
           </div>
 
           {/* Contact Info */}
@@ -62,21 +49,23 @@ const Footer = ({project, projectLogoContent}) => {
             <h3 className="single-fresh-footer__heading">Contact Us</h3>
             <div className="single-fresh-footer__contact-list">
               <div className="single-fresh-footer__contact-item">
+              <a href="tel:+917837840785" className="Single-fresh-contact__item">  
                 <div className="single-fresh-footer__contact-icon-wrapper">
-                  <Phone className="single-fresh-footer__contact-icon" />
-                </div>
+                        <Phone className="single-fresh-footer__contact-icon" /> 
+                </div></a>
                 <div className="single-fresh-footer__contact-details">
                   <p className="single-fresh-footer__contact-label">Call Us</p>
                   <p className="single-fresh-footer__contact-value">+91 7837840785</p>
                 </div>
               </div>
               <div className="single-fresh-footer__contact-item">
+              <a href="mailto:sales@propertydekho247.com" className="Single-fresh-contact__item">  
                 <div className="single-fresh-footer__contact-icon-wrapper">
-                  <Mail className="single-fresh-footer__contact-icon" />
-                </div>
+                  <Mail className="single-fresh-footer__contact-icon" /> 
+                </div> </a>
                 <div className="single-fresh-footer__contact-details">
                   <p className="single-fresh-footer__contact-label">Email Us</p>
-                  <p className="single-fresh-footer__contact-value">info@company.com</p>
+                  <p className="single-fresh-footer__contact-value">support@propertydekho247.com</p>
                 </div>
               </div>
               <div className="single-fresh-footer__contact-item">
@@ -103,19 +92,19 @@ const Footer = ({project, projectLogoContent}) => {
                   </a>
                 </li>
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#Amenities" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
                     <span className="single-fresh-footer__link-text">Amenities</span>
                   </a>
                 </li>
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#About" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
                     <span className="single-fresh-footer__link-text">About</span>
                   </a>
                 </li>
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#Highlights" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
                     <span className="single-fresh-footer__link-text">Highlights</span>
                   </a>
@@ -123,27 +112,33 @@ const Footer = ({project, projectLogoContent}) => {
               </ul>
               <ul className="single-fresh-footer__links-column">
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#Size-Price" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
                     <span className="single-fresh-footer__link-text">Size & Price</span>
                   </a>
                 </li>
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#Location" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
                     <span className="single-fresh-footer__link-text">Location</span>
                   </a>
                 </li>
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#Gallery" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
                     <span className="single-fresh-footer__link-text">Gallery</span>
                   </a>
                 </li>
                 <li className="single-fresh-footer__link-item">
-                  <a href="#" className="single-fresh-footer__link">
+                  <a href="#Site-Map" className="single-fresh-footer__link">
                     <span className="single-fresh-footer__link-dot"></span>
-                    <span className="single-fresh-footer__link-text">Contact</span>
+                    <span className="single-fresh-footer__link-text">Site Map</span>
+                  </a>
+                </li>
+                <li className="single-fresh-footer__link-item">
+                  <a href="#Floor-Plan" className="single-fresh-footer__link">
+                    <span className="single-fresh-footer__link-dot"></span>
+                    <span className="single-fresh-footer__link-text">Floor Plan</span>
                   </a>
                 </li>
               </ul>
@@ -215,7 +210,7 @@ const Footer = ({project, projectLogoContent}) => {
             <div className="single-fresh-footer__legal-links">
               <a href="#" className="single-fresh-footer__legal-link">Privacy Policy</a>
               <a href="#" className="single-fresh-footer__legal-link">Terms of Service</a>
-              <a href="#" className="single-fresh-footer__legal-link">Cookie Policy</a>
+              {/* <a href="#" className="single-fresh-footer__legal-link">Cookie Policy</a> */}
             </div>
           </div>
         </div>

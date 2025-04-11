@@ -19,7 +19,7 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
 
   return (
     <>
-    <div className='Single-fresh-floor-plan-main'>
+    <div className='Single-fresh-floor-plan-main' id='Floor-Plan'>
     <div className="m-auto" style={{ width: '90%' }}>
         <h3 data-aos="fade-up" data-aos-duration="1200" data-aos-once="false" className="mb-3 single-fresh-floor-plan-h3">Floor Plan</h3>
         <h2 data-aos="fade-up" data-aos-duration="1400" data-aos-once="false" className="fw-bold mb-3 single-fresh-floor-plan-h2" >

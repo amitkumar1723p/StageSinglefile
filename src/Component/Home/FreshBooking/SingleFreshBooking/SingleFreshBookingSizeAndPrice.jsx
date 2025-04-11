@@ -41,7 +41,7 @@ export default function SingleFreshBookingSizeAndPrice({projectPrice ,  project}
 
   return (
     <>
-      <div className="single-fresh-booking-chart-container bg-white d-flex py-3 justify-content-center align-items-center min-vh-80"  >
+      <div className="single-fresh-booking-chart-container bg-white d-flex py-3 justify-content-center align-items-center min-vh-80" id='Size-Price' >
         <div className="container ">
           <h3 
 data-aos="fade-up" data-aos-once="false"  data-aos-duration="800" className="mb-2   Single-fresh-Size-Price">How Much</h3>

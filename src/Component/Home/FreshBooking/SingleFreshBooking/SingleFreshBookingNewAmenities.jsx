@@ -33,7 +33,7 @@ export default function SingleFreshBookingNewAmenities({project , amenitiesConte
   return (
     <div className='w-100  ' >
 
-      <div className='single-fresh-booking-amenities-container m-auto  ' style={{width:'90%'}}>
+      <div className='single-fresh-booking-amenities-container m-auto  ' id='Amenities' style={{width:'90%'}}>
       <div className='fresh-booking-new-amenities-headings '>
             <h2>Project Facilities</h2>
             <h2>{project?.projectName} Amenities</h2>

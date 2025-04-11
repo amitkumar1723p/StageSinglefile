@@ -12,7 +12,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
 
   return (
     <>
-    <div className='single-fresh-gallery-main'>
+    <div className='single-fresh-gallery-main' id='Gallery'>
     <div className="container " >
       <h3 className="mb-1 Single-fresh-gallery-p">Gallery</h3>
       <h3 className="fw-bold mb-3 Single-fresh-gallery-h3" >

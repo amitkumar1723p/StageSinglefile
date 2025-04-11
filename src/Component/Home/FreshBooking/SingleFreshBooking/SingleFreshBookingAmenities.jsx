@@ -69,7 +69,7 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
   //   color:rgba(153, 153, 153, 0.8) !important; /* Change text color to white */
   // }`}
   </style>
-  <div className="container mt-5 mb-5">
+  <div className="container mt-5 mb-5" >
   <h3 className="mb-3 Single-fresh-facilities">Project Facilities</h3>
   <h3 className="fw-bold mb-3 Single-fresh-amenities" >
     {project?.projectName} Amenities
@@ -80,7 +80,7 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
       const currentLogo = item.replace(/\s+/g, ""); 
 
       return (
-        <div data-aos="flip-left" data-aos-duration="1800"  key={index} className=" single-fresh-booking-amenities-container d-flex " style={{width:'120px'}}>
+        <div data-aos="flip-left" data-aos-duration="1800"  key={index} className=" single-fresh-booking-amenities-container d-flex "  style={{width:'120px'}}>
           <div
             className="Single-fresh-amenities-content d-flex flex-column justify-content-between align-items-center text-center w-100 hover-effect "
             style={{

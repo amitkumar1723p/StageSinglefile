@@ -28,7 +28,7 @@ useEffect(()=>{
 // console.log(siteMapContent)
   return (
     <>
-    <div className="container py-5">
+    <div className="container py-5" id="Location">
         <div className="single-fresh-booking-locationmap-container">
           <div className="col-md-6 mb-4">
             <h3   className="mb-3 col Single-fresh-location-map-h3">Location Map</h3>
@@ -106,7 +106,7 @@ useEffect(()=>{
     )}
       <div className="single-fresh-booking-sitemap-container w-100  m-auto" style={{backgroundColor:'#F7F7F7'}}>
 
-      <div className="container mt-2 mb-2 ">
+      <div className="container mt-2 mb-2 " id="Site-Map">
         <h3 data-aos="fade-up"  data-aos-once="false" className="mb-1 Single-fresh-site-map-h3">Site Map </h3>
         <h2 data-aos="fade-up"  data-aos-once="false" className="fw-bold  mb-5 Single-fresh-site-map-h2" >
           Master Plan Of  {project?.projectName}
