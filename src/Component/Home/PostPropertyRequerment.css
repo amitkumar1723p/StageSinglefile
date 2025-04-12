@@ -3,7 +3,7 @@
   gap: 30px;
   background-color: #f9f9f9;
   padding: 0px;
-  border-radius: 8px;
+
   /* box-shadow: 0 0px 16px rgb(216,222,227,1); */
   position: relative; /* Ensure the cross button is positioned relative to the form container */
 }
@@ -15,20 +15,34 @@
 .cross-Btn {
   position: absolute;
   top: 9px;  /* Adjust this value to move it down */
-  right: 2px;  /* Adjust this value to move it left or right */
-  font-size: 18px;
-  font-weight: 600;
+  right: 8px;  /* Adjust this value to move it left or right */
+  font-size: 16px;
   cursor: pointer;
-  /* background-color:#c7e4fc;   */
-  color: #fff;
+  background-color:#c7e4fc;  
+  color: var(--main-light-clr);
   cursor: pointer;
+
   padding: 5px 12px;
   border-radius: 50%;
+
 
   &:hover{
     color: red;
   }
 
+
+}
+.share-rqrmnt-cross-Btn{
+  position: absolute;
+  top: 16px;  /* Adjust this value to move it down */
+  right: 16px;  /* Adjust this value to move it left or right */
+  cursor: pointer;
+  z-index: 1;
+
+img{
+  height: 100%;
+  width: 100%;
+}
 
 }
 
@@ -82,19 +96,49 @@
   width: auto;
   background-color: #ffffff;
   /* padding: 20px; */
-  border-radius: 8px;
+  /* border-radius: 8px; */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 .form-right-heading-container{
+  position: relative;
   display: flex;
+  z-index: 1;
+
   flex-direction: column;
+  /* background-image: url("C:/Users/Admin/Desktop/newKlone/propertyDekho247-frontend/public/img/share-rqrmnt-back.JPG"); */
   border-bottom: 1px solid #e2e2e2;
+  /* background-size: cover;         
+  background-position: center;   
+  background-repeat: no-repeat;    */
+ width: 100%;
   gap: 10px;
   /* border: 1px solid black; */
-  padding: 15px 20px ;
-  border-radius: 8px 8px 0px 0px ;
-  background-color: var(--main-light-clr);
 
+  /* border-radius: 8px 8px 0px 0px ; */
+
+  img{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+
+}
+.form-heading-image-color{
+  h3{
+    color: white;
+
+  }
+
+}
+.form-heading-image-color{
+  height: 100%;
+  width: 100%;
+  padding: 18px 30px 18px 30px;
+  background-color: rgba(24, 118, 242, 0.772);
 }
 .form-right-heading-container  p{
   color: rgba(61, 90, 128,1); 
@@ -103,26 +147,31 @@
 }
 .form-header {
   font-size: 18px;
-  color:#fff;
+  color:rgba(34, 34, 34, 1);
   font-weight: 600;
+
   
 }
 
 .property-form {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+
+  gap: 12px;
 }
 .post-property-form{
-  padding: 10px;
+  padding:20px ;
 }
 
 .property-form-type{
-  background: linear-gradient(to right, #999 10px, transparent 6px);
+  /* background: linear-gradient(to right, #999 10px, transparent 6px);
     background-size: 16px 1px;
     background-repeat: repeat-x;
     background-position: bottom;
-  padding: 0px 10px 20px 10px;
+  padding: 0px 10px 20px 10px; */
+
+width: 50%;
+min-width:269px ;
+
 
   select{
     width: 100%;
@@ -143,7 +192,6 @@
   display: flex;
   justify-content: space-between;
   align-items: end;
-  padding: 10px;
   gap: 10px;
 }
 .img-requirement img{
@@ -166,8 +214,9 @@
 .form-right input {
   width: 100%;
   padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
+  font-size: 12px;
+  background-color: rgba(248, 250, 252, 1);
+  border: 1px solid #daeaf9;
   border-radius: 4px;
 }
 
@@ -186,8 +235,8 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  height: 36px;
-  width: 100px;
+  padding: 10px;
+  width: 100%;
 }
 
 .form-submit-btn:hover {
@@ -210,7 +259,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 121.065%;
-  width: 250px;
+  /* width: 250px; */
   /* width: 100%; */
   font-size: 12px;
   background: #fff;
@@ -218,12 +267,14 @@
   padding: 10px;
 }
 .post-prop-form-group{
-  /* min-width: 220px; */
-  width: 100%;
+  /* min-width: 240px; */
+  /* width: 100%; */
 }
 
 .form-budget{
  flex-direction: row;
+
+ width: 100%;
  /* margin-left: 13px; */
  
 }
@@ -231,17 +282,27 @@
   display: flex;
   align-items: end;
 }
-.form-budget select{
+/* .form-budget select{
   padding: 5px;
   color: #444;
-  width: 60px;
+  width: 50px;
   height: 36px;
-  padding: 0px 0 0 5px;
+  padding: 0px;
   border-radius:0px 8px 8px 0px ;
   border: 1px solid #ccc !important;
-}
+} */
+ .plot-size-container{
+  p{
+    color: rgba(53, 68, 90, 1);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  input{
+    background-color:rgba(248, 250, 252, 1);
+  }
+ }
 .budget-container input{
-  width: 140px;
+  width: 170px;
   border-radius: 8px 0px 0px 8px;
 }
 .form-bhk select{
@@ -255,7 +316,18 @@
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #333;
+  width: 50%;
+ 
   /* width: 320px; */
+  p{
+    color: rgba(53, 68, 90, 1);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  label{
+    background-color:rgba(248, 250, 252, 1);
+  }
+
 }
 .possession-status-title{
   font-size: 12px;
@@ -290,159 +362,255 @@ input[type="radio"] {
 
 
 
+
+
+.share-rqrmnt-form-top{
+  display: flex;
+  width: 100%;
+  gap: 32px;
+}
+.share-rqrmnt-form-mid{
+  display: flex;
+  gap: 32px;
+}
+.share-rqrmnt-form-last{
+  display: flex;
+  gap: 32px;
+
+}
+
+
+.share-rqrmnt-property-type{
+
+
+  p{
+    color: rgba(53, 68, 90, 1);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  select{
+    background-color:rgba(248, 250, 252, 1);
+  }
+}
+.share-rqrmnt-form-locality{
+
+
+  min-width: 269px;
+  width: 50%;
+
+
+  p{
+    font-size: 14px;
+    font-weight: 500;
+    color:  rgba(53, 68, 90, 1);
+  }
+}
+
+
+
+.form-bhk{
+  width: 50%;
+
+
+  p{
+    font-size: 14px;
+    font-weight: 500;
+    color:rgba(53, 68, 90, 1) ;
+  }
+  select{
+    background-color:rgba(248, 250, 252, 1);
+  }
+}
+.form-floor{
+
+  width: 50%;
+  p{
+    font-size: 14px;
+    font-weight: 500;
+    color:rgba(53, 68, 90, 1) ;
+  }
+  select{
+    background-color:rgba(248, 250, 252, 1);
+  }
+}
+
+
+
+
+
+
+
+.budget-input-container {
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  width: 50%; 
+  font-family: inherit;
+  p{
+    font-size: 14px;
+    font-weight: 500;
+    color:rgba(53, 68, 90, 1) ;
+  }
+  select{
+    background-color:rgba(248, 250, 252, 1);
+  }
+  input{
+    border-radius:5px 0px 0px 5px ;
+    background-color:rgba(248, 250, 252, 1);
+    color:rgba(53, 68, 90, 1)
+  }
+}
+
+.budget-input-field {
+  flex: 1;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: #2d3e50;
+}
+
+.budget-input-dropdown {
+  border: none;
+  border-radius: 0px 5px 5px 0px ;
+  outline: none;
+  padding: 0 10px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #2d3e50;
+  cursor: pointer;
+  border: 1px solid #d9dfe7;
+  /* height: 100%; */
+}
+
+
+
+
+
+
+.plotsize-input-container {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 41px;
+  /* width: 250px; */
+  background-color: #f9fbfd;
+  font-family: inherit;
+
+  input{
+    border-radius: 5px 0px 0px 5px;
+  }
+  select{
+    border: 1px solid #d9dfe7;
+    border-radius: 0px 5px 5px 0px;
+  }
+}
+.plotsize-input-field {
+  flex: 1;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: #2d3e50;
+}
+
+.plotsize-input-dropdown {
+  border: none;
+  outline: none;
+  padding: 0 8px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #2d3e50;
+  cursor: pointer;
+  border-left: 1px solid #d9dfe7;
+  height: 98%;
+}
+
+
+
+
+
+
+
 @media (max-width: 768px) {
 
-  .search-container {
-    top: 25px;
-}
-  .property-form-details-top{
-    flex-direction: column;
-  }
-  .property-form-details-bottom{
-    flex-direction: column;
-    align-items: start;
-    gap: 25px;
-  }
-  .form-group{
-    width: 100%;
-  }
-  .form-group input{
-    width: 100%;
-  }
-  .form-container {
-    flex-direction: column;
-    padding: 20px;
-    width: 90%;
-    gap: 0;
-  }
 
-  .form-left {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .form-right {
-    width: 100%;
-  }
-
-  .form-title {
-    font-size: 18px;
-  }
-
-  .form-description {
-    font-size: 12px;
-  }
-
-  .form-features {
-    font-size: 12px;
-  }
-
-  .form-header {
-    font-size: 16px;
-  }
-
-  .property-form {
-    gap: 12px;
-  }
-
-  .form-group input,
-  .form-group select {
-    font-size: 14px;
-  }
-  .form-submit-btn {
-    /* padding: 12px; */
-    font-size: 16px;
-  }
-
-  .img-requirement img {
-    width: 150px;
-  }
-  .cross-Btn{
-    top: 26px;
-    right: 26px;
-  }
-  .form-budget select{
-    height: 38px;
-
-  }
 }
 
 
 @media (max-width: 480px) {
 
+  .form-heading-image-color{
+    h3{
+      font-size: 14px;
+    }
+  
+  }
+  .property-form-type{
+    width: 100%;
+  }
+  .share-rqrmnt-form-locality{
+    width: 100%;
+  }
+  .share-rqrmnt-form-top{
+    gap: 5px;
+  }
+  .share-rqrmnt-form-mid{
+    gap: 5px;
+  }
+  .share-rqrmnt-form-last{
+    gap: 5px;
+  }
+
+  .form-bhk{
+    width: 100%;
+  }
+  .form-floor{
+    width: 100%;
+  }
   .possession-status{
-    padding: 10px;
-  }
-
-  .form-group select, .form-group input {
-    font-size: 14px;
     width: 100%;
- 
-    border: 1px solid #c7c7c7;
-    border-radius: 7px;
-    padding: 10px;
-    color: #333;
-    font-size: 12px;
-    margin: 0;
-}
-  .form-title {
-    font-size: 16px;
+  }
+  .form-heading-image-color{
+    padding: 10px 8px 10px 8px;
+  }
+  .share-rqrmnt-cross-Btn{
+    top: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
   }
 
-  .form-description {
-    font-size: 11px;
+
+
+
+
+
+
+
+  .share-rqrmnt-form-top{
+    flex-direction: column;
   }
 
-  .form-features {
-    font-size: 11px;
+  .share-rqrmnt-form-mid{
+    flex-direction: column;
   }
+  .share-rqrmnt-form-last{
+    flex-direction: column;
+  
+  }
+  
 
-  .form-header {
-    font-size: 14px;
-  }
 
-  .property-form {
-    gap: 10px;
-  }
-  .post-property-form{
-    padding: 8px 0px 8px 0px;
-  }
 
-  .form-group input,
-  .form-group select {
-    font-size: 13px;
-  }
 
-  .form-submit-btn {
-    width: 100%;
-    /* padding: 10px; */
-    font-size: 14px;
-  }
 
-  .img-requirement img {
-    width: 120px;
-  }
 
-  .cross-Btn{
-    padding: 1px 8px;
-  }
-  .form-right-heading-container  p{
-    font-size: 12px;
-  }
-  .form-budget select{
-    height: 38px;
-    border-radius:0px 8px 8px 0px ;
-      color: rgba(170, 181, 193, 1);
 
-  }
-  .budget-container input{
-    width: 140px;
-    border-radius: 8px 0px 0px 8px;
-  }
-  .form-bhk select{
-    color: rgba(170, 181, 193, 1);
-  }
-  .form-floor select{
-    color: rgba(170, 181, 193, 1);
-  }
+
+  
 }
