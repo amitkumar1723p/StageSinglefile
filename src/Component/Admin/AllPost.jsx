@@ -42,7 +42,7 @@ export default function AllPost({
   const itemsPerPage = postPerPage; // Number of items per page
   const [querry, setquerry] = useSearchParams();
   // Create a URLSearchParams object from the query string (search part of the URL)
-  console.log(itemsPerPage ,"itemperpage")
+  // console.log(itemsPerPage ,"itemperpage")
   
 
   useEffect(() => {
@@ -84,12 +84,37 @@ export default function AllPost({
           // console.log(filteredPosts)
           // return ;
         }
-        // console.log("out")
-        if (activeFilter == true || activeFilter == false) {
-          filteredPosts = filteredPosts.filter((item) => {
-            return item.PostVerify === activeFilter;
-          });
+
+            // Active filter (postVerify on PostId)
+        if (activeFilter !== null) {
+          if (activeFilter === "expired") {
+            filteredPosts = filteredPosts.filter(
+              (item) => item?.PostExpired?.ExpiredStatus
+            );
+          }
+
+          if (activeFilter !== "expired" && activeFilter !== "success") {
+            filteredPosts = filteredPosts.filter((item) => {
+              const isVerifyMatch = item?.PostVerify === activeFilter;
+          
+              if (item?.PostExpired !== undefined) {
+                return isVerifyMatch && item?.PostId?.PostExpired?.ExpiredStatus === false;
+              }
+          
+              return isVerifyMatch;
+            });
+          }
+          
+      
         }
+  
+         
+        // // console.log("out")
+        // if (activeFilter == true || activeFilter == false) {
+        //   filteredPosts = filteredPosts.filter((item) => {
+        //     return item.PostVerify === activeFilter
+        //   });
+        // }
       } else {
         filteredPosts = [...filteredPosts];
       }

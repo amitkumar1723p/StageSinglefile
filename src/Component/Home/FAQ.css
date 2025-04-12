@@ -18,6 +18,8 @@
 
 .accordion-body{
   color: #333;
+  max-height: 82vh;
+    overflow-y: scroll;
 }
 .heading-faq{
   display: flex;
@@ -65,6 +67,7 @@ color: #333;
   background-color: var(--main-light-clr);
   font-weight: 600;
   color: #fff;
+  border-radius: 0px !important;
 }
 .accordion-button:not(.collapsed)::after {
   filter: invert(100%) brightness(100%);
@@ -98,5 +101,24 @@ color: #333;
   .accordion{
     width: 95%;
     margin: 0 auto;
+    /* height: 50px !important; */
   }
+.accordion-button-1{
+  position: relative;
+  display: flex
+;
+  align-items: center;
+  width: 100%;
+  padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+  font-size: 1rem;
+  color: var(--bs-accordion-btn-color);
+  text-align: left;
+  background-color: var(--bs-accordion-btn-bg);
+  border: 0;
+  border-radius: 0;
+  overflow-anchor: none;
+  transition: var(--bs-accordion-transition);
+  height: 38px;
+}
+
 }

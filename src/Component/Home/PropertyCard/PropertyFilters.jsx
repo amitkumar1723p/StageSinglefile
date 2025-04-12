@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./card.css";
 import HomeCard from "../HomeCard";
 import { UserContext } from "../../CreateContext/CreateContext";
@@ -6,23 +6,68 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { GetAllPostAction, GetSingleProjectNameDataAction } from "../../../Action/postAction";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderCard from "./HeaderCard";
+import { filter } from "lodash";
+import { formatPrice } from "../../../utils/CommonFunction";
+import { FileTerminal, FilterIcon, FilterX, FilterXIcon } from "lucide-react";
 
 const AllPostSearchFilter = () => {
+
   const [Filter, setFilter] = useState({});
   const [removeFilterField, setRemoveFilterField] = useState(false);
   const [isClicked, setIsClicked] = useState(null);
-  const [isClosing, setIsClosing] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [FurnishingStatus, setFurnishingStatus] = useState("");
-  const [preventScroll,setPreventScroll] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [allData,setAllData]= useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { setRedirectPathIsHomeCard } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+
 
   const { data } = useSelector((state) => state.GetAllPost);
    
+  useEffect(() => {
+    if (!data?.allPost) return;
+  
+    const filtered = [...data.allPost];
+    const isSale = searchParams.get("PropertyAddType") === "Sale";
+  console.log("in the filter")
+    switch (filterData.SortBy) {
+      case 'Price Low to High':
+        filtered.sort((a, b) => {
+          const aPrice = isSale ? a?.PricingDetails?.ExpectedPrice : a?.PricingDetails?.ExpectedRent;
+          const bPrice = isSale ? b?.PricingDetails?.ExpectedPrice : b?.PricingDetails?.ExpectedRent;
+          return (aPrice ?? 0) - (bPrice ?? 0);
+        });
+        break;
+  
+      case 'Price High to Low':
+        filtered.sort((a, b) => {
+          const aPrice = isSale ? a?.PricingDetails?.ExpectedPrice : a?.PricingDetails?.ExpectedRent;
+          const bPrice = isSale ? b?.PricingDetails?.ExpectedPrice : b?.PricingDetails?.ExpectedRent;
+          return (bPrice ?? 0) - (aPrice ?? 0);
+        });
+        break;
+  
+      case 'Newest First':
+        filtered.sort((a, b) => {
+          const aDate = isSale ? a?.BasicDetails?.PostedOn : a?.createAt;
+          const bDate = isSale ? b?.BasicDetails?.PostedOn : b?.createAt;
+          return new Date(bDate ?? 0) - new Date(aDate ?? 0);
+        });
+        break;
+  
+      default:
+        break;
+    }
+  
+    setAllData(()=>{
+      return filtered
+    });
+  }, [data]);
+  
+
+ 
 
   // Fetch single project data if ProjectName is available in URL
   useEffect(() => {
@@ -65,61 +110,12 @@ useEffect(() => {
   }
 
   setRedirectPathIsHomeCard(true);
-}, [searchParams, dispatch, data, setRedirectPathIsHomeCard]);
-
-  // Fetch posts when filters change
-  useEffect(() => {
-    if (Object.keys(Filter).length > 0 || removeFilterField) {
-      dispatch(
-        GetAllPostAction({
-          ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-", " "),
-          City: searchParams.get("city")?.replaceAll("-", " "),
-          Sector: searchParams.get("sector")?.replaceAll("-", " "),
-          Locality: searchParams.get("locality")?.replaceAll("-", " "),
-          PropertyAdType: searchParams.get("PropertyAddType"),
-          BHK: Filter.BHK,
-          ApartmentType: Filter.ApartmentType,
-          PropertyStatus: undefined, // Keeping undefined explicitly
-          Furnishing: Filter.Furnishing,
-        })
-      );
-    }
-    window.scrollTo(0, 0);
-  }, [Filter, searchParams, dispatch, removeFilterField]);
-
-  const handleClicked = (v) => {
-    setIsClicked(v);
-  };
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Function to toggle modal
-  
-
-  // Disable scrolling when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = ""; // Cleanup on unmount
-    };
-  }, [isOpen]);
+}, [searchParams, dispatch, setRedirectPathIsHomeCard]);
 
 
-  const closeModal = () => {
-    setIsOpen(false);
 
-    setIsClosing(true);
-    setTimeout(() => {
-      setShowModal(false);
-      setIsClosing(false);
-    }, 300);
-  };
 
-  const bhkOptions = [1, 2, 3, 4, 5];
+
   const ApartmentTypeOptions = [
     "Apartment",
     "Independent House/Villa",
@@ -131,161 +127,513 @@ useEffect(() => {
   const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
   const PropertyAdTypeArray = ["Sale", "Rent"];
 
+
+
+  const [query,setQuery]=useState("");
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [filterData, setFilterData] = useState({ BuySell:searchParams.get("PropertyAddType")  });
+  const searchInputRef = useRef(null);
+  const typeRef = useRef(null);
+  const budgetRef = useRef(null);
+  const bhkRef = useRef(null);
+  const statusRef = useRef(null);
+  const localityRef = useRef(null);
+  const furnishingRef = useRef(null);
+  const sortByRef = useRef(null);
+
+  const handleSelect = (category, value) => {
+    if (!value) return;
+    const exists = activeFilters.find(filter => filter.category === category && filter.value === value);
+    if (!exists) {
+      const updatedFilters = [...activeFilters.filter(filter => filter.category !== category), { category, value }];
+      setActiveFilters(updatedFilters);
+      setFilterData(prev => ({ ...prev, [category]: value }));
+    }
+  };
+
+  const handleToggleChip = (category, value) => {
+    const exists = activeFilters.find(filter => filter.category === category && filter.value === value);
+    if (exists) {
+      removeFilter(value);
+    } else {
+      setActiveFilters(prev => [...prev, { category, value }]);
+      setFilterData(prev => ({ ...prev, [category]: value }));
+    }
+  };
+
+  const removeFilter = (value) => {
+    const updatedFilters = activeFilters.filter(filter => filter.value !== value);
+    setActiveFilters(updatedFilters);
+    const updatedFilterData = { ...filterData };
+    for (const key in updatedFilterData) {
+      if (updatedFilterData[key] === value) {
+        
+        delete updatedFilterData[key];
+      }
+    }
+    setFilterData(updatedFilterData);
+  };
+
+  const clearAllFilters = () => {
+    setActiveFilters([]);
+    setFilterData({ BuySell: searchParams?.get("PropertyAddType") });
+    if (searchInputRef.current) searchInputRef.current.value = '';
+    if (typeRef.current) typeRef.current.value = '';
+    if (budgetRef.current) budgetRef.current.value = '';
+    if (bhkRef.current) bhkRef.current.value = '';
+    if (statusRef.current) statusRef.current.value = '';
+    if (localityRef.current) localityRef.current.value = '';
+    if (furnishingRef.current) furnishingRef.current.value = '';
+    if (sortByRef.current) sortByRef.current.value = '';
+  };
+
+  // const handleToggleBuySell = (type) => {
+  //   setFilter(prev => ({ ...prev, BuySell: type }));
+  // };
+
+  const isChipActive = (category, value) => {
+    return activeFilters.some(filter => filter.category === category && filter.value === value);
+  };
+  const [rawValue, setRawValue] = useState(50000000); // value from slider
+  const [value, setValue] = useState(50000000);       // debounced value
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setValue(rawValue);
+    }, 150); // debounce delay
+
+    return () => clearTimeout(timer); // cleanup on re-render
+  }, [rawValue]);
+
+  const handleChange = (e) => {
+    setRawValue(Number(e.target.value));
+  };
+
+  // Fetch posts when filters change
+  useEffect(() => {
+    if (Object.keys(filterData).length > 0 || removeFilterField) {
+      // console.log(filterData);
+  
+      dispatch(
+        GetAllPostAction({
+          ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-", " "),
+          City: searchParams.get("city")?.replaceAll("-", " "),
+          Sector: searchParams.get("sector")?.replaceAll("-", " "),
+          Locality: searchParams.get("locality")?.replaceAll("-", " "),
+          PropertyAdType: searchParams.get("PropertyAddType"),
+          BHK: filterData?.BHK?.[0],
+          ApartmentType: filterData?.ApartmentType,
+          PropertyStatus: filterData?.Status,
+          Furnishing: filterData?.Furnishing,
+          Locality: filterData?.Locality,
+          Verified: filterData?.Verified,
+          Budget: value,
+        })
+      );
+    }
+
+  if(!data || !data?.allPost){
+    return
+  }
+    let filtered = [...data?.allPost];
+    // ✅ Sort only if SortBy is present
+    if (filterData?.SortBy ) {
+      const isSale = searchParams.get("PropertyAddType") === "Sale";
+  
+      if (filterData.SortBy === 'Price Low to High') {
+        console.log("Sorting: Price Low to High");
+        filtered.sort((a, b) => {
+          const aPrice = isSale ? a.PricingDetails?.ExpectedPrice : a.PricingDetails?.ExpectedRent;
+          const bPrice = isSale ? b.PricingDetails?.ExpectedPrice : b.PricingDetails?.ExpectedRent;
+          return (aPrice ?? 0) - (bPrice ?? 0);
+        });
+      } else if (filterData.SortBy === 'Price High to Low') {
+        console.log("Sorting: Price High to Low");
+        filtered.sort((a, b) => {
+          const aPrice = isSale ? a.PricingDetails?.ExpectedPrice : a.PricingDetails?.ExpectedRent;
+          const bPrice = isSale ? b.PricingDetails?.ExpectedPrice : b.PricingDetails?.ExpectedRent;
+          return (bPrice ?? 0) - (aPrice ?? 0);
+        });
+      } else if (filterData.SortBy === 'Newest First') {
+        console.log("Sorting: Newest First");
+        filtered.sort((a, b) => {
+          const aDate = isSale ? a.BasicDetails?.PostedOn : a?.createAt;
+          const bDate = isSale ? b.BasicDetails?.PostedOn : b?.createAt;
+          return new Date(bDate ?? 0) - new Date(aDate ?? 0);
+        });
+      }
+  
+    }
+    setAllData(filtered);
+  
+    window.scrollTo(0, 0);
+  }, [filterData, searchParams, dispatch, removeFilterField, value]);
+  
+  const sortBy = filterData?.SortBy;
+  
+ 
+  
+  // console.log("all data h ",allData)
+
   return (
     <>
       <div className="property-post-filters-main-box">
         <div className="property-post-filters-box">
-          <aside className="property-filters">
-            <div className="allpost-clear-filter-title">
-              <h2 className="filter-title-1">Filter Your Search</h2>
-              <div className='allpost-clear-filter' 
-              onClick={() => {
-                dispatch(
-                  GetAllPostAction({
-                    ProjectName: searchParams.get("ProjectName"),
-                    PropertyAdType: searchParams.get("PropertyAddType"),
-                    City: searchParams.get("city")?.replaceAll("-"," ") ,
-                    Sector: searchParams.get("sector"),
-                    Locality:searchParams.get("locality"),
-                     
-                     
+
+           <div class=" accordion property-filter-parent-mob " id="accordionExample">
+                  <div class="accordion-item custon-accordian-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><FilterIcon />
+                        Filter &nbsp; &nbsp; {activeFilters.length>0 && <>{ activeFilters.length } Applied filter</>}
+                      </button>
+        
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     
-                     
-                  })
-                );
-                setFilter({});
-              }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
-            </div>
+                      <div class="accordion-body">     
+    
 
-            <div className="filter-dummyLine"></div>
-            <div className="flex">
-              <div className="filter-Lookin-for">
-                <p className="looking-for-data">I am looking for</p>
-                {PropertyAdTypeArray.map((text) => (
-                  <button
-                    key={text}
-                    onClick={() => {
-                      navigate(
-                        `/home/card?${searchParams.get("ProjectName") ? `ProjectName=${encodeURIComponent(searchParams.get("ProjectName"))}` : ""}
-                        ${searchParams.get("sector") ? `&sector=${encodeURIComponent(searchParams.get("sector"))}` : ""}
-                        ${searchParams.get("city") ? `&city=${encodeURIComponent(searchParams.get("city"))}` : ""}
-                        ${searchParams.get("locality") ? `&locality=${encodeURIComponent(searchParams.get("locality"))}` : ""}
-                        ${text ? `&PropertyAddType=${encodeURIComponent(text)}` : ""}`.replace(/\s+/g, "")
-                      );
-                      
-                      
-                      // setSearchParams({
-                      //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
-                      //   city:searchParams.get("city"),
-                      //   sector:searchParams.get("sector"),
-                      //   PropertyAddType: text,
-                      // });
-                      setRemoveFilterField(true);
-                    }}
-                    className={`bhk-option ${searchParams.get("PropertyAddType") === text ? "selected" : ""}`}
-                  >
-                    {text}
-                  </button>
-                ))}
+    <div className="property-filter-search-row">
+    <div className="property-filter-budget">
+     
+     <label htmlFor="moneySlider" className="slider-label">Budget:</label>
+     <div className="budget-filter-parent">
+ 
+     <input
+       type="range"
+       id="moneySlider"
+       min={100000}
+       max={500000000}
+       step={100000}
+       value={value}
+       onChange={handleChange}
+       className="slider-input"
+     />
+    
+     <div className="slider-value">
+       {formatPrice(value)}
+     </div>
+     </div>
+ 
+   </div>
+      {/* <input type="text" placeholder="Enter city, locality or project" onChange={(e)=>{setQuery(e.target.value)}} className="property-filter-search-input" /> */}
+    
+    <div className="property-filter-type-mob">
+      
+      <select ref={typeRef} onChange={(e) => handleSelect('ApartmentType', e.target.value)} className="property-filter-type" defaultValue="">
+        <option value="" disabled>Property Type</option>
+        {
+          ApartmentTypeOptions.map((value)=>{
+            return <option value={value}>
+              {value}
+            </option>
+          })
+        }
+  
+
+      </select>
+
+ 
+      <div className="property-filter-toggle-mob">
+   
+                  {PropertyAdTypeArray.map((text) => (
+                <button
+                  key={text}
+                  onClick={() => {
+                    navigate(
+                      `/home/card?${searchParams.get("ProjectName") ? `ProjectName=${encodeURIComponent(searchParams.get("ProjectName"))}` : ""}
+                      ${searchParams.get("sector") ? `&sector=${encodeURIComponent(searchParams.get("sector"))}` : ""}
+                      ${searchParams.get("city") ? `&city=${encodeURIComponent(searchParams.get("city"))}` : ""}
+                      ${searchParams.get("locality") ? `&locality=${encodeURIComponent(searchParams.get("locality"))}` : ""}
+                      ${text ? `&PropertyAddType=${encodeURIComponent(text)}` : ""}`.replace(/\s+/g, "")
+                    );
+                    setRemoveFilterField(true);
+                  }}
+                  className={`property-filter-toggle-btn ${searchParams.get("PropertyAddType") === text ? "active" : ""}`}
+                >
+                  {text}
+                </button>
+                    ))}
+               
+    
+    </div>
+
+    </div>
+  
+     
+    </div>
+
+    <div className="property-filter-header">
+   
+  
+    <div className="property-filter-options">
+            <div className="property-select-div">
+
+              <select className="property-filter-select" ref={bhkRef} onChange={(e) => handleSelect('BHK', e.target.value)} defaultValue="">
+                <option value="" disabled>BHK</option>
+                <option value="1 BHK">1 BHK</option>
+                <option value="2 BHK">2 BHK</option>
+                <option value="3 BHK">3 BHK</option>
+                <option value="4 BHK">4 BHK</option>
+              </select>
+            </div>
+              <div className="property-select-div">
+
+              <select className="property-filter-select" ref={statusRef} onChange={(e) => handleSelect('Status', e.target.value)} defaultValue="">
+                <option value="" disabled>Status</option>
+                <option value="Ready to move">Ready to Move</option>
+                <option value="Under Construction">Under Construction</option>
+              </select>
               </div>
+
+            <div className="property-select-div">
+
+              <select className="property-filter-select" onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
+                <option value="" disabled>Locality</option>
+                <option value="New Gurgaon">New Gurgaon</option>
+                <option value="Golf Course Extn Road">Golf Course</option>
+                <option value="Southern Peripheral Road Gurgaon">SPR Road</option>
+              </select>
             </div>
 
-            <div className="filter-dummyLine"></div>
+              <div className="property-select-div">
 
-            <div className="filter-group">
-              <h3>BHK</h3>
-              <div className="button-section">
-                {bhkOptions.map((bhk, i) => (
-                  <button
-                    key={i}
-                    className={`bhk-option ${Filter.BHK === bhk ? "selected" : ""}`}
-                    onClick={() => {
-                      if (Filter.BHK === bhk) {
-                        const { BHK, ...Filterrest } = Filter;
-                        setFilter(Filterrest);
-                        setRemoveFilterField(true);
-                      } else {
-                        setFilter({ ...Filter, BHK: bhk });
-                      }
-                    }}
-                  >
-                    {bhk} BHK
-                  </button>
-                ))}
+                            <select  className="property-filter-select" ref={furnishingRef} onChange={(e) => handleSelect('Furnishing', e.target.value)} defaultValue="">
+                              <option value="" disabled>Furnishing</option>
+                              <option value="Furnished">Furnished</option>
+                              <option value="Semi-Furnished">Semi Furnished</option>
+                              <option value="Un-Furnished">Unfurnished</option>
+                            </select>
               </div>
-            </div>
 
-            <div className="filter-dummyLine"></div>
+              {/* <button
+                onClick={() => handleToggleChip('Photos', 'With Photos')}
+                className={`property-filter-chip ${isChipActive('Photos', 'With Photos') ? 'active-chip' : ''}`}
+              >
+                With Photos
+              </button> */}
+              <button
+                onClick={() => handleToggleChip('Verified', 'Verified')}
+                className={`property-filter-chip ${isChipActive('Verified', 'Verified') ? 'active-chip' : ''}`}
+              >
+                Verified
+              </button>
+              {/* <button
+                onClick={() => handleToggleChip('Metro', 'Near Metro')}
+                className={`property-filter-chip ${isChipActive('Metro', 'Near Metro') ? 'active-chip' : ''}`}
+              >
+                Near Metro
+              </button> */}
 
-            <div className="filter-group">
-              <h3>Property Status</h3>
-              <div className="Property-Status">
-                {ApartmentTypeOptions.map((apartmenttype, i) => (
-                  <React.Fragment key={i}>
-                    <div className="filter-box-main">
-                      <input
-                        id={`${apartmenttype}${i}`}
-                        value={apartmenttype}
-                        type="Checkbox"
-                        name="Property-Status"
-                        onChange={() => {}}
-                        checked={Filter.ApartmentType === apartmenttype}
-                        onClick={() => {
-                          if (Filter.ApartmentType === apartmenttype) {
-                            const { ApartmentType, ...Filterrest } = Filter;
-                            setFilter(Filterrest);
-                            setRemoveFilterField(true);
-                          } else {
-                            setFilter({
-                              ...Filter,
-                              ApartmentType: apartmenttype,
-                            });
-                          }
-                        }}
-                      />
-                      <label htmlFor={`${apartmenttype}${i}`}>
-                        {apartmenttype}
-                      </label>
+                  <div className="property-select-div">
+                  <select ref={sortByRef} onChange={(e) => handleSelect('SortBy', e.target.value)} className="property-filter-select" defaultValue="">
+                <option value="" disabled>Sort By</option>
+                <option value="Price Low to High">Price Low to High</option>
+                <option value="Price High to Low">Price High to Low</option>
+                <option value="Newest First">Newest First</option>
+              </select>
+                  </div>
+
+   </div>
+
+      
+  
+ 
+  </div>
+ 
+    <div className="property-filter-active">
+      <span className="property-filter-active-title">Active filters:</span>
+      {activeFilters.map((filter, index) => (
+        <span key={index} className="property-filter-tag">
+          {filter.value} <button onClick={() => removeFilter(filter.value)}>&times;</button>
+        </span>
+      ))}
+      {activeFilters.length > 0 && (
+        <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
+      )}
+      <span className="property-filter-count">{data?.allPost?.length} properties found</span>
+    </div>
+  </div>
                     </div>
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-
-            <div className="filter-dummyLine"></div>
-
-            <div className="filter-group">
-              <h3>Furnishing Status</h3>
-              <div className="button-section">
-                <div className="Furnishing Status button-section">
-                  {FurnishingOptions.map((option) => (
-                    <button
-                      key={option}
-                      className={`${Filter.Furnishing === option ? "selected" : "bhk-option-1"}`}
-                      onClick={() => {
-                        handleClicked();
-                        if (Filter.Furnishing === option) {
-                          setFurnishingStatus(null);
-                          const { Furnishing, ...Filterrest } = Filter;
-                          setFilter(Filterrest);
-                          setRemoveFilterField(true);
-                        } else {
-                          setFilter({ ...Filter, Furnishing: option });
-                        }
-                      }}
-                    >
-                      {option}
-                    </button>
-                  ))}
+                  </div>
+        
                 </div>
-              </div>
+
+    {/* big screen filter */}
+
+        <div className="property-filter-main-dev">
+          
+            <div className="property-filter-parent">
+          
+
+            <div className="property-filter-search-row">
+              {/* <input type="text" placeholder="Enter city, locality or project" onChange={(e)=>{setQuery(e.target.value)}} className="property-filter-search-input" /> */}
+           <div className="property-select-div-type">
+           <select ref={typeRef} onChange={(e) => handleSelect('ApartmentType', e.target.value)} className="property-filter-select-type" defaultValue="">
+                <option value="" disabled>Property Type</option>
+                
+                {
+          ApartmentTypeOptions.map((value)=>{
+            return <option value={value}>
+              {value}
+            </option>
+          })
+        }
+              </select>
+          
+           </div>
+              <div className="property-filter-budget">
+            
+            <label htmlFor="moneySlider" className="slider-label">Budget:</label>
+            <div className="budget-filter-parent">
+
+            <input
+              type="range"
+              id="moneySlider"
+              min={100000}
+              max={500000000}
+              step={100000}
+              value={value}
+              onChange={handleChange}
+              className="slider-input"
+            />
+          
+            <div className="slider-value">
+              {formatPrice(value)}
+            </div>
             </div>
 
-            <div className="filter-dummyLine"></div>
-          </aside>
+          </div>
+          <div className="property-filter-toggle">
+     
+     {PropertyAdTypeArray.map((text) => (
+   <button
+     key={text}
+     onClick={() => {
+       navigate(
+         `/home/card?${searchParams.get("ProjectName") ? `ProjectName=${encodeURIComponent(searchParams.get("ProjectName"))}` : ""}
+         ${searchParams.get("sector") ? `&sector=${encodeURIComponent(searchParams.get("sector"))}` : ""}
+         ${searchParams.get("city") ? `&city=${encodeURIComponent(searchParams.get("city"))}` : ""}
+         ${searchParams.get("locality") ? `&locality=${encodeURIComponent(searchParams.get("locality"))}` : ""}
+         ${text ? `&PropertyAddType=${encodeURIComponent(text)}` : ""}`.replace(/\s+/g, "")
+       );
+       
+       
+       //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
+       //   city:searchParams.get("city"),
+       //   sector:searchParams.get("sector"),
+       //   PropertyAddType: text,
+       // });
+       setRemoveFilterField(true);
+     }}
+     className={`property-filter-toggle-btn ${searchParams.get("PropertyAddType") === text ? "active" : ""}`}
+   >
+     {text}
+   </button>
+       ))}
+     </div>
 
-          <div>
-            <HeaderCard />
+                      
+          <div className="property-filter-options">
+            <div className="property-select-div">
+
+              <select className="property-filter-select" ref={bhkRef} onChange={(e) => handleSelect('BHK', e.target.value)} defaultValue="">
+                <option value="" disabled>BHK</option>
+                <option value="1 BHK">1 BHK</option>
+                <option value="2 BHK">2 BHK</option>
+                <option value="3 BHK">3 BHK</option>
+                <option value="4 BHK">4 BHK</option>
+              </select>
+            </div>
+              <div className="property-select-div">
+
+              <select className="property-filter-select" ref={statusRef} onChange={(e) => handleSelect('Status', e.target.value)} defaultValue="">
+                <option value="" disabled>Status</option>
+                <option value="Ready to Move">Ready to Move</option>
+                <option value="Under Construction">Under Construction</option>
+              </select>
+              </div>
+
+            <div className="property-select-div">
+
+              <select className="property-filter-select" onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
+                <option value="" disabled>Locality</option>
+                <option value="New Gurgaon">New Gurgaon</option>
+                <option value="Golf Course Extn Road">Golf Course</option>
+                <option value="Southern Peripheral Road Gurgaon">SPR Road</option>
+              </select>
+            </div>
+
+              <div className="property-select-div">
+
+                            <select  className="property-filter-select" ref={furnishingRef} onChange={(e) => handleSelect('Furnishing', e.target.value)} defaultValue="">
+                              <option value="" disabled>Furnishing</option>
+                              <option value="Furnished">Furnished</option>
+                              <option value="Semi-Furnished">Semi Furnished</option>
+                              <option value="Un-Furnished">Unfurnished</option>
+                            </select>
+              </div>
+
+              {/* <button
+                onClick={() => handleToggleChip('Photos', 'With Photos')}
+                className={`property-filter-chip ${isChipActive('Photos', 'With Photos') ? 'active-chip' : ''}`}
+              >
+                With Photos
+              </button> */}
+              <button
+                onClick={() => handleToggleChip('Verified', 'Verified')}
+                className={`property-filter-chip ${isChipActive('Verified', 'Verified') ? 'active-chip' : ''}`}
+              >
+                Verified
+              </button>
+              {/* <button
+                onClick={() => handleToggleChip('Metro', 'Near Metro')}
+                className={`property-filter-chip ${isChipActive('Metro', 'Near Metro') ? 'active-chip' : ''}`}
+              >
+                Near Metro
+              </button> */}
+
+                  <div className="property-select-div">
+                  <select ref={sortByRef} onChange={(e) => handleSelect('SortBy', e.target.value)} className="property-filter-select" defaultValue="">
+                <option value="" disabled>Sort By</option>
+                <option value="Price Low to High">Price Low to High</option>
+                <option value="Price High to Low">Price High to Low</option>
+                <option value="Newest First">Newest First</option>
+              </select>
+                  </div>
+
+            </div>
+
+            </div>
+            
+            {/* <div className="property-filter-header">
+            
+           
+              
+          
+        
+          </div> */}
+        
+            <div className="property-filter-active">
+              <span className="property-filter-active-title">Active filters:</span>
+              {activeFilters.map((filter, index) => (
+                <span key={index} className="property-filter-tag">
+                  {filter.value} <button onClick={() => removeFilter(filter.value)}>&times;</button>
+                </span>
+              ))}
+              {activeFilters.length > 0 && (
+                <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
+              )}
+              <span className="property-filter-count">{data?.allPost?.length} properties found</span>
+            </div>
+          </div>
+
+          </div>
+    
+
+          <div className="property-filter-allpost-main">
+            {/* <HeaderCard /> */}
+
             {
               searchParams.get("PropertyAddType") =="Sale" && <div className="header-img-section">
               <img className="header-img-section-img"  src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
@@ -298,146 +646,13 @@ useEffect(() => {
                 <p className='total-post-lable-allpost'>
                   Total result {data?.allPost?.length}
                 </p>
-                <button className="all-post-filter-button" onClick={() =>{ setShowModal(true);
-                  setIsOpen(true)
-                }}>filter</button>
+               
               </div>
-              <HomeCard />
+              <HomeCard data={allData} />
             </div>
           </div>
 
-          {/* Modal */}
-          {showModal && (
-            <div className={`all-post-filter-overlay ${isClosing ? 'closing' : ''}`} onClick={closeModal}>
-              <div className="all-post-filter-content" onClick={(e) => e.stopPropagation()}>
-                <div className="all-post-filter-modal">
-                  <div className="filter-group">
-                    <div className="allpost-clear-filter-title-2">
-                      <h2>Filter Your Search</h2>
-                      <div className='allpost-clear-filter'    onClick={() => {
-                dispatch(
-                  GetAllPostAction({
-                    ProjectName: searchParams.get("ProjectName"),
-                    PropertyAdType: searchParams.get("PropertyAddType"),
-                    City: searchParams.get("city")?.replaceAll("-"," ") ,
-                    Sector: searchParams.get("sector"),
-                    BHK: "",
-                    ApartmentType: "",
-                    PropertyStatus: undefined,
-                    Furnishing: "",
-                  })
-                );
-                setFilter({});
-                      }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
-                    </div>
-
-                    <div className="button-section">
-                    {PropertyAdTypeArray.map((text) => (
-                  <button
-                    key={text}
-                    onClick={() => {
-                      navigate(
-                        `/home/card?${searchParams.get("ProjectName") ? `ProjectName=${encodeURIComponent(searchParams.get("ProjectName"))}` : ""}
-                        ${searchParams.get("sector") ? `&sector=${encodeURIComponent(searchParams.get("sector"))}` : ""}
-                        ${searchParams.get("city") ? `&city=${encodeURIComponent(searchParams.get("city"))}` : ""}
-                        ${searchParams.get("locality") ? `&locality=${encodeURIComponent(searchParams.get("locality"))}` : ""}
-                        ${text ? `&PropertyAddType=${encodeURIComponent(text)}` : ""}`.replace(/\s+/g, "")
-                      );
-                      
-                      
-                      //   ProjectName: searchParams.get("ProjectName") && searchParams.get("ProjectName"),
-                      //   city:searchParams.get("city"),
-                      //   sector:searchParams.get("sector"),
-                      //   PropertyAddType: text,
-                      // });
-                      setRemoveFilterField(true);
-                    }}
-                    className={`bhk-option ${searchParams.get("PropertyAddType") === text ? "selected" : ""}`}
-                  >
-                    {text}
-                  </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="filter-group">
-                    <h3>BHK</h3>
-                    <div className="button-section">
-                      {bhkOptions.map((bhk, i) => (
-                        <button
-                          key={i}
-                          className={`bhk-option ${Filter.BHK === bhk ? "selected" : ""}`}
-                          onClick={() => {
-                            if (Filter.BHK === bhk) {
-                              const { BHK, ...Filterrest } = Filter;
-                              setFilter(Filterrest);
-                              setRemoveFilterField(true);
-                            } else {
-                              setFilter({ ...Filter, BHK: bhk });
-                            }
-                          }}
-                        >
-                          {bhk} BHK
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="filter-group">
-                    <h3>Property Status</h3>
-                    <div className="button-section">
-                      {ApartmentTypeOptions.map((apartmenttype, i) => (
-                        <div 
-                          key={i} 
-                          className={`bhk-option ${Filter.ApartmentType === apartmenttype ? "selected" : ""}`}
-                          onClick={() => {
-                            if (Filter.ApartmentType === apartmenttype) {
-                              const { ApartmentType, ...Filterrest } = Filter;
-                              setFilter(Filterrest);
-                              setRemoveFilterField(true);
-                            } else {
-                              setFilter({
-                                ...Filter,
-                                ApartmentType: apartmenttype,
-                              });
-                            }
-                          }}
-                        >
-                          {apartmenttype}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="filter-group">
-                    <h3>Furnishing Status</h3>
-                    <div className="button-section">
-                      {FurnishingOptions.map((option) => (
-                        <button
-                          key={option}
-                          className={`bhk-option ${Filter.Furnishing === option ? "selected" : "bhk-option-1"}`}
-                          onClick={() => {
-                            handleClicked();
-                            if (Filter.Furnishing === option) {
-                              setFurnishingStatus(null);
-                              const { Furnishing, ...Filterrest } = Filter;
-                              setFilter(Filterrest);
-                              setRemoveFilterField(true);
-                            } else {
-                              setFilter({ ...Filter, Furnishing: option });
-                            }
-                          }}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="all-post-filter-close" onClick={closeModal}>Close</div>
-              </div>
-            </div>
-          )}
+       
         </div>
       </div>
     </>

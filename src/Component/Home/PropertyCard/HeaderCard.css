@@ -38,7 +38,7 @@
 /* Info Grid */
 .header-card-info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
   width: fit-content;
 }
@@ -75,7 +75,7 @@
 }
 .header-card-gallery-image,
 .header-card2-gallery-image {
-  max-width: 160px; /* Set max width to prevent large scaling */
+  max-width: 100px; /* Set max width to prevent large scaling */
   height: auto; /* Maintains aspect ratio */
   border-radius: 5px;
 }
@@ -89,7 +89,7 @@
 .header-main-data {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-left: 20px;
   flex: 1; /* Allows the section to grow and shrink */
 }

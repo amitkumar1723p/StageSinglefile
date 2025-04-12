@@ -44,6 +44,7 @@
 .property-filters h3 {
   margin: 10px 0;
   font-size: 14px;
+  white-space: nowrap;
 }
 .card-mianbox {
   display: flex;
@@ -105,18 +106,22 @@
   margin: 0 10px 0 0;
 }
 .property-filters {
-  height: fit-content;
-  /* width: 245px; */
-  /* background-color: #007bff; */
+  /* height: fit-content; */
+ 
+  background-color: #f1f1f2;
   /* height: auto; */
+  z-index: 12;
   border: 1px solid var(--main-light-clr);
   border-radius: 10px;
   /* padding: vh20px 10px; */
+  display: flex;
   position: sticky;
+  align-items: center;
+  justify-content: space-around;
   top: 76px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 89vh;
+width: 86%;
+  /* max-height: 89vh; */
+  height: 48px;
   margin-top: 10px;
   margin-bottom: 10px;
 
@@ -956,7 +961,7 @@
 
   .property-post-filters-box {
     width: 100%;
-    display: block;
+    /* display: block; */
     /* margin: 5px auto; */
   }
 
