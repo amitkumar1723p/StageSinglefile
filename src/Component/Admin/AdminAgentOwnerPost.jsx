@@ -56,7 +56,7 @@ export default function AdminAgentOwnerPost() {
   const [currentDataLength, setCurrentDataLength] = useState(null);
   const [active, setActive] = useState(null);
   const [onPageActive, setPageActive] = useState("");
-  const [propertyOrder, setPropertyOrder] = useState("decending");
+  const [propertyOrder, setPropertyOrder] = useState("descending");
   const [currenSelected, setCurrentSelected] = useState("");
   const [OwnerPostsPageNo, setOwnerPostsPageNo] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(25);
@@ -223,7 +223,9 @@ export default function AdminAgentOwnerPost() {
     }
     if (currenSelected === "expired") {
        filterdData = AllPost?.Post?.filter((item) => {
-        return item?.PostExpired?.ExpiredStatus && item?.BasicDetails?.PropertyAdType==="Sale" ;
+        return item?.PostExpired?.ExpiredStatus
+        // return item?.PostExpired?.ExpiredStatus && item?.BasicDetails?.PropertyAdType==="Sale" ;
+
       });
 
       setCurrentDataLength(filterdData?.length);

@@ -34,7 +34,7 @@ const VerifyOtp = ({
       Otp:inputOtp,
     };
     if(inputOtp.length != 6){
-      console.log(inputOtp)
+      // console.log(inputOtp)
       if(inputOtp.length == 0){
         setOtpError("Enter Your OTP")
         setInputShake(true);

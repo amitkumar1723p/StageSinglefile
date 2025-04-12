@@ -10,6 +10,7 @@ import ScrollToTop from "../../ScrollToTop";
 import { getPostsByAddress } from "../../Action/postAction";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatPrice } from "../../utils/CommonFunction";
+import { FilterIcon } from "lucide-react";
 
 const AllPostRender = () => {
 
@@ -243,7 +244,7 @@ const [query,setQuery]=useState("");
           <div class="accordion-item custon-accordian-item">
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Filter &nbsp; &nbsp; {activeFilters.length>0 && <>{ activeFilters.length } applied filter</>}
+               <FilterIcon/>&nbsp; Filter &nbsp; &nbsp; {activeFilters.length>0 && <>{ activeFilters.length } applied filter</>}
               </button>
 
             </h2>

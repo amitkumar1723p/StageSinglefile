@@ -60,7 +60,13 @@ export default function UserForm() {
           navigate(-1);
         }  
           else {
-          navigate("/user/my-listing");
+              if(medata?.user?.Role==="Property Owner"){
+
+                navigate("/user/my-listing");
+              }else {
+                navigate("/");
+                
+              }
         }
 
         if (RedirectPath == "/user/post") {

@@ -261,8 +261,6 @@ export default function AdminAside() {
               />
               All Response
             </NavLink>}
-           
-            
             <button className="AdminAside-button">
               <img src="/img/Report.svg" className="AdminAside-icon" alt="" />
               Report
@@ -285,7 +283,6 @@ export default function AdminAside() {
             </button>
           </div>
         </aside>
-
         <div className="AdminAside-content">
           <Outlet />
         </div>

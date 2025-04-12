@@ -567,8 +567,11 @@ export default function AdminListingCard({
                   <>
                     <div className="user-name-contact">
                       <span>Posted by : </span>
+                      <span><b>  {PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}    </b> 
+                      &nbsp;
 
-                      <span>{PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}</span>
+                     ({PostData?.CreatePostUser?.Role})
+                      </span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>

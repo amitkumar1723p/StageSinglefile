@@ -122,7 +122,7 @@ export const GetAllPostAction = ({
 // Delete Post Action and restore post
 
 export const DeleteAndRestorePostAction = (PostData) => {
-   console.log(PostData)
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -944,7 +944,7 @@ export const fetchAllOwnerFiles = () => {
 };
 //all excel file of  agent
 export const fetchAllAdminFiles = () => {
-  // console.log("im called")
+
   return async (dispatch) => {
     try {
       dispatch({

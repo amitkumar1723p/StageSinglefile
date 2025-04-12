@@ -961,7 +961,7 @@ export const getAllUserAction = () => {
 // Pyement Action
 
 export const paymentAction =  () => {
-  // console.log("hgq")
+
   return async (dispatch) => {
     try {
       // console.log("dis")

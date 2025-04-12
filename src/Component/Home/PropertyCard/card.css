@@ -395,11 +395,13 @@
 .header-img-section-img{
   /* margin-top: 10px; */
   width: 100%;
+  border-radius: 8px;
+  /* width: 1055px; */
   /* height: 75px; */
 }
 
+
 .filter-home-card{
-  
   display: flex;
   /* flex-direction: column; */
   justify-content: center;
