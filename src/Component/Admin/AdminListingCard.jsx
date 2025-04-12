@@ -34,7 +34,7 @@ export default function AdminListingCard({
   postPerPage,
   onPageActive,
   currenSelected,
-  MarkUpdatedPost ,
+  MarkUpdatedPost,
   sortOrder
 }) {
   const [formatDate, setFormatDate] = useState({
@@ -92,14 +92,12 @@ export default function AdminListingCard({
       ];
 
       // Format Active Date as DD-Month-YY
-      let activedate = `${("0" + date.getDate()).slice(-2)}-${
-        monthNames[date.getMonth()]
-      }-${date.getFullYear().toString().slice(-2)}`;
+      let activedate = `${("0" + date.getDate()).slice(-2)}-${monthNames[date.getMonth()]
+        }-${date.getFullYear().toString().slice(-2)}`;
 
       // Format Expired Date as DD-Month-YY (90 days after)
-      let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${
-        monthNames[After90Days.getMonth()]
-      }-${After90Days.getFullYear().toString().slice(-2)}`;
+      let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${monthNames[After90Days.getMonth()]
+        }-${After90Days.getFullYear().toString().slice(-2)}`;
 
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
@@ -113,14 +111,11 @@ export default function AdminListingCard({
   const [VisitAndOfferLength, setVisitAndOfferLength] = useState(undefined);
   useEffect(() => {
     setPropertyAddress(
-      `${
-        PostData?.PropertyDetails?.BHKType
-          ? `${PostData?.PropertyDetails?.BHKType} BHk`
-          : ""
-      }  ${PostData?.BasicDetails?.ApartmentType} For  ${
-        PostData?.BasicDetails?.PropertyAdType
-      } In ${PostData?.LocationDetails?.Landmark}  ${
-        PostData?.LocationDetails?.City
+      `${PostData?.PropertyDetails?.BHKType
+        ? `${PostData?.PropertyDetails?.BHKType} BHk`
+        : ""
+      }  ${PostData?.BasicDetails?.ApartmentType} For  ${PostData?.BasicDetails?.PropertyAdType
+      } In ${PostData?.LocationDetails?.Landmark}  ${PostData?.LocationDetails?.City
       }`
     );
   }, [PostData]);
@@ -186,9 +181,9 @@ export default function AdminListingCard({
     return index === 0;
   };
 
-   
+
   return (
-    <div className="Admin-property-post-card-main-box" id={PostData?._id} style={{outline:MarkUpdatedPost ==PostData._id ?"1px solid red":""}}>
+    <div className="Admin-property-post-card-main-box" id={PostData?._id} style={{ outline: MarkUpdatedPost == PostData._id ? "1px solid red" : "" }}>
       <div className="Admin-property-post-card-main">
         <div className="property-post-card" id="property-card-1">
           {medata?.user?.Role != "Agent" && AssignProperty && (
@@ -312,7 +307,7 @@ export default function AdminListingCard({
                                       dispatch(
                                         DeleteAndRestorePostAction({
                                           // postId: PostData?._id,
-                                          postData:[{PostId:PostData?._id}] ,
+                                          postData: [{ PostId: PostData?._id }],
                                           Status: "restore",
                                         })
                                       );
@@ -381,7 +376,7 @@ export default function AdminListingCard({
                                           postPerPage: postPerPage,
                                           onPageActive: onPageActive,
                                           currenSelected: currenSelected,
-                                          sortOrder :sortOrder
+                                          sortOrder: sortOrder
                                         },
                                       }
                                     );
@@ -397,7 +392,7 @@ export default function AdminListingCard({
                                   if (confrim) {
                                     dispatch(
                                       DeleteAndRestorePostAction({
-                                        postData:[{PostId:PostData?._id}] ,
+                                        postData: [{ PostId: PostData?._id }],
                                         Status: "delete",
                                       })
                                     );
@@ -521,11 +516,10 @@ export default function AdminListingCard({
               <div className="response-section">
                 <p
                   // className={location.pathname.includes("schedule-visit"?"select":"")}
-                  className={`${
-                    location.pathname.includes("/admin/schedule-visit")
+                  className={`${location.pathname.includes("/admin/schedule-visit")
                       ? "active-btn"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
                     if (
                       medata?.user?.Role == "Owner" &&
@@ -547,11 +541,10 @@ export default function AdminListingCard({
                   )
                 </p>
                 <p
-                  className={`${
-                    location.pathname.includes("/admin/recive-offer")
+                  className={`${location.pathname.includes("/admin/recive-offer")
                       ? "active-btn"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => {
                     if (
                       medata?.user?.Role == "Owner" &&
@@ -587,15 +580,14 @@ export default function AdminListingCard({
 
               <div className="admin-btn-active-btn">
                 <Link
-                  to={`${
-                    medata?.user?.Role == "Owner" &&
-                    PostData?.PostDelete?.Status == "delete"
+                  to={`${medata?.user?.Role == "Owner" &&
+                      PostData?.PostDelete?.Status == "delete"
                       ? "/admin/deleted-post"
                       : "/post-detail"
-                  }/${PropertyAddress.toLowerCase()
-                    .replaceAll(" ", "-")
-                    .replace(",", "")
-                    .replaceAll("/", "-")}-${PostData?._id}`}
+                    }/${PropertyAddress.toLowerCase()
+                      .replaceAll(" ", "-")
+                      .replace(",", "")
+                      .replaceAll("/", "-")}-${PostData?._id}`}
                 >
                   <button className="contact-button btn-sm">
                     View Listing
@@ -637,6 +629,7 @@ export default function AdminListingCard({
                         {/* {location.pathname.includes("admin") && ( */}
                         {PostData?.PostExpired ? (
                           <button
+                          className="re-open-btn-admin"
                             onClick={() => {
                               dispatch(ReOpenPostAction(PostData?._id));
                             }}

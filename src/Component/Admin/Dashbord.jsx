@@ -25,6 +25,7 @@ const Dashboard = () => {
   const [VerifyPost, setVerifyPost] = useState([]);
   const [TotalListing, setTotalListing] = useState(0);
   const [successPostlength, setSuccessPostLength] = useState(0);
+  const [expiredPostlength, setExpiredPostLength] = useState(0);
   const navigate = useNavigate();
   const { medata } = useSelector((state) => {
     return state.meDetails;
@@ -142,8 +143,14 @@ const Dashboard = () => {
         return item?.propertyStatus?.currentPropertyStatus === "sold out";
       });
 
+      const expiredPost = AllPost.Post.filter((item) => {
+        // console.log("ittem  ",item?.PostExpired)
+        return item?.PostExpired?.ExpiredStatus ;
+      });
+
 
       setSuccessPostLength(successPost?.length);
+      setExpiredPostLength(expiredPost?.length)
     }
   }, [AllPost]);
 
@@ -223,9 +230,9 @@ const Dashboard = () => {
 
             {medata?.user?.Role != "Agent" && (
               <>
-                <div className="card p-3 cursor-pointer">
+                <div className="card p-3 cursor-pointer"  onClick={() => navigate("/admin/allpost?type=expired")}>
                   <div className="Admin-box">
-                    <p className="total-number">0</p>
+                    <p className="total-number">{expiredPostlength}</p>
                     <img src="/img/In-ActivePosts.png" alt="post" />
                   </div>
                   <h3> Expire Lisitng </h3>

@@ -82,7 +82,7 @@ export default function AdminAgentOwnerPost() {
   const [myQuery, setMyQuery] = useState(queryParams.get("type"));
   // const {  NavbarRef } =
   //   useContext(UserContext);
-  console.log("MarkUpdatePost", MarkUpdatedPost);
+  // console.log("MarkUpdatePost", MarkUpdatedPost);
   useEffect(() => {
     if (
       location?.state &&
@@ -179,6 +179,10 @@ export default function AdminAgentOwnerPost() {
       } else if (myQuery === "success") {
         setActive("success");
         setCurrentSelected("Success Post ");
+      }
+      else if (myQuery === "expired") {
+        setActive("expired");
+        setCurrentSelected("expired");
       } else {
         setCurrentSelected("All posts");
         setActive(null);
@@ -217,13 +221,14 @@ export default function AdminAgentOwnerPost() {
 
       setCurrentDataLength(filterdData?.length);
     }
-    if (currenSelected === "sale") {
-      filterdData = AllPost?.Post?.filter((item) => {
-        return item?.BasicDetails?.PropertyAdType === PropertyType;
+    if (currenSelected === "expired") {
+       filterdData = AllPost?.Post?.filter((item) => {
+        return item?.PostExpired?.ExpiredStatus && item?.BasicDetails?.PropertyAdType==="Sale" ;
       });
 
       setCurrentDataLength(filterdData?.length);
     }
+    
     if (currenSelected === "Success Post") {
       filterdData = AllPost?.Post?.filter((item) => {
         return item?.propertyStatus?.currentPropertyStatus === "sold out";
@@ -374,7 +379,11 @@ export default function AdminAgentOwnerPost() {
       setActive(false);
     } else if (status === "success") {
       setActive("success");
-    } else {
+     }else if(status==="Expired"){
+      setCurrentSelected("expired");
+      setActive("expired");
+     } 
+    else {
       setCurrentSelected("All posts");
       setActive(null);
     }
@@ -478,6 +487,14 @@ export default function AdminAgentOwnerPost() {
               onClick={() => handleActive(false, "false")}
             >
               Inactive
+            </button>
+            <button
+              className={
+                myQuery === "expired" || onPageActive === "expired" ? "select" : ""
+              }
+              onClick={() => handleActive("Expired", "expired")}
+            >
+              Expired
             </button>
             <button
               className={
