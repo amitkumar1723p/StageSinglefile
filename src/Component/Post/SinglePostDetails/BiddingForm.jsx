@@ -329,7 +329,7 @@ export default function BiddingFormForm({
               {isLowerOffer === "CustomValue" && (
                 <div>
                   <input
-                    className="py-1 rounded-2 px-2 border text-[#333]"
+                    className="py-2 rounded-2 px-2 border text-[#333]"
                     type="text"
                     value={formatNumberWithCommas(price)}
                     onChange={handleChange}
