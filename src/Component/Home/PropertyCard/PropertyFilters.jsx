@@ -194,8 +194,8 @@ useEffect(() => {
   const isChipActive = (category, value) => {
     return activeFilters.some(filter => filter.category === category && filter.value === value);
   };
-  const [rawValue, setRawValue] = useState(50000000); // value from slider
-  const [value, setValue] = useState(50000000);       // debounced value
+  const [rawValue, setRawValue] = useState(500000000); // value from slider
+  const [value, setValue] = useState(500000000);       // debounced value
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -451,7 +451,7 @@ useEffect(() => {
       {activeFilters.length > 0 && (
         <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
       )}
-      <span className="property-filter-count">{data?.allPost?.length} properties found</span>
+      <span className="property-filter-count">{data?.allPost?.length} Properties Found</span>
     </div>
   </div>
                     </div>
@@ -624,7 +624,7 @@ useEffect(() => {
               {activeFilters.length > 0 && (
                 <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
               )}
-              <span className="property-filter-count">{data?.allPost?.length} properties found</span>
+              <span className="property-filter-count">{data?.allPost?.length} Properties Found</span>
             </div>
           </div>
 
