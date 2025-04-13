@@ -31,7 +31,7 @@ const AllPostSearchFilter = () => {
   
     const filtered = [...data.allPost];
     const isSale = searchParams.get("PropertyAddType") === "Sale";
-  console.log("in the filter")
+  
     switch (filterData.SortBy) {
       case 'Price Low to High':
         filtered.sort((a, b) => {
@@ -212,7 +212,7 @@ useEffect(() => {
   // Fetch posts when filters change
   useEffect(() => {
     if (Object.keys(filterData).length > 0 || removeFilterField) {
-      // console.log(filterData);
+     
   
       dispatch(
         GetAllPostAction({
@@ -241,21 +241,21 @@ useEffect(() => {
       const isSale = searchParams.get("PropertyAddType") === "Sale";
   
       if (filterData.SortBy === 'Price Low to High') {
-        console.log("Sorting: Price Low to High");
+       
         filtered.sort((a, b) => {
           const aPrice = isSale ? a.PricingDetails?.ExpectedPrice : a.PricingDetails?.ExpectedRent;
           const bPrice = isSale ? b.PricingDetails?.ExpectedPrice : b.PricingDetails?.ExpectedRent;
           return (aPrice ?? 0) - (bPrice ?? 0);
         });
       } else if (filterData.SortBy === 'Price High to Low') {
-        console.log("Sorting: Price High to Low");
+        
         filtered.sort((a, b) => {
           const aPrice = isSale ? a.PricingDetails?.ExpectedPrice : a.PricingDetails?.ExpectedRent;
           const bPrice = isSale ? b.PricingDetails?.ExpectedPrice : b.PricingDetails?.ExpectedRent;
           return (bPrice ?? 0) - (aPrice ?? 0);
         });
       } else if (filterData.SortBy === 'Newest First') {
-        console.log("Sorting: Newest First");
+       
         filtered.sort((a, b) => {
           const aDate = isSale ? a.BasicDetails?.PostedOn : a?.createAt;
           const bDate = isSale ? b.BasicDetails?.PostedOn : b?.createAt;
@@ -273,7 +273,7 @@ useEffect(() => {
   
  
   
-  // console.log("all data h ",allData)
+   
 
   return (
     <>
