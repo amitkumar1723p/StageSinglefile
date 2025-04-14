@@ -7,7 +7,7 @@ export const CreatePostReducer = (state = {}, action) => {
     // Admin routes
     // case "UpdatePostRequest":
     case "VerifyPostActionRequest":
-    case "ReOpenPostActionRequest":
+    case "ReOpenPostActionRequest-AdminRoutes":
     case "VerifyAdminRequest":
     case "VerifyBidRequest":
     case "Admin_OwnerScheduleVisitDoneRequest":
@@ -36,7 +36,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "DeleteAndRestorePostSuccess":
     // case "UpdatePostSuccess":
     case "VerifyPostActionSuccess":
-    case "ReOpenPostActionSuccess":
+    case "ReOpenPostActionSuccess-AdminRoutes":
     case "VerifyAdminSuccess":
     case "VerifyBidSuccess":
     case "Admin_OwnerScheduleVisitDoneSuccess":
@@ -68,7 +68,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "DeleteAndRestorePostFail":
     // case "UpdatePostFail":
     case "VerifyPostActionFail":
-    case "ReOpenPostActionFail":
+    case "ReOpenPostActionFail-AdminRoutes":
     case "VerifyAdminFail":
     case "VerifyBidFail":
     case "Admin_OwnerScheduleVisitDoneFail":

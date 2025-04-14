@@ -16,16 +16,93 @@ export default function ShowLoginUserPost() {
   const [AllPost, setAllPost] = useState([]);
   const [PropertyAdType, setPropertyAddType] = useState("All");
   const [filterdPost, setFilterdPost] = useState([]);
-
+  const [MarkRentOutPropertyId, setMarkRentOutPropertyId] = useState([]);
   const ButtonText = ["All", "Sale", "Rent"];
 
   // Get All Post by Login User
   const { loading, data } = useSelector((state) => state.GetPost);
 
+  const { data: Alertdata } = useSelector((state) => {
+    return state.userData;
+  });
+  console.log(Alertdata);
   // Fetch user posts on component mount
   useEffect(() => {
-    dispatch(LoginUserPostAction());
-  }, [dispatch]);
+    if (!data) {
+      dispatch(LoginUserPostAction());
+      sessionStorage.removeItem("removeLoding-ReOpenAndRentOut");
+    }
+
+    //
+  }, []);
+  useEffect(() => {
+    if (Alertdata?.RentOutPostId || Alertdata?.ReOpenPostId) {
+      dispatch(LoginUserPostAction());
+      sessionStorage.setItem("removeLoding-ReOpenAndRentOut", "true");
+    }
+
+    // When marking a post as Rent Out
+    // if (Alertdata?.RentOutPostId) {
+    //   let rentOutData = [];
+    //   try {
+    //     const sessionData = sessionStorage.getItem("RentOutPropertyId");
+    //     if (Array.isArray(JSON.parse(sessionData))) {
+    //       rentOutData = JSON.parse(sessionData);
+    //     }
+    //   } catch (e) {
+    //     console.error("Error parsing RentOutPropertyId", e);
+    //   }
+
+    //   // Add new RentOutPostId to RentOut list (avoid duplicates)
+    //   const updatedRentOutData = [Alertdata.RentOutPostId, ...rentOutData.filter(id => id !== Alertdata.RentOutPostId)];
+    //   sessionStorage.setItem("RentOutPropertyId", JSON.stringify(updatedRentOutData));
+
+    //   // Remove this ID from ReOpen list
+    //   let reOpenData = [];
+    //   try {
+    //     const sessionData = sessionStorage.getItem("ReOpenPropertyId");
+    //     if (Array.isArray(JSON.parse(sessionData))) {
+    //       reOpenData = JSON.parse(sessionData);
+    //     }
+    //   } catch (e) {
+    //     console.error("Error parsing ReOpenPropertyId", e);
+    //   }
+
+    //   const filteredReOpenData = reOpenData.filter(id => id !== Alertdata.RentOutPostId);
+    //   sessionStorage.setItem("ReOpenPropertyId", JSON.stringify(filteredReOpenData));
+    // }
+
+    // // When marking a post as Re-Open
+    // if (Alertdata?.ReOpenPostId) {
+    //   let rentOutData = [];
+    //   try {
+    //     const sessionData = sessionStorage.getItem("RentOutPropertyId");
+    //     if (Array.isArray(JSON.parse(sessionData))) {
+    //       rentOutData = JSON.parse(sessionData);
+    //     }
+    //   } catch (e) {
+    //     console.error("Error parsing RentOutPropertyId", e);
+    //   }
+
+    //   // Remove ReOpenPostId from RentOut list
+    //   const filteredRentOutData = rentOutData.filter(id => id !== Alertdata.ReOpenPostId);
+    //   sessionStorage.setItem("RentOutPropertyId", JSON.stringify(filteredRentOutData));
+
+    //   // Add to ReOpen list
+    //   let reOpenData = [];
+    //   try {
+    //     const sessionData = sessionStorage.getItem("ReOpenPropertyId");
+    //     if (Array.isArray(JSON.parse(sessionData))) {
+    //       reOpenData = JSON.parse(sessionData);
+    //     }
+    //   } catch (e) {
+    //     console.error("Error parsing ReOpenPropertyId", e);
+    //   }
+
+    //   const updatedReOpenData = [Alertdata.ReOpenPostId, ...reOpenData.filter(id => id !== Alertdata.ReOpenPostId)];
+    //   sessionStorage.setItem("ReOpenPropertyId", JSON.stringify(updatedReOpenData));
+    // }
+  }, [Alertdata]);
 
   // Filter and sort posts based on availability status
   useEffect(() => {
@@ -44,9 +121,13 @@ export default function ShowLoginUserPost() {
   // Update AllPost when filterdPost or PropertyAdType changes
   useEffect(() => {
     if (PropertyAdType === "Rent") {
-      setAllPost(filterdPost.filter((e) => e.BasicDetails.PropertyAdType === "Rent"));
+      setAllPost(
+        filterdPost.filter((e) => e.BasicDetails.PropertyAdType === "Rent")
+      );
     } else if (PropertyAdType === "Sale") {
-      setAllPost(filterdPost.filter((e) => e.BasicDetails.PropertyAdType === "Sale"));
+      setAllPost(
+        filterdPost.filter((e) => e.BasicDetails.PropertyAdType === "Sale")
+      );
     } else {
       setAllPost(filterdPost);
     }
@@ -60,12 +141,15 @@ export default function ShowLoginUserPost() {
           name="description"
           content="Manage all your property listings in one place. View, edit, or remove posts and keep them up to date on PropertyDekho247.com."
         />
-        <link rel="canonical" href="https://www.propertydekho247.com/user/my-listing/" />
+        <link
+          rel="canonical"
+          href="https://www.propertydekho247.com/user/my-listing/"
+        />
       </Helmet>
 
-      {loading ? (
+      {loading && !sessionStorage.getItem("removeLoding-ReOpenAndRentOut") ? (
         <Loader className="componentloader" />
-      ) :(
+      ) : (
         <>
           <h3 className="user-section-heading">{PropertyAdType} Post</h3>
           <div className="filter-btn-section">
@@ -91,14 +175,19 @@ export default function ShowLoginUserPost() {
           {AllPost.length > 0 ? (
             <div className="showpost my-listing-post">
               {AllPost.map((e, i) => (
-                <SingleCard key={i} PostData={e} />
+                <SingleCard
+                  key={i}
+                  PostData={e}
+                  setMarkRentOutPropertyId={setMarkRentOutPropertyId}
+                  MarkRentOutPropertyId={MarkRentOutPropertyId}
+                />
               ))}
             </div>
           ) : (
             <NoListThere />
           )}
         </>
-      ) }
+      )}
     </>
   );
 }

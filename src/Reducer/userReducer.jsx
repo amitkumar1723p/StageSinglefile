@@ -7,7 +7,6 @@ export const CreateUserReducer = (state = {}, action) => {
     case "BiddingFormRequest":
     case "CreateOtp_Admin_OwnerRequest":
     case "Login_Admin_OwnerRequest":
-
     case "CreateScheduleVisitRequest":
     case "PostPropertyRequirementRequest":
     case "CreateChannelPartnerRequest":
@@ -16,16 +15,14 @@ export const CreateUserReducer = (state = {}, action) => {
     case "NotifyActionRequest":
     case "CreatePostRequest":
     case "UpdatePostRequest":
-     
-    case"ProfileEdit":
-
+    case "ProfileEdit":
     case "ProfileUpdateRequest":
-
-    case"ReportSuspiciousPropertyRequest":
-
-    case"verifiedPaymentRequest":
+    case "ReportSuspiciousPropertyRequest":
+    case "verifiedPaymentRequest":
     case "ApplyJobActionRequest":
-    
+    case "MarkRentOutPropertyRequest":
+    case "ReOpenPostActionRequest-UserRoutes":
+
       return {
         ...state,
         loading: true,
@@ -47,14 +44,15 @@ export const CreateUserReducer = (state = {}, action) => {
     case "NotifyActionSuccess":
     case "CreatePostSuccess":
     case "UpdatePostSuccess":
-     
-    case"ProfileEditSuccess":
-    case"ProfileUpdateSuccess":
 
-    case"ReportSuspiciousPropertySuccess":
-case"verifiedPaymentSuccess":
-case "ApplyJobActionSuccess":
-  
+    case "ProfileEditSuccess":
+    case "ProfileUpdateSuccess":
+
+    case "ReportSuspiciousPropertySuccess":
+    case "verifiedPaymentSuccess":
+    case "ApplyJobActionSuccess":
+    case "MarkRentOutPropertySuccess":
+    case "ReOpenPostActionSuccess-UserRoutes":
       return {
         ...state,
         loading: false,
@@ -78,11 +76,12 @@ case "ApplyJobActionSuccess":
     case "CreatePostFail":
     case "UpdatePostFail":
 
-    case"ProfileEditFail":
-    case"ProfileUpdateFail":
-    case"ReportSuspiciousPropertyFail":
-   case"verifiedPaymentFail":
-   case "ApplyJobActionFail":
+    case "ProfileEditFail":
+    case "ProfileUpdateFail":
+    case "ReportSuspiciousPropertyFail":
+    case "verifiedPaymentFail":
+    case "MarkRentOutPropertyFail":
+    case "ReOpenPostActionFail-UserRoutes":
       return {
         ...state,
         loading: false,
@@ -258,8 +257,6 @@ export const GetTenentResponseReducer = (state = {}, action) => {
   }
 };
 
-
-
 export const TenentResponseIsExitReducer = (state = {}, action) => {
   switch (action.type) {
     case "TenentResponseIsExitRequest":
@@ -290,102 +287,99 @@ export const TenentResponseIsExitReducer = (state = {}, action) => {
       };
   }
 };
-export const getAllUserReducer=(state={},action)=>{
-  switch(action.type){
+export const getAllUserReducer = (state = {}, action) => {
+  switch (action.type) {
     case "GetAllUserRequest":
       return {
         ...state,
         loading: true,
       };
 
-    case"GetAllUserSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"GetAllUserFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"GetAllUserFailClear":
-return{}
-    default:
-      return{
+    case "GetAllUserSuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
 
-export const paymentReducer=(state={},action)=>{
-  switch(action.type){
+    case "GetAllUserFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "GetAllUserFailClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export const paymentReducer = (state = {}, action) => {
+  switch (action.type) {
     case "PaymentActionRequest":
       return {
         ...state,
         loading: true,
       };
 
-    case"PaymentActionSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"PaymentActionFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"PaymentActionClear":
-return{}
-    default:
-      return{
+    case "PaymentActionSuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
 
-// paid property 
-export const getPaidPropertyReducer=(state={},action)=>{
-  switch(action.type){
+    case "PaymentActionFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "PaymentActionClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+// paid property
+export const getPaidPropertyReducer = (state = {}, action) => {
+  switch (action.type) {
     case "getPaidPropertyRequest":
       return {
         ...state,
         loading: true,
       };
 
-    case"getPaidPropertySuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"getPaidPropertyFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"getPaidPropertyFailClear":
-return{}
-    default:
-      return{
+    case "getPaidPropertySuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
+
+    case "getPaidPropertyFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "getPaidPropertyFailClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
 // export const getTransactionDetailReducer=(state={},action)=>{
 //   switch(action.type){
@@ -418,132 +412,126 @@ return{}
 //             };
 //   }
 // }
-export const getTransactionDetailReducer=(state={},action)=>{
-  switch(action.type){
+export const getTransactionDetailReducer = (state = {}, action) => {
+  switch (action.type) {
     case "getTransactionDetailRequest":
       return {
         ...state,
         loading: true,
-      }
-    case"getTransactionDetailSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"getTransactionDetailFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"getTransactionDetailFailClear":
-return{}
-    default:
-      return{
+      };
+    case "getTransactionDetailSuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
 
+    case "getTransactionDetailFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
 
-// Get All user with property data if they posted 
-export const getAllUserResponseActionReducer=(state={},action)=>{
-  switch(action.type){
+    case "getTransactionDetailFailClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+// Get All user with property data if they posted
+export const getAllUserResponseActionReducer = (state = {}, action) => {
+  switch (action.type) {
     case "AllUserResponseActionRequest":
       return {
         ...state,
         loading: true,
-      }
-    case"AllUserResponseActionSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"AllUserResponseActionFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"AllUserResponseActionFailClear":
-return{}
-    default:
-      return{
+      };
+    case "AllUserResponseActionSuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
 
+    case "AllUserResponseActionFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
 
-// Get All user with property data if they posted 
-export const getSingleUserResponseActionReducer=(state={},action)=>{
-  switch(action.type){
+    case "AllUserResponseActionFailClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+// Get All user with property data if they posted
+export const getSingleUserResponseActionReducer = (state = {}, action) => {
+  switch (action.type) {
     case "SingleUserResponseActionRequest":
       return {
         ...state,
         loading: true,
-      }
-    case"SingleUserResponseActionSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"SingleUserResponseActionFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"SingleUserResponseActionFailClear":
-return{}
-    default:
-      return{
+      };
+    case "SingleUserResponseActionSuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
 
-// get owner contact number 
+    case "SingleUserResponseActionFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
 
-export const getViewOwnerDetailsActionReducer=(state={},action)=>{
-  switch(action.type){
+    case "SingleUserResponseActionFailClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+// get owner contact number
+
+export const getViewOwnerDetailsActionReducer = (state = {}, action) => {
+  switch (action.type) {
     case "ViewOwnerDetailsRequest":
       return {
         ...state,
         loading: true,
-      }
-    case"ViewOwnerDetailsRequestSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-
-    case"ViewOwnerDetailsRequestFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"ViewOwnerDetailsRequestFailClear":
-return{}
-    default:
-      return{
+      };
+    case "ViewOwnerDetailsRequestSuccess":
+      return {
         ...state,
-      };
-  }
-}
+        data: action.payload,
+        loading: false,
+      };
+
+    case "ViewOwnerDetailsRequestFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "ViewOwnerDetailsRequestFailClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};

@@ -275,7 +275,7 @@ export default function AdminAgentOwnerPost() {
       adminAlertData &&
       [
         "VerifyPostActionRequest",
-        "ReOpenPostActionRequest",
+        "ReOpenPostActionRequest-AdminRoutes",
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
         "changePropertyStatusRequest",

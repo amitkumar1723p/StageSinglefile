@@ -638,7 +638,7 @@ export default function AdminListingCard({
                         {PostData?.PostExpired ? (
                           <button
                             onClick={() => {
-                              dispatch(ReOpenPostAction(PostData?._id));
+                              dispatch(ReOpenPostAction(PostData?._id),"AdminRoutes");
                             }}
                           >
                             Re-Open
