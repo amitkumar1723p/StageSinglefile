@@ -195,8 +195,8 @@ const [query,setQuery]=useState("");
     }
     if(query){
       filtered = filtered.filter(post=>{
-        return post?.LocationDetails?.Landmark.toLowerCase().includes(query) || post?.LocationDetails?.Locality.toLowerCase().includes(query) || post?.LocationDetails?.ProjectName.toLowerCase().includes(query) ||
-        post?.LocationDetails?.City.toLowerCase().includes(query)  })
+        return post?.LocationDetails?.Landmark.toLowerCase().includes(query?.toLowerCase()) || post?.LocationDetails?.Locality.toLowerCase().includes(query?.toLowerCase()) || post?.LocationDetails?.ProjectName.toLowerCase().includes(query?.toLowerCase()) ||
+        post?.LocationDetails?.City.toLowerCase().includes(query?.toLowerCase())  })
     }
     if(value){
       filtered = filtered.filter(post => post.PricingDetails?.ExpectedPrice <= value || post.PricingDetails?.ExpectedRent <=value);
