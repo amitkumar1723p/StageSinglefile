@@ -146,7 +146,7 @@ const [query,setQuery]=useState("");
 
   // const { data: SingleProjectData } = useSelector((state) => state.SingleProjectName);
 
-  const [value, setValue] = useState(20000000); // default 10L
+  const [value, setValue] = useState(500000000); // default 10L
 
   const handleChange = (e) => {
     setValue(Number(e.target.value));
@@ -389,7 +389,7 @@ const [query,setQuery]=useState("");
               {activeFilters.length > 0 && (
                 <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
               )}
-              <span className="property-filter-count">{filteredData.length} properties found</span>
+              <span className="property-filter-count">{filteredData.length} Properties Found</span>
             </div>
         
               </div>
@@ -538,7 +538,7 @@ const [query,setQuery]=useState("");
       {activeFilters.length > 0 && (
         <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
       )}
-      <span className="property-filter-count">{filteredData.length} properties found</span>
+      <span className="property-filter-count">{filteredData.length} Properties Found</span>
     </div>
   </div>
         </div>
