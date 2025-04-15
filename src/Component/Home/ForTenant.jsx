@@ -6,9 +6,9 @@ const ForTenant = () => {
     <div className="MainContainer">
       <div className="TenantContainer">
         <div className="LeftContainer">
-          <img className="TenantBackground" src="/img/TenantBackground.png" alt="Tenant Background" />
-          <img className="TenantMobile" src="/img/TenantMobile.png" alt="Tenant Mobile" />
-          <img className="TenantArrow" src="/img/TenantArrow.png" alt="Tenant Arrow" />
+          <img className="TenantBackground" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/TenantBackground.png" alt="Tenant Background" />
+          <img className="TenantMobile" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/TenantMobile.png" alt="Tenant Mobile" />
+          <img className="TenantArrow" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/TenantArrow.png" alt="Tenant Arrow" />
           <div className="PhNoContainer">
             <p className="phoneText">Owner's Contact No.</p>
             <p className="phoneNumber">+91-745-546-0112</p>

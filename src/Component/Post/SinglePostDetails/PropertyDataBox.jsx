@@ -38,7 +38,7 @@ export default function PropertyDataBox({ Answer, Icon, Data, Id }) {
           <img
             onMouseEnter={() => setIsVisible(true)}
             onMouseOut={() => setIsVisible(false)}
-            src="/img/i-icon.png"
+            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/i-icon.png"
             alt="Icon"
             className="hover-icon"
           />

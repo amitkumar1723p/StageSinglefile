@@ -37,10 +37,10 @@ export default function TenantVsLandlord() {
         <div>
           <Tenant/>
           <BrowseProperties />
-          {/* <PropertyDetailsForm /> */}
-          {/* <RentAgreement /> */}
-          {/* <RentalBanner /> */}
-          {/* <VerifiedComponent /> */}
+          {/* <PropertyDetailsForm />
+          <RentAgreement />
+          <RentalBanner />
+          <VerifiedComponent /> */}
         </div>
     )}
     {tenantORlandlord === "LandLord" && (

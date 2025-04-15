@@ -29,7 +29,7 @@ const PropertyListingBanner = ({
             </h2>
             <p className="p-asist">
               <img
-                src="/img/blueTick.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
               />
@@ -37,7 +37,7 @@ const PropertyListingBanner = ({
             </p>
             <p className="p-asist">
               <img
-                src="/img/blueTick.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
               />
@@ -45,7 +45,7 @@ const PropertyListingBanner = ({
             </p>
             <p className="p-asist">
               <img
-                src="/img/blueTick.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
               />
@@ -53,7 +53,7 @@ const PropertyListingBanner = ({
             </p>
             <p className="p-asist">
               <img
-                src="/img/blueTick.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
               />
@@ -95,7 +95,7 @@ const PropertyListingBanner = ({
 
           {/* Right Side Image */}
           <div className="banner-image-right">
-            <img src="/img/confuse.svg" alt="Property Assistance" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/confuse.svg" alt="Property Assistance" />
           </div>
         </div>
 

@@ -8,10 +8,10 @@ const Tenant = () => {
 
     <div className="for-tenant-details">
       <div className="for-tenant-left">
-        <img alt="tenant-img" src="/img/TenantBackground.png" />
-        <img alt="TenantMobile" src="/img/TenantMobile.png" />
-        <img alt="TenantArrow" src="/img/TenantArrow.png" />
-        <img alt="Owner's-Phn-Numb" src="/img/rent-section-number.png" />
+        <img alt="tenant-img" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/TenantBackground.png" />
+        <img alt="TenantMobile" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/TenantMobile.png" />
+        <img alt="TenantArrow" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/TenantArrow.png" />
+        <img alt="Owner's-Phn-Numb" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/rent-section-number.png" />
 
 
       </div>
@@ -25,7 +25,7 @@ const Tenant = () => {
         <div className="for-tenant-content">
           <div className="for-tenant-introduction">
             <div className="for-tenant-introduction-img-container">
-              <img src="/img/Introduce.svg" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Introduce.svg" alt="introduce_logo" />
             </div>
             <div className="for-tenant-content-container">
               <h3>Introduce Yourself</h3>
@@ -34,7 +34,7 @@ const Tenant = () => {
           </div>
           <div className="for-tenant-introduction">
             <div className="for-tenant-introduction-img-container">
-              <img src="/img/StartExplore_Rent.svg" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/StartExplore_Rent.svg" alt="startExplore_logo" />
             </div>
             <div className="for-tenant-content-container">
               <h3>Start Exploring</h3>
@@ -43,7 +43,7 @@ const Tenant = () => {
           </div>
           <div className="for-tenant-introduction">
             <div className="for-tenant-introduction-img-container">
-              <img src="/img/ConnectWithOwner.svg" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ConnectWithOwner.svg" alt="" />
             </div>
             <div className="for-tenant-content-container">
               <h3>Connect with the Owner for Free!</h3>
@@ -52,7 +52,7 @@ const Tenant = () => {
           </div>
           <div className="for-tenant-introduction">
             <div className="for-tenant-introduction-img-container">
-              <img src="/img/legalDocs.svg" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/LegalDocs.svg" alt="" />
             </div>
             <div className="for-tenant-content-container">
               <h3>Legal Documentation</h3>

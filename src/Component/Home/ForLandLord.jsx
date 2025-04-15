@@ -8,7 +8,7 @@ const ForLandLord = () => {
         <div className="LandLordDetails-left">
           <img
             alt="LandLord-Img"
-            src="/img/ForLandLord-Img.png"
+            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/ForLandLord-Img.png"
           />
         </div>
         <div className="LandLordDetails-right">

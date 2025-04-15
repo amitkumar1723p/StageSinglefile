@@ -371,7 +371,7 @@ export default function SinglePostDetails() {
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
-          <img src="/img/call.png" alt="Call" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
         </Link>
         {/* WhatsApp Button */}
         <Link
@@ -382,7 +382,7 @@ export default function SinglePostDetails() {
         >
           <img
             className="whatapp-ing-section"
-            src="/img/whatapp.png"
+            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png"
             alt="WhatsApp"
           />
         </Link>
@@ -413,7 +413,7 @@ export default function SinglePostDetails() {
                 {getSinglePostData?.SinglePost?.PostVerifyShow ? (
                   getSinglePostData?.SinglePost?.PostVerify ? (
                     <div className="active-post">
-                      <img src="/img/verified-tag.svg" alt="verified-tag" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/verified-tag.svg" alt="verified-tag" />
                       <p className="active-post-para">Verified</p>
                     </div>
                   ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
@@ -438,7 +438,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/typology.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -470,7 +470,7 @@ export default function SinglePostDetails() {
                   <div className="property-info-tags">
                     <img
                       className="icon-detials"
-                      src="/img/area.png"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                       alt="icon"
                     />
 
@@ -492,7 +492,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/furnish.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -508,7 +508,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/overlooking.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/overlooking.png"
                             alt="icon"
                           />
 
@@ -533,7 +533,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/floor.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -551,7 +551,7 @@ export default function SinglePostDetails() {
                           <div className="property-info-tags">
                             <img
                               className="icon-detials"
-                              src="/img/parking.png"
+                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                               // src="/img/Plot-Dimension.svg"
                               alt="icon"
                             />
@@ -570,7 +570,7 @@ export default function SinglePostDetails() {
                           <div className="property-info-tags">
                             <img
                               className="icon-detials"
-                              src="/img/possession_.svg"
+                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/possession_.svg"
                               alt="icon"
                             />
                             <div className="img-box-imp-data">
@@ -587,7 +587,7 @@ export default function SinglePostDetails() {
                           <div className="property-info-tags">
                             <img
                               className="icon-detials"
-                              src="/img/current_prop_status.svg"
+                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/current_prop_status.svg"
                               alt="icon"
                             />
 
@@ -613,7 +613,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/parking.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -647,7 +647,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/Flooring-Type.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -665,7 +665,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/bathroom.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -684,7 +684,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/facing.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -702,7 +702,7 @@ export default function SinglePostDetails() {
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="/img/floor.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
@@ -724,7 +724,7 @@ export default function SinglePostDetails() {
                           getSinglePostData.SinglePost.BasicDetails
                             .PropertyStatus
                         }
-                        Icon="/img/status.png"
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/status.png"
                         Data={"Status"}
                       />
                     )} */}
@@ -894,7 +894,7 @@ export default function SinglePostDetails() {
                     {/* <button className="contact-expert-btn"> */}
                     <img
                       className="whatapp-ing-section-details"
-                      src="/img/whatapp.png"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png"
                       alt="icon"
                     />
                     WhatsApp
@@ -1013,7 +1013,7 @@ export default function SinglePostDetails() {
                       <span className="prop-id-name">
                         <img
                           className="home-icon"
-                          src="/img/Home-id.png"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Home-id.png"
                           alt="Home-logo"
                         />
                         Property Id :
@@ -1031,7 +1031,7 @@ export default function SinglePostDetails() {
                         getSinglePostData?.SinglePost?.BasicDetails
                           ?.ApartmentType
                       }
-                      Icon="/img/floor.png"
+                      Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                       Data={"Property Type"}
                     />
                     {/* PropertyStatus */}
@@ -1042,7 +1042,7 @@ export default function SinglePostDetails() {
                             getSinglePostData?.SinglePost?.BasicDetails
                               ?.PropertyStatus
                           }
-                          Icon="/img/status.png"
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/status.png"
                           Data={"Status"}
                         />
                       )}
@@ -1051,7 +1051,7 @@ export default function SinglePostDetails() {
                     {areaDetails && (
                       <PropertyDataBox
                         Answer={`${areaDetails?.value} ${areaDetails?.unit}`}
-                        Icon="/img/area.png"
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                         Data={areaDetails?.label}
                       />
                     )}
@@ -1062,14 +1062,14 @@ export default function SinglePostDetails() {
                           {/* BHKType */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
-                            Icon="/img/typology.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
                             Data={"BHK Type"}
                           />
 
                           {OtherArea && (
                             <PropertyDataBox
                               Answer={`${OtherArea?.value} ${OtherArea?.unit}`}
-                              Icon="/img/area.png"
+                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                               Data={OtherArea?.label}
                             />
                           )}
@@ -1082,7 +1082,7 @@ export default function SinglePostDetails() {
                                   getSinglePostData?.SinglePost?.PropertyDetails
                                     ?.Bathroom
                                 }
-                                Icon="/img/bathroom.png"
+                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
                                 Data={"Bathrooms"}
                               />
                             )}
@@ -1095,7 +1095,7 @@ export default function SinglePostDetails() {
                                   getSinglePostData?.SinglePost?.PropertyDetails
                                     ?.Balcony
                                 }
-                                Icon="/img/balcony.png"
+                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/balcony.png"
                                 Data={"Balconies"}
                               />
                             )}
@@ -1106,7 +1106,7 @@ export default function SinglePostDetails() {
                               getSinglePostData?.SinglePost?.AmenitiesDetails
                                 ?.Furnishing
                             }
-                            Icon="/img/furnish.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
                             Data={"Furnishing Details"}
                           />
 
@@ -1118,7 +1118,7 @@ export default function SinglePostDetails() {
                               getSinglePostData?.SinglePost?.FloorDetails
                                 ?.PropertyDirection
                             }
-                            Icon="/img/facing.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
                             Data={"Property Direction"}
                           />
                           {/* OverLookingView */}
@@ -1127,7 +1127,7 @@ export default function SinglePostDetails() {
                               getSinglePostData?.SinglePost?.FloorDetails
                                 ?.OverLookingView
                             }
-                            Icon="/img/area.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                             Data={"Overlooking View"}
                           />
 
@@ -1138,7 +1138,7 @@ export default function SinglePostDetails() {
                                 getSinglePostData?.SinglePost?.BasicDetails
                                   ?.PossessionStatus
                               }
-                              Icon="/img/area.png"
+                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                               Data={" Possission Status"}
                             />
                           }
@@ -1147,7 +1147,7 @@ export default function SinglePostDetails() {
                             Answer={
                               getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges
                             }
-                            Icon="/img/area.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                             Data={"Maintanance Details"}
                           />}
 
@@ -1156,7 +1156,7 @@ export default function SinglePostDetails() {
                             Answer={
                               getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent
                             }
-                            Icon="/img/area.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                             Data={"Monthly Expected Rent"}
                           />}
 
@@ -1170,7 +1170,7 @@ export default function SinglePostDetails() {
                                 getSinglePostData?.SinglePost?.BasicDetails
                                   ?.CurrentPropertyStatus
                               }
-                              Icon="/img/area.png"
+                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                               Data={"Current Property Status"}
                             />
                           }
@@ -1183,13 +1183,13 @@ export default function SinglePostDetails() {
                                   ?.PropertyOnFloor && (
                                     <PropertyDataBox
                                       Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.PropertyOnFloor}`}
-                                      Icon="/img/total-floor.png"
+                                      Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                                       Data={"Property on Floor"}
                                     />
                                   )}
                                 <PropertyDataBox
                                   Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.TotalFloors}`}
-                                  Icon="/img/total-floor.png"
+                                  Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                                   Data={"Total Floors"}
                                 />
                               </>
@@ -1198,7 +1198,7 @@ export default function SinglePostDetails() {
                           {/* Flooring Type */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.FlooringType}`}
-                            Icon="/img/Flooring-Type.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Flooring-Type.png"
                             Data={"Flooring Type"}
                           />
                         </>
@@ -1209,7 +1209,7 @@ export default function SinglePostDetails() {
                       ?.PropertyAdType == "Rent" && (
                         <PropertyDataBox
                           Answer={floorDetails}
-                          Icon="/img/total-floor.png"
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                           Data={"Property on Floor"}
                         />
                       )}
@@ -1221,7 +1221,7 @@ export default function SinglePostDetails() {
                             getSinglePostData?.SinglePost?.PropertyDetails
                               ?.Parking?.OpenParking
                           }
-                          Icon="/img/parking.png"
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                           Data={"Open Parking"}
                         />
                       )}
@@ -1232,7 +1232,7 @@ export default function SinglePostDetails() {
                             getSinglePostData?.SinglePost?.PropertyDetails
                               ?.Parking?.CoveredParking
                           }
-                          Icon="/img/parking.png"
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                           Data={"Covered Parking"}
                         />
                       )}
@@ -1241,7 +1241,7 @@ export default function SinglePostDetails() {
                     {/* Power BackUp */}
                     <PropertyDataBox
                       Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.PowerBackUp}`}
-                      Icon="/img/power-backup.png"
+                      Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/power-backup.png"
                       Data={"Power BackUp"}
                     />
                     {getSinglePostData?.SinglePost?.AmenitiesDetails
@@ -1250,7 +1250,7 @@ export default function SinglePostDetails() {
                           {/* Water Source */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                            Icon="/img/Water.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/water.png"
                             Data={"Water Source"}
                           />
                         </>
@@ -1269,7 +1269,7 @@ export default function SinglePostDetails() {
                                   ? "No"
                                   : ""
                               } `}
-                            Icon="/img/parking.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                             Data={"Basement"}
                           />
 
@@ -1278,7 +1278,7 @@ export default function SinglePostDetails() {
                               <>
                                 <PropertyDataBox
                                   Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
-                                  Icon="/img/parking.png"
+                                  Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                                   Data={"Basement Area"}
                                 />
                               </>
@@ -1291,7 +1291,7 @@ export default function SinglePostDetails() {
                       ?.PropertyAge && (
                         <PropertyDataBox
                           Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
-                          Icon="/img/Property-Age.png"
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Property-age.png"
                           Data={"Property Age"}
                         />
                       )}
@@ -1308,7 +1308,7 @@ export default function SinglePostDetails() {
                               }-${new Date(
                                 getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                               ).getFullYear()}`}
-                            Icon="/img/bathroom.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
                             Data={"Available From"}
                           />
 
@@ -1320,7 +1320,7 @@ export default function SinglePostDetails() {
                                     return text;
                                   }
                                 )}`}
-                                Icon="/img/bathroom.png"
+                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
                                 Data={"Preferred Tenant"}
                               />
                             )}
@@ -1333,20 +1333,20 @@ export default function SinglePostDetails() {
                                     return text;
                                   }
                                 )}`}
-                                Icon="/img/preferred-tenant.svg"
+                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/preferred-tenant.svg"
                                 Data={"Preferred Tenant"}
                               />
                             )}
 
                           <PropertyDataBox
                             Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
-                            Icon="/img/Expected-rent.svg"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Expected-rent.svg"
                             Data={"Expected Rent"}
                           />
 
                           <PropertyDataBox
                             Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice} `}
-                            Icon="/img/Security-deposit.svg"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Security-deposit.svg"
                             Data={"Security Deposit "}
                           />
                         </>
@@ -1362,24 +1362,24 @@ export default function SinglePostDetails() {
                           <PropertyDataBox
                             Id={"plot-dir"}
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotDirection}`}
-                            Icon="/img/facing.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
                             Data={"Plot Direction"}
                           />
                           {/* Plot Facing  */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotFacing}`}
-                            Icon="/img/plot_facing-.svg"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plot_facing-.svg"
                             Data={"Plot Facing"}
                           />
                           {/* Plot openside  */}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
-                            Icon="/img/open-side.svg"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/open-side.svg"
                             Data={"Open Side"}
                           />
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth} Meter`}
-                            Icon="/img/FrontRoad.svg"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FrontRoad.svg"
                             Data={"Front Road Width"}
                           />
                           {/* Other Feature   */}
@@ -1417,7 +1417,7 @@ export default function SinglePostDetails() {
                             )}
                           <PropertyDataBox
                             Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.ConstructionAllowed}`}
-                            Icon="/img/total-floor.png"
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                             Data={"Construction Allowed"}
                           />
 
@@ -1472,7 +1472,7 @@ export default function SinglePostDetails() {
                         }
                       }}
                     >
-                      <img src="/img/warning.png" alt="warning" /> Found
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/warning.png" alt="warning" /> Found
                       suspicious listing? Report here!
                     </p>
                   </div>
