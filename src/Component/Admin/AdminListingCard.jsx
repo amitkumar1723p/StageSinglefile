@@ -41,9 +41,7 @@ export default function AdminListingCard({
     ActiveDate: "",
     ExpiredDate: "",
   });
-
   const navigate = useNavigate();
-
   const formatReservePrice = (price) => {
     if (price >= 10000000) {
       const value = Math.floor(price / 100000) / 100;
@@ -58,11 +56,9 @@ export default function AdminListingCard({
       return `₹ ${price.toFixed(2)}`;
     }
   };
-
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
-
   useEffect(() => {
     let dateString = PostData?.PostVerifyData?.Time;
     //  console.log( "post id with date",PostData._id ,PostData)
@@ -74,7 +70,6 @@ export default function AdminListingCard({
     } else {
       const date = new Date(dateString);
       const After90Days = new Date(date.getTime() + 90 * 24 * 60 * 60 * 1000);
-
       // Define month names (abbreviated)
       const monthNames = [
         "Jan",
@@ -90,19 +85,15 @@ export default function AdminListingCard({
         "Nov",
         "Dec",
       ];
-
       // Format Active Date as DD-Month-YY
       let activedate = `${("0" + date.getDate()).slice(-2)}-${monthNames[date.getMonth()]
         }-${date.getFullYear().toString().slice(-2)}`;
-
       // Format Expired Date as DD-Month-YY (90 days after)
       let postExpireddate = `${("0" + After90Days.getDate()).slice(-2)}-${monthNames[After90Days.getMonth()]
         }-${After90Days.getFullYear().toString().slice(-2)}`;
-
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
   }, [PostData?.PostVerifyData?.Time]);
-
   const location = useLocation();
   const dispatch = useDispatch();
   const [isAssignedToAnyUser, setisAssignedToAnyUser] = useState([]);
@@ -119,7 +110,6 @@ export default function AdminListingCard({
       }`
     );
   }, [PostData]);
-
   // ====================================== Store the id on click property id
   const { loading, data } = useSelector((state) => {
     return state.AdminData;
