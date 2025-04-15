@@ -36,7 +36,7 @@ const BrowseProperties = () => {
              <div className='OwnerListings'>
                     <div className='OwnerListings-Img'>
                         <img
-                        src='/img/directOwnerListings.png'
+                        src='https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/directOwnerListings.png'
                         />
                     </div>
                     <div className='OwnerListings-Content'>
@@ -53,7 +53,7 @@ const BrowseProperties = () => {
                 </div>
                 <div className='VerifiedProperties-Img'>
                     <img
-                    src='/img/VerifiedProperties.png'
+                    src='https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/VerifiedProperties.png'
                     />
                 </div>
                 </div>
@@ -61,7 +61,7 @@ const BrowseProperties = () => {
                 <div className='DocsAssistance'>
                 <div className='DocsAssistance-Img'>
                     <img
-                    src='/img/DocsAssistance.png'
+                    src='https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/DocsAssistance.png'
                     />
 
                 </div>

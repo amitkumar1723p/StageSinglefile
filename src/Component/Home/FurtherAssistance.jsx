@@ -6,7 +6,7 @@ const FurtherAssistance = () => {
     <div className="further-assistance-container">
       <div className="further-assistance-left">
         <img
-          src="/img/futher-assistance.svg"
+          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/futher-assistance.svg"
           alt="Assistance"
           className="further-assistance-image"
         />

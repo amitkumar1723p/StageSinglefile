@@ -210,7 +210,7 @@ export default function DeletePosts() {
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
             <div>
-              <img src="/img/FilteImg.png" alt="FilteImg" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FilteImg.png" alt="FilteImg" />
             </div>
 
             <button

@@ -6,8 +6,8 @@ import ProtectedRoutes from "./Component/ProtectedRoutes";
 import { useEffect } from "react";
 import { GetMeDetailsAction, LogoutAction } from "./Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import CreatePostMain from "./Component/Post/CreatePost/CreatePostMain";
 import AdminOwnerCreateProfileSection from "./Component/Admin/CreateProfile";
@@ -94,8 +94,7 @@ import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingView
 
 function App() {
 
-  //  console.log(FormatDate("2025-02-20T06:48:35.238+00:00"))
-
+  
 
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
@@ -109,9 +108,13 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
+    console.log( state.userData ,"Userdata")
     return state.userData;
+     
   });
-  const { data: CreatePost } = useSelector((state) => {
+  const { data: CreatePost , LodingType:AlertType} = useSelector((state) => {
+ 
+     
     return state.Post;
   });
   const { data: getSinglePostData } = useSelector((state) => {
@@ -153,7 +156,7 @@ function App() {
   const { data: SimilarPropertyData } = useSelector((state) => {
     return state.SimilarProperty;
   });
-  // serach property 
+  // serach property
   const { data: serachResponse } = useSelector((state) => {
     return state.serachResponse;
   });
@@ -161,7 +164,7 @@ function App() {
   const { data: paidPropertyData } = useSelector((state) => {
     return state.paidPropertyData;
   });
-  // paid user transaction detail 
+  // paid user transaction detail
   const { data: getTransactionDetail } = useSelector((state) => {
     return state.getTransactionDetail;
   });
@@ -193,7 +196,7 @@ function App() {
     return state.deletePosts;
   });
 
-  //  excel file  
+  //  excel file
 
   const { data: OwnerAllExcelFilesData } = useSelector((state) => {
     return state.OwnerAllExcelFiles;
@@ -238,13 +241,11 @@ function App() {
     // eslint-disable-next-line
   }, [location]);
 
-
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-
+       console.log(LodingType ,"LodingType")
       if (data?.success && LodingType == "ProfileUpdateRequest") {
-
         dispatch(GetMeDetailsAction());
       }
 
@@ -269,10 +270,18 @@ function App() {
           "VerifyUserOtpRequest",
           "CreateUserRequest",
           "ViewOwnerDetailsRequest",
-        ].includes(LodingType)
+          "DisplayDataRequest",
+        ].includes(
+          typeof LodingType == "string" ? LodingType : LodingType?.Type
+        )
       ) {
-        dispatch({ type: "UserClear" });
+        // alert("zzc")
         setalertShow(false);
+         setTimeout(() => {
+          dispatch({ type: "UserClear" });
+         }, 0);
+       
+        
       } else {
         setalertMessage(<p>{data.message}</p>);
         setalertType("Success");
@@ -281,9 +290,10 @@ function App() {
         dispatch({ type: "UserClear" });
       }
 
-
-
-      if (data.success === false && ["VerifyUserOtpRequest"].includes(LodingType)) {
+      if (
+        data.success === false &&
+        ["VerifyUserOtpRequest"].includes(LodingType)
+      ) {
         dispatch({ type: "UserClear" });
         setalertShow(false);
       } else {
@@ -299,15 +309,19 @@ function App() {
           }
           setalertType("error");
           setalertShow(true);
+
           dispatch({ type: "UserClear" });
+
+          if (LodingType.Type == "DisplayDataRequest") {
+            dispatch({ type: LodingType.StoreClear });
+          }
         }
       }
 
       if (data?.isBlockedUser == true) {
-        dispatch(LogoutAction())
-        navigate("/")
+        dispatch(LogoutAction());
+        navigate("/");
       }
-
 
       // eslint-disable-next-line
     }
@@ -316,14 +330,23 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
-    console.log("admin", CreatePost)
+    console.log("admin", CreatePost);
     if (CreatePost) {
-      if (CreatePost.success === true) {
+      if (
+        CreatePost.success === true &&
+        ["DisplayDataRequest"].includes(
+          typeof AlertType === "string" ? AlertType : AlertType?.Type
+        )
+      ) {
+        dispatch({ type: "AdminAlertClear" });
+        setalertShow(false);
+      } else {
         setalertMessage(<p>{CreatePost.message}</p>);
         setalertType("success");
         setalertShow(true);
         dispatch({ type: "AdminAlertClear" });
       }
+
       if (CreatePost.success === false) {
         if (CreatePost.AdminVerify === false) {
           dispatch(LogoutAction());
@@ -347,6 +370,10 @@ function App() {
         setalertType("error");
         setalertShow(true);
         dispatch({ type: "AdminAlertClear" });
+
+        if (AlertType?.Type == "DisplayDataRequest") {
+          dispatch({ type: AlertType.StoreClear });
+        }
       }
     }
 
@@ -480,8 +507,8 @@ function App() {
         }
 
         if (LoginUserPostData?.isBlockedUser == true) {
-          dispatch(LogoutAction())
-          navigate("/")
+          dispatch(LogoutAction());
+          navigate("/");
         }
 
         setalertMessage(<p>{LoginUserPostData.message}</p>);
@@ -501,8 +528,8 @@ function App() {
           navigate("/");
         }
         if (TenentResponseData?.isBlockedUser == true) {
-          dispatch(LogoutAction())
-          navigate("/")
+          dispatch(LogoutAction());
+          navigate("/");
         }
         setalertMessage(<p>{TenentResponseData.message}</p>);
         setalertType("error");
@@ -610,8 +637,8 @@ function App() {
         }
 
         if (MyVisitsData?.isBlockedUser == true) {
-          dispatch(LogoutAction())
-          navigate("/")
+          dispatch(LogoutAction());
+          navigate("/");
         }
         setalertMessage(<p>{MyVisitsData.message}</p>);
         setalertType("error");
@@ -630,8 +657,8 @@ function App() {
           navigate("/");
         }
         if (OwnerPostsVisitsData?.isBlockedUser == true) {
-          dispatch(LogoutAction())
-          navigate("/")
+          dispatch(LogoutAction());
+          navigate("/");
         }
         setalertMessage(<p>{OwnerPostsVisitsData.message}</p>);
         setalertType("error");
@@ -709,7 +736,7 @@ function App() {
     }
     // eslint-disable-next-line
   }, [serachResponse]);
-  //  paid property 
+  //  paid property
   useEffect(() => {
     if (paidPropertyData) {
       if (paidPropertyData.success === false) {
@@ -725,7 +752,7 @@ function App() {
     }
     // eslint-disable-next-line
   }, [paidPropertyData]);
-  // get transaction paid detail 
+  // get transaction paid detail
   useEffect(() => {
     if (getTransactionDetail) {
       if (getTransactionDetail.success === false) {
@@ -797,9 +824,6 @@ function App() {
     // eslint-disable-next-line
   }, [deletePostsData]);
 
-
-
-
   //  exel file  (Owner)
 
   useEffect(() => {
@@ -867,11 +891,6 @@ function App() {
     // eslint-disable-next-line
   }, [AgentAllExcelFilesData]);
 
-
-
-
-
-
   useEffect(() => {
     if (alertshow === true) {
       dispatch(AlertAction(alertType, alertMessage, alertshow));
@@ -879,11 +898,7 @@ function App() {
     // eslint-disable-next-line
   }, [alertType, alertMessage, alertshow]);
 
-
-
-
-
-  //  Fresh Property For Admin 
+  //  Fresh Property For Admin
 
   //  console.log(allFreshProjectData ,"allfresh data")
   //   useEffect(() => {
@@ -926,37 +941,28 @@ function App() {
 
   // console.log(allFreshProjectData.success,"uuu")
 
-
   useEffect(() => {
     dispatch(GetMeDetailsAction());
-
-
   }, []);
 
   useEffect(() => {
     if (medata?.isBlockedUser == true) {
-      dispatch(LogoutAction())
+      dispatch(LogoutAction());
     }
-  }, [medata])
+  }, [medata]);
 
   useEffect(() => {
     AOS.init({
-      duration: 1000,   // animation duration in ms
-      once: true,       // animate only once when in view
-      offset: 10,      // offset (in px) from the original trigger point
+      duration: 1000, // animation duration in ms
+      once: true, // animate only once when in view
+      offset: 10, // offset (in px) from the original trigger point
     });
   }, []);
-
-
-
 
   return (
     <>
       {/* <PinnacleSms /> */}
-      {
-
-      }
-
+      {}
 
       <Navbar />
       {alertData && alertData.AlertShow === true && (
@@ -997,39 +1003,18 @@ function App() {
           path="/post-detail/:PostAddress"
           element={<SinglePostDetails />}
         />
-        <Route
-          exact
-          path="/Our-Service"
-          element={<OurService />}
-        />
-        <Route
-          exact
-          path="/Career"
-          element={<Career />}
-        />
-        <Route
-          exact
-          path="/Report"
-          element={<ReportPage />}
-        />
+        <Route exact path="/Our-Service" element={<OurService />} />
+        <Route exact path="/Career" element={<Career />} />
+        <Route exact path="/Report" element={<ReportPage />} />
 
         <Route
           exact
           path="/terms-and-conditions"
           element={<TermsAndConditions />}
         />
-        <Route
-          exact
-          path="/blog-page"
-          element={<BlogPage />}
-        />
-        <Route
-          exact
-          path="/blog-page/:title"
-          element={<SingleBlog />}
-        />
+        <Route exact path="/blog-page" element={<BlogPage />} />
+        <Route exact path="/blog-page/:title" element={<SingleBlog />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
-
 
         {/* protect route for user */}
         <>
@@ -1054,15 +1039,9 @@ function App() {
               path="my-post/all-response"
               element={<OwnerPostAllResponse />}
             />
-            <Route
-              exact
-              path="transactions"
-              element={<Transaction />}
-            />
-
+            <Route exact path="transactions" element={<Transaction />} />
 
             <Route
-
               exact
               path="favourite-post"
               element={<ShowUserFavouritePost />}
@@ -1077,11 +1056,17 @@ function App() {
         </>
         {/*admin routes*/}
 
-
         {/* <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/> */}
         {/* <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/> */}
-        <Route exact path="/fresh-bookings2" element={<FreshBookingViewAlll />} />
-        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking />} />
+        <Route
+          exact
+          path="/fresh-bookings2"
+          element={<FreshBookingViewAlll />}
+        />
+        <Route
+          path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id"
+          element={<SingleFreshBooking />}
+        />
 
         <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
         {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
@@ -1093,8 +1078,6 @@ function App() {
         >
           <Route exact path="dashboard" element={<Dashbord />} />
           {/* This routes Avaliable for Owner Only  */}
-
-
 
           <Route
             exact
@@ -1108,43 +1091,42 @@ function App() {
             exact
             path="all-excel"
             element={
-              <AdminOwnerRoutes Component={OwnerAgentExcelData} isOwner={true} />
+              <AdminOwnerRoutes
+                Component={OwnerAgentExcelData}
+                isOwner={true}
+              />
             }
           />
 
-          <Route
-
-            path="all-excel-both"
-            element={
-              <AdminAgentExcelData />
-            }
-          />
+          <Route path="all-excel-both" element={<AdminAgentExcelData />} />
           <Route
             exact
             path="excel/:id"
-            element={
-              <AdminOwnerRoutes Component={OwnerAgentExcel} />
-            }
+            element={<AdminOwnerRoutes Component={OwnerAgentExcel} />}
           />
           <Route
             exact
             path="all-user-Response-action"
             element={
-              <AdminOwnerRoutes Component={AllUserResponseAction} isOwner={true} />
+              <AdminOwnerRoutes
+                Component={AllUserResponseAction}
+                isOwner={true}
+              />
             }
           />
           <Route
             exact
             path="agent-user-Response-action"
-            element={
-              <AgentUserResponse />
-            }
+            element={<AgentUserResponse />}
           />
           <Route
             exact
             path="single-user-Response-action/:id"
             element={
-              <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
+              <AdminOwnerRoutes
+                Component={SingleUserRespponseAction}
+                isOwner={true}
+              />
             }
           />
 
@@ -1232,24 +1214,22 @@ function App() {
           <Route
             exact
             path="post/update/:PostId"
-
-            element={<AdminOwnerRoutes Component={CreatePostMain} isOwner={true} />}
+            element={
+              <AdminOwnerRoutes Component={CreatePostMain} isOwner={true} />
+            }
           />
           <Route
             exact
             path="all-asign-post-Response-action"
-            element={
-              < AllUserResponseAction />
-            }
-
-
+            element={<AllUserResponseAction />}
           />
-
-
 
           {/* Fresh property Routing start ----------- */}
 
-          <Route path="fresh-property" element={<FreshProjectRoutingComponent />} >
+          <Route
+            path="fresh-property"
+            element={<FreshProjectRoutingComponent />}
+          >
             <Route index element={<FreshProjectDashboard />} />
 
             <Route path="create" element={<FreshBookingForm />} />
@@ -1261,15 +1241,9 @@ function App() {
         </Route>
         {/*All post route admin routes end here*/}
 
-
         <Route path={"/all-post"} element={<AllPostRender />} />
 
-
         <Route path="*" element={<PageNotFound />} />
-
-
-
-
       </Routes>
       <Footer />
     </>
@@ -1277,5 +1251,3 @@ function App() {
 }
 
 export default App;
-
-

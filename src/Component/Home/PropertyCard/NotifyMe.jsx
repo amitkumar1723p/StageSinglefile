@@ -32,7 +32,7 @@ const NotifyMe = () => {
         <h3 className="notifyh3"> Oops! No Properties Available Right Now</h3>
         <p>We couldn’t find any properties matching your search criteria.</p>
         <img
-          src="/img/propnotfound.png"
+          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/propnotfound.png"
           alt="No Properties Illustration"
           className="notify-me-image"
         />

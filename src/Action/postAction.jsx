@@ -85,14 +85,16 @@ export const GetAllPostAction = ({
   Furnishing = "",
   City = "",
   Sector = "",
-  Locality=""
+  Locality="",
+  Verified="",
+  Budget = "",
 
 }) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "GetAllPostRequest" });
 
-      let url = `${api_Base_Url}/post/allpost?LocationDetails.ProjectName=${ProjectName?.trim()}&BasicDetails.PropertyAdType=${PropertyAdType?.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}&LocationDetails.Landmark=${Sector}&LocationDetails.City=${City}&LocationDetails.Locality=${Locality}`;
+      let url = `${api_Base_Url}/post/allpost?LocationDetails.ProjectName=${ProjectName?.trim()}&BasicDetails.PropertyAdType=${PropertyAdType?.trim()}&PropertyDetails.BHKType=${BHK}&BasicDetails.ApartmentType=${ApartmentType}&BasicDetails.PropertyStatus=${PropertyStatus}&AmenitiesDetails.Furnishing=${Furnishing}&LocationDetails.Landmark=${Sector}&LocationDetails.City=${City}&LocationDetails.Locality=${Locality}&PostVerifyShow=${Verified==='Verified' ? true:""}&PricingDetails.ExpectedPrice=${Budget}`;
       // &Pricing[$gte]=${Price}
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -120,7 +122,7 @@ export const GetAllPostAction = ({
 // Delete Post Action and restore post
 
 export const DeleteAndRestorePostAction = (PostData) => {
-   console.log(PostData)
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -447,13 +449,13 @@ export const showVeirifyPostIconAction = ({ postdata }, postId) => {
     }
   };
 };
-
-export const ReOpenPostAction = (postId) => {
+//  this action avariable  admin and user both 
+export const ReOpenPostAction = (postId ,RouteType) => {
   return async (dispatch) => {
     try {
       dispatch({
-        type: "ReOpenPostActionRequest",
-        payload: "ReOpenPostActionRequest",
+        type: `ReOpenPostActionRequest-${RouteType}`,
+        payload: `ReOpenPostActionRequest-${RouteType}`,
       });
 
       const url = `${api_Base_Url}/admin-owner/reopen-post/${postId}`;
@@ -465,16 +467,16 @@ export const ReOpenPostAction = (postId) => {
       };
 
       const { data } = await axios.get(url, config);
-      dispatch({ type: "ReOpenPostActionSuccess", payload: data });
+      dispatch({ type: `ReOpenPostActionSuccess-${RouteType}`, payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "ReOpenPostActionFail",
+          type: `ReOpenPostActionFail-${RouteType}`,
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "ReOpenPostActionFail",
+          type: `ReOpenPostActionFail-${RouteType}`,
           payload: { message: error.message, success: false },
         });
       }
@@ -943,7 +945,7 @@ export const fetchAllOwnerFiles = () => {
 };
 //all excel file of  agent
 export const fetchAllAdminFiles = () => {
-  // console.log("im called")
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -1344,3 +1346,40 @@ export const getPostsByAddress = () => {
     }
   };
 };
+
+
+
+  // Rent Out property
+  export const MarkRentOutProperty = ({ postdata }, postId) => {
+    return async (dispatch) => {
+      try {
+        dispatch({
+          type: "MarkRentOutPropertyRequest",
+          payload: "MarkRentOutPropertyRequest",
+        });
+  
+        const url = `${api_Base_Url}/user/mark-rent-out/${postId}`;
+  
+        const config = {
+          headers: { "Content-Type": "application/json" },
+  
+          withCredentials: true,
+        };
+  
+        const { data } = await axios.post(url, postdata, config);
+        dispatch({ type: "MarkRentOutPropertySuccess", payload: data });
+      } catch (error) {
+        if (error.response) {
+          dispatch({
+            type: "MarkRentOutPropertyFail",
+            payload: error.response.data,
+          });
+        } else {
+          dispatch({
+            type: "MarkRentOutPropertyFail",
+            payload: { message: error.message, success: false },
+          });
+        }
+      }
+    };
+  };

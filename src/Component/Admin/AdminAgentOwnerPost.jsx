@@ -46,7 +46,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
-  console.log("AssignProperty", AssignProperty);
+  
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -82,7 +82,7 @@ export default function AdminAgentOwnerPost() {
   const [myQuery, setMyQuery] = useState(queryParams.get("type"));
   // const {  NavbarRef } =
   //   useContext(UserContext);
-  console.log("MarkUpdatePost", MarkUpdatedPost);
+  // console.log("MarkUpdatePost", MarkUpdatedPost);
   useEffect(() => {
     if (
       location?.state &&
@@ -179,6 +179,10 @@ export default function AdminAgentOwnerPost() {
       } else if (myQuery === "success") {
         setActive("success");
         setCurrentSelected("Success Post ");
+      }
+      else if (myQuery === "expired") {
+        setActive("expired");
+        setCurrentSelected("expired");
       } else {
         setCurrentSelected("All posts");
         setActive(null);
@@ -217,13 +221,16 @@ export default function AdminAgentOwnerPost() {
 
       setCurrentDataLength(filterdData?.length);
     }
-    if (currenSelected === "sale") {
-      filterdData = AllPost?.Post?.filter((item) => {
-        return item?.BasicDetails?.PropertyAdType === PropertyType;
+    if (currenSelected === "expired") {
+       filterdData = AllPost?.Post?.filter((item) => {
+        return item?.PostExpired?.ExpiredStatus
+        // return item?.PostExpired?.ExpiredStatus && item?.BasicDetails?.PropertyAdType==="Sale" ;
+
       });
 
       setCurrentDataLength(filterdData?.length);
     }
+    
     if (currenSelected === "Success Post") {
       filterdData = AllPost?.Post?.filter((item) => {
         return item?.propertyStatus?.currentPropertyStatus === "sold out";
@@ -275,7 +282,7 @@ export default function AdminAgentOwnerPost() {
       adminAlertData &&
       [
         "VerifyPostActionRequest",
-        "ReOpenPostActionRequest",
+        "ReOpenPostActionRequest-AdminRoutes",
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
         "changePropertyStatusRequest",
@@ -374,7 +381,11 @@ export default function AdminAgentOwnerPost() {
       setActive(false);
     } else if (status === "success") {
       setActive("success");
-    } else {
+     }else if(status==="Expired"){
+      setCurrentSelected("expired");
+      setActive("expired");
+     } 
+    else {
       setCurrentSelected("All posts");
       setActive(null);
     }
@@ -447,7 +458,7 @@ export default function AdminAgentOwnerPost() {
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
             <div>
-              <img src="/img/FilteImg.png" alt="FilteImg" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FilteImg.png" alt="FilteImg" />
             </div>
 
             <button
@@ -478,6 +489,14 @@ export default function AdminAgentOwnerPost() {
               onClick={() => handleActive(false, "false")}
             >
               Inactive
+            </button>
+            <button
+              className={
+                myQuery === "expired" || onPageActive === "expired" ? "select" : ""
+              }
+              onClick={() => handleActive("Expired", "expired")}
+            >
+              Expired
             </button>
             <button
               className={
@@ -618,7 +637,6 @@ export default function AdminAgentOwnerPost() {
               <label className="admin-filter-select-lable">Select All</label>
             </>
           </div>
-
           <div>
             {" "}
             <select
@@ -652,7 +670,6 @@ export default function AdminAgentOwnerPost() {
             </select>
           </div>
           {/* here start */}
-
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -695,7 +712,6 @@ export default function AdminAgentOwnerPost() {
               Assing Property
             </button>
           )}
-
           {/* Buttons to change the status */}
           <button
             className="admin-btn-action  px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
@@ -735,7 +751,6 @@ export default function AdminAgentOwnerPost() {
                 let confrim = window.confirm(
                   "Are you sure you want to delete this property?"
                 );
-
                 if (confrim == true) {
                   let getDeletePost = AssignProperty?.map((post) => {
                     return { PostId: post.PostId };
@@ -755,7 +770,6 @@ export default function AdminAgentOwnerPost() {
           {/* Display the current status */}
         </div>
       </div>
-
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (
           <OwnerAllPost

@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getprojectLeadAllAction, updateProjectLeadAction } from "../../../Action/freshProjectAction";
+import {
+  getprojectLeadAllAction,
+  updateProjectLeadAction,
+} from "../../../Action/freshProjectAction";
 
 export function FreshProjectLead() {
-  const dispatch = useDispatch()
-  const [tarckNewLead, setTrackNewLead] = useState(0)
-  const [remark,setRemark]=useState()
+  const dispatch = useDispatch();
+  const [tarckNewLead, setTrackNewLead] = useState(0);
+  const [remark, setRemark] = useState(undefined);
   const { data: getAllFreshProjectLead } = useSelector((state) => {
-    return state.getAllFreshProjectLead
-  })
+    return state.getAllFreshProjectLead;
+  });
   useEffect(() => {
-    dispatch(getprojectLeadAllAction())
-  }, [])
+    dispatch(getprojectLeadAllAction());
+  }, []);
   // remark updated
-  useEffect(()=>{
-    const id=getAllFreshProjectLead?.projectLead[remark?.id]?._id
-  
-dispatch(updateProjectLeadAction(id,remark?.remark))
-  },[remark])
+  useEffect(() => {
+    if (remark) {
+      const id = getAllFreshProjectLead?.projectLead[remark?.id]?._id;
+
+      dispatch(updateProjectLeadAction(id, remark?.remark));
+      setRemark(undefined);
+    }
+  }, [remark]);
 
   // store value inside the localStorage
   useEffect(() => {
@@ -29,8 +35,7 @@ dispatch(updateProjectLeadAction(id,remark?.remark))
         const newLeads = newLength - oldLength;
         setTrackNewLead(newLeads);
 
-
-        localStorage.setItem('newLength', newLength.toString());
+        localStorage.setItem("newLength", newLength.toString());
       }
     }
   }, [getAllFreshProjectLead]);
@@ -51,37 +56,35 @@ dispatch(updateProjectLeadAction(id,remark?.remark))
         </thead>
         <tbody className="table-group-divider">
           {getAllFreshProjectLead?.projectLead?.map((item, index) => {
-
             return (
               <tr>
                 <th scope="row">{index}</th>
-                <td>{item?.name} {tarckNewLead - (index + 1) >= 0 && <sup className="text-success">new</sup>}</td>
-                <td>{item.contactNumber}</td>
-                <td>{item.createdAt
-                }</td>
-                <td>{item?.projectId?.projectBasicDetail?.projectName
-                }</td>
                 <td>
-                <select
-  className="px-2"
-  value={remark}
-  onChange={(e) => setRemark({ remark: e.target.value, id:index })}
->
-  <option value={item?.remark}>{item?.remark}</option>
-  <option value="deal">deal</option>
-</select>
-
+                  {item?.name}{" "}
+                  {tarckNewLead - (index + 1) >= 0 && (
+                    <sup className="text-success">new</sup>
+                  )}
+                </td>
+                <td>{item.contactNumber}</td>
+                <td>{item.createdAt}</td>
+                <td>{item?.projectId?.projectBasicDetail?.projectName}</td>
+                <td>
+                  <select
+                    className="px-2"
+                    value={remark}
+                    onChange={(e) =>
+                      setRemark({ remark: e.target.value, id: index })
+                    }
+                  >
+                    <option value={item?.remark}>{item?.remark}</option>
+                    <option value="notdeal">not deal</option>
+                  </select>
                 </td>
               </tr>
-            )
+            );
           })}
-
-
-
         </tbody>
       </table>
-
     </>
-  )
-
+  );
 }

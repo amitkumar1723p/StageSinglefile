@@ -75,7 +75,7 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
           <div className="main-box-of-schedule">
             <div className="left-box-of-schedule">
-              <img src="/img/schedule-form.svg" alt="schedule" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/schedule-form.svg" alt="schedule" />
             </div>
             <div className="right-box-of-schedule">
               <p className="schedule-your-visit-title">Schedule your Visit</p>

@@ -14,7 +14,7 @@ export default function SingleBlog() {
             date:"22 Jan 2025",
             title:"BUYING TIPS",
             heading:"A Guide: How to Buy a House in Gurgaon?",
-            imgUrl:"/img/blogImg/buying-tips.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/buying-tips.svg",
             content:"Buying a house is one of the most significant financial decisions of your life. If you’re planning to purchase a home in Gurgaon, you need to consider various factors, from budgeting to legal verification. This guide will help you navigate the process smoothly.",
             contentDescription:`## 1. Determine Your Budget
 The first step in buying a house is setting a budget. Consider your savings, home loan eligibility, and monthly EMI affordability. Gurgaon offers properties across various price ranges, so it’s essential to know what fits your financial plan.
@@ -57,7 +57,7 @@ Looking for the best properties in Gurgaon? Visit [PropertyDekho247](https://www
             date:"12 Feb 2025",
             title:"INVESTMENT INSIGHTS",
             heading:"Is 2025 the Right Year to Invest in Real Estate?",
-            imgUrl:"/img/blogImg/investment.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/investment.svg",
             content:"Experts weigh in on whether this year is ideal for real estate investment. Experts weigh in on whether this year is ideal for real estate investment.",
             contentDescription:`
 ## 1. Economic Growth and Its Impact
@@ -103,7 +103,7 @@ Looking for the best real estate investment opportunities? Visit [PropertyDekho2
             date:"15 Jan 2025",
             title:"HOME DECORS",
             heading:"Top Home Décor Trends for 2025",
-            imgUrl:"/img/blogImg/home-decors.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/home-decors.svg",
             content:"Discover the latest styles and interior design ideas for your home. Discover the latest styles and interior design ideas for your home.",
             contentDescription:`
 
@@ -150,7 +150,7 @@ Stay updated with the latest home décor ideas on [PropertyDekho247.com](https:/
             date:"19 Dec 2024",
             title:"LIFESTYLE & LIVINGS",
             heading:"Urban vs. Suburban Living",
-            imgUrl:"/img/blogImg/lifestyle.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/lifestyle.svg",
             content:"Comparing the benefits of living in cities versus suburbs in India. Comparing the benefits of living in cities versus suburbs in India.",
             contentDescription:`
 
@@ -197,7 +197,7 @@ Explore the best properties in urban and suburban areas on [PropertyDekho247.com
             date:"24 Feb 2025",
             title:"ARCHITECTURE & DESIGN",
             heading:"Modern Architecture Trends for 2025",
-            imgUrl:"/img/blogImg/architecture.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/architecture.svg",
             content:"Key architectural styles and trends shaping real estate in India.Key architectural styles and trends shaping real estate in India.",
             contentDescription:`## 1. Sustainable and Green Architecture
 
@@ -241,7 +241,7 @@ The architectural landscape in India is evolving towards sustainability, efficie
             date:"15 sept 2024",
             title:"FINANCIAL ADVICE",
             heading:"Understanding Home Loans",
-            imgUrl:"/img/blogImg/financial.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/financial.svg",
             content:"A guide to securing the best home loan with lower interest rates. Discover the latest styles and interior design ideas for your home.",
             contentDescription:`## 1. What is a Home Loan?
 
@@ -292,7 +292,7 @@ Understanding the nuances of home loans is crucial for making informed financial
             date:"14 Aug 2024",
             title:"LUXURY HOMES",
             heading:"Ultra Luxury Apartments in Gurgaon",
-            imgUrl:"/img/blogImg/luxuary-homes.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/luxuary-homes.png",
             content:"Exploring the premium real estate market in Gurgaon.Exploring the premium real estate market in Gurgaon.",
             contentDescription:`## 1. The Rise of Ultra Luxury Apartments
 
@@ -327,7 +327,7 @@ Gurgaon’s ultra-luxury apartment segment is redefining premium living with unm
             date:"14 Aug 2024",
             title:"MARKET TRENDS",
             heading:"Real Estate Market Predictions for 2025",
-            imgUrl:"/img/blogImg/market-trends.svg",
+            imgUrl:"https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/luxuary-homes.png",
             content:"What experts forecast for the real estate industry in the coming years.What experts forecast for the real estate industry in the coming years.",
             contentDescription:`## 1. Demand for Affordable Housing
 
@@ -409,7 +409,7 @@ The real estate market in 2025 is expected to be dynamic, with strong growth in 
         </div>
         <div className='single-blog-ads'>
            
-            <img src="/img/blogImg/blog-ads.svg" alt="blog-ads" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-ads.svg" alt="blog-ads" />
         </div>
     </div>
         )

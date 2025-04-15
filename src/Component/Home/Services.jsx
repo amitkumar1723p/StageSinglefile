@@ -18,7 +18,7 @@ const Services = () => {
         <div className="services-container">
           <div className="service-item">
             <img
-              src="/img/property-management.png"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/property-management.png"
               alt="Property Management"
               className="service-icon"
             />
@@ -28,7 +28,7 @@ const Services = () => {
           </div>
           <div className="service-item">
             <img
-              src="/img/ResaleServices.png"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ResaleServices.png"
               alt="Sale Services"
               className="service-icon"
             />
@@ -38,7 +38,7 @@ const Services = () => {
           </div>
           <div className="service-item">
             <img
-              src="/img/RentServices.svg"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/RentServices.svg"
               alt="Rental Services"
               className="service-icon"
             />
@@ -48,7 +48,7 @@ const Services = () => {
           </div>
           <div className="service-item">
             <img
-              src="/img/NRI.png"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/NRI.png"
               alt="NRI Property Management"
               className="service-icon"
             />
@@ -58,7 +58,7 @@ const Services = () => {
           </div>
           <div className="service-item">
             <img
-               src="/img/LegalCon.png"
+               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/LegalCon.png"
               alt="Legal Consultation"
               className="service-icon"
             />
@@ -68,7 +68,7 @@ const Services = () => {
           </div>
           <div className="service-item">
             <img
-              src="/img/Loan.png"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Loan.png"
               alt="Loan Assistance"
               className="service-icon"
             />

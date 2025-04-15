@@ -8,7 +8,7 @@ import ProjectNameSection from "../Post/ProjectName";
 
 const PostPropertyRequerment = ({ SetShow }) => {
   const dispatch = useDispatch();
- const [PostPropertyRequiremenLocalitytData,setPostPropertyRequiremenLocalitytData] = useState({});
+  const [PostPropertyRequiremenLocalitytData, setPostPropertyRequiremenLocalitytData] = useState({});
   const [PostPropertyRequirementData, setPostPropertyRequirementData] =
     useState({
       PropertyType: "",
@@ -46,8 +46,8 @@ const PostPropertyRequerment = ({ SetShow }) => {
     // Merge unit and PossessionStatus into the submission data
     let data = {
       ...PostPropertyRequirementData,
-      ProjectName:PostPropertyRequiremenLocalitytData?.ProjectName ||PostPropertyRequiremenLocalitytData?.projectName,
-      City:PostPropertyRequiremenLocalitytData?.city
+      ProjectName: PostPropertyRequiremenLocalitytData?.ProjectName || PostPropertyRequiremenLocalitytData?.projectName,
+      City: PostPropertyRequiremenLocalitytData?.city
     }
 
 
@@ -123,167 +123,209 @@ const PostPropertyRequerment = ({ SetShow }) => {
 
   }
 
+
+  const isMobile = window.innerWidth <= 480;
   return (
     <div className="form-container">
       <div className="form-right">
-        <div className="form-right-heading-container">
-          <h3 className="form-header">Let us Know Your Property Requirement</h3>
-          
+        <div className="form-right-heading-container " >
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/share-rqrmnt-back.JPG" alt="" />
+          <div className="form-heading-image-color">
+            <h3 className="form-header">Let us Know your Property Requirements</h3>
+          </div>
         </div>
-
         <form
           className="property-form post-property-form"
           onSubmit={CreateQuerryFormHandler}
         >
-          <div className="property-form-type">
-            <div className="form-group form-bhk">
-              <p className="postreq-form " >Property type</p>
-              <select
-                className={`form-input`}
-                required
-                value={PostPropertyRequirementData?.PropertyType?.trimStart()}
-                onChange={(e) =>
-                  setPostPropertyRequirementData({
-                    ...PostPropertyRequirementData,
-                    PropertyType: e.target.value,
-                  })
-                }
-              >
-                <option value="">Choose property type</option>
-                <option value="Appartment">Appartment</option>
-                <option value="Builder Floor">Builder Floor</option>
-                <option value="Plot">Plot/Land</option>
+          <div className="share-rqrmnt-form-top">
+            <div className="property-form-type">
+              <div className="share-rqrmnt-property-type ">
+                <p className="postreq-form " >Property type</p>
+                <select
+                  className={`form-input`}
+                  required
+                  value={PostPropertyRequirementData?.PropertyType?.trimStart()}
+                  onChange={(e) =>
+                    setPostPropertyRequirementData({
+                      ...PostPropertyRequirementData,
+                      PropertyType: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">Choose property type</option>
+                  <option value="Appartment">Appartment</option>
+                  <option value="Builder Floor">Builder Floor</option>
+                  <option value="Plot">Plot/Land</option>
 
-              </select>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="property-form-details-top">
-            {/* style={{ width: PostPropertyRequirementData.PropertyType !== "Plot" ? '220px' : '100%' }} */}
-            <div className='form-group post-prop-form-group'>
+
+            <div className='share-rqrmnt-form-locality post-prop-form-group'>
               <p className="postreq-form ">Locality</p>
               <ProjectNameSection
                 ProjectInputType={"PostRequirement"}
                 ProjectNameObjectData={PostPropertyRequiremenLocalitytData}
                 setProjectNameObjectData={setPostPropertyRequiremenLocalitytData}
-                placeholder={"Search by locality, project name"}
+                placeholder={"locality, project name"}
                 locationAlert={locationAlert}
               />
             </div>
-
-            {PostPropertyRequirementData?.PropertyType !== "Plot" && <>
-              <div className="form-group form-bhk">
-                <p className="postreq-form " >BHK Type</p>
-                <select
-                  className={`form-input `}
-                  required
-                  value={PostPropertyRequirementData?.BHKType?.trimStart()}
-                  onChange={(e) =>
-                    setPostPropertyRequirementData({
-                      ...PostPropertyRequirementData,
-                      BHKType: e.target.value,
-                    })
-                  }
-                >
-                  <option value="">Select BHK Type</option>
-                  <option value="1">1 BHK</option>
-                  <option value="2">2 BHK</option>
-                  <option value="3">3 BHK</option>
-                  <option value="4">4 BHK</option>
-                  <option value="5">5 BHK</option>
-                </select>
-              </div>
-
-              <div className="form-group form-floor">
-                <p className="postreq-form "> Floor Preference</p>
-                <select
-                  required
-                  className={`form-input post-prop-floor  ${floorPrefAlert ? "shake inputShake " : ''}`}
-                  onChange={(e) =>
-                    setPostPropertyRequirementData({
-                      ...PostPropertyRequirementData,
-                      FloorPreference: e.target.value,
-                    })
-                  }
-                >
-                  <option value="">Floor Preference</option>
-                  <option value="ground">Ground Floor</option>
-                  <option value="mid">Mid Floor</option>
-                  <option value="high">High Floor</option>
-                </select>
-              </div>
-            </>
-
-            }
-            {PostPropertyRequirementData?.PropertyType === "Plot" &&
-              <div className="form-group form-budget">
-                <div className="budget-container">
-                  <p className="postreq-form ">Plot size</p>
-                  <input
+          </div>
+          <div className="share-rqrmnt-form-mid ">
+            {PostPropertyRequirementData?.PropertyType !== "Plot" &&
+              <>
+                <div className="form-bhk">
+                  <p className="postreq-form " >BHK Type</p>
+                  <select
+                    className={`form-input `}
                     required
-                    value={PostPropertyRequirementData?.plotSize}
-                    onChange={(e) => {
-                      // Allow numbers and one decimal point only
-                      let value = e.target.value;
-                      // console.log(value)
+                    value={PostPropertyRequirementData?.BHKType?.trimStart()}
+                    onChange={(e) =>
                       setPostPropertyRequirementData({
                         ...PostPropertyRequirementData,
-                        plotSize: value,
-                      });
-                    }}
-                    type="text"
-                    placeholder="Enter your Budget"
-                    className="form-input"
-                  />
-                </div>
-
-                <div className="form-budget-option">
-                  <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)}>
-                    <option value="Sq.Ft">Sq.Ft</option>
-                    <option value="Sq.Yard">Sq.yard</option>
+                        BHKType: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="">Select BHK Type</option>
+                    <option value="1">1 BHK</option>
+                    <option value="2">2 BHK</option>
+                    <option value="3">3 BHK</option>
+                    <option value="4">4 BHK</option>
+                    <option value="5">5 BHK</option>
                   </select>
+                </div>
+                <div className=" form-floor">
+                  <p className="postreq-form "> Floor Preference</p>
+                  <select
+                    required
+                    className={`form-input post-prop-floor  ${floorPrefAlert ? "shake inputShake " : ''}`}
+                    onChange={(e) =>
+                      setPostPropertyRequirementData({
+                        ...PostPropertyRequirementData,
+                        FloorPreference: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="">Floor Preference</option>
+                    <option value="ground">Ground Floor</option>
+                    <option value="mid">Mid Floor</option>
+                    <option value="high">High Floor</option>
+                  </select>
+                </div>
+              </>
+            }
+            {PostPropertyRequirementData?.PropertyType === "Plot" &&
+              <div className=" form-budget">
+                <div className="plot-size-container">
+                  <p className="postreq-form ">Plot size</p>
+                  <div className="plotsize-input-container">
+                    <input
+                      required
+                      value={PostPropertyRequirementData?.plotSize}
+                      onChange={(e) => {
+                        // Allow numbers and one decimal point only
+                        let value = e.target.value;
+                        setPostPropertyRequirementData({
+                          ...PostPropertyRequirementData,
+                          plotSize: value,
+                        });
+                      }}
+                      type="text" className="plotsize-input-field" placeholder="Enter Plot Size" />
+                    <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)} className="plotsize-input-dropdown">
+                      <option value="Sqft">Sqft</option>
+                      <option value="SqYard">Sq Yard</option>
+                      <option value="Acres">Acres</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             }
-
-
           </div>
-
-          <div className="property-form-details-bottom">
-            <div className="form-group form-budget">
+          <div className="share-rqrmnt-form-last ">
+            {/* <div className=" form-budget">
               <div className="budget-container">
                 <p className="postreq-form ">Budget</p>
                 <input
                   required
-                  value={PostPropertyRequirementData?.Budget}
-                  onChange={(e) => {
-                    // Allow numbers and one decimal point only
-                    let value = e.target.value;
-                    // Remove any character that is not a digit or a decimal point
-                    value = value.replace(/[^0-9.]/g, "");
-                    // Ensure that only one decimal point exists
-                    const parts = value.split(".");
-                    if (parts.length > 2) {
-                      value = parts[0] + "." + parts.slice(1).join("");
-                    }
-                    setPostPropertyRequirementData({
-                      ...PostPropertyRequirementData,
-                      Budget: value,
-                    });
-                  }}
                   type="text"
                   placeholder="Enter your Budget"
                   className={`form-input `}
                 />
               </div>
-
               <div className="form-budget-option">
                 <select value={unit} onChange={(e) => setUnit(e.target.value)}>
                   <option value="Cr">Cr</option>
                   <option value="Lakh">Lakhs</option>
                 </select>
               </div>
-            </div>
-
+            </div> */}
+            {isMobile ?
+              <div className={`budget-input-container w-100 `}>
+                <p>Budget</p>
+                <div className="d-flex">
+                  <input
+                    required
+                    value={PostPropertyRequirementData?.Budget}
+                    onChange={(e) => {
+                      // Allow numbers and one decimal point only
+                      let value = e.target.value;
+                      // Remove any character that is not a digit or a decimal point
+                      value = value.replace(/[^0-9.]/g, "");
+                      // Ensure that only one decimal point exists
+                      const parts = value.split(".");
+                      if (parts.length > 2) {
+                        value = parts[0] + "." + parts.slice(1).join("");
+                      }
+                      setPostPropertyRequirementData({
+                        ...PostPropertyRequirementData,
+                        Budget: value,
+                      });
+                    }}
+                    type="text"
+                    className="budget-input-field form-input "
+                    placeholder="Enter your Budget"
+                  />
+                  <select value={unit} onChange={(e) => setUnit(e.target.value)} className="budget-input-dropdown">
+                    <option value="Cr">Cr</option>
+                    <option value="Lakh">Lakh</option>
+                  </select>
+                </div>
+              </div> :
+              <div className={`budget-input-container ${PostPropertyRequirementData?.PropertyType !== "Plot" ? "w-50" : 'w-100'}`}>
+                <p>Budget</p>
+                <div className="d-flex">
+                  <input
+                    required
+                    value={PostPropertyRequirementData?.Budget}
+                    onChange={(e) => {
+                      // Allow numbers and one decimal point only
+                      let value = e.target.value;
+                      // Remove any character that is not a digit or a decimal point
+                      value = value.replace(/[^0-9.]/g, "");
+                      // Ensure that only one decimal point exists
+                      const parts = value.split(".");
+                      if (parts.length > 2) {
+                        value = parts[0] + "." + parts.slice(1).join("");
+                      }
+                      setPostPropertyRequirementData({
+                        ...PostPropertyRequirementData,
+                        Budget: value,
+                      });
+                    }}
+                    type="text"
+                    className="budget-input-field form-input "
+                    placeholder="Enter your Budget"
+                  />
+                  <select value={unit} onChange={(e) => setUnit(e.target.value)} className="budget-input-dropdown">
+                    <option value="Cr">Cr</option>
+                    <option value="Lakh">Lakh</option>
+                  </select>
+                </div>
+              </div>
+            }
             {
               PostPropertyRequirementData.PropertyType !== "Plot" &&
               <div className="possession-status">
@@ -312,32 +354,29 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 </div>
               </div>
             }
-           
-
-            <div className="form-group">
-              <button
-                disabled={loading ? true : false}
-                type="submit"
-                className="form-submit-btn"
-                onClick={HandleRequirementAlert}
-              >
-                Submit
-              </button>
-            </div>
           </div>
+          <div className="w-100">
+            <button
+              disabled={loading ? true : false}
+              type="submit"
+              className="form-submit-btn"
+              onClick={HandleRequirementAlert}
+            >
+              Submit
+            </button>
+          </div>
+
         </form>
       </div>
       <div
-        className="cross-Btn"
+        className="share-rqrmnt-cross-Btn"
         onClick={() => {
           SetShow(false);
-
         }}
       >
-        X
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/share-ur-rqrmnt-X-btn.svg" alt="" />
       </div>
     </div>
   );
 };
-
 export default PostPropertyRequerment;

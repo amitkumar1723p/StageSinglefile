@@ -218,7 +218,7 @@ export default function BiddingFormForm({
             SetShow(false);
           }}
               className=" make-your-offer-cross-btn"
-              src="/img/mke-offer-cross.svg"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mke-offer-cross.svg"
              
             />
             
@@ -329,7 +329,7 @@ export default function BiddingFormForm({
               {isLowerOffer === "CustomValue" && (
                 <div>
                   <input
-                    className="py-1 rounded-2 px-2 border text-[#333]"
+                    className="py-2 rounded-2 px-2 border text-[#333]"
                     type="text"
                     value={formatNumberWithCommas(price)}
                     onChange={handleChange}
@@ -599,12 +599,12 @@ export default function BiddingFormForm({
                   }}
                   className="mke-you-offer-checkbox-input"
                 />
-                Receive updates on WhatsApp <img src="/img/make-offer-whatsapp.svg" alt="whatsapp" />
+                Receive updates on WhatsApp <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/make-offer-whatsapp.svg" alt="whatsapp" />
               </label>
             </div>
               </div>
               <div className="make-offer-image-container">
-                <img src="/img/make-offer-image.svg" alt="img" />
+                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/make-offer-image.svg" alt="img" />
               </div>
 
             

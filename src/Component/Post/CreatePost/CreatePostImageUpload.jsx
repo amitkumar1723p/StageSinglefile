@@ -62,10 +62,10 @@ export default function CreatePostImageUpload({
 
   const CratePostHandler = (e) => {
     e.preventDefault();
-    if (update && previewImage.length === 0) {
-      setnext(4);
-      return alert("one image is required");
-    }
+    // if (update && previewImage.length === 0) {
+    //   setnext(4);
+    //   return alert("one image is required");
+    // }
     let formData = new FormData(e.target);
 
     const PricingDetailsCopyObj = { ...PricingDetailsData };
@@ -268,7 +268,7 @@ export default function CreatePostImageUpload({
                   {" "}
                   <img
                     className="icon-img"
-                    src="/img/i-icon.png"
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/i-icon.png"
                     alt="i-icon"
                   />{" "}
                   Supported Format: JPEG, PNG{" "}

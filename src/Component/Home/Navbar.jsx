@@ -225,7 +225,7 @@ const Navbar = () => {
                       ) : (
                         <>
                           <img
-                            src="/img/Hamburger.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Hamburger.svg"
                             onClick={() => {
                               setIsOpen(!isOpen);
                             }}
@@ -242,7 +242,7 @@ const Navbar = () => {
                         onClick={() => {
                           setIsOpen(!isOpen);
                         }}
-                        src="/img/Hamburger.svg"
+                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Hamburger.svg"
                       />
                     ) : (
                       <img
@@ -251,7 +251,7 @@ const Navbar = () => {
                         onClick={() => {
                           setIsOpen(!isOpen);
                         }}
-                        src="/img/Hamburger.svg"
+                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Hamburger.svg"
                       />
                     )}
                   </div>

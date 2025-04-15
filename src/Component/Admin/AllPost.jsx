@@ -42,6 +42,8 @@ export default function AllPost({
   const itemsPerPage = postPerPage; // Number of items per page
   const [querry, setquerry] = useSearchParams();
   // Create a URLSearchParams object from the query string (search part of the URL)
+  // console.log(itemsPerPage ,"itemperpage")
+  
 
   useEffect(() => {
     if (activeFilter !== null && postVerify !== null) {
@@ -82,12 +84,37 @@ export default function AllPost({
           // console.log(filteredPosts)
           // return ;
         }
-        // console.log("out")
-        if (activeFilter == true || activeFilter == false) {
-          filteredPosts = filteredPosts.filter((item) => {
-            return item.PostVerify === activeFilter;
-          });
+
+            // Active filter (postVerify on PostId)
+        if (activeFilter !== null) {
+          if (activeFilter === "expired") {
+            filteredPosts = filteredPosts.filter(
+              (item) => item?.PostExpired?.ExpiredStatus
+            );
+          }
+
+          if (activeFilter !== "expired" && activeFilter !== "success") {
+            filteredPosts = filteredPosts.filter((item) => {
+              const isVerifyMatch = item?.PostVerify === activeFilter;
+          
+              if (item?.PostExpired !== undefined) {
+                return isVerifyMatch && item?.PostId?.PostExpired?.ExpiredStatus === false;
+              }
+          
+              return isVerifyMatch;
+            });
+          }
+          
+      
         }
+  
+         
+        // // console.log("out")
+        // if (activeFilter == true || activeFilter == false) {
+        //   filteredPosts = filteredPosts.filter((item) => {
+        //     return item.PostVerify === activeFilter
+        //   });
+        // }
       } else {
         filteredPosts = [...filteredPosts];
       }
@@ -119,15 +146,18 @@ export default function AllPost({
 
       // Sorting logic
       if (sortOrder !== undefined) {
-        if (sortOrder === "ascending") {
-          filteredPosts.sort(
-            (a, b) => new Date(a.createAt) - new Date(b.createAt)
-          ); // Ascending order
-        } else if (sortOrder === "descending") {
-          filteredPosts.sort(
-            (a, b) => new Date(b.createAt) - new Date(a.createAt)
-          ); // Descending order
-        }
+        filteredPosts.sort((a, b) => {
+          const aDate = a.PostExtend?.PostExtendTime || a.createAt;
+          const bDate = b.PostExtend?.PostExtendTime || b.createAt;
+      
+          if (sortOrder === "ascending") {
+            return new Date(aDate) - new Date(bDate); // Ascending
+          } else if (sortOrder === "descending") {
+            return new Date(bDate) - new Date(aDate); // Descending
+          }
+      
+          return 0; // No sorting applied if sortOrder is not valid
+        });
       }
 
       // Update pagination when filtered posts change

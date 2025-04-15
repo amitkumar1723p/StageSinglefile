@@ -104,11 +104,11 @@ const reducer = combineReducers({
   ViewOwnerDetailsRequest:getViewOwnerDetailsActionReducer,
 
   // fresh project reducer++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  createfreshProjectReducer,
+  // createfreshProjectReducer,
   allFreshProjectData:getAllFreshProjectReducer,
   // createfreshProjectReducer,
   getFreshProject:getviewoneProjectReducer,
-  editFreshProjectionReducer,
+  // editFreshProjectionReducer,
   // projectStatusReducer,
  getAllFreshProjectLead: getprojectLeadAllReducer
 

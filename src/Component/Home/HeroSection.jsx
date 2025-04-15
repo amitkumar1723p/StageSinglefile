@@ -277,7 +277,7 @@ const HeroSection = () => {
 
       <header className="hero-section" id="Hero-section">
         <div className="overlay">
-          <img src="/img/hero-img9.png" alt="" srcset="" className="home-hero-img" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/hero-img9.png" alt="" srcset="" className="home-hero-img" />
         </div>
         <div className="hero-content">
           <div className="hero-img-section">
@@ -346,7 +346,7 @@ const HeroSection = () => {
                 alt="tst"
               /> */}
 
-                  {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
+                  {/* <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
                   <button
                     disabled={
@@ -385,7 +385,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
-                      src="/img/Search-icon.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
                     />
@@ -474,7 +474,7 @@ const HeroSection = () => {
                     alt="tst"
                   /> */}
 
-                  {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
+                  {/* <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
                   <button
                   
@@ -526,7 +526,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
-                      src="/img/Search-icon.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
                     />
@@ -580,7 +580,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
-                      src="/img/Search-icon.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
                     />
@@ -708,7 +708,7 @@ const HeroSection = () => {
         <div className="floating-buttons ">
           {/* Call Button */}
           <Link to="tel:+917837840785" className="call-button">
-            <img src="/img/call.png" alt="Call" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
           </Link>
           {/* WhatsApp Button */}
           <Link
@@ -717,7 +717,7 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             className="whatapps-section-floating"
           >
-            <img src="/img/whatapp.png" alt="WhatsApp" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
       )}

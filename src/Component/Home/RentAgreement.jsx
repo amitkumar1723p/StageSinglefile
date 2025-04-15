@@ -15,7 +15,7 @@ const RentAgreement = () => {
       <div className="RentAgreement__steps-container">
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
-            <img src="./img/Submityourdraft.svg" alt="Submit your draft" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Submityourdraft.svg" alt="Submit your draft" />
           </div>
           <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Submit your Draft</h2>
@@ -28,7 +28,7 @@ const RentAgreement = () => {
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
             <img
-              src="./img/Review&Custmization.svg"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Review%26Custmization.svg"
               alt="Review & Custmization"
             />
           </div>
@@ -44,7 +44,7 @@ const RentAgreement = () => {
         </div>
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
-            <img src="./img/Stamp&Validate.svg" alt="Stamp & Validate" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Stamp%26Validate.svg" alt="Stamp & Validate" />
           </div>
           <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Stamp & Validate</h2>
@@ -57,7 +57,7 @@ const RentAgreement = () => {
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
             <img
-              src="./img/DeliveryAtYourDoorstep.svg"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/DeliveryAtYourDoorstep.svg"
               alt="Delivery At Your Door step.svg"
             />
           </div>
@@ -80,7 +80,7 @@ const RentAgreement = () => {
       >
         <button className="UploadYourDraftMain ">
 
-          <img src="/img/whatapp.png" alt="WhatsApp" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
           Share Your Draft
 
         </button>

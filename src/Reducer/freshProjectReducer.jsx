@@ -1,51 +1,54 @@
-export const createfreshProjectReducer=(state = {}, action)=>{
+// export const createfreshProjectReducer=(state = {}, action)=>{
    
-    switch (action.type) {
-        case "createfreshProjectRequest":
-          return {
-            ...state,
-            loading: true,
-          };
-        case "createfreshProjectSuccess":
-          return {
-            ...state,
-            data: action.payload,
-            loading: false,
-          };
+//     switch (action.type) {
+//         case "createfreshProjectRequest":
+//           return {
+//             ...state,
+//             loading: true,
+//           };
+//         case "createfreshProjectSuccess":
+//           return {
+//             ...state,
+//             data: action.payload,
+//             loading: false,
+//           };
     
-        case "createfreshProjectFail":
-          return {
-            ...state,
-          data: action.payload,
-            loading: false,
-          };
-        case "createfreshProjectClear":
-          return {};
-        default:
-          return {
-            ...state,
-          };
-      }
-}
+//         case "createfreshProjectFail":
+//           return {
+//             ...state,
+//           data: action.payload,
+//             loading: false,
+//           };
+//         case "createfreshProjectClear":
+//           return {};
+//         default:
+//           return {
+//             ...state,
+//           };
+//       }
+// }
 
 
 
 export const getAllFreshProjectReducer=(state = {}, action)=>{
 
   switch (action.type) {
-      case "getAllFreshProjectRequest":
+      case `getAllFreshProjectRequest-UserRoutes`:
+      case `getAllFreshProjectRequest-AdminRoutes`:
         return {
           ...state,
           loading: true,
         };
-      case "getAllFreshProjectSuccess":
+      case "getAllFreshProjectSuccess-UserRoutes":
+      case "getAllFreshProjectSuccess-AdminRoutes":
         return {
           ...state,
           data: action.payload,
           loading: false,
         };
   
-      case "getAllFreshProjectFail":
+      case "getAllFreshProjectFail-UserRoutes":
+      case "getAllFreshProjectFail-AdminRoutes":
         return {
           ...state,
           data: action.payload,
@@ -117,37 +120,37 @@ export const getviewoneProjectReducer = (state = {}, action) => {
   }
 };
 
-export const editFreshProjectionReducer = (state = {}, action) => {
-  switch (action.type) {
-    case "editFreshProjectionRequest":
-      return {
-        ...state,
-        loading: true,
-      };
+// export const editFreshProjectionReducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case "editFreshProjectionRequest":
+//       return {
+//         ...state,
+//         loading: true,
+//       };
 
-    case "editFreshProjectionSuccess":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+//     case "editFreshProjectionSuccess":
+//       return {
+//         ...state,
+//         loading: false,
+//         data: action.payload,
+//       };
 
-    case "editFreshProjectionFail":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+//     case "editFreshProjectionFail":
+//       return {
+//         ...state,
+//         loading: false,
+//         data: action.payload,
+//       };
 
-    case "editFreshProjectionClear":
-      // alert("get All Post Clear")
-      return {};
-    default:
-      return {
-        ...state,
-      };
-  }
-};
+//     case "editFreshProjectionClear":
+//       // alert("get All Post Clear")
+//       return {};
+//     default:
+//       return {
+//         ...state,
+//       };
+//   }
+// };
 
 // export const projectStatusReducer=(state = {}, action)=>{
 //   switch (action.type) {

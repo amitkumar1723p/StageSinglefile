@@ -40,7 +40,7 @@ const dispatch=useDispatch()
   const allFreshBookingCard = allFreshProjectData?.projectData ||  [] ;
 
   useEffect(()=>{
-dispatch(getAllFreshProjectAction())
+dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
   },[])
 
 

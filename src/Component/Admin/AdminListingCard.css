@@ -11,6 +11,20 @@
   border-radius: 5px;
 }
 
+.re-open-btn-admin{
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0aa768;
+color: #FFF;
+
+&:hover{
+ opacity: .8;
+}
+
+
+}
+
 .headingname-section-all{
   display: flex;
   gap: 20px;
@@ -44,6 +58,7 @@
 .property-filters h3 {
   margin: 10px 0;
   font-size: 14px;
+  white-space: nowrap;
 }
 .card-mianbox {
   display: flex;
@@ -105,18 +120,22 @@
   margin: 0 10px 0 0;
 }
 .property-filters {
-  height: fit-content;
-  /* width: 245px; */
-  /* background-color: #007bff; */
+  /* height: fit-content; */
+ 
+  background-color: #f1f1f2;
   /* height: auto; */
+  z-index: 12;
   border: 1px solid var(--main-light-clr);
   border-radius: 10px;
   /* padding: vh20px 10px; */
+  display: flex;
   position: sticky;
+  align-items: center;
+  justify-content: space-around;
   top: 76px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 89vh;
+width: 86%;
+  /* max-height: 89vh; */
+  height: 48px;
   margin-top: 10px;
   margin-bottom: 10px;
 
@@ -803,7 +822,7 @@ font-size: 12px;
 
 .admin-filter-all-button-parent{
   display: flex;
-  gap: 2px;
+  gap: 5px;
   background-color: #d0e5f6;
   padding: 5px;
   border-radius: 5px;
@@ -834,6 +853,12 @@ font-size: 12px;
   width: 100%;
   border-bottom: 1px solid #ebe4e4;
 }
+
+.filter-section-property button:hover{
+  /* outline: 1px solid var(--main-light-clr); */
+  background-color: #fff;
+}
+
 .filter-section-property button {
   cursor: pointer;
   border-radius: 5px;
@@ -956,7 +981,7 @@ font-size: 12px;
 
   .property-post-filters-box {
     width: 100%;
-    display: block;
+    /* display: block; */
     /* margin: 5px auto; */
   }
 
@@ -988,7 +1013,7 @@ font-size: 12px;
   border: 1px solid var(--main-light-clr);
   border-radius: 6px;
   font-size: 12px;
-  width: 200px;
+  width: 160px;
   position: relative;
   color: #333;
   background: none;
