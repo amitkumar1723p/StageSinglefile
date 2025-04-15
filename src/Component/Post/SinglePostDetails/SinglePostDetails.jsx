@@ -1434,7 +1434,27 @@ export default function SinglePostDetails() {
                     furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                   />
                 }
+{/* society features */}
 
+{getSinglePostData?.SinglePost?.AmenitiesDetails
+                  ?.SocietyAndBuildingFeature && (
+                    <SocietyAndBuildingFeature
+                      feature={
+                        getSinglePostData?.SinglePost?.AmenitiesDetails
+                          ?.SocietyAndBuildingFeature
+                      }
+                    />
+                  )}
+                {/* plot features */}
+                {getSinglePostData?.SinglePost?.AmenitiesDetails
+                  ?.ProjectAmmenities && (
+                    <SocietyAndBuildingFeature
+                      feature={
+                        getSinglePostData?.SinglePost?.AmenitiesDetails
+                          ?.ProjectAmmenities
+                      }
+                    />
+                  )}
 
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">
