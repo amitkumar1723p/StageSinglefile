@@ -112,7 +112,7 @@ const HandleNotifyFormSubmit = ()=>{
               Looking for Your Ideal Home? Let Us Notify You First!
             </p>
 
-            <form onSubmit={handleSubmit}>
+            <form className="notify-form" onSubmit={handleSubmit}>
 
               <div className="notify-form-main-content">
                 <div className="notify-form-bhk-section">

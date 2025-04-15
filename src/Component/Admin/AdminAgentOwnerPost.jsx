@@ -56,7 +56,7 @@ export default function AdminAgentOwnerPost() {
   const [currentDataLength, setCurrentDataLength] = useState(null);
   const [active, setActive] = useState(null);
   const [onPageActive, setPageActive] = useState("");
-  const [propertyOrder, setPropertyOrder] = useState("decending");
+  const [propertyOrder, setPropertyOrder] = useState("descending");
   const [currenSelected, setCurrentSelected] = useState("");
   const [OwnerPostsPageNo, setOwnerPostsPageNo] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(25);
@@ -678,7 +678,7 @@ export default function AdminAgentOwnerPost() {
           )}
           {AssignPropertyAdmin && (
             <button
-              className="Assing-Property-btn"
+              className="Assing-Property-btn admin-btn-action"
               onClick={() => {
                 let confirm = window.confirm(
                   `This Property Assign to ${AssignPropertyAdmin.Name}  Role is ${AssignPropertyAdmin.Role}`
@@ -698,25 +698,25 @@ export default function AdminAgentOwnerPost() {
 
           {/* Buttons to change the status */}
           <button
-            className="px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className="admin-btn-action  px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handleStatusChange("Active")}
           >
             Active
           </button>
           <button
-            className="px-1 mx-0 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+            className="admin-btn-action  px-1 mx-0 py bg-primary bg-opacity-10 border border-info-subtle rounded"
             onClick={() => handleStatusChange("InActive")}
           >
             In-Active
           </button>
           <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className=" admin-btn-action  px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handlePropertyStatus("sold out")}
           >
             Sold Out
           </button>
           <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className="admin-btn-action  px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handlePropertyStatus("available")}
           >
             Available
@@ -725,7 +725,7 @@ export default function AdminAgentOwnerPost() {
             disabled={
               AlertLoding && LodingType === "DeletePostRequest" ? true : false
             }
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className=" admin-btn-action  px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => {
               if (AssignProperty.length <= 0) {
                 return alert(

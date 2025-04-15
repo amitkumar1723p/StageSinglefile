@@ -41,67 +41,7 @@ export default function ShowLoginUserPost() {
       sessionStorage.setItem("removeLoding-ReOpenAndRentOut", "true");
     }
 
-    // When marking a post as Rent Out
-    // if (Alertdata?.RentOutPostId) {
-    //   let rentOutData = [];
-    //   try {
-    //     const sessionData = sessionStorage.getItem("RentOutPropertyId");
-    //     if (Array.isArray(JSON.parse(sessionData))) {
-    //       rentOutData = JSON.parse(sessionData);
-    //     }
-    //   } catch (e) {
-    //     console.error("Error parsing RentOutPropertyId", e);
-    //   }
-
-    //   // Add new RentOutPostId to RentOut list (avoid duplicates)
-    //   const updatedRentOutData = [Alertdata.RentOutPostId, ...rentOutData.filter(id => id !== Alertdata.RentOutPostId)];
-    //   sessionStorage.setItem("RentOutPropertyId", JSON.stringify(updatedRentOutData));
-
-    //   // Remove this ID from ReOpen list
-    //   let reOpenData = [];
-    //   try {
-    //     const sessionData = sessionStorage.getItem("ReOpenPropertyId");
-    //     if (Array.isArray(JSON.parse(sessionData))) {
-    //       reOpenData = JSON.parse(sessionData);
-    //     }
-    //   } catch (e) {
-    //     console.error("Error parsing ReOpenPropertyId", e);
-    //   }
-
-    //   const filteredReOpenData = reOpenData.filter(id => id !== Alertdata.RentOutPostId);
-    //   sessionStorage.setItem("ReOpenPropertyId", JSON.stringify(filteredReOpenData));
-    // }
-
-    // // When marking a post as Re-Open
-    // if (Alertdata?.ReOpenPostId) {
-    //   let rentOutData = [];
-    //   try {
-    //     const sessionData = sessionStorage.getItem("RentOutPropertyId");
-    //     if (Array.isArray(JSON.parse(sessionData))) {
-    //       rentOutData = JSON.parse(sessionData);
-    //     }
-    //   } catch (e) {
-    //     console.error("Error parsing RentOutPropertyId", e);
-    //   }
-
-    //   // Remove ReOpenPostId from RentOut list
-    //   const filteredRentOutData = rentOutData.filter(id => id !== Alertdata.ReOpenPostId);
-    //   sessionStorage.setItem("RentOutPropertyId", JSON.stringify(filteredRentOutData));
-
-    //   // Add to ReOpen list
-    //   let reOpenData = [];
-    //   try {
-    //     const sessionData = sessionStorage.getItem("ReOpenPropertyId");
-    //     if (Array.isArray(JSON.parse(sessionData))) {
-    //       reOpenData = JSON.parse(sessionData);
-    //     }
-    //   } catch (e) {
-    //     console.error("Error parsing ReOpenPropertyId", e);
-    //   }
-
-    //   const updatedReOpenData = [Alertdata.ReOpenPostId, ...reOpenData.filter(id => id !== Alertdata.ReOpenPostId)];
-    //   sessionStorage.setItem("ReOpenPropertyId", JSON.stringify(updatedReOpenData));
-    // }
+ 
   }, [Alertdata]);
 
   // Filter and sort posts based on availability status

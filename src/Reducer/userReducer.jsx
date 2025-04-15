@@ -22,6 +22,14 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ApplyJobActionRequest":
     case "MarkRentOutPropertyRequest":
     case "ReOpenPostActionRequest-UserRoutes":
+      
+      //  Fresh Property get Api ----- start
+      case "viewOneProjectRequest":
+      case "getAllFreshProjectRequest-UserRoutes":
+        
+      //  Fresh Property get Api ----- End
+       
+     
 
       return {
         ...state,
@@ -53,6 +61,11 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ApplyJobActionSuccess":
     case "MarkRentOutPropertySuccess":
     case "ReOpenPostActionSuccess-UserRoutes":
+     //  Fresh Property get Api ----- start
+     case "viewOneProjectSuccess":
+     case "getAllFreshProjectSuccess-UserRoutes":
+      //  Fresh Property get Api ----- End
+       
       return {
         ...state,
         loading: false,
@@ -82,6 +95,8 @@ export const CreateUserReducer = (state = {}, action) => {
     case "verifiedPaymentFail":
     case "MarkRentOutPropertyFail":
     case "ReOpenPostActionFail-UserRoutes":
+    case "getAllFreshProjectFail-UserRoutes":
+    case "viewOneProjectFail":
       return {
         ...state,
         loading: false,
