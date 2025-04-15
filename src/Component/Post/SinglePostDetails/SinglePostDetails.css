@@ -313,6 +313,7 @@ body {
   /* padding: 20px; */
   width: 80%;
   margin: 20px auto;
+  max-width: 1300px;
 }
 
 .prop-right {
