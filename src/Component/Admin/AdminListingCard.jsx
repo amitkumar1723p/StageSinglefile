@@ -265,7 +265,7 @@ export default function AdminListingCard({
                                     };
 
                                     let confrim = window.confirm(
-                                      "Are You Sure About This"
+                                      "Are You Sure About This "
                                     );
                                     if (confrim) {
                                       dispatch(
@@ -314,7 +314,7 @@ export default function AdminListingCard({
                                     }
                                   }}
                                 >
-                                  Re-Call
+                                  Restore
                                 </button>
                                 {/* <button
                                   onClick={() => {
@@ -465,7 +465,7 @@ export default function AdminListingCard({
                   <p className="admin-card-heading">Current status</p>
                   {PostData?.PostExpired ? (
                     <p className="Status-section-admin inactive-sign">
-                      {" "}
+                   
                       Expired
                     </p>
                   ) : (

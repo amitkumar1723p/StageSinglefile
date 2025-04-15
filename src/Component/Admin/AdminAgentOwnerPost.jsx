@@ -46,7 +46,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
-  console.log("AssignProperty", AssignProperty);
+  
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -637,7 +637,6 @@ export default function AdminAgentOwnerPost() {
               <label className="admin-filter-select-lable">Select All</label>
             </>
           </div>
-
           <div>
             {" "}
             <select
@@ -671,7 +670,6 @@ export default function AdminAgentOwnerPost() {
             </select>
           </div>
           {/* here start */}
-
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -714,7 +712,6 @@ export default function AdminAgentOwnerPost() {
               Assing Property
             </button>
           )}
-
           {/* Buttons to change the status */}
           <button
             className="px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
@@ -754,7 +751,6 @@ export default function AdminAgentOwnerPost() {
                 let confrim = window.confirm(
                   "Are you sure you want to delete this property?"
                 );
-
                 if (confrim == true) {
                   let getDeletePost = AssignProperty?.map((post) => {
                     return { PostId: post.PostId };
@@ -774,7 +770,6 @@ export default function AdminAgentOwnerPost() {
           {/* Display the current status */}
         </div>
       </div>
-
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (
           <OwnerAllPost

@@ -3,15 +3,12 @@
   gap: 30px;
   background-color: #f9f9f9;
   padding: 0px;
-
   /* box-shadow: 0 0px 16px rgb(216,222,227,1); */
   position: relative; /* Ensure the cross button is positioned relative to the form container */
 }
-
 .postreq-form{
   margin-bottom: 3px;
 }
-
 .cross-Btn {
   position: absolute;
   top: 9px;  /* Adjust this value to move it down */
@@ -21,15 +18,11 @@
   background-color:#c7e4fc;  
   color: var(--main-light-clr);
   cursor: pointer;
-
   padding: 5px 12px;
   border-radius: 50%;
-
-
   &:hover{
     color: red;
   }
-
 
 }
 .share-rqrmnt-cross-Btn{

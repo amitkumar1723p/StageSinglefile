@@ -1,21 +1,13 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-
 import "./BlogArticles.css";
-import SingleBlog from './SingleBlog';
 export default function BlogArticles() {
-
-
     const formatTitleForURL = (title) => {
         return title.split(" ").join("-").toLowerCase(); 
     };
-   
-    
-
     const truncateText = (text, maxLength) => {
         return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
       };
-
     const Blogs=[
         {
             id:1,

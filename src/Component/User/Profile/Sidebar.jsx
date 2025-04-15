@@ -17,14 +17,12 @@ function Sidebar() {
       }
     }
   };
-
   return (
     <>
       {/* Overlay to close sidebar when clicking outside */}
       {isOpen && (
         <div className="overlay" onClick={() => setIsOpen(false)}></div>
       )}
-
       {/* Sidebar */}
       <aside
         className={`sidebar-profile ${isOpen ? "open" : ""}`}
@@ -44,7 +42,6 @@ function Sidebar() {
                 Profile
               </li>
             </NavLink>
-
             <NavLink to="/user/post">
               <li className="navItem mob-hide">
                 <img
@@ -55,7 +52,6 @@ function Sidebar() {
                 Post Property - Free
               </li>
             </NavLink> 
-
             <NavLink to="/user/my-listing ">
               <li
                 className={`navItem ${
@@ -75,14 +71,12 @@ function Sidebar() {
                     : ""
                 } `} >
                 <img
-               
                   src="/img/NewLeads.svg"
                   alt="my-visits"
                 />
                 All Response
               </li>
             </NavLink>
-            
             <NavLink to="/user/favourite-post">
               <li
                 className={`navItem ${
@@ -108,17 +102,16 @@ function Sidebar() {
                 Transactions
               </li>
             </NavLink> */}
-            {/* <NavLink to="/user/my-visits">
+            <NavLink to="/user/my-visits">
               <li
                 className={`navItem ${
                   location.pathname == "/user/my-visits" ? "active-btn-nav" : ""
                 }`}
               >
                 <img className="" src="/img/Admin.svg" alt="my-visits" />
-                Schedule Visit
+                My Activity
               </li>
-            </NavLink> */}
-
+            </NavLink>
             <NavLink to="#">
               <li className="navItem mob-hide">
                 <img
