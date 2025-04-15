@@ -4,10 +4,12 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
+
+} 
+from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
-
+import { Headset, PhoneCall, MessageCircle, MousePointerClick } from 'lucide-react';
 
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
@@ -56,6 +58,7 @@ import { motion } from "framer-motion";
 import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
+
 import { UserContext } from "../CreateContext/CreateContext";
 import RentAgreement from "./RentAgreement";
 // import TenantDetailsForm from "./TenantDetailsForm";
@@ -72,7 +75,10 @@ import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
 import TenantVsLandlord from "./TenantVsLandlord.jsx";
+import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
+
 const HeroSection = () => {
+
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
   const [runSearchButton, setrunSearchButton] = useState(true);
@@ -80,6 +86,7 @@ const HeroSection = () => {
   //   setActiveTab(tab);
 
   // };
+ 
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ width: 0, left: 0, height: 0, top: 0 });
   const containerRef = useRef(null);
@@ -399,7 +406,9 @@ const HeroSection = () => {
               <div className="search-options">
                 {SearchTab.map((e, i) => {
                   return (
+                    
                     <div
+                   
                       key={i}
                       className={`search-tab ${e == SearchPropertyAddType ? "active" : ""
                         }
@@ -417,6 +426,9 @@ const HeroSection = () => {
                     </div>
                   );
                 })}
+                <div> 
+                  {/* <button onClick={HandleFreshbookingNavigation}>button</button> */}
+                </div>
               </div>
               <div className="search-box">
                 <img
@@ -710,7 +722,11 @@ const HeroSection = () => {
         </div>
       )}
 
+
+
       <PropertySection />
+      <FreshBookingHome/>
+      {/* <FreshBookingPost/> */}
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">
@@ -797,6 +813,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
+        
         </>
       )}
       {/* Sale Component  */}
@@ -822,6 +839,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FAQ />
           </div>
+         
         </>
       )}
 

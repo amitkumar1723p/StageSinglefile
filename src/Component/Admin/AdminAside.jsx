@@ -137,54 +137,23 @@ export default function AdminAside() {
                   </NavLink>
 
 
+
+
                   {/* All repose user route  */}
-                  {/* <NavLink
-                    to="/admin/all-registration-response"
-                    className={({ isActive }) =>
-                      `AdminAside-navLink ${
-                        location.search.includes("Role=Agent")
-                          ? "active"
-                          : "hover"
-                      }`
-                    }
-                  >
-                    <img
-                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg"
-                      alt="Agent Icon"
-                      className={`AdminAside-icon ${
-                        location.search.includes("Role=Agent") ? "active" : ""
-                      }`}
-                    />
-                    All User
-                  </NavLink> */}
                   {/* All repose user route  */}
                 </>
               )}
-            {/* <NavLink
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(GetAllNotificationsAndRequirements())
 
-  }, [])
-
-  return (
-    <div className="">
-      <div className="AdminAside-container">
-        <aside className="AdminAside-sidebar">
-          <div className="AdminAside-header">Dashboard</div>
-          <div className="AdminAside-links">
+            {/* Fresh Property Routing / */}
             <NavLink
-              to="/admin/dashboard"
-              className={({ isActive }) =>
-                `AdminAside-navLink ${isActive ? "active" : "hover"}`
-              }
-            >
+              to="/admin/fresh-property">
               <img
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                 alt="Dashboard Icon"
-                className={`AdminAside-icon ${location.pathname === "/admin/dashboard" ? "active" : ""}`}
+                
+
               />
-              Dashboard
+              Fresh property
             </NavLink>
             {medata?.IsAuthenticated &&
               medata.user.Role === "Owner" &&

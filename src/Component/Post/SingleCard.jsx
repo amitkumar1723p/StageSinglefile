@@ -11,7 +11,14 @@ import {
 } from "../../Action/userAction";
 import ShareModal from "./SinglePostDetails/ShareModal";
 import { FormatDate } from "../../utils/CommonFunction";
-const SingleCard = ({ PostData, index }) => {
+import { MarkRentOutProperty, ReOpenPostAction } from "../../Action/postAction";
+import { isBuffer } from "lodash";
+const SingleCard = ({
+  PostData,
+  index,
+  setMarkRentOutPropertyId,
+  MarkRentOutPropertyId,
+}) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
 
@@ -24,6 +31,7 @@ const SingleCard = ({ PostData, index }) => {
 
   const [floorDetails, setFloorDetails] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [EditPost, setEditPost] = useState(false);
 
   const shareUrl = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -96,6 +104,18 @@ const SingleCard = ({ PostData, index }) => {
     return `${day}-${month}-${year}`; // Format as DD-Month-YY
   };
 
+  const MarkRentOutPosts = JSON.parse(
+    sessionStorage.getItem("RentOutPropertyId") || "[]"
+  )?.includes(PostData?._id);
+
+  const RemoveRentOutPost = JSON.parse(
+    sessionStorage.getItem("ReOpenPropertyId") || "[]"
+  );
+
+  // Check if the current Post ID exists in the RemoveRentOutPost array
+  const isRemoved =
+    Array.isArray(RemoveRentOutPost) &&
+    RemoveRentOutPost.includes(PostData?._id);
   const location = useLocation();
   const dispatch = useDispatch();
   const [ImageTranlate, setImageTranlate] = useState(0);
@@ -257,6 +277,26 @@ const SingleCard = ({ PostData, index }) => {
     );
   }, [PostData]);
 
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setEditPost(false);
+      }
+    }
+
+    if (EditPost) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [EditPost]);
+
   const closeShareBox = (event) => {
     if (!event.target.matches(".share-btn")) {
       setIIshare(false);
@@ -314,7 +354,7 @@ const SingleCard = ({ PostData, index }) => {
               className="single-card-image"
             />
           </Link>
-          
+
           {/* { PostData?.PostVerify? (
             PostData?.PostVerifyShow ? (
               <div className="single-card-verified-badge">
@@ -331,10 +371,10 @@ const SingleCard = ({ PostData, index }) => {
           ) :<div className="inactive-post">
           <p className="inactive-post-para">Inactive</p>
         </div>} */}
-        
-            {/* to be fixed */}
 
-            { PostData?.PostVerify ? (
+          {/* to be fixed */}
+
+          {PostData?.PostVerify ? (
             PostData?.PostVerifyShow && (
               <div className="single-card-verified-badge">
                 <img
@@ -345,15 +385,18 @@ const SingleCard = ({ PostData, index }) => {
                 <p className="active-post-para">Verified</p>
               </div>
             )
-          ) : <>
-          {
-         <div className="inactive-post">
-          {/* <p>your post is currently inactive please contact our support team</p> */}
-            <p className="inactive-post-para">Your listing is under review and will be activated soon.</p>
-            
-          </div>
-          }
-          </>}
+          ) : (
+            <>
+              {
+                <div className="inactive-post">
+                  {/* <p>your post is currently inactive please contact our support team</p> */}
+                  <p className="inactive-post-para">
+                    Your listing is under review and will be activated soon.
+                  </p>
+                </div>
+              }
+            </>
+          )}
         </div>
 
         {/* Property Title Section */}
@@ -441,9 +484,55 @@ const SingleCard = ({ PostData, index }) => {
                   {location.pathname.includes("user/my-listing") &&
                     PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                       <>
-                        <Link to={`/user/post/update/${PostData?._id}`}>
-                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png" className="editIcon" />
-                        </Link>
+                     
+                        <img
+                         src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
+                          className="editIcon"
+                          onClick={() => {
+                            setEditPost(!EditPost);
+                          }}
+                        />
+                        {EditPost == true && (
+                          <select
+                            ref={selectRef}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              if (value == "post-edit") {
+                                // navigate(`/user/post/update/${PostData?._id}`);
+
+                                window.open(
+                                  `/user/post/update/${PostData?._id}`,
+                                  "EditPostTab"
+                                );
+                              } else if (value == "rent-out-post") {
+                                let postdata = { PostVerify: false };
+                                let postid = PostData?._id;
+                                dispatch(
+                                  MarkRentOutProperty({ postdata }, postid)
+                                );
+                              } else if (value == "Re-Open-Post") {
+                                dispatch(
+                                  ReOpenPostAction(PostData?._id, "UserRoutes")
+                                );
+                              }
+                              if (e.target.value != "") {
+                                setEditPost(false);
+                              }
+                            }}
+                          >
+                            <option value={""}>Select</option>
+                            <option value="post-edit">Edit-Post</option>
+
+                            {PostData?.BasicDetails?.PropertyAdType ===
+                              "Rent" &&
+                            PostData?.PostExpired?.ExpiredStatus === true ? (
+                              <option value="Re-Open-Post">Re-Open</option>
+                            ) : (
+                              <option value="rent-out-post">Rent Out</option>
+                            )}
+                          </select>
+                        )}
+                        
                       </>
                     )}
                 </div>
@@ -660,7 +749,6 @@ const SingleCard = ({ PostData, index }) => {
                 </div>
 
                 <div className="single-card-detail-text ">
-                
                   <p
                     className={`single-card-detail-title  ${
                       PostData?.propertyStatus?.currentPropertyStatus !==
@@ -669,20 +757,21 @@ const SingleCard = ({ PostData, index }) => {
                         : "sold-out"
                     }`}
                   >
-                
-                     {
-                       typeof PostData?.AreaDetails?.PlotDimensions =="string" ? PostData?.AreaDetails?.PlotDimensions : <> <span>{PostData?.AreaDetails?.PlotDimensions?.Length}</span>
-                       <span> X </span>
-                       <span>
-                        
-                         {PostData?.AreaDetails?.PlotDimensions?.Breadth}
-                       </span></>
-                      
-                     }
-                     
-                   
-
-
+                    {typeof PostData?.AreaDetails?.PlotDimensions ==
+                    "string" ? (
+                      PostData?.AreaDetails?.PlotDimensions
+                    ) : (
+                      <>
+                        {" "}
+                        <span>
+                          {PostData?.AreaDetails?.PlotDimensions?.Length}
+                        </span>
+                        <span> X </span>
+                        <span>
+                          {PostData?.AreaDetails?.PlotDimensions?.Breadth}
+                        </span>
+                      </>
+                    )}
                   </p>
                   <p
                     className={`single-card-detail-subtitle  ${
@@ -924,38 +1013,49 @@ const SingleCard = ({ PostData, index }) => {
                 >
                   {/* { PostData?.BasicDetails?.ApartmentType} */}
                   {PostData?.BasicDetails?.ApartmentType == "Plot/Land" ? (
-                  
-                    <> ₹   { String(
-                      PostData?.PricingDetails.PricePerSqYd
-                    ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Per sq yard</>
+                    <>
+                      {" "}
+                      ₹{" "}
+                      {String(PostData?.PricingDetails.PricePerSqYd).replace(
+                        /\B(?=(\d{3})+(?!\d))/g,
+                        ","
+                      )}{" "}
+                      Per sq yard
+                    </>
                   ) : (
-                    <> ₹  { String(
-                      PostData?.PricingDetails.PricePerSqFt
-                    ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}   Per sqft</>
+                    <>
+                      {" "}
+                      ₹{" "}
+                      {String(PostData?.PricingDetails.PricePerSqFt).replace(
+                        /\B(?=(\d{3})+(?!\d))/g,
+                        ","
+                      )}{" "}
+                      Per sqft
+                    </>
                   )}
                 </p>
               </div>
             </>
           )}
           {PostData?.propertyStatus?.currentPropertyStatus === "sold out" ? (
-            <p className="single-card-publish-date">Sold Out
+            <p className="single-card-publish-date">
+              Sold Out
               <span className="single-card-date-label"></span>
               <span className="single-card-date-value">
-               
                 {/* {formatDate(PostData?.PostVerifyData?.Time)} */}
               </span>
             </p>
-          ):<p className="single-card-publish-date">
-          <span className="single-card-date-label">Publish on: </span>
-          <span className="single-card-date-value">
-            {FormatDate(PostData?.PostVerifyData?.Time)}
-            {/* {formatDate(PostData?.PostVerifyData?.Time)} */}
-          </span>
-        </p>
-        
-        }
+          ) : (
+            <p className="single-card-publish-date">
+              <span className="single-card-date-label">Publish on: </span>
+              <span className="single-card-date-value">
+                {FormatDate(PostData?.PostVerifyData?.Time)}
+                {/* {formatDate(PostData?.PostVerifyData?.Time)} */}
+              </span>
+            </p>
+          )}
         </div>
-        
+
         {/* Action Buttons */}
         <div className="single-card-action-buttons-container">
           <button
@@ -1003,7 +1103,8 @@ const SingleCard = ({ PostData, index }) => {
           <Link
             target="_blank"
             className=""
-            to={`/post-detail/${PropertyAddress?.trim()?.toLowerCase()
+            to={`/post-detail/${PropertyAddress?.trim()
+              ?.toLowerCase()
               .replaceAll(" ", "-")
               .replace(",", "")
               .replaceAll("/", "-")}-${PostData?._id}`}
@@ -1024,6 +1125,12 @@ const SingleCard = ({ PostData, index }) => {
             </button>
           </Link>
         </div>
+
+        {location.pathname.includes("user/my-listing") &&
+          PostData?.BasicDetails?.PropertyAdType === "Rent" &&
+          PostData?.PostExpired?.ExpiredStatus === true && (
+            <button>RentOut</button>
+          )}
       </div>
       {/* share card begin  */}
 

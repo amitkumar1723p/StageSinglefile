@@ -62,10 +62,10 @@ export default function CreatePostImageUpload({
 
   const CratePostHandler = (e) => {
     e.preventDefault();
-    if (update && previewImage.length === 0) {
-      setnext(4);
-      return alert("one image is required");
-    }
+    // if (update && previewImage.length === 0) {
+    //   setnext(4);
+    //   return alert("one image is required");
+    // }
     let formData = new FormData(e.target);
 
     const PricingDetailsCopyObj = { ...PricingDetailsData };

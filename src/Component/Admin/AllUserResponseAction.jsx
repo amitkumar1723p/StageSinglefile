@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState ,useRef} from "react"
 import { Link, useNavigate } from "react-router-dom";
 // CSS file is here at bottom of this page 
 import "./AllUserResponseAction.css"
@@ -7,11 +7,17 @@ import "./AllRegistrationResponse.css";
 import { getAllUserResponseAction } from "../../Action/userAction";
 import { FormatDate } from "../../utils/CommonFunction";
 export default function AllUserResponseAction() {
+ 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // All user response action
   const [searchbtn, setSearchbtn] = useState(false)
   const [searchText, setSearchText] = useState("");
+  const [tarckNewLead, setTrackNewLead] = useState()
+  const[usersList,setUsersList]=useState()
+  const[newUser,setnewUser]=useState(0)
+  const [read,SetRead]=useState()
+  const[trackIndex,setTrackIndex]=useState()
   const [sort, setSort] = useState([])
   const { data: AllUserResponseAction_Store } = useSelector((state) => {
     return state.AllUserResponseAction_Store;
@@ -28,24 +34,20 @@ export default function AllUserResponseAction() {
 
   // console.log(AllUserResponseAction_Store)
   useEffect(() => {
+    
     if (AllUserResponseAction_Store == undefined || runPagination == true) {
       dispatch(getAllUserResponseAction(page));
+
     }
   }, [page]);
   useEffect(() => {
     // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
     if (searchText && searchbtn === true) {
-  
+     
       dispatch(getAllUserResponseAction(page, searchText));
 
       setSearchbtn(false)
     }
-// for localstaorage
-    // useEffect(() => {
-    //   localStorage.setItem('items', JSON.stringify(items));
-    // }, [items]);
-
-
   }, [page, searchText, searchbtn]);
 
 
@@ -82,9 +84,65 @@ export default function AllUserResponseAction() {
     setSearchbtn(true)
     // For example, log the search text
   };
+
+  useEffect(() => {
+  
+    if (typeof window !== "undefined" && searchText.length === 0 ) {
+      const users = AllUserResponseAction_Store?.data[0]?.users;
+      let newData;
+  
+      if (users) {
+        newData = users.map(item => ({
+          ContactNumber: `630713${item.ContactNumber}`,
+          notifyData: item.notifyData.length,
+          offerData: item.offerData.length,
+          postData: item.postData.length,
+          requireData: item.requireData.length,
+          scheduleData: item.scheduleData.length
+        }));
+  
+        const storedData = JSON.parse(localStorage.getItem("newLength")) || [];
+  
+        // let result = storedData.filter(storedItem => {
+        //   const match = newData.find(
+        //     newItem => newItem
+        //   );
+        //   return match && (
+        //     storedData.ContactNumber!==match.ContactNumber||
+        //     storedItem.notifyData !== match.notifyData ||
+        //     storedItem.postData !== match.postData ||
+        //     storedItem.requireData !== match.requireData ||
+        //     storedItem.scheduleData !== match.scheduleData ||
+        //     storedItem.offerData !== match.offerData
+        //   );
+        // });
+  
+        setTrackNewLead(storedData);
+        if(newData.length>storedData.length){
+          setnewUser(newData.length-storedData.length)
+        }
+        
+        localStorage.setItem("newLength", JSON.stringify(newData));
+   
+        setUsersList(
+        AllUserResponseAction_Store?.data[0]?.users ??
+        AllUserResponseAction_Store?.data)
+      }
+    }else{
+      setUsersList(
+        AllUserResponseAction_Store?.data[0]?.users ??
+        AllUserResponseAction_Store?.data)
+    }
+  }, [AllUserResponseAction_Store?.data[0]?.users ,searchText]);
+  
+
+ console.log(
+tarckNewLead,"l"
+ )
+
   return (
     <>
-
+{usersList&&
       <div className="border border-primary border-opacity-25 ">
         <div className="d-flex justify-content-between">
           <div className="">
@@ -107,15 +165,17 @@ export default function AllUserResponseAction() {
         <div className="container-fluid d-flex flex-column  gap-3 rounded">
 
 
-          {AllUserResponseAction_Store?.data && AllUserResponseAction_Store?.data[0]?.users?.map((item) => {
-          
+
+          {usersList?.map((item, index) => {
+      
             return (
 
               <div className=" main-box-all-response-section all-response-section-admin  d-flex align-content-start flex-wrap border border-primary border-opacity-25 py-2 rounded w-fit d-flex justify-content-center align-items-center">
 
                 <div className="userName border-end border-primary px-2  border-opacity-25">
                   <div className="">
-                    <p className="All-response-common-section  ">{item?.Name} {item?.LastName} - <small className="fw-light">( {item?.Role})</small></p>
+                    <p className="All-response-common-section  "  style={{ color: index < newUser ? 'red' : 'black' }}>
+                      {item?.Name} {item?.LastName} - <small className="fw-light">( {item?.Role})</small></p>
                     {/* <small className="fw-light">{item?.email}</small> */}
                     <small className="">
                       {item?.latestCreateAt ? FormatDate(item?.latestCreateAt) : 'N/A'}
@@ -126,53 +186,87 @@ export default function AllUserResponseAction() {
                 <div className="userContact border-end border-primary border-opacity-25 px-2 ">
                   <p className="All-response-common-section d-flex justify-content-center align-items-center">
                     {item?.ContactNumber}
+                  </p>
+                </div>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                    Lisitng : &nbsp; <small className="fw-bold">
+                    {tarckNewLead[index]?.ContactNumber==`630713${item.ContactNumber}`&&item?.postData?.length>tarckNewLead[index]?.postData ?
+                      <small> {item?.postData?.length}<sup className="text-success">new</sup></small>  :   <small>{item?.postData?.length}</small>}
+
+                    </small>
+                  </p>
+                </div>
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className=" all-response-data-section d-flex justify-content-center align-items-center ">
+                    Schedule :  &nbsp; <small className="fw-bold"> 
+                  
+                       {tarckNewLead[index]?.ContactNumber==`630713${item.ContactNumber}`&&item?.scheduleData?.length>tarckNewLead[index]?.scheduleData ?
+                      <small>{item?.scheduleData?.length}<sup className="text-success">new</sup></small>  :   <small>{item?.scheduleData?.length}</small>}
+                        </small> </p>
+                </div>
+
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                    Offer Data : &nbsp; <small className="fw-bold">
+                      {tarckNewLead[index]?.ContactNumber==`630713${item.ContactNumber}`&&item?.offerData?.length>tarckNewLead[index]?.offerData ?
+                      <small>{item?.offerData?.length}<sup className="text-success">new</sup></small>  :   <small>{item?.offerData?.length}</small>}
+                    </small></p>
+                </div>
 
 
+
+
+                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
+                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                    Notify:&nbsp; <small className="fw-bold">
+                    {tarckNewLead[index]?.ContactNumber==`630713${item.ContactNumber}`&&item?.notifyData?.length>tarckNewLead[index]?.notifyData ?
+                      <small>{item?.notifyData?.length}<sup className="text-success">new</sup></small>  :   <small>{item?.notifyData?.length}</small>}
+                      
+                 
+                      
+                      </small>
 
                   </p>
                 </div>
                 <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
                   <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
-
-                    Lisitng : &nbsp; <small className="fw-bold">{item?.postData?.length}</small>
-
-                  </p>
-                </div>
-                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className=" all-response-data-section d-flex justify-content-center align-items-center ">Schedule :  &nbsp; <small className="fw-bold">  {item?.scheduleData?.length} </small> </p>
-                </div>
-
-                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">Offer Data : &nbsp; <small className="fw-bold"> {item?.offerData?.length}</small></p>
-                </div>
-
-
-
-                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
-                    Notify:&nbsp; <small className="fw-bold">{item?.notifyData?.length}</small>
+                    Requirement : &nbsp; <small className="fw-bold">
+                      
+                    {tarckNewLead[index]?.ContactNumber==`630713${item.ContactNumber}`&&item?.requireData?.length>tarckNewLead[index]?.requireData ?
+                      <small>{item?.requireData?.length}<sup className="text-success">new</sup></small>  :   <small>{item?.requireData?.length}</small>}
+                      </small>
 
                   </p>
                 </div>
-                <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                  <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
-                    Requirement : &nbsp; <small className="fw-bold">{item?.requireData?.length}</small>
 
-                  </p>
-                </div>
-            
-                
+
 
 
                 {/* <div className="userDetail px-5 d-flex justify-content-between"> */}
 
 
 
-                <div className="btn-allresponse-section-main">
-                  <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none ">
-                    <button className="btn-allresponse-section fw-light px-4">View Details</button>
+                <div className="btn-allresponse-section-main" >
+                  {/* <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none " >
+                    <button className="btn-allresponse-section fw-light px-4" onClick={() => setTrackIndex(index)} >View Details</button>
 
-                  </Link>
+                  </Link> */}
+                  <Link
+  to={{
+    pathname: `/admin/single-user-Response-action/${item?._id}`,
+  }}
+  state={{index: index }}
+  className="text-decoration-none"
+>
+  <button
+    className="btn-allresponse-section fw-light px-4"
+    onClick={() => setTrackIndex(index)}
+  >
+    View Details
+  </button>
+</Link>
+
 
                 </div>
 
@@ -225,6 +319,7 @@ export default function AllUserResponseAction() {
         </div>
 
       </div>
+}
     </>
   )
 }

@@ -1174,13 +1174,9 @@ export const deleteExcelFile = (excelId) => {
   };
 };
 
-// if (medata.user.Role === "Owner") {
-//   dispatch(fetchAllOwnerFiles());
-// }
-// for
-// Get All user with property data if they posted 
+
 export const getAllUserResponseAction=(page,searchText)=>{
- 
+ console.log(searchText,page)
   return async (dispatch) => {
     try {
       dispatch({
@@ -1243,3 +1239,126 @@ export const getSingleUserResponseAction=(id)=>{
     }
   };
 }
+
+// this action is used to update offers status
+export const updateBidStatusAction=({ VisitStatus }, visitId)=>{
+  console.log(VisitStatus,visitId,"listen")
+
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "updateBidStatusActionRequest",
+        payload: "updateBidStatusActionRequest",
+      });
+
+      // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+      let url = `${api_Base_Url}/Biddingform/updateBidStatus/${visitId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, { VisitStatus }, config);
+
+      dispatch({
+        type: "updateBidStatusActionSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "updateBidStatusActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "updateBidStatusActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+export const updateNotifyStatusAction=({ VisitStatus }, visitId)=>{
+  console.log(VisitStatus,visitId,"listen")
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "updateNotifyStatusActionRequest",
+        payload: "updateNotifyStatusActionRequest",
+      });
+
+      // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+      let url = `${api_Base_Url}/notify/updatedNotifyStatus/${visitId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, { VisitStatus }, config);
+
+      dispatch({
+        type: "updateNotifyStatusActionSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "updateNotifyStatusActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "updateNotifyStatusActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+export const updateRequirementStatusAcion=({ VisitStatus }, visitId)=>{
+  console.log(VisitStatus,visitId,"listen23")
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "updateRequirementStatusAcionRequest",
+        payload: "updateRequirementStatusAcionRequest",
+      });
+
+      // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+      let url = `${api_Base_Url}/property-requirement/requirementStatus/${visitId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, { VisitStatus }, config);
+
+      dispatch({
+        type: "updateRequirementStatusAcionSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "updateRequirementStatusAcionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "updateRequirementStatusAcionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
