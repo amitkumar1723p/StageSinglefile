@@ -94,7 +94,7 @@ export default function ShowLoginUserPost() {
           <h3 className="user-section-heading">{PropertyAdType} Post</h3>
           <div className="filter-btn-section">
             <div className="user-filter-section flex">
-              <img src="/img/mage_filter.svg" alt="filter_icon" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/image_filter.svg" alt="filter_icon" />
               {ButtonText.map((btntext, index) => (
                 <button
                   key={index}

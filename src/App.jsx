@@ -93,7 +93,8 @@ import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingView
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
-  //  console.log(FormatDate("2025-02-20T06:48:35.238+00:00"))
+
+  
 
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
 
@@ -107,9 +108,13 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
+    console.log( state.userData ,"Userdata")
     return state.userData;
+     
   });
   const { data: CreatePost , LodingType:AlertType} = useSelector((state) => {
+ 
+     
     return state.Post;
   });
   const { data: getSinglePostData } = useSelector((state) => {
@@ -239,6 +244,7 @@ function App() {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
+       console.log(LodingType ,"LodingType")
       if (data?.success && LodingType == "ProfileUpdateRequest") {
         dispatch(GetMeDetailsAction());
       }
@@ -266,11 +272,16 @@ function App() {
           "ViewOwnerDetailsRequest",
           "DisplayDataRequest",
         ].includes(
-          typeof LodingType === "string" ? LodingType : LodingType?.Type
+          typeof LodingType == "string" ? LodingType : LodingType?.Type
         )
       ) {
-        dispatch({ type: "UserClear" });
+        // alert("zzc")
         setalertShow(false);
+         setTimeout(() => {
+          dispatch({ type: "UserClear" });
+         }, 0);
+       
+        
       } else {
         setalertMessage(<p>{data.message}</p>);
         setalertType("Success");

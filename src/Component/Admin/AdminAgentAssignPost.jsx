@@ -25,74 +25,83 @@ export default function AdminAgentAssignPost({
   const itemsPerPage = 10;
 
   //this useEffect is used for update state 
-  useEffect(()=>{
-    if(activeFilter!==null){
-      setPostVerify(null)
-     
+  useEffect(() => {
+    if (activeFilter !== null) {
+      setPostVerify(null);
     }
-  },[activeFilter])
+  }, [activeFilter, setPostVerify]);
+  
   // Update posts when data or sortOrder changes searching or pagination set inside this useEffect
   useEffect(() => {
-    if (allPropertyData?.AssignProperty) {
-      let filteredPosts = [...allPropertyData.AssignProperty];
-
-      if (SearchPostId.length > 0) {
-        filteredPosts = filteredPosts.filter((item) => {
-          const contactNumber = item?.PostId?.CreatePostUser?.ContactNumber;
-          return (
-            item?.PostId?._id
-              .toLowerCase()
-              .includes(SearchPostId.toLowerCase()) ||
-            item?.PostId?.CreatePostUser?.Name.toLowerCase().includes(
-              SearchPostId.toLowerCase()
-            ) ||
-            item.PostId?.LocationDetails.ProjectName.toLowerCase().includes(
-              SearchPostId.toLowerCase()
-            ) ||
-            (contactNumber && String(contactNumber).includes(SearchPostId)) // Convert to string before calling includes
-          );
-        });
-      }
-
-      // Apply the active filter (postVerify) to all posts
-      if (activeFilter !== null) {
+    if (!allPropertyData?.AssignProperty) return;
+  
+    let filteredPosts = [...allPropertyData.AssignProperty];
+  
+    // Search filter
+    if (SearchPostId.trim().length > 0) {
+      filteredPosts = filteredPosts.filter((item) => {
+        const postId = item?.PostId?._id?.toLowerCase() || "";
+        const userName = item?.PostId?.CreatePostUser?.Name?.toLowerCase() || "";
+        const projectName =
+          item?.PostId?.LocationDetails?.ProjectName?.toLowerCase() || "";
+        const contactNumber = String(item?.PostId?.CreatePostUser?.ContactNumber || "");
+  
+        const query = SearchPostId.toLowerCase();
+        return (
+          postId.includes(query) ||
+          userName.includes(query) ||
+          projectName.includes(query) ||
+          contactNumber.includes(query)
+        );
+      });
+    }
+  
+    // Active filter (postVerify on PostId)
+    if (activeFilter !== null) {
+      if (activeFilter === "expired") {
         filteredPosts = filteredPosts.filter(
-          (item) => item?.PostId?.PostVerify === activeFilter
+          (item) => item?.PostId?.PostExpired?.ExpiredStatus
         );
       }
-      if(postVerify!==null){
-        filteredPosts = filteredPosts.filter((item) => {
-          return item.PostVerify === postVerify;
-        });
-       }else{
-        filteredPosts=[...filteredPosts]
-      }
-      // Sorting logic - Ensure 'createAt' is valid
-      if (sortOrder !== undefined) {
-        filteredPosts.sort((a, b) => {
-          const dateA = new Date(a?.PostId?.createAt); // Ensure proper date handling
-          const dateB = new Date(b?.PostId?.createAt);
-          return sortOrder === "ascending" ? dateA - dateB : dateB - dateA;
-        });
-      }
-
-      // Update pagination when filtered posts change
-      const newTotalPages = Math.ceil(filteredPosts.length / itemsPerPage);
-      setTotalPages(newTotalPages); // Update total pages
-
-      // Reset the page if it exceeds the new total pages
-      if (page > newTotalPages) {
-        setPage(1); // Reset to the first page
-      }
-
-      const startIndex = (page - 1) * itemsPerPage;
-      const endIndex = page * itemsPerPage;
-      const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
-
-      setOwnerPosts(postsToDisplay); // Set the current page posts
+      console.log(filteredPosts)
+      if(activeFilter !== "expired")
+      filteredPosts = filteredPosts.filter(
+        (item) => item?.PostId?.PostVerify === activeFilter
+      );
+  
+   
     }
-  }, [allPropertyData, SearchPostId, sortOrder, activeFilter, page]);
-
+  
+    // postVerify from context (on AssignProperty itself)
+    if (postVerify !== null) {
+      filteredPosts = filteredPosts.filter((item) => item?.PostVerify === postVerify);
+    }
+  
+    // Sorting
+    if (sortOrder !== undefined) {
+      filteredPosts.sort((a, b) => {
+        const dateA = new Date(a?.PostId?.createAt);
+        const dateB = new Date(b?.PostId?.createAt);
+        return sortOrder === "ascending" ? dateA - dateB : dateB - dateA;
+      });
+    }
+  
+    // Pagination
+    const newTotalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+    setTotalPages(newTotalPages);
+  
+    if (page > newTotalPages && newTotalPages > 0) {
+      setPage(1); // Safe page reset
+      return; // Wait for page reset
+    }
+  
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = page * itemsPerPage;
+    const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+  
+    setOwnerPosts(postsToDisplay);
+  }, [allPropertyData, SearchPostId, sortOrder, activeFilter, postVerify, page]);
+  
  
 
   const handlePrevPage = () => {

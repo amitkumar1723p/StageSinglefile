@@ -73,7 +73,7 @@ export default function Login() {
         <div className="signup-form-wrapper-unique">
           <div className="signup-image-section-unique">
             <img
-              src="/img/Krisumi-Waterfall-Residences.jpg"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Krisumi-Waterfall-Residences.jpg"
               alt="Skyscrapers"
             />
           </div>

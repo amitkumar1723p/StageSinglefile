@@ -9,10 +9,11 @@ import Loader from "../Loader/Loader";
 // import NotifyForm from "../";/
 import Notifyme from "./PropertyCard/NotifyMe";
 import SingleCard from "../Post/SingleCard";
-export default function HomeCard() {
+export default function HomeCard({data}) {
   const dispatch = useDispatch();
+  console.log("data",data)
 
-  const { loading, data } = useSelector((state) => {
+  const { loading } = useSelector((state) => {
     return state.GetAllPost;
   });
   const [filterdPost, setFilterdPost] = useState(null);
@@ -20,13 +21,13 @@ export default function HomeCard() {
 
   useEffect(() => {
     function filter() {
-      if (!data || !data.allPost) {
+      if (!data) {
         return;
       } else {
-        const soldout = data?.allPost?.filter(
+        const soldout =data?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus === "sold out"
         );
-        const available = data?.allPost?.filter(
+        const available = data?.filter(
           (item) => item.propertyStatus?.currentPropertyStatus !== "sold out"
         );
         
@@ -57,7 +58,7 @@ export default function HomeCard() {
           }
         </div>:
            
-          (data?.allPost?.length > 0 ? (
+          (data?.length > 0 ? (
 
             <div className="home-postContainer">
               <div className="allPostrender-showpost">

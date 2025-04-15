@@ -33,15 +33,9 @@ export default function SingleFreshBookingViewMore(builderContent) {
     });
     const allFreshBookingCard = allFreshProjectData?.projectData ||  [] ;
   
-    useEffect(()=>{
-  dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
-    },[])
 
 
-
-      useEffect(()=>{
-    dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
-      },[])
+   
       const scrollFreshBookingViewMoreLeft = ()=>{
         document.querySelector('.fresh-booking-view-more-card-container').scrollBy({
           left: -300,

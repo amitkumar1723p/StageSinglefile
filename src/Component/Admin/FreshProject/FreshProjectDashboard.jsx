@@ -11,8 +11,10 @@ export default function FreshProjectDashboard() {
   const allFreshBooking = allFreshProjectData?.projectData || [];
 
   useEffect(() => {
-    
-    dispatch(getAllFreshProjectAction({RouteType:"AdminRoutes"}));
+     if(!allFreshProjectData){
+      dispatch(getAllFreshProjectAction({RouteType:"AdminRoutes"}));
+     }
+   
   }, []);
   return (
     <>

@@ -17,7 +17,7 @@
 //     });
 //   };
 //   const vv =window.innerWidth <= 768 
- 
+
 
 //   const quickLinks = [
 //     { name: 'Home', hash: "" },
@@ -227,7 +227,7 @@ const Footer = () => {
               <div className="company__underline"></div>
             </div>
             <p className="company__description">
-            India's first online Proptech platform that delivers real-time price alerts to property owners. We focused on building Transparency, Trust with fair price value.
+              India's first online Proptech platform that delivers real-time price alerts to property owners. We focused on building Transparency, Trust with fair price value.
 
             </p>
             {/* <div className="company__social">
@@ -341,10 +341,10 @@ const Footer = () => {
                     >
                       <span className="links__dot"></span>
                       <span className='list__Name'>{item.name}</span>
-                      
+
                     </a>
 
-                    
+
                   </li>
                 ))}
               </ul>
@@ -354,18 +354,18 @@ const Footer = () => {
             <div className="footer__links">
               <h4 className="links__title">Company</h4>
               <ul className="links__list">
-              <li  className="links__item">
+                <li className="links__item">
 
-              {/* <a
+                  {/* <a
                     target='blank'
-                      href="/Career"
-                      className="links__link"
-                    >
-                      <span className="links__dot"></span>
-                      <span className='list__Name'>Career</span>
-                    </a> */}
+                    href="/Career"
+                    className="links__link"
+                  >
+                    <span className="links__dot"></span>
+                    <span className='list__Name'>Career</span>
+                  </a> */}
 
-              {/* <a
+                  {/* <a
                     target='blank'
                       href="/Our-Service"
                       className="links__link"
@@ -373,49 +373,49 @@ const Footer = () => {
                       <span className="links__dot"></span>
                       <span className='list__Name'>Services</span>
                     </a> */}
-                    <a
+                  <a
                     target='blank'
-                      href="/privacy-policy"
-                      className="links__link"
-                    >
-                      <span className="links__dot"></span>
-                      <span className='list__Name'>Privacy Policy</span>
-                    </a>
-                  </li>
-                  <li  className="links__item">
-                    <a
-                     
-                      href="/Report"
-                      target='blank'
-                      className="links__link"
-                    >
-                      <span className="links__dot"></span>
-                      <span className='list__Name'>Report</span>
-                    </a>
-                  </li>
-                  <li  className="links__item">
-                    <a
-                     
-                      href="/terms-and-conditions"
-                      target='blank'
-                      className="links__link"
-                    >
-                      <span className="links__dot"></span>
-                      <span className='list__Name'>Terms & Conditions</span>
-                    </a>
-                  </li>
-                  <li  className="links__item">
-                    <a
-                     
-                      href="/blog-page"
-                      target='blank'
-                      className="links__link"
-                    >  
-                      <span className="links__dot"></span>
-                      <span className='list__Name'>Blogs</span>
-                    </a>
-                  </li>
-                 
+                    href="/privacy-policy"
+                    className="links__link"
+                  >
+                    <span className="links__dot"></span>
+                    <span className='list__Name'>Privacy Policy</span>
+                  </a>
+                </li>
+                <li className="links__item">
+                  <a
+
+                    href="/Report"
+                    target='blank'
+                    className="links__link"
+                  >
+                    <span className="links__dot"></span>
+                    <span className='list__Name'>Report</span>
+                  </a>
+                </li>
+                <li className="links__item">
+                  <a
+
+                    href="/terms-and-conditions"
+                    target='blank'
+                    className="links__link"
+                  >
+                    <span className="links__dot"></span>
+                    <span className='list__Name'>Terms & Conditions</span>
+                  </a>
+                </li>
+                <li className="links__item">
+                  <a
+
+                    href="/blog-page"
+                    target='blank'
+                    className="links__link"
+                  >
+                    <span className="links__dot"></span>
+                    <span className='list__Name'>Blogs</span>
+                  </a>
+                </li>
+
                 {companyLinks.map((item, index) => (
                   <li key={index} className="links__item">
                     <a

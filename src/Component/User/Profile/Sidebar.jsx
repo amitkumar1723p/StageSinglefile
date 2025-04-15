@@ -17,14 +17,12 @@ function Sidebar() {
       }
     }
   };
-
   return (
     <>
       {/* Overlay to close sidebar when clicking outside */}
       {isOpen && (
         <div className="overlay" onClick={() => setIsOpen(false)}></div>
       )}
-
       {/* Sidebar */}
       <aside
         className={`sidebar-profile ${isOpen ? "open" : ""}`}
@@ -40,22 +38,20 @@ function Sidebar() {
                   location.pathname == "/user" ? "active-btn-nav" : ""
                 }`}
               >
-                <img className="" src="/img/Profile.svg" alt="profile" />
+                <img className="" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Profile.svg" alt="profile" />
                 Profile
               </li>
             </NavLink>
-
             <NavLink to="/user/post">
               <li className="navItem mob-hide">
                 <img
                   className=""
-                  src="/img/PostProperty.svg"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/PostProperty.svg"
                   alt="post property"
                 />
                 Post Property - Free
               </li>
             </NavLink> 
-
             <NavLink to="/user/my-listing ">
               <li
                 className={`navItem ${
@@ -64,7 +60,7 @@ function Sidebar() {
                     : ""
                 } `}
               >
-                <img className="" src="/img/MyListing.svg" alt="my listing" />
+                <img className="" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/MyListing.svg" alt="my listing" />
                 My Listing
               </li>
             </NavLink>
@@ -76,13 +72,12 @@ function Sidebar() {
                 } `} >
                 <img
                
-                  src="/img/NewLeads.svg"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/NewLeads.svg"
                   alt="my-visits"
                 />
                 All Response
               </li>
             </NavLink>
-            
             <NavLink to="/user/favourite-post">
               <li
                 className={`navItem ${
@@ -91,7 +86,7 @@ function Sidebar() {
                     : ""
                 }`}
               >
-                <img className="" src="/img/Fav-Post.svg" alt="shortlisted" />
+                <img className="" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg" alt="shortlisted" />
                 Shortlisted Property
               </li>
             </NavLink>
@@ -108,17 +103,16 @@ function Sidebar() {
                 Transactions
               </li>
             </NavLink> */}
-            {/* <NavLink to="/user/my-visits">
+            <NavLink to="/user/my-visits">
               <li
                 className={`navItem ${
                   location.pathname == "/user/my-visits" ? "active-btn-nav" : ""
                 }`}
               >
-                <img className="" src="/img/Admin.svg" alt="my-visits" />
+                <img className="" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg" alt="my-visits" />
                 Schedule Visit
               </li>
-            </NavLink> */}
-
+            </NavLink>
             <NavLink to="#">
               <li className="navItem mob-hide">
                 <img
@@ -157,13 +151,13 @@ function Sidebar() {
             </NavLink>
             <NavLink to="#">
               <li className="navItem mob-hide">
-                <img className="" src="/img/support.png" alt="support" />
+                <img className="" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/support.png" alt="support" />
                 Support
               </li>
             </NavLink>
             <NavLink to="#">
               <li className="navItem mob-hide">
-                <img className="" src="/img/FAQs.svg" alt="FAQs" />
+                <img className="" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FAQs.svg" alt="FAQs" />
                 FAQs
               </li>
             </NavLink>
@@ -171,7 +165,7 @@ function Sidebar() {
               <li className="navItem mob-hide">
                 <img
                   className=""
-                  src="/img/MyListing.svg"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/MyListing.svg"
                   alt="post response"
                 />
                 Your Post Response

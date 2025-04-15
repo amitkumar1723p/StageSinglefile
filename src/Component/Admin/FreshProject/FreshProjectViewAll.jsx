@@ -15,11 +15,8 @@ export function FreshProjectViewAll() {
   });
   const allFreshBooking = allFreshProjectData?.projectData || [];
 
-  useEffect(() => {
-    dispatch(getAllFreshProjectAction({ RouteType: "AdminRoutes" }));
-  }, []);
 
-  console.log(projectId);
+
 
   const handleProjectStatus = (id) => {
     setprojectId(id);
@@ -42,30 +39,16 @@ export function FreshProjectViewAll() {
     return state.Post;
   });
   useEffect(() => {
-    console.log();
+   
     if (adminAlertData && ["projectStatusRequest"].includes(LodingType)) {
-      if (adminAlertData.
-        success == true) {
+      if (adminAlertData.success == true) {
+        alert("run")
         dispatch(getAllFreshProjectAction({ RouteType: "AdminRoutes" }));
       }
     }
   }, [adminAlertData]);
 
-  // if (
-  //     adminAlertData &&
-  //     (LodingType === "RemoveAssignPropertyRequest" ||
-  //       LodingType === "Admin_AssignedRequest")
-  //   ) {
-  //     if (adminAlertData.success === true) {
-  //       setAssignProperty([]);
-  //       setSelectAll(false);
 
-  //       dispatch(GetAllAssignProperty());
-  //     }
-  //   }
-
-  //   // eslint-disable-next-line
-  // }, [adminAlertData]);
 
   return (
     <>

@@ -23,7 +23,7 @@ export default function VoiceMatters() {
         </div>
       </div>
       <div className="voice-img-container">
-        <img src="/img/voice-matters.svg" alt="voice-matters"></img>
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/voice-matters.svg" alt="voice-matters"></img>
       </div>
     </div>
   );

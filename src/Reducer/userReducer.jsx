@@ -67,11 +67,12 @@ export const CreateUserReducer = (state = {}, action) => {
       //  Fresh Property get Api ----- End
        
       return {
+         
         ...state,
         loading: false,
         data: action.payload,
       };
-
+ 
     case "CreateUserOtpFail":
     case "VerifyUserOtpFail":
     case "CreateUserFail":
@@ -97,6 +98,7 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ReOpenPostActionFail-UserRoutes":
     case "getAllFreshProjectFail-UserRoutes":
     case "viewOneProjectFail":
+      
       return {
         ...state,
         loading: false,

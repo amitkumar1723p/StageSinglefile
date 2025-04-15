@@ -18,14 +18,18 @@ const[searchText,setSearchText]=useState()
     });
     const allFreshBooking = allFreshProjectData?.projectData || [];
 
-    useEffect(() => {
-        
-        dispatch(getAllFreshProjectAction({RouteType:"AdminRoutes"}))
-    }, [])
-
+  
     // filter function
     useEffect(() => {
-        dispatch(getAllFreshProjectAction({projectName, type, Adtype, projectStatus, address,searchText ,RouteType:"AdminRoutes"}))
+     
+        //    if(!allFreshProjectData){
+        //     console.log("kl")
+            // dispatch(getAllFreshProjectAction({projectName, type, Adtype, projectStatus, address,searchText ,RouteType:"AdminRoutes"}))
+           
+        //    if( projectName || type || Adtype ||projectStatus ||address ||searchText ){
+            dispatch(getAllFreshProjectAction({projectName, type, Adtype, projectStatus, address,searchText ,RouteType:"AdminRoutes"}))
+        //    }
+       
     }, [projectName, type, Adtype, projectStatus, address,searchText])
 
     // console.log(projectName,type,Adtype,projectStatus,address)
