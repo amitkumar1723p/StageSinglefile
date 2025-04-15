@@ -549,14 +549,14 @@ useEffect(() => {
 
               <select className="property-filter-select" ref={statusRef} onChange={(e) => handleSelect('Status', e.target.value)} defaultValue="">
                 <option value="" disabled>Status</option>
-                <option value="Ready to Move">Ready to Move</option>
+                <option value="Ready to move">Ready to Move</option>
                 <option value="Under Construction">Under Construction</option>
               </select>
               </div>
 
             <div className="property-select-div">
 
-              <select className="property-filter-select" onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
+              <select className="property-filter-select" ref={localityRef} onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
                 <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
                 <option value="Golf Course Extn Road">Golf Course</option>
@@ -614,18 +614,28 @@ useEffect(() => {
         
           </div> */}
         
-            <div className="property-filter-active">
+        <div className="porpety-filter-active-filter-parent">
+        <div className="property-filter-active">
               <span className="property-filter-active-title">Active filters:</span>
               {activeFilters.map((filter, index) => (
                 <span key={index} className="property-filter-tag">
                   {filter.value} <button onClick={() => removeFilter(filter.value)}>&times;</button>
                 </span>
               ))}
-              {activeFilters.length > 0 && (
+              {/* {activeFilters.length > 0 && (
                 <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
-              )}
-              <span className="property-filter-count">{data?.allPost?.length} Properties Found</span>
+              )} */}
+        
             </div>
+            <div className="clear-btn-and-length">
+              <span>    {activeFilters.length > 0 && (
+        <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
+      )}</span>
+              <span className="property-filter-count">{data?.allPost?.length} properties found</span>
+              </div>
+        </div>
+          
+              
           </div>
 
           </div>
