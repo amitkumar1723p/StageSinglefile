@@ -208,8 +208,8 @@ export default function PropertyDetailsSection({
                   <img
                     src={
                       PropertyDetailsData.OtherRoom?.includes(text)
-                        ? "/img/white-tick.svg"
-                        : "/img/plus-create.svg"
+                        ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                        : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                     }
                   />
                 </div>

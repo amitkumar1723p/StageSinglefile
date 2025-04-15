@@ -25,7 +25,7 @@ const SimpleStepsBuyer = () => {
       <div className="simple-steps-container">
         <div className="simple-step-card" id="step1">
           <div className="howwework-data">
-            <img src="/img/StartExploring.svg" alt="Start Exploring" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/StartExploring.svg" alt="Start Exploring" />
             <h3>Start Exploring</h3>
             <p>
               Start exploring our verified listings & select a property that
@@ -37,7 +37,7 @@ const SimpleStepsBuyer = () => {
 
         <div className="simple-step-card" id="step2">
           <div className="howwework-data">
-          <img src="/img/ConnectwithUs.png" alt="Start Exploring" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ConnectwithUs.png" alt="Start Exploring" />
             <h3>Lets Connect</h3>
             <p>For more details about property, speak to our representative.</p>
           </div>
@@ -46,7 +46,7 @@ const SimpleStepsBuyer = () => {
 
         <div className="simple-step-card" id="step3">
           <div className="howwework-data">
-          <img src="/img/ScheduleyourVisit.png" alt="Start Exploring" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ScheduleyourVisit.png" alt="Start Exploring" />
             <h3>Schedule Property Visit</h3>
             <p>
               Give us the opportunity to showcase your selected property in person.
@@ -57,7 +57,7 @@ const SimpleStepsBuyer = () => {
 
         <div className="simple-step-card" id="step4">
           <div className="howwework-data">
-          <img src="/img/SubmityourOffer.png" alt="Start Exploring" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/SubmityourOffer.png" alt="Start Exploring" />
             <h3>Submit your offer</h3>
             <p>
               Offer your best price online by researching the current market

@@ -646,7 +646,7 @@ useEffect(() => {
 
             {
               searchParams.get("PropertyAddType") =="Sale" && <div className="header-img-section">
-              <img className="header-img-section-img"  src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
+              <img className="header-img-section-img"  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/VerfiledProperty.jpg" alt="VerfiledProperty" />
             </div>
             }
              

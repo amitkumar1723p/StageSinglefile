@@ -143,8 +143,8 @@ export default function Amenities({
                       alt=""
                       src={
                         AmenitiesDetailsData.Furnishing === text
-                          ? "/img/white-tick.svg"
-                          : "/img/plus-create.svg"
+                          ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svgg"
+                          : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                       }
                     />
                   </div>
@@ -721,8 +721,8 @@ export default function Amenities({
                           AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
                             text
                           )
-                            ? "/img/white-tick.svg"
-                            : "/img/plus-create.svg"
+                            ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                            : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                         }
                       />
                     </div>
@@ -758,8 +758,8 @@ export default function Amenities({
                   alt=""
                   src={
                     AmenitiesDetailsData.PowerBackUp === text
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
+                      ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                      : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                   }
                 />
               </div>
@@ -810,8 +810,8 @@ export default function Amenities({
                     alt=""
                     src={
                       AmenitiesDetailsData.WaterSource?.includes(text)
-                        ? "/img/white-tick.svg"
-                        : "/img/plus-create.svg"
+                        ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                        : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                     }
                   />
                 </div>
@@ -870,8 +870,8 @@ export default function Amenities({
                       alt="tick"
                       src={
                         AmenitiesDetailsData.ProjectAmmenities?.includes(text)
-                          ? "/img/white-tick.svg"
-                          : "/img/plus-create.svg"
+                          ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                          : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                       }
                     />
                   </div>

@@ -59,16 +59,16 @@ const handleAlert = ()=>{
       <div className="reporting-main-content">
         <div className="reporting-image-container">
           <div className="reporting-submit-image-container">
-            <img src="/img/submit-your-report.svg" alt="submit-report" />
-            <img src="/img/reporting-right-arrow.svg" alt="arrow" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/submit-your-report.svg" alt="submit-report" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/reporting-right-arrow.svg" alt="arrow" />
           </div>
           <div className="reporting-review-image-container">
-            <img src="/img/reporting-left-arrow.svg" alt="arrow" />
-            <img src="/img/review-verification.svg" alt="review-verification" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/reporting-left-arrow.svg" alt="arrow" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/review-verification.svg" alt="review-verification" />
           </div>
           <div className="reporting-update-image-container">
-            <img src="/img/resolution-update.svg" alt="resolution-update" />
-            <img src="/img/spiral.svg" alt="spiral" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/resolution-update.svg" alt="resolution-update" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/spiral.svg" alt="spiral" />
           </div>
         </div>
 

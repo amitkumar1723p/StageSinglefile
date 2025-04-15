@@ -345,13 +345,13 @@ export default function AdminListingCard({
                                    
                                 >
                                   <img
-                                    src="/img/edit.png"
+                                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                                     className="editIcon"
                                   />
                                 </Link> */}
 
                                 <img
-                                  src="/img/edit.png"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                                   className="editIcon"
                                   onClick={(e) => {
                                     const queryParams = new URLSearchParams(
@@ -400,7 +400,7 @@ export default function AdminListingCard({
                                 }}
                               >
                                 <img
-                                  src="/img/delete.png"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/delete.png"
                                   className="editIcon"
                                 />
                               </div>{" "}

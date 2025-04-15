@@ -7,7 +7,7 @@ const LandLord = () => {
      <div className="landlord-left">
         <img
         alt="landlord-img" 
-        src="/img/ForLandLord-Img.png"
+        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/ForLandLord-Img.png"
         />
      </div>
      <div className="landlord-right">
@@ -19,7 +19,7 @@ const LandLord = () => {
             <div className="Introduction">
                 <div className="IntroductionImgContainer">
                 <img 
-                src="/img/Introduce.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Introduce.svg"
                 alt=""
                 />
                 </div>
@@ -31,7 +31,7 @@ const LandLord = () => {
             <div className="Introduction">
             <div className="IntroductionImgContainer">
                 <img 
-                src="/img/ListProperty.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ListProperty.svg"
                 alt=""
                 />
                 </div>
@@ -43,7 +43,7 @@ const LandLord = () => {
             <div className="Introduction">
             <div className="IntroductionImgContainer">
                 <img 
-                src="/img/GetVerified.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/GetVerified.svg"
                 alt=""
                 />
                 </div>
@@ -55,7 +55,7 @@ const LandLord = () => {
             <div className="Introduction">
             <div className="IntroductionImgContainer">
                 <img 
-                src="/img/legalDocs.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/LegalDocs.svg"
                 alt=""
                 />
                 </div>

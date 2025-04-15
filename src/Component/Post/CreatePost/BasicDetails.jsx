@@ -292,8 +292,8 @@ export default function BasicDetailsSection({
                   alt=""
                   src={
                     BasicDetailsData.PropertyType === "Residential"
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
+                      ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                      : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                   }
                 />
               </button>
@@ -328,8 +328,8 @@ export default function BasicDetailsSection({
                       alt=""
                       src={
                         BasicDetailsData.PropertyAdType === text
-                          ? "/img/white-tick.svg"
-                          : "/img/plus-create.svg"
+                          ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                          : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                       }
                     />
                   </button>
@@ -363,8 +363,8 @@ export default function BasicDetailsSection({
                       alt=""
                       src={
                         BasicDetailsData.ApartmentType === e
-                          ? "/img/white-tick.svg"
-                          : `/img/plus-create.svg`
+                          ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                          : `https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg`
                       }
                     />
                   </button>
@@ -412,8 +412,8 @@ export default function BasicDetailsSection({
                           alt=""
                           src={
                             BasicDetailsData.TransitionType === e
-                              ? "/img/white-tick.svg"
-                              : `/img/plus-create.svg`
+                              ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                              : `https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg`
                           }
                         />
                       </button>

@@ -129,7 +129,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
     <div className="form-container">
       <div className="form-right">
         <div className="form-right-heading-container " >
-          <img src="/img/share-rqrmnt-back.JPG" alt="" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/share-rqrmnt-back.JPG" alt="" />
           <div className="form-heading-image-color">
             <h3 className="form-header">Let us Know your Property Requirements</h3>
           </div>
@@ -374,7 +374,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
           SetShow(false);
         }}
       >
-        <img src="/img/share-ur-rqrmnt-X-btn.svg" alt="" />
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/share-ur-rqrmnt-X-btn.svg" alt="" />
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ export default function AdminAside() {
               }
             >
               <img
-                src="/img/Dashboard.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                 alt="Dashboard Icon"
                 className={`AdminAside-icon ${location.pathname === "/admin/dashboard" ? "active" : ""
                   }`}
@@ -92,7 +92,7 @@ export default function AdminAside() {
                     }
                   >
                     <img
-                      src="/img/Dashboard.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                       alt="Dashboard Icon"
                       className={`AdminAside-icon ${location.pathname === "/admin/all-user-Response-action" ? "active" : ""
                         }`}
@@ -111,7 +111,7 @@ export default function AdminAside() {
                     }
                   >
                     <img
-                      src="/img/agent.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg"
                       alt="Admin Icon"
                       className={`AdminAside-icon ${location.search.includes("Role=Admin") ? "active" : ""
                         }`}
@@ -128,7 +128,7 @@ export default function AdminAside() {
                     }
                   >
                     <img
-                      src="/img/Admin.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg"
                       alt="Agent Icon"
                       className={`AdminAside-icon ${location.search.includes("Role=Agent") ? "active" : ""
                         }`}
@@ -149,7 +149,7 @@ export default function AdminAside() {
                     }
                   >
                     <img
-                      src="/img/Admin.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg"
                       alt="Agent Icon"
                       className={`AdminAside-icon ${
                         location.search.includes("Role=Agent") ? "active" : ""
@@ -180,7 +180,7 @@ export default function AdminAside() {
               }
             >
               <img
-                src="/img/Dashboard.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                 alt="Dashboard Icon"
                 className={`AdminAside-icon ${location.pathname === "/admin/dashboard" ? "active" : ""}`}
               />
@@ -197,7 +197,7 @@ export default function AdminAside() {
                     }
                   >
                     <img
-                      src="/img/agent.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg"
                       alt="Admin Icon"
                       className={`AdminAside-icon ${location.search.includes("Role=Admin") ? "active" : ""}`}
                     />
@@ -210,7 +210,7 @@ export default function AdminAside() {
                     }
                   >
                     <img
-                      src="/img/Admin.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg"
                       alt="Agent Icon"
                       className={`AdminAside-icon ${location.search.includes("Role=Agent") ? "active" : ""}`}
                     />
@@ -240,7 +240,7 @@ export default function AdminAside() {
               }
             >
               <img
-                src="/img/Dashboard.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                 alt="Dashboard Icon"
                 className={`AdminAside-icon ${location.pathname === "/admin/all-asign-post-Response-action" ? "active" : ""
                   }`}
@@ -254,7 +254,7 @@ export default function AdminAside() {
               }
             >
               <img
-                src="/img/Dashboard.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                 alt="Dashboard Icon"
                 className={`AdminAside-icon ${location.pathname === "/admin/all-user-Response-action" ? "active" : ""
                   }`}
@@ -262,23 +262,23 @@ export default function AdminAside() {
               All Response
             </NavLink>}
             <button className="AdminAside-button">
-              <img src="/img/Report.svg" className="AdminAside-icon" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Report.svg" className="AdminAside-icon" alt="" />
               Report
             </button>
             <button className="AdminAside-button">
               <img
-                src="/img/Authentication.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Authentication.svg"
                 className="AdminAside-icon"
                 alt=""
               />
               Authentication
             </button>
             <button className="AdminAside-button">
-              <img src="/img/Schedule.svg" className="AdminAside-icon" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Schedule.svg" className="AdminAside-icon" alt="" />
               Schedules
             </button>
             <button className="AdminAside-button">
-              <img src="/img/Setting.svg" className="AdminAside-icon" alt="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Setting.svg" className="AdminAside-icon" alt="" />
               Settings
             </button>
           </div>
