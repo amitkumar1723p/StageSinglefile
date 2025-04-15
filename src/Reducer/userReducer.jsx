@@ -25,6 +25,10 @@ export const CreateUserReducer = (state = {}, action) => {
 
     case"verifiedPaymentRequest":
     case "ApplyJobActionRequest":
+        // from here adding status update reducer 
+      case"updateBidStatusActionRequest":
+      case"updateNotifyStatusActionRequest":
+      case"updateRequirementStatusAcionRequest":
     
       return {
         ...state,
@@ -54,6 +58,10 @@ export const CreateUserReducer = (state = {}, action) => {
     case"ReportSuspiciousPropertySuccess":
 case"verifiedPaymentSuccess":
 case "ApplyJobActionSuccess":
+  // from here adding status update reducer 
+  case"updateBidStatusActionSuccess":
+  case"updateNotifyStatusActionSuccess":
+  case"updateRequirementStatusAcionSuccess":
   
       return {
         ...state,
@@ -83,6 +91,10 @@ case "ApplyJobActionSuccess":
     case"ReportSuspiciousPropertyFail":
    case"verifiedPaymentFail":
    case "ApplyJobActionFail":
+      // from here adding status update reducer 
+  case"updateBidStatusActionFail":
+  case"updateNotifyStatusActionFail":
+  case"updateRequirementStatusAcionFail":
       return {
         ...state,
         loading: false,

@@ -29,7 +29,7 @@ export function FormatDateAndTime(inputDate) {
 
 
 export const formatPrice = (price) => {
-  console.log(price, "hghie");
+
 
   // Ensure price is a valid number
   if (isNaN(price)) {

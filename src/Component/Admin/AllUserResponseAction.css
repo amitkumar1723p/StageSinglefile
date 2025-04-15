@@ -212,10 +212,9 @@ padding: 5px;
     font-size: 10px;
 }
 
-/* Agent user response css */
-.agentuserName {
-    width: 22%;
-
+/* Agent user response css ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+.userName {
+    width: 18%;
 }
 
 .agentuserContact {
@@ -231,3 +230,16 @@ padding: 5px;
 /* .agentuserDetail {
     width: 55%;
 } */
+
+/* ==================================================== All css to use in the single user action reponse  */
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  option:hover,
+option:focus {
+  background: plum;
+}
+  /* ==================================================== All css to use in the single user action reponse  */
