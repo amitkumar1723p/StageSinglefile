@@ -1428,6 +1428,7 @@ export default function SinglePostDetails() {
                 {/* furnishing details */}
 
 
+
                 {getSinglePostData?.SinglePost?.BasicDetails
                   ?.ApartmentType !== "Plot/Land" &&
                   <FurnishDetails
