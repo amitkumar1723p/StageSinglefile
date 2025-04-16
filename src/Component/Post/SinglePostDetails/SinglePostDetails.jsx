@@ -1272,6 +1272,7 @@ export default function SinglePostDetails() {
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                             Data={"Basement"}
                           />
+
                           {getSinglePostData?.SinglePost?.PropertyDetails
                             ?.Basement == true && (
                               <>
@@ -1284,6 +1285,7 @@ export default function SinglePostDetails() {
                             )}
                         </>
                       )}
+
                     {/* Property Age */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAge && (
@@ -1293,6 +1295,7 @@ export default function SinglePostDetails() {
                           Data={"Property Age"}
                         />
                       )}
+
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
                         <>
@@ -1308,6 +1311,7 @@ export default function SinglePostDetails() {
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
                             Data={"Available From"}
                           />
+
                           {getSinglePostData.SinglePost.PricingDetails
                             .AdditionalDetails?.PreferredTenant?.length > 0 && (
                               <PropertyDataBox
@@ -1320,6 +1324,7 @@ export default function SinglePostDetails() {
                                 Data={"Preferred Tenant"}
                               />
                             )}
+
                           {getSinglePostData.SinglePost.PricingDetails
                             .AdditionalDetails?.PreferredTenant?.length > 0 && (
                               <PropertyDataBox
@@ -1332,11 +1337,13 @@ export default function SinglePostDetails() {
                                 Data={"Preferred Tenant"}
                               />
                             )}
+
                           <PropertyDataBox
                             Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Expected-rent.svg"
                             Data={"Expected Rent"}
                           />
+
                           <PropertyDataBox
                             Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice} `}
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Security-deposit.svg"
@@ -1344,6 +1351,7 @@ export default function SinglePostDetails() {
                           />
                         </>
                       )}
+
                     {/* Plot Land  */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.ApartmentType == "Plot/Land" && (
@@ -1412,37 +1420,20 @@ export default function SinglePostDetails() {
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                             Data={"Construction Allowed"}
                           />
+
                         </>
                       )}
                   </div>
                 </div>
                 {/* furnishing details */}
+
+
                 {getSinglePostData?.SinglePost?.BasicDetails
                   ?.ApartmentType !== "Plot/Land" &&
                   <FurnishDetails
                     furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                   />
                 }
-                  {/* society features */}
-                  {getSinglePostData?.SinglePost?.AmenitiesDetails
-                  ?.SocietyAndBuildingFeature && (
-                    <SocietyAndBuildingFeature
-                      feature={
-                        getSinglePostData?.SinglePost?.AmenitiesDetails
-                          ?.SocietyAndBuildingFeature
-                      }
-                    />
-                  )}
-                {/* plot features */}
-                {getSinglePostData?.SinglePost?.AmenitiesDetails
-                  ?.ProjectAmmenities && (
-                    <SocietyAndBuildingFeature
-                      feature={
-                        getSinglePostData?.SinglePost?.AmenitiesDetails
-                          ?.ProjectAmmenities
-                      }
-                    />
-                  )}
 
 
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (

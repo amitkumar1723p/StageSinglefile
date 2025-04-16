@@ -21,8 +21,7 @@ import ListYourProperty from "./ListYourProperty.jsx";
 import RentAuthentication from "./RentAuthentication.jsx";
 import BrowseProperties from "./BrowseProperties";
 // import LandLord from "./LandLord";
-
-import PropertyDetailsForm from "./PropertyDetailsForm";
+import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
 
 // import RentAgreement from "./RentAgreement";
 
@@ -75,9 +74,47 @@ import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
 import TenantVsLandlord from "./TenantVsLandlord.jsx";
-import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
-
+const words = ["Right Price","Right Amount", "Right Cost", "Right Worth", "Right Deal"];
 const HeroSection = () => {
+  const [index, setIndex] = useState(0); // Word index
+  const [text, setText] = useState(""); // Text to display
+  const [charIndex, setCharIndex] = useState(0); // Char position
+  const [isDeleting, setIsDeleting] = useState(false); // Deleting flag
+
+  useEffect(() => {
+    const currentWord = words[index];
+    let typeSpeed = isDeleting ? 100 : 120; // Slower for deleting, faster for typing
+
+    // Typing and deleting behavior
+    const timeout = setTimeout(() => {
+      if (isDeleting) {
+        // Backspace effect
+        setText(currentWord.substring(0, charIndex));
+        if (charIndex === 0) {
+          setIsDeleting(false);
+          setIndex((prev) => (prev + 1) % words.length); // Move to the next word
+        } else {
+          setCharIndex((prev) => prev - 1); // Decrease char index for backspacing
+        }
+      } else {
+        // Typing effect
+        setText(currentWord.substring(0, charIndex));
+        if (charIndex === currentWord.length) {
+          setTimeout(() => setIsDeleting(true), 1000); // Wait before starting to delete
+        } else {
+          setCharIndex((prev) => prev + 1); // Increase char index for typing
+        }
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, index]);
+
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleButtonClick = (button) => {
+    setActiveButton(activeButton === button ? null : button);
+  };
 
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -86,7 +123,11 @@ const HeroSection = () => {
   //   setActiveTab(tab);
 
   // };
- 
+  const [activeItem, setActiveItem] = useState(null);
+  const handleClick = (index) => {
+    setActiveItem(index);
+  };
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ width: 0, left: 0, height: 0, top: 0 });
   const containerRef = useRef(null);
@@ -292,7 +333,7 @@ const HeroSection = () => {
           </div>
           <div className="heading-hero">
             <h1>
-              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">{text}</span><span className="animate-blink">|</span>
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
@@ -658,7 +699,7 @@ const HeroSection = () => {
         </div>
       </header>
 
-      <div
+      {/* <div
         ref={PropertyRequirementBtnRef.current[0]}
         onClick={() => {
           if (medata && medata.IsAuthenticated == true) {
@@ -669,7 +710,7 @@ const HeroSection = () => {
           }
         }} className="requirement-button">
         <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
-      </div>
+      </div> */}
 
       {/* normal waala  */}
       {/* <div className="requirement-container">
@@ -705,7 +746,93 @@ const HeroSection = () => {
       {/* changes is complete in hero-section */}
 
       {!isHidden && (
-        <div className="floating-buttons ">
+      <div className="contact-sidebar">
+<div className="d-flex flex-column align-items-center">
+  
+  {/* Call Button */}
+  <button 
+    className={`hero-contact-btn mb-3 ${activeButton === 'call' ? 'active' : ''}`} 
+    onClick={() => handleButtonClick('call')}
+  >
+    <div className="hero-icon-container">
+      <Link to="tel:+917837840785" className="d-flex align-items-center hero-float-icon-a">
+      <dotlottie-player
+  src="https://lottie.host/c4658ed9-4396-4c41-a536-cdbd41ecb0a4/vkPcbOQrUI.lottie"
+  background="transparent"
+  speed="1"
+  style={{width: '47px' , height: '47px'}}
+  loop
+  autoplay
+></dotlottie-player>
+        <span className="hero-icon-floating-label">Phone</span>
+      </Link>
+    </div>
+  </button>
+
+  {/* Phone Button */}
+  <button 
+    className={`hero-contact-btn mb-3 ${activeButton === 'phone' ? 'active' : ''}`} 
+    onClick={() => handleButtonClick('phone')}
+  >
+    <div className="hero-icon-container">
+    <Link to="tel:+917837840785" className="d-flex align-items-center hero-float-icon-a">
+    <dotlottie-player
+  src="https://lottie.host/02272ac6-31e5-417d-834d-48cdcfeaf337/cG3WWN4Hvm.lottie"
+  background="transparent"
+  speed="1"
+  style={{width: '47px' , height: '47px'}}
+  loop
+  autoplay
+></dotlottie-player>
+      <span className="hero-icon-floating-label">Contact Us</span>
+      </Link>
+    </div>
+  </button>
+
+  {/* WhatsApp Button */}
+  <button 
+    className={`hero-contact-btn mb-3 ${activeButton === 'whatsapp' ? 'active' : ''}`} 
+    onClick={() => handleButtonClick('whatsapp')}
+  >
+    <div className="hero-icon-container">
+      <Link
+        to="https://wa.me/7837840785"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="d-flex align-items-center hero-float-icon-a"
+      >
+        <dotlottie-player
+  src="https://lottie.host/87aba604-393b-4d73-8a63-ef8fddc8e348/Kx2B1jvrlf.lottie"
+  background="transparent"
+  speed="1"
+  style={{width: '47px' , height: '47px', }}
+  loop
+  autoplay
+></dotlottie-player>
+        <span className="hero-icon-floating-label">WhatsApp</span>
+      </Link>
+    </div>
+  </button>
+
+  {/* Click Here Button */}
+  <div   ref={PropertyRequirementBtnRef.current[0]}
+        onClick={() => {
+          if (medata && medata.IsAuthenticated == true) {
+            setshowPropertyRequirement(true);
+          } else {
+            setRedirectPath("/post-requirement");
+            navigate("/login");
+          }
+        }}    className="hero-apply-btn-main">
+    <button className=" hero-float-apply-btn">
+      <div className="hero-float-apply-text">SHARE REQUIREMENT</div>
+  </button> </div>
+
+</div>
+</div>
+)}
+
+<div className="floating-buttons ">
           {/* Call Button */}
           <Link to="tel:+917837840785" className="call-button">
             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
@@ -720,7 +847,6 @@ const HeroSection = () => {
             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
-      )}
 
 
 
