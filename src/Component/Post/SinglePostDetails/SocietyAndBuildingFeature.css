@@ -16,8 +16,9 @@
   .society-feature-container {
     flex-wrap: wrap;
     /* Allow horizontal scrolling */
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
     scrollbar-width: none;
     /* Hide scrollbar in Firefox */
     -ms-overflow-style: none;
@@ -36,11 +37,29 @@
     align-items: center;
     justify-content: center;
     color: #2563eb;
-    width: fit-content;
+    justify-content: flex-start;
+    /* width: fit-content; */
     padding: 5px 10px;
     font-size: 12px;
     gap: 20px;
     /* border-radius: 10px; */
     white-space: nowrap;
   
+  }
+
+  @media (max-width:1024px) {
+    .society-feature-container { 
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 10px;
+    }
+  }
+  
+  
+  @media (max-width:480px) {
+    .society-feature-container { 
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+    }
   }

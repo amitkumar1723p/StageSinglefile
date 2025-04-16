@@ -272,14 +272,14 @@ const Footer = () => {
               <ul className="links__list">
               <li  className="links__item">
 
-              <a
+              {/* <a
                     target='blank'
                       href="/Career"
                       className="links__link"
                     >
                       <span className="links__dot"></span>
                       <span className='list__Name'>Career</span>
-                    </a>
+                    </a> */}
 
               {/* <a
                     target='blank'
