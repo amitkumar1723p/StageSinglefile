@@ -262,7 +262,7 @@ export default function CreatePostMain() {
             setBasicDetailsData({ ...BasicDetails });
           }
 
-           console.log(LocationDetails,"LocationDetails")
+          
 
           setLocationDetailsData({ ...LocationDetails });
           setPropertyDetailsData({ ...PropertyDetails });

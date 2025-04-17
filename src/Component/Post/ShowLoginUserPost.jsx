@@ -25,7 +25,7 @@ export default function ShowLoginUserPost() {
   const { data: Alertdata } = useSelector((state) => {
     return state.userData;
   });
-  console.log(Alertdata);
+  
   // Fetch user posts on component mount
   useEffect(() => {
     if (!data) {

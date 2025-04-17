@@ -38,9 +38,9 @@ export default function LocationDetails({
   const [localityShake, setLocalityShake] = useState(false);
 
   const [dataTosent, setDataToSent] = useState(LocationDetailsData);
-  // console.log(dataTosent)
+ 
   useEffect(() => {
-    // console.log("data to sent ",dataTosent)
+    
     setLocationDetailsData({
       ...LocationDetailsData,
       City: dataTosent?.City || dataTosent?.city,
@@ -48,7 +48,7 @@ export default function LocationDetails({
       Locality: dataTosent?.Locality || dataTosent?.locality,
       ProjectName: dataTosent?.ProjectName || dataTosent?.projectName,
     });
-    //  console.log(LocationDetailsData)
+  
   }, [dataTosent]);
 
   const LocationDetailsAlertShake = (e) => {
@@ -73,7 +73,7 @@ export default function LocationDetails({
     }
   };
 
-  // console.log(LocationDetailsData)
+  
 
   return (
     <>
@@ -159,7 +159,7 @@ export default function LocationDetails({
               />
             </div>
 
-            {console.log(LocationDetailsData, "LocationDetailsData")}
+            
             {/* Complete Address */}
             <div className="form-group">
               <label htmlFor="Complete Address">Complete Address*</label>
