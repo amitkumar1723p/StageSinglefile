@@ -108,13 +108,9 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
-    console.log( state.userData ,"Userdata")
     return state.userData;
-     
   });
-  const { data: CreatePost , LodingType:AlertType} = useSelector((state) => {
- 
-     
+  const { data: CreatePost , LodingType:AlertType} = useSelector((state) => { 
     return state.Post;
   });
   const { data: getSinglePostData } = useSelector((state) => {
@@ -130,7 +126,6 @@ function App() {
   const { data: ScheduleVisitsData } = useSelector((state) => {
     return state.ScheduleVisits;
   });
-
   const { data: VistAndOfferData } = useSelector((state) => {
     return state.VistAndOffer;
   });
@@ -168,12 +163,10 @@ function App() {
   const { data: getTransactionDetail } = useSelector((state) => {
     return state.getTransactionDetail;
   });
-
   // get all user excepation owner Admin agent
   const { data: AllUserResponseData } = useSelector((state) => {
     return state.AllUserResponse;
   });
-
   const { data: AssignPostData } = useSelector((state) => {
     return state.AssignPropertys;
   });
@@ -186,18 +179,14 @@ function App() {
   const { data: OwnerPostsVisitsData } = useSelector((state) => {
     return state.OwnerPostsVisits;
   });
-
   // notify
   const { data: AllNotifiesAndReqData } = useSelector((state) => {
     return state.AllNotifiesAndReq;
   });
-
   const { data: deletePostsData } = useSelector((state) => {
     return state.deletePosts;
   });
-
   //  excel file
-
   const { data: OwnerAllExcelFilesData } = useSelector((state) => {
     return state.OwnerAllExcelFiles;
   });
@@ -207,7 +196,6 @@ function App() {
   const { data: AdminAllExcelFilesData } = useSelector((state) => {
     return state.AdminAllExcelFiles;
   });
-
   // All user response action
   const { data: AllUserResponseAction_Store } = useSelector((state) => {
     return state.AllUserResponseAction_Store;
@@ -216,19 +204,15 @@ function App() {
   const { data: SingleUserResponseAction_Store } = useSelector((state) => {
     return state.SingleUserResponseAction_Store;
   });
-
   const location = useLocation();
-
   useEffect(() => {
     if (RedirectPath) {
       sessionStorage.setItem("RedirectPath", RedirectPath);
     }
-
     if (sessionStorage.getItem("RedirectPath")) {
       setRedirectPath(sessionStorage.getItem("RedirectPath"));
     }
   }, [RedirectPath]);
-
   useEffect(() => {
     if (location.pathname == "/") {
       dispatch(GetProjectNameAction());
@@ -240,7 +224,6 @@ function App() {
 
     // eslint-disable-next-line
   }, [location]);
-
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {

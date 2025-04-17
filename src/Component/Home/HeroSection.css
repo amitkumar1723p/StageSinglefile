@@ -1,5 +1,5 @@
 .sub-heading {
-  display: inline-flex;
+  /* display: inline-flex; */
   padding: 10px 20px;
   justify-content: center;
   align-items: center;
@@ -223,6 +223,10 @@ font-weight: 600;
   top: 38px;
 }
 
+.suggestion-p-tag{
+  font-size: 14px;
+}
+
 .search-main-box-section {
   border-radius: 15px;
   background: #fff;
@@ -321,6 +325,7 @@ font-weight: 600;
   /* justify-content: space-between; */
   align-items: center;
   height: 53.6px;
+  width: 800px;
   /* width: 649.6px;
   border-radius: 12px; */
   /* border: 1px solid var(--Non-hovered-Primary, #448bff); */
@@ -768,7 +773,7 @@ font-weight: 600;
   }
 
   .search-container {
-    top: 57px;
+    top: 35px;
   }
 
   .hero-content h1 {
@@ -930,6 +935,7 @@ font-weight: 600;
     padding: 8px;
   } */
   .search-box {
+    width: auto;
     padding: 0 5px;
     margin: 5px;
     border-top: 1px solid #d6d6fa;
@@ -942,6 +948,9 @@ font-weight: 600;
     /* box-shadow: 4px 4px 0px 0px #5988d4; */
   }
 
+  .suggestion-p-tag {
+    font-size: 10px;
+}
   .search-main-box-section {
     width: 95%;
     border-radius: 15px;
@@ -1476,7 +1485,8 @@ font-weight: 600;
   transform: scale(1.1);
 }
 
-.whatapps-section-floating {
+.whatapps-section-floating
+  {
   /* background-color: #25d366; */
 }
 

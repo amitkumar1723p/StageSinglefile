@@ -587,7 +587,8 @@ button:hover,
   color: black;
   position: absolute;
   top: 90%;
-  right: 2%;
+  left: -1%;
+  right: 0;
   z-index: 1;
   overflow: auto;
   /* text-align: justify; */
@@ -596,8 +597,10 @@ button:hover,
   padding: 8px;
   /* border-radius: 10px; */
   /* right: -35px; */
-  width: 100%;
+  width: 128%;
 }
+
+
 .apartmentname-container p {
   padding: 5px;
 
@@ -607,6 +610,10 @@ justify-content: space-between;
 }
 #plot-dimensions{
   width: 20%;
+}
+
+.search-box{
+  width: auto;
 }
 
 .post-requermient-search .apartmentname-container {
