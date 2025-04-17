@@ -42,6 +42,7 @@ export default function LocationDetails({
   useEffect(() => {
     // console.log("data to sent ",dataTosent)
     setLocationDetailsData({
+      ...LocationDetailsData,
       City: dataTosent?.City || dataTosent?.city,
       Landmark: dataTosent?.sector || dataTosent?.Landmark,
       Locality: dataTosent?.Locality || dataTosent?.locality,
@@ -157,12 +158,40 @@ export default function LocationDetails({
                 }}
               />
             </div>
+
+            {console.log(LocationDetailsData, "LocationDetailsData")}
+            {/* Complete Address */}
+            <div className="form-group">
+              <label htmlFor="Complete Address">Complete Address*</label>
+              <input
+                style={{ transitionDuration }}
+                className={`${localityShake ? "inputShake shake" : ""}`}
+                type="text"
+                id="complete-addresss"
+                name="complete-addresss"
+                placeholder="Write Complete Address"
+                required={
+                  update
+                    ? "CompleteAddress" in LocationDetailsData
+                      ? true
+                      : false
+                    : true
+                }
+                value={LocationDetailsData?.CompleteAddress?.trimStart() || ""}
+                onChange={(e) => {
+                  setLocationDetailsData({
+                    ...LocationDetailsData,
+                    CompleteAddress: e.target.value,
+                  });
+                }}
+              />
+            </div>
           </div>
 
           <div className="next-prev-box">
             {update == true && (
-              <div 
-              className="updatebyamdin"
+              <div
+                className="updatebyamdin"
                 onClick={() => {
                   FormSubmitRef?.current?.requestSubmit();
                 }}
