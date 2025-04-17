@@ -128,13 +128,13 @@ const VerifyOtp = ({
     <div>
       <ScrollToTop />
       <div className='login-main-parent'>
-      <img src="/img/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
+      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
 
        <div className='login-form-container'>
        
 
        <div className='login-page-form'>
-       <img src="/img/login-page.gif" alt="" className='login-page-gif'/>
+       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/login-page.gif" alt="" className='login-page-gif'/>
        <p className='login-form-login'>Verify OTP to Continue</p>
             <p className="otp-login-h2-p">
               {/* We have sent you a message with a 6-digit verification code OTP on
@@ -146,7 +146,7 @@ const VerifyOtp = ({
                   {ISNRI ? SignUpData?.email : SignUpData?.ContactNumber} .
                 </b>
                 <img
-                  src="/img/edit.png"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                   alt="edit"
                   onClick={() => {
                     setViewState({
@@ -224,7 +224,7 @@ const VerifyOtp = ({
           
       </div>
 
-      <img src="/img/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg'/>
+      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg'/>
 
     </div>
     </div>

@@ -26,24 +26,28 @@ export default function AllUserResponseAction() {
   const totalPages = AllUserResponseAction_Store?.totalPages
   // const itemsPerPage = 10; // Number of items per page
 
-  // console.log(AllUserResponseAction_Store)
-  useEffect(() => {
-    if (AllUserResponseAction_Store == undefined || runPagination == true) {
-      dispatch(getAllUserResponseAction(page));
-    }
-  }, [page]);
-  useEffect(() => {
-    // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
-    if (searchText && searchbtn === true) {
+  console.log(AllUserResponseAction_Store)
+useEffect(() => {
+  if (AllUserResponseAction_Store == undefined || runPagination == true) {
+    dispatch(getAllUserResponseAction(page));
+  }
+}, [page]);
+useEffect(() => {
+  // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
+  if (searchText && searchbtn===true) {
+    dispatch(getAllUserResponseAction(page, searchText));
+    
+    setSearchbtn(false)
+  }
   
-      dispatch(getAllUserResponseAction(page, searchText));
-
-      setSearchbtn(false)
-    }
+  
+ 
+  
 // for localstaorage
     // useEffect(() => {
     //   localStorage.setItem('items', JSON.stringify(items));
     // }, [items]);
+
 
 
   }, [page, searchText, searchbtn]);
@@ -107,7 +111,7 @@ export default function AllUserResponseAction() {
         <div className="container-fluid d-flex flex-column  gap-3 rounded">
 
 
-          {AllUserResponseAction_Store?.data[0]?.users?.map((item) => {
+          {AllUserResponseAction_Store?.data && AllUserResponseAction_Store?.data[0]?.users?.map((item) => {
           
             return (
 
@@ -117,7 +121,7 @@ export default function AllUserResponseAction() {
                   <div className="">
                     <p className="All-response-common-section  ">{item?.Name} {item?.LastName} - <small className="fw-light">( {item?.Role})</small></p>
                     {/* <small className="fw-light">{item?.email}</small> */}
-                    <small className="">
+                    <small className="fw-light">
                       {item?.latestCreateAt ? FormatDate(item?.latestCreateAt) : 'N/A'}
                     </small>
                   </div>

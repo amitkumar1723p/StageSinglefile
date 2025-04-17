@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './UpgradeSection.module.css';
-
 function UpgradeSection() {
   return (
     <aside className={styles.upgradeSection}>
@@ -16,5 +15,4 @@ function UpgradeSection() {
     </aside>
   );
 }
-
 export default UpgradeSection;

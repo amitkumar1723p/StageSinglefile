@@ -81,11 +81,11 @@ const LoginForm = ({
     <>
       <ScrollToTop />
       <div className="login-main-parent">
-        <img src="/img/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
         <div className="login-form-container">
 
           <div className="login-page-form">
-            <img src="/img/login-page.gif" alt="" className='login-page-gif' />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/login-page.gif" alt="" className='login-page-gif' />
 
             <h2 className="login-form-login">Login or Register </h2>
 
@@ -99,7 +99,7 @@ const LoginForm = ({
                   </label>
                   <div className={`login-phone-icon-container  ${inputShake ? 'inputShake' : ''} ${shake ? 'shake' : ''}`}>
 
-                    <img src={`${ISNRI ? "/img/email-icon.svg" : "/img/new-phone-iocn.svg"}`} alt="" className='login-form-phone' />
+                    <img src={`${ISNRI ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/email-icon.svg" : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/new-phone-iocn.svg"}`} alt="" className='login-form-phone' />
                     {/* <img src="" alt="" className="icon"/> */}
                     <input
 
@@ -212,7 +212,7 @@ const LoginForm = ({
             </div>
            </div> */}
         </div>
-        <img src="/img/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg' />
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg' />
       </div>
     </>
   );

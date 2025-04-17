@@ -13,7 +13,7 @@ const EndToEndSupportSeller = () => {
           {/* Left Side Image */}
           <div className="support-image">
             <img
-              src="/img/seller-to-seller.png"
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/seller-to-seller.png"
               alt="Support illustration"
               className="main-image"
             />
@@ -35,7 +35,7 @@ const EndToEndSupportSeller = () => {
               ].map((feature, index) => (
                 <li key={index} className="feature-item">
                   <img
-                    src="/img/tick-purple.png" // replace with the path to your checkmark icon
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/tick-purple.png" // replace with the path to your checkmark icon
                     alt="checkmark"
                     className="checkmark-icon"
                   />

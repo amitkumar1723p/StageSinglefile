@@ -32,7 +32,7 @@ const RentalHome = () => {
               <div className="rental-home-img-section">
                 <img
                   className="rental-home-feature-icon"
-                  src="/img/directOwnerListings.png"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/directOwnerListings.png"
                   alt="Direct Owner Listings"
                 />
               </div>
@@ -46,7 +46,7 @@ const RentalHome = () => {
               <div className="rental-home-img-section">
                 <img
                   className="rental-home-feature-icon"
-                  src="/img/VerifiedProperties.png"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/VerifiedProperties.png"
                   alt="Verified Properties"
                 />
               </div>
@@ -60,7 +60,7 @@ const RentalHome = () => {
               <div className="rental-home-img-section">
                 <img
                   className="rental-home-feature-icon"
-                  src="/img/DocsAssistance.png"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/DocsAssistance.png"
                   alt="Document Assistance"
                 />
               </div>

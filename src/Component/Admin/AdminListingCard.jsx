@@ -265,7 +265,7 @@ export default function AdminListingCard({
                                     };
 
                                     let confrim = window.confirm(
-                                      "Are You Sure About This"
+                                      "Are You Sure About This "
                                     );
                                     if (confrim) {
                                       dispatch(
@@ -314,7 +314,7 @@ export default function AdminListingCard({
                                     }
                                   }}
                                 >
-                                  Re-Call
+                                  Restore
                                 </button>
                                 {/* <button
                                   onClick={() => {
@@ -345,13 +345,13 @@ export default function AdminListingCard({
                                    
                                 >
                                   <img
-                                    src="/img/edit.png"
+                                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                                     className="editIcon"
                                   />
                                 </Link> */}
 
                                 <img
-                                  src="/img/edit.png"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                                   className="editIcon"
                                   onClick={(e) => {
                                     const queryParams = new URLSearchParams(
@@ -400,7 +400,7 @@ export default function AdminListingCard({
                                 }}
                               >
                                 <img
-                                  src="/img/delete.png"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/delete.png"
                                   className="editIcon"
                                 />
                               </div>{" "}
@@ -465,7 +465,7 @@ export default function AdminListingCard({
                   <p className="admin-card-heading">Current status</p>
                   {PostData?.PostExpired ? (
                     <p className="Status-section-admin inactive-sign">
-                      {" "}
+                   
                       Expired
                     </p>
                   ) : (
@@ -634,7 +634,7 @@ export default function AdminListingCard({
                           <button
                           className="re-open-btn-admin"
                             onClick={() => {
-                              dispatch(ReOpenPostAction(PostData?._id));
+                              dispatch(ReOpenPostAction(PostData?._id),"AdminRoutes");
                             }}
                           >
                             Re-Open

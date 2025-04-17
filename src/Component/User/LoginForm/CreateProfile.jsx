@@ -52,7 +52,7 @@ const CreateProfile = ({
     <>
       <ScrollToTop />
       <div className="login-main-parent">
-        <img src="/img/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/logi-page-blue-svg.svg" alt="" className="blue-login-top-right" />
 
         <div className="login-form-container">
 
@@ -99,7 +99,7 @@ const CreateProfile = ({
               </div>
 
               <div className="input-group">
-                <img src="/img/email-icon.svg" alt="" className="icon" />
+                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/email-icon.svg" alt="" className="icon" />
 
                 <input
                   type="email"
@@ -160,7 +160,7 @@ const CreateProfile = ({
 
                   <>
                     <div className="input-group">
-                      <img src="/img/new-phone-iocn.svg" alt="" className="icon" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/new-phone-iocn.svg" alt="" className="icon" />
 
                       <input
                         required
@@ -183,7 +183,7 @@ const CreateProfile = ({
                       />
                     </div>
                     <div className="input-group">
-                      <img src="/img/new-phone-iocn.svg" alt="" className="icon" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/new-phone-iocn.svg" alt="" className="icon" />
 
                       <input
                         className="nri-contact-another-number"
@@ -211,7 +211,7 @@ const CreateProfile = ({
               {!ISNRI && (
                 <>
                   <div className="input-group">
-                    <img src="/img/new-phone-iocn.svg" alt="" className="icon" />
+                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/new-phone-iocn.svg" alt="" className="icon" />
                     <input
                       type="text"
                       placeholder="Enter your Contact Number"
@@ -266,8 +266,8 @@ const CreateProfile = ({
               <p className='login-page-right-text'>PropertyDekho247 simplifies property buying, selling, and renting with free listings, verified leads, and a fully digital transaction process. Whether you're a homeowner or a seeker, find trusted deals effortlessly with expert insights and a seamless experience.</p>
             </div>
           </div> */}
-          <img src="/img/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg' />
-          <img src="/img/login-page.gif" alt="" className='create-page-gif' />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/logi-page-blue-svg.svg" alt="" className='login-page-blue-svg' />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/login-page.gif" alt="" className='create-page-gif' />
 
         </div>
       </div>

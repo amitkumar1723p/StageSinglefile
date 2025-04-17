@@ -46,7 +46,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
-  console.log("AssignProperty", AssignProperty);
+  
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -282,7 +282,7 @@ export default function AdminAgentOwnerPost() {
       adminAlertData &&
       [
         "VerifyPostActionRequest",
-        "ReOpenPostActionRequest",
+        "ReOpenPostActionRequest-AdminRoutes",
         "showVeirifyPostIconRequest",
         "Active_InactivePropertyRequest",
         "changePropertyStatusRequest",
@@ -458,7 +458,7 @@ export default function AdminAgentOwnerPost() {
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
             <div>
-              <img src="/img/FilteImg.png" alt="FilteImg" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FilteImg.png" alt="FilteImg" />
             </div>
 
             <button
@@ -637,7 +637,6 @@ export default function AdminAgentOwnerPost() {
               <label className="admin-filter-select-lable">Select All</label>
             </>
           </div>
-
           <div>
             {" "}
             <select
@@ -671,7 +670,6 @@ export default function AdminAgentOwnerPost() {
             </select>
           </div>
           {/* here start */}
-
           {/* here end */}
           {AdminData && AdminData.success && (
             <select
@@ -697,7 +695,7 @@ export default function AdminAgentOwnerPost() {
           )}
           {AssignPropertyAdmin && (
             <button
-              className="Assing-Property-btn"
+              className="Assing-Property-btn admin-btn-action"
               onClick={() => {
                 let confirm = window.confirm(
                   `This Property Assign to ${AssignPropertyAdmin.Name}  Role is ${AssignPropertyAdmin.Role}`
@@ -714,28 +712,27 @@ export default function AdminAgentOwnerPost() {
               Assing Property
             </button>
           )}
-
           {/* Buttons to change the status */}
           <button
-            className="px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className="admin-btn-action  px-2 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handleStatusChange("Active")}
           >
             Active
           </button>
           <button
-            className="px-1 mx-0 py bg-primary bg-opacity-10 border border-info-subtle rounded"
+            className="admin-btn-action  px-1 mx-0 py bg-primary bg-opacity-10 border border-info-subtle rounded"
             onClick={() => handleStatusChange("InActive")}
           >
             In-Active
           </button>
           <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className=" admin-btn-action  px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handlePropertyStatus("sold out")}
           >
             Sold Out
           </button>
           <button
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className="admin-btn-action  px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => handlePropertyStatus("available")}
           >
             Available
@@ -744,7 +741,7 @@ export default function AdminAgentOwnerPost() {
             disabled={
               AlertLoding && LodingType === "DeletePostRequest" ? true : false
             }
-            className="px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
+            className=" admin-btn-action  px-3 mx-0 bg-primary bg-opacity-10 border border-info-subtle py-1 rounded"
             onClick={() => {
               if (AssignProperty.length <= 0) {
                 return alert(
@@ -754,7 +751,6 @@ export default function AdminAgentOwnerPost() {
                 let confrim = window.confirm(
                   "Are you sure you want to delete this property?"
                 );
-
                 if (confrim == true) {
                   let getDeletePost = AssignProperty?.map((post) => {
                     return { PostId: post.PostId };
@@ -774,7 +770,6 @@ export default function AdminAgentOwnerPost() {
           {/* Display the current status */}
         </div>
       </div>
-
       <div className="showpost">
         {medata?.user?.Role == "Owner" ? (
           <OwnerAllPost

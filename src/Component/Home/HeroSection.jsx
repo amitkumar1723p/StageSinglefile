@@ -4,10 +4,12 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
+
+} 
+from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
-
+import { Headset, PhoneCall, MessageCircle, MousePointerClick } from 'lucide-react';
 
 import FAQ from "./FAQ";
 import LandLord from "./LandLord";
@@ -56,6 +58,7 @@ import { motion } from "framer-motion";
 import "./BuyingSellingTenant.css";
 import Services from "./Services";
 
+
 import { UserContext } from "../CreateContext/CreateContext";
 import RentAgreement from "./RentAgreement";
 // import TenantDetailsForm from "./TenantDetailsForm";
@@ -72,7 +75,10 @@ import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
 import TenantVsLandlord from "./TenantVsLandlord.jsx";
+import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
+
 const HeroSection = () => {
+
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
   const [runSearchButton, setrunSearchButton] = useState(true);
@@ -80,6 +86,7 @@ const HeroSection = () => {
   //   setActiveTab(tab);
 
   // };
+ 
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ width: 0, left: 0, height: 0, top: 0 });
   const containerRef = useRef(null);
@@ -270,7 +277,7 @@ const HeroSection = () => {
 
       <header className="hero-section" id="Hero-section">
         <div className="overlay">
-          <img src="/img/hero-img9.png" alt="" srcset="" className="home-hero-img" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/hero-img9.png" alt="" srcset="" className="home-hero-img" />
         </div>
         <div className="hero-content">
           <div className="hero-img-section">
@@ -339,7 +346,7 @@ const HeroSection = () => {
                 alt="tst"
               /> */}
 
-                  {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
+                  {/* <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
                   <button
                     disabled={
@@ -378,7 +385,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
-                      src="/img/Search-icon.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
                     />
@@ -399,7 +406,9 @@ const HeroSection = () => {
               <div className="search-options">
                 {SearchTab.map((e, i) => {
                   return (
+                    
                     <div
+                   
                       key={i}
                       className={`search-tab ${e == SearchPropertyAddType ? "active" : ""
                         }
@@ -417,6 +426,9 @@ const HeroSection = () => {
                     </div>
                   );
                 })}
+                <div> 
+                  {/* <button onClick={HandleFreshbookingNavigation}>button</button> */}
+                </div>
               </div>
               <div className="search-box">
                 <img
@@ -462,7 +474,7 @@ const HeroSection = () => {
                     alt="tst"
                   /> */}
 
-                  {/* <img src="/img/Search-icon.svg" alt="" className="img-searchbar" /> */}
+                  {/* <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
                   <button
                   
@@ -514,7 +526,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
-                      src="/img/Search-icon.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
                     />
@@ -568,7 +580,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
-                      src="/img/Search-icon.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
                     />
@@ -696,7 +708,7 @@ const HeroSection = () => {
         <div className="floating-buttons ">
           {/* Call Button */}
           <Link to="tel:+917837840785" className="call-button">
-            <img src="/img/call.png" alt="Call" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
           </Link>
           {/* WhatsApp Button */}
           <Link
@@ -705,12 +717,16 @@ const HeroSection = () => {
             rel="noopener noreferrer"
             className="whatapps-section-floating"
           >
-            <img src="/img/whatapp.png" alt="WhatsApp" />
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
           </Link>
         </div>
       )}
 
+
+
       <PropertySection />
+      <FreshBookingHome/>
+      {/* <FreshBookingPost/> */}
 
       <div className="select-options" id="select-option-section">
         <div className="sell-rent-buy">
@@ -797,6 +813,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
+        
         </>
       )}
       {/* Sale Component  */}
@@ -822,6 +839,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FAQ />
           </div>
+         
         </>
       )}
 

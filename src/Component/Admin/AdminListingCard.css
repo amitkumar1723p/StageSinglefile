@@ -756,7 +756,7 @@ width: 86%;
   padding: 6px 14px;
   border-radius: 6px;
   border: none;
-
+font-size: 12px;
   background-origin: border-box;
   box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
     inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
@@ -822,7 +822,7 @@ width: 86%;
 
 .admin-filter-all-button-parent{
   display: flex;
-  gap: 2px;
+  gap: 5px;
   background-color: #d0e5f6;
   padding: 5px;
   border-radius: 5px;
@@ -853,6 +853,12 @@ width: 86%;
   width: 100%;
   border-bottom: 1px solid #ebe4e4;
 }
+
+.filter-section-property button:hover{
+  /* outline: 1px solid var(--main-light-clr); */
+  background-color: #fff;
+}
+
 .filter-section-property button {
   cursor: pointer;
   border-radius: 5px;
@@ -1007,7 +1013,7 @@ width: 86%;
   border: 1px solid var(--main-light-clr);
   border-radius: 6px;
   font-size: 12px;
-  width: 200px;
+  width: 160px;
   position: relative;
   color: #333;
   background: none;
