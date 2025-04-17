@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./ViewOwnerDetailsAlert.css";
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon for success
+import { useSelector } from "react-redux";
 
 export default function ViewOwnerDetails({ SetShow, Contact }) {
   const [OwnerDetails, setOwnerDetals] = useState({});
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
 
   useEffect(() => {
     let OwnerDetails = sessionStorage.getItem("OwnerDetails");
@@ -17,7 +21,9 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
   }, []);
 
   return (
-    OwnerDetails?.success && (<div className="view-owner-details-modal">
+    OwnerDetails?.success &&  (
+    
+    <div className="view-owner-details-modal">
       <div className="view-owner-details-header">
         <span
           className="close-btn"
@@ -38,13 +44,13 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
     <strong>Here are Owner contact details for rental property inquiries:</strong>
   </p>
   <p>
-    Owner Name: <b>{OwnerDetails?.ownerName}</b>
+    Owner Name: <b>{medata?.user?.Role==="Channel Partner"?<>Team Propertydekho247</>:<>{OwnerDetails?.ownerName}</>}</b>
   </p>
   <p>
-    Owner Contact No: <b>{OwnerDetails?.ownerPhonenumber}</b>
+    Owner Contact No: <b>{medata?.user?.Role==="Channel Partner"?<>+91 783-784-0785</>:<>{OwnerDetails?.ownerPhonenumber}</>}</b>
   </p>
   <p>
-   Owner Email: <b>{OwnerDetails?.ownmerEmail}</b>
+   Owner Email: <b>{medata?.user?.Role==="Channel Partner"?<>sales@propertydekho247.com</>:<>{OwnerDetails?.ownmerEmail}</>}</b>
   </p>
   <p>
   <span className="view-owner-details-desclaimer">Disclaimer:</span> The contact details provided have been verified to a reasonable extent; however, their accuracy and authenticity are not guaranteed. We disclaim all liability for any loss, dispute, or consequence arising from their use. Users are advised to exercise discretion.
@@ -52,8 +58,6 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
 </div>
 
 
-    </div>)
-
-    
+    </div>)    
   );
 }

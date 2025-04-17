@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 export default function SingleUserRespponseAction() {
     const location = useLocation();
     const { index } = location.state || {};
+    const { indexAgent } = location.state || {};
     const dispatch = useDispatch()
     const { id } = useParams()
 // console.log(index,"lll")
@@ -75,16 +76,35 @@ export default function SingleUserRespponseAction() {
 
     }, [scheduleStatus, offerStatus,notifyStatus,requirementStatus])
 
-    console.log(requirementStatus)
+  
     // Admin_OwnerScheduleVisitDone
 
-    useEffect(()=>{
-        const check=   localStorage.getItem("readMode");
-if(index && check){
-console.log("kel",check.length)
-
-}
-    },[index])
+    useEffect(() => {
+        if (index !== undefined && index !== null) {
+          const stored = localStorage.getItem('readMode');
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            // Remove first match by ContactNumber
+            const updated = parsed.filter(item => item.ContactNumber !== index);
+            localStorage.setItem('readMode', JSON.stringify(updated));
+        
+          }
+        }
+        if (indexAgent !== undefined && indexAgent !== null) {
+            const stored = localStorage.getItem('agentReadMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+        console.log(indexAgent,"id")
+                // Filter out the one with matching _id
+                const updated = parsed.filter(item => item !== indexAgent);
+        
+                // Update localStorage
+                localStorage.setItem('agentReadMode', JSON.stringify(updated));
+            }
+        }
+        
+      }, [index,indexAgent]);
+      
     return (
         <div className="border border-primary border-opacity-25 ">
 

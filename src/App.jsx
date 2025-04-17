@@ -108,7 +108,7 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
-    console.log( state.userData ,"Userdata")
+    
     return state.userData;
      
   });
@@ -1123,9 +1123,9 @@ function App() {
             exact
             path="single-user-Response-action/:id"
             element={
-              <AdminOwnerRoutes
-                Component={SingleUserRespponseAction}
-                isOwner={true}
+              <SingleUserRespponseAction
+               
+               
               />
             }
           />
