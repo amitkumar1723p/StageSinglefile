@@ -387,14 +387,24 @@ const SingleCard = ({
             )
           ) : (
             <>
-              {
+              {PostData?.PostExpired?.ExpiredStatus == true ? (
+                <div className="">
+                {/* <p>your post is currently inactive please contact our support team</p> */}
+                <p className="">
+                  {PostData?.BasicDetails?.PropertyAdType=="Sale" && "sale property expired"}
+                  {PostData?.BasicDetails?.PropertyAdType=="Rent" && " “Marked as Rented? Click to Make It Available Again If Needed.”"}
+                   
+               
+                </p>
+              </div>
+              ) : (
                 <div className="inactive-post">
                   {/* <p>your post is currently inactive please contact our support team</p> */}
                   <p className="inactive-post-para">
                     Your listing is under review and will be activated soon.
                   </p>
                 </div>
-              }
+              )}
             </>
           )}
         </div>
@@ -481,12 +491,11 @@ const SingleCard = ({
                       />
                     )}
                   </button>
-                  {location.pathname.includes("user/my-listing") &&
-                    PostData?.BasicDetails?.PropertyAdType == "Rent" && (
+ 
+                  {location.pathname.includes("user/my-listing")&&PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                       <>
-                     
                         <img
-                         src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                           className="editIcon"
                           onClick={() => {
                             setEditPost(!EditPost);
@@ -532,7 +541,6 @@ const SingleCard = ({
                             )}
                           </select>
                         )}
-                        
                       </>
                     )}
                 </div>
@@ -644,7 +652,10 @@ const SingleCard = ({
             {PostData?.BasicDetails?.ApartmentType == "Plot/Land" ? (
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png" alt="Typology" />
+                  <img
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
+                    alt="Typology"
+                  />
                 </div>
                 <div className="single-card-detail-text">
                   <p
@@ -672,7 +683,10 @@ const SingleCard = ({
             ) : (
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png" alt="Typology" />
+                  <img
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
+                    alt="Typology"
+                  />
                 </div>
                 <div className="single-card-detail-text">
                   <p
@@ -714,7 +728,10 @@ const SingleCard = ({
 
             <div className="single-card-detail-item">
               <div className="single-card-detail-icon-container">
-                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png" alt="Area" />
+                <img
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
+                  alt="Area"
+                />
               </div>
               <div className="single-card-detail-text">
                 <p
@@ -745,7 +762,10 @@ const SingleCard = ({
             {PostData?.BasicDetails?.ApartmentType == "Plot/Land" ? (
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/washing-machine.svg" alt="Washing Machine" />
+                  <img
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/washing-machine.svg"
+                    alt="Washing Machine"
+                  />
                 </div>
 
                 <div className="single-card-detail-text ">
@@ -788,7 +808,10 @@ const SingleCard = ({
             ) : (
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png" alt="FurnishDetail" />
+                  <img
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
+                    alt="FurnishDetail"
+                  />
                 </div>
 
                 <div className="single-card-detail-text ">
@@ -820,7 +843,10 @@ const SingleCard = ({
             {PostData?.BasicDetails?.ApartmentType == "Plot/Land" ? (
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png" alt="Total Floor" />
+                  <img
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                    alt="Total Floor"
+                  />
                 </div>
                 <div className="single-card-detail-text">
                   <p
@@ -849,7 +875,10 @@ const SingleCard = ({
               <>
                 <div className="single-card-detail-item">
                   <div className="single-card-detail-icon-container">
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png" alt="Total Floor" />
+                    <img
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                      alt="Total Floor"
+                    />
                   </div>
                   <div className="single-card-detail-text">
                     <p
