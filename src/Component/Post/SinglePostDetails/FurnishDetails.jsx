@@ -22,7 +22,7 @@ const furnishingData = [
 ];
 
 const FurnishDetails = ({ furnishD }) => {
-  const isUnFurnished = furnishD.Furnishing === "Un-Furnished";
+  const isUnFurnished = furnishD?.Furnishing === "Un-Furnished";
   
   const items = furnishingData.map((item) => ({
     ...item,

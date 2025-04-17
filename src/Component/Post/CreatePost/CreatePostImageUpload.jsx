@@ -153,7 +153,7 @@ export default function CreatePostImageUpload({
       "PricingDetails",
       `${JSON.stringify(PricingDetailsCopyObj)}`
     );
-    console.log(defaultImg, "default");
+   
 
     if (update) {
       if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
@@ -348,7 +348,7 @@ export default function CreatePostImageUpload({
                       onClick={() => {
                         setDefaultImg(image.name); // Store image name instead of index
 
-                        console.log("Selected Image:", image.name);
+                     
 
                         // Find the image in uploadimages
                         let selectedImage = uploadimages.find(
@@ -414,7 +414,7 @@ export default function CreatePostImageUpload({
 
                         // Default Save Image Default image
                         if (image.name === defaultImg) {
-                          console.log(image);
+                        
                           setDefaultImg(null);
                         }
                       }}

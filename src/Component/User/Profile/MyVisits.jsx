@@ -52,7 +52,7 @@ export default function MyVisits() {
           <tbody>
             {MyVisitsData.ScheduleVisits?.map((visit) => {
               const PostData = visit?.PostData?.PostId;
-              const PostName = `${PostData?.PropertyDetails?.BHKType} BHk ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
+              const PostName = `${PostData?.PropertyDetails?.BHKType ?`${PostData?.PropertyDetails?.BHKType} BHk` :""}  ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType} In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City}`;
 
               return (
                 <tr key={visit._id}>

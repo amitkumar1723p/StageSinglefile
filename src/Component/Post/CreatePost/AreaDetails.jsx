@@ -108,7 +108,7 @@ export default function AreaDetailsSection({
                 value={AreaDetailsData.PlotSize?.unit || ""}
 
               /> */}
-              {/* {console.log(AreaDetailsData.PlotSize)} */}
+        
               <select value={AreaDetailsData.PlotSize?.unit || ""} className="unit" onChange={((e) => {
                 setAreaDetailsData({
                   ...AreaDetailsData,
