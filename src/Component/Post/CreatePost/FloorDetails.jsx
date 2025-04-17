@@ -183,7 +183,7 @@ export default function FloorDetails({
       </div>
 
       <div className="fom-group">
-        <p className="label">Property Direction *</p>
+        <p className="Property-Details-heading">Property Direction *</p>
 
         <div className="tab-box">
           {PropertyfacingArray.map((text, i) => {

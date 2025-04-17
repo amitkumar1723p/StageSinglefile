@@ -166,7 +166,7 @@ h6 {
   line-height: 1.2;
   color: var(--bs-heading-color);
 } */
-
+/* 
 .row > * {
   flex-shrink: 0;
   width: 100%;
@@ -174,7 +174,7 @@ h6 {
   padding-right: 0;
   padding-left: 0;
   margin-top: var(--bs-gutter-y);
-}
+} */
 
 /* tr{
   font-size: 16px !important; 

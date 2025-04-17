@@ -169,7 +169,7 @@ export default function LocationDetails({
                 type="text"
                 id="complete-addresss"
                 name="complete-addresss"
-                placeholder="Write Complete Address"
+                placeholder="eg . Flat no / Tower No  "
                 required={
                   update
                     ? "CompleteAddress" in LocationDetailsData
