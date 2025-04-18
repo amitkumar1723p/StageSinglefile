@@ -102,10 +102,13 @@
 
 /* Alll user Response Action CSSS */
 .userName{
-  width: 18%;
+  width: 16%;
 }
 .userContact{
-  width: 11%;
+  width: 14%;
+}
+.userContactNumber{
+  width: 8%;
 }
 .userDetail{
   width:0%;

@@ -108,6 +108,7 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
+    
     return state.userData;
   });
   const { data: CreatePost , LodingType:AlertType} = useSelector((state) => { 
@@ -1106,9 +1107,9 @@ function App() {
             exact
             path="single-user-Response-action/:id"
             element={
-              <AdminOwnerRoutes
-                Component={SingleUserRespponseAction}
-                isOwner={true}
+              <SingleUserRespponseAction
+               
+               
               />
             }
           />

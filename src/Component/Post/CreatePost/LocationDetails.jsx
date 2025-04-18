@@ -162,7 +162,7 @@ export default function LocationDetails({
             
             {/* Complete Address */}
             <div className="form-group">
-              <label htmlFor="Complete Address">Complete Address*</label>
+              <label htmlFor="Complete Address">Property Address*</label>
               <input
                 style={{ transitionDuration }}
                 className={`${localityShake ? "inputShake shake" : ""}`}
