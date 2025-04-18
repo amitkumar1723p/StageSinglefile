@@ -107,6 +107,7 @@ const [query,setQuery]=useState("");
     "1 RK/Studio Apartment",
     "Serviced Apartment",
     "Plot/Land",
+    "Pent House",
   ];
 
   const [filters, setFilters] = useState({
@@ -653,6 +654,7 @@ const [query,setQuery]=useState("");
                 <div className="button-section">
                   {[
                     "Apartment",
+                    "Pent House",
                     "Independent House/Villa",
                     "Independent/Builder Floor",
                     // "1 RK/Studio Apartment",

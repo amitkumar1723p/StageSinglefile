@@ -14,6 +14,7 @@ export default function BasicDetailsSection({
   // eslint-disable-next-line
   const [ApartMentTypeTab, setApartMentTypeTab] = useState([
     "Apartment",
+    "Pent House",
     "Independent House/Villa",
     // "1 RK/Studio Apartment",
     "Independent/Builder Floor",
@@ -21,6 +22,7 @@ export default function BasicDetailsSection({
   ]);
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
+    "Pent House",
     "Independent House/Villa",
     // "1 RK/Studio Apartment",
     "Studio Apartment",
@@ -53,6 +55,7 @@ export default function BasicDetailsSection({
     if (BasicDetailsData.PropertyAdType === "Sale") {
       setApartMentTypeTab([
         "Apartment",
+        "Pent House" ,
         "Independent/Builder Floor",
         "Studio Apartment",
         "Independent House/Villa",
@@ -66,6 +69,7 @@ export default function BasicDetailsSection({
     if (BasicDetailsData.PropertyAdType === "Rent") {
       setApartMentTypeTab([
         "Apartment",
+        "Pent House" ,
         "Independent/Builder Floor",
         "1 RK/PG",
         "Independent House/Villa",

@@ -46,7 +46,7 @@ export default function AdminAgentOwnerPost() {
     return state.AdminProperty;
   });
   const [AssignProperty, setAssignProperty] = useState([]);
-  
+
   const [AssignPropertyAdmin, setAssignPropertyAdmin] = useState(null);
   const [querry, setquerry] = useSearchParams();
   const [SearchPostId, setSearchPostId] = useState("");
@@ -179,8 +179,7 @@ export default function AdminAgentOwnerPost() {
       } else if (myQuery === "success") {
         setActive("success");
         setCurrentSelected("Success Post ");
-      }
-      else if (myQuery === "expired") {
+      } else if (myQuery === "expired") {
         setActive("expired");
         setCurrentSelected("expired");
       } else {
@@ -222,15 +221,14 @@ export default function AdminAgentOwnerPost() {
       setCurrentDataLength(filterdData?.length);
     }
     if (currenSelected === "expired") {
-       filterdData = AllPost?.Post?.filter((item) => {
-        return item?.PostExpired?.ExpiredStatus
+      filterdData = AllPost?.Post?.filter((item) => {
+        return item?.PostExpired?.ExpiredStatus;
         // return item?.PostExpired?.ExpiredStatus && item?.BasicDetails?.PropertyAdType==="Sale" ;
-
       });
 
       setCurrentDataLength(filterdData?.length);
     }
-    
+
     if (currenSelected === "Success Post") {
       filterdData = AllPost?.Post?.filter((item) => {
         return item?.propertyStatus?.currentPropertyStatus === "sold out";
@@ -381,11 +379,10 @@ export default function AdminAgentOwnerPost() {
       setActive(false);
     } else if (status === "success") {
       setActive("success");
-     }else if(status==="Expired"){
+    } else if (status === "Expired") {
       setCurrentSelected("expired");
       setActive("expired");
-     } 
-    else {
+    } else {
       setCurrentSelected("All posts");
       setActive(null);
     }
@@ -442,23 +439,28 @@ export default function AdminAgentOwnerPost() {
           </span>
           {medata?.user?.Role == "Owner" && (
             <>
-
-
-
               <span>
                 {`>`} Display Post ({OwnerPosts.length})
               </span>
 
-              {AssignProperty.length > 0 && <>   <sapn>
-                {`>`}Selected Post ({AssignProperty.length})
-              </sapn> </>}
+              {AssignProperty.length > 0 && (
+                <>
+                  {" "}
+                  <sapn>
+                    {`>`}Selected Post ({AssignProperty.length})
+                  </sapn>{" "}
+                </>
+              )}
             </>
           )}
         </p>
         <div className="filter-section-property">
           <div className="admin-filter-all-button-parent">
             <div>
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FilteImg.png" alt="FilteImg" />
+              <img
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FilteImg.png"
+                alt="FilteImg"
+              />
             </div>
 
             <button
@@ -478,7 +480,7 @@ export default function AdminAgentOwnerPost() {
                 myQuery === "true" || onPageActive === "true" ? "select" : ""
               }
               onClick={() => handleActive(true, "true")}
-            // className={active == true ? "select" : ""}
+              // className={active == true ? "select" : ""}
             >
               Active
             </button>
@@ -492,7 +494,9 @@ export default function AdminAgentOwnerPost() {
             </button>
             <button
               className={
-                myQuery === "expired" || onPageActive === "expired" ? "select" : ""
+                myQuery === "expired" || onPageActive === "expired"
+                  ? "select"
+                  : ""
               }
               onClick={() => handleActive("Expired", "expired")}
             >

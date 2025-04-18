@@ -36,6 +36,7 @@ export default function Amenities({
 
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
+    "Pent House",
     "Independent House/Villa",
     // "1 RK/Studio Apartment",
     "Studio Apartment",
