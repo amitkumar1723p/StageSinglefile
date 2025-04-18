@@ -14,7 +14,6 @@
     display: flex;
     width: 100%;
     max-width: 740px;
-    height: 500px;
     background-color: white;
     border-radius: 12px;
     overflow: hidden;
@@ -147,8 +146,25 @@
   }
   
   @media (max-width: 768px) {
+    .contactus-container {
+
+        min-width: 250px;
+        height: 100%;
+    
+        font-family: Arial, sans-serif;
+        background-color: #000000c2;
+        padding: 20px;
+      }
+    .contactus-left{
+        display: none;
+    }
+    .contactus-right{
+        width: 100%;
+        height: 100%;
+    }
     .contactus-card {
-      /* flex-direction: column; */
+      flex-direction: column;
+      max-width: 400px;
     }
     
     .contactus-left, .contactus-right {
