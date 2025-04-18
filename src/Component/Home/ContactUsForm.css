@@ -1,0 +1,157 @@
+.contactus-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 750px;
+    height: 100%;
+
+    font-family: Arial, sans-serif;
+    background-color: #000000c2;
+    padding: 20px;
+  }
+  
+  .contactus-card {
+    display: flex;
+    width: 100%;
+    max-width: 740px;
+    height: 500px;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contactus-left {
+
+    
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+  }
+  
+  .contactus-right {
+
+    background-color: #0072E5;
+    padding: 40px 20px;
+    position: relative;
+    width: 50%;
+    color: white;
+  }
+  
+  .contactus-title {
+    font-weight: 700;
+    font-size: 34px;
+    /* margin: 0 0 16px 0; */
+    color: #333;
+  }
+  
+  .contactus-subtitle {
+    color: #666;
+    margin: 0 0 40px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+  .contactus-left-content-container{
+    /* border: 1px solid pink; */
+  }
+  
+  .contactus-info {
+    /* margin-top: auto; */
+  }
+  
+  .contactus-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .contactus-icon {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .contactus-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .contactus-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .contactus-form-group {
+    /* margin-bottom: 24px; */
+  }
+  
+  .contactus-form-group label {
+    display: block;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .contactus-form-group input,
+  .contactus-form-group textarea {
+    width: 100%;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .contactus-form-group input::placeholder,
+  .contactus-form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .contactus-form-group textarea {
+
+  }
+  
+  .contactus-submit {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: white;
+    color: #0072E5;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 12px;
+  }
+  
+  .contactus-submit:hover {
+    opacity: 0.9;
+  }
+  
+  @media (max-width: 768px) {
+    .contactus-card {
+      /* flex-direction: column; */
+    }
+    
+    .contactus-left, .contactus-right {
+      padding: 30px;
+    }
+  }
