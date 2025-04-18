@@ -347,7 +347,17 @@ const Navbar = () => {
                                 All Response
                               </NavLink>
                             )}
-                          
+                        
+                         {/* Fresh Property Routing / */}
+            <NavLink
+              to="/admin/fresh-property"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              }><img
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
+                alt="Dashboard Icon"
+              
+              />Fresh property</NavLink>
                         
                         <NavLink
                           to="/admin/agent/dashboard?Role=Admin"
