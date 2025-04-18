@@ -32,8 +32,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "editFreshProjectionRequest":
     case "getprojectLeadAllRequest":
     case "getAllFreshProjectRequest-AdminRoutes":
-      
-      // case "getAllFreshProjectRequest":
+    case "submitFreshProjectLeadRequest":
+      case"submitFreshProjectLead_VerifyOtpRequest":
       // from here we used fresh project end
       return {
         ...state,
@@ -73,6 +73,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "editFreshProjectionSuccess":
     case "getprojectLeadAllSuccess":
     case "getAllFreshProjectSuccess-AdminRoutes":
+      case "submitFreshProjectLeadSuccess":  
+      case"submitFreshProjectLead_VerifyOtpSuccess":
       // from here we used fresh project end
 
       return {
@@ -113,6 +115,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "createfreshProjectFail":
     case "editFreshProjectionFail":
     case "getAllFreshProjectFail-AdminRoutes":
+      case "submitFreshProjectLeadFail": 
+      case"submitFreshProjectLead_VerifyOtpFail":
       //  case "getAllFreshProjectFail":
       // from here we used fresh project end
       return {
