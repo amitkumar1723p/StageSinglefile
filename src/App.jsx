@@ -90,6 +90,7 @@ import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLea
 
 // import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
 import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
+import ContactUsForm from "./Component/Home/ContactUsForm";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -108,7 +109,7 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
- 
+    
     return state.userData;
   });
   const { data: CreatePost , LodingType:AlertType} = useSelector((state) => { 
@@ -1051,6 +1052,11 @@ function App() {
           path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id"
           element={<SingleFreshBooking />}
         />
+        <Route
+          path="/ContactUs"
+          element={<ContactUsForm/>}
+        />
+
 
         <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
         {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}

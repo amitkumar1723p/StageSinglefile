@@ -1361,4 +1361,42 @@ export const updateRequirementStatusAcion=({ VisitStatus }, visitId)=>{
     }
   }
 }
+export const submitContactForm=(formData)=>{
+  console.log(formData,"dis")
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "submitContactFormRequest",
+        payload: "submitContactFormRequest",
+      });
 
+      let url = `${api_Base_Url}/contact/contactSubmit`;
+
+      let config = {
+        headers: { "Content-Type": "application/JSON" },
+        withCredentials: true,
+      };
+const form=JSON.stringify(formData)
+console.log(form,"pppp")
+      // Post the FormData to the backend
+      const { data } = await axios.post(url, form, config);
+
+      dispatch({
+        type: "submitContactFormSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "submitContactFormFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "submitContactFormFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
