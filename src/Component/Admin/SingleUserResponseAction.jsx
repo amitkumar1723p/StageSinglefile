@@ -172,6 +172,7 @@ export default function SingleUserRespponseAction() {
                             <tr>
                                 <th scope="col"><span className="fw-normal ">Property Type</span></th>
                                 <th scope="col"> <span className="fw-normal ">Project Name</span></th>
+                                <th scope="col"> <span className="fw-normal "> P-ID</span></th>
 
 
                                 <th scope="col"><span className="fw-normal">Prop Status</span></th>
@@ -194,9 +195,10 @@ export default function SingleUserRespponseAction() {
                                         }}
                                     >
                                         <small className="fw-light text-truncate text-nowrap overflow-hidden text-primary border-primary border-bottom px-2 border-opacity-50  d-inline-block w-100">
-                                            {item?.PostData?.PostId?.LocationDetails?.ProjectName} - {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.City} - ({item?.PostData?.PostId?._id})
+                                            {item?.PostData?.PostId?.LocationDetails?.ProjectName} - {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.City}  
                                         </small>
                                     </td>
+                                    <td><small className="fw-light ">{item?.PostData?.PostId?._id}</small></td>
 
 
                                     <td><small className="fw-light ">{item?.PostData?.PostId?.PostVerify === true ? "Active" : "Inactive"}</small></td>
@@ -250,6 +252,8 @@ export default function SingleUserRespponseAction() {
                                 {/* <th scope="col"> <span className="fw-normal">Project Name</span></th> */}
 
                                 <th scope="col"> <span className="fw-normal">Project Name</span></th>
+                                <th scope="col"> <span className="fw-normal">P-ID</span></th>
+
                                 <th scope="col"> <span className="fw-normal">Project Price</span></th>
                                 <th scope="col"> <span className="fw-normal">Property Type</span></th>
                                 <th scope="col"><span className="fw-normal">Offer Price</span></th>
@@ -268,7 +272,8 @@ export default function SingleUserRespponseAction() {
                                         window.open(`/post-detail/${item?.PostData?.PostId?._id}`, 'SinglePostDetail2')
                                     }}
                                     ><small className="fw-light text-truncate text-nowrap overflow-hidden text-primary border-primary border-bottom px-2 border-opacity-50  d-inline-block w-100">{item?.PostData?.PostId?.LocationDetails?.ProjectName} -
-                                            {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.Locality}-({item?.PostData?.PostId?._id})</small></td>
+                                            {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.Locality}</small></td>
+                                            <td><small className="fw-light">{item?.PostData?.PostId?._id}</small></td>
 
                                     <td><small className="fw-light">{formatPrice(item?.PostData?.PostId?.PricingDetails?.ExpectedPrice)}</small></td>
                                     <td><small className="fw-light">{item?.PostData?.PostId?.BasicDetails?.ApartmentType}</small></td>
@@ -304,7 +309,7 @@ export default function SingleUserRespponseAction() {
                                 <th scope="col"> <span className="fw-normal">Project Name</span></th>
                                 <th scope="col"> <span className="fw-normal ps-4">Property Type</span></th>
                                 <th scope="col"> <span className="fw-normal">Listing Status</span></th>
-                                <th scope="col"> <span className="fw-normal">Post Id</span></th>
+                                <th scope="col"> <span className="fw-normal">P-ID</span></th>
                                 <th scope="col"> <span className="fw-normal">Date</span></th>
 
                             </tr>

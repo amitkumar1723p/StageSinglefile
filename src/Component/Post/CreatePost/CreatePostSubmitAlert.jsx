@@ -18,7 +18,7 @@ export default function CreatePostSubmitAlert({ SetShow }) {
       <div className="alert-header">
         <div className="alert-title-create">
           
-          <img src="/img/blue-tick.svg" alt="blue-tick" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg" alt="blue-tick" />
           <h3>Post Created Successfully! </h3>{" "}
         </div>
         <button

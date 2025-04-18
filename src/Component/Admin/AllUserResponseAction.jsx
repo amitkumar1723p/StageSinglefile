@@ -181,7 +181,7 @@ export default function AllUserResponseAction() {
   return (
     <>
       {usersList &&
-        <div className="border border-primary border-opacity-25 ">
+        <div className="border border-primary border-opacity-25  ">
           <div className="d-flex justify-content-between">
             <div className="d-flex">
               <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
