@@ -1,5 +1,6 @@
 .freshbooking-main-container{
     width: 80%;
+    transition-duration: .3s;
 }
 
 
@@ -22,6 +23,13 @@
 .freshbooking-highlight-image-upload-container{
     width: 55%;
 
+}
+.highlightList{
+    li{
+        background-color: #1877f2;
+        color: white;
+    }
+    
 }
 .freshbooking-highlights-add-button{
     border-radius: 8px;
