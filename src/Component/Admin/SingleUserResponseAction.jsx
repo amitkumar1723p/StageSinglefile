@@ -205,7 +205,7 @@ export default function SingleUserRespponseAction() {
                                     <td><small className="fw-light ">{item?.VisitDate ? FormatDate(item?.VisitDate) : 'N/A'} ({item?.VisitTime?.From} {item?.VisitTime?.To})</small></td>
                                     <td><small className="fw-light ">
                                         <select
-                                            className="form-select"
+                                            className="admin-all-response-remaks"
                                             onChange={(e) => setScheduleStatus({ status: e.target.value, id: item?._id })}
 
                                         >
@@ -280,7 +280,7 @@ export default function SingleUserRespponseAction() {
                                     <td><small className="fw-light">{formatPrice(item?.BidPrice)}</small></td>
                                     <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'} </small></td>
                                     <td><small className="fw-light">
-                                        <select onChange={(e) => setOfferStatus({ status: e.target.value, id: item?._id })}>
+                                        <select className="admin-all-response-remaks" onChange={(e) => setOfferStatus({ status: e.target.value, id: item?._id })}>
                                             <option value={item?.bidStatus?.status}>{item?.bidStatus?.status}</option>
                                             {["Made", "Accepted", "Rejected"]
                                                 .filter(status => status !== item?.bidStatus?.status)
@@ -307,9 +307,9 @@ export default function SingleUserRespponseAction() {
                         <thead>
                             <tr>
                                 <th scope="col"> <span className="fw-normal">Project Name</span></th>
+                                <th scope="col"> <span className="fw-normal">P-ID</span></th>
                                 <th scope="col"> <span className="fw-normal ps-4">Property Type</span></th>
                                 <th scope="col"> <span className="fw-normal">Listing Status</span></th>
-                                <th scope="col"> <span className="fw-normal">P-ID</span></th>
                                 <th scope="col"> <span className="fw-normal">Date</span></th>
 
                             </tr>
@@ -324,9 +324,13 @@ export default function SingleUserRespponseAction() {
                                             onClick={() => window.open(`/post-detail/${item?._id}`, 'SinglePostDetail')}
                                         >
                                             {item?.LocationDetails?.ProjectName} -
-                                            {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City} - ({item?._id})
+                                            {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City} 
                                         </small>
                                     </td>
+
+                                    <td
+                                    ><small className="fw-light">{item?._id}</small></td>
+
 
 
                                     <td><small className="fw-light ps-5">{item?.BasicDetails?.ApartmentType}</small></td>
@@ -339,11 +343,7 @@ export default function SingleUserRespponseAction() {
 
 
 
-                                    <td onClick={(e) => {
-                                        window.open(`/post-detail/${item?._id}`, 'SinglePostDetail3')
-                                    }}
-                                    ><small className="fw-light">{item?._id}</small></td>
-
+                                    
 
 
                                     <td><small className="fw-light">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small></td>
@@ -403,7 +403,7 @@ export default function SingleUserRespponseAction() {
 
                                     <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
                                     <td><small className="fw-light">
-                                        <select onChange={(e) => setNotifyStatus({ status: e.target.value, id: item?._id })}>
+                                        <select  className="admin-all-response-remaks" onChange={(e) => setNotifyStatus({ status: e.target.value, id: item?._id })}>
                                             <option value={item?.notifyStatus?.status}>{item?.notifyStatus?.status}</option>
                                             {["Pending", "Completed"]
                                                 .filter(status => status !== item?.notifyStatus?.status)
@@ -434,7 +434,7 @@ export default function SingleUserRespponseAction() {
                                 <th scope="col"><span className="fw-normal">Project Name</span></th>
 
                                 <th scope="col"><span className="fw-normal">Floor Prefrence</span></th>
-                                <th scope="col"><span className="fw-normal">Bhk Type</span></th>
+                                <th scope="col"><span className="fw-normal">BHK Type</span></th>
                                 <th scope="col"><span className="fw-normal">Budget</span></th>
                                 <th scope="col"><span className="fw-normal">Date</span></th>
                                 <th scope="col"><span className="fw-normal">Status</span></th>
@@ -457,7 +457,7 @@ export default function SingleUserRespponseAction() {
                                         FormatDateAndTime(item?.createAt)
                                         : 'N/A'}</small></td>
                                     <td><small className="fw-light">
-                                        <select onChange={(e) => setRequirementStatus({ status: e.target.value, id: item?._id })}>
+                                        <select className="admin-all-response-remaks"  onChange={(e) => setRequirementStatus({ status: e.target.value, id: item?._id })}>
                                             <option value={item?.requirementStatus?.status}>{item?.requirementStatus?.status}</option>
                                             {["Pending", "Completed"]
                                                 .filter(status => status !== item?.requirementStatus?.status)

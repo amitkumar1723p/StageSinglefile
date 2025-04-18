@@ -14,6 +14,17 @@
     color: #003366;
     margin-bottom: 10px;
   }
+
+  .schdule-btn-confirm{
+    background-color: var(--main-light-clr);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+
+    &:hover{
+      opacity: .9;
+    }
+  }
   
   .request-submit-body {
     font-size: 16px;

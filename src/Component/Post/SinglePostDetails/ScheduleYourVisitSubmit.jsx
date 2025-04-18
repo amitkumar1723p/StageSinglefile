@@ -60,7 +60,7 @@ const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
       </div>
       <div className="action-buttons">
         <button
-          className="btn view-more"
+          className="schdule-btn-confirm"
           onClick={() => {
             navigate("/");
           }}
@@ -68,7 +68,7 @@ const ScheduleYourVisitSubmit = ({ SetShow, ScheduleVistData }) => {
           View More Properties
         </button>
         <button
-          className="btn"
+          className="schdule-btn-confirm"
           onClick={() => {
             navigate("/user");
           }}

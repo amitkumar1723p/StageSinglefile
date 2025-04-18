@@ -329,7 +329,7 @@ const HeroSection = () => {
           </div>
           <div className="heading-hero">
             <h1>
-              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span><span className="animate-blink">|</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
@@ -791,12 +791,12 @@ const HeroSection = () => {
               onClick={() => handleButtonClick('whatsapp')}
             >
               <div className="hero-icon-container">
-                <Link
-                  to="https://wa.me/7837840785"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="d-flex align-items-center hero-float-icon-a"
-                >
+              <Link
+  to="https://wa.me/7837840785?text=Hi!%20I’d%20like%20to%20learn%20more%20about%20your%20services.%20Can%20you%20help%20me%20out?"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="d-flex align-items-center hero-float-icon-a"
+>
                   <dotlottie-player
                     src="https://lottie.host/87aba604-393b-4d73-8a63-ef8fddc8e348/Kx2B1jvrlf.lottie"
                     background="transparent"

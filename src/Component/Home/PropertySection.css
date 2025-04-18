@@ -75,7 +75,7 @@ color: #FFF;
 
 /* Container styles */
 .property-filter-container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 1rem 1rem;
 }
@@ -586,6 +586,8 @@ color: #FFF;
 .floating-buttons a{
   width: 35px;
   height: 35px;
+  background-color: var(--main-light-clr);
+
 }
   
   .requirement-btn {

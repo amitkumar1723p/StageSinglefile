@@ -185,7 +185,7 @@ export default function AllUserResponseAction() {
           <div className="d-flex justify-content-between">
             <div className="d-flex">
               <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
-              <p className="px-4 mt-3 fw-semibold text-primary">Unchecked:(<span className="text-danger">{read?.length}</span>)</p>
+              {/* <p className="px-4 mt-3 fw-semibold text-primary">Unchecked:(<span className="text-danger">{read?.length}</span>)</p> */}
             </div>
             <div className="px-4 mt-3 d-flex py-2">
               <input
@@ -391,20 +391,21 @@ export default function AllUserResponseAction() {
                     <button className="btn-allresponse-section fw-light px-4" onClick={() => setTrackIndex(index)} >View Details</button>
 
                   </Link> */}
-                    <Link
-                      to={{
-                        pathname: `/admin/single-user-Response-action/${item?._id}`,
-                      }}
-                      state={{ index:`630713${item.ContactNumber}`}}
-                      className="text-decoration-none"
-                    >
-                      <button
-                        className="btn-allresponse-section fw-light px-2"
-                        onClick={() => setTrackIndex(index)}
-                      >
-                        View Details
-                      </button>
-                    </Link>
+                    <button
+  className="btn-allresponse-section fw-light px-2"
+  onClick={() => {
+    setTrackIndex(index);
+
+    // Save state to sessionStorage (so it can be read in the new tab)
+    sessionStorage.setItem("userResponseIndex", `630713${item.ContactNumber}`);
+
+    // Open new tab with the correct path
+    window.open(`/admin/single-user-Response-action/${item?._id}`, "_blank");
+  }}
+>
+  View Details
+</button>
+
 
 
                   </div>

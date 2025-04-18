@@ -42,7 +42,7 @@ export function FreshProjectViewAll() {
    
     if (adminAlertData && ["projectStatusRequest"].includes(LodingType)) {
       if (adminAlertData.success == true) {
-        alert("run")
+        alert("Please confirm if you would like to proceed with changing the property status")
         dispatch(getAllFreshProjectAction({ RouteType: "AdminRoutes" }));
       }
     }
@@ -90,13 +90,13 @@ export function FreshProjectViewAll() {
                       className="px-5"
                       onClick={() => handleProjectStatus(item?._id)}
                     >
-                      {" "}
-                      {item?.status === false ? <>Active</> : <>In-Active</>}
+                     
+                     <div className="active-section-freshbook">{item?.status === false ? <>Active</> : <>InActive</>} </div> 
                     </p>
 
                     <div className="col-6 d-flex">
                       <Link to={`/admin/fresh-property/edit/${item?._id}`}>
-                        <p className="d-flex justify-content-end">edit</p>
+                        <p className="d-flex justify-content-end">Edit</p>
                       </Link>
                     </div>
                   </div>

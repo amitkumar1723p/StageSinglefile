@@ -134,14 +134,15 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       {showScheduleVistAlert === "LodingTrue" && (
         <Loader className={"componentloader"} />
       )}
+
+     
       {showScheduleVistAlert == true && (
         <ScheduleYourVisitSubmit
           SetShow={SetShow}
           ScheduleVistData={ScheduleVistData}
-         
+
         />
-      )}
-    </>
+      )}     </>
   );
 }
 

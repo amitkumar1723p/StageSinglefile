@@ -4,6 +4,19 @@
 }
 
 
+.active-section-freshbook{
+    width: 100%;
+    background-color: var(--main-light-clr);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px;
+    &:hover{
+        opacity: .9;
+    }
+}
+
 
 
 

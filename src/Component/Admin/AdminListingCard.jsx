@@ -455,7 +455,7 @@ export default function AdminListingCard({
                   <p className="admin-card-heading">Current status</p>
                   {PostData?.PostExpired ? (
                     <p className="Status-section-admin inactive-sign">
-                   
+
                       Expired
                     </p>
                   ) : (
@@ -507,8 +507,8 @@ export default function AdminListingCard({
                 <p
                   // className={location.pathname.includes("schedule-visit"?"select":"")}
                   className={`${location.pathname.includes("/admin/schedule-visit")
-                      ? "active-btn"
-                      : ""
+                    ? "active-btn"
+                    : ""
                     }`}
                   onClick={() => {
                     if (
@@ -532,8 +532,8 @@ export default function AdminListingCard({
                 </p>
                 <p
                   className={`${location.pathname.includes("/admin/recive-offer")
-                      ? "active-btn"
-                      : ""
+                    ? "active-btn"
+                    : ""
                     }`}
                   onClick={() => {
                     if (
@@ -557,35 +557,57 @@ export default function AdminListingCard({
                   <>
                     <div className="user-name-contact">
                       <span>Posted by : </span>
-                      <span><b>  {PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}    </b> 
-                      &nbsp;
+                      <span><b>  {PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}    </b>
+                        &nbsp;
 
-                     ({PostData?.CreatePostUser?.Role})
+                        ({PostData?.CreatePostUser?.Role})
                       </span>
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>
                       <span>{PostData?.CreatePostUser?.ContactNumber}</span>
                     </div>
+                    <div className="user-name-contact">
+                      <span>Email : </span>
+                      <span>{PostData?.CreatePostUser?.email}</span>
+                    </div>
                   </>
                 )}
               </div>
 
               <div className="admin-btn-active-btn">
-                <Link
-                  to={`${medata?.user?.Role == "Owner" &&
-                      PostData?.PostDelete?.Status == "delete"
-                      ? "/admin/deleted-post"
-                      : "/post-detail"
-                    }/${PropertyAddress.toLowerCase()
+                <button
+                  className="contact-button btn-sm"
+                  onClick={async () => {
+                    const basePath =
+                      medata?.user?.Role === "Owner" && PostData?.PostDelete?.Status === "delete"
+                        ? "/admin/deleted-post"
+                        : "/post-detail";
+
+                    const formattedAddress = `${PropertyAddress.toLowerCase()
                       .replaceAll(" ", "-")
                       .replace(",", "")
-                      .replaceAll("/", "-")}-${PostData?._id}`}
+                      .replaceAll("/", "-")}`;
+
+                    const finalUrl = `${basePath}/${formattedAddress}-${PostData?._id}`;
+
+                    try {
+                      const response = await fetch(finalUrl, { method: "HEAD" });
+
+                      if (response.ok) {
+                        window.open(finalUrl, "_blank");
+                      } else {
+                        alert("The listing you're trying to view doesn't exist.");
+                      }
+                    } catch (error) {
+                      console.error("Error checking listing:", error);
+                      alert("Could not verify the listing.");
+                    }
+                  }}
                 >
-                  <button className="contact-button btn-sm">
-                    View Listing
-                  </button>
-                </Link>
+                  View Listing
+                </button>
+
 
                 {PostData?.PostDelete?.Status != "delete" && (
                   <div className="d-flex gap-5">
@@ -622,9 +644,9 @@ export default function AdminListingCard({
                         {/* {location.pathname.includes("admin") && ( */}
                         {PostData?.PostExpired ? (
                           <button
-                          className="re-open-btn-admin"
+                            className="re-open-btn-admin"
                             onClick={() => {
-                              dispatch(ReOpenPostAction(PostData?._id ,"AdminRoutes"));
+                              dispatch(ReOpenPostAction(PostData?._id, "AdminRoutes"));
                             }}
                           >
                             Re-Open
