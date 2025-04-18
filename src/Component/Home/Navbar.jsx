@@ -280,48 +280,44 @@ const Navbar = () => {
 
 
                         {["Admin", "Agent", "Owner"].includes(
-                              medata?.user?.Role
-                            ) ? (
-                              <>
-                                   <NavLink
-                          to="/admin/dashboard"
-                          className={({ isActive }) =>
-                            `AdminAside-navLink ${
-                              isActive ? "active" : "hover"
-                            }`
-                          }
-                        >
-                          <img
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
-                            alt="Dashboard Icon"
-                            className={`AdminAside-icon ${
-                              location.pathname === "/admin/dashboard"
-                                ? "active"
-                                : ""
-                            }`}
-                          />
-                          Dashboard
-                        </NavLink>
-                                   {/* -----------------------------Agent-admin AllUserResponse --------------------------------------------- */}
+                          medata?.user?.Role
+                        ) ? (
+                          <>
+                            <NavLink
+                              to="/admin/dashboard"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${isActive ? "active" : "hover"
+                                }`
+                              }
+                            >
+                              <img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
+                                alt="Dashboard Icon"
+                                className={`AdminAside-icon ${location.pathname === "/admin/dashboard"
+                                    ? "active"
+                                    : ""
+                                  }`}
+                              />
+                              Dashboard
+                            </NavLink>
+                            {/* -----------------------------Agent-admin AllUserResponse --------------------------------------------- */}
 
                             {medata.user.Role == "Agent" ? (
                               <NavLink
                                 to="/admin/agent-user-Response-action"
                                 className={({ isActive }) =>
-                                  `AdminAside-navLink ${
-                                    isActive ? "active" : "hover"
+                                  `AdminAside-navLink ${isActive ? "active" : "hover"
                                   }`
                                 }
                               >
                                 <img
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                   alt="Dashboard Icon"
-                                  className={`AdminAside-icon ${
-                                    location.pathname ===
-                                    "/admin/all-asign-post-Response-action"
+                                  className={`AdminAside-icon ${location.pathname ===
+                                      "/admin/all-asign-post-Response-action"
                                       ? "active"
                                       : ""
-                                  }`}
+                                    }`}
                                 />
                                 All Response
                               </NavLink>
@@ -329,91 +325,84 @@ const Navbar = () => {
                               <NavLink
                                 to="/admin/all-user-Response-action"
                                 className={({ isActive }) =>
-                                  `AdminAside-navLink ${
-                                    isActive ? "active" : "hover"
+                                  `AdminAside-navLink ${isActive ? "active" : "hover"
                                   }`
                                 }
                               >
                                 <img
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                   alt="Dashboard Icon"
-                                  className={`AdminAside-icon ${
-                                    location.pathname ===
-                                    "/admin/all-user-Response-action"
+                                  className={`AdminAside-icon ${location.pathname ===
+                                      "/admin/all-user-Response-action"
                                       ? "active"
                                       : ""
-                                  }`}
+                                    }`}
                                 />
                                 All Response
                               </NavLink>
                             )}
-                        
-                         {/* Fresh Property Routing / */}
-            <NavLink
-              to="/admin/fresh-property"
-              className={({ isActive }) =>
-                `AdminAside-navLink ${isActive ? "active" : "hover"}`
-              }><img
-                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
-                alt="Dashboard Icon"
-              
-              />Fresh property</NavLink>
-                        
-                        <NavLink
-                          to="/admin/agent/dashboard?Role=Admin"
-                          className={({ isActive }) =>
-                            `AdminAside-navLink ${
-                              location.search.includes("Role=Admin")
-                                ? "active"
-                                : "hover"
-                            }`
-                          }
-                        >
-                          <img
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg "
-                            alt="Admin Icon"
-                            className={`AdminAside-icon ${
-                              location.search.includes("Role=Admin")
-                                ? "active"
-                                : ""
-                            }`}
-                          />
-                          Admin
-                        </NavLink>
-                        
-                        <NavLink
-                          to="/admin/agent/dashboard?Role=Agent"
-                          className={({ isActive }) =>
-                            `AdminAside-navLink ${
-                              location.search.includes("Role=Agent")
-                                ? "active"
-                                : "hover"
-                            }`
-                          }
-                        >
-                          <img
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg "
-                            alt="Agent Icon"
-                            className={`AdminAside-icon ${
-                              location.search.includes("Role=Agent")
-                                ? "active"
-                                : ""
-                            }`}
-                          />
-                          Agent
-                        </NavLink>
-                               {/* admin routes  */}
-                               
-                               </>
-                            ) : (
-                              <> 
-                                <NavLink to="/user">
+
+                            {/* Fresh Property Routing / */}
+                            <NavLink
+                              to="/admin/fresh-property"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+                              }><img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
+                                alt="Dashboard Icon"
+
+                              />Fresh property</NavLink>
+
+                            <NavLink
+                              to="/admin/agent/dashboard?Role=Admin"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${location.search.includes("Role=Admin")
+                                  ? "active"
+                                  : "hover"
+                                }`
+                              }
+                            >
+                              <img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg "
+                                alt="Admin Icon"
+                                className={`AdminAside-icon ${location.search.includes("Role=Admin")
+                                    ? "active"
+                                    : ""
+                                  }`}
+                              />
+                              Admin
+                            </NavLink>
+
+                            <NavLink
+                              to="/admin/agent/dashboard?Role=Agent"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${location.search.includes("Role=Agent")
+                                  ? "active"
+                                  : "hover"
+                                }`
+                              }
+                            >
+                              <img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg "
+                                alt="Agent Icon"
+                                className={`AdminAside-icon ${location.search.includes("Role=Agent")
+                                    ? "active"
+                                    : ""
+                                  }`}
+                              />
+                              Agent
+                            </NavLink>
+                            {/* admin routes  */}
+
+                          </>
+                        ) : (
+                          <>
+                            <NavLink to="/user">
                               <li
-                                className={`navItem ${
-                                  location.pathname == "/user"
+                                className={`navItem ${location.pathname == "/user"
                                     ? "active-btn-nav"
                                     : ""
-                                }`}
+                                  }`}
                               >
                                 <img
                                   className=""
@@ -426,25 +415,23 @@ const Navbar = () => {
 
                             <NavLink to="/user/my-post/all-response">
                               <li
-                                className={`navItem navItem mob-hide ${
-                                  location.pathname ==
-                                  "/user/my-post/all-response"
+                                className={`navItem navItem mob-hide ${location.pathname ==
+                                    "/user/my-post/all-response"
                                     ? "active-btn-nav"
                                     : ""
-                                } `}
+                                  } `}
                               >
                                 <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/NewLeads.svg " alt="my-visits" />
                                 All Response
                               </li>
                             </NavLink>
-                            
-                              <NavLink to="/user/my-listing ">
+
+                            <NavLink to="/user/my-listing ">
                               <li
-                                className={`navItem ${
-                                  location.pathname == "/user/my-listing"
+                                className={`navItem ${location.pathname == "/user/my-listing"
                                     ? "active-btn-nav"
                                     : ""
-                                } `}
+                                  } `}
                               >
                                 <img
                                   className=""
@@ -455,14 +442,13 @@ const Navbar = () => {
                               </li>
                             </NavLink>
 
-                          
+
                             <NavLink to="/user/favourite-post">
                               <li
-                                className={`navItem ${
-                                  location.pathname == "/user/favourite-post"
+                                className={`navItem ${location.pathname == "/user/favourite-post"
                                     ? "active-btn-nav"
                                     : ""
-                                }`}
+                                  }`}
                               >
                                 <img
                                   className=""
@@ -472,12 +458,12 @@ const Navbar = () => {
                                 Shortlisted Property
                               </li>
                             </NavLink>
-                              {/* simple user  */}
-                              
-                              </>
-                            )}
+                            {/* simple user  */}
 
-                       
+                          </>
+                        )}
+
+
 
                         {/* {!["Admin", "Agent", "Owner"].includes(
                           medata?.user?.Role

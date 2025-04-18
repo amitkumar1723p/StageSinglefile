@@ -1615,7 +1615,7 @@ font-weight: 600;
   box-shadow: 
     -5px 0 15px rgba(0, 0, 0, 0.05),
     -2px 0 5px rgba(0, 0, 0, 0.05);
-  z-index: 100;
+  z-index: 10;
   width: 65px;
   height: auto;
   min-height: 280px;
