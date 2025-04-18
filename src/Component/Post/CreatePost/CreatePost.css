@@ -1449,6 +1449,8 @@ input[type="number"] {
 .dashboard-right-side {
   box-shadow: 0px 0px 16px 0px #cfdae2;
   border-radius: 10px;
+  height: 406px;
+    width: fit-content;
 }
 
 .dashboard-right-side img {
