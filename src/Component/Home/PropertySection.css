@@ -107,6 +107,7 @@ color: #FFF;
   align-items: center;
   padding: 8px 16px;
   border-radius: 4px;
+  font-size: 14px;
   margin-right: 8px;
   border: 1px solid #e2e8f0;
   background-color: white;
@@ -549,6 +550,7 @@ color: #FFF;
 
   .filter-button {
     display: flex;
+    font-size: 14px;
     align-items: center;
     padding: 4px 8px;
     border-radius: 4px;
@@ -562,6 +564,10 @@ color: #FFF;
   }
 
   .property-section-h3 {
+    font-size: 14px;
+  }
+
+  .button-span{
     font-size: 14px;
   }
 
