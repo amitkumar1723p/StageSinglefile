@@ -80,6 +80,36 @@ export default function AdminAside() {
               Dashboard
             </NavLink>
 
+            {medata.user.Role =="Agent"?
+            <NavLink
+              to="/admin/agent-user-Response-action"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              }
+            >
+              <img
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
+                alt="Dashboard Icon"
+                className={`AdminAside-icon ${location.pathname === "/admin/all-asign-post-Response-action" ? "active" : ""
+                  }`}
+              />
+              All Response
+            </NavLink>: 
+             <NavLink
+              to="/admin/all-user-Response-action"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              }
+            >
+              <img
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
+                alt="Dashboard Icon"
+                className={`AdminAside-icon ${location.pathname === "/admin/all-user-Response-action" ? "active" : ""
+                  }`}
+              />
+              All Response
+            </NavLink>}
+
 
             {medata?.IsAuthenticated &&
               medata.user.Role === "Owner" &&
@@ -101,7 +131,7 @@ export default function AdminAside() {
                   </NavLink> */}
 
 
-                  <NavLink
+                  {/* <NavLink
                     to="/admin/agent/dashboard?Role=Admin"
                     className={({ isActive }) =>
                       `AdminAside-navLink ${location.search.includes("Role=Admin")
@@ -134,7 +164,7 @@ export default function AdminAside() {
                         }`}
                     />
                     Agent
-                  </NavLink>
+                  </NavLink> */}
 
 
 
@@ -146,12 +176,15 @@ export default function AdminAside() {
 
             {/* Fresh Property Routing / */}
             <NavLink
-              to="/admin/fresh-property">
+              to="/admin/fresh-property"
+              className={({ isActive }) =>
+                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+              } 
+                    >
               <img
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                 alt="Dashboard Icon"
-                
-
+              
               />
               Fresh property
             </NavLink>
@@ -201,35 +234,7 @@ export default function AdminAside() {
             All Post
           </NavLink> */}
           {/* all-asign-post-Response-action */}
-          {medata.user.Role =="Agent"?
-            <NavLink
-              to="/admin/agent-user-Response-action"
-              className={({ isActive }) =>
-                `AdminAside-navLink ${isActive ? "active" : "hover"}`
-              }
-            >
-              <img
-                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
-                alt="Dashboard Icon"
-                className={`AdminAside-icon ${location.pathname === "/admin/all-asign-post-Response-action" ? "active" : ""
-                  }`}
-              />
-              All Response
-            </NavLink>: 
-             <NavLink
-              to="/admin/all-user-Response-action"
-              className={({ isActive }) =>
-                `AdminAside-navLink ${isActive ? "active" : "hover"}`
-              }
-            >
-              <img
-                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
-                alt="Dashboard Icon"
-                className={`AdminAside-icon ${location.pathname === "/admin/all-user-Response-action" ? "active" : ""
-                  }`}
-              />
-              All Response
-            </NavLink>}
+         
             <button className="AdminAside-button">
               <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Report.svg" className="AdminAside-icon" alt="" />
               Report

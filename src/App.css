@@ -166,7 +166,7 @@ h6 {
   line-height: 1.2;
   color: var(--bs-heading-color);
 } */
-
+/* 
 .row > * {
   flex-shrink: 0;
   width: 100%;
@@ -174,7 +174,7 @@ h6 {
   padding-right: 0;
   padding-left: 0;
   margin-top: var(--bs-gutter-y);
-}
+} */
 
 /* tr{
   font-size: 16px !important; 
@@ -374,11 +374,38 @@ td{
   border: 1px dashed red !important;
   animation: justshake 0.5s ease-in-out;
 }
+.onlyShake{
+  animation: justshake 0.5s ease-in-out;
+}
 .inputShake{
   transition-duration: 0.3s;
   border: 1px solid red !important;
   animation: justshake 0.5s ease-in-out;
 }
+
+
+
+
+
+.freshShake{
+  border: 1px solid red !important;
+  color: red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+.freshShake::placeholder{
+  color: red;
+}
+.freshGreen{
+  background-color: #1877f2 !important;
+  color: white !important;
+}
+.dragDropShake{
+  border: 2px dashed red !important;
+  animation: justshake 0.5s ease-in-out;
+}
+
+
+
 
 /* not select text  */
 .not-select-text {

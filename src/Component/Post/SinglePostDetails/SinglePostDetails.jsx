@@ -68,7 +68,6 @@ export default function SinglePostDetails() {
   const [status, setStatus] = useState(false);
   const [showOwnerDetailsForm, setshowOwnerDetailsForm] = useState(false);
 
-
   // console.log(showOwnerDetailsForm, "j")
   // payment
   const { data: paidPropertyData } = useSelector((state) => {
@@ -104,14 +103,18 @@ export default function SinglePostDetails() {
     return state.TenentResponseIsExit;
   });
 
+  console.log(getSinglePostData, "getSingllepost");
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
       setPropertyAddress(
-        `${`${getSinglePostData.SinglePost?.PropertyDetails?.BHKType
-          ? `${getSinglePostData.SinglePost?.PropertyDetails?.BHKType} BHK`
-          : ""
-        }`} ${getSinglePostData?.SinglePost?.BasicDetails.ApartmentType} For ${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType
-        } In ${getSinglePostData?.SinglePost?.LocationDetails?.ProjectName}   ${getSinglePostData?.SinglePost?.LocationDetails?.Landmark
+        `${`${
+          getSinglePostData?.SinglePost?.PropertyDetails?.BHKType
+            ? `${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`
+            : ""
+        }`} ${getSinglePostData?.SinglePost?.BasicDetails.ApartmentType} For ${
+          getSinglePostData?.SinglePost?.BasicDetails?.PropertyAdType
+        } In ${getSinglePostData?.SinglePost?.LocationDetails?.ProjectName}   ${
+          getSinglePostData?.SinglePost?.LocationDetails?.Landmark
         } ${getSinglePostData?.SinglePost?.LocationDetails?.City} `
       );
 
@@ -256,7 +259,7 @@ export default function SinglePostDetails() {
         sessionStorage.getItem("RedirectPath") == "/view-owner-details" &&
         medata?.user?.Role == "Tenant"
       ) {
-        setshowOwnerDetailsForm(true)
+        setshowOwnerDetailsForm(true);
         // setshowTenantDetailsForm(true);
       }
 
@@ -290,11 +293,10 @@ export default function SinglePostDetails() {
 
   useEffect(() => {
     if (AlertData?.success && AlertType == "ViewOwnerDetailsRequest") {
-       
       StoreDataInSession("OwnerDetails", AlertData);
       setshowOwnerDetailsForm(true);
-   
-// 
+
+      //
       // if (!TenentResponseIsExitData?.TenantDetails) {
       //   sessionStorage.setItem("TenentFillForm", true);
       //   dispatch(TenentResponseIsExitAction(SinglePostId));
@@ -371,7 +373,10 @@ export default function SinglePostDetails() {
       <div className="floating-buttons">
         {/* Call Button */}
         <Link to="tel:+917837840785" className="call-button">
-          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
+          <img
+            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png"
+            alt="Call"
+          />
         </Link>
         {/* WhatsApp Button */}
         <Link
@@ -413,7 +418,10 @@ export default function SinglePostDetails() {
                 {getSinglePostData?.SinglePost?.PostVerifyShow ? (
                   getSinglePostData?.SinglePost?.PostVerify ? (
                     <div className="active-post">
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/verified-tag.svg" alt="verified-tag" />
+                      <img
+                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/verified-tag.svg"
+                        alt="verified-tag"
+                      />
                       <p className="active-post-para">Verified</p>
                     </div>
                   ) : null // If PostVerifyShow is true but PostVerify is false, show nothing
@@ -434,38 +442,39 @@ export default function SinglePostDetails() {
                 <div className="prop-grid">
                   {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType !=
                     "Plot/Land" && (
-                      <>
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
-                              {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
-                                (text) => {
-                                  return `+ ${text == "Pooja Room"
-                                      ? "Pooja"
-                                      : text == "Servant Room"
-                                        ? "SQ"
-                                        : text == "Study Room"
-                                          ? "Study"
-                                          : text == "Store Room"
-                                            ? "Store"
-                                            : text == "Terrace"
-                                              ? "Ter"
-                                              : ""
-                                    }`;
-                                }
-                              )}
-                            </span>
-                            <p> Type </p>
-                          </div>
+                    <>
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
+                            {getSinglePostData?.SinglePost?.PropertyDetails?.OtherRoom?.map(
+                              (text) => {
+                                return `+ ${
+                                  text == "Pooja Room"
+                                    ? "Pooja"
+                                    : text == "Servant Room"
+                                    ? "SQ"
+                                    : text == "Study Room"
+                                    ? "Study"
+                                    : text == "Store Room"
+                                    ? "Store"
+                                    : text == "Terrace"
+                                    ? "Ter"
+                                    : ""
+                                }`;
+                              }
+                            )}
+                          </span>
+                          <p> Type </p>
                         </div>
-                      </>
-                    )}
+                      </div>
+                    </>
+                  )}
 
                   <div className="property-info-tags">
                     <img
@@ -478,7 +487,7 @@ export default function SinglePostDetails() {
                       {areaDetails ? (
                         <div className="img-box-details-span">
                           <span>
-                            {`${areaDetails?.value} ${areaDetails?.unit}`}
+                            {`${areaDetails?.value} ${areaDetails?.uSinglePostnit}`}
                           </span>
                           <br />
                           <p>{areaDetails?.label}</p>
@@ -488,235 +497,236 @@ export default function SinglePostDetails() {
                   </div>
                   {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType !=
                     "Plot/Land" && (
-                      <>
+                    <>
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {
+                              getSinglePostData?.SinglePost?.AmenitiesDetails
+                                ?.Furnishing
+                            }
+                          </span>
+                          <p>Furnishing Details</p>
+                        </div>
+                      </div>
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/overlooking.png"
+                          alt="icon"
+                        />
+
+                        {getSinglePostData?.SinglePost?.FloorDetails
+                          ?.OverLookingView && (
+                          <>
+                            <div className="img-box-imp-data">
+                              <span className="img-box-details-span">
+                                {
+                                  getSinglePostData?.SinglePost?.FloorDetails
+                                    ?.OverLookingView[0]
+                                }
+                              </span>
+                              <p> Overlooking View </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {floorDetails}
+                          </span>
+                          <p> Floor</p>
+                        </div>
+                      </div>
+
+                      {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
+                        ?.CoveredParking > 0 ||
+                      getSinglePostData?.SinglePost?.PropertyDetails?.Parking
+                        ?.OpenParking > 0 ? (
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                            // src="/img/Plot-Dimension.svg"
+                            alt="icon"
+                          />
+                          <div className="img-box-imp-data">
+                            <span className="img-box-details-span">
+                              {getSinglePostData?.SinglePost?.PropertyDetails
+                                ?.Parking?.CoveredParking +
+                                getSinglePostData?.SinglePost?.PropertyDetails
+                                  ?.Parking?.OpenParking}
+                            </span>
+                            <p> Parking </p>
+                          </div>
+                        </div>
+                      ) : getSinglePostData?.SinglePost?.BasicDetails
+                          ?.PropertyStatus ? (
+                        <div className="property-info-tags">
+                          <img
+                            className="icon-detials"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/possession_.svg"
                             alt="icon"
                           />
                           <div className="img-box-imp-data">
                             <span className="img-box-details-span">
                               {
-                                getSinglePostData?.SinglePost?.AmenitiesDetails
-                                  ?.Furnishing
+                                getSinglePostData?.SinglePost?.BasicDetails
+                                  ?.PropertyStatus
                               }
                             </span>
-                            <p>Furnishing Details</p>
+                            <p> Status</p>
                           </div>
                         </div>
+                      ) : (
                         <div className="property-info-tags">
                           <img
                             className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/overlooking.png"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/current_prop_status.svg"
                             alt="icon"
                           />
 
-                          {
-                            getSinglePostData?.SinglePost?.FloorDetails
-                              ?.OverLookingView && <>
-
-                              <div className="img-box-imp-data">
-                                <span className="img-box-details-span">
-                                  {
-                                    getSinglePostData?.SinglePost?.FloorDetails
-                                      ?.OverLookingView[0]
-
-                                  }
-                                </span>
-                                {/* <p> Overlooking View </p> */}
-                              </div>
-                            </>
-                          }
-
-                        </div>
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
-                            alt="icon"
-                          />
                           <div className="img-box-imp-data">
                             <span className="img-box-details-span">
-                              {floorDetails}
+                              {
+                                getSinglePostData?.SinglePost?.AmenitiesDetails
+                                  ?.PowerBackUp
+                              }
                             </span>
-                            <p> Floor</p>
+                            <p> Power BackUp</p>
                           </div>
                         </div>
-
-                        {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
-                          ?.CoveredParking > 0 ||
-                          getSinglePostData?.SinglePost?.PropertyDetails?.Parking
-                            ?.OpenParking > 0 ? (
-                          <div className="property-info-tags">
-                            <img
-                              className="icon-detials"
-                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                              // src="/img/Plot-Dimension.svg"
-                              alt="icon"
-                            />
-                            <div className="img-box-imp-data">
-                              <span className="img-box-details-span">
-                                {getSinglePostData?.SinglePost?.PropertyDetails
-                                  ?.Parking?.CoveredParking +
-                                  getSinglePostData?.SinglePost?.PropertyDetails
-                                    ?.Parking?.OpenParking}
-                              </span>
-                              <p> Parking </p>
-                            </div>
-                          </div>
-                        ) : getSinglePostData?.SinglePost?.BasicDetails
-                          ?.PropertyStatus ? (
-                          <div className="property-info-tags">
-                            <img
-                              className="icon-detials"
-                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/possession_.svg"
-                              alt="icon"
-                            />
-                            <div className="img-box-imp-data">
-                              <span className="img-box-details-span">
-                                {
-                                  getSinglePostData?.SinglePost?.BasicDetails
-                                    ?.PropertyStatus
-                                }
-                              </span>
-                              <p> Status</p>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="property-info-tags">
-                            <img
-                              className="icon-detials"
-                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/current_prop_status.svg"
-                              alt="icon"
-                            />
-
-                            <div className="img-box-imp-data">
-                              <span className="img-box-details-span">
-                                {
-                                  getSinglePostData?.SinglePost?.AmenitiesDetails
-                                    ?.PowerBackUp
-                                }
-                              </span>
-                              <p> Power BackUp</p>
-                            </div>
-                          </div>
-                        )}
-                      </>
-                    )}
+                      )}
+                    </>
+                  )}
 
                   {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType ==
                     "Plot/Land" && (
-                      <>
-                        {/* PlotDimensions */}
+                    <>
+                      {/* PlotDimensions */}
 
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {typeof getSinglePostData?.SinglePost?.AreaDetails
-                                ?.PlotDimensions == "string"
-                                ? getSinglePostData?.SinglePost?.AreaDetails
-                                  ?.PlotDimensions
-                                : <> <span>
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {typeof getSinglePostData?.SinglePost?.AreaDetails
+                              ?.PlotDimensions == "string" ? (
+                              getSinglePostData?.SinglePost?.AreaDetails
+                                ?.PlotDimensions
+                            ) : (
+                              <>
+                                {" "}
+                                <span>
                                   {
                                     getSinglePostData?.SinglePost?.AreaDetails
                                       ?.PlotDimensions.Length
                                   }
                                 </span>
-                                  <span > x </span>
-                                  <span>
-                                    {" "}
-                                    {
-                                      getSinglePostData?.SinglePost?.AreaDetails
-                                        ?.PlotDimensions.Breadth
-                                    }
-                                  </span></>}
+                                <span> x </span>
+                                <span>
+                                  {" "}
+                                  {
+                                    getSinglePostData?.SinglePost?.AreaDetails
+                                      ?.PlotDimensions.Breadth
+                                  }
+                                </span>
+                              </>
+                            )}
+                          </span>
 
-                            </span>
-
-                            <p> Plot Dimensions</p>
-                          </div>
+                          <p> Plot Dimensions</p>
                         </div>
+                      </div>
 
-                        {/* Possission Status  */}
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {
-                                getSinglePostData?.SinglePost?.BasicDetails
-                                  ?.PossessionStatus
-                              }
-                            </span>
-                            <p> Possission Status</p>
-                          </div>
+                      {/* Possission Status  */}
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {
+                              getSinglePostData?.SinglePost?.BasicDetails
+                                ?.PossessionStatus
+                            }
+                          </span>
+                          <p> Possission Status</p>
                         </div>
+                      </div>
 
-                        {/* current property status  */}
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {
-                                getSinglePostData?.SinglePost?.BasicDetails
-                                  ?.CurrentPropertyStatus
-                              }
-                            </span>
-                            <p> Current Property Status</p>
-                          </div>
+                      {/* current property status  */}
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {
+                              getSinglePostData?.SinglePost?.BasicDetails
+                                ?.CurrentPropertyStatus
+                            }
+                          </span>
+                          <p> Current Property Status</p>
                         </div>
+                      </div>
 
-                        {/* Plot direction  */}
+                      {/* Plot direction  */}
 
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {
-                                getSinglePostData?.SinglePost?.OtherDetails
-                                  ?.PlotDirection
-                              }
-                            </span>
-                            <p>Plot Direction</p>
-                          </div>
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {
+                              getSinglePostData?.SinglePost?.OtherDetails
+                                ?.PlotDirection
+                            }
+                          </span>
+                          <p>Plot Direction</p>
                         </div>
+                      </div>
 
-                        {/* Plot Facing  */}
-                        <div className="property-info-tags">
-                          <img
-                            className="icon-detials"
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
-                            alt="icon"
-                          />
-                          <div className="img-box-imp-data">
-                            <span className="img-box-details-span">
-                              {
-                                getSinglePostData?.SinglePost?.OtherDetails
-                                  ?.PlotFacing
-                              }
-                            </span>
-                            <p>Plot Facing </p>
-                          </div>
+                      {/* Plot Facing  */}
+                      <div className="property-info-tags">
+                        <img
+                          className="icon-detials"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                          alt="icon"
+                        />
+                        <div className="img-box-imp-data">
+                          <span className="img-box-details-span">
+                            {
+                              getSinglePostData?.SinglePost?.OtherDetails
+                                ?.PlotFacing
+                            }
+                          </span>
+                          <p>Plot Facing </p>
                         </div>
-                      </>
-                    )}
+                      </div>
+                    </>
+                  )}
                   {/* {getSinglePostData.SinglePost.BasicDetails
                       .PropertyStatus && (
                       <PropertyDataBox
@@ -735,91 +745,86 @@ export default function SinglePostDetails() {
                   <div className="property-price">
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Sale" && (
-                        <>
-                          <span className="ReservePrice-section">
-                            Reserve Price :{" "}
-                            <span className="price-value-in-span">
-                              {formatReservePrice(
-                                getSinglePostData?.SinglePost?.PricingDetails
-                                  ?.ExpectedPrice
-                              )}
-                            </span>
-                            {getSinglePostData?.SinglePost?.BasicDetails
-                              ?.ApartmentType == "Plot/Land" ? (
-                              <>
-                                <p className="lisitng-area-section">
-                                  ₹
-                                  { String(
-              getSinglePostData?.SinglePost?.PricingDetails
-              ?.PricePerSqYd
-            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                    
-                                  }
-                                  Per sq.yd
-                                </p>
-                              </>
-                            ) : (
-                              <>
-                                <p className="lisitng-area-section">
-                                  ₹{" "}
-                                  { String(
-              getSinglePostData?.SinglePost?.PricingDetails
-              ?.PricePerSqFt
-            ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                    
-                                  }
-                                  {" "}
-                                  Per sqft
-                                </p>
-                              </>
+                      <>
+                        <span className="ReservePrice-section">
+                          Reserve Price :{" "}
+                          <span className="price-value-in-span">
+                            {formatReservePrice(
+                              getSinglePostData?.SinglePost?.PricingDetails
+                                ?.ExpectedPrice
                             )}
                           </span>
-
-                          {!["Owner", "Admin"].includes(medata?.user?.Role) && (
-                            <span
-                              className="original-price"
-                              ref={BiddingFormOpenBtnRef}
-                              onClick={() => {
-                                if (medata && medata.IsAuthenticated === true) {
-                                  setshowBiddingForm(true);
-                                } else {
-                                  setRedirectPath("/show-offerForm");
-                                  navigate("/login");
-                                }
-                              }}
-                            >
-                              Make Your Offer
-                            </span>
+                          {getSinglePostData?.SinglePost?.BasicDetails
+                            ?.ApartmentType == "Plot/Land" ? (
+                            <>
+                              <p className="lisitng-area-section">
+                                ₹
+                                {String(
+                                  getSinglePostData?.SinglePost?.PricingDetails
+                                    ?.PricePerSqYd
+                                ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                Per sq.yd
+                              </p>
+                            </>
+                          ) : (
+                            <>
+                              <p className="lisitng-area-section">
+                                ₹{" "}
+                                {String(
+                                  getSinglePostData?.SinglePost?.PricingDetails
+                                    ?.PricePerSqFt
+                                ).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                                Per sqft
+                              </p>
+                            </>
                           )}
-                        </>
-                      )}
+                        </span>
+
+                        {!["Owner", "Admin"].includes(medata?.user?.Role) &&!getSinglePostData?.SinglePost?.myPost && (
+                          <span
+                            className="original-price"
+                            ref={BiddingFormOpenBtnRef}
+                            onClick={() => {
+                              if (medata && medata.IsAuthenticated === true) {
+                                setshowBiddingForm(true);
+                              } else {
+                                setRedirectPath("/show-offerForm");
+                                navigate("/login");
+                              }
+                            }}
+                          >
+                            Make Your Offer
+                          </span>
+                        )}
+                      </>
+                    )}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
-                        <>
-                          <div className="rent-main-section">
-                            <div>
-                              <p className="rent-price-main">
-                                {formatReservePrice(
-                                  getSinglePostData?.SinglePost?.PricingDetails
-                                    ?.ExpectedRent
-                                )}{" "}
-                                <span>/Month</span>
-                              </p>
-                              <p className="rent-ques-section">Rent Price</p>
-                            </div>
-
-                            <div>
-                              <p className="rent-price-main">
-                                {formatReservePrice(
-                                  getSinglePostData?.SinglePost?.PricingDetails
-                                    ?.DepositePrice
-                                )}
-                              </p>
-                              <p className="rent-ques-section">Deposite Price</p>
-                            </div>
+                      <>
+                        <div className="rent-main-section">
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData?.SinglePost?.PricingDetails
+                                  ?.ExpectedRent
+                              )}{" "}
+                              <span>/Month</span>
+                            </p>
+                            <p className="rent-ques-section">Rent Price</p>
                           </div>
 
-                          {/* {!medata || !medata.IsAuthenticated ? (
+                          <div>
+                            <p className="rent-price-main">
+                              {formatReservePrice(
+                                getSinglePostData?.SinglePost?.PricingDetails
+                                  ?.DepositePrice
+                              )}
+                            </p>
+                            <p className="rent-ques-section">Deposite Price</p>
+                          </div>
+                        </div>
+
+                        {/* {!medata || !medata.IsAuthenticated ? (
                           <span
                             className="original-price"
                             onClick={() => {
@@ -852,21 +857,23 @@ export default function SinglePostDetails() {
                             </span>
                           )
                         )} */}
-                        </>
-                      )}
+                      </>
+                    )}
                   </div>
                 </div>
 
                 <div
-                  className={`property-actions ${getSinglePostData.SinglePost.BasicDetails.PropertyAdType ==
-                    "Rent"
-                    ? "property-actions-rent"
-                    : "property-actions-sale"
-                    }`}
+                  className={`property-actions ${
+                    getSinglePostData?.SinglePost?.BasicDetails
+                      ?.PropertyAdType == "Rent"
+                      ? "property-actions-rent"
+                      : "property-actions-sale"
+                  }`}
                 >
                   {!["Owner", "Admin"].includes(medata?.user?.Role) &&
                     getSinglePostData?.SinglePost?.BasicDetails
-                      ?.PropertyAdType != "Rent" && (
+                      ?.PropertyAdType != "Rent" &&
+                    !getSinglePostData?.SinglePost?.myPost && (
                       <>
                         {" "}
                         <button
@@ -901,7 +908,6 @@ export default function SinglePostDetails() {
                     {/* </button> */}
                   </Link>
 
-
                   {/* <button
                     className="original-price border-0"
                     ref={showOwnerDetailsFormRef}
@@ -912,7 +918,7 @@ export default function SinglePostDetails() {
                     View Number
                   </button> */}
                   {getSinglePostData?.SinglePost?.BasicDetails
-                    ?.PropertyAdType === "Rent" ? (
+                    ?.PropertyAdType === "Rent" && !getSinglePostData?.SinglePost?.myPost ? (
                     <div>
                       {!medata || !medata.IsAuthenticated ? (
                         <span
@@ -931,7 +937,11 @@ export default function SinglePostDetails() {
                             ref={showOwnerDetailsFormRef}
                             onClick={() => {
                               // setshowOwnerDetailsForm(true);
-                              dispatch(ViewOwnerDetailsAction(getSinglePostData?.SinglePost?._id))
+                              dispatch(
+                                ViewOwnerDetailsAction(
+                                  getSinglePostData?.SinglePost?._id
+                                )
+                              );
                             }}
                           >
                             View Number
@@ -967,7 +977,6 @@ export default function SinglePostDetails() {
                       )}
                     </div>
                   ) : null}
-
                 </div>
                 {getSinglePostData?.SinglePost?.PostVerifyData?.Time && (
                   <div className="posted-by-section">
@@ -977,23 +986,36 @@ export default function SinglePostDetails() {
                          <path d="M15.7741 4.63696L12.4718 4.63697V3.81501C12.4718 3.58715 12.2872 3.40259 12.0594 3.40259C11.8315 3.40259 11.647 3.58715 11.647 3.81501V4.63677H8.34757V3.81501C8.34757 3.58715 8.16301 3.40259 7.93514 3.40259C7.70728 3.40259 7.52272 3.58715 7.52272 3.81501V4.63677H4.22621C3.77069 4.63677 3.40137 5.00609 3.40137 5.46161V15.7722C3.40137 16.2277 3.77069 16.5971 4.22621 16.5971H15.7741C16.2296 16.5971 16.5989 16.2277 16.5989 15.7722V5.46161C16.5989 5.00629 16.2296 4.63696 15.7741 4.63696ZM15.7741 15.7722H4.22621V5.46161H7.52272V5.87713C7.52272 6.10498 7.70728 6.28955 7.93514 6.28955C8.16301 6.28955 8.34757 6.10498 8.34757 5.87713V5.46182H11.647V5.87734C11.647 6.1052 11.8315 6.28976 12.0594 6.28976C12.2872 6.28976 12.4718 6.1052 12.4718 5.87734V5.46182H15.7741V15.7722ZM12.8871 9.99847H13.712C13.9396 9.99847 14.1244 9.8137 14.1244 9.58605V8.7612C14.1244 8.53354 13.9396 8.34877 13.712 8.34877H12.8871C12.6595 8.34877 12.4747 8.53354 12.4747 8.7612V9.58605C12.4747 9.8137 12.6595 9.99847 12.8871 9.99847ZM12.8871 13.2977H13.712C13.9396 13.2977 14.1244 13.1131 14.1244 12.8852V12.0604C14.1244 11.8327 13.9396 11.648 13.712 11.648H12.8871C12.6595 11.648 12.4747 11.8327 12.4747 12.0604V12.8852C12.4747 13.1133 12.6595 13.2977 12.8871 13.2977ZM10.4126 11.648H9.58773C9.36007 11.648 9.1753 11.8327 9.1753 12.0604V12.8852C9.1753 13.1131 9.36007 13.2977 9.58773 13.2977H10.4126C10.6402 13.2977 10.825 13.1131 10.825 12.8852V12.0604C10.825 11.8329 10.6402 11.648 10.4126 11.648ZM10.4126 8.34877H9.58773C9.36007 8.34877 9.1753 8.53354 9.1753 8.7612V9.58605C9.1753 9.8137 9.36007 9.99847 9.58773 9.99847H10.4126C10.6402 9.99847 10.825 9.8137 10.825 9.58605V8.7612C10.825 8.53333 10.6402 8.34877 10.4126 8.34877ZM7.11318 8.34877H6.28833C6.06068 8.34877 5.87591 8.53354 5.87591 8.7612V9.58605C5.87591 9.8137 6.06068 9.99847 6.28833 9.99847H7.11318C7.34084 9.99847 7.52561 9.8137 7.52561 9.58605V8.7612C7.52561 8.53333 7.34084 8.34877 7.11318 8.34877ZM7.11318 11.648H6.28833C6.06068 11.648 5.87591 11.8327 5.87591 12.0604V12.8852C5.87591 13.1131 6.06068 13.2977 6.28833 13.2977H7.11318C7.34084 13.2977 7.52561 13.1131 7.52561 12.8852V12.0604C7.52561 11.8329 7.34084 11.648 7.11318 11.648Z" fill="#0078D4"/>
                          </svg>
                          `)}`}
-                         alt="post-img"
+                      alt="post-img"
                     />
                     <p>
                       Posted On :{" "}
                       <span>
-                        {
-                          (() => {
-                            const date = new Date(getSinglePostData?.SinglePost?.PostVerifyData?.Time);
-                            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        {(() => {
+                          const date = new Date(
+                            getSinglePostData?.SinglePost?.PostVerifyData?.Time
+                          );
+                          const monthNames = [
+                            "Jan",
+                            "Feb",
+                            "Mar",
+                            "Apr",
+                            "May",
+                            "Jun",
+                            "Jul",
+                            "Aug",
+                            "Sep",
+                            "Oct",
+                            "Nov",
+                            "Dec",
+                          ];
 
-                            const day = ("0" + date.getDate()).slice(-2);  // Ensures two-digit day
-                            const month = monthNames[date.getMonth()];     // Get abbreviated month name
-                            const year = date.getFullYear().toString().slice(-2);  // Get last two digits of the year
+                          const day = ("0" + date.getDate()).slice(-2); // Ensures two-digit day
+                          const month = monthNames[date.getMonth()]; // Get abbreviated month name
+                          const year = date.getFullYear().toString().slice(-2); // Get last two digits of the year
 
-                            return `${day}-${month}-${year}`;
-                          })()
-                        }
+                          return `${day}-${month}-${year}`;
+                        })()}
                       </span>
                     </p>
                   </div>
@@ -1037,15 +1059,27 @@ export default function SinglePostDetails() {
                     {/* PropertyStatus */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyStatus && (
-                        <PropertyDataBox
-                          Answer={
-                            getSinglePostData?.SinglePost?.BasicDetails
-                              ?.PropertyStatus
-                          }
-                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/status.png"
-                          Data={"Status"}
-                        />
-                      )}
+                      <PropertyDataBox
+                        Answer={
+                          getSinglePostData?.SinglePost?.BasicDetails
+                            ?.PropertyStatus
+                        }
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/possession_.svg"
+                        Data={"Status"}
+                      />
+                    )}
+
+                    {getSinglePostData?.SinglePost?.BasicDetails
+                      ?.PossessionStatus && (
+                      <PropertyDataBox
+                        Answer={
+                          getSinglePostData?.SinglePost?.BasicDetails
+                            ?.PossessionStatus
+                        }
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/status.png"
+                        Data={"Possession Status"}
+                      />
+                    )}
 
                     {/* areaDetails */}
                     {areaDetails && (
@@ -1058,184 +1092,192 @@ export default function SinglePostDetails() {
 
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.ApartmentType != "Plot/Land" && (
-                        <>
-                          {/* BHKType */}
+                      <>
+                        {/* BHKType */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
+                          Data={"BHK Type"}
+                        />
+
+                        {OtherArea && (
                           <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BHKType} BHK`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
-                            Data={"BHK Type"}
+                            Answer={`${OtherArea?.value} ${OtherArea?.unit}`}
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
+                            Data={OtherArea?.label}
                           />
+                        )}
 
-                          {OtherArea && (
-                            <PropertyDataBox
-                              Answer={`${OtherArea?.value} ${OtherArea?.unit}`}
-                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
-                              Data={OtherArea?.label}
-                            />
-                          )}
-
-                          {/* Bathroom */}
-                          {getSinglePostData?.SinglePost?.PropertyDetails
-                            ?.Bathroom > 0 && (
-                              <PropertyDataBox
-                                Answer={
-                                  getSinglePostData?.SinglePost?.PropertyDetails
-                                    ?.Bathroom
-                                }
-                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
-                                Data={"Bathrooms"}
-                              />
-                            )}
-
-                          {/* Balcony */}
-                          {getSinglePostData?.SinglePost?.PropertyDetails
-                            ?.Balcony > 0 && (
-                              <PropertyDataBox
-                                Answer={
-                                  getSinglePostData?.SinglePost?.PropertyDetails
-                                    ?.Balcony
-                                }
-                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/balcony.png"
-                                Data={"Balconies"}
-                              />
-                            )}
-
-                          {/* Furnishing */}
+                        {/* Bathroom */}
+                        {getSinglePostData?.SinglePost?.PropertyDetails
+                          ?.Bathroom > 0 && (
                           <PropertyDataBox
                             Answer={
-                              getSinglePostData?.SinglePost?.AmenitiesDetails
-                                ?.Furnishing
+                              getSinglePostData?.SinglePost?.PropertyDetails
+                                ?.Bathroom
                             }
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
-                            Data={"Furnishing Details"}
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
+                            Data={"Bathrooms"}
                           />
+                        )}
 
-                          {/* FloorDetails */}
-
+                        {/* Balcony */}
+                        {getSinglePostData?.SinglePost?.PropertyDetails
+                          ?.Balcony > 0 && (
                           <PropertyDataBox
-                            Id={"property-dir"}
                             Answer={
-                              getSinglePostData?.SinglePost?.FloorDetails
-                                ?.PropertyDirection
+                              getSinglePostData?.SinglePost?.PropertyDetails
+                                ?.Balcony
                             }
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
-                            Data={"Property Direction"}
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/balcony.png"
+                            Data={"Balconies"}
                           />
-                          {/* OverLookingView */}
+                        )}
+
+                        {/* Furnishing */}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData?.SinglePost?.AmenitiesDetails
+                              ?.Furnishing
+                          }
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
+                          Data={"Furnishing Details"}
+                        />
+
+                        {/* FloorDetails */}
+
+                        <PropertyDataBox
+                          Id={"property-dir"}
+                          Answer={
+                            getSinglePostData?.SinglePost?.FloorDetails
+                              ?.PropertyDirection
+                          }
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
+                          Data={"Property Direction"}
+                        />
+                        {/* OverLookingView */}
+                        <PropertyDataBox
+                          Answer={
+                            getSinglePostData?.SinglePost?.FloorDetails
+                              ?.OverLookingView
+                          }
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
+                          Data={"Overlooking View"}
+                        />
+
+                        {/* Possission Status  */}
+                        {getSinglePostData?.SinglePost?.FloorDetails
+                          ?.PossessionStatus && (
                           <PropertyDataBox
                             Answer={
-                              getSinglePostData?.SinglePost?.FloorDetails
-                                ?.OverLookingView
+                              getSinglePostData?.SinglePost?.BasicDetails
+                                ?.PossessionStatus
                             }
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
-                            Data={"Overlooking View"}
+                            Data={" Possission Status"}
                           />
-
-                          {/* Possission Status  */}
-                          {getSinglePostData?.SinglePost?.FloorDetails
-                            ?.PossessionStatus && <PropertyDataBox
-                              Answer={
-                                getSinglePostData?.SinglePost?.BasicDetails
-                                  ?.PossessionStatus
-                              }
-                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
-                              Data={" Possission Status"}
-                            />
-                          }
-                          {/* additional pricing details */}
-                          {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges && <PropertyDataBox
+                        )}
+                        {/* additional pricing details */}
+                        {getSinglePostData?.SinglePost?.PricingDetails
+                          ?.AdditionalDetails?.MaintenanceCharges && (
+                          <PropertyDataBox
                             Answer={
-                              getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MaintenanceCharges
+                              getSinglePostData?.SinglePost?.PricingDetails
+                                ?.AdditionalDetails?.MaintenanceCharges
                             }
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                             Data={"Maintanance Details"}
-                          />}
+                          />
+                        )}
 
-                          {/* additional pricing details */}
-                          {getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent && <PropertyDataBox
+                        {/* additional pricing details */}
+                        {getSinglePostData?.SinglePost?.PricingDetails
+                          ?.AdditionalDetails?.MonthlyExpectedRent && (
+                          <PropertyDataBox
                             Answer={
-                              getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.MonthlyExpectedRent
+                              getSinglePostData?.SinglePost?.PricingDetails
+                                ?.AdditionalDetails?.MonthlyExpectedRent
                             }
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                             Data={"Monthly Expected Rent"}
-                          />}
-
-
-
-                          {/* current property status  */}
-
-                          {getSinglePostData?.SinglePost?.BasicDetails
-                            ?.CurrentPropertyStatus && <PropertyDataBox
-                              Answer={
-                                getSinglePostData?.SinglePost?.BasicDetails
-                                  ?.CurrentPropertyStatus
-                              }
-                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
-                              Data={"Current Property Status"}
-                            />
-                          }
-
-                          {/* Property on Floor  , Total Floors" */}
-                          {getSinglePostData?.SinglePost?.BasicDetails
-                            ?.PropertyAdType == "Sale" && (
-                              <>
-                                {getSinglePostData?.SinglePost?.FloorDetails
-                                  ?.PropertyOnFloor && (
-                                    <PropertyDataBox
-                                      Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.PropertyOnFloor}`}
-                                      Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
-                                      Data={"Property on Floor"}
-                                    />
-                                  )}
-                                <PropertyDataBox
-                                  Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.TotalFloors}`}
-                                  Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
-                                  Data={"Total Floors"}
-                                />
-                              </>
-                            )}
-
-                          {/* Flooring Type */}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.FlooringType}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Flooring-Type.png"
-                            Data={"Flooring Type"}
                           />
-                        </>
-                      )}
+                        )}
+
+                        {/* current property status  */}
+
+                        {getSinglePostData?.SinglePost?.BasicDetails
+                          ?.CurrentPropertyStatus && (
+                          <PropertyDataBox
+                            Answer={
+                              getSinglePostData?.SinglePost?.BasicDetails
+                                ?.CurrentPropertyStatus
+                            }
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
+                            Data={"Current Property Status"}
+                          />
+                        )}
+
+                        {/* Property on Floor  , Total Floors" */}
+                        {getSinglePostData?.SinglePost?.BasicDetails
+                          ?.PropertyAdType == "Sale" && (
+                          <>
+                            {getSinglePostData?.SinglePost?.FloorDetails
+                              ?.PropertyOnFloor && (
+                              <PropertyDataBox
+                                Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.PropertyOnFloor}`}
+                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                                Data={"Property on Floor"}
+                              />
+                            )}
+                            <PropertyDataBox
+                              Answer={`${getSinglePostData?.SinglePost?.FloorDetails?.TotalFloors}`}
+                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                              Data={"Total Floors"}
+                            />
+                          </>
+                        )}
+
+                        {/* Flooring Type */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.FlooringType}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Flooring-Type.png"
+                          Data={"Flooring Type"}
+                        />
+                      </>
+                    )}
 
                     {/* Property on Floor  */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
-                        <PropertyDataBox
-                          Answer={floorDetails}
-                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
-                          Data={"Property on Floor"}
-                        />
-                      )}
+                      <PropertyDataBox
+                        Answer={floorDetails}
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                        Data={"Property on Floor"}
+                      />
+                    )}
 
                     {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
                       ?.OpenParking > 0 && (
-                        <PropertyDataBox
-                          Answer={
-                            getSinglePostData?.SinglePost?.PropertyDetails
-                              ?.Parking?.OpenParking
-                          }
-                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                          Data={"Open Parking"}
-                        />
-                      )}
+                      <PropertyDataBox
+                        Answer={
+                          getSinglePostData?.SinglePost?.PropertyDetails
+                            ?.Parking?.OpenParking
+                        }
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                        Data={"Open Parking"}
+                      />
+                    )}
                     {getSinglePostData?.SinglePost?.PropertyDetails?.Parking
                       ?.CoveredParking > 0 && (
-                        <PropertyDataBox
-                          Answer={
-                            getSinglePostData?.SinglePost?.PropertyDetails
-                              ?.Parking?.CoveredParking
-                          }
-                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                          Data={"Covered Parking"}
-                        />
-                      )}
+                      <PropertyDataBox
+                        Answer={
+                          getSinglePostData?.SinglePost?.PropertyDetails
+                            ?.Parking?.CoveredParking
+                        }
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                        Data={"Covered Parking"}
+                      />
+                    )}
                     {/* Parking  */}
 
                     {/* Power BackUp */}
@@ -1246,217 +1288,217 @@ export default function SinglePostDetails() {
                     />
                     {getSinglePostData?.SinglePost?.AmenitiesDetails
                       ?.WaterSource && (
-                        <>
-                          {/* Water Source */}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/water.png"
-                            Data={"Water Source"}
-                          />
-                        </>
-                      )}
+                      <>
+                        {/* Water Source */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.AmenitiesDetails?.WaterSource}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/water.png"
+                          Data={"Water Source"}
+                        />
+                      </>
+                    )}
                     {(getSinglePostData?.SinglePost?.PropertyDetails
                       ?.Basement == true ||
                       getSinglePostData?.SinglePost?.PropertyDetails
                         ?.Basement == false) && (
-                        <>
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.PropertyDetails
-                                ?.Basement == true
-                                ? "Yes"
-                                : getSinglePostData?.SinglePost?.PropertyDetails
+                      <>
+                        <PropertyDataBox
+                          Answer={`${
+                            getSinglePostData?.SinglePost?.PropertyDetails
+                              ?.Basement == true
+                              ? "Yes"
+                              : getSinglePostData?.SinglePost?.PropertyDetails
                                   ?.Basement == false
-                                  ? "No"
-                                  : ""
-                              } `}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                            Data={"Basement"}
-                          />
+                              ? "No"
+                              : ""
+                          } `}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                          Data={"Basement"}
+                        />
 
-                          {getSinglePostData?.SinglePost?.PropertyDetails
-                            ?.Basement == true && (
-                              <>
-                                <PropertyDataBox
-                                  Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
-                                  Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                                  Data={"Basement Area"}
-                                />
-                              </>
-                            )}
-                        </>
-                      )}
+                        {getSinglePostData?.SinglePost?.PropertyDetails
+                          ?.Basement == true && (
+                          <>
+                            <PropertyDataBox
+                              Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
+                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                              Data={"Basement Area"}
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
 
                     {/* Property Age */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAge && (
-                        <PropertyDataBox
-                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
-                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Property-age.png"
-                          Data={"Property Age"}
-                        />
-                      )}
+                      <PropertyDataBox
+                        Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.PropertyAge} Year`}
+                        Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Property-age.png"
+                        Data={"Property Age"}
+                      />
+                    )}
 
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.PropertyAdType == "Rent" && (
-                        <>
-                          <PropertyDataBox
-                            Answer={`${new Date(
-                              getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                            ).getDate()}-${new Date(
+                      <>
+                        <PropertyDataBox
+                          Answer={`${new Date(
+                            getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
+                          ).getDate()}-${
+                            new Date(
                               getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
                             ).getMonth() + 1
-                              }-${new Date(
-                                getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
-                              ).getFullYear()}`}
+                          }-${new Date(
+                            getSinglePostData?.SinglePost?.BasicDetails?.AvailableFrom
+                          ).getFullYear()}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
+                          Data={"Available From"}
+                        />
+
+                        {getSinglePostData?.SinglePost?.PricingDetails
+                          .AdditionalDetails?.PreferredTenant?.length > 0 && (
+                          <PropertyDataBox
+                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
+                              (text) => {
+                                return text;
+                              }
+                            )}`}
                             Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
-                            Data={"Available From"}
+                            Data={"Preferred Tenant"}
                           />
+                        )}
 
-                          {getSinglePostData.SinglePost.PricingDetails
-                            .AdditionalDetails?.PreferredTenant?.length > 0 && (
-                              <PropertyDataBox
-                                Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
-                                  (text) => {
-                                    return text;
-                                  }
-                                )}`}
-                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bathroom.png"
-                                Data={"Preferred Tenant"}
-                              />
-                            )}
-
-                          {getSinglePostData.SinglePost.PricingDetails
-                            .AdditionalDetails?.PreferredTenant?.length > 0 && (
-                              <PropertyDataBox
-                                Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
-                                  (text) => {
-                                    return text;
-                                  }
-                                )}`}
-                                Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/preferred-tenant.svg"
-                                Data={"Preferred Tenant"}
-                              />
-                            )}
-
+                        {getSinglePostData?.SinglePost?.PricingDetails
+                          .AdditionalDetails?.PreferredTenant?.length > 0 && (
                           <PropertyDataBox
-                            Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Expected-rent.svg"
-                            Data={"Expected Rent"}
+                            Answer={`${getSinglePostData?.SinglePost?.PricingDetails?.AdditionalDetails?.PreferredTenant?.map(
+                              (text) => {
+                                return text;
+                              }
+                            )}`}
+                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/preferred-tenant.svg"
+                            Data={"Preferred Tenant"}
                           />
+                        )}
 
-                          <PropertyDataBox
-                            Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice} `}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Security-deposit.svg"
-                            Data={"Security Deposit "}
-                          />
-                        </>
-                      )}
+                        <PropertyDataBox
+                          Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.ExpectedRent}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Expected-rent.svg"
+                          Data={"Expected Rent"}
+                        />
+
+                        <PropertyDataBox
+                          Answer={`₹ ${getSinglePostData?.SinglePost?.PricingDetails?.DepositePrice} `}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Security-deposit.svg"
+                          Data={"Security Deposit "}
+                        />
+                      </>
+                    )}
 
                     {/* Plot Land  */}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.ApartmentType == "Plot/Land" && (
-                        <>
-                          {" "}
-                          {/* Plot Land Other Details  */}
-                          {/* Plot Direction  */}
-                          <PropertyDataBox
-                            Id={"plot-dir"}
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotDirection}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
-                            Data={"Plot Direction"}
-                          />
-                          {/* Plot Facing  */}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotFacing}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plot_facing-.svg"
-                            Data={"Plot Facing"}
-                          />
-                          {/* Plot openside  */}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/open-side.svg"
-                            Data={"Open Side"}
-                          />
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth} Meter`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FrontRoad.svg"
-                            Data={"Front Road Width"}
-                          />
-                          {/* Other Feature   */}
-                          {getSinglePostData?.SinglePost?.AmenitiesDetails
-                            ?.OtherFeature?.length > 0 && (
-                              <div className="overview-box">
-                                <div className="img-icon">
-                                  <img
-                                    className="icon-overview"
-                                    src={"/img/Other-feature.svg"}
-                                    alt="icon"
-                                  />
-                                </div>
-                                <div className="para-span">
-                                  <p className="p-ans">
-                                    {getSinglePostData?.SinglePost?.AmenitiesDetails?.OtherFeature?.map(
-                                      (text, i) => {
-                                        const isLast =
-                                          i ===
-                                          getSinglePostData.SinglePost
-                                            .AmenitiesDetails.OtherFeature.length -
-                                          1;
-                                        return (
-                                          <span key={i}>
-                                            {text}
-                                            {!isLast && ", "}
-                                          </span>
-                                        );
-                                      }
-                                    )}
-                                  </p>
-                                  <p className="p-deta">{"Other Feature"}</p>
-                                </div>
-                              </div>
-                            )}
-                          <PropertyDataBox
-                            Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.ConstructionAllowed}`}
-                            Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
-                            Data={"Construction Allowed"}
-                          />
-
-                        </>
-                      )}
+                      <>
+                        {" "}
+                        {/* Plot Land Other Details  */}
+                        {/* Plot Direction  */}
+                        <PropertyDataBox
+                          Id={"plot-dir"}
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotDirection}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/facing.png"
+                          Data={"Plot Direction"}
+                        />
+                        {/* Plot Facing  */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.PlotFacing}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plot_facing-.svg"
+                          Data={"Plot Facing"}
+                        />
+                        {/* Plot openside  */}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.BasicDetails?.NoOfOpenSide}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/open-side.svg"
+                          Data={"Open Side"}
+                        />
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.FrontRoadWidth} Meter`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FrontRoad.svg"
+                          Data={"Front Road Width"}
+                        />
+                        {/* Other Feature   */}
+                        {getSinglePostData?.SinglePost?.AmenitiesDetails
+                          ?.OtherFeature?.length > 0 && (
+                          <div className="overview-box">
+                            <div className="img-icon">
+                              <img
+                                className="icon-overview"
+                                src={"/img/Other-feature.svg"}
+                                alt="icon"
+                              />
+                            </div>
+                            <div className="para-span">
+                              <p className="p-ans">
+                                {getSinglePostData?.SinglePost?.AmenitiesDetails?.OtherFeature?.map(
+                                  (text, i) => {
+                                    const isLast =
+                                      i ===
+                                      getSinglePostData?.SinglePost
+                                        ?.AmenitiesDetails?.OtherFeature
+                                        ?.length -
+                                        1;
+                                    return (
+                                      <span key={i}>
+                                        {text}
+                                        {!isLast && ", "}
+                                      </span>
+                                    );
+                                  }
+                                )}
+                              </p>
+                              <p className="p-deta">{"Other Feature"}</p>
+                            </div>
+                          </div>
+                        )}
+                        <PropertyDataBox
+                          Answer={`${getSinglePostData?.SinglePost?.OtherDetails?.ConstructionAllowed}`}
+                          Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
+                          Data={"Construction Allowed"}
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
                 {/* furnishing details */}
 
-
-                {getSinglePostData?.SinglePost?.BasicDetails
-                  ?.ApartmentType !== "Plot/Land" &&
+                {getSinglePostData?.SinglePost?.BasicDetails?.ApartmentType !==
+                  "Plot/Land" && (
                   <FurnishDetails
                     furnishD={getSinglePostData?.SinglePost?.AmenitiesDetails}
                   />
-                }
+                )}
 
-                  {/* society features */}
+                {/* society features */}
 
-                  {getSinglePostData?.SinglePost?.AmenitiesDetails
+                {getSinglePostData?.SinglePost?.AmenitiesDetails
                   ?.SocietyAndBuildingFeature && (
-                    <SocietyAndBuildingFeature
-                      feature={
-                        getSinglePostData?.SinglePost?.AmenitiesDetails
-                          ?.SocietyAndBuildingFeature
-                      }
-                    />
-                  )}
+                  <SocietyAndBuildingFeature
+                    feature={
+                      getSinglePostData?.SinglePost?.AmenitiesDetails
+                        ?.SocietyAndBuildingFeature
+                    }
+                  />
+                )}
                 {/* plot features */}
                 {getSinglePostData?.SinglePost?.AmenitiesDetails
                   ?.ProjectAmmenities && (
-                    <SocietyAndBuildingFeature
-                      feature={
-                        getSinglePostData?.SinglePost?.AmenitiesDetails
-                          ?.ProjectAmmenities
-                      }
-                    />
-                  )}
-
+                  <SocietyAndBuildingFeature
+                    feature={
+                      getSinglePostData?.SinglePost?.AmenitiesDetails
+                        ?.ProjectAmmenities
+                    }
+                  />
+                )}
 
                 {!["Admin", "Owner"].includes(medata?.user?.Role) && (
                   <div className="map-loc">
@@ -1494,10 +1536,16 @@ export default function SinglePostDetails() {
                         }
                       }}
                     >
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/warning.png" alt="warning" /> Found
-                      suspicious listing? Report here!
+                      <img
+                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/warning.png"
+                        alt="warning"
+                      />{" "}
+                      Found suspicious listing? Report here!
                     </p>
                   </div>
+                  {/* {
+                    console.log(getSinglePostData ,"getSinglePostdetails")
+                   } */}
 
                   {/* similar property */}
 
@@ -1545,35 +1593,35 @@ export default function SinglePostDetails() {
                                       </p> */}
                                       {item?.BasicDetails?.PropertyAdType ==
                                         "Rent" && (
-                                          <>
-                                            <div className="similar-area-price">
-                                              <div className="similar-area-price-rent-price">
-                                                {formatReservePrice(
-                                                  item?.PricingDetails
-                                                    ?.ExpectedRent
-                                                )}{" "}
-                                                <span>/Month</span>
-                                              </div>
-
-                                              <span className="rent-price-section-similar-property">
-                                                {" "}
-                                                Rent Price{" "}
-                                              </span>
-                                            </div>
-                                          </>
-                                        )}
-                                      {item?.BasicDetails?.PropertyAdType ==
-                                        "Sale" && (
-                                          <>
-                                            <div className="similar-area-price">
+                                        <>
+                                          <div className="similar-area-price">
+                                            <div className="similar-area-price-rent-price">
                                               {formatReservePrice(
                                                 item?.PricingDetails
-                                                  ?.ExpectedPrice
-                                              )}
-                                              <span> Reserved Price </span>
+                                                  ?.ExpectedRent
+                                              )}{" "}
+                                              <span>/Month</span>
                                             </div>
-                                          </>
-                                        )}
+
+                                            <span className="rent-price-section-similar-property">
+                                              {" "}
+                                              Rent Price{" "}
+                                            </span>
+                                          </div>
+                                        </>
+                                      )}
+                                      {item?.BasicDetails?.PropertyAdType ==
+                                        "Sale" && (
+                                        <>
+                                          <div className="similar-area-price">
+                                            {formatReservePrice(
+                                              item?.PricingDetails
+                                                ?.ExpectedPrice
+                                            )}
+                                            <span> Reserved Price </span>
+                                          </div>
+                                        </>
+                                      )}
 
                                       <button className="view-more-btn-3rd">
                                         View More
@@ -1599,7 +1647,7 @@ export default function SinglePostDetails() {
                       BtnRef={BiddingFormOpenBtnRef}
                       SinglePostData={getSinglePostData}
                       PropertyAddress={PropertyAddress}
-                    // setshowMakeOfferSuccessAlert ={setshowMakeOfferSuccessAlert}
+                      // setshowMakeOfferSuccessAlert ={setshowMakeOfferSuccessAlert}
                     />
                   )}
 
@@ -1621,7 +1669,7 @@ export default function SinglePostDetails() {
                       Component={TanantDetailsForm}
                       SetShow={setshowTenantDetailsForm}
                       SinglePostData={getSinglePostData}
-                    // PropertyAddress={PropertyAddress}
+                      // PropertyAddress={PropertyAddress}
                     />
                   )}
 
@@ -1631,7 +1679,7 @@ export default function SinglePostDetails() {
                       SetShow={setshowOwnerDetailsForm}
                       BtnRef={showOwnerDetailsFormRef}
                       Contact={"7837840785"}
-                    // PropertyAddress={PropertyAddress}
+                      // PropertyAddress={PropertyAddress}
                     />
                   )}
 
@@ -1642,7 +1690,7 @@ export default function SinglePostDetails() {
                       SetShow={setOpenReportForm}
                       BtnRef={SupspiciousListingBtn}
                       SinglePostData={getSinglePostData}
-                    // PropertyAddress={PropertyAddress}
+                      // PropertyAddress={PropertyAddress}
                     />
                   )}
 

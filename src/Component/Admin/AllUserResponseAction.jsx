@@ -365,7 +365,6 @@ export default function AllUserResponseAction() {
                           (() => {
                             const fullNumber = `630713${item.ContactNumber}`;
                             const matched = read.find(r => r.ContactNumber === fullNumber);
-
                             if (matched) {
                               return item?.requireData?.length > matched?.requireData
                                 ? <>{item?.requireData?.length}<sup className="text-danger px-1 fw-bolder ">new-{item?.requireData?.length - matched?.requireData}</sup></>

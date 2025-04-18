@@ -581,6 +581,7 @@ color: #FFF;
   .floating-buttons img {
     width: 20px;
     height: 20px;
+    background-color: var(--main-light-clr);
 }
 .floating-buttons a{
   width: 35px;

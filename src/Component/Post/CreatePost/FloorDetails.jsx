@@ -70,7 +70,7 @@ export default function FloorDetails({
   
       if (
         !prevData.TotalFloors &&
-        ["Apartment", "Independent/Builder Floor", "Studio Apartment", "1 RK/PG", "Serviced Apartment"].includes(BasicDetailsData.ApartmentType)
+        ["Apartment", "Pent House","Independent/Builder Floor", "Studio Apartment", "1 RK/PG", "Serviced Apartment"].includes(BasicDetailsData.ApartmentType)
       ) {
         updatedData.PropertyOnFloor = "";
       }
@@ -137,6 +137,7 @@ export default function FloorDetails({
 
         {[
           "Apartment",
+          "Pent House",
           "Independent/Builder Floor",
           // "1 RK/Studio Apartment",
           "Studio Apartment",
@@ -183,7 +184,7 @@ export default function FloorDetails({
       </div>
 
       <div className="fom-group">
-        <p className="label">Property Direction *</p>
+        <p className="Property-Details-heading">Property Direction *</p>
 
         <div className="tab-box">
           {PropertyfacingArray.map((text, i) => {

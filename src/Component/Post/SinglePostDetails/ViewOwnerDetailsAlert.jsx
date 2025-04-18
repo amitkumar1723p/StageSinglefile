@@ -41,16 +41,16 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
   </div>
 
   <p>
-    <strong>Here are Owner contact details for rental property inquiries:</strong>
+    <strong>Here are contact details for rental property inquiries:</strong>
   </p>
   <p>
-    Owner Name: <b>{medata?.user?.Role==="Channel Partner"?<>Team Propertydekho247</>:<>{OwnerDetails?.ownerName}</>}</b>
+     Name: <b>{medata?.user?.Role==="Channel Partner"?<>Team Propertydekho247</>:<>{OwnerDetails?.ownerName}</>}</b>
   </p>
   <p>
-    Owner Contact No: <b>{medata?.user?.Role==="Channel Partner"?<>+91 783-784-0785</>:<>{OwnerDetails?.ownerPhonenumber}</>}</b>
+    Contact No: <b>{medata?.user?.Role==="Channel Partner"?<>+91 783-784-0785</>:<>{OwnerDetails?.ownerPhonenumber}</>}</b>
   </p>
   <p>
-   Owner Email: <b>{medata?.user?.Role==="Channel Partner"?<>sales@propertydekho247.com</>:<>{OwnerDetails?.ownmerEmail}</>}</b>
+    Email: <b>{medata?.user?.Role==="Channel Partner"?<>sales@propertydekho247.com</>:<>{OwnerDetails?.ownmerEmail}</>}</b>
   </p>
   <p>
   <span className="view-owner-details-desclaimer">Disclaimer:</span> The contact details provided have been verified to a reasonable extent; however, their accuracy and authenticity are not guaranteed. We disclaim all liability for any loss, dispute, or consequence arising from their use. Users are advised to exercise discretion.

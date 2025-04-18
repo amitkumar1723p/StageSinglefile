@@ -19,10 +19,10 @@ export default function CreatePostMain() {
   const location = useLocation();
 
   const update = location.pathname.includes("update");
-  console.log(location);
+  
   const navigate = useNavigate();
   // Data State
-  console.log(location);
+   
 
   const [BasicDetailsData, setBasicDetailsData] = useState({});
   const [LocationDetailsData, setLocationDetailsData] = useState({});
@@ -45,7 +45,7 @@ export default function CreatePostMain() {
   //  Form Submit  State
 
   //  Update Post Logic
-  console.log(location);
+ 
   // const []
   // show submit alert
   const [showCreatePostSubmitAlert, setshowCreatePostSubmitAlert] =
@@ -262,6 +262,8 @@ export default function CreatePostMain() {
             setBasicDetailsData({ ...BasicDetails });
           }
 
+          
+
           setLocationDetailsData({ ...LocationDetails });
           setPropertyDetailsData({ ...PropertyDetails });
           setFloorDetailsData({ ...FloorDetails });
@@ -457,6 +459,7 @@ export default function CreatePostMain() {
         [
           "Independent House/Villa",
           "Apartment",
+          "Pent House",
           "Independent/Builder Floor",
           // "1 RK/Studio Apartment",
           "Studio Apartment",
@@ -492,6 +495,7 @@ export default function CreatePostMain() {
         } else if (
           [
             "Apartment",
+            "Pent House",
             // "1 RK/Studio Apartment",
             "Studio Apartment",
             "1 RK/PG",
@@ -555,6 +559,7 @@ export default function CreatePostMain() {
     if (
       [
         "Apartment",
+        "Pent House",
         "Independent House/Villa",
         "Studio Apartment",
         "1 RK/PG",

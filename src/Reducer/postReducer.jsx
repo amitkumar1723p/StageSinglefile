@@ -35,6 +35,8 @@ export const CreatePostReducer = (state = {}, action) => {
     case "submitFreshProjectLeadRequest":
       case"submitFreshProjectLead_VerifyOtpRequest":
       // from here we used fresh project end
+      // conatct
+      case"submitContactFormRequest":
       return {
         ...state,
         loading: true,
@@ -76,7 +78,8 @@ export const CreatePostReducer = (state = {}, action) => {
       case "submitFreshProjectLeadSuccess":  
       case"submitFreshProjectLead_VerifyOtpSuccess":
       // from here we used fresh project end
-
+   // conatct
+   case"submitContactFormSuccess":
       return {
         ...state,
         loading: false,
@@ -119,6 +122,8 @@ export const CreatePostReducer = (state = {}, action) => {
       case"submitFreshProjectLead_VerifyOtpFail":
       //  case "getAllFreshProjectFail":
       // from here we used fresh project end
+         // conatct
+         case"submitContactFormFail":
       return {
         ...state,
         loading: false,
