@@ -39,7 +39,7 @@ export default function HeaderCard() {
       PostVerifyData &&
       [
         "VerifyPostActionRequest",
-        "ReOpenPostActionRequest",
+        "ReOpenPostActionRequest-AdminRoutes",
         "showVeirifyPostIconRequest",
       ].includes(LodingType)
     ) {

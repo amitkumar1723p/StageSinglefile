@@ -42,6 +42,7 @@ const [query,setQuery]=useState("");
   const localityRef = useRef(null);
   const furnishingRef = useRef(null);
   const sortByRef = useRef(null);
+  // const localityRef = useRef(null);
 
   const handleSelect = (category, value) => {
     if (!value) return;
@@ -106,6 +107,7 @@ const [query,setQuery]=useState("");
     "1 RK/Studio Apartment",
     "Serviced Apartment",
     "Plot/Land",
+    "Pent House",
   ];
 
   const [filters, setFilters] = useState({
@@ -195,8 +197,8 @@ const [query,setQuery]=useState("");
     }
     if(query){
       filtered = filtered.filter(post=>{
-        return post?.LocationDetails?.Landmark.toLowerCase().includes(query) || post?.LocationDetails?.Locality.toLowerCase().includes(query) || post?.LocationDetails?.ProjectName.toLowerCase().includes(query) ||
-        post?.LocationDetails?.City.toLowerCase().includes(query)  })
+        return post?.LocationDetails?.Landmark.toLowerCase().includes(query?.toLowerCase()) || post?.LocationDetails?.Locality.toLowerCase().includes(query?.toLowerCase()) || post?.LocationDetails?.ProjectName.toLowerCase().includes(query?.toLowerCase()) ||
+        post?.LocationDetails?.City.toLowerCase().includes(query?.toLowerCase())  })
     }
     if(value){
       filtered = filtered.filter(post => post.PricingDetails?.ExpectedPrice <= value || post.PricingDetails?.ExpectedRent <=value);
@@ -317,14 +319,14 @@ const [query,setQuery]=useState("");
 
               <select className="property-filter-select" ref={statusRef} onChange={(e) => handleSelect('Status', e.target.value)} defaultValue="">
                 <option value="" disabled>Status</option>
-                <option value="Ready to Move">Ready to Move</option>
+                <option value="Ready to move">Ready to Move</option>
                 <option value="Under Construction">Under Construction</option>
               </select>
               </div>
 
             <div className="property-select-div">
 
-              <select className="property-filter-select" onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
+              <select className="property-filter-select"  ref={localityRef} onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
                 <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
                 <option value="Golf Course Extn Road">Golf Course</option>
@@ -467,14 +469,14 @@ const [query,setQuery]=useState("");
 
               <select className="property-filter-select" ref={statusRef} onChange={(e) => handleSelect('Status', e.target.value)} defaultValue="">
                 <option value="" disabled>Status</option>
-                <option value="Ready to Move">Ready to Move</option>
+                <option value="Ready to move">Ready to Move</option>
                 <option value="Under Construction">Under Construction</option>
               </select>
               </div>
 
             <div className="property-select-div">
 
-              <select className="property-filter-select" onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
+              <select className="property-filter-select" ref={localityRef} onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
               <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
               <option value="Golf Course Extn Road">Golf Course</option>
@@ -528,18 +530,27 @@ const [query,setQuery]=useState("");
  
   </div>
  
-    <div className="property-filter-active">
-      <span className="property-filter-active-title">Active filters:</span>
-      {activeFilters.map((filter, index) => (
-        <span key={index} className="property-filter-tag">
-          {filter.value} <button onClick={() => removeFilter(filter.value)}>&times;</button>
-        </span>
-      ))}
-      {activeFilters.length > 0 && (
+   
+  <div className="porpety-filter-active-filter-parent">
+        <div className="property-filter-active">
+              <span className="property-filter-active-title">Active filters:</span>
+              {activeFilters.map((filter, index) => (
+                <span key={index} className="property-filter-tag">
+                  {filter.value} <button onClick={() => removeFilter(filter.value)}>&times;</button>
+                </span>
+              ))}
+              {/* {activeFilters.length > 0 && (
+                <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
+              )} */}
+        
+            </div>
+            <div className="clear-btn-and-length">
+              <span>    {activeFilters.length > 0 && (
         <button className="property-filter-clear-btn" onClick={clearAllFilters}>Clear All</button>
-      )}
-      <span className="property-filter-count">{filteredData.length} Properties Found</span>
-    </div>
+      )}</span>
+              <span className="property-filter-count">{filteredData?.length} properties found</span>
+              </div>
+        </div>
   </div>
         </div>
 
@@ -643,6 +654,7 @@ const [query,setQuery]=useState("");
                 <div className="button-section">
                   {[
                     "Apartment",
+                    "Pent House",
                     "Independent House/Villa",
                     "Independent/Builder Floor",
                     // "1 RK/Studio Apartment",

@@ -7,7 +7,7 @@ const FutureAsist = () => {
       {/* Left Side - Image */}
       <div className="assistance-banner-image">
         <img
-          src="/img/futher-assistance.svg"
+          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/futher-assistance.svg"
           alt="Assistance"
           className="assistance-banner-img"
         />
@@ -33,7 +33,7 @@ const FutureAsist = () => {
       );
     }}
   >
-    <img className="icon-btn" src="/img/whatapp.png" alt="whatsapp" />
+    <img className="icon-btn" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="whatsapp" />
     Whatsapp
   </button>
 </div>

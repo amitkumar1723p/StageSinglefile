@@ -700,6 +700,7 @@
   background-color: white;
   cursor: pointer;
   border-radius: 4px;
+  font-size: 12px
 }
 
 .property-filter-toggle-btn.active {
@@ -820,24 +821,22 @@
 }
 .property-filter-select-o{
   /* padding: 8px 14px; */
-  
-
   border: none;
-  /* padding-right: 10px;
-   */
-
+  
    padding: 6px 2px;
-
 }
-
 .property-filter-chip {
   width: 100px;
   border: 1px solid #e3e3e3;
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
   cursor: pointer;
+  font-size: 12px;
 }
-
+.porpety-filter-active-filter-parent{
+  display: flex ;
+  justify-content: space-between;
+}
 .property-filter-chip:hover {
   background-color: #f0f0f0;
 }
@@ -846,9 +845,15 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  /* justify-content: space-between; */
   gap: 10px;
 }
+.clear-btn-and-length{
+  display: flex;
+  align-items: center;
+  gap: 15px;
 
+}
 .property-filter-active-title {
   font-weight: bold;
   margin-right: 8px;

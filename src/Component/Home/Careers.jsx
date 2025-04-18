@@ -222,10 +222,10 @@ function Career() {
           <div className="Career-Overlay">
             <div className="left-svg">
               {" "}
-              <img src="/img/left-Vector.svg" alt="" srcSet="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/left-Vector.svg" alt="alt" srcSet="" />
             </div>
             <div className="right-svg">
-              <img src="/img/right-Vector.svg" alt="" srcSet="" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/right-Vector.svg" alt="alt" srcSet="" />
             </div>
           </div>
           {/* <div className="career-search-container">
@@ -310,7 +310,7 @@ function Career() {
             <h3 className="Career-Heading">
               Why
               <span>
-                <img src="/img/Group.svg" alt="" srcSet="" />
+                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group.svg" alt="" srcSet="" />
                 Join
               </span>
               PropertyDekho247
@@ -368,16 +368,16 @@ function Career() {
           </p>
           <div className="gallery ">
             <div className="image">
-              <img src="/img/Rectangle 264.png" alt="Team meeting" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+264.png" alt="Team meeting" />
             </div>
             <div className="image">
-              <img src="/img/Rectangle 265.png" alt="Team collaboration" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+265.png" alt="Team collaboration" />
             </div>
             <div className="image">
-              <img src="/img/Rectangle 266.png" alt="Laptop workspace" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+266.png" alt="Laptop workspace" />
             </div>
             <div className="image">
-              <img src="/img/Rectangle 267.png" alt="Workshop session" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+267.png" alt="Workshop session" />
             </div>
           </div>
         </section>
@@ -397,18 +397,18 @@ function Career() {
             <div className="gallery-img ">
               <div className="image-row">
                 <div className="image-container">
-                  <img src="/img/Rectangle 278.png" alt="Laptop workspace" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+278.png" alt="Laptop workspace" />
                 </div>
                 <div className="image-container">
                   <img
-                    src="/img/Rectangle 279.png"
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+279.png"
                     alt="Notification on a tablet"
                   />
                 </div>
               </div>
               <div className="image-row">
                 <div className="image-container ">
-                  <img src="/img/Rectangle 280.png" alt="Interview scene" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+280.png" alt="Interview scene" />
                 </div>
               </div>
             </div>
@@ -416,7 +416,7 @@ function Career() {
               <div className="step">
                 <div className="step-number">
                   1
-                  <img src="img/Vector 128.svg" alt="stroke" srcSet="" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
                 </div>
                 <div className="step-content">
                   <h3>Submit Your Application</h3>
@@ -434,7 +434,7 @@ function Career() {
               <div className="step">
                 <div className="step-number">
                   2
-                  <img src="img/Vector 128.svg" alt="stroke" srcSet="" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
                 </div>
                 <div className="step-content">
                   <h3>Screening and Shortlisting</h3>
@@ -453,7 +453,7 @@ function Career() {
               <div className="step">
                 <div className="step-number">
                   3
-                  <img src="img/Vector 128.svg" alt="stroke" srcSet="" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
                 </div>
                 <div className="step-content">
                   <h3>Interviews</h3>
@@ -518,21 +518,21 @@ function Career() {
                     <div className="job-details">
                       <div className="detail">
                         <div>
-                          <img src="/img/mynaui_briefcase.svg" alt="briefcase" />
+                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mynaui_briefcase.svg" alt="briefcase" />
                         </div>
                         <span>{job.experience}</span>
                         <div className="detail-stroke">|</div>
                       </div>
                       <div className="detail">
                         <div>
-                          <img src="img/heroicons_currency-rupee.svg" alt="currency" />
+                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/heroicons_currency-rupee.svg" alt="currency" />
                         </div>
                         <span>{job.salary}</span>
                         <div className="detail-stroke">|</div>
                       </div>
                       <div className="detail">
                         <div>
-                          <img src="img/fluent_location-28-regular.svg" alt="location" />
+                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/fluent_location-28-regular.svg" alt="location" />
                         </div>
                         <span>{job.location}</span>
                         <div className="detail-stroke">|</div>
@@ -540,7 +540,7 @@ function Career() {
                       <div className="detail">
                         <div>
                           <img
-                            src="img/streamline_industry-innovation-and-infrastructure.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/streamline_industry-innovation-and-infrastructure.svg"
                             alt="infrastructure"
                           />
                         </div>
@@ -574,7 +574,7 @@ function Career() {
                           className="see-more"
                         >
                           {expandedJobIndex === index ? "See Less" : "See More"}
-                          <img src="img/Icon placeholder.svg" alt="" />
+                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Icon+placeholder.svg" alt="" />
                         </button>
                       </div>
                     </div>
@@ -608,7 +608,7 @@ function Career() {
                     <ul>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -618,7 +618,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -628,7 +628,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -636,7 +636,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -649,21 +649,21 @@ function Career() {
                   <button className="Career-explore-button">
                     <div className="explore-button-text">Explore</div>
                     <div className="explore-arrow">
-                      <img src="img/Vector.svg" alt="right-arrow" srcSet="" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector.svg" alt="right-arrow" srcSet="" />
                     </div>
                   </button>
                 </div>
                 <div className="explore-svg">
                   <div className="explore-message-svg">
                     <img
-                      src="img/Clip path group.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Clip+path+group.svg"
                       alt="message svg"
                       srcSet=""
                     />
                   </div>
                   <div className="explore-img">
                     <div className="explore-page-svg">
-                      <img src="img/Group 189.svg" alt="" srcSet="" className="career-first-svg" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Group+189.svg" alt="" srcSet="" className="career-first-svg" />
                     </div>
                   </div>
                 </div>
@@ -675,7 +675,7 @@ function Career() {
                     <ul>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -683,7 +683,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -693,7 +693,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -703,7 +703,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
-                          src="img/mdi_tick-circle-outline.svg"
+                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
                         />
@@ -716,21 +716,21 @@ function Career() {
                   <button className="Career-explore-button">
                     <div className="explore-button-text">Explore</div>
                     <div className="explore-arrow">
-                      <img src="img/Vector.svg" alt="right-arrow" srcSet="" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector.svg" alt="right-arrow" srcSet="" />
                     </div>
                   </button>
                 </div>
                 <div className="explore-svg">
                   <div className="explore-message-svg">
                     <img
-                      src="img/Clip path group.svg"
+                      src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Clip+path+group.svg"
                       alt="message svg"
                       srcSet=""
                     />
                   </div>
                   <div className="explore-img">
                     <div className="explore-page-svg">
-                      <img src="img/Group 187.svg" alt="" srcSet="" className="career-second-svg" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Group+187.svg" alt="" srcSet="" className="career-second-svg" />
                     </div>
                   </div>
                 </div>
@@ -742,15 +742,15 @@ function Career() {
             <div className="career-banner">
               <div className="first-banner">
                 <img
-                  src="img/Modern Did You Know Fun Fact Instagram Post 1.png"
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Modern+Did+You+Know+Fun+Fact+Instagram+Post+1.png"
                   alt="Banner"
                   srcSet=""
                   className="banner-img"
                 /></div>
               <div className="first-banner">
-                <img src="img/CareerBanner3png.png" alt="Banner" srcset="" /></div>
+                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/CareerBanner3png.png" alt="Banner" srcset="" /></div>
               <div className="first-banner">
-                <img src="img/CareerBanner4.png" alt="Banner" srcset="" /></div>
+                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/CareerBanner4.png" alt="Banner" srcset="" /></div>
             </div>
           </div>
         </div>

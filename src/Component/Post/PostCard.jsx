@@ -209,7 +209,7 @@ export default function PostCard({ PostData, index }) {
     <>
       <div className="prop-card-main-box ">
         {PostData?.propertyStatus?.currentPropertyStatus==="sold out" && <div className="sold-out-blur-img sold-img-blur glass-effect">
-          <img src="/img/sold-out.svg" alt="" className="sold-img-blu blur-img"/>
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/sold-out.svg" alt="" className="sold-img-blu blur-img"/>
           {/* <p className="sold-out-lable">This property is sold out</p> */}
           </div>
           }
@@ -229,7 +229,7 @@ export default function PostCard({ PostData, index }) {
               {PostData?.PostVerifyShow ? (
                 PostData?.PostVerify ? (
                   <div className="active-post">
-                    <img src="/img/verified-tag.svg" alt="verified-tag" />
+                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/verified-tag.svg" alt="verified-tag" />
                     <p className="active-post-para">Verified</p>
                   </div>
                 ) : (
@@ -285,7 +285,7 @@ export default function PostCard({ PostData, index }) {
                   <div className="postcard-share-parent">
                     <div onClick={() => setIsModalOpen(true)}>
                       <img
-                        src="/img/share-btn.svg"
+                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/share-btn.svg"
                         className="img-fluid img-thumbnail"
                         alt="..."
                       ></img>
@@ -315,13 +315,13 @@ export default function PostCard({ PostData, index }) {
                         ) ? (
                           <img
                             className="fav-icon"
-                            src="/img/Un-Fav-Post.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Un-Fav-Post.svg"
                             alt="Fav-icon"
                           />
                         ) : (
                           <img
                             className="fav-icon"
-                            src="/img/Fav-Post.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg"
                             alt="Fav-icon"
                           />
                         )}
@@ -330,7 +330,7 @@ export default function PostCard({ PostData, index }) {
                         PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                           <>
                             <Link to={`/user/post/update/${PostData?._id}`}>
-                              <img src="/img/edit.png" className="editIcon" />
+                              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png" className="editIcon" />
                             </Link>
                           </>
                         )}

@@ -292,7 +292,7 @@ const Navbar = () => {
                           }
                         >
                           <img
-                            src="/img/Dashboard.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                             alt="Dashboard Icon"
                             className={`AdminAside-icon ${
                               location.pathname === "/admin/dashboard"
@@ -314,7 +314,7 @@ const Navbar = () => {
                                 }
                               >
                                 <img
-                                  src="/img/Dashboard.svg"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                   alt="Dashboard Icon"
                                   className={`AdminAside-icon ${
                                     location.pathname ===
@@ -335,7 +335,7 @@ const Navbar = () => {
                                 }
                               >
                                 <img
-                                  src="/img/Dashboard.svg"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                   alt="Dashboard Icon"
                                   className={`AdminAside-icon ${
                                     location.pathname ===
@@ -348,7 +348,7 @@ const Navbar = () => {
                               </NavLink>
                             )}
                           
-
+                        
                         <NavLink
                           to="/admin/agent/dashboard?Role=Admin"
                           className={({ isActive }) =>
@@ -360,7 +360,7 @@ const Navbar = () => {
                           }
                         >
                           <img
-                            src="/img/agent.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg "
                             alt="Admin Icon"
                             className={`AdminAside-icon ${
                               location.search.includes("Role=Admin")
@@ -370,6 +370,7 @@ const Navbar = () => {
                           />
                           Admin
                         </NavLink>
+                        
                         <NavLink
                           to="/admin/agent/dashboard?Role=Agent"
                           className={({ isActive }) =>
@@ -381,7 +382,7 @@ const Navbar = () => {
                           }
                         >
                           <img
-                            src="/img/Admin.svg"
+                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg "
                             alt="Agent Icon"
                             className={`AdminAside-icon ${
                               location.search.includes("Role=Agent")
@@ -406,7 +407,7 @@ const Navbar = () => {
                               >
                                 <img
                                   className=""
-                                  src="/img/Profile.svg"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Profile.svg "
                                   alt="profile"
                                 />
                                 Profile
@@ -422,7 +423,7 @@ const Navbar = () => {
                                     : ""
                                 } `}
                               >
-                                <img src="/img/NewLeads.svg" alt="my-visits" />
+                                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/NewLeads.svg " alt="my-visits" />
                                 All Response
                               </li>
                             </NavLink>
@@ -437,7 +438,7 @@ const Navbar = () => {
                               >
                                 <img
                                   className=""
-                                  src="/img/MyListing.svg"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/MyListing.svg "
                                   alt="my listing"
                                 />
                                 My Listing
@@ -455,7 +456,7 @@ const Navbar = () => {
                               >
                                 <img
                                   className=""
-                                  src="/img/Fav-Post.svg"
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg "
                                   alt="shortlisted"
                                 />
                                 Shortlisted Property

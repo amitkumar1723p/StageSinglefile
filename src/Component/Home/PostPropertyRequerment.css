@@ -3,15 +3,12 @@
   gap: 30px;
   background-color: #f9f9f9;
   padding: 0px;
-
   /* box-shadow: 0 0px 16px rgb(216,222,227,1); */
   position: relative; /* Ensure the cross button is positioned relative to the form container */
 }
-
 .postreq-form{
   margin-bottom: 3px;
 }
-
 .cross-Btn {
   position: absolute;
   top: 9px;  /* Adjust this value to move it down */
@@ -21,15 +18,11 @@
   background-color:#c7e4fc;  
   color: var(--main-light-clr);
   cursor: pointer;
-
   padding: 5px 12px;
   border-radius: 50%;
-
-
   &:hover{
     color: red;
   }
-
 
 }
 .share-rqrmnt-cross-Btn{
@@ -105,7 +98,7 @@ img{
   z-index: 1;
 
   flex-direction: column;
-  /* background-image: url("C:/Users/Admin/Desktop/newKlone/propertyDekho247-frontend/public/img/share-rqrmnt-back.JPG"); */
+  /* background-image: url("https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/share-rqrmnt-back.JPG"); */
   border-bottom: 1px solid #e2e2e2;
   /* background-size: cover;         
   background-position: center;   

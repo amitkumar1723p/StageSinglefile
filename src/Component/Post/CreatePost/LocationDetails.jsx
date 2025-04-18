@@ -38,16 +38,17 @@ export default function LocationDetails({
   const [localityShake, setLocalityShake] = useState(false);
 
   const [dataTosent, setDataToSent] = useState(LocationDetailsData);
-  // console.log(dataTosent)
+ 
   useEffect(() => {
-    // console.log("data to sent ",dataTosent)
+    
     setLocationDetailsData({
+      ...LocationDetailsData,
       City: dataTosent?.City || dataTosent?.city,
       Landmark: dataTosent?.sector || dataTosent?.Landmark,
       Locality: dataTosent?.Locality || dataTosent?.locality,
       ProjectName: dataTosent?.ProjectName || dataTosent?.projectName,
     });
-    //  console.log(LocationDetailsData)
+  
   }, [dataTosent]);
 
   const LocationDetailsAlertShake = (e) => {
@@ -72,7 +73,7 @@ export default function LocationDetails({
     }
   };
 
-  // console.log(LocationDetailsData)
+  
 
   return (
     <>
@@ -157,12 +158,40 @@ export default function LocationDetails({
                 }}
               />
             </div>
+
+            
+            {/* Complete Address */}
+            <div className="form-group">
+              <label htmlFor="Complete Address">Property Address*</label>
+              <input
+                style={{ transitionDuration }}
+                className={`${localityShake ? "inputShake shake" : ""}`}
+                type="text"
+                id="complete-addresss"
+                name="complete-addresss"
+                placeholder="eg . Flat no / Tower No  "
+                required={
+                  update
+                    ? "CompleteAddress" in LocationDetailsData
+                      ? true
+                      : false
+                    : true
+                }
+                value={LocationDetailsData?.CompleteAddress?.trimStart() || ""}
+                onChange={(e) => {
+                  setLocationDetailsData({
+                    ...LocationDetailsData,
+                    CompleteAddress: e.target.value,
+                  });
+                }}
+              />
+            </div>
           </div>
 
           <div className="next-prev-box">
             {update == true && (
-              <div 
-              className="updatebyamdin"
+              <div
+                className="updatebyamdin"
                 onClick={() => {
                   FormSubmitRef?.current?.requestSubmit();
                 }}

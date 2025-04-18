@@ -17,6 +17,7 @@ export default function AreaDetailsSection({
   useEffect(() => {
     if (
       [
+        "Pent House",
         "Apartment",
         "Studio Apartment",
         "1 RK/PG",
@@ -108,7 +109,7 @@ export default function AreaDetailsSection({
                 value={AreaDetailsData.PlotSize?.unit || ""}
 
               /> */}
-              {/* {console.log(AreaDetailsData.PlotSize)} */}
+        
               <select value={AreaDetailsData.PlotSize?.unit || ""} className="unit" onChange={((e) => {
                 setAreaDetailsData({
                   ...AreaDetailsData,
@@ -280,6 +281,7 @@ export default function AreaDetailsSection({
       {[
         "Independent House/Villa",
         "Apartment",
+        "Pent House" ,
         "Independent/Builder Floor",
         // "1 RK/Studio Apartment",
         "Studio Apartment",

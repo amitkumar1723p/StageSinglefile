@@ -449,13 +449,13 @@ export const showVeirifyPostIconAction = ({ postdata }, postId) => {
     }
   };
 };
-
-export const ReOpenPostAction = (postId) => {
+//  this action avariable  admin and user both 
+export const ReOpenPostAction = (postId ,RouteType) => {
   return async (dispatch) => {
     try {
       dispatch({
-        type: "ReOpenPostActionRequest",
-        payload: "ReOpenPostActionRequest",
+        type: `ReOpenPostActionRequest-${RouteType}`,
+        payload: `ReOpenPostActionRequest-${RouteType}`,
       });
 
       const url = `${api_Base_Url}/admin-owner/reopen-post/${postId}`;
@@ -467,16 +467,16 @@ export const ReOpenPostAction = (postId) => {
       };
 
       const { data } = await axios.get(url, config);
-      dispatch({ type: "ReOpenPostActionSuccess", payload: data });
+      dispatch({ type: `ReOpenPostActionSuccess-${RouteType}`, payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "ReOpenPostActionFail",
+          type: `ReOpenPostActionFail-${RouteType}`,
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "ReOpenPostActionFail",
+          type: `ReOpenPostActionFail-${RouteType}`,
           payload: { message: error.message, success: false },
         });
       }
@@ -562,6 +562,7 @@ export const GetAllScheduleVisitsAndMakeOffer_Length = (PostId) => {
 };
 
 export const Admin_OwnerScheduleVisitDone = ({ VisitStatus }, visitId) => {
+  console.log(VisitStatus,visitId,"listen")
   return async (dispatch) => {
     try {
       dispatch({
@@ -1345,3 +1346,40 @@ export const getPostsByAddress = () => {
     }
   };
 };
+
+
+
+  // Rent Out property
+  export const MarkRentOutProperty = ({ postdata }, postId) => {
+    return async (dispatch) => {
+      try {
+        dispatch({
+          type: "MarkRentOutPropertyRequest",
+          payload: "MarkRentOutPropertyRequest",
+        });
+  
+        const url = `${api_Base_Url}/user/mark-rent-out/${postId}`;
+  
+        const config = {
+          headers: { "Content-Type": "application/json" },
+  
+          withCredentials: true,
+        };
+  
+        const { data } = await axios.post(url, postdata, config);
+        dispatch({ type: "MarkRentOutPropertySuccess", payload: data });
+      } catch (error) {
+        if (error.response) {
+          dispatch({
+            type: "MarkRentOutPropertyFail",
+            payload: error.response.data,
+          });
+        } else {
+          dispatch({
+            type: "MarkRentOutPropertyFail",
+            payload: { message: error.message, success: false },
+          });
+        }
+      }
+    };
+  };

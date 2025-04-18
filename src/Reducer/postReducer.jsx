@@ -7,7 +7,7 @@ export const CreatePostReducer = (state = {}, action) => {
     // Admin routes
     // case "UpdatePostRequest":
     case "VerifyPostActionRequest":
-    case "ReOpenPostActionRequest":
+    case "ReOpenPostActionRequest-AdminRoutes":
     case "VerifyAdminRequest":
     case "VerifyBidRequest":
     case "Admin_OwnerScheduleVisitDoneRequest":
@@ -19,13 +19,22 @@ export const CreatePostReducer = (state = {}, action) => {
     case "changePropertyStatusRequest":
     case "acknowledgeProfileRequest":
     case "PermanentPostDeleteRequest":
-      case "AssignExecleRequest":
+    case "AssignExecleRequest":
     case "Remove_ExcelFromAdminRequest":
-      case "UserRoleUpdationRequest":
+    case "UserRoleUpdationRequest":
     case "Delete_ExcelFileRequest":
     case "OwnerAllExcelFileRequest":
     case "ReportPagePostRequest":
-    
+    // from here we used fresh project start
+    case "projectStatusRequest":
+    case "updateProjectLeadRequest":
+    case "createfreshProjectRequest":
+    case "editFreshProjectionRequest":
+    case "getprojectLeadAllRequest":
+    case "getAllFreshProjectRequest-AdminRoutes":
+      
+      // case "getAllFreshProjectRequest":
+      // from here we used fresh project end
       return {
         ...state,
         loading: true,
@@ -36,7 +45,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "DeleteAndRestorePostSuccess":
     // case "UpdatePostSuccess":
     case "VerifyPostActionSuccess":
-    case "ReOpenPostActionSuccess":
+    case "ReOpenPostActionSuccess-AdminRoutes":
     case "VerifyAdminSuccess":
     case "VerifyBidSuccess":
     case "Admin_OwnerScheduleVisitDoneSuccess":
@@ -50,15 +59,23 @@ export const CreatePostReducer = (state = {}, action) => {
     case "changePropertyStatusSuccess":
     case "acknowledgeProfileSuccess":
     case "PermanentPostDeleteSuccess":
-      case "AssignExecleSucess":
+    case "AssignExecleSucess":
     case "Remove_ExcelFromAdminSuccess":
-      case "UserRoleUpdationSuccess":
+    case "UserRoleUpdationSuccess":
     case "Delete_ExcelFileSuccess":
     case "OwnerAllExcelFileSuccess":
-      case "ReportPagePostSuccess":
-   
-     
-    return {
+    case "ReportPagePostSuccess":
+    // from here we used fresh project start
+    case "projectStatusSuccess":
+    // case "getAllFreshProjectSuccess":   // getapi
+    case "updateProjectLeadSuccess":
+    case "createfreshProjectSuccess":
+    case "editFreshProjectionSuccess":
+    case "getprojectLeadAllSuccess":
+    case "getAllFreshProjectSuccess-AdminRoutes":
+      // from here we used fresh project end
+
+      return {
         ...state,
         loading: false,
         data: action.payload,
@@ -68,7 +85,7 @@ export const CreatePostReducer = (state = {}, action) => {
     case "DeleteAndRestorePostFail":
     // case "UpdatePostFail":
     case "VerifyPostActionFail":
-    case "ReOpenPostActionFail":
+    case "ReOpenPostActionFail-AdminRoutes":
     case "VerifyAdminFail":
     case "VerifyBidFail":
     case "Admin_OwnerScheduleVisitDoneFail":
@@ -82,14 +99,22 @@ export const CreatePostReducer = (state = {}, action) => {
     case "changePropertyStatusFail":
     case "acknowledgeProfileFail":
     case "PermanentPostDeleteFail":
-      case "AssignExeclFail":
+    case "AssignExeclFail":
     case "Remove_ExcelFromAdminFail":
     case "UserRoleUpdationFail":
     case "Delete_ExcelFileFail":
     case "OwnerAllExcelFileFail":
     case "ReportPagePostFail":
-   
+    case "getprojectLeadAllFail":
 
+    // from here we used fresh project start
+    case "projectStatusFail":
+    case "updateProjectLeadFail":
+    case "createfreshProjectFail":
+    case "editFreshProjectionFail":
+    case "getAllFreshProjectFail-AdminRoutes":
+      //  case "getAllFreshProjectFail":
+      // from here we used fresh project end
       return {
         ...state,
         loading: false,
@@ -538,16 +563,16 @@ export const OwnerUploadExcelFileReducer = (state = {}, action) => {
         loading: false,
         data: action.payload,
       };
-      case "OwnerUploadExcelFileClear":
-        return {};
-      default:
-        return {
-          ...state,
-        };
+    case "OwnerUploadExcelFileClear":
+      return {};
+    default:
+      return {
+        ...state,
+      };
   }
-}
+};
 
-//owner all file excel reducer 
+//owner all file excel reducer
 export const fetchAllOwnerFilesReducer = (state = {}, action) => {
   switch (action.type) {
     case "FetchAllOwnerFilesRequest":
@@ -641,8 +666,6 @@ export const fetchAllAgentFilesReducer = (state = {}, action) => {
 };
 //remove excel reducer
 
-
-
 // notify
 export const GetAllNotificationsAndRequirementsReducer = (
   state = {},
@@ -711,67 +734,60 @@ export const GetDeletedPostsReducer = (state = {}, action) => {
   }
 };
 
-
-
-
-export const getSerachPropertyReducer=(state={},action)=>{
-  switch(action.type){
+export const getSerachPropertyReducer = (state = {}, action) => {
+  switch (action.type) {
     case "GetSerachPropertyRequest":
       return {
         ...state,
         loading: true,
-
       };
 
-    case"GetSerachPropertySuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
+    case "GetSerachPropertySuccess":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
 
+    case "GetSerachPropertyFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
 
-    case"GetSerachPropertyFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-
-    case"GetSerachPropertyClear":
-  
-    return {}; // Clears state when necessary
+    case "GetSerachPropertyClear":
+      return {}; // Clears state when necessary
 
     default:
       return state;
-  }
-}
-export const getPostsByAddressReducer=(state={},action)=>{
-  switch(action.type){
+  }
+};
+export const getPostsByAddressReducer = (state = {}, action) => {
+  switch (action.type) {
     case "GetPostsByAddressRequest":
       return {
         ...state,
         loading: true,
       };
-      
-    case"GetPostsByAddressSuccess":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
-    case"GeetPostsByAddressFail":
-    return {
-      ...state,
-      data: action.payload,
-      loading: false,
-    };
 
-    case"GeetPostsByAddressClear":
+    case "GetPostsByAddressSuccess":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case "GeetPostsByAddressFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
 
-    return {}; // Clears state when necessary
+    case "GeetPostsByAddressClear":
+      return {}; // Clears state when necessary
 
     default:
       return state;
-  }
-}
+  }
+};

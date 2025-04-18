@@ -101,7 +101,7 @@ const HandleNotifyFormSubmit = ()=>{
           <div className="img-notify">
             <div>
               <img
-                src="/img/notifyimg.svg"
+                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/notifyimg.svg"
                 alt="Notification Illustration"
                 className="notify-form-image"
               />
@@ -112,7 +112,7 @@ const HandleNotifyFormSubmit = ()=>{
               Looking for Your Ideal Home? Let Us Notify You First!
             </p>
 
-            <form onSubmit={handleSubmit}>
+            <form className="notify-form" onSubmit={handleSubmit}>
 
               <div className="notify-form-main-content">
                 <div className="notify-form-bhk-section">

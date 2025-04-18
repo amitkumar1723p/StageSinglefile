@@ -28,7 +28,7 @@ export default function ListYourProperty() {
       </div>
 
       <div className='list-your-property-image'>
-        <img src="/img/confuse.svg" alt="list-property-img" />
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/confuse.svg" alt="list-property-img" />
       </div>
     </div>
   )

@@ -129,7 +129,7 @@ const PostPropertyRequerment = ({ SetShow }) => {
     <div className="form-container">
       <div className="form-right">
         <div className="form-right-heading-container " >
-          <img src="/img/share-rqrmnt-back.JPG" alt="" />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/share-rqrmnt-back.JPG" alt="" />
           <div className="form-heading-image-color">
             <h3 className="form-header">Let us Know your Property Requirements</h3>
           </div>
@@ -218,7 +218,6 @@ const PostPropertyRequerment = ({ SetShow }) => {
               </>
             }
             {PostPropertyRequirementData?.PropertyType === "Plot" &&
-             
               <div className=" form-budget">
                 <div className="plot-size-container">
                   <p className="postreq-form ">Plot size</p>
@@ -229,7 +228,6 @@ const PostPropertyRequerment = ({ SetShow }) => {
                       onChange={(e) => {
                         // Allow numbers and one decimal point only
                         let value = e.target.value;
-                        
                         setPostPropertyRequirementData({
                           ...PostPropertyRequirementData,
                           plotSize: value,
@@ -237,16 +235,14 @@ const PostPropertyRequerment = ({ SetShow }) => {
                       }}
                       type="text" className="plotsize-input-field" placeholder="Enter Plot Size" />
                     <select value={plotUnit} onChange={(e) => setplotUnit(e.target.value)} className="plotsize-input-dropdown">
-                      <option value="sqft">sqft</option>
-                      <option value="sqyard">sq yard</option>
+                      <option value="Sqft">Sqft</option>
+                      <option value="SqYard">Sq Yard</option>
+                      <option value="Acres">Acres</option>
                     </select>
                   </div>
                 </div>
-
-
               </div>
             }
-
           </div>
           <div className="share-rqrmnt-form-last ">
             {/* <div className=" form-budget">
@@ -254,13 +250,11 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 <p className="postreq-form ">Budget</p>
                 <input
                   required
-                 
                   type="text"
                   placeholder="Enter your Budget"
                   className={`form-input `}
                 />
               </div>
-
               <div className="form-budget-option">
                 <select value={unit} onChange={(e) => setUnit(e.target.value)}>
                   <option value="Cr">Cr</option>
@@ -268,7 +262,6 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 </select>
               </div>
             </div> */}
-
             {isMobile ?
               <div className={`budget-input-container w-100 `}>
                 <p>Budget</p>
@@ -333,8 +326,6 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 </div>
               </div>
             }
-
-
             {
               PostPropertyRequirementData.PropertyType !== "Plot" &&
               <div className="possession-status">
@@ -363,7 +354,6 @@ const PostPropertyRequerment = ({ SetShow }) => {
                 </div>
               </div>
             }
-
           </div>
           <div className="w-100">
             <button
@@ -382,13 +372,11 @@ const PostPropertyRequerment = ({ SetShow }) => {
         className="share-rqrmnt-cross-Btn"
         onClick={() => {
           SetShow(false);
-
         }}
       >
-        <img src="/img/share-ur-rqrmnt-X-btn.svg" alt="" />
+        <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/share-ur-rqrmnt-X-btn.svg" alt="" />
       </div>
     </div>
   );
 };
-
 export default PostPropertyRequerment;

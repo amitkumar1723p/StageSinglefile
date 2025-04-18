@@ -17,14 +17,12 @@ function Sidebar() {
       }
     }
   };
-
   return (
     <>
       {/* Overlay to close sidebar when clicking outside */}
       {isOpen && (
         <div className="overlay" onClick={() => setIsOpen(false)}></div>
       )}
-
       {/* Sidebar */}
       <aside
         className={`sidebar-profile ${isOpen ? "open" : ""}`}

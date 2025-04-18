@@ -202,7 +202,7 @@ function ProfileHeader() {
                           <div className="whatapp-notify ">
                             {/* <img
                               className="icon-wp"
-                              src="/img/whatapp.png"
+                              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png"
                               alt="whatapp logo"
                             /> */}
                             <p>Receive updates</p>
@@ -252,7 +252,7 @@ function ProfileHeader() {
         <Link to="/user/post">
        
         <div className="dashboard-right-side">
-          <img src="img/dash-banner.svg" alt="dash-banner" style={{height:'100%', width: 'auto'}} />
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg" alt="dash-banner"  style={{height:'100%', width: 'auto'}} />
         </div>
          </Link>
       </div>

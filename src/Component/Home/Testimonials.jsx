@@ -47,8 +47,8 @@ const Testimonials = () => {
         {testimonials.map((testimonial, index) => (
           <div key={index} className="feedback-item">
             <div className="collan">
-              <img src="/img/Double-colon.svg" alt="double" />
-              <img src="/img/Double-colon.svg" alt="double" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Double-colon.svg" alt="double" />
+              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Double-colon.svg" alt="double" />
             </div>
             <p className="feedback-quote"> {testimonial.feedback} </p>
             <div className="feedback-user-info">

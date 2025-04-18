@@ -197,20 +197,20 @@ const Dashboard = () => {
           </h4>
           <div className="cards  grid grid-cols-4 gap-3  ">
             <Link to="/admin/allpost?type=all">
-              <div className="card p-3">
+              <div className="Admin-dashboard-row p-3">
                 <div className="Admin-box">
                   <p className="total-number">{TotalListing}</p>
-                  <img src="/img/TotalPosts.png" alt="totalPost" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalPosts.png" alt="totalPost" />
                 </div>
                 <h3>Total Listing</h3>
                 <p className="viewall">View All</p>
               </div>
             </Link>
             <Link to="/admin/allpost?type=true">
-              <div className="card p-3">
+              <div className="Admin-dashboard-row p-3">
                 <div className="Admin-box">
                   <p className="total-number">{VerifyPost.length}</p>
-                  <img src="/img/ActivePosts.png" alt="post" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                 </div>
                 <h3 onClick={() => setPostVerify(true)}>Active Listing</h3>
                 <p className="viewall">View All</p>
@@ -218,10 +218,10 @@ const Dashboard = () => {
             </Link>
 
             <Link to="/admin/allpost?type=false">
-              <div className="card p-3 cursor-pointer">
+              <div className="Admin-dashboard-row p-3 cursor-pointer">
                 <div className="Admin-box">
                   <p className="total-number">{UnVerifyPost.length}</p>
-                  <img src="/img/In-ActivePosts.png" alt="post" />
+                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                 </div>
                 <h3 onClick={() => setPostVerify(false)}>In-Active Listing</h3>
                 <p className="viewall">View All</p>
@@ -233,19 +233,19 @@ const Dashboard = () => {
                 <div className="card p-3 cursor-pointer"  onClick={() => navigate("/admin/allpost?type=expired")}>
                   <div className="Admin-box">
                     <p className="total-number">{expiredPostlength}</p>
-                    <img src="/img/In-ActivePosts.png" alt="post" />
+                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                   </div>
                   <h3> Expire Lisitng </h3>
 
                   <p className="viewall">View All</p>
                 </div>
                 <div
-                  className="card p-3 cursor-pointer"
+                  className="Admin-dashboard-row p-3 cursor-pointer"
                   onClick={() => navigate("/admin/allpost?type=success")}
                 >
                   <div className="Admin-box">
                     <p className="total-number">{successPostlength}</p>
-                    <img src="/img/ActivePosts.png" alt="post" />
+                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                   </div>
                   <h3> Success</h3>
 
@@ -260,10 +260,10 @@ const Dashboard = () => {
             {medata?.user?.Role === "Owner" && (
               <>
                 <Link to="/admin/all-excel">
-                  <div className="card p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{data?.length}</p>
-                      <img src="/img/In-ActivePosts.png" alt="post" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 >All Excel Data</h3>
                     <p className="viewall">View All</p>
@@ -274,10 +274,10 @@ const Dashboard = () => {
             {medata?.user?.Role === "Admin" && (
               <>
                 <Link to="/admin/all-excel-both">
-                  <div className="card p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
-                      <img src="/img/In-ActivePosts.png" alt="post" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 >All Excel Data</h3>
                     <p className="viewall">View All</p>
@@ -288,12 +288,12 @@ const Dashboard = () => {
             {medata?.user?.Role === "Agent" && (
               <>
                 <Link to="/admin/all-excel-both">
-                  <div className="card p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
                       {!AgentAllExcelFilesData && <p className="total-number">0</p>}
 
-                      <img src="/img/In-ActivePosts.png" alt="post" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 >All Excel Data</h3>
                     <p className="viewall">View All</p>
@@ -304,7 +304,7 @@ const Dashboard = () => {
             {medata?.user?.Role === "Owner" && (
               <>
                 <div
-                  className="card p-3 cursor-pointer"
+                  className="Admin-dashboard-row p-3 cursor-pointer"
                   onClick={() => {
                     window.open(
                       "/admin/deleted-post?Type=AllPost",
@@ -316,7 +316,7 @@ const Dashboard = () => {
                     <p className="total-number">
                       {DeletedPost?.deletedPosts?.length || 0}
                     </p>
-                    <img src="/img/In-ActivePosts.png" alt="post" />
+                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                   </div>
                   <h3> Deleted Lisitng </h3>
 
@@ -324,12 +324,12 @@ const Dashboard = () => {
                 </div>
 
                 <Link to="/admin/all-registration-response">
-                  <div className="card p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">
                         {AllUserResponseData?.data?.length}
                       </p>
-                      <img src="/img/ActivePosts.png" alt="post" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       All Registration
@@ -343,10 +343,10 @@ const Dashboard = () => {
             {medata?.user?.Role === "Owner" && (
               <>
                 <Link to="/admin/notify">
-                  <div className="card p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{newNotifyAndReq.length}</p>
-                      <img src="/img/In-ActivePosts.png" alt="post" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       Notify & Requirments
@@ -363,7 +363,7 @@ const Dashboard = () => {
                   <div className="card p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{getTransactionDetail?.data?.length}</p>
-                      <img src="/img/ActivePosts.png" alt="post" />
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       Transaction Detail

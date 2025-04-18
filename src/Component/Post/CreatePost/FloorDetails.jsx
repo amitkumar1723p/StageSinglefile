@@ -70,7 +70,7 @@ export default function FloorDetails({
   
       if (
         !prevData.TotalFloors &&
-        ["Apartment", "Independent/Builder Floor", "Studio Apartment", "1 RK/PG", "Serviced Apartment"].includes(BasicDetailsData.ApartmentType)
+        ["Apartment", "Pent House","Independent/Builder Floor", "Studio Apartment", "1 RK/PG", "Serviced Apartment"].includes(BasicDetailsData.ApartmentType)
       ) {
         updatedData.PropertyOnFloor = "";
       }
@@ -137,6 +137,7 @@ export default function FloorDetails({
 
         {[
           "Apartment",
+          "Pent House",
           "Independent/Builder Floor",
           // "1 RK/Studio Apartment",
           "Studio Apartment",
@@ -183,7 +184,7 @@ export default function FloorDetails({
       </div>
 
       <div className="fom-group">
-        <p className="label">Property Direction *</p>
+        <p className="Property-Details-heading">Property Direction *</p>
 
         <div className="tab-box">
           {PropertyfacingArray.map((text, i) => {
@@ -205,8 +206,8 @@ export default function FloorDetails({
                   alt=""
                   src={
                     FloorDetailsData.PropertyDirection === text
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
+                      ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                      : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                   }
                 />
               </div>
@@ -240,8 +241,8 @@ export default function FloorDetails({
                 alt=""
                   src={
                     FloorDetailsData.OverLookingView === text
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
+                      ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                      : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                   }
                 />
               </div>
@@ -285,8 +286,8 @@ export default function FloorDetails({
                   alt=""
                   src={
                     FloorDetailsData.OverLookingView?.includes(text)
-                      ? "/img/white-tick.svg"
-                      : "/img/plus-create.svg"
+                      ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                      : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                   }
                 />
               </div>
@@ -351,8 +352,8 @@ export default function FloorDetails({
             AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
               text
             )
-              ? "/img/white-tick.svg"
-              : "/img/plus-create.svg"
+              ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+              : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
           }
         />
       </div>

@@ -3,7 +3,7 @@
     height: 300px;
     margin-bottom: 30px;
     background-color: rgba(0, 145, 255, 0.623);
-    background-image: url('/public/img/blog-insights-background-image.svg');
+    background-image: url('https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-insights-background-image.svg');
     /* background-repeat:repeat-x; */
 }
 

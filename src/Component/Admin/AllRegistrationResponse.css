@@ -2,9 +2,9 @@
 
 
 /* Container for all content */
-.container-fluid {
+/* container-fluid {
   padding: 20px;
-}
+} */
 
 /* Filter section */
 .filter-container {
@@ -102,10 +102,13 @@
 
 /* Alll user Response Action CSSS */
 .userName{
-  width: 22%;
+  width: 16%;
 }
 .userContact{
-  width: 11%;
+  width: 14%;
+}
+.userContactNumber{
+  width: 8%;
 }
 .userDetail{
   width:0%;

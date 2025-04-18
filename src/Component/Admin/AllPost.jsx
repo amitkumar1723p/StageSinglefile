@@ -146,15 +146,18 @@ export default function AllPost({
 
       // Sorting logic
       if (sortOrder !== undefined) {
-        if (sortOrder === "ascending") {
-          filteredPosts.sort(
-            (a, b) => new Date(a.createAt) - new Date(b.createAt)
-          ); // Ascending order
-        } else if (sortOrder === "descending") {
-          filteredPosts.sort(
-            (a, b) => new Date(b.createAt) - new Date(a.createAt)
-          ); // Descending order
-        }
+        filteredPosts.sort((a, b) => {
+          const aDate = a.PostExtend?.PostExtendTime || a.createAt;
+          const bDate = b.PostExtend?.PostExtendTime || b.createAt;
+      
+          if (sortOrder === "ascending") {
+            return new Date(aDate) - new Date(bDate); // Ascending
+          } else if (sortOrder === "descending") {
+            return new Date(bDate) - new Date(aDate); // Descending
+          }
+      
+          return 0; // No sorting applied if sortOrder is not valid
+        });
       }
 
       // Update pagination when filtered posts change

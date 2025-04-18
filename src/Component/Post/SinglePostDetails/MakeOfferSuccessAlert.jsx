@@ -33,7 +33,7 @@ const AlertBox = ({ SetShow }) => {
           </a>
           <div className="action-buttons">
             <button
-              className="btn"
+              className=" action-button "
               onClick={() => {
                 navigate("/user/my-listing");
               }}
@@ -41,7 +41,7 @@ const AlertBox = ({ SetShow }) => {
               View More Properties
             </button>
             <button
-              className="btn"
+              className=" action-button"
               onClick={() => {
                 navigate("/user/my-listing");
               }}

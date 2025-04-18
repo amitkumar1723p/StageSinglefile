@@ -1,4 +1,3 @@
-
 .prop-box-andpropname {
   display: flex;
   gap: 10px;
@@ -11,21 +10,20 @@
   border-radius: 5px;
 }
 
-.re-open-btn-admin{
+.re-open-btn-admin {
   padding: 5px;
   border: none;
   border-radius: 5px;
   background-color: #0aa768;
-color: #FFF;
+  color: #FFF;
+  font-size: 12px;
 
-&:hover{
- opacity: .8;
+  &:hover {
+    opacity: .8;
+  }
 }
 
-
-}
-
-.headingname-section-all{
+.headingname-section-all {
   display: flex;
   gap: 20px;
 }
@@ -55,11 +53,13 @@ color: #FFF;
   width: 25px;
   filter: brightness(1) saturate(30%);
 }
+
 .property-filters h3 {
   margin: 10px 0;
   font-size: 14px;
   white-space: nowrap;
 }
+
 .card-mianbox {
   display: flex;
   flex-direction: column;
@@ -69,6 +69,7 @@ color: #FFF;
 .property-filters label {
   display: block;
 }
+
 /* .filter-group label {
   font-size: 12px;
 } */
@@ -80,7 +81,7 @@ color: #FFF;
   padding: 20px;
 }
 
-.Verified-lable{
+.Verified-lable {
   display: flex;
   gap: 5px;
   color: #303030;
@@ -119,9 +120,10 @@ color: #FFF;
 .Postedby input {
   margin: 0 10px 0 0;
 }
+
 .property-filters {
   /* height: fit-content; */
- 
+
   background-color: #f1f1f2;
   /* height: auto; */
   z-index: 12;
@@ -133,7 +135,7 @@ color: #FFF;
   align-items: center;
   justify-content: space-around;
   top: 76px;
-width: 86%;
+  width: 86%;
   /* max-height: 89vh; */
   height: 48px;
   margin-top: 10px;
@@ -141,12 +143,12 @@ width: 86%;
 
 }
 
-.show-admin-data{
+.show-admin-data {
   display: flex;
   gap: 5px;
 }
 
-.filter-title{
+.filter-title {
   display: flex;
   /* background-color: #007bff; */
   padding: 10px;
@@ -154,20 +156,23 @@ width: 86%;
   /* background-color: #007bff; */
 
 }
-.filter-dummyLine{
+
+.filter-dummyLine {
   height: 0.1px;
-  width: 100%; 
+  width: 100%;
   border-bottom: 1px solid rgba(128, 128, 128, 0.344);
 }
+
 .filter-title-1 {
   font-size: 13px;
   /* background-color: red; */
-  
+
   /* width: 100px; */
 
 
 }
-.filter-Lookin-for{
+
+.filter-Lookin-for {
   /* background: #000; */
   padding: 10px;
 }
@@ -207,21 +212,23 @@ width: 86%;
   position: relative;
   gap: 5px;
 }
+
 .edit-del-section {
   display: flex;
   gap: 10px;
 }
 
-.varified-lable{
+.varified-lable {
   color: #535151;
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   letter-spacing: 1px;
-  
+
 
 }
+
 .Admin-property-post-card-main {
   width: 875px;
   padding: 15px;
@@ -264,6 +271,7 @@ width: 86%;
   flex-direction: column;
   justify-content: space-between;
 }
+
 #per-sqft-data {
   color: #8b8b8b;
   font-size: 10px;
@@ -271,6 +279,7 @@ width: 86%;
   font-weight: 500;
   line-height: normal;
 }
+
 /* .property-status-floor{
     margin-left: 47px;
   } */
@@ -278,6 +287,7 @@ width: 86%;
   font-size: 20px;
   color: #333;
 }
+
 .active-sign {
   color: #0aa768;
 }
@@ -304,6 +314,7 @@ width: 86%;
   font-weight: 600;
   line-height: normal;
 }
+
 .admin-property-address {
   color: #303030;
   overflow: hidden;
@@ -313,7 +324,8 @@ width: 86%;
   font-weight: 500;
   line-height: normal;
   letter-spacing: 1px;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
+  /* Prevent text from wrapping */
 }
 
 
@@ -342,6 +354,7 @@ width: 86%;
   font-weight: 600;
   line-height: normal;
 }
+
 .property-status {
   display: flex;
   flex-direction: column;
@@ -351,16 +364,19 @@ width: 86%;
   color: #333;
   display: flex;
 }
+
 .card-box-section {
   display: flex;
   padding: 10px 0 0 0;
   justify-content: space-between;
 }
+
 .admin-Price-section-card {
   display: flex;
   flex-direction: column;
   justify-content: start;
 }
+
 .price-rp-que {
   color: #333;
 
@@ -434,6 +450,7 @@ width: 86%;
   justify-content: space-between;
   margin-top: 10px;
 }
+
 .property-specs p {
   color: #333;
   display: flex;
@@ -459,6 +476,7 @@ width: 86%;
   opacity: 0.9;
   color: #fff;
 }
+
 .price-details {
   font-weight: 600;
   color: #4c4c90;
@@ -483,6 +501,7 @@ width: 86%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
 .bhk-option {
   background-color: #fff;
   margin: 2px;
@@ -531,6 +550,7 @@ width: 86%;
 .Con-status {
   display: flex;
 }
+
 .Con-status label {
   display: flex;
   padding: 10px;
@@ -564,15 +584,18 @@ width: 86%;
   display: flex;
   align-items: center;
 }
+
 .tick {
   font-size: 302px;
 }
+
 .test {
   display: flex;
   flex-direction: row;
 
   justify-content: end;
 }
+
 .Date-of-post {
   color: #333;
   font-family: "Inter", Sans-serif;
@@ -582,6 +605,7 @@ width: 86%;
   line-height: normal;
   letter-spacing: 1px;
 }
+
 .img-date {
   display: flex;
   flex-direction: column;
@@ -604,6 +628,7 @@ width: 86%;
   font-weight: 600;
   line-height: normal;
 }
+
 .verified-badge img {
   width: 10px;
   margin-right: 5px;
@@ -623,13 +648,14 @@ width: 86%;
   font-size: 10px;
 }
 
-.rent-admin-section{
+.rent-admin-section {
   color: #333 !important;
-    font-size: 12px !important;
-    font-style: normal !important;
-    font-weight: 600 !important;
-    line-height: normal !important;
-    text-transform: capitalize !important; ; 
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+  text-transform: capitalize !important;
+  ;
 }
 
 /* .profile-name-ans{
@@ -707,16 +733,19 @@ width: 86%;
   flex-direction: column;
   gap: 10px;
 }
+
 .Property-status-section {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .poston-date {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .Expire-section-section {
   display: flex;
   flex-direction: column;
@@ -756,7 +785,7 @@ width: 86%;
   padding: 6px 14px;
   border-radius: 6px;
   border: none;
-
+  font-size: 12px;
   background-origin: border-box;
   box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
     inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
@@ -781,7 +810,7 @@ width: 86%;
   opacity: 0.9;
 }
 
-.AllListing-admin{
+.AllListing-admin {
   color: var(--main-light-clr);
   font-size: 16px;
   font-style: normal;
@@ -790,6 +819,7 @@ width: 86%;
   line-height: normal;
   text-transform: capitalize;
 }
+
 .admin-card-area-section {
   margin-top: 10px;
   color: #8b8b8b;
@@ -799,16 +829,17 @@ width: 86%;
   line-height: normal;
 }
 
-.search-bar-admin{
+.search-bar-admin {
   position: absolute;
   right: 25px;
-  
+
 }
 
-.page-link{
+.page-link {
   z-index: 1 !important;
 }
-.admin-filter-main-parent-box{
+
+.admin-filter-main-parent-box {
   background: white;
   position: fixed;
   transform: translateX(-16px);
@@ -820,19 +851,21 @@ width: 86%;
   padding-top: 15px;
 }
 
-.admin-filter-all-button-parent{
+.admin-filter-all-button-parent {
   display: flex;
-  gap: 2px;
+  gap: 5px;
   background-color: #d0e5f6;
   padding: 5px;
   border-radius: 5px;
 }
-#itemsPerPage{
+
+#itemsPerPage {
   border: none;
   background-color: #cce3fb;
   cursor: pointer;
   border-radius: 10px;
 }
+
 /* #itemsPerPage option{
   border: none;
   background-color: #d3e5f8;
@@ -848,19 +881,25 @@ width: 86%;
   align-items: center;
   justify-content: space-between;
   /* width: ax-contentm; */
- 
-  
+
+
   width: 100%;
   border-bottom: 1px solid #ebe4e4;
 }
+
+.filter-section-property button:hover {
+  /* outline: 1px solid var(--main-light-clr); */
+  background-color: #fff;
+}
+
 .filter-section-property button {
   cursor: pointer;
   border-radius: 5px;
- 
+
 
   padding: 5px 10px;
   border: none;
-  background:none;
+  background: none;
   color: #000000;
   text-align: center;
   font-family: "Inter", Sans-serif;
@@ -868,8 +907,10 @@ width: 86%;
 
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 166.667% */
+  line-height: 20px;
+  /* 166.667% */
 }
+
 .Admin-property-post-card-main-box {
   display: flex;
   flex-direction: column;
@@ -886,7 +927,7 @@ width: 86%;
   /* border-radius: 4px; */
   /* border: 0.5px solid #a4d0ed; */
   background: #f7fcff;
-  
+
   margin: 10px 0;
   /* position: sticky; */
   /* top: 124px; */
@@ -896,6 +937,7 @@ width: 86%;
   border-radius: 10px;
   /* background-color: #d0e5f6e8; */
 }
+
 .active-btn {
   display: flex;
   align-items: center;
@@ -941,19 +983,20 @@ width: 86%;
   /* padding: 5px; */
 }
 
-.admin-filter-select-lable{
+.admin-filter-select-lable {
   font-size: 12px;
   cursor: pointer;
 }
-.admin-filter-select{
+
+.admin-filter-select {
   background-color: #d0e5f6;
   cursor: pointer;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-   gap: 4px;
-   padding: 2px 5px;
+  gap: 4px;
+  padding: 2px 5px;
 }
 
 @media (min-width: 1px) and (max-width: 480px) {
@@ -964,6 +1007,7 @@ width: 86%;
   .heading-name {
     margin: 10px 0 0 0;
   }
+
   .property-card-info {
     margin-left: 0px;
     flex: 1 1;
@@ -988,11 +1032,13 @@ width: 86%;
     background: #fff;
     box-shadow: 0px 0px 12px 0px #cbe1f1;
   }
+
   .imageSlide img {
     min-width: 100%;
     max-width: 100%;
     transition: all 1s ease-in-out;
   }
+
   .property-post-card {
     display: flex;
     flex-direction: column;
@@ -1001,20 +1047,23 @@ width: 86%;
       position: relative; */
   }
 }
+
 /* Amit css========================================== */
 .controlled-input {
   padding: 5px;
   border: 1px solid var(--main-light-clr);
   border-radius: 6px;
   font-size: 12px;
-  width: 200px;
+  width: 160px;
   position: relative;
   color: #333;
   background: none;
 }
+
 .searchAdmin {
   margin-left: 20px;
 }
+
 .ActiveFill {
   display: flex;
   flex-direction: row;
@@ -1029,6 +1078,7 @@ width: 86%;
   background-color: #fff;
   border: 1px solid #daeaf9;
 }
+
 /* 2nd case */
 .ActiveEmpty {
   display: flex;
@@ -1059,7 +1109,7 @@ width: 86%;
   color: #fff;
 }
 
-.Assing-Property-btn:hover{
+.Assing-Property-btn:hover {
   opacity: .8;
 }
 
@@ -1071,15 +1121,17 @@ width: 86%;
   border-radius: 5px;
 }
 
-.delete-Property-btn:hover{
+.delete-Property-btn:hover {
   opacity: .8;
 }
+
 .Assing-Property-btn:hover {
   background-color: var(--main-light-clr);
   color: #fff;
   padding: 5px;
   border-radius: 5px;
 }
+
 /* assign to section css */
 .selectAssign {
   width: 80px;
@@ -1090,16 +1142,18 @@ width: 86%;
   padding: 0px;
   font-size: 12px;
   margin-top: 0px;
-  outline: none; /* Remove outline when focused */
+  outline: none;
+  /* Remove outline when focused */
   background-color: #dee2e600;
 
   padding: 5px 10px;
 }
 
-.selectAssign > option {
+.selectAssign>option {
   background-color: hsl(120, 14%, 96%);
   color: #333333;
 }
+
 .adminNameButton {
   flex-direction: row;
   gap: 5px;

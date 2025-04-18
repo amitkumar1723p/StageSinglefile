@@ -62,10 +62,10 @@ export default function CreatePostImageUpload({
 
   const CratePostHandler = (e) => {
     e.preventDefault();
-    if (update && previewImage.length === 0) {
-      setnext(4);
-      return alert("one image is required");
-    }
+    // if (update && previewImage.length === 0) {
+    //   setnext(4);
+    //   return alert("one image is required");
+    // }
     let formData = new FormData(e.target);
 
     const PricingDetailsCopyObj = { ...PricingDetailsData };
@@ -153,7 +153,7 @@ export default function CreatePostImageUpload({
       "PricingDetails",
       `${JSON.stringify(PricingDetailsCopyObj)}`
     );
-    console.log(defaultImg, "default");
+   
 
     if (update) {
       if (update_RemoveImage.length === 0 && uploadimages.length === 0) {
@@ -268,7 +268,7 @@ export default function CreatePostImageUpload({
                   {" "}
                   <img
                     className="icon-img"
-                    src="/img/i-icon.png"
+                    src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/i-icon.png"
                     alt="i-icon"
                   />{" "}
                   Supported Format: JPEG, PNG{" "}
@@ -348,7 +348,7 @@ export default function CreatePostImageUpload({
                       onClick={() => {
                         setDefaultImg(image.name); // Store image name instead of index
 
-                        console.log("Selected Image:", image.name);
+                     
 
                         // Find the image in uploadimages
                         let selectedImage = uploadimages.find(
@@ -414,7 +414,7 @@ export default function CreatePostImageUpload({
 
                         // Default Save Image Default image
                         if (image.name === defaultImg) {
-                          console.log(image);
+                        
                           setDefaultImg(null);
                         }
                       }}

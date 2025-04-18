@@ -147,7 +147,7 @@
   line-height: normal;
 }
 
-form {
+.notify-form {
   display: flex;
   flex-direction: column;
   padding: 10px;
