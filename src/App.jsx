@@ -78,6 +78,7 @@ import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseActio
 // import MyVisits from "./Component/Post/CreatePost/m";
 import { FormatDate } from "./utils/CommonFunction";
 import AgentUserResponse from "./Component/Admin/AgentUserResponse";
+import SpreadsheetView from "./Component/Admin/AdminExcel/SpreadsheetView";
 
 import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
@@ -1040,27 +1041,14 @@ function App() {
           </Route>
         </>
         {/*admin routes*/}
-
-        {/* <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/> */}
-        {/* <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/> */}
+        {/* This Routes available For Admin Owner Agent  */}
         <Route
-          exact
-          path="/fresh-bookings2"
-          element={<FreshBookingViewAlll />}
-        />
-        <Route
-          path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id"
-          element={<SingleFreshBooking />}
-        />
-        <Route
-          path="/ContactUs"
-          element={<ContactUsForm/>}
-        />
-
-
-        <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
-        {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
-
+            exact
+            path="excel/:id"
+            element={
+               <SpreadsheetView/>
+            }
+          />
         <Route
           exact
           path="/admin"
@@ -1088,11 +1076,20 @@ function App() {
             }
           />
 
-          <Route path="all-excel-both" element={<AdminAgentExcelData />} />
+          <Route
+
+            path="all-excel-both"
+            element={
+              <AdminAgentExcelData />
+            }
+          />
+   
           <Route
             exact
-            path="excel/:id"
-            element={<AdminOwnerRoutes Component={OwnerAgentExcel} />}
+            path="single-user-Response-action/:id"
+            element={
+              <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
+            }
           />
           <Route
             exact

@@ -53,11 +53,11 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
               <div
                 key={item._id}
                 className="files-card"
-                onClick={() => navigate(`/admin/excel/${item?.ExcelId?._id}`)}
+                onClick={() => navigate(`/excel/${item?.ExcelId?._id}`)}
               >
 
                 <div className="file-icon"><img src="/img/excel_icon.svg" alt="excel_icon" /></div>
-                <div className="file-name"><small>{item?.ExcelId?.fileName}  </small> </div>
+                <div className="file-name"><small>{item?.ExcelId?.name}  </small> </div>
               </div>
             </div>
 
