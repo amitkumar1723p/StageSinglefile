@@ -7,7 +7,7 @@ const ContactUsForm = ( {setContactUs}) => {
 const dispatch=useDispatch()
   const [formData, setFormData] = useState({
     firstName: '',
-    lastName: '',
+    phoneNumber: '',
     email: '',
     message: ''
   });
@@ -23,6 +23,7 @@ const dispatch=useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
 dispatch(submitContactForm(formData))
+setContactUs(false)
   };
 
   return (
@@ -80,6 +81,7 @@ dispatch(submitContactForm(formData))
             <div className="contactus-form-group">
               <label htmlFor="firstName">First Name</label>
               <input
+              required
                 type="text"
                 id="firstName"
                 name="firstName"
@@ -90,12 +92,15 @@ dispatch(submitContactForm(formData))
             </div>
             
             <div className="contactus-form-group">
-              <label htmlFor="lastName">Last Name</label>
+              <label htmlFor="lastName">Mobile No.</label>
               <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
+              required
+                type="Number"
+                id="phoneNumber"
+                pattern="[1-9]{1}[0-9]{9}"
+                maxLength={10}
+                name="phoneNumber"
+                value={formData.phoneNumber}
                 onChange={handleChange}
               />
             </div>
@@ -103,6 +108,7 @@ dispatch(submitContactForm(formData))
             <div className="contactus-form-group">
               <label htmlFor="email">Email</label>
               <input
+              required
                 type="email"
                 id="email"
                 name="email"
@@ -114,6 +120,7 @@ dispatch(submitContactForm(formData))
             <div className="contactus-form-group">
               <label htmlFor="message">Message</label>
               <textarea
+              required
                 id="message"
                 name="message"
                 value={formData.message}
