@@ -75,6 +75,7 @@ import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseActio
 // import MyVisits from "./Component/Post/CreatePost/m";
 import { FormatDate } from "./utils/CommonFunction";
 import AgentUserResponse from "./Component/Admin/AgentUserResponse";
+import SpreadsheetView from "./Component/Admin/AdminExcel/SpreadsheetView";
 
 
 function App() {
@@ -861,7 +862,7 @@ function App() {
         console.log(medata)
    
   }, []);
- console.log(medata)
+//  console.log(medata)
    useEffect(()=>{
     if(medata?.isBlockedUser==true){
       dispatch(LogoutAction())
@@ -993,7 +994,13 @@ function App() {
         </>
         {/*admin routes*/}
         {/* This Routes available For Admin Owner Agent  */}
-
+        <Route
+            exact
+            path="excel/:id"
+            element={
+               <SpreadsheetView/>
+            }
+          />
         <Route
           exact
           path="/admin"
@@ -1024,13 +1031,7 @@ function App() {
               <AdminAgentExcelData />
             }
           />
-          <Route
-            exact
-            path="excel/:id"
-            element={
-              <AdminOwnerRoutes Component={OwnerAgentExcel} />
-            }
-          />
+   
           <Route
             exact
             path="single-user-Response-action/:id"

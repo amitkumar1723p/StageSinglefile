@@ -226,10 +226,10 @@ const OwnerAgentExcelData = () => {
                                         />
                                         <div
                                             className="files-card"
-                                            onClick={() => navigate(`/admin/excel/${item._id}`)}
+                                            onClick={() => navigate(`/excel/${item?._id}`)}
                                         >
                                             <div className="file-icon">📊</div>
-                                            <div className="file-name">{item.fileName}</div>
+                                            <div className="file-name">{item?.name}</div>
                                         </div>
                                     </div>
                                 ))}
