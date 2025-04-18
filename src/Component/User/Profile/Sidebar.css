@@ -53,7 +53,7 @@
   letter-spacing: 0.5px;
   margin: 5px 5px;
   font-size: 14px;
-  border-bottom: 1px solid #dedeff;
+  /* border-bottom: 1px solid #dedeff; */
   transition: filter 0.3s ease;
 }
 

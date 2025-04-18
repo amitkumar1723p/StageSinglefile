@@ -252,7 +252,7 @@ function ProfileHeader() {
         <Link to="/user/post">
        
         <div className="dashboard-right-side">
-          <img src="img/dash-banner.svg" alt="dash-banner" />
+          <img src="img/dash-banner.svg" alt="dash-banner" style={{height:'100%', width: 'auto'}} />
         </div>
          </Link>
       </div>
