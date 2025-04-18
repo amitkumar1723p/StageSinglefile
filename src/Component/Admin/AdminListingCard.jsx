@@ -634,7 +634,7 @@ export default function AdminListingCard({
                           <button
                           className="re-open-btn-admin"
                             onClick={() => {
-                              dispatch(ReOpenPostAction(PostData?._id),"AdminRoutes");
+                              dispatch(ReOpenPostAction(PostData?._id ,"AdminRoutes"));
                             }}
                           >
                             Re-Open

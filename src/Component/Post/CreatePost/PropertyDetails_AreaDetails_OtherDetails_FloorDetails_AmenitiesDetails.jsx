@@ -28,6 +28,7 @@ export default function PropertyDetails_AreaDetails_OtherDetails_FloorDetails_Am
 }) {
   const ApartMentTypeArrayRemovePlotAndLand = [
     "Apartment",
+    "Pent House" ,
     "Independent House/Villa",
     "Studio Apartment",
     "1 RK/PG",

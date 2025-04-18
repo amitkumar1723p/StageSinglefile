@@ -123,6 +123,8 @@ useEffect(() => {
     "1 RK/Studio Apartment",
     "Serviced Apartment",
     "Plot/Land",
+    "Pent House",
+    
   ];
   const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
   const PropertyAdTypeArray = ["Sale", "Rent"];
