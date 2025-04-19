@@ -94,6 +94,8 @@ export default function AdminListingCard({
       setFormatDate({ ActiveDate: activedate, ExpiredDate: postExpireddate });
     }
   }, [PostData?.PostVerifyData?.Time]);
+
+    console.log(PostData ,"postData")
   const location = useLocation();
   const dispatch = useDispatch();
   const [isAssignedToAnyUser, setisAssignedToAnyUser] = useState([]);
@@ -553,7 +555,7 @@ export default function AdminListingCard({
                 </p>
                 {/* <p>Extend Duration</p> */}
 
-                {medata.user.Role != "Agent" && (
+                 
                   <>
                     <div className="user-name-contact">
                       <span>Posted by : </span>
@@ -561,7 +563,7 @@ export default function AdminListingCard({
                         &nbsp;
 
                         ({PostData?.CreatePostUser?.Role})
-                      </span>
+                      </span><br />
                     </div>
                     <div className="user-name-contact">
                       <span>Mobile No. : </span>
@@ -572,7 +574,7 @@ export default function AdminListingCard({
                       <span>{PostData?.CreatePostUser?.email}</span>
                     </div>
                   </>
-                )}
+                
               </div>
 
               <div className="admin-btn-active-btn">

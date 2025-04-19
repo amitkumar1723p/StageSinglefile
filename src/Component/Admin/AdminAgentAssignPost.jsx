@@ -104,6 +104,7 @@ export default function AdminAgentAssignPost({
   
  
 
+  console.log(OwnerPosts.length)
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);

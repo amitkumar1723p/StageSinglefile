@@ -193,6 +193,12 @@ td{
 
 
 @media (max-width: 480px) {
+
+
+.floating-buttons a {
+  background-color: var(--main-light-clr);
+}
+
   /* .who-we-are-section{
     font-size: 12px !important;
   } */

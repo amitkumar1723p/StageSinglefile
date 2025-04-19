@@ -103,7 +103,7 @@ export default function SinglePostDetails() {
     return state.TenentResponseIsExit;
   });
 
-  console.log(getSinglePostData, "getSingllepost");
+
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
       setPropertyAddress(

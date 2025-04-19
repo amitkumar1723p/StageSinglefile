@@ -191,7 +191,7 @@ export default function AdminAgentOwnerPost() {
 
   useEffect(() => {
     var filterdData = AllPost;
-
+console.log("cyeeee ",currenSelected)
     setCurrentDataLength(AllPost?.Post?.length);
     if (currenSelected === "All In-Active posts") {
       filterdData = AllPost?.Post?.filter((item) => !item?.PostVerify);
@@ -236,6 +236,7 @@ export default function AdminAgentOwnerPost() {
 
       setCurrentDataLength(filterdData?.length);
     }
+    console.log("date ddd ",AllPost)
   }, [currenSelected, AllPost]);
 
   //  function handleCurrentSlected(a){
