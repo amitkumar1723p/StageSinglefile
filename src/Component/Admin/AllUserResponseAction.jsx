@@ -29,17 +29,18 @@ export default function AllUserResponseAction() {
   // Pagination logic state
   const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
   const [runPagination, setrunPagination] = useState(false);
+  const[index,setIndex]=useState()
   const totalPages = AllUserResponseAction_Store?.totalPages
   // const itemsPerPage = 10; // Number of items per page
 
   // console.log(AllUserResponseAction_Store)
   useEffect(() => {
 
-    if (AllUserResponseAction_Store == undefined || runPagination == true) {
+    if (AllUserResponseAction_Store == undefined || runPagination == true || index) {
       dispatch(getAllUserResponseAction(page));
 
     }
-  }, [page]);
+  }, [page,index]);
   useEffect(() => {
     // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
     if (searchText && searchbtn === true) {
@@ -112,7 +113,7 @@ export default function AllUserResponseAction() {
             storedItem.latestCreateAt !== match.latestCreateAt // ✅ this was missing proper comparison
           );
         });
-        console.log(result)
+     console.log(result,"lll")
         setTrackNewLead(result);
 
         if (newData.length > storedData.length) {
@@ -150,20 +151,19 @@ export default function AllUserResponseAction() {
 
         if (!existingItem) {
           // If new contact, add it
-          storedMap.set(newItem.ContactNumber, newItem);
-        } else {
-          // If contact exists, check if any field changed
-          const hasChanged = Object.keys(newItem).some(
-            key => newItem[key] !== existingItem[key]
-          );
+          storedMap.set(newItem.ContactNumber, newItem);}
+        // } else {
+        //   // If contact exists, check if any field changed
+        //   const hasChanged = Object.keys(newItem).some(
+        //     key => newItem[key] !== existingItem[key]
+        //   );
 
-          if (hasChanged) {
-            // Update with latest info
-            storedMap.set(newItem.ContactNumber, newItem);
-          }
-        }
+        //   if (hasChanged) {
+        //     // Update with latest info
+        //     storedMap.set(newItem.ContactNumber, newItem);
+        //   }
+        // }
       });
-
       const updatedRead = Array.from(storedMap.values());
 
       updatedRead.sort((a, b) => new Date(b.latestCreateAt) - new Date(a.latestCreateAt));
@@ -178,6 +178,23 @@ export default function AllUserResponseAction() {
   }, [tarckNewLead]);
 
 
+   useEffect(() => {
+        if (index !== undefined && index !== null) {
+            const stored = localStorage.getItem('readMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                // Remove first match by ContactNumber
+                const updated = parsed.filter(item => item.ContactNumber !== index);
+                console.log(updated)
+                localStorage.setItem('readMode', JSON.stringify(updated));
+
+            }
+        }
+       
+
+    }, [index]);
+  
+
   return (
     <>
       {usersList &&
@@ -185,7 +202,7 @@ export default function AllUserResponseAction() {
           <div className="d-flex justify-content-between">
             <div className="d-flex">
               <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
-              {/* <p className="px-4 mt-3 fw-semibold text-primary">Unchecked:(<span className="text-danger">{read?.length}</span>)</p> */}
+              <p className="px-4 mt-3 fw-semibold text-primary">Unchecked:(<span className="text-danger">{read?.length}</span>)</p>
             </div>
             <div className="px-4 mt-3 d-flex py-2">
               <input
@@ -387,26 +404,17 @@ export default function AllUserResponseAction() {
 
 
                   <div className="btn-allresponse-section-main" >
-                    {/* <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none " >
-                    <button className="btn-allresponse-section fw-light px-4" onClick={() => setTrackIndex(index)} >View Details</button>
+              
 
-                  </Link> */}
                     <button
-  className="btn-allresponse-section fw-light px-2"
-  onClick={() => {
-    setTrackIndex(index);
-
-    // Save state to sessionStorage (so it can be read in the new tab)
-    sessionStorage.setItem("userResponseIndex", `630713${item.ContactNumber}`);
-
-    // Open new tab with the correct path
-    window.open(`/admin/single-user-Response-action/${item?._id}`, "_blank");
-  }}
->
-  View Details
-</button>
-
-
+                                        className="btn-allresponse-section fw-light px-4"
+                                        onClick={() => {
+                                            setIndex(`630713${item.ContactNumber}`);
+                                            window.open(`/admin/single-user-Response-action/${item?._id}`, 'AgentView');
+                                        }}
+                                    >
+                                        View Details
+                                    </button>
 
                   </div>
 
