@@ -9,17 +9,20 @@ import { useLocation } from 'react-router-dom';
 
 export default function SingleUserRespponseAction() {
     const location = useLocation();
+
+    const params = new URLSearchParams(location.search);
+    const indexAgent = params.get('indexAgent');
     const { index } = location.state || {};
-    const { indexAgent } = location.state || {};
+
     const dispatch = useDispatch()
     const { id } = useParams()
-// console.log(index,"lll")
+    // console.log(index,"lll")
     const [activeTable, setActiveTable] = useState(1);
 
     const [scheduleStatus, setScheduleStatus] = useState()
     const [offerStatus, setOfferStatus] = useState()
     const [notifyStatus, setNotifyStatus] = useState()
-    const [requirementStatus,setRequirementStatus]=useState()
+    const [requirementStatus, setRequirementStatus] = useState()
     // single user response action
     const { data: SingleUserResponseAction_Store, loading } = useSelector((state) => {
         return state.SingleUserResponseAction_Store;
@@ -61,50 +64,52 @@ export default function SingleUserRespponseAction() {
                 offerStatus?.id
             ))
         }
-        if(notifyStatus){
+        if (notifyStatus) {
             dispatch(updateNotifyStatusAction(
                 { VisitStatus: notifyStatus?.status },
                 notifyStatus?.id
             ))
         }
-        if(requirementStatus){
-            dispatch( updateRequirementStatusAcion(
-                { VisitStatus:requirementStatus?.status },
+        if (requirementStatus) {
+            dispatch(updateRequirementStatusAcion(
+                { VisitStatus: requirementStatus?.status },
                 requirementStatus?.id
             ))
         }
 
-    }, [scheduleStatus, offerStatus,notifyStatus,requirementStatus])
+    }, [scheduleStatus, offerStatus, notifyStatus, requirementStatus])
 
-  
+
     // Admin_OwnerScheduleVisitDone
 
     useEffect(() => {
         if (index !== undefined && index !== null) {
-          const stored = localStorage.getItem('readMode');
-          if (stored) {
-            const parsed = JSON.parse(stored);
-            // Remove first match by ContactNumber
-            const updated = parsed.filter(item => item.ContactNumber !== index);
-            localStorage.setItem('readMode', JSON.stringify(updated));
-        
-          }
+            const stored = localStorage.getItem('readMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                // Remove first match by ContactNumber
+                const updated = parsed.filter(item => item.ContactNumber !== index);
+                console.log(updated)
+                localStorage.setItem('readMode', JSON.stringify(updated));
+
+            }
         }
         if (indexAgent !== undefined && indexAgent !== null) {
             const stored = localStorage.getItem('agentReadMode');
             if (stored) {
                 const parsed = JSON.parse(stored);
-        console.log(indexAgent,"id")
+                console.log(indexAgent, "id")
                 // Filter out the one with matching _id
                 const updated = parsed.filter(item => item !== indexAgent);
-        
+
                 // Update localStorage
                 localStorage.setItem('agentReadMode', JSON.stringify(updated));
             }
         }
-        
-      }, [index,indexAgent]);
-      
+
+    }, [index, indexAgent]);
+    console.log(index, indexAgent, "lk")
+
     return (
         <div className="border border-primary border-opacity-25 ">
 
@@ -184,7 +189,7 @@ export default function SingleUserRespponseAction() {
                         </thead>
                         <tbody>
                             {SingleUserResponseAction_Store?.schedules?.slice().reverse().map((item) => {
-                                console.log(item?._id)
+
                                 return (<tr>
                                     {/* <td><small className="fw-light">{item?.LocationDetails?.ProjectName}</small></td> */}
                                     <td><small className="fw-light ">{item?.PostData?.PostId?.BasicDetails?.ApartmentType}</small></td>
@@ -195,7 +200,7 @@ export default function SingleUserRespponseAction() {
                                         }}
                                     >
                                         <small className="fw-light text-truncate text-nowrap overflow-hidden text-primary border-primary border-bottom px-2 border-opacity-50  d-inline-block w-100">
-                                            {item?.PostData?.PostId?.LocationDetails?.ProjectName} - {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.City}  
+                                            {item?.PostData?.PostId?.LocationDetails?.ProjectName} - {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.City}
                                         </small>
                                     </td>
                                     <td><small className="fw-light ">{item?.PostData?.PostId?._id}</small></td>
@@ -273,7 +278,7 @@ export default function SingleUserRespponseAction() {
                                     }}
                                     ><small className="fw-light text-truncate text-nowrap overflow-hidden text-primary border-primary border-bottom px-2 border-opacity-50  d-inline-block w-100">{item?.PostData?.PostId?.LocationDetails?.ProjectName} -
                                             {item?.PostData?.PostId?.LocationDetails?.Landmark} {item?.PostData?.PostId?.LocationDetails?.Locality}</small></td>
-                                            <td><small className="fw-light">{item?.PostData?.PostId?._id}</small></td>
+                                    <td><small className="fw-light">{item?.PostData?.PostId?._id}</small></td>
 
                                     <td><small className="fw-light">{formatPrice(item?.PostData?.PostId?.PricingDetails?.ExpectedPrice)}</small></td>
                                     <td><small className="fw-light">{item?.PostData?.PostId?.BasicDetails?.ApartmentType}</small></td>
@@ -324,7 +329,7 @@ export default function SingleUserRespponseAction() {
                                             onClick={() => window.open(`/post-detail/${item?._id}`, 'SinglePostDetail')}
                                         >
                                             {item?.LocationDetails?.ProjectName} -
-                                            {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City} 
+                                            {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City}
                                         </small>
                                     </td>
 
@@ -343,7 +348,7 @@ export default function SingleUserRespponseAction() {
 
 
 
-                                    
+
 
 
                                     <td><small className="fw-light">{item?.createAt ? FormatDate(item?.createAt) : 'N/A'}</small></td>
@@ -403,7 +408,7 @@ export default function SingleUserRespponseAction() {
 
                                     <td><small className="fw-light">{item?.createAt ? dateTimeFormatter.format(new Date(item?.createAt)) : 'N/A'}</small></td>
                                     <td><small className="fw-light">
-                                        <select  className="admin-all-response-remaks" onChange={(e) => setNotifyStatus({ status: e.target.value, id: item?._id })}>
+                                        <select className="admin-all-response-remaks" onChange={(e) => setNotifyStatus({ status: e.target.value, id: item?._id })}>
                                             <option value={item?.notifyStatus?.status}>{item?.notifyStatus?.status}</option>
                                             {["Pending", "Completed"]
                                                 .filter(status => status !== item?.notifyStatus?.status)
@@ -457,7 +462,7 @@ export default function SingleUserRespponseAction() {
                                         FormatDateAndTime(item?.createAt)
                                         : 'N/A'}</small></td>
                                     <td><small className="fw-light">
-                                        <select className="admin-all-response-remaks"  onChange={(e) => setRequirementStatus({ status: e.target.value, id: item?._id })}>
+                                        <select className="admin-all-response-remaks" onChange={(e) => setRequirementStatus({ status: e.target.value, id: item?._id })}>
                                             <option value={item?.requirementStatus?.status}>{item?.requirementStatus?.status}</option>
                                             {["Pending", "Completed"]
                                                 .filter(status => status !== item?.requirementStatus?.status)

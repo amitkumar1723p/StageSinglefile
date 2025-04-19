@@ -1088,7 +1088,7 @@ function App() {
             exact
             path="single-user-Response-action/:id"
             element={
-              <AdminOwnerRoutes Component={SingleUserRespponseAction} isOwner={true} />
+              <SingleUserRespponseAction />
             }
           />
           <Route
