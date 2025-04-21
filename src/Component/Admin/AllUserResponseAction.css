@@ -253,3 +253,263 @@ option:focus {
   background: plum;
 }
   /* ==================================================== All css to use in the single user action reponse  */
+
+
+
+
+
+
+
+
+
+
+  /* Single User Response Action  css start*/
+
+
+
+.single-user-response-action-container{
+    background-color:rgba(238, 242, 246, 1) ;
+  }
+  
+  .single-user-response-info-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 20px;
+    width: fit-content;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0px 4px 20px rgba(215, 220, 228, 1);
+  }
+  .single-user-response-info-top{
+    display: flex;
+    gap: 60px;
+  
+  }
+  .single-fresh-user-name{
+  
+    padding: 8px 16px 8px 0px;
+    h2{
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+  .single-user-response-info-top-button{
+    display: flex;
+    gap: 30px;
+  }
+  .single-user-response-role{
+    background-color: rgba(237, 242, 254, 1);
+    color: rgba(73, 118, 244, 1);
+    padding: 8px 16px;
+    border-radius: 4px;
+    p{
+  
+    }
+  }
+  .single-user-response-call-button{
+    border: 1px solid rgba(104, 111, 120, 1);
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+      img{
+        height: 20px;
+        width: 20px;
+      }
+      span{
+        color: rgba(69, 75, 83, 1);
+      }
+    
+  }
+  
+  
+  .single-user-response-info-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .single-user-response-phno-email{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .single-user-response-phone{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+    img{
+      height: 20px;
+      width: 20px;
+    }
+    p{
+      font-size: 14px;
+      color: rgba(114, 114, 114, 1);
+    }
+  }
+  .single-user-response-email{
+  
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+    img{
+      height: 20px;
+      width: 20px;
+    }
+    p{
+      font-size: 14px;
+      color: rgba(44, 48, 53, 1);
+      border-bottom: 1px solid black;
+    }
+  }
+  
+  .single-user-response-email-button{
+    border: 1px solid rgba(104, 111, 120, 1);
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    gap: 5px;
+    img{
+      height: 20px;
+      width: 20px;
+    }
+    span{
+      color: rgba(69, 75, 83, 1);
+    }
+  }
+  
+  
+  .single-user-response-filter-container{
+    /* padding: 0px 15px; */
+    box-shadow: 0px 2px 2px rgb(209, 209, 209);
+    margin-bottom: 10px;
+  
+    position: sticky;
+    top: 64px;
+  
+  }
+  .main-form-data-section{
+    overflow: scroll;
+    scrollbar-width: none;
+    padding: 20px 24px;
+    background-color: rgb(255, 255, 255);
+    gap: 20px;
+    div{
+      position: relative;
+      cursor:pointer;
+      white-space: nowrap;
+  
+      small{
+        border: 2px solid rgba(209, 215, 223, 1);
+           span{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -16px;
+            right: -9px;
+            border-radius: 50%;
+            font-size: 12px;
+            min-height: 20px;
+            min-width: 20px;
+            background-color: rgb(15, 189, 15);
+            color: white;
+        }
+      }
+      
+    }
+  
+  }
+  .isSingleFilterButtonActive{
+    background-color: rgba(45, 65, 91, 1);
+    border: 2px solid rgba(45, 65, 91, 1) !important;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+  
+  
+  }
+  .isSingleFilterButtonNotActive{
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 4px;
+    
+  }
+  
+  
+  .single-user-response-table-head-container{
+    position: sticky;
+    top: 128px;
+    tr{
+     th{
+      font-size: 14px;
+      font-weight: 600;
+      background-color: #2d415b ;
+      color: white;
+      margin-bottom: 5px;
+  
+     }
+    }
+  }
+  .single-user-response-table-body-container{
+    tr{
+      td{
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(49, 54, 63, 1);
+      }
+    }
+  }
+  .single-user-response-project-name{
+  
+    &:hover{
+      color: var(--main-light-clr);
+      
+    } 
+  }
+  .single-user-response-dropdown{
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 5px 15px;
+  
+  }
+  
+  .single-user-dropdown-accepted{
+    color: rgb(25, 196, 5);
+  }
+  .single-user-dropdown-rejected{
+    color: rgb(209, 0, 0);
+  }
+  .single-user-dropdown-made{
+    color: rgb(146, 146, 146);
+  }
+  
+  
+  .single-user-response-dropdown-rejected{
+    background-color: rgb(138, 138, 138) !important;
+    color: white;
+  }
+  .dropdown-default-background{
+    /* background-color: rgb(101, 101, 101) !important; */
+  }
+
+
+  .single-user-response-active{
+    color: #0fbd0f ;
+  }
+  
+  .single-user-response-inactive{
+    color: rgb(136, 136, 136) ;
+  }

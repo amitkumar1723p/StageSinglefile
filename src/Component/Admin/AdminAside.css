@@ -94,7 +94,7 @@ bottom: 32%;
     /* flex: 1; */
     /* display: flex;
     flex-wrap: wrap; */
-    width: 80%;
+    width: 90%;
     margin: auto;
     gap: 10px;
     padding: 1rem;
@@ -248,4 +248,15 @@ bottom: 32%;
   .skeleton-button.red {
     background: linear-gradient(90deg, #f8d7da 25%, #f5c6cb 50%, #f8d7da 75%);
   }
+  
+
+
+
+
+
+
+
+
+
+
   
