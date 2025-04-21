@@ -34,7 +34,7 @@ export const CreateUserReducer = (state = {}, action) => {
         
       //  Fresh Property get Api ----- End
        
-     
+     case"updateConatctRemarkActionRequest":
 
       return {
         ...state,
@@ -74,6 +74,9 @@ export const CreateUserReducer = (state = {}, action) => {
   case"updateBidStatusActionSuccess":
   case"updateNotifyStatusActionSuccess":
   case"updateRequirementStatusAcionSuccess":
+
+
+  case"updateConatctRemarkActionSuccess":
       return {
          
         ...state,
@@ -110,6 +113,10 @@ export const CreateUserReducer = (state = {}, action) => {
   case"updateBidStatusActionFail":
   case"updateNotifyStatusActionFail":
   case"updateRequirementStatusAcionFail":
+
+
+  
+  case"updateConatctRemarkActionFail":
       
       return {
         ...state,
@@ -558,6 +565,38 @@ export const getViewOwnerDetailsActionReducer = (state = {}, action) => {
 
     case "ViewOwnerDetailsRequestFailClear":
       return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+// get all conatct us 
+
+export const viewAllContactFormReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "viewAllContactFormRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "viewAllContactFormSuccess":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "viewAllContactFormFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case "viewAllContactFormClear":
+      return {};
+
     default:
       return {
         ...state,
