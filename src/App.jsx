@@ -316,11 +316,11 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
-    console.log("admin", CreatePost);
+    console.log("admin", CreatePost ,AlertType ,"AlertType" );
     if (CreatePost) {
       if (
         CreatePost.success === true &&
-        ["DisplayDataRequest"].includes(
+        ["DisplayDataRequest" ,"OwnerAllExcelFileRequest"].includes(
           typeof AlertType === "string" ? AlertType : AlertType?.Type
         )
       ) {

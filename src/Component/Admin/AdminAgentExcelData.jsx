@@ -39,7 +39,7 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
 
 
   return (
-    <div>
+    <div className=''>
 
       {fetchedAllFiles?.length > 0 && (
         <div className="files-card-container">
@@ -66,7 +66,7 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
       )}
 
 
-      {!fetchedAllFiles && <div>no assined excel found</div>}
+      {!fetchedAllFiles && <div>No assigned excel found</div>}
     </div>
   )
 }

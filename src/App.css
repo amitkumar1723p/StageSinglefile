@@ -321,8 +321,8 @@ td{
 
 /* Apply to all scrollbars */
 ::-webkit-scrollbar {
-  width: 6px; /* Adjust scrollbar width */
-  height: 6px; /* For horizontal scrollbars */
+  width: 10px; /* Adjust scrollbar width */
+  height: 15px; /* For horizontal scrollbars */
 }
 
 /* Scrollbar Track */
