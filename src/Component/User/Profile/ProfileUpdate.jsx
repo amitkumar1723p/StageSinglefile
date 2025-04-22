@@ -15,15 +15,15 @@ const dispatch=useDispatch()
 const {varb}=useContext(UserContext);
 
 
-  const [number, setNumber] = useState(varb?.Name);
+  const [number, setNumber] = useState(varb?.ContactNumber);
   const [email, setEmail] = useState(varb?.emil);
-  const [name, setName] = useState(varb?.ContactNumber);
+  const [name, setName] = useState(varb?.Name);
   const [otp, setOtp] = useState('');
 
   const handleNumber = async (e) => {
     e.preventDefault();
     const updateData={ContactNumber:varb.ContactNumber,LastName:varb.LastName,email:varb.email,Name:varb.Name,Otp:otp};
-     
+     if(otp.length!=6) return alert("Please enter right OTP")
     dispatch(ProfileUpdateAction(updateData))
     
   }
@@ -106,6 +106,7 @@ const {varb}=useContext(UserContext);
           required
           placeholder="Enter OTP here"
           value={otp}
+          maxLength={6}
           onChange={(e) => setOtp(e.target.value)}
           style={styles.input}
         />

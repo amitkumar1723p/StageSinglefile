@@ -172,7 +172,7 @@ const Dashboard = () => {
       setTotalListing(PostVerify.length + unverify.length);
     }
   }, [AgentAdminAllPost]);
-console.log(viewAllContactFormReducer,"ooo")
+
   // console.log(AllUserResponseData,"dash")
   return (
     <>

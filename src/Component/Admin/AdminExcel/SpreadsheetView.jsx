@@ -384,6 +384,8 @@ const SpreadsheetView = () => {
     if (medata) {
       if (medata?.user?.Role === "Owner") {
         fetchSpreadsheetData();
+        getAllAdminsAgents({ AgentVerify: true });
+        getAllAdminsAgents({ AdminVerify: true });
       }
       else {
 
@@ -391,8 +393,7 @@ const SpreadsheetView = () => {
       }
     }
 
-    getAllAdminsAgents({ AgentVerify: true });
-    getAllAdminsAgents({ AdminVerify: true });
+
 
     // Initialize Socket.io connection
     socketRef.current = io(SOCKET_URL);
@@ -834,6 +835,7 @@ const SpreadsheetView = () => {
       setFilteredIndices(null); // Reset filtered indices
     } catch (error) {
       console.error('Error fetching spreadsheet:', error);
+      navigate("/admin/dashboard")
       setNotification({
         open: true,
         message: 'Error loading spreadsheet: ' + (error.response?.data?.error || error.message),
@@ -858,6 +860,7 @@ const SpreadsheetView = () => {
       setFilteredIndices(null); // Reset filtered indices
     } catch (err) {
       navigate("/admin/dashboard")
+      window.location.reload();
       console.error("Error fetching file data:", err);
     }
   };
@@ -1040,12 +1043,13 @@ const SpreadsheetView = () => {
       }));
 
       // Use updated endpoint from second code
-      await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${id}/update`, {
+      // console.log(updates)
+    const res=  await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${id}/update`, {
         updates
       }, { withCredentials: true });
 
       setPendingUpdates([]);
-
+  
       setNotification({
         open: true,
         message: 'Changes saved successfully',
@@ -1053,6 +1057,11 @@ const SpreadsheetView = () => {
       });
     } catch (error) {
       console.error('Error saving changes:', error);
+      if(error?.response?.data?.success===false){
+        navigate("/admin/dashboard")
+        window.location.reload();
+
+      }
       setNotification({
         open: true,
         message: 'Error saving changes: ' + (error.response?.data?.error || error.message),
@@ -1501,9 +1510,9 @@ const SpreadsheetView = () => {
           {/* Spreadsheet Info */}
           <div className="spreadsheet-info">
             <div style={{ display: "flex", gap: "20px", marginBottom: "10px" }}>
-              <p>Description: {spreadsheet.description || 'No description provided'}</p>
-              <p>Created: {new Date(spreadsheet.createdAt).toLocaleString()}</p>
-              <p>Last updated: {new Date(spreadsheet.updatedAt).toLocaleString()}</p>
+              {/* <p>Description: {spreadsheet.description || 'No description provided'}</p> */}
+              <p>Created: {new Date(spreadsheet?.createdAt).toLocaleString()}</p>
+              <p>Last updated: {new Date(spreadsheet?.updatedAt).toLocaleString()}</p>
             </div>
             <div>
 

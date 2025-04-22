@@ -402,10 +402,7 @@ export default function AdminAgentOwnerPost() {
       const isConfirmed = window.confirm("Are you sure about it?");
       if (isConfirmed) {
         setStatus(value);
-      } else {
-        // Handle the cancel action if needed
-        console.log("Status change canceled.");
-      }
+      }  
     } else {
       alert("Please Select for Change Property Status!");
     }
@@ -426,9 +423,7 @@ export default function AdminAgentOwnerPost() {
     let result = window.confirm("Are you sure you want to proceed?");
     if (result && changePropertyStatusData?.AssignedPropertys?.length === 1) {
       dispatch(changePropertyStatus(changePropertyStatusData));
-    } else {
-      console.log("Cancel");
-    }
+    }  
   };
 
   return (
