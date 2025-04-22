@@ -90,8 +90,7 @@ export default function SingleFreshBooking() {
 
      const { id } = useParams();
 
-console.log(projectAboutBuilder?.projectAboutBuilderName,"pop")
-
+ 
   return (
     <div className='overflow-hidden'>
       <SingleFreshBookingHero   projectLogoContent= {projectLogoImage}  projectBannerImage = {bannerImage}

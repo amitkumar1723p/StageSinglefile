@@ -246,8 +246,7 @@ const HeroSection = () => {
           //   .replaceAll(" ", "-")
           //   .replace(",", "")
           //   .replaceAll("/", "-")}-${PostData._id}`
-          console.log(ProjectNameObjectData)
-
+ 
           navigate(
             `/home/card?${(ProjectNameObjectData?.s_type?.trim() === "ProjectName" ||
               ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName") && ProjectNameObjectData?.projectName

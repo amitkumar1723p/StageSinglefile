@@ -62,7 +62,7 @@ export default function CreateProfile() {
           Otp: "",
           ContactNumber: "",
         });
-     console.log(data)
+   
         if (data.admin_owner.Role === "Owner") {
           dispatch(GetMeDetailsAction());
         }

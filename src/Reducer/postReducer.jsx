@@ -551,35 +551,35 @@ export const OwnerAllPostsVisitsReducer = (state = {}, action) => {
   }
 };
 
-export const OwnerUploadExcelFileReducer = (state = {}, action) => {
-  switch (action.type) {
-    case "OwnerUploadExcelFile":
-      return {
-        ...state,
-        loading: true,
-      };
+// export const OwnerUploadExcelFileReducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case "OwnerUploadExcelFile":
+//       return {
+//         ...state,
+//         loading: true,
+//       };
 
-    case "OwnerUploadExcelFileSuccess":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
+//     case "OwnerUploadExcelFileSuccess":
+//       return {
+//         ...state,
+//         loading: false,
+//         data: action.payload,
+//       };
 
-    case "OwnerUploadExcelFileFail":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
-    case "OwnerUploadExcelFileClear":
-      return {};
-    default:
-      return {
-        ...state,
-      };
-  }
-};
+//     case "OwnerUploadExcelFileFail":
+//       return {
+//         ...state,
+//         loading: false,
+//         data: action.payload,
+//       };
+//     case "OwnerUploadExcelFileClear":
+//       return {};
+//     default:
+//       return {
+//         ...state,
+//       };
+//   }
+// };
 
 //owner all file excel reducer
 export const fetchAllOwnerFilesReducer = (state = {}, action) => {

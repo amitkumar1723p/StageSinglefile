@@ -35,11 +35,9 @@ export default function SingleFreshBookingForm() {
         dispatch(submitFreshProjectLead(formData))
         setOtpSent(true);
       
-            console.log(formData,"kl")
-        } else {
+         } else {
             dispatch(submitFreshProjectLead_VerifyOtp(formData))
-           console.log(formData.otp,"jj")
-        
+         
         }
     };
 

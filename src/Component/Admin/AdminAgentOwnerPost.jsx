@@ -133,7 +133,7 @@ export default function AdminAgentOwnerPost() {
         let NavbarHight = NavbarRef?.current?.offsetHeight || 0;
 
         if (postCardId) {
-          console.log("Found element:", postCardId.getBoundingClientRect());
+      
           const elementTop =
             postCardId.getBoundingClientRect().top + window.scrollY;
           const offset = allPostFilterBoxHight + NavbarHight;
@@ -191,7 +191,7 @@ export default function AdminAgentOwnerPost() {
 
   useEffect(() => {
     var filterdData = AllPost;
-console.log("cyeeee ",currenSelected)
+
     setCurrentDataLength(AllPost?.Post?.length);
     if (currenSelected === "All In-Active posts") {
       filterdData = AllPost?.Post?.filter((item) => !item?.PostVerify);
@@ -236,7 +236,7 @@ console.log("cyeeee ",currenSelected)
 
       setCurrentDataLength(filterdData?.length);
     }
-    console.log("date ddd ",AllPost)
+    
   }, [currenSelected, AllPost]);
 
   //  function handleCurrentSlected(a){

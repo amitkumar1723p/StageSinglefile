@@ -586,7 +586,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 // Create Tenant Post Response
 
 export const ViewOwnerDetailsAction = (Document) => {
-    console.log(Document)
+ 
  
   return async (dispatch) => {
     try {
@@ -1085,10 +1085,10 @@ export const UserRoleUpdation = (updateData) => {
           ...updateData,
           role:true
         }
-        console.log(toSend)
+   
       }
      else if(updateData.role==="UnBlock"){
-      console.log("idaodd")
+   
         toSend = {
           ...updateData,
           role:false
@@ -1176,7 +1176,7 @@ export const deleteExcelFile = (excelId) => {
 
 
 export const getAllUserResponseAction=(page,searchText)=>{
- console.log(searchText,page)
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -1242,7 +1242,7 @@ export const getSingleUserResponseAction=(id)=>{
 
 // this action is used to update offers status
 export const updateBidStatusAction=({ VisitStatus }, visitId)=>{
-  console.log(VisitStatus,visitId,"listen")
+ 
 
   return async(dispatch)=>{
     try {
@@ -1283,7 +1283,7 @@ export const updateBidStatusAction=({ VisitStatus }, visitId)=>{
 }
 
 export const updateNotifyStatusAction=({ VisitStatus }, visitId)=>{
-  console.log(VisitStatus,visitId,"listen")
+
   return async(dispatch)=>{
     try {
       dispatch({
@@ -1323,7 +1323,7 @@ export const updateNotifyStatusAction=({ VisitStatus }, visitId)=>{
 }
 
 export const updateRequirementStatusAcion=({ VisitStatus }, visitId)=>{
-  console.log(VisitStatus,visitId,"listen23")
+ 
   return async(dispatch)=>{
     try {
       dispatch({
@@ -1362,7 +1362,7 @@ export const updateRequirementStatusAcion=({ VisitStatus }, visitId)=>{
   }
 }
 export const submitContactForm=(formData)=>{
-  console.log(formData,"dis")
+ 
   return async(dispatch)=>{
     try {
       dispatch({
@@ -1377,7 +1377,7 @@ export const submitContactForm=(formData)=>{
         withCredentials: true,
       };
 const form=JSON.stringify(formData)
-console.log(form,"pppp")
+
       // Post the FormData to the backend
       const { data } = await axios.post(url, form, config);
 

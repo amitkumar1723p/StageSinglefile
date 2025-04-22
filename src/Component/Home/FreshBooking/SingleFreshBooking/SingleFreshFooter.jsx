@@ -11,7 +11,7 @@ const Footer = ({project, projectLogoContent}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', formData);
+     
   };
 
   const handleChange = (e) => {

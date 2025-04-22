@@ -14,6 +14,11 @@
   padding: 2rem;
 }
 
+
+.custom-date-icon img{
+  width: 20px;
+}
+
 .schedule-your-visit-card {
   background: #fff;
   border-radius: 12px;
@@ -25,7 +30,7 @@
 
 .schedule-your-visit-header {
   background-color:#1877F2;
-  padding: 16px 24px;
+  padding: 10px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -110,7 +115,7 @@
 }
 
 .schedule-your-visit-image img {
-  width: 100%;
+  width: 102%;
   max-width: 320px;
 }
 

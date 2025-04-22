@@ -95,7 +95,7 @@ export default function AdminListingCard({
     }
   }, [PostData?.PostVerifyData?.Time]);
 
-    console.log(PostData ,"postData")
+
   const location = useLocation();
   const dispatch = useDispatch();
   const [isAssignedToAnyUser, setisAssignedToAnyUser] = useState([]);
@@ -506,75 +506,80 @@ export default function AdminListingCard({
               </div>
 
               <div className="response-section">
-                <p
-                  // className={location.pathname.includes("schedule-visit"?"select":"")}
-                  className={`${location.pathname.includes("/admin/schedule-visit")
-                    ? "active-btn"
-                    : ""
-                    }`}
-                  onClick={() => {
-                    if (
-                      medata?.user?.Role == "Owner" &&
-                      PostData?.PostDelete?.Status == "delete"
-                    ) {
-                      // schedule-visit/deleted-post
-                      navigate(
-                        `/admin/schedule-visit/deleted-post/${PostData?._id}`
-                      );
-                    } else {
-                      navigate(`/admin/schedule-visit/${PostData?._id}`);
-                    }
-                  }}
-                >
-                  Schedule Visit (
-                  {VisitAndOfferLength
-                    ? VisitAndOfferLength.schedulevisit
-                    : "0"}
-                  )
-                </p>
-                <p
-                  className={`${location.pathname.includes("/admin/recive-offer")
-                    ? "active-btn"
-                    : ""
-                    }`}
-                  onClick={() => {
-                    if (
-                      medata?.user?.Role == "Owner" &&
-                      PostData?.PostDelete?.Status == "delete"
-                    ) {
-                      navigate(
-                        `/admin/recive-offer/deleted-post/${PostData?._id}`
-                      );
-                    } else {
-                      navigate(`/admin/recive-offer/${PostData?._id}`);
-                    }
-                  }}
-                >
-                  View Offer Received (
-                  {VisitAndOfferLength ? VisitAndOfferLength.makeoffer : "0"})
-                </p>
+                <div className="admin-section-section-response">
+
+                  <p
+                    // className={location.pathname.includes("schedule-visit"?"select":"")}
+                    className={`admin-response-section  ${location.pathname.includes("/admin/schedule-visit")
+                      ? "active-btn"
+                      : ""
+                      }`}
+                    onClick={() => {
+                      if (
+                        medata?.user?.Role == "Owner" &&
+                        PostData?.PostDelete?.Status == "delete"
+                      ) {
+                        // schedule-visit/deleted-post
+                        navigate(
+                          `/admin/schedule-visit/deleted-post/${PostData?._id}`
+                        );
+                      } else {
+                        navigate(`/admin/schedule-visit/${PostData?._id}`);
+                      }
+                    }}
+                  >
+                    Visit (
+                    {VisitAndOfferLength
+                      ? VisitAndOfferLength.schedulevisit
+                      : "0"}
+                    )
+                  </p>
+                  <p
+                    className={`admin-response-section ${location.pathname.includes("/admin/recive-offer")
+                      ? "active-btn"
+                      : ""
+                      }`}
+                    onClick={() => {
+                      if (
+                        medata?.user?.Role == "Owner" &&
+                        PostData?.PostDelete?.Status == "delete"
+                      ) {
+                        navigate(
+                          `/admin/recive-offer/deleted-post/${PostData?._id}`
+                        );
+                      } else {
+                        navigate(`/admin/recive-offer/${PostData?._id}`);
+                      }
+                    }}
+                  >
+                    Offer  (
+                    {VisitAndOfferLength ? VisitAndOfferLength.makeoffer : "0"})
+                  </p>
+
+                </div>
+
                 {/* <p>Extend Duration</p> */}
 
-                 
-                  <>
-                    <div className="user-name-contact">
-                      <span>Posted by : </span>
-                      <span><b>  {PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}    </b>
-                        &nbsp;
 
-                        ({PostData?.CreatePostUser?.Role})
-                      </span><br />
-                    </div>
-                    <div className="user-name-contact">
-                      <span>Mobile No. : </span>
-                      <span>{PostData?.CreatePostUser?.ContactNumber}</span>
-                    </div>
-                    <div className="user-name-contact">
-                      <span>Email : </span>
-                      <span>{PostData?.CreatePostUser?.email}</span>
-                    </div>
-                  </>
-                
+                <>
+                  <div className="user-name-contact">
+                    <span>Posted by : </span>
+                    <span><b>  {PostData?.CreatePostUser?.Name} {PostData?.CreatePostUser?.LastName}    </b>
+                      &nbsp;
+
+                      ({PostData?.CreatePostUser?.Role})
+                    </span><br />
+                  </div>
+                  <div className="user-name-contact">
+                    <span>Mobile No. : </span>
+                    <span>{PostData?.CreatePostUser?.ContactNumber}</span>
+                  </div>
+                  <div className="user-name-contact">
+                    <span>Email : </span>
+                    <span>{PostData?.CreatePostUser?.email}</span>
+                  </div>
+                </>
+
               </div>
 
               <div className="admin-btn-active-btn">

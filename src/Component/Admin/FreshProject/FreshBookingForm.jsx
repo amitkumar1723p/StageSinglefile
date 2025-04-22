@@ -456,8 +456,7 @@ export default function FreshBookingForm() {
   };
   //--------------------------------------------------------project size and price-----//
 
-console.log(formData?.projectAmenities,"unlaf")
-  const [propertySegmentShake, setPropertySegmentShake] = useState();
+   const [propertySegmentShake, setPropertySegmentShake] = useState();
   const [projectNameShake, setProjectNameShake] = useState();
   const [projectStatueShake, setProjectStatusShake] = useState();
   const [localityShake, setLocalityShake] = useState();

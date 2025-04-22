@@ -753,19 +753,25 @@
 }
 
 .response-section p {
-  cursor: pointer;
-  color: #333;
-  font-family: "Inter", Sans-serif;
   font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  /* text-decoration-line: underline; */
-  text-decoration-style: solid;
-  text-decoration-skip-ink: auto;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
-  text-underline-position: from-font;
+  background-color: var(--main-light-clr);
+  text-align: center;
+  color: #fff;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover{
+    opacity: .9;
+  }
+}
+
+.admin-section-section-response{
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .three-section-data {

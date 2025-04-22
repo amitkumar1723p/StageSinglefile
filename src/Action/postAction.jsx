@@ -562,7 +562,7 @@ export const GetAllScheduleVisitsAndMakeOffer_Length = (PostId) => {
 };
 
 export const Admin_OwnerScheduleVisitDone = ({ VisitStatus }, visitId) => {
-  console.log(VisitStatus,visitId,"listen")
+
   return async (dispatch) => {
     try {
       dispatch({

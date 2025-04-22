@@ -78,8 +78,7 @@ export default function SingleFreshBookingViewMore(builderContent) {
       //  }, []);
        
 
-  console.log(builderContent?.projectAboutBuilderName, "saurabh")
-     
+      
   return (
        <div className='freshbooking-view-more-main-container d-flex flex-column gap-4'>
          <div className='d-md-flex justify-content-between m-auto ' style={{width:'90%'}}>

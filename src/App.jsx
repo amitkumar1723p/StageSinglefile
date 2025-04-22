@@ -230,7 +230,7 @@ function App() {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-       console.log(LodingType ,"LodingType")
+     
       if (data?.success && LodingType == "ProfileUpdateRequest") {
         dispatch(GetMeDetailsAction());
       }
@@ -316,11 +316,10 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
-    console.log("admin", CreatePost);
-    if (CreatePost) {
+     if (CreatePost) {
       if (
         CreatePost.success === true &&
-        ["DisplayDataRequest"].includes(
+        ["DisplayDataRequest" ,"OwnerAllExcelFileRequest"].includes(
           typeof AlertType === "string" ? AlertType : AlertType?.Type
         )
       ) {
@@ -1228,7 +1227,7 @@ function App() {
         </Route>
         {/*All post route admin routes end here*/}
 
-        <Route path={"/all-post"} element={<AllPostRender />} />
+        <Route path={"/all-post/:type"} element={<AllPostRender />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
