@@ -92,6 +92,7 @@ import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLea
 // import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
 import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
 import ContactUsForm from "./Component/Home/ContactUsForm";
+import Contactus from "./Component/Admin/Contactus";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -1024,6 +1025,7 @@ function App() {
               path="my-post/all-response"
               element={<OwnerPostAllResponse />}
             />
+           
             <Route exact path="transactions" element={<Transaction />} />
 
             <Route
@@ -1082,7 +1084,7 @@ function App() {
               <AdminAgentExcelData />
             }
           />
-   
+    <Route exact path="Contact-us" element={<Contactus/>}/>
           <Route
             exact
             path="single-user-Response-action/:id"

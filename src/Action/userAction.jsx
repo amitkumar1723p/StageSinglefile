@@ -1400,3 +1400,82 @@ const form=JSON.stringify(formData)
     }
   }
 }
+
+export const viewAllContactForm=()=>{
+
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "viewAllContactFormRequest",
+        payload: "viewAllContactFormRequest",
+      });
+
+      let url = `${api_Base_Url}/contact/view-All-Contact`;
+
+      let config = {
+        headers: { "Content-Type": "application/JSON" },
+        withCredentials: true,
+      };
+
+      // Post the FormData to the backend
+      const { data } = await axios.get(url, config);
+
+      dispatch({
+        type: "viewAllContactFormSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "viewAllContactFormFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "viewAllContactFormFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+export const updateConatctRemarkAction=( {VisitStatus},conatctId)=>{
+
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "updateConatctRemarkActionRequest",
+        payload: "updateConatctRemarkActionRequest",
+      });
+
+      // let url = `/admin-owner/schedulevisit/status/${visitId}`;/conatct-remark/:conatctId
+      let url = `${api_Base_Url}/contact/conatct-remark/${conatctId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, { VisitStatus }, config);
+
+      dispatch({
+        type: "updateConatctRemarkActionSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "updateConatctRemarkActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "updateConatctRemarkActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}

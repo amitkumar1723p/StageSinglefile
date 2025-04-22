@@ -14,7 +14,7 @@ import {
   fetchAllAgentFiles,
 } from "../../Action/postAction";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { GetAllAdminAction } from "../../Action/userAction";
+import { GetAllAdminAction, viewAllContactForm } from "../../Action/userAction";
 import { UserContext } from "../CreateContext/CreateContext";
 
 const Dashboard = () => {
@@ -92,9 +92,9 @@ const Dashboard = () => {
   const { data: getTransactionDetail } = useSelector((state) => {
     return state.getTransactionDetail;
   });
-  // const { data2} = useSelector((state) => {
-  //   return state;
-  // });
+  const { data: viewAllContactFormReducer } = useSelector((state) => {
+    return state.viewAllContactFormReducer;
+});
   // console.log(data2,"hello1");
   // console.log("assongg ",assignedExcles)
 
@@ -105,6 +105,8 @@ const Dashboard = () => {
         dispatch(Admin_OwnerGetAllPostAction());
         dispatch(GetAllAdminAction());
         dispatch(fetchAllOwnerFiles())
+            dispatch(viewAllContactForm())
+            
         // if  data is  exit in redux store not call thsi api
         if (!DeletedPost) {
           dispatch(GetDeletedPostsAction());
@@ -170,7 +172,7 @@ const Dashboard = () => {
       setTotalListing(PostVerify.length + unverify.length);
     }
   }, [AgentAdminAllPost]);
-
+console.log(viewAllContactFormReducer,"ooo")
   // console.log(AllUserResponseData,"dash")
   return (
     <>
@@ -357,6 +359,22 @@ const Dashboard = () => {
               </>
             )}
 
+{medata?.user?.Role === "Owner" && (
+              <>
+                <Link to="/admin/Contact-us">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{viewAllContactFormReducer?.data?.length}</p>
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 onClick={() => setPostVerify(false)}>
+                     Contact-Us
+                    </h3>
+                    <p className="viewall">View All</p>
+                  </div>
+                </Link>
+              </>
+            )}
             {/* {medata?.user?.Role === "Owner" && (
               <>
                 <Link to="/admin/Transaction">

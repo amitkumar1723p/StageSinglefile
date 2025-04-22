@@ -21,7 +21,8 @@ import {
 getAllUserResponseActionReducer,
 
 getViewOwnerDetailsActionReducer,
-getSingleUserResponseActionReducer
+getSingleUserResponseActionReducer,
+viewAllContactFormReducer
 } from "./Reducer/userReducer.jsx";
 
 import {
@@ -110,7 +111,9 @@ const reducer = combineReducers({
   getFreshProject:getviewoneProjectReducer,
   // editFreshProjectionReducer,
   // projectStatusReducer,
- getAllFreshProjectLead: getprojectLeadAllReducer
+ getAllFreshProjectLead: getprojectLeadAllReducer,
+
+ viewAllContactFormReducer
 
 });
 
