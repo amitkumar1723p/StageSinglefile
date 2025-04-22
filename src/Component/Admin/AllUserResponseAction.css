@@ -1,15 +1,15 @@
 /* Alll user Response Action CSSS */
 .userName {
-    width: 25%;
+
 
 }
 
 .userContact {
-    width: 20%;
+
 }
 
 .userDetail {
-    width: 55%;
+
 }
 
 .singleUser_mainbtn {
@@ -87,6 +87,7 @@
 
 .main-box-all-response-section {
     width: 100%;
+
 }
 
 .All-response-common-section {
@@ -224,7 +225,7 @@ padding: 5px;
 
 /* Agent user response css ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 .userName {
-    width: 18%;
+
 }
 
 .agentuserContact {
@@ -258,6 +259,75 @@ option:focus {
 
 
 
+  /* .all-user-response-action-container{
+    div{
+        div{
+           p:nth-of-type(2){
+            align-content: center;
+            color: rgb(138, 18, 18);
+            border: 1px solid red;
+            text-align: center;
+            height: fit-content;
+            span{
+                border: 1px solid black;
+            }
+           } 
+        }
+    }
+  } */
+
+.all-user-response-user-role{
+    white-space: nowrap;
+    background-color: #e4f3ff;
+    color:#0078d4;
+    padding: 0px 8px;
+    border-radius: 8px;
+    font-weight: 600;
+
+}
+.all-user-response-new-activity-container{
+
+    white-space: nowrap;
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: white;
+    background-color: var(--main-light-clr);
+    align-content: center;
+    height: fit-content;
+
+}
+
+.all-user-action-response-container{
+    white-space: nowrap;
+    padding: 5px 15px;
+    border-radius: 50px;
+    color: white;
+    background-color: var(--main-light-clr);
+    align-content: center;
+    height: fit-content;
+}
+
+.all-user-response-new-activitites{
+    position: relative;
+    top: -10px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    font-size: 12px;
+
+    border-radius: 50px;
+    width: 15px;
+    height: 15px;
+
+}
+
+.all-user-response-new-activitite-container{
+
+}
+
 
 
 
@@ -286,7 +356,7 @@ option:focus {
     gap: 60px;
   
   }
-  .single-fresh-user-name{
+  .single-fresh-user-name {
   
     padding: 8px 16px 8px 0px;
     h2{
@@ -511,5 +581,5 @@ option:focus {
   }
   
   .single-user-response-inactive{
-    color: rgb(136, 136, 136) ;
+    color: rgb(255, 0, 0) ;
   }

@@ -13,21 +13,23 @@ export default function AgentUserResponse() {
     const [searchbtn, setSearchbtn] = useState(false)
     const [searchText, setSearchText] = useState("");
     const [runPagination, setrunPagination] = useState(false);
+
+    const [indexAgent, setIndexAgent] = useState()
     const { data: AllUserResponseAction_Store } = useSelector((state) => {
         return state.AllUserResponseAction_Store;
     });
-    console.log(AllUserResponseAction_Store, "kl")
+
     // Pagination logic state
     const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage || 1); // Current page for pagination
     const [read, setRead] = useState()
     const totalPages = AllUserResponseAction_Store?.totalPages
 
     useEffect(() => {
-        if (AllUserResponseAction_Store == undefined || runPagination == true) {
+        if (AllUserResponseAction_Store == undefined || runPagination == true || indexAgent) {
 
             dispatch(getAllUserResponseAction(page))
         }
-    }, [page])
+    }, [page, indexAgent])
 
     useEffect(() => {
         // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
@@ -75,30 +77,47 @@ export default function AgentUserResponse() {
         const users = AllUserResponseAction_Store?.data || [];
         const storedIds = JSON.parse(localStorage.getItem("agentDash")) || [];
         const agentReadMode_Old = JSON.parse(localStorage.getItem("agentReadMode")) || [];
-    
+
         if (users.length > storedIds.length && searchText.length === 0) {
             const newIds = users
                 .map(user => user?._id)
                 .filter(id => id && !storedIds.includes(id));
-    
+
             if (newIds.length > 0) {
                 const updatedIds = [...storedIds, ...newIds];
                 localStorage.setItem("agentDash", JSON.stringify(updatedIds));
-    
+
                 const updateAgentId = [...agentReadMode_Old, ...newIds];
                 localStorage.setItem("agentReadMode", JSON.stringify(updateAgentId));
-    
+
                 setRead(updateAgentId); // Directly update state with the new list
                 return; // early exit
             }
         }
-    
+
         // fallback: always sync read state from storage if no new updates
         setRead(agentReadMode_Old);
     }, [AllUserResponseAction_Store, searchText]);
-    
-    
-    
+
+
+    useEffect(() => {
+
+        if (indexAgent !== undefined && indexAgent !== null) {
+            const stored = localStorage.getItem('agentReadMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                console.log(indexAgent, "id")
+                // Filter out the one with matching _id
+                const updated = parsed.filter(item => item !== indexAgent);
+
+                // Update localStorage
+                localStorage.setItem('agentReadMode', JSON.stringify(updated));
+            }
+        }
+
+    }, [indexAgent]);
+    console.log(indexAgent, "lk")
+
 
     return (
         <>
@@ -124,39 +143,40 @@ export default function AgentUserResponse() {
                 <div className="container-fluid d-flex flex-column  gap-3 rounded">
                     {AllUserResponseAction_Store?.data?.map((item) => {
                         return (
-                           
+
                             <div className=" main-box-all-response-section all-response-section-admin  d-flex   border border-primary border-opacity-25 py-2 rounded  ">
-                           {
-                          (() => {
-                           
-                          const matched = read.find(id => id === item?._id);})
-                          }
+                                {
+                                    (() => {
+
+                                        const matched = read.find(id => id === item?._id);
+                                    })
+                                }
 
                                 <div className="agentuserName border-end border-primary px-1  border-opacity-25">
                                     <div className="">
                                         <small className=" fw-light text-primary border-primary border-bottom px-2 border-opacity-50  cursor-pointer"
                                             //    className=""
-                                            onClick={(e) => { window.open(`/post-detail/${item?.propertyDetail?._id}`, 'SinglePostDetail');}}
+                                            onClick={(e) => { window.open(`/post-detail/${item?.propertyDetail?._id}`, 'SinglePostDetail'); }}
                                         >
- <small className="fw-light">
-  {read?.includes(item?._id) ? (
-    <small className='text-danger'>
-      {item?.propertyDetail?.LocationDetails?.ProjectName} -{" "}
-      {item?.propertyDetail?.LocationDetails?.Landmark}{" "}
-      {item?.propertyDetail?.LocationDetails?.City} -{" "}
-      <small className="fw-light ">({item?.propertyDetail?._id})</small>
-    </small>
-  ) : (
-    <>
-      {item?.propertyDetail?.LocationDetails?.ProjectName} -{" "}
-      {item?.propertyDetail?.LocationDetails?.Landmark}{" "}
-      {item?.propertyDetail?.LocationDetails?.City} -{" "}
-      <small className="fw-light">({item?.propertyDetail?._id})</small>
-    </>
-  )}
-</small>
-</small>
-                                            {/* {item?.propertyDetail?.LocationDetails?.ProjectName}
+                                            <small className="fw-light">
+                                                {read?.includes(item?._id) ? (
+                                                    <small className='text-danger'>
+                                                        {item?.propertyDetail?.LocationDetails?.ProjectName} -{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.Landmark}{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.City} -{" "}
+                                                        <small className="fw-light ">({item?.propertyDetail?._id})</small>
+                                                    </small>
+                                                ) : (
+                                                    <>
+                                                        {item?.propertyDetail?.LocationDetails?.ProjectName} -{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.Landmark}{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.City} -{" "}
+                                                        <small className="fw-light">({item?.propertyDetail?._id})</small>
+                                                    </>
+                                                )}
+                                            </small>
+                                        </small>
+                                        {/* {item?.propertyDetail?.LocationDetails?.ProjectName}
                                             - {item?.propertyDetail?.LocationDetails?.Landmark} {item?.propertyDetail?.LocationDetails?.City}-
                                             <small className="fw-light">( {item?.propertyDetail?._id}) </small>
                                         </small> */}
@@ -218,24 +238,16 @@ export default function AgentUserResponse() {
 
 
                                 <div className="px-1">
-                                    {/* <p className="text-center px-5">
-                                        <small className='fw-light'>Lead Type</small> 
-                                        <br /><small className="fw-normal">{item?.Biddinguser ? <>Offer</> : <>Schedule</>}</small>
-                                    </p> */}
-                                    <Link
-                                        to={{
-                                            pathname: `/admin/single-user-Response-action/${item?.userDetail?._id}`,
-                                        }}
-                                        state={{ indexAgent:`${item?._id}`}}
-                                        className="text-decoration-none"
-                                    >
-                                        <button
-                                            className="btn-allresponse-section fw-light px-4"
 
-                                        >
-                                            View Details
-                                        </button>
-                                    </Link>
+                                    <button
+                                        className="btn-allresponse-section fw-light px-4"
+                                        onClick={() => {
+                                            setIndexAgent(item?._id);
+                                            window.open(`/admin/single-user-Response-action/${item?.userDetail?._id}`, 'AgentView');
+                                        }}
+                                    >
+                                        View Details
+                                    </button>
 
                                 </div>
 

@@ -29,17 +29,18 @@ export default function AllUserResponseAction() {
   // Pagination logic state
   const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
   const [runPagination, setrunPagination] = useState(false);
+  const [index, setIndex] = useState()
   const totalPages = AllUserResponseAction_Store?.totalPages
   // const itemsPerPage = 10; // Number of items per page
 
   // console.log(AllUserResponseAction_Store)
   useEffect(() => {
 
-    if (AllUserResponseAction_Store == undefined || runPagination == true) {
+    if (AllUserResponseAction_Store == undefined || runPagination == true || index) {
       dispatch(getAllUserResponseAction(page));
 
     }
-  }, [page]);
+  }, [page, index]);
   useEffect(() => {
     // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
     if (searchText && searchbtn === true) {
@@ -112,7 +113,7 @@ export default function AllUserResponseAction() {
             storedItem.latestCreateAt !== match.latestCreateAt // ✅ this was missing proper comparison
           );
         });
-        console.log(result)
+        console.log(result, "lll")
         setTrackNewLead(result);
 
         if (newData.length > storedData.length) {
@@ -151,19 +152,19 @@ export default function AllUserResponseAction() {
         if (!existingItem) {
           // If new contact, add it
           storedMap.set(newItem.ContactNumber, newItem);
-        } else {
-          // If contact exists, check if any field changed
-          const hasChanged = Object.keys(newItem).some(
-            key => newItem[key] !== existingItem[key]
-          );
-
-          if (hasChanged) {
-            // Update with latest info
-            storedMap.set(newItem.ContactNumber, newItem);
-          }
         }
-      });
+        // } else {
+        //   // If contact exists, check if any field changed
+        //   const hasChanged = Object.keys(newItem).some(
+        //     key => newItem[key] !== existingItem[key]
+        //   );
 
+        //   if (hasChanged) {
+        //     // Update with latest info
+        //     storedMap.set(newItem.ContactNumber, newItem);
+        //   }
+        // }
+      });
       const updatedRead = Array.from(storedMap.values());
 
       updatedRead.sort((a, b) => new Date(b.latestCreateAt) - new Date(a.latestCreateAt));
@@ -178,16 +179,33 @@ export default function AllUserResponseAction() {
   }, [tarckNewLead]);
 
 
+  useEffect(() => {
+    if (index !== undefined && index !== null) {
+      const stored = localStorage.getItem('readMode');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        // Remove first match by ContactNumber
+        const updated = parsed.filter(item => item.ContactNumber !== index);
+        console.log(updated)
+        localStorage.setItem('readMode', JSON.stringify(updated));
+
+      }
+    }
+
+
+  }, [index]);
+
+
   return (
     <>
       {usersList &&
-        <div className="border border-primary border-opacity-25  ">
-          <div className="d-flex justify-content-between">
-            <div className="d-flex">
-              <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
-              {/* <p className="px-4 mt-3 fw-semibold text-primary">Unchecked:(<span className="text-danger">{read?.length}</span>)</p> */}
+        <div className="all-user-response-action-container  ">
+          <div className="d-flex justify-content-between align-items-center p-2">
+            <div className=" d-flex gap-3">
+              <p className="all-user-action-response-container  fw-semibold ">All Response: {AllUserResponseAction_Store?.totalUsers}</p>
+              <p className="all-user-response-new-activity-container fw-semibold ">New Activity: <span className="">{read?.length}</span></p>
             </div>
-            <div className="px-4 mt-3 d-flex py-2">
+            <div className=" d-flex ">
               <input
                 className="allresponse-search-input"
                 placeholder="e.g.  9053608395"
@@ -214,7 +232,7 @@ export default function AllUserResponseAction() {
                   <div className="userName border-end border-primary px-2  border-opacity-25">
                     <div className="">
                       <p className="All-response-common-section  " style={{ color: index < newUser ? 'red' : 'black' }}>
-                        {item?.Name} {item?.LastName} - <small className="fw-light">( {item?.Role})</small></p>
+                        {item?.Name} {item?.LastName} - <small className="all-user-response-user-role fw-light"> {item?.Role}</small></p>
                       {/* <small className="fw-light">{item?.email}</small> */}
                       <small className="">
                         {item?.latestCreateAt ? FormatDate(item?.latestCreateAt) : 'N/A'}
@@ -237,7 +255,7 @@ export default function AllUserResponseAction() {
                   </p> */}
                     <p className="all-response-data-section d-flex justify-content-center align-items-center">
                       Listing:&nbsp;
-                      <small className="fw-bold">
+                      <div className="fw-bold">
                         {
                           (() => {
                             const fullNumber = `630713${item.ContactNumber}`;
@@ -245,7 +263,7 @@ export default function AllUserResponseAction() {
 
                             if (matched) {
                               return item?.postData?.length > matched?.postData
-                                ? <>{item?.postData?.length}<sup className="text-danger px-1 fw-bolder ">new-{item?.postData?.length - matched?.postData}</sup></>
+                                ? <div className="d-flex">{item?.postData?.length}{" "}<span className="all-user-response-new-activitites  ">{item?.postData?.length - matched?.postData}</span></div>
 
                                 : <>{item?.postData?.length}</>;
                             } else {
@@ -253,7 +271,7 @@ export default function AllUserResponseAction() {
                             }
                           })()
                         }
-                      </small>
+                      </div>
                     </p>
 
                   </div>
@@ -266,7 +284,7 @@ export default function AllUserResponseAction() {
                       </small> </p> */}
                     <p className="all-response-data-section d-flex justify-content-center align-items-center">
                       Schedule:&nbsp;
-                      <small className="fw-bold">
+                      <div className="all-user-response-new-activitite-container fw-bold">
                         {
                           (() => {
                             const fullNumber = `630713${item.ContactNumber}`;
@@ -274,14 +292,14 @@ export default function AllUserResponseAction() {
 
                             if (matched) {
                               return item?.scheduleData?.length > matched?.scheduleData
-                                ? <>{item?.scheduleData?.length}<sup className="text-danger px-1 fw-bolder ">new-{item?.scheduleData?.length - matched?.scheduleData}</sup></>
+                                ? <div className="d-flex"><span>{item?.scheduleData?.length}</span>{" "}<span className="all-user-response-new-activitites  ">{item?.scheduleData?.length - matched?.scheduleData}</span></div>
                                 : <>{item?.scheduleData?.length}</>;
                             } else {
                               return <>{item?.scheduleData?.length}</>;
                             }
                           })()
                         }
-                      </small>
+                      </div>
                     </p>
 
                   </div>
@@ -294,7 +312,7 @@ export default function AllUserResponseAction() {
                       </small></p> */}
                     <p className="all-response-data-section d-flex justify-content-center align-items-center">
                       Offer Data:&nbsp;
-                      <small className="fw-bold">
+                      <div className="fw-bold">
                         {
                           (() => {
                             const fullNumber = `630713${item.ContactNumber}`;
@@ -302,14 +320,14 @@ export default function AllUserResponseAction() {
 
                             if (matched) {
                               return item?.offerData?.length > matched?.offerData
-                                ? <>{item?.offerData?.length}<sup className="text-danger px-1 fw-bolder ">new-{item?.offerData?.length - matched?.offerData}</sup></>
+                                ? <div className="d-flex">{item?.offerData?.length}{" "}<span className="all-user-response-new-activitites  ">{item?.offerData?.length - matched?.offerData}</span></div>
                                 : <>{item?.offerData?.length}</>;
                             } else {
                               return <>{item?.offerData?.length}</>;
                             }
                           })()
                         }
-                      </small>
+                      </div>
                     </p>
 
                   </div>
@@ -330,7 +348,7 @@ export default function AllUserResponseAction() {
                     </p> */}
                     <p className="all-response-data-section d-flex justify-content-center align-items-center">
                       Notify:&nbsp;
-                      <small className="fw-bold">
+                      <div className="fw-bold">
                         {
                           (() => {
                             const fullNumber = `630713${item.ContactNumber}`;
@@ -338,14 +356,14 @@ export default function AllUserResponseAction() {
 
                             if (matched) {
                               return item?.notifyData?.length > matched?.notifyData
-                                ? <>{item?.notifyData?.length}<sup className="text-danger px-1 fw-bolder "> new-{item?.notifyData?.length - matched?.notifyData}</sup></>
+                                ? <div className="d-flex">{item?.notifyData?.length}{" "}<span className="all-user-response-new-activitites  "> {item?.notifyData?.length - matched?.notifyData}</span></div>
                                 : <>{item?.notifyData?.length}</>;
                             } else {
                               return <>{item?.notifyData?.length}</>;
                             }
                           })()
                         }
-                      </small>
+                      </div>
                     </p>
 
                   </div>
@@ -360,21 +378,21 @@ export default function AllUserResponseAction() {
                     </p> */}
                     <p className="all-response-data-section d-flex justify-content-center align-items-center">
                       Requirement:&nbsp;
-                      <small className="fw-bold">
+                      <div className="fw-bold">
                         {
                           (() => {
                             const fullNumber = `630713${item.ContactNumber}`;
                             const matched = read.find(r => r.ContactNumber === fullNumber);
                             if (matched) {
                               return item?.requireData?.length > matched?.requireData
-                                ? <>{item?.requireData?.length}<sup className="text-danger px-1 fw-bolder ">new-{item?.requireData?.length - matched?.requireData}</sup></>
+                                ? <div className="d-flex">{item?.requireData?.length}{" "}<span className="all-user-response-new-activitites  ">{item?.requireData?.length - matched?.requireData}</span></div>
                                 : <>{item?.requireData?.length}</>;
                             } else {
                               return <>{item?.requireData?.length}</>;
                             }
                           })()
                         }
-                      </small>
+                      </div>
                     </p>
 
                   </div>
@@ -387,26 +405,17 @@ export default function AllUserResponseAction() {
 
 
                   <div className="btn-allresponse-section-main" >
-                    {/* <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none " >
-                    <button className="btn-allresponse-section fw-light px-4" onClick={() => setTrackIndex(index)} >View Details</button>
 
-                  </Link> */}
+
                     <button
-  className="btn-allresponse-section fw-light px-2"
-  onClick={() => {
-    setTrackIndex(index);
-
-    // Save state to sessionStorage (so it can be read in the new tab)
-    sessionStorage.setItem("userResponseIndex", `630713${item.ContactNumber}`);
-
-    // Open new tab with the correct path
-    window.open(`/admin/single-user-Response-action/${item?._id}`, "_blank");
-  }}
->
-  View Details
-</button>
-
-
+                      className="btn-allresponse-section fw-light px-4"
+                      onClick={() => {
+                        setIndex(`630713${item.ContactNumber}`);
+                        window.open(`/admin/single-user-Response-action/${item?._id}`, 'AgentView');
+                      }}
+                    >
+                      View Details
+                    </button>
 
                   </div>
 

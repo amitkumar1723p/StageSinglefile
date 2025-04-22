@@ -9,17 +9,20 @@ import { useLocation } from 'react-router-dom';
 
 export default function SingleUserRespponseAction() {
     const location = useLocation();
+
+    const params = new URLSearchParams(location.search);
+    const indexAgent = params.get('indexAgent');
     const { index } = location.state || {};
-    const { indexAgent } = location.state || {};
+
     const dispatch = useDispatch()
     const { id } = useParams()
-// console.log(index,"lll")
+    // console.log(index,"lll")
     const [activeTable, setActiveTable] = useState(1);
 
     const [scheduleStatus, setScheduleStatus] = useState()
     const [offerStatus, setOfferStatus] = useState()
     const [notifyStatus, setNotifyStatus] = useState()
-    const [requirementStatus,setRequirementStatus]=useState()
+    const [requirementStatus, setRequirementStatus] = useState()
     // single user response action
     const { data: SingleUserResponseAction_Store, loading } = useSelector((state) => {
         return state.SingleUserResponseAction_Store;
@@ -61,43 +64,44 @@ export default function SingleUserRespponseAction() {
                 offerStatus?.id
             ))
         }
-        if(notifyStatus){
+        if (notifyStatus) {
             dispatch(updateNotifyStatusAction(
                 { VisitStatus: notifyStatus?.status },
                 notifyStatus?.id
             ))
         }
-        if(requirementStatus){
-            dispatch( updateRequirementStatusAcion(
-                { VisitStatus:requirementStatus?.status },
+        if (requirementStatus) {
+            dispatch(updateRequirementStatusAcion(
+                { VisitStatus: requirementStatus?.status },
                 requirementStatus?.id
             ))
         }
 
-    }, [scheduleStatus, offerStatus,notifyStatus,requirementStatus])
+    }, [scheduleStatus, offerStatus, notifyStatus, requirementStatus])
 
-  
+
     // Admin_OwnerScheduleVisitDone
 
     useEffect(() => {
         if (index !== undefined && index !== null) {
-          const stored = localStorage.getItem('readMode');
-          if (stored) {
-            const parsed = JSON.parse(stored);
-            // Remove first match by ContactNumber
-            const updated = parsed.filter(item => item.ContactNumber !== index);
-            localStorage.setItem('readMode', JSON.stringify(updated));
-        
-          }
+            const stored = localStorage.getItem('readMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                // Remove first match by ContactNumber
+                const updated = parsed.filter(item => item.ContactNumber !== index);
+                console.log(updated)
+                localStorage.setItem('readMode', JSON.stringify(updated));
+
+            }
         }
         if (indexAgent !== undefined && indexAgent !== null) {
             const stored = localStorage.getItem('agentReadMode');
             if (stored) {
                 const parsed = JSON.parse(stored);
-        console.log(indexAgent,"id")
+                console.log(indexAgent, "id")
                 // Filter out the one with matching _id
                 const updated = parsed.filter(item => item !== indexAgent);
-        
+
                 // Update localStorage
                 localStorage.setItem('agentReadMode', JSON.stringify(updated));
             }
@@ -364,7 +368,7 @@ export default function SingleUserRespponseAction() {
                                             onClick={() => window.open(`/post-detail/${item?._id}`, 'SinglePostDetail')}
                                         >
                                             {item?.LocationDetails?.ProjectName} -
-                                            {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City} 
+                                            {item?.LocationDetails?.Landmark}, {item?.LocationDetails?.City}
                                         </small>
                                     </td>
 
@@ -415,10 +419,10 @@ export default function SingleUserRespponseAction() {
                                     <td><small className="">{item?.BHKType}</small></td>
                                     <td><small className="">{item?.FloorPreference}</small></td>
                                     {item?.Room.length > 0 ? <td>
-                                        <span className="admin-all-response-remaks ">
+                                        <span className="admin-all-response-remaks ">{"|"}{" "}
                                             {item?.Room?.map((option, index) => (
                                                 <small key={index} value={option} className="">
-                                                    {option}
+                                                    {option}{" |"}
                                                 </small>
                                             ))}
                                         </span>
