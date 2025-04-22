@@ -224,7 +224,7 @@ function App() {
     } else if (location.pathname.includes("/admin/post/update")) {
       dispatch(GetProjectNameAction());
     }
-
+  
     // eslint-disable-next-line
   }, [location]);
   //  Simple User Show Alert Function
@@ -269,7 +269,7 @@ function App() {
        
         
       } else {
-        setalertMessage(<p>{data.message}</p>);
+        setalertMessage(<p>{data?.message}</p>);
         setalertType("Success");
         setalertShow(true);
 
@@ -277,28 +277,28 @@ function App() {
       }
 
       if (
-        data.success === false &&
+        data?.success === false &&
         ["VerifyUserOtpRequest"].includes(LodingType)
       ) {
         dispatch({ type: "UserClear" });
         setalertShow(false);
       } else {
-        if (data.success === false) {
-          if (data.fielderrors) {
+        if (data?.success === false) {
+          if (data?.fielderrors) {
             setalertMessage(
               data.fielderrors.map((e, index) => {
                 return <p key={index}>{e.msg}</p>;
               })
             );
           } else {
-            setalertMessage(<p> {data.message}</p>);
+            setalertMessage(<p> {data?.message}</p>);
           }
           setalertType("error");
           setalertShow(true);
 
           dispatch({ type: "UserClear" });
 
-          if (LodingType.Type == "DisplayDataRequest") {
+          if (LodingType?.Type == "DisplayDataRequest") {
             dispatch({ type: LodingType.StoreClear });
           }
         }
