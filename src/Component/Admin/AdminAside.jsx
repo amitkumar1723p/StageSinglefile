@@ -16,6 +16,11 @@ export default function AdminAside() {
   const dispatch = useDispatch();
   const { medata } = useSelector((state) => state.meDetails);
   const location = useLocation();
+  let newClass ="";
+   if(location.pathname=="/admin/dashboard") {
+  newClass ="w-100 p-0"
+   }  
+    // "?"":"" 
   // get all user excepation owner Admin agent
   // const{data:AllUserResponseData}=useSelector((state)=>{
   //   return state.AllUserResponse
@@ -62,7 +67,7 @@ export default function AdminAside() {
   return (
     <div className="">
       <div className="AdminAside-container">
-        <div className="AdminAside-content">
+        <div className={`AdminAside-content ${newClass}`} >
           <Outlet />
         </div>
       </div>
