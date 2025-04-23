@@ -40,7 +40,7 @@ const FurnishDetails = ({ furnishD }) => {
         {[...availableItems, ...unavailableItems].map(({ name, value, icon }) => (
           <div key={name} className={`furnish-item ${value > 0 ? "available" : "unavailable"}`}>
             <img src={icon} alt={name} className="furnish-icon" />
-            <span className="furnish-name">{value > 0 ? (name === "ModularKitchen" ? "Modular-Kitchen" : `${value} ${name}`) : name}</span>
+            <span className="furnish-name">{value > 0 ? (name === "ModularKitchen" ? "Modular-Kitchen" : `${value!=true ? value:""} ${name}`) : name}</span>
           </div>
         ))}
       </div>
