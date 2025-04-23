@@ -325,7 +325,7 @@ const AllPostSearchFilter = () => {
               <select className="property-filter-select" onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
                 <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
-                <option value="Golf Course Extn Road">Golf Course</option>
+                <option value="Golf Course Ext Road Gurgaon">Golf Course</option>
                 <option value="Southern Peripheral Road Gurgaon">SPR Road</option>
               </select>
             </div>
@@ -493,7 +493,7 @@ const AllPostSearchFilter = () => {
               <select className="property-filter-select" ref={localityRef} onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
                 <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
-                <option value="Golf Course Extn Road">Golf Course</option>
+                <option value="Golf Course Ext Road Gurgaon">Golf Course</option>
                 <option value="Southern Peripheral Road Gurgaon">SPR Road</option>
               </select>
             </div>
