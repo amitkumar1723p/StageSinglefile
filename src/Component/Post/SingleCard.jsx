@@ -390,7 +390,7 @@ const SingleCard = ({
               {PostData?.PostExpired?.ExpiredStatus == true ? (
                 <div className="">
                 {/* <p>your post is currently inactive please contact our support team</p> */}
-                <p className="">
+                <p className="inactive-post-para">
                   {PostData?.BasicDetails?.PropertyAdType=="Sale" && "sale property expired"}
                   {PostData?.BasicDetails?.PropertyAdType=="Rent" && " “Marked as Rented? Click to Make It Available Again If Needed.”"}
                    

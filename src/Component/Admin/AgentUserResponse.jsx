@@ -4,6 +4,7 @@ import { FormatDate } from '../../utils/CommonFunction'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUserResponseAction } from '../../Action/userAction';
 import { formatPrice } from "../../utils/CommonFunction";
+// kawal sir css is here
 import "./AllRegistrationResponse.css";
 export default function AgentUserResponse() {
     const dispatch = useDispatch()
@@ -30,6 +31,7 @@ export default function AgentUserResponse() {
     useEffect(() => {
         // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
         if (searchText && searchbtn === true) {
+            console.log(searchText,"k")
             dispatch(getAllUserResponseAction(page, searchText));
 
             setSearchbtn(false)

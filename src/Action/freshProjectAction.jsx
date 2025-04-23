@@ -231,7 +231,7 @@ export const getprojectLeadAllAction = () => {
 };
 
 export const updateProjectLeadAction = (id, remark) => {
-  console.log(remark);
+ 
 
   return async (dispatch) => {
     try {

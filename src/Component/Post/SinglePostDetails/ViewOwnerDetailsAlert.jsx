@@ -10,7 +10,7 @@ export default function ViewOwnerDetails({ SetShow, Contact }) {
     if (OwnerDetails) {
        setOwnerDetals(JSON.parse(OwnerDetails));
     }
-       console.log("OwnerDetails",OwnerDetails)
+ 
     return () => {
       sessionStorage.removeItem("OwnerDetails");
     };

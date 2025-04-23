@@ -1,3 +1,5 @@
+//  this user avaliable for Simple User
+
 export const CreateUserReducer = (state = {}, action) => {
   switch (action.type) {
     case "CreateUserOtpRequest":
@@ -20,17 +22,22 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ReportSuspiciousPropertyRequest":
     case "verifiedPaymentRequest":
     case "ApplyJobActionRequest":
+    // from here adding status update reducer
+    case "updateBidStatusActionRequest":
+    case "updateNotifyStatusActionRequest":
+    case "updateRequirementStatusAcionRequest":
+
     case "MarkRentOutPropertyRequest":
     case "ReOpenPostActionRequest-UserRoutes":
-      
-      //  Fresh Property get Api ----- start
-      case "viewOneProjectRequest":
-      case "getAllFreshProjectRequest-UserRoutes":
-        
-      //  Fresh Property get Api ----- End
-       
-     
+   
 
+    //  Fresh Property get Api ----- start
+    case "viewOneProjectRequest":
+    case "getAllFreshProjectRequest-UserRoutes":
+      //  Fresh Property get Api ----- End
+
+ case "SentTokenForEmailVerificationRequest":
+ case "VerifyTokenForEmailVerificationActionRequest":
       return {
         ...state,
         loading: true,
@@ -61,18 +68,22 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ApplyJobActionSuccess":
     case "MarkRentOutPropertySuccess":
     case "ReOpenPostActionSuccess-UserRoutes":
-     //  Fresh Property get Api ----- start
-     case "viewOneProjectSuccess":
-     case "getAllFreshProjectSuccess-UserRoutes":
-      //  Fresh Property get Api ----- End
-       
+    //  Fresh Property get Api ----- start
+    case "viewOneProjectSuccess":
+    case "getAllFreshProjectSuccess-UserRoutes":
+    //  Fresh Property get Api ----- End
+    // from here adding status update reducer
+    case "updateBidStatusActionSuccess":
+    case "updateNotifyStatusActionSuccess":
+    case "updateRequirementStatusAcionSuccess":
+    case "SentTokenForEmailVerificationSuccess":
+    case "VerifyTokenForEmailVerificationActionSuccess":
       return {
-         
         ...state,
         loading: false,
         data: action.payload,
       };
- 
+
     case "CreateUserOtpFail":
     case "VerifyUserOtpFail":
     case "CreateUserFail":
@@ -98,7 +109,13 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ReOpenPostActionFail-UserRoutes":
     case "getAllFreshProjectFail-UserRoutes":
     case "viewOneProjectFail":
-      
+ 
+    // from here adding status update reducer
+    case "updateBidStatusActionFail":
+    case "updateNotifyStatusActionFail":
+    case "updateRequirementStatusAcionFail":
+      case "SentTokenForEmailVerificationFail":
+      case "VerifyTokenForEmailVerificationActionFail":
       return {
         ...state,
         loading: false,

@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./ProfileHeader.css";
 import { useSelector } from "react-redux";
-import { GetMeDetailsAction, GetPost_BiddingDocumentAction, ProfileUpdateAction } from "../../../Action/userAction";
+import {
+  GetMeDetailsAction,
+  GetPost_BiddingDocumentAction,
+  ProfileUpdateAction,
+  SentTokenForEmailVerification,
+} from "../../../Action/userAction";
 import { UserContext } from "../../CreateContext/CreateContext";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -14,12 +19,18 @@ function ProfileHeader() {
   });
 
   // Get state from Redux store
-  const { data, LodingType } = useSelector((state) => {
+  const { data, LodingType, loading } = useSelector((state) => {
     return state.userData;
   });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  //  This Data required for Email Verificiaton
+  const origin = window.location.origin; // domain
+  const pathname = location.pathname; // current path
+  const querry = location.search;
   // useEffect(()=>{
 
   // } ,[medata])
@@ -74,42 +85,56 @@ function ProfileHeader() {
 
   // Toggle the state when the button is clicked
   const handleToggleChange = () => {
-    
     setIsToggled(!isToggled);
   };
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++Editing start here+++++++++++++++++
   // Initialize state with the data from the backend
 
   const { setVarb } = useContext(UserContext);
-  const [name, setName] = useState( medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1));
-  const [Lastname, setLastName] = useState(medata?.user?.LastName?.charAt(0).toUpperCase() + medata?.user?.LastName?.slice(1));
+  const [name, setName] = useState(
+    medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1)
+  );
+  const [Lastname, setLastName] = useState(
+    medata?.user?.LastName?.charAt(0).toUpperCase() +
+      medata?.user?.LastName?.slice(1)
+  );
   const [email, setEmail] = useState(medata?.user?.email);
   const [number, setNumber] = useState(medata?.user?.ContactNumber);
   // Function to handle the edit button click
   const handleEdit = () => {
-    setVarb({ Name: name,LastName:Lastname, email: email, ContactNumber: number });
-    if(number !== medata?.user?.ContactNumber){
- 
+    setVarb({
+      Name: name,
+      LastName: Lastname,
+      email: email,
+      ContactNumber: number,
+    });
+    if (number !== medata?.user?.ContactNumber) {
       dispatch(ProfileEditAction({ ContactNumber: number }));
-    }
-    else{
-      const updateData={ Name: name,LastName:Lastname, email: email, ContactNumber: number };
-           
-          dispatch(ProfileUpdateAction(updateData))
+    } else {
+      const updateData = {
+        Name: name,
+        LastName: Lastname,
+        email: email,
+        ContactNumber: number,
+      };
+
+      dispatch(ProfileUpdateAction(updateData));
     }
   };
   // Check if any changes were made to the fields
   const hasChanges =
-    name !== medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1) ||
-    Lastname !== medata?.user?.LastName?.charAt(0).toUpperCase() + medata?.user?.LastName?.slice(1)||
+    name !==
+      medata?.user?.Name?.charAt(0).toUpperCase() +
+        medata?.user?.Name?.slice(1) ||
+    Lastname !==
+      medata?.user?.LastName?.charAt(0).toUpperCase() +
+        medata?.user?.LastName?.slice(1) ||
     email !== medata?.user?.email ||
     number !== medata?.user?.ContactNumber;
   // Effect to handle navigation on successful profile update
 
-  
-   
   //  useEffect(()=>{
- 
+
   //      console.log(AlertData)
   //       console.log(AlertType)
   //   if(AlertData?.success){
@@ -117,7 +142,7 @@ function ProfileHeader() {
   //     dispatch(GetMeDetailsAction());     }
 
   //  },[AlertData])
-   const handleEnableEdit = (e) => {
+  const handleEnableEdit = (e) => {
     e.preventDefault();
     alert("please make changes !");
   };
@@ -139,7 +164,10 @@ function ProfileHeader() {
                 <header>
                   <form>
                     <div className="medata-role">
-                      <p className="register-as-role"> You are registered as: </p>
+                      <p className="register-as-role">
+                        {" "}
+                        You are registered as:{" "}
+                      </p>
                       <span>{medata.user.Role}</span>
                     </div>
                     <div className="profileNameEmail">
@@ -148,7 +176,7 @@ function ProfileHeader() {
                         <input
                           className="profile-name"
                           type="text"
-                          value={name }
+                          value={name}
                           onChange={(e) => setName(e.target.value)} // Update name state
                         />
                       </div>
@@ -157,25 +185,26 @@ function ProfileHeader() {
                         <input
                           className="profile-name"
                           type="text"
-                          value={Lastname? Lastname :""}
-                          placeholder={Lastname? "" :"Please Update Your Last Name"}
+                          value={Lastname ? Lastname : ""}
+                          placeholder={
+                            Lastname ? "" : "Please Update Your Last Name"
+                          }
                           onChange={(e) => setLastName(e.target.value)} // Update name state
                         />
                       </div>
-                
                     </div>
 
-              <div className="profileNameEmail">
-              <div className="profile-section-data">
-                      <label>Contact Number:</label>
-                      <input
-                        className="profile-email"
-                        type="tel"
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)} // Update number state
-                      />
-                    </div>
-                    <div className="profile-section-data">
+                    <div className="profileNameEmail">
+                      <div className="profile-section-data">
+                        <label>Contact Number:</label>
+                        <input
+                          className="profile-email"
+                          type="tel"
+                          value={number}
+                          onChange={(e) => setNumber(e.target.value)} // Update number state
+                        />
+                      </div>
+                      <div className="profile-section-data">
                         <label>Email:</label>
                         <input
                           className="profile-email"
@@ -183,21 +212,50 @@ function ProfileHeader() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)} // Update email state
                         />
+
+                        {!medata?.user?.EmailVerify && (
+                          <div
+                            style={{ cursor: "pointer" }}
+                            onClick={(e) => {
+                              const Url = `${origin}${pathname}`;
+
+                              if (
+                                !loading &&
+                                LodingType !=
+                                  "SentTokenForEmailVerificationRequest"
+                              ) {
+                                dispatch(
+                                  SentTokenForEmailVerification({
+                                    email: medata?.user?.email,
+                                    Url: { pathname: Url, querry: querry },
+                                  })
+                                );
+                              }
+                            }}
+                          >
+                            Verify Your Email
+                            {loading &&
+                            LodingType == "SentTokenForEmailVerificationRequest"
+                              ? " Loding....."
+                              : null}
+                          </div>
+                        )}
                       </div>
-              </div>
+                    </div>
                     {hasChanges ? (
                       <Link
-                        to={number !== medata?.user?.ContactNumber ? `/user/profileUpdate`:""}
+                        to={
+                          number !== medata?.user?.ContactNumber
+                            ? `/user/profileUpdate`
+                            : ""
+                        }
                         className="editProfileButton"
                         onClick={handleEdit}
                       >
                         <button>Update Profile</button>
                       </Link>
                     ) : (
-                      <div
-                        className="editProfileButton"
-                        
-                      >
+                      <div className="editProfileButton">
                         <div className="button-section-dashborad">
                           <div className="whatapp-notify ">
                             {/* <img
@@ -250,11 +308,13 @@ function ProfileHeader() {
           </div>
         </div>
         <Link to="/user/post">
-       
-        <div className="dashboard-right-side">
-          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg" alt="dash-banner" />
-        </div>
-         </Link>
+          <div className="dashboard-right-side">
+            <img
+              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg"
+              alt="dash-banner"
+            />
+          </div>
+        </Link>
       </div>
     </>
   );

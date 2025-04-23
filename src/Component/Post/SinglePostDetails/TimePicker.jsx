@@ -55,7 +55,7 @@
 //         // Adjust hour to current hour or 9 AM, whichever is later
 //         const validHour = Math.max(currentHour, 9);
 //         const { hour: adjustedHour12, period: adjustedPeriod } = to12HourFormat(validHour);
-//         // console.log(adjustedPeriod)
+//    
         
 //         setSelectedHour(adjustedHour12);
 //         setSelectedMinute(0);

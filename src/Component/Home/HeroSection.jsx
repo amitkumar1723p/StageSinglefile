@@ -5,8 +5,8 @@ import React, {
   useRef,
   useState,
 
-} 
-from "react";
+}
+  from "react";
 import "./HeroSection.css"; // Import your CSS file if you have one
 import "./Navbar.css";
 import { Headset, PhoneCall, MessageCircle, MousePointerClick } from 'lucide-react';
@@ -21,8 +21,7 @@ import ListYourProperty from "./ListYourProperty.jsx";
 import RentAuthentication from "./RentAuthentication.jsx";
 import BrowseProperties from "./BrowseProperties";
 // import LandLord from "./LandLord";
-
-import PropertyDetailsForm from "./PropertyDetailsForm";
+import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
 
 // import RentAgreement from "./RentAgreement";
 
@@ -75,9 +74,47 @@ import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
 import TenantVsLandlord from "./TenantVsLandlord.jsx";
-import FreshBookingHome from './FreshBooking/FreshBookingHome/FreshBookingHome.jsx'
-
+const words = ["Right Price"];
 const HeroSection = () => {
+  const [index, setIndex] = useState(0); // Word index
+  const [text, setText] = useState(""); // Text to display
+  const [charIndex, setCharIndex] = useState(0); // Char position
+  const [isDeleting, setIsDeleting] = useState(false); // Deleting flag
+
+  useEffect(() => {
+    const currentWord = words[index];
+    let typeSpeed = isDeleting ? 100 : 120; // Slower for deleting, faster for typing
+
+    // Typing and deleting behavior
+    const timeout = setTimeout(() => {
+      if (isDeleting) {
+        // Backspace effect
+        setText(currentWord.substring(0, charIndex));
+        if (charIndex === 0) {
+          setIsDeleting(false);
+          setIndex((prev) => (prev + 1) % words.length); // Move to the next word
+        } else {
+          setCharIndex((prev) => prev - 1); // Decrease char index for backspacing
+        }
+      } else {
+        // Typing effect
+        setText(currentWord.substring(0, charIndex));
+        if (charIndex === currentWord.length) {
+          setTimeout(() => setIsDeleting(true), 1000); // Wait before starting to delete
+        } else {
+          setCharIndex((prev) => prev + 1); // Increase char index for typing
+        }
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, index]);
+
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleButtonClick = (button) => {
+    setActiveButton(activeButton === button ? null : button);
+  };
 
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("buy");
@@ -86,7 +123,11 @@ const HeroSection = () => {
   //   setActiveTab(tab);
 
   // };
- 
+  const [activeItem, setActiveItem] = useState(null);
+  const handleClick = (index) => {
+    setActiveItem(index);
+  };
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [position, setPosition] = useState({ width: 0, left: 0, height: 0, top: 0 });
   const containerRef = useRef(null);
@@ -206,29 +247,25 @@ const HeroSection = () => {
           console.log(ProjectNameObjectData)
 
           navigate(
-            `/home/card?${ 
-              (ProjectNameObjectData?.s_type?.trim() === "ProjectName" || 
-              ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName") && ProjectNameObjectData?.projectName 
+            `/home/card?${(ProjectNameObjectData?.s_type?.trim() === "ProjectName" ||
+              ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName") && ProjectNameObjectData?.projectName
               ? `ProjectName=${ProjectNameObjectData?.projectName.toLowerCase().replaceAll(" ", "-")}&`
               : ""
-            }${
-              (ProjectNameObjectData?.s_type?.trim() === "Locality" || 
+            }${(ProjectNameObjectData?.s_type?.trim() === "Locality" ||
               ProjectNameObjectData?.mostMatchedField?.trim() === "Locality") && ProjectNameObjectData?.locality
               ? `locality=${ProjectNameObjectData?.locality.toLowerCase().replaceAll(" ", "-")}&city=${ProjectNameObjectData?.city.toLowerCase().replaceAll(" ", "-")}&`
               : ""
-            }${
-              (ProjectNameObjectData?.s_type?.trim() === "City" || 
+            }${(ProjectNameObjectData?.s_type?.trim() === "City" ||
               ProjectNameObjectData?.mostMatchedField?.trim() === "City") && ProjectNameObjectData?.city
               ? `city=${ProjectNameObjectData?.city.toLowerCase().replaceAll(" ", "-")}&`
               : ""
-            }${
-              (ProjectNameObjectData?.s_type?.trim() === "Landmark" || 
+            }${(ProjectNameObjectData?.s_type?.trim() === "Landmark" ||
               ProjectNameObjectData?.mostMatchedField?.trim() === "Landmark") && ProjectNameObjectData?.sector
               ? `sector=${ProjectNameObjectData?.sector.toLowerCase().replaceAll(" ", "-")}&city=${ProjectNameObjectData?.city.toLowerCase().replaceAll(" ", "-")}&`
               : ""
             }PropertyAddType=${SearchPropertyAddType}`
           );
-          
+
           // navigate(
           //   `/home/card?ProjectName=${ProjectNameObjectData.ProjectName?.toLowerCase()
           //       .replaceAll(" ", "-")
@@ -292,7 +329,7 @@ const HeroSection = () => {
           </div>
           <div className="heading-hero">
             <h1>
-              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span><span className="animate-blink">|</span>
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
@@ -321,7 +358,7 @@ const HeroSection = () => {
                 </select>
 
                 <select>
-                  <option value="Gurgaon">Gurgaon</option>
+                  <option className="herosection-gurgaon-suggest" value="Gurgaon">Gurgaon</option>
                   {/* <option value="Noida">Noida</option>
             <option value="Delhi">Delhi</option> */}
                 </select>
@@ -354,11 +391,11 @@ const HeroSection = () => {
                     }
                     className="search-button-nav"
                     onClick={() => {
-                      if (Object.keys(ProjectNameObjectData).length===0) {
+                      if (Object.keys(ProjectNameObjectData).length === 0) {
                         return alert("Write correct ProjectName");
                       }
                       if (
-                        
+
                         ProjectNameObjectData?.projectName?.length > 0
                       ) {
                         // setRedirectPath("/");
@@ -370,9 +407,9 @@ const HeroSection = () => {
                         // );
                         dispatch(
                           GetAllPostAction({
-                            ProjectName:ProjectNameObjectData?.s_type?.trim() === "ProjectName" || ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName" ? ProjectNameObjectData?.projectName?.trim() :"" ,
-                            City : ProjectNameObjectData?.city?.trim(),
-                            Sector : ProjectNameObjectData?.sector?.trim(),
+                            ProjectName: ProjectNameObjectData?.s_type?.trim() === "ProjectName" || ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName" ? ProjectNameObjectData?.projectName?.trim() : "",
+                            City: ProjectNameObjectData?.city?.trim(),
+                            Sector: ProjectNameObjectData?.sector?.trim(),
                             PropertyAdType: SearchPropertyAddType,
                           })
                         );
@@ -406,9 +443,9 @@ const HeroSection = () => {
               <div className="search-options">
                 {SearchTab.map((e, i) => {
                   return (
-                    
+
                     <div
-                   
+
                       key={i}
                       className={`search-tab ${e == SearchPropertyAddType ? "active" : ""
                         }
@@ -426,7 +463,7 @@ const HeroSection = () => {
                     </div>
                   );
                 })}
-                <div> 
+                <div>
                   {/* <button onClick={HandleFreshbookingNavigation}>button</button> */}
                 </div>
               </div>
@@ -477,14 +514,14 @@ const HeroSection = () => {
                   {/* <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg" alt="" className="img-searchbar" /> */}
 
                   <button
-                  
+
                     className="search-button"
                     onClick={() => {
-                      if (Object.keys(ProjectNameObjectData).length<=1 ) {
+                      if (Object.keys(ProjectNameObjectData).length <= 1) {
                         return alert("Please select an option from the dropdown suggestions.");
                       }
                       if (
-                        
+
                         ProjectNameObjectData?.projectName?.length > 0
                       ) {
                         // setRedirectPath("/");
@@ -502,7 +539,7 @@ const HeroSection = () => {
                         let dispatchPayload = {
                           PropertyAdType: SearchPropertyAddType
                         };
-                        
+
                         if (s_type?.trim() === "ProjectName" || mostMatchedField?.trim() === "ProjectName") {
                           dispatchPayload.ProjectName = projectName?.trim();
                           dispatchPayload.City = city?.trim();
@@ -515,10 +552,10 @@ const HeroSection = () => {
                           dispatchPayload.Sector = sector?.trim();
                           dispatchPayload.City = city?.trim();
                         }
-                        
+
                         // Dispatch action
                         dispatch(GetAllPostAction(dispatchPayload));
-                        
+
                         // navigate(
                         //   `home/card?Search=${ProjectNameObjectData.ProjectName.trim()}&PropertyType=${SearchPropertyAddType}`
                         // );
@@ -533,15 +570,15 @@ const HeroSection = () => {
                   </button>
 
                   <button
-                   
+
                     className="search-button-mob"
                     onClick={() => {
-                    
-                      if (Object.keys(ProjectNameObjectData).length<=1) {
+
+                      if (Object.keys(ProjectNameObjectData).length <= 1) {
                         return alert("Please select an option from the dropdown suggestions.");
                       }
                       if (
-                      
+
                         ProjectNameObjectData?.projectName?.length > 0
                       ) {
                         // setRedirectPath("/");
@@ -557,7 +594,7 @@ const HeroSection = () => {
                         let dispatchPayload = {
                           PropertyAdType: SearchPropertyAddType
                         };
-                        
+
                         if (s_type?.trim() === "ProjectName" || mostMatchedField?.trim() === "ProjectName") {
                           dispatchPayload.ProjectName = projectName?.trim();
                           dispatchPayload.City = city?.trim();
@@ -570,7 +607,7 @@ const HeroSection = () => {
                           dispatchPayload.Sector = sector?.trim();
                           dispatchPayload.City = city?.trim();
                         }
-                        
+
                         // Dispatch action
                         dispatch(GetAllPostAction(dispatchPayload));
                         // navigate(
@@ -658,7 +695,7 @@ const HeroSection = () => {
         </div>
       </header>
 
-      <div
+      {/* <div
         ref={PropertyRequirementBtnRef.current[0]}
         onClick={() => {
           if (medata && medata.IsAuthenticated == true) {
@@ -669,7 +706,7 @@ const HeroSection = () => {
           }
         }} className="requirement-button">
         <button className="requirement-btn"><span className="requirement-span">SHARE REQUIREMENT</span></button>
-      </div>
+      </div> */}
 
       {/* normal waala  */}
       {/* <div className="requirement-container">
@@ -705,27 +742,112 @@ const HeroSection = () => {
       {/* changes is complete in hero-section */}
 
       {!isHidden && (
-        <div className="floating-buttons ">
-          {/* Call Button */}
-          <Link to="tel:+917837840785" className="call-button">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
-          </Link>
-          {/* WhatsApp Button */}
-          <Link
-            to="https://wa.me/7837840785"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatapps-section-floating"
-          >
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
-          </Link>
+        <div className="contact-sidebar">
+          <div className="d-flex flex-column align-items-center">
+
+            {/* Call Button */}
+            <button
+              className={`hero-contact-btn mb-3 ${activeButton === 'call' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('call')}
+            >
+              <div className="hero-icon-container">
+                <Link to="tel:+917837840785" className="d-flex align-items-center hero-float-icon-a">
+                  <dotlottie-player
+                    src="https://lottie.host/c4658ed9-4396-4c41-a536-cdbd41ecb0a4/vkPcbOQrUI.lottie"
+                    background="transparent"
+                    speed="1"
+                    style={{ width: '47px', height: '47px' }}
+                    loop
+                    autoplay
+                  ></dotlottie-player>
+                  <span className="hero-icon-floating-label">Phone</span>
+                </Link>
+              </div>
+            </button>
+
+            {/* Phone Button */}
+            <button
+              className={`hero-contact-btn mb-3 ${activeButton === 'phone' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('phone')}
+            >
+              <div className="hero-icon-container">
+                <Link to="tel:+917837840785" className="d-flex align-items-center hero-float-icon-a">
+                  <dotlottie-player
+                    src="https://lottie.host/02272ac6-31e5-417d-834d-48cdcfeaf337/cG3WWN4Hvm.lottie"
+                    background="transparent"
+                    speed="1"
+                    style={{ width: '47px', height: '47px' }}
+                    loop
+                    autoplay
+                  ></dotlottie-player>
+                  <span className="hero-icon-floating-label">Contact Us</span>
+                </Link>
+              </div>
+            </button>
+
+            {/* WhatsApp Button */}
+            <button
+              className={`hero-contact-btn mb-3 ${activeButton === 'whatsapp' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('whatsapp')}
+            >
+              <div className="hero-icon-container">
+                <Link
+                  to="https://wa.me/7837840785"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="d-flex align-items-center hero-float-icon-a"
+                >
+                  <dotlottie-player
+                    src="https://lottie.host/87aba604-393b-4d73-8a63-ef8fddc8e348/Kx2B1jvrlf.lottie"
+                    background="transparent"
+                    speed="1"
+                    style={{ width: '47px', height: '47px', }}
+                    loop
+                    autoplay
+                  ></dotlottie-player>
+                  <span className="hero-icon-floating-label">WhatsApp</span>
+                </Link>
+              </div>
+            </button>
+
+            {/* Click Here Button */}
+            <div ref={PropertyRequirementBtnRef.current[0]}
+              onClick={() => {
+                if (medata && medata.IsAuthenticated == true) {
+                  setshowPropertyRequirement(true);
+                } else {
+                  setRedirectPath("/post-requirement");
+                  navigate("/login");
+                }
+              }} className="hero-apply-btn-main">
+              <button className=" hero-float-apply-btn">
+                <div className="hero-float-apply-text">SHARE REQUIREMENT</div>
+              </button> </div>
+
+          </div>
         </div>
       )}
+
+      <div className="floating-buttons ">
+        {/* Call Button */}
+        <Link to="tel:+917837840785" className="call-button">
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/call.png" alt="Call" />
+        </Link>
+        {/* WhatsApp Button */}
+        <Link
+          to="https://wa.me/7837840785"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="whatapps-section-floating"
+        >
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
+        </Link>
+      </div>
 
 
 
       <PropertySection />
-      <FreshBookingHome/>
+      {/* <FreshBookingHome /> */}
       {/* <FreshBookingPost/> */}
 
       <div className="select-options" id="select-option-section">
@@ -813,7 +935,7 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FaqBuyer />
           </div>
-        
+
         </>
       )}
       {/* Sale Component  */}
@@ -839,14 +961,14 @@ const HeroSection = () => {
           <div id="FAQ-SECTION">
             <FAQ />
           </div>
-         
+
         </>
       )}
 
       {/* Rent Component./ */}
       {PropertyAddType == "Rent" && (
         <>
-        <TenantVsLandlord/>
+          <TenantVsLandlord />
           {/* <Tenant />
           <BrowseProperties />
           <ListYourProperty />
@@ -858,7 +980,7 @@ const HeroSection = () => {
           {/* <TenantDetailsForm /> */}
         </>
       )}
-   
+
       {/* Buy Component  */}
 
       {showPropertyRequirement && (

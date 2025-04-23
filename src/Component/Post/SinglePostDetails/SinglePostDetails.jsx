@@ -36,6 +36,7 @@ import TanantDetailsForm from "../SinglePostDetails/TenantDetailsForm";
 import ViewOwnerDetails from "./ViewOwnerDetailsAlert";
 import { retry } from "@reduxjs/toolkit/query";
 import SocietyAndBuildingFeature from "./SocietyAndBuildingFeature";
+import EmailVerifyComponent from "../../User/EmailVerify";
 // import PayButton from "./PayButton";
 // import AreaGraphIcon from './Images/AreaGraph.png'
 export default function SinglePostDetails() {
@@ -103,7 +104,6 @@ export default function SinglePostDetails() {
     return state.TenentResponseIsExit;
   });
 
-  console.log(getSinglePostData, "getSingllepost");
   useEffect(() => {
     if (getSinglePostData && getSinglePostData.success == true) {
       setPropertyAddress(
@@ -352,10 +352,28 @@ export default function SinglePostDetails() {
     }
   }, [status]);
 
-  //  useEffect(()=>{
-  //   // AlertData
-  //   // AlertType
-  //  },[AlertData])
+  // user After email verify some condition is run
+
+  useEffect(() => {
+    const PendingFormString = sessionStorage.getItem("PendingForm");
+    console.log("PendingForm", PendingFormString);
+
+    let PendingForm = {};
+
+    if (PendingFormString) {
+      try {
+        PendingForm = JSON.parse(PendingFormString);
+      } catch (err) {
+        console.error("Error parsing PendingForm", err);
+      }
+    }
+
+    if (PendingForm?.Type === "ScheduleVisit") {
+      setshowScheduleVisitForm(true);
+    } else if (PendingForm?.Type === "MakeOffer") {
+      setshowBiddingForm(true);
+    }
+  }, [sessionStorage.getItem("PendingForm")]);
 
   return (
     <>
@@ -780,22 +798,23 @@ export default function SinglePostDetails() {
                           )}
                         </span>
 
-                        {!["Owner", "Admin"].includes(medata?.user?.Role) &&!getSinglePostData?.SinglePost?.myPost && (
-                          <span
-                            className="original-price"
-                            ref={BiddingFormOpenBtnRef}
-                            onClick={() => {
-                              if (medata && medata.IsAuthenticated === true) {
-                                setshowBiddingForm(true);
-                              } else {
-                                setRedirectPath("/show-offerForm");
-                                navigate("/login");
-                              }
-                            }}
-                          >
-                            Make Your Offer
-                          </span>
-                        )}
+                        {!["Owner", "Admin"].includes(medata?.user?.Role) &&
+                          !getSinglePostData?.SinglePost?.myPost && (
+                            <span
+                              className="original-price"
+                              ref={BiddingFormOpenBtnRef}
+                              onClick={() => {
+                                if (medata && medata.IsAuthenticated === true) {
+                                  setshowBiddingForm(true);
+                                } else {
+                                  setRedirectPath("/show-offerForm");
+                                  navigate("/login");
+                                }
+                              }}
+                            >
+                              Make Your Offer
+                            </span>
+                          )}
                       </>
                     )}
                     {getSinglePostData?.SinglePost?.BasicDetails
@@ -918,7 +937,8 @@ export default function SinglePostDetails() {
                     View Number
                   </button> */}
                   {getSinglePostData?.SinglePost?.BasicDetails
-                    ?.PropertyAdType === "Rent" && !getSinglePostData?.SinglePost?.myPost ? (
+                    ?.PropertyAdType === "Rent" &&
+                  !getSinglePostData?.SinglePost?.myPost ? (
                     <div>
                       {!medata || !medata.IsAuthenticated ? (
                         <span
@@ -1653,13 +1673,28 @@ export default function SinglePostDetails() {
 
                   {/* Schedule Your Visit */}
                   {showScheduleVisitForm && (
-                    <WindowComponent
-                      Component={ScheduleYourVisit}
-                      SetShow={setshowScheduleVisitForm}
-                      BtnRef={ScheduleYourVisitOpenBtnRef}
-                      SinglePostData={getSinglePostData}
-                      PropertyAddress={PropertyAddress}
-                    />
+                    <>
+                      <WindowComponent
+                        Component={ScheduleYourVisit}
+                        SetShow={setshowScheduleVisitForm}
+                        BtnRef={ScheduleYourVisitOpenBtnRef}
+                        SinglePostData={getSinglePostData}
+                        PropertyAddress={PropertyAddress}
+                      />
+                      {/* Email Verify Component  */}
+                      {/* {!medata?.user?.EmailVerify ? (
+                        <WindowComponent
+                          BtnRef={ScheduleYourVisitOpenBtnRef}
+                          Component={EmailVerifyComponent}
+                          SetShow={setshowScheduleVisitForm}
+                        
+                        />
+                      ) : (
+
+                        //  ScheduleVist Component 
+                       
+                      )} */}
+                    </>
                   )}
 
                   {/* View Response Form  */}

@@ -20,9 +20,9 @@ export default function ProtectedRoutes({ Component }) {
   });
   useEffect(() => {
     if (medata) {
-
       // if (medata.IsAuthenticated == false ||   medata.user?.Role !== "User") {
-      if (medata?.IsAuthenticated == false ||
+      if (
+        medata?.IsAuthenticated == false ||
         ![
           "Buyer",
           "Tenant",
@@ -34,13 +34,10 @@ export default function ProtectedRoutes({ Component }) {
         navigate("/");
       }
 
-      
       if (medata?.isBlockedUser == true) {
         dispatch(LogoutAction());
         navigate("/");
-
       }
-
     }
 
     // eslint-disable-next-line
@@ -48,22 +45,22 @@ export default function ProtectedRoutes({ Component }) {
 
   return (
     <>
-      {loading ? (
+      {loading && !sessionStorage.getItem("againUserDataFetch") ? (
         <Loader className={"windowloader"} />
       ) : (
         <>
           {" "}
           {medata &&
             (medata.IsAuthenticated === false ||
-              // (medata.user && medata.user.Role !== "User") ? (
-              (medata.user &&
-                ![
-                  "Buyer",
-                  "Tenant",
-                  "Property Owner",
-                  "Channel Partner",
-                  "NRI",
-                ].includes(medata.user.Role)) ? (
+            // (medata.user && medata.user.Role !== "User") ? (
+            (medata.user &&
+              ![
+                "Buyer",
+                "Tenant",
+                "Property Owner",
+                "Channel Partner",
+                "NRI",
+              ].includes(medata.user.Role)) ? (
               <Navigate to={"/"} />
             ) : (
               <Component />

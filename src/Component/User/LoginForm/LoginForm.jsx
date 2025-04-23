@@ -48,7 +48,7 @@ const LoginForm = ({
       }
     } else {
       if (SignUpData?.ContactNumber?.length !== 10) {
-        // console.log(SignUpData?.ContactNumber?.length)
+      
         if (SignUpData?.ContactNumber?.length == 0 || SignUpData?.ContactNumber?.length === undefined) {
           setloginError("Enter Phone Number")
 

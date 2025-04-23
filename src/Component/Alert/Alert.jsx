@@ -11,6 +11,7 @@ export default function Alert({
   const dispatch = useDispatch();
  const  navigate = useNavigate()
  
+  //  console.log(AlertType , AlertMessage ,ShowAlert ,"kddk")
   useEffect(() => {
     if (ShowAlert === true) {
       setTimeout(() => {

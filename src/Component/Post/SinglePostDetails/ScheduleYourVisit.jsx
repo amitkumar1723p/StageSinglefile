@@ -2,14 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./ScheduleYourVisit.css";
 import Loader from "../../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateScheduleVisitAction } from "../../../Action/userAction";
-import { useNavigate } from "react-router-dom";
+import {
+  CreateScheduleVisitAction,
+  SentTokenForEmailVerification,
+} from "../../../Action/userAction";
+import { useLocation, useNavigate } from "react-router-dom";
 import ScheduleYourVisitSubmit from "./ScheduleYourVisitSubmit";
 import TimePicker from "./TimePicker";
 
 function ScheduleYourVisit({ SinglePostData, SetShow }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  //  This Data required for Email Verificiaton
+  const origin = window.location.origin; // domain
+  const pathname = location.pathname; // current path
+  const querry = location.search;
+  // const [emailVerify,setEmailVerify]=useState()
   const { loading, data, LodingType } = useSelector((state) => {
     return state.userData;
   });
@@ -40,6 +50,15 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       setshowScheduleVistAlert(true);
     }, 1000);
     setTimeoutId(id);
+
+    // if(emailVerify===true){
+    //   // const obj={
+    //   //   formData:data,
+    //   //   emailtoken:token
+    //   // }
+    //   // dispatch email verify and then store into localstorage data
+    //   // localStorage.setItem("EmailData",obj)
+    // }
   };
 
   useEffect(() => {
@@ -55,80 +74,141 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
     }
   }, [data]);
 
+  // user After email verify some condition is run
+
+  useEffect(() => {
+    const PendingFormString = sessionStorage.getItem("PendingForm");
+
+    if (!PendingFormString) return;
+
+    let PendingForm;
+    try {
+      PendingForm = JSON.parse(PendingFormString);
+    } catch (err) {
+      console.error("Error parsing PendingForm", err);
+      return;
+    }
+
+    if (PendingForm?.Type === "ScheduleVisit") {
+      setScheduleVistData({ ...PendingForm?.data });
+    }
+
+    return () => {
+      if (PendingForm?.Type === "ScheduleVisit") {
+        sessionStorage.removeItem("PendingForm");
+      }
+    };
+  }, [sessionStorage.getItem("PendingForm")]);
+
   return (
     <>
       {/* {LodingType && LodingType == "CreateScheduleVisitRequest" && loading ? (
         <Loader className={"componentloader"} />
       ) : ( */}
       {showScheduleVistAlert == false && (
-        <form className="schedule-your-visit-form" onSubmit={SubmitHandler}>
-          <div className="cross-div">
-            <span
-              className="cross-btn"
-              onClick={() => {
-                SetShow(false);
-              }}
-            >
-              X
-            </span>
-          </div>
-
-          <div className="main-box-of-schedule">
-            <div className="left-box-of-schedule">
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/schedule-form.svg" alt="schedule" />
+        <>
+          <form className="schedule-your-visit-form" onSubmit={SubmitHandler}>
+            <div className="cross-div">
+              <span
+                className="cross-btn"
+                onClick={() => {
+                  SetShow(false);
+                }}
+              >
+                X
+              </span>
             </div>
-            <div className="right-box-of-schedule">
-              <p className="schedule-your-visit-title">Schedule your Visit</p>
-              <div className="schedule-your-visit-group-data">
-                <label className="schedule-your-visit-label">Select Date</label>
+            {!medata?.user?.EmailVerify && (
+              <div
+                onClick={(e) => {
+                  const Url = `${origin}${pathname}`;
 
-                <input
-                  type="date"
-                  className="schedule-your-visit-input-date"
-                  required
-                  value={ScheduleVistData.VisitDate || ""}
-                  onChange={(e) => {
-                    const currentDate = new Date().toISOString().split("T")[0];
-                    const selectedDate = e.target.value;
-
-                    if (selectedDate >= currentDate) {
-                      setScheduleVistData({
-                        ...ScheduleVistData,
-                        VisitDate: e.target.value,
-                      });
-                    }
-                  }}
+                  if (!loading && LodingType!="SentTokenForEmailVerificationRequest"   ) {
+                    dispatch(
+                      SentTokenForEmailVerification({
+                        email: medata?.user?.email,
+                        Url: { pathname: Url, querry: querry },
+                        PendingForm: {
+                          Type: "ScheduleVisit",
+                          data: { ...ScheduleVistData },
+                        },
+                      })
+                    );
+                  }
+                }}
+              >
+                Verify Your Email
+                {loading && LodingType == "SentTokenForEmailVerificationRequest"
+                  ? " Loding....."
+                  : null}
+              </div>
+            )}
+            <div className="main-box-of-schedule">
+              <div className="left-box-of-schedule">
+                <img
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/schedule-form.svg"
+                  alt="schedule"
                 />
               </div>
+              <div className="right-box-of-schedule">
+                <p className="schedule-your-visit-title">Schedule your Visit</p>
+                <div className="schedule-your-visit-group-data">
+                  <label className="schedule-your-visit-label">
+                    Select Date
+                  </label>
 
-              <div className="schedule-your-visit-time-group">
-                <label className="schedule-your-visit-label">Select Time</label>
-                <div className="schedule-your-visit-time-container">
-                  <TimePicker
+                  <input
+                    type="date"
+                    className="schedule-your-visit-input-date"
+                    required
+                    value={ScheduleVistData.VisitDate || ""}
                     onChange={(e) => {
-                      setScheduleVistData({
-                        ...ScheduleVistData,
-                        VisitTime: {
-                          ...ScheduleVistData.VisitTime,
-                          From: e,
-                        },
-                      });
+                      const currentDate = new Date()
+                        .toISOString()
+                        .split("T")[0];
+                      const selectedDate = e.target.value;
+
+                      if (selectedDate >= currentDate) {
+                        setScheduleVistData({
+                          ...ScheduleVistData,
+                          VisitDate: e.target.value,
+                        });
+                      }
                     }}
-                    selectedDate={ScheduleVistData.VisitDate || ""}
                   />
                 </div>
-                {/* <small>available time 10:00 Am to 7:00 PM</small> */}
-              </div>
 
-              <button
-                type="submit"
-                className="schedule-your-visit-submit-button"
-              >
-                Submit
-              </button>
+                <div className="schedule-your-visit-time-group">
+                  <label className="schedule-your-visit-label">
+                    Select Time
+                  </label>
+                  <div className="schedule-your-visit-time-container">
+                    <TimePicker
+                      onChange={(e) => {
+                        setScheduleVistData({
+                          ...ScheduleVistData,
+                          VisitTime: {
+                            ...ScheduleVistData.VisitTime,
+                            From: e,
+                          },
+                        });
+                      }}
+                      selectedDate={ScheduleVistData.VisitDate || ""}
+                    />
+                  </div>
+                  {/* <small>available time 10:00 Am to 7:00 PM</small> */}
+                </div>
+
+                <button
+                  type="submit"
+                  className="schedule-your-visit-submit-button"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </>
       )}
 
       {showScheduleVistAlert === "LodingTrue" && (
@@ -138,7 +218,6 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
         <ScheduleYourVisitSubmit
           SetShow={SetShow}
           ScheduleVistData={ScheduleVistData}
-         
         />
       )}
     </>

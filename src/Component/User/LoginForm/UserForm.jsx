@@ -43,37 +43,6 @@ export default function UserForm() {
   const ISNRI = location.pathname == "/nri/login";
   useEffect(() => {
     if (medata) {
-      if (medata.IsAuthenticated == true) {
-        if (RedirectPath == "/user/post") {
-          navigate("/user/post");
-        } else if (RedirectPath == "/home/card") {
-          navigate(-1);
-        } else if (RedirectPath == "/show-offerForm") {
-          navigate(-1);
-        } else if (RedirectPath == "/show-scheduleVisit") {
-          navigate(-1);
-        } else if (RedirectPath == "/view-owner-details") {
-          navigate(-1);
-        } else if (RedirectPath == "/post-requirement") {
-          navigate(-1);
-        } else if (RedirectPath == "/show-Supspicious-Listing-Form") {
-          navigate(-1);
-        }  
-          else {
-              if(medata?.user?.Role==="Property Owner"){
-
-                navigate("/user/my-listing");
-              }else {
-                navigate("/");
-                
-              }
-        }
-
-        if (RedirectPath == "/user/post") {
-          sessionStorage.removeItem("RedirectPath");
-          setRedirectPath("");
-        }
-      }
     }
   }, [medata]);
 
@@ -132,6 +101,34 @@ export default function UserForm() {
   useEffect(() => {
     setUrlVisit(true);
   }, []);
+  if (medata.IsAuthenticated == true) {
+    if (RedirectPath == "/user/post") {
+      navigate("/user/post");
+    } else if (RedirectPath == "/home/card") {
+      navigate(-1);
+    } else if (RedirectPath == "/show-offerForm") {
+      navigate(-1);
+    } else if (RedirectPath == "/show-scheduleVisit") {
+      navigate(-1);
+    } else if (RedirectPath == "/view-owner-details") {
+      navigate(-1);
+    } else if (RedirectPath == "/post-requirement") {
+      navigate(-1);
+    } else if (RedirectPath == "/show-Supspicious-Listing-Form") {
+      navigate(-1);
+    } else {
+      if (medata?.user?.Role === "Property Owner") {
+        navigate("/user/my-listing");
+      } else {
+        navigate("/");
+      }
+    }
+
+    if (RedirectPath == "/user/post") {
+      sessionStorage.removeItem("RedirectPath");
+      setRedirectPath("");
+    }
+  }
 
   return (
     <>
