@@ -1602,7 +1602,9 @@ const SpreadsheetView = () => {
                 </Grid>
               </div>
             </div>
-          </Paper></>
+          </Paper>
+          
+          </>
 
 
           :
@@ -1769,6 +1771,18 @@ const SpreadsheetView = () => {
           <Button onClick={handleAddColumn} variant="contained">Add</Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={() => setNotification({ ...notification, open: false })}
+      >
+        <Alert 
+          onClose={() => setNotification({ ...notification, open: false })} 
+          severity={notification.severity}
+        >
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
