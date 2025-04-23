@@ -224,7 +224,7 @@
 
 
 /* From Uiverse.io by cssbuttons-io */ 
-button {
+/* button {
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -236,7 +236,7 @@ button {
     padding: 0;
     font-size: inherit;
     font-family: inherit;
-   }
+   } */
    
    .freshbooking-home-button {
     min-width: 260px;
