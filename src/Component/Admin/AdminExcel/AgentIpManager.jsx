@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 
 const AgentIpManager = () => {
     const [ips, setIps] = useState([]);
+    const [filteredIp,setFilteredIp]=useState([])
     const [form, setForm] = useState({ ip: "", agentName: "" });
     const [editingId, setEditingId] = useState(null);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: "", text: "" });
+    const [search,setSearch]=useState("")
 
     const apiUrl = process.env.REACT_APP_API_URL; 
 
@@ -18,7 +20,10 @@ const AgentIpManager = () => {
             const res = await axios.get(`${apiUrl}/ip/all-agent-ip`,{
                 withCredentials:true
             });
-            setIps(res.data.allIp);
+            if(res.data.success){
+                setIps(res.data.allIp);
+                setFilteredIp(res.data.allIp)
+            }
         } catch (err) {
             handleError("Failed to fetch IPs", err);
         } finally {
@@ -33,7 +38,13 @@ const AgentIpManager = () => {
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-
+    useEffect(()=>{
+        let filtering = [...ips];
+        if(search){
+            filtering = filtering.filter((ip)=>ip.AgentName.toLowerCase().includes(search.toLowerCase()))
+        }
+        setFilteredIp(filtering)
+    },[search])
     const resetForm = () => {
         setForm({ ip: "", agentName: "" });
         setEditingId(null);
@@ -115,7 +126,6 @@ const AgentIpManager = () => {
         <div className="agent-ip-container">
             <h2 className="agent-ip-title">Agent IP Manager</h2>
 
-
             <form onSubmit={handleSubmit} className="agent-ip-form">
                 <input
                     type="text"
@@ -147,7 +157,11 @@ const AgentIpManager = () => {
                 </div>
             </form>
 
+            <div className="agent-ip-subtitle-parent">
             <h3 className="agent-ip-subtitle">Saved IPs</h3>
+                    
+                    <input type="text" className="agent-ip-filter-search" placeholder="Search Agent " onChange={(e)=>setSearch(e.target.value)}/>
+            </div>
 
             {loading ? (
                 <p className="agent-ip-loading">Loading...</p>
@@ -161,7 +175,7 @@ const AgentIpManager = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {ips.map((ip) => (
+                        {filteredIp.map((ip) => (
                             <tr key={ip._id}>
                                 <td>{ip.IP}</td>
                                 <td>{ip.AgentName}</td>

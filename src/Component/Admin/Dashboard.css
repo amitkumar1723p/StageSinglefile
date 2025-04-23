@@ -648,9 +648,10 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(53, 53, 53, 1);
+      display: none;
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -739,9 +740,10 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(55, 39, 94, 1);
+      display: none;
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgb(255, 255, 255);
     }
@@ -778,6 +780,8 @@ width: 90%;
     font-weight: 500;
     color: rgba(44, 44, 44, 1);
     text-align: center;
+   
+
   }
   div:nth-of-type(2){
     p{
@@ -800,10 +804,11 @@ width: 90%;
 
       font-size: 12px;
       font-weight: 400;
+      display: none;
       color: rgba(116, 98, 53, 1);
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -862,9 +867,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(55, 123, 13, 1);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -922,9 +929,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(55, 123, 13, 1);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -982,9 +991,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgb(255, 255, 255);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgb(255, 255, 255);
     }
@@ -1042,9 +1053,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(50, 123, 104, 1);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -1103,9 +1116,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(50, 123, 104, 1);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -1164,9 +1179,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgb(255, 255, 255);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgb(255, 255, 255);
     }
@@ -1223,9 +1240,10 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgba(99, 70, 6, 1);
+      display: none;
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgba(44, 44, 44, 1);
     }
@@ -1285,9 +1303,11 @@ width: 90%;
       font-size: 12px;
       font-weight: 400;
       color: rgb(255, 255, 255);
+      display: none;
+
     }
     p{
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 500;
       color: rgb(255, 255, 255);
     }
