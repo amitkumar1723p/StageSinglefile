@@ -28,6 +28,7 @@ export default function ProfileEdit() {
     
  if(data && LodingType =="ProfileEdit"){
   if(data.success==true){
+   
     navigate('/user/profileUpdate');
   }
  }

@@ -6,32 +6,35 @@ import { getAllUserResponseAction } from '../../Action/userAction';
 import { formatPrice } from "../../utils/CommonFunction";
 // kawal sir css is here
 import "./AllRegistrationResponse.css";
+import { Link } from 'react-router-dom';
 export default function AgentUserResponse() {
     const dispatch = useDispatch()
     // All user response action
     const [searchbtn, setSearchbtn] = useState(false)
     const [searchText, setSearchText] = useState("");
     const [runPagination, setrunPagination] = useState(false);
+
+    const [indexAgent, setIndexAgent] = useState()
     const { data: AllUserResponseAction_Store } = useSelector((state) => {
         return state.AllUserResponseAction_Store;
     });
 
     // Pagination logic state
     const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage || 1); // Current page for pagination
-
+    const [read, setRead] = useState()
     const totalPages = AllUserResponseAction_Store?.totalPages
 
     useEffect(() => {
-        if (AllUserResponseAction_Store == undefined || runPagination == true) {
+        if (AllUserResponseAction_Store == undefined || runPagination == true || indexAgent) {
 
             dispatch(getAllUserResponseAction(page))
         }
-    }, [page])
+    }, [page, indexAgent])
 
     useEffect(() => {
         // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
         if (searchText && searchbtn === true) {
-            console.log(searchText,"k")
+
             dispatch(getAllUserResponseAction(page, searchText));
 
             setSearchbtn(false)
@@ -70,14 +73,61 @@ export default function AgentUserResponse() {
         // For example, log the search text
     };
 
+    useEffect(() => {
+        const users = AllUserResponseAction_Store?.data || [];
+        const storedIds = JSON.parse(localStorage.getItem("agentDash")) || [];
+        const agentReadMode_Old = JSON.parse(localStorage.getItem("agentReadMode")) || [];
+
+        if (users.length > storedIds.length && searchText.length === 0) {
+            const newIds = users
+                .map(user => user?._id)
+                .filter(id => id && !storedIds.includes(id));
+
+            if (newIds.length > 0) {
+                const updatedIds = [...storedIds, ...newIds];
+                localStorage.setItem("agentDash", JSON.stringify(updatedIds));
+
+                const updateAgentId = [...agentReadMode_Old, ...newIds];
+                localStorage.setItem("agentReadMode", JSON.stringify(updateAgentId));
+
+                setRead(updateAgentId); // Directly update state with the new list
+                return; // early exit
+            }
+        }
+
+        // fallback: always sync read state from storage if no new updates
+        setRead(agentReadMode_Old);
+    }, [AllUserResponseAction_Store, searchText]);
+
+
+    useEffect(() => {
+
+        if (indexAgent !== undefined && indexAgent !== null) {
+            const stored = localStorage.getItem('agentReadMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                
+                // Filter out the one with matching _id
+                const updated = parsed.filter(item => item !== indexAgent);
+
+                // Update localStorage
+                localStorage.setItem('agentReadMode', JSON.stringify(updated));
+            }
+        }
+
+    }, [indexAgent]);
+ 
+
+
     return (
         <>
             <div className="border border-primary border-opacity-25 ">
                 <div className="d-flex justify-content-between">
-                    <div className="">
+                    <div className="d-flex">
                         <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
+                        <p className="px-4 mt-3 fw-semibold text-primary">Unckecked({<small className='text-danger'>{read?.length}</small>})</p>
                     </div>
-                    <div className="px-4 mt-3 d-flex">
+                    <div className="px-4 mt-3 d-flex pb-4">
                         <input
                             className="allresponse-search-input"
                             placeholder="e.g.  9053608395"
@@ -85,7 +135,7 @@ export default function AgentUserResponse() {
                             value={searchText} // Bind input value to state
                             onChange={handleInputChange} // Handle input change
                         />
-                        <div className=" px-2">
+                        <div className=" px-2 ">
                             <button className=" allresponse-search-input-btn px-2" onClick={handleSearch}>Search</button>
                         </div>
                     </div>
@@ -95,18 +145,42 @@ export default function AgentUserResponse() {
                         return (
 
                             <div className=" main-box-all-response-section all-response-section-admin  d-flex   border border-primary border-opacity-25 py-2 rounded  ">
+                                {
+                                    (() => {
+
+                                        const matched = read.find(id => id === item?._id);
+                                    })
+                                }
 
                                 <div className="agentuserName border-end border-primary px-1  border-opacity-25">
                                     <div className="">
                                         <small className=" fw-light text-primary border-primary border-bottom px-2 border-opacity-50  cursor-pointer"
                                             //    className=""
-                                            onClick={(e) => {
-                                                window.open(`/post-detail/${item?.propertyDetail?._id}`, 'SinglePostDetail');
-                                            }}
+                                            onClick={(e) => { window.open(`/post-detail/${item?.propertyDetail?._id}`, 'SinglePostDetail'); }}
                                         >
-                                            {item?.propertyDetail?.LocationDetails?.ProjectName}
+                                            <small className="fw-light">
+                                                {read?.includes(item?._id) ? (
+                                                    <small className='text-danger'>
+                                                        {item?.propertyDetail?.LocationDetails?.ProjectName} -{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.Landmark}{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.City} -{" "}
+                                                        <small className="fw-light ">({item?.propertyDetail?._id})</small>
+                                                    </small>
+                                                ) : (
+                                                    <>
+                                                        {item?.propertyDetail?.LocationDetails?.ProjectName} -{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.Landmark}{" "}
+                                                        {item?.propertyDetail?.LocationDetails?.City} -{" "}
+                                                        <small className="fw-light">({item?.propertyDetail?._id})</small>
+                                                    </>
+                                                )}
+                                            </small>
+                                        </small>
+                                        {/* {item?.propertyDetail?.LocationDetails?.ProjectName}
                                             - {item?.propertyDetail?.LocationDetails?.Landmark} {item?.propertyDetail?.LocationDetails?.City}-
-                                            <small className="fw-light">( {item?.propertyDetail?._id})</small></small>
+                                            <small className="fw-light">( {item?.propertyDetail?._id}) </small>
+                                        </small> */}
+
                                         {/* <small className="fw-light">{item?.email}</small> */}<br />
                                         <small className="fw-light px-2 border-light">
                                             {item?.createAt ? FormatDate(item?.createAt) : 'N/A'}
@@ -165,12 +239,15 @@ export default function AgentUserResponse() {
 
                                 <div className="px-1">
 
-
-
-                                    <p className="text-center px-5">
-                                        <small className='fw-light'>Lead Type</small> <br /><small className="fw-normal">{item?.Biddinguser ? <>Offer</> : <>Schedule</>}</small>
-
-                                    </p>
+                                    <button
+                                        className="btn-allresponse-section fw-light px-4"
+                                        onClick={() => {
+                                            setIndexAgent(item?._id);
+                                            window.open(`/admin/single-user-Response-action/${item?.userDetail?._id}`, 'AgentView');
+                                        }}
+                                    >
+                                        View Details
+                                    </button>
 
                                 </div>
 

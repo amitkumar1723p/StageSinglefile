@@ -14,7 +14,7 @@ import {
   fetchAllAgentFiles,
 } from "../../Action/postAction";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { GetAllAdminAction } from "../../Action/userAction";
+import { GetAllAdminAction, viewAllContactForm } from "../../Action/userAction";
 import { UserContext } from "../CreateContext/CreateContext";
 
 const Dashboard = () => {
@@ -92,9 +92,9 @@ const Dashboard = () => {
   const { data: getTransactionDetail } = useSelector((state) => {
     return state.getTransactionDetail;
   });
-  // const { data2} = useSelector((state) => {
-  //   return state;
-  // });
+  const { data: viewAllContactFormReducer } = useSelector((state) => {
+    return state.viewAllContactFormReducer;
+});
   // console.log(data2,"hello1");
   // console.log("assongg ",assignedExcles)
 
@@ -105,6 +105,8 @@ const Dashboard = () => {
         dispatch(Admin_OwnerGetAllPostAction());
         dispatch(GetAllAdminAction());
         dispatch(fetchAllOwnerFiles())
+            dispatch(viewAllContactForm())
+            
         // if  data is  exit in redux store not call thsi api
         if (!DeletedPost) {
           dispatch(GetDeletedPostsAction());
@@ -197,59 +199,59 @@ const Dashboard = () => {
           </h4>
           <div className="cards  grid grid-cols-4 gap-3  ">
             <Link to="/admin/allpost?type=all">
-              <div className="Admin-dashboard-row p-3">
+              <div className="Admin-dashboard-row ">
                 <div className="Admin-box">
-                  <p className="total-number">{TotalListing}</p>
+                  <p className="Admin-dashboard-total-number">{TotalListing}</p>
                   <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalPosts.png" alt="totalPost" />
                 </div>
-                <h3>Total Listing</h3>
-                <p className="viewall">View All</p>
+                <h3 className="dashboard-card-h3">Total Listing</h3>
+                <p className="Admin-dashboard-viewall">View All</p>
               </div>
             </Link>
             <Link to="/admin/allpost?type=true">
-              <div className="Admin-dashboard-row p-3">
+              <div className="Admin-dashboard-row ">
                 <div className="Admin-box">
-                  <p className="total-number">{VerifyPost.length}</p>
+                  <p className="Admin-dashboard-total-number">{VerifyPost.length}</p>
                   <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                 </div>
-                <h3 onClick={() => setPostVerify(true)}>Active Listing</h3>
-                <p className="viewall">View All</p>
+                <h3  className="dashboard-card-h3" onClick={() => setPostVerify(true)}>Active Listing</h3>
+                <p className="Admin-dashboard-viewall">View All</p>
               </div>
             </Link>
 
             <Link to="/admin/allpost?type=false">
-              <div className="Admin-dashboard-row p-3 cursor-pointer">
+              <div className="Admin-dashboard-row  cursor-pointer">
                 <div className="Admin-box">
-                  <p className="total-number">{UnVerifyPost.length}</p>
+                  <p className="Admin-dashboard-total-number">{UnVerifyPost.length}</p>
                   <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                 </div>
-                <h3 onClick={() => setPostVerify(false)}>In-Active Listing</h3>
-                <p className="viewall">View All</p>
+                <h3 className="dashboard-card-h3"  onClick={() => setPostVerify(false)}>In-Active Listing</h3>
+                <p className="Admin-dashboard-viewall">View All</p>
               </div>
             </Link>
 
             {medata?.user?.Role != "Agent" && (
               <>
-                <div className="card p-3 cursor-pointer"  onClick={() => navigate("/admin/allpost?type=expired")}>
+                <div className="dashboard-card p-3 cursor-pointer"  onClick={() => navigate("/admin/allpost?type=expired")}>
                   <div className="Admin-box">
-                    <p className="total-number">{expiredPostlength}</p>
+                    <p className="Admin-dashboard-total-number ">{expiredPostlength}</p>
                     <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                   </div>
-                  <h3> Expire Lisitng </h3>
+                  <h3 className="dashboard-card-h3"> Expire Lisitng </h3>
 
-                  <p className="viewall">View All</p>
+                  <p className="Admin-dashboard-viewall">View All</p>
                 </div>
                 <div
-                  className="Admin-dashboard-row p-3 cursor-pointer"
+                  className="Admin-dashboard-row  cursor-pointer"
                   onClick={() => navigate("/admin/allpost?type=success")}
                 >
                   <div className="Admin-box">
-                    <p className="total-number">{successPostlength}</p>
+                    <p className="Admin-dashboard-total-number">{successPostlength}</p>
                     <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                   </div>
-                  <h3> Success</h3>
+                  <h3 className="dashboard-card-h3" > Success</h3>
 
-                  <p className="viewall">View All</p>
+                  <p className="Admin-dashboard-viewall">View All</p>
                 </div>{" "}
 
 
@@ -260,13 +262,13 @@ const Dashboard = () => {
             {medata?.user?.Role === "Owner" && (
               <>
                 <Link to="/admin/all-excel">
-                  <div className="Admin-dashboard-row p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row  cursor-pointer">
                     <div className="Admin-box">
-                      <p className="total-number">{data?.length}</p>
+                      <p className="Admin-dashboard-total-number">{data?.length}</p>
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
-                    <h3 >All Excel Data</h3>
-                    <p className="viewall">View All</p>
+                    <h3 className="dashboard-card-h3">All Excel Data</h3>
+                    <p className="Admin-dashboard-viewall">View All</p>
                   </div>
                 </Link>
               </>
@@ -274,13 +276,13 @@ const Dashboard = () => {
             {medata?.user?.Role === "Admin" && (
               <>
                 <Link to="/admin/all-excel-both">
-                  <div className="Admin-dashboard-row p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row  cursor-pointer">
                     <div className="Admin-box">
-                      <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
+                      <p className="Admin-dashboard-total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
-                    <h3 >All Excel Data</h3>
-                    <p className="viewall">View All</p>
+                    <h3 className="dashboard-card-h3">All Excel Data</h3>
+                    <p className="Admin-dashboard-viewall">View All</p>
                   </div>
                 </Link>
               </>
@@ -288,15 +290,15 @@ const Dashboard = () => {
             {medata?.user?.Role === "Agent" && (
               <>
                 <Link to="/admin/all-excel-both">
-                  <div className="Admin-dashboard-row p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row  cursor-pointer">
                     <div className="Admin-box">
-                      <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
-                      {!AgentAllExcelFilesData && <p className="total-number">0</p>}
+                      <p className="Admin-dashboard-total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
+                      {!AgentAllExcelFilesData && <p className="Admin-dashboard-total-number">0</p>}
 
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
-                    <h3 >All Excel Data</h3>
-                    <p className="viewall">View All</p>
+                    <h3 className="dashboard-card-h3">All Excel Data</h3>
+                    <p className="Admin-dashboard-viewall">View All</p>
                   </div>
                 </Link>
               </>
@@ -304,7 +306,7 @@ const Dashboard = () => {
             {medata?.user?.Role === "Owner" && (
               <>
                 <div
-                  className="Admin-dashboard-row p-3 cursor-pointer"
+                  className="Admin-dashboard-row  cursor-pointer"
                   onClick={() => {
                     window.open(
                       "/admin/deleted-post?Type=AllPost",
@@ -313,28 +315,28 @@ const Dashboard = () => {
                   }}
                 >
                   <div className="Admin-box">
-                    <p className="total-number">
+                    <p className="Admin-dashboard-total-number">
                       {DeletedPost?.deletedPosts?.length || 0}
                     </p>
                     <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                   </div>
-                  <h3> Deleted Lisitng </h3>
+                  <h3 className="dashboard-card-h3"> Deleted Lisitng </h3>
 
-                  <p className="viewall">View All</p>
+                  <p className="Admin-dashboard-viewall">View All</p>
                 </div>
 
                 <Link to="/admin/all-registration-response">
-                  <div className="Admin-dashboard-row p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row  cursor-pointer">
                     <div className="Admin-box">
-                      <p className="total-number">
+                      <p className="Admin-dashboard-total-number">
                         {AllUserResponseData?.data?.length}
                       </p>
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
-                    <h3 onClick={() => setPostVerify(false)}>
+                    <h3 className="dashboard-card-h3" onClick={() => setPostVerify(false)}>
                       All Registration
                     </h3>
-                    <p className="viewall">View All</p>
+                    <p className="Admin-dashboard-viewall">View All</p>
                   </div>
                 </Link>
               </>
@@ -343,32 +345,48 @@ const Dashboard = () => {
             {medata?.user?.Role === "Owner" && (
               <>
                 <Link to="/admin/notify">
-                  <div className="Admin-dashboard-row p-3 cursor-pointer">
+                  <div className="Admin-dashboard-row  cursor-pointer">
                     <div className="Admin-box">
-                      <p className="total-number">{newNotifyAndReq.length}</p>
+                      <p className="Admin-dashboard-total-number">{newNotifyAndReq.length}</p>
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
-                    <h3 onClick={() => setPostVerify(false)}>
+                    <h3 className="dashboard-card-h3" onClick={() => setPostVerify(false)}>
                       Notify & Requirments
+                    </h3>
+                    <p className="Admin-dashboard-viewall">View All</p>
+                  </div>
+                </Link>
+              </>
+            )}
+
+{medata?.user?.Role === "Owner" && (
+              <>
+                <Link to="/admin/Contact-us">
+                  <div className="card p-3 cursor-pointer">
+                    <div className="Admin-box">
+                      <p className="total-number">{viewAllContactFormReducer?.data?.length}</p>
+                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                    </div>
+                    <h3 onClick={() => setPostVerify(false)}>
+                     Contact-Us
                     </h3>
                     <p className="viewall">View All</p>
                   </div>
                 </Link>
               </>
             )}
-
             {/* {medata?.user?.Role === "Owner" && (
               <>
                 <Link to="/admin/Transaction">
                   <div className="card p-3 cursor-pointer">
                     <div className="Admin-box">
-                      <p className="total-number">{getTransactionDetail?.data?.length}</p>
+                      <p className="Admin-dashboard-total-number">{getTransactionDetail?.data?.length}</p>
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       Transaction Detail
                     </h3>
-                    <p className="viewall">View All</p>
+                    <p className="Admin-dashboard-viewall">View All</p>
                   </div>
                 </Link>
               </>

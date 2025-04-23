@@ -75,7 +75,7 @@ color: #FFF;
 
 /* Container styles */
 .property-filter-container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 1rem 1rem;
 }
@@ -107,6 +107,7 @@ color: #FFF;
   align-items: center;
   padding: 8px 16px;
   border-radius: 4px;
+  font-size: 14px;
   margin-right: 8px;
   border: 1px solid #e2e8f0;
   background-color: white;
@@ -549,6 +550,7 @@ color: #FFF;
 
   .filter-button {
     display: flex;
+    font-size: 14px;
     align-items: center;
     padding: 4px 8px;
     border-radius: 4px;
@@ -562,6 +564,10 @@ color: #FFF;
   }
 
   .property-section-h3 {
+    font-size: 14px;
+  }
+
+  .button-span{
     font-size: 14px;
   }
 
@@ -581,10 +587,13 @@ color: #FFF;
   .floating-buttons img {
     width: 20px;
     height: 20px;
+    background-color: var(--main-light-clr);
 }
 .floating-buttons a{
   width: 35px;
   height: 35px;
+  background-color: var(--main-light-clr);
+
 }
   
   .requirement-btn {

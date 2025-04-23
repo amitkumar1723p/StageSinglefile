@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SingleFreshBookingForm from "./SingleFreshBookingForm";
 
 export default function SingleFreshBookingHero({ project, projectPrice , projectBannerImage , projectLogoContent }) {
   const [showForm, setShowForm] = useState(false);
@@ -161,7 +162,8 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 
         {!isSmallScreen && (
           <div className="position-absolute top-50 end-0 translate-middle-y pe-5">
-            {FormComponent()}
+            {/* {SingleFreshBookingForm} */}
+            <SingleFreshBookingForm />
           </div>
         )}
 
@@ -171,8 +173,8 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
             style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 50 }}
           >
             <div className="position-relative">
-               {/* <FormComponent /> */}
-              {FormComponent()}
+               <SingleFreshBookingForm />
+              {/* {SingleFreshBookingForm} */}
               <button
                 className="btn-close position-absolute top-0 end-0 m-2"
                 onClick={handleCloseForm}
@@ -205,100 +207,100 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
   );
 }
 
-// ✅ Extracted Form Component - Used in both Popup & Large Screen
-const FormComponent = () => (
+// // ✅ Extracted Form Component - Used in both Popup & Large Screen
+// const FormComponent = () => (
   
-  <form
-    className="Single-fresh-form rounded shadow-lg text-light overflow-hidden"
-  >
-    <h2
-     data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"
-      className="Single-fresh-form-h2   text-center mb-2 fw-medium"
+//   <form
+//     className="Single-fresh-form rounded shadow-lg text-light overflow-hidden"
+//   >
+//     <h2
+//      data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true"
+//       className="Single-fresh-form-h2   text-center mb-2 fw-medium"
     
-    >
-      Let’s Find Your Dream Home!
-    </h2>
-    <p
-     data-aos="fade-left"  data-aos-duration="1400" data-aos-once="true"
-      className="Single-fresh-form-p  text-center mb-4"
+//     >
+//       Let’s Find Your Dream Home!
+//     </h2>
+//     <p
+//      data-aos="fade-left"  data-aos-duration="1400" data-aos-once="true"
+//       className="Single-fresh-form-p  text-center mb-4"
      
-    >
-      Please fill out the form below, our expert will get back to you soon.
-    </p>
+//     >
+//       Please fill out the form below, our expert will get back to you soon.
+//     </p>
 
-    <div className="d-flex flex-column ">
-      <div
-       data-aos="fade-left"  data-aos-duration="1100" data-aos-once="true" 
-       className="position-relative">
+//     <div className="d-flex flex-column ">
+//       <div
+//        data-aos="fade-left"  data-aos-duration="1100" data-aos-once="true" 
+//        className="position-relative">
         
-<div className="form__group field">
+// <div className="form__group field">
   
-  <img
-    src="/img/mdi_user.svg"
-    alt="user-icon"
-    className="form__icon"
-  />
-  <input
-    type="text"
-    className="form__field"
-    placeholder="Enter Your Name" // must be a non-empty string!
-    id="name"
-    required
-  />
-  <label htmlFor="name" className="form__label">Your Name</label>
-</div>
-      </div>
+//   <img
+//     src="/img/mdi_user.svg"
+//     alt="user-icon"
+//     className="form__icon"
+//   />
+//   <input
+//     type="text"
+//     className="form__field"
+//     placeholder="Enter Your Name" // must be a non-empty string!
+//     id="name"
+//     required
+//   />
+//   <label htmlFor="name" className="form__label">Your Name</label>
+// </div>
+//       </div>
 
-      <div
-       data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true"
-       className="position-relative">
-     <div className="form__group field">
+//       <div
+//        data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true"
+//        className="position-relative">
+//      <div className="form__group field">
   
-  <img
-    src="/img/ic_baseline-email.svg"
-    alt="user-icon"
-    className="form__icon"
-  />
-  <input
-    type="text"
-    className="form__field"
-    placeholder="Enter Your Email" // must be a non-empty string!
-    id="email"
-    required
-  />
-  <label htmlFor="email" className="form__label">Your Email</label>
-</div>
-      </div>
+//   <img
+//     src="/img/ic_baseline-email.svg"
+//     alt="user-icon"
+//     className="form__icon"
+//   />
+//   <input
+//     type="text"
+//     className="form__field"
+//     placeholder="Enter Your Email" // must be a non-empty string!
+//     id="email"
+//     required
+//   />
+//   <label htmlFor="email" className="form__label">Your Email</label>
+// </div>
+//       </div>
 
-      <div
-       data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true"
-       className="position-relative">
-       <div className="form__group field">
+//       <div
+//        data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true"
+//        className="position-relative">
+//        <div className="form__group field">
   
-  <img
-    src="/img/ic_baseline-phone.svg"
-    alt="user-icon"
-    className="form__icon"
-  />
-  <input
-    type="number"
-    className="form__field"
-    placeholder="Enter Your Number" // must be a non-empty string!
-    id="number"
-    required
-  />
-  <label htmlFor="number" className="form__label">Your Number</label>
-</div>
-      </div>
+//   <img
+//     src="/img/ic_baseline-phone.svg"
+//     alt="user-icon"
+//     className="form__icon"
+//   />
+//   <input
+//     type="number"
+//     className="form__field"
+//     placeholder="Enter Your Number" // must be a non-empty string!
+//     id="number"
+//     required
+//   />
+//   <label htmlFor="number" className="form__label">Your Number</label>
+// </div>
+//       </div>
 
-      <button
-       data-aos="fade-left"  data-aos-duration="1700" data-aos-once="true"
-        type="submit"
-        className="Single-fresh-form-btn btn w-100 "
+//       <button
+//        data-aos="fade-left"  data-aos-duration="1700" data-aos-once="true"
+//         type="submit"
+//         className="Single-fresh-form-btn btn w-100 "
       
-      >
-        Reserve Your Spot
-      </button>
-    </div>
-  </form>
-);
+//       >
+//         Reserve Your Spot
+//       </button>
+//     </div>
+//   </form>
+// );

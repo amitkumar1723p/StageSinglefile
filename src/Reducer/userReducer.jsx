@@ -29,7 +29,14 @@ export const CreateUserReducer = (state = {}, action) => {
 
     case "MarkRentOutPropertyRequest":
     case "ReOpenPostActionRequest-UserRoutes":
-   
+      
+      //  Fresh Property get Api ----- start
+      case "viewOneProjectRequest":
+      case "getAllFreshProjectRequest-UserRoutes":
+        
+      //  Fresh Property get Api ----- End
+       
+     case"updateConatctRemarkActionRequest":
 
     //  Fresh Property get Api ----- start
     case "viewOneProjectRequest":
@@ -68,16 +75,18 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ApplyJobActionSuccess":
     case "MarkRentOutPropertySuccess":
     case "ReOpenPostActionSuccess-UserRoutes":
-    //  Fresh Property get Api ----- start
-    case "viewOneProjectSuccess":
-    case "getAllFreshProjectSuccess-UserRoutes":
-    //  Fresh Property get Api ----- End
-    // from here adding status update reducer
-    case "updateBidStatusActionSuccess":
-    case "updateNotifyStatusActionSuccess":
-    case "updateRequirementStatusAcionSuccess":
-    case "SentTokenForEmailVerificationSuccess":
+     //  Fresh Property get Api ----- start
+     case "viewOneProjectSuccess":
+     case "getAllFreshProjectSuccess-UserRoutes":
+      //  Fresh Property get Api ----- End
+         // from here adding status update reducer 
+  case"updateBidStatusActionSuccess":
+  case"updateNotifyStatusActionSuccess":
+  case"updateRequirementStatusAcionSuccess":
+  case "SentTokenForEmailVerificationSuccess":
     case "VerifyTokenForEmailVerificationActionSuccess":
+
+  case"updateConatctRemarkActionSuccess":
       return {
         ...state,
         loading: false,
@@ -109,13 +118,16 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ReOpenPostActionFail-UserRoutes":
     case "getAllFreshProjectFail-UserRoutes":
     case "viewOneProjectFail":
- 
-    // from here adding status update reducer
-    case "updateBidStatusActionFail":
-    case "updateNotifyStatusActionFail":
-    case "updateRequirementStatusAcionFail":
-      case "SentTokenForEmailVerificationFail":
-      case "VerifyTokenForEmailVerificationActionFail":
+            // from here adding status update reducer 
+  case"updateBidStatusActionFail":
+  case"updateNotifyStatusActionFail":
+  case"updateRequirementStatusAcionFail":
+
+  case "SentTokenForEmailVerificationFail":
+    case "VerifyTokenForEmailVerificationActionFail":
+  
+  case"updateConatctRemarkActionFail":
+      
       return {
         ...state,
         loading: false,
@@ -563,6 +575,38 @@ export const getViewOwnerDetailsActionReducer = (state = {}, action) => {
 
     case "ViewOwnerDetailsRequestFailClear":
       return {};
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+// get all conatct us 
+
+export const viewAllContactFormReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "viewAllContactFormRequest":
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case "viewAllContactFormSuccess":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+
+    case "viewAllContactFormFail":
+      return {
+        ...state,
+        data: action.payload,
+        loading: false,
+      };
+    case "viewAllContactFormClear":
+      return {};
+
     default:
       return {
         ...state,

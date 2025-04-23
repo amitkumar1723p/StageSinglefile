@@ -44,7 +44,7 @@ export default function FreshBookingForm() {
       return state.Post;
     }
   );
-   console.log(adminAlertData ,"AdminAlert")
+
   useEffect(() => {
     if (adminAlertData && ["createfreshProjectRequest" ,"editFreshProjectionRequest"].includes(AlertType)) {
       if (adminAlertData.success === true) {
@@ -393,7 +393,7 @@ export default function FreshBookingForm() {
   };
 
   const handleAddLocationDetails = () => {
-    // console.log(locationDetail)
+
     if (locationDetail.trim()) {
       let key = locationKey;
 
@@ -456,8 +456,343 @@ export default function FreshBookingForm() {
   };
   //--------------------------------------------------------project size and price-----//
 
+   const [propertySegmentShake, setPropertySegmentShake] = useState();
+  const [projectNameShake, setProjectNameShake] = useState();
+  const [projectStatueShake, setProjectStatusShake] = useState();
+  const [localityShake, setLocalityShake] = useState();
+  const [projectCityShake, setProjectCityShake] = useState();
+  const [minPriceShake,setMinPriceShake] = useState();
+  const [maxPriceShake, setMaxPriceShake] = useState();
+  const [possessionShake,setPossessionShake] = useState();
+  const [paymentPlanShake,setPaymentPlanShake] = useState();
+  const [totalLandShake,setTotalLandShake] = useState();
+  const [totalTowerShake, setTotalTowerShake] = useState();
+  const [totalUnitsShake, setTotalUnitsShake] = useState();
+  const [propertyTypeShake, setPropertyTypeShake] = useState();
+  const [imageLogo,setImageLogo] = useState();
+  const [cardImageshake,setCardImageShake] = useState();
+  const [descriptionShake,setDescriptionShake] = useState();
+  const [aboutProjectImgShake, setAboutProjectImgShake] = useState();
+  const [highlightShake,setHighlightShake] = useState();
+  const [highlightImgShake,setHighlightImgShake] = useState();
+  const [priceSizeshake,setPriceSizeShake] = useState();
+  const [galleryUploadShake,setGalleryUploadShake] = useState();
+  const [freshAmenities,setFreshAmennities] = useState();
+  const [floorplanShake, setFloorplanShake] = useState();
+  const [locationMapShake,setLocationMapShake] = useState();
+  const [locationMapImgShake, setLocationMapImgShake] = useState();
+  const [sitePlanShake,setSitePlanShake] = useState();
+  const [BuilderNameShake,setBuilderNameShake] = useState();
+  const [builderDescriptionShake, setBuilderDescriptionShake] = useState();
+  const [builderImgShake, setBuilderImgShake] = useState();
+  const [metaTitleShake, setMetaTitleShake] = useState();
+  const [projectManagerContactShake, setProjectManagerContactShake] = useState();
+  const [metaDescriptionShake, setMetaDescriptionShake] = useState();
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    //  required field logic ==start 
+
+    //project details alert start
+    if(formData?.projectBasicDetail?.projectType === undefined  ){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+        behavior: "smooth",
+      });
+      setTimeout(() => setPropertySegmentShake(true), 1000);
+      setTimeout(() => setPropertySegmentShake(false), 2500);
+      return 
+    }
+    if(formData?.projectBasicDetail?.projectName  === undefined || formData?.projectBasicDetail?.projectName == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+        behavior: "smooth",
+      });
+      setTimeout(() => setProjectNameShake(true), 1000);
+      setTimeout(() => setProjectNameShake(false), 2500);
+      return 
+
+    }
+    if(formData?.projectBasicDetail?.projectStatus === undefined || formData?.projectBasicDetail?.projectStatus == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+        behavior: "smooth",
+      });
+      setTimeout(() => setProjectStatusShake(true), 1000);
+      setTimeout(() => setProjectStatusShake(false), 2500);
+      return 
+    }
+    if(formData?.projectBasicDetail?.locality === undefined || formData?.projectBasicDetail?.locality == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setLocalityShake(true), 1000);
+      setTimeout(() => setLocalityShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.projectCity === undefined || formData?.projectBasicDetail?.projectCity == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setProjectCityShake(true), 1000);
+      setTimeout(() => setProjectCityShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.minPrice === undefined || formData?.projectBasicDetail?.minPrice == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setMinPriceShake(true), 1000);
+      setTimeout(() => setMinPriceShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.maxPrice === undefined || formData?.projectBasicDetail?.maxPrice == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setMaxPriceShake(true), 1000);
+      setTimeout(() => setMaxPriceShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.possessionStatus === undefined || formData?.projectBasicDetail?.possessionStatus == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setPossessionShake(true), 1000);
+      setTimeout(() => setPossessionShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.projectPaymentPlan === undefined || formData?.projectBasicDetail?.projectPaymentPlan == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setPaymentPlanShake(true), 1000);
+      setTimeout(() => setPaymentPlanShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.totalLandArea === undefined || formData?.projectBasicDetail?.totalLandArea == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setTotalLandShake(true), 1000);
+      setTimeout(() => setTotalLandShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.towerNumber === undefined || formData?.projectBasicDetail?.towerNumber == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setTotalTowerShake(true), 1000);
+      setTimeout(() => setTotalTowerShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.totalUnit === undefined || formData?.projectBasicDetail?.totalUnit == ""){
+      const targetScroll = document.querySelector("#propertySegment");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setTotalUnitsShake(true), 1000);
+      setTimeout(() => setTotalUnitsShake(false), 2500);
+      return
+    }
+    if(formData?.projectBasicDetail?.projectAdType === undefined || formData?.projectBasicDetail?.projectAdType == ""){
+      const targetScroll = document.querySelector("#freshPropertyType");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setPropertyTypeShake(true), 1000);
+      setTimeout(() => setPropertyTypeShake(false), 2500);
+      return
+    }
+    if(formData?.projectLogoImage === undefined || formData?.projectLogoImage == ""){
+      const targetScroll = document.querySelector("#freshPropertyType");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setImageLogo(true), 800);
+      setTimeout(() => setImageLogo(false), 2000);
+      return
+    }
+    if(formData?.bannerImage === undefined || formData?.bannerImage == ""){
+      const targetScroll = document.querySelector("#freshPropertyType");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setCardImageShake(true), 800);
+      setTimeout(() => setCardImageShake(false), 2000);
+      return
+    }
+    if(formData?.aboutProject?.aboutProjectContent === undefined || formData?.aboutProject?.aboutProjectContent == ""){
+      const targetScroll = document.querySelector("#aboutProject");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setDescriptionShake(true), 800);
+      setTimeout(() => setDescriptionShake(false), 2000);
+      return
+    }
+    if(!aboutProject){
+      const targetScroll = document.querySelector("#aboutProject");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() =>setAboutProjectImgShake(true), 800);
+      setTimeout(() => setAboutProjectImgShake(false), 2000);
+      return
+    }
+    if(formData?.projectHightlight?.hightlightContent === undefined ||formData?.projectHightlight?.hightlightContent?.length === 0){
+      const targetScroll = document.querySelector("#projectHighlight");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setHighlightShake(true), 800);
+      setTimeout(() => setHighlightShake(false), 2000);
+      return
+    }
+    if(!handleProjectHighlight){
+      const targetScroll = document.querySelector("#projectHighlight");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setHighlightImgShake(true), 800);
+      setTimeout(() => setHighlightImgShake(false), 2000);
+      return
+    }
+    if(formData?.projectPriceSize?.length === 0 || formData?.projectPriceSize === undefined){
+      const targetScroll = document.querySelector("#projectPriceSize");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setPriceSizeShake(true), 800);
+      setTimeout(() => setPriceSizeShake(false), 1800);
+      return
+    }
+    if( formData?.projectAmenities.length === 0 ||  formData?.projectAmenities === undefined){
+      const targetScroll = document.querySelector("#freshAmenities");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setFreshAmennities(true), 800);
+      setTimeout(() => setFreshAmennities(false), 1800);
+      return
+    }
+    if( galleryImages.length === 0){
+      const targetScroll = document.querySelector("#gallery");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() =>setGalleryUploadShake(true), 800);
+      setTimeout(() =>setGalleryUploadShake(false), 1800);
+      return
+    }
+    if(floorPlanUpload.length ===0 || floorPlanUpload === undefined){
+      const targetScroll = document.querySelector("#freshAmenities");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setFloorplanShake(true), 800);
+      setTimeout(() => setFloorplanShake(false), 1800);
+      return
+    }
+    if( Object.keys(formData?.projectLocation || {}).length === 0 ){
+      const targetScroll = document.querySelector("#locationMap");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setLocationMapShake(true), 1000);
+      setTimeout(() => setLocationMapShake(false), 2500);
+      return
+    }
+    if(!locationMapImage){
+      const targetScroll = document.querySelector("#locationMap");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setLocationMapImgShake(true), 1000);
+      setTimeout(() => setLocationMapImgShake(false), 2500);
+      return
+    }
+    if(!sitePlan){
+      const targetScroll = document.querySelector("#sitePlan");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setSitePlanShake(true), 1000);
+      setTimeout(() => setSitePlanShake(false), 2500);
+      return
+    }
+    if( formData?.projectAboutBuilder?.projectAboutBuilderName === undefined ||  formData?.projectAboutBuilder?.projectAboutBuilderName  === ""){
+      const targetScroll = document.querySelector("#aboutBuilder");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() =>setBuilderNameShake(true), 1000);
+      setTimeout(() =>setBuilderNameShake(false), 2500);
+      return
+    }
+    if( formData?.projectAboutBuilder?.projectAboutBuilderContent === undefined || formData?.projectAboutBuilder?.projectAboutBuilderContent  === ""){
+      const targetScroll = document.querySelector("#aboutBuilder");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() =>setBuilderDescriptionShake(true), 1000);
+      setTimeout(() =>setBuilderDescriptionShake(false), 2500);
+      return
+    }
+    if(!aboutBuidlder){
+      const targetScroll = document.querySelector("#aboutBuilder");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() =>setBuilderImgShake(true), 1000);
+      setTimeout(() =>setBuilderImgShake(false), 2500);
+      return
+    }
+    if( formData?.projectMeta?.projectTitle === undefined || formData?.projectMeta?.projectTitle  === ""){
+      const targetScroll = document.querySelector("#aboutSeo");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() =>setMetaTitleShake(true), 1000);
+      setTimeout(() =>setMetaTitleShake(false), 2500);
+      return
+    }
+    if( formData?.projectManagerContact === undefined || formData?.projectManagerContact  === ""){
+      const targetScroll = document.querySelector("#aboutSeo");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setProjectManagerContactShake(true), 1000);
+      setTimeout(() => setProjectManagerContactShake(false), 2500);
+      return
+    }
+    if( formData?.projectMeta?.projectDescripation === undefined || formData?.projectMeta?.projectDescripation  === ""){
+      const targetScroll = document.querySelector("#aboutSeo");
+      targetScroll.scrollIntoView({
+      behavior: "smooth",
+      });
+      setTimeout(() => setMetaDescriptionShake(true), 1000);
+      setTimeout(() => setMetaDescriptionShake(false), 2500);
+      return
+    }
+   
+   
+    
+
+  
+    //  required field logic ==end 
+
 
     const formDataNew = new FormData(e.target);
 
@@ -675,9 +1010,13 @@ export default function FreshBookingForm() {
       }
       dispatch(createfreshProjectAction(formDataNew));
     }
+
+
   };
 
-  // console.log(formData,"bhf")
+
+
+
   return (
     <div className="conatiner">
       <div className=" d-flex flex-column gap-3  my-3 mx-auto">
@@ -699,7 +1038,7 @@ export default function FreshBookingForm() {
               Project Details
             </h2>
             <div className="d-flex flex-column gap-2">
-              <div className=" p-2">
+              <div id="propertySegment"  className=" p-2"  style={{ scrollMarginTop: "150px" }} >
                 <p style={{ color: "#16315F", fontSize: "14px" }}>
                   Property Segment*
                 </p>
@@ -722,13 +1061,13 @@ export default function FreshBookingForm() {
                           formData?.projectBasicDetail?.projectType === item
                             ? "select "
                             : ""
-                        }`}
+                        }  ${propertySegmentShake? "freshShake":""} `}
                         style={{
                           cursor: "pointer",
-                          outline:
+                          border:
                             formData?.projectBasicDetail?.projectType === item
-                              ? "2px solid #1877f2"
-                              : "2px solid rgb(198, 230, 255)",
+                              ? "1px solid #1877f2"
+                              : "1px solid rgb(198, 230, 255)",
                         }}
                       >
                         <p style={{ fontSize: "14px" }}>{item}</p>
@@ -736,8 +1075,8 @@ export default function FreshBookingForm() {
                           style={{ width: "15px" }}
                           src={`${
                             formData?.projectBasicDetail?.projectType === item
-                              ? "/img/white-tick.svg"
-                              : "/img/plus-create.svg"
+                              ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                              : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                           }`}
                         ></img>
                       </div>
@@ -746,7 +1085,7 @@ export default function FreshBookingForm() {
                 </div>
               </div>
 
-              <div className="d-flex flex-wrap gap-4 p-2 ">
+              <div className="d-flex flex-wrap gap-4 p-2 " style={{transitionDuration:'0.3s'}}>
                 <div className="freshbooking-ProjectName ">
                   <p style={{ color: "#16315F", fontSize: "14px" }}>
                     Project Name*
@@ -766,7 +1105,7 @@ export default function FreshBookingForm() {
                     }}
                     name="projectName"
                     id=""
-                    className=" rounded-1 p-2"
+                    className={` rounded-1 p-2 ${projectNameShake? "freshShake":""} ${formData?.projectBasicDetail?.projectName? "freshGreen":''} `}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     placeholder="e.g DLF Corporate Greens"
                   />
@@ -776,7 +1115,7 @@ export default function FreshBookingForm() {
                     Project Status*
                   </p>
                   <select
-                    className=" rounded-1 p-2"
+                    className={` rounded-1 p-2 ${projectStatueShake? "freshShake":''}  ${formData?.projectBasicDetail?.projectStatus? "freshGreen":''} `}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     name="projectStatus"
                     id=""
@@ -808,7 +1147,7 @@ export default function FreshBookingForm() {
                     Locality*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className={` rounded-1 p-2 ${localityShake? "freshShake":''} ${formData?.projectBasicDetail?.locality ? "freshGreen":''} `}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder="e.g Sector 74A"
@@ -829,7 +1168,7 @@ export default function FreshBookingForm() {
                     City/State*
                   </p>
                   <input
-                    className="rounded-1 p-2"
+                    className={`rounded-1 p-2 ${projectCityShake? "freshShake":''} ${formData?.projectBasicDetail?.projectCity ? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder="e.g Gurugram"
@@ -852,19 +1191,22 @@ export default function FreshBookingForm() {
                     Minimum Price (In CR)*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className={` rounded-1 p-2 ${minPriceShake? "freshShake":''} ${formData?.projectBasicDetail?.minPrice? "freshGreen":''} `}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="phone"
                     placeholder="e.g 2.6"
-                    required
+                  
                     onChange={(e) => {
-                      setFromData({
-                        ...formData,
-                        projectBasicDetail: {
-                          ...formData.projectBasicDetail,
-                          minPrice: e.target.value,
-                        },
-                      });
+                      const value = e.target.value;
+                      if (/^[0-9]*\.?[0-9]*$/.test(value)) {
+                        setFromData({
+                          ...formData,
+                          projectBasicDetail: {
+                            ...formData.projectBasicDetail,
+                            minPrice: value,
+                          },
+                        });
+                      }
                     }}
                     value={formData?.projectBasicDetail?.minPrice}
                   />
@@ -874,18 +1216,22 @@ export default function FreshBookingForm() {
                     Maximum Price (In CR)*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className= {`rounded-1 p-2  ${maxPriceShake? "freshShake":''} ${formData?.projectBasicDetail?.maxPrice? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
-                    type="phone"
+                    type="text"
                     placeholder="e.g 5.7"
                     onChange={(e) => {
-                      setFromData({
-                        ...formData,
-                        projectBasicDetail: {
-                          ...formData.projectBasicDetail,
-                          maxPrice: e.target.value,
-                        },
-                      });
+                      const value = e.target.value;
+                      if (/^[0-9]*\.?[0-9]*$/.test(value)){
+                        setFromData({
+                          ...formData,
+                          projectBasicDetail: {
+                            ...formData.projectBasicDetail,
+                            maxPrice: e.target.value,
+                          },
+                        });
+                      }
+                      
                     }}
                     value={formData?.projectBasicDetail?.maxPrice}
                   />
@@ -895,7 +1241,7 @@ export default function FreshBookingForm() {
                     Possession Year
                   </p>
                   <input
-                    className="  rounded-1 p-2"
+                    className={` rounded-1 p-2 ${possessionShake? "freshShake":''} ${formData?.projectBasicDetail?.possessionStatus? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="phone"
                     placeholder="e.g 2077"
@@ -916,7 +1262,7 @@ export default function FreshBookingForm() {
                     Payment Plan
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className={` rounded-1 p-2  ${paymentPlanShake? "freshShake":''} ${formData?.projectBasicDetail?.projectPaymentPlan? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="phone"
                     placeholder="e.g  50|50  30|70"
@@ -937,7 +1283,7 @@ export default function FreshBookingForm() {
                     RERA Id (optional)
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className={`rounded-1 p-2 ${formData?.projectBasicDetail?.projectReraId? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="phone"
                     placeholder="e.g abcd123"
@@ -961,18 +1307,23 @@ export default function FreshBookingForm() {
                     Total Land (In Acres)*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className={`rounded-1 p-2 ${totalLandShake? "freshShake":''} ${formData?.projectBasicDetail?.totalLandArea? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
-                    type="text"
+                    type="number"
                     placeholder="e.g 8"
                     onChange={(e) => {
-                      setFromData({
-                        ...formData,
-                        projectBasicDetail: {
-                          ...formData.projectBasicDetail,
-                          totalLandArea: e.target.value,
-                        },
-                      });
+                      const value = e.target.value;
+                      if (/^[0-9]*\.?[0-9]*$/.test(value)){
+                        setFromData({
+                          ...formData,
+                          projectBasicDetail: {
+                            ...formData.projectBasicDetail,
+                            totalLandArea: e.target.value,
+                          },
+                        });
+                      }
+
+                      
                     }}
                     value={formData?.projectBasicDetail?.totalLandArea}
                   />
@@ -982,18 +1333,22 @@ export default function FreshBookingForm() {
                     Total Tower*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                     className={`rounded-1 p-2 ${totalTowerShake? "freshShake":''} ${formData?.projectBasicDetail?.towerNumber? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder="e.g 4"
                     onChange={(e) => {
-                      setFromData({
-                        ...formData,
-                        projectBasicDetail: {
-                          ...formData.projectBasicDetail,
-                          towerNumber: e.target.value,
-                        },
-                      });
+                      const value = e.target.value;
+                      if (/^[0-9]*\.?[0-9]*$/.test(value)){
+                        setFromData({
+                          ...formData,
+                          projectBasicDetail: {
+                            ...formData.projectBasicDetail,
+                            towerNumber: e.target.value,
+                          },
+                        });
+                      }
+                     
                     }}
                     value={formData?.projectBasicDetail?.towerNumber}
                   />
@@ -1003,25 +1358,29 @@ export default function FreshBookingForm() {
                     Total Units*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                     className={`rounded-1 p-2 ${totalUnitsShake? "freshShake":''} ${formData?.projectBasicDetail?.totalUnit? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder="e.g 340"
                     onChange={(e) => {
-                      setFromData({
-                        ...formData,
-                        projectBasicDetail: {
-                          ...formData.projectBasicDetail,
-                          totalUnit: e.target.value,
-                        },
-                      });
+                      const value = e.target.value;
+                      if (/^[0-9]*\.?[0-9]*$/.test(value)){
+                        setFromData({
+                          ...formData,
+                          projectBasicDetail: {
+                            ...formData.projectBasicDetail,
+                            totalUnit: e.target.value,
+                          },
+                        });
+                      }
+                     
                     }}
                     value={formData?.projectBasicDetail?.totalUnit}
                   />
                 </div>
               </div>
 
-              <div className=" p-2">
+              <div id="freshPropertyType" className=" p-2" style={{ scrollMarginTop: "65px" }}>
                 <p style={{ color: "#16315F", fontSize: "14px" }}>
                   Property Type*
                 </p>
@@ -1038,14 +1397,14 @@ export default function FreshBookingForm() {
                               item
                                 ? "select"
                                 : ""
-                            }`}
+                            } ${propertyTypeShake? "freshShake":''} `}
                             style={{
                               cursor: "pointer",
-                              outline:
+                              border:
                                 formData?.projectBasicDetail?.projectAdType ===
                                 item
-                                  ? "2px solid #1877f2"
-                                  : "2px solid rgb(198, 230, 255)",
+                                  ? "1px solid #1877f2"
+                                  : "1px solid rgb(198, 230, 255)",
                             }}
                             onClick={() =>
                               setFromData({
@@ -1063,8 +1422,8 @@ export default function FreshBookingForm() {
                               src={`${
                                 formData.projectBasicDetail?.projectAdType ===
                                 item
-                                  ? "/img/white-tick.svg"
-                                  : "/img/plus-create.svg"
+                                  ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                                  : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                               }`}
                             ></img>
                           </div>
@@ -1082,14 +1441,14 @@ export default function FreshBookingForm() {
                               item
                                 ? "select"
                                 : ""
-                            }`}
+                            } ${propertyTypeShake? "freshShake":''}`}
                             style={{
                               cursor: "pointer",
-                              outline:
+                            border:
                                 formData?.projectBasicDetail?.projectAdType ===
                                 item
-                                  ? "2px solid #1877f2"
-                                  : "2px solid rgb(198, 230, 255)",
+                                  ? "1px solid #1877f2"
+                                  : "1px solid rgb(198, 230, 255)",
                             }}
                             onClick={() =>
                               setFromData({
@@ -1107,8 +1466,8 @@ export default function FreshBookingForm() {
                               src={`${
                                 formData?.projectBasicDetail?.projectAdType ===
                                 item
-                                  ? "/img/white-tick.svg"
-                                  : "/img/plus-create.svg"
+                                  ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                                  : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                               }`}
                             ></img>
                           </div>
@@ -1128,6 +1487,7 @@ export default function FreshBookingForm() {
 
                     <div className="position-relative ">
                       <div
+                      className={`${imageLogo? "dragDropShake":""}`}
                         style={{
                           borderWidth: "2px",
                           borderStyle: "dashed",
@@ -1235,6 +1595,7 @@ export default function FreshBookingForm() {
 
                     <div className="position-relative ">
                       <div
+                      className={`${cardImageshake?"dragDropShake":''}`}
                         style={{
                           borderWidth: "2px",
                           borderStyle: "dashed",
@@ -1305,7 +1666,7 @@ export default function FreshBookingForm() {
                           src={cardImagePreview}
                           alt="Preview"
                           className="img-fluid"
-                          style={{ Height: "auto", width: "100%" }}
+                          style={{ Height: "auto" }}
                         />
                       ) : (
                         <img
@@ -1313,7 +1674,7 @@ export default function FreshBookingForm() {
                             formData?.bannerImage?.url || "/img/PreviewImg.svg"
                           }
                           alt="Preview"
-                          style={{ Height: "auto", width: "100%" }}
+                          style={{ Height: "auto" }}
                         />
                       )}
 
@@ -1337,10 +1698,11 @@ export default function FreshBookingForm() {
           {/* ------------------------------------------ Project About Start  ------------------------------------------------ */}
 
           <div
+           id="aboutProject" 
             className=" rounded-3 d-flex flex-column gap-3 p-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" ,scrollMarginTop: "150px" }}
           >
-            <div>
+            <div >
               <h2
                 className="fs-5"
                 style={{ color: "#16315F", fontSize: "14px" }}
@@ -1360,7 +1722,7 @@ export default function FreshBookingForm() {
                   </p>
                   <textarea
                     placeholder="Enter your message here..."
-                    className=" rounded-1 w-100 p-2"
+                    className={`rounded-1 w-100 p-2 ${descriptionShake? "freshShake":''} ${formData?.aboutProject?.aboutProjectContent ? "freshGreen":'' }`}
                     style={{
                       border: "1px solid rgba(198, 230, 255, 1)",
                       minHeight: "155px",
@@ -1384,11 +1746,12 @@ export default function FreshBookingForm() {
               <div className="freshbooking-highlight-image-upload-container d-flex justify-content-between gap-4">
                 <div className="upload-image-dragdrop-container mb-3 ">
                   <label htmlFor="imageUpload" className="form-label fw-bold">
-                    Upload Highlights Image*
+                    Upload About Project Image*
                   </label>
 
                   <div className="position-relative ">
                     <div
+                     className={`${aboutProjectImgShake?"dragDropShake":''}`}
                       style={{
                         borderWidth: "2px",
                         borderStyle: "dashed",
@@ -1459,7 +1822,7 @@ export default function FreshBookingForm() {
                         src={aboutProject}
                         alt="Preview"
                         className="img-fluid"
-                        style={{ Height: "auto", width: "100%" }}
+                        style={{ Height: "auto" }}
                       />
                     ) : (
                       <img
@@ -1468,7 +1831,7 @@ export default function FreshBookingForm() {
                           "/img/PreviewImg.svg"
                         }
                         alt="Preview"
-                        style={{ Height: "auto", width: "100%" }}
+                        style={{ Height: "auto" }}
                       />
                     )}
 
@@ -1491,8 +1854,9 @@ export default function FreshBookingForm() {
           {/* ------------------------------------------ Project highlights Start  ------------------------------------------------ */}
 
           <div
+          id="projectHighlight"
             className=" rounded-3 d-flex flex-column gap-3 p-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)",scrollMarginTop: "75px" }}
           >
             <div>
               <h2
@@ -1515,7 +1879,7 @@ export default function FreshBookingForm() {
                   <div className="d-flex gap-2">
                     <input
                       type="text"
-                      className=" rounded-1 p-2"
+                      className={` rounded-1 p-2 ${highlightShake? "freshShake":''} ${inputValue? "freshGreen":''}`}
                       style={{
                         border: "1px solid rgba(198, 230, 255, 1)",
                         width: "220px",
@@ -1524,24 +1888,29 @@ export default function FreshBookingForm() {
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                     />
-                    <div className=" " onClick={handleAddProjectHighlights}>
+                    <div className={`freshbooking-highlights-add-button border text-center align-content-center ${highlightShake? "onlyShake":''}`}   style={{
+                  minWidth: "150px",
+                  cursor: "pointer ",
+                  height: "fit-content",
+                }}onClick={handleAddProjectHighlights}>
                       Add
                     </div>
                   </div>
                 </div>
                 <div>
-                  <ul className="mt-3 list-group">
-                    hightlightContent
+                  <ul className="highlightList mt-3 list-group">
+          
                     {formData?.projectHightlight?.hightlightContent?.map(
                       (item, index) => (
                         <li
                           key={index}
-                          className="list-group-item py-2 fw-light"
+                          className="list-group-item py-2 d-flex justify-content-between fw-light"
                         >
                           <small className="pe-3">{item}</small>
                           <span
                             type="button"
                             className="text-white fw-bolder px-2 bg-danger rounded-5"
+                            style={{height: 'fit-content'}}
                             onClick={() => handleDeleteProjectHighlight(index)}
                           >
                             X
@@ -1561,6 +1930,7 @@ export default function FreshBookingForm() {
 
                   <div className="position-relative ">
                     <div
+                    className={`${highlightImgShake? "dragDropShake":''}`}
                       style={{
                         borderWidth: "2px",
                         borderStyle: "dashed",
@@ -1631,7 +2001,7 @@ export default function FreshBookingForm() {
                         src={handleProjectHighlight}
                         alt="Preview"
                         className="img-fluid"
-                        style={{ Height: "auto", width: "100%" }}
+                        style={{ Height: "auto" }}
                       />
                     ) : (
                       <img
@@ -1640,7 +2010,7 @@ export default function FreshBookingForm() {
                           "/img/PreviewImg.svg"
                         }
                         alt="Preview"
-                        style={{ Height: "auto", width: "100%" }}
+                        style={{ Height: "auto" }}
                       />
                     )}
 
@@ -1661,10 +2031,10 @@ export default function FreshBookingForm() {
           {/* ------------------------------------------ Project highlights End  ------------------------------------------------ */}
 
           {/* ------------------------------------------  Pricing Details Start  ------------------------------------------------ */}
-
           <div
+          id="projectPriceSize"
             className=" rounded-3 d-flex flex-column gap-3 p-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)",scrollMarginTop: "75px" }}
           >
             <div>
               <h2
@@ -1679,7 +2049,7 @@ export default function FreshBookingForm() {
               <div>
                 <p style={{ color: "#16315F", fontSize: "14px" }}>Unit Type*</p>
                 <select
-                  className=" rounded-1 w-100 p-2"
+                  className={` rounded-1 w-100 p-2 ${priceSizeshake? "freshShake":''} ${projectSize?.type? "freshGreen":''} `}
                   style={{
                     border: "1px solid rgba(198, 230, 255, 1)",
                     minWidth: "220px",
@@ -1706,7 +2076,7 @@ export default function FreshBookingForm() {
               <div>
                 <p style={{ color: "#16315F", fontSize: "14px" }}>Unit Size*</p>
                 <input
-                  className="  rounded-1 p-2"
+                  className={`  rounded-1 p-2 ${projectSize?.size ? "freshGreen":''}`}
                   style={{
                     border: "1px solid rgba(198, 230, 255, 1)",
                     minWidth: "220px",
@@ -1721,10 +2091,10 @@ export default function FreshBookingForm() {
               </div>
               <div>
                 <p style={{ color: "#16315F", fontSize: "14px" }}>
-                  Unit Price*
+                  Unit Price(In CR)*
                 </p>
                 <input
-                  className=" rounded-1 p-2"
+                  className={`  rounded-1 p-2 ${projectSize?.price ? "freshGreen":''}`}
                   style={{
                     border: "1px solid rgba(198, 230, 255, 1)",
                     minWidth: "220px",
@@ -1773,10 +2143,14 @@ export default function FreshBookingForm() {
                         onClick={() => handleAddProjectSizeRemove(index)}
                       >
                         {" "}
-                        <img
-                          style={{ height: "22px", width: "auto" }}
-                          src="/img/icons8-wrong.svg"
-                        ></img>
+                        <span
+                         type="button"
+                         className="text-white fw-bolder px-2 bg-danger rounded-5"
+                         style={{height: 'fit-content'}}
+                        >
+                          X
+
+                        </span>
                       </div>
                     </div>
                   );
@@ -1789,14 +2163,15 @@ export default function FreshBookingForm() {
           {/* ------------------------------------------  Gallery Image Upload Start  ------------------------------------------------ */}
 
           <div
+          id="gallery"
             className="rounded-3 d-flex flex-column gap-3 p-3 "
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)",scrollMarginTop: "75px" }}
           >
             <h2 className="fs-5" style={{ color: "#16315F", fontSize: "14px" }}>
               Gallery Image Upload
             </h2>
             <div
-              className=" freshbooking-gallery-image-section position-relative m-auto p-4 text-center rounded d-flex flex-column align-items-center justify-content-center"
+              className={` freshbooking-gallery-image-section position-relative m-auto p-4 text-center rounded d-flex flex-column align-items-center justify-content-center ${galleryUploadShake? "dragDropShake":''}`}
               style={{
                 cursor: "pointer",
                 minHeight: "160px",
@@ -1891,8 +2266,9 @@ export default function FreshBookingForm() {
           {/* ------------------------------------------ Amenities Start  ------------------------------------------------ */}
 
           <div
+          id="freshAmenities"
             className=" rounded-3 d-flex flex-column gap-3 p-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" ,scrollMarginTop: "75px" }}
           >
             <div>
               <h2
@@ -1921,13 +2297,13 @@ export default function FreshBookingForm() {
                         formData?.projectAmenities.includes(item)
                           ? "select"
                           : ""
-                      }`}
+                      } ${freshAmenities? "freshShake":''}`}
                       style={{
                         cursor: "pointer",
                         fontSize: "14px",
-                        outline: formData?.projectAmenities?.includes(item)
-                          ? "2px solid #1877f2"
-                          : "2px solid rgb(198, 230, 255)",
+                        border: formData?.projectAmenities?.includes(item)
+                          ? "1px solid #1877f2"
+                          : "1px solid rgb(198, 230, 255)",
                       }}
                       onClick={() => {
                         if (!formData?.projectAmenities?.includes(item)) {
@@ -1957,8 +2333,8 @@ export default function FreshBookingForm() {
                         style={{ width: "15px" }}
                         src={`${
                           formData?.projectAmenities?.includes(item)
-                            ? "/img/white-tick.svg"
-                            : "/img/plus-create.svg"
+                            ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"
+                            : "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/plus-create.svg"
                         }`}
                       ></img>
                     </div>
@@ -1981,7 +2357,7 @@ export default function FreshBookingForm() {
 
             <div className="d-flex justify-content-between w-100">
               <div
-                className=" freshbooking-floor-plan-image-upload position-relative p-4 text-center rounded m-auto"
+                className={` freshbooking-floor-plan-image-upload position-relative p-4 text-center rounded m-auto ${floorplanShake? "dragDropShake":''}`}
                 style={{
                   borderWidth: "2px",
                   borderStyle: "dashed",
@@ -2089,8 +2465,9 @@ export default function FreshBookingForm() {
 
           {/* ------------------------------------------ Location Map Start  ------------------------------------------------ */}
           <div
+          id="locationMap"
             className="rounded-3 d-flex flex-column gap-3 p-3 "
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)",scrollMarginTop: "75px" }}
           >
             <div>
               <h2
@@ -2110,12 +2487,12 @@ export default function FreshBookingForm() {
                     key={index}
                     className={`p-2 m-2 d-flex gap-2 rounded-2 bg-white  ${
                       locationKey === item ? "select" : ""
-                    }`}
+                    } ${locationMapShake? "freshShake":''}`}
                     style={{
-                      outline:
+                      border:
                         locationKey === item
-                          ? "2px solid #1877f2"
-                          : "2px solid rgb(198, 230, 255)",
+                          ? "1px solid #1877f2"
+                          : "1px solid rgb(198, 230, 255)",
                       fontSize: "14px",
                       cursor: "pointer",
                     }}
@@ -2149,7 +2526,7 @@ export default function FreshBookingForm() {
                   {locationKey?.split("Location")} Location Details
                 </p>
                 <input
-                  className=" rounded-1 p-2"
+                  className={` rounded-1 p-2 ${locationMapShake? "freshShake":''}`}
                   style={{
                     border: "1px solid rgba(198, 230, 255, 1)",
                     width: "220px",
@@ -2213,6 +2590,7 @@ export default function FreshBookingForm() {
 
                   <div className="position-relative ">
                     <div
+                    className={`${locationMapImgShake? "dragDropShake":''}`}
                       style={{
                         borderWidth: "2px",
                         borderStyle: "dashed",
@@ -2283,7 +2661,7 @@ export default function FreshBookingForm() {
                         src={locationMapImage}
                         alt="Preview"
                         className="img-fluid"
-                        style={{ Height: "auto", width: "100%" }}
+                        style={{ Height: "auto" }}
                       />
                     ) : (
                       <img
@@ -2292,7 +2670,7 @@ export default function FreshBookingForm() {
                           "/img/PreviewImg.svg"
                         }
                         alt="Preview"
-                        style={{ Height: "auto", width: "100%" }}
+                        style={{ Height: "auto" }}
                       />
                     )}
 
@@ -2314,8 +2692,9 @@ export default function FreshBookingForm() {
 
           {/* ------------------------------------------ Site Plan Upload Start ------------------------------------------------ */}
           <div
+          id="sitePlan"
             className=" rounded-3 d-flex flex-column gap-3 p-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)",scrollMarginTop: "75px"  }}
           >
             <div>
               <h2
@@ -2336,6 +2715,7 @@ export default function FreshBookingForm() {
 
                     <div className="position-relative ">
                       <div
+                      className={`${sitePlanShake? "dragDropShake":''}`}
                         style={{
                           borderWidth: "2px",
                           borderStyle: "dashed",
@@ -2406,7 +2786,7 @@ export default function FreshBookingForm() {
                           src={sitePlan}
                           alt="Preview"
                           className="img-fluid"
-                          style={{ Height: "auto", width: "100%" }}
+                          style={{ Height: "auto" }}
                         />
                       ) : (
                         <img
@@ -2415,7 +2795,7 @@ export default function FreshBookingForm() {
                             "/img/PreviewImg.svg"
                           }
                           alt="Preview"
-                          style={{ Height: "auto", width: "100%" }}
+                          style={{ Height: "auto" }}
                         />
                       )}
 
@@ -2438,8 +2818,9 @@ export default function FreshBookingForm() {
 
           {/* ------------------------------------------  About Builder Start  ------------------------------------------------ */}
           <div
+          id="aboutBuilder"
             className=" rounded-3 d-flex flex-column gap-3 p-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" ,scrollMarginTop: "75px" }}
           >
             <div>
               <h2
@@ -2458,7 +2839,7 @@ export default function FreshBookingForm() {
                     Project Builder Name*
                   </p>
                   <input
-                    className=" rounded-1 p-2"
+                    className={` rounded-1 p-2 ${BuilderNameShake? "freshShake":''} ${formData?.projectAboutBuilder?.projectAboutBuilderName ? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder=" Project Builder Name*"
@@ -2481,7 +2862,7 @@ export default function FreshBookingForm() {
                     Project Builder Description*
                   </p>
                   <textarea
-                    className=" rounded-1 p-2 w-100"
+                    className={` rounded-1 p-2 w-100 ${builderDescriptionShake? "freshShake ":''} ${formData?.projectAboutBuilder?.projectAboutBuilderContent? "freshGreen":''}`}
                     style={{
                       border: "1px solid rgba(198, 230, 255, 1)",
                       minHeight: "120px",
@@ -2514,6 +2895,7 @@ export default function FreshBookingForm() {
 
                     <div className="upload-image-dragdrop-container position-relative ">
                       <div
+                      className={`${builderImgShake? "dragDropShake":''}`}
                         style={{
                           borderWidth: "2px",
                           borderStyle: "dashed",
@@ -2584,7 +2966,7 @@ export default function FreshBookingForm() {
                           src={aboutBuidlder}
                           alt="Preview"
                           className="img-fluid"
-                          style={{ Height: "auto", width: "100%" }}
+                          style={{ Height: "auto" }}
                         />
                       ) : (
                         <img
@@ -2594,7 +2976,7 @@ export default function FreshBookingForm() {
                             "/img/PreviewImg.svg"
                           }
                           alt="Preview"
-                          style={{ Height: "auto", width: "100%" }}
+                          style={{ Height: "auto"}}
                         />
                       )}
 
@@ -2617,8 +2999,9 @@ export default function FreshBookingForm() {
 
           {/* ------------------------------------------  About SEO Start  ------------------------------------------------ */}
           <div
+          id="aboutSeo"
             className=" rounded-3 d-flex flex-column gap-3 p-3 mb-3"
-            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)" }}
+            style={{ boxShadow: "0px 0px 10px rgba(198, 221, 238, 1)",scrollMarginTop: "75px" }}
           >
             <div>
               <h2
@@ -2637,7 +3020,7 @@ export default function FreshBookingForm() {
                     Project Meta Title*
                   </p>
                   <input
-                    className=" rounded-1 p-3"
+                    className={` rounded-1 p-3 ${metaTitleShake? "freshShake":''} ${formData?.projectMeta?.projectTitle? "freshGreen":''}`}
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder=" Project Builder Name"
@@ -2659,7 +3042,7 @@ export default function FreshBookingForm() {
                     Project Manager Contact*
                   </p>
                   <input
-                    className=" rounded-1 p-3"
+                    className={`rounded-1 p-3 ${projectManagerContactShake? "freshShake":''}`} 
                     style={{ border: "1px solid rgba(198, 230, 255, 1)" }}
                     type="text"
                     placeholder=" Project Manager Contact"
@@ -2678,7 +3061,7 @@ export default function FreshBookingForm() {
                   Project Meta Description*
                 </p>
                 <textarea
-                  className=" rounded-1 p-2"
+                  className={`rounded-1 p-3 ${metaDescriptionShake? "freshShake":''} ${formData?.projectMeta?.projectDescripation ? "freshGreen":''}`} 
                   style={{
                     border: "1px solid rgba(198, 230, 255, 1)",
                     minHeight: "120px",
@@ -2707,7 +3090,8 @@ export default function FreshBookingForm() {
           <button
             className=" my-4 mx-auto py-2 px-5 border fs-5 rounded-3 text-white"
             style={{ backgroundColor: "#1877f2" }}
-            type="submit"
+            type="submit" 
+          
           >
   
             {id ? <>{loading&&AlertType=="editFreshProjectionRequest" ?"updating":"update"} </> : <>  {loading&&AlertType=="createfreshProjectRequest"?"submiting":"submit"} </>}

@@ -83,6 +83,7 @@ import SingleUserRespponseAction from "./Component/Admin/SingleUserResponseActio
 // import MyVisits from "./Component/Post/CreatePost/m";
 import { FormatDate } from "./utils/CommonFunction";
 import AgentUserResponse from "./Component/Admin/AgentUserResponse";
+import SpreadsheetView from "./Component/Admin/AdminExcel/SpreadsheetView";
 
 import { Component } from "lucide-react";
 // import FreshBookingForm from "./Component/Admin/FreshProject/FreshBookingForm.jsx";
@@ -95,6 +96,8 @@ import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLea
 
 // import FreshBookingPost from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAll";
 import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
+import ContactUsForm from "./Component/Home/ContactUsForm";
+import Contactus from "./Component/Admin/Contactus";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 import { useSearchParams } from "react-router-dom";
@@ -112,6 +115,7 @@ function App() {
     return state.Alert;
   });
   const { data, LodingType } = useSelector((state) => {
+    
     return state.userData;
   });
   const { data: CreatePost, LodingType: AlertType } = useSelector((state) => {
@@ -225,7 +229,7 @@ function App() {
     } else if (location.pathname.includes("/admin/post/update")) {
       dispatch(GetProjectNameAction());
     }
-
+  
     // eslint-disable-next-line
   }, [location]);
   //  Simple User Show Alert Function
@@ -291,21 +295,21 @@ function App() {
       }
 
       if (
-        data.success === false &&
+        data?.success === false &&
         ["VerifyUserOtpRequest"].includes(LodingType)
       ) {
         dispatch({ type: "UserClear" });
         setalertShow(false);
       } else {
-        if (data.success === false) {
-          if (data.fielderrors) {
+        if (data?.success === false) {
+          if (data?.fielderrors) {
             setalertMessage(
               data.fielderrors.map((e, index) => {
                 return <p key={index}>{e.msg}</p>;
               })
             );
           } else {
-            setalertMessage(<p> {data.message}</p>);
+            setalertMessage(<p> {data?.message}</p>);
           }
           setalertType("error");
           setalertShow(true);
@@ -330,21 +334,20 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
-    if (CreatePost) {
-      if (CreatePost.success == true) {
-        if (
-          ["DisplayDataRequest"].includes(
-            typeof AlertType === "string" ? AlertType : AlertType?.Type
-          )
-        ) {
-          dispatch({ type: "AdminAlertClear" });
-          setalertShow(false);
-        } else {
-          setalertMessage(<p>{CreatePost.message}</p>);
-          setalertType("success");
-          setalertShow(true);
-          dispatch({ type: "AdminAlertClear" });
-        }
+     if (CreatePost) {
+      if (
+        CreatePost.success === true &&
+        ["DisplayDataRequest" ,"OwnerAllExcelFileRequest"].includes(
+          typeof AlertType === "string" ? AlertType : AlertType?.Type
+        )
+      ) {
+        dispatch({ type: "AdminAlertClear" });
+        setalertShow(false);
+      } else {
+        setalertMessage(<p>{CreatePost.message}</p>);
+        setalertType("success");
+        setalertShow(true);
+        dispatch({ type: "AdminAlertClear" });
       }
 
       if (CreatePost.success === false) {
@@ -1010,6 +1013,7 @@ function App() {
               path="my-post/all-response"
               element={<OwnerPostAllResponse />}
             />
+           
             <Route exact path="transactions" element={<Transaction />} />
 
             <Route
@@ -1026,22 +1030,14 @@ function App() {
           </Route>
         </>
         {/*admin routes*/}
-
-        {/* <Route exact path="/fresh-booking-project"  element={<FreshBookingForm/>}/> */}
-        {/* <Route exact path="/fresh-bookings"  element={<FreshBookingPost/>}/> */}
+        {/* This Routes available For Admin Owner Agent  */}
         <Route
-          exact
-          path="/fresh-bookings2"
-          element={<FreshBookingViewAlll />}
-        />
-        <Route
-          path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id"
-          element={<SingleFreshBooking />}
-        />
-
-        <Route exact path="/fresh-booking" element={<SingleFreshBooking />} />
-        {/* This Routes available For Admin Owner Agent   start here  and use * isOwner for only owner access  */}
-
+            exact
+            path="excel/:id"
+            element={
+               <SpreadsheetView/>
+            }
+          />
         <Route
           exact
           path="/admin"
@@ -1069,11 +1065,20 @@ function App() {
             }
           />
 
-          <Route path="all-excel-both" element={<AdminAgentExcelData />} />
+          <Route
+
+            path="all-excel-both"
+            element={
+              <AdminAgentExcelData />
+            }
+          />
+    <Route exact path="Contact-us" element={<Contactus/>}/>
           <Route
             exact
-            path="excel/:id"
-            element={<AdminOwnerRoutes Component={OwnerAgentExcel} />}
+            path="single-user-Response-action/:id"
+            element={
+              <SingleUserRespponseAction />
+            }
           />
           <Route
             exact
@@ -1094,9 +1099,9 @@ function App() {
             exact
             path="single-user-Response-action/:id"
             element={
-              <AdminOwnerRoutes
-                Component={SingleUserRespponseAction}
-                isOwner={true}
+              <SingleUserRespponseAction
+               
+               
               />
             }
           />
@@ -1212,7 +1217,7 @@ function App() {
         </Route>
         {/*All post route admin routes end here*/}
 
-        <Route path={"/all-post"} element={<AllPostRender />} />
+        <Route path={"/all-post/:type"} element={<AllPostRender />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

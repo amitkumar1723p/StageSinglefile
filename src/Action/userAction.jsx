@@ -588,6 +588,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 
 export const ViewOwnerDetailsAction = (Document) => {
  
+ 
 
   return async (dispatch) => {
     try {
@@ -1081,11 +1082,12 @@ export const UserRoleUpdation = (updateData) => {
         // console.log("idaodd")
         toSend = {
           ...updateData,
-          role: true,
-        };
-        console.log(toSend);
-      } else if (updateData.role === "UnBlock") {
-        console.log("idaodd");
+          role:true
+        }
+   
+      }
+     else if(updateData.role==="UnBlock"){
+   
         toSend = {
           ...updateData,
           role: false,
@@ -1172,8 +1174,9 @@ export const deleteExcelFile = (excelId) => {
   };
 };
 
-export const getAllUserResponseAction = (page, searchText) => {
-  console.log(searchText, page);
+
+export const getAllUserResponseAction=(page,searchText)=>{
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -1238,8 +1241,8 @@ export const getSingleUserResponseAction = (id) => {
 };
 
 // this action is used to update offers status
-export const updateBidStatusAction = ({ VisitStatus }, visitId) => {
-  console.log(VisitStatus, visitId, "listen");
+export const updateBidStatusAction=({ VisitStatus }, visitId)=>{
+ 
 
   return async (dispatch) => {
     try {
@@ -1279,9 +1282,9 @@ export const updateBidStatusAction = ({ VisitStatus }, visitId) => {
   };
 };
 
-export const updateNotifyStatusAction = ({ VisitStatus }, visitId) => {
-  console.log(VisitStatus, visitId, "listen");
-  return async (dispatch) => {
+export const updateNotifyStatusAction=({ VisitStatus }, visitId)=>{
+
+  return async(dispatch)=>{
     try {
       dispatch({
         type: "updateNotifyStatusActionRequest",
@@ -1319,9 +1322,9 @@ export const updateNotifyStatusAction = ({ VisitStatus }, visitId) => {
   };
 };
 
-export const updateRequirementStatusAcion = ({ VisitStatus }, visitId) => {
-  console.log(VisitStatus, visitId, "listen23");
-  return async (dispatch) => {
+export const updateRequirementStatusAcion=({ VisitStatus }, visitId)=>{
+ 
+  return async(dispatch)=>{
     try {
       dispatch({
         type: "updateRequirementStatusAcionRequest",
@@ -1356,98 +1359,212 @@ export const updateRequirementStatusAcion = ({ VisitStatus }, visitId) => {
         });
       }
     }
-  };
-};
-//  Email Verify  Start
-
+  }
+}
+export const submitContactForm=(formData)=>{
  
-
-//  Sent Token In Email 
-export const SentTokenForEmailVerification = (userdata) => {
-   console.log(userdata, "userdata")
-   
-  return async (dispatch) => {
+  return async(dispatch)=>{
     try {
       dispatch({
-        type: "SentTokenForEmailVerificationRequest",
-        payload: "SentTokenForEmailVerificationRequest",
+        type: "submitContactFormRequest",
+        payload: "submitContactFormRequest",
       });
 
-      // let url = `/admin-owner/schedulevisit/status/${visitId}`;
-      let url = `${api_Base_Url}/user/email/sent-token`;
-      
-      const config = {
-        headers: { "Content-Type": "application/json" },
+      let url = `${api_Base_Url}/contact/contactSubmit`;
+
+      let config = {
+        headers: { "Content-Type": "application/JSON" },
         withCredentials: true,
       };
+const form=JSON.stringify(formData)
 
-      const { data } = await axios.post(url, userdata, config);
+      // Post the FormData to the backend
+      const { data } = await axios.post(url, form, config);
 
       dispatch({
-        type: "SentTokenForEmailVerificationSuccess",
+        type: "submitContactFormSuccess",
         payload: data,
       });
     } catch (error) {
       if (error.response) {
         dispatch({
-          type: "SentTokenForEmailVerificationFail",
+          type: "submitContactFormFail",
           payload: error.response.data,
         });
       } else {
         dispatch({
-          type: "SentTokenForEmailVerificationFail",
+          type: "submitContactFormFail",
           payload: { message: error.message, success: false },
         });
       }
     }
-  };
+  }
+}
+
+export const viewAllContactForm=()=>{
+
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "viewAllContactFormRequest",
+        payload: "viewAllContactFormRequest",
+      });
+
+      let url = `${api_Base_Url}/contact/view-All-Contact`;
+
+      let config = {
+        headers: { "Content-Type": "application/JSON" },
+        withCredentials: true,
+      };
+
+      // Post the FormData to the backend
+      const { data } = await axios.get(url, config);
+
+      dispatch({
+        type: "viewAllContactFormSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "viewAllContactFormFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "viewAllContactFormFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+export const updateConatctRemarkAction=( {VisitStatus},conatctId)=>{
+
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "updateConatctRemarkActionRequest",
+        payload: "updateConatctRemarkActionRequest",
+      });
+
+      // let url = `/admin-owner/schedulevisit/status/${visitId}`;/conatct-remark/:conatctId
+      let url = `${api_Base_Url}/contact/conatct-remark/${conatctId}`;
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+
+        withCredentials: true,
+      };
+
+      const { data } = await axios.post(url, { VisitStatus }, config);
+
+      dispatch({
+        type: "updateConatctRemarkActionSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "updateConatctRemarkActionFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "updateConatctRemarkActionFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+
+
+//  Sent Token In Email 
+export const SentTokenForEmailVerification = (userdata) => {
+  console.log(userdata, "userdata")
+  
+ return async (dispatch) => {
+   try {
+     dispatch({
+       type: "SentTokenForEmailVerificationRequest",
+       payload: "SentTokenForEmailVerificationRequest",
+     });
+
+     // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+     let url = `${api_Base_Url}/user/email/sent-token`;
+     
+     const config = {
+       headers: { "Content-Type": "application/json" },
+       withCredentials: true,
+     };
+
+     const { data } = await axios.post(url, userdata, config);
+
+     dispatch({
+       type: "SentTokenForEmailVerificationSuccess",
+       payload: data,
+     });
+   } catch (error) {
+     if (error.response) {
+       dispatch({
+         type: "SentTokenForEmailVerificationFail",
+         payload: error.response.data,
+       });
+     } else {
+       dispatch({
+         type: "SentTokenForEmailVerificationFail",
+         payload: { message: error.message, success: false },
+       });
+     }
+   }
+ };
 };
 
 
- 
+
 
 //  Email Verify End 
 
 
- export const VerifyTokenForEmailVerificationAction = ({token})=>{
-
- 
-  return async (dispatch) => {
-    try {
-      dispatch({
-        type: "VerifyTokenForEmailVerificationActionRequest",
-        payload: "VerifyTokenForEmailVerificationActionRequest",
-      });
-
-      // let url = `/admin-owner/schedulevisit/status/${visitId}`;
-      let url = `${api_Base_Url}/user/email/verify-token?token=${token}`;
-      
-      const config = {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      };
-
-      const { data } = await axios.get(url,  config);
-
-      dispatch({
-        type: "VerifyTokenForEmailVerificationActionSuccess",
-        payload: data,
-      });
-    } catch (error) {
-      if (error.response) {
-        dispatch({
-          type: "VerifyTokenForEmailVerificationActionFail",
-          payload: error.response.data,
-        });
-      } else {
-        dispatch({
-          type: "VerifyTokenForEmailVerificationActionFail",
-          payload: { message: error.message, success: false },
-        });
-      }
-    }
-  };
- }
- 
+export const VerifyTokenForEmailVerificationAction = ({token})=>{
 
 
+ return async (dispatch) => {
+   try {
+     dispatch({
+       type: "VerifyTokenForEmailVerificationActionRequest",
+       payload: "VerifyTokenForEmailVerificationActionRequest",
+     });
+
+     // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+     let url = `${api_Base_Url}/user/email/verify-token?token=${token}`;
+     
+     const config = {
+       headers: { "Content-Type": "application/json" },
+       withCredentials: true,
+     };
+
+     const { data } = await axios.get(url,  config);
+
+     dispatch({
+       type: "VerifyTokenForEmailVerificationActionSuccess",
+       payload: data,
+     });
+   } catch (error) {
+     if (error.response) {
+       dispatch({
+         type: "VerifyTokenForEmailVerificationActionFail",
+         payload: error.response.data,
+       });
+     } else {
+       dispatch({
+         type: "VerifyTokenForEmailVerificationActionFail",
+         payload: { message: error.message, success: false },
+       });
+     }
+   }
+ };
+}

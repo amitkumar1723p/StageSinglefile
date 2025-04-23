@@ -14,6 +14,17 @@
     color: #003366;
     margin-bottom: 10px;
   }
+
+  .schdule-btn-confirm{
+    background-color: var(--main-light-clr);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+
+    &:hover{
+      opacity: .9;
+    }
+  }
   
   .request-submit-body {
     font-size: 16px;
@@ -85,3 +96,131 @@
       padding: 6px 12px;
      }
   }
+
+
+
+  /* ----------------------------------------------new submit css ------------------------------------ */
+
+  .schedule-your-visit-submit {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .schedule-your-visit-submit .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 22px;
+    background-color: #333;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .schedule-your-visit-submit .success-icon {
+    font-size: 32px;
+    color: green;
+    margin-bottom: 15px;
+  }
+  
+  .schedule-your-visit-submit .submit-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #222;
+    margin-top: 25px;
+    margin-bottom: 35px;
+  }
+  
+  .schedule-your-visit-submit .visit-subtitle {
+    color: #607d8b;
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .schedule-your-visit-submit .visit-time {
+    font-size: 15px;
+    font-weight: 400;
+    color: #000;
+    margin-bottom: 30px;
+  }
+  
+  .schedule-your-visit-submit .info-text {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    padding: 0 10px;
+  }
+  
+  .schedule-your-visit-submit .divider {
+    border: none;
+    border-top: 2px solid #333;
+    margin: 30px 0 20px;
+  }
+  
+  .schedule-your-visit-submit .action-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .schedule-your-visit-submit .outlined-btn {
+    /* flex: 1; */
+    /* min-width: 180px; */
+    padding: 12px 16px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #333;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .schedule-your-visit-submit .outlined-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+
+  @media (max-width: 480px) { 
+    .schedule-your-visit-submit {
+      max-width: 400px; 
+    }
+    .schedule-your-visit-submit .info-text {
+      font-size: 12px; 
+    }
+  }
+
+@media (max-width: 375px) {
+  .schedule-your-visit-submit .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 19px;
+    background-color: #333;
+    border-radius: 100%;
+    color: #fff;
+    cursor: pointer;
+}
+
+.schedule-your-visit-submit .info-text {
+  font-size: 11px;
+}
+
+.schedule-your-visit-submit {
+  max-width: 337px;
+}
+
+.schedule-your-visit-submit .outlined-btn {
+ font-size: 10px;
+}
+}

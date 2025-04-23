@@ -1,7 +1,21 @@
 .freshbooking-main-container{
     width: 80%;
+    transition-duration: .3s;
 }
 
+
+.active-section-freshbook{
+    width: 100%;
+    background-color: var(--main-light-clr);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px;
+    &:hover{
+        opacity: .9;
+    }
+}
 
 
 
@@ -22,6 +36,13 @@
 .freshbooking-highlight-image-upload-container{
     width: 55%;
 
+}
+.highlightList{
+    li{
+        background-color: #1877f2;
+        color: white;
+    }
+    
 }
 .freshbooking-highlights-add-button{
     border-radius: 8px;

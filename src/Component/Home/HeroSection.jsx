@@ -74,6 +74,7 @@ import { Helmet } from "react-helmet";
 import VerifiedComponent from "./VerifiedComponent.jsx";
 import PropertySection from "./PropertySection.jsx";
 import TenantVsLandlord from "./TenantVsLandlord.jsx";
+import ContactUsForm from "./ContactUsForm.jsx";
 const words = ["Right Price"];
 const HeroSection = () => {
   const [index, setIndex] = useState(0); // Word index
@@ -224,6 +225,7 @@ const HeroSection = () => {
   const [ProjectNameObjectData, setProjectNameObjectData] = useState({});
 
   const [showPropertyRequirement, setshowPropertyRequirement] = useState(false);
+  const [showContactUsForm,setShowContactUsForm] = useState(false);
   const { loading: GetAllPostLoading, data: AllPostData } = useSelector(
     (state) => {
       return state.GetAllPost;
@@ -244,8 +246,7 @@ const HeroSection = () => {
           //   .replaceAll(" ", "-")
           //   .replace(",", "")
           //   .replaceAll("/", "-")}-${PostData._id}`
-          console.log(ProjectNameObjectData)
-
+ 
           navigate(
             `/home/card?${(ProjectNameObjectData?.s_type?.trim() === "ProjectName" ||
               ProjectNameObjectData?.mostMatchedField?.trim() === "ProjectName") && ProjectNameObjectData?.projectName
@@ -301,6 +302,9 @@ const HeroSection = () => {
     setRedirectPath("");
   }, []);
 
+   const HandleContactUS = ()=>{
+    setShowContactUsForm(true)
+   }
 
   return (
     <div className="hero-main-parent-div"><Helmet>
@@ -329,7 +333,7 @@ const HeroSection = () => {
           </div>
           <div className="heading-hero">
             <h1>
-              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span><span className="animate-blink">|</span>
+              Market Value of <span className="heading-span-h1">Property </span>  Pay the <span className="heading-span-h1">Right Price</span>
             </h1>
             <p className="sub-heading">
               India's 1st online proptech platform that delivers real-time<span className="hero-span-main-line">  price
@@ -765,13 +769,13 @@ const HeroSection = () => {
               </div>
             </button>
 
-            {/* Phone Button */}
+            {/* contact US */}
             <button
               className={`hero-contact-btn mb-3 ${activeButton === 'phone' ? 'active' : ''}`}
-              onClick={() => handleButtonClick('phone')}
+              onClick={() =>setShowContactUsForm(true)}
             >
               <div className="hero-icon-container">
-                <Link to="tel:+917837840785" className="d-flex align-items-center hero-float-icon-a">
+                <Link className="d-flex align-items-center hero-float-icon-a">
                   <dotlottie-player
                     src="https://lottie.host/02272ac6-31e5-417d-834d-48cdcfeaf337/cG3WWN4Hvm.lottie"
                     background="transparent"
@@ -791,12 +795,12 @@ const HeroSection = () => {
               onClick={() => handleButtonClick('whatsapp')}
             >
               <div className="hero-icon-container">
-                <Link
-                  to="https://wa.me/7837840785"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="d-flex align-items-center hero-float-icon-a"
-                >
+              <Link
+  to="https://wa.me/7837840785?text=Hi!%20I’d%20like%20to%20learn%20more%20about%20your%20services.%20Can%20you%20help%20me%20out?"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="d-flex align-items-center hero-float-icon-a"
+>
                   <dotlottie-player
                     src="https://lottie.host/87aba604-393b-4d73-8a63-ef8fddc8e348/Kx2B1jvrlf.lottie"
                     background="transparent"
@@ -989,6 +993,14 @@ const HeroSection = () => {
           SetShow={setshowPropertyRequirement}
           BtnRef={PropertyRequirementBtnRef}
         />
+      )}
+      {showContactUsForm && (
+        <div className="ContactUs-container">
+           <ContactUsForm
+            setContactUs = {setShowContactUsForm}
+           />
+        </div>
+       
       )}
     </div>
   );

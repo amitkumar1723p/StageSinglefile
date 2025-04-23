@@ -11,8 +11,7 @@ import Notifyme from "./PropertyCard/NotifyMe";
 import SingleCard from "../Post/SingleCard";
 export default function HomeCard({data}) {
   const dispatch = useDispatch();
-  console.log("data",data)
-
+ 
   const { loading } = useSelector((state) => {
     return state.GetAllPost;
   });

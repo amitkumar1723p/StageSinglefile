@@ -39,7 +39,7 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
 
 
   return (
-    <div>
+    <div className=''>
 
       {fetchedAllFiles?.length > 0 && (
         <div className="files-card-container">
@@ -53,11 +53,11 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
               <div
                 key={item._id}
                 className="files-card"
-                onClick={() => navigate(`/admin/excel/${item?.ExcelId?._id}`)}
+                onClick={() => navigate(`/excel/${item?.ExcelId?._id}`)}
               >
 
-                <div className="file-icon"><img src="/img/excel_icon.svg" alt="excel_icon" /></div>
-                <div className="file-name"><small>{item?.ExcelId?.fileName}  </small> </div>
+<div class="file-icon">📊</div>
+                <div className="file-name"><small>{item?.ExcelId?.name}  </small> </div>
               </div>
             </div>
 
@@ -66,7 +66,7 @@ const {data:AgentAllExcelFilesData} = useSelector((state) => {
       )}
 
 
-      {!fetchedAllFiles && <div>no assined excel found</div>}
+      {!fetchedAllFiles && <div>No assigned excel found</div>}
     </div>
   )
 }

@@ -158,7 +158,7 @@ const PropertySection = () => {
               <div className="property-btn">
                 <button
                   className="view-btn"
-                  onClick={() => navigate("/all-post")}
+                  onClick={() => navigate("/all-post/Sale")}
                 >
                   <span className="view-btn-span">
                     View All Properties{" "}

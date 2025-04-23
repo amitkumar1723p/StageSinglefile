@@ -24,8 +24,7 @@ const HandleFreshbookingUrl = (projectName)=>{
 
 
 
-console.log(cardData)
-
+ 
   return (
    
  

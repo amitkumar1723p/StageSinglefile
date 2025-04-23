@@ -49,11 +49,9 @@
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   transition: background-color 0.3s;
 }
-
 .PageNotFound-homeButton:hover {
   background-color: var(--main-light-clr);
 }
-
 .PageNotFound-supportButton {
   font-size: 0.875rem;
   font-weight: 600;

@@ -562,7 +562,6 @@ export const GetAllScheduleVisitsAndMakeOffer_Length = (PostId) => {
 };
 
 export const Admin_OwnerScheduleVisitDone = ({ VisitStatus }, visitId) => {
-  
   return async (dispatch) => {
     try {
       dispatch({
@@ -808,7 +807,7 @@ export const SimilarProperty = (postId) => {
         payload: data,
       });
     } catch (error) {
-      console.log("API Error:", error); // Log the full error
+     
 
       if (error.response) {
         // Server responded with an error
@@ -861,7 +860,7 @@ export const OwnerUploadExcelFile = (file)=>{
         payload: data,
       });
     } catch (error) {
-      console.log("API Error:", error);  // Log the full error
+       // Log the full error
 
       if (error.response) {
         // Server responded with an error

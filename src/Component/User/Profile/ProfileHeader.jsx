@@ -91,47 +91,50 @@ function ProfileHeader() {
   // Initialize state with the data from the backend
 
   const { setVarb } = useContext(UserContext);
-  const [name, setName] = useState(
-    medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1)
-  );
-  const [Lastname, setLastName] = useState(
-    medata?.user?.LastName?.charAt(0).toUpperCase() +
-      medata?.user?.LastName?.slice(1)
-  );
+  const [name, setName] = useState(medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1));
+  const [Lastname, setLastName] = useState(medata?.user?.LastName?.charAt(0).toUpperCase() + medata?.user?.LastName?.slice(1));
   const [email, setEmail] = useState(medata?.user?.email);
   const [number, setNumber] = useState(medata?.user?.ContactNumber);
   // Function to handle the edit button click
   const handleEdit = () => {
-    setVarb({
-      Name: name,
-      LastName: Lastname,
-      email: email,
-      ContactNumber: number,
-    });
-    if (number !== medata?.user?.ContactNumber) {
-      dispatch(ProfileEditAction({ ContactNumber: number }));
-    } else {
-      const updateData = {
-        Name: name,
-        LastName: Lastname,
-        email: email,
-        ContactNumber: number,
-      };
+    
+    setVarb({ Name: name, LastName: Lastname, email: email, ContactNumber: number });
+    if (number != medata?.user?.ContactNumber) {
+      if(number.length<10){
+        return alert("Please enter valid number")
+      }
+      if (!name || !Lastname || !email || !number) {
+        return alert("Please enter all data")
+        // 
+      }
+      
+      // alert("run")
+       setTimeout(() => {
+        navigate("/user/profileUpdate")
+       }, 0);
+         
+     
 
-      dispatch(ProfileUpdateAction(updateData));
+      dispatch(ProfileEditAction({ ContactNumber: number }));
+    }
+    else {
+      const updateData = { Name: name, LastName: Lastname, email: email, ContactNumber: number };
+      if (!name || !Lastname || !email || !number) {
+        alert("Please enter all data")
+        return
+      }
+      dispatch(ProfileUpdateAction(updateData))
     }
   };
   // Check if any changes were made to the fields
   const hasChanges =
-    name !==
-      medata?.user?.Name?.charAt(0).toUpperCase() +
-        medata?.user?.Name?.slice(1) ||
-    Lastname !==
-      medata?.user?.LastName?.charAt(0).toUpperCase() +
-        medata?.user?.LastName?.slice(1) ||
+    name !== medata?.user?.Name?.charAt(0).toUpperCase() + medata?.user?.Name?.slice(1) ||
+    Lastname !== medata?.user?.LastName?.charAt(0).toUpperCase() + medata?.user?.LastName?.slice(1) ||
     email !== medata?.user?.email ||
-    number !== medata?.user?.ContactNumber;
+    number != medata?.user?.ContactNumber;
   // Effect to handle navigation on successful profile update
+
+  // useEffect(()=>{navigate("/user/profileUpdate")},[])
 
   //  useEffect(()=>{
 
@@ -144,7 +147,7 @@ function ProfileHeader() {
   //  },[AlertData])
   const handleEnableEdit = (e) => {
     e.preventDefault();
-    alert("please make changes !");
+    alert("Please make changes !");
   };
   return (
     <>
@@ -186,12 +189,11 @@ function ProfileHeader() {
                           className="profile-name"
                           type="text"
                           value={Lastname ? Lastname : ""}
-                          placeholder={
-                            Lastname ? "" : "Please Update Your Last Name"
-                          }
+                          placeholder={Lastname ? "" : "Please Update Your Last Name"}
                           onChange={(e) => setLastName(e.target.value)} // Update name state
                         />
                       </div>
+
                     </div>
 
                     <div className="profileNameEmail">
@@ -201,6 +203,7 @@ function ProfileHeader() {
                           className="profile-email"
                           type="tel"
                           value={number}
+                          maxLength={10}
                           onChange={(e) => setNumber(e.target.value)} // Update number state
                         />
                       </div>
@@ -244,18 +247,16 @@ function ProfileHeader() {
                     </div>
                     {hasChanges ? (
                       <Link
-                        to={
-                          number !== medata?.user?.ContactNumber
-                            ? `/user/profileUpdate`
-                            : ""
-                        }
                         className="editProfileButton"
                         onClick={handleEdit}
                       >
                         <button>Update Profile</button>
                       </Link>
                     ) : (
-                      <div className="editProfileButton">
+                      <div
+                        className="editProfileButton"
+
+                      >
                         <div className="button-section-dashborad">
                           <div className="whatapp-notify ">
                             {/* <img
@@ -308,13 +309,11 @@ function ProfileHeader() {
           </div>
         </div>
         <Link to="/user/post">
-          <div className="dashboard-right-side">
-            <img
-              src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg"
-              alt="dash-banner"
-            />
-          </div>
-        </Link>
+       
+        <div className="dashboard-right-side">
+          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg" alt="dash-banner"  style={{height:'103%', width: 'auto'}} />
+        </div>
+         </Link>
       </div>
     </>
   );

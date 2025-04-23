@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Navbar.css";
+import { NavLink } from "react-router-dom";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutAction } from "../../Action/userAction";
@@ -11,7 +12,7 @@ import ChannelPartner from "./ChannelPartner";
 
 import { UserContext } from "../CreateContext/CreateContext";
 const Navbar = () => {
-  const {  NavbarRef} = useContext(UserContext);
+  const { NavbarRef } = useContext(UserContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,11 +63,9 @@ const Navbar = () => {
   //  Logout Data show Code (Start)
 
   // for removing the localstorage of login user/agen/owner/admin
-  const clearAllPropertyData = (() => {
-    localStorage.removeItem('Admin_OwnerGetAllPostState');
-  })
-
-
+  const clearAllPropertyData = () => {
+    localStorage.removeItem("Admin_OwnerGetAllPostState");
+  };
 
   useEffect(() => {
     if (logoutdata) {
@@ -83,8 +82,7 @@ const Navbar = () => {
           dispatch({ type: "MeDetailsClear" });
         }, 0);
 
-
-        clearAllPropertyData()
+        clearAllPropertyData();
       }
       if (logoutdata.success === false) {
         setalertMessage(<p>{logoutdata.message}</p>);
@@ -112,11 +110,9 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar" >
-
+      <nav className="navbar">
         <div className="navbar-container">
           <div className="d-flex logo-nav-bar">
-
             <div
               className="logo"
               onClick={() => {
@@ -225,7 +221,7 @@ const Navbar = () => {
                       ) : (
                         <>
                           <img
-                            src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Hamburger.svg"
+                            src="/img/admin-aside-dropdown-svg.svg"
                             onClick={() => {
                               setIsOpen(!isOpen);
                             }}
@@ -238,11 +234,11 @@ const Navbar = () => {
                     {isOpen ? (
                       <img
                         alt="dropdown-icon"
-                        className="dropbtn"
+                        className={`dropbtn ${isOpen ? "rotate-up" : ""}`}
                         onClick={() => {
                           setIsOpen(!isOpen);
                         }}
-                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Hamburger.svg"
+                        src="/img/admin-aside-dropdown-svg.svg"
                       />
                     ) : (
                       <img
@@ -251,111 +247,279 @@ const Navbar = () => {
                         onClick={() => {
                           setIsOpen(!isOpen);
                         }}
-                        src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Hamburger.svg"
+                        src="/img/admin-aside-dropdown-svg.svg"
                       />
                     )}
                   </div>
 
                   {isOpen && (
-                    <div className="dropdown-content">
-                      <li
-                        className="Dropdown-section"
-                        onClick={() => {
-                          navigate("/");
-                        }}
-                      >
-                        <img
-                          alt="dropdown-icon`"
-                          className="dropbtn-nav"
+                    <div className="dropdown-content-main">
+                      <div className="dropdown-content">
+                        <li
+                          className="navItem "
                           onClick={() => {
-                            setIsOpen(!isOpen);
+                            navigate("/");
                           }}
-                          src={`data:image/svg+xml;utf8,${encodeURIComponent(`
+                        >
+                          <img
+                            alt="dropdown-icon`"
+                            className="dropbtn-nav"
+                            onClick={() => {
+                              setIsOpen(!isOpen);
+                            }}
+                            src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 19V10C4 9.68333 4.071 9.38333 4.213 9.1C4.355 8.81667 4.55067 8.58333 4.8 8.4L10.8 3.9C11.15 3.63333 11.55 3.5 12 3.5C12.45 3.5 12.85 3.63333 13.2 3.9L19.2 8.4C19.45 8.58333 19.646 8.81667 19.788 9.1C19.93 9.38333 20.0007 9.68333 20 10V19C20 19.55 19.804 20.021 19.412 20.413C19.02 20.805 18.5493 21.0007 18 21H15C14.7167 21 14.4793 20.904 14.288 20.712C14.0967 20.52 14.0007 20.2827 14 20V15C14 14.7167 13.904 14.4793 13.712 14.288C13.52 14.0967 13.2827 14.0007 13 14H11C10.7167 14 10.4793 14.096 10.288 14.288C10.0967 14.48 10.0007 14.7173 10 15V20C10 20.2833 9.904 20.521 9.712 20.713C9.52 20.905 9.28267 21.0007 9 21H6C5.45 21 4.97933 20.8043 4.588 20.413C4.19667 20.0217 4.00067 19.5507 4 19Z" fill="#94D1FF"/>
                         </svg>
 
  
                         `)}`}
-                        />{" "}
-                        Home
+                          />{" "}
+                          Home
+                        </li>
 
-                      </li>
 
-                      {!["Admin", "Agent", "Owner"].includes(
-                        medata?.user?.Role
-                      ) && (
-                          <li
-                            className="Dropdown-section"
-                            onClick={() => {
-                              navigate("/user");
-                            }}
-                          >
-                            <img
-                              alt="dropdown-icon`"
-                              className="dropbtn-nav"
-                              onClick={() => {
-                                setIsOpen(!isOpen);
-                              }}
-                              src={`data:image/svg+xml;utf8,${encodeURIComponent(`
-                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M4 18C4 16.9391 4.42143 15.9217 5.17157 15.1716C5.92172 14.4214 6.93913 14 8 14H16C17.0609 14 18.0783 14.4214 18.8284 15.1716C19.5786 15.9217 20 16.9391 20 18C20 18.5304 19.7893 19.0391 19.4142 19.4142C19.0391 19.7893 18.5304 20 18 20H6C5.46957 20 4.96086 19.7893 4.58579 19.4142C4.21071 19.0391 4 18.5304 4 18Z" stroke="#94D1FF" stroke-width="2" stroke-linejoin="round"/>
-                          <path d="M12 10C13.6569 10 15 8.65685 15 7C15 5.34315 13.6569 4 12 4C10.3431 4 9 5.34315 9 7C9 8.65685 10.3431 10 12 10Z" stroke="#94D1FF" stroke-width="2"/>
-                          </svg>
+                        {["Admin", "Agent", "Owner"].includes(
+                          medata?.user?.Role
+                        ) ? (
+                          <>
+                            <NavLink
+                              to="/admin/dashboard"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${isActive ? "active" : "hover"
+                                }`
+                              }
+                            >
+                              <img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
+                                alt="Dashboard Icon"
+                                className={`AdminAside-icon ${location.pathname === "/admin/dashboard"
+                                    ? "active"
+                                    : ""
+                                  }`}
+                              />
+                              Dashboard
+                            </NavLink>
+                            {/* -----------------------------Agent-admin AllUserResponse --------------------------------------------- */}
 
- 
-                        `)}`}
-                            />
-                            Profile
-                          </li>
+                            {medata.user.Role == "Agent" ? (
+                              <NavLink
+                                to="/admin/agent-user-Response-action"
+                                className={({ isActive }) =>
+                                  `AdminAside-navLink ${isActive ? "active" : "hover"
+                                  }`
+                                }
+                              >
+                                <img
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
+                                  alt="Dashboard Icon"
+                                  className={`AdminAside-icon ${location.pathname ===
+                                      "/admin/all-asign-post-Response-action"
+                                      ? "active"
+                                      : ""
+                                    }`}
+                                />
+                                All Response
+                              </NavLink>
+                            ) : (
+                              <NavLink
+                                to="/admin/all-user-Response-action"
+                                className={({ isActive }) =>
+                                  `AdminAside-navLink ${isActive ? "active" : "hover"
+                                  }`
+                                }
+                              >
+                                <img
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
+                                  alt="Dashboard Icon"
+                                  className={`AdminAside-icon ${location.pathname ===
+                                      "/admin/all-user-Response-action"
+                                      ? "active"
+                                      : ""
+                                    }`}
+                                />
+                                All Response
+                              </NavLink>
+                            )}
+
+                            {/* Fresh Property Routing / */}
+                            <NavLink
+                              to="/admin/fresh-property"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${isActive ? "active" : "hover"}`
+                              }><img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
+                                alt="Dashboard Icon"
+
+                              />Fresh property</NavLink>
+
+                            <NavLink
+                              to="/admin/agent/dashboard?Role=Admin"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${location.search.includes("Role=Admin")
+                                  ? "active"
+                                  : "hover"
+                                }`
+                              }
+                            >
+                              <img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg "
+                                alt="Admin Icon"
+                                className={`AdminAside-icon ${location.search.includes("Role=Admin")
+                                    ? "active"
+                                    : ""
+                                  }`}
+                              />
+                              Admin
+                            </NavLink>
+
+                            <NavLink
+                              to="/admin/agent/dashboard?Role=Agent"
+                              className={({ isActive }) =>
+                                `AdminAside-navLink ${location.search.includes("Role=Agent")
+                                  ? "active"
+                                  : "hover"
+                                }`
+                              }
+                            >
+                              <img
+                                src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg "
+                                alt="Agent Icon"
+                                className={`AdminAside-icon ${location.search.includes("Role=Agent")
+                                    ? "active"
+                                    : ""
+                                  }`}
+                              />
+                              Agent
+                            </NavLink>
+                            {/* admin routes  */}
+
+                          </>
+                        ) : (
+                          <>
+                            <NavLink to="/user">
+                              <li
+                                className={`navItem ${location.pathname == "/user"
+                                    ? "active-btn-nav"
+                                    : ""
+                                  }`}
+                              >
+                                <img
+                                  className=""
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Profile.svg "
+                                  alt="profile"
+                                />
+                                Profile
+                              </li>
+                            </NavLink>
+
+                            <NavLink to="/user/my-post/all-response">
+                              <li
+                                className={`navItem navItem mob-hide ${location.pathname ==
+                                    "/user/my-post/all-response"
+                                    ? "active-btn-nav"
+                                    : ""
+                                  } `}
+                              >
+                                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/NewLeads.svg " alt="my-visits" />
+                                All Response
+                              </li>
+                            </NavLink>
+
+                            <NavLink to="/user/my-listing ">
+                              <li
+                                className={`navItem ${location.pathname == "/user/my-listing"
+                                    ? "active-btn-nav"
+                                    : ""
+                                  } `}
+                              >
+                                <img
+                                  className=""
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/MyListing.svg "
+                                  alt="my listing"
+                                />
+                                My Listing
+                              </li>
+                            </NavLink>
+
+
+                            <NavLink to="/user/favourite-post">
+                              <li
+                                className={`navItem ${location.pathname == "/user/favourite-post"
+                                    ? "active-btn-nav"
+                                    : ""
+                                  }`}
+                              >
+                                <img
+                                  className=""
+                                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg "
+                                  alt="shortlisted"
+                                />
+                                Shortlisted Property
+                              </li>
+                            </NavLink>
+                            {/* simple user  */}
+
+                          </>
                         )}
 
-                      <li
-                        className="Dropdown-section sell-btn hide-for-pc"
-                        onClick={() => {
-                          if (medata && medata.IsAuthenticated === true) {
-                            navigate("/user/post");
-                          } else {
-                            navigate("/login");
-                          }
-                        }}
-                      >
-                        <img
-                          alt="dropdown-icon`"
-                          className="dropbtn-nav-1"
+
+
+                        {/* {!["Admin", "Agent", "Owner"].includes(
+                          medata?.user?.Role
+                        ) && (
+                          <>
+                          
+ 
+                          </>
+                        )} */}
+
+                        <li
+                          className="navItem  sell-btn hide-for-pc"
                           onClick={() => {
-                            setIsOpen(!isOpen);
+                            if (medata && medata.IsAuthenticated === true) {
+                              navigate("/user/post");
+                            } else {
+                              navigate("/login");
+                            }
                           }}
-                          src={`data:image/svg+xml;utf8,${encodeURIComponent(`
+                        >
+                          <img
+                            alt="dropdown-icon`"
+                            className="dropbtn-nav-1"
+                            onClick={() => {
+                              setIsOpen(!isOpen);
+                            }}
+                            src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                        <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path id="Vector" d="M4.85889 11.0159L5.21244 11.3695L5.566 11.0159L9.80345 6.77849L10.157 6.42493L9.80345 6.07138L8.73471 5.00264L8.38116 4.64909L8.02761 5.00264L5.21244 7.81781L3.99101 6.59638L3.63746 6.24282L3.28391 6.59638L2.21517 7.66511L1.86162 8.01867L2.21517 8.37222L4.85889 11.0159ZM9.8989 12.2157C8.85833 13.6477 7.5611 14.5616 6.00002 14.9831C4.43938 14.5612 3.14233 13.6471 2.10172 12.215C1.03195 10.7427 0.500498 9.11734 0.5 7.32493C0.5 7.32488 0.5 7.32484 0.5 7.32479L0.5 3.09648L5.99993 1.034L11.4999 3.09648V7.32493C11.4999 9.11788 10.9687 10.7435 9.8989 12.2157Z" fill="#94D1FF" stroke="#94D1FF"/>
                         </svg>
 
 
                       `)}`}
-                        />
-                        Post Property
-                        <span className="header-free"> Free</span>
-                      </li>
-                      <li className="Dropdown-section" onClick={LogoutUserFunc}>
-                        <img
-                          alt="dropdown-icon`"
-                          className="dropbtn-nav"
-                          onClick={() => {
-                            setIsOpen(!isOpen);
-                          }}
-                          src={`data:image/svg+xml;utf8,${encodeURIComponent(`
+                          />
+                          Post Property
+                          <span className="header-free"> Free</span>
+                        </li>
+                        <li className="navItem " onClick={LogoutUserFunc}>
+                          <img
+                            alt="dropdown-icon`"
+                            className="dropbtn-nav"
+                            onClick={() => {
+                              setIsOpen(!isOpen);
+                            }}
+                            src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M5 21C4.45 21 3.97933 20.8043 3.588 20.413C3.19667 20.0217 3.00067 19.5507 3 19V5C3 4.45 3.196 3.97933 3.588 3.588C3.98 3.19667 4.45067 3.00067 5 3H12V5H5V19H12V21H5ZM16 17L14.625 15.55L17.175 13H9V11H17.175L14.625 8.45L16 7L21 12L16 17Z" fill="#94D1FF"/>
                           </svg>
 
  
                         `)}`}
-                        />
-                        Logout
-                      </li>
+                          />
+                          Logout
+                        </li>
 
-                      <div className="needhelp-innavbar">
+                        {/* <div className="needhelp-innavbar">
                         <img
                           src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -378,6 +542,7 @@ const Navbar = () => {
                             support@propertydekho247.com
                           </p>
                         </div>
+                      </div> */}
                       </div>
                     </div>
                   )}

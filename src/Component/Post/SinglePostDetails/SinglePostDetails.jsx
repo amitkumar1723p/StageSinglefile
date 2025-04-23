@@ -1110,6 +1110,17 @@ export default function SinglePostDetails() {
                       />
                     )}
 
+                     {/* basment area  */}
+ {getSinglePostData?.SinglePost?.PropertyDetails
+                          ?.Basement == true && (
+                          <>
+                            <PropertyDataBox
+                              Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
+                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
+                              Data={"Basement Area"}
+                            />
+                          </>
+                        )}
                     {getSinglePostData?.SinglePost?.BasicDetails
                       ?.ApartmentType != "Plot/Land" && (
                       <>
@@ -1322,7 +1333,7 @@ export default function SinglePostDetails() {
                       getSinglePostData?.SinglePost?.PropertyDetails
                         ?.Basement == false) && (
                       <>
-                        <PropertyDataBox
+                        {/* <PropertyDataBox
                           Answer={`${
                             getSinglePostData?.SinglePost?.PropertyDetails
                               ?.Basement == true
@@ -1334,18 +1345,9 @@ export default function SinglePostDetails() {
                           } `}
                           Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
                           Data={"Basement"}
-                        />
+                        /> */}
 
-                        {getSinglePostData?.SinglePost?.PropertyDetails
-                          ?.Basement == true && (
-                          <>
-                            <PropertyDataBox
-                              Answer={`${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.value} ${getSinglePostData?.SinglePost?.PropertyDetails?.BasementArea?.unit}`}
-                              Icon="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/parking.png"
-                              Data={"Basement Area"}
-                            />
-                          </>
-                        )}
+                       
                       </>
                     )}
 

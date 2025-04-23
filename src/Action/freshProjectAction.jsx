@@ -266,3 +266,84 @@ export const updateProjectLeadAction = (id, remark) => {
     }
   };
 };
+
+export const submitFreshProjectLead=(formData)=>{
+ 
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "submitFreshProjectLeadRequest",
+        payload: "submitFreshProjectLeadRequest",
+      });
+
+      let url = `${api_Base_Url}/fresh/lead/project`;
+
+      let config = {
+        headers: { "Content-Type": "application/JSON" },
+        withCredentials: true,
+      };
+const form=JSON.stringify(formData)
+
+      // Post the FormData to the backend
+      const { data } = await axios.post(url, form, config);
+
+      dispatch({
+        type: "submitFreshProjectLeadSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "submitFreshProjectLeadFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "submitFreshProjectLeadFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+
+export const submitFreshProjectLead_VerifyOtp=(formData)=>{
+ 
+  return async(dispatch)=>{
+    try {
+      dispatch({
+        type: "submitFreshProjectLead_VerifyOtpRequest",
+        payload: "submitFreshProjectLead_VerifyOtpRequest",
+      });
+
+      let url = `${api_Base_Url}/fresh/otp-verify/project`;
+
+      let config = {
+        headers: { "Content-Type": "application/JSON" },
+        withCredentials: true,
+      };
+const form=JSON.stringify(formData)
+
+      // Post the FormData to the backend
+      const { data } = await axios.post(url, form, config);
+
+      dispatch({
+        type: "submitFreshProjectLead_VerifyOtpSuccess",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        dispatch({
+          type: "submitFreshProjectLead_VerifyOtpFail",
+          payload: error.response.data,
+        });
+      } else {
+        dispatch({
+          type: "submitFreshProjectLead_VerifyOtpFail",
+          payload: { message: error.message, success: false },
+        });
+      }
+    }
+  }
+}
+

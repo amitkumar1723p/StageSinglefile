@@ -162,14 +162,14 @@ export default function LocationDetails({
             
             {/* Complete Address */}
             <div className="form-group">
-              <label htmlFor="Complete Address">Complete Address*</label>
+              <label htmlFor="Complete Address">Property Address*</label>
               <input
                 style={{ transitionDuration }}
                 className={`${localityShake ? "inputShake shake" : ""}`}
                 type="text"
                 id="complete-addresss"
                 name="complete-addresss"
-                placeholder="Write Complete Address"
+                placeholder="eg . Flat No / Tower No / Plot No "
                 required={
                   update
                     ? "CompleteAddress" in LocationDetailsData

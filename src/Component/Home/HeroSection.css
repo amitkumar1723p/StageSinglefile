@@ -767,6 +767,16 @@ font-weight: 600;
   color: #fff;
 }
 
+.ContactUs-container{
+  border: 1px solid black;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 500;
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 1024px) {
   .search-box-nav {
     display: none;
@@ -1485,13 +1495,10 @@ font-weight: 600;
   transform: scale(1.1);
 }
 
-.whatapps-section-floating
-  {
-  /* background-color: #25d366; */
-}
+
 
 .floating-buttons a.call-button {
-  /* background-color: var(--main-light-clr); */
+  background-color: var(--main-light-clr);
   /* Green for Call */
 }
 
@@ -1608,7 +1615,7 @@ font-weight: 600;
   box-shadow: 
     -5px 0 15px rgba(0, 0, 0, 0.05),
     -2px 0 5px rgba(0, 0, 0, 0.05);
-  z-index: 100;
+  z-index: 10;
   width: 65px;
   height: auto;
   min-height: 280px;

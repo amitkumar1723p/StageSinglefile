@@ -29,43 +29,55 @@ export default function AllUserResponseAction() {
   // Pagination logic state
   const [page, setPage] = useState(AllUserResponseAction_Store?.currentPage); // Current page for pagination
   const [runPagination, setrunPagination] = useState(false);
+  const [index, setIndex] = useState()
   const totalPages = AllUserResponseAction_Store?.totalPages
   // const itemsPerPage = 10; // Number of items per page
 
   // console.log(AllUserResponseAction_Store)
   useEffect(() => {
-    if (AllUserResponseAction_Store == undefined || runPagination == true) {
+
+    if (AllUserResponseAction_Store == undefined || runPagination == true || index) {
       dispatch(getAllUserResponseAction(page));
+
     }
-  }, [page]);
+  }, [page, index]);
   useEffect(() => {
     // If 'page' has a value or both 'searchText' and 'searchbtn' are truthy, dispatch the action
     if (searchText && searchbtn === true) {
+
       dispatch(getAllUserResponseAction(page, searchText));
+
       setSearchbtn(false)
     }
   }, [page, searchText, searchbtn]);
+
+
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);
       setrunPagination(true);
     }
   };
+
   const handleNextPage = () => {
     if (page < totalPages) {
       setPage(page + 1);
       setrunPagination(true);
     }
   };
+
   const handlePageChange = (newPage) => {
     setPage(newPage); // Go to the selected page
     setrunPagination(true);
   };
+
+
   // searching
   // Function to handle input changes
   const handleInputChange = (event) => {
     setSearchText(event.target.value); // Update state with input value
   };
+
   // Function to handle search button click
   const handleSearch = () => {
     setSearchbtn(true)
@@ -75,6 +87,7 @@ export default function AllUserResponseAction() {
     if (typeof window !== "undefined" && searchText.length === 0) {
       const users = AllUserResponseAction_Store?.data[0]?.users;
       let newData;
+
       if (users) {
         newData = users.map(item => ({
           ContactNumber: `630713${item.ContactNumber}`,
@@ -82,46 +95,117 @@ export default function AllUserResponseAction() {
           offerData: item.offerData.length,
           postData: item.postData.length,
           requireData: item.requireData.length,
-          scheduleData: item.scheduleData.length
+          scheduleData: item.scheduleData.length,
+          latestCreateAt: item.latestCreateAt
         }));
+
         const storedData = JSON.parse(localStorage.getItem("newLength")) || [];
-        // let result = storedData.filter(storedItem => {
-        //   const match = newData.find(
-        //     newItem => newItem
-        //   );
-        //   return match && (
-        //     storedData.ContactNumber!==match.ContactNumber||
-        //     storedItem.notifyData !== match.notifyData ||
-        //     storedItem.postData !== match.postData ||
-        //     storedItem.requireData !== match.requireData ||
-        //     storedItem.scheduleData !== match.scheduleData ||
-        //     storedItem.offerData !== match.offerData
-        //   );
-        // });
-        setTrackNewLead(storedData);
+console.log(localStorage.getItem("newLength"))
+        const result = storedData?.filter(storedItem => {
+          const match = newData?.find(newItem => newItem.ContactNumber === storedItem.ContactNumber);
+
+          return match && (
+            storedItem.notifyData !== match.notifyData ||
+            storedItem.postData !== match.postData ||
+            storedItem.requireData !== match.requireData ||
+            storedItem.scheduleData !== match.scheduleData ||
+            storedItem.offerData !== match.offerData ||
+            storedItem.latestCreateAt !== match.latestCreateAt // ✅ this was missing proper comparison
+          );
+        });
+ 
+        setTrackNewLead(result);
+
         if (newData.length > storedData.length) {
-          setnewUser(newData.length - storedData.length)
+          setnewUser(newData.length - storedData.length);
         }
+
         localStorage.setItem("newLength", JSON.stringify(newData));
+
         setUsersList(
           AllUserResponseAction_Store?.data[0]?.users ??
-          AllUserResponseAction_Store?.data)
+          AllUserResponseAction_Store?.data
+        );
       }
     } else {
       setUsersList(
         AllUserResponseAction_Store?.data[0]?.users ??
-        AllUserResponseAction_Store?.data)
+        AllUserResponseAction_Store?.data
+      );
     }
   }, [AllUserResponseAction_Store?.data[0]?.users, searchText]);
+
+
+
+
+  useEffect(() => {
+    if (tarckNewLead && tarckNewLead.length > 0) {
+      const stored = JSON.parse(localStorage.getItem("readMode") || "[]");
+
+      // Convert stored data to a map for faster access
+      const storedMap = new Map(stored.map(item => [item.ContactNumber, item]));
+
+      // Merge with new leads
+      tarckNewLead.forEach(newItem => {
+        const existingItem = storedMap.get(newItem.ContactNumber);
+
+        if (!existingItem) {
+          // If new contact, add it
+          storedMap.set(newItem.ContactNumber, newItem);
+        }
+        // } else {
+        //   // If contact exists, check if any field changed
+        //   const hasChanged = Object.keys(newItem).some(
+        //     key => newItem[key] !== existingItem[key]
+        //   );
+
+        //   if (hasChanged) {
+        //     // Update with latest info
+        //     storedMap.set(newItem.ContactNumber, newItem);
+        //   }
+        // }
+      });
+      const updatedRead = Array.from(storedMap.values());
+
+      updatedRead.sort((a, b) => new Date(b.latestCreateAt) - new Date(a.latestCreateAt));
+
+      SetRead(updatedRead);
+      localStorage.setItem("readMode", JSON.stringify(updatedRead));
+    } else {
+      const check = JSON.parse(localStorage.getItem("readMode") || "[]");
+      check.sort((a, b) => new Date(b.latestCreateAt) - new Date(a.latestCreateAt));
+      SetRead(check);
+    }
+  }, [tarckNewLead]);
+
+
+   useEffect(() => {
+        if (index !== undefined && index !== null) {
+            const stored = localStorage.getItem('readMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                // Remove first match by ContactNumber
+                const updated = parsed.filter(item => item.ContactNumber !== index);
+              
+                localStorage.setItem('readMode', JSON.stringify(updated));
+
+      }
+    }
+
+
+  }, [index]);
+
+
   return (
     <>
       {usersList &&
-        <div className="border border-primary border-opacity-25 ">
-          <div className="d-flex justify-content-between">
-            <div className="">
-              <p className="px-4 mt-3 fw-semibold text-primary">All Response({AllUserResponseAction_Store?.totalUsers})</p>
+        <div className="all-user-response-action-container  ">
+          <div className="d-flex justify-content-between align-items-center p-2">
+            <div className=" d-flex gap-3">
+              <p className="all-user-action-response-container  fw-semibold ">All Response: {AllUserResponseAction_Store?.totalUsers}</p>
+              <p className="all-user-response-new-activity-container fw-semibold ">New Activity: <span className="">{read?.length}</span></p>
             </div>
-            <div className="px-4 mt-3 d-flex">
+            <div className=" d-flex ">
               <input
                 className="allresponse-search-input"
                 placeholder="e.g.  9053608395"
@@ -148,7 +232,7 @@ export default function AllUserResponseAction() {
                   <div className="userName border-end border-primary px-2  border-opacity-25">
                     <div className="">
                       <p className="All-response-common-section  " style={{ color: index < newUser ? 'red' : 'black' }}>
-                        {item?.Name} {item?.LastName} - <small className="fw-light">( {item?.Role})</small></p>
+                        {item?.Name} {item?.LastName} - <small className="all-user-response-user-role fw-light"> {item?.Role}</small></p>
                       {/* <small className="fw-light">{item?.email}</small> */}
                       <small className="">
                         {item?.latestCreateAt ? FormatDate(item?.latestCreateAt) : 'N/A'}
@@ -156,61 +240,161 @@ export default function AllUserResponseAction() {
                     </div>
                   </div>
 
-                  <div className="userContact border-end border-primary border-opacity-25 px-2 ">
+                  <div className="userContactNumber border-end border-primary border-opacity-25 px-2 ">
                     <p className="All-response-common-section d-flex justify-content-center align-items-center">
                       {item?.ContactNumber}
                     </p>
                   </div>
-                  <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                    <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
-                      Lisitng : &nbsp; <small className="fw-bold">
-                        {tarckNewLead[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.postData?.length > tarckNewLead[index]?.postData ?
-                          <small> {item?.postData?.length}<sup className="text-success">new</sup></small> : <small>{item?.postData?.length}</small>}
+                  <div className="  userContact border-end border-primary border-opacity-25 px-1 ">
+                    {/* <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                    Lisitng : &nbsp; <small className="fw-bold">
+                    {read[index]?.ContactNumber==`630713${item.ContactNumber}`&&item?.postData?.length>read[index]?.postData ?
+                      <small> {item?.postData?.length}<sup className="text-success">new</sup></small>  :   <small>{item?.postData?.length}</small>}
 
-                      </small>
+                    </small>
+                  </p> */}
+                    <p className="all-response-data-section d-flex justify-content-center align-items-center">
+                      Listing:&nbsp;
+                      <div className="fw-bold">
+                        {
+                          (() => {
+                            const fullNumber = `630713${item.ContactNumber}`;
+                            const matched = read.find(r => r.ContactNumber === fullNumber);
+
+                            if (matched) {
+                              return item?.postData?.length > matched?.postData
+                                ? <div className="d-flex">{item?.postData?.length}{" "}<span className="all-user-response-new-activitites  ">{item?.postData?.length - matched?.postData}</span></div>
+
+                                : <>{item?.postData?.length}</>;
+                            } else {
+                              return <>{item?.postData?.length}</>;
+                            }
+                          })()
+                        }
+                      </div>
                     </p>
+
                   </div>
-                  <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                    <p className=" all-response-data-section d-flex justify-content-center align-items-center ">
+                  <div className="  userContact border-end border-primary border-opacity-25 px-1 ">
+                    {/* <p className=" all-response-data-section d-flex justify-content-center align-items-center ">
                       Schedule :  &nbsp; <small className="fw-bold">
 
-                        {tarckNewLead[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.scheduleData?.length > tarckNewLead[index]?.scheduleData ?
+                        {read[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.scheduleData?.length > read[index]?.scheduleData ?
                           <small>{item?.scheduleData?.length}<sup className="text-success">new</sup></small> : <small>{item?.scheduleData?.length}</small>}
-                      </small> </p>
+                      </small> </p> */}
+                    <p className="all-response-data-section d-flex justify-content-center align-items-center">
+                      Schedule:&nbsp;
+                      <div className="all-user-response-new-activitite-container fw-bold">
+                        {
+                          (() => {
+                            const fullNumber = `630713${item.ContactNumber}`;
+                            const matched = read.find(r => r.ContactNumber === fullNumber);
+
+                            if (matched) {
+                              return item?.scheduleData?.length > matched?.scheduleData
+                                ? <div className="d-flex"><span>{item?.scheduleData?.length}</span>{" "}<span className="all-user-response-new-activitites  ">{item?.scheduleData?.length - matched?.scheduleData}</span></div>
+                                : <>{item?.scheduleData?.length}</>;
+                            } else {
+                              return <>{item?.scheduleData?.length}</>;
+                            }
+                          })()
+                        }
+                      </div>
+                    </p>
+
                   </div>
 
-                  <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                    <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                  <div className="  userContact border-end border-primary border-opacity-25 px-1 ">
+                    {/* <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
                       Offer Data : &nbsp; <small className="fw-bold">
-                        {tarckNewLead[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.offerData?.length > tarckNewLead[index]?.offerData ?
+                        {read[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.offerData?.length > read[index]?.offerData ?
                           <small>{item?.offerData?.length}<sup className="text-success">new</sup></small> : <small>{item?.offerData?.length}</small>}
-                      </small></p>
+                      </small></p> */}
+                    <p className="all-response-data-section d-flex justify-content-center align-items-center">
+                      Offer Data:&nbsp;
+                      <div className="fw-bold">
+                        {
+                          (() => {
+                            const fullNumber = `630713${item.ContactNumber}`;
+                            const matched = read.find(r => r.ContactNumber === fullNumber);
+
+                            if (matched) {
+                              return item?.offerData?.length > matched?.offerData
+                                ? <div className="d-flex">{item?.offerData?.length}{" "}<span className="all-user-response-new-activitites  ">{item?.offerData?.length - matched?.offerData}</span></div>
+                                : <>{item?.offerData?.length}</>;
+                            } else {
+                              return <>{item?.offerData?.length}</>;
+                            }
+                          })()
+                        }
+                      </div>
+                    </p>
+
                   </div>
 
 
 
 
-                  <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                    <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                  <div className=" userContactNumber border-end border-primary border-opacity-25 px-1 ">
+                    {/* <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
                       Notify:&nbsp; <small className="fw-bold">
-                        {tarckNewLead[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.notifyData?.length > tarckNewLead[index]?.notifyData ?
+                        {read[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.notifyData?.length > read[index]?.notifyData ?
                           <small>{item?.notifyData?.length}<sup className="text-success">new</sup></small> : <small>{item?.notifyData?.length}</small>}
 
 
 
                       </small>
 
+                    </p> */}
+                    <p className="all-response-data-section d-flex justify-content-center align-items-center">
+                      Notify:&nbsp;
+                      <div className="fw-bold">
+                        {
+                          (() => {
+                            const fullNumber = `630713${item.ContactNumber}`;
+                            const matched = read.find(r => r.ContactNumber === fullNumber);
+
+                            if (matched) {
+                              return item?.notifyData?.length > matched?.notifyData
+                                ? <div className="d-flex">{item?.notifyData?.length}{" "}<span className="all-user-response-new-activitites  "> {item?.notifyData?.length - matched?.notifyData}</span></div>
+                                : <>{item?.notifyData?.length}</>;
+                            } else {
+                              return <>{item?.notifyData?.length}</>;
+                            }
+                          })()
+                        }
+                      </div>
                     </p>
+
                   </div>
-                  <div className="  userContact border-end border-primary border-opacity-25 px-2 ">
-                    <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
+                  <div className="  userContact border-end border-primary border-opacity-25 px-1 ">
+                    {/* <p className="  all-response-data-section d-flex justify-content-center align-items-center ">
                       Requirement : &nbsp; <small className="fw-bold">
 
-                        {tarckNewLead[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.requireData?.length > tarckNewLead[index]?.requireData ?
+                        {read[index]?.ContactNumber == `630713${item.ContactNumber}` && item?.requireData?.length > read[index]?.requireData ?
                           <small>{item?.requireData?.length}<sup className="text-success">new</sup></small> : <small>{item?.requireData?.length}</small>}
                       </small>
 
+                    </p> */}
+                    <p className="all-response-data-section d-flex justify-content-center align-items-center">
+                      Requirement:&nbsp;
+                      <div className="fw-bold">
+                        {
+                          (() => {
+                            const fullNumber = `630713${item.ContactNumber}`;
+                            const matched = read.find(r => r.ContactNumber === fullNumber);
+                            if (matched) {
+                              return item?.requireData?.length > matched?.requireData
+                                ? <div className="d-flex">{item?.requireData?.length}{" "}<span className="all-user-response-new-activitites  ">{item?.requireData?.length - matched?.requireData}</span></div>
+                                : <>{item?.requireData?.length}</>;
+                            } else {
+                              return <>{item?.requireData?.length}</>;
+                            }
+                          })()
+                        }
+                      </div>
                     </p>
+
                   </div>
 
 
@@ -221,25 +405,17 @@ export default function AllUserResponseAction() {
 
 
                   <div className="btn-allresponse-section-main" >
-                    {/* <Link to={`/admin/single-user-Response-action/${item?._id}`} className="text-decoration-none " >
-                    <button className="btn-allresponse-section fw-light px-4" onClick={() => setTrackIndex(index)} >View Details</button>
 
-                  </Link> */}
-                    <Link
-                      to={{
-                        pathname: `/admin/single-user-Response-action/${item?._id}`,
+
+                    <button
+                      className="btn-allresponse-section fw-light px-4"
+                      onClick={() => {
+                        setIndex(`630713${item.ContactNumber}`);
+                        window.open(`/admin/single-user-Response-action/${item?._id}`, 'AgentView');
                       }}
-                      state={{ index: index }}
-                      className="text-decoration-none"
                     >
-                      <button
-                        className="btn-allresponse-section fw-light px-4"
-                        onClick={() => setTrackIndex(index)}
-                      >
-                        View Details
-                      </button>
-                    </Link>
-
+                      View Details
+                    </button>
 
                   </div>
 

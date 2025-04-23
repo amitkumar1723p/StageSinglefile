@@ -29,11 +29,12 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
   const [ScheduleVistData, setScheduleVistData] = useState({
     VisitDate: "",
-    // VisitTime: ,
     VisitTime: { From: "09:00" },
   });
+
   const [showScheduleVistAlert, setshowScheduleVistAlert] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
+
   const SubmitHandler = (e) => {
     e.preventDefault();
 
@@ -42,7 +43,6 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       PostData: { PostId: SinglePostData.SinglePost._id },
     };
 
-    //  alert(`${ScheduleVistData.VisitTime.From} to ${ScheduleVistData.VisitTime.To}`)
     dispatch(CreateScheduleVisitAction(vistobj));
 
     setshowScheduleVistAlert("LodingTrue");
@@ -62,9 +62,9 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
   };
 
   useEffect(() => {
-    if (data && LodingType == "CreateScheduleVisitRequest") {
-      if (data.success == false) {
-        if (data.IsAuthenticated == false) {
+    if (data && LodingType === "CreateScheduleVisitRequest") {
+      if (data.success === false) {
+        if (data.IsAuthenticated === false) {
           navigate("/");
         }
         clearTimeout(timeoutId);
@@ -102,22 +102,21 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
 
   return (
     <>
-      {/* {LodingType && LodingType == "CreateScheduleVisitRequest" && loading ? (
-        <Loader className={"componentloader"} />
-      ) : ( */}
-      {showScheduleVistAlert == false && (
-        <>
-          <form className="schedule-your-visit-form" onSubmit={SubmitHandler}>
-            <div className="cross-div">
+      {showScheduleVistAlert === false && (
+        <div className="schedule-your-visit-wrapper">
+          <div className="schedule-your-visit-card">
+            <div className="schedule-your-visit-header">
+              <h2>Live the Life You Deserve – Schedule a Visit!</h2>
               <span
-                className="cross-btn"
-                onClick={() => {
-                  SetShow(false);
-                }}
+                className="schedule-your-visit-close"
+                onClick={() => SetShow(false)}
               >
-                X
+                ×
               </span>
             </div>
+
+
+
             {!medata?.user?.EmailVerify && (
               <div
                 onClick={(e) => {
@@ -143,78 +142,68 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
                   : null}
               </div>
             )}
-            <div className="main-box-of-schedule">
-              <div className="left-box-of-schedule">
-                <img
-                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/schedule-form.svg"
-                  alt="schedule"
-                />
-              </div>
-              <div className="right-box-of-schedule">
-                <p className="schedule-your-visit-title">Schedule your Visit</p>
-                <div className="schedule-your-visit-group-data">
-                  <label className="schedule-your-visit-label">
-                    Select Date
-                  </label>
+            <div className="schedule-your-visit-body">
+              <form onSubmit={SubmitHandler} className="schedule-your-visit-form">
+                <div className="schedule-your-visit-form-group">
+                  <label className="schedule-your-visit-label">Select Date</label>
+                  <div className="schedule-your-visit-date-wrapper">
+                    <input
+                      type="date"
+                      className="schedule-your-visit-input custom-date-input"
+                      required
+                      value={ScheduleVistData.VisitDate || ""}
+                      onChange={(e) => {
+                        const currentDate = new Date().toISOString().split("T")[0];
+                        const selectedDate = e.target.value;
 
-                  <input
-                    type="date"
-                    className="schedule-your-visit-input-date"
-                    required
-                    value={ScheduleVistData.VisitDate || ""}
-                    onChange={(e) => {
-                      const currentDate = new Date()
-                        .toISOString()
-                        .split("T")[0];
-                      const selectedDate = e.target.value;
+                        if (selectedDate >= currentDate) {
+                          setScheduleVistData({
+                            ...ScheduleVistData,
+                            VisitDate: selectedDate,
+                          });
+                        }
+                      }}
+                    />
+                    <span className="custom-date-icon">
+                     <img src="/img/schedule-your-visit-datepicker.svg" alt="datepicker" />
+                    </span>
+                  </div>
+                </div>
 
-                      if (selectedDate >= currentDate) {
-                        setScheduleVistData({
-                          ...ScheduleVistData,
-                          VisitDate: e.target.value,
-                        });
-                      }
-                    }}
+                <div className="schedule-your-visit-form-group">
+                  <label className="schedule-your-visit-label">Select Time</label>
+                  <TimePicker
+                    onChange={(e) =>
+                      setScheduleVistData({
+                        ...ScheduleVistData,
+                        VisitTime: { ...ScheduleVistData.VisitTime, From: e },
+                      })
+                    }
+                    selectedDate={ScheduleVistData.VisitDate || ""}
                   />
                 </div>
 
-                <div className="schedule-your-visit-time-group">
-                  <label className="schedule-your-visit-label">
-                    Select Time
-                  </label>
-                  <div className="schedule-your-visit-time-container">
-                    <TimePicker
-                      onChange={(e) => {
-                        setScheduleVistData({
-                          ...ScheduleVistData,
-                          VisitTime: {
-                            ...ScheduleVistData.VisitTime,
-                            From: e,
-                          },
-                        });
-                      }}
-                      selectedDate={ScheduleVistData.VisitDate || ""}
-                    />
-                  </div>
-                  {/* <small>available time 10:00 Am to 7:00 PM</small> */}
-                </div>
-
-                <button
-                  type="submit"
-                  className="schedule-your-visit-submit-button"
-                >
-                  Submit
+                <button type="submit" className="schedule-your-visit-submit-btn">
+                  Click to Schedule
                 </button>
+              </form>
+
+              <div className="schedule-your-visit-image">
+                <img
+                  src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/new-schedule-visit-form.png "
+                  alt="schedule"
+                />
               </div>
             </div>
-          </form>
-        </>
+          </div>
+        </div>
       )}
 
       {showScheduleVistAlert === "LodingTrue" && (
         <Loader className={"componentloader"} />
       )}
-      {showScheduleVistAlert == true && (
+
+      {showScheduleVistAlert === true && (
         <ScheduleYourVisitSubmit
           SetShow={SetShow}
           ScheduleVistData={ScheduleVistData}

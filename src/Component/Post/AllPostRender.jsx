@@ -160,7 +160,7 @@ const [query,setQuery]=useState("");
     if (!GetAllPostData?.properties?.length) return;
   
     let filtered = [...filterdPost];
-  console.log(filterData)
+
     if (filterData?.BuySell) {
       filtered = filtered.filter(post => post.BasicDetails?.PropertyAdType?.toLowerCase() == filterData.BuySell.toLowerCase());
     }
@@ -189,7 +189,7 @@ const [query,setQuery]=useState("");
     if (filterData?.Verified) {
       filtered = filtered.filter(post => post.PostVerifyShow == true);
     }
-    console.log(filterData)
+
   
     if (filterData?.Locality) {
       // console.log(filterData.Locality)

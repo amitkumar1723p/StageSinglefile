@@ -265,14 +265,11 @@ const SingleCard = ({
     }
 
     setPropertyAddress(
-      `${
-        PostData?.PropertyDetails?.BHKType
-          ? `${PostData?.PropertyDetails?.BHKType} BHK`
-          : ""
-      } ${PostData?.BasicDetails?.ApartmentType} For ${
-        PostData?.BasicDetails?.PropertyAdType
-      } In ${PostData?.LocationDetails?.Landmark} ${
-        PostData?.LocationDetails?.City
+      `${PostData?.PropertyDetails?.BHKType
+        ? `${PostData?.PropertyDetails?.BHKType} BHK`
+        : ""
+      } ${PostData?.BasicDetails?.ApartmentType} For ${PostData?.BasicDetails?.PropertyAdType
+      } In ${PostData?.LocationDetails?.Landmark} ${PostData?.LocationDetails?.City
       }`
     );
   }, [PostData]);
@@ -389,14 +386,14 @@ const SingleCard = ({
             <>
               {PostData?.PostExpired?.ExpiredStatus == true ? (
                 <div className="">
-                {/* <p>your post is currently inactive please contact our support team</p> */}
-                <p className="inactive-post-para">
-                  {PostData?.BasicDetails?.PropertyAdType=="Sale" && "sale property expired"}
-                  {PostData?.BasicDetails?.PropertyAdType=="Rent" && " “Marked as Rented? Click to Make It Available Again If Needed.”"}
-                   
-               
-                </p>
-              </div>
+                  {/* <p>your post is currently inactive please contact our support team</p> */}
+                  <p className="inactive-post-para">
+                    {PostData?.BasicDetails?.PropertyAdType == "Sale" && "This Property is Expired"}
+                    {PostData?.BasicDetails?.PropertyAdType == "Rent" && "This post is marked as 'Rented Out.' To relist it, click the three-dot menu."}
+
+
+                  </p>
+                </div>
               ) : (
                 <div className="inactive-post">
                   {/* <p>your post is currently inactive please contact our support team</p> */}
@@ -413,11 +410,10 @@ const SingleCard = ({
         <div className="single-card-title-section">
           <div className="single-card-title-actions-container">
             <h2
-              className={`single-card-property-title  ${
-                PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
+              className={`single-card-property-title  ${PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                   ? ""
                   : "sold-out"
-              }`}
+                }`}
             >
               {PostData?.LocationDetails?.ProjectName}
             </h2>
@@ -438,7 +434,7 @@ const SingleCard = ({
                   className="single-page-share-button"
                   disabled={
                     PostData?.propertyStatus?.currentPropertyStatus !==
-                    "sold out"
+                      "sold out"
                       ? false
                       : true
                   }
@@ -456,7 +452,7 @@ const SingleCard = ({
                   <button
                     disabled={
                       PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                        "sold out"
                         ? false
                         : true
                     }
@@ -491,68 +487,67 @@ const SingleCard = ({
                       />
                     )}
                   </button>
- 
-                  {location.pathname.includes("user/my-listing")&&PostData?.BasicDetails?.PropertyAdType == "Rent" && (
-                      <>
-                        <img
-                          src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
-                          className="editIcon"
-                          onClick={() => {
-                            setEditPost(!EditPost);
+
+                  {location.pathname.includes("user/my-listing") && PostData?.BasicDetails?.PropertyAdType == "Rent" && (
+                    <>
+                      <img
+                        src="/img/Three-Dot.svg"
+                        className="editIcon"
+                        onClick={() => {
+                          setEditPost(!EditPost);
+                        }}
+                      />
+                      {EditPost == true && (
+                        <select
+                          ref={selectRef}
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            if (value == "post-edit") {
+                              // navigate(`/user/post/update/${PostData?._id}`);
+
+                              window.open(
+                                `/user/post/update/${PostData?._id}`,
+                                "EditPostTab"
+                              );
+                            } else if (value == "rent-out-post") {
+                              let postdata = { PostVerify: false };
+                              let postid = PostData?._id;
+                              dispatch(
+                                MarkRentOutProperty({ postdata }, postid)
+                              );
+                            } else if (value == "Re-Open-Post") {
+                              dispatch(
+                                ReOpenPostAction(PostData?._id, "UserRoutes")
+                              );
+                            }
+                            if (e.target.value != "") {
+                              setEditPost(false);
+                            }
                           }}
-                        />
-                        {EditPost == true && (
-                          <select
-                            ref={selectRef}
-                            onChange={(e) => {
-                              const value = e.target.value;
-                              if (value == "post-edit") {
-                                // navigate(`/user/post/update/${PostData?._id}`);
+                        >
+                          <option value={""}>Select</option>
+                          <option value="post-edit">Edit-Post</option>
 
-                                window.open(
-                                  `/user/post/update/${PostData?._id}`,
-                                  "EditPostTab"
-                                );
-                              } else if (value == "rent-out-post") {
-                                let postdata = { PostVerify: false };
-                                let postid = PostData?._id;
-                                dispatch(
-                                  MarkRentOutProperty({ postdata }, postid)
-                                );
-                              } else if (value == "Re-Open-Post") {
-                                dispatch(
-                                  ReOpenPostAction(PostData?._id, "UserRoutes")
-                                );
-                              }
-                              if (e.target.value != "") {
-                                setEditPost(false);
-                              }
-                            }}
-                          >
-                            <option value={""}>Select</option>
-                            <option value="post-edit">Edit-Post</option>
-
-                            {PostData?.BasicDetails?.PropertyAdType ===
-                              "Rent" &&
+                          {PostData?.BasicDetails?.PropertyAdType ===
+                            "Rent" &&
                             PostData?.PostExpired?.ExpiredStatus === true ? (
-                              <option value="Re-Open-Post">Re-Open</option>
-                            ) : (
-                              <option value="rent-out-post">Rent Out</option>
-                            )}
-                          </select>
-                        )}
-                      </>
-                    )}
+                            <option value="Re-Open-Post">Re-Open</option>
+                          ) : (
+                            <option value="rent-out-post">Rent Out</option>
+                          )}
+                        </select>
+                      )}
+                    </>
+                  )}
                 </div>
               )}
             </div>
           </div>
           <p
-            className={`single-card-property-location truncate-text  ${
-              PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
+            className={`single-card-property-location truncate-text  ${PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                 ? ""
                 : "sold-out"
-            }`}
+              }`}
           >
             {PropertyAddress}
           </p>
@@ -617,11 +612,10 @@ const SingleCard = ({
                 </div> */}
 
         <div
-          className={`single-card-details-container  ${
-            PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
+          className={`single-card-details-container  ${PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
               ? ""
               : "sold-out"
-          }`}
+            }`}
         >
           {/* Left Button */}
           {/* <button
@@ -643,11 +637,10 @@ const SingleCard = ({
           {/* Scrollable Container */}
           <div
             ref={sliderRef}
-            className={`single-card-details-slide ${
-              PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
+            className={`single-card-details-slide ${PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                 ? ""
                 : "sold-out"
-            } `}
+              } `}
           >
             {PostData?.BasicDetails?.ApartmentType == "Plot/Land" ? (
               <div className="single-card-detail-item">
@@ -659,22 +652,20 @@ const SingleCard = ({
                 </div>
                 <div className="single-card-detail-text">
                   <p
-                    className={`single-card-detail-title  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     {PostData?.OtherDetails?.PlotDirection}
                   </p>
                   <p
-                    className={`single-card-detail-subtitle  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     Plot Direction
                   </p>
@@ -690,35 +681,32 @@ const SingleCard = ({
                 </div>
                 <div className="single-card-detail-text">
                   <p
-                    className={`single-card-detail-title  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     {`${PostData?.PropertyDetails?.BHKType} BHK`}{" "}
                     {PostData?.PropertyDetails?.OtherRoom?.map((text) => {
-                      return `+ ${
-                        text === "Pooja Room"
+                      return `+ ${text === "Pooja Room"
                           ? "Pooja"
                           : text === "Servant Room"
-                          ? "SQ"
-                          : text === "Study Room"
-                          ? "Study"
-                          : text === "Store Room"
-                          ? "Store"
-                          : ""
-                      }`;
+                            ? "SQ"
+                            : text === "Study Room"
+                              ? "Study"
+                              : text === "Store Room"
+                                ? "Store"
+                                : ""
+                        }`;
                     })}
                   </p>
                   <p
-                    className={`single-card-detail-subtitle  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     Type
                   </p>
@@ -735,22 +723,20 @@ const SingleCard = ({
               </div>
               <div className="single-card-detail-text">
                 <p
-                  className={`single-card-detail-title  ${
-                    PostData?.propertyStatus?.currentPropertyStatus !==
-                    "sold out"
+                  className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                      "sold out"
                       ? ""
                       : "sold-out"
-                  }`}
+                    }`}
                 >
                   {`${areaDetails?.value} ${areaDetails?.unit}`}
                 </p>
                 <p
-                  className={`single-card-detail-subtitle  ${
-                    PostData?.propertyStatus?.currentPropertyStatus !==
-                    "sold out"
+                  className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                      "sold out"
                       ? ""
                       : "sold-out"
-                  }`}
+                    }`}
                 >
                   {areaDetails?.label}
                 </p>
@@ -770,15 +756,14 @@ const SingleCard = ({
 
                 <div className="single-card-detail-text ">
                   <p
-                    className={`single-card-detail-title  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     {typeof PostData?.AreaDetails?.PlotDimensions ==
-                    "string" ? (
+                      "string" ? (
                       PostData?.AreaDetails?.PlotDimensions
                     ) : (
                       <>
@@ -794,12 +779,11 @@ const SingleCard = ({
                     )}
                   </p>
                   <p
-                    className={`single-card-detail-subtitle  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     Plot Dimensions
                   </p>
@@ -816,22 +800,20 @@ const SingleCard = ({
 
                 <div className="single-card-detail-text ">
                   <p
-                    className={`single-card-detail-title  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     {PostData?.AmenitiesDetails.Furnishing}
                   </p>
                   <p
-                    className={`single-card-detail-subtitle  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     Furnishing Details
                   </p>
@@ -850,22 +832,20 @@ const SingleCard = ({
                 </div>
                 <div className="single-card-detail-text">
                   <p
-                    className={`single-card-detail-title  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     {PostData?.OtherDetails?.PlotFacing}
                   </p>
                   <p
-                    className={`single-card-detail-subtitle  ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    }`}
+                      }`}
                   >
                     Plot Facing
                   </p>
@@ -882,22 +862,20 @@ const SingleCard = ({
                   </div>
                   <div className="single-card-detail-text">
                     <p
-                      className={`single-card-detail-title  ${
-                        PostData?.propertyStatus?.currentPropertyStatus !==
-                        "sold out"
+                      className={`single-card-detail-title  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
                           ? ""
                           : "sold-out"
-                      }`}
+                        }`}
                     >
                       {floorDetails}
                     </p>
                     <p
-                      className={`single-card-detail-subtitle  ${
-                        PostData?.propertyStatus?.currentPropertyStatus !==
-                        "sold out"
+                      className={`single-card-detail-subtitle  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
                           ? ""
                           : "sold-out"
-                      }`}
+                        }`}
                     >
                       Floor
                     </p>
@@ -940,35 +918,32 @@ const SingleCard = ({
                 <div className="single-card-rent-price-section">
                   <div>
                     <p
-                      className={`rent-price-ans  ${
-                        PostData?.propertyStatus?.currentPropertyStatus !==
-                        "sold out"
+                      className={`rent-price-ans  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
                           ? ""
                           : "sold-out"
-                      }`}
+                        }`}
                     >
                       {formatReservePrice(
                         PostData?.PricingDetails?.ExpectedRent
                       )}
                       <span
-                        className={`rent-per-month  ${
-                          PostData?.propertyStatus?.currentPropertyStatus !==
-                          "sold out"
+                        className={`rent-per-month  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                            "sold out"
                             ? ""
                             : "sold-out"
-                        }`}
+                          }`}
                       >
                         {" "}
                         / Month
                       </span>
                     </p>
                     <p
-                      className={`question-box  ${
-                        PostData?.propertyStatus?.currentPropertyStatus !==
-                        "sold out"
+                      className={`question-box  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                          "sold out"
                           ? ""
                           : "sold-out"
-                      }`}
+                        }`}
                     >
                       Rent{" "}
                     </p>
@@ -977,24 +952,22 @@ const SingleCard = ({
                     <div className="Reserveprice-sec">
                       <div className="Reserveprice-sec-grid">
                         <p
-                          className={`rent-price-ans  ${
-                            PostData?.propertyStatus?.currentPropertyStatus !==
-                            "sold out"
+                          className={`rent-price-ans  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                              "sold out"
                               ? ""
                               : "sold-out"
-                          }`}
+                            }`}
                         >
                           {formatReservePrice(
                             PostData?.PricingDetails?.DepositePrice
                           )}
                         </p>
                         <p
-                          className={`single-card-rent-price-value  ${
-                            PostData?.propertyStatus?.currentPropertyStatus !==
-                            "sold out"
+                          className={`single-card-rent-price-value  ${PostData?.propertyStatus?.currentPropertyStatus !==
+                              "sold out"
                               ? ""
                               : "sold-out"
-                          }`}
+                            }`}
                         >
                           Deposit Amount{" "}
                         </p>
@@ -1011,24 +984,22 @@ const SingleCard = ({
               <div className="single-card-price-section-sale">
                 <div className="single-card-price-section">
                   <span
-                    className={`single-card-sale-price-label ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={`single-card-sale-price-label ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    } `}
+                      } `}
                   >
                     {" "}
                     Reserve Price
                   </span>{" "}
                   :{" "}
                   <span
-                    className={` single-card-price-value ${
-                      PostData?.propertyStatus?.currentPropertyStatus !==
-                      "sold out"
+                    className={` single-card-price-value ${PostData?.propertyStatus?.currentPropertyStatus !==
+                        "sold out"
                         ? ""
                         : "sold-out"
-                    } `}
+                      } `}
                   >
                     {formatReservePrice(
                       PostData?.PricingDetails?.ExpectedPrice
@@ -1036,9 +1007,8 @@ const SingleCard = ({
                   </span>
                 </div>
                 <p
-                  className={`single-post-card-persqft ${
-                    false ? "" : "sold-out"
-                  } `}
+                  className={`single-post-card-persqft ${false ? "" : "sold-out"
+                    } `}
                 >
                   {/* { PostData?.BasicDetails?.ApartmentType} */}
                   {PostData?.BasicDetails?.ApartmentType == "Plot/Land" ? (
@@ -1088,11 +1058,10 @@ const SingleCard = ({
         {/* Action Buttons */}
         <div className="single-card-action-buttons-container">
           <button
-            className={`single-card-action-button-whatsapp ${
-              PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
+            className={`single-card-action-button-whatsapp ${PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                 ? "whatsapp-button"
                 : "sold-out-button"
-            }`}
+              }`}
             disabled={
               PostData?.propertyStatus?.currentPropertyStatus === "sold out"
             }
@@ -1103,17 +1072,14 @@ const SingleCard = ({
                 const phoneNumber = "7837840785"; // Replace with actual phone number
                 const userName = medata?.user?.name || "Interested Buyer"; // Fallback if name is unavailable
                 const message = encodeURIComponent(
-                  `Hello, I am interested in a ${
-                    PostData?.PropertyDetails?.BHKType
-                      ? `${PostData?.PropertyDetails?.BHKType} BHk`
-                      : ""
-                  } ${PostData?.BasicDetails.ApartmentType} In ${
-                    PostData?.LocationDetails?.ProjectName
-                  } For ${PostData?.BasicDetails.PropertyAdType} In ${
-                    PostData?.LocationDetails?.Landmark
-                  } ${
-                    PostData?.LocationDetails.City
-                  }. Could you please share more details?`
+                  `I am interested in ${PostData?.PropertyDetails?.BHKType
+                    ? `${PostData?.PropertyDetails?.BHKType} BHk`
+                    : ""
+                  } ${PostData?.BasicDetails.ApartmentType} In ${PostData?.LocationDetails?.ProjectName
+                  } For ${PostData?.BasicDetails.PropertyAdType} In ${PostData?.LocationDetails?.Landmark
+                  } ${PostData?.LocationDetails.City
+                  }, Property Id ${PostData?._id} Listed on PropertyDekho247.Com
+ `
                 );
                 window.open(
                   `https://wa.me/${phoneNumber}?text=${message}`,
@@ -1139,11 +1105,10 @@ const SingleCard = ({
               .replaceAll("/", "-")}-${PostData?._id}`}
           >
             <button
-              className={`single-card-action-button ${
-                PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
+              className={`single-card-action-button ${PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                   ? ""
                   : "sold-out-button"
-              }`}
+                }`}
               disabled={
                 PostData?.propertyStatus?.currentPropertyStatus !== "sold out"
                   ? false
@@ -1155,23 +1120,22 @@ const SingleCard = ({
           </Link>
         </div>
 
-        {location.pathname.includes("user/my-listing") &&
+        {/* {location.pathname.includes("user/my-listing") &&
           PostData?.BasicDetails?.PropertyAdType === "Rent" &&
           PostData?.PostExpired?.ExpiredStatus === true && (
             <button>RentOut</button>
-          )}
+          )} */}
       </div>
       {/* share card begin  */}
 
       <ShareModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        propid={`${
-          window.location.origin
-        }/post-detail/${PropertyAddress.toLowerCase()
-          .replaceAll(" ", "-")
-          .replace(",", "")
-          .replaceAll("/", "-")}-${PostData?._id}`}
+        propid={`${window.location.origin
+          }/post-detail/${PropertyAddress.toLowerCase()
+            .replaceAll(" ", "-")
+            .replace(",", "")
+            .replaceAll("/", "-")}-${PostData?._id}`}
       />
 
       {/* share card end  */}

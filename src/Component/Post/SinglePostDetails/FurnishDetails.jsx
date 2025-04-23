@@ -2,7 +2,7 @@ import React from 'react';
 import "./FurnishDetails.css";
 
 const furnishingData = [
-  { name: "AC", icon: "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ac.svg" },
+  { name: "AC", icon: "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ac.svg"},
   { name: "Beds", icon: "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/bed.svg" },
   { name: "Fans", icon: "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/fan.svg" },
   { name: "Geyser", icon: "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/geyser.svg" },
