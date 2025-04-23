@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllOwnerFiles, OwnerUploadExcelFile } from '../../Action/postAction';
 import axios from 'axios';
 import "./OwnerAgentExcelData.css";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { deleteExcelFile, GetAllAdminAction } from '../../Action/userAction';
 import { toast } from 'react-toastify';
+import AgentIpManager from './AdminExcel/AgentIpManager';
 
 const OwnerAgentExcelData = () => {
     const [file, setFile] = useState(null);
@@ -114,6 +115,8 @@ const OwnerAgentExcelData = () => {
                 <button onClick={uploadFile} className="file-handler-upload-button">
                     Upload
                 </button>
+                <Link className="file-handler-upload-button" to={"/admin/manage-ip"}>
+                Manage Access</Link>
             </div>
 
             {/* Admin/Agent Selection */}
