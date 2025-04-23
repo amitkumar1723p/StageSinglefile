@@ -93,6 +93,7 @@ import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLea
 import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
 import ContactUsForm from "./Component/Home/ContactUsForm";
 import Contactus from "./Component/Admin/Contactus";
+import AgentIpManager from "./Component/Admin/AdminExcel/AgentIpManager";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -1072,6 +1073,16 @@ function App() {
             element={
               <AdminOwnerRoutes
                 Component={OwnerAgentExcelData}
+                isOwner={true}
+              />
+            }
+          />
+          <Route
+            exact
+            path="manage-ip"
+            element={
+              <AdminOwnerRoutes
+                Component={AgentIpManager}
                 isOwner={true}
               />
             }

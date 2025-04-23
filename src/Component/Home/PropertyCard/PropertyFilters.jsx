@@ -11,18 +11,29 @@ import { formatPrice } from "../../../utils/CommonFunction";
 import { FileTerminal, FilterIcon, FilterX, FilterXIcon } from "lucide-react";
 
 const AllPostSearchFilter = () => {
-
   const [Filter, setFilter] = useState({});
   const [removeFilterField, setRemoveFilterField] = useState(false);
   const [isClicked, setIsClicked] = useState(null);
-  const [allData,setAllData]= useState([]);
+  const [allData, setAllData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { setRedirectPathIsHomeCard } = useContext(UserContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const [searchParams, setSearchParams] = useSearchParams();
-
+  const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
+  const PropertyAdTypeArray = ["Sale", "Rent"];
+  const [rawValue, setRawValue] = useState(500000000); // value from slider
+  const [value, setValue] = useState(500000000);       // debounced value
+  const [query, setQuery] = useState("");
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [filterData, setFilterData] = useState({ BuySell: searchParams.get("PropertyAddType") });
+  const searchInputRef = useRef(null);
+  const typeRef = useRef(null);
+  const budgetRef = useRef(null);
+  const bhkRef = useRef(null);
+  const statusRef = useRef(null);
+  const localityRef = useRef(null);
+  const furnishingRef = useRef(null);
+  const sortByRef = useRef(null);
 
   const { data } = useSelector((state) => state.GetAllPost);
    
@@ -61,19 +72,15 @@ const AllPostSearchFilter = () => {
         break;
     }
   
-    setAllData(()=>{
-      return filtered
+    setAllData(() => {
+      return filtered;
     });
-  }, [data]);
-  
-
- 
+  }, [data, filterData.SortBy, searchParams]);
 
   // Fetch single project data if ProjectName is available in URL
   useEffect(() => {
     const projectName = searchParams.get("ProjectName");
     if (projectName) {
-    
       dispatch(
         GetSingleProjectNameDataAction({ ProjectName: projectName.replaceAll("-", " ") })
       );
@@ -89,32 +96,40 @@ const AllPostSearchFilter = () => {
     });
   }, [searchParams]);
 
-// Fetch all posts based on query params with correct condition handling
-useEffect(() => {
-  const currentProjectName = searchParams.get("ProjectName")?.replaceAll("-", " ");
-  const currentPropertyAddType = searchParams.get("PropertyAddType");
-  const currentSector = searchParams.get("sector")?.replaceAll("-", " ");
-  const currentCity = searchParams.get("city")?.replaceAll("-", " ");
-  const currentLocality = searchParams.get("locality")?.replaceAll("-", " ");
+  // MERGED FETCH LOGIC: Combined the two useEffects to avoid duplicate dispatch calls
+  useEffect(() => {
+    const currentProjectName = searchParams.get("ProjectName")?.replaceAll("-", " ");
+    const currentPropertyAddType = searchParams.get("PropertyAddType");
+    const currentSector = searchParams.get("sector")?.replaceAll("-", " ");
+    const currentCity = searchParams.get("city")?.replaceAll("-", " ");
+    const currentLocality = searchParams.get("locality")?.replaceAll("-", " ");
+    
+    // Initial load or URL params change
+    if ((currentProjectName || currentCity || currentSector || currentLocality || currentPropertyAddType) || 
+        Object.keys(filterData).length > 0 || removeFilterField) {
+      
+      let payload = {
+        ProjectName: currentProjectName,
+        PropertyAdType: currentPropertyAddType,
+        City: currentCity,
+        Sector: currentSector,
+        // Use URL locality param if available, otherwise use the filter locality
+        Locality:   filterData?.Locality || currentLocality,
+        // Add filter parameters
+        BHK: filterData?.BHK?.[0],
+        ApartmentType: filterData?.ApartmentType,
+        PropertyStatus: filterData?.Status,
+        Furnishing: filterData?.Furnishing,
+        Verified: filterData?.Verified,
+        Budget: value,
+      };
+      
+      dispatch(GetAllPostAction(payload));
+    }
 
-  if ((currentProjectName || currentCity || currentSector || currentLocality) && !data) {
-    let payload = {
-      ProjectName: currentProjectName,
-      PropertyAdType: currentPropertyAddType,
-      Locality: currentLocality,
-      City: currentCity,
-      Sector: currentSector,
-    };
-
-    dispatch(GetAllPostAction(payload));
-  }
-
-  setRedirectPathIsHomeCard(true);
-}, [searchParams, dispatch, setRedirectPathIsHomeCard]);
-
-
-
-
+    setRedirectPathIsHomeCard(true);
+    window.scrollTo(0, 0);
+  }, [filterData, searchParams, dispatch, removeFilterField, value]);
 
   const ApartmentTypeOptions = [
     "Apartment",
@@ -124,24 +139,8 @@ useEffect(() => {
     "Serviced Apartment",
     "Plot/Land",
     "Pent House",
-    
   ];
-  const FurnishingOptions = ["Furnished", "Semi-Furnished", "Un-Furnished"];
-  const PropertyAdTypeArray = ["Sale", "Rent"];
-
-
-
-  const [query,setQuery]=useState("");
-  const [activeFilters, setActiveFilters] = useState([]);
-  const [filterData, setFilterData] = useState({ BuySell:searchParams.get("PropertyAddType")  });
-  const searchInputRef = useRef(null);
-  const typeRef = useRef(null);
-  const budgetRef = useRef(null);
-  const bhkRef = useRef(null);
-  const statusRef = useRef(null);
-  const localityRef = useRef(null);
-  const furnishingRef = useRef(null);
-  const sortByRef = useRef(null);
+  
 
   const handleSelect = (category, value) => {
     if (!value) return;
@@ -169,7 +168,6 @@ useEffect(() => {
     const updatedFilterData = { ...filterData };
     for (const key in updatedFilterData) {
       if (updatedFilterData[key] === value) {
-        
         delete updatedFilterData[key];
       }
     }
@@ -189,15 +187,11 @@ useEffect(() => {
     if (sortByRef.current) sortByRef.current.value = '';
   };
 
-  // const handleToggleBuySell = (type) => {
-  //   setFilter(prev => ({ ...prev, BuySell: type }));
-  // };
-
   const isChipActive = (category, value) => {
     return activeFilters.some(filter => filter.category === category && filter.value === value);
   };
-  const [rawValue, setRawValue] = useState(500000000); // value from slider
-  const [value, setValue] = useState(500000000);       // debounced value
+  
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -211,68 +205,6 @@ useEffect(() => {
     setRawValue(Number(e.target.value));
   };
 
-  // Fetch posts when filters change
-  useEffect(() => {
-    if (Object.keys(filterData).length > 0 || removeFilterField) {
-     
-  
-      dispatch(
-        GetAllPostAction({
-          ProjectName: searchParams.get("ProjectName")?.toLowerCase().replaceAll("-", " "),
-          City: searchParams.get("city")?.replaceAll("-", " "),
-          Sector: searchParams.get("sector")?.replaceAll("-", " "),
-          Locality: searchParams.get("locality")?.replaceAll("-", " "),
-          PropertyAdType: searchParams.get("PropertyAddType"),
-          BHK: filterData?.BHK?.[0],
-          ApartmentType: filterData?.ApartmentType,
-          PropertyStatus: filterData?.Status,
-          Furnishing: filterData?.Furnishing,
-          Locality: filterData?.Locality,
-          Verified: filterData?.Verified,
-          Budget: value,
-        })
-      );
-    }
-
-  if(!data || !data?.allPost){
-    return
-  }
-    let filtered = [...data?.allPost];
-    // ✅ Sort only if SortBy is present
-    if (filterData?.SortBy ) {
-      const isSale = searchParams.get("PropertyAddType") === "Sale";
-  
-      if (filterData.SortBy === 'Price Low to High') {
-       
-        filtered.sort((a, b) => {
-          const aPrice = isSale ? a.PricingDetails?.ExpectedPrice : a.PricingDetails?.ExpectedRent;
-          const bPrice = isSale ? b.PricingDetails?.ExpectedPrice : b.PricingDetails?.ExpectedRent;
-          return (aPrice ?? 0) - (bPrice ?? 0);
-        });
-      } else if (filterData.SortBy === 'Price High to Low') {
-        
-        filtered.sort((a, b) => {
-          const aPrice = isSale ? a.PricingDetails?.ExpectedPrice : a.PricingDetails?.ExpectedRent;
-          const bPrice = isSale ? b.PricingDetails?.ExpectedPrice : b.PricingDetails?.ExpectedRent;
-          return (bPrice ?? 0) - (aPrice ?? 0);
-        });
-      } else if (filterData.SortBy === 'Newest First') {
-       
-        filtered.sort((a, b) => {
-          const aDate = isSale ? a.BasicDetails?.PostedOn : a?.createAt;
-          const bDate = isSale ? b.BasicDetails?.PostedOn : b?.createAt;
-          return new Date(bDate ?? 0) - new Date(aDate ?? 0);
-        });
-      }
-  
-    }
-    setAllData(filtered);
-  
-    window.scrollTo(0, 0);
-  }, [filterData, searchParams, dispatch, removeFilterField, value]);
-  
-  const sortBy = filterData?.SortBy;
-  
  
   
    
