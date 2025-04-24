@@ -558,7 +558,7 @@ const Dashboard = () => {
 
                     </>
                   }
-                  {medata.user.role == "Agent" &&
+                  {medata.user.Role == "Agent" &&
                     <>
                       {/*  All-response start  */}
                       <Link to="/admin/agent-user-Response-action">
