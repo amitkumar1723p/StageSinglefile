@@ -357,7 +357,7 @@ option:focus {
   
   }
   .single-fresh-user-name {
-  
+    min-width: 120px;
     padding: 8px 16px 8px 0px;
     h2{
       font-size: 18px;
@@ -467,6 +467,7 @@ option:focus {
   
     position: sticky;
     top: 64px;
+    z-index: 13;
   
   }
   .main-form-data-section{
@@ -522,6 +523,7 @@ option:focus {
   .single-user-response-table-head-container{
     position: sticky;
     top: 128px;
+    z-index: 12;
     tr{
      th{
       font-size: 14px;
@@ -583,3 +585,169 @@ option:focus {
   .single-user-response-inactive{
     color: rgb(255, 0, 0) ;
   }
+
+  /* ----------------------------------------------------------------------------------------------------------- */
+
+  /* Container for the dropdown */
+.admin-custom-dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+/* Button that shows selected value */
+.dropdown-btn {
+  width: 100px; /* or 120px if you prefer */
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  background-color: grey; 
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Status-specific button styles */
+.dropdown-btn.plan {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.dropdown-btn.done {
+  background-color: #22c55e;
+  color: white;
+}
+
+.dropdown-btn.re-plan {
+  background-color: #ef4444;
+  color: white;
+}
+
+
+/* Dropdown menu container */
+.dropdown-options {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 160px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  z-index: 99;
+  padding: 8px 0;
+}
+
+/* Title inside the dropdown */
+.dropdown-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  padding: 6px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 4px;
+}
+
+/* Each selectable item */
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Status-specific text colors */
+.dropdown-item.plan {
+  color: #3b82f6;
+}
+
+.dropdown-item.done {
+  color: #22c55e;
+}
+
+.dropdown-item.replan {
+  color: #ef4444;
+}
+
+/* Dropdown item for the default state */
+.dropdown-item.made {
+  color: #3b82f6; /* Blue */
+}
+
+.dropdown-item.accepted {
+  color: #22c55e; /* Green */
+}
+
+.dropdown-item.rejected {
+  color: #ef4444; /* Red */
+}
+
+
+/* Status-specific button styles */
+.dropdown-btn.made {
+  background-color: #3b82f6; /* Blue */
+  color: white;
+}
+
+.dropdown-btn.accepted {
+  background-color: #22c55e; /* Green */
+  color: white;
+}
+
+.dropdown-btn.rejected {
+  background-color: #ef4444; /* Red */
+  color: white;
+}
+
+
+.notify-dropdown-btn {
+  width: 120px; /* or 120px if you prefer */
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  background-color: grey; 
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+
+
+
+.notify-dropdown-btn.pending {
+  background-color: #ef4444; /* Red */
+  color: white;
+}
+
+.notify-dropdown-btn.completed {
+  background-color: #22c55e; /* Green */
+  color: white;
+}
+
+/* Item text colors */
+.dropdown-item.pending {
+  color: #ef4444;
+}
+
+.dropdown-item.completed {
+  color: #22c55e;
+}
