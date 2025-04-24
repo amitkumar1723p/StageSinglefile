@@ -487,7 +487,7 @@ export default function SinglePostDetails() {
                       {areaDetails ? (
                         <div className="img-box-details-span">
                           <span>
-                            {`${areaDetails?.value} ${areaDetails?.uSinglePostnit}`}
+                            {`${areaDetails?.value} ${areaDetails?.unit}`}
                           </span>
                           <br />
                           <p>{areaDetails?.label}</p>

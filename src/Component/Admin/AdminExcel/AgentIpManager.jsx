@@ -60,7 +60,7 @@ const AgentIpManager = () => {
         try {
             if (editingId) {
              const res=   await axios.put(`${apiUrl}/ip/update-agents-ip/${editingId}`, {
-                    IP: form.ip,
+                    IP: form.ip?.trim(),
                     AgentName: form.agentName,
                 },{
                     withCredentials:true
@@ -130,7 +130,7 @@ const AgentIpManager = () => {
                 <input
                     type="text"
                     name="ip"
-                    placeholder="Enter IP"
+                    placeholder="Enter IPV 4"
                     value={form.ip}
                     onChange={handleChange}
                     required
@@ -169,7 +169,7 @@ const AgentIpManager = () => {
                 <table className="agent-ip-table">
                     <thead>
                         <tr>
-                            <th>IP</th>
+                            <th>IPV 4</th>
                             <th>Agent Name</th>
                             <th>Actions</th>
                         </tr>
