@@ -219,7 +219,7 @@ const Dashboard = () => {
               </div>
               <div className="dashboard-track-one-place"><p>From Listings to Closings — All in One Place.</p></div>
               <div className="dashboard-track-button"><button>Seal Your First Deal Now <img src="/img/dashboard-track-button.svg" alt="btn" /></button> </div>
-              <div className="dashboard-track-star-0"><img src="/img/dashboard-track-Star_0.svg" alt="star" /></div>
+              <div className="dashboard-track-star-0"><img src="/img/dashboard-track-star_0.svg" alt="star" /></div>
               <div className="dashboard-track-star-1"><img src="/img/dashboard-track-Star_1.svg" alt="star" /></div>
               <div className="dashboard-track-star-2"><img src="/img/dashboard-track-star_2.svg" alt="star" /></div>
               <div className="dashboard-track-star-3"><img src="/img/dashboard-track-Star_1.svg" alt="star" /></div>
