@@ -223,8 +223,11 @@
 
 
 
-/* From Uiverse.io by cssbuttons-io */ 
-/* button {
+
+   
+   .freshbooking-home-button {
+    min-width: 260px;
+    height: auto;
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -236,11 +239,6 @@
     padding: 0;
     font-size: inherit;
     font-family: inherit;
-   } */
-   
-   .freshbooking-home-button {
-    min-width: 260px;
-    height: auto;
    }
    
    .freshbooking-home-button.fresh-booking-view-more-more .fresh-booking-button-circle {

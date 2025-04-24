@@ -136,7 +136,7 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
           <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
         </div>
         <div className='freshbooking-home-button-container d-flex align-items-center ' >
-        <button onClick={()=>{navigate('/fresh-bookings2', { state: {allCardData:allFreshBookingCard} } )}} class="freshbooking-home-button fresh-booking-view-more-more">
+        <button onClick={()=>{navigate('/fresh-bookings', { state: {allCardData:allFreshBookingCard} } )}} class="freshbooking-home-button fresh-booking-view-more-more">
   <span class="fresh-booking-button-circle" aria-hidden="true">
   <span class="icon arrow"></span>
   </span>
