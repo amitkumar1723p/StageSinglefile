@@ -100,7 +100,7 @@ export function FreshProjectViewAll() {
                       <Link to={`/admin/fresh-property/edit/${item?._id}`}>
                         <p className="d-flex justify-content-end">Edit</p>
                       </Link>
-                      <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(item?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(item?.projectBasicDetail?.locality)}/${item?.projectBasicDetail?.projectCity}/${item._id}`}> <button className="active-section-freshbook border-0 ">View</button></Link>
+                      <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(item?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(item?.projectBasicDetail?.locality)}/${item?.projectBasicDetail?.projectCity}/${item._id}`}> <button className="active-section-freshbook border-0 ">View Property </button></Link>
                      
                     </div>
                     <div>
