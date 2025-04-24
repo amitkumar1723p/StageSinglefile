@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./PropertySection.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,7 +64,7 @@ const PropertySection = () => {
       const formattedResults = saleProperties.map((post) => {
         const { LocationDetails } = post;
         return {
-          area: `${LocationDetails?.Landmark}, ${LocationDetails?.City}`,
+          area: `${LocationDetails.Landmark}, ${LocationDetails.City}`,
           post,
         };
       });
@@ -138,16 +138,50 @@ const PropertySection = () => {
       return `₹ ${price.toFixed(2)}`;
     }
   };
+
+const PropContainerRef = useRef(null);
+useEffect(() => {
+  const container = PropContainerRef.current;
+  if (!container) return;
+
+  let intervalId;
+  let delayTimer;
+
+  const scrollStep = () => {
+    container.scrollLeft -= 1;
+
+    if (container.scrollLeft <= 0) {
+      clearInterval(intervalId); // stop scrolling
+
+      setTimeout(() => {
+        container.scrollLeft = container.scrollWidth - container.clientWidth;
+        intervalId = setInterval(scrollStep, 30); // restart after 3s
+      }, 3000); // 3s delay before reset
+    }
+  };
+
+  delayTimer = setTimeout(() => {
+    intervalId = setInterval(scrollStep, 30);
+  }, 1800);
+
+  return () => {
+    clearTimeout(delayTimer);
+    clearInterval(intervalId);
+  };
+}, []);
+
+
+
   return (
     <>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
       <div className="Property-section-main-container">
-        <div className="property-filter-container">
+        <div className="property-filter-container ">
           <div className="property-section-container">
-            <div className="property-heading-btn">
-              <div className="property-heading">
-                <h2 className="property-section-h2">
+            <div className="property-heading-btn ">
+              <div className="property-section-heading">
+                <h2 className="">
                   Find Your Dream Home Today!
                 </h2>
                 <h3 className="property-section-h3">
@@ -155,14 +189,18 @@ const PropertySection = () => {
                   luxurious, all in one place.
                 </h3>
               </div>
-              <div className="property-btn">
+              <div className="property-section-button-container">
+                {/* button css is applied from FreshBookingHome.css from line 226 to 313 */}
                 <button
-                  className="view-btn"
+                  className="freshbooking-home-button fresh-booking-view-more-more"
                   onClick={() => navigate("/all-post/Sale")}
                 >
-                  <span className="view-btn-span">
+                  <span class="fresh-booking-button-circle" aria-hidden="true">
+  <span class="icon arrow"></span>
+  </span>
+                  <span className="fresh-booking-button-text">
                     View All Properties{" "}
-                    <img src="/img/right-arrow.svg" alt="" />
+                   
                   </span>
                 </button>
               </div>
@@ -234,8 +272,8 @@ const PropertySection = () => {
           {/* Content section */}
           <div className="content-section">
             <div className={`category-content `}>
-              <div className="container">
-                <div className="scroll-container">
+              <div className="">
+                <div ref={PropContainerRef} className="scroll-container">
                   {loading ? (
                     // Skeleton loader
                     Array.from({ length: 4 }).map((_, index) => (
@@ -255,8 +293,11 @@ const PropertySection = () => {
                   ) : (
                     <>
                       {todisplay?.properties?.map((property, index) => {
+                        
                         return (
+                         
                           property?.BasicDetails?.PropertyAdType === "Sale" && (
+                            
                             <div className="property-cards" key={index}>
                               <img
                                 src={property?.PropertyImages[0]?.url}
@@ -378,7 +419,7 @@ const PropertySection = () => {
                   )}
                 </div>
 
-                <button className="scroll-button left" onClick={scrollLeft}>
+                <button className="scroll-button d-none left" onClick={scrollLeft}>
                   <svg
                     className="icon"
                     fill="none"
@@ -394,7 +435,7 @@ const PropertySection = () => {
                     ></path>
                   </svg>
                 </button>
-                <button className="scroll-button right" onClick={scrollRight}>
+                <button className="scroll-button d-none right" onClick={scrollRight}>
                   <svg
                     className="icon"
                     fill="none"
