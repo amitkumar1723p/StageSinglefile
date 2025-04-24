@@ -1,3 +1,167 @@
+/* AllAdminData css start */
+.all-admin-agent-data-card-contianer{
+  cursor: default;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px 10px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+.all-admin-agent-data-card{
+  max-width: 330px;
+  border-radius: 10px;
+  text-wrap: nowrap;
+  overflow: hidden;
+  div:nth-of-type(1){
+
+  }
+
+}
+.all-admin-agent-data-container{
+
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #4a6bff 0%, #2541b8 100%);
+  display: flex;
+  gap: 8px;
+}
+.all-admin-agent-name-logo-container{
+  padding: 5px;
+}
+.all-admin-agent-name-logo{
+  background-color: #ffffff2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgb(222, 222, 222);
+  width: fit-content;
+  height: 45px;
+  width: 45px;
+
+  aspect-ratio: 1/1;
+  border-radius: 50px;
+  p{
+    font-size: 24px;
+    color: white;
+  }
+}
+.all-admin-agent-name-role-container{
+
+}
+.all-admin-agent-name{
+
+     
+  p{
+    color: white;
+    font-size: 20px;
+  }
+}
+.all-admin-agent-role{
+  display: flex;
+  gap: 10px;
+  p:nth-of-type(1){
+    font-size: 12px;
+    padding: 2px 12px;
+    border-radius: 50px;
+    color: white;
+    background-color: #ffffff2d;
+  }
+  p:nth-of-type(2){
+    white-space: nowrap;  
+    font-size: 12px;
+    padding: 2px 12px;
+    border-radius: 50px;
+
+    font-weight: 600;
+
+  }
+}
+.admin-agent-verified{
+  color: #8a5d00;
+  background-color: #ffcf5c;
+}
+.admin-agent-unverified{
+  color: #0e0e0e;
+  background-color: #bcbcbc;
+}
+
+.all-admin-agent-phone-container{
+  display: flex;
+  gap: 12px;
+  padding: 0px 0px 5px 0px;
+  border-bottom: 1px solid rgb(189, 189, 189);
+}
+.all-admin-agent-info-container{
+  border: 1px solid rgb(189, 189, 189);
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+
+
+.all-admin-agent-phone-logo-container{
+  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+  border-radius:4px;
+  padding: 4px;
+  height: fit-content;
+}
+.all-admin-agent-phone{
+  h2{
+    font-size: 12px;
+    color: #6c757d;
+  }
+  p{
+    font-size: 14px;
+    color: #212529;
+    font-weight: 500;
+  }
+}
+.all-admin-agent-status{
+  h2{
+    font-size: 12px;
+    color: #6c757d;
+  }
+  p{
+    font-size: 14px;
+    color: #212529;
+    font-weight: 500;
+  }
+}
+.all-admin-agent-verification-status{
+  display: flex;
+  gap: 12px;
+  padding: 10px 0px 5px 0px;
+  border-bottom: 1px solid rgb(189, 189, 189);
+}
+.all-admin-agent-status-container{
+  
+  border-radius: 4px;
+  padding: 4px;
+  height: fit-content;
+}
+.all-admin-agent-verified{
+  background: linear-gradient(135deg, #5eff07, #00d123);
+}
+.all-admin-agent-unverified{
+  background: linear-gradient(135deg, #ff1616, #d90505);
+}
+
+.add-admin-agent-button{
+  padding: 10px 0px 0px 0px ;
+}
+
+.admin-agent-button{
+  width: 100%;
+  padding: 10px  20px;
+  background: linear-gradient(135deg, #1877f2 0%, #4a6bff 100%);
+  border-radius:5px;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+}
+
+/* AllAdminData css end */
+
+
 /* src/Dashboard.css */
 .dashboard {
   display: flex;
@@ -21,15 +185,7 @@
   min-height: 100%;
 }
 
-.agent-verifed-btn{
-  padding: 5px;
-  background-color: var(--main-light-clr);
-  border-radius:5px;
-  color: #fff;
-  border: none;
-  font-size: 12px;
-  
-}
+
 
 
 .card {
@@ -1274,6 +1430,10 @@ width: 90%;
   .dashboard-listing-card{
     min-width: 240px;
   }
+  .all-admin-agent-data-card-contianer{
+    grid-template-columns: repeat(3,1fr);
+
+  }
 
   
 }
@@ -1301,6 +1461,10 @@ width: 90%;
   }
   .dashboard-data-user-card-container{
     grid-template-columns: repeat(2,1fr);
+  }
+  .all-admin-agent-data-card-contianer{
+    grid-template-columns: repeat(2,1fr);
+
   }
   
 }
@@ -1337,5 +1501,17 @@ width: 90%;
   .dashboard-data-user-card-container{
     grid-template-columns: repeat(1,1fr);
   }
+  .all-admin-agent-data-card-contianer{
+    grid-template-columns: repeat(1,1fr);
+
+  }
+  .all-admin-agent-data-card{
+  
+  }
+
+
+}
+
+@media(max-width:480px){
 
 }

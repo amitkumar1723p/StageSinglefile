@@ -464,8 +464,8 @@ console.log(viewAllContactFormReducer,"ooo")
 
                 {medata.user.Role === "Owner"  && 
                 <>
-                              {/* All-excel-data start  */}
-                              <Link to="/admin/all-excel">
+              {/* All-excel-data start  */}
+                 <Link to="/admin/all-excel">
                  <div className="dashboard-listing-card dashboard-all-excel-data-card">
                       <div>
                         <div className="dashboard-listing-card-top-all-excel-data-heading">
