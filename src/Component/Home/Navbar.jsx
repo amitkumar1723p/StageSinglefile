@@ -321,7 +321,8 @@ const Navbar = () => {
                                 />
                                 All Response
                               </NavLink>
-                            ) : (
+                            ) :
+                             (
                               <NavLink
                                 to="/admin/all-user-Response-action"
                                 className={({ isActive }) =>
@@ -343,6 +344,7 @@ const Navbar = () => {
                             )}
 
                             {/* Fresh Property Routing / */}
+                           {medata?.user?.Role==="Owner" && <>
                             <NavLink
                               to="/admin/fresh-property"
                               className={({ isActive }) =>
@@ -391,7 +393,9 @@ const Navbar = () => {
                                   }`}
                               />
                               Agent
-                            </NavLink>
+                            </NavLink></>
+
+                           }
                             {/* admin routes  */}
 
                           </>

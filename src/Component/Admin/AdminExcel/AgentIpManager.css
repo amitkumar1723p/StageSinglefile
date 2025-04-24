@@ -1,0 +1,132 @@
+.agent-ip-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.agent-ip-subtitle-parent{
+    display: flex;
+    gap: 20px;
+    height: 50px;
+    
+    align-items: center;
+}
+
+.agent-ip-filter-search{
+    height: 30px;
+   border: none;
+   border: 1px solid var(--main-light-clr);
+   padding: 4px;
+   border-radius: 5px;
+
+}
+
+.agent-ip-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.agent-ip-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.agent-ip-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.agent-ip-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.agent-ip-button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.agent-ip-button.cancel {
+    background-color: #6c757d;
+}
+
+.agent-ip-button:disabled {
+    background-color: #b3d7ff;
+    cursor: not-allowed;
+}
+
+.agent-ip-message {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.agent-ip-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.agent-ip-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.agent-ip-subtitle {
+    /* margin-top: 1.5rem; */
+    font-size: 1.2rem;
+    /* margin-bottom: 0.5rem; */
+}
+
+.agent-ip-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.agent-ip-table th,
+.agent-ip-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.agent-ip-table th {
+    background-color: #f0f0f0;
+}
+
+.agent-ip-action {
+    padding: 6px 12px;
+    margin-right: 6px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.agent-ip-action.edit {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.agent-ip-action.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.agent-ip-loading {
+    text-align: center;
+    color: #777;
+}

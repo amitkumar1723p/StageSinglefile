@@ -93,6 +93,7 @@ import { FreshProjectLead } from "./Component/Admin/FreshProject/FreshProjectLea
 import FreshBookingViewAlll from "./Component/Home/FreshBooking/FreshBookingViewAll/FreshBookingViewAlll";
 import ContactUsForm from "./Component/Home/ContactUsForm";
 import Contactus from "./Component/Admin/Contactus";
+import AgentIpManager from "./Component/Admin/AdminExcel/AgentIpManager";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
 function App() {
@@ -225,13 +226,13 @@ function App() {
     } else if (location.pathname.includes("/admin/post/update")) {
       dispatch(GetProjectNameAction());
     }
-
+  
     // eslint-disable-next-line
   }, [location]);
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-       console.log(LodingType ,"LodingType")
+     
       if (data?.success && LodingType == "ProfileUpdateRequest") {
         dispatch(GetMeDetailsAction());
       }
@@ -270,7 +271,7 @@ function App() {
        
         
       } else {
-        setalertMessage(<p>{data.message}</p>);
+        setalertMessage(<p>{data?.message}</p>);
         setalertType("Success");
         setalertShow(true);
 
@@ -278,28 +279,28 @@ function App() {
       }
 
       if (
-        data.success === false &&
+        data?.success === false &&
         ["VerifyUserOtpRequest"].includes(LodingType)
       ) {
         dispatch({ type: "UserClear" });
         setalertShow(false);
       } else {
-        if (data.success === false) {
-          if (data.fielderrors) {
+        if (data?.success === false) {
+          if (data?.fielderrors) {
             setalertMessage(
               data.fielderrors.map((e, index) => {
                 return <p key={index}>{e.msg}</p>;
               })
             );
           } else {
-            setalertMessage(<p> {data.message}</p>);
+            setalertMessage(<p> {data?.message}</p>);
           }
           setalertType("error");
           setalertShow(true);
 
           dispatch({ type: "UserClear" });
 
-          if (LodingType.Type == "DisplayDataRequest") {
+          if (LodingType?.Type == "DisplayDataRequest") {
             dispatch({ type: LodingType.StoreClear });
           }
         }
@@ -317,11 +318,10 @@ function App() {
   //  show Alert on Create Post Delete Post and UpdatePost
   // Admin Onwer Show Alert Function
   useEffect(() => {
-    console.log("admin", CreatePost);
-    if (CreatePost) {
+     if (CreatePost) {
       if (
         CreatePost.success === true &&
-        ["DisplayDataRequest"].includes(
+        ["DisplayDataRequest" ,"OwnerAllExcelFileRequest"].includes(
           typeof AlertType === "string" ? AlertType : AlertType?.Type
         )
       ) {
@@ -1077,6 +1077,16 @@ function App() {
               />
             }
           />
+          <Route
+            exact
+            path="manage-ip"
+            element={
+              <AdminOwnerRoutes
+                Component={AgentIpManager}
+                isOwner={true}
+              />
+            }
+          />
 
           <Route
 
@@ -1230,7 +1240,7 @@ function App() {
         </Route>
         {/*All post route admin routes end here*/}
 
-        <Route path={"/all-post"} element={<AllPostRender />} />
+        <Route path={"/all-post/:type"} element={<AllPostRender />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>

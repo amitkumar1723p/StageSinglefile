@@ -63,7 +63,7 @@ export default function AdminAgentAssignPost({
           (item) => item?.PostId?.PostExpired?.ExpiredStatus
         );
       }
-      console.log(filteredPosts)
+   
       if(activeFilter !== "expired")
       filteredPosts = filteredPosts.filter(
         (item) => item?.PostId?.PostVerify === activeFilter
@@ -104,6 +104,7 @@ export default function AdminAgentAssignPost({
   
  
 
+ 
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);

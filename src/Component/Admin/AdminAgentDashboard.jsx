@@ -89,39 +89,39 @@ const AdminAgentDashboard = () => {
                     <>
                       {" "}
                       <Link to="/admin/data?Role=Admin">
-                        <div className="card p-3">
+                        <div className="dashboard-card">
                           <div className="Admin-box">
-                            <p className="total-number">
+                            <p className="Admin-dashboard-total-number ">
                               {UnVerifyAdmin.length + VerifiedAdmin.length}
                             </p>
                             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalAdmin.png" alt="post" />
                           </div>
-                          <h3> Total Admin Verified And Un-Verified </h3>
-                          <p className="viewall">View All</p>
+                          <h3 className="dashboard-card-h3"> Total Admin Verified And Un-Verified </h3>
+                          <p className="Admin-dashboard-viewall">View All</p>
                         </div>
                       </Link>
                       <Link to={`/admin/data?AdminVerify=false`}>
-                        <div className="card min-h-[8.5rem]  p-3">
+                        <div className="dashboard-card min-h-[8.5rem] ">
                           <div className="Admin-box">
-                            <p className="total-number">
+                            <p className="Admin-dashboard-total-number ">
                               {UnVerifyAdmin.length}
                             </p>
                             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Unverified Admin </h3>
-                          <p className="viewall">View All</p>
+                          <h3 className="dashboard-card-h3"> Unverified Admin </h3>
+                          <p className="Admin-dashboard-viewall">View All</p>
                         </div>
                       </Link>
                       <Link to="/admin/data/?AdminVerify=true">
-                        <div className="card min-h-[8.5rem]  p-3">
+                        <div className="dashboard-card min-h-[8.5rem]">
                           <div className="Admin-box">
-                            <p className="total-number">
+                            <p className="Admin-dashboard-total-number ">
                               {VerifiedAdmin.length}
                             </p>
                             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Verified Admin </h3>
-                          <p className="viewall">View All</p>
+                          <h3 className="dashboard-card-h3"> Verified Admin </h3>
+                          <p className="Admin-dashboard-viewall">View All</p>
                         </div>
                       </Link>
                     </>
@@ -131,37 +131,37 @@ const AdminAgentDashboard = () => {
                     <>
                       {" "}
                       <Link to="/admin/data/?Role=Agent">
-                        <div className="card min-h-[8.5rem]  p-3">
+                        <div className="dashboard-card min-h-[8.5rem] ">
                           <div className="Admin-box">
-                            <p className="total-number">
+                            <p className="Admin-dashboard-total-number ">
                               {UnVerifyAgent.length + VerifyAgent.length}
                             </p>
                             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalAdmin.png" alt="post" />
                           </div>
-                          <h3> Total Agent Verified And Un-Verified </h3>
-                          <p className="viewall">View All</p>
+                          <h3 className="dashboard-card-h3"> Total Agent Verified And Un-Verified </h3>
+                          <p className="Admin-dashboard-viewall">View All</p>
                         </div>
                       </Link>
                       <Link to="/admin/data?AgentVerify=false">
-                        <div className="card min-h-[8.5rem]  p-3">
+                        <div className="dashboard-card min-h-[8.5rem] ">
                           <div className="Admin-box">
-                            <p className="total-number">
+                            <p className="Admin-dashboard-total-number ">
                               {UnVerifyAgent.length}
                             </p>
                             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Unverified Agent </h3>
-                          <p className="viewall">View All</p>
+                          <h3 className="dashboard-card-h3"> Unverified Agent </h3>
+                          <p className="Admin-dashboard-viewall">View All</p>
                         </div>
                       </Link>
                       <Link to="/admin/data?AgentVerify=true">
-                        <div className="card min-h-[8.5rem]  p-3">
+                        <div className="dashboard-card min-h-[8.5rem]">
                           <div className="Admin-box">
-                            <p className="total-number">{VerifyAgent.length}</p>
+                            <p className="Admin-dashboard-total-number ">{VerifyAgent.length}</p>
                             <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
-                          <h3> Verified Agent </h3>
-                          <p className="viewall">View All</p>
+                          <h3 className="dashboard-card-h3"> Verified Agent </h3>
+                          <p className="Admin-dashboard-viewall">View All</p>
                         </div>
                       </Link>
                     </>
@@ -170,7 +170,7 @@ const AdminAgentDashboard = () => {
 
                   {/* <div className="card">
                     <div className="Admin-box">
-                      <p className="total-number">{FakeUnverifyAdmin.length}</p>
+                      <p className="Admin-dashboard-total-number ">{FakeUnverifyAdmin.length}</p>
                       <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3> Fake Admin request (Profile is not Create) </h3>

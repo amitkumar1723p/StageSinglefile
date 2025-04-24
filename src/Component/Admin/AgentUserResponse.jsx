@@ -106,7 +106,7 @@ export default function AgentUserResponse() {
             const stored = localStorage.getItem('agentReadMode');
             if (stored) {
                 const parsed = JSON.parse(stored);
-                console.log(indexAgent, "id")
+                
                 // Filter out the one with matching _id
                 const updated = parsed.filter(item => item !== indexAgent);
 
@@ -116,7 +116,7 @@ export default function AgentUserResponse() {
         }
 
     }, [indexAgent]);
-    console.log(indexAgent, "lk")
+ 
 
 
     return (

@@ -37,7 +37,7 @@ export default function Login() {
       dispatch(Login_Admin_Owner_Action({ userData }));
     }
   };
-  console.log(medata);
+   
   useEffect(() => {
     if (medata) {
       if (medata.IsAuthenticated === true) {

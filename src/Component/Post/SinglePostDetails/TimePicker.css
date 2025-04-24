@@ -6,7 +6,7 @@
   padding-top: 10px ;
   padding-bottom: 10px ;
   padding-right: 33px ;
-  padding-left: 5px;
+  padding-left: 16px;
   text-align: start;
   border: 1px solid #4a7296;
   border-radius: 4px;
@@ -15,7 +15,7 @@
   color: #333;
 }
 .timepicker-format-dispaly{
-font-size: 9px;
+font-size: 10px;
 padding-left: 4px;
 }
 .time-picker-overlay {
@@ -148,4 +148,11 @@ padding-left: 4px;
   cursor: not-allowed;
   background-color: #e5e5e5 !important;
   color: #999 !important;
+}
+
+@media (max-width: 480px) {
+
+  .time-picker-button{
+    padding: 10px;
+  }
 }

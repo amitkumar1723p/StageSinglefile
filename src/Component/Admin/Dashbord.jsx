@@ -94,7 +94,7 @@ const Dashboard = () => {
   });
   const { data: viewAllContactFormReducer } = useSelector((state) => {
     return state.viewAllContactFormReducer;
-});
+  });
   // console.log(data2,"hello1");
   // console.log("assongg ",assignedExcles)
 
@@ -105,8 +105,8 @@ const Dashboard = () => {
         dispatch(Admin_OwnerGetAllPostAction());
         dispatch(GetAllAdminAction());
         dispatch(fetchAllOwnerFiles())
-            dispatch(viewAllContactForm())
-            
+        dispatch(viewAllContactForm())
+
         // if  data is  exit in redux store not call thsi api
         if (!DeletedPost) {
           dispatch(GetDeletedPostsAction());
@@ -147,7 +147,7 @@ const Dashboard = () => {
 
       const expiredPost = AllPost.Post.filter((item) => {
         // console.log("ittem  ",item?.PostExpired)
-        return item?.PostExpired?.ExpiredStatus ;
+        return item?.PostExpired?.ExpiredStatus;
       });
 
 
@@ -172,7 +172,7 @@ const Dashboard = () => {
       setTotalListing(PostVerify.length + unverify.length);
     }
   }, [AgentAdminAllPost]);
-console.log(viewAllContactFormReducer,"ooo")
+
   // console.log(AllUserResponseData,"dash")
   return (
     <>
@@ -188,38 +188,38 @@ console.log(viewAllContactFormReducer,"ooo")
         </>
       ) : (
 
-      
+
         <div className="dashboard-container">
 
           <div className="dashboard-agentprofile-container">
             <div className="dashboard-agentprofile">
               <div className="dashboard-username-contianer">
-                <div className="dashboard-username">{medata.user.Name} </div>
-                <div className="dashboard-role">{medata.user.Role}</div>
+                <div className="dashboard-username">{medata?.user?.Name} </div>
+                <div className="dashboard-role">{medata?.user?.Role}</div>
               </div>
               <div className="dashboard-call-email-container">
                 <div className="dashboard-callme">
                   <img src="/img/dashboard-callme.svg" alt="call" />
-                  <p>9634755090</p>
+                  <p>{medata?.user?.ContactNumber}</p>
                 </div>
-                <div className="dashboard-emailme">
+                {/* <div className="dashboard-emailme">
                   <img src="/img/dashboard-emailme.svg" alt="email" />
                   <p>saurabhhh2613@gmail.notcom</p>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="dashboard-track-card">
               <div className="dashboard-track-properydekho"><p>PROPERTYDEKHO247.COM</p></div>
               <div className="dashboard-track-container">
                 <div><p>Track</p></div>
-                <div><img src="/img/dashboard-arrow.svg" alt="arrow" /></div>
+                <div ><img src="/img/dashboard-arrow.svg" alt="arrow" /></div>
                 <div><p>Connect</p></div>
                 <div><img src="/img/dashboard-arrow.svg" alt="arrow" /></div>
                 <div><p>Close</p></div>
               </div>
               <div className="dashboard-track-one-place"><p>From Listings to Closings — All in One Place.</p></div>
               <div className="dashboard-track-button"><button>Seal Your First Deal Now <img src="/img/dashboard-track-button.svg" alt="btn" /></button> </div>
-              <div className="dashboard-track-star-0"><img src="/img/dashboard-track-Star_0.svg" alt="star" /></div>
+              <div className="dashboard-track-star-0"><img src="/img/dashboard-track-star_0.svg" alt="star" /></div>
               <div className="dashboard-track-star-1"><img src="/img/dashboard-track-star_1.svg" alt="star" /></div>
               <div className="dashboard-track-star-2"><img src="/img/dashboard-track-star_2.svg" alt="star" /></div>
               <div className="dashboard-track-star-3"><img src="/img/dashboard-track-star_1.svg" alt="star" /></div>
@@ -229,25 +229,25 @@ console.log(viewAllContactFormReducer,"ooo")
             </div>
           </div>
           <div className="dashboard-routes-container">
-            
+
             <div className="dashboard-routes-top">
               <div className="dashboard-listing-info">
                 <div className="dashbord-listing-info-heading">Listing Info</div>
                 <div className="dashboard-listing-cards-container">
-                 {/* Dashboard-total-post start  */}
-                <Link to="/admin/allpost?type=all">
-                 <div className="dashboard-listing-card dashboard-total-post-card">
+                  {/* Dashboard-total-post start  */}
+                  <Link to="/admin/allpost?type=all">
+                    <div className="dashboard-listing-card dashboard-total-post-card">
                       <div>
                         <div className="dashboard-listing-card-top-total-post-heading">
                           <div>
-                              <img src="/img/new_total_listing.svg" alt="total_listing" />
-                              <h2>Total Post</h2>
+                            <img src="/img/new_total_listing.svg" alt="total_listing" />
+                            <h2>Total Post</h2>
                           </div>
                           <div className="d-none">
-                              <p>+5.63</p>
+                            <p>+5.63</p>
                           </div>
                         </div>
-                        
+
                       </div>
                       <div className="dashboard-listing-card-total-post-bottom">
                         <div>
@@ -257,27 +257,27 @@ console.log(viewAllContactFormReducer,"ooo")
                         <div>
                           <img src="/img/graph_1.svg" alt="graph" />
                         </div>
-                       
+
                       </div>
-                  </div>    
-                 </Link>
+                    </div>
+                  </Link>
                   {/* Dashboard-total-post end  */}
 
 
                   {/* Active-listings start  */}
-                <Link to="/admin/allpost?type=true">
-                 <div className="dashboard-listing-card dashboard-active-listing-card">
+                  <Link to="/admin/allpost?type=true">
+                    <div className="dashboard-listing-card dashboard-active-listing-card">
                       <div>
                         <div className="dashboard-listing-card-top-active-listing-heading">
                           <div>
-                              <img src="/img/active_listing.svg" alt="active_listing" />
-                              <h2>Active Listings</h2>
+                            <img src="/img/active_listing.svg" alt="active_listing" />
+                            <h2>Active Listings</h2>
                           </div>
                           <div className="d-none">
-                              <p>-4.44</p>
+                            <p>-4.44</p>
                           </div>
                         </div>
-                        
+
                       </div>
                       <div className="dashboard-listing-card-active-listing-bottom">
                         <div>
@@ -287,27 +287,27 @@ console.log(viewAllContactFormReducer,"ooo")
                         <div>
                           <img src="/img/graph_2.svg" alt="graph" />
                         </div>
-                       
+
                       </div>
-                  </div>    
-                 </Link>
-                   {/*Active-listings end  */}
+                    </div>
+                  </Link>
+                  {/*Active-listings end  */}
 
 
                   {/* InActive-listings start  */}
-                <Link to="/admin/allpost?type=false">
-                 <div className="dashboard-listing-card dashboard-inactive-listing-card">
+                  <Link to="/admin/allpost?type=false">
+                    <div className="dashboard-listing-card dashboard-inactive-listing-card">
                       <div>
                         <div className="dashboard-listing-card-top-inactive-listing-heading">
                           <div>
-                              <img src="/img/inactive_listing.svg" alt="total_listing" />
-                              <h2>In-Active Listings</h2>
+                            <img src="/img/inactive_listing.svg" alt="total_listing" />
+                            <h2>In-Active Listings</h2>
                           </div>
                           <div className="d-none">
-                              <p>+17.63</p>
+                            <p>+17.63</p>
                           </div>
                         </div>
-                        
+
                       </div>
                       <div className="dashboard-listing-card-inactive-listing-bottom">
                         <div>
@@ -317,295 +317,351 @@ console.log(viewAllContactFormReducer,"ooo")
                         <div>
                           <img src="/img/graph_3.svg" alt="graph" />
                         </div>
-                       
+
                       </div>
-                  </div>    
-                 </Link>
+                    </div>
+                  </Link>
                   {/* InActive-listings start  */}
 
 
 
-        { ["Admin" ,"Owner"].includes(medata.user.Role)  && <>
-              {/* Expire-Listing start  */}
-                <Link to ="/admin/allpost?type=expired">
-                  <div className="dashboard-listing-card dashboard-expired-listing-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-expired-listing-heading">
-                          <div>
+                  {["Admin", "Owner"].includes(medata.user.Role) && <>
+                    {/* Expire-Listing start  */}
+                    <Link to="/admin/allpost?type=expired">
+                      <div className="dashboard-listing-card dashboard-expired-listing-card">
+                        <div>
+                          <div className="dashboard-listing-card-top-expired-listing-heading">
+                            <div>
                               <img src="/img/expire_listing.svg" alt="total_listing" />
                               <h2>Expired Listings</h2>
-                          </div>
-                          <div className="d-none">
+                            </div>
+                            <div className="d-none">
                               <p>-23.43</p>
+                            </div>
                           </div>
-                        </div>
-                        
-                      </div>
-                      <div className="dashboard-listing-card-expired-listing-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{expiredPostlength}</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_3.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>  
-                </Link>
-              {/* Expire-Listing end  */}
 
-              {/*Success-listing start  */}
-                <Link to="/admin/allpost?type=success">
-                 <div className="dashboard-listing-card dashboard-success-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-success-heading">
+                        </div>
+                        <div className="dashboard-listing-card-expired-listing-bottom">
                           <div>
-                              <img src="/img/success_listing.svg" alt="total_listing" />
+                            <h2>Current Value</h2>
+                            <p>{expiredPostlength}</p>
+                          </div>
+                          <div>
+                            <img src="/img/graph_3.svg" alt="graph" />
+                          </div>
+
+                        </div>
+                      </div>
+                    </Link>
+                    {/* Expire-Listing end  */}
+
+                    {/*Success-listing start  */}
+                    <Link to="/admin/allpost?type=success">
+                      <div className="dashboard-listing-card dashboard-success-card">
+                        <div>
+                          <div className="dashboard-listing-card-top-success-heading">
+                            <div>
+                              <img src="/img/Success_listing.svg" alt="total_listing" />
                               <h2>Success Listings</h2>
-                          </div>
-                          <div className="d-none">
+                            </div>
+                            <div className="d-none">
                               <p>-8.63</p>
+                            </div>
                           </div>
-                        </div>
-                        
-                      </div>
-                      <div className="dashboard-listing-card-success-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{successPostlength}</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_2.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>    
-                 </Link>
-              {/* Success-listings end  */}
-              
-              </>
-          }
 
-
-          {medata.user.Role === "Owner" && 
-          <>
-          
-              {/* Deleted-listings start  */}
-                  <Link to="/admin/deleted-post?Type=AllPost">
-                 <div className="dashboard-listing-card dashboard-deleted-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-deleted-heading">
+                        </div>
+                        <div className="dashboard-listing-card-success-bottom">
                           <div>
-                              <img src="/img/deleted_listing.svg" alt="deleted_listing" />
-                              <h2>Deleted Listings</h2>
+                            <h2>Current Value</h2>
+                            <p>{successPostlength}</p>
                           </div>
-                          <div className="d-none">
-                              <p>+5.63</p>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div className="dashboard-listing-card-deleted-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{DeletedPost?.deletedPosts?.length || 0}</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_1.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>    
-                 </Link>
-              {/* Deleted-listingst end  */}
-          </>
-          }
-            </div>
-              </div>
-
-                <div className="dashboard-data-user">
-                <div className="dashboard-data-user-headings">Data & Users</div>
-                <div className="dashboard-data-user-card-container">
- 
-                {["Agent","Admin"].includes(medata.user.Role) && <>
-                
-              {/* All-excel-data start  */}
-                 <Link to="/admin/all-excel-both">
-                 <div className="dashboard-listing-card dashboard-all-excel-data-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-all-excel-data-heading">
                           <div>
-                              <img src="/img/all_excel_data.svg" alt="all_excel_data" />
-                              <h2>All Excel Data</h2>
+                            <img src="/img/graph_2.svg" alt="graph" />
                           </div>
-                          <div className="d-none">
-                              <p>+5.63</p>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div className="dashboard-listing-card-all-excel-data-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{data?.length} Sheets</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_1.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>    
-                 </Link>
-              {/* All-excel-data end  */}
-                
-                </>
-                }
 
-                {medata.user.Role === "Owner"  && 
-                <>
-              {/* All-excel-data start  */}
-                 <Link to="/admin/all-excel">
-                 <div className="dashboard-listing-card dashboard-all-excel-data-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-all-excel-data-heading">
+                        </div>
+                      </div>
+                    </Link>
+                    {/* Success-listings end  */}
+
+                  </>
+                  }
+
+
+                  {medata.user.Role === "Owner" &&
+                    <>
+
+                      {/* Deleted-listings start  */}
+                      <Link to="/admin/deleted-post?Type=AllPost">
+                        <div className="dashboard-listing-card dashboard-deleted-card">
                           <div>
-                              <img src="/img/all_excel_data.svg" alt="all_excel_data" />
-                              <h2>All Excel Data</h2>
-                          </div>
-                          <div className="d-none">
-                              <p>+5.63</p>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div className="dashboard-listing-card-all-excel-data-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{data?.length} Sheets</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_1.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>    
-                 </Link>
-              {/* All-excel-data end  */}
+                            <div className="dashboard-listing-card-top-deleted-heading">
+                              <div>
+                                <img src="/img/deleted_listing.svg" alt="deleted_listing" />
+                                <h2>Deleted Listings</h2>
+                              </div>
+                              <div className="d-none">
+                                <p>+5.63</p>
+                              </div>
+                            </div>
 
-
-              {/*  All-registration start  */}
-                <Link to="/admin/all-registration-response">
-                 <div className="dashboard-listing-card dashboard-all-reg-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-all-reg-heading">
-                          <div>
-                              <img src="/img/all_registration.svg" alt="all_registration" />
-                              <h2>All Registration</h2>
                           </div>
-                          <div className="d-none">
-                              <p>+5.63</p>
+                          <div className="dashboard-listing-card-deleted-bottom">
+                            <div>
+                              <h2>Current Value</h2>
+                              <p>{DeletedPost?.deletedPosts?.length || 0}</p>
+                            </div>
+                            <div>
+                              <img src="/img/graph_1.svg" alt="graph" />
+                            </div>
+
                           </div>
                         </div>
-                        
-                      </div>
-                      <div className="dashboard-listing-card-all-reg-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{AllUserResponseData?.data?.length}</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_2.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>    
-                 </Link>
-              {/* All-registration end  */}
-                </>
-                }
-
+                      </Link>
+                      {/* Deleted-listingst end  */}
+                    </>
+                  }
                 </div>
               </div>
 
+              <div className="dashboard-data-user">
+                <div className="dashboard-data-user-headings">Data & Users</div>
+                <div className="dashboard-data-user-card-container">
 
-              
+                  {["Agent", "Admin"].includes(medata.user.Role) && <>
 
-            </div>
+                    {/* All-excel-data start  */}
+                    <Link to="/admin/all-excel-both">
+                      <div className="dashboard-listing-card dashboard-all-excel-data-card">
+                        <div>
+                          <div className="dashboard-listing-card-top-all-excel-data-heading">
+                            <div>
+                              <img src="/img/all_excel_data.svg" alt="all_excel_data" />
+                              <h2>All Excel Data</h2>
+                            </div>
+                            <div className="d-none">
+                              <p>+5.63</p>
+                            </div>
+                          </div>
 
-            {medata.user.Role === "Owner" && 
-            <>
-            
-            <div className="dashboard-routes-bottom">
-            <div className="dashboard-data-user-headings">Support & Notification</div>
-            <div className="dashboard-support-notification-card-container">
-              {/*Notify & Requirements start */}
-                 <Link to="/admin/notify">
-                 <div className="dashboard-listing-card dashboard-notify-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-notify-heading">
+                        </div>
+                        <div className="dashboard-listing-card-all-excel-data-bottom">
                           <div>
+                            <h2>Current Value</h2>
+                            <p>{data?.length} Sheets</p>
+                          </div>
+                          <div>
+                            <img src="/img/graph_1.svg" alt="graph" />
+                          </div>
+
+                        </div>
+                      </div>
+                    </Link>
+                    {/* All-excel-data end  */}
+
+                  </>
+                  }
+
+                  {medata.user.Role === "Owner" &&
+                    <>
+                      {/* All-excel-data start  */}
+                      <Link to="/admin/all-excel">
+                        <div className="dashboard-listing-card dashboard-all-excel-data-card">
+                          <div>
+                            <div className="dashboard-listing-card-top-all-excel-data-heading">
+                              <div>
+                                <img src="/img/all_excel_data.svg" alt="all_excel_data" />
+                                <h2>All Excel Data</h2>
+                              </div>
+                              <div className="d-none">
+                                <p>+5.63</p>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div className="dashboard-listing-card-all-excel-data-bottom">
+                            <div>
+                              <h2>Current Value</h2>
+                              <p>{data?.length} Sheets</p>
+                            </div>
+                            <div>
+                              <img src="/img/graph_1.svg" alt="graph" />
+                            </div>
+
+                          </div>
+                        </div>
+                      </Link>
+                      {/* All-excel-data end  */}
+
+                      <div className="dashboard-listing-all-reg-response-container">
+                            {/*  All-registration start  */}
+                      <Link to="/admin/all-registration-response">
+                        <div className="dashboard-listing-card dashboard-all-reg-card">
+                          <div>
+                            <div className="dashboard-listing-card-top-all-reg-heading">
+                              <div>
+                                <img src="/img/all_registration.svg" alt="all_registration" />
+                                <h2>All Registration</h2>
+                              </div>
+                              <div className="d-none">
+                                <p>+5.63</p>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div className="dashboard-listing-card-all-reg-bottom">
+                            <div>
+                              <h2>Current Value</h2>
+                              <p>{AllUserResponseData?.data?.length}</p>
+                            </div>
+                            <div>
+                              <img src="/img/graph_2.svg" alt="graph" />
+                            </div>
+
+                          </div>
+                        </div>
+                      </Link>
+                      {/* All-registration end  */}
+
+
+
+                      {/*  All-response start  */}
+                      <Link to="/admin/all-user-Response-action">
+                        <div className="dashboard-listing-card dashboard-all-response-card">
+                          <div>
+                            <div className="dashboard-listing-card-top-all-response-heading">
+                              <div>
+                                <img src="/img/contact_user.svg" alt="response" />
+                                <h2>All Response</h2>
+                              </div>
+                              <div className="d-none">
+                                <p>+5.63</p>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div className="dashboard-listing-card-all-response-bottom">
+                            <div>
+                              <h2>Current Value</h2>
+                              <p>{AllUserResponseData?.data?.length}</p>
+                            </div>
+                            <div>
+                              <img src="/img/graph_2.svg" alt="graph" />
+                            </div>
+
+                          </div>
+                        </div>
+                      </Link>
+                      {/* All-response end  */}
+                      </div>
+
+
+                    </>
+                  }
+                  {medata.user.role == "Agent" &&
+                    <>
+                      {/*  All-response start  */}
+                      <Link to="/admin/agent-user-Response-action">
+                        <div className="dashboard-listing-card dashboard-all-response-card">
+                          <div>
+                            <div className="dashboard-listing-card-top-all-response-heading">
+                              <div>
+                                <img src="/img/contact_user.svg" alt="response" />
+                                <h2>All Response</h2>
+                              </div>
+                              <div className="d-none">
+                                <p>+5.63</p>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div className="dashboard-listing-card-all-response-bottom">
+                            <div>
+                              <h2>Current Value</h2>
+                              <p>{AllUserResponseData?.data?.length}</p>
+                            </div>
+                            <div>
+                              <img src="/img/graph_2.svg" alt="graph" />
+                            </div>
+
+                          </div>
+                        </div>
+                      </Link>
+                      {/* All-response end  */}
+                    </>
+                  }
+
+                </div>
+              </div>
+            </div>
+            {medata.user.Role === "Owner" &&
+              <>
+                <div className="dashboard-routes-bottom">
+                  <div className="dashboard-data-user-headings">Support & Notification</div>
+                  <div className="dashboard-support-notification-card-container">
+                    {/*Notify & Requirements start */}
+                    <Link to="/admin/notify">
+                      <div className="dashboard-listing-card dashboard-notify-card">
+                        <div>
+                          <div className="dashboard-listing-card-top-notify-heading">
+                            <div>
                               <img src="/img/notify&requirement.svg" alt="total_listing" />
                               <h2>Notify & Requirements</h2>
-                          </div>
-                          <div className="d-none">
+                            </div>
+                            <div className="d-none">
                               <p>-8.63</p>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div className="dashboard-listing-card-notify-bottom">
+                          <div>
+                            <h2>Current Value</h2>
+                            <p>{newNotifyAndReq.length}</p>
+                          </div>
+                          <div>
+                            <img src="/img/graph_1.svg" alt="graph" />
                           </div>
                         </div>
-                        
                       </div>
-                      <div className="dashboard-listing-card-notify-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{newNotifyAndReq.length}</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_1.svg" alt="graph" />
-                        </div>
-                      </div>
-                  </div>    
-                 </Link>
-              {/* Notify & Requirements end  */}
+                    </Link>
+                    {/* Notify & Requirements end  */}
 
 
-              {/* Contact_User start  */}
-                <Link to="/admin/Contact-us">
-                 <div className="dashboard-listing-card dashboard-contact-card">
-                      <div>
-                        <div className="dashboard-listing-card-top-contact-heading">
-                          <div>
+                    {/* Contact_User start  */}
+                    <Link to="/admin/Contact-us">
+                      <div className="dashboard-listing-card dashboard-contact-card">
+                        <div>
+                          <div className="dashboard-listing-card-top-contact-heading">
+                            <div>
                               <img src="/img/contact_user.svg" alt="contact_user" />
                               <h2>Contact Users</h2>
-                          </div>
-                          <div className="d-none">
+                            </div>
+                            <div className="d-none">
                               <p>-5.63</p>
+                            </div>
                           </div>
+
                         </div>
-                        
+                        <div className="dashboard-listing-card-contact-bottom">
+                          <div>
+                            <h2>Current Value</h2>
+                            <p>{viewAllContactFormReducer?.data?.length}</p>
+                          </div>
+                          <div>
+                            <img src="/img/graph_2.svg" alt="graph" />
+                          </div>
+
+                        </div>
                       </div>
-                      <div className="dashboard-listing-card-contact-bottom">
-                        <div>
-                          <h2>Current Value</h2>
-                          <p>{viewAllContactFormReducer?.data?.length}</p>
-                        </div>
-                        <div>
-                          <img src="/img/graph_2.svg" alt="graph" />
-                        </div>
-                       
-                      </div>
-                  </div>    
-                </Link>
-              {/* Contact_User end  */}
-            </div>
-            </div>
-            
-            </>}
-
-
-
+                    </Link>
+                    {/* Contact_User end  */}
+                  </div>
+                </div>
+              </>}
           </div>
-        
-          
+
+
         </div>
         // <>
         //   <h4

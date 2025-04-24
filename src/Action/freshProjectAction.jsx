@@ -231,7 +231,7 @@ export const getprojectLeadAllAction = () => {
 };
 
 export const updateProjectLeadAction = (id, remark) => {
-  console.log(remark);
+ 
 
   return async (dispatch) => {
     try {
@@ -268,7 +268,7 @@ export const updateProjectLeadAction = (id, remark) => {
 };
 
 export const submitFreshProjectLead=(formData)=>{
-  console.log(formData,"dis")
+ 
   return async(dispatch)=>{
     try {
       dispatch({
@@ -283,7 +283,7 @@ export const submitFreshProjectLead=(formData)=>{
         withCredentials: true,
       };
 const form=JSON.stringify(formData)
-console.log(form,"pppp")
+
       // Post the FormData to the backend
       const { data } = await axios.post(url, form, config);
 
@@ -308,7 +308,7 @@ console.log(form,"pppp")
 }
 
 export const submitFreshProjectLead_VerifyOtp=(formData)=>{
-  console.log(formData,"dis")
+ 
   return async(dispatch)=>{
     try {
       dispatch({
@@ -323,7 +323,7 @@ export const submitFreshProjectLead_VerifyOtp=(formData)=>{
         withCredentials: true,
       };
 const form=JSON.stringify(formData)
-console.log(form,"pppp")
+
       // Post the FormData to the backend
       const { data } = await axios.post(url, form, config);
 

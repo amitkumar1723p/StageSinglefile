@@ -89,7 +89,7 @@ export default function SingleUserRespponseAction() {
                 const parsed = JSON.parse(stored);
                 // Remove first match by ContactNumber
                 const updated = parsed.filter(item => item.ContactNumber !== index);
-                console.log(updated)
+            
                 localStorage.setItem('readMode', JSON.stringify(updated));
 
             }
@@ -98,7 +98,7 @@ export default function SingleUserRespponseAction() {
             const stored = localStorage.getItem('agentReadMode');
             if (stored) {
                 const parsed = JSON.parse(stored);
-                console.log(indexAgent, "id")
+            
                 // Filter out the one with matching _id
                 const updated = parsed.filter(item => item !== indexAgent);
 
@@ -106,8 +106,10 @@ export default function SingleUserRespponseAction() {
                 localStorage.setItem('agentReadMode', JSON.stringify(updated));
             }
         }
-        
-      }, [index,indexAgent]);
+
+    }, [index, indexAgent]);
+   
+
     return (
         <div className="single-user-response-action-container ">
 

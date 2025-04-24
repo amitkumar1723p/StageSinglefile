@@ -160,7 +160,7 @@ const [query,setQuery]=useState("");
     if (!GetAllPostData?.properties?.length) return;
   
     let filtered = [...filterdPost];
-  console.log(filterData)
+
     if (filterData?.BuySell) {
       filtered = filtered.filter(post => post.BasicDetails?.PropertyAdType?.toLowerCase() == filterData.BuySell.toLowerCase());
     }
@@ -189,7 +189,7 @@ const [query,setQuery]=useState("");
     if (filterData?.Verified) {
       filtered = filtered.filter(post => post.PostVerifyShow == true);
     }
-    console.log(filterData)
+
   
     if (filterData?.Locality) {
       // console.log(filterData.Locality)
@@ -329,7 +329,7 @@ const [query,setQuery]=useState("");
               <select className="property-filter-select"  ref={localityRef} onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
                 <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
-                <option value="Golf Course Extn Road">Golf Course</option>
+                <option value="Golf Course Ext Road Gurgaon">Golf Course</option>
                 <option value="Southern Peripheral Road Gurgaon">SPR Road</option>
               </select>
             </div>
@@ -479,7 +479,7 @@ const [query,setQuery]=useState("");
               <select className="property-filter-select" ref={localityRef} onChange={(e) => handleSelect('Locality', e.target.value)} defaultValue="">
               <option value="" disabled>Locality</option>
                 <option value="New Gurgaon">New Gurgaon</option>
-              <option value="Golf Course Extn Road">Golf Course</option>
+              <option value="Golf Course Ext Road Gurgaon">Golf Course</option>
                 <option value="Southern Peripheral Road Gurgaon">SPR Road</option>
               </select>
             </div>

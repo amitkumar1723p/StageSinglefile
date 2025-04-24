@@ -31,8 +31,7 @@ const HandleFreshbookingUrl = (projectName)=>{
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
-    console.log("Searching with parameters:", { propertyType, location, price, searchTerm });
-    // Add your search functionality here
+     // Add your search functionality here
   };
 
   return (

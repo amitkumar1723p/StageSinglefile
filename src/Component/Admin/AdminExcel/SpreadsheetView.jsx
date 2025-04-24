@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { 
+import { useNavigate, useParams } from 'react-router-dom';
+import {
   Container, Box, Typography, CircularProgress,
   Button, IconButton, Tooltip, Paper, Menu, MenuItem,
   Dialog, DialogTitle, DialogContent, DialogActions, FormControl,
@@ -31,7 +31,7 @@ const SOCKET_URL = process.env.REACT_APP_API_URL;
 
 // Custom Cell component
 const Cell = ({ columnIndex, rowIndex, style, data }) => {
-  
+
   if (columnIndex === 0) {
     return (
       <div
@@ -56,28 +56,78 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
     );
   }
   const handleFocus = () => {
-    console.log('Cell focused:', rowIndex, columnKey);
+
     if (!isLocked && data.onfocus) {
       data.onfocus(rowIndex, columnKey);
     }
   };
   // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
   const actualColumnIndex = columnIndex - 1;
-  
-  const { rows, columns, onCellChange, editingCell, setEditingCell, 
-          editValue, setEditValue, saveEdit, handleKeyPress,onfocus } = data;
-  
+
+  const { rows, columns, onCellChange, editingCell, setEditingCell,
+    editValue, setEditValue, saveEdit, handleKeyPress, onfocus, fontSize } = data;
+
   const row = rows[rowIndex];
   const column = columns[actualColumnIndex];
   const columnKey = column?.name;
   const columnType = column?.type || 'text';
   const cellValue = row?.[columnKey];
   const isLocked = column?.locked;
-  
-  const isEditing = editingCell && 
-                   editingCell.rowIndex === rowIndex && 
-                   editingCell.columnName === columnKey;
 
+  const isEditing = editingCell &&
+    editingCell.rowIndex === rowIndex &&
+    editingCell.columnName === columnKey;
+
+  const handleMouseEnter = (e) => {
+    // Don't show tooltip if editing
+
+    if (isEditing) return;
+
+    // Get value to display in tooltip
+    let displayValue = cellValue !== null && cellValue !== undefined ? cellValue : '';
+
+    // Convert to string if not already
+    if (typeof displayValue !== 'string') {
+      displayValue = String(displayValue);
+    }
+
+    // Only show tooltip if the content is meaningful
+    if (displayValue.trim().length > 0) {
+      const tooltip = document.getElementById('spreadsheet-tooltip');
+      if (tooltip) {
+        tooltip.textContent = displayValue;
+        tooltip.style.display = 'block';
+
+        // Calculate if tooltip would go off screen and adjust positioning
+        const maxWidth = window.innerWidth - 20;
+        const maxHeight = window.innerHeight - 20;
+        const tooltipWidth = 250;
+
+        // Adjust X position if would go off right side
+        let posX = e.clientX + 15;
+        if (posX + tooltipWidth > maxWidth) {
+          posX = e.clientX - tooltipWidth - 20;
+        }
+
+        // Adjust Y position if would go off bottom
+        let posY = e.clientY + 10;
+        const tooltipHeight = tooltip.offsetHeight;
+        if (posY + tooltipHeight > maxHeight) {
+          posY = maxHeight - tooltipHeight;
+        }
+
+        tooltip.style.left = `${posX}px`;
+        tooltip.style.top = `${posY}px`;
+      }
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
+  };
   const startEditing = () => {
     if (isLocked) return;
     setEditingCell({ rowIndex, columnName: columnKey });
@@ -93,10 +143,10 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
             checked={Boolean(cellValue)}
             onChange={(e) => onCellChange(rowIndex, columnKey, e.target.checked)}
             disabled={isLocked}
-            onFocus={(e)=>onfocus(rowIndex, columnKey)}
+            onFocus={(e) => onfocus(rowIndex, columnKey)}
           />
         );
-        
+
       case 'dropdown':
         const options = column.options || [];
         return (
@@ -104,7 +154,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
             <Select
               value={cellValue || ''}
               onChange={(e) => onCellChange(rowIndex, columnKey, e.target.value)}
-            onFocus={()=>onfocus(rowIndex, columnKey)}
+              onFocus={() => onfocus(rowIndex, columnKey)}
 
               displayEmpty
             >
@@ -119,7 +169,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
             </Select>
           </FormControl>
         );
-        
+
       case 'date':
         if (isEditing) {
           return (
@@ -133,13 +183,13 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
               onBlur={saveEdit}
 
               autoFocus
-            onFocus={()=>onfocus(rowIndex, columnKey)}
+              onFocus={() => onfocus(rowIndex, columnKey)}
 
             />
           );
         }
         return cellValue || '';
-        
+
       case 'number':
         if (isEditing) {
           return (
@@ -152,21 +202,22 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
               onKeyDown={handleKeyPress}
               onBlur={saveEdit}
               autoFocus
-            onFocus={()=>onfocus(rowIndex, columnKey)}
+              onFocus={() => onfocus(rowIndex, columnKey)}
 
             />
           );
         }
         return cellValue !== null && cellValue !== undefined ? cellValue : '';
-        
+
       case 'text':
       default:
         if (columnType === 'text' || columnType === 'number' || columnType === 'date') {
           if (isEditing) {
             return (
-              <div style={{...style, /* existing styles */}}>
+              <div style={{ ...style, }}>
                 <TextField
                   fullWidth
+
                   size="small"
                   value={editValue}
                   onChange={(e) => setEditValue(e.target.value)}
@@ -196,10 +247,18 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
         textOverflow: 'ellipsis',
         cursor: isLocked ? 'not-allowed' : 'pointer',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        whiteSpace: "nowrap",
+        fontSize: fontSize,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        width: "200px", // set width for truncation to take effect
+        display: "block"
       }}
       onClick={() => !isLocked && !isEditing && startEditing()}
-      onFocus={handleFocus} // Use the handler here
+      onFocus={handleFocus}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
 
     >
       {renderCellContent()}
@@ -210,7 +269,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
 // Custom HeaderCell component
 const HeaderCell = ({ columnIndex, style, data }) => {
   const { columns, handleColumnClick, sortConfig, filters } = data;
-  
+
   // Special case for sequence number column (columnIndex === 0)
   if (columnIndex === 0) {
     return (
@@ -232,13 +291,13 @@ const HeaderCell = ({ columnIndex, style, data }) => {
       </div>
     );
   }
-  
+
   // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
   const actualColumnIndex = columnIndex - 1;
   const column = columns[actualColumnIndex];
   const columnName = column?.name;
   const isLocked = column?.locked;
-  
+
   const getSortIcon = () => {
     if (sortConfig.key !== columnName) return null;
     return sortConfig.direction === 'asc' ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />;
@@ -266,7 +325,7 @@ const HeaderCell = ({ columnIndex, style, data }) => {
       onClick={(e) => handleColumnClick(e, columnName)}
     >
       <span>{columnName}</span>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '4px'}}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         {isLocked && <LockIcon fontSize="small" style={{ color: '#555' }} />}
         {getFilterIcon()}
         {getSortIcon()}
@@ -303,7 +362,12 @@ const SpreadsheetView = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [allAdmins, setAllAdmins] = useState([]);
   const [filterdAdmins, setFilterAdmin] = useState([]);
-   const [AssinedAdmins, setAssignedAdmins] = useState([]);
+  const [AssinedAdmins, setAssignedAdmins] = useState([]);
+  const [isFullScreen, setFullScreen] = useState(false);
+  const [fontSize, setfontSize] = useState(14);
+
+  const navigate = useNavigate();
+
   // Socket.io reference
   const socketRef = useRef(null);
   // Grid reference for refreshing
@@ -312,57 +376,69 @@ const SpreadsheetView = () => {
   const { medata } = useSelector((state) => {
     return state.meDetails;
   });
-  console.log(medata)
+  // console.log(medata)
 
   useEffect(() => {
-    fetchSpreadsheetData();
-    getAllAdminsAgents({ AgentVerify: true });
-    getAllAdminsAgents({ AdminVerify: true });
-    
+
+
+    if (medata) {
+      if (medata?.user?.Role === "Owner") {
+        fetchSpreadsheetData();
+        getAllAdminsAgents({ AgentVerify: true });
+        getAllAdminsAgents({ AdminVerify: true });
+      }
+      else {
+
+        fetchSingleFileData()
+      }
+    }
+
+
+
     // Initialize Socket.io connection
     socketRef.current = io(SOCKET_URL);
-    
+
     // Join spreadsheet room
     socketRef.current.emit('joinSpreadsheet', id);
-    
+
     // Listen for cell updates from other users
     socketRef.current.on('cellUpdates', (data) => {
       handleRemoteCellUpdates(data.updates);
     });
-    
+
     // Listen for column lock changes
     socketRef.current.on('columnLockChanged', (data) => {
       handleRemoteColumnLockChange(data);
     });
-    
+
     // Listen for new rows
     socketRef.current.on('rowAdded', (data) => {
       handleRemoteRowAdded(data);
     });
-    
+
     // Listen for new columns
     socketRef.current.on('columnAdded', (data) => {
       handleRemoteColumnAdded(data);
     });
     socketRef.current.on('cellEditing', ({ cell, user }) => {
-      console.log(`${user.name} is editing cell [${cell.rowIndex}, ${cell.columnKey}]`);
+
       // Optionally highlight that cell or show user's name on UI
       // setEditingStatus((prev) => ({
       //   ...prev,
       //   [`${cell.rowIndex}-${cell.columnKey}`]: user.name
       // }));
     });
-    
+
     // Listen for cell editing stopped by another user
     socketRef.current.on('cellEditingStopped', ({ cell }) => {
-      console.log("dtopped",`${cell.rowIndex}-${cell.columnKey}`)
+
       // setEditingStatus((prev) => {
       //   const updated = { ...prev };
       //   delete updated[`${cell.rowIndex}-${cell.columnKey}`];
       //   return updated;
       // });
     });
-    
+
     // Cleanup on unmount
     return () => {
       if (socketRef.current) {
@@ -371,7 +447,7 @@ const SpreadsheetView = () => {
       // Clear any pending debounced saves
       saveChanges.flush();
     };
-  }, [id]);
+  }, [medata]);
 
   async function getAllAdminsAgents(Keyword) {
     try {
@@ -398,6 +474,109 @@ const SpreadsheetView = () => {
       console.log(error);
     }
   }
+  useEffect(() => {
+    // Create tooltip element if it doesn't exist
+    if (!document.getElementById('spreadsheet-tooltip')) {
+      const tooltip = document.createElement('div');
+      tooltip.id = 'spreadsheet-tooltip';
+      tooltip.style.cssText = `
+        position: fixed;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        max-width: 250px;
+        height:"fit-content",
+        overflow: auto;
+        word-break: break-word;
+        pointer-events: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        font-size: 14px;
+        z-index: 9999;
+      `;
+      document.body.appendChild(tooltip);
+    }
+
+    // Clean up on component unmount
+    return () => {
+      const tooltip = document.getElementById('spreadsheet-tooltip');
+      if (tooltip && tooltip.parentNode) {
+        tooltip.parentNode.removeChild(tooltip);
+      }
+    };
+  }, []);
+  // Throttle function to limit how often a function runs
+  const throttle = (func, limit) => {
+    let inThrottle;
+    return function () {
+      const args = arguments;
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  };
+
+  // Utility functions for tooltip
+  const showTooltip = (text, x, y) => {
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (!tooltip) return;
+
+    tooltip.textContent = text;
+    tooltip.style.display = 'block';
+
+    // Calculate if tooltip would go off screen and adjust positioning
+    const maxWidth = window.innerWidth - 20;
+    const maxHeight = window.innerHeight - 20;
+    const tooltipWidth = 250;
+
+    // Adjust X position if would go off right side
+    let posX = x + 15;
+    if (posX + tooltipWidth > maxWidth) {
+      posX = x - tooltipWidth - 20;
+    }
+
+    // Adjust Y position if would go off bottom
+    let posY = y + 10;
+    const tooltipHeight = tooltip.offsetHeight;
+    if (posY + tooltipHeight > maxHeight) {
+      posY = maxHeight - tooltipHeight;
+    }
+
+    tooltip.style.left = `${posX}px`;
+    tooltip.style.top = `${posY}px`;
+  };
+
+  const hideTooltip = () => {
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (tooltip) tooltip.style.display = 'none';
+  };
+
+  // Throttled update function for mouse movement
+  const updateTooltipPosition = throttle((x, y) => {
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (!tooltip || tooltip.style.display === 'none') return;
+
+    // Get current text to maintain it
+    const text = tooltip.textContent;
+    showTooltip(text, x, y);
+  }, 30); // Update at most every 30ms
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      updateTooltipPosition(e.clientX, e.clientY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      hideTooltip(); // Make sure to hide tooltip on unmount
+    };
+  }, []);
 
   useEffect(() => {
     if (spreadsheet && allAdmins.length > 0) {
@@ -409,117 +588,130 @@ const SpreadsheetView = () => {
       setFilterAdmin(matchingAdmins);
 
       // const agentIdsSet = new Set(AssinedAdmins.map(agent => agent.AdminId._id));
-   
+
       // // Find common AdminIds
       // const matchingAdmins = allAdmins.filter(admin => agentIdsSet.has(admin._id));
-      
+
       // setFilterAdmin(matchingAdmins)
     }
   }, [allAdmins, spreadsheet]);
 
-//preventing screen shots and copying
-useEffect(() => {
-  const handleKeyDown = (event) => {
-    // Prevent Developer Tools
-    if (
-      event.key === "F12" || // F12 Key
-      (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "i") || // Ctrl + Shift + I
-      (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "j") || // Ctrl + Shift + J
-      (event.ctrlKey && event.key.toLowerCase() === "u") // Ctrl + U (View Source) 
-      ||  (event.shiftKey && event.metaKey )
-    ) {
-      event.preventDefault();
-  
-      setIsHidden(true);
+  //preventing screen shots and copying
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Prevent Developer Tools
 
-      // alert("Screenshot detected! Your activity is being monitored.");
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setFullScreen(false);
+      }
+      // if(isFullScreen){
+      //   console.log("ddddd")
+      //   if (event.key.toLowerCase() === "f") {
+      //     event.preventDefault();
+      //   setFullScreen(true);
+      //   }
+      // }
 
-      setTimeout(() => {
-        setIsHidden(false);
-      }, 2000); // Restore UI after 2 seconds
-    }
+      if (
+        event.key === "F12" || // F12 Key
+        (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "i") || // Ctrl + Shift + I
+        (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "j") || // Ctrl + Shift + J
+        (event.ctrlKey && event.key.toLowerCase() === "u") // Ctrl + U (View Source) 
+        || (event.shiftKey && event.metaKey)
+      ) {
+        event.preventDefault();
 
-    // Prevent Printing (Ctrl + P)
-    if (event.ctrlKey && event.key.toLowerCase() === "p") {
-      event.preventDefault();
         setIsHidden(true);
-  
+
         // alert("Screenshot detected! Your activity is being monitored.");
 
         setTimeout(() => {
           setIsHidden(false);
         }, 2000); // Restore UI after 2 seconds
-    }
+      }
 
-    // Prevent Snipping Tool (Win + Shift + S)
-    if (event.shiftKey && event.metaKey && event.key.toLowerCase() === "s") {
-      event.preventDefault();
-      setIsHidden(true);
-
-      // alert("Screenshot detected! Your activity is being monitored.");
-
-      setTimeout(() => {
-        setIsHidden(false);
-      }, 2000); // Restore UI after 2 seconds
-    }
-  };
-
-  const handlePrintScreen = (event) => {
-    if (event.key === "PrintScreen") {
-      event.preventDefault();
+      // Prevent Printing (Ctrl + P)
+      if (event.ctrlKey && event.key.toLowerCase() === "p") {
+        event.preventDefault();
         setIsHidden(true);
-  
+
         // alert("Screenshot detected! Your activity is being monitored.");
 
         setTimeout(() => {
           setIsHidden(false);
         }, 2000); // Restore UI after 2 seconds
-    }
-  };
+      }
 
-  const handleRightClick = (event) => {
-    event.preventDefault();
-    alert("Right-click is disabled!");
-  };
+      // Prevent Snipping Tool (Win + Shift + S)
+      if (event.shiftKey && event.metaKey && event.key.toLowerCase() === "s") {
+        event.preventDefault();
+        setIsHidden(true);
 
-  // Add event listeners
-  document.addEventListener("keydown", handleKeyDown);
-  document.addEventListener("keyup", handlePrintScreen);
-  document.addEventListener("contextmenu", handleRightClick);
+        // alert("Screenshot detected! Your activity is being monitored.");
 
-  // Cleanup event listeners when component unmounts
-  return () => {
-    document.removeEventListener("keydown", handleKeyDown);
-    document.removeEventListener("keyup", handlePrintScreen);
-    document.removeEventListener("contextmenu", handleRightClick);
-  };
-}, []);
+        setTimeout(() => {
+          setIsHidden(false);
+        }, 2000); // Restore UI after 2 seconds
+      }
+    };
+
+    const handlePrintScreen = (event) => {
+      if (event.key === "PrintScreen") {
+        event.preventDefault();
+        setIsHidden(true);
+
+        // alert("Screenshot detected! Your activity is being monitored.");
+
+        setTimeout(() => {
+          setIsHidden(false);
+        }, 2000); // Restore UI after 2 seconds
+      }
+    };
+
+    const handleRightClick = (event) => {
+      event.preventDefault();
+      alert("Right-click is disabled!");
+    };
+
+    // Add event listeners
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handlePrintScreen);
+    document.addEventListener("contextmenu", handleRightClick);
+
+    // Cleanup event listeners when component unmounts
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handlePrintScreen);
+      document.removeEventListener("contextmenu", handleRightClick);
+    };
+  }, []);
 
   const onfocus = useCallback((rowIndex, columnKey) => {
-    console.log('Cell focus triggered:', rowIndex, columnKey);
-    
+
+
     if (!socketRef.current) {
       console.error('Socket not initialized when trying to emit cellEditing');
       return;
     }
-    
+
     if (!socketRef.current.connected) {
       console.error('Socket not connected when trying to emit cellEditing');
       return;
     }
-    
+
     const eventData = {
       spreadsheetId: id,
       cell: { rowIndex, columnKey },
-      user: { id: medata?.user?._id || "user123", name: medata?.user?.Name || "ankit" }
+      user: { id: medata?.user?._id || "poprfuture id", name: medata?.user?.Name || "prop future" }
     };
-    
-    console.log('Emitting cellEditing event with data:', eventData);
+
+
     socketRef.current.emit('cellEditing', eventData);
   }, [id, medata]);
 
-  useEffect(()=>{
-    if(!doneByUser && notification.message.length>0)
+  useEffect(() => {
+    if (!doneByUser && notification.message.length > 0)
       toast.info(notification.message, {
         position: "top-center",
         autoClose: 5000,
@@ -530,20 +722,20 @@ useEffect(() => {
         progress: undefined,
         theme: "colored",
       });
-  },[notification]);
+  }, [notification]);
 
   // Handle remote updates received from Socket.io
   const handleRemoteCellUpdates = (updates) => {
     // Skip if these are our own updates
-    if (pendingUpdates.some(update => 
-      updates.some(remoteUpdate => 
-        remoteUpdate.rowIndex === update.rowIndex && 
+    if (pendingUpdates.some(update =>
+      updates.some(remoteUpdate =>
+        remoteUpdate.rowIndex === update.rowIndex &&
         remoteUpdate.field === update.field
       )
     )) {
       return;
     }
-    
+
     // Apply remote updates to our data
     setData(prevData => {
       const newData = [...prevData];
@@ -557,25 +749,25 @@ useEffect(() => {
       });
       return newData;
     });
-    
+
     // Show notification
-    setNotification({
-      open: true,
-      message: 'Changes received from another user',
-      severity: 'info'
-    });
+    // setNotification({
+    //   open: true,
+    //   message: 'Changes received from another user',
+    //   severity: 'info'
+    // });
   };
 
   const handleRemoteColumnLockChange = (data) => {
     const { columnName, locked } = data;
-    
+
     // Update columns state
-    setColumns(prevColumns => 
-      prevColumns.map(col => 
+    setColumns(prevColumns =>
+      prevColumns.map(col =>
         col.name === columnName ? { ...col, locked } : col
       )
     );
-    
+
     // Show notification
     setNotification({
       open: true,
@@ -586,10 +778,10 @@ useEffect(() => {
 
   const handleRemoteRowAdded = (data) => {
     const { rowData } = data;
-    
+
     // Add row to data
     setData(prevData => [...prevData, rowData]);
-    
+
     // Show notification
     setNotification({
       open: true,
@@ -600,7 +792,7 @@ useEffect(() => {
 
   const handleRemoteColumnAdded = (data) => {
     const { column, defaultValue } = data;
-    
+
     // Update our data to include the new column
     setData(prevData => {
       return prevData.map(row => ({
@@ -608,10 +800,10 @@ useEffect(() => {
         [column.name]: defaultValue
       }));
     });
-    
+
     // Update columns state
     setColumns(prevColumns => [...prevColumns, column]);
-    
+
     // Show notification
     setNotification({
       open: true,
@@ -625,15 +817,15 @@ useEffect(() => {
     try {
       setLoading(true);
       let response;
-      
+
       // Use appropriate API endpoint based on user role
-     
-        response = await axios.get(`${process.env.REACT_APP_API_URL}/excel/owner/file/${id}`, { withCredentials: true });
-    
+
+      response = await axios.get(`${process.env.REACT_APP_API_URL}/excel/owner/file/${id}`, { withCredentials: true });
+
       //  else {
       //   response = await axios.get(`${process.env.REACT_APP_API_URL}/excel/file/${id}`, { withCredentials: true });
       // }
-      
+
       // Set all state
       setAssignedAdmins(response.data.admins)
       setSpreadsheet(response.data.fileData);
@@ -643,8 +835,9 @@ useEffect(() => {
       setFilteredIndices(null); // Reset filtered indices
     } catch (error) {
       console.error('Error fetching spreadsheet:', error);
+      navigate("/admin/dashboard")
       setNotification({
-        open: true, 
+        open: true,
         message: 'Error loading spreadsheet: ' + (error.response?.data?.error || error.message),
         severity: 'error'
       });
@@ -656,22 +849,40 @@ useEffect(() => {
     }
   };
 
+
+  const fetchSingleFileData = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/excel/file/${id}`, { withCredentials: true });
+      setSpreadsheet(response.data.fileData);
+      setColumns(response.data.fileData.columns);
+      setData(response.data.fileData.data);
+      setFilteredData(response.data.fileData.data);
+      setFilteredIndices(null); // Reset filtered indices
+    } catch (err) {
+      navigate("/admin/dashboard")
+      window.location.reload();
+      console.error("Error fetching file data:", err);
+    }
+  };
+
+
+
   // Apply filters to data
   useEffect(() => {
     if (!data || data.length === 0) return;
-    
+
     let result = [...data];
     let indices = [];
-    
+
     // First collect indices of all rows that match the filters
     data.forEach((row, index) => {
       let includeRow = true;
-      
+
       // Check each filter
       for (const key of Object.keys(filters)) {
         const filter = filters[key];
         if (!filter) continue; // Skip null filters (cleared ones)
-        
+
         if (filter.type === 'text' && filter.value) {
           const cellValue = String(row[key] || '').toLowerCase();
           if (!cellValue.includes(filter.value.toLowerCase())) {
@@ -689,15 +900,15 @@ useEffect(() => {
           }
         }
       }
-      
+
       if (includeRow) {
         indices.push(index);
       }
     });
-    
+
     // Get the filtered data using indices
     result = indices.map(index => data[index]);
-    
+
     // Apply sorting
     if (sortConfig.key) {
       // Sort both the filtered data and keep track of indices
@@ -705,19 +916,19 @@ useEffect(() => {
         item,
         originalIndex: indices[index]
       }));
-      
+
       sortedWithIndices.sort((a, b) => {
         const aValue = a.item[sortConfig.key] || '';
         const bValue = b.item[sortConfig.key] || '';
-        
+
         // Check if values are numbers
         const aNum = Number(aValue);
         const bNum = Number(bValue);
-        
+
         if (!isNaN(aNum) && !isNaN(bNum)) {
           return sortConfig.direction === 'asc' ? aNum - bNum : bNum - aNum;
         }
-        
+
         // String comparison
         if (aValue < bValue) {
           return sortConfig.direction === 'asc' ? -1 : 1;
@@ -727,12 +938,12 @@ useEffect(() => {
         }
         return 0;
       });
-      
+
       // Update filtered data and indices
       result = sortedWithIndices.map(item => item.item);
       indices = sortedWithIndices.map(item => item.originalIndex);
     }
-    
+
     setFilteredData(result);
     setFilteredIndices(indices.length > 0 ? indices : null);
   }, [data, filters, sortConfig]);
@@ -749,9 +960,9 @@ useEffect(() => {
 
   const handleCellChange = useCallback((rowIndex, field, value) => {
     // Get the actual index if we're looking at filtered data
-    console.log((rowIndex))
+
     const actualIndex = filteredIndices ? filteredIndices[rowIndex] : rowIndex;
-    
+
     // Update the main data array
     setData(prevData => {
       const newData = [...prevData];
@@ -761,7 +972,7 @@ useEffect(() => {
       };
       return newData;
     });
-    
+
     // IMPORTANT: Update the filtered data too so UI reflects changes immediately
     if (filteredIndices) {
       setFilteredData(prevFiltered => {
@@ -774,7 +985,7 @@ useEffect(() => {
         return newFiltered;
       });
     }
-    
+
     // Add to pending updates
     setPendingUpdates(prev => [
       ...prev,
@@ -784,10 +995,10 @@ useEffect(() => {
 
   const saveEdit = useCallback(() => {
     if (editingCell) {
-      console.log('Saving edit for cell:', editingCell);
+
       const actualRowIndex = filteredIndices ? filteredIndices[editingCell.rowIndex] : editingCell.rowIndex;
       handleCellChange(editingCell.rowIndex, editingCell.columnName, editValue);
-      
+
       // Emit cellEditingStopped event when editing is done
       if (socketRef.current && socketRef.current.connected) {
         const stopEditingData = {
@@ -795,13 +1006,13 @@ useEffect(() => {
           cell: { rowIndex: editingCell.rowIndex, columnKey: editingCell.columnName },
           user: { id: medata?.user?._id || "user123", name: medata?.user?.Name || "ankit" }
         };
-        
-        console.log('Emitting cellEditingStopped event with data:', stopEditingData);
+
+
         socketRef.current.emit('cellEditingStopped', stopEditingData);
       } else {
         console.error('Cannot emit cellEditingStopped: socket not connected');
       }
-      
+
       setEditingCell(null);
     }
   }, [editingCell, editValue, handleCellChange, filteredIndices, id, medata]);
@@ -813,29 +1024,32 @@ useEffect(() => {
       setEditingCell(null);
     }
   }, [saveEdit]);
-  
+
   // Debounced save function to avoid too many API calls
   const saveChanges = useCallback(debounce(async () => {
     if (pendingUpdates.length === 0) return;
-    
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
     try {
       setIsSaving(true);
       setDoneByUser(true);
-      
+
       const updates = pendingUpdates.map(update => ({
         rowIndex: update.rowIndex,
         columnName: update.field,
         newValue: update.value
       }));
-      
+
       // Use updated endpoint from second code
-      console.log(updates)
-      await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${id}/update`, {
+      // console.log(updates)
+    const res=  await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${id}/update`, {
         updates
       }, { withCredentials: true });
-      
+
       setPendingUpdates([]);
-      
+  
       setNotification({
         open: true,
         message: 'Changes saved successfully',
@@ -843,6 +1057,11 @@ useEffect(() => {
       });
     } catch (error) {
       console.error('Error saving changes:', error);
+      if(error?.response?.data?.success===false){
+        navigate("/admin/dashboard")
+        window.location.reload();
+
+      }
       setNotification({
         open: true,
         message: 'Error saving changes: ' + (error.response?.data?.error || error.message),
@@ -861,7 +1080,7 @@ useEffect(() => {
     if (pendingUpdates.length > 0) {
       saveChanges();
     }
-    
+
     // Cleanup function to ensure final save when component unmounts
     return () => {
       saveChanges.flush();
@@ -874,7 +1093,7 @@ useEffect(() => {
 
   const handleSort = (columnName) => {
     closeColumnMenu();
-    
+
     let direction = 'asc';
     if (sortConfig.key === columnName && sortConfig.direction === 'asc') {
       direction = 'desc';
@@ -883,7 +1102,7 @@ useEffect(() => {
       setSortConfig({ key: null, direction: null });
       return;
     }
-    
+
     setSortConfig({ key: columnName, direction });
   };
 
@@ -894,12 +1113,13 @@ useEffect(() => {
   };
 
   const handleApplyFilter = (columnName, filterOptions) => {
-    setFilters(prev => ({...prev,
+    setFilters(prev => ({
+      ...prev,
       [columnName]: filterOptions
     }));
     setFilterDialogOpen(false);
   };
-  
+
   const handleClearFilter = (columnName) => {
     setFilters(prev => {
       const newFilters = { ...prev };
@@ -908,34 +1128,34 @@ useEffect(() => {
     });
     closeColumnMenu();
   };
-  
+
   const handleClearAllFilters = () => {
     setFilters({});
   };
-  
+
   const handleToggleColumnLock = async (columnName) => {
     closeColumnMenu();
-    
+
     // Find column and toggle lock status
     const column = columns.find(col => col.name === columnName);
     if (!column) return;
-    
+
     const newLockStatus = !column.locked;
-    
+
     try {
       setDoneByUser(true);
       // Update column lock in database
       await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${id}/column/${columnName}/lock`, {
         locked: newLockStatus
       }, { withCredentials: true });
-      
+
       // Update local state
-      setColumns(prevColumns => 
-        prevColumns.map(col => 
+      setColumns(prevColumns =>
+        prevColumns.map(col =>
           col.name === columnName ? { ...col, locked: newLockStatus } : col
         )
       );
-      
+
       // Emit column lock change via socket
       if (socketRef.current) {
         socketRef.current.emit('columnLockChanged', {
@@ -945,7 +1165,7 @@ useEffect(() => {
           user: { id: medata?.user?._id || "user123", name: medata?.user?.Name || "ankit" }
         });
       }
-      
+
       setNotification({
         open: true,
         message: `Column "${columnName}" ${newLockStatus ? 'locked' : 'unlocked'} successfully`,
@@ -964,8 +1184,8 @@ useEffect(() => {
       }, 500);
     }
   };
-  
-  
+
+
   const handleAddRow = async () => {
     try {
       setDoneByUser(true);
@@ -983,16 +1203,16 @@ useEffect(() => {
             newRow[col.name] = '';
         }
       });
-      
+
       // Add row to database
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/excel/file/${id}/row`, {
         rowData: newRow
       }, { withCredentials: true });
-      
+
       // Update local state with the row returned from server
       const savedRow = response.data.row;
       setData(prevData => [...prevData, savedRow]);
-      
+
       // Emit row added via socket
       if (socketRef.current) {
         socketRef.current.emit('rowAdded', {
@@ -1001,7 +1221,7 @@ useEffect(() => {
           user: { id: medata?.user?._id || "user123", name: medata?.user?.Name || "ankit" }
         });
       }
-      
+
       setNotification({
         open: true,
         message: 'New row added successfully',
@@ -1020,7 +1240,7 @@ useEffect(() => {
       }, 500);
     }
   };
-  
+
   const handleAddColumn = async () => {
     if (!newColumnName.trim()) {
       setNotification({
@@ -1030,7 +1250,7 @@ useEffect(() => {
       });
       return;
     }
-    
+
     // Check for duplicate column name
     if (columns.some(col => col.name === newColumnName)) {
       setNotification({
@@ -1040,24 +1260,24 @@ useEffect(() => {
       });
       return;
     }
-    
+
     try {
       setDoneByUser(true);
       let options = [];
       if (newColumnType === 'dropdown' && dropdownOptions.trim()) {
         options = dropdownOptions.split(',').map(opt => opt.trim());
       }
-      
+
       const newColumn = {
         name: newColumnName,
         type: newColumnType,
         locked: false
       };
-      
+
       if (options.length > 0) {
         newColumn.options = options;
       }
-      
+
       // Default value for the new column
       let defaultValue;
       switch (newColumnType) {
@@ -1070,25 +1290,25 @@ useEffect(() => {
         default:
           defaultValue = '';
       }
-      
+
       // Add column to database
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/excel/file/${id}/column`, {
         column: newColumn,
         defaultValue
       }, { withCredentials: true });
-      
+
       // Update local state with the column returned from server
       const savedColumn = response.data.column;
-      setColumns(prevColumns => [...prevColumns, savedColumn]);
-      
-      // Update data to include the new column
-      setData(prevData => {
-        return prevData.map(row => ({
-          ...row,
-          [savedColumn.name]: defaultValue
-        }));
-      });
-      
+      // setColumns(prevColumns => [...prevColumns, savedColumn]);
+
+      // // Update data to include the new column
+      // setData(prevData => {
+      //   return prevData.map(row => ({
+      //     ...row,
+      //     [savedColumn.name]: defaultValue
+      //   }));
+      // });
+
       // Emit column added via socket
       if (socketRef.current) {
         socketRef.current.emit('columnAdded', {
@@ -1098,12 +1318,12 @@ useEffect(() => {
           user: { id: medata?.user?._id || "user123", name: medata?.user?.Name || "ankit" }
         });
       }
-      
+
       setNewColumnDialogOpen(false);
       setNewColumnName('');
       setNewColumnType('text');
       setDropdownOptions('');
-      
+
       setNotification({
         open: true,
         message: 'New column added successfully',
@@ -1122,17 +1342,17 @@ useEffect(() => {
       }, 500);
     }
   };
-  
+
   const handleDownloadCsv = async () => {
     try {
       setIsDownloading(true);
       setDoneByUser(true);
-      
+
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/excel/file/${id}/export/csv`, {
         responseType: 'blob',
         withCredentials: true
       });
-      
+
       // Create download link
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
@@ -1141,7 +1361,7 @@ useEffect(() => {
       document.body.appendChild(link);
       link.click();
       link.remove();
-      
+
       setNotification({
         open: true,
         message: 'File downloaded successfully',
@@ -1161,10 +1381,10 @@ useEffect(() => {
       }, 500);
     }
   };
-  
+
   const handleRemoveExcelFromAdmin = async (admin) => {
     try {
-      dispatch(removeExcelFromAdminAction( admin._id,id));
+      dispatch(removeExcelFromAdminAction(admin._id, id));
       toast.success("Admin removed from Excel successfully");
       // Update the list of admins
       setFilterAdmin(prev => prev.filter(a => a._id !== admin._id));
@@ -1184,7 +1404,7 @@ useEffect(() => {
 
   if (loading && !spreadsheet) {
     return (
-      <Container sx={{ display: 'flex', justifyContent: 'center', width:'95vw', alignItems: 'center', height: '95vh' }}>
+      <Container sx={{ display: 'flex', justifyContent: 'center', width: '95vw', alignItems: 'center', height: '95vh' }}>
         <CircularProgress />
       </Container>
     );
@@ -1195,17 +1415,17 @@ useEffect(() => {
   const totalColumnCount = columnCount + 1; // Add 1 for the sequence number column
   const rowHeight = 40;
   const getColumnWidth = index => (index === 0 ? 60 : 200); // Sequence column is narrower
-  const totalGridWidth = 80 + (columnCount * 200); // 60px for seq column + rest for data columns
+  const totalGridWidth = 65 + (columnCount * 200); // 60px for seq column + rest for data columns
   const gridHeight = Math.min(510, rowCount * rowHeight + rowHeight); // Add rowHeight for header
 
   // Calculate total and filtered rows count
   const totalRows = data?.length || 0;
   const filteredRows = filteredData?.length || 0;
   const isFiltered = Object.keys(filters).length > 0;
-if (isHidden) {
+  if (isHidden) {
     return (
       <Container>
-        <Box sx={{ 
+        <Box sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -1223,170 +1443,232 @@ if (isHidden) {
     );
   }
   return (
-   !isHidden && <div style={{ width:'98vw', height: 'calc(100vh - 100px)', margin:"auto" , userSelect: "none" }} >
-<div className="top-bar">
-<p>{spreadsheet?.name}</p>
+    !isHidden &&
 
-  <div className="button-group">
-    <button className="excel-btn primary" onClick={handleAddRow}>
-      ➕ Add Row
-    </button>
+    <div style={{ width: `${isFullScreen ? '100vw' : '99vw'}`, margin: "auto", overflow: "hidden", userSelect: "none" }} >
+      {
+        !isFullScreen ? <><div className="top-bar">
+          <p>{spreadsheet?.name}</p>
 
-    <button className="excel-btn outlined" onClick={() => setNewColumnDialogOpen(true)}>
-      ➕ Add Column
-    </button>
+          <div style={{ display: "flex", gap: "10px", padding:"2px" }}>
+            <button
 
-    <button
-      className="excel-btn outlined"
-      onClick={handleClearAllFilters}
-      disabled={Object.keys(filters).length === 0}
-    >
-      🔍 Clear Filters
-    </button>
+            style={{ padding:"5px" ,background:"var(--main-light-clr)", border:"none", borderRadius:"5px", color:"#fff"
+            }}
+            
+            onClick={() => {
+              setFullScreen(!isFullScreen)
+            }}>Full Screen</button>
 
-    <button
-      className="excel-btn outlined"
-      onClick={manualSave}
-      disabled={pendingUpdates.length === 0 || isSaving}
-    >
-      💾 Save Changes
-    </button>
-
-    <button
-      className="excel-btn outlined"
-      onClick={handleDownloadCsv}
-      disabled={isDownloading}
-    >
-      ⬇️ Export CSV
-    </button>
-  </div>
-</div>
-
-{/* Spreadsheet Info */}
-<div className="spreadsheet-info">
-  <p>Description: {spreadsheet.description || 'No description provided'}</p>
-  <p>Created: {new Date(spreadsheet.createdAt).toLocaleString()}</p>
-  <p>Last updated: {new Date(spreadsheet.updatedAt).toLocaleString()}</p>
-</div>
-
-{/* Admins with Access */}
-<div className="admin-section">
- <div className='excel-admin-chips'>
- <h3>Admins with Access:</h3>
-  <div className="admin-chips">
-    {filterdAdmins.length > 0 ? (
-      filterdAdmins.map(admin => (
-        <div key={admin._id} className="admin-chip">
-          {admin.Name || admin.Email}
-          <button onClick={() => handleRemoveExcelFromAdmin(admin)}>✖</button>
-        </div>
-      ))
-    ) : (
-      <p>No admins have access to this spreadsheet.</p>
-    )}
-  </div>
- </div>
-  <div>
-   
-    <p>
-      {isFiltered
-        ? `Showing ${filteredRows} of ${totalRows} rows`
-        : `Total rows: ${totalRows}`}
-    </p>
-  </div>
-</div>
-
-{/* <div className="spreadsheet-header">
-  <div>
-    <h2>{spreadsheet?.name}</h2>
-    <p>
-      {isFiltered
-        ? `Showing ${filteredRows} of ${totalRows} rows`
-        : `Total rows: ${totalRows}`}
-    </p>
-  </div>
-
-  <div className="button-group">
-    <button className="btn outlined" onClick={() => setNewColumnDialogOpen(true)}>
-      ➕ Add Column
-    </button>
-
-    <button className="btn outlined" onClick={handleAddRow}>
-      ➕ Add Row
-    </button>
-
-    <button className="btn outlined" onClick={handleDownloadCsv} disabled={isDownloading}>
-      {isDownloading ? 'Downloading...' : '⬇️ Download Excel'}
-    </button>
-
-    <button
-      className="btn primary"
-      onClick={manualSave}
-      disabled={pendingUpdates.length === 0 || isSaving}
-    >
-      {isSaving
-        ? 'Saving...'
-        : `💾 Save${pendingUpdates.length > 0 ? ` (${pendingUpdates.length})` : ''}`}
-    </button>
-  </div>
-</div> */}
-
-      <Paper 
-        sx={{ 
-          height: 'calc(100% - 60px)', 
-          width: '98vw', 
-          overflow: 'hidden',
-          display: 'flex', 
-          flexDirection: 'column'
-        }}
-      >
-        <div style={{ width: '100%', height: '100%', overflow: 'scroll' }}>
-          <div style={{ width: totalGridWidth, height: gridHeight, overflow: 'auto' }}>
-            {/* Header */}
-            <div style={{ position: 'sticky', top: 0, zIndex: 2 }}>
-              <Grid
-                columnCount={totalColumnCount}
-                rowCount={1}
-                columnWidth={getColumnWidth}
-                rowHeight={index => rowHeight}
-                height={rowHeight}
-                width={totalGridWidth}
-                itemData={{ columns, handleColumnClick, sortConfig, filters }}
-                style={{ overflow: 'hidden'}}
-              >
-                {HeaderCell}
-              </Grid>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <p style={{ fontSize: "20px", cursor: "pointer" }} onClick={() => setfontSize(fontSize - 1)}>-</p>
+              <p style={{ padding: "2px 8px", border: "1px solid black", borderRadius: "5px", fontSize:"14px" }}>Font Size : {fontSize}</p>
+              <p style={{ fontSize: "20px", cursor: "pointer" }} onClick={() => setfontSize(fontSize + 1)}>+</p>
             </div>
+          </div>
 
-            {/* Body */}
-            <Grid
-              ref={gridRef}
-              columnCount={totalColumnCount}
-              rowCount={rowCount}
-              columnWidth={getColumnWidth}
-              rowHeight={index => rowHeight}
-              height={gridHeight - rowHeight}
-              width={totalGridWidth}
-              itemData={{ 
-                rows: filteredData, 
-                columns, 
-                onCellChange: handleCellChange,
-                editingCell,
-                setEditingCell,
-                editValue,
-                setEditValue,
-                saveEdit,
-                handleKeyPress,
-                onfocus: onfocus, 
+          <div className="button-group">
+            {
+              medata?.user?.Role === "Owner" && <>
+                <button className="excel-btn primary" onClick={handleAddRow}>
+                  ➕ Add Row
+                </button>
 
-              }}
+                <button className="excel-btn outlined" onClick={() => setNewColumnDialogOpen(true)}>
+                  ➕ Add Column
+                </button></>
+            }
+
+            <button
+              className="excel-btn outlined"
+              onClick={handleClearAllFilters}
+              disabled={Object.keys(filters).length === 0}
             >
-              {Cell}
-            </Grid>
+              🔍 Clear Filters
+            </button>
+
+            <button
+              className="excel-btn outlined"
+              onClick={manualSave}
+              disabled={pendingUpdates.length === 0 || isSaving}
+            >
+              💾 Save Changes
+            </button>
+
+            {
+              medata?.user?.Role === "Owner" && <button
+                className="excel-btn outlined"
+                onClick={handleDownloadCsv}
+                disabled={isDownloading}
+              >
+                ⬇️ Export CSV
+              </button>
+            }
           </div>
         </div>
-      </Paper>
 
+          {/* Spreadsheet Info */}
+          <div className="spreadsheet-info">
+            <div style={{ display: "flex", gap: "20px", marginBottom: "10px" }}>
+              {/* <p>Description: {spreadsheet.description || 'No description provided'}</p> */}
+              <p>Created: {new Date(spreadsheet?.createdAt).toLocaleString()}</p>
+              <p>Last updated: {new Date(spreadsheet?.updatedAt).toLocaleString()}</p>
+            </div>
+            <div>
+
+              <p>
+                {isFiltered
+                  ? `Showing ${filteredRows} of ${totalRows} rows`
+                  : `Total rows: ${totalRows}`}
+              </p>
+            </div>
+          </div>
+
+          {/* Admins with Access */}
+          {
+            medata?.user?.Role === "Owner" && <div className="admin-section">
+              <div className='excel-admin-chips'>
+                <h3>Admins with Access:</h3>
+                <div className="admin-chips">
+                  {filterdAdmins.length > 0 ? (
+                    filterdAdmins.map(admin => (
+                      <div key={admin._id} className="admin-chip">
+                        {admin.Name || admin.Email}
+                        <button onClick={() => handleRemoveExcelFromAdmin(admin)}>✖</button>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No admins have access to this spreadsheet.</p>
+                  )}
+                </div>
+              </div>
+
+            </div>
+          }
+
+
+          <Paper
+            sx={{
+              // height: 'calc(100% - 10px)',
+              width: '100vw',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <div style={{ width: '100%', height: '100%', overflow: 'scroll' }}>
+              <div style={{ width: totalGridWidth, height: gridHeight + 61, overflow: 'hidden' }}>
+                {/* Header */}
+                <div style={{ position: 'sticky', top: 0, zIndex: 2 }}>
+                  <Grid
+                    columnCount={totalColumnCount}
+                    rowCount={1}
+                    columnWidth={getColumnWidth}
+                    rowHeight={index => rowHeight}
+                    height={rowHeight}
+                    width={totalGridWidth}
+                    itemData={{ columns, handleColumnClick, sortConfig, filters }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    {HeaderCell}
+                  </Grid>
+                </div>
+
+                {/* Body */}
+                <Grid
+                  ref={gridRef}
+                  columnCount={totalColumnCount}
+                  rowCount={rowCount}
+                  columnWidth={getColumnWidth}
+                  rowHeight={index => rowHeight}
+                  height={gridHeight + rowHeight}
+                  width={totalGridWidth + 5}
+                  itemData={{
+                    rows: filteredData,
+                    columns,
+                    onCellChange: handleCellChange,
+                    editingCell,
+                    setEditingCell,
+                    editValue,
+                    setEditValue,
+                    saveEdit,
+                    handleKeyPress,
+                    onfocus: onfocus,
+                    fontSize
+
+                  }}
+                >
+                  {Cell}
+                </Grid>
+              </div>
+            </div>
+          </Paper>
+          
+          </>
+
+
+          :
+          //full screen mode
+          <Paper
+            sx={{
+
+              width: '100vw',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              position: "absolute",
+              top: 0,
+              zIndex: 16
+            }}
+          >
+            <div style={{ width: '100%', height: '100vh', overflow: 'scroll' }}>
+              <div style={{ width: totalGridWidth, height: 720, overflow: 'hidden' }}>
+                {/* Header */}
+                <div style={{ position: 'sticky', top: 0, zIndex: 2 }}>
+                  <Grid
+                    columnCount={totalColumnCount}
+                    rowCount={1}
+                    columnWidth={getColumnWidth}
+                    rowHeight={index => rowHeight}
+                    height={rowHeight}
+                    width={totalGridWidth}
+                    itemData={{ columns, handleColumnClick, sortConfig, filters }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    {HeaderCell}
+                  </Grid>
+                </div>
+
+                {/* Body */}
+                <Grid
+                  ref={gridRef}
+                  columnCount={totalColumnCount}
+                  rowCount={rowCount}
+                  columnWidth={getColumnWidth}
+                  rowHeight={index => rowHeight}
+                  height={gridHeight + rowHeight + 200}
+                  width={totalGridWidth + 5}
+                  itemData={{
+                    rows: filteredData,
+                    columns,
+                    onCellChange: handleCellChange,
+                    editingCell,
+                    setEditingCell,
+                    editValue,
+                    setEditValue,
+                    saveEdit,
+                    handleKeyPress,
+                    onfocus: onfocus,
+                    fontSize
+                  }}
+                >
+                  {Cell}
+                </Grid>
+              </div>
+            </div>
+          </Paper>
+
+      }
       {/* Column Context Menu */}
       <Menu
         anchorEl={anchorEl}
@@ -1405,19 +1687,22 @@ if (isHidden) {
         <MenuItem onClick={() => openFilterDialog(columnContextMenu)}>
           Filter {filters[columnContextMenu] && '(active)'}
         </MenuItem>
-        {columnContextMenu && columns.find(col => col.name === columnContextMenu)?.locked ? (
-          <MenuItem onClick={() => handleToggleColumnLock(columnContextMenu)}>
-            Unlock Column <LockOpenIcon fontSize="small" sx={{ ml: 1 }} />
-          </MenuItem>
-        ) : (
-          <MenuItem onClick={() => handleToggleColumnLock(columnContextMenu)}>
-            Lock Column <LockIcon fontSize="small" sx={{ ml: 1 }} />
-          </MenuItem>
-        )}
+        {
+          medata?.user?.Role === "Owner" && <>
+            {columnContextMenu && columns.find(col => col.name === columnContextMenu)?.locked ? (
+              <MenuItem onClick={() => handleToggleColumnLock(columnContextMenu)}>
+                Unlock Column <LockOpenIcon fontSize="small" sx={{ ml: 1 }} />
+              </MenuItem>
+            ) : (
+              <MenuItem onClick={() => handleToggleColumnLock(columnContextMenu)}>
+                Lock Column <LockIcon fontSize="small" sx={{ ml: 1 }} />
+              </MenuItem>
+            )}</>
+        }
       </Menu>
 
       {/* Filter Dialog */}
-      <FilterDialog 
+      <FilterDialog
         open={filterDialogOpen}
         onClose={() => setFilterDialogOpen(false)}
         column={activeFilterColumn}
@@ -1427,8 +1712,8 @@ if (isHidden) {
       />
 
       {/* New Column Dialog */}
-      {/* <Dialog 
-        open={newColumnDialogOpen} 
+      <Dialog
+        open={newColumnDialogOpen}
         onClose={() => setNewColumnDialogOpen(false)}
         fullWidth
         maxWidth="sm"
@@ -1446,7 +1731,7 @@ if (isHidden) {
               onChange={(e) => setNewColumnName(e.target.value)}
             />
           </Box>
-          
+
           <Box sx={{ mt: 2 }}>
             <FormControl fullWidth>
               <InputLabel id="column-type-select-label">Column Type</InputLabel>
@@ -1464,8 +1749,8 @@ if (isHidden) {
               </Select>
             </FormControl>
           </Box>
-          
-          
+
+
           {newColumnType === 'dropdown' && (
             <Box sx={{ mt: 2 }}>
               <TextField
@@ -1485,7 +1770,19 @@ if (isHidden) {
           <Button onClick={() => setNewColumnDialogOpen(false)}>Cancel</Button>
           <Button onClick={handleAddColumn} variant="contained">Add</Button>
         </DialogActions>
-      </Dialog> */}
+      </Dialog>
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={() => setNotification({ ...notification, open: false })}
+      >
+        <Alert 
+          onClose={() => setNotification({ ...notification, open: false })} 
+          severity={notification.severity}
+        >
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

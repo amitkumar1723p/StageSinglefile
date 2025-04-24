@@ -61,7 +61,7 @@ const ExpiredListing = () => {
       const [myQuery, setMyQuery] = useState(queryParams.get("type"));
       // const {  NavbarRef } =
       //   useContext(UserContext);
-      console.log("MarkUpdatePost", MarkUpdatedPost);
+       
       useEffect(() => {
         if (location?.state && location?.state?.updatePost == true) {
           // Set all your state variables as before
@@ -107,7 +107,7 @@ const ExpiredListing = () => {
             let NavbarHight = NavbarRef?.current?.offsetHeight || 0;
             
             if (postCardId) {
-              console.log("Found element:", postCardId.getBoundingClientRect());
+            
               const elementTop = postCardId.getBoundingClientRect().top + window.scrollY;
               const offset = allPostFilterBoxHight + NavbarHight;
       
@@ -366,10 +366,8 @@ const ExpiredListing = () => {
           const isConfirmed = window.confirm("Are you sure about it?");
           if (isConfirmed) {
             setStatus(value);
-          } else {
-            // Handle the cancel action if needed
-            console.log("Status change canceled.");
-          }
+          }  
+          
         } else {
           alert("Please Select for Change Property Status!");
         }
@@ -397,9 +395,7 @@ const ExpiredListing = () => {
         let result = window.confirm("Are you sure you want to proceed?");
         if (result && changePropertyStatusData?.AssignedPropertys?.length === 1) {
           dispatch(changePropertyStatus(changePropertyStatusData));
-        } else {
-          console.log("Cancel");
-        }
+        }   
       };
     
     //   useEffect(()=>{

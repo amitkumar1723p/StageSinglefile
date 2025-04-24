@@ -380,7 +380,7 @@ const OwnerAgentExcel = () => {
   }
 
   const fetchSingleFileDataOwner = async (id) => {
-    console.log("im called bhai")
+  
     try {
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/excel/owner/file/${id}`, { withCredentials: true });
       setAssignedAdmins(res.data.admins);

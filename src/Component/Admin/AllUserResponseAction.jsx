@@ -100,9 +100,9 @@ export default function AllUserResponseAction() {
         }));
 
         const storedData = JSON.parse(localStorage.getItem("newLength")) || [];
-
-        const result = storedData.filter(storedItem => {
-          const match = newData.find(newItem => newItem.ContactNumber === storedItem.ContactNumber);
+console.log(localStorage.getItem("newLength"))
+        const result = storedData?.filter(storedItem => {
+          const match = newData?.find(newItem => newItem.ContactNumber === storedItem.ContactNumber);
 
           return match && (
             storedItem.notifyData !== match.notifyData ||
@@ -113,7 +113,7 @@ export default function AllUserResponseAction() {
             storedItem.latestCreateAt !== match.latestCreateAt // ✅ this was missing proper comparison
           );
         });
-        console.log(result, "lll")
+ 
         setTrackNewLead(result);
 
         if (newData.length > storedData.length) {
@@ -179,15 +179,15 @@ export default function AllUserResponseAction() {
   }, [tarckNewLead]);
 
 
-  useEffect(() => {
-    if (index !== undefined && index !== null) {
-      const stored = localStorage.getItem('readMode');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        // Remove first match by ContactNumber
-        const updated = parsed.filter(item => item.ContactNumber !== index);
-        console.log(updated)
-        localStorage.setItem('readMode', JSON.stringify(updated));
+   useEffect(() => {
+        if (index !== undefined && index !== null) {
+            const stored = localStorage.getItem('readMode');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                // Remove first match by ContactNumber
+                const updated = parsed.filter(item => item.ContactNumber !== index);
+              
+                localStorage.setItem('readMode', JSON.stringify(updated));
 
       }
     }

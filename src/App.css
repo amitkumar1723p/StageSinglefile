@@ -193,6 +193,12 @@ td{
 
 
 @media (max-width: 480px) {
+
+
+.floating-buttons a {
+  background-color: var(--main-light-clr);
+}
+
   /* .who-we-are-section{
     font-size: 12px !important;
   } */
@@ -321,8 +327,8 @@ td{
 
 /* Apply to all scrollbars */
 ::-webkit-scrollbar {
-  width: 6px; /* Adjust scrollbar width */
-  height: 6px; /* For horizontal scrollbars */
+  width: 10px; /* Adjust scrollbar width */
+  height: 15px; /* For horizontal scrollbars */
 }
 
 /* Scrollbar Track */
