@@ -951,7 +951,9 @@ function App() {
       {/* <PinnacleSms /> */}
       {}
 
-      <Navbar />
+
+{!location.pathname.includes("fresh-bookings/project-name") &&    <Navbar />}
+   
       {alertData && alertData.AlertShow === true && (
         <Alert
           AlertType={alertData.AlertType}
@@ -1249,7 +1251,8 @@ function App() {
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Footer />
+      {!location.pathname.includes("fresh-bookings/project-name") &&    <Footer />}
+      
     </>
   );
 }
