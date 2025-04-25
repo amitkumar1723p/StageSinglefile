@@ -11,8 +11,9 @@ export const CreateUserOtpAction = (userData) => {
         payload: "CreateUserOtpRequest",
       });
       // const url = "/user/create";
-      const url = `${api_Base_Url}/user/${userData.email ? "nri-genrate-otp" : "genrate-otp"
-        }`;
+      const url = `${api_Base_Url}/user/${
+        userData.email ? "nri-genrate-otp" : "genrate-otp"
+      }`;
       //  const url =  ""
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -51,8 +52,9 @@ export const VerifyUserOtpAction = (userData) => {
       //   userData.email ? "nri-genrate-otp" : "genrate-otp"
       // }`;
 
-      const url = `${api_Base_Url}/user/${userData.email ? "nri-verify-otp" : "verify-otp"
-        }`;
+      const url = `${api_Base_Url}/user/${
+        userData.email ? "nri-verify-otp" : "verify-otp"
+      }`;
 
       const config = {
         headers: { "Content-Type": "application/json" },
@@ -224,7 +226,7 @@ export const BiddingFormAction = (queryData) => {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
 
         withCredentials: true,
@@ -333,8 +335,9 @@ export const GetAllAdminAction = (Keyword) => {
 
       let url;
       if (Keyword) {
-        url = `${api_Base_Url}/admin-owner/admin-data?${Object.keys(Keyword)[0]
-          }=${Keyword[Object.keys(Keyword)[0]]}`;
+        url = `${api_Base_Url}/admin-owner/admin-data?${
+          Object.keys(Keyword)[0]
+        }=${Keyword[Object.keys(Keyword)[0]]}`;
       } else {
         url = `${api_Base_Url}/admin-owner/admin-data`;
       }
@@ -398,7 +401,7 @@ export const VerifyAdminAction = ({ userdata }, UserId) => {
 };
 
 // Get All Bidding Data  sort by Post id
-export const GetPost_BiddingDocumentAction = (PostId , DeletePost) => {
+export const GetPost_BiddingDocumentAction = (PostId, DeletePost) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -406,9 +409,7 @@ export const GetPost_BiddingDocumentAction = (PostId , DeletePost) => {
         payload: "GetPost_BiddingDocumentRequest",
       });
 
-    
-
-       let url ;
+      let url;
 
       if (DeletePost == true) {
         url = `${api_Base_Url}/Biddingform/get-bidding-data/deleted-post/${PostId}`;
@@ -588,6 +589,7 @@ export const CreateChannelPartnerAction = (ChannelPartnerData) => {
 export const ViewOwnerDetailsAction = (Document) => {
  
  
+
   return async (dispatch) => {
     try {
       dispatch({
@@ -606,15 +608,14 @@ export const ViewOwnerDetailsAction = (Document) => {
 
       let data;
       if (Document) {
-       
-        const response = await axios.post(url,{postId:Document} , config);
+        const response = await axios.post(url, { postId: Document }, config);
         data = response.data;
-    } 
-    // else {
-     
-    //     const response = await axios.get(url, config);
-    //     data = response.data;
-    //   }
+      }
+      // else {
+
+      //     const response = await axios.get(url, config);
+      //     data = response.data;
+      //   }
 
       dispatch({ type: "ViewOwnerDetailsSuccess", payload: data });
     } catch (error) {
@@ -682,7 +683,7 @@ export const TenentResponseIsExitAction = (PostId) => {
 
       dispatch({ type: "TenentResponseIsExitSuccess", payload: data });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.response) {
         dispatch({
           type: "TenentResponseIsExitFail",
@@ -798,7 +799,6 @@ export const ProfileEditAction = (editData) => {
 };
 
 export const ProfileUpdateAction = (updateData) => {
-
   return async (dispatch) => {
     try {
       dispatch({
@@ -864,7 +864,7 @@ export const ReportSuspiciousProperty = (updateData) => {
 export const GetMyVisitsAction = () => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "GetMyVisitsRequest" })
+      dispatch({ type: "GetMyVisitsRequest" });
 
       let url = `${api_Base_Url}/schedule-visit/my-visits`;
 
@@ -954,23 +954,23 @@ export const getAllUserAction = () => {
         });
       }
     }
-  }
-}
-
+  };
+};
 
 // Pyement Action
 
-export const paymentAction =  () => {
-
+export const paymentAction = () => {
   return async (dispatch) => {
     try {
       // console.log("dis")
-      dispatch({ type: "PaymentActionRequest",payload: "PaymentActionRequest" });
+      dispatch({
+        type: "PaymentActionRequest",
+        payload: "PaymentActionRequest",
+      });
 
       let url = `${api_Base_Url}/payment/userOrder`;
       // console.log(url)
       // const config = {
-      
 
       //   withCredentials: true,
       // };
@@ -979,7 +979,7 @@ export const paymentAction =  () => {
       // console.log("data", data)
       dispatch({ type: "PaymentActionSuccess", payload: data });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error.response) {
         dispatch({
           type: "PaymentActionFail",
@@ -992,11 +992,11 @@ export const paymentAction =  () => {
         });
       }
     }
-  }
-}
+  };
+};
 
 // store payment info
-export const verifiedPayment =  (userData) => {
+export const verifiedPayment = (userData) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "verifiedPaymentRequest" });
@@ -1008,7 +1008,7 @@ export const verifiedPayment =  (userData) => {
 
         withCredentials: true,
       };
-// console.log(userData,"j")
+      // console.log(userData,"j")
       const { data } = await axios.post(url, userData, config);
       dispatch({ type: "verifiedPaymentSuccess", payload: data });
     } catch (error) {
@@ -1024,12 +1024,12 @@ export const verifiedPayment =  (userData) => {
         });
       }
     }
-  }
-}
+  };
+};
 
-// get paid property 
+// get paid property
 
-export const getPaidPropertyAction=(PostId)=>{
+export const getPaidPropertyAction = (PostId) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "getPaidPropertyRequest" });
@@ -1059,11 +1059,10 @@ export const getPaidPropertyAction=(PostId)=>{
       }
     }
   };
-}
-
+};
 
 //user role updation
- 
+
 export const UserRoleUpdation = (updateData) => {
   // console.log(updateData)
   return async (dispatch) => {
@@ -1079,7 +1078,7 @@ export const UserRoleUpdation = (updateData) => {
         withCredentials: true,
       };
       let toSend;
-      if(updateData.role==="Block"){
+      if (updateData.role === "Block") {
         // console.log("idaodd")
         toSend = {
           ...updateData,
@@ -1091,12 +1090,12 @@ export const UserRoleUpdation = (updateData) => {
    
         toSend = {
           ...updateData,
-          role:false
-        }
-      }else{
+          role: false,
+        };
+      } else {
         toSend = {
-          ...updateData
-        }
+          ...updateData,
+        };
       }
       const { data } = await axios.put(url, toSend, config);
       dispatch({ type: "UserRoleUpdationSuccess", payload: data });
@@ -1116,8 +1115,7 @@ export const UserRoleUpdation = (updateData) => {
   };
 };
 
-export const getTransactionDetailAction=()=>{
-
+export const getTransactionDetailAction = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: "getTransactionDetailRequest" });
@@ -1131,9 +1129,8 @@ export const getTransactionDetailAction=()=>{
       };
 
       const { data } = await axios.get(url, config);
-   
 
-      dispatch({ type: "getTransactionDetailSuccess", payload:data });
+      dispatch({ type: "getTransactionDetailSuccess", payload: data });
     } catch (error) {
       if (error.response) {
         dispatch({
@@ -1148,27 +1145,30 @@ export const getTransactionDetailAction=()=>{
       }
     }
   };
-}
+};
 //delete excel file
 
 export const deleteExcelFile = (excelId) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "Delete_ExcelFileRequest",
-        payload:"Delete_ExcelFileRequest"
-       });
+      dispatch({
+        type: "Delete_ExcelFileRequest",
+        payload: "Delete_ExcelFileRequest",
+      });
 
       const url = `${process.env.REACT_APP_API_URL}/excel/delete/${excelId}`;
-      const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
+      const config = {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      };
 
       const { data } = await axios.delete(url, config);
 
       dispatch({ type: "Delete_ExcelFileSuccess", payload: data });
-
     } catch (error) {
       dispatch({
         type: "Delete_ExcelFileFail",
-        payload:{ message: error.message, success: false }
+        payload: { message: error.message, success: false },
       });
     }
   };
@@ -1205,16 +1205,16 @@ export const getAllUserResponseAction=(page,searchText)=>{
       }
     }
   };
-}
+};
 
-export const getSingleUserResponseAction=(id)=>{
+export const getSingleUserResponseAction = (id) => {
   return async (dispatch) => {
     try {
       dispatch({
         type: "SingleUserResponseActionRequest",
         payload: "SingleUserResponseActionRequest",
       });
-      
+
       const url = `${api_Base_Url}/admin-owner/getSingleUser/${id}`;
 
       const config = {
@@ -1222,7 +1222,7 @@ export const getSingleUserResponseAction=(id)=>{
         withCredentials: true,
       };
       const { data } = await axios.get(url, config);
-      
+
       dispatch({ type: "SingleUserResponseActionSuccess", payload: data });
     } catch (error) {
       if (error.response) {
@@ -1238,13 +1238,13 @@ export const getSingleUserResponseAction=(id)=>{
       }
     }
   };
-}
+};
 
 // this action is used to update offers status
 export const updateBidStatusAction=({ VisitStatus }, visitId)=>{
  
 
-  return async(dispatch)=>{
+  return async (dispatch) => {
     try {
       dispatch({
         type: "updateBidStatusActionRequest",
@@ -1279,8 +1279,8 @@ export const updateBidStatusAction=({ VisitStatus }, visitId)=>{
         });
       }
     }
-  }
-}
+  };
+};
 
 export const updateNotifyStatusAction=({ VisitStatus }, visitId)=>{
 
@@ -1319,8 +1319,8 @@ export const updateNotifyStatusAction=({ VisitStatus }, visitId)=>{
         });
       }
     }
-  }
-}
+  };
+};
 
 export const updateRequirementStatusAcion=({ VisitStatus }, visitId)=>{
  
@@ -1478,4 +1478,93 @@ export const updateConatctRemarkAction=( {VisitStatus},conatctId)=>{
       }
     }
   }
+}
+
+
+
+//  Sent Token In Email 
+export const SentTokenForEmailVerification = (userdata) => {
+  console.log(userdata, "userdata")
+  
+ return async (dispatch) => {
+   try {
+     dispatch({
+       type: "SentTokenForEmailVerificationRequest",
+       payload: "SentTokenForEmailVerificationRequest",
+     });
+
+     // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+     let url = `${api_Base_Url}/user/email/sent-token`;
+     
+     const config = {
+       headers: { "Content-Type": "application/json" },
+       withCredentials: true,
+     };
+
+     const { data } = await axios.post(url, userdata, config);
+
+     dispatch({
+       type: "SentTokenForEmailVerificationSuccess",
+       payload: data,
+     });
+   } catch (error) {
+     if (error.response) {
+       dispatch({
+         type: "SentTokenForEmailVerificationFail",
+         payload: error.response.data,
+       });
+     } else {
+       dispatch({
+         type: "SentTokenForEmailVerificationFail",
+         payload: { message: error.message, success: false },
+       });
+     }
+   }
+ };
+};
+
+
+
+
+//  Email Verify End 
+
+
+export const VerifyTokenForEmailVerificationAction = ({token})=>{
+
+
+ return async (dispatch) => {
+   try {
+     dispatch({
+       type: "VerifyTokenForEmailVerificationActionRequest",
+       payload: "VerifyTokenForEmailVerificationActionRequest",
+     });
+
+     // let url = `/admin-owner/schedulevisit/status/${visitId}`;
+     let url = `${api_Base_Url}/user/email/verify-token?token=${token}`;
+     
+     const config = {
+       headers: { "Content-Type": "application/json" },
+       withCredentials: true,
+     };
+
+     const { data } = await axios.get(url,  config);
+
+     dispatch({
+       type: "VerifyTokenForEmailVerificationActionSuccess",
+       payload: data,
+     });
+   } catch (error) {
+     if (error.response) {
+       dispatch({
+         type: "VerifyTokenForEmailVerificationActionFail",
+         payload: error.response.data,
+       });
+     } else {
+       dispatch({
+         type: "VerifyTokenForEmailVerificationActionFail",
+         payload: { message: error.message, success: false },
+       });
+     }
+   }
+ };
 }

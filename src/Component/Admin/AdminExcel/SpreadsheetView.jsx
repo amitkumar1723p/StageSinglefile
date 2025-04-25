@@ -26,12 +26,473 @@ import FilterDialog from './FilterDialog';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeExcelFromAdminAction } from '../../../Action/postAction';
+import { DeleteIcon, EditIcon } from 'lucide-react';
 // Socket URL - use environment variable in production
 const SOCKET_URL = process.env.REACT_APP_API_URL;
 
-// Custom Cell component
-const Cell = ({ columnIndex, rowIndex, style, data }) => {
+// // Custom Cell component
+// const Cell = ({ columnIndex, rowIndex, style, data }) => {
 
+//   if (columnIndex === 0) {
+//     return (
+//       <div
+//         style={{
+//           ...style,
+//           boxSizing: 'border-box',
+//           border: '1px solid #ddd',
+//           padding: '6px',
+//           backgroundColor: rowIndex % 2 === 0 ? '#fff' : '#f9f9f9',
+//           whiteSpace: 'nowrap',
+//           overflow: 'hidden',
+//           // textOverflow: 'ellipsis',
+//           display: 'flex',
+//           alignItems: 'center',
+//           justifyContent: 'center',
+//           fontWeight: 'bold',
+//           color: '#666'
+//         }}
+//       >
+//         {rowIndex + 1}
+//       </div>
+//     );
+//   }
+//   const handleFocus = () => {
+
+//     if (!isLocked && data.onfocus) {
+//       data.onfocus(rowIndex, columnKey);
+//     }
+//   };
+//   // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
+//   const actualColumnIndex = columnIndex - 1;
+
+//   const { rows, columns, onCellChange, editingCell, setEditingCell,
+//     editValue, setEditValue, saveEdit, handleKeyPress, onfocus, fontSize } = data;
+
+//   const row = rows[rowIndex];
+//   const column = columns[actualColumnIndex];
+//   const columnKey = column?.name;
+//   const columnType = column?.type || 'text';
+//   const cellValue = row?.[columnKey];
+//   const isLocked = column?.locked;
+
+//   const isEditing = editingCell &&
+//     editingCell.rowIndex === rowIndex &&
+//     editingCell.columnName === columnKey;
+
+//   const handleMouseEnter = (e) => {
+//     // Don't show tooltip if editing
+
+//     if (isEditing) return;
+
+//     // Get value to display in tooltip
+//     let displayValue = cellValue !== null && cellValue !== undefined ? cellValue : '';
+
+//     // Convert to string if not already
+//     if (typeof displayValue !== 'string') {
+//       displayValue = String(displayValue);
+//     }
+
+//     // Only show tooltip if the content is meaningful
+//     if (displayValue.trim().length > 0) {
+//       const tooltip = document.getElementById('spreadsheet-tooltip');
+//       if (tooltip) {
+//         tooltip.textContent = displayValue;
+//         tooltip.style.display = 'block';
+
+//         // Calculate if tooltip would go off screen and adjust positioning
+//         const maxWidth = window.innerWidth - 20;
+//         const maxHeight = window.innerHeight - 20;
+//         const tooltipWidth = 250;
+
+//         // Adjust X position if would go off right side
+//         let posX = e.clientX + 15;
+//         if (posX + tooltipWidth > maxWidth) {
+//           posX = e.clientX - tooltipWidth - 20;
+//         }
+
+//         // Adjust Y position if would go off bottom
+//         let posY = e.clientY + 10;
+//         const tooltipHeight = tooltip.offsetHeight;
+//         if (posY + tooltipHeight > maxHeight) {
+//           posY = maxHeight - tooltipHeight;
+//         }
+
+//         tooltip.style.left = `${posX}px`;
+//         tooltip.style.top = `${posY}px`;
+//       }
+//     }
+//   };
+
+//   const handleMouseLeave = () => {
+//     const tooltip = document.getElementById('spreadsheet-tooltip');
+//     if (tooltip) {
+//       tooltip.style.display = 'none';
+//     }
+//   };
+//   const startEditing = () => {
+//     if (isLocked) return;
+//     setEditingCell({ rowIndex, columnName: columnKey });
+//     setEditValue(cellValue !== null && cellValue !== undefined ? cellValue : '');
+//   };
+
+//   // Handle different cell types
+//   const renderCellContent = () => {
+//     switch (columnType) {
+//       case 'checkbox':
+//         return (
+//           <Checkbox
+//             checked={Boolean(cellValue)}
+//             onChange={(e) => onCellChange(rowIndex, columnKey, e.target.checked)}
+//             disabled={isLocked}
+//             onFocus={(e) => onfocus(rowIndex, columnKey)}
+//           />
+//         );
+
+//       case 'dropdown':
+//         const options = column.options || [];
+//         return (
+//           <FormControl fullWidth size="small" disabled={isLocked}>
+//             <Select
+//               value={cellValue || ''}
+//               onChange={(e) => onCellChange(rowIndex, columnKey, e.target.value)}
+//               onFocus={() => onfocus(rowIndex, columnKey)}
+
+//               displayEmpty
+//             >
+//               <MenuItem value="">
+//                 <em>None</em>
+//               </MenuItem>
+//               {options.map((option) => (
+//                 <MenuItem key={option} value={option}>
+//                   {option}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         );
+
+//       case 'date':
+//         if (isEditing) {
+//           return (
+//             <TextField
+//               type="date"
+//               fullWidth
+//               size="small"
+//               value={editValue || ''}
+//               onChange={(e) => setEditValue(e.target.value)}
+//               onKeyDown={handleKeyPress}
+//               onBlur={saveEdit}
+
+//               autoFocus
+//               onFocus={() => onfocus(rowIndex, columnKey)}
+
+//             />
+//           );
+//         }
+//         return cellValue || '';
+
+//       case 'number':
+//         if (isEditing) {
+//           return (
+//             <TextField
+//               type="number"
+//               fullWidth
+//               size="small"
+//               value={editValue}
+//               onChange={(e) => setEditValue(e.target.value)}
+//               onKeyDown={handleKeyPress}
+//               onBlur={saveEdit}
+//               autoFocus
+//               onFocus={() => onfocus(rowIndex, columnKey)}
+
+//             />
+//           );
+//         }
+//         return cellValue !== null && cellValue !== undefined ? cellValue : '';
+
+//       case 'text':
+//       default:
+//         if (columnType === 'text' || columnType === 'number' || columnType === 'date') {
+//           if (isEditing) {
+//             return (
+//               <div style={{ ...style, }}>
+//                 <TextField
+//                   fullWidth
+
+//                   size="small"
+//                   value={editValue}
+//                   onChange={(e) => setEditValue(e.target.value)}
+//                   onKeyDown={handleKeyPress}
+//                   onBlur={saveEdit}
+//                   autoFocus
+//                   onFocus={handleFocus} // Use the handler here
+//                 />
+//               </div>
+//             );
+//           }
+//         }
+//         return cellValue !== null && cellValue !== undefined ? cellValue : '';
+//     }
+//   };
+
+//   return (
+//     <div
+//       style={{
+//         ...style,
+//         boxSizing: 'border-box',
+//         border: '1px solid #ddd',
+//         padding: isEditing ? '2px' : '6px',
+//         backgroundColor: isLocked ? '#f0f0f0' : (rowIndex % 2 === 0 ? '#fff' : '#f9f9f9'),
+//         whiteSpace: 'nowrap',
+//         overflow: 'hidden',
+//         textOverflow: 'ellipsis',
+//         cursor: isLocked ? 'not-allowed' : 'pointer',
+//         display: 'flex',
+//         alignItems: 'center',
+//         whiteSpace: "nowrap",
+//         fontSize: fontSize,
+//         overflow: "hidden",
+//         textOverflow: "ellipsis",
+//         width: "200px", // set width for truncation to take effect
+//         display: "block"
+//       }}
+//       onClick={() => !isLocked && !isEditing && startEditing()}
+//       onFocus={handleFocus}
+//       onMouseEnter={handleMouseEnter}
+//       onMouseLeave={handleMouseLeave}
+
+//     >
+//       {renderCellContent()}
+//     </div>
+//   );
+// };
+
+// // Custom HeaderCell component
+// const HeaderCell = ({ columnIndex, style, data }) => {
+//   const { columns, handleColumnClick, sortConfig, filters } = data;
+
+//   // Special case for sequence number column (columnIndex === 0)
+//   if (columnIndex === 0) {
+//     return (
+//       <div
+//         style={{
+//           ...style,
+//           boxSizing: 'border-box',
+//           border: '1px solid #ccc',
+//           fontWeight: 'bold',
+//           backgroundColor: '#f3f3f3',
+//           padding: '6px',
+//           whiteSpace: 'nowrap',
+//           display: 'flex',
+//           alignItems: 'center',
+//           justifyContent: 'center'
+//         }}
+//       >
+//         <span>#</span>
+//       </div>
+//     );
+//   }
+
+//   // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
+//   const actualColumnIndex = columnIndex - 1;
+//   const column = columns[actualColumnIndex];
+//   const columnName = column?.name;
+//   const isLocked = column?.locked;
+
+//   const getSortIcon = () => {
+//     if (sortConfig.key !== columnName) return null;
+//     return sortConfig.direction === 'asc' ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />;
+//   };
+
+//   const getFilterIcon = () => {
+//     return filters[columnName] ? <FilterListIcon color="primary" fontSize="small" /> : <FilterListIcon fontSize="small" />;
+//   };
+
+//   return (
+//     <div
+//       style={{
+//         ...style,
+//         boxSizing: 'border-box',
+//         border: '1px solid #ccc',
+//         fontWeight: 'bold',
+//         backgroundColor: isLocked ? '#e0e0e0' : '#f3f3f3',
+//         padding: '6px',
+//         whiteSpace: 'nowrap',
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'space-between',
+//         cursor: 'pointer'
+//       }}
+//       onClick={(e) => handleColumnClick(e, columnName)}
+//     >
+//       <span>{columnName}</span>
+//       <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+//         {isLocked && <LockIcon fontSize="small" style={{ color: '#555' }} />}
+//         {getFilterIcon()}
+//         {getSortIcon()}
+//       </div>
+//     </div>
+//   );
+// };
+const Cell = ({ columnIndex, rowIndex, style, data }) => {
+  // Get reference to the cell DOM element for focus
+  const cellRef = useRef(null);
+  
+  // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
+  const actualColumnIndex = columnIndex - 1;
+  
+  const { 
+    rows, columns, onCellChange, editingCell, setEditingCell, 
+    editValue, setEditValue, saveEdit, handleKeyPress, onfocus, customFont,
+    navigateCell, currentFocus, setCurrentFocus
+  } = data;
+  // console.log(data)
+  
+  // These variables can be defined conditionally
+  let row, column, columnKey, columnType, cellValue, isLocked, isEditing, isFocused;
+  
+  // Special case for sequence number column (columnIndex === 0)
+  if (columnIndex !== 0) {
+    row = rows[rowIndex];
+    column = columns[actualColumnIndex];
+    columnKey = column?.name;
+    columnType = column?.type || 'text';
+    cellValue = row?.[columnKey];
+    isLocked = column?.locked;
+    
+    isEditing = editingCell && 
+                editingCell.rowIndex === rowIndex && 
+                editingCell.columnName === columnKey;
+    
+    isFocused = currentFocus && 
+                currentFocus.rowIndex === rowIndex && 
+                currentFocus.columnIndex === columnIndex;
+  }
+
+  // Effect to focus the cell when it becomes the current focus - now always defined
+  useEffect(() => {
+    if (columnIndex !== 0 && isFocused && cellRef.current && !isLocked) {
+      cellRef.current.focus();
+    }
+  }, [isFocused, isLocked, columnIndex]);
+  
+  const handleFocus = () => {
+    if (columnIndex === 0  || !data.onfocus) return;
+    
+    // console.log('Cell focused:', rowIndex, columnKey);
+    onfocus(rowIndex, columnKey);
+    
+    // Update current focus when this cell gets focused
+    setCurrentFocus({ rowIndex, columnIndex, columnName: columnKey });
+  };
+  
+  const handleKeyDown = (e) => {
+    if (columnIndex === 0) return;
+    
+    // Don't handle navigation if we're editing
+    if (isEditing) {
+      handleKeyPress(e);
+      return;
+    }
+    
+    // Handle arrow keys, tab, and shift+tab
+    switch (e.key) {
+      case 'ArrowUp':
+        e.preventDefault();
+        navigateCell(rowIndex, columnIndex, 'up');
+        break;
+      case 'ArrowDown':
+        e.preventDefault();
+        navigateCell(rowIndex, columnIndex, 'down');
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        navigateCell(rowIndex, columnIndex, 'left');
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        navigateCell(rowIndex, columnIndex, 'right');
+        break;
+      case 'Tab':
+        e.preventDefault();
+        navigateCell(rowIndex, columnIndex, e.shiftKey ? 'left' : 'right');
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (!isLocked) {
+          startEditing();
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleMouseEnter = (e) => {
+    if (columnIndex === 0 || isEditing) return;
+    
+    // Get value to display in tooltip
+    let displayValue = cellValue !== null && cellValue !== undefined ? cellValue : '';
+    
+    // Convert to string if not already
+    if (typeof displayValue !== 'string') {
+      displayValue = String(displayValue);
+    }
+    
+    // Only show tooltip if the content is meaningful
+    if (displayValue.trim().length > 0) {
+      const tooltip = document.getElementById('spreadsheet-tooltip');
+      if (tooltip) {
+        tooltip.textContent = displayValue;
+        tooltip.style.display = 'block';
+        
+        // Calculate if tooltip would go off screen and adjust positioning
+        const maxWidth = window.innerWidth - 20;
+        const maxHeight = window.innerHeight - 20;
+        const tooltipWidth = 250;
+        
+        // Adjust X position if would go off right side
+        let posX = e.clientX + 15;
+        if (posX + tooltipWidth > maxWidth) {
+          posX = e.clientX - tooltipWidth - 20;
+        }
+        
+        // Adjust Y position if would go off bottom
+        let posY = e.clientY + 10;
+        const tooltipHeight = tooltip.offsetHeight;
+        if (posY + tooltipHeight > maxHeight) {
+          posY = maxHeight - tooltipHeight;
+        }
+        
+        tooltip.style.left = `${posX}px`;
+        tooltip.style.top = `${posY}px`;
+      }
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (columnIndex === 0) return;
+    
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
+  };
+
+  const startEditing = () => {
+    if (columnIndex === 0 || isLocked) return;
+    
+    // Hide tooltip when starting to edit
+    const tooltip = document.getElementById('spreadsheet-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
+    
+    setEditingCell({ rowIndex, columnName: columnKey });
+    setEditValue(cellValue !== null && cellValue !== undefined ? cellValue : '');
+  };
+
+  // Now render conditionally
   if (columnIndex === 0) {
     return (
       <div
@@ -43,7 +504,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
           backgroundColor: rowIndex % 2 === 0 ? '#fff' : '#f9f9f9',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
-          // textOverflow: 'ellipsis',
+          textOverflow: 'ellipsis',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -55,84 +516,6 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
       </div>
     );
   }
-  const handleFocus = () => {
-
-    if (!isLocked && data.onfocus) {
-      data.onfocus(rowIndex, columnKey);
-    }
-  };
-  // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
-  const actualColumnIndex = columnIndex - 1;
-
-  const { rows, columns, onCellChange, editingCell, setEditingCell,
-    editValue, setEditValue, saveEdit, handleKeyPress, onfocus, fontSize } = data;
-
-  const row = rows[rowIndex];
-  const column = columns[actualColumnIndex];
-  const columnKey = column?.name;
-  const columnType = column?.type || 'text';
-  const cellValue = row?.[columnKey];
-  const isLocked = column?.locked;
-
-  const isEditing = editingCell &&
-    editingCell.rowIndex === rowIndex &&
-    editingCell.columnName === columnKey;
-
-  const handleMouseEnter = (e) => {
-    // Don't show tooltip if editing
-
-    if (isEditing) return;
-
-    // Get value to display in tooltip
-    let displayValue = cellValue !== null && cellValue !== undefined ? cellValue : '';
-
-    // Convert to string if not already
-    if (typeof displayValue !== 'string') {
-      displayValue = String(displayValue);
-    }
-
-    // Only show tooltip if the content is meaningful
-    if (displayValue.trim().length > 0) {
-      const tooltip = document.getElementById('spreadsheet-tooltip');
-      if (tooltip) {
-        tooltip.textContent = displayValue;
-        tooltip.style.display = 'block';
-
-        // Calculate if tooltip would go off screen and adjust positioning
-        const maxWidth = window.innerWidth - 20;
-        const maxHeight = window.innerHeight - 20;
-        const tooltipWidth = 250;
-
-        // Adjust X position if would go off right side
-        let posX = e.clientX + 15;
-        if (posX + tooltipWidth > maxWidth) {
-          posX = e.clientX - tooltipWidth - 20;
-        }
-
-        // Adjust Y position if would go off bottom
-        let posY = e.clientY + 10;
-        const tooltipHeight = tooltip.offsetHeight;
-        if (posY + tooltipHeight > maxHeight) {
-          posY = maxHeight - tooltipHeight;
-        }
-
-        tooltip.style.left = `${posX}px`;
-        tooltip.style.top = `${posY}px`;
-      }
-    }
-  };
-
-  const handleMouseLeave = () => {
-    const tooltip = document.getElementById('spreadsheet-tooltip');
-    if (tooltip) {
-      tooltip.style.display = 'none';
-    }
-  };
-  const startEditing = () => {
-    if (isLocked) return;
-    setEditingCell({ rowIndex, columnName: columnKey });
-    setEditValue(cellValue !== null && cellValue !== undefined ? cellValue : '');
-  };
 
   // Handle different cell types
   const renderCellContent = () => {
@@ -143,10 +526,10 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
             checked={Boolean(cellValue)}
             onChange={(e) => onCellChange(rowIndex, columnKey, e.target.checked)}
             disabled={isLocked}
-            onFocus={(e) => onfocus(rowIndex, columnKey)}
+            onFocus={(e)=>onfocus(rowIndex, columnKey)}
           />
         );
-
+        
       case 'dropdown':
         const options = column.options || [];
         return (
@@ -154,8 +537,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
             <Select
               value={cellValue || ''}
               onChange={(e) => onCellChange(rowIndex, columnKey, e.target.value)}
-              onFocus={() => onfocus(rowIndex, columnKey)}
-
+              onFocus={()=>onfocus(rowIndex, columnKey)}
               displayEmpty
             >
               <MenuItem value="">
@@ -169,7 +551,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
             </Select>
           </FormControl>
         );
-
+        
       case 'date':
         if (isEditing) {
           return (
@@ -181,15 +563,13 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
               onChange={(e) => setEditValue(e.target.value)}
               onKeyDown={handleKeyPress}
               onBlur={saveEdit}
-
               autoFocus
-              onFocus={() => onfocus(rowIndex, columnKey)}
-
+              onFocus={()=>onfocus(rowIndex, columnKey)}
             />
           );
         }
         return cellValue || '';
-
+        
       case 'number':
         if (isEditing) {
           return (
@@ -202,29 +582,27 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
               onKeyDown={handleKeyPress}
               onBlur={saveEdit}
               autoFocus
-              onFocus={() => onfocus(rowIndex, columnKey)}
-
+              onFocus={()=>onfocus(rowIndex, columnKey)}
             />
           );
         }
         return cellValue !== null && cellValue !== undefined ? cellValue : '';
-
+        
       case 'text':
       default:
         if (columnType === 'text' || columnType === 'number' || columnType === 'date') {
           if (isEditing) {
             return (
-              <div style={{ ...style, }}>
+              <div style={{width: '100%'}}>
                 <TextField
                   fullWidth
-
                   size="small"
                   value={editValue}
                   onChange={(e) => setEditValue(e.target.value)}
                   onKeyDown={handleKeyPress}
                   onBlur={saveEdit}
                   autoFocus
-                  onFocus={handleFocus} // Use the handler here
+                  onFocus={handleFocus}
                 />
               </div>
             );
@@ -234,42 +612,53 @@ const Cell = ({ columnIndex, rowIndex, style, data }) => {
     }
   };
 
+  // Create border style based on focus state
+  const borderStyle = isFocused 
+    ?  {
+       
+       // Compensate for the border width to prevent layout shift
+        zIndex: 1,       // Ensure focused cell appears above others
+        position: 'relative'
+      }
+    : {
+        border: '1px solid #ddd'
+      };
+
   return (
     <div
+      ref={cellRef}
       style={{
         ...style,
         boxSizing: 'border-box',
-        border: '1px solid #ddd',
+        ...borderStyle,  // Apply border style based on focus state
+        // border:'1px solid #ddd',
         padding: isEditing ? '2px' : '6px',
         backgroundColor: isLocked ? '#f0f0f0' : (rowIndex % 2 === 0 ? '#fff' : '#f9f9f9'),
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
         cursor: isLocked ? 'not-allowed' : 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        whiteSpace: "nowrap",
-        fontSize: fontSize,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
+        fontSize: customFont,
         width: "200px", // set width for truncation to take effect
-        display: "block"
+        whiteSpace: "nowrap",
+        overflow: 'hidden',
+        textOverflow: "ellipsis",
+        display: 'block'
       }}
       onClick={() => !isLocked && !isEditing && startEditing()}
       onFocus={handleFocus}
+      onKeyDown={handleKeyDown}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-
+      tabIndex={isLocked ? -1 : 0} // Make non-locked cells focusable
     >
       {renderCellContent()}
     </div>
   );
 };
 
+
 // Custom HeaderCell component
 const HeaderCell = ({ columnIndex, style, data }) => {
   const { columns, handleColumnClick, sortConfig, filters } = data;
-
+  
   // Special case for sequence number column (columnIndex === 0)
   if (columnIndex === 0) {
     return (
@@ -291,13 +680,13 @@ const HeaderCell = ({ columnIndex, style, data }) => {
       </div>
     );
   }
-
+  
   // Adjust columnIndex to get the actual column (subtract 1 because of seq column)
   const actualColumnIndex = columnIndex - 1;
   const column = columns[actualColumnIndex];
   const columnName = column?.name;
   const isLocked = column?.locked;
-
+  
   const getSortIcon = () => {
     if (sortConfig.key !== columnName) return null;
     return sortConfig.direction === 'asc' ? <ArrowUpwardIcon fontSize="small" /> : <ArrowDownwardIcon fontSize="small" />;
@@ -325,7 +714,7 @@ const HeaderCell = ({ columnIndex, style, data }) => {
       onClick={(e) => handleColumnClick(e, columnName)}
     >
       <span>{columnName}</span>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px'}}>
         {isLocked && <LockIcon fontSize="small" style={{ color: '#555' }} />}
         {getFilterIcon()}
         {getSortIcon()}
@@ -333,6 +722,8 @@ const HeaderCell = ({ columnIndex, style, data }) => {
     </div>
   );
 };
+
+
 
 const SpreadsheetView = () => {
   const { id } = useParams();
@@ -365,7 +756,15 @@ const SpreadsheetView = () => {
   const [AssinedAdmins, setAssignedAdmins] = useState([]);
   const [isFullScreen, setFullScreen] = useState(false);
   const [fontSize, setfontSize] = useState(14);
-
+  // New state for keyboard navigation
+  const [currentFocus, setCurrentFocus] = useState(null);
+  // New state for rename column dialog
+  const [renameColumnDialogOpen, setRenameColumnDialogOpen] = useState(false);
+  const [columnToRename, setColumnToRename] = useState('');
+  const [newColumnNameForRename, setNewColumnNameForRename] = useState('');
+  // New state for delete column confirmation dialog
+  const [deleteColumnDialogOpen, setDeleteColumnDialogOpen] = useState(false);
+  const [columnToDelete, setColumnToDelete] = useState('');
   const navigate = useNavigate();
 
   // Socket.io reference
@@ -596,6 +995,115 @@ const SpreadsheetView = () => {
     }
   }, [allAdmins, spreadsheet]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+  // Function to navigate between cells
+  const navigateCell = useCallback((rowIndex, columnIndex, direction) => {
+    if (!filteredData || !columns) return;
+    
+    const rowCount = filteredData.length;
+    const columnCount = columns.length + 1; // +1 for sequence column
+    
+    let newRowIndex = rowIndex;
+    let newColumnIndex = columnIndex;
+    
+    switch (direction) {
+      case 'up':
+        newRowIndex = Math.max(0, rowIndex - 1);
+        break;
+      case 'down':
+        newRowIndex = Math.min(rowCount - 1, rowIndex + 1);
+        break;
+      case 'left':
+        newColumnIndex = Math.max(1, columnIndex - 1); // Min is 1 to skip sequence column
+        break;
+      case 'right':
+        newColumnIndex = Math.min(columnCount - 1, columnIndex + 1);
+        break;
+      default:
+        break;
+    }
+    
+    // Don't navigate to sequence column (index 0)
+    if (newColumnIndex === 0) {
+      newColumnIndex = 1;
+    }
+    
+    // If nothing changed, return
+    if (newRowIndex === rowIndex && newColumnIndex === columnIndex) {
+      return;
+    }
+    
+    // Update current focus
+    let newColumnName = newColumnIndex > 0 ? columns[newColumnIndex - 1]?.name : null;
+    
+    // Check if the target cell is locked
+    let isTargetLocked = newColumnIndex > 0 && columns[newColumnIndex - 1]?.locked;
+    // console.log(newColumnName,isTargetLocked)
+    // If target is locked, try to find next non-locked cell in the same direction
+    if (isTargetLocked) {
+      // For horizontal navigation, keep moving in the same direction until non-locked or edge
+      if (direction === 'left' || direction === 'right') {
+        let nextColumnIndex = newColumnIndex;
+        const step = direction === 'left' ? -1 : 1;
+        
+        while (nextColumnIndex > 0 && nextColumnIndex < columnCount && 
+               columns[nextColumnIndex - 1]?.locked) {
+          nextColumnIndex += step;
+          
+          // Stop at boundaries
+          if (nextColumnIndex <= 0 || nextColumnIndex >= columnCount) {
+            break;
+          }
+        }
+        
+        // If we found a non-locked cell, use that
+        if (nextColumnIndex > 0 && nextColumnIndex < columnCount && 
+            !columns[nextColumnIndex - 1]?.locked) {
+          newColumnIndex = nextColumnIndex;
+          newColumnName = columns[newColumnIndex - 1]?.name;
+        } else {
+          // If all cells are locked in this direction, stay at current position
+          return;
+        }
+      }
+    }
+    
+    // Set new focus
+    setCurrentFocus({ 
+      rowIndex: newRowIndex, 
+      columnIndex: newColumnIndex,
+      columnName: newColumnName
+    });
+    
+    // Scroll to the new cell if needed
+    if (gridRef.current) {
+      gridRef.current.scrollToItem({
+        rowIndex: newRowIndex,
+        columnIndex: newColumnIndex
+      });
+    }
+  }, [filteredData, columns]);
+
+
+
+
+
+
+
+
+
+
   //preventing screen shots and copying
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -633,6 +1141,16 @@ const SpreadsheetView = () => {
 
       // Prevent Printing (Ctrl + P)
       if (event.ctrlKey && event.key.toLowerCase() === "p") {
+        event.preventDefault();
+        setIsHidden(true);
+
+        // alert("Screenshot detected! Your activity is being monitored.");
+
+        setTimeout(() => {
+          setIsHidden(false);
+        }, 2000); // Restore UI after 2 seconds
+      } 
+      if (event.ctrlKey && event.key.toLowerCase() === "s") {
         event.preventDefault();
         setIsHidden(true);
 
@@ -710,19 +1228,19 @@ const SpreadsheetView = () => {
     socketRef.current.emit('cellEditing', eventData);
   }, [id, medata]);
 
-  useEffect(() => {
-    if (!doneByUser && notification.message.length > 0)
-      toast.info(notification.message, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-  }, [notification]);
+  // useEffect(() => {
+  //   if (!doneByUser && notification.message.length > 0)
+  //     toast.info(notification.message, {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       hideProgressBar: false,
+  //       closeOnClick: false,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "colored",
+  //     });
+  // }, [notification]);
 
   // Handle remote updates received from Socket.io
   const handleRemoteCellUpdates = (updates) => {
@@ -757,6 +1275,181 @@ const SpreadsheetView = () => {
     //   severity: 'info'
     // });
   };
+  const handleDeleteColumn = async () => {
+    try {
+      // Delete on server
+      await axios.delete(`${process.env.REACT_APP_API_URL}/excel/file/${id}/columns/${columnToDelete}`,{
+        withCredentials:true
+      });
+      
+      // Update locally
+      setColumns(prevColumns => prevColumns.filter(col => col.name !== columnToDelete));
+      
+      // Update data to remove the column from all rows
+      setData(prevData => {
+        return prevData.map(row => {
+          const newRow = { ...row };
+          delete newRow[columnToDelete];
+          return newRow;
+        });
+      });
+      
+      // Clear any sort/filter on this column
+      if (sortConfig.key === columnToDelete) {
+        setSortConfig({ key: null, direction: null });
+      }
+      
+      if (filters[columnToDelete]) {
+        setFilters(prev => {
+          const newFilters = { ...prev };
+          delete newFilters[columnToDelete];
+          return newFilters;
+        });
+      }
+      
+      // Notify other users via socket
+      if (socketRef.current) {
+        socketRef.current.emit('columnDeleted', {
+          spreadsheetId: id,
+          columnName: columnToDelete
+        });
+      }
+      
+      // Show success notification
+      setNotification({
+        open: true,
+        message: `Column "${columnToDelete}" deleted`,
+        severity: 'success'
+      });
+      
+      // Close dialog
+      setDeleteColumnDialogOpen(false);
+      setColumnToDelete('');
+    } catch (error) {
+      console.error('Error deleting column:', error);
+      setNotification({
+        open: true,
+        message: 'Error deleting column',
+        severity: 'error'
+      });
+    }
+    };
+    
+    const handleRenameColumn = async () => {
+    // Validate new name
+    if (!newColumnNameForRename.trim()) {
+      setNotification({
+        open: true,
+        message: 'Column name cannot be empty',
+        severity: 'error'
+      });
+      return;
+    }
+    
+    // Check for duplicate name
+    if (columns.some(col => col.name === newColumnNameForRename)) {
+      setNotification({
+        open: true,
+        message: 'Column name already exists',
+        severity: 'error'
+      });
+      return;
+    }
+    
+    try {
+      // Rename on server
+      await axios.put(`${process.env.REACT_APP_API_URL}/excel/file/${id}/columns/${columnToRename}`, {
+        newName: newColumnNameForRename
+      },{
+        withCredentials:true
+      });
+      
+      // Update columns locally
+      const updatedColumn = columns.find(col => col.name === columnToRename);
+      
+      setColumns(prevColumns => 
+        prevColumns.map(col => 
+          col.name === columnToRename ? { ...col, name: newColumnNameForRename } : col
+        )
+      );
+      
+      // Update data to use the new column name
+      setData(prevData => {
+        return prevData.map(row => {
+          const newRow = { ...row };
+          if (columnToRename in newRow) {
+            newRow[newColumnNameForRename] = newRow[columnToRename];
+            delete newRow[columnToRename];
+          }
+          return newRow;
+        });
+      });
+      
+      // Update any sort/filter on this column
+      if (sortConfig.key === columnToRename) {
+        setSortConfig({ key: newColumnNameForRename, direction: sortConfig.direction });
+      }
+      
+      if (filters[columnToRename]) {
+        setFilters(prev => {
+          const newFilters = { ...prev };
+          newFilters[newColumnNameForRename] = newFilters[columnToRename];
+          delete newFilters[columnToRename];
+          return newFilters;
+        });
+      }
+      
+      // Notify other users via socket
+      if (socketRef.current) {
+        socketRef.current.emit('columnRenamed', {
+          spreadsheetId: id,
+          oldName: columnToRename,
+          newName: newColumnNameForRename,
+          column: updatedColumn
+        });
+      }
+      
+      // Show success notification
+      setNotification({
+        open: true,
+        message: `Column renamed from "${columnToRename}" to "${newColumnNameForRename}"`,
+        severity: 'success'
+      });
+      
+      // Close dialog and reset values
+      setRenameColumnDialogOpen(false);
+      setColumnToRename('');
+      setNewColumnNameForRename('');
+    } catch (error) {
+      console.error('Error renaming column:', error);
+      setNotification({
+        open: true,
+        message: 'Error renaming column',
+        severity: 'error'
+      });
+    }
+    };
+
+  const handleCloseContextMenu = () => {
+    setAnchorEl(null);
+    setColumnContextMenu(null);
+    };
+  const handleRenameColumnClick = () => {
+    setColumnToRename(columnContextMenu);
+    setNewColumnNameForRename(columnContextMenu);
+    setRenameColumnDialogOpen(true);
+    handleCloseContextMenu();
+    };
+    
+    const handleDeleteColumnClick = () => {
+    setColumnToDelete(columnContextMenu);
+    setDeleteColumnDialogOpen(true);
+    handleCloseContextMenu();
+    };
+    
+
+
+
 
   const handleRemoteColumnLockChange = (data) => {
     const { columnName, locked } = data;
@@ -1017,13 +1710,35 @@ const SpreadsheetView = () => {
     }
   }, [editingCell, editValue, handleCellChange, filteredIndices, id, medata]);
 
-  const handleKeyPress = useCallback((e) => {
-    if (e.key === 'Enter') {
+  // const handleKeyPress = useCallback((e) => {
+  //   if (e.key === 'Enter') {
+  //     saveEdit();
+  //   } else if (e.key === 'Escape') {
+  //     setEditingCell(null);
+  //   }
+  // }, [saveEdit]);
+  const handleKeyPress = (e) => {
+    if (!editingCell) return;
+    
+    if (e.key === 'Enter' || e.key === 'Tab') {
+      e.preventDefault();
       saveEdit();
+      
+      // Navigate to next cell based on key
+      if (e.key === 'Enter') {
+        navigateCell(editingCell.rowIndex, 
+                   columns.findIndex(col => col.name === editingCell.columnName) + 1, 
+                   'down');
+      } else if (e.key === 'Tab') {
+        navigateCell(editingCell.rowIndex, 
+                   columns.findIndex(col => col.name === editingCell.columnName) + 1, 
+                   e.shiftKey ? 'left' : 'right');
+      }
     } else if (e.key === 'Escape') {
+      e.preventDefault();
       setEditingCell(null);
     }
-  }, [saveEdit]);
+    };
 
   // Debounced save function to avoid too many API calls
   const saveChanges = useCallback(debounce(async () => {
@@ -1385,7 +2100,7 @@ const SpreadsheetView = () => {
   const handleRemoveExcelFromAdmin = async (admin) => {
     try {
       dispatch(removeExcelFromAdminAction(admin._id, id));
-      toast.success("Admin removed from Excel successfully");
+      // toast.success("Admin removed from Excel successfully");
       // Update the list of admins
       setFilterAdmin(prev => prev.filter(a => a._id !== admin._id));
     } catch (error) {
@@ -1409,7 +2124,9 @@ const SpreadsheetView = () => {
       </Container>
     );
   }
-
+  const handleNotificationClose = () => {
+    setNotification({ ...notification, open: false });
+    };
   const rowCount = filteredData?.length || 0;
   const columnCount = columns?.length || 0;
   const totalColumnCount = columnCount + 1; // Add 1 for the sequence number column
@@ -1568,7 +2285,7 @@ const SpreadsheetView = () => {
                     height={rowHeight}
                     width={totalGridWidth}
                     itemData={{ columns, handleColumnClick, sortConfig, filters }}
-                    style={{ overflow: 'hidden' }}
+                          // style={{ overflow: 'hidden' }}
                   >
                     {HeaderCell}
                   </Grid>
@@ -1583,9 +2300,9 @@ const SpreadsheetView = () => {
                   rowHeight={index => rowHeight}
                   height={gridHeight + rowHeight}
                   width={totalGridWidth + 5}
-                  itemData={{
-                    rows: filteredData,
-                    columns,
+                  itemData={{ 
+                    rows: filteredData, 
+                    columns, 
                     onCellChange: handleCellChange,
                     editingCell,
                     setEditingCell,
@@ -1594,8 +2311,10 @@ const SpreadsheetView = () => {
                     saveEdit,
                     handleKeyPress,
                     onfocus: onfocus,
-                    fontSize
-
+                    customFont:fontSize,
+                    navigateCell,
+                    currentFocus,
+                    setCurrentFocus
                   }}
                 >
                   {Cell}
@@ -1625,49 +2344,51 @@ const SpreadsheetView = () => {
               <div style={{ width: totalGridWidth, height: 720, overflow: 'hidden' }}>
                 {/* Header */}
                 <div style={{ position: 'sticky', top: 0, zIndex: 2 }}>
-                  <Grid
-                    columnCount={totalColumnCount}
-                    rowCount={1}
-                    columnWidth={getColumnWidth}
-                    rowHeight={index => rowHeight}
-                    height={rowHeight}
-                    width={totalGridWidth}
-                    itemData={{ columns, handleColumnClick, sortConfig, filters }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    {HeaderCell}
-                  </Grid>
+                <Grid
+          columnCount={totalColumnCount}
+          rowCount={1}
+          columnWidth={getColumnWidth}
+          rowHeight={index => rowHeight}
+          height={rowHeight}
+          width={totalGridWidth}
+          itemData={{ columns, handleColumnClick, sortConfig, filters }}
+          style={{ overflow: 'hidden' }}
+        >
+          {HeaderCell}
+        </Grid>
                 </div>
 
                 {/* Body */}
                 <Grid
-                  ref={gridRef}
-                  columnCount={totalColumnCount}
-                  rowCount={rowCount}
-                  columnWidth={getColumnWidth}
-                  rowHeight={index => rowHeight}
-                  height={gridHeight + rowHeight + 200}
-                  width={totalGridWidth + 5}
-                  itemData={{
-                    rows: filteredData,
-                    columns,
-                    onCellChange: handleCellChange,
-                    editingCell,
-                    setEditingCell,
-                    editValue,
-                    setEditValue,
-                    saveEdit,
-                    handleKeyPress,
-                    onfocus: onfocus,
-                    fontSize
-                  }}
-                >
-                  {Cell}
-                </Grid>
+        ref={gridRef}
+        columnCount={totalColumnCount}
+        rowCount={rowCount}
+        columnWidth={getColumnWidth}
+        rowHeight={index => rowHeight}
+        height={gridHeight+200}
+        width={totalGridWidth+10}
+        itemData={{ 
+          rows: filteredData, 
+          columns, 
+          onCellChange: handleCellChange,
+          editingCell,
+          setEditingCell,
+          editValue,
+          setEditValue,
+          saveEdit,
+          handleKeyPress,
+          onfocus: onfocus,
+          customFont:fontSize,
+          navigateCell,
+          currentFocus,
+          setCurrentFocus
+        }}
+      >
+        {Cell}
+      </Grid>
               </div>
             </div>
           </Paper>
-
       }
       {/* Column Context Menu */}
       <Menu
@@ -1688,7 +2409,9 @@ const SpreadsheetView = () => {
           Filter {filters[columnContextMenu] && '(active)'}
         </MenuItem>
         {
-          medata?.user?.Role === "Owner" && <>
+          medata?.user?.Role === "Owner" && 
+          
+          <>
             {columnContextMenu && columns.find(col => col.name === columnContextMenu)?.locked ? (
               <MenuItem onClick={() => handleToggleColumnLock(columnContextMenu)}>
                 Unlock Column <LockOpenIcon fontSize="small" sx={{ ml: 1 }} />
@@ -1697,7 +2420,18 @@ const SpreadsheetView = () => {
               <MenuItem onClick={() => handleToggleColumnLock(columnContextMenu)}>
                 Lock Column <LockIcon fontSize="small" sx={{ ml: 1 }} />
               </MenuItem>
-            )}</>
+            )}
+               <MenuItem onClick={handleRenameColumnClick}>
+         Rename Column
+               <EditIcon fontSize="xs" style={{height:"17px",marginLeft:"5px" }} />
+       </MenuItem>
+       <MenuItem onClick={handleDeleteColumnClick}>
+         Delete Column
+         <DeleteIcon style={{height:"19px",marginLeft:"5px" }} />
+       </MenuItem>
+            </>
+
+         
         }
       </Menu>
 
@@ -1771,18 +2505,51 @@ const SpreadsheetView = () => {
           <Button onClick={handleAddColumn} variant="contained">Add</Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        open={notification.open}
-        autoHideDuration={6000}
-        onClose={() => setNotification({ ...notification, open: false })}
+
+
+
+      {/* Rename Column Dialog */}
+      <Dialog 
+        open={renameColumnDialogOpen} 
+        onClose={() => setRenameColumnDialogOpen(false)}
+        maxWidth="sm"
+        fullWidth
       >
-        <Alert 
-          onClose={() => setNotification({ ...notification, open: false })} 
-          severity={notification.severity}
-        >
-          {notification.message}
-        </Alert>
-      </Snackbar>
+        <DialogTitle>Rename Column</DialogTitle>
+        <DialogContent>
+          <Box sx={{ mt: 2 }}>
+            <TextField
+              label="New Column Name"
+              value={newColumnNameForRename}
+              onChange={(e) => setNewColumnNameForRename(e.target.value)}
+              fullWidth
+              required
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setRenameColumnDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleRenameColumn} variant="contained" color="primary">Rename</Button>
+        </DialogActions>
+      </Dialog>
+      
+      {/* Delete Column Confirmation Dialog */}
+      <Dialog 
+        open={deleteColumnDialogOpen} 
+        onClose={() => setDeleteColumnDialogOpen(false)}
+      >
+        <DialogTitle>Delete Column</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete the column "{columnToDelete}"? This action cannot be undone.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteColumnDialogOpen(false)}>Cancel</Button>
+          <Button onClick={handleDeleteColumn} variant="contained" color="error">Delete</Button>
+        </DialogActions>
+      </Dialog>
+
     </div>
   );
 };

@@ -4,7 +4,12 @@ import Alert from "./Component/Alert/Alert";
 import Profile from "./Component/User/Profile/Profile";
 import ProtectedRoutes from "./Component/ProtectedRoutes";
 import { useEffect } from "react";
-import { GetMeDetailsAction, LogoutAction } from "./Action/userAction";
+import {
+  GetMeDetailsAction,
+  LogoutAction,
+  VerifyTokenForEmailVerificationAction,
+  VerifyUserOtpAction,
+} from "./Action/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -96,12 +101,11 @@ import Contactus from "./Component/Admin/Contactus";
 import AgentIpManager from "./Component/Admin/AdminExcel/AgentIpManager";
 // import SingleFreshBooking from "./Component/Home/SingleFreshBooking";
 
+import { useSearchParams } from "react-router-dom";
+
 function App() {
-
-  
-
   const { setRedirectPath, RedirectPath } = useContext(UserContext);
-
+  const [querry, setquerry] = useSearchParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [alertType, setalertType] = useState("");
@@ -115,7 +119,7 @@ function App() {
     
     return state.userData;
   });
-  const { data: CreatePost , LodingType:AlertType} = useSelector((state) => { 
+  const { data: CreatePost, LodingType: AlertType } = useSelector((state) => {
     return state.Post;
   });
   const { data: getSinglePostData } = useSelector((state) => {
@@ -232,9 +236,22 @@ function App() {
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {
-     
-      if (data?.success && LodingType == "ProfileUpdateRequest") {
+      if (
+        data?.success &&
+        [
+          "ProfileUpdateRequest",
+          "VerifyTokenForEmailVerificationActionRequest",
+        ].includes(LodingType)
+      ) {
         dispatch(GetMeDetailsAction());
+        sessionStorage.setItem("againUserDataFetch", "true");
+        if (data?.PendingForm) {
+          sessionStorage.setItem(
+            "PendingForm",
+            JSON.stringify(data?.PendingForm)
+          );
+        }
+
       }
 
       if (data.success === true && ["CreatePostRequest"].includes(LodingType)) {
@@ -248,34 +265,34 @@ function App() {
         sessionStorage.removeItem("PropertyDetailsData");
         sessionStorage.removeItem("PricingDetailsData");
       }
-      if (
-        data.success === true &&
-        [
-          "CreateScheduleVisitRequest",
-          "BiddingFormRequest",
-          "CreatePostRequest",
-          "CreateUserOtpRequest",
-          "VerifyUserOtpRequest",
-          "CreateUserRequest",
-          "ViewOwnerDetailsRequest",
-          "DisplayDataRequest",
-        ].includes(
-          typeof LodingType == "string" ? LodingType : LodingType?.Type
-        )
-      ) {
-        // alert("zzc")
-        setalertShow(false);
-         setTimeout(() => {
-          dispatch({ type: "UserClear" });
-         }, 0);
-       
-        
-      } else {
-        setalertMessage(<p>{data?.message}</p>);
-        setalertType("Success");
-        setalertShow(true);
 
-        dispatch({ type: "UserClear" });
+      if (data.success === true) {
+        if (
+          [
+            "CreateScheduleVisitRequest",
+            "BiddingFormRequest",
+            "CreatePostRequest",
+            "CreateUserOtpRequest",
+            "VerifyUserOtpRequest",
+            "CreateUserRequest",
+            "ViewOwnerDetailsRequest",
+            "DisplayDataRequest",
+          ].includes(
+            typeof LodingType == "string" ? LodingType : LodingType?.Type
+          )
+        ) {
+          // alert("zzc")
+          setalertShow(false);
+          setTimeout(() => {
+            dispatch({ type: "UserClear" });
+          }, 0);
+        } else {
+          setalertMessage(<p>{data.message}</p>);
+          setalertType("Success");
+          setalertShow(true);
+
+          dispatch({ type: "UserClear" });
+        }
       }
 
       if (
@@ -887,56 +904,28 @@ function App() {
 
   //  Fresh Property For Admin
 
-  //  console.log(allFreshProjectData ,"allfresh data")
-  //   useEffect(() => {
-
-  //   if (CreatePost || allFreshProjectData) {
-  //     if (CreatePost?.success === true || allFreshProjectData?.success === true ) {
-  //       setalertMessage(<p>{CreatePost?<p>{CreatePost?.message}</p>:<p>{allFreshProjectData?.message}</p>}</p>);
-  //       setalertType("success");
-  //       setalertShow(true);
-  //       dispatch({ type: "AdminAlertClear" });
-  //     }
-  //     if (CreatePost?.success === false) {
-  //       if (CreatePost.AdminVerify === false) {
-  //         dispatch(LogoutAction());
-  //         navigate("/");
-  //       }
-  //       if (CreatePost?.IsAuthenticated === false) {
-  //         navigate("/");
-  //       }
-
-  //       if (CreatePost?.fielderrors) {
-  //         setalertMessage(
-  //           CreatePost?.fielderrors?.map((e, index) => {
-  //             return <p key={index}>{e.msg}</p>;
-  //           })
-  //         );
-  //       } else {
-  //         setalertMessage(<p> {CreatePost?.message}</p>);
-  //       }
-
-  //       // setalertMessage(<p>{CreatePost.message}</p>);
-  //       setalertType("error");
-  //       setalertShow(true);
-  //       dispatch({ type: "AdminAlertClear" });
-  //     }
-  //   }
-
-  //   // eslint-disable-next-line
-  // }, [CreatePost,allFreshProjectData]);
-
-  // console.log(allFreshProjectData.success,"uuu")
+   
 
   useEffect(() => {
     dispatch(GetMeDetailsAction());
   }, []);
 
   useEffect(() => {
-    if (medata?.isBlockedUser == true) {
+    if (!medata) return; // Jab tak medata nahi aata, kuch na karo
+    sessionStorage.removeItem("againUserDataFetch");
+    if (medata?.isBlocked === true) {
       dispatch(LogoutAction());
+      return;
+    }
+
+    const token = querry.get("token");
+    const isEmailVerified = medata?.user?.EmailVerify;
+
+    if (token && !isEmailVerified) {
+      dispatch(VerifyTokenForEmailVerificationAction({ token }));
     }
   }, [medata]);
+
 
   useEffect(() => {
     AOS.init({
@@ -949,7 +938,6 @@ function App() {
   return (
     <>
       {/* <PinnacleSms /> */}
-      {}
 
       <Navbar />
       {alertData && alertData.AlertShow === true && (

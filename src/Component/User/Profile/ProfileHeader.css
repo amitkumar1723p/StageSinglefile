@@ -63,7 +63,16 @@
   border: 1px solid #daeaf9;
   background: #fff;
   padding: 10px;
+  width: 100%;
+  padding-right: 30px; /* Space for the icon */
+}
+.profile-phone {
+  border-radius: 7px;
+  border: 1px solid #daeaf9;
+  background: #fff;
+  padding: 10px;
   width: 80%;
+  padding-right: 30px; /* Space for the icon */
 }
 .editProfileButton {
   display: flex;
@@ -105,6 +114,39 @@
   line-height: 20px; /* 153.846% */
 }
 
+.profile-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 80%;
+}
+
+.profile-email {
+  width: 100%;
+  padding-right: 40px; /* Enough space for icon */
+  box-sizing: border-box;
+}
+.profile-phone {
+  width: 80%;
+  padding-right: 40px; /* Enough space for icon */
+  box-sizing: border-box;
+}
+.email-verified-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.email-verify-clickable {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  user-select: none;
+}
+
 .need-help-box h4 {
   color: #353c48;
 
@@ -122,7 +164,50 @@
   font-weight: 400;
   line-height: 16px; /* 133.333% */
 }
+.profile-email-updating{
+  font-size: 12px;
+  cursor: pointer;
+  color: #4190f8;
+}
+.profile-email-loader-parent {
+  position: absolute;
+  bottom:0;
+  left: 0;
+  height: 4.8px;
+  width: 100%;
+  /* padding: 50px; */
+  background-color: transparent; /* Optional */
+  overflow: hidden;
+  pointer-events: none; /* So it doesn't block clicks */
+}
+/* Actual animated loader */
+.profile-your-visit-loader {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+}
 
+.profile-your-visit-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background:var(--main-light-clr);
+  animation: animloader 0.7s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes animloader {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
 .need-help-box-contact {
   color: #353c48;
 
@@ -495,7 +580,11 @@
     /* margin-top: 12px; */
     font-size: 12px;
   }
-
+  .profile-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
   .profile-regis-ans {
     display: inline-block;
     font-size: 10px;

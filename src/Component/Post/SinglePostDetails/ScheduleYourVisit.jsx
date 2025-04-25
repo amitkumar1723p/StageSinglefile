@@ -2,16 +2,30 @@ import React, { useEffect, useState } from "react";
 import "./ScheduleYourVisit.css";
 import Loader from "../../Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateScheduleVisitAction } from "../../../Action/userAction";
-import { useNavigate } from "react-router-dom";
+import {
+  CreateScheduleVisitAction,
+  SentTokenForEmailVerification,
+} from "../../../Action/userAction";
+import { useLocation, useNavigate } from "react-router-dom";
 import ScheduleYourVisitSubmit from "./ScheduleYourVisitSubmit";
 import TimePicker from "./TimePicker";
 
 function ScheduleYourVisit({ SinglePostData, SetShow }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, data, LodingType } = useSelector((state) => state.userData);
-  const { medata } = useSelector((state) => state.meDetails);
+  const location = useLocation();
+
+  //  This Data required for Email Verificiaton
+  const origin = window.location.origin; // domain
+  const pathname = location.pathname; // current path
+  const querry = location.search;
+  // const [emailVerify,setEmailVerify]=useState()
+  const { loading, data, LodingType } = useSelector((state) => {
+    return state.userData;
+  });
+  const { medata } = useSelector((state) => {
+    return state.meDetails;
+  });
 
   const [ScheduleVistData, setScheduleVistData] = useState({
     VisitDate: "",
@@ -36,6 +50,15 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       setshowScheduleVistAlert(true);
     }, 1000);
     setTimeoutId(id);
+
+    // if(emailVerify===true){
+    //   // const obj={
+    //   //   formData:data,
+    //   //   emailtoken:token
+    //   // }
+    //   // dispatch email verify and then store into localstorage data
+    //   // localStorage.setItem("EmailData",obj)
+    // }
   };
 
   useEffect(() => {
@@ -50,6 +73,32 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
       }
     }
   }, [data]);
+
+  // user After email verify some condition is run
+
+  useEffect(() => {
+    const PendingFormString = sessionStorage.getItem("PendingForm");
+
+    if (!PendingFormString) return;
+
+    let PendingForm;
+    try {
+      PendingForm = JSON.parse(PendingFormString);
+    } catch (err) {
+      console.error("Error parsing PendingForm", err);
+      return;
+    }
+
+    if (PendingForm?.Type === "ScheduleVisit") {
+      setScheduleVistData({ ...PendingForm?.data });
+    }
+
+    return () => {
+      if (PendingForm?.Type === "ScheduleVisit") {
+        sessionStorage.removeItem("PendingForm");
+      }
+    };
+  }, [sessionStorage.getItem("PendingForm")]);
 
   return (
     <>
@@ -66,6 +115,9 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
               </span>
             </div>
 
+
+
+       
             <div className="schedule-your-visit-body">
               <form onSubmit={SubmitHandler} className="schedule-your-visit-form">
                 <div className="schedule-your-visit-form-group">
@@ -106,10 +158,37 @@ function ScheduleYourVisit({ SinglePostData, SetShow }) {
                     selectedDate={ScheduleVistData.VisitDate || ""}
                   />
                 </div>
+                {
+                  !medata?.user?.EmailVerify && 
+                  <p className="sc-visit-veify-label">We’ll send you updates about your visit — just verify your email! 📩 <span     onClick={(e) => {
+                          const Url = `${origin}${pathname}`;
+        
+                          if (!loading && LodingType!="SentTokenForEmailVerificationRequest"   ) {
+                            dispatch(
+                              SentTokenForEmailVerification({
+                                email: medata?.user?.email,
+                                Url: { pathname: Url, querry: querry },
+                                PendingForm: {
+                                  Type: "ScheduleVisit",
+                                  data: { ...ScheduleVistData },
+                                },
+                              })
+                            );
+                          }
+                        }} 
+                         className="bidding-form-verify">Verify</span> </p>
+                }
+          
 
-                <button type="submit" className="schedule-your-visit-submit-btn">
+
+
+               <button type="submit" className="schedule-your-visit-submit-btn">
                   Click to Schedule
                 </button>
+
+                  
+              
+         
               </form>
 
               <div className="schedule-your-visit-image">

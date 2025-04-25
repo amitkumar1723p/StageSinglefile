@@ -1,3 +1,5 @@
+//  this user avaliable for Simple User
+
 export const CreateUserReducer = (state = {}, action) => {
   switch (action.type) {
     case "CreateUserOtpRequest":
@@ -20,11 +22,11 @@ export const CreateUserReducer = (state = {}, action) => {
     case "ReportSuspiciousPropertyRequest":
     case "verifiedPaymentRequest":
     case "ApplyJobActionRequest":
-        // from here adding status update reducer 
-      case"updateBidStatusActionRequest":
-      case"updateNotifyStatusActionRequest":
-      case"updateRequirementStatusAcionRequest":
-    
+    // from here adding status update reducer
+    case "updateBidStatusActionRequest":
+    case "updateNotifyStatusActionRequest":
+    case "updateRequirementStatusAcionRequest":
+
     case "MarkRentOutPropertyRequest":
     case "ReOpenPostActionRequest-UserRoutes":
       
@@ -36,6 +38,13 @@ export const CreateUserReducer = (state = {}, action) => {
        
      case"updateConatctRemarkActionRequest":
 
+    //  Fresh Property get Api ----- start
+    case "viewOneProjectRequest":
+    case "getAllFreshProjectRequest-UserRoutes":
+      //  Fresh Property get Api ----- End
+
+ case "SentTokenForEmailVerificationRequest":
+ case "VerifyTokenForEmailVerificationActionRequest":
       return {
         ...state,
         loading: true,
@@ -74,16 +83,16 @@ export const CreateUserReducer = (state = {}, action) => {
   case"updateBidStatusActionSuccess":
   case"updateNotifyStatusActionSuccess":
   case"updateRequirementStatusAcionSuccess":
-
+  case "SentTokenForEmailVerificationSuccess":
+    case "VerifyTokenForEmailVerificationActionSuccess":
 
   case"updateConatctRemarkActionSuccess":
       return {
-         
         ...state,
         loading: false,
         data: action.payload,
       };
- 
+
     case "CreateUserOtpFail":
     case "VerifyUserOtpFail":
     case "CreateUserFail":
@@ -114,7 +123,8 @@ export const CreateUserReducer = (state = {}, action) => {
   case"updateNotifyStatusActionFail":
   case"updateRequirementStatusAcionFail":
 
-
+  case "SentTokenForEmailVerificationFail":
+    case "VerifyTokenForEmailVerificationActionFail":
   
   case"updateConatctRemarkActionFail":
       

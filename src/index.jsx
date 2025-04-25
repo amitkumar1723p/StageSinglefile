@@ -16,7 +16,7 @@ root.render(
        <ScrollToTop />
         <App />
         <ToastContainer 
-         position="top-center"
+         position="top-right"
         //  limit={3}
         theme="colored"
        className={"ttc"}
