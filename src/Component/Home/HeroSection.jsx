@@ -874,7 +874,7 @@ const HeroSection = () => {
 
 
       <PropertySection />
-      <FreshBookingHome />
+      {/* <FreshBookingHome /> */}
       {/* <FreshBookingPost/> */}
 
       <div className="select-options" id="select-option-section">
