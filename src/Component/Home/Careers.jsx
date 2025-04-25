@@ -222,10 +222,10 @@ function Career() {
           <div className="Career-Overlay">
             <div className="left-svg">
               {" "}
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/left-Vector.svg" alt="alt" srcSet="" />
+              <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/left-Vector.svg" alt="alt" srcSet="" />
             </div>
             <div className="right-svg">
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/right-Vector.svg" alt="alt" srcSet="" />
+              <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/right-Vector.svg" alt="alt" srcSet="" />
             </div>
           </div>
           {/* <div className="career-search-container">
@@ -235,11 +235,13 @@ function Career() {
                 onClick={() => setDepartmentOpen(!departmentOpen)}
               >
                 <img
+                loading="lazy"
                   src="/img/mingcute_department-line.svg"
                   alt="Department icon"
                 />
                 <span>Department</span>
                 <img
+                loading="lazy"
                   src="/img/heroicons-solid_chevron-up.svg"
                   alt="Toggle department dropdown"
                 />
@@ -258,9 +260,10 @@ function Career() {
                 className="career-search-filter career-search-type"
                 onClick={() => setTypeOpen(!typeOpen)}
               >
-                <img src="/img/mage_dashboard-plus.svg" alt="Type icon" />
+                <img loading="lazy" src="/img/mage_dashboard-plus.svg" alt="Type icon" />
                 <span>Type</span>
                 <img
+                loading="lazy"
                   src="/img/heroicons-solid_chevron-up.svg"
                   alt="Toggle type dropdown"
                 />
@@ -281,9 +284,10 @@ function Career() {
               
                 }}
               >
-                <img src="/img/iconoir_page-star.svg" alt="Experience icon" />
+                <img loading="lazy" src="/img/iconoir_page-star.svg" alt="Experience icon" />
                 <span>Experience</span>
                 <img
+                loading="lazy"
                   src="/img/heroicons-solid_chevron-up.svg"
                   alt="Toggle experience dropdown"
                 />
@@ -299,7 +303,7 @@ function Career() {
               </div>
 
               <button className="career-search-tab">
-                <img src="/img/wpf_search.svg" alt="Search icon" />
+                <img loading="lazy" src="/img/wpf_search.svg" alt="Search icon" />
                 <span>Search</span>
               </button>
             </div>
@@ -310,7 +314,7 @@ function Career() {
             <h3 className="Career-Heading">
               Why
               <span>
-                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group.svg" alt="" srcSet="" />
+                <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group.svg" alt="" srcSet="" />
                 Join
               </span>
               PropertyDekho247
@@ -368,16 +372,16 @@ function Career() {
           </p>
           <div className="gallery ">
             <div className="image">
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+264.png" alt="Team meeting" />
+              <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+264.png" alt="Team meeting" />
             </div>
             <div className="image">
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+265.png" alt="Team collaboration" />
+              <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+265.png" alt="Team collaboration" />
             </div>
             <div className="image">
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+266.png" alt="Laptop workspace" />
+              <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+266.png" alt="Laptop workspace" />
             </div>
             <div className="image">
-              <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+267.png" alt="Workshop session" />
+              <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+267.png" alt="Workshop session" />
             </div>
           </div>
         </section>
@@ -397,10 +401,11 @@ function Career() {
             <div className="gallery-img ">
               <div className="image-row">
                 <div className="image-container">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+278.png" alt="Laptop workspace" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+278.png" alt="Laptop workspace" />
                 </div>
                 <div className="image-container">
                   <img
+                  loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+279.png"
                     alt="Notification on a tablet"
                   />
@@ -408,7 +413,7 @@ function Career() {
               </div>
               <div className="image-row">
                 <div className="image-container ">
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+280.png" alt="Interview scene" />
+                  <img  loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Rectangle+280.png" alt="Interview scene" />
                 </div>
               </div>
             </div>
@@ -416,7 +421,7 @@ function Career() {
               <div className="step">
                 <div className="step-number">
                   1
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
                 </div>
                 <div className="step-content">
                   <h3>Submit Your Application</h3>
@@ -434,7 +439,7 @@ function Career() {
               <div className="step">
                 <div className="step-number">
                   2
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
                 </div>
                 <div className="step-content">
                   <h3>Screening and Shortlisting</h3>
@@ -453,7 +458,7 @@ function Career() {
               <div className="step">
                 <div className="step-number">
                   3
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector+128.svg" alt="stroke" srcSet="" />
                 </div>
                 <div className="step-content">
                   <h3>Interviews</h3>
@@ -518,21 +523,21 @@ function Career() {
                     <div className="job-details">
                       <div className="detail">
                         <div>
-                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mynaui_briefcase.svg" alt="briefcase" />
+                          <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mynaui_briefcase.svg" alt="briefcase" />
                         </div>
                         <span>{job.experience}</span>
                         <div className="detail-stroke">|</div>
                       </div>
                       <div className="detail">
                         <div>
-                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/heroicons_currency-rupee.svg" alt="currency" />
+                          <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/heroicons_currency-rupee.svg" alt="currency" />
                         </div>
                         <span>{job.salary}</span>
                         <div className="detail-stroke">|</div>
                       </div>
                       <div className="detail">
                         <div>
-                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/fluent_location-28-regular.svg" alt="location" />
+                          <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/fluent_location-28-regular.svg" alt="location" />
                         </div>
                         <span>{job.location}</span>
                         <div className="detail-stroke">|</div>
@@ -540,6 +545,7 @@ function Career() {
                       <div className="detail">
                         <div>
                           <img
+                          loading="lazy"
                             src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/streamline_industry-innovation-and-infrastructure.svg"
                             alt="infrastructure"
                           />
@@ -574,7 +580,7 @@ function Career() {
                           className="see-more"
                         >
                           {expandedJobIndex === index ? "See Less" : "See More"}
-                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Icon+placeholder.svg" alt="" />
+                          <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Icon+placeholder.svg" alt="" />
                         </button>
                       </div>
                     </div>
@@ -607,7 +613,7 @@ function Career() {
                   <div className="explore-page-list">
                     <ul>
                       <li className="explore-page-items">
-                        <img
+                        <img loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -618,6 +624,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -628,6 +635,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -636,6 +644,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -649,13 +658,14 @@ function Career() {
                   <button className="Career-explore-button">
                     <div className="explore-button-text">Explore</div>
                     <div className="explore-arrow">
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector.svg" alt="right-arrow" srcSet="" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector.svg" alt="right-arrow" srcSet="" />
                     </div>
                   </button>
                 </div>
                 <div className="explore-svg">
                   <div className="explore-message-svg">
                     <img
+                    loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Clip+path+group.svg"
                       alt="message svg"
                       srcSet=""
@@ -663,7 +673,7 @@ function Career() {
                   </div>
                   <div className="explore-img">
                     <div className="explore-page-svg">
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Group+189.svg" alt="" srcSet="" className="career-first-svg" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Group+189.svg" alt="" srcSet="" className="career-first-svg" />
                     </div>
                   </div>
                 </div>
@@ -674,7 +684,8 @@ function Career() {
                   <div className="explore-page-list">
                     <ul>
                       <li className="explore-page-items">
-                        <img
+                        <img 
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -683,6 +694,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -693,6 +705,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -703,6 +716,7 @@ function Career() {
                       </li>
                       <li className="explore-page-items">
                         <img
+                        loading="lazy"
                           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/mdi_tick-circle-outline.svg"
                           alt="checkmark"
                           srcSet=""
@@ -716,13 +730,14 @@ function Career() {
                   <button className="Career-explore-button">
                     <div className="explore-button-text">Explore</div>
                     <div className="explore-arrow">
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector.svg" alt="right-arrow" srcSet="" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Vector.svg" alt="right-arrow" srcSet="" />
                     </div>
                   </button>
                 </div>
                 <div className="explore-svg">
                   <div className="explore-message-svg">
                     <img
+                    loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Clip+path+group.svg"
                       alt="message svg"
                       srcSet=""
@@ -730,7 +745,7 @@ function Career() {
                   </div>
                   <div className="explore-img">
                     <div className="explore-page-svg">
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Group+187.svg" alt="" srcSet="" className="career-second-svg" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Group+187.svg" alt="" srcSet="" className="career-second-svg" />
                     </div>
                   </div>
                 </div>
@@ -742,15 +757,16 @@ function Career() {
             <div className="career-banner">
               <div className="first-banner">
                 <img
+                loading="lazy"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Modern+Did+You+Know+Fun+Fact+Instagram+Post+1.png"
                   alt="Banner"
                   srcSet=""
                   className="banner-img"
                 /></div>
               <div className="first-banner">
-                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/CareerBanner3png.png" alt="Banner" srcset="" /></div>
+                <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/CareerBanner3png.png" alt="Banner" srcset="" /></div>
               <div className="first-banner">
-                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/CareerBanner4.png" alt="Banner" srcset="" /></div>
+                <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/CareerBanner4.png" alt="Banner" srcset="" /></div>
             </div>
           </div>
         </div>
@@ -768,7 +784,7 @@ function Career() {
                   setSuccessOpen(false)
 
                 }} >
-                  <img src="img/iconoir_cancel.svg" alt="cancel-action" srcSet="" />
+                  <img loading="lazy" src="img/iconoir_cancel.svg" alt="cancel-action" srcSet="" />
                 </div>
               </div>
               <div className="thankyoufor-applying-paragraph">
@@ -799,6 +815,7 @@ function Career() {
               }}>
                 {" "}
                 <img
+                loading="lazy"
                   src="img/iconoir_cancel.svg"
                   alt="cancel"
                   srcSet=""
@@ -863,6 +880,7 @@ function Career() {
                   <div className="attach-button">
                     <label htmlFor="file" className="file-label">
                       <img
+                      loading="lazy"
                         src="img/mdi_attachment-plus.svg"
                         alt="attachment-button"
                       />

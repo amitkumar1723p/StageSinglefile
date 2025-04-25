@@ -293,6 +293,7 @@ export default function BasicDetailsSection({
               >
                 Residential{" "}
                 <img
+                      loading="lazy"
                   alt=""
                   src={
                     BasicDetailsData.PropertyType === "Residential"
@@ -329,6 +330,7 @@ export default function BasicDetailsSection({
                   >
                     {text === "Sale" ? "Sell" : text}
                     <img
+                      loading="lazy"
                       alt=""
                       src={
                         BasicDetailsData.PropertyAdType === text
@@ -363,6 +365,7 @@ export default function BasicDetailsSection({
                   >
                     {e}
                     <img
+                      loading="lazy"
                       className="select-img"
                       alt=""
                       src={
@@ -412,6 +415,7 @@ export default function BasicDetailsSection({
                       >
                         {e}
                         <img
+                      loading="lazy"
                           className="select-img"
                           alt=""
                           src={

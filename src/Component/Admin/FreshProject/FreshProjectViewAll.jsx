@@ -66,6 +66,7 @@ export function FreshProjectViewAll() {
                 {/* Image Column (col-4) */}
                 <div className="col-4">
                   <img
+                  loading="lazy"
                     src={item?.bannerImage?.url}
                     className="rounded-start"
                     alt="..."

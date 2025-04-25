@@ -383,7 +383,8 @@ The real estate market in 2025 is expected to be dynamic, with strong growth in 
         <div className='single-blog-container'>
             <div className='single-blog-image'>
                 
-                <img src={singleblog.imgUrl} alt="blog-image" />
+                <img
+                      loading="lazy" src={singleblog.imgUrl} alt="blog-image" />
             </div>
             <div className='single-blog-main-description'>
                 <div className='single-blog-titleNdate'>
@@ -409,7 +410,8 @@ The real estate market in 2025 is expected to be dynamic, with strong growth in 
         </div>
         <div className='single-blog-ads'>
            
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-ads.svg" alt="blog-ads" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-ads.svg" alt="blog-ads" />
         </div>
     </div>
         )

@@ -86,7 +86,8 @@ const posts = [
                     <div className='w-full h-[50%] flex flex-col gap-[5px]'>
                         <div className='w-full h-[50%] text-white font-extralight text-[14px]'>{posts.location}</div>
                         <div className='w-full h-[50%] '>
-                            <button className='w-full flex justify-center item-center py-1  border-1 border-[#FFD700] rounded-[8px]  text-white transition duration-200  hover:shadow-[0px_0px_10px_#ffd90072] active:bg-[#ffe34689]'>View More <img src="/img/postDetailsImg/solar_arrow-right-up-outline.svg" alt="" /></button>
+                            <button className='w-full flex justify-center item-center py-1  border-1 border-[#FFD700] rounded-[8px]  text-white transition duration-200  hover:shadow-[0px_0px_10px_#ffd90072] active:bg-[#ffe34689]'>View More <img 
+                      loading="lazy" src="/img/postDetailsImg/solar_arrow-right-up-outline.svg" alt="" /></button>
                         </div>
                     </div>
                 </div>

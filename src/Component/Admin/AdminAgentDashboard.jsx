@@ -94,7 +94,7 @@ const AdminAgentDashboard = () => {
                             <p className="total-number">
                               {UnVerifyAdmin.length + VerifiedAdmin.length}
                             </p>
-                            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalAdmin.png" alt="post" />
+                            <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalAdmin.png" alt="post" />
                           </div>
                           <h3> Total Admin Verified And Un-Verified </h3>
                           <p className="viewall">View All</p>
@@ -106,7 +106,7 @@ const AdminAgentDashboard = () => {
                             <p className="total-number">
                               {UnVerifyAdmin.length}
                             </p>
-                            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                            <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
                           <h3> Unverified Admin </h3>
                           <p className="viewall">View All</p>
@@ -118,7 +118,7 @@ const AdminAgentDashboard = () => {
                             <p className="total-number">
                               {VerifiedAdmin.length}
                             </p>
-                            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                            <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
                           <h3> Verified Admin </h3>
                           <p className="viewall">View All</p>
@@ -136,7 +136,7 @@ const AdminAgentDashboard = () => {
                             <p className="total-number">
                               {UnVerifyAgent.length + VerifyAgent.length}
                             </p>
-                            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalAdmin.png" alt="post" />
+                            <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalAdmin.png" alt="post" />
                           </div>
                           <h3> Total Agent Verified And Un-Verified </h3>
                           <p className="viewall">View All</p>
@@ -148,7 +148,7 @@ const AdminAgentDashboard = () => {
                             <p className="total-number">
                               {UnVerifyAgent.length}
                             </p>
-                            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                            <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
                           <h3> Unverified Agent </h3>
                           <p className="viewall">View All</p>
@@ -158,7 +158,7 @@ const AdminAgentDashboard = () => {
                         <div className="card min-h-[8.5rem]  p-3">
                           <div className="Admin-box">
                             <p className="total-number">{VerifyAgent.length}</p>
-                            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                            <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                           </div>
                           <h3> Verified Agent </h3>
                           <p className="viewall">View All</p>
@@ -171,7 +171,7 @@ const AdminAgentDashboard = () => {
                   {/* <div className="card">
                     <div className="Admin-box">
                       <p className="total-number">{FakeUnverifyAdmin.length}</p>
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3> Fake Admin request (Profile is not Create) </h3>
 

@@ -10,30 +10,36 @@ const ProjectsGrid = () => {
       <div className="main-wrapper">
         <div className="grid">
           <div className="box houses-apartments">
-            <img src="/img/g1.jpg" alt="Houses and Apartments" />
+            <img
+                      loading="lazy" src="/img/g1.jpg" alt="Houses and Apartments" />
             <span>New Gurgaon</span>
           </div>
           <div className="box commercial-properties">
-            <img src="/img/hero-img.jpg" alt="Commercial Properties" />
+            <img
+                      loading="lazy" src="/img/hero-img.jpg" alt="Commercial Properties" />
             <span>Sohna</span>
           </div>
           <div className="box industrial-properties">
             <img
+              loading="lazy"
               src="/img/Krisumi Waterfall Residences.jpg"
               alt="Industrial Properties"
             />
             <span>Ext Road</span>
           </div>
           <div className="box other-properties">
-            <img src="/img/g1.jpg" alt="Other Properties" />
+            <img
+                      loading="lazy" src="/img/g1.jpg" alt="Other Properties" />
             <span>Dwarka</span>
           </div>
           <div className="box land-plots">
-            <img src="/img/hero-img.jpg" alt="Land and Plots" />
+            <img
+                      loading="lazy" src="/img/hero-img.jpg" alt="Land and Plots" />
             <span>SPR</span>
           </div>
           <div className="box commercial-properties">
-            <img src="/img/hero-img.jpg" alt="Commercial Properties" />
+            <img
+                      loading="lazy" src="/img/hero-img.jpg" alt="Commercial Properties" />
             <span>Sohna</span>
           </div>
         </div>

@@ -119,6 +119,7 @@ export default function ShowSinglePostImages({ Images }) {
             }}
           >
             <img
+                      loading="lazy"
               className="next-prev-img-lending-page"
               src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,6 +147,7 @@ export default function ShowSinglePostImages({ Images }) {
             }}
           >
             <img
+                      loading="lazy"
               className="next-prev-img-lending-page"
               src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                         <svg width="41" height="40" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">

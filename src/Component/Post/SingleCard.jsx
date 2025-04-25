@@ -322,6 +322,7 @@ const SingleCard = ({
         {PostData?.propertyStatus?.currentPropertyStatus === "sold out" && (
           <div className="sold-out-blur-img sold-img-blur glass-effect">
             <img
+              loading="lazy"
               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/sold-out.svg"
               alt=""
               className="sold-img-blu blur-img"
@@ -332,6 +333,7 @@ const SingleCard = ({
         {/* Property Image with Verified Badge */}
         <div className="single-card-image-container">
           {/* <img
+            loading="lazy"
                         src="https://i.pinimg.com/736x/01/1e/65/011e655237835f908bfd1f8a872e2d6a.jpg"
                         alt="DLF Primus Building"
                         className="single-card-image"
@@ -345,6 +347,7 @@ const SingleCard = ({
               .replaceAll("/", "-")}-${PostData?._id}`}
           >
             <img
+              loading="lazy"
               // key={}
               src={PostData?.PropertyImages[0]?.url}
               alt="PropertyPost"
@@ -356,6 +359,7 @@ const SingleCard = ({
             PostData?.PostVerifyShow ? (
               <div className="single-card-verified-badge">
                 <img
+                  loading="lazy"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/verified-tag.svg"
                   className="single-card-verified-icon"
                   alt="verified-tag"
@@ -375,6 +379,7 @@ const SingleCard = ({
             PostData?.PostVerifyShow && (
               <div className="single-card-verified-badge">
                 <img
+                  loading="lazy"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/verified-tag.svg"
                   className="single-card-verified-icon"
                   alt="verified-tag"
@@ -441,6 +446,7 @@ const SingleCard = ({
                   onClick={() => setIsModalOpen(true)}
                 >
                   <img
+                    loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/share-btn.svg"
                     className="img-fluid img-thumbnail"
                     alt="..."
@@ -475,12 +481,14 @@ const SingleCard = ({
                         String(PostData?._id)
                     ) ? (
                       <img
+                        loading="lazy"
                         className="fav-icon"
                         src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Un-Fav-Post.svg"
                         alt="Fav-icon"
                       />
                     ) : (
                       <img
+                        loading="lazy"
                         className="fav-icon"
                         src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg"
                         alt="Fav-icon"
@@ -491,6 +499,7 @@ const SingleCard = ({
                   {location.pathname.includes("user/my-listing") && PostData?.BasicDetails?.PropertyAdType == "Rent" && (
                     <>
                       <img
+                        loading="lazy"
                         src="/img/Three-Dot.svg"
                         className="editIcon"
                         onClick={() => {
@@ -646,6 +655,7 @@ const SingleCard = ({
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
                   <img
+                    loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
                     alt="Typology"
                   />
@@ -675,6 +685,7 @@ const SingleCard = ({
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
                   <img
+                    loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/typology.png"
                     alt="Typology"
                   />
@@ -717,6 +728,7 @@ const SingleCard = ({
             <div className="single-card-detail-item">
               <div className="single-card-detail-icon-container">
                 <img
+                  loading="lazy"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/area.png"
                   alt="Area"
                 />
@@ -749,6 +761,7 @@ const SingleCard = ({
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
                   <img
+                    loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/washing-machine.svg"
                     alt="Washing Machine"
                   />
@@ -793,6 +806,7 @@ const SingleCard = ({
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
                   <img
+                    loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/furnish.png"
                     alt="FurnishDetail"
                   />
@@ -826,6 +840,7 @@ const SingleCard = ({
               <div className="single-card-detail-item">
                 <div className="single-card-detail-icon-container">
                   <img
+                    loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                     alt="Total Floor"
                   />
@@ -856,6 +871,7 @@ const SingleCard = ({
                 <div className="single-card-detail-item">
                   <div className="single-card-detail-icon-container">
                     <img
+                      loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/floor.png"
                       alt="Total Floor"
                     />
@@ -1089,6 +1105,7 @@ const SingleCard = ({
             }}
           >
             <img
+                      loading="lazy"
               className="whatapp-img-card-post"
               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png"
               alt="whatsapp"

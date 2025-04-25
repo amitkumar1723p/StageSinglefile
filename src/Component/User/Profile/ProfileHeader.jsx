@@ -201,6 +201,7 @@ function ProfileHeader() {
                         <div className="button-section-dashborad">
                           <div className="whatapp-notify ">
                             {/* <img
+                      loading="lazy"
                               className="icon-wp"
                               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png"
                               alt="whatapp logo"

@@ -7,6 +7,7 @@ const ForLandLord = () => {
       <div className="LandLordDetails-container">
         <div className="LandLordDetails-left">
           <img
+           loading="lazy"
             alt="LandLord-Img"
             src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/ForLandLord-Img.png"
           />

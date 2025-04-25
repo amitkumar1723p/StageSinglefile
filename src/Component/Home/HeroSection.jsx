@@ -306,10 +306,24 @@ const HeroSection = () => {
    const HandleContactUS = ()=>{
     setShowContactUsForm(true)
    }
+   useEffect(() => {
+    // Create a new link element for preloading the image
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.href = 'https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/hero-img9.png';
+    preloadLink.as = 'image';
+    preloadLink.type = 'image/png'; // Adjust to match your image format
+    preloadLink.crossOrigin = 'anonymous';
+    document.head.appendChild(preloadLink);
+
+    // Cleanup: Remove the preload link when the component unmounts
+    return () => {
+      document.head.removeChild(preloadLink);
+    };
+  }, []);
 
   return (
     <div className="hero-main-parent-div"><Helmet>
-
       {/* <title>PropertyDekho247.com - Trusted Real Estate for Resale & Rentals in Gurugram</title> */}
       <title>Buy & Sell Resale Properties in Gurgaon</title>
       <meta name="description" content="PropertyDekho247 India's 1st online Proptech Reselling platform that delivers real-time price alerts to property owners."></meta>
@@ -319,12 +333,14 @@ const HeroSection = () => {
 
       <header className="hero-section" id="Hero-section">
         <div className="overlay">
-          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/hero-img9.png" alt="" srcset="" className="home-hero-img" />
+          <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/hero-img9.png" alt="home-page-img" className="home-hero-img" />
         </div>
         <div className="hero-content">
           <div className="hero-img-section">
             {/* <div className="hero-img-section" style={{backgroundImage:"url(/img/mobile-img.svg)"}}> */}
             {/* <img
+             loading="lazy"
           className="hero-img-section-main-section"
           src="/img/mobile-img.svg"
           alt="hero img"
@@ -379,6 +395,7 @@ const HeroSection = () => {
                     placeholder={"Search by Project name or society name"}
                   />
                   {/* <img
+                   loading="lazy"
                 className="img-searchbar"
                 src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -427,6 +444,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
+                     loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
@@ -474,6 +492,7 @@ const HeroSection = () => {
               </div>
               <div className="search-box">
                 <img
+                 loading="lazy"
                   src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                   <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                   <g clip-path="url(#clip0_2281_10206)">
@@ -507,6 +526,7 @@ const HeroSection = () => {
                     placeholder={"Search by Project name or society name"}
                   />
                   {/* <img
+                   loading="lazy"
                     className="img-searchbar"
                     src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
@@ -568,6 +588,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
+                     loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
@@ -622,6 +643,7 @@ const HeroSection = () => {
                     }}
                   >
                     <img
+                     loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svg"
                       alt=""
                       className="img-searchbar"
@@ -660,6 +682,7 @@ const HeroSection = () => {
                     <span>&#x2192;</span>
                     <div className="icon">
                       <img
+                       loading="lazy"
                         src="/img/needbuyer.svg"
                         alt="Property Listing Icon"
                       />

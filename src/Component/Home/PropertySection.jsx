@@ -162,7 +162,8 @@ const PropertySection = () => {
                 >
                   <span className="view-btn-span">
                     View All Properties{" "}
-                    <img src="/img/right-arrow.svg" alt="" />
+                    <img
+                      loading="lazy" src="/img/right-arrow.svg" alt="" />
                   </span>
                 </button>
               </div>
@@ -259,6 +260,7 @@ const PropertySection = () => {
                           property?.BasicDetails?.PropertyAdType === "Sale" && (
                             <div className="property-cards" key={index}>
                               <img
+                                loading="lazy"
                                 src={property?.PropertyImages[0]?.url}
                                 // alt={property.altText}
                                 className="card-image"

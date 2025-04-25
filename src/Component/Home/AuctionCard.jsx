@@ -10,6 +10,7 @@ const AuctionCard = () => {
         <div className="auction-card">
           <div className="card-image">
             <img
+            loading="lazy"
               src="/img/Krisumi Waterfall Residences.jpg"
               alt="Krisumi Waterside Residence"
             />

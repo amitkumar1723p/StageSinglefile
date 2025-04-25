@@ -46,6 +46,7 @@ return (
       </div>
       <div style={{ overflow: 'hidden', display: 'inline-block' }}>
         <img
+                      loading="lazy"
           src={ImageUrl}
           alt="Zoomable"
  

@@ -221,6 +221,7 @@ const Navbar = () => {
                       ) : (
                         <>
                           <img
+                           loading="lazy"
                             src="/img/admin-aside-dropdown-svg.svg"
                             onClick={() => {
                               setIsOpen(!isOpen);
@@ -233,6 +234,7 @@ const Navbar = () => {
                     </span>
                     {isOpen ? (
                       <img
+                       loading="lazy"
                         alt="dropdown-icon"
                         className={`dropbtn ${isOpen ? "rotate-up" : ""}`}
                         onClick={() => {
@@ -242,6 +244,7 @@ const Navbar = () => {
                       />
                     ) : (
                       <img
+                       loading="lazy"
                         alt="dropdown-icon`"
                         className="dropbtn"
                         onClick={() => {
@@ -262,6 +265,7 @@ const Navbar = () => {
                           }}
                         >
                           <img
+                           loading="lazy"
                             alt="dropdown-icon`"
                             className="dropbtn-nav"
                             onClick={() => {
@@ -291,6 +295,7 @@ const Navbar = () => {
                               }
                             >
                               <img
+                               loading="lazy"
                                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                 alt="Dashboard Icon"
                                 className={`AdminAside-icon ${location.pathname === "/admin/dashboard"
@@ -311,6 +316,7 @@ const Navbar = () => {
                                 }
                               >
                                 <img
+                                 loading="lazy"
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                   alt="Dashboard Icon"
                                   className={`AdminAside-icon ${location.pathname ===
@@ -330,6 +336,7 @@ const Navbar = () => {
                                 }
                               >
                                 <img
+                                 loading="lazy"
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg "
                                   alt="Dashboard Icon"
                                   className={`AdminAside-icon ${location.pathname ===
@@ -348,6 +355,7 @@ const Navbar = () => {
                               className={({ isActive }) =>
                                 `AdminAside-navLink ${isActive ? "active" : "hover"}`
                               }><img
+                               loading="lazy"
                                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Dashboard.svg"
                                 alt="Dashboard Icon"
 
@@ -363,6 +371,7 @@ const Navbar = () => {
                               }
                             >
                               <img
+                               loading="lazy"
                                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/agent.svg "
                                 alt="Admin Icon"
                                 className={`AdminAside-icon ${location.search.includes("Role=Admin")
@@ -383,6 +392,7 @@ const Navbar = () => {
                               }
                             >
                               <img
+                               loading="lazy"
                                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Admin.svg "
                                 alt="Agent Icon"
                                 className={`AdminAside-icon ${location.search.includes("Role=Agent")
@@ -405,7 +415,7 @@ const Navbar = () => {
                                   }`}
                               >
                                 <img
-                                  className=""
+                                loading="lazy"
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Profile.svg "
                                   alt="profile"
                                 />
@@ -434,6 +444,7 @@ const Navbar = () => {
                                   } `}
                               >
                                 <img
+                                  loading="lazy"
                                   className=""
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/MyListing.svg "
                                   alt="my listing"
@@ -451,6 +462,7 @@ const Navbar = () => {
                                   }`}
                               >
                                 <img
+                                  loading="lazy"
                                   className=""
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg "
                                   alt="shortlisted"
@@ -485,6 +497,7 @@ const Navbar = () => {
                           }}
                         >
                           <img
+                            loading="lazy"
                             alt="dropdown-icon`"
                             className="dropbtn-nav-1"
                             onClick={() => {
@@ -503,6 +516,7 @@ const Navbar = () => {
                         </li>
                         <li className="navItem " onClick={LogoutUserFunc}>
                           <img
+                            loading="lazy"
                             alt="dropdown-icon`"
                             className="dropbtn-nav"
                             onClick={() => {
@@ -521,6 +535,7 @@ const Navbar = () => {
 
                         {/* <div className="needhelp-innavbar">
                         <img
+                          loading="lazy"
                           src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                             <path d="M15.492 7.91602H15.5M18.492 7.91602H18.5M22 7.69902C22 10.341 19.761 12.483 17 12.483C16.6747 12.483 16.3523 12.453 16.033 12.393C15.803 12.35 15.688 12.329 15.608 12.341C15.528 12.353 15.414 12.413 15.188 12.534C14.5409 12.8789 13.7963 12.9948 13.075 12.863C13.3507 12.5224 13.5376 12.1186 13.619 11.688C13.669 11.423 13.545 11.166 13.359 10.978C12.4912 10.1071 12.0027 8.9285 12 7.69902C12 5.05802 14.239 2.91602 17 2.91602C19.761 2.91602 22 5.05802 22 7.69902ZM7.50199 21.916H4.71799C4.39499 21.916 4.06999 21.87 3.77299 21.743C2.80699 21.328 2.31599 20.779 2.08799 20.436C2.02611 20.341 1.99571 20.2289 2.0011 20.1157C2.00648 20.0024 2.04738 19.8937 2.11799 19.805C3.23799 18.317 5.83799 17.419 7.50699 17.419C9.17499 17.419 11.771 18.317 12.891 19.805C13.032 19.992 13.051 20.241 12.921 20.436C12.692 20.779 12.201 21.328 11.235 21.743C10.9349 21.8638 10.6134 21.9226 10.29 21.916H7.50199ZM10.286 12.205C10.2855 12.5696 10.2131 12.9304 10.0732 13.267C9.93316 13.6036 9.72824 13.9094 9.47009 14.1668C9.21195 14.4242 8.90563 14.6282 8.56863 14.7672C8.23163 14.9063 7.87054 14.9775 7.50599 14.977C6.7701 14.9775 6.0641 14.6859 5.54318 14.1661C5.02227 13.6463 4.72905 12.9409 4.72799 12.205C4.72839 11.8405 4.80058 11.4796 4.94045 11.1429C5.08032 10.8063 5.28513 10.5005 5.54319 10.243C5.80124 9.98547 6.10749 9.78132 6.44444 9.64218C6.78139 9.50304 7.14244 9.43162 7.50699 9.43202C7.87154 9.43162 8.2326 9.50304 8.56955 9.64218C8.9065 9.78132 9.21275 9.98547 9.4708 10.243C9.72886 10.5005 9.93366 10.8063 10.0735 11.1429C10.2134 11.4796 10.2856 11.8405 10.286 12.205Z" stroke="#0078D4" stroke-linecap="round" stroke-linejoin="round"/>

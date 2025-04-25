@@ -133,7 +133,8 @@ export default function SingleFreshBookingViewMore(builderContent) {
                                    <a href={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
                                    <button key={index}  onMouseEnter={() => setIsViewAllButtonHovered(index)} onMouseLeave={() => setIsViewAllButtonHovered(null)}  className="fresh-booking-view-more-card-button w-100 d-flex align-items-center justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '8px', borderRadius: '8px' }}
                                  >
-                                    View More <img  src={isViewAllButtonHovered === index ? "/img/lucide_square-arrow-out-up-right.svg" : "/img/solar_arrow-right-up-outline.svg"} alt="viewMore" />
+                                    View More <img
+                      loading="lazy"  src={isViewAllButtonHovered === index ? "/img/lucide_square-arrow-out-up-right.svg" : "/img/solar_arrow-right-up-outline.svg"} alt="viewMore" />
                                   </button>
                                    </a>
                                 

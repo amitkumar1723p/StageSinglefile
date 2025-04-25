@@ -57,6 +57,7 @@ const RentalBanner = () => {
           <div className="agent-image-container">
             <div className="agent-image">
               <img
+                loading="lazy"
               src='/img/rentalbanner.svg'
               alt='rentalBanner'
               />

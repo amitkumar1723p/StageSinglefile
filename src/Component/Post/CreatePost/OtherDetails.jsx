@@ -105,6 +105,7 @@ export default function OtherDetails({
                 >
                   {text}
                   <img
+                      loading="lazy"
                     alt=""
                     src={
                       OtherDetailsData.PlotDirection === text
@@ -141,6 +142,7 @@ export default function OtherDetails({
                 >
                   {text}
                   <img
+                      loading="lazy"
                     alt=""
                     src={
                       OtherDetailsData.PlotFacing === text

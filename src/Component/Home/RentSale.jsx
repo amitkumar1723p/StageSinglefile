@@ -6,7 +6,8 @@ const RentSale = () => {
     <div className="rent-sale-container">
       <div className="property-image-section">
         <div className="property-image">
-          <img src="./img/Rent-sale.svg" alt="img" />
+          <img
+                      loading="lazy" src="./img/Rent-sale.svg" alt="img" />
         </div>
       </div>
       <div className="property-info-section">

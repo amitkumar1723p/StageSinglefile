@@ -7,6 +7,7 @@ const FutureAsist = () => {
       {/* Left Side - Image */}
       <div className="assistance-banner-image">
         <img
+         loading="lazy"
           src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/futher-assistance.svg"
           alt="Assistance"
           className="assistance-banner-img"

@@ -92,7 +92,8 @@ export default function SingleFreshBookingAmenities({project , amenitiesContent}
             }}
           >
             <div className="icon-container">
-              <img src={amenities[currentLogo] || ""} alt={item.name || ""} className="amenity-icon" style={{height:'30px', width:'auto'}} />
+              <img
+                      loading="lazy" src={amenities[currentLogo] || ""} alt={item.name || ""} className="amenity-icon" style={{height:'30px', width:'auto'}} />
             </div>
             <p className="mt-2 mb-0 fw-medium  amenity-text text-black">{item.name || item}</p>
           </div>

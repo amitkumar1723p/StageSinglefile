@@ -17,7 +17,8 @@ const VerifiedComponent = () => {
       <div className="Rent-Grid">
         <div className="Rent-Authentication">
           <div className="Rent-Icon">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/IdentityAutha.svg" alt="IdentityAutha" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/IdentityAutha.svg" alt="IdentityAutha" />
           </div>
           <div>
             <h3 className="Rent-Title">Identity Authentication</h3>
@@ -30,7 +31,8 @@ const VerifiedComponent = () => {
 
         <div className="Rent-Authentication">
           <div className="Rent-Icon">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/OTPAuthe.svg" alt="OTPAuthe" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/OTPAuthe.svg" alt="OTPAuthe" />
           </div>
           <div>
             <h3 className="Rent-Title">OTP Authentication</h3>

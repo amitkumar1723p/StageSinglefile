@@ -16,7 +16,8 @@ export default function SingleFreshBookingBuilder({project, builderContent}) {
       </div>
     </div>
     <div data-aos="fade-left"  data-aos-once="false" className="single-fresh-booking-builder-image-container">
-        <img src={builderContent?.projectAboutBuilderImage?.url} alt={builderContent?.projectAboutBuilderImage?.name} />
+        <img
+                      loading="lazy" src={builderContent?.projectAboutBuilderImage?.url} alt={builderContent?.projectAboutBuilderImage?.name} />
     </div>
 
 

@@ -239,6 +239,7 @@ export default function OwnerPostAllResponse() {
           {" "}
           <div class="user-all-noreponse-container">
             <img
+                      loading="lazy"
               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/User-all-response.png"
               alt="No Response Yet"
               class="user-all-noreponse-img"

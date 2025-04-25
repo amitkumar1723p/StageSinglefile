@@ -36,6 +36,7 @@ export default function PropertyDataBox({ Answer, Icon, Data, Id }) {
           onMouseOut={() => setIsVisible(false)}
         >
           <img
+                      loading="lazy"
             onMouseEnter={() => setIsVisible(true)}
             onMouseOut={() => setIsVisible(false)}
             src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/i-icon.png"

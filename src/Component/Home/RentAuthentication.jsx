@@ -10,12 +10,14 @@ export default function RentAuthentication() {
       </div>
       <div className='rent-auth-main-content'>
         <div className='rent-auth-image-container'>
-            <img src="/img/rent-auth-image.svg" alt="rent-image" />
+            <img
+                      loading="lazy" src="/img/rent-auth-image.svg" alt="rent-image" />
         </div>
         <div className='rent-auth-cards-container'>
             <div className='rent-auth-card'>
                 <div className='rent-auth-card-image'>
-                    <img src="/img/rent-identify-authentication.svg" alt="rent-card-img" />
+                    <img
+                      loading="lazy" src="/img/rent-identify-authentication.svg" alt="rent-card-img" />
                 </div>
                 <div className='rent-auth-card-text'>
                     <h2>Identify Authentication</h2>
@@ -24,7 +26,8 @@ export default function RentAuthentication() {
             </div>
             <div className='rent-auth-card'>
                 <div className='rent-auth-card-image'>
-                    <img src="/img/rent-otp-authentication.svg" alt="rent-card-img" />
+                    <img
+                      loading="lazy" src="/img/rent-otp-authentication.svg" alt="rent-card-img" />
                 </div>
                 <div className='rent-auth-card-text'>
                     <h2>OTP Authentication</h2>
@@ -33,7 +36,8 @@ export default function RentAuthentication() {
             </div>
             <div className='rent-auth-card'>
                 <div className='rent-auth-card-image'>
-                    <img src="/img/rent-authentic.svg" alt="rent-card-img" />
+                    <img
+                      loading="lazy" src="/img/rent-authentic.svg" alt="rent-card-img" />
                 </div>
                 <div className='rent-auth-card-text'>
                     <h2>Authentic Property Images</h2>

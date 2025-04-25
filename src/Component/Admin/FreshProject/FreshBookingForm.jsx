@@ -1073,6 +1073,7 @@ console.log(formData?.projectAmenities,"unlaf")
                       >
                         <p style={{ fontSize: "14px" }}>{item}</p>
                         <img
+                        loading="lazy"
                           style={{ width: "15px" }}
                           src={`${
                             formData?.projectBasicDetail?.projectType === item
@@ -1419,6 +1420,7 @@ console.log(formData?.projectAmenities,"unlaf")
                           >
                             <p style={{ fontSize: "14px" }}>{item}</p>
                             <img
+                            loading="lazy"
                               style={{ width: "15px" }}
                               src={`${
                                 formData.projectBasicDetail?.projectAdType ===
@@ -1463,6 +1465,7 @@ console.log(formData?.projectAmenities,"unlaf")
                           >
                             <p style={{ fontSize: "14px" }}>{item}</p>
                             <img
+                            loading="lazy"
                               style={{ width: "15px" }}
                               src={`${
                                 formData?.projectBasicDetail?.projectAdType ===
@@ -1557,6 +1560,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       {previewImage ? (
                         <img
+                        loading="lazy"
                           src={previewImage}
                           alt="Preview"
                           className="img-fluid"
@@ -1564,6 +1568,7 @@ console.log(formData?.projectAmenities,"unlaf")
                         />
                       ) : (
                         <img
+                        loading="lazy"
                           src={
                             formData?.projectLogoImage?.url ||
                             "/img/PreviewImg.svg"
@@ -1664,6 +1669,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       {cardImagePreview ? (
                         <img
+                        loading="lazy"
                           src={cardImagePreview}
                           alt="Preview"
                           className="img-fluid"
@@ -1671,6 +1677,7 @@ console.log(formData?.projectAmenities,"unlaf")
                         />
                       ) : (
                         <img
+                        loading="lazy"
                           src={
                             formData?.bannerImage?.url || "/img/PreviewImg.svg"
                           }
@@ -1820,6 +1827,7 @@ console.log(formData?.projectAmenities,"unlaf")
                   >
                     {aboutProject ? (
                       <img
+                      loading="lazy"
                         src={aboutProject}
                         alt="Preview"
                         className="img-fluid"
@@ -1827,6 +1835,7 @@ console.log(formData?.projectAmenities,"unlaf")
                       />
                     ) : (
                       <img
+                      loading="lazy"
                         src={
                           formData?.aboutProject?.aboutProjectImage?.url ||
                           "/img/PreviewImg.svg"
@@ -1999,6 +2008,7 @@ console.log(formData?.projectAmenities,"unlaf")
                   >
                     {handleProjectHighlight ? (
                       <img
+                      loading="lazy"
                         src={handleProjectHighlight}
                         alt="Preview"
                         className="img-fluid"
@@ -2006,6 +2016,7 @@ console.log(formData?.projectAmenities,"unlaf")
                       />
                     ) : (
                       <img
+                      loading="lazy"
                         src={
                           formData?.projectHightlight?.hightlightImage?.url ||
                           "/img/PreviewImg.svg"
@@ -2209,6 +2220,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       <div className="border rounded p-2 bg-light position-relative">
                         <img
+                        loading="lazy"
                           src={src}
                           alt="Preview"
                           className="img-fluid rounded"
@@ -2239,6 +2251,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       <div className="border rounded p-2 bg-light position-relative">
                         <img
+                        loading="lazy"
                           src={item?.url}
                           alt="Preview"
                           className="img-fluid rounded"
@@ -2331,6 +2344,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       {item}
                       <img
+                      loading="lazy"
                         style={{ width: "15px" }}
                         src={`${
                           formData?.projectAmenities?.includes(item)
@@ -2408,6 +2422,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       <div className="border rounded p-2 bg-light position-relative">
                         <img
+                        loading="lazy"
                           src={src}
                           alt="Preview"
                           className="img-fluid rounded"
@@ -2438,6 +2453,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       <div className="border rounded p-2 bg-light position-relative">
                         <img
+                        loading="lazy"
                           src={item?.url}
                           alt="Preview"
                           className="img-fluid rounded"
@@ -2571,6 +2587,7 @@ console.log(formData?.projectAmenities,"unlaf")
                         onClick={() => handleRemove(index)}
                       >
                         <img
+                        loading="lazy"
                           style={{ width: "15px", height: "auto" }}
                           src="/img/icons8-wrong-60.png"
                           alt=""
@@ -2659,6 +2676,7 @@ console.log(formData?.projectAmenities,"unlaf")
                   >
                     {locationMapImage ? (
                       <img
+                      loading="lazy"
                         src={locationMapImage}
                         alt="Preview"
                         className="img-fluid"
@@ -2666,6 +2684,7 @@ console.log(formData?.projectAmenities,"unlaf")
                       />
                     ) : (
                       <img
+                      loading="lazy"
                         src={
                           formData?.projectLocation?.locationImage?.url ||
                           "/img/PreviewImg.svg"
@@ -2791,6 +2810,7 @@ console.log(formData?.projectAmenities,"unlaf")
                         />
                       ) : (
                         <img
+                        loading="lazy"
                           src={
                             formData?.projectSitemap?.url ||
                             "/img/PreviewImg.svg"
@@ -2964,6 +2984,7 @@ console.log(formData?.projectAmenities,"unlaf")
                     >
                       {aboutBuidlder ? (
                         <img
+                        loading="lazy"
                           src={aboutBuidlder}
                           alt="Preview"
                           className="img-fluid"
@@ -2971,6 +2992,7 @@ console.log(formData?.projectAmenities,"unlaf")
                         />
                       ) : (
                         <img
+                        loading="lazy"
                           src={
                             formData?.projectAboutBuilder
                               ?.projectAboutBuilderImage?.url ||

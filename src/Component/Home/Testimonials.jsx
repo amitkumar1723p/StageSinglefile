@@ -53,6 +53,7 @@ const Testimonials = () => {
             <p className="feedback-quote"> {testimonial.feedback} </p>
             <div className="feedback-user-info">
               {/* <img
+                loading="lazy"
                 className="feedback-image"
                 src={testimonial.image}
                 alt={testimonial.name}

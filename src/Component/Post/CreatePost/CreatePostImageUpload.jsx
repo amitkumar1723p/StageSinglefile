@@ -267,6 +267,7 @@ export default function CreatePostImageUpload({
                 <p className="p-img-upload-i">
                   {" "}
                   <img
+                      loading="lazy"
                     className="icon-img"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/i-icon.png"
                     alt="i-icon"
@@ -371,6 +372,7 @@ export default function CreatePostImageUpload({
 
                     {/* Preview Image */}
                     <img
+                      loading="lazy"
                       className="showpreviewImage"
                       src={image.url}
                       alt="PropertyPost"

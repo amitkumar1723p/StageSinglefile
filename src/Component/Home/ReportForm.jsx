@@ -28,25 +28,25 @@ export default function ReportForm() {
   };
 
   // alert
-  const [feedkacTypeAlert,setFeedkacTypeAlert] = useState(false);
+  const [feedkacTypeAlert, setFeedkacTypeAlert] = useState(false);
   const [feedbackdescription, setFeedbackDescription] = useState(false);
 
-const handleAlert = ()=>{
-  // if(!feedback.type){
-  //   console.log(feedback.type)
-  //   setFeedkacTypeAlert(true)
-  //   setTimeout(() => {
-  //     setFeedkacTypeAlert(false)
-  //   }, 1400);
-  // }
-  // if(!feedback.description){
-  //    setFeedbackDescription(true)
-  //   setTimeout(() => {
-  //     setFeedbackDescription(false)
-  //   }, 1400);
-  //   return;
-  // }
-}
+  const handleAlert = () => {
+    // if(!feedback.type){
+    //   console.log(feedback.type)
+    //   setFeedkacTypeAlert(true)
+    //   setTimeout(() => {
+    //     setFeedkacTypeAlert(false)
+    //   }, 1400);
+    // }
+    // if(!feedback.description){
+    //    setFeedbackDescription(true)
+    //   setTimeout(() => {
+    //     setFeedbackDescription(false)
+    //   }, 1400);
+    //   return;
+    // }
+  }
 
   return (
     <div className="reporting-container">
@@ -59,16 +59,22 @@ const handleAlert = ()=>{
       <div className="reporting-main-content">
         <div className="reporting-image-container">
           <div className="reporting-submit-image-container">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/submit-your-report.svg" alt="submit-report" />
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/reporting-right-arrow.svg" alt="arrow" />
+            <img
+              loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/submit-your-report.svg" alt="submit-report" />
+            <img
+              loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/reporting-right-arrow.svg" alt="arrow" />
           </div>
           <div className="reporting-review-image-container">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/reporting-left-arrow.svg" alt="arrow" />
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/review-verification.svg" alt="review-verification" />
+            <img
+              loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/reporting-left-arrow.svg" alt="arrow" />
+            <img
+              loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/review-verification.svg" alt="review-verification" />
           </div>
           <div className="reporting-update-image-container">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/resolution-update.svg" alt="resolution-update" />
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/spiral.svg" alt="spiral" />
+            <img
+              loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/resolution-update.svg" alt="resolution-update" />
+            <img
+              loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/spiral.svg" alt="spiral" />
           </div>
         </div>
 
@@ -78,8 +84,8 @@ const handleAlert = ()=>{
 
             <div className="reporting-form-group">
               <select
-              required
-                className={`reporting-select ${feedkacTypeAlert? " inputShake":''}`}
+                required
+                className={`reporting-select ${feedkacTypeAlert ? " inputShake" : ''}`}
                 value={feedback.type}
                 onChange={(e) => setFeedback({ ...feedback, type: e.target.value })}
               >
@@ -97,7 +103,7 @@ const handleAlert = ()=>{
               <label className="reporting-label-section">Describe</label>
               <input
                 type="text"
-                className={`reporting-input-section  ${feedbackdescription? " inputShake":''}`}
+                className={`reporting-input-section  ${feedbackdescription ? " inputShake" : ''}`}
                 placeholder="Describe your concern"
                 value={feedback.description}
                 onChange={(e) => setFeedback({ ...feedback, description: e.target.value })}
@@ -107,7 +113,7 @@ const handleAlert = ()=>{
             <div className="reporting-form-group">
               <label className="reporting-label">Upload JPEG Images</label>
               <div className="reporting-file-container reporting-input">
-                <input placeholder="choose image " type="file"  accept=".jpg,.jpeg,.png,.webp" multiple className="reporting-input" onChange={handleFileChange} />
+                <input placeholder="choose image " type="file" accept=".jpg,.jpeg,.png,.webp" multiple className="reporting-input" onChange={handleFileChange} />
               </div>
 
               {/* Display selected files with a remove button */}
@@ -131,8 +137,8 @@ const handleAlert = ()=>{
                 type: "",
                 description: "",
                 file: [],
-              })  ; handleAlert()
-              }}>
+              }); handleAlert()
+            }}>
               Submit
             </button>
           </div>

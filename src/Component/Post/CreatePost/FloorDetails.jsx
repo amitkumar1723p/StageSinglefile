@@ -203,6 +203,7 @@ export default function FloorDetails({
               >
                 {text}
                 <img
+                      loading="lazy"
                   alt=""
                   src={
                     FloorDetailsData.PropertyDirection === text
@@ -238,6 +239,7 @@ export default function FloorDetails({
               >
                 {text}
                 <img
+                      loading="lazy"
                 alt=""
                   src={
                     FloorDetailsData.OverLookingView === text
@@ -283,6 +285,7 @@ export default function FloorDetails({
               >
                 {text}{" "}
                 <img
+                      loading="lazy"
                   alt=""
                   src={
                     FloorDetailsData.OverLookingView?.includes(text)
@@ -347,6 +350,7 @@ export default function FloorDetails({
       >
         {text}{" "}
         <img
+                      loading="lazy"
         alt=""
           src={
             AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(

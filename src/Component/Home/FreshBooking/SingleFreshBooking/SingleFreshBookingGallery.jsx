@@ -39,6 +39,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
   {/* Main Image */}
   {mainImage && (
     <img
+      loading="lazy"
       src={mainImage.url}
       alt={mainImage.alt || 'Main Image'}
       className="img-fluid w-100 h-100 rounded shadow position-relative"
@@ -67,6 +68,7 @@ export default function SingleFreshBookingGallery({ project, galleryContent }) {
               }}
             >
               <img
+                loading="lazy"
                 src={image.url}
                 alt={image.alt}
                 style={{

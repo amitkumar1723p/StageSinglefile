@@ -200,7 +200,7 @@ const Dashboard = () => {
               <div className="Admin-dashboard-row p-3">
                 <div className="Admin-box">
                   <p className="total-number">{TotalListing}</p>
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalPosts.png" alt="totalPost" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TotalPosts.png" alt="totalPost" />
                 </div>
                 <h3>Total Listing</h3>
                 <p className="viewall">View All</p>
@@ -210,7 +210,7 @@ const Dashboard = () => {
               <div className="Admin-dashboard-row p-3">
                 <div className="Admin-box">
                   <p className="total-number">{VerifyPost.length}</p>
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                 </div>
                 <h3 onClick={() => setPostVerify(true)}>Active Listing</h3>
                 <p className="viewall">View All</p>
@@ -221,7 +221,7 @@ const Dashboard = () => {
               <div className="Admin-dashboard-row p-3 cursor-pointer">
                 <div className="Admin-box">
                   <p className="total-number">{UnVerifyPost.length}</p>
-                  <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                  <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                 </div>
                 <h3 onClick={() => setPostVerify(false)}>In-Active Listing</h3>
                 <p className="viewall">View All</p>
@@ -233,7 +233,7 @@ const Dashboard = () => {
                 <div className="card p-3 cursor-pointer"  onClick={() => navigate("/admin/allpost?type=expired")}>
                   <div className="Admin-box">
                     <p className="total-number">{expiredPostlength}</p>
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                    <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                   </div>
                   <h3> Expire Lisitng </h3>
 
@@ -245,7 +245,7 @@ const Dashboard = () => {
                 >
                   <div className="Admin-box">
                     <p className="total-number">{successPostlength}</p>
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                    <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                   </div>
                   <h3> Success</h3>
 
@@ -263,7 +263,7 @@ const Dashboard = () => {
                   <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{data?.length}</p>
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 >All Excel Data</h3>
                     <p className="viewall">View All</p>
@@ -277,7 +277,7 @@ const Dashboard = () => {
                   <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{AdminAllExcelFilesData?.assignedExcels?.length}</p>
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 >All Excel Data</h3>
                     <p className="viewall">View All</p>
@@ -293,7 +293,7 @@ const Dashboard = () => {
                       <p className="total-number">{AgentAllExcelFilesData?.assignedExcels?.length}</p>
                       {!AgentAllExcelFilesData && <p className="total-number">0</p>}
 
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 >All Excel Data</h3>
                     <p className="viewall">View All</p>
@@ -316,7 +316,7 @@ const Dashboard = () => {
                     <p className="total-number">
                       {DeletedPost?.deletedPosts?.length || 0}
                     </p>
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                    <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                   </div>
                   <h3> Deleted Lisitng </h3>
 
@@ -329,7 +329,7 @@ const Dashboard = () => {
                       <p className="total-number">
                         {AllUserResponseData?.data?.length}
                       </p>
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       All Registration
@@ -346,7 +346,7 @@ const Dashboard = () => {
                   <div className="Admin-dashboard-row p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{newNotifyAndReq.length}</p>
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/In-ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       Notify & Requirments
@@ -363,7 +363,7 @@ const Dashboard = () => {
                   <div className="card p-3 cursor-pointer">
                     <div className="Admin-box">
                       <p className="total-number">{getTransactionDetail?.data?.length}</p>
-                      <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
+                      <img loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ActivePosts.png" alt="post" />
                     </div>
                     <h3 onClick={() => setPostVerify(false)}>
                       Transaction Detail
