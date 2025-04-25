@@ -35,22 +35,25 @@ export default function SingleFreshBookingForm() {
         dispatch(submitFreshProjectLead(formData))
         setOtpSent(true);
       
-         } else {
+            console.log(formData,"kl")
+        } else {
             dispatch(submitFreshProjectLead_VerifyOtp(formData))
-         
+            setFormData({name: "",
+                email: "",
+                contactNumber: "",
+                otp: ""})
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="Single-fresh-form rounded shadow-lg text-light overflow-hidden mb-5">
-            <h2 className="text-center mb-2 fw-medium">Let’s Find Your Dream Home!</h2>
-            <p className="text-center mb-4">Please fill out the form below, our expert will get back to you soon.</p>
+        <form autoComplete="off" onSubmit={handleSubmit} className="Single-fresh-form rounded shadow-lg text-light overflow-hidden mb-5">
+            <h2  data-aos="fade-left"  data-aos-duration="1200" data-aos-once="true" className=" text-center fw-medium">Let’s Find Your Dream Home!</h2>
+            <p  data-aos="fade-left"  data-aos-duration="1400" data-aos-once="true" className="text-center mb-2">Please fill out the form below, our expert will get back to you soon.</p>
 
-            <div className="d-flex flex-column">
+            <div   data-aos="fade-left"  data-aos-duration="1100" data-aos-once="true"  className="d-flex flex-column">
                 {/* Name Input */}
-                <div className="form__group field position-relative">
-                    <img
-                      loading="lazy" src="/img/mdi_user.svg" alt="user-icon" className="form__icon" />
+                <div  data-aos="fade-left"  data-aos-duration="1300" data-aos-once="true" className="form__group mb-3 field position-relative">
+                    <img src="/img/mdi_user.svg" alt="user-icon" className="form__icon" />
                     <input
                         type="text"
                         className="form__field"
@@ -66,9 +69,8 @@ export default function SingleFreshBookingForm() {
                 </div>
 
                 {/* Email Input */}
-                <div className="form__group field position-relative">
-                    <img
-                      loading="lazy" src="/img/ic_baseline-email.svg" alt="email-icon" className="form__icon" />
+                <div  data-aos="fade-left"  data-aos-duration="1500" data-aos-once="true" className="form__grou mb-3 field position-relative">
+                    <img src="/img/ic_baseline-email.svg" alt="email-icon" className="form__icon" />
                     <input
                         type="email"
                         className="form__field"
@@ -84,12 +86,12 @@ export default function SingleFreshBookingForm() {
                 </div>
 
                 {/* Phone Number Input */}
-                <div className="form__group field position-relative">
-                    <img
-                      loading="lazy" src="/img/ic_baseline-phone.svg" alt="phone-icon" className="form__icon" />
+                <div  data-aos="fade-left"  data-aos-duration="1700" data-aos-once="true" className="fresh-form-number-otp-container mb-3 d-flex">
+                <div className={`form__group  field position-relative  w-50 `}>
+                    <img src="/img/ic_baseline-phone.svg" alt="phone-icon" className="form__icon" />
                     <input
                         type="tel"
-                        className="form__field"
+                        className="form__field border-0"
                         placeholder="Enter Your Number"
                         id="contactNumber"
                         pattern="[1-9]{1}[0-9]{9}"
@@ -103,14 +105,13 @@ export default function SingleFreshBookingForm() {
                     <label htmlFor="contactNumber" className="form__label">Your Number</label>
                 </div>
 
-                {/* OTP Input (only visible after OTP sent) */}
-                {otpSent && (
-                    <div className="form__group field position-relative">
-                        <img
-                      loading="lazy" src="/img/ic_baseline-lock.svg" alt="otp-icon" className="form__icon" />
+                 {/* OTP Input (only visible after OTP sent) */}
+                 {otpSent && (
+                    <div className="form__group field position-relative  w-50">
+                        <img src="/img/icons8-password.svg" alt="otp-icon" className="form__icon" />
                         <input
                             type="text"
-                            className="form__field"
+                            className="form__field border-0"
                             placeholder="Enter OTP"
                             id="otp"
                             required
@@ -122,6 +123,11 @@ export default function SingleFreshBookingForm() {
                     </div>
                 )}
 
+
+                </div>
+                
+
+               
                 {/* Submit Button */}
                 <button type="submit" className="btn w-100 mt-3">
                     {otpSent ? "Verify OTP" : "Reserve Your Spot"}
@@ -132,4 +138,3 @@ export default function SingleFreshBookingForm() {
 }
 
 
-{/* <input type="text" name="country_code" title="Error Message" pattern="[1-9]{1}[0-9]{9}">  */ }
