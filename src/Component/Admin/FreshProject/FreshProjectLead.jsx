@@ -29,13 +29,13 @@ export function FreshProjectLead() {
   useEffect(() => {
     if (getAllFreshProjectLead) {
       const newLength = getAllFreshProjectLead?.projectLead?.length;
-      const oldLength = parseInt(localStorage.getItem("newLength")) || 0;
+      const oldLength = parseInt(localStorage.getItem("prop_newLength")) || 0;
 
       if (newLength > oldLength) {
         const newLeads = newLength - oldLength;
         setTrackNewLead(newLeads);
 
-        localStorage.setItem("newLength", newLength.toString());
+        localStorage.setItem("prop_newLength", newLength.toString());
       }
     }
   }, [getAllFreshProjectLead]);

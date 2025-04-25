@@ -100,9 +100,9 @@ export default function AllUserResponseAction() {
         }));
 
         const storedData = JSON.parse(localStorage.getItem("newLength")) || [];
-console.log(localStorage.getItem("newLength"))
+
         const result = storedData?.filter(storedItem => {
-          const match = newData?.find(newItem => newItem.ContactNumber === storedItem.ContactNumber);
+          const match = newData?.find(newItem => newItem?.ContactNumber === storedItem?.ContactNumber);
 
           return match && (
             storedItem.notifyData !== match.notifyData ||
@@ -120,7 +120,7 @@ console.log(localStorage.getItem("newLength"))
           setnewUser(newData.length - storedData.length);
         }
 
-        localStorage.setItem("newLength", JSON.stringify(newData));
+        localStorage.setItem("prop_newLength", JSON.stringify(newData));
 
         setUsersList(
           AllUserResponseAction_Store?.data[0]?.users ??
