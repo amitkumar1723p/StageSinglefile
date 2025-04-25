@@ -140,36 +140,64 @@ const PropertySection = () => {
   };
 
 const PropContainerRef = useRef(null);
+// useEffect(() => {
+//   const container = PropContainerRef.current;
+//   if (!container) return;
+
+//   let intervalId;
+//   let delayTimer;
+
+//   const scrollStep = () => {
+//     container.scrollLeft -= 1;
+
+//     if (container.scrollLeft <= 0) {
+//       clearInterval(intervalId); // stop scrolling
+
+//       setTimeout(() => {
+//         container.scrollLeft = container.scrollWidth - container.clientWidth;
+//         intervalId = setInterval(scrollStep, 40); 
+//       }, 3000); // 3s delay before reset
+//     }
+//   };
+
+//   delayTimer = setTimeout(() => {
+//     intervalId = setInterval(scrollStep, 30);
+//   }, 1500);
+
+//   return () => {
+//     clearTimeout(delayTimer);
+//     clearInterval(intervalId);
+//   };
+// }, []);
 useEffect(() => {
   const container = PropContainerRef.current;
   if (!container) return;
 
-  let intervalId;
+  let animationFrameId;
   let delayTimer;
 
-  const scrollStep = () => {
-    container.scrollLeft -= 1;
+  const scroll = () => {
+    container.scrollLeft -= 0.5; 
 
     if (container.scrollLeft <= 0) {
-      clearInterval(intervalId); // stop scrolling
-
-      setTimeout(() => {
-        container.scrollLeft = container.scrollWidth - container.clientWidth;
-        intervalId = setInterval(scrollStep, 30); // restart after 3s
-      }, 3000); // 3s delay before reset
+      container.scrollLeft = container.scrollWidth - container.clientWidth; // 🔄 Reset to end
     }
+
+    animationFrameId = requestAnimationFrame(scroll);
   };
 
   delayTimer = setTimeout(() => {
-    intervalId = setInterval(scrollStep, 30);
-  }, 1800);
+    container.scrollLeft = container.scrollWidth - container.clientWidth; // ✅ Start from right end
+    scroll(); // Start scrolling after delay
+  }, 1500);
 
   return () => {
     clearTimeout(delayTimer);
-    clearInterval(intervalId);
+    cancelAnimationFrame(animationFrameId);
   };
 }, []);
 
+        
 
 
   return (
