@@ -76,6 +76,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         <div className="container-fluid ">
           <div className="navbar-brand Single-fresh-logo-a ">
             <img
+              loading="lazy"
               onClick={() => {
                 navigate("/");
 
@@ -110,6 +111,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                   href="#"
                 >
                   <img
+                    loading="lazy"
                     src="/img/hero-dialer.png"
                     alt="dialer"
                     style={{ width: "20px", height: "20px" }}
@@ -123,6 +125,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
                   href="#"
                 >
                   <img
+                    loading="lazy"
                     src="/img/hero-whatsapp.png"
                     alt="whatsapp"
                     style={{ width: "20px", height: "20px" }}
@@ -189,6 +192,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
     {heroData.map((item, index) => (
       <div className=" single-fresh-booking-info-boxes text-center p-1 mb-md-0" style={{ }} key={index}>
         <img
+          loading="lazy"
           src={`/img/${item.icon}`}
           alt={item.label}
           className="img-fluid mb-2 Single-fresh-info-box-icon"
@@ -235,7 +239,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
         
 // <div className="form__group field">
   
-//   <img
+//   <img   loading="lazy"
 //     src="/img/mdi_user.svg"
 //     alt="user-icon"
 //     className="form__icon"
@@ -256,7 +260,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 //        className="position-relative">
 //      <div className="form__group field">
   
-//   <img
+//   <img  loading="lazy"
 //     src="/img/ic_baseline-email.svg"
 //     alt="user-icon"
 //     className="form__icon"
@@ -277,7 +281,7 @@ export default function SingleFreshBookingHero({ project, projectPrice , project
 //        className="position-relative">
 //        <div className="form__group field">
   
-//   <img
+//   <img  loading="lazy"
 //     src="/img/ic_baseline-phone.svg"
 //     alt="user-icon"
 //     className="form__icon"

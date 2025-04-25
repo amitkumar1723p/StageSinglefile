@@ -214,6 +214,7 @@ export default function BiddingFormForm({
           </div>
           <div   className="make-your-offer-crozz-btn">
           <img
+                      loading="lazy"
           onClick={() => {
             SetShow(false);
           }}
@@ -503,6 +504,7 @@ export default function BiddingFormForm({
                 return (
                   <div className="showpreviewImage-box" key={index}>
                     <img
+                      loading="lazy"
                       style={{ width: "100px" }}
                       className="showpreviewImage"
                       key={index}

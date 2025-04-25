@@ -30,6 +30,7 @@ const ExploreProperties = () => {
       <div className="explore-images">
         <div className="explore-image-item">
           <img
+           loading="lazy"
             src="/img/individualfloor.png"
             alt="Individual Floor"
             className="explore-image"
@@ -38,6 +39,7 @@ const ExploreProperties = () => {
         </div>
         <div className="explore-image-item">
           <img
+           loading="lazy"
             src="/img/independnet.png"
             alt="Independent House"
             className="explore-image"
@@ -46,6 +48,7 @@ const ExploreProperties = () => {
         </div>
         <div className="explore-image-item">
           <img
+           loading="lazy"
             src="/img/villa.png"
             alt="Independent Villa"
             className="explore-image"
@@ -54,6 +57,7 @@ const ExploreProperties = () => {
         </div>
         <div className="explore-image-item large">
           <img
+           loading="lazy"
             src="/img/apartment.png"
             alt="Apartment"
             className="explore-image"
@@ -62,6 +66,7 @@ const ExploreProperties = () => {
         </div>
         <div className="explore-image-item large">
           <img
+           loading="lazy"
             src="/img/land-plot.png"
             alt="Land/Plot"
             className="explore-image"

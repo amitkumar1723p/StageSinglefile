@@ -90,8 +90,6 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
       const containerRef = useRef(null);
 
      
-
-    
       useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
@@ -99,10 +97,17 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
         let scrollAmount = 0;
         let animationFrameId;
         let delayTimer;
+        let isHovered = false;
+        let scrollSpeed = 1; // current speed
+        let targetSpeed = 1; // desired speed
+        const easing = 0.5; // controls smoothness
       
         const scroll = () => {
-          container.scrollLeft += 1;
-          scrollAmount += 0.1;
+          // Ease towards the target speed
+          scrollSpeed += (targetSpeed - scrollSpeed) * easing;
+      
+          container.scrollLeft += scrollSpeed;
+          scrollAmount += scrollSpeed;
       
           if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
             container.scrollLeft = 0;
@@ -112,16 +117,59 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
           animationFrameId = requestAnimationFrame(scroll);
         };
       
-        // Delay scroll start by 3 seconds
+        const handleMouseEnter = () => {
+          targetSpeed = 0.2; // smoothly slow down to stop
+        };
+      
+        const handleMouseLeave = () => {
+          targetSpeed = 1; // smoothly resume
+        };
+      
+        container.addEventListener('mouseenter', handleMouseEnter);
+        container.addEventListener('mouseleave', handleMouseLeave);
+      
         delayTimer = setTimeout(() => {
           scroll(); // Start scrolling after delay
         }, 1500);
       
         return () => {
-          clearTimeout(delayTimer); // Clear delay timer if component unmounts
-          cancelAnimationFrame(animationFrameId); // Stop animation
+          clearTimeout(delayTimer);
+          cancelAnimationFrame(animationFrameId);
+          container.removeEventListener('mouseenter', handleMouseEnter);
+          container.removeEventListener('mouseleave', handleMouseLeave);
         };
       }, []);
+    
+      // useEffect(() => {
+      //   const container = containerRef.current;
+      //   if (!container) return;
+      
+      //   let scrollAmount = 0;
+      //   let animationFrameId;
+      //   let delayTimer;
+      
+      //   const scroll = () => {
+      //     container.scrollLeft += 1;
+      //     scrollAmount += 0.1;
+      
+      //     if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+      //       container.scrollLeft = 0;
+      //       scrollAmount = 0;
+      //     }
+      
+      //     animationFrameId = requestAnimationFrame(scroll);
+      //   };
+      
+      //   // Delay scroll start by 3 seconds
+      //   delayTimer = setTimeout(() => {
+      //     scroll(); // Start scrolling after delay
+      //   }, 1500);
+      
+      //   return () => {
+      //     clearTimeout(delayTimer); // Clear delay timer if component unmounts
+      //     cancelAnimationFrame(animationFrameId); // Stop animation
+      //   };
+      // }, []);
       
         
         
@@ -173,7 +221,8 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
                       <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
                         <button  className="fresh-booking-card-button w-100 d-flex align-items-center text-white justify-content-center rounded-2 fs-6  " style={{ gap: '8px', padding: '4px',backgroundColor:'#0b0b0b4d', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
                        >
-                          View More <img src="/img/Vector-arrow-top-right.svg" alt="logo" />
+                          View More <img
+                      loading="lazy" src="/img/Vector-arrow-top-right.svg" alt="logo" />
                         </button>
                         </Link>
                       </div>

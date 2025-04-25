@@ -88,7 +88,8 @@ export default function BlogArticles() {
             <div className='blog-card-container'>
             {Blogs.map(blog =>(
                 <div className={`blog-card blog-card-${blog.id}`}>
-                    <div className='blog-card-image-container'><img src={blog.imgUrl} alt="blog-image" /></div>
+                    <div className='blog-card-image-container'><img
+                      loading="lazy" src={blog.imgUrl} alt="blog-image" /></div>
                     <div className='blog-card-data'>
                         <div className='blog-card-title-date'>
                             <div className='blog-card-title'><p>{blog.title}</p></div>
@@ -96,7 +97,8 @@ export default function BlogArticles() {
                         </div>
                         <div className='blog-card-heading'><h2>{blog.heading}</h2></div>
                         <div className='blog-card-description'> <p>{truncateText(blog.content, 69)}</p></div>
-                        <div className='blog-card-button'><Link to={`/blog-page/${formatTitleForURL(blog.title)}`}><button>Read More <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blog-readmore-logo.svg" ></img> </button></Link> </div>
+                        <div className='blog-card-button'><Link to={`/blog-page/${formatTitleForURL(blog.title)}`}><button>Read More <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blog-readmore-logo.svg" ></img> </button></Link> </div>
                     </div>
                 
                 </div>

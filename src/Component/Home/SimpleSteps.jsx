@@ -34,6 +34,7 @@ const SimpleSteps = () => {
           </div>
           {/* <div className="deal">
             <img
+              loading="lazy"
               src="/img/sellall.png"
               alt="Property Requirement Icon"
               className="step-image"
@@ -52,6 +53,7 @@ const SimpleSteps = () => {
           </div>
           {/* <div className="deal">
             <img
+              loading="lazy"
               src="/img/sellall.png"
               alt="Property Requirement Icon"
               className="step-image"
@@ -70,6 +72,7 @@ const SimpleSteps = () => {
           </div>
           {/* <div className="deal">
             <img
+              loading="lazy"
               src="/img/sellall.png"
               alt="Property Requirement Icon"
               className="step-image"
@@ -87,6 +90,7 @@ const SimpleSteps = () => {
           </div>
           {/* <div className="deal">
             <img
+              loading="lazy"
               src="/img/sellall.png"
               alt="Property Requirement Icon"
               className="step-image"

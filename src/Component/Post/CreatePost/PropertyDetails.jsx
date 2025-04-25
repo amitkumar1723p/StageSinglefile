@@ -206,6 +206,7 @@ export default function PropertyDetailsSection({
                 >
                   {text}{" "}
                   <img
+                      loading="lazy"
                     src={
                       PropertyDetailsData.OtherRoom?.includes(text)
                         ? "https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/white-tick.svg"

@@ -49,7 +49,8 @@ export default function SingleFreshBookingForm() {
             <div className="d-flex flex-column">
                 {/* Name Input */}
                 <div className="form__group field position-relative">
-                    <img src="/img/mdi_user.svg" alt="user-icon" className="form__icon" />
+                    <img
+                      loading="lazy" src="/img/mdi_user.svg" alt="user-icon" className="form__icon" />
                     <input
                         type="text"
                         className="form__field"
@@ -66,7 +67,8 @@ export default function SingleFreshBookingForm() {
 
                 {/* Email Input */}
                 <div className="form__group field position-relative">
-                    <img src="/img/ic_baseline-email.svg" alt="email-icon" className="form__icon" />
+                    <img
+                      loading="lazy" src="/img/ic_baseline-email.svg" alt="email-icon" className="form__icon" />
                     <input
                         type="email"
                         className="form__field"
@@ -83,7 +85,8 @@ export default function SingleFreshBookingForm() {
 
                 {/* Phone Number Input */}
                 <div className="form__group field position-relative">
-                    <img src="/img/ic_baseline-phone.svg" alt="phone-icon" className="form__icon" />
+                    <img
+                      loading="lazy" src="/img/ic_baseline-phone.svg" alt="phone-icon" className="form__icon" />
                     <input
                         type="tel"
                         className="form__field"
@@ -103,7 +106,8 @@ export default function SingleFreshBookingForm() {
                 {/* OTP Input (only visible after OTP sent) */}
                 {otpSent && (
                     <div className="form__group field position-relative">
-                        <img src="/img/ic_baseline-lock.svg" alt="otp-icon" className="form__icon" />
+                        <img
+                      loading="lazy" src="/img/ic_baseline-lock.svg" alt="otp-icon" className="form__icon" />
                         <input
                             type="text"
                             className="form__field"

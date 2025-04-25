@@ -246,6 +246,7 @@ export default function PostCard({ PostData, index }) {
               {PostData?.PropertyImages?.map((Post, i) => {
                 return (
                   <img
+                    loading="lazy"
                     key={i}
                     src={Post.url}
                     alt="PropertyPost"
@@ -262,6 +263,7 @@ export default function PostCard({ PostData, index }) {
             </div>:
           <div className="imageSlide">
                 <img
+                  loading="lazy"
                     // key={}
                     src={PostData?.PropertyImages[0]?.url}
                     alt="PropertyPost"
@@ -285,6 +287,7 @@ export default function PostCard({ PostData, index }) {
                   <div className="postcard-share-parent">
                     <div onClick={() => setIsModalOpen(true)}>
                       <img
+                        loading="lazy"
                         src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/share-btn.svg"
                         className="img-fluid img-thumbnail"
                         alt="..."
@@ -314,12 +317,14 @@ export default function PostCard({ PostData, index }) {
                             String(PostData?._id)
                         ) ? (
                           <img
+                            loading="lazy"
                             className="fav-icon"
                             src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Un-Fav-Post.svg"
                             alt="Fav-icon"
                           />
                         ) : (
                           <img
+                            loading="lazy"
                             className="fav-icon"
                             src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Fav-Post.svg"
                             alt="Fav-icon"

@@ -12,6 +12,7 @@ const ChannelPartnerForm = () => {
             <div className="text-white text-lg font-medium font-['Inter'] leading-tight">Channel Partner Form</div>
             <button className="w-6 h-6  bg-white rounded-[62px] ">
                 <img
+                loading="lazy"
                 className="transition duration-300 ease-in-out group-hover:brightness-75" 
                 src="/img/goBack.png" alt="exit"></img>
             </button>

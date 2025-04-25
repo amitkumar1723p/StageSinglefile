@@ -31,6 +31,7 @@ const RentalHome = () => {
             <div className="rental-home-feature-item">
               <div className="rental-home-img-section">
                 <img
+                  loading="lazy"
                   className="rental-home-feature-icon"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/directOwnerListings.png"
                   alt="Direct Owner Listings"
@@ -45,6 +46,7 @@ const RentalHome = () => {
             <div className="rental-home-feature-item">
               <div className="rental-home-img-section">
                 <img
+                  loading="lazy"
                   className="rental-home-feature-icon"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/VerifiedProperties.png"
                   alt="Verified Properties"
@@ -59,6 +61,7 @@ const RentalHome = () => {
             <div className="rental-home-feature-item">
               <div className="rental-home-img-section">
                 <img
+                  loading="lazy"
                   className="rental-home-feature-icon"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/DocsAssistance.png"
                   alt="Document Assistance"

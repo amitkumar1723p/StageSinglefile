@@ -50,7 +50,8 @@ export default function BlogSubscribe() {
                     <div className='blog-subscribe-input'>
                       <div className={`blog-input-wrapper ${inputShake? 'inputShake' : ''}`}>
                         <div className='blog-email-svg'>
-                          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-email-logo.svg" alt="email-logo" />
+                          <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-email-logo.svg" alt="email-logo" />
                         </div>
                       <input type='email' value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Email Id'className={`${shake ? 'shake' : ''} `} ></input>
                       
@@ -67,7 +68,8 @@ export default function BlogSubscribe() {
                 </div>
             </div>
             <div className='blog-subscribe-image'>
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-subscribe-img.svg" alt="subscribe-img" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/blog-subscribe-img.svg" alt="subscribe-img" />
             </div>
         </div>
     </div>

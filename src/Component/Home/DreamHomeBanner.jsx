@@ -8,6 +8,7 @@ const DreamHomeBanner = () => {
   return (
     <div className="">
       <img
+       loading="lazy"
         src="/img/Contactus.png"
         alt="Dream Home Banner"
         className="dream-home-banner-image"

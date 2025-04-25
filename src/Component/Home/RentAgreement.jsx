@@ -15,7 +15,8 @@ const RentAgreement = () => {
       <div className="RentAgreement__steps-container">
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Submityourdraft.svg" alt="Submit your draft" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Submityourdraft.svg" alt="Submit your draft" />
           </div>
           <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Submit your Draft</h2>
@@ -28,6 +29,7 @@ const RentAgreement = () => {
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
             <img
+              loading="lazy"
               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Review%26Custmization.svg"
               alt="Review & Custmization"
             />
@@ -44,7 +46,8 @@ const RentAgreement = () => {
         </div>
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Stamp%26Validate.svg" alt="Stamp & Validate" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Stamp%26Validate.svg" alt="Stamp & Validate" />
           </div>
           <div className="RentAgreement-text">
             <h2 className="RentAgreement__step-title">Stamp & Validate</h2>
@@ -57,6 +60,7 @@ const RentAgreement = () => {
         <div className="RentAgreement__step">
           <div className="RentAgreement__icon">
             <img
+              loading="lazy"
               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/DeliveryAtYourDoorstep.svg"
               alt="Delivery At Your Door step.svg"
             />
@@ -80,7 +84,8 @@ const RentAgreement = () => {
       >
         <button className="UploadYourDraftMain ">
 
-          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
+          <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/whatapp.png" alt="WhatsApp" />
           Share Your Draft
 
         </button>

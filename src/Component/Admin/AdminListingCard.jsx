@@ -337,12 +337,14 @@ export default function AdminListingCard({
                                    
                                 >
                                   <img
+                                  loading="lazy"
                                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                                     className="editIcon"
                                   />
                                 </Link> */}
 
                                 <img
+                                loading="lazy"
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                                   className="editIcon"
                                   onClick={(e) => {
@@ -392,6 +394,7 @@ export default function AdminListingCard({
                                 }}
                               >
                                 <img
+                                loading="lazy"
                                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/delete.png"
                                   className="editIcon"
                                 />

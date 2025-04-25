@@ -140,6 +140,7 @@ export default function Amenities({
                     >
                       {text}{" "}
                       <img
+                      loading="lazy"
                         alt=""
                         src={
                           AmenitiesDetailsData.Furnishing === text
@@ -720,6 +721,7 @@ export default function Amenities({
                       >
                         {text}{" "}
                         <img
+                      loading="lazy"
                           alt=""
                           src={
                             AmenitiesDetailsData.SocietyAndBuildingFeature?.includes(
@@ -758,6 +760,7 @@ export default function Amenities({
               >
                 {text}{" "}
                 <img
+                      loading="lazy"
                   alt=""
                   src={
                     AmenitiesDetailsData.PowerBackUp === text
@@ -809,6 +812,7 @@ export default function Amenities({
                 >
                   {text}{" "}
                   <img
+                      loading="lazy"
                     alt=""
                     src={
                       AmenitiesDetailsData.WaterSource?.includes(text)
@@ -868,6 +872,7 @@ export default function Amenities({
                   >
                     {text}{" "}
                     <img
+                      loading="lazy"
                       alt="tick"
                       src={
                         AmenitiesDetailsData.ProjectAmmenities?.includes(text)

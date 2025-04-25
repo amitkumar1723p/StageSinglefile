@@ -35,6 +35,7 @@ const Footer = ({project, projectLogoContent}) => {
           <div className="single-fresh-footer__company">
             <div className="single-fresh-footer__logo-wrapper">
               <img 
+                      loading="lazy"
                 src={`${projectLogoContent?.url}`} 
                 alt="Company Logo" 
                 className="single-fresh-footer__logo"

@@ -202,7 +202,7 @@ const Dashboard = () => {
               </div>
               <div className="dashboard-call-email-container">
                 <div className="dashboard-callme">
-                  <img src="/img/dashboard-callme.svg" alt="call" />
+                  <img   loading="lazy" src="/img/dashboard-callme.svg" alt="call" />
                   <p>{medata?.user?.ContactNumber}</p>
                 </div>
                 {/* <div className="dashboard-emailme">
@@ -215,18 +215,18 @@ const Dashboard = () => {
               <div className="dashboard-track-properydekho"><p>PROPERTYDEKHO247.COM</p></div>
               <div className="dashboard-track-container">
                 <div><p>Track</p></div>
-                <div ><img src="/img/dashboard-arrow.svg" alt="arrow" /></div>
+                <div ><img  loading="lazy"  src="/img/dashboard-arrow.svg" alt="arrow" /></div>
                 <div><p>Connect</p></div>
-                <div><img src="/img/dashboard-arrow.svg" alt="arrow" /></div>
+                <div><img  loading="lazy"  src="/img/dashboard-arrow.svg" alt="arrow" /></div>
                 <div><p>Close</p></div>
               </div>
               <div className="dashboard-track-one-place"><p>From Listings to Closings — All in One Place.</p></div>
               <div className="dashboard-track-button"><button>Seal Your First Deal Now <img src="/img/dashboard-track-button.svg" alt="btn" /></button> </div>
-              <div className="dashboard-track-star-0"><img src="/img/dashboard-track-star_0.svg" alt="star" /></div>
-              <div className="dashboard-track-star-1"><img src="/img/dashboard-track-star_1.svg" alt="star" /></div>
-              <div className="dashboard-track-star-2"><img src="/img/dashboard-track-star_2.svg" alt="star" /></div>
-              <div className="dashboard-track-star-3"><img src="/img/dashboard-track-star_1.svg" alt="star" /></div>
-              <div className="dashboard-track-star-4"><img src="/img/dashboard-track-star_2.svg" alt="star" /></div>
+              <div className="dashboard-track-star-0"><img  loading="lazy" src="/img/dashboard-track-star_0.svg" alt="star" /></div>
+              <div className="dashboard-track-star-1"><img  loading="lazy" src="/img/dashboard-track-star_1.svg" alt="star" /></div>
+              <div className="dashboard-track-star-2"><img  loading="lazy" src="/img/dashboard-track-star_2.svg" alt="star" /></div>
+              <div className="dashboard-track-star-3"><img  loading="lazy" src="/img/dashboard-track-star_1.svg" alt="star" /></div>
+              <div className="dashboard-track-star-4"><img  loading="lazy" src="/img/dashboard-track-star_2.svg" alt="star" /></div>
 
 
             </div>
@@ -243,7 +243,7 @@ const Dashboard = () => {
                       <div>
                         <div className="dashboard-listing-card-top-total-post-heading">
                           <div>
-                            <img src="/img/new_total_listing.svg" alt="total_listing" />
+                            <img  loading="lazy" src="/img/new_total_listing.svg" alt="total_listing" />
                             <h2>Total Post</h2>
                           </div>
                           <div className="d-none">
@@ -258,7 +258,7 @@ const Dashboard = () => {
                           <p>{TotalListing}</p>
                         </div>
                         <div>
-                          <img src="/img/graph_1.svg" alt="graph" />
+                          <img  loading="lazy" src="/img/graph_1.svg" alt="graph" />
                         </div>
 
                       </div>
@@ -273,7 +273,7 @@ const Dashboard = () => {
                       <div>
                         <div className="dashboard-listing-card-top-active-listing-heading">
                           <div>
-                            <img src="/img/active_listing.svg" alt="active_listing" />
+                            <img  loading="lazy" src="/img/active_listing.svg" alt="active_listing" />
                             <h2>Active Listings</h2>
                           </div>
                           <div className="d-none">
@@ -288,7 +288,7 @@ const Dashboard = () => {
                           <p>{VerifyPost.length}</p>
                         </div>
                         <div>
-                          <img src="/img/graph_2.svg" alt="graph" />
+                          <img  loading="lazy" src="/img/graph_2.svg" alt="graph" />
                         </div>
 
                       </div>
@@ -303,7 +303,7 @@ const Dashboard = () => {
                       <div>
                         <div className="dashboard-listing-card-top-inactive-listing-heading">
                           <div>
-                            <img src="/img/inactive_listing.svg" alt="total_listing" />
+                            <img  loading="lazy" src="/img/inactive_listing.svg" alt="total_listing" />
                             <h2>In-Active Listings</h2>
                           </div>
                           <div className="d-none">
@@ -318,7 +318,7 @@ const Dashboard = () => {
                           <p>{UnVerifyPost.length}</p>
                         </div>
                         <div>
-                          <img src="/img/graph_3.svg" alt="graph" />
+                          <img  loading="lazy" src="/img/graph_3.svg" alt="graph" />
                         </div>
 
                       </div>
@@ -335,7 +335,7 @@ const Dashboard = () => {
                         <div>
                           <div className="dashboard-listing-card-top-expired-listing-heading">
                             <div>
-                              <img src="/img/expire_listing.svg" alt="total_listing" />
+                              <img  loading="lazy" src="/img/expire_listing.svg" alt="total_listing" />
                               <h2>Expired Listings</h2>
                             </div>
                             <div className="d-none">
@@ -350,7 +350,7 @@ const Dashboard = () => {
                             <p>{expiredPostlength}</p>
                           </div>
                           <div>
-                            <img src="/img/graph_3.svg" alt="graph" />
+                            <img   loading="lazy" src="/img/graph_3.svg" alt="graph" />
                           </div>
 
                         </div>
@@ -364,7 +364,7 @@ const Dashboard = () => {
                         <div>
                           <div className="dashboard-listing-card-top-success-heading">
                             <div>
-                              <img src="/img/Success_listing.svg" alt="total_listing" />
+                              <img  loading="lazy"  src="/img/Success_listing.svg" alt="total_listing" />
                               <h2>Success Listings</h2>
                             </div>
                             <div className="d-none">
@@ -379,7 +379,7 @@ const Dashboard = () => {
                             <p>{successPostlength}</p>
                           </div>
                           <div>
-                            <img src="/img/graph_2.svg" alt="graph" />
+                            <img   loading="lazy" src="/img/graph_2.svg" alt="graph" />
                           </div>
 
                         </div>
@@ -400,7 +400,7 @@ const Dashboard = () => {
                           <div>
                             <div className="dashboard-listing-card-top-deleted-heading">
                               <div>
-                                <img src="/img/deleted_listing.svg" alt="deleted_listing" />
+                                <img  loading="lazy"  src="/img/deleted_listing.svg" alt="deleted_listing" />
                                 <h2>Deleted Listings</h2>
                               </div>
                               <div className="d-none">
@@ -415,7 +415,7 @@ const Dashboard = () => {
                               <p>{DeletedPost?.deletedPosts?.length || 0}</p>
                             </div>
                             <div>
-                              <img src="/img/graph_1.svg" alt="graph" />
+                              <img loading="lazy" src="/img/graph_1.svg" alt="graph" />
                             </div>
 
                           </div>
@@ -439,7 +439,7 @@ const Dashboard = () => {
                         <div>
                           <div className="dashboard-listing-card-top-all-excel-data-heading">
                             <div>
-                              <img src="/img/all_excel_data.svg" alt="all_excel_data" />
+                              <img  loading="lazy" src="/img/all_excel_data.svg" alt="all_excel_data" />
                               <h2>All Excel Data</h2>
                             </div>
                             <div className="d-none">
@@ -454,7 +454,7 @@ const Dashboard = () => {
                             <p>{data?.length} Sheets</p>
                           </div>
                           <div>
-                            <img src="/img/graph_1.svg" alt="graph" />
+                            <img  loading="lazy" src="/img/graph_1.svg" alt="graph" />
                           </div>
 
                         </div>
@@ -473,7 +473,7 @@ const Dashboard = () => {
                           <div>
                             <div className="dashboard-listing-card-top-all-excel-data-heading">
                               <div>
-                                <img src="/img/all_excel_data.svg" alt="all_excel_data" />
+                                <img  loading="lazy" src="/img/all_excel_data.svg" alt="all_excel_data" />
                                 <h2>All Excel Data</h2>
                               </div>
                               <div className="d-none">
@@ -488,7 +488,7 @@ const Dashboard = () => {
                               <p>{data?.length} Sheets</p>
                             </div>
                             <div>
-                              <img src="/img/graph_1.svg" alt="graph" />
+                              <img  loading="lazy" src="/img/graph_1.svg" alt="graph" />
                             </div>
 
                           </div>
@@ -503,7 +503,7 @@ const Dashboard = () => {
                           <div>
                             <div className="dashboard-listing-card-top-all-reg-heading">
                               <div>
-                                <img src="/img/all_registration.svg" alt="all_registration" />
+                                <img  loading="lazy" src="/img/all_registration.svg" alt="all_registration" />
                                 <h2>All Registration</h2>
                               </div>
                               <div className="d-none">
@@ -518,7 +518,7 @@ const Dashboard = () => {
                               <p>{AllUserResponseData?.data?.length}</p>
                             </div>
                             <div>
-                              <img src="/img/graph_2.svg" alt="graph" />
+                              <img  loading="lazy"  src="/img/graph_2.svg" alt="graph" />
                             </div>
 
                           </div>
@@ -534,7 +534,7 @@ const Dashboard = () => {
                           <div>
                             <div className="dashboard-listing-card-top-all-response-heading">
                               <div>
-                                <img src="/img/contact_user.svg" alt="response" />
+                                <img  loading="lazy" src="/img/contact_user.svg" alt="response" />
                                 <h2>All Response</h2>
                               </div>
                               <div className="d-none">
@@ -549,7 +549,7 @@ const Dashboard = () => {
                               <p>{AllUserResponseAction_Store?.totalUsers}</p>
                             </div>
                             <div>
-                              <img src="/img/graph_2.svg" alt="graph" />
+                              <img loading="lazy" src="/img/graph_2.svg" alt="graph" />
                             </div>
 
                           </div>
@@ -569,7 +569,7 @@ const Dashboard = () => {
                           <div>
                             <div className="dashboard-listing-card-top-all-response-heading">
                               <div>
-                                <img src="/img/contact_user.svg" alt="response" />
+                                <img  loading="lazy"  src="/img/contact_user.svg" alt="response" />
                                 <h2>All Response</h2>
                               </div>
                               <div className="d-none">
@@ -584,7 +584,7 @@ const Dashboard = () => {
                               <p>{AllUserResponseAction_Store?.totalUsers}</p>
                             </div>
                             <div>
-                              <img src="/img/graph_2.svg" alt="graph" />
+                              <img  loading="lazy" src="/img/graph_2.svg" alt="graph" />
                             </div>
 
                           </div>
@@ -608,7 +608,7 @@ const Dashboard = () => {
                         <div>
                           <div className="dashboard-listing-card-top-notify-heading">
                             <div>
-                              <img src="/img/notify&requirement.svg" alt="total_listing" />
+                              <img  loading="lazy" src="/img/notify&requirement.svg" alt="total_listing" />
                               <h2>Notify & Requirements</h2>
                             </div>
                             <div className="d-none">
@@ -623,7 +623,7 @@ const Dashboard = () => {
                             <p>{newNotifyAndReq.length}</p>
                           </div>
                           <div>
-                            <img src="/img/graph_1.svg" alt="graph" />
+                            <img loading="lazy" src="/img/graph_1.svg" alt="graph" />
                           </div>
                         </div>
                       </div>
@@ -637,7 +637,7 @@ const Dashboard = () => {
                         <div>
                           <div className="dashboard-listing-card-top-contact-heading">
                             <div>
-                              <img src="/img/contact_user.svg" alt="contact_user" />
+                              <img  loading="lazy" src="/img/contact_user.svg" alt="contact_user" />
                               <h2>Contact Users</h2>
                             </div>
                             <div className="d-none">
@@ -652,7 +652,7 @@ const Dashboard = () => {
                             <p>{viewAllContactFormReducer?.data?.length}</p>
                           </div>
                           <div>
-                            <img src="/img/graph_2.svg" alt="graph" />
+                            <img   loading="lazy" src="/img/graph_2.svg" alt="graph" />
                           </div>
 
                         </div>

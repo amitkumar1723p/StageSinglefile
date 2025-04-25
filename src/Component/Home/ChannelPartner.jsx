@@ -65,7 +65,7 @@ export default function PostPropertyRequirement({ SetShow }) {
           </p>
           <div className="main-channel-box">
             <div className="img-right-channel">
-              <img src="/img/channelpartner.svg" alt="img" />
+              <img loading="lazy" src="/img/channelpartner.svg" alt="img" />
             </div>
 
             <div className="ChannelPartner-container">

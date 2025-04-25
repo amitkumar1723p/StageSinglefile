@@ -29,6 +29,7 @@ const PropertyListingBanner = ({
             </h2>
             <p className="p-asist">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
@@ -37,6 +38,7 @@ const PropertyListingBanner = ({
             </p>
             <p className="p-asist">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
@@ -45,6 +47,7 @@ const PropertyListingBanner = ({
             </p>
             <p className="p-asist">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"
@@ -53,6 +56,7 @@ const PropertyListingBanner = ({
             </p>
             <p className="p-asist">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/blueTick.svg"
                 alt="checkmark"
                 className="checkmark-icon"

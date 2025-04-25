@@ -84,7 +84,7 @@ useEffect(()=>{
             </div>
           </div>
           <div className="freshbooking-location-image-container col-md-6 single-fresh-map-img">
-            <img
+            <img  loading="lazy"
               // style={{ transform: "scale(0.7)" }}
               src={LocationImageContent?.url}
               onClick={() => setZoomedImage(LocationImageContent?.url)}
@@ -118,7 +118,7 @@ useEffect(()=>{
         style={{  width: "90%", margin: "auto", boxShadow: '0px 0px 20px #8f8f8f',borderRadius: '15px' }}
       >
         <img
-      
+        loading="lazy"
           src={siteMapContent?.url}
           alt="site map"
         
@@ -169,7 +169,7 @@ useEffect(()=>{
                       className="single-freshbooking-builder-image-container card rounded-4 shadow  overflow-hidden border-0 mx-auto mx-md-0"
                       style={{ maxWidth: "500px" }}
                     >
-                      <img
+                      <img  loading="lazy"
                         src={builderImage?.url}
                         alt="DLF The Primus Building"
                         className="img-fluid w-auto h-100"

@@ -279,6 +279,7 @@ export default function Search({
             onClick={handleSearchClick} 
           >   
             <img
+              loading="lazy"
               src="/img/Searhttps://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Search-icon.svgch-icon.svg"
               alt=""
               className="img-searchbar"

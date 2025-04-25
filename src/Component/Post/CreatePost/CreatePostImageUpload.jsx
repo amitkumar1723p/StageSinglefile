@@ -267,6 +267,7 @@ export default function CreatePostImageUpload({
                 <p className="p-img-upload-i">
                   {" "}
                   <img
+                      loading="lazy"
                     className="icon-img"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/i-icon.png"
                     alt="i-icon"
@@ -333,9 +334,14 @@ export default function CreatePostImageUpload({
                 }}
               />
             </div>
-            <p className="upload-image-defaultimage">
-            Check the box on an image to make it Property-Profile picture* (By default, the first image will be set as your profile picture)
-            </p>
+             {
+              previewImage?.length>0 ?  <p className="upload-image-defaultimage">
+              Check the box on an image to make it Property-Profile picture* (By default, the first image will be set as your profile picture)
+              </p>:<p className="upload-image-defaultimage1">
+              You can create a post without an image
+              </p>
+             }
+          
             <div className="showpreviewImage-Container upload-img-section">
               {previewImage.map((image) => {
                 return (
@@ -347,9 +353,6 @@ export default function CreatePostImageUpload({
                       className="default-image"
                       onClick={() => {
                         setDefaultImg(image.name); // Store image name instead of index
-
-                     
-
                         // Find the image in uploadimages
                         let selectedImage = uploadimages.find(
                           (img) => img.name === image.name
@@ -371,6 +374,7 @@ export default function CreatePostImageUpload({
 
                     {/* Preview Image */}
                     <img
+                      loading="lazy"
                       className="showpreviewImage"
                       src={image.url}
                       alt="PropertyPost"

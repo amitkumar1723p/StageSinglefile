@@ -101,6 +101,7 @@ const HandleNotifyFormSubmit = ()=>{
           <div className="img-notify">
             <div>
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/notifyimg.svg"
                 alt="Notification Illustration"
                 className="notify-form-image"

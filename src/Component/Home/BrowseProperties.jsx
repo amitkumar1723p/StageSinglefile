@@ -25,10 +25,12 @@ const BrowseProperties = () => {
             </div>
             <div className='BrowseProperties-Right'>
                 <img
+                loading="lazy"
                 className='Img-One'
                 src='/img/EllipseBG.png'
                 />
                 <img
+                loading="lazy"
                 className='Img-Two'
                 src='/img/EllipseBG.png'
                 />
@@ -36,6 +38,7 @@ const BrowseProperties = () => {
              <div className='OwnerListings'>
                     <div className='OwnerListings-Img'>
                         <img
+                        loading="lazy"
                         src='https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/directOwnerListings.png'
                         />
                     </div>
@@ -53,6 +56,7 @@ const BrowseProperties = () => {
                 </div>
                 <div className='VerifiedProperties-Img'>
                     <img
+                    loading="lazy"
                     src='https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/VerifiedProperties.png'
                     />
                 </div>
@@ -61,6 +65,7 @@ const BrowseProperties = () => {
                 <div className='DocsAssistance'>
                 <div className='DocsAssistance-Img'>
                     <img
+                    loading="lazy"
                     src='https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/DocsAssistance.png'
                     />
 

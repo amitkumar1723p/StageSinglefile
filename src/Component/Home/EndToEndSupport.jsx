@@ -13,6 +13,7 @@ const EndToEndSupport = () => {
           {/* Left Side Image */}
           <div className="Buying-support-image">
             <img
+             loading="lazy"
               src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/EndToEndNewBuyer.svg"
               alt="Support illustration"
               className="end-to-end-main-image"
@@ -32,6 +33,7 @@ const EndToEndSupport = () => {
               ].map((feature, index) => (
                 <li key={index} className="feature-item">
                   <img
+                   loading="lazy"
                     src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/tick-purple.png" // replace with the path to your checkmark icon
                     alt="checkmark"
                     className="checkmark-icon"

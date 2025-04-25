@@ -34,7 +34,8 @@ function OurService() {
       <header>
         <div className="hero-container">
           <div className="hero-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/service-hero-img3.png" alt="Hero background" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/service-hero-img3.png" alt="Hero background" />
           </div>
           <div className="hero-img-inside-container">
             <div className="hero-img-text">
@@ -71,7 +72,8 @@ function OurService() {
       <div className="offer-card-container">
         <div className="offer-card">
           <div className="offer-card-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/house-green.svg" alt="house" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/house-green.svg" alt="house" />
           </div>
           <div className="offer-card-text">
             <h2 className="offer-card-text-h2">PROPERTY MANAGEMENT</h2>
@@ -82,7 +84,8 @@ function OurService() {
         </div>
         <div className="offer-card">
           <div className="offer-card-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/house-orange.svg" alt="house" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/house-orange.svg" alt="house" />
           </div>
           <div className="offer-card-text">
             <h2 className="offer-card-text-h2">RESALE SERVICES</h2>
@@ -93,7 +96,8 @@ function OurService() {
         </div>
         <div className="offer-card">
           <div className="offer-card-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+284.svg" alt="house" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+284.svg" alt="house" />
           </div>
           <div className="offer-card-text">
             <h2 className="offer-card-text-h2">RENTAL SERVICES</h2>
@@ -105,7 +109,8 @@ function OurService() {
 
         <div className="offer-card">
           <div className="offer-card-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/house-purple.svg" alt="house" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/house-purple.svg" alt="house" />
           </div>
           <div className="offer-card-text">
             <h2 className="offer-card-text-h2">NRI PROPERTY MANAGEMENT</h2>
@@ -116,7 +121,8 @@ function OurService() {
         </div>
         <div className="offer-card">
           <div className="offer-card-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/document.svg" alt="house" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/document.svg" alt="house" />
           </div>
           <div className="offer-card-text">
             <h2 className="offer-card-text-h2">LEGAL CONSULTATION</h2>
@@ -127,7 +133,8 @@ function OurService() {
         </div>
         <div className="offer-card">
           <div className="offer-card-img">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/loan.svg" alt="house" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/loan.svg" alt="house" />
           </div>
           <div className="offer-card-text">
             <h2 className="offer-card-text-h2">LOAN ASSISTANCE</h2>
@@ -238,7 +245,8 @@ function OurService() {
                 </div>
                 <div className="selling-offer-card">
                   <div className="selling-offer-card-img">
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+297.svg" alt="verified buyer" />
+                    <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+297.svg" alt="verified buyer" />
                   </div>
                   <div className="selling-offer-card-text">
                     <h2 className="selling-offer-card-text-h2">
@@ -252,7 +260,8 @@ function OurService() {
                 </div>
                 <div className="selling-offer-card">
                   <div className="selling-offer-card-img">
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+298.svg" alt="schedule" />
+                    <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+298.svg" alt="schedule" />
                   </div>
                   <div className="selling-offer-card-text">
                     <h2 className="selling-offer-card-text-h2">
@@ -267,7 +276,8 @@ function OurService() {
                 </div>
                 <div className="selling-offer-card">
                   <div className="selling-offer-card-img">
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+299.svg" alt="house" />
+                    <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+299.svg" alt="house" />
                   </div>
                   <div className="selling-offer-card-text">
                     <h2 className="selling-offer-card-text-h2">
@@ -281,7 +291,8 @@ function OurService() {
                 </div>
                 <div className="selling-offer-card">
                   <div className="selling-offer-card-img">
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+300.svg" alt="house" />
+                    <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+300.svg" alt="house" />
                   </div>
                   <div className="selling-offer-card-text">
                     <h2 className="selling-offer-card-text-h2">
@@ -306,6 +317,7 @@ function OurService() {
                }}>
                
                 <img
+                  loading="lazy"
                   src="/img/Real Estate Retractable Banner2.png"
                   alt="banner"
                 />
@@ -318,7 +330,8 @@ function OurService() {
             {/* <div className="service-card-container">
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 276.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 276.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>100% Verified Sellers</h2>
@@ -331,7 +344,8 @@ function OurService() {
 
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 280.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 280.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>Dedicated Relationship Manager</h2>
@@ -343,7 +357,8 @@ function OurService() {
               </div>
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 281.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 281.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>Transparency, Trust and Fair Price</h2>
@@ -355,7 +370,8 @@ function OurService() {
               </div>
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 282.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 282.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>Single Point of contact for Dealing</h2>
@@ -411,6 +427,7 @@ function OurService() {
                 <div className="buying-offer-card">
                   <div className="buying-offer-card-img">
                     <img
+                      loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+289.svg"
                       alt="verified seller"
                       srcset=""
@@ -429,6 +446,7 @@ function OurService() {
                 <div className="buying-offer-card">
                   <div className="buying-offer-card-img">
                     <img
+                      loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+290.svg"
                       alt="relationship"
                       srcset=""
@@ -446,7 +464,8 @@ function OurService() {
                 </div>
                 <div className="buying-offer-card">
                   <div className="buying-offer-card-img">
-                    <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+291.svg" alt="trust&fair" srcset="" />
+                    <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+291.svg" alt="trust&fair" srcset="" />
                   </div>
                   <div className="buying-offer-card-text">
                     <h2 className="buying-offer-card-h2">
@@ -461,6 +480,7 @@ function OurService() {
                 <div className="buying-offer-card">
                   <div className="buying-offer-card-img">
                     <img
+                      loading="lazy"
                       src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/Group+292.svg"
                       alt="contact&dealing"
                       srcset=""
@@ -478,7 +498,8 @@ function OurService() {
                 </div>
               </div>
               <div className="buying-card-banner">
-                <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/banner3.png" alt="banner" srcset="" />
+                <img 
+                      loading="lazy"src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/banner3.png" alt="banner" srcset="" />
               </div>
             </div>
           </div>
@@ -488,7 +509,8 @@ function OurService() {
             {/* <div className="service-card-container">
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 276.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 276.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>100% Verified Sellers</h2>
@@ -500,7 +522,8 @@ function OurService() {
               </div>
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 280.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 280.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>Dedicated Relationship Manager</h2>
@@ -512,7 +535,8 @@ function OurService() {
               </div>
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 281.svg" alt="" srcset="" />
+                  <img 
+                      loading="lazy" src="/img/Group 281.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>Transparency, Trust and Fair Price</h2>
@@ -524,7 +548,8 @@ function OurService() {
               </div>
               <div className="service-card">
                 <div className="service-card-img">
-                  <img src="/img/Group 282.svg" alt="" srcset="" />
+                  <img
+                      loading="lazy" src="/img/Group 282.svg" alt="" srcset="" />
                 </div>
                 <div className="service-card-text">
                   <h2>Single Point of contact for Dealing</h2>

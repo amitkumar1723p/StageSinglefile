@@ -218,17 +218,17 @@ function App() {
       setRedirectPath(sessionStorage.getItem("RedirectPath"));
     }
   }, [RedirectPath]);
-  useEffect(() => {
-    if (location.pathname == "/") {
-      dispatch(GetProjectNameAction());
-    } else if (location.pathname.includes("/user/post")) {
-      dispatch(GetProjectNameAction());
-    } else if (location.pathname.includes("/admin/post/update")) {
-      dispatch(GetProjectNameAction());
-    }
+  // useEffect(() => {
+  //   if (location.pathname == "/") {
+  //     dispatch(GetProjectNameAction());
+  //   } else if (location.pathname.includes("/user/post")) {
+  //     dispatch(GetProjectNameAction());
+  //   } else if (location.pathname.includes("/admin/post/update")) {
+  //     dispatch(GetProjectNameAction());
+  //   }
   
-    // eslint-disable-next-line
-  }, [location]);
+  //   // eslint-disable-next-line
+  // }, [location]);
   //  Simple User Show Alert Function
   useEffect(() => {
     if (data) {

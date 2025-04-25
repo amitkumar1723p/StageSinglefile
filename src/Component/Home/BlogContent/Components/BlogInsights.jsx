@@ -3,7 +3,8 @@ import './BlogInsights.css'
 export default function BlogInsights() {
   return (
     <div className='blog-insights-container'>
-        {/* <img src='/img/blog-insights-background.png' alt='blog-insights-background'></img> */}
+        {/* <img
+                      loading="lazy" src='/img/blog-insights-background.png' alt='blog-insights-background'></img> */}
         <div className='blog-insights-background-color'>
             <div className='blog-insights-headings'>
                 <h1>Latest Real Estate Insights From Our Experts</h1>

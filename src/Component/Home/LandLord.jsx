@@ -6,6 +6,7 @@ const LandLord = () => {
     <div className="LandLordDetails">
      <div className="landlord-left">
         <img
+         loading="lazy"
         alt="landlord-img" 
         src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/ForLandLord-Img.png"
         />
@@ -19,6 +20,7 @@ const LandLord = () => {
             <div className="Introduction">
                 <div className="IntroductionImgContainer">
                 <img 
+                      loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/Introduce.svg"
                 alt=""
                 />
@@ -31,6 +33,7 @@ const LandLord = () => {
             <div className="Introduction">
             <div className="IntroductionImgContainer">
                 <img 
+                      loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/ListProperty.svg"
                 alt=""
                 />
@@ -43,6 +46,7 @@ const LandLord = () => {
             <div className="Introduction">
             <div className="IntroductionImgContainer">
                 <img 
+                      loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/GetVerified.svg"
                 alt=""
                 />
@@ -55,6 +59,7 @@ const LandLord = () => {
             <div className="Introduction">
             <div className="IntroductionImgContainer">
                 <img 
+                      loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/LegalDocs.svg"
                 alt=""
                 />

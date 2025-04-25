@@ -26,6 +26,7 @@ const PostFreeContainer = () => {
           <ul className="home-banner-list">
             <li className="home-banner-list-item">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TickIconBuyer.svg"
                 alt="TickIconBuyer"
                 className="home-banner-icon"
@@ -34,6 +35,7 @@ const PostFreeContainer = () => {
             </li>
             <li className="home-banner-list-item">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TickIconBuyer.svg"
                 alt="TickIconBuyer"
                 srcset=""
@@ -45,6 +47,7 @@ const PostFreeContainer = () => {
             </li>
             <li className="home-banner-list-item">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TickIconBuyer.svg"
                 alt="TickIconBuyer"
                 className="home-banner-icon"
@@ -55,6 +58,7 @@ const PostFreeContainer = () => {
             </li>
             <li className="home-banner-list-item">
               <img
+                loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/TickIconBuyer.svg"
                 alt="TickIconBuyer"
 
@@ -81,6 +85,7 @@ const PostFreeContainer = () => {
         </div>
         <div className="home-banner-image">
           <img
+            loading="lazy"
             src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/ListYourProp.png"
             alt="Illustration of people shaking hands in front of a house"
             className="home-banner-img"

@@ -28,6 +28,7 @@ export default function SingleFreshBookingAboutProject({projectHightlight , high
                   <div className="col-12 col-md-5 mb-4 mb-md-0">
                     <div className="card rounded-4 shadow overflow-hidden border-0 mx-auto mx-md-0" style={{ maxWidth: '500px' }}>
                       <img
+                        loading="lazy"
                         src="/img/building12.jpg"
                         alt="DLF The Primus Building"
                         className="img-fluid"

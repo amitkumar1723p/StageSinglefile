@@ -1493,16 +1493,25 @@ input[type="number"] {
   color: red;
   text-align: center;
   font-size: 14px;
-
-
   font-family: "Inter", Sans-serif;
-
-
   font-weight: 500;
   line-height: 28px;
   letter-spacing: 0.5px;
   margin-top: 10px;
 }
+
+.upload-image-defaultimage1 {
+  color: #333;
+  text-align: center;
+  font-size: 14px;
+  font-family: "Inter", Sans-serif;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+
+
 
 .showpreviewImage-box:last-child {
   margin-right: 0;

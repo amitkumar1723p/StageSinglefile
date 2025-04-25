@@ -37,17 +37,20 @@ const HeaderCard = () => {
           <div className="header-card">
             <div className="header-card-gallery">
               <img
+                loading="lazy"
                 src="/img/high-rise.jpg"
                 alt="Tower-Image-1"
                 className="header-card-gallery-image"
               />
               {/* <div className="header-img-box">
                   <img
+                    loading="lazy"
                     src="/img/dlf2.jpg"
                     alt="Tower-Image-2"
                     className="header-card2-gallery-image"
                   />
                   <img
+                    loading="lazy"
                     src="/img/dlf3.jpeg"
                     alt="Tower-Image-3"
                     className="header-card2-gallery-image"

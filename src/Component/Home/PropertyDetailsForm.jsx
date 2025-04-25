@@ -143,7 +143,8 @@ export default function PropertyDetailsForm() {
         <div className="lowerSection">
           <h4>WHAT YOU WILL GET HERE</h4>
           <div className="property-Container">
-            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/PropertyDetailsForm.svg" alt="Property Details" />
+            <img
+                      loading="lazy" src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/PropertyDetailsForm.svg" alt="Property Details" />
           </div>
         </div>
       </div>

@@ -146,6 +146,7 @@ const VerifyOtp = ({
                   {ISNRI ? SignUpData?.email : SignUpData?.ContactNumber} .
                 </b>
                 <img
+                      loading="lazy"
                   src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/edit.png"
                   alt="edit"
                   onClick={() => {

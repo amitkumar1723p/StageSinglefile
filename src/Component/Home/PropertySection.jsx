@@ -169,31 +169,56 @@ const PropContainerRef = useRef(null);
 //     clearInterval(intervalId);
 //   };
 // }, []);
+
+const containerRef = useRef(null);
+
 useEffect(() => {
-  const container = PropContainerRef.current;
+  const container = containerRef.current;
   if (!container) return;
 
+  let scrollAmount = 0;
   let animationFrameId;
   let delayTimer;
+  let isHovered = false;
+  let scrollSpeed = 1; // current speed
+  let targetSpeed = 1; // desired speed
+  const easing = 0.02; // controls smoothness
 
   const scroll = () => {
-    container.scrollLeft -= 0.5; 
+    // Ease towards the target speed
+    scrollSpeed += (targetSpeed - scrollSpeed) * easing;
 
-    if (container.scrollLeft <= 0) {
-      container.scrollLeft = container.scrollWidth - container.clientWidth; // 🔄 Reset to end
+    container.scrollLeft += scrollSpeed;
+    scrollAmount += scrollSpeed;
+
+    if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+      container.scrollLeft = 0;
+      scrollAmount = 0;
     }
 
     animationFrameId = requestAnimationFrame(scroll);
   };
 
+  const handleMouseEnter = () => {
+    targetSpeed = 0.2; // smoothly slow down to stop
+  };
+
+  const handleMouseLeave = () => {
+    targetSpeed = 1; // smoothly resume
+  };
+
+  container.addEventListener('mouseenter', handleMouseEnter);
+  container.addEventListener('mouseleave', handleMouseLeave);
+
   delayTimer = setTimeout(() => {
-    container.scrollLeft = container.scrollWidth - container.clientWidth; // ✅ Start from right end
     scroll(); // Start scrolling after delay
   }, 1500);
 
   return () => {
     clearTimeout(delayTimer);
     cancelAnimationFrame(animationFrameId);
+    container.removeEventListener('mouseenter', handleMouseEnter);
+    container.removeEventListener('mouseleave', handleMouseLeave);
   };
 }, []);
 
@@ -228,7 +253,8 @@ useEffect(() => {
   </span>
                   <span className="fresh-booking-button-text">
                     View All Properties{" "}
-                   
+                    <img
+                      loading="lazy" src="/img/right-arrow.svg" alt="" />
                   </span>
                 </button>
               </div>
@@ -328,6 +354,7 @@ useEffect(() => {
                             
                             <div className="property-cards" key={index}>
                               <img
+                                loading="lazy"
                                 src={property?.PropertyImages[0]?.url}
                                 // alt={property.altText}
                                 className="card-image"

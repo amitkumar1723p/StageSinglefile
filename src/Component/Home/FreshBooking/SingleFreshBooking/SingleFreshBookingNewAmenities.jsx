@@ -47,7 +47,8 @@ export default function SingleFreshBookingNewAmenities({project , amenitiesConte
       return (
        <div className='fresh-booking-new-amenities-card' >
         <div className='fresh-booking-new-amenities-img-container'> 
-          <img src={amenities[currentImg] || ""} alt={item.name || ""}  />
+          <img
+                      loading="lazy" src={amenities[currentImg] || ""} alt={item.name || ""}  />
         </div>
         <div className='fresh-booking-new-amenities-name-container'>
         <p>{item}</p>

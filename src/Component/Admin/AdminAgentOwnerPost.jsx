@@ -454,6 +454,7 @@ export default function AdminAgentOwnerPost() {
           <div className="admin-filter-all-button-parent">
             <div>
               <img
+              loading="lazy"
                 src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/Icons/FilteImg.png"
                 alt="FilteImg"
               />
@@ -584,6 +585,7 @@ export default function AdminAgentOwnerPost() {
               }}
             />
             <img
+            loading="lazy"
               className="search-admin-section"
               src={`data:image/svg+xml;utf8,${encodeURIComponent(`
                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">

@@ -143,7 +143,8 @@ const AllPostSearchFilter = () => {
                   })
                 );
                 setFilter({});
-              }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
+              }}>Clear Filter <img
+              loading="lazy" src="/img/clear-filter.svg" alt="" /></div>
             </div>
 
             <div className="filter-dummyLine"></div>
@@ -265,7 +266,8 @@ const AllPostSearchFilter = () => {
           <div>
             <HeaderCard />
             {/* <div>
-              <img src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
+              <img
+                      loading="lazy" src="/img/VerfiledProperty.jpg" alt="VerfiledProperty" />
             </div> */}
             <div className="filter-home-card">
               <div className='total-post-length-container'>
@@ -300,7 +302,8 @@ const AllPostSearchFilter = () => {
                           })
                         );
                         setFilter({});
-                      }}>Clear Filter <img src="/img/clear-filter.svg" alt="" /></div>
+                      }}>Clear Filter <img
+                      loading="lazy" src="/img/clear-filter.svg" alt="" /></div>
                     </div>
 
                     <div className="button-section">

@@ -34,6 +34,7 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
             
             
             <img
+            
               src={plan?.url}
               alt={plan?.alt}
               onClick={() => setZoomedImage(plan?.url)}
@@ -62,7 +63,8 @@ export default function SingleFreshBookingFloorPlan({project , FloorPlanContent}
     {zoomedImage && (
       <div className="zoom-overlay">
         <div className="zoom-content">
-          <img src={zoomedImage} alt="Zoomed" className="zoomed-image" />
+          <img 
+                      loading="lazy" src={zoomedImage} alt="Zoomed" className="zoomed-image" />
           <button onClick={() => setZoomedImage(null)} className="close-zoom-button">
             ✕ 
           </button>
