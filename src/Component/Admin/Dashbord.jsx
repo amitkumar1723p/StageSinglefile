@@ -173,7 +173,10 @@ const Dashboard = () => {
     }
   }, [AgentAdminAllPost]);
 
-  // console.log(AllUserResponseData,"dash")
+    const { data: AllUserResponseAction_Store } = useSelector((state) => {
+        return state.AllUserResponseAction_Store;
+    });
+
   return (
     <>
       {loading ? (
@@ -543,7 +546,7 @@ const Dashboard = () => {
                           <div className="dashboard-listing-card-all-response-bottom">
                             <div>
                               <h2>Current Value</h2>
-                              <p>{AllUserResponseData?.data?.length}</p>
+                              <p>{AllUserResponseAction_Store?.totalUsers}</p>
                             </div>
                             <div>
                               <img src="/img/graph_2.svg" alt="graph" />
@@ -578,7 +581,7 @@ const Dashboard = () => {
                           <div className="dashboard-listing-card-all-response-bottom">
                             <div>
                               <h2>Current Value</h2>
-                              <p>{AllUserResponseData?.data?.length}</p>
+                              <p>{AllUserResponseAction_Store?.totalUsers}</p>
                             </div>
                             <div>
                               <img src="/img/graph_2.svg" alt="graph" />

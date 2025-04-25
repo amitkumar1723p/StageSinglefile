@@ -117,8 +117,7 @@ export default function AgentUserResponse() {
 
     }, [indexAgent]);
  
-
-
+console.log(AllUserResponseAction_Store,"saueabhahsdja")
     return (
         <>
             <div className="border border-primary border-opacity-25 ">

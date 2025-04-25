@@ -1003,6 +1003,10 @@ function App() {
         <Route exact path="/blog-page/:title" element={<SingleBlog />} />
         <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
 
+        {/* fresh booking routes */}
+        <Route exact path="/fresh-bookings"  element={<FreshBookingViewAlll/>}/>
+        <Route path="/fresh-bookings/project-name/:propertyName/:locality/:projectCity/:id" element={<SingleFreshBooking/>} />
+
         {/* protect route for user */}
         <>
           <Route
@@ -1224,6 +1228,7 @@ function App() {
           />
 
           {/* Fresh property Routing start ----------- */}
+
 
           <Route
             path="fresh-property"

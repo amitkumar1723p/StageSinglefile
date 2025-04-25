@@ -136,7 +136,7 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
           <p className='fw-normal' style={{ color:'rgba(51, 51, 51, 1)'}}>Exclusive new property launches, tailored to your lifestyle – from modern to luxurious, all in one place.</p>
         </div>
         <div className='freshbooking-home-button-container d-flex align-items-center ' >
-        <button onClick={()=>{navigate('/fresh-bookings2', { state: {allCardData:allFreshBookingCard} } )}} class="freshbooking-home-button fresh-booking-view-more-more">
+        <button onClick={()=>{navigate('/fresh-bookings', { state: {allCardData:allFreshBookingCard} } )}} class="freshbooking-home-button fresh-booking-view-more-more">
   <span class="fresh-booking-button-circle" aria-hidden="true">
   <span class="icon arrow"></span>
   </span>
@@ -171,7 +171,7 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
                      
                       <div className='w-100 ' >
                       <Link to={`/fresh-bookings/project-name/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.projectName)}/${HandleFreshbookingUrl(cardData?.projectBasicDetail?.locality)}/${cardData?.projectBasicDetail?.projectCity}/${cardData._id}`}>
-                        <button  className="fresh-booking-card-button w-100 d-flex align-items-center text-white justify-content-center rounded-2 fs-6 " style={{ gap: '8px', padding: '4px', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
+                        <button  className="fresh-booking-card-button w-100 d-flex align-items-center text-white justify-content-center rounded-2 fs-6  " style={{ gap: '8px', padding: '4px',backgroundColor:'#0b0b0b4d', border: '1px solid rgba(245, 130, 32, 1)', borderRadius: '8px' }}
                        >
                           View More <img src="/img/Vector-arrow-top-right.svg" alt="logo" />
                         </button>
@@ -185,7 +185,7 @@ dispatch(getAllFreshProjectAction({RouteType:"UserRoutes"}))
               </div>
           
          ))
-          ):(<p>Ruko jra sabar kro</p>)}
+          ):(<p>Loading</p>)}
 
       
         </div>
