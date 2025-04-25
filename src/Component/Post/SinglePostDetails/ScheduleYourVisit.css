@@ -12,9 +12,54 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
+  position:relative
 }
 
+.mke-offer-buttons-parent{
+  display: flex;
+  justify-content: space-between;
 
+ }
+ .schedule-email-loader-parent {
+  position: absolute;
+  top: 10.7%;
+  left: 0;
+  height: 4.8px;
+  width: 100%;
+  /* padding: 50px; */
+  background-color: transparent; /* Optional */
+  overflow: hidden;
+  pointer-events: none; /* So it doesn't block clicks */
+}
+
+/* Actual animated loader */
+.shcedule-your-visit-loader {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.shcedule-your-visit-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background:var(--main-light-clr);
+  animation: animloader 0.7s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes animloader {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
 .custom-date-icon img{
   width: 20px;
 }
@@ -26,6 +71,7 @@
   width: 740px;
   max-width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .schedule-your-visit-header {
@@ -101,7 +147,20 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
+.schedule-your-visit-submit-btn-email{
+  margin-top: 10px;
+  text-align: center;
+  padding: 12px;
+  width: 48%;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #1877F2;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 .schedule-your-visit-submit-btn:hover {
   background-color: #0056b3;
 }
@@ -207,7 +266,17 @@
     width: 100%;
     height: auto;
   }
-
+  .schedule-email-loader-parent {
+    position: absolute;
+    top: 7.9%;
+    left: 0;
+    height: 4.8px;
+    width: 100%;
+    /* padding: 50px; */
+    background-color: transparent; /* Optional */
+    overflow: hidden;
+    pointer-events: none; /* So it doesn't block clicks */
+  }
   .schedule-your-visit-submit-btn {
     font-size: 14px;
     padding: 6px;

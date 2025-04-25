@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./ProfileHeader.css";
 import { useSelector } from "react-redux";
-import { GetMeDetailsAction, GetPost_BiddingDocumentAction, ProfileUpdateAction } from "../../../Action/userAction";
+import {
+  GetMeDetailsAction,
+  GetPost_BiddingDocumentAction,
+  ProfileUpdateAction,
+  SentTokenForEmailVerification,
+} from "../../../Action/userAction";
 import { UserContext } from "../../CreateContext/CreateContext";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -14,12 +19,18 @@ function ProfileHeader() {
   });
 
   // Get state from Redux store
-  const { data, LodingType } = useSelector((state) => {
+  const { data, LodingType, loading } = useSelector((state) => {
     return state.userData;
   });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  //  This Data required for Email Verificiaton
+  const origin = window.location.origin; // domain
+  const pathname = location.pathname; // current path
+  const querry = location.search;
   // useEffect(()=>{
 
   // } ,[medata])
@@ -74,7 +85,6 @@ function ProfileHeader() {
 
   // Toggle the state when the button is clicked
   const handleToggleChange = () => {
-
     setIsToggled(!isToggled);
   };
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++Editing start here+++++++++++++++++
@@ -87,23 +97,23 @@ function ProfileHeader() {
   const [number, setNumber] = useState(medata?.user?.ContactNumber);
   // Function to handle the edit button click
   const handleEdit = () => {
-    
+
     setVarb({ Name: name, LastName: Lastname, email: email, ContactNumber: number });
     if (number != medata?.user?.ContactNumber) {
-      if(number.length<10){
+      if (number.length < 10) {
         return alert("Please enter valid number")
       }
       if (!name || !Lastname || !email || !number) {
         return alert("Please enter all data")
         // 
       }
-      
+
       // alert("run")
-       setTimeout(() => {
+      setTimeout(() => {
         navigate("/user/profileUpdate")
-       }, 0);
-         
-     
+      }, 0);
+
+
 
       dispatch(ProfileEditAction({ ContactNumber: number }));
     }
@@ -135,7 +145,6 @@ function ProfileHeader() {
   //     dispatch(GetMeDetailsAction());     }
 
   //  },[AlertData])
-
   const handleEnableEdit = (e) => {
     e.preventDefault();
     alert("Please make changes !");
@@ -158,7 +167,10 @@ function ProfileHeader() {
                 <header>
                   <form>
                     <div className="medata-role">
-                      <p className="register-as-role"> You are registered as: </p>
+                      <p className="register-as-role">
+                        {" "}
+                        You are registered as:{" "}
+                      </p>
                       <span>{medata.user.Role}</span>
                     </div>
                     <div className="profileNameEmail">
@@ -183,10 +195,13 @@ function ProfileHeader() {
                       </div>
 
                     </div>
-
+            
                     <div className="profileNameEmail">
+
                       <div className="profile-section-data">
                         <label>Contact Number:</label>
+                    
+                        <div className="profile-input-wrapper">
                         <input
                           className="profile-email"
                           type="tel"
@@ -194,20 +209,75 @@ function ProfileHeader() {
                           maxLength={10}
                           onChange={(e) => setNumber(e.target.value)} // Update number state
                         />
+              
+                        {
+                          medata?.user?.Role!=="NRI" &&   <span className="email-verified-icon">
+                         
+                          <img src="/img/Verified-profile.svg" alt="Verified" className="email-verify-clickable"/>
+                        
+                        
+                      </span> 
+                        }
+                        </div>
+      
+
                       </div>
+
                       <div className="profile-section-data">
                         <label>Email:</label>
-                        <input
-                          className="profile-email"
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)} // Update email state
-                        />
+
+                        <div className="profile-input-wrapper">
+                          <input
+                            className="profile-email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                          {loading &&
+                            LodingType === "SentTokenForEmailVerificationRequest"
+                            ? <div className="profile-email-loader-parent">
+
+                              <div class="profile-your-visit-loader"></div>
+                            </div>
+                            : null}
+                          <span className="email-verified-icon">
+                            {medata?.user?.EmailVerify ? (
+                              <img src="/img/Verified-profile.svg" alt="Verified"  className="email-verify-clickable"/>
+                            ) : (
+                              <img
+                                src="/img/Unverified-profile.svg"
+                                alt="Unverified"
+                                className="email-verify-clickable"
+
+                              />
+                            )}
+                          </span>
+                        </div>
+                        {!medata?.user?.EmailVerify && (
+                          <div onClick={() => {
+                            const Url = `${origin}${pathname}`;
+                            if (
+                              !loading &&
+                              LodingType !== "SentTokenForEmailVerificationRequest"
+                            ) {
+                              dispatch(
+                                SentTokenForEmailVerification({
+                                  email: medata?.user?.email,
+                                  Url: { pathname: Url, querry: querry },
+                                })
+                              );
+                            }
+                          }} className="profile-email-updating">
+                            Verify Your Email
+
+                          </div>
+                        )}
+
                       </div>
+
                     </div>
                     {hasChanges ? (
                       <Link
-
                         className="editProfileButton"
                         onClick={handleEdit}
                       >
@@ -271,11 +341,11 @@ function ProfileHeader() {
           </div>
         </div>
         <Link to="/user/post">
-       
-        <div className="dashboard-right-side">
-          <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg" alt="dash-banner"  style={{height:'103%', width: 'auto'}} />
-        </div>
-         </Link>
+
+          <div className="dashboard-right-side">
+            <img src="https://propertydekho247bucket.s3.ap-south-1.amazonaws.com/Static-Img/images/dash-banner.svg" alt="dash-banner" style={{ height: '103%', width: 'auto' }} />
+          </div>
+        </Link>
       </div>
     </>
   );

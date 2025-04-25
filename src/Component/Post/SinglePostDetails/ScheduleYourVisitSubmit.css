@@ -25,7 +25,13 @@
       opacity: .9;
     }
   }
-  
+  .sc-visit-veify-label {
+    /* display: flex; */
+    align-items: flex-start;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 300;
+  }
   .request-submit-body {
     font-size: 16px;
     color: #333;
